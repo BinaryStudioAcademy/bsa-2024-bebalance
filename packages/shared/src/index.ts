@@ -5,7 +5,6 @@ export {
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
-	ApplicationError,
 	HTTPError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";

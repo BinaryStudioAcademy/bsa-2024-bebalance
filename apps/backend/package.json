@@ -11,7 +11,7 @@
 		"migrate:dev:make": "node --loader ts-paths-esm-loader ../../node_modules/knex/bin/cli.js migrate:make -x ts",
 		"migrate:dev:down": "node --loader ts-paths-esm-loader ../../node_modules/knex/bin/cli.js migrate:down",
 		"migrate:dev:rollback": "node --loader ts-paths-esm-loader ../../node_modules/knex/bin/cli.js migrate:rollback --all",
-		"build": "tsc --project tsconfig.build.json && tsc-alias && npm run build:copy",
+		"build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json && npm run build:copy",
 		"build:copy": "cp -r package.json build",
 		"prestart": "npm run migrate",
 		"migrate": "knex migrate:latest",
@@ -30,13 +30,12 @@
 		"pino": "9.3.2",
 		"pino-pretty": "11.2.2",
 		"swagger-jsdoc": "6.2.8",
-		"shared": "file:../../packages/shared"
+		"shared": "*"
 	},
 	"devDependencies": {
 		"@types/convict": "6.1.6",
 		"@types/swagger-jsdoc": "6.0.4",
 		"ts-paths-esm-loader": "1.4.3",
-		"tsc-alias": "1.8.10",
 		"tsx": "4.17.0"
 	}
 }
