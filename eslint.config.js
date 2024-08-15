@@ -23,7 +23,7 @@ const filesConfig = {
 
 /** @type {FlatConfig} */
 const ignoresConfig = {
-	ignores: ["apps", "packages", "dangerfile.ts", "eslint.config.js", "lint-staged.config.js"],
+	ignores: ["apps", "packages", "dangerfile.ts"],
 };
 
 /** @type {FlatConfig} */
@@ -123,6 +123,7 @@ const perfectionistConfig = {
 
 /** @type {FlatConfig} */
 const typescriptConfig = {
+	files: ["*.ts", '*.tsx'],
 	languageOptions: {
 		parser: /** @type {ParserModule} */ (tsParser),
 		parserOptions: {

@@ -1,6 +1,6 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["**/*.ts", "lint-staged.config.js"],
+	"include": ["**/*.ts", "**/*.js"],
 	"exclude": ["build", "node_modules"],
 	"compilerOptions": {
 		"outDir": "build",

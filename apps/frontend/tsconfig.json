@@ -1,6 +1,6 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["**/*.ts", "**/*.tsx", "lint-staged.config.js"],
+	"include": ["**/*.ts", "**/*.js", "**/*.tsx"],
 	"exclude": ["node_modules"],
 	"files": ["packages.d.ts"],
 	"compilerOptions": {
