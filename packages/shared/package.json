@@ -1,0 +1,22 @@
+{
+	"name": "shared",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "build/index.js",
+	"types": "build/index.d.ts",
+	"engines": {
+		"node": "20.x.x",
+		"npm": "10.x.x"
+	},
+	"scripts": {
+		"postinstall": "npm run build",
+		"lint:type": "npx tsc --noEmit",
+		"lint:js": "npx eslint . --max-warnings=0 --no-warn-ignored",
+		"lint": "concurrently \"npm:lint:*\"",
+		"build": "tsc --project tsconfig.build.json && npm run build:copy",
+		"build:copy": "cp -r package.json build"
+	},
+	"devDependencies": {
+		"zod": "3.22.4"
+	}
+}

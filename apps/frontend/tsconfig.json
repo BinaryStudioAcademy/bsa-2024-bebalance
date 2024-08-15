@@ -1,0 +1,16 @@
+{
+	"extends": "../../tsconfig.json",
+	"include": ["**/*.ts", "**/*.js", "**/*.tsx"],
+	"exclude": ["node_modules"],
+	"files": ["packages.d.ts"],
+	"compilerOptions": {
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"jsx": "react-jsx",
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["./src/*"],
+		},
+	},
+}
