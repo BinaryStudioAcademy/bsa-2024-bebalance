@@ -1,12 +1,12 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["**/*.ts", "**/*.js"],
+	"include": ["**/*.ts", "lint-staged.config.js"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
 		"outDir": "build",
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["./src/*"],
-		},
-	},
+			"~/*": ["./src/*"]
+		}
+	}
 }

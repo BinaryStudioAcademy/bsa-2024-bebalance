@@ -1,6 +1,6 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["**/*.ts", "**/*.js", "**/*.tsx"],
+	"include": ["**/*.ts", "**/*.tsx", "lint-staged.config.js"],
 	"exclude": ["node_modules"],
 	"files": ["packages.d.ts"],
 	"compilerOptions": {
@@ -10,7 +10,7 @@
 		"noEmit": true,
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["./src/*"],
-		},
-	},
+			"~/*": ["./src/*"]
+		}
+	}
 }

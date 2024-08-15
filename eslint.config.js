@@ -23,7 +23,7 @@ const filesConfig = {
 
 /** @type {FlatConfig} */
 const ignoresConfig = {
-	ignores: ["apps", "packages", "dangerfile.ts"],
+	ignores: ["apps", "packages", "dangerfile.ts", "eslint.config.js", "lint-staged.config.js"],
 };
 
 /** @type {FlatConfig} */
