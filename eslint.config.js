@@ -31,7 +31,7 @@ const jsConfig = {
 	languageOptions: {
 		globals: globals.node,
 		parserOptions: {
-			ecmaVersion: "latest",
+			ecmaVersion: 14,
 			sourceType: "module",
 		},
 	},
