@@ -123,7 +123,7 @@ const perfectionistConfig = {
 
 /** @type {FlatConfig} */
 const typescriptConfig = {
-	files: ["*.ts", '*.tsx'],
+	files: ["*.ts", "*.tsx"],
 	languageOptions: {
 		parser: /** @type {ParserModule} */ (tsParser),
 		parserOptions: {
