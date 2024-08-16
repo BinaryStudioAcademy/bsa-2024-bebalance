@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import type { SignInRequestDto, UserDto } from '@app/types/types';
-import { createAppAsyncThunk } from '../helpers/create-app-async-thunk';
-import type { RootState } from '../store';
+import type { SignUpRequestDto, UserDto } from "~/app/types/types";
+import { createAppAsyncThunk } from "../helpers/helpers";
+import type { RootState } from "../store";
 
 interface AuthState {
 	user: UserDto | null;
@@ -12,15 +12,15 @@ const initialState: AuthState = {
 	user: null,
 };
 
-const signIn = createAppAsyncThunk<
-	{ user: UserDto },
-	Omit<SignInRequestDto, 'strategy'>
->(`/signIn`, payload => {
-	const { login, password } = payload;
-	const user = { id: 1, email: login, password };
+const signUp = createAppAsyncThunk<{ user: UserDto }, SignUpRequestDto>(
+	`/signIn`,
+	(payload) => {
+		const { login, password } = payload;
+		const user = { id: 1, email: login, password };
 
-	return { user };
-});
+		return { user };
+	},
+);
 
 const signOut = createAppAsyncThunk(`/signOut`, () => {
 	const user = null;
@@ -29,11 +29,11 @@ const signOut = createAppAsyncThunk(`/signOut`, () => {
 });
 
 const authSlice = createSlice({
-	name: 'auth',
+	name: "auth",
 	initialState,
 	reducers: {},
-	extraReducers: builder => {
-		builder.addCase(signIn.fulfilled, (state, action) => {
+	extraReducers: (builder) => {
+		builder.addCase(signUp.fulfilled, (state, action) => {
 			state.user = action.payload.user;
 		});
 		builder.addCase(signOut.fulfilled, (state, action) => {
@@ -45,7 +45,7 @@ const authSlice = createSlice({
 const { reducer } = authSlice;
 
 const selectIsAuthenticated = (state: RootState) => {
-	return !!state.auth.user;
+	return Boolean(state.auth.user);
 };
 
-export { reducer, signIn, signOut, selectIsAuthenticated };
+export { reducer, signUp, signOut, selectIsAuthenticated };

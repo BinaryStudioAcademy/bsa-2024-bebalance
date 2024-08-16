@@ -1,14 +1,14 @@
-import { Stack } from 'expo-router';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import "react-native-reanimated";
 import {
 	initialWindowMetrics,
 	SafeAreaProvider,
-} from 'react-native-safe-area-context';
-import { Provider as StoreProvider } from 'react-redux';
-import { StyleSheet } from 'react-native';
+} from "react-native-safe-area-context";
+import { Provider as StoreProvider } from "react-redux";
 
-import { store } from '@app/store/store';
+import { store } from "~/app/store/store";
+import { StyleSheet } from "~/app/components/components";
 
 const RootLayout = () => {
 	return (

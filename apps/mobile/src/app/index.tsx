@@ -1,13 +1,15 @@
-import { Redirect } from 'expo-router';
+import { Redirect } from "expo-router";
 
-import { useAppSelector } from '@app/hooks/hooks';
-import { selectIsAuthenticated } from '@app/store/auth/auth-slice';
+import { useAppSelector } from "~/app/hooks/hooks";
+import { selectIsAuthenticated } from "~/app/store/auth/auth-slice";
 
 const Index = () => {
-	const isAuthenticated = useAppSelector(state => selectIsAuthenticated(state));
+	const isAuthenticated = useAppSelector((state) =>
+		selectIsAuthenticated(state),
+	);
 
 	return (
-		<Redirect href={isAuthenticated ? '/(tabs)/home' : '/(auth)/sign-in'} />
+		<Redirect href={isAuthenticated ? "/(tabs)/home" : "/(auth)/sign-in"} />
 	);
 };
 

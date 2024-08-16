@@ -1,18 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import { rootReducer } from './root-reducer';
+import { rootReducer } from "./root-reducer";
 
 const thunkExtraArgument = {} as const;
 
 const store = configureStore({
 	reducer: rootReducer,
-	middleware: getDefaultMiddleware =>
+	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			thunk: {
 				extraArgument: thunkExtraArgument,
 			},
 		}),
-	enhancers: getDefaultEnhancers => {
+	enhancers: (getDefaultEnhancers) => {
 		const defaultEnhancers = getDefaultEnhancers();
 
 		return defaultEnhancers;

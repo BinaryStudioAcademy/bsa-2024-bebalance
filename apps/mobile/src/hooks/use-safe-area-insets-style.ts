@@ -1,50 +1,53 @@
-import { useSafeAreaInsets, type Edge } from 'react-native-safe-area-context';
-import type { FlexStyle } from 'react-native';
+import { useSafeAreaInsets, type Edge } from "react-native-safe-area-context";
+import type { FlexStyle } from "react-native";
 
-type ExtendedEdge = Edge | 'start' | 'end';
+type ExtendedEdge = Edge | "start" | "end";
 
-const propertySuffixMap = {
-	top: 'Top',
-	bottom: 'Bottom',
-	left: 'Start',
-	right: 'End',
-	start: 'Start',
-	end: 'End',
+const propertyToSuffixMap = {
+	top: "Top",
+	bottom: "Bottom",
+	left: "Start",
+	right: "End",
+	start: "Start",
+	end: "End",
 };
 
-const edgeInsetMap: Record<'start' | 'end', Edge> = {
-	start: 'left',
-	end: 'right',
+const edgeToInsetMap: Record<"start" | "end", Edge> = {
+	start: "left",
+	end: "right",
 };
 
 type UseSafeAreaInsetsStyle = Pick<
 	FlexStyle,
-	| 'marginBottom'
-	| 'marginEnd'
-	| 'marginStart'
-	| 'marginTop'
-	| 'paddingBottom'
-	| 'paddingEnd'
-	| 'paddingStart'
-	| 'paddingTop'
+	| "marginBottom"
+	| "marginEnd"
+	| "marginStart"
+	| "marginTop"
+	| "paddingBottom"
+	| "paddingEnd"
+	| "paddingStart"
+	| "paddingTop"
 >;
 
 function useSafeAreaInsetsStyle(
 	safeAreaEdges: ExtendedEdge[] = [],
-	property: 'padding' | 'margin' = 'padding'
+	property: "padding" | "margin" = "padding",
 ): UseSafeAreaInsetsStyle {
 	const insets = useSafeAreaInsets();
 
-	return safeAreaEdges.reduce<UseSafeAreaInsetsStyle>((acc, e) => {
+	return safeAreaEdges.reduce<UseSafeAreaInsetsStyle>((acc, edge) => {
 		let value: Edge;
 
-		if (e === 'start' || e === 'end') {
-			value = edgeInsetMap[e];
+		if (edge === "start" || edge === "end") {
+			value = edgeToInsetMap[edge];
 		} else {
-			value = e;
+			value = edge;
 		}
 
-		return { ...acc, [`${property}${propertySuffixMap[e]}`]: insets[value] };
+		return {
+			...acc,
+			[`${property}${propertyToSuffixMap[edge]}`]: insets[value],
+		};
 	}, {});
 }
 

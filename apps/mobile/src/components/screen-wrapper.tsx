@@ -1,8 +1,8 @@
-import { View, StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
-import type { Edge } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
+import { View, StyleSheet, type StyleProp, type ViewStyle } from "react-native";
+import type { Edge } from "react-native-safe-area-context";
 
-import { useSafeAreaInsetsStyle } from '@app/hooks/hooks';
+import { useSafeAreaInsetsStyle } from "~/app/hooks/hooks";
+import { StatusBar } from "./components";
 
 type ScreenWrapperProps = {
 	safeAreaEdges?: Edge[];
@@ -12,7 +12,7 @@ type ScreenWrapperProps = {
 	statusBarProps?: React.ComponentProps<typeof StatusBar>;
 };
 
-const DEFAULT_SAFE_AREA_EDGES: Edge[] = ['top', 'bottom', 'left', 'right'];
+const DEFAULT_SAFE_AREA_EDGES: Edge[] = ["top", "bottom", "left", "right"];
 
 const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
 	safeAreaEdges = DEFAULT_SAFE_AREA_EDGES,
@@ -36,8 +36,8 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
 const styles = StyleSheet.create({
 	outerContainer: {
 		flex: 1,
-		height: '100%',
-		width: '100%',
+		height: "100%",
+		width: "100%",
 	},
 	innerContainer: {
 		flex: 1,

@@ -1,2 +1,2 @@
-export type { UserDto } from './user';
-export type { SignInRequestDto } from './auth';
+export type { UserDto } from "./user";
+export type { SignUpRequestDto } from "./auth";

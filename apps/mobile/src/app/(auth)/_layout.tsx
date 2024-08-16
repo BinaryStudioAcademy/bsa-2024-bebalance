@@ -1,11 +1,12 @@
-import { Stack } from 'expo-router';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import "react-native-reanimated";
+
+import { RouteName } from "~/app/enums/enums";
 
 const UnauthorizedLayout = () => {
 	return (
 		<Stack screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="sign-in" />
-			<Stack.Screen name="sign-up" />
+			<Stack.Screen name={RouteName.SIGN_UP} />
 		</Stack>
 	);
 };

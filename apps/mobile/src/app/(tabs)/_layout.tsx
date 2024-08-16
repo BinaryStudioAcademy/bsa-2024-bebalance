@@ -1,16 +1,17 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import React from "react";
 
-import { TabBarIcon } from '@app/components/components';
+import { TabBarIcon } from "~/app/components/components";
+import { RouteName } from "~/app/enums/navigation";
 
 const TabLayout = () => {
 	return (
 		<Tabs>
 			<Tabs.Screen
-				name="home"
+				name={RouteName.HOME}
 				options={{
-					title: 'Dashboard',
-					tabBarIcon: props => <TabBarIcon name="home" {...props} />,
+					title: "Dashboard",
+					tabBarIcon: (props) => <TabBarIcon name="home" {...props} />,
 				}}
 			/>
 		</Tabs>

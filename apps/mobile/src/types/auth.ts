@@ -1,6 +1,6 @@
-type SignInRequestDto = {
+type SignUpRequestDto = {
 	login: string;
 	password: string;
 };
 
-export type { SignInRequestDto };
+export type { SignUpRequestDto };
