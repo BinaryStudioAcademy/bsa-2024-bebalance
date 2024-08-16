@@ -1,26 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import type { SignUpRequestDto, UserDto } from "~/app/types/types";
+import type {
+	UserSignUpRequestDto,
+	UserSignUpResponseDto,
+} from "~/app/types/types";
 import { createAppAsyncThunk } from "../helpers/helpers";
-import type { RootState } from "../store";
 
 interface AuthState {
-	user: UserDto | null;
+	user: UserSignUpResponseDto | null;
 }
 
 const initialState: AuthState = {
 	user: null,
 };
 
-const signUp = createAppAsyncThunk<{ user: UserDto }, SignUpRequestDto>(
-	`/signIn`,
-	(payload) => {
-		const { login, password } = payload;
-		const user = { id: 1, email: login, password };
+const signUp = createAppAsyncThunk<
+	{ user: UserSignUpResponseDto },
+	UserSignUpRequestDto
+>(`/signIn`, (payload) => {
+	const { email, password } = payload;
+	const user = { id: 1, email, password };
 
-		return { user };
-	},
-);
+	return { user };
+});
 
 const signOut = createAppAsyncThunk(`/signOut`, () => {
 	const user = null;
@@ -44,8 +46,4 @@ const authSlice = createSlice({
 
 const { reducer } = authSlice;
 
-const selectIsAuthenticated = (state: RootState) => {
-	return Boolean(state.auth.user);
-};
-
-export { reducer, signUp, signOut, selectIsAuthenticated };
+export { reducer, signUp, signOut };

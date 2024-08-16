@@ -1,6 +1,1 @@
-type SignUpRequestDto = {
-	login: string;
-	password: string;
-};
-
-export type { SignUpRequestDto };
+export type { UserSignUpRequestDto, UserSignUpResponseDto } from "shared";

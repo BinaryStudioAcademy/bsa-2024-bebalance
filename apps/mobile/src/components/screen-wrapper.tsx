@@ -1,8 +1,8 @@
+import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, type StyleProp, type ViewStyle } from "react-native";
 import type { Edge } from "react-native-safe-area-context";
 
 import { useSafeAreaInsetsStyle } from "~/app/hooks/hooks";
-import { StatusBar } from "./components";
 
 type ScreenWrapperProps = {
 	safeAreaEdges?: Edge[];
