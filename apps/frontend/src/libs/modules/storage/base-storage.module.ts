@@ -16,7 +16,7 @@ class BaseStorage implements Storage {
 		return Promise.resolve();
 	}
 
-	public get<R = string>(key: ValueOf<typeof StorageKey>): Promise<R | null> {
+	public get<R = string>(key: ValueOf<typeof StorageKey>): Promise<null | R> {
 		return Promise.resolve(this.store.getItem(key as string) as R);
 	}
 

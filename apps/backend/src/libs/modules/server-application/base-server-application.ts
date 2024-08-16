@@ -1,8 +1,8 @@
 import fastifyStatic from "@fastify/static";
 import swagger, { type StaticDocumentSpec } from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
-import Fastify, { type FastifyError } from "fastify";
-import { dirname, join } from "node:path";
+import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { ServerErrorType } from "~/libs/enums/enums.js";
@@ -34,7 +34,7 @@ type Constructor = {
 class BaseServerApplication implements ServerApplication {
 	private apis: ServerApplicationApi[];
 
-	private app: ReturnType<typeof Fastify>;
+	private app: FastifyInstance;
 
 	private config: Config;
 
@@ -79,7 +79,9 @@ class BaseServerApplication implements ServerApplication {
 				}
 
 				if (error instanceof HTTPError) {
-					this.logger.error(`[HTTP Error]: ${error.status} – ${error.message}`);
+					this.logger.error(
+						`[HTTP Error]: ${String(error.status)} – ${error.message}`,
+					);
 
 					const response: ServerCommonErrorResponse = {
 						errorType: ServerErrorType.COMMON,
@@ -102,8 +104,8 @@ class BaseServerApplication implements ServerApplication {
 	}
 
 	private async initServe(): Promise<void> {
-		const staticPath = join(
-			dirname(fileURLToPath(import.meta.url)),
+		const staticPath = path.join(
+			path.dirname(fileURLToPath(import.meta.url)),
 			"../../../../public",
 		);
 
@@ -119,8 +121,8 @@ class BaseServerApplication implements ServerApplication {
 
 	private initValidationCompiler(): void {
 		this.app.setValidatorCompiler<ValidationSchema>(({ schema }) => {
-			return <T, R = ReturnType<ValidationSchema["parse"]>>(data: T): R => {
-				return schema.parse(data) as R;
+			return (data): ReturnType<ValidationSchema["parse"]> => {
+				return schema.parse(data);
 			};
 		});
 	}
