@@ -1,4 +1,5 @@
 {
+	"extends": "./tsconfig.json",
 	"include": ["src", "knexfile.ts"],
 	"compilerOptions": {
 		"outDir": "build"
