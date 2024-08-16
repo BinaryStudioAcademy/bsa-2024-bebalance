@@ -1,0 +1,15 @@
+{
+	"build": {
+		"development": {
+			"developmentClient": true,
+			"distribution": "internal"
+		},
+		"preview": {
+			"autoIncrement": true,
+			"android": {
+				"buildType": "apk"
+			}
+		},
+		"production": {}
+	}
+}
