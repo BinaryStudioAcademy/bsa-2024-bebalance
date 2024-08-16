@@ -2,6 +2,8 @@
 
 ## 1. Introduction
 
+Track your work-life balance and improve the specific areas of your life with AI recommendations.
+
 ### 1.1 Useful Links
 
 - Pay attention, that we have certain [quality criteria](https://github.com/BinaryStudioAcademy/quality-criteria/blob/production/src/javascript.md), which we should follow during application development.
@@ -10,7 +12,7 @@ TODO: Add development deployment link
 
 ## 2. Domain
 
-The product helps the users to track the progress in all their courses from different vendors in one place, along with additional features like checking friends' progress
+The product helps the users to maintain work-life balance, identify areas for improvements and recommend specific measurable actions.
 
 ## 3. Requirements
 

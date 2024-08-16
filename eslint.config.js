@@ -11,7 +11,7 @@ import globals from "globals";
 
 const JS_MAX_PARAMS_ALLOWED = 3;
 
-/** @typedef {import("eslint").Linter.FlatConfig} */
+/** @typedef {import("eslint").Linter.Config} */
 let FlatConfig;
 /** @typedef {import("eslint").Linter.ParserModule} */
 let ParserModule;
@@ -31,7 +31,7 @@ const jsConfig = {
 	languageOptions: {
 		globals: globals.node,
 		parserOptions: {
-			ecmaVersion: "latest",
+			ecmaVersion: 14,
 			sourceType: "module",
 		},
 	},
@@ -99,7 +99,10 @@ const sonarConfig = {
 	plugins: {
 		sonarjs,
 	},
-	rules: sonarjs.configs.recommended.rules,
+	rules: {
+		...sonarjs.configs.recommended.rules,
+		"sonarjs/no-duplicate-string": ["off"],
+	},
 };
 
 /** @type {FlatConfig} */
@@ -123,7 +126,7 @@ const perfectionistConfig = {
 
 /** @type {FlatConfig} */
 const typescriptConfig = {
-	files: ["*.ts", "*.tsx"],
+	ignores: ["eslint.config.js", "lint-staged.config.js", "stylelint.config.js"],
 	languageOptions: {
 		parser: /** @type {ParserModule} */ (tsParser),
 		parserOptions: {

@@ -38,6 +38,21 @@ class BaseHTTPApi implements HTTPApi {
 		this.storage = storage;
 	}
 
+	protected getFullEndpoint<T extends Record<string, string>>(
+		...parameters: [...string[], T]
+	): string {
+		const copiedParameters = [...parameters];
+
+		const options = copiedParameters.pop() as T;
+
+		return configureString(
+			this.baseUrl,
+			this.path,
+			...(copiedParameters as string[]),
+			options,
+		);
+	}
+
 	private async checkResponse(response: Response): Promise<Response> {
 		if (!response.ok) {
 			await this.handleError(response);
@@ -85,21 +100,6 @@ class BaseHTTPApi implements HTTPApi {
 			message: parsedException.message,
 			status: response.status as ValueOf<typeof HTTPCode>,
 		});
-	}
-
-	protected getFullEndpoint<T extends Record<string, string>>(
-		...parameters: [...string[], T]
-	): string {
-		const copiedParameters = [...parameters];
-
-		const options = copiedParameters.pop() as T;
-
-		return configureString(
-			this.baseUrl,
-			this.path,
-			...(copiedParameters as string[]),
-			options,
-		);
 	}
 
 	public async load(
