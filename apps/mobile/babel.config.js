@@ -12,7 +12,7 @@ module.exports = {
 				alias: {
 					"^shared/build(.+)": path.resolve(
 						__dirname,
-						"../shared/build/cjs/\\1"
+						"../../packages/shared/build/\\1"
 					),
 					"^#(.+)": "./src/\\1",
 				},
