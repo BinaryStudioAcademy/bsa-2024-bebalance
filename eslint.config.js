@@ -99,7 +99,10 @@ const sonarConfig = {
 	plugins: {
 		sonarjs,
 	},
-	rules: sonarjs.configs.recommended.rules,
+	rules: {
+		...sonarjs.configs.recommended.rules,
+		"sonarjs/no-duplicate-string": ["off"],
+	},
 };
 
 /** @type {FlatConfig} */
@@ -123,7 +126,7 @@ const perfectionistConfig = {
 
 /** @type {FlatConfig} */
 const typescriptConfig = {
-	files: ["*.ts", "*.tsx"],
+	ignores: ["eslint.config.js", "lint-staged.config.js", "stylelint.config.js"],
 	languageOptions: {
 		parser: /** @type {ParserModule} */ (tsParser),
 		parserOptions: {

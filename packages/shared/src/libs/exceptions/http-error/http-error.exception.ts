@@ -1,6 +1,5 @@
 import { type HTTPCode } from "../../../libs/modules/http/http.js";
 import { type ValueOf } from "../../../libs/types/types.js";
-
 import { ApplicationError } from "../application-error/application-error.exception.js";
 
 type Constructor = {

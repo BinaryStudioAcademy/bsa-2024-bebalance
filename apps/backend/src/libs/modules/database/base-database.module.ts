@@ -1,5 +1,5 @@
 import knex, { type Knex } from "knex";
-import { Model, knexSnakeCaseMappers } from "objection";
+import { knexSnakeCaseMappers, Model } from "objection";
 
 import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
@@ -18,8 +18,21 @@ class BaseDatabase implements Database {
 		this.logger = logger;
 	}
 
+	public connect(): ReturnType<Database["connect"]> {
+		this.logger.info("Establish DB connection...");
+
+		Model.knex(knex.default(this.environmentConfig));
+	}
+
 	private get environmentConfig(): Knex.Config {
 		return this.environmentsConfig[this.appConfig.ENV.APP.ENVIRONMENT];
+	}
+
+	public get environmentsConfig(): Database["environmentsConfig"] {
+		return {
+			[AppEnvironment.DEVELOPMENT]: this.initialConfig,
+			[AppEnvironment.PRODUCTION]: this.initialConfig,
+		};
 	}
 
 	private get initialConfig(): Knex.Config {
@@ -36,19 +49,6 @@ class BaseDatabase implements Database {
 				min: this.appConfig.ENV.DB.POOL_MIN,
 			},
 			...knexSnakeCaseMappers({ underscoreBetweenUppercaseLetters: true }),
-		};
-	}
-
-	public connect(): ReturnType<Database["connect"]> {
-		this.logger.info("Establish DB connection...");
-
-		Model.knex(knex.default(this.environmentConfig));
-	}
-
-	public get environmentsConfig(): Database["environmentsConfig"] {
-		return {
-			[AppEnvironment.DEVELOPMENT]: this.initialConfig,
-			[AppEnvironment.PRODUCTION]: this.initialConfig,
 		};
 	}
 }
