@@ -1,7 +1,5 @@
 # BeBalance
 
-Track your progress for all your courses
-
 ## 1. Introduction
 
 ### 1.1 Useful Links

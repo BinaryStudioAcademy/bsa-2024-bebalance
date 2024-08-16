@@ -2,6 +2,10 @@
 	"name": "backend",
 	"type": "module",
 	"version": "1.0.0",
+	"engines": {
+		"node": "20.x.x",
+		"npm": "10.x.x"
+	},
 	"scripts": {
 		"lint:type": "npx tsc --noEmit",
 		"lint:js": "npx eslint . --max-warnings=0",
