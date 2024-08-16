@@ -1,6 +1,6 @@
 {
 	"name": "mobile",
-	"main": "index.js",
+	"main": "expo-router/entry",
 	"version": "0.0.0",
 	"scripts": {
 		"start": "EXPO_USE_METRO_WORKSPACE_ROOT=1 expo start",
@@ -57,6 +57,7 @@
 		"@typescript-eslint/eslint-plugin": "^8.0.1",
 		"@typescript-eslint/parser": "^8.0.1",
 		"eslint": "^8.57.0",
+		"eslint-config-expo": "7.1.2",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-react": "^7.35.0",

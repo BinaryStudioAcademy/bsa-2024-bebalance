@@ -34,12 +34,10 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({
 };
 
 const styles = StyleSheet.create({
-	// eslint-disable-next-line react-native/no-color-literals
 	outerContainer: {
 		flex: 1,
 		height: '100%',
 		width: '100%',
-		backgroundColor: '#ffffff',
 	},
 	innerContainer: {
 		flex: 1,
