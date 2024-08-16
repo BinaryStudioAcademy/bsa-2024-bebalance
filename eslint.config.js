@@ -11,7 +11,7 @@ import globals from "globals";
 
 const JS_MAX_PARAMS_ALLOWED = 3;
 
-/** @typedef {import("eslint").Linter.FlatConfig} */
+/** @typedef {import("eslint").Linter.Config} */
 let FlatConfig;
 /** @typedef {import("eslint").Linter.ParserModule} */
 let ParserModule;
