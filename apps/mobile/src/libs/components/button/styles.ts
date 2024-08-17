@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native";
 
+import { CommonColors } from "~/libs/enums/enums";
+
 const styles = StyleSheet.create({
 	btn: {
 		alignItems: "center",
-		backgroundColor: "blue",
+		backgroundColor: CommonColors.BLACK,
 		padding: 10,
 	},
 	label: {
