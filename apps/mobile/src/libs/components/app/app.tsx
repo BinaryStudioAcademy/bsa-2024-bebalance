@@ -1,6 +1,5 @@
-import "fast-text-encoding";
-
 import { NavigationContainer } from "@react-navigation/native";
+import "fast-text-encoding";
 import React, { type FC } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider as StoreProvider } from "react-redux";

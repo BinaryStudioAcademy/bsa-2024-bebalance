@@ -15,17 +15,17 @@ import { type Storage, StorageKey } from "../storage/storage";
 
 type Constructor = {
 	baseUrl: string;
-	path: string;
 	http: HTTP;
+	path: string;
 	storage: Storage;
 };
 
 class BaseHttpApi implements HTTPApi {
 	private baseUrl: string;
 
-	private path: string;
-
 	private http: HTTP;
+
+	private path: string;
 
 	private storage: Storage;
 
@@ -34,23 +34,6 @@ class BaseHttpApi implements HTTPApi {
 		this.path = path;
 		this.http = http;
 		this.storage = storage;
-	}
-
-	public async load(
-		path: string,
-		options: HTTPApiOptions,
-	): Promise<HTTPApiResponse> {
-		const { method, contentType, payload = null, hasAuth } = options;
-
-		const headers = await this.getHeaders(contentType, hasAuth);
-
-		const response = await this.http.load(path, {
-			method,
-			headers,
-			payload,
-		});
-
-		return (await this.checkResponse(response)) as HTTPApiResponse;
 	}
 
 	protected getFullEndpoint<T extends Record<string, string>>(
@@ -65,6 +48,14 @@ class BaseHttpApi implements HTTPApi {
 			...(copiedParameters as string[]),
 			options,
 		);
+	}
+
+	private async checkResponse(response: Response): never | Promise<Response> {
+		if (!response.ok) {
+			await this.handleError(response);
+		}
+
+		return response;
 	}
 
 	private async getHeaders(
@@ -83,14 +74,6 @@ class BaseHttpApi implements HTTPApi {
 		return headers;
 	}
 
-	private async checkResponse(response: Response): Promise<Response> | never {
-		if (!response.ok) {
-			await this.handleError(response);
-		}
-
-		return response;
-	}
-
 	private async handleError(response: Response): Promise<never> {
 		const parsedException = (await response.json().catch(
 			(): ServerErrorResponse => ({
@@ -102,13 +85,30 @@ class BaseHttpApi implements HTTPApi {
 		const isCustomException = Boolean(parsedException.errorType);
 
 		throw new HTTPError({
-			status: response.status as ValueOf<typeof HTTPCode>,
+			details: "details" in parsedException ? parsedException.details : [],
 			errorType: isCustomException
 				? parsedException.errorType
 				: ServerErrorType.COMMON,
 			message: parsedException.message,
-			details: "details" in parsedException ? parsedException.details : [],
+			status: response.status as ValueOf<typeof HTTPCode>,
 		});
+	}
+
+	public async load(
+		path: string,
+		options: HTTPApiOptions,
+	): Promise<HTTPApiResponse> {
+		const { contentType, hasAuth, method, payload = null } = options;
+
+		const headers = await this.getHeaders(contentType, hasAuth);
+
+		const response = await this.http.load(path, {
+			headers,
+			method,
+			payload,
+		});
+
+		return (await this.checkResponse(response)) as HTTPApiResponse;
 	}
 }
 

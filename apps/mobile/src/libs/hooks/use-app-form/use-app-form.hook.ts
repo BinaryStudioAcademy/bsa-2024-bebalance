@@ -13,8 +13,8 @@ import { type ValidationSchema } from "~/libs/types/types";
 
 type Arguments<T extends FieldValues = FieldValues> = {
 	defaultValues: DefaultValues<T>;
-	validationSchema: ValidationSchema;
 	mode?: keyof ValidationMode;
+	validationSchema: ValidationSchema;
 };
 
 type Results<T extends FieldValues = FieldValues> = {
@@ -30,8 +30,8 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 }: Arguments<T>): Results<T> => {
 	const {
 		control,
-		handleSubmit,
 		formState: { errors },
+		handleSubmit,
 	} = useForm<T>({
 		defaultValues,
 		mode,
@@ -40,8 +40,8 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 
 	return {
 		control,
-		handleSubmit,
 		errors,
+		handleSubmit,
 	};
 };
 

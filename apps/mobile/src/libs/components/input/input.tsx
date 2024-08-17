@@ -27,9 +27,9 @@ const Input = <T extends FieldValues>({
 	name,
 	placeholder,
 }: Properties<T>): JSX.Element => {
-	const { field } = useFormController({ name, control });
+	const { field } = useFormController({ control, name });
 
-	const { value, onChange, onBlur } = field;
+	const { onBlur, onChange, value } = field;
 
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
@@ -38,11 +38,11 @@ const Input = <T extends FieldValues>({
 		<View>
 			<Text>{label}</Text>
 			<TextInput
-				onChangeText={onChange}
-				value={value}
 				onBlur={onBlur}
+				onChangeText={onChange}
 				placeholder={placeholder}
 				style={styles.input}
+				value={value}
 			/>
 			<Text>{hasError && (error as string)}</Text>
 		</View>

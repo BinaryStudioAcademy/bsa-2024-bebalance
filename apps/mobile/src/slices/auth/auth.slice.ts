@@ -13,10 +13,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 };
 
-const { reducer, actions, name } = createSlice({
-	initialState,
-	name: "auth",
-	reducers: {},
+const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
 		builder.addCase(signUp.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
@@ -28,6 +25,9 @@ const { reducer, actions, name } = createSlice({
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
+	initialState,
+	name: "auth",
+	reducers: {},
 });
 
 export { actions, name, reducer };

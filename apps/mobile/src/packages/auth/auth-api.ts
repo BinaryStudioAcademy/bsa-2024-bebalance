@@ -17,23 +17,19 @@ type Constructor = {
 
 class AuthApi extends BaseHttpApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ path: APIPath.AUTH, baseUrl, http, storage });
+		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 
 	public async signUp(
 		payload: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
-		console.log(
-			"GET FULL URL = ",
-			this.getFullEndpoint(AuthApiPath.SIGN_UP, {}),
-		);
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.SIGN_UP, {}),
 			{
-				method: "POST",
 				contentType: ContentType.JSON,
-				payload: JSON.stringify(payload),
 				hasAuth: false,
+				method: "POST",
+				payload: JSON.stringify(payload),
 			},
 		);
 

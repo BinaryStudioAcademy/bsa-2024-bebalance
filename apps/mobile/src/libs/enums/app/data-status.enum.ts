@@ -1,7 +1,7 @@
 const DataStatus = {
+	FULFILLED: "fulfilled",
 	IDLE: "idle",
 	PENDING: "pending",
-	FULFILLED: "fulfilled",
 	REJECTED: "rejected",
 } as const;
 

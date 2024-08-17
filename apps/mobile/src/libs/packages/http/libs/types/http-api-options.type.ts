@@ -3,10 +3,10 @@ import { type ValueOf } from "~/libs/types/types";
 
 import { type HTTPOptions } from "./types";
 
-type HTTPApiOptions = Omit<HTTPOptions, "headers" | "payload"> & {
-	hasAuth: boolean;
+type HTTPApiOptions = {
 	contentType: ValueOf<typeof ContentType>;
+	hasAuth: boolean;
 	payload?: HTTPOptions["payload"];
-};
+} & Omit<HTTPOptions, "headers" | "payload">;
 
 export { type HTTPApiOptions };

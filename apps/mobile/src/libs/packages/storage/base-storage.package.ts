@@ -12,26 +12,26 @@ class BaseStorage implements Storage {
 		this.store = new MMKV();
 	}
 
-	public set(key: ValueOf<typeof StorageKey>, value: string): Promise<void> {
-		this.store.set(key as string, value);
-
-		return Promise.resolve();
-	}
-
-	public get<T = string>(key: ValueOf<typeof StorageKey>): Promise<T | null> {
-		return Promise.resolve((this.store.getString(key as string) as T) ?? null);
-	}
-
 	public drop(key: ValueOf<typeof StorageKey>): Promise<void> {
 		this.store.delete(key as string);
 
 		return Promise.resolve();
 	}
 
+	public get<T = string>(key: ValueOf<typeof StorageKey>): Promise<null | T> {
+		return Promise.resolve((this.store.getString(key as string) as T) ?? null);
+	}
+
 	public async has(key: ValueOf<typeof StorageKey>): Promise<boolean> {
 		const value = await this.get(key);
 
 		return Boolean(value);
+	}
+
+	public set(key: ValueOf<typeof StorageKey>, value: string): Promise<void> {
+		this.store.set(key as string, value);
+
+		return Promise.resolve();
 	}
 }
 

@@ -14,16 +14,16 @@ type Constructor = {
 
 class UserApi extends BaseHttpApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ path: APIPath.USERS, baseUrl, http, storage });
+		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 
 	public async getAll(): Promise<UserGetAllResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(UsersApiPath.ROOT, {}),
 			{
-				method: "GET",
 				contentType: ContentType.JSON,
 				hasAuth: false,
+				method: "GET",
 			},
 		);
 

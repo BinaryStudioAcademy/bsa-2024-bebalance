@@ -34,16 +34,16 @@ class Store {
 	public constructor(config: Config) {
 		this.instance = configureStore({
 			devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
-			reducer: {
-				auth: authReducer,
-				users: usersReducer,
-			},
 			middleware: (getDefaultMiddleware) => {
 				return getDefaultMiddleware({
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
 				});
+			},
+			reducer: {
+				auth: authReducer,
+				users: usersReducer,
 			},
 		});
 	}

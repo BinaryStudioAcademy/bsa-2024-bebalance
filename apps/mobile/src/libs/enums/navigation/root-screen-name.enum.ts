@@ -1,6 +1,6 @@
 const RootScreenName = {
-	SIGN_UP: "Sign Up",
 	SIGN_IN: "Sign In",
+	SIGN_UP: "Sign Up",
 } as const;
 
 export { RootScreenName };

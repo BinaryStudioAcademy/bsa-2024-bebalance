@@ -14,11 +14,11 @@ class BaseConfig implements Config {
 
 	private get envSchema(): EnvironmentSchema {
 		return {
-			APP: {
-				ENVIRONMENT: EnvConfig["ENVIRONMENT"] as ValueOf<typeof AppEnvironment>,
-			},
 			API: {
 				ORIGIN_URL: EnvConfig["API_URL"] as string,
+			},
+			APP: {
+				ENVIRONMENT: EnvConfig["ENVIRONMENT"] as ValueOf<typeof AppEnvironment>,
 			},
 		};
 	}
