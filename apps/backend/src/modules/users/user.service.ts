@@ -33,8 +33,10 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Service["find"]> {
-		return Promise.resolve(null);
+	public find(
+		payload: Record<string, unknown>,
+	): Promise<undefined | UserEntity> {
+		return this.userRepository.find({ ...payload });
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
