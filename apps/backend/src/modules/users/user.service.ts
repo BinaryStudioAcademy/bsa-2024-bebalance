@@ -33,8 +33,8 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Service["find"]> {
-		return Promise.resolve(null);
+	public find(payload: UserSignUpRequestDto): ReturnType<Service["find"]> {
+		return this.userRepository.find();
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {

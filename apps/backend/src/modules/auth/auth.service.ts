@@ -11,6 +11,12 @@ class AuthService {
 		this.userService = userService;
 	}
 
+	public signIn(
+		userRequestDto: UserSignInRequestDto,
+	): Promise<UserSignInResponseDto> {
+		return this.userService.find();
+	}
+
 	public signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {

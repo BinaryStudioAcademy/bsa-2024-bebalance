@@ -13,6 +13,7 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
+import * as jose from "jose";
 
 class AuthController extends BaseController {
 	private authService: AuthService;
@@ -31,6 +32,20 @@ class AuthController extends BaseController {
 				),
 			method: "POST",
 			path: AuthApiPath.SIGN_UP,
+			validation: {
+				body: userSignUpValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.signIn(
+					options as APIHandlerOptions<{
+						body: UserSignUpRequestDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.SIGN_IN,
 			validation: {
 				body: userSignUpValidationSchema,
 			},
@@ -67,11 +82,28 @@ class AuthController extends BaseController {
 	 *                    type: object
 	 *                    $ref: "#/components/schemas/User"
 	 */
+
+	private async signIn(
+		options: APIHandlerOptions<{
+			body: UserSignUpRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.signUp(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
+		const user = await this.authService.signUp(options.body);
+
+		const token = new jose.SignJWT({ userID: user.id }).setProtectedHeader({
+			alg: "HS256",
+		});
 		return {
 			payload: await this.authService.signUp(options.body),
 			status: HTTPCode.CREATED,
