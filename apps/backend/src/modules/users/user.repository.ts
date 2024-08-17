@@ -28,8 +28,11 @@ class UserRepository implements Repository {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(
+		query: Partial<Record<keyof UserModel, unknown>>,
+	): Promise<null | UserEntity> {
+		const user = await this.userModel.query().where(query).first().execute();
+		return user ? UserEntity.initialize(user) : null;
 	}
 
 	public async findAll(): Promise<UserEntity[]> {

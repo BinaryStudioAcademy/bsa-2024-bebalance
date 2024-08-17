@@ -4,6 +4,7 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
 	type UserGetAllResponseDto,
+	type UserGetOneResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
@@ -33,8 +34,12 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Service["find"]> {
-		return Promise.resolve(null);
+	public async find(
+		query: Partial<Record<string, unknown>>,
+	): Promise<null | UserGetOneResponseDto> {
+		const user = await this.userRepository.find({ ...query });
+
+		return user ? user.toObject() : null;
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
@@ -43,6 +48,12 @@ class UserService implements Service {
 		return {
 			items: items.map((item) => item.toObject()),
 		};
+	}
+
+	public findByEmail(
+		email: UserEntity["email"],
+	): Promise<null | UserGetOneResponseDto> {
+		return this.find({ email });
 	}
 
 	public update(): ReturnType<Service["update"]> {
