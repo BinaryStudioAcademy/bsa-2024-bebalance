@@ -7,6 +7,8 @@ import {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
+import { UserSignInRequestDto } from "shared/src/modules/users/libs/types/user-sign-in-request-dto-type.js";
+import { UserSignInResponseDto } from "shared/src/modules/users/libs/types/user-sign-in-response-dto.type.js";
 
 class UserService implements Service {
 	private userRepository: UserRepository;
@@ -33,7 +35,7 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public find(payload: UserSignUpRequestDto): ReturnType<Service["find"]> {
+	public find(payload: UserSignInRequestDto): Promise<UserSignInResponseDto> {
 		return this.userRepository.find();
 	}
 

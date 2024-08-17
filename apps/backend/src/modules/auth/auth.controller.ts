@@ -1,4 +1,8 @@
+import * as jose from "jose";
+import { UserSignInRequestDto } from "shared/src/modules/users/libs/types/user-sign-in-request-dto-type.js";
+
 import { APIPath } from "~/libs/enums/enums.js";
+import { config } from "~/libs/modules/config/config.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
@@ -13,7 +17,8 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
-import * as jose from "jose";
+
+const JWT_SECRET = new TextEncoder().encode(config.ENV.JWT.JWT_SECRET);
 
 class AuthController extends BaseController {
 	private authService: AuthService;
@@ -85,11 +90,11 @@ class AuthController extends BaseController {
 
 	private async signIn(
 		options: APIHandlerOptions<{
-			body: UserSignUpRequestDto;
+			body: UserSignInRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.authService.signUp(options.body),
+			payload: await this.authService.signIn(options.body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -101,11 +106,18 @@ class AuthController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		const user = await this.authService.signUp(options.body);
 
-		const token = new jose.SignJWT({ userID: user.id }).setProtectedHeader({
-			alg: "HS256",
-		});
+		const token = await new jose.SignJWT({ userID: user.id })
+			.setProtectedHeader({
+				alg: "HS256",
+			})
+			.sign(JWT_SECRET);
+
+		const payload = {
+			token,
+			user,
+		};
 		return {
-			payload: await this.authService.signUp(options.body),
+			payload,
 			status: HTTPCode.CREATED,
 		};
 	}

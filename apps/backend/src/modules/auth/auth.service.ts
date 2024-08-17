@@ -1,3 +1,6 @@
+import { UserSignInRequestDto } from "shared/src/modules/users/libs/types/user-sign-in-request-dto-type.js";
+import { UserSignInResponseDto } from "shared/src/modules/users/libs/types/user-sign-in-response-dto.type.js";
+
 import {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
