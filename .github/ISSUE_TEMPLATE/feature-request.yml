@@ -1,7 +1,6 @@
 name: 💡 Feature Request
 description: Suggest a feature request
 title: "feat:"
-labels: ["feature request"]
 body:
   - type: textarea
     id: what-feature
