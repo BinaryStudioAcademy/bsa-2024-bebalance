@@ -11,6 +11,7 @@
 		"ios": "react-native run-ios",
 		"lint:js": "npx eslint \"src/**/*.{ts,tsx}\"",
 		"lint:type": "npx tsc --noEmit",
+		"lint": "concurrently \"npm:lint:*\"",
 		"start": "react-native start"
 	},
 	"dependencies": {

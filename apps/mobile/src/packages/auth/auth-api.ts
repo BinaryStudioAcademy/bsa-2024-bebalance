@@ -23,6 +23,10 @@ class AuthApi extends BaseHttpApi {
 	public async signUp(
 		payload: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
+		console.log(
+			"GET FULL URL = ",
+			this.getFullEndpoint(AuthApiPath.SIGN_UP, {}),
+		);
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.SIGN_UP, {}),
 			{
