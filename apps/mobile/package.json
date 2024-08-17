@@ -2,12 +2,16 @@
 	"name": "mobile",
 	"version": "0.0.1",
 	"private": true,
+	"engines": {
+		"node": "20.x.x",
+		"npm": "10.x.x"
+	},
 	"scripts": {
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
-		"lint": "eslint .",
-		"start": "react-native start",
-		"test": "jest"
+		"lint:js": "npx eslint \"src/**/*.{ts,tsx}\"",
+		"lint:type": "npx tsc --noEmit",
+		"start": "react-native start"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "3.9.0",
@@ -30,23 +34,13 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.25.2",
-		"@babel/plugin-proposal-export-namespace-from": "7.18.9",
 		"@babel/preset-env": "7.25.3",
 		"@babel/runtime": "7.25.0",
 		"@react-native/babel-preset": "0.74.87",
-		"@react-native/eslint-config": "0.74.87",
 		"@react-native/metro-config": "0.74.87",
-		"@react-native/typescript-config": "0.74.87",
-		"@tsconfig/react-native": "3.0.5",
 		"@types/react": "18.3.3",
-		"babel-jest": "^29.6.3",
 		"babel-plugin-module-resolver": "5.0.2",
 		"eslint": "^8.19.0",
-		"metro-react-native-babel-preset": "0.77.0",
-		"prettier": "2.8.8",
 		"typescript": "5.5.4"
-	},
-	"engines": {
-		"node": ">=18"
 	}
 }

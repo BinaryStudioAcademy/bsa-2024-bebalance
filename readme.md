@@ -87,6 +87,41 @@ TODO: add application schema
 
 3. modules - separate app features or functionalities
 
+### 5.4 Mobile
+
+This project is mainly focused on Android platform.
+
+#### 5.4.1 Technologies
+
+React Native — a mobile library
+Redux + Redux Toolkit — a state manager
+
+#### 5.4.2 Folder Structure
+
+1. assets - static assets (images)
+
+2. libs - shared libraries and utilities
+
+   2.1 components - plain react components
+
+   2.2 enums
+
+   2.3 helpers
+
+   2.4 hooks
+
+   2.5 packages - separate features or functionalities
+
+   2.6 types
+
+3. navigations - app navigators
+
+4. packages - separate app features or functionalities
+
+5. screens - app screens
+
+6. slices - redux slices
+
 ### 5.4 Shared Package
 
 #### 5.4.1 Reason

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button, Input, Link, Text, View } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
-import { useAppForm } from "~/libs/hooks/hooks";
+import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { userSignUpValidationSchema } from "~/packages/users/libs/validation-schemas/validation-schemas";
 import { type UserSignUpRequestDto } from "~/packages/users/users";
 
@@ -17,9 +17,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 		validationSchema: userSignUpValidationSchema,
 	});
 
-	const handleFormSubmit = (): void => {
-		handleSubmit(onSubmit);
-	};
+	const handleFormSubmit = useCallback((): void => {
+		void handleSubmit(onSubmit)();
+	}, [handleSubmit, onSubmit]);
 
 	return (
 		<View>

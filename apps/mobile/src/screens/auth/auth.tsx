@@ -38,7 +38,7 @@ const Auth: React.FC = () => {
 		(payload: UserSignUpRequestDto): void => {
 			void dispatch(authActions.signUp(payload));
 		},
-		[],
+		[dispatch],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
