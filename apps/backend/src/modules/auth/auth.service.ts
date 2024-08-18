@@ -17,7 +17,7 @@ class AuthService {
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const { email } = userRequestDto;
-		const user = await this.userService.find({ email });
+		const user = await this.userService.findByEmail(email);
 		const token = await JWTManager.createToken({ userId: user.id });
 
 		return { token, user };
