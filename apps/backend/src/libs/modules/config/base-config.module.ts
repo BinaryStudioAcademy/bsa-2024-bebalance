@@ -77,6 +77,18 @@ class BaseConfig implements Config {
 				},
 			},
 			JWT: {
+				ALGORITHM: {
+					default: null,
+					doc: "Token encription algorithm",
+					env: "ALGORITHM",
+					format: String,
+				},
+				EXPIRATION_TIME: {
+					default: null,
+					doc: "Token expiration time",
+					env: "EXPIRATION_TIME",
+					format: String,
+				},
 				SECRET: {
 					default: null,
 					doc: "Used to sign and validate JWT tokens",
