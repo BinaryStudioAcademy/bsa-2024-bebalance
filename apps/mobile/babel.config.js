@@ -7,7 +7,7 @@ module.exports = {
 			"module-resolver",
 			{
 				alias: {
-					"^~(.+)": String.raw`./src/\1`,
+					"^~(.+)": "./src/\\1",
 				},
 				root: path.resolve("./"),
 			},

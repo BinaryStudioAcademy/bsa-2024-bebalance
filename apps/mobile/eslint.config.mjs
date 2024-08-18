@@ -42,6 +42,7 @@ const overridesConfigs = [
 		files: ["babel.config.js"],
 		rules: {
 			"unicorn/prefer-node-protocol": ["off"],
+			"unicorn/prefer-string-raw": ["off"],
 		},
 	},
 ];
