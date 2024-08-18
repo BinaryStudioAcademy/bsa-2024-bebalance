@@ -4,8 +4,8 @@ import { default as baseConfig } from "../../lint-staged.config.js";
 const config = {
 	...baseConfig,
 	"**/*.ts": [
-		() => "npm run lint:js -w backend",
-		() => "npm run lint:type -w backend",
+		() => "npm run lint:js -w mobile",
+		() => "npm run lint:type -w mobile",
 	],
 };
 
