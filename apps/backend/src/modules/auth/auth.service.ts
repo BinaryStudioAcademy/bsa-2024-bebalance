@@ -1,7 +1,6 @@
-import {
-	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
-} from "~/modules/users/libs/types/types.js";
+import { UserDto } from "shared/src/modules/users/libs/types/user-dto.type.js";
+
+import { type UserSignUpRequestDto } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 class AuthService {
@@ -11,9 +10,7 @@ class AuthService {
 		this.userService = userService;
 	}
 
-	public signUp(
-		userRequestDto: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
+	public signUp(userRequestDto: UserSignUpRequestDto): Promise<UserDto> {
 		return this.userService.create(userRequestDto);
 	}
 }

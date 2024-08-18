@@ -1,6 +1,6 @@
 type UserSignUpRequestDto = {
 	email: string;
-	id: number;
+	password: string;
 };
 
 export { type UserSignUpRequestDto };
