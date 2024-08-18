@@ -6,7 +6,7 @@ type ConstructorProperties = {
 	secret: Uint8Array;
 };
 
-class BaseToken {
+class BaseToken<T extends JWTPayload> {
 	private algorithm: string;
 	private expirationTime: string;
 	private secret: Uint8Array;
@@ -17,7 +17,7 @@ class BaseToken {
 		this.expirationTime = expirationTime;
 	}
 
-	public async createToken(payload: JWTPayload): Promise<string> {
+	public async createToken(payload: T): Promise<string> {
 		return await new SignJWT(payload)
 			.setProtectedHeader({ alg: this.algorithm })
 			.setIssuedAt()
