@@ -1,14 +1,11 @@
-import * as jose from "jose";
-import { UserSignInRequestDto } from "shared/src/modules/users/libs/types/user-sign-in-request-dto-type.js";
-
 import { APIPath } from "~/libs/enums/enums.js";
-import { config } from "~/libs/modules/config/config.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
+import { JWTManager } from "~/libs/modules/jwt-manager/jwt-manager.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type UserSignUpRequestDto,
@@ -17,8 +14,6 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
-
-const JWT_SECRET = new TextEncoder().encode(config.ENV.JWT.JWT_SECRET);
 
 class AuthController extends BaseController {
 	private authService: AuthService;
@@ -37,20 +32,6 @@ class AuthController extends BaseController {
 				),
 			method: "POST",
 			path: AuthApiPath.SIGN_UP,
-			validation: {
-				body: userSignUpValidationSchema,
-			},
-		});
-
-		this.addRoute({
-			handler: (options) =>
-				this.signIn(
-					options as APIHandlerOptions<{
-						body: UserSignUpRequestDto;
-					}>,
-				),
-			method: "POST",
-			path: AuthApiPath.SIGN_IN,
 			validation: {
 				body: userSignUpValidationSchema,
 			},
@@ -83,21 +64,13 @@ class AuthController extends BaseController {
 	 *              schema:
 	 *                type: object
 	 *                properties:
-	 *                  message:
-	 *                    type: object
+	 *                  user:
 	 *                    $ref: "#/components/schemas/User"
+	 *                  token:
+	 *                    type: string
+	 *                    description: "Authentication token for the user."
+	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
-
-	private async signIn(
-		options: APIHandlerOptions<{
-			body: UserSignInRequestDto;
-		}>,
-	): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.authService.signIn(options.body),
-			status: HTTPCode.OK,
-		};
-	}
 
 	private async signUp(
 		options: APIHandlerOptions<{
@@ -106,18 +79,10 @@ class AuthController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		const user = await this.authService.signUp(options.body);
 
-		const token = await new jose.SignJWT({ userID: user.id })
-			.setProtectedHeader({
-				alg: "HS256",
-			})
-			.sign(JWT_SECRET);
+		const token = await JWTManager.createToken({ userId: user.id });
 
-		const payload = {
-			token,
-			user,
-		};
 		return {
-			payload,
+			payload: { token, user },
 			status: HTTPCode.CREATED,
 		};
 	}
