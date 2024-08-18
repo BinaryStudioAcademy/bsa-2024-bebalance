@@ -33,10 +33,8 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public async find(
-		payload: Record<string, unknown>,
-	): Promise<undefined | UserEntity> {
-		return await this.userRepository.find({ ...payload });
+	public find(): ReturnType<Service["find"]> {
+		return Promise.resolve(null);
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
@@ -45,6 +43,10 @@ class UserService implements Service {
 		return {
 			items: items.map((item) => item.toObject()),
 		};
+	}
+
+	public async findByEmail(email: string): Promise<null | UserEntity> {
+		return await this.userRepository.findByEmail(email);
 	}
 
 	public update(): ReturnType<Service["update"]> {
