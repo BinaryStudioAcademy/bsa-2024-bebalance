@@ -1,0 +1,109 @@
+.auth-container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--blue-background);
+}
+
+.logo-container {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.form-container {
+	display: flex;
+	flex-basis: 40%;
+	flex-direction: column;
+	padding: 80px 160px;
+	margin: 16px;
+	font-family: var(--nunito-font);
+	background-color: white;
+	border-radius: 32px;
+}
+
+.form-container .input-groups {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin: 24px 0;
+}
+
+.form-container .auth-info {
+	font-family: inherit;
+	font-weight: 600;
+}
+
+.form-container .title-form {
+	font-weight: 700;
+}
+
+.auth-info .link-info {
+	color: #00c2fc;
+	text-decoration: none;
+}
+
+.ilustration-container {
+	position: relative;
+	display: flex;
+	flex-basis: 60%;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+
+.ilustration-container .title {
+	font-size: 48px;
+}
+
+.ilustration-container .img-left {
+	position: absolute;
+	left: 0;
+	z-index: 0;
+	width: 70%;
+	margin-top: -300px;
+	margin-left: -300px;
+}
+
+.ilustration-container .img-right {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	width: 90%;
+	margin-right: -100px;
+	margin-bottom: -200px;
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	font-family: var(--nunito-font);
+}
+
+.input-container .input-content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 8px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+}
+
+.input-container .label {
+	margin-bottom: 8px;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.input-container .input {
+	width: 80%;
+	padding: 16px;
+	font-family: inherit;
+	border: none;
+}
+
+.input-container .input:focus {
+	outline: none;
+}

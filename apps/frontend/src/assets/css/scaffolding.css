@@ -1,5 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Righteous&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
 * {
 	box-sizing: border-box;
+}
+
+:root {
+	--primary-gradient: linear-gradient(
+		325deg,
+		hsl(184deg 100% 50%) 0%,
+		hsl(209deg 100% 50%) 100%
+	);
+	--pink-gradient: linear-gradient(
+		325deg,
+		hsl(338deg 100% 67%) 0%,
+		hsl(299deg 100% 72%) 100%
+	);
+	--blue-background: #76acec;
+	--dark: #000000;
+	--nunito-font: "Nunito", sans-serif;
 }
 
 body {

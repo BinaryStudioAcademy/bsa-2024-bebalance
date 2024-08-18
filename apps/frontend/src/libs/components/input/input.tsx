@@ -8,8 +8,11 @@ import {
 import { useFormController } from "~/libs/hooks/hooks.js";
 
 type Properties<T extends FieldValues> = {
+	className: string;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	hasIcon?: string;
+	iconSrc?: string;
 	label: string;
 	name: FieldPath<T>;
 	placeholder?: string;
@@ -17,8 +20,11 @@ type Properties<T extends FieldValues> = {
 };
 
 const Input = <T extends FieldValues>({
+	className,
 	control,
 	errors,
+	hasIcon,
+	iconSrc,
 	label,
 	name,
 	placeholder = "",
@@ -30,10 +36,18 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 
 	return (
-		<label>
-			<span>{label}</span>
-			<input {...field} placeholder={placeholder} type={type} />
-			{hasError && <span>{error as string}</span>}
+		<label className={className}>
+			<span className="label">{label}</span>
+			<div className="input-content">
+				<input
+					className="input"
+					{...field}
+					placeholder={placeholder}
+					type={type}
+				/>
+				{hasError && <span>{error as string}</span>}
+				{Boolean(hasIcon) && <img alt="" src={iconSrc} />}
+			</div>
 		</label>
 	);
 };
