@@ -26,8 +26,8 @@ class AuthService {
 
 		if (!user) {
 			throw new AuthError({
-				message: ErrorMessage.USER_NOT_FOUND,
-				status: HTTPCode.NOT_FOUND,
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
 
@@ -39,6 +39,7 @@ class AuthService {
 		if (!isPasswordValid) {
 			throw new AuthError({
 				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
 
