@@ -1,9 +1,10 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 
 import "~/assets/css/styles.css";
 import {
 	App,
+	Loader,
 	RouterProvider,
 	StoreProvider,
 } from "~/libs/components/components.js";
@@ -14,28 +15,30 @@ import { Auth } from "~/pages/auth/auth.jsx";
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
 		<StoreProvider store={store.instance}>
-			<RouterProvider
-				routes={[
-					{
-						children: [
-							{
-								element: "Root",
-								path: AppRoute.ROOT,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.SIGN_IN,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.SIGN_UP,
-							},
-						],
-						element: <App />,
-						path: AppRoute.ROOT,
-					},
-				]}
-			/>
+			<Suspense fallback={<Loader />}>
+				<RouterProvider
+					routes={[
+						{
+							children: [
+								{
+									element: "Root",
+									path: AppRoute.ROOT,
+								},
+								{
+									element: <Auth />,
+									path: AppRoute.SIGN_IN,
+								},
+								{
+									element: <Auth />,
+									path: AppRoute.SIGN_UP,
+								},
+							],
+							element: <App />,
+							path: AppRoute.ROOT,
+						},
+					]}
+				/>
+			</Suspense>
 		</StoreProvider>
 	</StrictMode>,
 );
