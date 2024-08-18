@@ -6,6 +6,7 @@ import {
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserGetOneResponseDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
@@ -33,8 +34,14 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Service["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<UserGetOneResponseDto | null> {
+		const item = await this.userRepository.find(id);
+
+		if (!item) {
+			return null;
+		}
+
+		return item.toObject();
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
