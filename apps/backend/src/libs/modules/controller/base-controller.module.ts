@@ -37,12 +37,13 @@ class BaseController implements Controller {
 	private mapRequest(
 		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
 	): APIHandlerOptions {
-		const { body, params, query } = request;
+		const { body, params, query, headers } = request;
 
 		return {
 			body,
 			params,
 			query,
+			headers,
 		};
 	}
 
