@@ -1,4 +1,4 @@
-import { UserDto } from "shared/src/modules/users/libs/types/user-dto.type.js";
+import { UserDto } from "shared/src/modules/users/users.js";
 
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
