@@ -4,5 +4,6 @@ export {
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserGetOneResponseDto,
 } from "./libs/types/types.js";
 export { userSignUp as userSignUpValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

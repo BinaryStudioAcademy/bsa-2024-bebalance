@@ -3,6 +3,7 @@ const HTTPCode = {
 	INTERNAL_SERVER_ERROR: 500,
 	OK: 200,
 	UNPROCESSED_ENTITY: 422,
+	UNATHORIZED: 401,
 } as const;
 
 export { HTTPCode };
