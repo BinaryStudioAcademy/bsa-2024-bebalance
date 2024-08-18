@@ -1,10 +1,11 @@
-import { JWTManager } from "~/libs/modules/jwt-manager/jwt-manager.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
+
+import { token } from "../../libs/modules/token/token.js";
 
 class AuthService {
 	private userService: UserService;
@@ -18,18 +19,18 @@ class AuthService {
 	): Promise<UserSignInResponseDto> {
 		const { email } = userRequestDto;
 		const user = await this.userService.findByEmail(email);
-		const token = await JWTManager.createToken({ userId: user.id });
+		const JWTtoken = await token.createToken({ userId: user.id });
 
-		return { token, user };
+		return { token: JWTtoken, user };
 	}
 
 	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const user = await this.userService.create(userRequestDto);
-		const token = await JWTManager.createToken({ userId: user.id });
+		const JWTtoken = await token.createToken({ userId: user.id });
 
-		return { token, user };
+		return { token: JWTtoken, user };
 	}
 }
 

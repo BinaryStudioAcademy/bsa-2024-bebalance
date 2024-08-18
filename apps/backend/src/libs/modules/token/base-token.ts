@@ -6,7 +6,7 @@ type ConstructorProperties = {
 	secret: Uint8Array;
 };
 
-class BaseJWTManager {
+class BaseToken {
 	private algorithm: string;
 	private expirationTime: string;
 	private secret: Uint8Array;
@@ -30,4 +30,4 @@ class BaseJWTManager {
 	}
 }
 
-export { BaseJWTManager };
+export { BaseToken };
