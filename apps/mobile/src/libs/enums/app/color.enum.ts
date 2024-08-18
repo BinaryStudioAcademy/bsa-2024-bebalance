@@ -1,4 +1,4 @@
-const CommonColors = {
+const Color = {
 	BG_BLUE: "rgba(118, 172, 236, 1)",
 	BG_LIGHT: "rgba(246, 245, 250, 1)",
 	BG_WHITE: "rgba(255, 255, 255, 1)",
@@ -20,4 +20,4 @@ const CommonColors = {
 	YELLOW_GT: "linear-gradient(180deg, #FFE307 0%, #FFF8B5 100%)",
 } as const;
 
-export { CommonColors };
+export { Color };
