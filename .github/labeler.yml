@@ -1,0 +1,38 @@
+root:
+  - changed-files:
+      - any-glob-to-any-file: "*"
+
+workflows:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**/*"
+
+shared:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/shared/**/*"
+
+backend:
+  - changed-files:
+      - all-globs-to-any-file:
+          - "apps/backend/**/*"
+          - "!apps/backend/.env.example"
+
+frontend:
+  - changed-files:
+      - all-globs-to-any-file:
+          - "apps/frontend/**/*"
+          - "!apps/frontend/.env.example"
+
+mobile:
+  - changed-files:
+      - all-globs-to-any-file:
+          - "apps/mobile/**/*"
+          - "!apps/mobile/.env.example"
+
+env:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "apps/backend/.env.example"
+          - "apps/frontend/.env.example"
+          - "apps/mobile/.env.example"
