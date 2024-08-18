@@ -79,8 +79,8 @@ class BaseConfig implements Config {
 			JWT: {
 				SECRET: {
 					default: null,
-					doc: "JWT secret",
-					env: "JWT_SECRET",
+					doc: "Used to sign and validate JWT tokens",
+					env: "SECRET",
 					format: String,
 				},
 			},
