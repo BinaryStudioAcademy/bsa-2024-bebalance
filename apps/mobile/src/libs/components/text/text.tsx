@@ -7,7 +7,7 @@ import { getFontFamily } from "~/libs/helpers/get-fonts-family/get-fonts-family"
 
 import { styles as presetStyles } from "./styles";
 
-type TextProperties = {
+type Properties = {
 	children: ReactNode;
 	color?: string;
 	fontFamily?: "INTER" | "LATO" | "NUNITO";
@@ -25,7 +25,7 @@ const Text = ({
 	size,
 	style,
 	weight = "regular",
-}: TextProperties) => {
+}: Properties) => {
 	const baseStyle = presetStyles[presetProperties];
 
 	const dynamicStyle = size
