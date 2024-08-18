@@ -5,7 +5,6 @@ import {
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { JWTManager } from "~/libs/modules/jwt-manager/jwt-manager.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type UserSignUpRequestDto,
@@ -91,12 +90,8 @@ class AuthController extends BaseController {
 			body: UserSignUpRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const user = await this.authService.signIn(options.body);
-
-		const token = await JWTManager.createToken({ userId: user.id });
-
 		return {
-			payload: { token, user },
+			payload: await this.authService.signIn(options.body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -106,12 +101,8 @@ class AuthController extends BaseController {
 			body: UserSignUpRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const user = await this.authService.signUp(options.body);
-
-		const token = await JWTManager.createToken({ userId: user.id });
-
 		return {
-			payload: { token, user },
+			payload: await this.authService.signUp(options.body),
 			status: HTTPCode.CREATED,
 		};
 	}
