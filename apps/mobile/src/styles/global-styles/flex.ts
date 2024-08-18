@@ -1,33 +1,33 @@
 const FLEX = {
+	alignItemsCenter: {
+		alignItems: "center" as const,
+	},
+	alignItemsEnd: {
+		alignItems: "flex-end" as const,
+	},
+	alignItemsStart: {
+		alignItems: "flex-start" as const,
+	},
 	flex1: {
 		flex: 1,
 	},
-	flexDirectionRow: {
-		flexDirection: "row" as "row",
-	},
 	flexDirectionColumn: {
-		flexDirection: "column" as "column",
+		flexDirection: "column" as const,
 	},
-	alignItemsCenter: {
-		alignItems: "center" as "center",
-	},
-	alignItemsStart: {
-		alignItems: "flex-start" as "flex-start",
-	},
-	alignItemsEnd: {
-		alignItems: "flex-end" as "flex-end",
+	flexDirectionRow: {
+		flexDirection: "row" as const,
 	},
 	justifyContentCenter: {
-		justifyContent: "center" as "center",
-	},
-	justifyContentStart: {
-		justifyContent: "flex-start" as "flex-start",
+		justifyContent: "center" as const,
 	},
 	justifyContentEnd: {
-		justifyContent: "flex-end" as "flex-end",
+		justifyContent: "flex-end" as const,
 	},
 	justifyContentSpaceBetween: {
-		justifyContent: "space-between" as "space-between",
+		justifyContent: "space-between" as const,
+	},
+	justifyContentStart: {
+		justifyContent: "flex-start" as const,
 	},
 };
 

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 import { FLEX } from "~/styles/global-styles/flex";
 import { GAPS } from "~/styles/global-styles/gaps";
 import { MARGINS } from "~/styles/global-styles/margins";

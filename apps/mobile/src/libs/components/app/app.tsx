@@ -6,7 +6,6 @@ import { Provider as StoreProvider } from "react-redux";
 
 import { store } from "~/libs/packages/store/store";
 import { Root as RootNavigation } from "~/navigations/navigations";
-
 import { globalStyles } from "~/styles/styles";
 
 const App: FC = () => {

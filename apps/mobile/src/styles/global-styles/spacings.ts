@@ -1,9 +1,9 @@
 const SPACINGS = {
-	xs: 8,
-	sm: 10,
-	md: 12,
 	lg: 14,
+	md: 12,
+	sm: 10,
 	xl: 25,
+	xs: 8,
 	xxl: 44,
 };
 

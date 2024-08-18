@@ -1,10 +1,10 @@
 import { SPACINGS } from "~/styles/global-styles/spacings";
 
 const GAPS = {
-	gapXs: { gap: SPACINGS.xs },
-	gapSm: { gap: SPACINGS.md },
 	gapLg: { gap: SPACINGS.lg },
+	gapSm: { gap: SPACINGS.md },
 	gapXl: { gap: SPACINGS.xl },
+	gapXs: { gap: SPACINGS.xs },
 	gapXXl: { gap: SPACINGS.xxl },
 };
 
