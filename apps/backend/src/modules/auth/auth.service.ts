@@ -1,4 +1,6 @@
-import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
+import { ErrorMessage } from "~/libs/enums/enums.js";
+import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { AuthError, HTTPCode } from "~/libs/modules/http/http.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -8,29 +10,35 @@ import {
 import { type UserService } from "~/modules/users/user.service.js";
 
 class AuthService {
+	private encrypt: Encrypt;
 	private userService: UserService;
 
-	public constructor(userService: UserService) {
+	public constructor(userService: UserService, encrypt: Encrypt) {
 		this.userService = userService;
+		this.encrypt = encrypt;
 	}
 
 	public async signIn(
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
-		const user = await this.userService.find({ email });
+		const user = await this.userService.findByEmail(email);
 
 		if (!user) {
-			throw new HTTPError({
-				message: "User not found",
+			throw new AuthError({
+				message: ErrorMessage.USER_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
 			});
 		}
 
-		if (user.toNewObject().passwordHash !== password) {
-			throw new HTTPError({
-				message: "Wrong password",
-				status: HTTPCode.UNAUTHORIZED,
+		const isPasswordValid = await this.encrypt.compare(
+			password,
+			user.toNewObject().passwordHash,
+		);
+
+		if (!isPasswordValid) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
 			});
 		}
 
