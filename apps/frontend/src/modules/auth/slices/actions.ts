@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type UserSignUpRequestDto,
@@ -17,7 +18,7 @@ const signUp = createAsyncThunk<
 
 	const response = await authApi.signUp(registerPayload);
 
-	localStorage.setItem("token", response.token);
+	localStorage.setItem(StorageKey.TOKEN, response.token);
 
 	return response;
 });
