@@ -1,4 +1,4 @@
-import { BaseEncrypt } from "./encrypt.package.js";
+import { BaseEncrypt } from "./base-encrypt.module.js";
 
 const encrypt = new BaseEncrypt();
 
