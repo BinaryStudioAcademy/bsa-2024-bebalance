@@ -35,6 +35,17 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getAuthenticatedUser(
+					options as APIHandlerOptions<{
+						headers: { authorization: string };
+					}>,
+				),
+			method: "GET",
+			path: AuthApiPath.AUTHENTICATED_USER,
+		});
 	}
 
 	/**
@@ -75,6 +86,35 @@ class AuthController extends BaseController {
 		return {
 			payload: await this.authService.signUp(options.body),
 			status: HTTPCode.CREATED,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /auth/authenticated-user:
+	 *   get:
+	 *     description: Return authenticated user object
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
+	 */
+	private async getAuthenticatedUser(
+		options: APIHandlerOptions<{
+			headers: { authorization: string };
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.getAuthenticatedUser(
+				options.headers.authorization,
+			),
+			status: HTTPCode.OK,
 		};
 	}
 }
