@@ -1,4 +1,4 @@
-import { SPACINGS } from "~/styles/global-styles/spacings";
+import { SPACINGS } from "~/libs/styles/global-styles/spacings";
 
 const PADDINGS = {
 	p2: { padding: SPACINGS.xxxs },
