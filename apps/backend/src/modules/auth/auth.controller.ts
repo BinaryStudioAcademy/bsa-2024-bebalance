@@ -36,6 +36,20 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.signIn(
+					options as APIHandlerOptions<{
+						body: UserSignUpRequestDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.SIGN_IN,
+			validation: {
+				body: userSignUpValidationSchema,
+			},
+		});
 	}
 
 	/**
@@ -71,6 +85,21 @@ class AuthController extends BaseController {
 	 *                    description: "Authentication token for the user."
 	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
+
+	private async signIn(
+		options: APIHandlerOptions<{
+			body: UserSignUpRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const user = await this.authService.signIn(options.body);
+
+		const token = await JWTManager.createToken({ userId: user.id });
+
+		return {
+			payload: { token, user },
+			status: HTTPCode.OK,
+		};
+	}
 
 	private async signUp(
 		options: APIHandlerOptions<{
