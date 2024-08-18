@@ -5,7 +5,7 @@ import {
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
-import { HTTPError } from "./libs/exceptions/exceptions.js";
+import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
 	private userService: UserService;
@@ -21,7 +21,7 @@ class AuthService {
 		const userWithSameEmail = await this.userService.findByEmail(email);
 
 		if (userWithSameEmail) {
-			throw new HTTPError({
+			throw new AuthError({
 				message: UserValidationMessage.EMAIL_TAKEN,
 				status: HTTPCode.CONFLICT,
 			});
