@@ -16,7 +16,7 @@ export {
 	type HTTP,
 	HTTPCode,
 	HTTPHeader,
-	type HTTPMethod,
+	type HTTPMethodType,
 	type HTTPOptions,
 } from "./libs/modules/http/http.js";
 export { type Storage } from "./libs/modules/storage/storage.js";
