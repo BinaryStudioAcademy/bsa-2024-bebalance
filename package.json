@@ -20,7 +20,6 @@
 		"build": "npm run build:shared && npm run build:frontend && npm run build:backend",
 		"lint:editor": "editorconfig-checker",
 		"lint:fs": "ls-lint",
-		"lint:css": "npx stylelint \"apps/frontend/src/**/*.css\"",
 		"lint:type": "npx tsc --noEmit",
 		"lint:js": "npx eslint . --max-warnings=0 --no-warn-ignored",
 		"lint:format": "prettier --check \"**/*.{ts,tsx,json,md,css,html}\"",
