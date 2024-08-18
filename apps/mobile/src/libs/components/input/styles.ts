@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 import { GradientColor } from "~/libs/enums/enums";
 
-const colorIndex = 0;
+const COLOR_INDEX = 0;
 const styles = StyleSheet.create({
 	input: {
-		borderColor: GradientColor.BLUE[colorIndex],
+		borderColor: GradientColor.BLUE[COLOR_INDEX],
 		borderWidth: 1,
 	},
 });
