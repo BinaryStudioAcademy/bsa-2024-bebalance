@@ -1,4 +1,6 @@
-import { Button, Input } from "~/libs/components/components.js";
+import eyeIcon from "~/assets/icons/eye.png";
+import { Button, Input, Link } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpRequestDto,
@@ -26,29 +28,66 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<>
-			<h3>Sign Up</h3>
+			<div className="logo-container">
+				<div className="circle circle-pink"></div>
+				<h1>LOGO</h1>
+			</div>
+			<h3 className="title-form">CREATE AN ACCOUNT</h3>
+			<span className="auth-info">
+				Already have an account? Go to
+				<Link className="link-info" to={AppRoute.SIGN_IN}>
+					{" "}
+					Log in
+				</Link>
+			</span>
 			<form onSubmit={handleFormSubmit}>
-				<p>
+				<div className="input-groups">
 					<Input
+						className="input-container"
+						control={control}
+						errors={errors}
+						label="Name"
+						name="email"
+						placeholder="name"
+						type="text"
+					/>
+					<Input
+						className="input-container"
 						control={control}
 						errors={errors}
 						label="Email"
 						name="email"
-						placeholder="Enter your email"
-						type="text"
+						placeholder="email"
+						type="email"
 					/>
-				</p>
-				<p>
 					<Input
+						className="input-container"
 						control={control}
 						errors={errors}
+						hasIcon="true"
+						iconSrc={eyeIcon}
 						label="Password"
 						name="password"
-						placeholder="Enter your password"
+						placeholder="password"
 						type="text"
 					/>
-				</p>
-				<Button label="Sign up" type="submit" />
+					<Input
+						className="input-container"
+						control={control}
+						errors={errors}
+						hasIcon="true"
+						iconSrc={eyeIcon}
+						label="Confirm password"
+						name="password"
+						placeholder="password"
+						type="text"
+					/>
+				</div>
+				<Button
+					className="btn btn-dark"
+					label="CREATE AN ACCOUNT"
+					type="submit"
+				/>
 			</form>
 		</>
 	);

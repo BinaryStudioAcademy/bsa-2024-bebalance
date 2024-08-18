@@ -1,0 +1,13 @@
+.btn {
+	width: 100%;
+	padding: 16px 0; /* Mengganti em dengan rem */
+	font-family: var(--nunito-font);
+	font-weight: 700;
+	color: white;
+	border: none;
+	border-radius: 32px; /* Mengganti em dengan rem */
+}
+
+.btn-dark {
+	background-color: var(--dark);
+}

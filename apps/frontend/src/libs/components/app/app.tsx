@@ -1,5 +1,6 @@
-import reactLogo from "~/assets/img/react.svg";
-import { Link, RouterOutlet } from "~/libs/components/components.js";
+// import reactLogo from "~/assets/img/react.svg";
+// import { Link, RouterOutlet } from "~/libs/components/components.js";
+import { RouterOutlet } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -27,7 +28,7 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<img alt="logo" className="App-logo" src={reactLogo} width="30" />
+			{/* <img alt="logo" className="App-logo" src={reactLogo} width="30" />
 
 			<ul className="App-navigation-list">
 				<li>
@@ -40,7 +41,7 @@ const App: React.FC = () => {
 					<Link to={AppRoute.SIGN_UP}>Sign up</Link>
 				</li>
 			</ul>
-			<p>Current path: {pathname}</p>
+			<p>Current path: {pathname}</p> */}
 
 			<div>
 				<RouterOutlet />
