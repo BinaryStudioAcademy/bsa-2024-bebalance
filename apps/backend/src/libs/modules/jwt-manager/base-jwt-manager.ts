@@ -1,19 +1,27 @@
 import { JWTPayload, jwtVerify, JWTVerifyResult, SignJWT } from "jose";
 
-import { config } from "~/libs/modules/config/config.js";
+type ConstructorProperties = {
+	algorithm: string;
+	expirationTime: string;
+	secret: Uint8Array;
+};
 
 class BaseJWTManager {
+	private algorithm: string;
+	private expirationTime: string;
 	private secret: Uint8Array;
 
-	constructor() {
-		this.secret = new TextEncoder().encode(config.ENV.JWT.SECRET);
+	constructor({ algorithm, expirationTime, secret }: ConstructorProperties) {
+		this.secret = secret;
+		this.algorithm = algorithm;
+		this.expirationTime = expirationTime;
 	}
 
 	public async createToken(payload: JWTPayload): Promise<string> {
 		return await new SignJWT(payload)
-			.setProtectedHeader({ alg: "HS256" })
+			.setProtectedHeader({ alg: this.algorithm })
 			.setIssuedAt()
-			.setExpirationTime("24hr")
+			.setExpirationTime(this.expirationTime)
 			.sign(this.secret);
 	}
 
