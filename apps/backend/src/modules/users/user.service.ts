@@ -1,3 +1,4 @@
+import { AuthError, ErrorMessage, HTTPCode } from "shared";
 import { UserDto } from "shared/src/modules/users/users.js";
 
 import { type Service } from "~/libs/types/types.js";
@@ -45,7 +46,15 @@ class UserService implements Service {
 	}
 
 	public async findByEmail(email: string): Promise<UserDto> {
-		const user = (await this.userRepository.findByEmail(email)) as UserEntity;
+		const user = await this.userRepository.findByEmail(email);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
 		return user.toObject();
 	}
 
