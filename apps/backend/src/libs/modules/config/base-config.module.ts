@@ -77,7 +77,7 @@ class BaseConfig implements Config {
 				},
 			},
 			JWT: {
-				JWT_SECRET: {
+				SECRET: {
 					default: null,
 					doc: "JWT secret",
 					env: "JWT_SECRET",

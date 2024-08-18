@@ -6,7 +6,7 @@ class BaseJWTManager {
 	private secret: Uint8Array;
 
 	constructor() {
-		this.secret = new TextEncoder().encode(config.ENV.JWT.JWT_SECRET);
+		this.secret = new TextEncoder().encode(config.ENV.JWT.SECRET);
 	}
 
 	public async createToken(payload: JWTPayload): Promise<string> {
