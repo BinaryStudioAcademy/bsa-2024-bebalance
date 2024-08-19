@@ -8,13 +8,13 @@ import { getUser, loadAll } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	user: undefined | UserGetAllItemResponseDto;
+	user: null | UserGetAllItemResponseDto;
 	users: UserGetAllItemResponseDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	user: undefined,
+	user: null,
 	users: [],
 };
 
@@ -31,7 +31,7 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(getUser.fulfilled, (state, action) => {
-			state.user = { email: action.payload.email, id: action.payload.id };
+			state.user = action.payload;
 		});
 	},
 	initialState,
