@@ -53,26 +53,23 @@
 }
 
 .ilustration-container .title {
-	font-size: 48px;
+	font-size: 70px;
 }
 
 .ilustration-container .img-left {
 	position: absolute;
-	left: 0;
+	top: -200px;
+	left: -300px;
 	z-index: 0;
-	width: 70%;
-	margin-top: -300px;
-	margin-left: -300px;
+	width: 60%;
 }
 
 .ilustration-container .img-right {
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	right: -100px;
+	bottom: -200px;
 	z-index: 0;
 	width: 90%;
-	margin-right: -100px;
-	margin-bottom: -200px;
 }
 
 .input-container {
@@ -99,9 +96,16 @@
 
 .input-container .input {
 	width: 80%;
-	padding: 16px;
+	padding: 8px;
 	font-family: inherit;
 	border: none;
+}
+
+.input-container .btn-icon {
+	z-index: 2;
+	background-color: transparent;
+	border: none;
+	opacity: 0.3;
 }
 
 .input-container .input:focus {

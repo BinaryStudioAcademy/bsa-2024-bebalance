@@ -1,11 +1,12 @@
 .btn {
 	width: 100%;
-	padding: 16px 0; /* Mengganti em dengan rem */
+	padding: 10px 0;
 	font-family: var(--nunito-font);
+	font-size: 16px;
 	font-weight: 700;
 	color: white;
 	border: none;
-	border-radius: 32px; /* Mengganti em dengan rem */
+	border-radius: 32px;
 }
 
 .btn-dark {

@@ -9,6 +9,7 @@ import { useFormController } from "~/libs/hooks/hooks.js";
 
 type Properties<T extends FieldValues> = {
 	className: string;
+	clickIcon?: (event_: React.BaseSyntheticEvent) => void;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
 	hasIcon?: string;
@@ -16,11 +17,12 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	placeholder?: string;
-	type?: "email" | "text";
+	type?: "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
 	className,
+	clickIcon,
 	control,
 	errors,
 	hasIcon,
@@ -46,7 +48,11 @@ const Input = <T extends FieldValues>({
 					type={type}
 				/>
 				{hasError && <span>{error as string}</span>}
-				{Boolean(hasIcon) && <img alt="" src={iconSrc} />}
+				{Boolean(hasIcon) && (
+					<button className="btn-icon" onClick={clickIcon} type="button">
+						<img alt="" src={iconSrc} />
+					</button>
+				)}
 			</div>
 		</label>
 	);

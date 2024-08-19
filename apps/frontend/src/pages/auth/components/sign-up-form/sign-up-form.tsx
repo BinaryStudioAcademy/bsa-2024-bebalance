@@ -1,4 +1,7 @@
-import eyeIcon from "~/assets/icons/eye.png";
+import { useState } from "react";
+
+import eyeIcon from "~/assets/icons/eye.svg";
+import slashEyeIcon from "~/assets/icons/eye-slash.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -26,6 +29,40 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		[handleSubmit, onSubmit],
 	);
 
+	// const [showPassword, setShowPassword] = useState(false);
+	// const [passwordIcon, setPasswordIcon] = useState(slashEyeIcon)
+	// const [confirmPasswordIcon, setConfirmPasswordIcon] = useState(slashEyeIcon)
+	type InputType = {
+		icon: string;
+		type: "password" | "text";
+	};
+
+	const [passwordData, setPasswordData] = useState<InputType>({
+		icon: slashEyeIcon,
+		type: "password",
+	});
+
+	const [confirmPasswordData, setConfirmPasswordData] = useState<InputType>({
+		icon: slashEyeIcon,
+		type: "password",
+	});
+
+	const toggleVisibilityPassword = useCallback((): void => {
+		const newData: InputType =
+			passwordData.icon === slashEyeIcon
+				? { icon: eyeIcon, type: "text" }
+				: { icon: slashEyeIcon, type: "password" };
+		setPasswordData(newData);
+	}, [passwordData]);
+
+	const toggleVisibilityConfirmPassword = useCallback((): void => {
+		const newData: InputType =
+			confirmPasswordData.icon === slashEyeIcon
+				? { icon: eyeIcon, type: "text" }
+				: { icon: slashEyeIcon, type: "password" };
+		setConfirmPasswordData(newData);
+	}, [confirmPasswordData]);
+
 	return (
 		<>
 			<div className="logo-container">
@@ -47,7 +84,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						control={control}
 						errors={errors}
 						label="Name"
-						name="email"
+						name="name"
 						placeholder="name"
 						type="text"
 					/>
@@ -62,25 +99,27 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					/>
 					<Input
 						className="input-container"
+						clickIcon={toggleVisibilityPassword}
 						control={control}
 						errors={errors}
 						hasIcon="true"
-						iconSrc={eyeIcon}
+						iconSrc={passwordData.icon}
 						label="Password"
 						name="password"
 						placeholder="password"
-						type="text"
+						type={passwordData.type}
 					/>
 					<Input
 						className="input-container"
+						clickIcon={toggleVisibilityConfirmPassword}
 						control={control}
 						errors={errors}
 						hasIcon="true"
-						iconSrc={eyeIcon}
+						iconSrc={confirmPasswordData.icon}
 						label="Confirm password"
-						name="password"
-						placeholder="password"
-						type="text"
+						name="confirmPassword"
+						placeholder="confirm password"
+						type={confirmPasswordData.type}
 					/>
 				</div>
 				<Button
