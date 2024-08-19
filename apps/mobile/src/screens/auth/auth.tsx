@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Text } from "~/libs/components/components";
+import { ScreenWrapper, Text } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
@@ -56,8 +56,10 @@ const Auth: React.FC = () => {
 
 	return (
 		<>
-			<Text>state: {dataStatus}</Text>
-			{getScreen(name)}
+			<ScreenWrapper>
+				<Text>state: {dataStatus}</Text>
+				{getScreen(name)}
+			</ScreenWrapper>
 		</>
 	);
 };
