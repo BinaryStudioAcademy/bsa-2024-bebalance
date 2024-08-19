@@ -1,5 +1,5 @@
 import React from "react";
-import { Edge, useSafeAreaInsets } from "react-native-safe-area-context";
+import { type Edge, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
@@ -12,16 +12,17 @@ type Properties = {
 	edges?: Edge[];
 };
 
-const ScreenWrapper: React.FC<Properties> = ({ children, edges }) => {
+const ScreenWrapper: React.FC<Properties> = ({
+	children,
+	edges = DEFAULT_SAFE_AREA_EDGES,
+}) => {
 	const insets = useSafeAreaInsets();
 
-	const localEdges = edges || DEFAULT_SAFE_AREA_EDGES;
-
 	const paddingStyle = {
-		paddingBottom: localEdges.includes("bottom") ? insets.bottom : ZERO_PADDING,
-		paddingLeft: localEdges.includes("left") ? insets.left : ZERO_PADDING,
-		paddingRight: localEdges.includes("right") ? insets.right : ZERO_PADDING,
-		paddingTop: localEdges.includes("top") ? insets.top : ZERO_PADDING,
+		paddingBottom: edges?.includes("bottom") ? insets.bottom : ZERO_PADDING,
+		paddingLeft: edges?.includes("left") ? insets.left : ZERO_PADDING,
+		paddingRight: edges?.includes("right") ? insets.right : ZERO_PADDING,
+		paddingTop: edges?.includes("top") ? insets.top : ZERO_PADDING,
 	};
 
 	return <View style={[globalStyles.flex1, paddingStyle]}>{children}</View>;
