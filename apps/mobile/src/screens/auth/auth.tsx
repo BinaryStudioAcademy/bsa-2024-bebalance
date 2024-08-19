@@ -1,6 +1,11 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 
-import { ScreenWrapper, Text } from "~/libs/components/components";
+import {
+	LoaderWrapper,
+	ScreenWrapper,
+	Text,
+} from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
@@ -54,7 +59,9 @@ const Auth: React.FC = () => {
 		return null;
 	};
 
-	return (
+	return dataStatus === "pending" ? (
+		<LoaderWrapper children={<ActivityIndicator size="large" />} />
+	) : (
 		<>
 			<ScreenWrapper>
 				<Text>state: {dataStatus}</Text>
