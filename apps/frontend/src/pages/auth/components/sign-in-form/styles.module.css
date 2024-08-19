@@ -1,13 +1,16 @@
 .sign-in__container {
+	position: relative;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 30px;
 	height: 100dvh;
-	padding: 20px;
+	padding: 15px;
+	overflow: hidden;
 	background-color: #76acec;
 }
 
 .sign-in__form-container {
+	z-index: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -70,7 +73,63 @@
 	justify-content: center;
 }
 
-@media (width <= 600px) {
+.sign-in__logo {
+	font-size: 40px;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.svg-background1 {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 30%;
+	height: auto;
+	transform: translateX(-50%);
+}
+
+.svg-background2 {
+	position: absolute;
+	bottom: -50%;
+	left: 42%;
+	width: 60%;
+	height: auto;
+	max-height: 500px;
+	transform: translateY(-50%);
+}
+
+.circle-gradiant1 {
+	position: absolute;
+	top: 5%;
+	left: 58%;
+	width: 130px;
+	height: 130px;
+	background: linear-gradient(to bottom, #ffe307 0%, #fff8b5 100%);
+	border-radius: 50%;
+	transform: translateX(-50%);
+}
+
+.circle-gradiant2 {
+	position: absolute;
+	top: 20%;
+	right: 10%;
+	width: 35px;
+	height: 35px;
+	background: linear-gradient(to right, #ff5794 0%, #fc72ff 100%);
+	border-radius: 50%;
+}
+
+.circle-gradiant3 {
+	position: absolute;
+	right: 10%;
+	bottom: 10%;
+	width: 100px;
+	height: 100px;
+	background: linear-gradient(to right, #69ff35 0%, #c3ff19 100%);
+	border-radius: 50%;
+}
+
+@media (width <= 640px) {
 	.sign-in__logo-container {
 		display: none;
 	}
