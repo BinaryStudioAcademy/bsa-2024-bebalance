@@ -1,12 +1,13 @@
+import * as jose from "jose";
+import { createSecretKey } from "node:crypto";
+import { HTTPCode, HTTPError } from "shared";
+
 import {
 	type UserGetOneResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
-import { createSecretKey } from "node:crypto";
-import * as jose from "jose";
 import { type UserService } from "~/modules/users/user.service.js";
-import { HTTPCode, HTTPError } from "shared";
 
 class AuthService {
 	private userService: UserService;
