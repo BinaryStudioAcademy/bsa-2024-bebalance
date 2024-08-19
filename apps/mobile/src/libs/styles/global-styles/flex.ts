@@ -4,7 +4,7 @@ type GlobalFlexStyles = {
 	[key: string]: FlexStyle;
 };
 
-const FLEX = {
+const Flex = {
 	alignItemsCenter: {
 		alignItems: "center",
 	},
@@ -37,4 +37,4 @@ const FLEX = {
 	},
 } satisfies GlobalFlexStyles;
 
-export { FLEX };
+export { Flex };

@@ -1,15 +1,15 @@
 import { StyleSheet } from "react-native";
 
-import { FLEX } from "~/libs/styles/global-styles/flex";
-import { GAPS } from "~/libs/styles/global-styles/gaps";
-import { MARGINS } from "~/libs/styles/global-styles/margins";
-import { PADDINGS } from "~/libs/styles/global-styles/paddings";
+import { Flex } from "./flex";
+import { Gap } from "./gap";
+import { Margin } from "./margin";
+import { Padding } from "./padding";
 
 const globalStyles = StyleSheet.create({
-	...FLEX,
-	...GAPS,
-	...MARGINS,
-	...PADDINGS,
+	...Flex,
+	...Gap,
+	...Margin,
+	...Padding,
 });
 
 export { globalStyles };
