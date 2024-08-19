@@ -4,7 +4,7 @@
 	gap: 30px;
 	height: 100dvh;
 	padding: 20px;
-	background-color: lightblue;
+	background-color: #76acec;
 }
 
 .sign-in__form-container {
@@ -68,4 +68,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media (width <= 600px) {
+	.sign-in__logo-container {
+		display: none;
+	}
+
+	.sign-in__container {
+		grid-template-columns: 1fr;
+	}
 }
