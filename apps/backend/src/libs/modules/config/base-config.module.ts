@@ -81,13 +81,13 @@ class BaseConfig implements Config {
 					default: null,
 					doc: "Token encription algorithm",
 					env: "ALGORITHM",
-					format: String,
+					format: ["HS256"],
 				},
 				EXPIRATION_TIME: {
 					default: null,
 					doc: "Token expiration time",
 					env: "EXPIRATION_TIME",
-					format: String,
+					format: ["24hr"],
 				},
 				SECRET: {
 					default: null,
