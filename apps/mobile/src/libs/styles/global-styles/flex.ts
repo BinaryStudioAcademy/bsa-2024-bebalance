@@ -1,34 +1,40 @@
+import type { FlexStyle } from "react-native";
+
+type GlobalFlexStyles = {
+	[key: string]: FlexStyle;
+};
+
 const FLEX = {
 	alignItemsCenter: {
-		alignItems: "center" as const,
+		alignItems: "center",
 	},
 	alignItemsEnd: {
-		alignItems: "flex-end" as const,
+		alignItems: "flex-end",
 	},
 	alignItemsStart: {
-		alignItems: "flex-start" as const,
+		alignItems: "flex-start",
 	},
 	flex1: {
 		flex: 1,
 	},
 	flexDirectionColumn: {
-		flexDirection: "column" as const,
+		flexDirection: "column",
 	},
 	flexDirectionRow: {
-		flexDirection: "row" as const,
+		flexDirection: "row",
 	},
 	justifyContentCenter: {
-		justifyContent: "center" as const,
+		justifyContent: "center",
 	},
 	justifyContentEnd: {
-		justifyContent: "flex-end" as const,
+		justifyContent: "flex-end",
 	},
 	justifyContentSpaceBetween: {
-		justifyContent: "space-between" as const,
+		justifyContent: "space-between",
 	},
 	justifyContentStart: {
-		justifyContent: "flex-start" as const,
+		justifyContent: "flex-start",
 	},
-};
+} satisfies GlobalFlexStyles;
 
 export { FLEX };
