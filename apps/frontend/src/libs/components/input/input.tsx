@@ -17,6 +17,7 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	placeholder?: string;
+	required?: string;
 	type?: "email" | "password" | "text";
 };
 
@@ -30,6 +31,7 @@ const Input = <T extends FieldValues>({
 	label,
 	name,
 	placeholder = "",
+	required,
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
@@ -45,6 +47,7 @@ const Input = <T extends FieldValues>({
 					className="input"
 					{...field}
 					placeholder={placeholder}
+					required={Boolean(required) || true}
 					type={type}
 				/>
 				{hasError && <span>{error as string}</span>}

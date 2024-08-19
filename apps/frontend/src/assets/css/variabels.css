@@ -1,0 +1,15 @@
+:root {
+	--primary-gradient: linear-gradient(
+		325deg,
+		hsl(184deg 100% 50%) 0%,
+		hsl(209deg 100% 50%) 100%
+	);
+	--pink-gradient: linear-gradient(
+		325deg,
+		hsl(338deg 100% 67%) 0%,
+		hsl(299deg 100% 72%) 100%
+	);
+	--blue-background: #76acec;
+	--dark: #000000;
+	--nunito-font: "Nunito", sans-serif;
+}

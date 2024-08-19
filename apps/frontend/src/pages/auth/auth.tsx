@@ -10,6 +10,7 @@ import {
 import { actions as authActions } from "~/modules/auth/auth.js";
 import { type UserSignUpRequestDto } from "~/modules/users/users.js";
 
+import "./assets/css/auth.css";
 import { SignInForm, SignUpForm } from "./components/components.js";
 
 const Auth: React.FC = () => {

@@ -4,28 +4,13 @@
 	box-sizing: border-box;
 }
 
-:root {
-	--primary-gradient: linear-gradient(
-		325deg,
-		hsl(184deg 100% 50%) 0%,
-		hsl(209deg 100% 50%) 100%
-	);
-	--pink-gradient: linear-gradient(
-		325deg,
-		hsl(338deg 100% 67%) 0%,
-		hsl(299deg 100% 72%) 100%
-	);
-	--blue-background: #76acec;
-	--dark: #000000;
-	--nunito-font: "Nunito", sans-serif;
-}
-
 body {
 	display: flex;
 	flex-direction: column;
 	min-width: 320px;
 	min-height: 100vh;
 	margin: 0;
+	overflow: hidden;
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.5;
@@ -48,4 +33,35 @@ body {
 	clip-path: inset(100%);
 	white-space: nowrap;
 	border: 0;
+}
+
+/* circles */
+.circle {
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+}
+
+.circle-blue {
+	background: var(--primary-gradient);
+}
+
+.circle-pink {
+	background: var(--pink-gradient);
+}
+
+/* buttons */
+.btn {
+	width: 100%;
+	padding: 10px 0;
+	font-family: var(--nunito-font);
+	font-size: 16px;
+	font-weight: 700;
+	color: white;
+	border: none;
+	border-radius: 32px;
+}
+
+.btn-dark {
+	background-color: var(--dark);
 }

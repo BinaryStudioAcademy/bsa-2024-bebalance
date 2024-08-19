@@ -29,9 +29,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		[handleSubmit, onSubmit],
 	);
 
-	// const [showPassword, setShowPassword] = useState(false);
-	// const [passwordIcon, setPasswordIcon] = useState(slashEyeIcon)
-	// const [confirmPasswordIcon, setConfirmPasswordIcon] = useState(slashEyeIcon)
 	type InputType = {
 		icon: string;
 		type: "password" | "text";
