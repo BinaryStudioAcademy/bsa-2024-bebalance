@@ -1,6 +1,6 @@
 import type { StyleProp, TextStyle } from "react-native";
 
-import { fontWeightToFamilyMap, sizeToStyleMap } from "./font-maps";
+import { fontWeightToFamilyMap, sizeToStyleMap } from "./maps";
 
 const presetToStyleMap: Record<
 	"default" | "heading" | "subheading",

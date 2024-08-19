@@ -8,7 +8,7 @@ import {
 	fontWeightToFamilyMap,
 	presetToStyleMap,
 	sizeToStyleMap,
-} from "./font-maps";
+} from "./libs/maps/maps";
 
 type Preset = "default" | "heading" | "subheading";
 
