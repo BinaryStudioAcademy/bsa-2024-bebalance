@@ -3,9 +3,9 @@ import {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
-import { type UserService } from "~/modules/users/user.service.js";
+import { createSecretKey } from "node:crypto";
 import * as jose from "jose";
-import { createSecretKey } from "crypto";
+import { type UserService } from "~/modules/users/user.service.js";
 import { HTTPCode, HTTPError } from "shared";
 
 class AuthService {
@@ -13,12 +13,6 @@ class AuthService {
 
 	public constructor(userService: UserService) {
 		this.userService = userService;
-	}
-
-	public signUp(
-		userRequestDto: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
-		return this.userService.create(userRequestDto);
 	}
 
 	public async getAuthenticatedUser(
@@ -42,13 +36,13 @@ class AuthService {
 			}
 			const secretKey = createSecretKey(
 				process.env["JWT_SECRET_KEY"] as string,
-				"utf-8",
+				"utf8",
 			);
-			let payload: jose.JWTPayload | { id: number };
+			let payload: { id: number } | jose.JWTPayload;
 			try {
-				const verifiedToken = await jose.jwtVerify(token as string, secretKey);
+				const verifiedToken = await jose.jwtVerify(token, secretKey);
 				payload = verifiedToken.payload;
-			} catch (error) {
+			} catch {
 				throw new HTTPError({
 					cause: "Invalid or expired token",
 					message: "Unauthorized",
@@ -81,6 +75,12 @@ class AuthService {
 				});
 			}
 		}
+	}
+
+	public signUp(
+		userRequestDto: UserSignUpRequestDto,
+	): Promise<UserSignUpResponseDto> {
+		return this.userService.create(userRequestDto);
 	}
 }
 

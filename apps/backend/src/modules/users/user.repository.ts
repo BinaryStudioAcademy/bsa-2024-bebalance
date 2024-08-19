@@ -28,14 +28,14 @@ class UserRepository implements Repository {
 		return Promise.resolve(true);
 	}
 
-	public async find(id: number): Promise<UserEntity | null> {
+	public async find(id: number): Promise<null | UserEntity> {
 		const user = (await this.userModel
 			.query()
 			.where({
 				id,
 			})
 			.first()
-			.execute()) as UserModel | null;
+			.execute()) as null | UserModel;
 		if (!user) {
 			return null;
 		}

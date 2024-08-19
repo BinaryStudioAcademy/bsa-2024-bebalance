@@ -30,6 +30,6 @@ export {
 	UsersApiPath,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
-	userSignUpValidationSchema,
 	type UserGetOneResponseDto,
+	userSignUpValidationSchema,
 } from "./modules/users/users.js";
