@@ -1,20 +1,21 @@
 import React, { ReactNode } from "react";
-import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
+import { type StyleProp, Text as RNText, type TextStyle } from "react-native";
 
-import {
-	BaseColor,
-	FontFamilies,
-	FontSize,
-	LineHeight,
-	WeightMap,
-} from "~/libs/enums/enums";
+import { BaseColor, FontSize, LineHeight, WeightMap } from "~/libs/enums/enums";
 
 import { styles as presetStyles } from "./styles";
+
+const fontWeightToFamilyMap = {
+	BOLD: "Nunito-Bold",
+	EXTRA_BOLD: "Nunito-ExtraBold",
+	MEDIUM: "Nunito-Medium",
+	REGULAR: "Nunito-Regular",
+	SEMI_BOLD: "Nunito-SemiBold",
+};
 
 type Properties = {
 	children: ReactNode;
 	color?: (typeof BaseColor)[keyof typeof BaseColor];
-	fontFamily?: keyof typeof FontFamilies;
 	preset?: "default" | "heading" | "subheading";
 	size?: keyof typeof FontSize;
 	style?: StyleProp<TextStyle>;
@@ -24,22 +25,21 @@ type Properties = {
 const Text = ({
 	children,
 	color = BaseColor.BLACK,
-	preset: presetProperties = "default",
-	size = "md",
+	preset = "default",
+	size = "MD",
 	style: styleOverride,
-	weight = "regular",
+	weight = "REGULAR",
 }: Properties) => {
-	const baseStyle = presetStyles[presetProperties];
+	const baseStyle = presetStyles[preset];
 
 	const sizeToStyleMap = {
-		fontFamily: "NUNITO",
+		fontFamily: fontWeightToFamilyMap[weight],
 		fontSize: FontSize[size],
-		fontWeight: WeightMap[weight] as TextStyle["fontWeight"],
 		lineHeight: LineHeight[size],
 	} satisfies TextStyle;
 
 	const colorStyle: TextStyle = {
-		color,
+		color: color,
 	};
 
 	const styles: StyleProp<TextStyle> = [

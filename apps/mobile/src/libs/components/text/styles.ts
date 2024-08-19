@@ -4,16 +4,16 @@ import { FontSize, LineHeight } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
 	default: {
-		fontSize: FontSize.md,
-		lineHeight: LineHeight.md,
+		fontSize: FontSize.MD,
+		lineHeight: LineHeight.MD,
 	},
 	heading: {
-		fontSize: FontSize.xxl,
-		lineHeight: LineHeight.xxl,
+		fontSize: FontSize.XXL,
+		lineHeight: LineHeight.XXL,
 	},
 	subheading: {
-		fontSize: FontSize.lg,
-		lineHeight: LineHeight.lg,
+		fontSize: FontSize.LG,
+		lineHeight: LineHeight.LG,
 	},
 });
 

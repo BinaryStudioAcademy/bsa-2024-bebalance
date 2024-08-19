@@ -1,27 +1,27 @@
 const FontSize = {
-	lg: 20,
-	md: 16,
-	sm: 14,
-	xl: 24,
-	xs: 12,
-	xxl: 32,
+	LG: 20,
+	MD: 16,
+	SM: 14,
+	XL: 24,
+	XS: 12,
+	XXL: 32,
 };
 
 const LineHeight = {
-	lg: 25,
-	md: 22,
-	sm: 19,
-	xl: 26,
-	xs: 16,
-	xxl: 40,
+	LG: 25,
+	MD: 22,
+	SM: 19,
+	XL: 26,
+	XS: 16,
+	XXL: 40,
 };
 
 const WeightMap = {
-	bold: "700",
-	extraBold: "800",
-	medium: "500",
-	regular: "400",
-	semiBold: "600",
+	BOLD: "700",
+	EXTRA_BOLD: "800",
+	MEDIUM: "500",
+	REGULAR: "400",
+	SEMI_BOLD: "600",
 };
 
 export { FontSize, LineHeight, WeightMap };
