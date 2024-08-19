@@ -23,7 +23,7 @@ class AuthService {
 		if (userWithSameEmail) {
 			throw new AuthError({
 				message: UserValidationMessage.EMAIL_TAKEN,
-				status: HTTPCode.CONFLICT,
+				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
