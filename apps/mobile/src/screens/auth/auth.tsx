@@ -1,5 +1,4 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
 
 import {
 	LoaderWrapper,
@@ -59,15 +58,13 @@ const Auth: React.FC = () => {
 		return null;
 	};
 
-	return dataStatus === "pending" ? (
-		<LoaderWrapper children={<ActivityIndicator size="large" />} />
-	) : (
-		<>
+	return (
+		<LoaderWrapper isLoading={dataStatus === "pending"}>
 			<ScreenWrapper>
 				<Text>state: {dataStatus}</Text>
 				{getScreen(name)}
 			</ScreenWrapper>
-		</>
+		</LoaderWrapper>
 	);
 };
 
