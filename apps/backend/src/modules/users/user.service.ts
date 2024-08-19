@@ -1,4 +1,4 @@
-import { BaseEncrypt } from "~/libs/modules/encrypt/base-encrypt.module.js";
+import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -11,10 +11,10 @@ import {
 } from "./libs/types/types.js";
 
 class UserService implements Service {
-	private encrypt: BaseEncrypt;
+	private encrypt: Encrypt;
 	private userRepository: UserRepository;
 
-	public constructor(userRepository: UserRepository, encrypt: BaseEncrypt) {
+	public constructor(userRepository: UserRepository, encrypt: Encrypt) {
 		this.userRepository = userRepository;
 		this.encrypt = encrypt;
 	}

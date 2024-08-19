@@ -1,6 +1,8 @@
 import { genSalt, hash } from "bcrypt";
 
-class BaseEncrypt {
+import { Encrypt } from "./libs/types/types.js";
+
+class BaseEncrypt implements Encrypt {
 	private saltRounds: number;
 
 	constructor(saltRounds: number) {
