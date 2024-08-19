@@ -1,16 +1,25 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { ValueOf } from "shared";
 
-import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
-const ProtectedRoute: React.FC = () => {
-	const authStatus = useAppSelector(({ auth }) => auth.dataStatus);
+type Properties = {
+	component: React.ReactNode;
+	redirectTo: ValueOf<typeof AppRoute>;
+};
 
-	if (authStatus === DataStatus.FULFILLED) {
-		return <Outlet />;
+const ProtectedRoute: React.FC<Properties> = ({
+	component,
+	redirectTo,
+}: Properties) => {
+	const user = useAppSelector(({ auth }) => auth.user);
+
+	if (user) {
+		return component;
 	}
 
-	return <Navigate replace to={AppRoute.SIGN_IN} />;
+	return <Navigate replace to={redirectTo} />;
 };
 
 export { ProtectedRoute };

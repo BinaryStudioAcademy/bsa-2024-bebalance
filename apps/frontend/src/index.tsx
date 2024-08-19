@@ -20,13 +20,13 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 					{
 						children: [
 							{
-								children: [
-									{
-										element: "Root",
-										path: AppRoute.ROOT,
-									},
-								],
-								element: <ProtectedRoute />,
+								element: (
+									<ProtectedRoute
+										component={"Root"}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
+								path: AppRoute.ROOT,
 							},
 							{
 								element: <Auth />,
