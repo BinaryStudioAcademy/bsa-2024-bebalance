@@ -21,4 +21,3 @@ ignore:
   - apps/mobile/ios
   - apps/mobile/android
   - apps/mobile/node_modules
-  - .idea
