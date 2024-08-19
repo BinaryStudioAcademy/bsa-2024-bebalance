@@ -1,6 +1,6 @@
 import reactLogo from "~/assets/img/react.svg";
-import { Link, RouterOutlet } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { Link, Loader, RouterOutlet } from "~/libs/components/components.js";
+import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -25,6 +25,8 @@ const App: React.FC = () => {
 		}
 	}, [isRoot, dispatch]);
 
+	const isLoading = dataStatus === DataStatus.PENDING;
+
 	return (
 		<>
 			<img alt="logo" className="App-logo" src={reactLogo} width="30" />
@@ -45,7 +47,8 @@ const App: React.FC = () => {
 			<div>
 				<RouterOutlet />
 			</div>
-			{isRoot && (
+			{isLoading && <Loader />}
+			{!isLoading && isRoot && (
 				<>
 					<h2>Users:</h2>
 					<h3>Status: {dataStatus}</h3>
