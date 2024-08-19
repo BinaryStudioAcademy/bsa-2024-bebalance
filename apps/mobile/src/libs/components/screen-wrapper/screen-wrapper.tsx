@@ -19,10 +19,10 @@ const ScreenWrapper: React.FC<Properties> = ({
 	const insets = useSafeAreaInsets();
 
 	const paddingStyle = {
-		paddingBottom: edges?.includes("bottom") ? insets.bottom : ZERO_PADDING,
-		paddingLeft: edges?.includes("left") ? insets.left : ZERO_PADDING,
-		paddingRight: edges?.includes("right") ? insets.right : ZERO_PADDING,
-		paddingTop: edges?.includes("top") ? insets.top : ZERO_PADDING,
+		paddingBottom: edges.includes("bottom") ? insets.bottom : ZERO_PADDING,
+		paddingLeft: edges.includes("left") ? insets.left : ZERO_PADDING,
+		paddingRight: edges.includes("right") ? insets.right : ZERO_PADDING,
+		paddingTop: edges.includes("top") ? insets.top : ZERO_PADDING,
 	};
 
 	return <View style={[globalStyles.flex1, paddingStyle]}>{children}</View>;
