@@ -4,6 +4,12 @@ import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
 import { BaseColor } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 
+import {
+	fontWeightToFamilyMap,
+	presetToStyleMap,
+	sizeToStyleMap,
+} from "./font-maps";
+
 type Preset = "default" | "heading" | "subheading";
 
 type Properties = {
@@ -32,29 +38,6 @@ const Text = ({
 	];
 
 	return <RNText style={styles}>{children}</RNText>;
-};
-
-const fontWeightToFamilyMap = {
-	bold: { fontFamily: "Nunito-Bold" },
-	extraBold: { fontFamily: "Nunito-ExtraBold" },
-	medium: { fontFamily: "Nunito-Medium" },
-	regular: { fontFamily: "Nunito-Regular" },
-	semiBold: { fontFamily: "Nunito-SemiBold" },
-};
-
-const sizeToStyleMap = {
-	lg: { fontSize: 20, lineHeight: 25 } satisfies TextStyle,
-	md: { fontSize: 16, lineHeight: 22 } satisfies TextStyle,
-	sm: { fontSize: 14, lineHeight: 19 } satisfies TextStyle,
-	xl: { fontSize: 24, lineHeight: 26 } satisfies TextStyle,
-	xs: { fontSize: 12, lineHeight: 16 } satisfies TextStyle,
-	xxl: { fontSize: 32, lineHeight: 40 } satisfies TextStyle,
-};
-
-const presetToStyleMap: Record<Preset, StyleProp<TextStyle>> = {
-	default: [sizeToStyleMap.md, fontWeightToFamilyMap.regular],
-	heading: [sizeToStyleMap.xxl, fontWeightToFamilyMap.bold],
-	subheading: [sizeToStyleMap.lg, fontWeightToFamilyMap.semiBold],
 };
 
 export { Text };
