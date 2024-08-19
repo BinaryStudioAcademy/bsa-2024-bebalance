@@ -1,5 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { AuthError, HTTPCode } from "~/libs/modules/http/http.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
@@ -7,6 +7,8 @@ import {
 	type UserSignUpRequestDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
+
+import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
 	private userService: UserService;
