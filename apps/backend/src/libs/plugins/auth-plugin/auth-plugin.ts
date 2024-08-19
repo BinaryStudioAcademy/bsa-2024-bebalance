@@ -3,18 +3,10 @@ import { type FastifyPluginCallback } from "fastify";
 import { HTTPCode } from "~/libs/modules/http/libs/enums/enums.js";
 
 type PluginOptions = {
-	/** Define route prefixes to be excluded by `authPlugin` */
 	excludedRoutePrefixes?: string[];
-
-	/** Required for auth token verification */
 	tokenVerifier: (token: string) => Promise<unknown>;
 };
 
-/**
- * Apply `onRequest` hook to authenticate requests.
- *
- * Authenticated payload will be stored in `req.authUser` for the route handler to use.
- */
 const authPlugin: FastifyPluginCallback<PluginOptions> = (
 	app,
 	{ excludedRoutePrefixes = [], tokenVerifier },

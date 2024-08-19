@@ -209,7 +209,6 @@ class BaseServerApplication implements ServerApplication {
 
 				await this.app.register(authPlugin, {
 					excludedRoutePrefixes: [APIPath.AUTH],
-					// TODO [ @KeidsID ]: inject actual token verifier
 					tokenVerifier: (token) => Promise.resolve({ token }),
 				});
 			}),
