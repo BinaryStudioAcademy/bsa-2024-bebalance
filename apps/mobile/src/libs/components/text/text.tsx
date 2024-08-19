@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { StyleProp, Text as RNText, TextStyle } from "react-native";
+import { Text as RNText, StyleProp, TextStyle } from "react-native";
 
 import {
 	BaseColor,
