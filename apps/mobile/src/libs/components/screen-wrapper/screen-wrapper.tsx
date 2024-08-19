@@ -8,16 +8,17 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const SafeAreaScreenWrapper: React.FC<Props> = ({ children }) => {
+const ScreenWrapper: React.FC<Props> = ({ children }) => {
 	const insets = useSafeAreaInsets();
 
 	return (
 		<SafeAreaView
 			style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom }}
+			edges={["top", "bottom", "right", "left"]}
 		>
 			{children}
 		</SafeAreaView>
 	);
 };
 
-export { SafeAreaScreenWrapper };
+export { ScreenWrapper };
