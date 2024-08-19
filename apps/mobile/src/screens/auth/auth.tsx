@@ -1,7 +1,6 @@
 import React from "react";
 import { ActivityIndicator } from "react-native";
-
-import { LoaderWrapper, Text } from "~/libs/components/components";
+import { LoaderWrapper, ScreenWrapper, Text } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
@@ -59,8 +58,10 @@ const Auth: React.FC = () => {
 		<LoaderWrapper children={<ActivityIndicator size="large" />} />
 	) : (
 		<>
-			<Text>state: {dataStatus}</Text>
-			{getScreen(name)}
+			<ScreenWrapper>
+				<Text>state: {dataStatus}</Text>
+				{getScreen(name)}
+			</ScreenWrapper>
 		</>
 	);
 };
