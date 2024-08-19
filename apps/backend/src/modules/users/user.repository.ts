@@ -63,8 +63,11 @@ class UserRepository implements Repository {
 
 		return users.map((user) =>
 			UserEntity.initialize({
-				...user,
-				...user.userDetails,
+				email: user.email,
+				id: user.id,
+				name: user.userDetails.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
 			}),
 		);
 	}
@@ -77,7 +80,13 @@ class UserRepository implements Repository {
 			.first()
 			.execute();
 		return user
-			? UserEntity.initialize({ ...user, ...user.userDetails })
+			? UserEntity.initialize({
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+				})
 			: null;
 	}
 
