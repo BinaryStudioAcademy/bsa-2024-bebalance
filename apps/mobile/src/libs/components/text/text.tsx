@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
-import { ValueOf } from "shared";
 
 import { BaseColor } from "~/libs/enums/enums";
+import { type ValueOf } from "~/libs/types/types";
 
 type Preset = "default" | "heading" | "subheading";
 
