@@ -1,6 +1,7 @@
 import { type FastifyPluginCallback } from "fastify";
 
 import { HTTPCode } from "~/libs/modules/http/libs/enums/enums.js";
+import { ServerHooks } from "~/libs/plugins/libs/enums/enums.js";
 
 type PluginOptions = {
 	excludedRoutePrefixes?: string[];
@@ -11,7 +12,7 @@ const authPlugin: FastifyPluginCallback<PluginOptions> = (
 	app,
 	{ excludedRoutePrefixes = [], tokenVerifier },
 ) => {
-	app.addHook("preHandler", async (request, reply) => {
+	app.addHook(ServerHooks.PRE_HANDLER, async (request, reply) => {
 		for (const routePrefix of excludedRoutePrefixes) {
 			if (request.url.startsWith(routePrefix)) {
 				return;
@@ -27,7 +28,7 @@ const authPlugin: FastifyPluginCallback<PluginOptions> = (
 		}
 
 		try {
-			request.authUser = await tokenVerifier(token);
+			request.user = await tokenVerifier(token);
 		} catch {
 			reply.code(HTTPCode.UNAUTHORIZED).send({ message: "Invalid token" });
 		}
