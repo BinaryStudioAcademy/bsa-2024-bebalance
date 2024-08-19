@@ -110,14 +110,18 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
+		createdAt: string;
 		email: string;
 		id: number;
 		name: string;
+		updatedAt: string;
 	} {
 		return {
+			createdAt: this.createdAt,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,
+			updatedAt: this.updatedAt,
 		};
 	}
 }
