@@ -6,14 +6,14 @@ import globals from "globals";
 import baseConfig from "../../eslint.config.js";
 
 /** @typedef {import("eslint").Linter.Config} */
-let FlatConfig;
+let Config;
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const ignoresConfig = {
 	ignores: ["build"],
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const mainConfig = {
 	languageOptions: {
 		globals: {
@@ -25,7 +25,7 @@ const mainConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const reactConfig = {
 	files: ["**/*.tsx"],
 	plugins: {
@@ -39,7 +39,7 @@ const reactConfig = {
 	},
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const reactHooksConfig = {
 	files: ["**/*.tsx"],
 	plugins: {
@@ -48,7 +48,7 @@ const reactHooksConfig = {
 	rules: reactHooks.configs.recommended.rules,
 };
 
-/** @type {FlatConfig} */
+/** @type {Config} */
 const jsxA11yConfig = {
 	files: ["**/*.tsx"],
 	plugins: {
@@ -57,7 +57,7 @@ const jsxA11yConfig = {
 	rules: jsxA11y.configs.recommended.rules,
 };
 
-/** @type {FlatConfig[]} */
+/** @type {Config[]} */
 const overridesConfigs = [
 	{
 		files: ["vite.config.ts"],
@@ -73,7 +73,7 @@ const overridesConfigs = [
 	},
 ];
 
-/** @type {FlatConfig[]} */
+/** @type {Config[]} */
 const config = [
 	...baseConfig,
 	ignoresConfig,

@@ -1,0 +1,17 @@
+{
+	"extends": "../../tsconfig.json",
+	"include": ["**/*.ts", "**/*.js", "**/*.mjs", "**/*.tsx"],
+	"exclude": ["node_modules"],
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"esModuleInterop": true,
+		"moduleResolution": "Bundler",
+		"skipLibCheck": true,
+		"jsx": "react-native",
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["./src/*"]
+		}
+	}
+}
