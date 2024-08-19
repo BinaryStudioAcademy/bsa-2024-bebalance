@@ -20,7 +20,7 @@ class UserEntity implements Entity {
 	}: {
 		email: string;
 		id: null | number;
-		name: UserEntity["name"];
+		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}) {
@@ -40,7 +40,7 @@ class UserEntity implements Entity {
 	}: {
 		email: string;
 		id: number;
-		name: UserEntity["name"];
+		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
@@ -60,7 +60,7 @@ class UserEntity implements Entity {
 		passwordSalt,
 	}: {
 		email: string;
-		name: UserEntity["name"];
+		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	}): UserEntity {
@@ -75,7 +75,7 @@ class UserEntity implements Entity {
 
 	public toNewObject(): {
 		email: string;
-		name: UserEntity["name"];
+		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 	} {
@@ -90,7 +90,7 @@ class UserEntity implements Entity {
 	public toObject(): {
 		email: string;
 		id: number;
-		name: UserEntity["name"];
+		name: string;
 	} {
 		return {
 			email: this.email,

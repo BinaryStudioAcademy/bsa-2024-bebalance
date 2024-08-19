@@ -53,7 +53,7 @@ class UserService implements Service {
 	}
 
 	public async findByEmail(
-		email: UserEntity["email"],
+		email: string,
 	): Promise<null | UserGetOneResponseDto> {
 		const item = await this.userRepository.findByEmail(email);
 		return item ? item.toObject() : null;

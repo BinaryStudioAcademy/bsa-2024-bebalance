@@ -72,9 +72,7 @@ class UserRepository implements Repository {
 		);
 	}
 
-	public async findByEmail(
-		email: UserEntity["email"],
-	): Promise<null | UserEntity> {
+	public async findByEmail(email: string): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(RelationName.USER_DETAILS)
