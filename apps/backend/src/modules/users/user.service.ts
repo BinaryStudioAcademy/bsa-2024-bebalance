@@ -1,12 +1,8 @@
-// import { AuthError, ErrorMessage, HTTPCode } from "shared";
-import { UserDto } from "shared/src/modules/users/users.js";
-
-import { ErrorMessage } from "~/libs/enums/enums.js";
-import { AuthError, HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
+import { UserDto } from "./libs/types/types.js";
 import {
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
@@ -47,17 +43,10 @@ class UserService implements Service {
 		};
 	}
 
-	public async findByEmail(email: string): Promise<UserDto> {
+	public async findByEmail(email: string): Promise<null | UserDto> {
 		const user = await this.userRepository.findByEmail(email);
 
-		if (!user) {
-			throw new AuthError({
-				message: ErrorMessage.INCORRECT_CREDENTIALS,
-				status: HTTPCode.UNAUTHORIZED,
-			});
-		}
-
-		return user.toObject();
+		return user ? user.toObject() : null;
 	}
 
 	public update(): ReturnType<Service["update"]> {
