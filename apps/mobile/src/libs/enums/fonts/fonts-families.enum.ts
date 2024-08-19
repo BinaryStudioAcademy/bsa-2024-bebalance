@@ -1,10 +1,4 @@
 const FontFamilies = {
-	INTER: {
-		bold: "Inter_28pt-Bold",
-	},
-	LATO: {
-		regular: "Lato-Regular",
-	},
 	NUNITO: {
 		bold: "Nunito-Bold",
 		extraBold: "Nunito-ExtraBold",

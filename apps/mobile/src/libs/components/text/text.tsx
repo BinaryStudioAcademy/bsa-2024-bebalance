@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Text as RNText, StyleProp, TextStyle } from "react-native";
+import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
 
 import {
 	BaseColor,
@@ -13,19 +13,19 @@ import { styles as presetStyles } from "./styles";
 
 type Properties = {
 	children: ReactNode;
-	color?: keyof typeof BaseColor;
+	color?: (typeof BaseColor)[keyof typeof BaseColor];
 	fontFamily?: keyof typeof FontFamilies;
 	preset?: "default" | "heading" | "subheading";
 	size?: keyof typeof FontSize;
 	style?: StyleProp<TextStyle>;
-	weight?: "bold" | "extraBold" | "medium" | "regular" | "semiBold";
+	weight?: keyof typeof WeightMap;
 };
 
 const Text = ({
 	children,
-	color = "BLACK",
+	color = BaseColor.BLACK,
 	preset: presetProperties = "default",
-	size,
+	size = "md",
 	style: styleOverride,
 	weight = "regular",
 }: Properties) => {
@@ -33,13 +33,13 @@ const Text = ({
 
 	const sizeToStyleMap = {
 		fontFamily: "NUNITO",
-		fontSize: size ? FontSize[size] : undefined,
+		fontSize: FontSize[size],
 		fontWeight: WeightMap[weight] as TextStyle["fontWeight"],
-		lineHeight: size ? LineHeight[size] : undefined,
+		lineHeight: LineHeight[size],
 	} satisfies TextStyle;
 
 	const colorStyle: TextStyle = {
-		color: BaseColor[color],
+		color,
 	};
 
 	const styles: StyleProp<TextStyle> = [
@@ -48,6 +48,7 @@ const Text = ({
 		colorStyle,
 		styleOverride,
 	];
+
 	return <RNText style={styles}>{children}</RNText>;
 };
 
