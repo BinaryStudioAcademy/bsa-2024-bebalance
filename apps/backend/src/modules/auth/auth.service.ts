@@ -1,7 +1,7 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { AuthError } from "~/modules/auth/libs/exceptions/exceptions.ts.js";
+import { AuthError } from "~/modules/auth/libs/exceptions/exceptions.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
