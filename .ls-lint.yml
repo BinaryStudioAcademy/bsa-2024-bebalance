@@ -9,6 +9,7 @@ ls:
 ignore:
   - .git
   - .github
+  - .idea/**
   - node_modules
   - build
   - packages/shared/build
