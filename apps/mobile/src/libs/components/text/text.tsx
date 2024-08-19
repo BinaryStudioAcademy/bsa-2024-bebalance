@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { type StyleProp, Text as RNText, type TextStyle } from "react-native";
+import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
 
 import { BaseColor, FontSize, LineHeight, WeightMap } from "~/libs/enums/enums";
 
