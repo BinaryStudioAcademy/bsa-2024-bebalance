@@ -19,7 +19,7 @@ const authPlugin: FastifyPluginCallback<PluginOptions> = (
 	app,
 	{ excludedRoutePrefixes = [], tokenVerifier },
 ) => {
-	app.addHook("onRequest", async (request, reply) => {
+	app.addHook("preHandler", async (request, reply) => {
 		for (const routePrefix of excludedRoutePrefixes) {
 			if (request.url.startsWith(routePrefix)) {
 				return;
