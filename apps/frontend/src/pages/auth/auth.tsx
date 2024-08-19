@@ -1,5 +1,3 @@
-import authIlustrationLeft from "~/assets/img/auth-ilustration-left.svg";
-import authIlustrationRight from "~/assets/img/auth-ilustration-right.svg";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -9,6 +7,8 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import { type UserSignUpRequestDto } from "~/modules/users/users.js";
+import authIlustrationLeft from "~/pages/auth/assets/img/auth-ilustration-left.svg";
+import authIlustrationRight from "~/pages/auth/assets/img/auth-ilustration-right.svg";
 
 import "./assets/css/auth.css";
 import { SignInForm, SignUpForm } from "./components/components.js";

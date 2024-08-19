@@ -65,3 +65,7 @@ body {
 .btn-dark {
 	background-color: var(--dark);
 }
+
+.btn:disabled {
+	background-color: #e0e0e0;
+}

@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import eyeIcon from "~/assets/icons/eye.svg";
-import slashEyeIcon from "~/assets/icons/eye-slash.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -9,6 +7,8 @@ import {
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
+import eyeIcon from "~/pages/auth/assets/icons/eye.svg";
+import slashEyeIcon from "~/pages/auth/assets/icons/eye-slash.svg";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 
@@ -32,33 +32,60 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	type InputType = {
 		icon: string;
 		type: "password" | "text";
+		value: string;
 	};
 
 	const [passwordData, setPasswordData] = useState<InputType>({
 		icon: slashEyeIcon,
 		type: "password",
+		value: "",
 	});
 
 	const [confirmPasswordData, setConfirmPasswordData] = useState<InputType>({
 		icon: slashEyeIcon,
 		type: "password",
+		value: "",
 	});
 
-	const toggleVisibilityPassword = useCallback((): void => {
-		const newData: InputType =
-			passwordData.icon === slashEyeIcon
-				? { icon: eyeIcon, type: "text" }
-				: { icon: slashEyeIcon, type: "password" };
-		setPasswordData(newData);
-	}, [passwordData]);
+	const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
-	const toggleVisibilityConfirmPassword = useCallback((): void => {
-		const newData: InputType =
-			confirmPasswordData.icon === slashEyeIcon
-				? { icon: eyeIcon, type: "text" }
-				: { icon: slashEyeIcon, type: "password" };
-		setConfirmPasswordData(newData);
-	}, [confirmPasswordData]);
+	const handleInputChange = useCallback(
+		(event_: React.BaseSyntheticEvent): void => {
+			const { name, value } = event_.target as HTMLInputElement;
+			if (name === "password") {
+				setPasswordData({ ...passwordData, value });
+			} else if (name === "confirmPassword") {
+				setConfirmPasswordData({ ...confirmPasswordData, value });
+			}
+		},
+		[passwordData, confirmPasswordData],
+	);
+
+	const toggleVisibilityPassword = useCallback(
+		(event_: React.BaseSyntheticEvent): void => {
+			event_.stopPropagation();
+			const imgAttribute = (event_.target as HTMLImageElement).dataset["name"];
+			if (imgAttribute == "password") {
+				const newData: InputType =
+					passwordData.icon === slashEyeIcon
+						? { ...passwordData, icon: eyeIcon, type: "text" }
+						: { ...passwordData, icon: slashEyeIcon, type: "password" };
+				setPasswordData(newData);
+			} else if (imgAttribute == "confirmPassword") {
+				const newData: InputType =
+					confirmPasswordData.icon === slashEyeIcon
+						? { ...confirmPasswordData, icon: eyeIcon, type: "text" }
+						: { ...confirmPasswordData, icon: slashEyeIcon, type: "password" };
+				setConfirmPasswordData(newData);
+			}
+		},
+		[passwordData, confirmPasswordData],
+	);
+
+	useEffect(() => {
+		const passwordsMatch = passwordData.value === confirmPasswordData.value;
+		setIsSubmitEnabled(passwordsMatch && passwordData.value !== "");
+	}, [passwordData.value, confirmPasswordData.value]);
 
 	return (
 		<>
@@ -101,6 +128,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						errors={errors}
 						hasIcon="true"
 						iconSrc={passwordData.icon}
+						inputChange={handleInputChange}
 						label="Password"
 						name="password"
 						placeholder="password"
@@ -108,11 +136,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					/>
 					<Input
 						className="input-container"
-						clickIcon={toggleVisibilityConfirmPassword}
+						clickIcon={toggleVisibilityPassword}
 						control={control}
 						errors={errors}
 						hasIcon="true"
 						iconSrc={confirmPasswordData.icon}
+						inputChange={handleInputChange}
 						label="Confirm password"
 						name="confirmPassword"
 						placeholder="confirm password"
@@ -121,6 +150,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				</div>
 				<Button
 					className="btn btn-dark"
+					isDisabled={!isSubmitEnabled}
 					label="CREATE AN ACCOUNT"
 					type="submit"
 				/>
