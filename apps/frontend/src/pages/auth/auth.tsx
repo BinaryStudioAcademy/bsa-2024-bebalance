@@ -41,12 +41,11 @@ const Auth: React.FC = () => {
 		return null;
 	};
 
-	return (
-		<>
-			state: {dataStatus}
-			{getScreen(pathname)}
-		</>
-	);
+	if (dataStatus === "rejected") {
+		return <div>An error occured.</div>;
+	}
+
+	return <>{getScreen(pathname)}</>;
 };
 
 export { Auth };
