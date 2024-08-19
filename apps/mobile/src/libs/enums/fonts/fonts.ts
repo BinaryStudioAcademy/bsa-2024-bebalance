@@ -1,2 +1,2 @@
-export { fontSize, lineHeight } from "./font-size.enum";
-export { fontFamilies } from "./fonts-families.enum";
+export { FontSize, LineHeight, WeightMap } from "./font-size.enum";
+export { FontFamilies } from "./fonts-families.enum";

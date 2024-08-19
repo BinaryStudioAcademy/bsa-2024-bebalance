@@ -1,19 +1,19 @@
 import { StyleSheet } from "react-native";
 
-import { fontSize, lineHeight } from "~/libs/enums/fonts/font-size.enum";
+import { FontSize, LineHeight } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
 	default: {
-		fontSize: fontSize.md,
-		lineHeight: lineHeight.md,
+		fontSize: FontSize.md,
+		lineHeight: LineHeight.md,
 	},
 	heading: {
-		fontSize: fontSize.xxl,
-		lineHeight: lineHeight.xxl,
+		fontSize: FontSize.xxl,
+		lineHeight: LineHeight.xxl,
 	},
 	subheading: {
-		fontSize: fontSize.lg,
-		lineHeight: lineHeight.lg,
+		fontSize: FontSize.lg,
+		lineHeight: LineHeight.lg,
 	},
 });
 

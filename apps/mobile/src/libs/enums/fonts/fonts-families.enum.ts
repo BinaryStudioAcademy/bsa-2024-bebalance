@@ -1,4 +1,4 @@
-const fontFamilies = {
+const FontFamilies = {
 	INTER: {
 		bold: "Inter_28pt-Bold",
 	},
@@ -14,4 +14,4 @@ const fontFamilies = {
 	},
 };
 
-export { fontFamilies };
+export { FontFamilies };

@@ -1,45 +1,54 @@
 import React, { ReactNode } from "react";
-import { TextStyle } from "react-native";
+import { StyleProp, Text as RNText, TextStyle } from "react-native";
 
-import { RNText } from "~/libs/components/components";
-import { fontSize, lineHeight } from "~/libs/enums/fonts/font-size.enum";
-import { getFontFamily } from "~/libs/helpers/get-fonts-family/get-fonts-family";
+import {
+	BaseColor,
+	FontFamilies,
+	FontSize,
+	LineHeight,
+	WeightMap,
+} from "~/libs/enums/enums";
 
 import { styles as presetStyles } from "./styles";
 
 type Properties = {
 	children: ReactNode;
-	color?: string;
-	fontFamily?: "INTER" | "LATO" | "NUNITO";
-	presetProps?: "default" | "heading" | "subheading";
-	size?: keyof typeof fontSize;
-	style?: TextStyle | TextStyle[];
+	color?: keyof typeof BaseColor;
+	fontFamily: keyof typeof FontFamilies;
+	preset?: "default" | "heading" | "subheading";
+	size?: keyof typeof FontSize;
+	style?: StyleProp<TextStyle>;
 	weight?: "bold" | "extraBold" | "medium" | "regular" | "semiBold";
 };
 
 const Text = ({
 	children,
-	color = "#000000",
-	fontFamily = "NUNITO",
-	presetProps: presetProperties = "default",
+	color = "BLACK",
+	preset: presetProperties = "default",
 	size,
-	style,
+	style: styleOverride,
 	weight = "regular",
 }: Properties) => {
 	const baseStyle = presetStyles[presetProperties];
 
-	const dynamicStyle = size
-		? {
-				fontFamily: getFontFamily(fontFamily, weight),
-				fontSize: fontSize[size],
-				lineHeight: lineHeight[size],
-			}
-		: {};
-	return (
-		<RNText style={[baseStyle, dynamicStyle, { color }, style]}>
-			{children}
-		</RNText>
-	);
+	const sizeToStyleMap = {
+		fontFamily: "NUNITO",
+		fontSize: size ? FontSize[size] : undefined,
+		fontWeight: WeightMap[weight] as TextStyle["fontWeight"],
+		lineHeight: size ? LineHeight[size] : undefined,
+	} satisfies TextStyle;
+
+	const colorStyle: TextStyle = {
+		color: BaseColor[color],
+	};
+
+	const styles: StyleProp<TextStyle> = [
+		baseStyle,
+		sizeToStyleMap,
+		colorStyle,
+		styleOverride,
+	];
+	return <RNText style={styles}>{children}</RNText>;
 };
 
 export { Text };

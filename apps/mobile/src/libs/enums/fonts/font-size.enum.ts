@@ -1,4 +1,4 @@
-const fontSize = {
+const FontSize = {
 	lg: 20,
 	md: 16,
 	sm: 14,
@@ -7,7 +7,7 @@ const fontSize = {
 	xxl: 32,
 };
 
-const lineHeight = {
+const LineHeight = {
 	lg: 25,
 	md: 22,
 	sm: 19,
@@ -16,4 +16,12 @@ const lineHeight = {
 	xxl: 40,
 };
 
-export { fontSize, lineHeight };
+const WeightMap = {
+	bold: "700",
+	extraBold: "800",
+	medium: "500",
+	regular: "400",
+	semiBold: "600",
+};
+
+export { FontSize, LineHeight, WeightMap };
