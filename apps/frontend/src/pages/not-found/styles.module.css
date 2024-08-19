@@ -22,6 +22,7 @@
 }
 
 .title {
+	margin-bottom: 20px;
 	font-size: 48px;
 	font-weight: 700;
 	color: var(--white);
@@ -29,6 +30,7 @@
 }
 
 .text {
+	margin-bottom: 30px;
 	font-size: 28px;
 	font-weight: 500;
 	color: var(--white);
