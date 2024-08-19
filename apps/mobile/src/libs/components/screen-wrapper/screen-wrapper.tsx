@@ -1,36 +1,30 @@
 import React from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Edge, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { View } from "~/libs/components/components";
-import { ScreenWrapperEdge } from "~/libs/enums/app/screen-wrapper-edge.enum";
-import { ValueOf } from "~/libs/types/types";
+import { globalStyles } from "~/libs/styles/styles";
 
 const ZERO_PADDING = 0;
+const DEFAULT_SAFE_AREA_EDGES: Edge[] = ["top", "bottom", "left", "right"];
 
 type Properties = {
 	children: React.ReactNode;
-	edges?: ValueOf<typeof ScreenWrapperEdge>[];
+	edges?: Edge[];
 };
 
 const ScreenWrapper: React.FC<Properties> = ({ children, edges }) => {
 	const insets = useSafeAreaInsets();
 
+	const localEdges = edges || DEFAULT_SAFE_AREA_EDGES;
+
 	const paddingStyle = {
-		paddingBottom: edges?.includes(ScreenWrapperEdge.BOTTOM)
-			? insets.bottom
-			: ZERO_PADDING,
-		paddingLeft: edges?.includes(ScreenWrapperEdge.LEFT)
-			? insets.left
-			: ZERO_PADDING,
-		paddingRight: edges?.includes(ScreenWrapperEdge.RIGHT)
-			? insets.right
-			: ZERO_PADDING,
-		paddingTop: edges?.includes(ScreenWrapperEdge.TOP)
-			? insets.top
-			: ZERO_PADDING,
+		paddingBottom: localEdges.includes("bottom") ? insets.bottom : ZERO_PADDING,
+		paddingLeft: localEdges.includes("left") ? insets.left : ZERO_PADDING,
+		paddingRight: localEdges.includes("right") ? insets.right : ZERO_PADDING,
+		paddingTop: localEdges.includes("top") ? insets.top : ZERO_PADDING,
 	};
 
-	return <View style={{ flex: 1, ...paddingStyle }}>{children}</View>;
+	return <View style={[globalStyles.flex1, paddingStyle]}>{children}</View>;
 };
 
 export { ScreenWrapper };
