@@ -1,5 +1,5 @@
 import { config } from "../config/config.js";
-import { BaseToken } from "./base-token.js";
+import { BaseToken } from "./base-token.module.js";
 
 const token = new BaseToken({
 	algorithm: config.ENV.JWT.ALGORITHM,
