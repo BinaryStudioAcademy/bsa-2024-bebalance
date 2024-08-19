@@ -9,6 +9,6 @@ const Gap = {
 	gap24: { gap: Spacing.lg },
 	gap32: { gap: Spacing.xl },
 	gap48: { gap: Spacing.xxl },
-};
+} as const;
 
 export { Gap };

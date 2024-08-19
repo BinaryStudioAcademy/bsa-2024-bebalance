@@ -63,6 +63,6 @@ const Margin = {
 	mv24: { marginVertical: Spacing.lg },
 	mv32: { marginVertical: Spacing.xl },
 	mv48: { marginVertical: Spacing.xxl },
-};
+} as const;
 
 export { Margin };

@@ -7,6 +7,6 @@ const Spacing = {
 	xxl: 48,
 	xxs: 4,
 	xxxs: 2,
-};
+} as const;
 
 export { Spacing };

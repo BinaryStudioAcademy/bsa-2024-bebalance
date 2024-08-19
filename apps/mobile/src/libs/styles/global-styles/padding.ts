@@ -63,6 +63,6 @@ const Padding = {
 	pv24: { paddingVertical: Spacing.lg },
 	pv32: { paddingVertical: Spacing.xl },
 	pv48: { paddingVertical: Spacing.xxl },
-};
+} as const;
 
 export { Padding };

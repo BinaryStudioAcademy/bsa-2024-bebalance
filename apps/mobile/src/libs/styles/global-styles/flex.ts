@@ -1,4 +1,4 @@
-import type { FlexStyle } from "react-native";
+import { type FlexStyle } from "react-native";
 
 type GlobalFlexStyles = {
 	[key: string]: FlexStyle;
