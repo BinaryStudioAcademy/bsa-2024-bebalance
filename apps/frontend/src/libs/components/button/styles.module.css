@@ -1,0 +1,15 @@
+.btn {
+	display: inline-block;
+	min-height: 16px;
+	padding: 12px 24px;
+	margin: 0;
+	font-weight: 700;
+	line-height: 16px;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
+	background-color: #000000;
+	border: none;
+	border-radius: 16px;
+	outline: 0;
+}
