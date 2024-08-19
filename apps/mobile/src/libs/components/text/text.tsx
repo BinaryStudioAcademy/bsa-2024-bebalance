@@ -14,7 +14,7 @@ import { styles as presetStyles } from "./styles";
 type Properties = {
 	children: ReactNode;
 	color?: keyof typeof BaseColor;
-	fontFamily: keyof typeof FontFamilies;
+	fontFamily?: keyof typeof FontFamilies;
 	preset?: "default" | "heading" | "subheading";
 	size?: keyof typeof FontSize;
 	style?: StyleProp<TextStyle>;
