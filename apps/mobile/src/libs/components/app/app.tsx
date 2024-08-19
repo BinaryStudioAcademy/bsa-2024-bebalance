@@ -6,14 +6,13 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider as StoreProvider } from "react-redux";
 
 import { store } from "~/libs/packages/store/store";
+import { globalStyles } from "~/libs/styles/styles";
 import { Root as RootNavigation } from "~/navigations/navigations";
-
-import { styles } from "./styles";
 
 const App: FC = () => {
 	return (
 		<StoreProvider store={store.instance}>
-			<GestureHandlerRootView style={styles.root}>
+			<GestureHandlerRootView style={globalStyles.flex1}>
 				<SafeAreaProvider>
 					<NavigationContainer>
 						<RootNavigation />
