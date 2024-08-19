@@ -39,11 +39,13 @@ class UserRepository implements Repository {
 			.returning("*");
 
 		return UserEntity.initialize({
+			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
 			name: details.name,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
 		});
 	}
 
@@ -63,11 +65,13 @@ class UserRepository implements Repository {
 
 		return users.map((user) =>
 			UserEntity.initialize({
+				createdAt: user.createdAt,
 				email: user.email,
 				id: user.id,
 				name: user.userDetails.name,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
 			}),
 		);
 	}
@@ -81,11 +85,13 @@ class UserRepository implements Repository {
 			.execute();
 		return user
 			? UserEntity.initialize({
+					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
 				})
 			: null;
 	}
