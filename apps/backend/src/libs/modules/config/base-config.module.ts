@@ -79,7 +79,7 @@ class BaseConfig implements Config {
 			JWT: {
 				ALGORITHM: {
 					default: null,
-					doc: "Token encription algorithm",
+					doc: "Token encryption algorithm",
 					env: "JWT_ALGORITHM",
 					format: String,
 				},

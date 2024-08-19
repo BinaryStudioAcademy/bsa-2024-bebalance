@@ -7,6 +7,8 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
+	type UserSignInRequestDto,
+	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
@@ -40,13 +42,13 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.signIn(
 					options as APIHandlerOptions<{
-						body: UserSignUpRequestDto;
+						body: UserSignInRequestDto;
 					}>,
 				),
 			method: "POST",
 			path: AuthApiPath.SIGN_IN,
 			validation: {
-				body: userSignUpValidationSchema,
+				body: userSignInValidationSchema,
 			},
 		});
 	}

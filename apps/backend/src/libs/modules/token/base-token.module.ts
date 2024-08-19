@@ -26,7 +26,7 @@ class BaseToken<T extends JWTPayload> {
 	}
 
 	public async decode(token: string): Promise<JWTVerifyResult> {
-		return await jwtVerify(token, this.secret);
+		return await jwtVerify<T>(token, this.secret);
 	}
 }
 
