@@ -1,19 +1,17 @@
 import { JWTPayload, jwtVerify, JWTVerifyResult, SignJWT } from "jose";
 
-import { Algorithm, ExpirationTime } from "./libs/types/types.js";
-
-type ConstructorProperties = {
-	algorithm: Algorithm;
-	expirationTime: ExpirationTime;
+type Constructor = {
+	algorithm: string;
+	expirationTime: string;
 	secret: Uint8Array;
 };
 
 class BaseToken<T extends JWTPayload> {
-	private algorithm: Algorithm;
-	private expirationTime: ExpirationTime;
+	private algorithm: string;
+	private expirationTime: string;
 	private secret: Uint8Array;
 
-	constructor({ algorithm, expirationTime, secret }: ConstructorProperties) {
+	constructor({ algorithm, expirationTime, secret }: Constructor) {
 		this.secret = secret;
 		this.algorithm = algorithm;
 		this.expirationTime = expirationTime;

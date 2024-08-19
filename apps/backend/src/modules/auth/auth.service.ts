@@ -19,18 +19,18 @@ class AuthService {
 	): Promise<UserSignInResponseDto> {
 		const { email } = userRequestDto;
 		const user = await this.userService.findByEmail(email);
-		const JWTtoken = await token.createToken({ userId: user.id });
+		const JwToken = await token.createToken({ userId: user.id });
 
-		return { token: JWTtoken, user };
+		return { token: JwToken, user };
 	}
 
 	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const user = await this.userService.create(userRequestDto);
-		const JWTtoken = await token.createToken({ userId: user.id });
+		const JwToken = await token.createToken({ userId: user.id });
 
-		return { token: JWTtoken, user };
+		return { token: JwToken, user };
 	}
 }
 

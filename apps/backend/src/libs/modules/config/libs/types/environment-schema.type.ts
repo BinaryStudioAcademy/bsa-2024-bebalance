@@ -1,8 +1,4 @@
 import { type AppEnvironment } from "~/libs/enums/enums.js";
-import {
-	Algorithm,
-	ExpirationTime,
-} from "~/libs/modules/token/libs/types/types.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 type EnvironmentSchema = {
@@ -18,8 +14,8 @@ type EnvironmentSchema = {
 		POOL_MIN: number;
 	};
 	JWT: {
-		ALGORITHM: Algorithm;
-		EXPIRATION_TIME: ExpirationTime;
+		ALGORITHM: string;
+		EXPIRATION_TIME: string;
 		SECRET: string;
 	};
 };

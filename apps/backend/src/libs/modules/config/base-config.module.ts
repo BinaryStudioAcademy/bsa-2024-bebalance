@@ -3,10 +3,6 @@ import { config } from "dotenv";
 
 import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import {
-	JWTAlgorithm,
-	JWTExpirationTime,
-} from "~/libs/modules/token/libs/enums/enums.js";
 
 import { type Config, type EnvironmentSchema } from "./libs/types/types.js";
 
@@ -84,19 +80,19 @@ class BaseConfig implements Config {
 				ALGORITHM: {
 					default: null,
 					doc: "Token encription algorithm",
-					env: "ALGORITHM",
-					format: Object.values(JWTAlgorithm),
+					env: "JWT_ALGORITHM",
+					format: String,
 				},
 				EXPIRATION_TIME: {
 					default: null,
 					doc: "Token expiration time",
-					env: "EXPIRATION_TIME",
-					format: Object.values(JWTExpirationTime),
+					env: "JWT_EXPIRATION_TIME",
+					format: String,
 				},
 				SECRET: {
 					default: null,
 					doc: "Used to sign and validate JWT tokens",
-					env: "SECRET",
+					env: "JWT_SECRET",
 					format: String,
 				},
 			},
