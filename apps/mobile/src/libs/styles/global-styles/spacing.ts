@@ -1,4 +1,4 @@
-const SPACINGS = {
+const SPACING = {
 	lg: 24,
 	md: 16,
 	sm: 12,
@@ -9,4 +9,4 @@ const SPACINGS = {
 	xxxs: 2,
 };
 
-export { SPACINGS };
+export { SPACING };
