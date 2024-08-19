@@ -4,15 +4,17 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserGetAllItemResponseDto } from "~/modules/users/users.js";
 
-import { loadAll } from "./actions.js";
+import { getUser, loadAll } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	user: undefined | UserGetAllItemResponseDto;
 	users: UserGetAllItemResponseDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	user: undefined,
 	users: [],
 };
 
@@ -27,6 +29,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(loadAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(getUser.fulfilled, (state, action) => {
+			state.user = { email: action.payload.email, id: action.payload.id };
 		});
 	},
 	initialState,
