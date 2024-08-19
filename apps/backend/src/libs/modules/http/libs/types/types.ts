@@ -1,1 +1,1 @@
-export { type HTTPMethodType } from "shared";
+export { type HTTPMethod } from "shared";

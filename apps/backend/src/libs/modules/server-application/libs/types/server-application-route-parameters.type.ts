@@ -1,6 +1,6 @@
 import { type FastifyReply, type FastifyRequest } from "fastify";
 
-import { type HTTPMethodType } from "~/libs/modules/http/http.js";
+import { type HTTPMethod } from "~/libs/modules/http/http.js";
 import { type ValidationSchema } from "~/libs/types/types.js";
 
 type ServerApplicationRouteParameters = {
@@ -8,7 +8,7 @@ type ServerApplicationRouteParameters = {
 		request: FastifyRequest,
 		reply: FastifyReply,
 	) => Promise<void> | void;
-	method: HTTPMethodType;
+	method: HTTPMethod;
 	path: string;
 	validation?: {
 		body?: ValidationSchema;
