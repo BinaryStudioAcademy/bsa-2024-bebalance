@@ -16,7 +16,6 @@ export {
 	type HTTP,
 	HTTPCode,
 	HTTPHeader,
-	HTTPMethod,
 	type HTTPMethodType,
 	type HTTPOptions,
 } from "./libs/modules/http/http.js";
