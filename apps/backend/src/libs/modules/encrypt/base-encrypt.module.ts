@@ -1,6 +1,6 @@
 import { genSalt, hash } from "bcrypt";
 
-class Encryptor {
+class BaseEncrypt {
 	private saltRounds: number;
 
 	constructor(saltRounds: number) {
@@ -25,4 +25,4 @@ class Encryptor {
 	}
 }
 
-export { Encryptor };
+export { BaseEncrypt };
