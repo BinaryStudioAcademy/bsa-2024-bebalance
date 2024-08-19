@@ -17,7 +17,7 @@
 		"build:shared": "npm run build -w shared",
 		"build:frontend": "npm run build -w frontend",
 		"build:backend": "npm run build -w backend",
-		"build": "npm run build --workspaces",
+		"build": "npm run build:shared && npm run build:frontend && npm run build:backend",
 		"lint:editor": "editorconfig-checker",
 		"lint:fs": "ls-lint",
 		"lint:type": "npx tsc --noEmit",

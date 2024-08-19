@@ -14,6 +14,15 @@ const config: KnipConfig = {
 		"apps/frontend": {
 			entry: ["src/index.tsx"],
 		},
+		"apps/mobile": {
+			entry: ["index.js", "metro.config.js"],
+			ignoreDependencies: [
+				"react-native-codegen",
+				"@babel/preset-env",
+				"@babel/runtime",
+				"metro-config",
+			],
+		},
 		"packages/shared": {
 			entry: ["src/index.ts"],
 		},

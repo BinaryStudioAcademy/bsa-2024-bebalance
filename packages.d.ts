@@ -3,7 +3,7 @@ declare module "eslint-plugin-perfectionist" {
 
 	const configs: Record<
 		"configs",
-		Record<"recommended-natural", Required<Linter.FlatConfig>>
+		Record<"recommended-natural", Required<Linter.Config>>
 	>;
 
 	export default configs;
@@ -14,7 +14,7 @@ declare module "eslint-plugin-unicorn" {
 
 	const configs: Record<
 		"configs",
-		Record<"recommended", Required<Linter.FlatConfig>>
+		Record<"recommended", Required<Linter.Config>>
 	>;
 
 	export default configs;
@@ -25,7 +25,7 @@ declare module "eslint-plugin-import" {
 
 	const configs: Record<
 		"configs",
-		Record<"recommended", Required<Linter.FlatConfig>>
+		Record<"recommended", Required<Linter.Config>>
 	>;
 
 	export default configs;
@@ -34,7 +34,7 @@ declare module "eslint-plugin-import" {
 declare module "eslint-plugin-sonarjs" {
 	import { type Linter } from "eslint";
 
-	const configs: Record<"recommended", Required<Linter.FlatConfig>>;
+	const configs: Record<"recommended", Required<Linter.Config>>;
 
 	export default {
 		configs,
@@ -44,7 +44,7 @@ declare module "eslint-plugin-sonarjs" {
 declare module "@typescript-eslint/eslint-plugin" {
 	import { type Linter } from "eslint";
 
-	const configs: Record<"strict-type-checked", Required<Linter.FlatConfig>>;
+	const configs: Record<"strict-type-checked", Required<Linter.Config>>;
 
 	export default {
 		configs,
