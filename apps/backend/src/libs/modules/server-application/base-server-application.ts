@@ -11,13 +11,13 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { type Database } from "~/libs/modules/database/database.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { authPlugin } from "~/libs/plugins/auth-plugin/auth-plugin.js";
 import {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 } from "~/libs/types/types.js";
 
-import { authPlugin } from "./libs/modules/auth-plugin/auth-plugin.js";
 import {
 	type ServerApplication,
 	type ServerApplicationApi,
