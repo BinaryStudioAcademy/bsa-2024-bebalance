@@ -1,5 +1,3 @@
-import { transaction } from "objection";
-
 import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
@@ -23,31 +21,30 @@ class UserRepository implements Repository {
 	public async create(entity: UserEntity): Promise<UserEntity> {
 		const { email, name, passwordHash, passwordSalt } = entity.toNewObject();
 
-		const userWithDetails = await transaction(
-			this.userModel.knex(),
-			async (trx) => {
-				const user = await this.userModel
-					.query(trx)
-					.insert({
-						email,
-						passwordHash,
-						passwordSalt,
-					})
-					.returning("*");
+		const user = await this.userModel
+			.query()
+			.insert({
+				email,
+				passwordHash,
+				passwordSalt,
+			})
+			.returning("*");
 
-				const details = await this.userDetailsModel
-					.query(trx)
-					.insert({
-						name,
-						userId: user.id,
-					})
-					.returning("*");
+		const details = await this.userDetailsModel
+			.query()
+			.insert({
+				name,
+				userId: user.id,
+			})
+			.returning("*");
 
-				return { ...user, ...details };
-			},
-		);
-
-		return UserEntity.initialize(userWithDetails);
+		return UserEntity.initialize({
+			email: user.email,
+			id: user.id,
+			name: details.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+		});
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
