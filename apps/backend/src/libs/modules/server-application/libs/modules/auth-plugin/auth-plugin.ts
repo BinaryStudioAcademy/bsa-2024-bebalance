@@ -5,6 +5,9 @@ import { HTTPCode } from "~/libs/modules/http/libs/enums/enums.js";
 type PluginOptions = {
 	/** Define route prefixes to be excluded by `authPlugin` */
 	excludedRoutePrefixes?: string[];
+
+	/** Required for auth token verification */
+	tokenVerifier: (token: string) => Promise<unknown>;
 };
 
 /**
@@ -14,9 +17,9 @@ type PluginOptions = {
  */
 const authPlugin: FastifyPluginCallback<PluginOptions> = (
 	app,
-	{ excludedRoutePrefixes = [] },
+	{ excludedRoutePrefixes = [], tokenVerifier },
 ) => {
-	app.addHook("onRequest", (request, reply) => {
+	app.addHook("onRequest", async (request, reply) => {
 		for (const routePrefix of excludedRoutePrefixes) {
 			if (request.url.startsWith(routePrefix)) {
 				return;
@@ -26,13 +29,16 @@ const authPlugin: FastifyPluginCallback<PluginOptions> = (
 		const token = request.headers.authorization;
 
 		if (!token) {
-			return reply
+			return await reply
 				.code(HTTPCode.UNAUTHORIZED)
 				.send({ message: "Authorization header required for this route" });
 		}
 
-		// TODO: Implement token validation by JWT manager
-		request.authUser = token;
+		try {
+			request.authUser = await tokenVerifier(token);
+		} catch {
+			reply.code(HTTPCode.UNAUTHORIZED).send({ message: "Invalid token" });
+		}
 	});
 };
 
