@@ -1,8 +1,7 @@
-import { Navigate } from "react-router-dom";
-import { ValueOf } from "shared";
-
+import { Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
+import { ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
 	component: React.ReactNode;
