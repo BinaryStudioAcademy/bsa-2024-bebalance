@@ -129,6 +129,13 @@
 	border-radius: 50%;
 }
 
+.circle-gradient4 {
+	position: absolute;
+	display: none;
+	background: linear-gradient(to right, #0085ff 0%, #00f0ff 100%);
+	border-radius: 50%;
+}
+
 @media (width <= 640px) {
 	.sign-in__logo-container {
 		display: none;
@@ -136,5 +143,57 @@
 
 	.sign-in__container {
 		grid-template-columns: 1fr;
+		padding-top: 100px;
+		padding-bottom: 60px;
+	}
+
+	.sign-in__form-container {
+		align-items: flex-start;
+		justify-content: stretch;
+		padding-top: 60px;
+	}
+
+	.sign-in__form {
+		align-items: stretch;
+		min-width: 100%;
+	}
+
+	.ripple-effect__background1,
+	.ripple-effect__background2 {
+		width: 528px;
+		height: 528px;
+	}
+
+	.ripple-effect__background1 {
+		top: -5%;
+		left: 100%;
+	}
+
+	.ripple-effect__background2 {
+		bottom: -60%;
+		left: -45%;
+	}
+
+	.circle-gradient1,
+	.circle-gradient2 {
+		display: none;
+	}
+
+	.circle-gradient3 {
+		top: -12%;
+		left: 20%;
+		display: block;
+		width: 150px;
+		height: 150px;
+	}
+
+	.circle-gradient4 {
+		right: -10%;
+		bottom: 12%;
+		z-index: 2;
+		display: block;
+		width: 86px;
+		height: 86px;
+		background: linear-gradient(to bottom, #0085ff 0%, #00f0ff 100%);
 	}
 }
