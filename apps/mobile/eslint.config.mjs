@@ -26,6 +26,12 @@ const overridesConfigs = [
 		},
 	},
 	{
+		rules: {
+			"@typescript-eslint/no-require-imports": ["off"],
+			"unicorn/prefer-module": ["off"],
+		},
+	},
+	{
 		files: ["eslint.config.mjs", "lint-staged.config.mjs"],
 		rules: {
 			"import/no-default-export": ["off"],
