@@ -9,12 +9,12 @@ class BaseEncrypt implements Encrypt {
 		this.saltRounds = saltRounds;
 	}
 
-	private generateHash(password: string, salt: string): Promise<string> {
-		return hash(password, salt);
+	private async generateHash(password: string, salt: string): Promise<string> {
+		return await hash(password, salt);
 	}
 
-	private generateSalt(): Promise<string> {
-		return genSalt(this.saltRounds);
+	private async generateSalt(): Promise<string> {
+		return await genSalt(this.saltRounds);
 	}
 
 	public async encrypt(
