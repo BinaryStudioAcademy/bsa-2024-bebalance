@@ -36,24 +36,3 @@
 	color: var(--white);
 	text-shadow: 2px 2px 1px var(--brand);
 }
-
-.button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 200px;
-	height: 40px;
-	font-size: 16px;
-	font-weight: 700;
-	color: var(--white);
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-	background-color: var(--black);
-	border-radius: 35px;
-}
-
-.button:hover {
-	color: var(--black);
-	background-color: var(--white);
-}

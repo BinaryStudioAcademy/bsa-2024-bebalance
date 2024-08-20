@@ -9,7 +9,7 @@ const NotFound: React.FC = () => (
 		<p className={styles["text"]}>
 			The page you are looking for does not exist.
 		</p>
-		<Link className={styles["button"] || ""} to={AppRoute.ROOT}>
+		<Link to={AppRoute.ROOT} type={"notFoundButton"}>
 			Go to Homepage
 		</Link>
 	</div>
