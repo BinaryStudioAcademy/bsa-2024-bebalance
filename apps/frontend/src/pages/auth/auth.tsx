@@ -1,7 +1,6 @@
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
-	useAppSelector,
 	useCallback,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
@@ -12,9 +11,6 @@ import { SignInForm, SignUpForm } from "./components/components.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ auth }) => ({
-		dataStatus: auth.dataStatus,
-	}));
 	const { pathname } = useLocation();
 
 	const handleSignInSubmit = useCallback((): void => {
@@ -40,10 +36,6 @@ const Auth: React.FC = () => {
 
 		return null;
 	};
-
-	if (dataStatus === "rejected") {
-		return <div>An error occured.</div>;
-	}
 
 	return <>{getScreen(pathname)}</>;
 };
