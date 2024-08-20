@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.1.0...v1.2.0) (2024-08-20)
+
+
+### Features
+
+* sign up bb-8 ([#46](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/46)) ([833b096](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833b096800fda00136885ae1bffedada943a1e8a))
+
 ## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.0.0...v1.1.0) (2024-08-20)
 
 
