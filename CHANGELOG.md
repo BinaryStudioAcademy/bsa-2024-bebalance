@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.3.0...v1.4.0) (2024-08-20)
+
+
+### Features
+
+* add Not Found page bb-51 ([#56](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/56)) ([befb626](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/befb626bfc67278a9aa40b3f460885807f35969b))
+* mobile linter rule adjust bb-2 ([#82](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/82)) ([584c838](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/584c8387a3150c317123beabb9c962de97f012f5))
+
 ## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.2.0...v1.3.0) (2024-08-20)
 
 
