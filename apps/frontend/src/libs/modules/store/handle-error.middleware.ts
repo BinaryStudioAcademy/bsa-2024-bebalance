@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 const handleErrorMiddleware: Middleware = () => {
 	return (next) => (action) => {
 		if (isRejected(action)) {
-			toast.error(
-				"data" in action.error
-					? (action.error.data as { message: string }).message
-					: action.error.message,
-			);
+			const error = action.error as {
+				data?: { message: string };
+				message?: string;
+			};
+			toast.error(error.data ? error.data.message : error.message);
 		}
 		return next(action);
 	};
