@@ -14,9 +14,9 @@ const ProjectPrefix = {
 		"test",
 	],
 	ENVIRONMENT: "main",
-	ISSUE_PREFIXES: ["bb"],
+	ISSUE_PREFIXES: ["bb", "release"],
 	SCOPES: {
-		APPS: ["frontend", "backend"],
+		APPS: ["frontend", "backend", "mobile"],
 		PACKAGES: ["shared"],
 	},
 } as const;
