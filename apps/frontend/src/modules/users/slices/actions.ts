@@ -22,7 +22,7 @@ const getAuthenticatedUser = createAsyncThunk<
 	UserGetAllItemResponseDto,
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/get_user`, (_, { extra }) => {
+>(`${sliceName}/get-authenticated-user`, (_, { extra }) => {
 	const { userApi } = extra;
 
 	return userApi.getAuthenticatedUser();
