@@ -1,6 +1,6 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
 
+import { ActivityIndicator } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/app/base-color.enum";
 import { globalStyles } from "~/libs/styles/styles";
 

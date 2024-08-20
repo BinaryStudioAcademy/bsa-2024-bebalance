@@ -5,7 +5,7 @@ import {
 	ScreenWrapper,
 	Text,
 } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
+import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppRoute,
@@ -59,7 +59,7 @@ const Auth: React.FC = () => {
 	};
 
 	return (
-		<LoaderWrapper isLoading={dataStatus === "pending"}>
+		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 			<ScreenWrapper>
 				<Text>state: {dataStatus}</Text>
 				{getScreen(name)}
