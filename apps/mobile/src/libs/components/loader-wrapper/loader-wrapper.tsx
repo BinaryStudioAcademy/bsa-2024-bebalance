@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ActivityIndicator } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/app/base-color.enum";
+import { BaseColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
 type Properties = {
