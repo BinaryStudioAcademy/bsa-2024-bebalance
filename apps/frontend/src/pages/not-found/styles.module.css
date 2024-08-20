@@ -1,0 +1,38 @@
+.pageContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-color: var(--background);
+	background-image: url("../../assets/img/circle-group-large.svg"),
+		url("../../assets/img/circle-group-medium.svg"),
+		url("../../assets/img/circle-group-small.svg"),
+		url("../../assets/img/ellipse.svg"), url("../../assets/img/ellipse.svg"),
+		url("../../assets/img/ellipse.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+		no-repeat;
+	background-position:
+		left -600px top 50%,
+		right -30% bottom -500px,
+		right 20% top -270px,
+		right 10% top 10%,
+		left 30% top 75%,
+		right 45% top 30%;
+}
+
+.title {
+	margin-bottom: 20px;
+	font-size: 48px;
+	font-weight: 700;
+	color: var(--white);
+	text-shadow: 2px 2px 1px var(--brand);
+}
+
+.text {
+	margin-bottom: 30px;
+	font-size: 28px;
+	font-weight: 500;
+	color: var(--white);
+	text-shadow: 2px 2px 1px var(--brand);
+}
