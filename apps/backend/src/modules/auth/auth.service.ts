@@ -1,6 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
 import { AuthError } from "~/modules/auth/libs/exceptions/exceptions.js";
 import {
 	type UserSignInRequestDto,
@@ -9,6 +8,8 @@ import {
 	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
+
+import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 
 class AuthService {
 	private encrypt: Encrypt;
@@ -49,10 +50,20 @@ class AuthService {
 		return user.toObject();
 	}
 
-	public signUp(
+	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
-		return this.userService.create(userRequestDto);
+		const { email } = userRequestDto;
+		const userWithSameEmail = await this.userService.findByEmail(email);
+
+		if (userWithSameEmail) {
+			throw new AuthError({
+				message: UserValidationMessage.EMAIL_TAKEN,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		return await this.userService.create(userRequestDto);
 	}
 }
 

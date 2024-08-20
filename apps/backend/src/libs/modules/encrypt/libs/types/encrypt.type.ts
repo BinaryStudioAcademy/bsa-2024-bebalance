@@ -5,10 +5,7 @@ type Encrypt = {
 		salt: string,
 	) => Promise<boolean>;
 
-	encrypt: (password: string) => Promise<{
-		hash: string;
-		salt: string;
-	}>;
+	encrypt: (password: string) => Promise<{ hash: string; salt: string }>;
 };
 
 export { type Encrypt };

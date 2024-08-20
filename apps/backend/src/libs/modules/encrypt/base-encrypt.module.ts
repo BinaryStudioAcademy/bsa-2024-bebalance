@@ -1,20 +1,20 @@
-import bcrypt from "bcrypt";
+import { genSalt, hash } from "bcrypt";
 
-import { type Encrypt } from "./types/types.js";
+import { type Encrypt } from "./libs/types/types.js";
 
 class BaseEncrypt implements Encrypt {
-	private readonly saltRounds: number;
+	private saltRounds: number;
 
 	constructor(saltRounds: number) {
 		this.saltRounds = saltRounds;
 	}
 
 	private async generateHash(password: string, salt: string): Promise<string> {
-		return await bcrypt.hash(password, salt);
+		return await hash(password, salt);
 	}
 
 	private async generateSalt(): Promise<string> {
-		return await bcrypt.genSalt(this.saltRounds);
+		return await genSalt(this.saltRounds);
 	}
 
 	public async compare(
