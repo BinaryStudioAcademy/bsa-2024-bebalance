@@ -37,11 +37,7 @@ class UserService implements Service {
 	public async find(id: number): Promise<null | UserGetOneResponseDto> {
 		const item = await this.userRepository.find(id);
 
-		if (!item) {
-			return null;
-		}
-
-		return item.toObject();
+		return item?.toObject() || null;
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
