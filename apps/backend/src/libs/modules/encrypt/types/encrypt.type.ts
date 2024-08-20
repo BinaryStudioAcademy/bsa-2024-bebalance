@@ -1,7 +1,14 @@
 type Encrypt = {
-	compare: (data: string, hash: string) => Promise<boolean>;
-	generateHash: (data: string, salt: string) => Promise<string>;
-	generateSalt: (saltRounds: number) => Promise<string>;
+	compare: (
+		password: string,
+		passwordHash: string,
+		salt: string,
+	) => Promise<boolean>;
+
+	encrypt: (password: string) => Promise<{
+		hash: string;
+		salt: string;
+	}>;
 };
 
 export { type Encrypt };

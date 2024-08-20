@@ -32,9 +32,11 @@ class AuthService {
 			});
 		}
 
+		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
 			password,
-			user.toNewObject().passwordHash,
+			passwordHash,
+			passwordSalt,
 		);
 
 		if (!isPasswordValid) {
