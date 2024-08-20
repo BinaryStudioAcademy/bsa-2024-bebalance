@@ -3,7 +3,7 @@ import type { Middleware } from "@reduxjs/toolkit";
 import { isRejected } from "@reduxjs/toolkit";
 
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { toastNotification } from "~/libs/modules/toast-notification/toast-notification.js";
+import { notification } from "~/libs/modules/notification/notification.js";
 
 const handleErrorMiddleware: Middleware = () => {
 	return (next) => (action) => {
@@ -12,10 +12,10 @@ const handleErrorMiddleware: Middleware = () => {
 				data?: { message: string };
 				message?: string;
 			};
-			toastNotification.error(
+			notification.error(
 				error.data
 					? error.data.message
-					: error.message || ErrorMessage.UNEXPECTED_ERROR,
+					: (error.message ?? ErrorMessage.UNEXPECTED_ERROR),
 			);
 		}
 		return next(action);

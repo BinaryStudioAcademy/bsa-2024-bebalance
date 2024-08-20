@@ -35,15 +35,11 @@ class Store {
 		this.instance = configureStore({
 			devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
 			middleware: (getDefaultMiddleware) => {
-				const defaultMiddleware = getDefaultMiddleware({
+				return getDefaultMiddleware({
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
-				});
-
-				return [...defaultMiddleware, handleErrorMiddleware] as Tuple<
-					[ThunkMiddleware<RootReducer, UnknownAction, ExtraArguments>]
-				>;
+				}).prepend([handleErrorMiddleware]);
 			},
 			reducer: {
 				auth: authReducer,

@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-class ToastNotification {
+class Notification {
 	public error(message: string) {
 		toast.error(message);
 	}
@@ -18,4 +18,4 @@ class ToastNotification {
 	}
 }
 
-export { ToastNotification };
+export { Notification };
