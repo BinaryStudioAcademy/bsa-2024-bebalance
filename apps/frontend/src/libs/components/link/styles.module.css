@@ -1,0 +1,12 @@
+.link {
+	color: var(--black);
+}
+
+.primary {
+	color: var(--brand);
+	text-decoration: none;
+}
+
+.underline {
+	text-decoration: underline;
+}

@@ -44,7 +44,7 @@
 	padding-right: 50px;
 }
 
-.input:focus {
+.input__field:focus {
 	border-color: var(--brand);
 }
 
