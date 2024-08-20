@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.2.0...v1.3.0) (2024-08-20)
+
+
+### Features
+
+* loader component bb-19 ([#58](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/58)) ([7d50184](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7d50184baa33f2f04e4c51a5cdfdc18973a31c76))
+
 ## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.1.0...v1.2.0) (2024-08-20)
 
 
