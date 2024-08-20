@@ -1,4 +1,4 @@
-import type { Knex } from "knex";
+import { type Knex } from "knex";
 
 const TableName = { USER_DETAILS: "user_details", USERS: "users" } as const;
 
