@@ -1,4 +1,4 @@
-.input-container {
+.input-wrapper {
 	display: flex;
 	flex-direction: column;
 }
@@ -7,12 +7,41 @@
 	font-size: 16px;
 }
 
-.input {
+.input-container {
+	position: relative;
+}
+
+.input__field {
+	width: 100%;
 	padding: 10px;
 	font-size: 16px;
 	border: 2px solid var(--light-gray);
 	border-radius: 5px;
 	outline: none;
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	min-width: 23px;
+	opacity: 0.5;
+	transform: translateY(-50%);
+}
+
+.icon-left {
+	left: 10px;
+}
+
+.icon-right {
+	right: 15px;
+}
+
+.input__field--with-icon-left {
+	padding-left: 40px;
+}
+
+.input__field--with-icon-right {
+	padding-right: 50px;
 }
 
 .input:focus {

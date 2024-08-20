@@ -1,3 +1,4 @@
+import eye from "~/assets/img/eye.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -64,6 +65,8 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					<Input
 						control={control}
 						errors={errors}
+						icon={eye}
+						iconPosition="right"
 						label="Password"
 						name="password"
 						placeholder="*******"
