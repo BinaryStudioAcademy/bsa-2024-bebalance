@@ -12,7 +12,7 @@ import { RippleEffectBg, RippleEffectBg2 } from "./libs/icons/icons.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: () => void;
+	onSubmit: (payload: UserSignInRequestDto) => void;
 };
 
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
