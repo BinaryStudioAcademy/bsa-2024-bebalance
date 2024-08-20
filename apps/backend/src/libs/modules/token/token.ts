@@ -1,7 +1,7 @@
 import { config } from "~/libs/modules/config/config.js";
 
 import { BaseToken } from "./base-token.module.js";
-import { TokenPayload } from "./libs/types/token-payload.type.js";
+import { TokenPayload } from "./libs/types/types.js";
 
 const token = new BaseToken<TokenPayload>({
 	algorithm: config.ENV.JWT.ALGORITHM,
@@ -10,4 +10,3 @@ const token = new BaseToken<TokenPayload>({
 });
 
 export { token };
-export { TokenPayload } from "./libs/types/types.js";
