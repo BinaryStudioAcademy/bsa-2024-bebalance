@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.0.0...v1.1.0) (2024-08-20)
+
+
+### Features
+
+* get authenticated user bb-14 ([#53](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/53)) ([0b147e2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0b147e2ca611f5859c8e81917e5a39ed8ad1971a))
+
 ## 1.0.0 (2024-08-20)
 
 
