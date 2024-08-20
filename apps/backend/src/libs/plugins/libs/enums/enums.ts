@@ -1,1 +1,1 @@
-export { ServerHooks } from "./hooks.enum.js";
+export { ServerHooks } from "./server-hooks.enum.js";
