@@ -18,14 +18,14 @@ const loadAll = createAsyncThunk<
 	return userApi.getAll();
 });
 
-const getUser = createAsyncThunk<
+const getAuthenticatedUser = createAsyncThunk<
 	UserGetAllItemResponseDto,
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get_user`, (_, { extra }) => {
 	const { userApi } = extra;
 
-	return userApi.getUser();
+	return userApi.getAuthenticatedUser();
 });
 
-export { getUser, loadAll };
+export { getAuthenticatedUser, loadAll };

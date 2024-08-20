@@ -4,7 +4,7 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserGetAllItemResponseDto } from "~/modules/users/users.js";
 
-import { getUser, loadAll } from "./actions.js";
+import { getAuthenticatedUser, loadAll } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -30,7 +30,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(loadAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(getUser.fulfilled, (state, action) => {
+		builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
 			state.user = action.payload;
 		});
 	},
