@@ -4,4 +4,5 @@ export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
-export { ActivityIndicator, Text, View } from "react-native";
+export { Text } from "./text/text";
+export { ActivityIndicator, View } from "react-native";
