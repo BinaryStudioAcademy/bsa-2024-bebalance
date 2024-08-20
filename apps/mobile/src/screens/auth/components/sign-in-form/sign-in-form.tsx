@@ -12,7 +12,6 @@ const SignInForm: React.FC<Properties> = () => {
 		<View>
 			<Text>Sign In</Text>
 			<Button
-				borderRadius={35}
 				label="Sign in"
 				onPress={(): void => {
 					// TODO: handle Sign in

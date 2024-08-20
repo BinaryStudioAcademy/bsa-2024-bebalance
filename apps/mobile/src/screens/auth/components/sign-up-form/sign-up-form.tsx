@@ -38,7 +38,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				name="password"
 				placeholder="Enter your password"
 			/>
-			<Button borderRadius={35} label="Sign up" onPress={handleFormSubmit} />
+			<Button label="Sign up" onPress={handleFormSubmit} />
 			<Link label="Go to Sign In" to={`/${RootScreenName.SIGN_IN}`} />
 		</View>
 	);
