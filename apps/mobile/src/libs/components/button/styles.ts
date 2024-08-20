@@ -3,26 +3,26 @@ import { StyleSheet } from "react-native";
 import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
-	btn: {
-		alignItems: "center",
-		padding: 10,
+	bgWhite: {
+		backgroundColor: BaseColor.BG_WHITE,
 	},
-	filledBtnLabel: {
+	colorBlack: {
+		color: BaseColor.BLACK,
+	},
+	colorWhite: {
 		color: BaseColor.BG_WHITE,
 	},
-	label: {
+	p1: {
+		padding: 1,
+	},
+	rounded: {
+		borderRadius: 35,
+	},
+	text: {
 		fontFamily: "Nunito",
 		fontSize: 16,
 		fontWeight: 700,
 		textTransform: "uppercase",
-	},
-	outlined: {
-		borderWidth: 1,
-	},
-	outlinedInner: {
-		backgroundColor: BaseColor.BG_WHITE,
-		height: "100%",
-		width: "100%",
 	},
 	wrapper: {
 		height: 42,

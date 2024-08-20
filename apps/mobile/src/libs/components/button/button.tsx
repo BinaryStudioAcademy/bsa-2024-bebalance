@@ -1,102 +1,86 @@
 import React from "react";
-import { Pressable, View } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
 
-import { Text } from "~/libs/components/components";
+import { Pressable, Text, View } from "~/libs/components/components";
+import { GradientText } from "~/libs/components/gradient-text";
+import { LinearGradient } from "~/libs/components/linear-gradient";
 import { BaseColor, GradientColor } from "~/libs/enums/enums";
+import { globalStyles } from "~/libs/styles/styles";
 
-import { GradientText } from "../gradient-text/gradient-text";
 import { styles } from "./styles";
 
 type Properties = {
 	appearance?: "filled" | "outlined";
-	borderRadius: number;
-	disabled?: boolean | null;
+	isDisabled?: boolean;
 	label: string;
 	onPress: () => void;
 };
 
 const Button: React.FC<Properties> = ({
 	appearance = "filled",
-	borderRadius,
-	disabled,
+	isDisabled = false,
 	label,
 	onPress,
 }) => {
 	const FIRST_COLOR_STOP = -0.4;
 	const SECOND_COLOR_STOP = 0.9;
-	const IS_FILLED = appearance === "filled";
+	const isFilled = appearance === "filled";
+	const { alignItemsCenter, flex1, justifyContentCenter } = globalStyles;
+	const { bgWhite, colorBlack, colorWhite, p1, rounded, text, wrapper } =
+		styles;
 
 	return (
-		<Pressable disabled={disabled} onPress={onPress} style={[styles.wrapper]}>
-			{({ pressed }) =>
-				pressed ? (
+		<Pressable disabled={isDisabled} onPress={onPress} style={wrapper}>
+			{({ pressed }) => {
+				const activeButtonColors = pressed
+					? [...GradientColor.BLUE]
+					: [BaseColor.BLACK, BaseColor.BLACK];
+				const conditionalColors = isDisabled
+					? [BaseColor.LIGHT_GRAY, BaseColor.LIGHT_GRAY]
+					: activeButtonColors;
+				return (
 					<LinearGradient
 						angle={305}
 						angleCenter={{ x: 0.5, y: 0.5 }}
-						colors={[...GradientColor.BLUE]}
+						colors={conditionalColors}
 						locations={[FIRST_COLOR_STOP, SECOND_COLOR_STOP]}
-						style={[styles.btn, !IS_FILLED && { padding: 1 }, { borderRadius }]}
+						style={[
+							alignItemsCenter,
+							flex1,
+							justifyContentCenter,
+							rounded,
+							!isFilled && p1,
+						]}
 						useAngle
 					>
-						{IS_FILLED ? (
-							<Text style={[styles.label, styles.filledBtnLabel]}>{label}</Text>
+						{isFilled ? (
+							<Text style={[colorWhite, text]}>{label}</Text>
 						) : (
 							<View
-								style={[styles.btn, styles.outlinedInner, { borderRadius }]}
+								style={[
+									alignItemsCenter,
+									bgWhite,
+									flex1,
+									justifyContentCenter,
+									rounded,
+								]}
 							>
 								<GradientText
 									gradientProps={{
 										angle: 305,
 										angleCenter: { x: 0.5, y: 0.5 },
-										colors: [...GradientColor.BLUE],
+										colors: conditionalColors,
 										locations: [FIRST_COLOR_STOP, SECOND_COLOR_STOP],
 										useAngle: true,
 									}}
-									textStyle={styles.label}
+									textStyle={[colorBlack, text]}
 								>
 									{label}
 								</GradientText>
 							</View>
 						)}
 					</LinearGradient>
-				) : (
-					<View
-						style={[
-							styles.btn,
-							{ borderRadius },
-							IS_FILLED
-								? {
-										backgroundColor: disabled
-											? BaseColor.LIGHT_GRAY
-											: BaseColor.BLACK,
-									}
-								: [
-										styles.outlined,
-										styles.outlinedInner,
-										{
-											borderColor: disabled
-												? BaseColor.LIGHT_GRAY
-												: BaseColor.BLACK,
-										},
-									],
-						]}
-					>
-						<Text
-							style={[
-								styles.label,
-								IS_FILLED
-									? styles.filledBtnLabel
-									: {
-											color: disabled ? BaseColor.LIGHT_GRAY : BaseColor.BLACK,
-										},
-							]}
-						>
-							{label}
-						</Text>
-					</View>
-				)
-			}
+				);
+			}}
 		</Pressable>
 	);
 };

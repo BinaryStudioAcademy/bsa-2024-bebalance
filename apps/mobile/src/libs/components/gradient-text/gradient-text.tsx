@@ -1,9 +1,14 @@
-import MaskedView from "@react-native-masked-view/masked-view";
 import React from "react";
-import { type StyleProp, Text, type TextStyle, View } from "react-native";
-import LinearGradient, {
+
+import { Text, View } from "~/libs/components/components";
+import { LinearGradient } from "~/libs/components/linear-gradient";
+import { MaskedView } from "~/libs/components/masked-view";
+import { globalStyles } from "~/libs/styles/styles";
+import {
 	type LinearGradientProps,
-} from "react-native-linear-gradient";
+	type StyleProp,
+	type TextStyle,
+} from "~/libs/types/types";
 
 import { styles } from "./styles";
 
@@ -18,16 +23,22 @@ const GradientText: React.FC<Properties> = ({
 	gradientProps,
 	textStyle,
 }) => {
+	const { alignItemsCenter, flex1, flexDirectionRow, justifyContentCenter } =
+		globalStyles;
+	const { bgTransparent } = styles;
+
 	return (
 		<MaskedView
 			maskElement={
-				<View style={styles.element}>
-					<Text style={[textStyle]}>{children}</Text>
+				<View
+					style={[alignItemsCenter, justifyContentCenter, bgTransparent, flex1]}
+				>
+					<Text style={textStyle}>{children}</Text>
 				</View>
 			}
-			style={styles.mask}
+			style={[flexDirectionRow, flex1]}
 		>
-			<LinearGradient {...gradientProps} style={{ flex: 1 }} />
+			<LinearGradient {...gradientProps} style={flex1} />
 		</MaskedView>
 	);
 };
