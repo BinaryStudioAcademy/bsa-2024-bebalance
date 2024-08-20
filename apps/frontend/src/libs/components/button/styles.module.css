@@ -5,11 +5,15 @@
 	margin: 0;
 	font-weight: 700;
 	line-height: 16px;
-	color: #ffffff;
+	color: #000000;
 	text-align: center;
 	cursor: pointer;
-	background-color: #000000;
 	border: none;
 	border-radius: 16px;
 	outline: 0;
+}
+
+.primary {
+	color: #ffffff;
+	background-color: #000000;
 }

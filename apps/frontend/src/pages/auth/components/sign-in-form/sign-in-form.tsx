@@ -1,5 +1,6 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
@@ -77,8 +78,12 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<span className={styles["sign-in__logo"]}>LOGO</span>
 			</div>
 
-			<RippleEffectBg className={styles["ripple-effect__background1"]} />
-			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+			<RippleEffectBg
+				className={getValidClassNames("ripple-effect__background1", styles)}
+			/>
+			<RippleEffectBg2
+				className={getValidClassNames("ripple-effect__background2", styles)}
+			/>
 
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />

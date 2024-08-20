@@ -1,13 +1,11 @@
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
-
 type Properties = {
-	className: string | undefined;
+	className: string;
 };
 
 const RippleEffectBg = ({ className }: Properties) => {
 	return (
 		<svg
-			className={getValidClassNames(className)}
+			className={className}
 			fill="none"
 			viewBox="0 0 529 316"
 			xmlns="http://www.w3.org/2000/svg"

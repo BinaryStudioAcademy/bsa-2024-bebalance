@@ -3,17 +3,20 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	className?: string;
+	isPrimary?: boolean;
 	label: string;
 	type?: "button" | "submit";
 };
 
 const Button: React.FC<Properties> = ({
-	className,
+	isPrimary = true,
 	label,
 	type = "button",
 }: Properties) => (
-	<button className={getValidClassNames(styles["btn"], className)} type={type}>
+	<button
+		className={getValidClassNames(`btn ${isPrimary ? "primary" : ""}`, styles)}
+		type={type}
+	>
 		{label}
 	</button>
 );
