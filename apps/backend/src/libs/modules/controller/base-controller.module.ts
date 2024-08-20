@@ -37,26 +37,25 @@ class BaseController implements Controller {
 	private mapRequest(
 		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
 	): APIHandlerOptions {
-		const { body, headers, params, query, userPayload } = request;
+		const { body, headers, params, query, user } = request;
 
 		return {
 			body,
 			headers,
 			params,
 			query,
-			userPayload,
+			user,
 		};
 	}
 
 	public addRoute(options: ControllerRouteParameters): void {
-		const { handler, path, preHandler } = options;
+		const { handler, path } = options;
 		const fullPath = this.apiUrl + path;
 
 		this.routes.push({
 			...options,
 			handler: (request, reply) => this.mapHandler(handler, request, reply),
 			path: fullPath,
-			...(preHandler && { preHandler }),
 		});
 	}
 }

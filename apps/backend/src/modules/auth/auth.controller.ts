@@ -6,7 +6,6 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { tokenVerificationMiddleware } from "~/libs/modules/middleware/middleware.js";
 import {
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
@@ -41,12 +40,11 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.getAuthenticatedUser(
 					options as APIHandlerOptions<{
-						userPayload: { id: number };
+						user: { id: number };
 					}>,
 				),
 			method: "GET",
 			path: AuthApiPath.AUTHENTICATED_USER,
-			preHandler: tokenVerificationMiddleware,
 		});
 	}
 
@@ -68,12 +66,12 @@ class AuthController extends BaseController {
 	 */
 	private async getAuthenticatedUser(
 		options: APIHandlerOptions<{
-			userPayload: { id: number };
+			user: { id: number };
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.authService.getAuthenticatedUser(
-				options.userPayload?.id as number,
+				options.user?.id as number,
 			),
 			status: HTTPCode.OK,
 		};
