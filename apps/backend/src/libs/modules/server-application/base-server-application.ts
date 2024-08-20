@@ -5,7 +5,7 @@ import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { APIPath, ServerErrorType } from "~/libs/enums/enums.js";
+import { ServerErrorType } from "~/libs/enums/enums.js";
 import { type ValidationError } from "~/libs/exceptions/exceptions.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { type Database } from "~/libs/modules/database/database.js";
@@ -18,6 +18,7 @@ import {
 	type ValidationSchema,
 } from "~/libs/types/types.js";
 
+import { WHITE_ROUTES } from "./libs/constants/constants.js";
 import {
 	type ServerApplication,
 	type ServerApplicationApi,
@@ -208,8 +209,8 @@ class BaseServerApplication implements ServerApplication {
 				});
 
 				await this.app.register(authPlugin, {
-					excludedRoutePrefixes: [APIPath.AUTH],
-					tokenVerifier: (token) => Promise.resolve({ token }),
+					tokenVerifier: (token) => Promise.resolve(token),
+					whiteRoutes: WHITE_ROUTES,
 				});
 			}),
 		);

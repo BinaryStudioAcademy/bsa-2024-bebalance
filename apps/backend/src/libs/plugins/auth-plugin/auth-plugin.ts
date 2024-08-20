@@ -4,15 +4,15 @@ import { HTTPCode, HTTPHeader } from "~/libs/modules/http/http.js";
 import { ServerHooks } from "~/libs/plugins/libs/enums/enums.js";
 
 type PluginOptions = {
-	excludedRoutePrefixes?: string[];
 	tokenVerifier: (token: string) => Promise<unknown>;
+	whiteRoutes?: string[];
 };
 
 const authPlugin = fp<PluginOptions>(
-	(app, { excludedRoutePrefixes = [], tokenVerifier }) => {
+	(app, { tokenVerifier, whiteRoutes = [] }) => {
 		app.addHook(ServerHooks.PRE_HANDLER, async (request, reply) => {
-			const whiteRoute = excludedRoutePrefixes.find((route) =>
-				request.url.startsWith(route),
+			const whiteRoute = whiteRoutes.find(
+				(route) => request.routeOptions.url === route,
 			);
 
 			if (whiteRoute) {
