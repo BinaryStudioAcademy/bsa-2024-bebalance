@@ -69,10 +69,6 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					/>
 
 					<Button label="SIGN IN" type="submit" />
-
-					<Link className={styles["sign-in__form-link"]} to={"/sign-in"}>
-						Forgot password?
-					</Link>
 				</form>
 			</div>
 
