@@ -45,15 +45,15 @@
 	font-family: var(--nunito-font);
 	font-size: 16px;
 	font-weight: 700;
-	color: var(--white-color);
+	color: var(--white);
 	border: none;
 	border-radius: 32px;
 }
 
 .btn-dark {
-	background-color: var(--black-color);
+	background-color: var(--black);
 }
 
 .btn:disabled {
-	background-color: var(--disable-color);
+	background-color: var(--disable);
 }

@@ -1,17 +1,15 @@
 :root {
-	--primary-gradient: linear-gradient(
-		325deg,
-		hsl(184deg 100% 50%) 0%,
-		hsl(209deg 100% 50%) 100%
-	);
+	--background: #76acec;
+	--white: #ffffff;
+	--black: #000000;
+	--disable: #e0e0e0;
+	--nunito-font: "Nunito", sans-serif;
+	--light-blue: #b4d6ff;
+	--light-brand: #00f0ff;
+	--brand: #0085ff;
 	--pink-gradient: linear-gradient(
 		325deg,
 		hsl(338deg 100% 67%) 0%,
 		hsl(299deg 100% 72%) 100%
 	);
-	--blue-background: #76acec;
-	--black-color: #000000;
-	--white-color: #ffffff;
-	--disable-color: #e0e0e0;
-	--nunito-font: "Nunito", sans-serif;
 }

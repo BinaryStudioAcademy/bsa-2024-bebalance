@@ -2,7 +2,7 @@
 	display: flex;
 	width: 100vw;
 	height: 100vh;
-	background-color: var(--blue-background);
+	background-color: var(--background);
 }
 
 .form-container {
