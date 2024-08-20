@@ -1,9 +1,10 @@
-import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 
 import { type AppRoute } from "~/libs/enums/enums.js";
-import { type LinkType, type ValueOf } from "~/libs/types/types.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
+import { type LinkType } from "./libs/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -13,7 +14,10 @@ type Properties = {
 };
 
 const Link: React.FC<Properties> = ({ children, to, type }: Properties) => (
-	<NavLink className={clsx(styles["link"], type && styles[type])} to={to}>
+	<NavLink
+		className={getValidClassNames(styles["link"], type && styles[type])}
+		to={to}
+	>
 		{children}
 	</NavLink>
 );
