@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
 	bubble: {
-		borderRadius: 100,
+		borderRadius: 999,
 		position: "absolute",
 	},
 });

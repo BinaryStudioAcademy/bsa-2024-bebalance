@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Background } from "~/libs/components/background/background";
+import { BackgroundWrapper } from "~/libs/components/background-wrapper/background-wrapper";
 import { Button, Link, Text, View } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 
@@ -10,7 +10,7 @@ type Properties = {
 
 const SignInForm: React.FC<Properties> = () => {
 	return (
-		<Background>
+		<BackgroundWrapper>
 			<View>
 				<Text>Sign In</Text>
 				<Button
@@ -21,7 +21,7 @@ const SignInForm: React.FC<Properties> = () => {
 				/>
 				<Link label="Go to Sign Up" to={`/${RootScreenName.SIGN_UP}`} />
 			</View>
-		</Background>
+		</BackgroundWrapper>
 	);
 };
 
