@@ -1,5 +1,10 @@
 import reactLogo from "~/assets/img/react.svg";
-import { Link, Loader, RouterOutlet } from "~/libs/components/components.js";
+import {
+	Link,
+	Loader,
+	Notification,
+	RouterOutlet,
+} from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -7,7 +12,6 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
-import { ToastNotification } from "~/libs/modules/toast-notification/toast-notification.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
 const App: React.FC = () => {
@@ -60,7 +64,7 @@ const App: React.FC = () => {
 					</ul>
 				</>
 			)}
-			<ToastNotification />
+			<Notification />
 		</>
 	);
 };

@@ -1,8 +1,8 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ToastNotification = () => {
+const Notification = () => {
 	return <ToastContainer />;
 };
 
-export { ToastNotification };
+export { Notification };
