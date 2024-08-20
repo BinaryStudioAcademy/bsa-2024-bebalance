@@ -1,7 +1,8 @@
 import "fastify";
+import { UserDto } from "shared";
 
 declare module "fastify" {
 	interface FastifyRequest {
-		user?: unknown;
+		user?: UserDto;
 	}
 }
