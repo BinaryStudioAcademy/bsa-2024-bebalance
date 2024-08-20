@@ -1,6 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
-import { AuthError } from "~/modules/auth/libs/exceptions/exceptions.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -10,6 +9,7 @@ import {
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
+import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
 	private encrypt: Encrypt;
