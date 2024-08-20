@@ -7,7 +7,7 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
-import { Toast } from "~/libs/modules/toast/toast.js";
+import { ToastNotification } from "~/libs/modules/toast-notification/toast-notification.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
 const App: React.FC = () => {
@@ -60,7 +60,7 @@ const App: React.FC = () => {
 					</ul>
 				</>
 			)}
-			<Toast />
+			<ToastNotification />
 		</>
 	);
 };
