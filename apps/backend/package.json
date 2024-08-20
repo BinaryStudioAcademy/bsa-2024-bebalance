@@ -25,6 +25,7 @@
 		"@fastify/static": "7.0.4",
 		"@fastify/swagger": "8.15.0",
 		"@fastify/swagger-ui": "4.1.0",
+		"bcrypt": "5.1.1",
 		"convict": "6.2.4",
 		"dotenv": "16.4.5",
 		"fastify": "4.28.1",
@@ -37,6 +38,7 @@
 		"swagger-jsdoc": "6.2.8"
 	},
 	"devDependencies": {
+		"@types/bcrypt": "5.0.2",
 		"@types/convict": "6.1.6",
 		"@types/swagger-jsdoc": "6.0.4",
 		"ts-paths-esm-loader": "1.4.3",
