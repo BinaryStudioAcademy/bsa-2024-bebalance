@@ -1,0 +1,1 @@
+export { AuthError } from "shared";
