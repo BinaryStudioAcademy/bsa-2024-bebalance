@@ -1,7 +1,8 @@
 import type { Middleware } from "@reduxjs/toolkit";
 
 import { isRejected } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+
+import { toast } from "~/libs/modules/toast/toast.js";
 
 const handleErrorMiddleware: Middleware = () => {
 	return (next) => (action) => {

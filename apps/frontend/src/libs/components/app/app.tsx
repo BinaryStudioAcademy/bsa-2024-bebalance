@@ -1,6 +1,3 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import reactLogo from "~/assets/img/react.svg";
 import { Link, Loader, RouterOutlet } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
@@ -10,6 +7,7 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
+import { Toast } from "~/libs/modules/toast/toast.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
 const App: React.FC = () => {
@@ -62,7 +60,7 @@ const App: React.FC = () => {
 					</ul>
 				</>
 			)}
-			<ToastContainer />
+			<Toast />
 		</>
 	);
 };
