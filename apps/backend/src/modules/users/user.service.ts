@@ -4,8 +4,8 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
+	type UserDto,
 	type UserGetAllResponseDto,
-	type UserGetOneResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
@@ -52,9 +52,7 @@ class UserService implements Service {
 		};
 	}
 
-	public async findByEmail(
-		email: string,
-	): Promise<null | UserGetOneResponseDto> {
+	public async findByEmail(email: string): Promise<null | UserDto> {
 		const item = await this.userRepository.findByEmail(email);
 		return item ? item.toObject() : null;
 	}
