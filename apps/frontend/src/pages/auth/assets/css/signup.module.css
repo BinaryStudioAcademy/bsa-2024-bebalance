@@ -27,33 +27,9 @@
 	font-weight: 600;
 }
 
-.auth-info .link-info {
-	color: #00c2fc;
-	text-decoration: none;
-}
-
 .input-groups {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 	margin: 24px 0;
-}
-
-.btn {
-	width: 100%;
-	padding: 10px 0;
-	font-family: var(--nunito-font);
-	font-size: 16px;
-	font-weight: 700;
-	color: var(--white);
-	border: none;
-	border-radius: 32px;
-}
-
-.btn-dark {
-	background-color: var(--black);
-}
-
-.btn:disabled {
-	background-color: var(--disable);
 }

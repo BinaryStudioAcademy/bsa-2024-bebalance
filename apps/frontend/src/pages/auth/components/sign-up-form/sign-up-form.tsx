@@ -37,7 +37,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
 			<span className={styles["auth-info"]}>
 				Already have an account? Go to
-				<Link className={styles["link-info"]} to={AppRoute.SIGN_IN}>
+				<Link to={AppRoute.SIGN_IN} variant="default">
 					{" "}
 					Log in
 				</Link>
@@ -77,11 +77,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						type="password"
 					/>
 				</div>
-				<Button
-					className={`${styles["btn"] as string} ${styles["btn-dark"] as string}`}
-					label="CREATE AN ACCOUNT"
-					type="submit"
-				/>
+				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
 			</form>
 		</section>
 	);

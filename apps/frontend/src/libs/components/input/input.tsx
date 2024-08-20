@@ -11,21 +11,21 @@ import { useFormController } from "~/libs/hooks/hooks.js";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	isRequired?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	onClick?: (event_: React.BaseSyntheticEvent) => void;
 	placeholder?: string;
-	required?: boolean;
 	type?: "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	isRequired = false,
 	label,
 	name,
 	placeholder = "",
-	required = false,
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
@@ -41,7 +41,7 @@ const Input = <T extends FieldValues>({
 					className={styles["input"]}
 					{...field}
 					placeholder={placeholder}
-					required={required}
+					required={isRequired}
 					type={type}
 				/>
 				{hasError && <span>{error as string}</span>}

@@ -5,18 +5,25 @@ import { type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
 	children: React.ReactNode;
-	className: string | undefined;
 	to: ValueOf<typeof AppRoute>;
+	variant: "default";
 };
+
+import styles from "../css/link.module.css";
 
 const Link: React.FC<Properties> = ({
 	children,
-	className,
 	to,
-}: Properties) => (
-	<NavLink className={className as string} to={to}>
-		{children}
-	</NavLink>
-);
-
+	variant = "default",
+}: Properties) => {
+	const linkClass = "link-" + variant;
+	return (
+		<NavLink
+			className={`${styles["link"] as string} ${styles[linkClass] as string}`}
+			to={to}
+		>
+			{children}
+		</NavLink>
+	);
+};
 export { Link };
