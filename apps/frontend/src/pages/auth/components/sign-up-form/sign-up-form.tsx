@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -7,9 +5,8 @@ import {
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
-import eyeIcon from "~/pages/auth/assets/icons/eye.svg";
-import slashEyeIcon from "~/pages/auth/assets/icons/eye-slash.svg";
 
+import styles from "../../assets/css/signup.module.css";
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
 
 type Properties = {
@@ -29,82 +26,25 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		[handleSubmit, onSubmit],
 	);
 
-	type InputType = {
-		icon: string;
-		type: "password" | "text";
-		value: string;
-	};
-
-	const [passwordData, setPasswordData] = useState<InputType>({
-		icon: slashEyeIcon,
-		type: "password",
-		value: "",
-	});
-
-	const [confirmPasswordData, setConfirmPasswordData] = useState<InputType>({
-		icon: slashEyeIcon,
-		type: "password",
-		value: "",
-	});
-
-	const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-
-	const handleInputChange = useCallback(
-		(event_: React.BaseSyntheticEvent): void => {
-			const { name, value } = event_.target as HTMLInputElement;
-			if (name === "password") {
-				setPasswordData({ ...passwordData, value });
-			} else if (name === "confirmPassword") {
-				setConfirmPasswordData({ ...confirmPasswordData, value });
-			}
-		},
-		[passwordData, confirmPasswordData],
-	);
-
-	const toggleVisibilityPassword = useCallback(
-		(event_: React.BaseSyntheticEvent): void => {
-			event_.stopPropagation();
-			const imgAttribute = (event_.target as HTMLImageElement).dataset["name"];
-			if (imgAttribute == "password") {
-				const newData: InputType =
-					passwordData.icon === slashEyeIcon
-						? { ...passwordData, icon: eyeIcon, type: "text" }
-						: { ...passwordData, icon: slashEyeIcon, type: "password" };
-				setPasswordData(newData);
-			} else if (imgAttribute == "confirmPassword") {
-				const newData: InputType =
-					confirmPasswordData.icon === slashEyeIcon
-						? { ...confirmPasswordData, icon: eyeIcon, type: "text" }
-						: { ...confirmPasswordData, icon: slashEyeIcon, type: "password" };
-				setConfirmPasswordData(newData);
-			}
-		},
-		[passwordData, confirmPasswordData],
-	);
-
-	useEffect(() => {
-		const passwordsMatch = passwordData.value === confirmPasswordData.value;
-		setIsSubmitEnabled(passwordsMatch && passwordData.value !== "");
-	}, [passwordData.value, confirmPasswordData.value]);
-
 	return (
-		<>
-			<div className="logo-container">
-				<div className="circle circle-pink"></div>
+		<section className={styles["signup-container"]}>
+			<div className={styles["logo-container"]}>
+				<div
+					className={`${styles["circle"] as string} ${styles["circle-pink"] as string}`}
+				></div>
 				<h1>LOGO</h1>
 			</div>
-			<h3 className="title-form">CREATE AN ACCOUNT</h3>
-			<span className="auth-info">
+			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
+			<span className={styles["auth-info"]}>
 				Already have an account? Go to
-				<Link className="link-info" to={AppRoute.SIGN_IN}>
+				<Link className={styles["link-info"]} to={AppRoute.SIGN_IN}>
 					{" "}
 					Log in
 				</Link>
 			</span>
 			<form onSubmit={handleFormSubmit}>
-				<div className="input-groups">
+				<div className={styles["input-groups"]}>
 					<Input
-						className="input-container"
 						control={control}
 						errors={errors}
 						label="Name"
@@ -113,7 +53,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						type="text"
 					/>
 					<Input
-						className="input-container"
 						control={control}
 						errors={errors}
 						label="Email"
@@ -122,40 +61,29 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						type="email"
 					/>
 					<Input
-						className="input-container"
-						clickIcon={toggleVisibilityPassword}
 						control={control}
 						errors={errors}
-						hasIcon="true"
-						iconSrc={passwordData.icon}
-						inputChange={handleInputChange}
 						label="Password"
 						name="password"
 						placeholder="password"
-						type={passwordData.type}
+						type="password"
 					/>
 					<Input
-						className="input-container"
-						clickIcon={toggleVisibilityPassword}
 						control={control}
 						errors={errors}
-						hasIcon="true"
-						iconSrc={confirmPasswordData.icon}
-						inputChange={handleInputChange}
 						label="Confirm password"
 						name="confirmPassword"
 						placeholder="confirm password"
-						type={confirmPasswordData.type}
+						type="password"
 					/>
 				</div>
 				<Button
-					className="btn btn-dark"
-					isDisabled={!isSubmitEnabled}
+					className={`${styles["btn"] as string} ${styles["btn-dark"] as string}`}
 					label="CREATE AN ACCOUNT"
 					type="submit"
 				/>
 			</form>
-		</>
+		</section>
 	);
 };
 

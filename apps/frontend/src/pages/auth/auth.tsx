@@ -1,7 +1,6 @@
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
-	// useAppSelector,
 	useCallback,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
@@ -10,14 +9,11 @@ import { type UserSignUpRequestDto } from "~/modules/users/users.js";
 import authIlustrationLeft from "~/pages/auth/assets/img/auth-ilustration-left.svg";
 import authIlustrationRight from "~/pages/auth/assets/img/auth-ilustration-right.svg";
 
-import "./assets/css/auth.css";
+import styles from "./assets/css/auth.module.css";
 import { SignInForm, SignUpForm } from "./components/components.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
-	// const { dataStatus } = useAppSelector(({ auth }) => ({
-	// 	dataStatus: auth.dataStatus,
-	// }));
 	const { pathname } = useLocation();
 
 	const handleSignInSubmit = useCallback((): void => {
@@ -46,19 +42,20 @@ const Auth: React.FC = () => {
 
 	return (
 		<>
-			{/* state: {dataStatus} */}
-			<main className="auth-container">
-				<section className="form-container ">{getScreen(pathname)}</section>
-				<section className="ilustration-container ">
+			<main className={styles["auth-container"]}>
+				<section className={styles["form-container"]}>
+					{getScreen(pathname)}
+				</section>
+				<section className={styles["ilustration-container"]}>
 					<img
 						alt="sky blue ilustation"
-						className="img-left"
+						className={styles["img-left"]}
 						src={authIlustrationLeft}
 					/>
-					<h1 className="title">Logo</h1>
+					<h1 className={styles["title"]}>Logo</h1>
 					<img
 						alt="sky blue ilustation"
-						className="img-right"
+						className={styles["img-right"]}
 						src={authIlustrationRight}
 					/>
 				</section>

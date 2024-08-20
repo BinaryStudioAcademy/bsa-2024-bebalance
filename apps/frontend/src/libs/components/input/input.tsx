@@ -5,35 +5,27 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
-import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
+import styles from "~/libs/components/css/input.module.css";
+import { useFormController } from "~/libs/hooks/hooks.js";
 
 type Properties<T extends FieldValues> = {
-	className: string;
-	clickIcon?: (event_: React.BaseSyntheticEvent) => void;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
-	hasIcon?: string;
-	iconSrc?: string;
-	inputChange?: (event_: React.BaseSyntheticEvent) => void;
 	label: string;
 	name: FieldPath<T>;
+	onClick?: (event_: React.BaseSyntheticEvent) => void;
 	placeholder?: string;
-	required?: string;
+	required?: boolean;
 	type?: "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
-	className,
-	clickIcon,
 	control,
 	errors,
-	hasIcon,
-	iconSrc,
-	inputChange,
 	label,
 	name,
 	placeholder = "",
-	required,
+	required = false,
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
@@ -41,39 +33,18 @@ const Input = <T extends FieldValues>({
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
 
-	const handleChange = useCallback(
-		(event: React.BaseSyntheticEvent) => {
-			field.onChange(event);
-			if (inputChange) {
-				inputChange(event);
-			}
-		},
-		[field, inputChange],
-	);
-
 	return (
-		<label className={className}>
-			<span className="label">{label}</span>
-			<div className="input-content">
+		<label className={styles["input-container"]}>
+			<span className={styles["label"]}>{label}</span>
+			<div className={styles["input-content"]}>
 				<input
-					className="input"
+					className={styles["input"]}
 					{...field}
-					onChange={handleChange}
 					placeholder={placeholder}
-					required={Boolean(required) || true}
+					required={required}
 					type={type}
 				/>
 				{hasError && <span>{error as string}</span>}
-				{Boolean(hasIcon) && (
-					<button
-						className="btn-icon"
-						name={name}
-						onClick={clickIcon}
-						type="button"
-					>
-						<img alt="" data-name={name} src={iconSrc} />
-					</button>
-				)}
 			</div>
 		</label>
 	);

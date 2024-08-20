@@ -1,0 +1,59 @@
+.signup-container {
+	font-family: var(--nunito-font);
+}
+
+.signup-container .logo-container {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.circle {
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+}
+
+.circle-pink {
+	background: var(--pink-gradient);
+}
+
+.title-form {
+	font-weight: 700;
+}
+
+.signup-container .auth-info {
+	font-family: inherit;
+	font-weight: 600;
+}
+
+.auth-info .link-info {
+	color: #00c2fc;
+	text-decoration: none;
+}
+
+.input-groups {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin: 24px 0;
+}
+
+.btn {
+	width: 100%;
+	padding: 10px 0;
+	font-family: var(--nunito-font);
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--white-color);
+	border: none;
+	border-radius: 32px;
+}
+
+.btn-dark {
+	background-color: var(--black-color);
+}
+
+.btn:disabled {
+	background-color: var(--disable-color);
+}

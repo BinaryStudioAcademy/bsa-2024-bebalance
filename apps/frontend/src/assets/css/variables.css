@@ -10,6 +10,8 @@
 		hsl(299deg 100% 72%) 100%
 	);
 	--blue-background: #76acec;
-	--dark: #000000;
+	--black-color: #000000;
+	--white-color: #ffffff;
+	--disable-color: #e0e0e0;
 	--nunito-font: "Nunito", sans-serif;
 }

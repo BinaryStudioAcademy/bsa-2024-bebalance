@@ -5,7 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
 	children: React.ReactNode;
-	className: string;
+	className: string | undefined;
 	to: ValueOf<typeof AppRoute>;
 };
 
@@ -14,7 +14,7 @@ const Link: React.FC<Properties> = ({
 	className,
 	to,
 }: Properties) => (
-	<NavLink className={className} to={to}>
+	<NavLink className={className as string} to={to}>
 		{children}
 	</NavLink>
 );
