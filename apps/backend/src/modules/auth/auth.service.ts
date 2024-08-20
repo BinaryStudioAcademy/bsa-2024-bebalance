@@ -1,8 +1,14 @@
+import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
+import { token } from "~/libs/modules/token/token.js";
 import {
+	type UserSignInRequestDto,
+	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
+
+import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
 	private userService: UserService;
@@ -11,10 +17,31 @@ class AuthService {
 		this.userService = userService;
 	}
 
-	public signUp(
+	public async signIn(
+		userRequestDto: UserSignInRequestDto,
+	): Promise<UserSignInResponseDto> {
+		const { email } = userRequestDto;
+		const user = await this.userService.findByEmail(email);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		const jwtToken = await token.createToken({ userId: user.id });
+
+		return { token: jwtToken, user };
+	}
+
+	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
-		return this.userService.create(userRequestDto);
+	): Promise<UserSignInResponseDto> {
+		const user = await this.userService.create(userRequestDto);
+		const jwtToken = await token.createToken({ userId: user.id });
+
+		return { token: jwtToken, user };
 	}
 }
 

@@ -2,10 +2,10 @@ import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
+import { UserDto } from "./libs/types/types.js";
 import {
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
@@ -15,9 +15,7 @@ class UserService implements Service {
 		this.userRepository = userRepository;
 	}
 
-	public async create(
-		payload: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
+	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const item = await this.userRepository.create(
 			UserEntity.initializeNew({
 				email: payload.email,
@@ -43,6 +41,12 @@ class UserService implements Service {
 		return {
 			items: items.map((item) => item.toObject()),
 		};
+	}
+
+	public async findByEmail(email: string): Promise<null | UserDto> {
+		const user = await this.userRepository.findByEmail(email);
+
+		return user ? user.toObject() : null;
 	}
 
 	public update(): ReturnType<Service["update"]> {
