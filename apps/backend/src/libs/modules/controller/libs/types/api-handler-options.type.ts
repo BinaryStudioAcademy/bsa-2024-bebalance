@@ -3,6 +3,7 @@ type DefaultApiHandlerOptions = {
 	headers?: unknown;
 	params?: unknown;
 	query?: unknown;
+	userPayload?: unknown;
 };
 
 type APIHandlerOptions<
@@ -12,6 +13,7 @@ type APIHandlerOptions<
 	headers: T["headers"];
 	params: T["params"];
 	query: T["query"];
+	userPayload?: T["userPayload"];
 };
 
 export { type APIHandlerOptions };

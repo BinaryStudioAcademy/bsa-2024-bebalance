@@ -1,7 +1,10 @@
-import * as jose from "jose";
-import { createSecretKey } from "node:crypto";
-import { HTTPCode, HTTPError } from "shared";
-
+import { ErrorMessage } from "~/libs/enums/enums.js";
+import {
+	AuthError,
+	HTTPCode,
+	HTTPError,
+	ServerError,
+} from "~/libs/modules/http/http.js";
 import {
 	type UserGetOneResponseDto,
 	type UserSignUpRequestDto,
@@ -17,45 +20,14 @@ class AuthService {
 	}
 
 	public async getAuthenticatedUser(
-		authentication: string,
+		userId: number,
 	): Promise<UserGetOneResponseDto> {
 		try {
-			if (!authentication) {
-				throw new HTTPError({
-					cause: "No authentication token provided",
-					message: "Unauthorized",
-					status: HTTPCode.UNATHORIZED,
-				});
-			}
-			const [scheme, token] = authentication.split(" ");
-			if (scheme !== "Bearer" || !token) {
-				throw new HTTPError({
-					cause: "Invalid authentication scheme",
-					message: "Unauthorized",
-					status: HTTPCode.UNATHORIZED,
-				});
-			}
-			const secretKey = createSecretKey(
-				process.env["JWT_SECRET_KEY"] as string,
-				"utf8",
-			);
-			let payload: { id: number } | jose.JWTPayload;
-			try {
-				const verifiedToken = await jose.jwtVerify(token, secretKey);
-				payload = verifiedToken.payload;
-			} catch {
-				throw new HTTPError({
-					cause: "Invalid or expired token",
-					message: "Unauthorized",
-					status: HTTPCode.UNATHORIZED,
-				});
-			}
-			const user = await this.userService.find(payload["id"] as number);
+			const user = await this.userService.find(userId);
 			if (!user) {
-				throw new HTTPError({
+				throw new AuthError({
 					cause: "Invalid credentials",
-					message: "Unauthorized",
-					status: HTTPCode.UNATHORIZED,
+					message: ErrorMessage.UNAUTHORIZED,
 				});
 			}
 			return user;
@@ -63,15 +35,15 @@ class AuthService {
 			if (error instanceof HTTPError) {
 				throw error;
 			} else if (error instanceof Error) {
-				throw new HTTPError({
+				throw new ServerError({
 					cause: error.message,
-					message: "Internal Server Error",
+					message: ErrorMessage.INTERNAL_SERVER_ERROR,
 					status: HTTPCode.INTERNAL_SERVER_ERROR,
 				});
 			} else {
-				throw new HTTPError({
+				throw new ServerError({
 					cause: "Unknown error occurred",
-					message: "Internal Server Error",
+					message: ErrorMessage.INTERNAL_SERVER_ERROR,
 					status: HTTPCode.INTERNAL_SERVER_ERROR,
 				});
 			}
