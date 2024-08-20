@@ -43,7 +43,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 					},
 					{
 						element: <NotFound />,
-						path: "*",
+						path: AppRoute.ANY,
 					},
 				]}
 			/>
