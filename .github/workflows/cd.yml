@@ -10,7 +10,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - apps/mobile/*.*
+      - apps/mobile/**/*.*
   workflow_dispatch:
 
 concurrency:
@@ -36,7 +36,6 @@ jobs:
         with:
           manifest-file: .release-please-manifest.json
           config-file: release-please-config.json
-          release-type: node
 
   deploy:
     needs: release
