@@ -1,7 +1,10 @@
 :root {
 	--background: #76acec;
+	--black: #000000;
+	--brand: #0085ff;
+	--error: #df1c3d;
 	--light-blue: #b4d6ff;
 	--light-brand: #00f0ff;
-	--brand: #0085ff;
+	--light-gray: #e0e0e0;
 	--white: #ffffff;
 }

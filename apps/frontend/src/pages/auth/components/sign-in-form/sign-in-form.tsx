@@ -44,7 +44,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						<span className={styles["sign-in__form-header-sub-text"]}>
 							No account? Go to{" "}
 							<Link
-								className={styles["sign-in__form-link"]}
+								className={getValidClassNames("sign-in__form-link", styles)}
 								to={AppRoute.SIGN_UP}
 							>
 								Create an Account

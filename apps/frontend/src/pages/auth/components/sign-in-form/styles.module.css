@@ -6,7 +6,7 @@
 	height: 100dvh;
 	padding: 15px;
 	overflow: hidden;
-	background-color: #76acec;
+	background-color: var(--background);
 }
 
 .sign-in__form-container {
@@ -14,7 +14,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: white;
+	background-color: var(--white);
 	border-radius: 20px;
 }
 
@@ -76,7 +76,7 @@
 .sign-in__logo {
 	font-size: 40px;
 	font-weight: bold;
-	color: #ffffff;
+	color: var(--white);
 }
 
 .ripple-effect__background1 {
