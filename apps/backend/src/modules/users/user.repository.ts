@@ -60,8 +60,7 @@ class UserRepository implements Repository {
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
-			.execute();
+			.withGraphFetched(RelationName.USER_DETAILS);
 
 		return users.map((user) =>
 			UserEntity.initialize({
@@ -81,8 +80,7 @@ class UserRepository implements Repository {
 			.query()
 			.withGraphFetched(RelationName.USER_DETAILS)
 			.where({ email })
-			.first()
-			.execute();
+			.first();
 		return user
 			? UserEntity.initialize({
 					createdAt: user.createdAt,
