@@ -1,10 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import {
-	AuthError,
-	HTTPCode,
-	HTTPError,
-	ServerError,
-} from "~/libs/modules/http/http.js";
+import { HTTPError, ServerError } from "~/libs/modules/http/http.js";
 import {
 	type UserGetOneResponseDto,
 	type UserSignUpRequestDto,
@@ -31,6 +26,7 @@ class AuthService {
 				throw new AuthError({
 					cause: "Invalid credentials",
 					message: ErrorMessage.UNAUTHORIZED,
+					status: HTTPCode.UNAUTHORIZED,
 				});
 			}
 			return user;
@@ -53,7 +49,7 @@ class AuthService {
 		}
 	}
 
-	public signUp(
+	public async signUp(
 		userRequestDto: UserSignUpRequestDto,
 	): Promise<UserSignUpResponseDto> {
 		const { email } = userRequestDto;

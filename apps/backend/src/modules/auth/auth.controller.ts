@@ -40,7 +40,8 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.getAuthenticatedUser(
 					options as APIHandlerOptions<{
-						user: { id: number };
+						// user: { id: number };
+						query: { id: number };
 					}>,
 				),
 			method: "GET",
@@ -52,7 +53,7 @@ class AuthController extends BaseController {
 	 * @swagger
 	 * /auth/authenticated-user:
 	 *   get:
-	 *     description: Return authenticated user object
+	 *     description: Return authenticated user
 	 *     security:
 	 *       - bearerAuth: []
 	 *     responses:
@@ -66,12 +67,14 @@ class AuthController extends BaseController {
 	 */
 	private async getAuthenticatedUser(
 		options: APIHandlerOptions<{
-			user: { id: number };
+			// user: { id: number };
+			query: { id: number };
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.authService.getAuthenticatedUser(
-				options.user?.id as number,
+				// options.user!.id,
+				options.query.id,
 			),
 			status: HTTPCode.OK,
 		};

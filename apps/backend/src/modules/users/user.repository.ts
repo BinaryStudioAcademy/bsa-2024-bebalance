@@ -64,7 +64,15 @@ class UserRepository implements Repository {
 		if (!user) {
 			return null;
 		}
-		return UserEntity.initialize(user);
+		return UserEntity.initialize({
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
 	}
 
 	public async findAll(): Promise<UserEntity[]> {
