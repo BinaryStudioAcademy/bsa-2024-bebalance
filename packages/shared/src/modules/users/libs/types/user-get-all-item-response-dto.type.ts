@@ -1,6 +1,5 @@
-type UserGetAllItemResponseDto = {
-	email: string;
-	id: number;
-};
+import { UserDto } from "./user-dto.type.js";
+
+type UserGetAllItemResponseDto = UserDto;
 
 export { type UserGetAllItemResponseDto };
