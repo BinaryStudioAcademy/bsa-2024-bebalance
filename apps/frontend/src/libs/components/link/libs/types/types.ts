@@ -1,1 +1,1 @@
-export { type LinkType } from "./link-type.type.js";
+export { type LinkType } from "./link.type.js";
