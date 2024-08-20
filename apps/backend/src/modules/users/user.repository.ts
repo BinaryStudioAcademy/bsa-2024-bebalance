@@ -4,6 +4,7 @@ import { type UserModel } from "~/modules/users/user.model.js";
 
 class UserRepository implements Repository {
 	private userModel: typeof UserModel;
+
 	public constructor(userModel: typeof UserModel) {
 		this.userModel = userModel;
 	}
@@ -40,7 +41,16 @@ class UserRepository implements Repository {
 
 	public async findByEmail(email: string): Promise<null | UserEntity> {
 		const user = await this.userModel.query().findOne({ email });
-		return user ? UserEntity.initialize(user) : null;
+		return user
+			? UserEntity.initialize({
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
 	}
 
 	public update(): ReturnType<Repository["update"]> {
