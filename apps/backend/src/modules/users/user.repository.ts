@@ -30,7 +30,7 @@ class UserRepository implements Repository {
 			})
 			.returning("*");
 
-		const details = await this.userDetailsModel
+		const userDetails = await this.userDetailsModel
 			.query()
 			.insert({
 				name,
@@ -42,7 +42,7 @@ class UserRepository implements Repository {
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
-			name: details.name,
+			name: userDetails.name,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
