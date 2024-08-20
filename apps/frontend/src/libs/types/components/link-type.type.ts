@@ -1,3 +1,3 @@
-type LinkType = "navLink" | "notFoundButton";
+type LinkType = "button" | "navLink";
 
 export { type LinkType };

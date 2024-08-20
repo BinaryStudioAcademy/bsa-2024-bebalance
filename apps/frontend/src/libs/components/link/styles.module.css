@@ -2,21 +2,22 @@
 	text-decoration: none;
 }
 
-.notFoundButton {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 200px;
+.button {
+	display: inline-block;
+	width: 100%;
+	max-width: 322px;
 	height: 42px;
+	padding: 10px 0;
 	font-size: 16px;
 	font-weight: 700;
 	color: var(--white);
+	text-align: center;
 	text-transform: uppercase;
 	background-color: var(--black);
 	border-radius: 35px;
 }
 
-.notFoundButton:hover {
+.button:hover {
 	color: var(--black);
 	background-color: var(--white);
 	border: 1px solid var(--black);
