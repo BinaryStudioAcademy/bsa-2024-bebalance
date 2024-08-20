@@ -79,7 +79,7 @@
 	color: #ffffff;
 }
 
-.svg-background1 {
+.ripple-effect__background1 {
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -88,7 +88,7 @@
 	transform: translateX(-50%);
 }
 
-.svg-background2 {
+.ripple-effect__background2 {
 	position: absolute;
 	bottom: -50%;
 	left: 42%;
@@ -98,7 +98,7 @@
 	transform: translateY(-50%);
 }
 
-.circle-gradiant1 {
+.circle-gradient1 {
 	position: absolute;
 	top: 5%;
 	left: 58%;
@@ -109,7 +109,7 @@
 	transform: translateX(-50%);
 }
 
-.circle-gradiant2 {
+.circle-gradient2 {
 	position: absolute;
 	top: 20%;
 	right: 10%;
@@ -119,7 +119,7 @@
 	border-radius: 50%;
 }
 
-.circle-gradiant3 {
+.circle-gradient3 {
 	position: absolute;
 	right: 10%;
 	bottom: 10%;
