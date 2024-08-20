@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
 
@@ -13,7 +13,7 @@ const Button: React.FC<Properties> = ({
 	label,
 	type = "button",
 }: Properties) => (
-	<button className={clsx(styles["btn"], className)} type={type}>
+	<button className={getValidClassNames(styles["btn"], className)} type={type}>
 		{label}
 	</button>
 );
