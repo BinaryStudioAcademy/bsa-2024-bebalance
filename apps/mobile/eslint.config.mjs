@@ -21,13 +21,9 @@ const mainConfig = {
 const overridesConfigs = [
 	{
 		rules: {
+			"@typescript-eslint/no-require-imports": ["off"],
 			"@typescript-eslint/no-unnecessary-type-parameters": ["off"],
 			"import/extensions": ["off"],
-		},
-	},
-	{
-		rules: {
-			"@typescript-eslint/no-require-imports": ["off"],
 			"unicorn/prefer-module": ["off"],
 		},
 	},
