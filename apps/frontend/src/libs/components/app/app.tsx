@@ -22,10 +22,8 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		if (isRoot) {
-			dispatch(() => {
-				userActions.loadAll();
-				userActions.getAuthenticatedUser();
-			});
+			void dispatch(userActions.loadAll());
+			void dispatch(userActions.getAuthenticatedUser());
 		}
 	}, [isRoot, dispatch]);
 
