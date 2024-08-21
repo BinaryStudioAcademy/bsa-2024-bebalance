@@ -13,6 +13,8 @@ import { store } from "~/libs/modules/store/store.js";
 import { Auth } from "~/pages/auth/auth.jsx";
 import { NotFound } from "~/pages/not-found/not-found.jsx";
 
+import { MyWheel } from "./pages/my-wheel/my-wheel.js";
+
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
 		<StoreProvider store={store.instance}>
@@ -23,7 +25,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component={"Root"}
+										component={<MyWheel />}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
