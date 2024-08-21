@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types";
-import { type UserGetAllResponseDto } from "~/packages/users/users";
+import {
+	type UserGetAllItemResponseDto,
+	type UserGetAllResponseDto,
+} from "~/packages/users/users";
 
 import { name as sliceName } from "./users.slice";
 
@@ -15,4 +18,14 @@ const loadAll = createAsyncThunk<
 	return userApi.getAll();
 });
 
-export { loadAll };
+const getAuthenticatedUser = createAsyncThunk<
+	UserGetAllItemResponseDto,
+	number,
+	AsyncThunkConfig
+>(`${sliceName}/get-authenticated-user`, async (userId, { extra }) => {
+	const { userApi } = extra;
+
+	return await userApi.getAuthenticatedUser(userId);
+});
+
+export { getAuthenticatedUser, loadAll };

@@ -4,7 +4,10 @@ import { type HTTP } from "~/libs/packages/http/http";
 import { type Storage } from "~/libs/packages/storage/storage";
 
 import { UsersApiPath } from "./libs/enums/enums";
-import { type UserGetAllResponseDto } from "./libs/types/types";
+import {
+	type UserGetAllItemResponseDto,
+	type UserGetAllResponseDto,
+} from "./libs/types/types";
 
 type Constructor = {
 	baseUrl: string;
@@ -28,6 +31,23 @@ class UserApi extends BaseHttpApi {
 		);
 
 		return await response.json<UserGetAllResponseDto>();
+	}
+
+	public async getAuthenticatedUser(
+		userId: number,
+	): Promise<UserGetAllItemResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.AUTHENTICATED_USER, {
+				id: userId.toString(),
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "GET",
+			},
+		);
+
+		return await response.json<UserGetAllItemResponseDto>();
 	}
 }
 

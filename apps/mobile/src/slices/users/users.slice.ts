@@ -4,15 +4,17 @@ import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type UserGetAllItemResponseDto } from "~/packages/users/users";
 
-import { loadAll } from "./actions";
+import { getAuthenticatedUser, loadAll } from "./actions";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	user: null | UserGetAllItemResponseDto;
 	users: UserGetAllItemResponseDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	user: null,
 	users: [],
 };
 
@@ -27,6 +29,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(loadAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
+			state.user = action.payload;
 		});
 	},
 	initialState,
