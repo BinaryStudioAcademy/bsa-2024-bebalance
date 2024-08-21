@@ -14,12 +14,10 @@ import {
 	sizeToStyleMap,
 } from "./libs/maps/maps";
 
-type Preset = "default" | "heading" | "subheading";
-
 type Properties = {
 	children: ReactNode;
 	color?: ValueOf<typeof BaseColor>;
-	preset?: Preset;
+	preset?: keyof typeof presetToStyleMap;
 	size?: keyof typeof sizeToStyleMap;
 	style?: StyleProp<TextStyle>;
 	weight?: keyof typeof fontWeightToFamilyMap;
