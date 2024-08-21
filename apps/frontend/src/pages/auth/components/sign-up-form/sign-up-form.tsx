@@ -1,13 +1,14 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { AppRoute } from "~/libs/enums/enums.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import styles from "../../assets/css/signup.module.css";
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import styles from "./style.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;
@@ -30,17 +31,17 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		<section className={styles["signup-container"]}>
 			<div className={styles["logo-container"]}>
 				<div
-					className={`${styles["circle"] as string} ${styles["circle-pink"] as string}`}
+					className={getValidClassNames(
+						styles["circle"],
+						styles["circle-pink"],
+					)}
 				></div>
 				<h1>LOGO</h1>
 			</div>
 			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
 			<span className={styles["auth-info"]}>
 				Already have an account? Go to
-				<Link to={AppRoute.SIGN_IN} variant="default">
-					{" "}
-					Log in
-				</Link>
+				<Link to={AppRoute.SIGN_IN}> Log in</Link>
 			</span>
 			<form onSubmit={handleFormSubmit}>
 				<div className={styles["input-groups"]}>
@@ -66,14 +67,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						label="Password"
 						name="password"
 						placeholder="password"
-						type="password"
-					/>
-					<Input
-						control={control}
-						errors={errors}
-						label="Confirm password"
-						name="confirmPassword"
-						placeholder="confirm password"
 						type="password"
 					/>
 				</div>

@@ -12,8 +12,8 @@ import {
 import authIlustrationLeft from "~/pages/auth/assets/img/auth-ilustration-left.svg";
 import authIlustrationRight from "~/pages/auth/assets/img/auth-ilustration-right.svg";
 
-import styles from "./assets/css/auth.module.css";
 import { SignInForm, SignUpForm } from "./components/components.js";
+import styles from "./style.module.css";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
