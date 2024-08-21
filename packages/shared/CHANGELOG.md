@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.2.0...shared-v1.3.0) (2024-08-21)
+
+
+### Features
+
+* authorization token (JWT) bb-10 ([#40](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/40)) ([16e3c35](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16e3c353ff700ab27a7b6af4fa7b3c17059cc916))
+
 ## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.1.0...shared-v1.2.0) (2024-08-21)
 
 
