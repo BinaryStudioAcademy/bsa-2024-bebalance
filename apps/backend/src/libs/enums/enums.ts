@@ -1,1 +1,7 @@
-export { APIPath, AppEnvironment, ErrorMessage, ServerErrorType } from "shared";
+export {
+	APIPath,
+	AppEnvironment,
+	AuthApiPath,
+	ErrorMessage,
+	ServerErrorType,
+} from "shared";

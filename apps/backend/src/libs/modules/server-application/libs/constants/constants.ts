@@ -1,4 +1,4 @@
-import { APIPath, AuthApiPath } from "shared";
+import { APIPath, AuthApiPath } from "~/libs/enums/enums.js";
 
 const WHITE_ROUTES: string[] = [
 	APIPath.AUTH,

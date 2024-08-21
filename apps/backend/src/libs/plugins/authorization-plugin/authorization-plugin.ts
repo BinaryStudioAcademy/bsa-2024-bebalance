@@ -37,7 +37,7 @@ const authorizationPlugin = fp<PluginOptions>(
 					payload: { userId },
 				} = await token.decode(header);
 
-				const user = await userService.findById(userId.toString());
+				const user = await userService.findById(userId);
 
 				if (!user) {
 					throw new AuthError({ message: "User not found" });
