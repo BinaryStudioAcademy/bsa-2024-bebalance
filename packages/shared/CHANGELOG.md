@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.3.0...shared-v1.4.0) (2024-08-21)
+
+
+### Features
+
+* impl protected routing bb-11 ([#50](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/50)) ([5f2c71c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5f2c71ccfd1dd50f4a894d1ab391690b674ab2eb))
+
 ## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.2.0...shared-v1.3.0) (2024-08-21)
 
 

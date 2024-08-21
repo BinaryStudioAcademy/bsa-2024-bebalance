@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.3.0...frontend-v1.4.0) (2024-08-21)
+
+
+### Features
+
+* sign in screen - mobile responsiveness bb-61 ([#78](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/78)) ([f8b36f2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f8b36f25d71b15d0be03091bdae04b0f664b6ede))
+
 ## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.2.0...frontend-v1.3.0) (2024-08-21)
 
 
