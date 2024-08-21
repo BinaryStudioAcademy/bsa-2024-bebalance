@@ -1,13 +1,12 @@
 import fp from "fastify-plugin";
 
-import { AuthError } from "~/libs/exceptions/exceptions.js";
 import { HTTPHeader } from "~/libs/modules/http/http.js";
 import { BaseToken } from "~/libs/modules/token/base-token.module.js";
 import { ServerHooks } from "~/libs/plugins/libs/enums/enums.js";
 import { TokenPayload } from "~/libs/types/types.js";
 import { UserService } from "~/modules/users/user.service.js";
 
-import { ErrorMessage } from "./libs/types/enums/enums.js";
+import { AuthError, ErrorMessage } from "./libs/types/enums/enums.js";
 
 type PluginOptions = {
 	token: BaseToken<TokenPayload>;
