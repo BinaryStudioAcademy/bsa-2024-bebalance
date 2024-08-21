@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.0.0...frontend-v1.1.0) (2024-08-21)
+
+
+### Features
+
+* added color variables to varibles.css bb-52 ([#93](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/93)) ([1544930](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1544930f5ce7736753d6dd5af0c8383b12dcb1e9))
+
 ## 1.0.0 (2024-08-20)
 
 
