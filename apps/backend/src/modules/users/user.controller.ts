@@ -1,13 +1,7 @@
 import { APIPath } from "~/libs/enums/enums.js";
-import {
-	type APIHandlerResponse,
-	BaseController,
-} from "~/libs/modules/controller/controller.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
+import { BaseController } from "~/libs/modules/controller/controller.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserService } from "~/modules/users/user.service.js";
-
-import { UsersApiPath } from "./libs/enums/enums.js";
 
 /*** @swagger
  * components:
@@ -30,12 +24,6 @@ class UserController extends BaseController {
 		super(logger, APIPath.USERS);
 
 		this.userService = userService;
-
-		this.addRoute({
-			handler: () => this.findAll(),
-			method: "GET",
-			path: UsersApiPath.ROOT,
-		});
 	}
 
 	/**
@@ -53,12 +41,12 @@ class UserController extends BaseController {
 	 *                items:
 	 *                  $ref: "#/components/schemas/User"
 	 */
-	private async findAll(): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.userService.findAll(),
-			status: HTTPCode.OK,
-		};
-	}
+	// private async findAll(): Promise<APIHandlerResponse> {
+	// 	return {
+	// 		payload: await this.userService.findAll(),
+	// 		status: HTTPCode.OK,
+	// 	};
+	// }
 }
 
 export { UserController };

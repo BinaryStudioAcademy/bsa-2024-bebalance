@@ -17,17 +17,15 @@ import { actions as userActions } from "~/modules/users/users.js";
 const App: React.FC = () => {
 	const { pathname } = useLocation();
 	const dispatch = useAppDispatch();
-	const { dataStatus, user, users } = useAppSelector(({ users }) => ({
+	const { dataStatus, user } = useAppSelector(({ users }) => ({
 		dataStatus: users.dataStatus,
 		user: users.user,
-		users: users.users,
 	}));
 
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
 		if (isRoot) {
-			void dispatch(userActions.loadAll());
 			void dispatch(userActions.getAuthenticatedUser());
 		}
 	}, [isRoot, dispatch]);
@@ -59,11 +57,6 @@ const App: React.FC = () => {
 				<>
 					<h2>Users: {user?.email}</h2>
 					<h3>Status: {dataStatus}</h3>
-					<ul>
-						{users.map((user) => (
-							<li key={user.id}>{user.email}</li>
-						))}
-					</ul>
 				</>
 			)}
 			<Notification />

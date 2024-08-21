@@ -57,24 +57,6 @@ class UserRepository implements Repository {
 		return Promise.resolve(null);
 	}
 
-	public async findAll(): Promise<UserEntity[]> {
-		const users = await this.userModel
-			.query()
-			.withGraphFetched(RelationName.USER_DETAILS);
-
-		return users.map((user) =>
-			UserEntity.initialize({
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.userDetails.name,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-			}),
-		);
-	}
-
 	public async findByEmail(email: string): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
