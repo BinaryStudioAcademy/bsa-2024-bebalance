@@ -1,8 +1,11 @@
 import React, { ComponentProps } from "react";
 
-import { Text, View } from "~/libs/components/components";
-import { LinearGradient } from "~/libs/components/linear-gradient";
-import { MaskedView } from "~/libs/components/masked-view";
+import {
+	LinearGradient,
+	MaskedView,
+	Text,
+	View,
+} from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
 import { type LinearGradientProps } from "~/libs/types/types";
 

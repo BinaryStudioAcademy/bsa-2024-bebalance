@@ -1,8 +1,12 @@
 import React from "react";
 
-import { Pressable, Text, View } from "~/libs/components/components";
-import { GradientText } from "~/libs/components/gradient-text";
-import { LinearGradient } from "~/libs/components/linear-gradient";
+import {
+	GradientText,
+	LinearGradient,
+	Pressable,
+	Text,
+	View,
+} from "~/libs/components/components";
 import { BaseColor, GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
