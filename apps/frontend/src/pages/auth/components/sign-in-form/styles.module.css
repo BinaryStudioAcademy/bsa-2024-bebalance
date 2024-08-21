@@ -128,23 +128,23 @@
 }
 
 @media (width <= 640px) {
-	.sign-in__logo-container {
+	.logo-container {
 		display: none;
 	}
 
-	.sign-in__container {
+	.container {
 		grid-template-columns: 1fr;
 		padding-top: 100px;
 		padding-bottom: 60px;
 	}
 
-	.sign-in__form-container {
+	.form-container {
 		align-items: flex-start;
 		justify-content: stretch;
 		padding-top: 60px;
 	}
 
-	.sign-in__form {
+	.form {
 		align-items: stretch;
 		min-width: 100%;
 	}
