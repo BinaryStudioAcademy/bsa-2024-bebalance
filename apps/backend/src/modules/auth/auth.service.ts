@@ -1,5 +1,6 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -33,6 +34,10 @@ class AuthService {
 			});
 		}
 
+		const userDetails = user.toObject();
+
+		const jwtToken = await token.createToken({ userId: userDetails.id });
+
 		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
 			password,
@@ -47,7 +52,7 @@ class AuthService {
 			});
 		}
 
-		return user.toObject();
+		return { token: jwtToken, user: userDetails };
 	}
 
 	public async signUp(
@@ -63,7 +68,11 @@ class AuthService {
 			});
 		}
 
-		return await this.userService.create(userRequestDto);
+		const user = await this.userService.create(userRequestDto);
+
+		const jwtToken = await token.createToken({ userId: user.id });
+
+		return { token: jwtToken, user };
 	}
 }
 
