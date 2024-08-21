@@ -35,7 +35,9 @@ class AuthService {
 			});
 		}
 
-		const userDto = user.toObject();
+		const userDetails = user.toObject();
+
+		const jwtToken = await token.createToken({ userId: userDetails.id });
 
 		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
@@ -51,9 +53,7 @@ class AuthService {
 			});
 		}
 
-		const jwtToken = await token.createToken({ userId: userDto.id });
-
-		return { token: jwtToken, user: userDto };
+		return { token: jwtToken, user: userDetails };
 	}
 
 	public async signUp(
@@ -70,6 +70,7 @@ class AuthService {
 		}
 
 		const user = await this.userService.create(userRequestDto);
+
 		const jwtToken = await token.createToken({ userId: user.id });
 
 		return { token: jwtToken, user };

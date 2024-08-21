@@ -5,6 +5,7 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import { UserDto } from "./libs/types/types.js";
 import {
+	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
@@ -21,7 +22,7 @@ class UserService implements Service {
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const { hash, salt } = await this.encrypt.encrypt(payload.password);
 
-		const item = await this.userRepository.create(
+		const user = await this.userRepository.create(
 			UserEntity.initializeNew({
 				email: payload.email,
 				name: payload.name,
@@ -30,7 +31,7 @@ class UserService implements Service {
 			}),
 		);
 
-		return item.toObject();
+		return user.toObject();
 	}
 
 	public delete(): ReturnType<Service["delete"]> {
