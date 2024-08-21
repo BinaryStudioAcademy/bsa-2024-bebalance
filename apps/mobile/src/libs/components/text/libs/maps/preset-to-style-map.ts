@@ -1,10 +1,6 @@
 import { type StyleProp, type TextStyle } from "~/libs/types/types";
 
-import {
-	fontWeightToFamilyMap,
-	sizeToStyleMap,
-	textTransformToStyleMap,
-} from "./maps";
+import { fontWeightToFamilyMap, sizeToStyleMap } from "./maps";
 
 const presetToStyleMap: Record<
 	"default" | "heading" | "subheading" | "uppercase",
@@ -13,7 +9,7 @@ const presetToStyleMap: Record<
 	default: [sizeToStyleMap.md, fontWeightToFamilyMap.regular],
 	heading: [sizeToStyleMap.xxl, fontWeightToFamilyMap.bold],
 	subheading: [sizeToStyleMap.lg, fontWeightToFamilyMap.semiBold],
-	uppercase: [textTransformToStyleMap.uppercase],
+	uppercase: { textTransform: "uppercase" } satisfies TextStyle,
 };
 
 export { presetToStyleMap };
