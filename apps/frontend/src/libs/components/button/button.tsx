@@ -1,25 +1,28 @@
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
+
+import styles from "./styles.module.css";
+
 type Properties = {
+	isPrimary?: boolean;
 	label: string;
 	type?: "button" | "submit";
 	variant: "dark" | "secondary";
 };
 
-import styles from "../css/button.module.css";
-
 const Button: React.FC<Properties> = ({
+	isPrimary = true,
 	label,
 	type = "button",
-	variant = "dark",
-}: Properties) => {
-	const buttonClass = "btn-" + variant;
-	return (
-		<button
-			className={`${styles["btn"] as string} ${styles[buttonClass] as string}`}
-			type={type}
-		>
-			{label}
-		</button>
-	);
-};
+}: Properties) => (
+	<button
+		className={getValidClassNames(
+			styles["btn"],
+			isPrimary && styles["primary"],
+		)}
+		type={type}
+	>
+		{label}
+	</button>
+);
 
 export { Button };

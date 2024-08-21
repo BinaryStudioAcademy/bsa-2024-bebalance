@@ -5,16 +5,16 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
-import styles from "~/libs/components/css/input.module.css";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useFormController } from "~/libs/hooks/hooks.js";
+
+import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
-	isRequired?: boolean;
 	label: string;
 	name: FieldPath<T>;
-	onClick?: (event_: React.BaseSyntheticEvent) => void;
 	placeholder?: string;
 	type?: "email" | "password" | "text";
 };
@@ -22,7 +22,6 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
-	isRequired = false,
 	label,
 	name,
 	placeholder = "",
@@ -34,18 +33,20 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 
 	return (
-		<label className={styles["input-container"]}>
-			<span className={styles["label"]}>{label}</span>
-			<div className={styles["input-content"]}>
+		<label className={styles["input-wrapper"]}>
+			<span className={styles["input-label"]}>{label}</span>
+			<div className={styles["input-container"]}>
 				<input
-					className={styles["input"]}
+					className={getValidClassNames(styles["input-field"])}
 					{...field}
 					placeholder={placeholder}
-					required={isRequired}
 					type={type}
 				/>
-				{hasError && <span>{error as string}</span>}
 			</div>
+
+			{hasError && (
+				<span className={styles["input-error"]}>{error as string}</span>
+			)}
 		</label>
 	);
 };
