@@ -7,6 +7,8 @@ import { ServerHooks } from "~/libs/plugins/libs/enums/enums.js";
 import { TokenPayload } from "~/libs/types/types.js";
 import { UserService } from "~/modules/users/user.service.js";
 
+import { AuthorizationPluginErrorMessage as ErrorMessage } from "./libs/types/enums/enums.js";
+
 type PluginOptions = {
 	token: BaseToken<TokenPayload>;
 	userService: UserService;
@@ -28,7 +30,8 @@ const authorizationPlugin = fp<PluginOptions>(
 
 			if (!header) {
 				throw new AuthError({
-					message: "Authorization header required for this route",
+					cause: request,
+					message: ErrorMessage.MISSING_HEADER,
 				});
 			}
 
@@ -40,7 +43,7 @@ const authorizationPlugin = fp<PluginOptions>(
 				const user = await userService.findById(userId);
 
 				if (!user) {
-					throw new AuthError({ message: "User not found" });
+					throw new AuthError({ message: ErrorMessage.USER_NOT_FOUND });
 				}
 
 				request.user = user;
@@ -49,11 +52,14 @@ const authorizationPlugin = fp<PluginOptions>(
 					throw error;
 				}
 
-				throw new AuthError({ cause: error, message: "Invalid token" });
+				throw new AuthError({
+					cause: error,
+					message: ErrorMessage.INVALID_TOKEN,
+				});
 			}
 		});
 	},
-	{ name: "auth-plugin" },
+	{ name: "authorization-plugin" },
 );
 
 export { authorizationPlugin };
