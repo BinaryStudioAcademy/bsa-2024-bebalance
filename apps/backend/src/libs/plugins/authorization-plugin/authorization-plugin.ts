@@ -7,7 +7,7 @@ import { ServerHooks } from "~/libs/plugins/libs/enums/enums.js";
 import { TokenPayload } from "~/libs/types/types.js";
 import { UserService } from "~/modules/users/user.service.js";
 
-import { AuthorizationPluginErrorMessage as ErrorMessage } from "./libs/types/enums/enums.js";
+import { ErrorMessage } from "./libs/types/enums/enums.js";
 
 type PluginOptions = {
 	token: BaseToken<TokenPayload>;
@@ -31,7 +31,7 @@ const authorizationPlugin = fp<PluginOptions>(
 			if (!header) {
 				throw new AuthError({
 					cause: request,
-					message: ErrorMessage.MISSING_HEADER,
+					message: ErrorMessage.MISSING_AUTHORIZATION_HEADER,
 				});
 			}
 
@@ -59,6 +59,7 @@ const authorizationPlugin = fp<PluginOptions>(
 			}
 		});
 	},
+	{ name: "authorization-plugin" },
 );
 
 export { authorizationPlugin };

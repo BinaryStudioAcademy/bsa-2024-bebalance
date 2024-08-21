@@ -1,1 +1,1 @@
-export { AuthorizationPluginErrorMessage } from "./authorization-plugin-error-message.enum.js";
+export { ErrorMessage } from "shared";
