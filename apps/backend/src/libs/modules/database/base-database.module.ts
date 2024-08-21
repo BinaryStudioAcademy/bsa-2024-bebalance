@@ -31,14 +31,23 @@ class BaseDatabase implements Database {
 	public get environmentsConfig(): Database["environmentsConfig"] {
 		return {
 			[AppEnvironment.DEVELOPMENT]: this.initialConfig,
+			[AppEnvironment.LOCAL]: this.initialConfig,
 			[AppEnvironment.PRODUCTION]: this.initialConfig,
 		};
 	}
 
 	private get initialConfig(): Knex.Config {
+		const sslConfig =
+			this.appConfig.ENV.APP.ENVIRONMENT === AppEnvironment.LOCAL
+				? {}
+				: { ssl: { rejectUnauthorized: false } };
+
 		return {
 			client: this.appConfig.ENV.DB.DIALECT,
-			connection: this.appConfig.ENV.DB.CONNECTION_STRING,
+			connection: {
+				connectionString: this.appConfig.ENV.DB.CONNECTION_STRING,
+				...sslConfig,
+			},
 			debug: false,
 			migrations: {
 				directory: "src/db/migrations",

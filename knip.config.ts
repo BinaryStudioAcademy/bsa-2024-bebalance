@@ -16,6 +16,7 @@ const config: KnipConfig = {
 		},
 		"apps/mobile": {
 			entry: ["index.js", "metro.config.js"],
+			ignore: ["react-native.config.js"],
 			ignoreDependencies: [
 				"react-native-codegen",
 				"@babel/preset-env",

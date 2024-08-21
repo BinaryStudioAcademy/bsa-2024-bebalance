@@ -11,8 +11,9 @@ import { actions as userActions } from "~/modules/users/users.js";
 const App: React.FC = () => {
 	const { pathname } = useLocation();
 	const dispatch = useAppDispatch();
-	const { dataStatus, users } = useAppSelector(({ users }) => ({
+	const { dataStatus, user, users } = useAppSelector(({ users }) => ({
 		dataStatus: users.dataStatus,
+		user: users.user,
 		users: users.users,
 	}));
 
@@ -21,17 +22,21 @@ const App: React.FC = () => {
 	useEffect(() => {
 		if (isRoot) {
 			void dispatch(userActions.loadAll());
+			void dispatch(userActions.getAuthenticatedUser());
 		}
 	}, [isRoot, dispatch]);
+
+	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
 		<>
 			<div>
 				<RouterOutlet />
 			</div>
-			{isRoot && (
+			{isLoading && <Loader />}
+			{!isLoading && isRoot && (
 				<>
-					<h2>Users:</h2>
+					<h2>Users: {user?.email}</h2>
 					<h3>Status: {dataStatus}</h3>
 					<ul>
 						{users.map((user) => (

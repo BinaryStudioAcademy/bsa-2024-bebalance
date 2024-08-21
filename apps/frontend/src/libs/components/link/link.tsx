@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import { type AppRoute } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
+import styles from "../css/link.module.css";
+
 type Properties = {
 	children: React.ReactNode;
 	to: ValueOf<typeof AppRoute>;
 	variant: "default";
 };
-
-import styles from "../css/link.module.css";
 
 const Link: React.FC<Properties> = ({
 	children,
