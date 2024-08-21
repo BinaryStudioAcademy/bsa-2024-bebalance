@@ -1,8 +1,12 @@
 import React, { ReactNode } from "react";
-import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
+import { Text as RNText } from "react-native";
 
 import { BaseColor } from "~/libs/enums/enums";
-import { type ValueOf } from "~/libs/types/types";
+import {
+	type StyleProp,
+	type TextStyle,
+	type ValueOf,
+} from "~/libs/types/types";
 
 import {
 	fontWeightToFamilyMap,
@@ -10,12 +14,10 @@ import {
 	sizeToStyleMap,
 } from "./libs/maps/maps";
 
-type Preset = "default" | "heading" | "subheading";
-
 type Properties = {
 	children: ReactNode;
 	color?: ValueOf<typeof BaseColor>;
-	preset?: Preset;
+	preset?: keyof typeof presetToStyleMap;
 	size?: keyof typeof sizeToStyleMap;
 	style?: StyleProp<TextStyle>;
 	weight?: keyof typeof fontWeightToFamilyMap;

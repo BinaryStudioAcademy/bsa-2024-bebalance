@@ -9,3 +9,4 @@ const authService = new AuthService(userService, encrypt);
 const authController = new AuthController(logger, authService);
 
 export { authController };
+export { AuthError } from "./libs/exceptions/exceptions.js";
