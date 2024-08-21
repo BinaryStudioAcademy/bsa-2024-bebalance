@@ -1,11 +1,12 @@
-import { APIPath } from "~/libs/enums/enums.js";
+import { APIPath, ErrorMessage } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
+import { AuthError, HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { UserDto } from "~/modules/users/libs/types/types.js";
 import {
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
@@ -40,8 +41,7 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.getAuthenticatedUser(
 					options as APIHandlerOptions<{
-						// user: { id: number };
-						query: { id: number };
+						user: UserDto;
 					}>,
 				),
 			method: "GET",
@@ -65,17 +65,19 @@ class AuthController extends BaseController {
 	 *               type: object
 	 *               $ref: "#/components/schemas/User"
 	 */
-	private async getAuthenticatedUser(
+	private getAuthenticatedUser(
 		options: APIHandlerOptions<{
-			// user: { id: number };
-			query: { id: number };
+			user: UserDto;
 		}>,
-	): Promise<APIHandlerResponse> {
+	): APIHandlerResponse {
+		if (!options.user) {
+			throw new AuthError({
+				message: ErrorMessage.UNAUTHORIZED,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
 		return {
-			payload: await this.authService.getAuthenticatedUser(
-				// options.user!.id,
-				options.query.id,
-			),
+			payload: options.user,
 			status: HTTPCode.OK,
 		};
 	}
