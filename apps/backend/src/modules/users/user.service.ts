@@ -4,6 +4,7 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
+	UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
@@ -17,10 +18,10 @@ class UserService implements Service {
 		this.encrypt = encrypt;
 	}
 
-	public async create(payload: UserSignUpRequestDto): Promise<UserEntity> {
+	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const { hash, salt } = await this.encrypt.encrypt(payload.password);
 
-		return await this.userRepository.create(
+		const user = await this.userRepository.create(
 			UserEntity.initializeNew({
 				email: payload.email,
 				name: payload.name,
@@ -28,6 +29,8 @@ class UserService implements Service {
 				passwordSalt: salt,
 			}),
 		);
+
+		return user.toObject();
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

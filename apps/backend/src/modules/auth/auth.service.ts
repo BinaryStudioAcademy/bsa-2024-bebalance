@@ -25,20 +25,20 @@ class AuthService {
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
-		const userEntity = await this.userService.findByEmail(email);
+		const user = await this.userService.findByEmail(email);
 
-		if (!userEntity) {
+		if (!user) {
 			throw new AuthError({
 				message: ErrorMessage.INCORRECT_CREDENTIALS,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
 
-		const userObject = userEntity.toObject();
+		const userObject = user.toObject();
 
 		const jwtToken = await token.createToken({ userId: userObject.id });
 
-		const { passwordHash, passwordSalt } = userEntity.toNewObject();
+		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
 			password,
 			passwordHash,
@@ -68,13 +68,11 @@ class AuthService {
 			});
 		}
 
-		const userEntity = await this.userService.create(userRequestDto);
+		const user = await this.userService.create(userRequestDto);
 
-		const userObject = userEntity.toObject();
+		const jwtToken = await token.createToken({ userId: user.id });
 
-		const jwtToken = await token.createToken({ userId: userObject.id });
-
-		return { token: jwtToken, user: userObject };
+		return { token: jwtToken, user };
 	}
 }
 
