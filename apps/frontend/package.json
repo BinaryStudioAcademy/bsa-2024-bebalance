@@ -1,7 +1,7 @@
 {
 	"name": "frontend",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.2.0",
 	"type": "module",
 	"engines": {
 		"node": "20.x.x",
@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@hookform/resolvers": "3.9.0",
 		"@reduxjs/toolkit": "2.2.7",
+		"clsx": "2.1.1",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"react-hook-form": "7.52.2",
