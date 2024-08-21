@@ -5,7 +5,7 @@ import {
 	colorToGradientMap,
 	gradientDirectionMap,
 	sizeToStyleMap,
-} from "./../../maps/maps";
+} from "../../maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
