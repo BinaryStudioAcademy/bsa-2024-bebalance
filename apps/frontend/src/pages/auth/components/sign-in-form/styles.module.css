@@ -41,7 +41,11 @@
 .form-header__logo {
 	width: 33px;
 	height: 33px;
-	background: linear-gradient(to right, #ff5794 0%, #fc72ff 100%);
+	background: linear-gradient(
+		to right,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
 	border-radius: 50%;
 }
 
@@ -95,7 +99,11 @@
 	left: 58%;
 	width: 130px;
 	height: 130px;
-	background: linear-gradient(to bottom, #ffe307 0%, #fff8b5 100%);
+	background: linear-gradient(
+		to bottom,
+		var(--physical-start) 0%,
+		var(--physical-end) 100%
+	);
 	border-radius: 50%;
 	transform: translateX(-50%);
 }
@@ -106,7 +114,11 @@
 	right: 10%;
 	width: 35px;
 	height: 35px;
-	background: linear-gradient(to right, #ff5794 0%, #fc72ff 100%);
+	background: linear-gradient(
+		to right,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
 	border-radius: 50%;
 }
 
@@ -116,14 +128,22 @@
 	bottom: 10%;
 	width: 100px;
 	height: 100px;
-	background: linear-gradient(to right, #69ff35 0%, #c3ff19 100%);
+	background: linear-gradient(
+		to right,
+		var(--work-start) 0%,
+		var(--work-end) 100%
+	);
 	border-radius: 50%;
 }
 
 .circle-gradient4 {
 	position: absolute;
 	display: none;
-	background: linear-gradient(to right, #0085ff 0%, #00f0ff 100%);
+	background: linear-gradient(
+		to right,
+		var(--mental-start) 0%,
+		var(--mental-end) 100%
+	);
 	border-radius: 50%;
 }
 
@@ -185,6 +205,5 @@
 		display: block;
 		width: 86px;
 		height: 86px;
-		background: linear-gradient(to bottom, #0085ff 0%, #00f0ff 100%);
 	}
 }
