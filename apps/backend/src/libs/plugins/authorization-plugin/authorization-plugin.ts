@@ -16,13 +16,13 @@ type PluginOptions = {
 };
 
 const authorizationPlugin = fp<PluginOptions>(
-	(app, { token, userService, whiteRoutes = [] }) => {
+	(app, { token, userService, whiteRoutes = [] }, done) => {
 		app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
-			const whiteRoute = whiteRoutes.find(
-				(route) => request.routeOptions.url === route,
-			);
+			const isWhiteRoute = whiteRoutes.some((whiteRoute) => {
+				return request.url.includes(whiteRoute);
+			});
 
-			if (whiteRoute) {
+			if (isWhiteRoute) {
 				return;
 			}
 
@@ -52,6 +52,8 @@ const authorizationPlugin = fp<PluginOptions>(
 				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 		});
+
+		done();
 	},
 );
 
