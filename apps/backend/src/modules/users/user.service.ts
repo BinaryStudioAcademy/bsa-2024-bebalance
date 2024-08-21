@@ -37,8 +37,8 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public async find(query: Partial<UserDto>): Promise<null | UserEntity> {
-		return await this.userRepository.find(query);
+	public async find(id: number): Promise<null | UserEntity> {
+		return await this.userRepository.find(id);
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
@@ -50,11 +50,7 @@ class UserService implements Service {
 	}
 
 	public findByEmail(email: string): Promise<null | UserEntity> {
-		return this.find({ email });
-	}
-
-	public findById(id: number): Promise<null | UserEntity> {
-		return this.find({ id });
+		return this.userRepository.findByEmail(email);
 	}
 
 	public update(): ReturnType<Service["update"]> {

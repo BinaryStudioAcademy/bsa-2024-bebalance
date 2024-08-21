@@ -1,5 +1,5 @@
 import { RelationName } from "~/libs/enums/enums.js";
-import { type Repository, UserDto } from "~/libs/types/types.js";
+import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
@@ -53,11 +53,11 @@ class UserRepository implements Repository {
 		return Promise.resolve(true);
 	}
 
-	public async find(query: Partial<UserDto>): Promise<null | UserEntity> {
+	public async find(id: number): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(RelationName.USER_DETAILS)
-			.where(query)
+			.where({ id })
 			.first();
 
 		return user
