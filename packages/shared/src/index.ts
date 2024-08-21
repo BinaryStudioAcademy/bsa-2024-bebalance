@@ -35,7 +35,6 @@ export {
 	type UserDto,
 	type UserGetAllItemResponseDto,
 	type UserGetAllResponseDto,
-	type UserGetOneResponseDto,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,

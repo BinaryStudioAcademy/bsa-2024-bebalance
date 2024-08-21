@@ -6,7 +6,6 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
-	type UserGetOneResponseDto,
 	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
 
@@ -38,7 +37,7 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public async find(id: number): Promise<null | UserGetOneResponseDto> {
+	public async find(id: number): Promise<null | UserEntity> {
 		return await this.userRepository.find(id);
 	}
 
