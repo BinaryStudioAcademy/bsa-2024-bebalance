@@ -1,12 +1,13 @@
 import fp from "fastify-plugin";
 
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPHeader } from "~/libs/modules/http/http.js";
-import { BaseToken } from "~/libs/modules/token/base-token.module.js";
-import { ServerHooks } from "~/libs/plugins/libs/enums/enums.js";
+import { BaseToken } from "~/libs/modules/token/token.js";
 import { TokenPayload } from "~/libs/types/types.js";
-import { UserService } from "~/modules/users/user.service.js";
+import { AuthError } from "~/modules/auth/auth.js";
+import { UserService } from "~/modules/users/users.js";
 
-import { AuthError, ErrorMessage } from "./libs/types/enums/enums.js";
+import { ServerHooks } from "../libs/enums/enums.js";
 
 type PluginOptions = {
 	token: BaseToken<TokenPayload>;
@@ -28,10 +29,7 @@ const authorizationPlugin = fp<PluginOptions>(
 			const header = request.headers[HTTPHeader.AUTHORIZATION];
 
 			if (!header) {
-				throw new AuthError({
-					cause: request,
-					message: ErrorMessage.MISSING_AUTHORIZATION_HEADER,
-				});
+				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 
 			try {
@@ -42,7 +40,7 @@ const authorizationPlugin = fp<PluginOptions>(
 				const user = await userService.find(userId);
 
 				if (!user) {
-					throw new AuthError({ message: ErrorMessage.USER_NOT_FOUND });
+					throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 				}
 
 				request.user = user.toObject();
@@ -51,14 +49,10 @@ const authorizationPlugin = fp<PluginOptions>(
 					throw error;
 				}
 
-				throw new AuthError({
-					cause: error,
-					message: ErrorMessage.INVALID_TOKEN,
-				});
+				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 		});
 	},
-	{ name: "authorization-plugin" },
 );
 
 export { authorizationPlugin };
