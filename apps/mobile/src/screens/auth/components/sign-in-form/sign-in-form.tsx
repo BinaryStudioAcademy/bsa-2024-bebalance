@@ -1,7 +1,12 @@
 import React from "react";
 
-import { BackgroundWrapper } from "~/libs/components/background-wrapper/background-wrapper";
-import { Button, Link, Text, View } from "~/libs/components/components";
+import {
+	BackgroundWrapper,
+	Button,
+	Link,
+	Text,
+	View,
+} from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 
 type Properties = {

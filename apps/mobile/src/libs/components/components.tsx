@@ -1,4 +1,5 @@
 export { App } from "./app/app";
+export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
