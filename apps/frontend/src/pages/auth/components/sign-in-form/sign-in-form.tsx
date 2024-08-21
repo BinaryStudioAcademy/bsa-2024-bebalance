@@ -1,3 +1,5 @@
+import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
+import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -7,8 +9,6 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants.js";
-import rippleEffectBg from "./libs/images/ripple-effect-bg.svg";
-import rippleEffectBg2 from "./libs/images/ripple-effect-bg2.svg";
 import styles from "./styles.module.css";
 
 type Properties = {
