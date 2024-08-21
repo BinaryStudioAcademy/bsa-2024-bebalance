@@ -1,5 +1,5 @@
-import { type HTTPCode } from "../../../libs/modules/http/http.js";
 import { type ValueOf } from "../../../libs/types/types.js";
+import { HTTPCode } from "../../modules/http/http.js";
 import { HTTPError } from "../http-error/http-error.exception.js";
 
 type Constructor = {
@@ -10,11 +10,7 @@ type Constructor = {
 
 class AuthError extends HTTPError {
 	public constructor({ cause, message, status }: Constructor) {
-		super({
-			cause,
-			message,
-			status,
-		});
+		super({ cause, message, status });
 	}
 }
 
