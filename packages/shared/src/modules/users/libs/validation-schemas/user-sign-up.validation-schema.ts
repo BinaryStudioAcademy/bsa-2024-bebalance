@@ -13,13 +13,13 @@ const userSignUp = z
 		email: z
 			.string()
 			.trim()
-			.min(UserValidationRule.EMAIL_REQUIRE, {
+			.min(UserValidationRule.EMAIL_MINIMUM_LENGTH, {
 				message: UserValidationMessage.EMAIL_REQUIRE,
 			})
 			.email({
 				message: UserValidationMessage.EMAIL_WRONG,
 			}),
-		name: z.string().trim().min(UserValidationRule.NAME_MINIMUM_LENGTH, {
+		name: z.string().trim().min(UserValidationRule.EMAIL_REQUIRE, {
 			message: UserValidationMessage.NAME_REQUIRE,
 		}),
 		password: z.string().trim(),
