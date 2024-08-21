@@ -5,6 +5,7 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useFormController } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
@@ -32,14 +33,17 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 
 	return (
-		<label className={styles["input-container"]}>
+		<label className={styles["input-wrapper"]}>
 			<span className={styles["input-label"]}>{label}</span>
-			<input
-				className={styles["input"]}
-				{...field}
-				placeholder={placeholder}
-				type={type}
-			/>
+			<div className={styles["input-container"]}>
+				<input
+					className={getValidClassNames(styles["input-field"])}
+					{...field}
+					placeholder={placeholder}
+					type={type}
+				/>
+			</div>
+
 			{hasError && (
 				<span className={styles["input-error"]}>{error as string}</span>
 			)}

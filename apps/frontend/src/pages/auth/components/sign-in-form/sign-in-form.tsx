@@ -1,6 +1,5 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
@@ -8,7 +7,8 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants.js";
-import { RippleEffectBg, RippleEffectBg2 } from "./libs/icons/icons.js";
+import rippleEffectBg from "./libs/images/ripple-effect-bg.svg";
+import rippleEffectBg2 from "./libs/images/ripple-effect-bg2.svg";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -43,10 +43,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						<h1 className={styles["sign-in__form-header-text"]}>SIGN IN</h1>
 						<span className={styles["sign-in__form-header-sub-text"]}>
 							No account? Go to{" "}
-							<Link
-								className={getValidClassNames("sign-in__form-link", styles)}
-								to={AppRoute.SIGN_UP}
-							>
+							<Link to={AppRoute.SIGN_UP} type="navLink">
 								Create an Account
 							</Link>
 						</span>
@@ -78,11 +75,15 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<span className={styles["sign-in__logo"]}>LOGO</span>
 			</div>
 
-			<RippleEffectBg
-				className={getValidClassNames("ripple-effect__background1", styles)}
+			<img
+				alt="ripple-effect-bg"
+				className={styles["ripple-effect__background1"]}
+				src={rippleEffectBg}
 			/>
-			<RippleEffectBg2
-				className={getValidClassNames("ripple-effect__background2", styles)}
+			<img
+				alt="ripple-effect-bg"
+				className={styles["ripple-effect__background2"]}
+				src={rippleEffectBg2}
 			/>
 
 			<div className={styles["circle-gradient1"]} />

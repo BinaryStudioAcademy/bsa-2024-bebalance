@@ -27,15 +27,6 @@
 	padding-inline: 20px;
 }
 
-.sign-in__form-link {
-	color: transparent;
-	text-align: center;
-	text-decoration: none;
-	background: linear-gradient(to right, #00f0ff, #0085ff);
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-}
-
 .sign-in__form-header {
 	margin-bottom: 5px;
 }

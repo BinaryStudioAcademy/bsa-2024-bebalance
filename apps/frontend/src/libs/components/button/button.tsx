@@ -14,7 +14,10 @@ const Button: React.FC<Properties> = ({
 	type = "button",
 }: Properties) => (
 	<button
-		className={getValidClassNames(`btn ${isPrimary ? "primary" : ""}`, styles)}
+		className={getValidClassNames(
+			styles["btn"],
+			isPrimary && styles["primary"],
+		)}
 		type={type}
 	>
 		{label}
