@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.7.0...v1.8.0) (2024-08-21)
+
+
+### Features
+
+* add background component bb-24 ([#84](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/84)) ([55dd338](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/55dd338c10a3b34fa0dc959def4606b62571f0d5))
+* authorization token (JWT) bb-10 ([#40](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/40)) ([16e3c35](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16e3c353ff700ab27a7b6af4fa7b3c17059cc916))
+* **backend:** add categories migration bb-34 ([#100](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/100)) ([43ececb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/43ececb50a49723b2d0ff52ef1041dcfe49be225))
+* error handling bb-16 ([#57](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/57)) ([4425001](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/442500105802ba497c02978fd1e9af88eb6ae53d))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.6.0...v1.7.0) (2024-08-21)
 
 
