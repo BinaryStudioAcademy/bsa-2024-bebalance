@@ -5,6 +5,7 @@ export { GradientText } from "./gradient-text/gradient-text";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
+export { Notification } from "./notification/notification";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Text } from "./text/text";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
