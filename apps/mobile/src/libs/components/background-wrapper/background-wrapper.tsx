@@ -25,18 +25,18 @@ const BackgroundWrapper = ({ children }: Properties) => {
 			<View style={[styles.dot, styles.dotPositionRightBottom]} />
 			<View style={[styles.dot, styles.dotPositionBottom]} />
 			<View style={[styles.dot, styles.dotPositionLeft]} />
-			<Planet color={"green"} size={"sm"} style={styles.topPlanet} />
+			<Planet color="green" size="sm" style={styles.topPlanet} />
 			<Planet
-				color={"blue"}
+				color="blue"
 				gradientDirection={"topToBottom"}
-				size={"sm"}
+				size="sm"
 				style={styles.leftPlanet}
 			/>
 			{children}
 			<Planet
-				color={"pink"}
+				color="pink"
 				gradientDirection={"topToBottom"}
-				size={"lg"}
+				size="lg"
 				style={styles.bottomPlanet}
 			/>
 			<Image
