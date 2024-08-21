@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.3.0...v1.4.0) (2024-08-20)
+
+
+### Features
+
+* add Not Found page bb-51 ([#56](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/56)) ([befb626](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/befb626bfc67278a9aa40b3f460885807f35969b))
+* mobile linter rule adjust bb-2 ([#82](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/82)) ([584c838](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/584c8387a3150c317123beabb9c962de97f012f5))
+
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.2.0...v1.3.0) (2024-08-20)
+
+
+### Features
+
+* loader component bb-19 ([#58](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/58)) ([7d50184](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7d50184baa33f2f04e4c51a5cdfdc18973a31c76))
+
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.1.0...v1.2.0) (2024-08-20)
+
+
+### Features
+
+* sign up bb-8 ([#46](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/46)) ([833b096](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833b096800fda00136885ae1bffedada943a1e8a))
+
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.0.0...v1.1.0) (2024-08-20)
+
+
+### Features
+
+* get authenticated user bb-14 ([#53](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/53)) ([0b147e2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0b147e2ca611f5859c8e81917e5a39ed8ad1971a))
+
 ## 1.0.0 (2024-08-20)
 
 

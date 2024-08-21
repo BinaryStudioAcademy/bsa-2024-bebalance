@@ -1,12 +1,24 @@
 .link {
-	color: var(--black);
-}
-
-.primary {
-	color: var(--brand);
 	text-decoration: none;
 }
 
-.underline {
-	text-decoration: underline;
+.button {
+	display: inline-block;
+	width: 100%;
+	max-width: 322px;
+	height: 42px;
+	padding: 10px 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--white);
+	text-align: center;
+	text-transform: uppercase;
+	background-color: var(--black);
+	border-radius: 35px;
+}
+
+.button:hover {
+	color: var(--black);
+	background-color: var(--white);
+	border: 1px solid var(--black);
 }
