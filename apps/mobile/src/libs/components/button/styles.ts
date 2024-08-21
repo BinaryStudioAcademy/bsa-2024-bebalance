@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
-	btn: {
-		alignItems: "center",
-		backgroundColor: BaseColor.BLACK,
-		padding: 10,
+	bgWhite: {
+		backgroundColor: BaseColor.BG_WHITE,
 	},
-	label: {
-		color: "white",
+	rounded: {
+		borderRadius: 35,
+	},
+	wrapper: {
+		height: 42,
 	},
 });
 
