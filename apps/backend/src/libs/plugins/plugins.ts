@@ -1,1 +1,1 @@
-export { authPlugin } from "./auth-plugin/auth-plugin.js";
+export { authorizationPlugin } from "./authorization-plugin/authorization-plugin.js";

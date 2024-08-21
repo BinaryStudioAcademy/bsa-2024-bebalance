@@ -13,7 +13,7 @@ type PluginOptions = {
 	whiteRoutes?: string[];
 };
 
-const authPlugin = fp<PluginOptions>(
+const authorizationPlugin = fp<PluginOptions>(
 	(app, { token, userService, whiteRoutes = [] }) => {
 		app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
 			const whiteRoute = whiteRoutes.find(
@@ -56,4 +56,4 @@ const authPlugin = fp<PluginOptions>(
 	{ name: "auth-plugin" },
 );
 
-export { authPlugin };
+export { authorizationPlugin };

@@ -12,7 +12,7 @@ import { type Database } from "~/libs/modules/database/database.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { token } from "~/libs/modules/token/token.js";
-import { authPlugin } from "~/libs/plugins/plugins.js";
+import { authorizationPlugin } from "~/libs/plugins/plugins.js";
 import {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
@@ -210,7 +210,7 @@ class BaseServerApplication implements ServerApplication {
 					routePrefix: `/${api.version}/documentation`,
 				});
 
-				await this.app.register(authPlugin, {
+				await this.app.register(authorizationPlugin, {
 					token,
 					userService,
 					whiteRoutes: WHITE_ROUTES,
