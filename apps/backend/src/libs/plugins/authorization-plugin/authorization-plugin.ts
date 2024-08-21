@@ -13,13 +13,18 @@ type PluginOptions = {
 	token: BaseToken<TokenPayload>;
 	userService: UserService;
 	whiteRoutes?: string[];
+	whiteRoutesPrefix?: string;
 };
 
 const authorizationPlugin = fp<PluginOptions>(
-	(app, { token, userService, whiteRoutes = [] }, done) => {
+	(
+		app,
+		{ token, userService, whiteRoutes = [], whiteRoutesPrefix = "/v1" },
+		done,
+	) => {
 		app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
 			const isWhiteRoute = whiteRoutes.some((whiteRoute) => {
-				return request.url.includes(whiteRoute);
+				return request.url === `${whiteRoutesPrefix}${whiteRoute}`;
 			});
 
 			if (isWhiteRoute) {

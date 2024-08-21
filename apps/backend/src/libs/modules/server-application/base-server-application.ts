@@ -214,6 +214,7 @@ class BaseServerApplication implements ServerApplication {
 					token,
 					userService,
 					whiteRoutes: WHITE_ROUTES,
+					whiteRoutesPrefix: `/${api.version}`,
 				});
 			}),
 		);
