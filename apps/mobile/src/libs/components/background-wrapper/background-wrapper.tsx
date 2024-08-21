@@ -28,14 +28,14 @@ const BackgroundWrapper = ({ children }: Properties) => {
 			<Planet color="green" size="sm" style={styles.topPlanet} />
 			<Planet
 				color="blue"
-				gradientDirection={"topToBottom"}
+				gradientDirection="topToBottom"
 				size="sm"
 				style={styles.leftPlanet}
 			/>
 			{children}
 			<Planet
 				color="pink"
-				gradientDirection={"topToBottom"}
+				gradientDirection="topToBottom"
 				size="lg"
 				style={styles.bottomPlanet}
 			/>
