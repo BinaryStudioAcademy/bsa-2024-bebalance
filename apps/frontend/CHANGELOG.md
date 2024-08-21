@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.2.0...frontend-v1.3.0) (2024-08-21)
+
+
+### Features
+
+* authorization token (JWT) bb-10 ([#40](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/40)) ([16e3c35](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16e3c353ff700ab27a7b6af4fa7b3c17059cc916))
+* error handling bb-16 ([#57](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/57)) ([4425001](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/442500105802ba497c02978fd1e9af88eb6ae53d))
+
 ## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.1.0...frontend-v1.2.0) (2024-08-21)
 
 
