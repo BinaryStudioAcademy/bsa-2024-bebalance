@@ -29,19 +29,17 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={styles["sign-in__container"]}>
-			<div className={styles["sign-in__form-container"]}>
-				<form className={styles["sign-in__form"]} onSubmit={handleFormSubmit}>
-					<div className={styles["sign-in__form-header"]}>
-						<div className={styles["sign-in__form-header-logo-container"]}>
-							<div className={styles["sign-in__form-header-logo"]} />
-							<span className={styles["sign-in__form-header-logo-text"]}>
-								LOGO
-							</span>
+		<div className={styles["container"]}>
+			<div className={styles["form-container"]}>
+				<form className={styles["form"]} onSubmit={handleFormSubmit}>
+					<div className={styles["form-header"]}>
+						<div className={styles["form-header__logo-container"]}>
+							<div className={styles["form-header__logo"]} />
+							<span className={styles["form-header__logo-text"]}>LOGO</span>
 						</div>
 
-						<h1 className={styles["sign-in__form-header-text"]}>SIGN IN</h1>
-						<span className={styles["sign-in__form-header-sub-text"]}>
+						<h1 className={styles["form-header__text"]}>SIGN IN</h1>
+						<span className={styles["form-header__sub-text"]}>
 							No account? Go to{" "}
 							<Link to={AppRoute.SIGN_UP} type="navLink">
 								Create an Account
@@ -71,8 +69,8 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				</form>
 			</div>
 
-			<div className={styles["sign-in__logo-container"]}>
-				<span className={styles["sign-in__logo"]}>LOGO</span>
+			<div className={styles["logo-container"]}>
+				<span className={styles["logo"]}>LOGO</span>
 			</div>
 
 			<img
