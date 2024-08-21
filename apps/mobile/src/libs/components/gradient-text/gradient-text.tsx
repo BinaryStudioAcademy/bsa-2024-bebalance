@@ -1,44 +1,36 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 
 import { Text, View } from "~/libs/components/components";
 import { LinearGradient } from "~/libs/components/linear-gradient";
 import { MaskedView } from "~/libs/components/masked-view";
 import { globalStyles } from "~/libs/styles/styles";
-import {
-	type LinearGradientProps,
-	type StyleProp,
-	type TextStyle,
-} from "~/libs/types/types";
+import { type LinearGradientProps } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 type Properties = {
-	children: string;
 	gradientProps: LinearGradientProps;
-	textStyle: StyleProp<TextStyle>;
+	textProps: ComponentProps<typeof Text>;
 };
 
-const GradientText: React.FC<Properties> = ({
-	children,
-	gradientProps,
-	textStyle,
-}) => {
-	const { alignItemsCenter, flex1, flexDirectionRow, justifyContentCenter } =
-		globalStyles;
-	const { bgTransparent } = styles;
-
+const GradientText: React.FC<Properties> = ({ gradientProps, textProps }) => {
 	return (
 		<MaskedView
 			maskElement={
 				<View
-					style={[alignItemsCenter, justifyContentCenter, bgTransparent, flex1]}
+					style={[
+						globalStyles.alignItemsCenter,
+						globalStyles.justifyContentCenter,
+						styles.bgTransparent,
+						globalStyles.flex1,
+					]}
 				>
-					<Text style={textStyle}>{children}</Text>
+					<Text {...textProps} />
 				</View>
 			}
-			style={[flexDirectionRow, flex1]}
+			style={[globalStyles.flexDirectionRow, globalStyles.flex1]}
 		>
-			<LinearGradient {...gradientProps} style={flex1} />
+			<LinearGradient {...gradientProps} style={globalStyles.flex1} />
 		</MaskedView>
 	);
 };
