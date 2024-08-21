@@ -37,7 +37,6 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
-
 		this.addRoute({
 			handler: (options) =>
 				this.signIn(

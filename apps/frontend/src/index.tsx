@@ -4,12 +4,14 @@ import { createRoot } from "react-dom/client";
 import "~/assets/css/styles.css";
 import {
 	App,
+	ProtectedRoute,
 	RouterProvider,
 	StoreProvider,
 } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 import { Auth } from "~/pages/auth/auth.jsx";
+import { NotFound } from "~/pages/not-found/not-found.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -19,7 +21,12 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 					{
 						children: [
 							{
-								element: "Root",
+								element: (
+									<ProtectedRoute
+										component={"Root"}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
 								path: AppRoute.ROOT,
 							},
 							{
@@ -33,6 +40,10 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 						],
 						element: <App />,
 						path: AppRoute.ROOT,
+					},
+					{
+						element: <NotFound />,
+						path: AppRoute.ANY,
 					},
 				]}
 			/>

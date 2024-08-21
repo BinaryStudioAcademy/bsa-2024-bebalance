@@ -21,8 +21,23 @@ const mainConfig = {
 const overridesConfigs = [
 	{
 		rules: {
+			"@typescript-eslint/no-require-imports": ["off"],
+			"@typescript-eslint/no-unnecessary-type-parameters": ["off"],
 			"import/extensions": ["off"],
-			"@typescript-eslint/no-unnecessary-type-parameters": ["off"]
+			"unicorn/prefer-module": ["off"],
+		},
+	},
+	{
+		files: ["eslint.config.mjs", "lint-staged.config.mjs"],
+		rules: {
+			"import/no-default-export": ["off"],
+		},
+	},
+	{
+		files: ["babel.config.js"],
+		rules: {
+			"unicorn/prefer-node-protocol": ["off"],
+			"unicorn/prefer-string-raw": ["off"],
 		},
 	},
 ];
