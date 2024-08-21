@@ -1,6 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
-import { HTTPCode } from "~/libs/modules/http/http.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
@@ -10,7 +9,7 @@ import {
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
-import { UserValidationMessage } from "./libs/enums/enums.js";
+import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthService {
@@ -26,20 +25,20 @@ class AuthService {
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
-		const user = await this.userService.findByEmail(email);
+		const userEntity = await this.userService.findByEmail(email);
 
-		if (!user) {
+		if (!userEntity) {
 			throw new AuthError({
 				message: ErrorMessage.INCORRECT_CREDENTIALS,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
 
-		const userObject = user.toObject();
+		const userObject = userEntity.toObject();
 
 		const jwtToken = await token.createToken({ userId: userObject.id });
 
-		const { passwordHash, passwordSalt } = user.toNewObject();
+		const { passwordHash, passwordSalt } = userEntity.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
 			password,
 			passwordHash,
@@ -69,9 +68,9 @@ class AuthService {
 			});
 		}
 
-		const user = await this.userService.create(userRequestDto);
+		const userEntity = await this.userService.create(userRequestDto);
 
-		const userObject = user.toObject();
+		const userObject = userEntity.toObject();
 
 		const jwtToken = await token.createToken({ userId: userObject.id });
 
