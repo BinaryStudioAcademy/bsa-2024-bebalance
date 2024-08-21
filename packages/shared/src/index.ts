@@ -26,6 +26,7 @@ export {
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type ServerValidationErrorResponse,
+	type TokenPayload,
 	type ValidationSchema,
 	type ValueOf,
 } from "./libs/types/types.js";
@@ -36,6 +37,9 @@ export {
 	type UserGetAllResponseDto,
 	type UserGetOneResponseDto,
 	UsersApiPath,
+	type UserSignInRequestDto,
+	type UserSignInResponseDto,
+	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,

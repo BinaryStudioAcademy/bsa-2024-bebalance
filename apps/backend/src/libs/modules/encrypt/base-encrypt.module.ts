@@ -1,6 +1,6 @@
 import { genSalt, hash } from "bcrypt";
 
-import { Encrypt } from "./libs/types/types.js";
+import { type Encrypt } from "./libs/types/types.js";
 
 class BaseEncrypt implements Encrypt {
 	private saltRounds: number;
@@ -17,9 +17,16 @@ class BaseEncrypt implements Encrypt {
 		return await genSalt(this.saltRounds);
 	}
 
-	public async encrypt(
+	public async compare(
 		password: string,
-	): Promise<{ hash: string; salt: string }> {
+		passwordHash: string,
+		salt: string,
+	): Promise<boolean> {
+		const hash = await this.generateHash(password, salt);
+		return hash === passwordHash;
+	}
+
+	public async encrypt(password: string): ReturnType<Encrypt["encrypt"]> {
 		const salt = await this.generateSalt();
 		const hash = await this.generateHash(password, salt);
 

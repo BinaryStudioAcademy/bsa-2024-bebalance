@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.2.0...backend-v1.3.0) (2024-08-21)
+
+
+### Features
+
+* impl protected routing bb-11 ([#50](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/50)) ([5f2c71c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5f2c71ccfd1dd50f4a894d1ab391690b674ab2eb))
+
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.1.0...backend-v1.2.0) (2024-08-21)
+
+
+### Features
+
+* authorization token (JWT) bb-10 ([#40](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/40)) ([16e3c35](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16e3c353ff700ab27a7b6af4fa7b3c17059cc916))
+* **backend:** add categories migration bb-34 ([#100](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/100)) ([43ececb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/43ececb50a49723b2d0ff52ef1041dcfe49be225))
+
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.0.0...backend-v1.1.0) (2024-08-21)
+
+
+### Features
+
+* implement sign-in functionality bb-6 ([#37](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/37)) ([1f2b54c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1f2b54c94efa5e1553bc8b4bd24f2fdf2b0f8053))
+
 ## 1.0.0 (2024-08-20)
 
 

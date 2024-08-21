@@ -54,25 +54,19 @@ class UserRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
-		const user = (await this.userModel
-			.query()
-			.where({
-				id,
-			})
-			.first()
-			.execute()) as null | UserModel;
-		if (!user) {
-			return null;
-		}
-		return UserEntity.initialize({
-			createdAt: user.createdAt,
-			email: user.email,
-			id: user.id,
-			name: user.userDetails.name,
-			passwordHash: user.passwordHash,
-			passwordSalt: user.passwordSalt,
-			updatedAt: user.updatedAt,
-		});
+		const user = await this.userModel.query().findById(id);
+
+		return user
+			? UserEntity.initialize({
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
 	}
 
 	public async findAll(): Promise<UserEntity[]> {

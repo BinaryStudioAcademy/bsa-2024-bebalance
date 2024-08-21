@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.3.0...frontend-v1.4.0) (2024-08-21)
+
+
+### Features
+
+* sign in screen - mobile responsiveness bb-61 ([#78](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/78)) ([f8b36f2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f8b36f25d71b15d0be03091bdae04b0f664b6ede))
+
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.2.0...frontend-v1.3.0) (2024-08-21)
+
+
+### Features
+
+* authorization token (JWT) bb-10 ([#40](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/40)) ([16e3c35](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16e3c353ff700ab27a7b6af4fa7b3c17059cc916))
+* error handling bb-16 ([#57](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/57)) ([4425001](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/442500105802ba497c02978fd1e9af88eb6ae53d))
+
+## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.1.0...frontend-v1.2.0) (2024-08-21)
+
+
+### Features
+
+* Sign In bb-7 ([#49](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/49)) ([7132640](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7132640bb557dfc3ab67c7ad131be828b576ef05))
+
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.0.0...frontend-v1.1.0) (2024-08-21)
+
+
+### Features
+
+* added color variables to varibles.css bb-52 ([#93](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/93)) ([1544930](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1544930f5ce7736753d6dd5af0c8383b12dcb1e9))
+
 ## 1.0.0 (2024-08-20)
 
 
