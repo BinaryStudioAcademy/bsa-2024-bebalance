@@ -92,16 +92,20 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		createdAt: string;
 		email: string;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
+		updatedAt: string;
 	} {
 		return {
+			createdAt: this.createdAt,
 			email: this.email,
 			name: this.name,
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
+			updatedAt: this.updatedAt,
 		};
 	}
 
