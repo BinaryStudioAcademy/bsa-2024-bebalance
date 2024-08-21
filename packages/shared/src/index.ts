@@ -2,6 +2,7 @@ export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
+	ErrorMessage,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
