@@ -85,8 +85,10 @@ class AuthController extends BaseController {
 	 *                    type: string
 	 *                    description: "Authentication token for the user."
 	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *                  message:
+	 *                    type: object
+	 *                    $ref: "#/components/schemas/User"
 	 */
-
 	private async signIn(
 		options: APIHandlerOptions<{
 			body: UserSignInRequestDto;
