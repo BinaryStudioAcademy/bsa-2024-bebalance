@@ -1,3 +1,3 @@
-export { colorToGradientColorsMap } from "./color-to-gradient-colors-map";
-export { directionToGradientMap } from "./direction-to-gradient-map";
-export { sizeToStylesMap } from "./size-to-styles-map";
+export { colorToGradientColors } from "./color-to-gradient-colors";
+export { directionToGradient } from "./direction-to-gradient";
+export { sizeToStyles } from "./size-to-styles";

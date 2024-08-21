@@ -2,16 +2,16 @@ import { LinearGradient } from "~/libs/components/components";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 
 import {
-	colorToGradientColorsMap,
-	directionToGradientMap,
-	sizeToStylesMap,
+	colorToGradientColors,
+	directionToGradient,
+	sizeToStyles,
 } from "../../maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
-	color: keyof typeof colorToGradientColorsMap;
-	gradientDirection?: keyof typeof directionToGradientMap;
-	size: keyof typeof sizeToStylesMap;
+	color: keyof typeof colorToGradientColors;
+	gradientDirection?: keyof typeof directionToGradient;
+	size: keyof typeof sizeToStyles;
 	style?: StyleProp<ViewStyle>;
 };
 
@@ -21,14 +21,14 @@ const Planet = ({
 	size,
 	style,
 }: Properties) => {
-	const { end, start } = directionToGradientMap[gradientDirection];
+	const { end, start } = directionToGradient[gradientDirection];
 
 	return (
 		<LinearGradient
-			colors={colorToGradientColorsMap[color]}
+			colors={colorToGradientColors[color]}
 			end={end}
 			start={start}
-			style={[styles.bubble, sizeToStylesMap[size], style]}
+			style={[styles.bubble, sizeToStyles[size], style]}
 		/>
 	);
 };

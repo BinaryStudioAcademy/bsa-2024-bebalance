@@ -1,9 +1,9 @@
 import { GradientColor } from "~/libs/enums/enums";
 
-const colorToGradientColorsMap = {
+const colorToGradientColors = {
 	blue: [...GradientColor.BLUE],
 	green: [...GradientColor.LIME],
 	pink: [...GradientColor.ROSE],
 };
 
-export { colorToGradientColorsMap };
+export { colorToGradientColors };
