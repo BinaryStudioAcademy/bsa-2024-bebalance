@@ -1,10 +1,11 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { token } from "~/libs/modules/token/token.js";
 import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
+	type UserSignUpResponseDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
@@ -24,7 +25,7 @@ class AuthService {
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
-		
+
 		const user = await this.userService.findByEmail(email);
 
 		if (!user) {
@@ -33,6 +34,8 @@ class AuthService {
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
+
+		const userDto = user.toObject();
 
 		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
@@ -48,9 +51,9 @@ class AuthService {
 			});
 		}
 
-		const jwtToken = await token.createToken({ userId: user.id });
+		const jwtToken = await token.createToken({ userId: userDto.id });
 
-		return { token: jwtToken, user };
+		return { token: jwtToken, user: userDto };
 	}
 
 	public async signUp(

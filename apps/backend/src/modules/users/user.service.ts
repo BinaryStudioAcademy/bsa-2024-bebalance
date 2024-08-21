@@ -5,69 +5,61 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import { UserDto } from "./libs/types/types.js";
 import {
-  type UserGetAllResponseDto,
-  type UserSignUpRequestDto,
+	type UserGetAllResponseDto,
+	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
-  private encrypt: Encrypt;
-  private userRepository: UserRepository;
+	private encrypt: Encrypt;
+	private userRepository: UserRepository;
 
-  public constructor(userRepository: UserRepository, encrypt: Encrypt) {
-    this.userRepository = userRepository;
-    this.encrypt = encrypt;
-  }
+	public constructor(userRepository: UserRepository, encrypt: Encrypt) {
+		this.userRepository = userRepository;
+		this.encrypt = encrypt;
+	}
 
-  public async create(
-    payload: UserSignUpRequestDto
-  ): Promise<UserSignUpResponseDto> {
-    const { hash, salt } = await this.encrypt.encrypt(payload.password);
+	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
+		const { hash, salt } = await this.encrypt.encrypt(payload.password);
 
-    const item = await this.userRepository.create(
-      UserEntity.initializeNew({
-        email: payload.email,
-        name: payload.name,
-        passwordHash: hash,
-        passwordSalt: salt,
-      })
-    );
+		const item = await this.userRepository.create(
+			UserEntity.initializeNew({
+				email: payload.email,
+				name: payload.name,
+				passwordHash: hash,
+				passwordSalt: salt,
+			}),
+		);
 
-    return item.toObject();
-  }
+		return item.toObject();
+	}
 
-  public delete(): ReturnType<Service["delete"]> {
-    return Promise.resolve(true);
-  }
+	public delete(): ReturnType<Service["delete"]> {
+		return Promise.resolve(true);
+	}
 
-  public async find(query: Partial<UserDto>): Promise<null | UserDto> {
-    const user = await this.userRepository.find({ ...query });
+	public async find(query: Partial<UserDto>): Promise<null | UserEntity> {
+		return await this.userRepository.find(query);
+	}
 
-    if (user) {
-      return user.toObject();
-    }
+	public async findAll(): Promise<UserGetAllResponseDto> {
+		const items = await this.userRepository.findAll();
 
-    return null;
-  }
+		return {
+			items: items.map((item) => item.toObject()),
+		};
+	}
 
-  public async findAll(): Promise<UserGetAllResponseDto> {
-    const items = await this.userRepository.findAll();
+	public findByEmail(email: string): Promise<null | UserEntity> {
+		return this.find({ email });
+	}
 
-    return {
-      items: items.map((item) => item.toObject()),
-    };
-  }
+	public findById(id: number): Promise<null | UserEntity> {
+		return this.find({ id });
+	}
 
-  public findByEmail(email: string): Promise<null | UserDto> {
-    return this.find({ email });
-  }
-
-  public findById(id: number): Promise<null | UserDto> {
-    return this.find({ id });
-  }
-
-  public update(): ReturnType<Service["update"]> {
-    return Promise.resolve(null);
-  }
+	public update(): ReturnType<Service["update"]> {
+		return Promise.resolve(null);
+	}
 }
 
 export { UserService };

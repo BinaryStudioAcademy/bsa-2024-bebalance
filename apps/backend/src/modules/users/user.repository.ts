@@ -54,9 +54,23 @@ class UserRepository implements Repository {
 	}
 
 	public async find(query: Partial<UserDto>): Promise<null | UserEntity> {
-		const user = await this.userModel.query().findOne(query);
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.where(query)
+			.first();
 
-		return user ? UserEntity.initialize(user) : null;
+		return user
+			? UserEntity.initialize({
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
 	}
 
 	public async findAll(): Promise<UserEntity[]> {

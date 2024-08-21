@@ -46,7 +46,7 @@ const authorizationPlugin = fp<PluginOptions>(
 					throw new AuthError({ message: ErrorMessage.USER_NOT_FOUND });
 				}
 
-				request.user = user;
+				request.user = user.toObject();
 			} catch (error) {
 				if (error instanceof AuthError) {
 					throw error;
