@@ -1,21 +1,21 @@
 import { toast } from "react-toastify";
 
-import { DefaulteMessage } from "./libs/enums/enums.js";
+import { DEFAULT_ERROR_MESSAGE } from "./libs/constants/constants.js";
 
 class Notification {
-	public error(message = DefaulteMessage.ERROR) {
+	public error(message = DEFAULT_ERROR_MESSAGE) {
 		toast.error(message);
 	}
 
-	public info(message = DefaulteMessage.INFO) {
+	public info(message: string) {
 		toast.info(message);
 	}
 
-	public success(message = DefaulteMessage.SUCCESS) {
+	public success(message: string) {
 		toast.success(message);
 	}
 
-	public warn(message = DefaulteMessage.WARN) {
+	public warn(message: string) {
 		toast.warn(message);
 	}
 }
