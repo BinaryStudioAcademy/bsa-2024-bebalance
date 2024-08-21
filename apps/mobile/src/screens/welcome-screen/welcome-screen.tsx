@@ -1,7 +1,6 @@
 import React from "react";
-import { View } from "react-native";
 
-import { Text } from "~/libs/components/components";
+import { Text, View } from "~/libs/components/components";
 
 const WelcomeScreen: React.FC = () => {
 	return (

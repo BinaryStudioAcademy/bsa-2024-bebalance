@@ -4,7 +4,6 @@ import {
 } from "@react-navigation/native-stack";
 import React from "react";
 
-import { ProtectedRoute } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { Auth } from "~/screens/auth/auth";
@@ -17,18 +16,24 @@ const screenOptions: NativeStackNavigationOptions = {
 };
 
 const Root: React.FC = () => {
+	// const { authenticatedUser } = useAppSelector(({ auth }) => ({
+	// 	authenticatedUser: auth.authenticatedUser,
+	// }));
+	const authenticatedUser = "User";
+	const hasUser = Boolean(authenticatedUser);
 	return (
 		<NativeStack.Navigator screenOptions={screenOptions}>
-			<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_IN} />
-			<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_UP} />
-			<NativeStack.Screen
-				component={() => (
-					<ProtectedRoute>
-						<WelcomeScreen />
-					</ProtectedRoute>
-				)}
-				name={RootScreenName.WELCOME}
-			/>
+			{hasUser ? (
+				<NativeStack.Screen
+					component={WelcomeScreen}
+					name={RootScreenName.WELCOME}
+				/>
+			) : (
+				<>
+					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_IN} />
+					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_UP} />
+				</>
+			)}
 		</NativeStack.Navigator>
 	);
 };
