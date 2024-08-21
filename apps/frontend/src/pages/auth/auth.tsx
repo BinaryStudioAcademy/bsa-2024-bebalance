@@ -10,7 +10,11 @@ import {
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
-import { SignInForm, SignUpForm } from "./components/components.js";
+import {
+	QuizIntroductionScreen,
+	SignInForm,
+	SignUpForm,
+} from "./components/components.js";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -32,6 +36,9 @@ const Auth: React.FC = () => {
 
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
+			case AppRoute.QUIZ: {
+				return <QuizIntroductionScreen />;
+			}
 			case AppRoute.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
