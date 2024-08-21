@@ -1,6 +1,6 @@
 const ErrorMessage = {
-	INTERNAL_SERVER_ERROR: "Internal server error",
-	UNAUTHORIZED: "Unauthorized",
+	INTERNAL_SERVER_ERROR: "Unexpected internal server error",
+	UNAUTHORIZED: "You are unauthorized to access the requested resource",
 } as const;
 
 export { ErrorMessage };
