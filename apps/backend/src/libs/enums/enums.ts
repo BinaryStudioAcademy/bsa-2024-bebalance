@@ -1,8 +1,3 @@
 export { RelationName } from "./relation-name.enum.js";
-export {
-	APIPath,
-	AppEnvironment,
-	AuthApiPath,
-	ErrorMessage,
-	ServerErrorType,
-} from "shared";
+export { AuthApiPath } from "~/modules/auth/libs/enums/enums.js";
+export { APIPath, AppEnvironment, ErrorMessage, ServerErrorType } from "shared";

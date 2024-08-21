@@ -59,7 +59,6 @@ const authorizationPlugin = fp<PluginOptions>(
 			}
 		});
 	},
-	{ name: "authorization-plugin" },
 );
 
 export { authorizationPlugin };
