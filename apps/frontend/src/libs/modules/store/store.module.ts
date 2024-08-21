@@ -10,6 +10,8 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import { userApi, reducer as usersReducer } from "~/modules/users/users.js";
 
+import { handleErrorMiddleware } from "./handle-error.middleware.js";
+
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
 	users: ReturnType<typeof usersReducer>;
@@ -37,7 +39,7 @@ class Store {
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
-				});
+				}).prepend([handleErrorMiddleware]);
 			},
 			reducer: {
 				auth: authReducer,
