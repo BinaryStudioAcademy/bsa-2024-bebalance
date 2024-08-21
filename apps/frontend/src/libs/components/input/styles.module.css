@@ -11,7 +11,7 @@
 	position: relative;
 }
 
-.input__field {
+.input-field {
 	width: 100%;
 	padding: 10px;
 	font-size: 16px;
@@ -20,31 +20,7 @@
 	outline: none;
 }
 
-.icon {
-	position: absolute;
-	top: 50%;
-	min-width: 23px;
-	opacity: 0.5;
-	transform: translateY(-50%);
-}
-
-.icon-left {
-	left: 10px;
-}
-
-.icon-right {
-	right: 15px;
-}
-
-.input__field--with-icon-left {
-	padding-left: 40px;
-}
-
-.input__field--with-icon-right {
-	padding-right: 50px;
-}
-
-.input__field:focus {
+.input-field:focus {
 	border-color: var(--brand);
 }
 
