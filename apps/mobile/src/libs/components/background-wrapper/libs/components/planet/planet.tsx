@@ -1,17 +1,17 @@
-import { type StyleProp, type ViewStyle } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "~/libs/components/components";
+import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 
 import {
 	colorToGradientMap,
 	gradientDirectionMap,
-	sizeToWidthHeightMap,
+	sizeToStyleMap,
 } from "./../../maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
 	color: keyof typeof colorToGradientMap;
 	gradientDirection?: keyof typeof gradientDirectionMap;
-	size: keyof typeof sizeToWidthHeightMap;
+	size: keyof typeof sizeToStyleMap;
 	style?: StyleProp<ViewStyle>;
 };
 
@@ -28,7 +28,7 @@ const Planet = ({
 			colors={colorToGradientMap[color]}
 			end={end}
 			start={start}
-			style={[styles.bubble, sizeToWidthHeightMap[size], style]}
+			style={[styles.bubble, sizeToStyleMap[size], style]}
 		/>
 	);
 };

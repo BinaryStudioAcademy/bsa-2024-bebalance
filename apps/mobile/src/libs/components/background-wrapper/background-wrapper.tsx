@@ -1,16 +1,11 @@
 import { ReactNode } from "react";
-import { type ImageSourcePropType } from "react-native";
 
 import { Image, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
+import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { Planet } from "./libs/components/planet/planet";
 import { styles } from "./styles";
-
-const circleTop =
-	require("~/assets/images/top-circle.png") as ImageSourcePropType;
-const circleBottom =
-	require("~/assets/images/bottom-circle.png") as ImageSourcePropType;
 
 type Properties = {
 	children: ReactNode;
@@ -18,8 +13,13 @@ type Properties = {
 
 const BackgroundWrapper = ({ children }: Properties) => {
 	return (
-		<View style={[styles.container, globalStyles.flex1]}>
-			<Image source={circleTop} style={[styles.image, styles.topImage]} />
+		<View style={[globalStyles.flex1, styles.container]}>
+			<Image
+				source={
+					require("~/assets/images/top-circle.png") as ImageSourcePropType
+				}
+				style={[styles.image, styles.topImage]}
+			/>
 			<View style={[styles.dot, styles.dotPositionTop]} />
 			<View style={[styles.dot, styles.dotPositionRight]} />
 			<View style={[styles.dot, styles.dotPositionRightBottom]} />
@@ -39,7 +39,12 @@ const BackgroundWrapper = ({ children }: Properties) => {
 				size={"lg"}
 				style={styles.bottomPlanet}
 			/>
-			<Image source={circleBottom} style={[styles.image, styles.bottomImage]} />
+			<Image
+				source={
+					require("~/assets/images/bottom-circle.png") as ImageSourcePropType
+				}
+				style={[styles.image, styles.bottomImage]}
+			/>
 		</View>
 	);
 };

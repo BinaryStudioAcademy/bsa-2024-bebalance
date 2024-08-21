@@ -6,3 +6,4 @@ export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Text } from "./text/text";
 export { ActivityIndicator, Image, View } from "react-native";
+export { LinearGradient } from "react-native-linear-gradient";
