@@ -22,8 +22,9 @@ import { SignInForm, SignUpForm } from "./components/components";
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ auth }) => ({
+	const { dataStatus, user } = useAppSelector(({ auth }) => ({
 		dataStatus: auth.dataStatus,
+		user: auth.user,
 	}));
 
 	const isSignUpScreen = name === RootScreenName.SIGN_UP;
@@ -34,6 +35,12 @@ const Auth: React.FC = () => {
 		}
 	}, [isSignUpScreen, dispatch]);
 
+	useEffect(() => {
+		if (user) {
+			void dispatch(userActions.getAuthenticatedUser(user.id));
+		}
+	}, [user]);
+
 	const handleSignInSubmit = useCallback(() => {
 		// TODO: handle sign in
 	}, []);
@@ -42,7 +49,7 @@ const Auth: React.FC = () => {
 		(payload: UserSignUpRequestDto): void => {
 			void dispatch(authActions.signUp(payload));
 		},
-		[],
+		[dispatch],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
