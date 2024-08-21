@@ -34,8 +34,8 @@
 		"pg": "8.12.0",
 		"pino": "9.3.2",
 		"pino-pretty": "11.2.2",
-		"swagger-jsdoc": "6.2.8",
-		"shared": "*"
+		"shared": "*",
+		"swagger-jsdoc": "6.2.8"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "5.0.2",

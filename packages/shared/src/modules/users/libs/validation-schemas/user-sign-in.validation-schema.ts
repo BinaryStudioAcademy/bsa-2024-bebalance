@@ -21,6 +21,9 @@ const userSignIn = z
 		password: z
 			.string()
 			.trim()
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+				message: UserValidationMessage.PASSWORD_REQUIRE,
+			})
 			.max(UserValidationRule.PASSWORD_MAX_LENGTH, {
 				message: UserValidationMessage.PASSWORD_MAX_LENGTH,
 			})

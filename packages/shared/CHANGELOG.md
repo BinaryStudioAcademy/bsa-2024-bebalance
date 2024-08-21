@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.0.0...shared-v1.1.0) (2024-08-21)
+
+
+### Features
+
+* Sign In bb-7 ([#49](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/49)) ([7132640](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7132640bb557dfc3ab67c7ad131be828b576ef05))
+
 ## 1.0.0 (2024-08-20)
 
 
