@@ -1,4 +1,4 @@
-import { type ViewStyle } from "react-native";
+import { type ViewStyle } from "~/libs/types/types";
 
 const sizeToStyleMap = {
 	lg: { borderRadius: 160, height: 160, width: 160 } satisfies ViewStyle,
