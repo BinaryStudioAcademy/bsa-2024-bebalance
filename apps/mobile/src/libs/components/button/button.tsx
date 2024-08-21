@@ -24,12 +24,9 @@ const Button: React.FC<Properties> = ({
 	const FIRST_COLOR_STOP = -0.4;
 	const SECOND_COLOR_STOP = 0.9;
 	const isFilled = appearance === "filled";
-	const { alignItemsCenter, flex1, justifyContentCenter } = globalStyles;
-	const { bgWhite, colorBlack, colorWhite, p1, rounded, text, wrapper } =
-		styles;
 
 	return (
-		<Pressable disabled={isDisabled} onPress={onPress} style={wrapper}>
+		<Pressable disabled={isDisabled} onPress={onPress} style={styles.wrapper}>
 			{({ pressed }) => {
 				const activeButtonColors = pressed
 					? [...GradientColor.BLUE]
@@ -44,24 +41,26 @@ const Button: React.FC<Properties> = ({
 						colors={conditionalColors}
 						locations={[FIRST_COLOR_STOP, SECOND_COLOR_STOP]}
 						style={[
-							alignItemsCenter,
-							flex1,
-							justifyContentCenter,
-							rounded,
-							!isFilled && p1,
+							globalStyles.alignItemsCenter,
+							globalStyles.flex1,
+							globalStyles.justifyContentCenter,
+							styles.rounded,
+							!isFilled && globalStyles.p2,
 						]}
 						useAngle
 					>
 						{isFilled ? (
-							<Text style={[colorWhite, text]}>{label}</Text>
+							<Text color={BaseColor.BG_WHITE} preset="uppercase" size="md">
+								{label}
+							</Text>
 						) : (
 							<View
 								style={[
-									alignItemsCenter,
-									bgWhite,
-									flex1,
-									justifyContentCenter,
-									rounded,
+									globalStyles.alignItemsCenter,
+									styles.bgWhite,
+									globalStyles.flex1,
+									globalStyles.justifyContentCenter,
+									styles.rounded,
 								]}
 							>
 								<GradientText
@@ -72,10 +71,14 @@ const Button: React.FC<Properties> = ({
 										locations: [FIRST_COLOR_STOP, SECOND_COLOR_STOP],
 										useAngle: true,
 									}}
-									textStyle={[colorBlack, text]}
-								>
-									{label}
-								</GradientText>
+									textProps={{
+										children: label,
+										color: BaseColor.BLACK,
+										preset: "uppercase",
+										size: "md",
+										weight: "bold",
+									}}
+								/>
 							</View>
 						)}
 					</LinearGradient>
