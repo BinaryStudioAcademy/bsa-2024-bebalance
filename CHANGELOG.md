@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.8.0...v1.9.0) (2024-08-21)
+
+
+### Features
+
+* Button component bb-26 ([#54](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/54)) ([e9d535d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e9d535d7685a93cf35eda81e196ee7af7c1e2d1d))
+* impl protected routing bb-11 ([#50](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/50)) ([5f2c71c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5f2c71ccfd1dd50f4a894d1ab391690b674ab2eb))
+* sign in screen - mobile responsiveness bb-61 ([#78](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/78)) ([f8b36f2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f8b36f25d71b15d0be03091bdae04b0f664b6ede))
+
 ## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.7.0...v1.8.0) (2024-08-21)
 
 
