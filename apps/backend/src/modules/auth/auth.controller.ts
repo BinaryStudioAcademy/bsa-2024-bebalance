@@ -50,7 +50,7 @@ class AuthController extends BaseController {
 			path: AuthApiPath.AUTHENTICATED_USER,
 		});
 
-    this.addRoute({
+		this.addRoute({
 			handler: (options) =>
 				this.signIn(
 					options as APIHandlerOptions<{
@@ -97,10 +97,10 @@ class AuthController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
-  
-  /**
+
+	/**
 	 * @swagger
-   * /auth/sign-in:
+	 * /auth/sign-in:
 	 *    post:
 	 *      description: Sign in user into the system
 	 *      requestBody:
