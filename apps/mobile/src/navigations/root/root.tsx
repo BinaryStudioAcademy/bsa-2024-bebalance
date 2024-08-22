@@ -16,11 +16,10 @@ const screenOptions: NativeStackNavigationOptions = {
 };
 
 const Root: React.FC = () => {
-	// const { authenticatedUser } = useAppSelector(({ auth }) => ({
-	// 	authenticatedUser: auth.authenticatedUser,
-	// }));
-	const authenticatedUser = "User";
-	const hasUser = Boolean(authenticatedUser);
+	// const user = useAppSelector(({ auth }) => auth.user);
+
+	const user = "User";
+	const hasUser = Boolean(user);
 	return (
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
