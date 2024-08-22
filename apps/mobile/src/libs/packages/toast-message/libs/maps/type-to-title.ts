@@ -1,6 +1,5 @@
-import { type ValueOf } from "shared";
-
 import { ToastMessageTitle, ToastMessageType } from "~/libs/enums/enums";
+import { type ValueOf } from "~/libs/types/types";
 
 const typeToTitle: Record<
 	ValueOf<typeof ToastMessageType>,
