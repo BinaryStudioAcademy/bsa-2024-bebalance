@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.0...v1.11.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** fix conflicted protected routes bb-11 ([#121](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/121)) ([81851eb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/81851eb378d4efd604de19be3424c3b62646f2a2))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.10.0...v1.11.0) (2024-08-22)
 
 
