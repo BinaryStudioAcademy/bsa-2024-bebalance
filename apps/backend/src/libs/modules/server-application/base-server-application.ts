@@ -11,12 +11,16 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { type Database } from "~/libs/modules/database/database.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { token } from "~/libs/modules/token/token.js";
+import { authorizationPlugin } from "~/libs/plugins/plugins.js";
 import {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
 	type ValidationSchema,
 } from "~/libs/types/types.js";
+import { userService } from "~/modules/users/users.js";
 
+import { WHITE_ROUTES } from "./libs/constants/constants.js";
 import {
 	type ServerApplication,
 	type ServerApplicationApi,
@@ -204,6 +208,12 @@ class BaseServerApplication implements ServerApplication {
 
 				await this.app.register(swaggerUi, {
 					routePrefix: `/${api.version}/documentation`,
+				});
+
+				await this.app.register(authorizationPlugin, {
+					token,
+					userService,
+					whiteRoutes: WHITE_ROUTES,
 				});
 			}),
 		);

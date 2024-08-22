@@ -25,6 +25,7 @@ class AuthService {
 		userRequestDto: UserSignInRequestDto,
 	): Promise<UserSignInResponseDto> {
 		const { email, password } = userRequestDto;
+
 		const user = await this.userService.findByEmail(email);
 
 		if (!user) {

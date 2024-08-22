@@ -9,6 +9,12 @@
 	--light-brand: #00f0ff;
 	--light-gray: #e0e0e0;
 	--white: #ffffff;
+	--disable: #e0e0e0;
+	--pink-gradient: linear-gradient(
+		325deg,
+		hsl(338deg 100% 67%) 0%,
+		hsl(299deg 100% 72%) 100%
+	);
 	--complete: #c2eacd;
 	--completed: #f0fff4;
 	--physical-start: #ffe307;

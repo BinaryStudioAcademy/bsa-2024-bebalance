@@ -17,7 +17,7 @@ type Properties<T extends FieldValues> = {
 	name: FieldPath<T>;
 	options?: { label: string; value: string }[];
 	placeholder?: string;
-	type?: "email" | "radio" | "text";
+	type?: "email" | "password" | "radio" | "text";
 };
 
 const Input = <T extends FieldValues>({
