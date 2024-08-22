@@ -1,5 +1,51 @@
 # Changelog
 
+## [1.11.3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.2...v1.11.3) (2024-08-22)
+
+
+### Bug Fixes
+
+* **frontend:** consistant sign in naming web bb-126 ([#123](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/123)) ([eb36a24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/eb36a246fb0ac30a7dbf1a4e08173242ffe0a2e1))
+
+## [1.11.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.1...v1.11.2) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** fix invalid regex on white route helper bb-11 ([#130](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/130)) ([f1ef964](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f1ef9642ea3d3a59de8c2f44b8d02f88e40fe149))
+
+## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.0...v1.11.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** fix conflicted protected routes bb-11 ([#121](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/121)) ([81851eb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/81851eb378d4efd604de19be3424c3b62646f2a2))
+
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.10.0...v1.11.0) (2024-08-22)
+
+
+### Features
+
+* Sign Up bb-9 ([#55](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/55)) ([1957941](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1957941e8145c5ad0942048b98d62c5f62e8e6da))
+
+
+### Bug Fixes
+
+* **backend:** add missing "/api" prefix for white route check bb-11 ([#116](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/116)) ([12ac4d7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/12ac4d7c8cdae85ea5561e6ba74b82bed439281d))
+
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.9.0...v1.10.0) (2024-08-22)
+
+
+### Features
+
+* get authenticated user bb-13 ([#47](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/47)) ([dfb6769](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dfb67695905b4a1fe9050e4ea07f94e7af17bb4a))
+* Quiz introduction screen bb-87 ([#97](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/97)) ([f53bc9f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f53bc9f2f47a03c47426dc263a67bcfac71d9793))
+
+
+### Bug Fixes
+
+* **backend:** fix unresolved auth plugin and invalid white routes bb-11 ([#108](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/108)) ([bc97a65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc97a655d9833ad512c7d10526cf7ad43be05f4f))
+
 ## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.8.0...v1.9.0) (2024-08-21)
 
 
