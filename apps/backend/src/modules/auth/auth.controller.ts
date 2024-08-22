@@ -37,6 +37,7 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
 		this.addRoute({
 			handler: (options) =>
 				this.signIn(
@@ -78,9 +79,12 @@ class AuthController extends BaseController {
 	 *              schema:
 	 *                type: object
 	 *                properties:
-	 *                  message:
-	 *                    type: object
+	 *                  user:
 	 *                    $ref: "#/components/schemas/User"
+	 *                  token:
+	 *                    type: string
+	 *                    description: "Authentication token for the user."
+	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
 	private async signIn(
 		options: APIHandlerOptions<{
@@ -119,10 +123,14 @@ class AuthController extends BaseController {
 	 *              schema:
 	 *                type: object
 	 *                properties:
-	 *                  message:
-	 *                    type: object
+	 *                  user:
 	 *                    $ref: "#/components/schemas/User"
+	 *                  token:
+	 *                    type: string
+	 *                    description: "Authentication token for the user."
+	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
+
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;

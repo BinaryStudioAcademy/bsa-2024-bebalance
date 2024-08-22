@@ -87,6 +87,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />
 			<div className={styles["circle-gradient3"]} />
+			<div className={styles["circle-gradient4"]} />
 		</div>
 	);
 };

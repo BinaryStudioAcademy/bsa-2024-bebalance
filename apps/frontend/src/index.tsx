@@ -23,7 +23,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component={"Root"}
+										component="Root"
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
