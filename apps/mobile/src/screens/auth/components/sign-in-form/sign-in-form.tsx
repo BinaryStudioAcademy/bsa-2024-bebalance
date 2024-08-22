@@ -2,7 +2,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 //temp
 
-import { Button, Input, Link, Text, View } from "~/libs/components/components";
+import {
+	BackgroundWrapper,
+	Button,
+	Input,
+	Link,
+	Text,
+	View,
+} from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { userSignInValidationSchema } from "~/packages/users/libs/validation-schemas/validation-schemas";
@@ -24,7 +31,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 	}, [handleSubmit, onSubmit]);
 
 	return (
-		<>
+		<BackgroundWrapper>
 			<Text preset="heading" size="xl">
 				SIGN IN
 			</Text>
@@ -50,7 +57,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 			<View style={styles.forgotPasswordContainer}>
 				<Link label="Forgot password?" to="/" />
 			</View>
-		</>
+		</BackgroundWrapper>
 	);
 };
 
