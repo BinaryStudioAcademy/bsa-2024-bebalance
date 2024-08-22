@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.4.0...frontend-v1.5.0) (2024-08-22)
+
+
+### Features
+
+* Quiz introduction screen bb-87 ([#97](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/97)) ([f53bc9f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f53bc9f2f47a03c47426dc263a67bcfac71d9793))
+
 ## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.3.0...frontend-v1.4.0) (2024-08-21)
 
 

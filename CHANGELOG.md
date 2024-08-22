@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.9.0...v1.10.0) (2024-08-22)
+
+
+### Features
+
+* get authenticated user bb-13 ([#47](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/47)) ([dfb6769](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dfb67695905b4a1fe9050e4ea07f94e7af17bb4a))
+* Quiz introduction screen bb-87 ([#97](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/97)) ([f53bc9f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f53bc9f2f47a03c47426dc263a67bcfac71d9793))
+
+
+### Bug Fixes
+
+* **backend:** fix unresolved auth plugin and invalid white routes bb-11 ([#108](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/108)) ([bc97a65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc97a655d9833ad512c7d10526cf7ad43be05f4f))
+
 ## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.8.0...v1.9.0) (2024-08-21)
 
 
