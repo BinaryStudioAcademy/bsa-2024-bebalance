@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.3.0...backend-v1.4.0) (2024-08-22)
+
+
+### Features
+
+* get authenticated user bb-13 ([#47](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/47)) ([dfb6769](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dfb67695905b4a1fe9050e4ea07f94e7af17bb4a))
+
+
+### Bug Fixes
+
+* **backend:** fix unresolved auth plugin and invalid white routes bb-11 ([#108](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/108)) ([bc97a65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc97a655d9833ad512c7d10526cf7ad43be05f4f))
+
 ## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.2.0...backend-v1.3.0) (2024-08-21)
 
 
