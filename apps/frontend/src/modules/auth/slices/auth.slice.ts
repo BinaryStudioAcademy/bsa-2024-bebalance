@@ -16,7 +16,8 @@ type State = {
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	user: { email: "shevchenko@gmail.com", id: 4 }, //TODO: change to null
+	//TODO: change to null
+	user: { email: "shevchenko@gmail.com", id: 4 },
 };
 
 const { actions, name, reducer } = createSlice({

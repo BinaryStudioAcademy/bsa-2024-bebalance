@@ -1,0 +1,20 @@
+.sidebarContainer {
+	background-color: var(--background-gray);
+}
+
+.logoContainer {
+	padding-top: 24px;
+	padding-bottom: 25px;
+	padding-left: 30px;
+	font-size: 28px;
+	border-bottom: 1px solid var(--white);
+}
+
+.buttonsContainer {
+	padding: 14px, 12px, 14px, 14px;
+}
+
+.linkPicture {
+	width: 23px;
+	height: 23px;
+}
