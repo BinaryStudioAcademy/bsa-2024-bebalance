@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.5.0...frontend-v1.6.0) (2024-08-22)
+
+
+### Features
+
+* Sign Up bb-9 ([#55](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/55)) ([1957941](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1957941e8145c5ad0942048b98d62c5f62e8e6da))
+
 ## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.4.0...frontend-v1.5.0) (2024-08-22)
 
 

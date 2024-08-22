@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.10.0...v1.11.0) (2024-08-22)
+
+
+### Features
+
+* Sign Up bb-9 ([#55](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/55)) ([1957941](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1957941e8145c5ad0942048b98d62c5f62e8e6da))
+
+
+### Bug Fixes
+
+* **backend:** add missing "/api" prefix for white route check bb-11 ([#116](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/116)) ([12ac4d7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/12ac4d7c8cdae85ea5561e6ba74b82bed439281d))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.9.0...v1.10.0) (2024-08-22)
 
 
