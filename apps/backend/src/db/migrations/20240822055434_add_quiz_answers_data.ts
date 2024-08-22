@@ -5,7 +5,7 @@ type QuizQuestion = {
 	[ColumnName.LABEL]: string;
 };
 
-type QuizAnswers = {
+type QuizAnswer = {
 	[ColumnName.LABEL]: string;
 	[ColumnName.QUESTION_ID]: number;
 	[ColumnName.VALUE]: number;
@@ -211,7 +211,7 @@ async function up(knex: Knex): Promise<void> {
 		questions.map((question) => [question.label, question.id]),
 	);
 
-	const quizAnswers: QuizAnswers[] = Object.entries(QUIZ_ANSWERS).flatMap(
+	const quizAnswers: QuizAnswer[] = Object.entries(QUIZ_ANSWERS).flatMap(
 		([questionLabel, answers]) =>
 			answers.map((answerLabel, index) => ({
 				[ColumnName.LABEL]: answerLabel,
@@ -221,13 +221,13 @@ async function up(knex: Knex): Promise<void> {
 			})),
 	);
 
-	await knex<QuizAnswers>(TableName.QUIZ_ANSWERS).insert(quizAnswers);
+	await knex<QuizAnswer>(TableName.QUIZ_ANSWERS).insert(quizAnswers);
 }
 
 function down(knex: Knex): Promise<void> {
 	const questionLabels = Object.keys(QUIZ_ANSWERS);
 
-	return knex<QuizAnswers>(TableName.QUIZ_ANSWERS)
+	return knex<QuizAnswer>(TableName.QUIZ_ANSWERS)
 		.whereIn(
 			ColumnName.QUESTION_ID,
 			knex(TableName.QUIZ_QUESTIONS)

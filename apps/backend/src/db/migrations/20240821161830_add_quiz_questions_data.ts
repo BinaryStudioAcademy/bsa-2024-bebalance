@@ -83,14 +83,14 @@ async function up(knex: Knex): Promise<void> {
 		.select(ColumnName.ID, ColumnName.NAME)
 		.whereIn(ColumnName.NAME, Object.values(CATEGORIES));
 
-	const idByCategory: Record<string, number> = Object.fromEntries(
+	const categoryIdByLabel: Record<string, number> = Object.fromEntries(
 		categories.map((category) => [category.name, category.id]),
 	);
 
 	const quizQuestions: QuizQuestion[] = Object.entries(QUIZ_QUESTIONS).flatMap(
 		([category, questionLabels]) =>
 			questionLabels.map((label) => ({
-				category_id: idByCategory[category] as number,
+				category_id: categoryIdByLabel[category] as number,
 				label,
 			})),
 	);
