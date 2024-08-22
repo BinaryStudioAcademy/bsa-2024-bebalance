@@ -15,9 +15,8 @@ import { actions as userActions } from "~/modules/users/users.js";
 const App: React.FC = () => {
 	const { pathname } = useLocation();
 	const dispatch = useAppDispatch();
-	const { dataStatus, user } = useAppSelector(({ users }) => ({
+	const { dataStatus } = useAppSelector(({ users }) => ({
 		dataStatus: users.dataStatus,
-		user: users.user,
 	}));
 
 	const isRoot = pathname === AppRoute.ROOT;
@@ -36,12 +35,6 @@ const App: React.FC = () => {
 				<RouterOutlet />
 			</div>
 			{isLoading && <Loader />}
-			{!isLoading && isRoot && (
-				<>
-					<h2>Users: {user?.email}</h2>
-					<h3>Status: {dataStatus}</h3>
-				</>
-			)}
 			<Notification />
 		</>
 	);
