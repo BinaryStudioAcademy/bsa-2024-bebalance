@@ -9,8 +9,8 @@ import {
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
-import authIlustrationLeft from "~/pages/auth/assets/img/auth-ilustration-left.svg";
-import authIlustrationRight from "~/pages/auth/assets/img/auth-ilustration-right.svg";
+import authIllustrationLeft from "~/pages/auth/assets/img/auth-illustration-left.svg";
+import authIllustrationRight from "~/pages/auth/assets/img/auth-illustration-right.svg";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
 import styles from "./style.module.css";
@@ -54,15 +54,15 @@ const Auth: React.FC = () => {
 				</section>
 				<section className={styles["ilustration-container"]}>
 					<img
-						alt="sky blue ilustation"
+						alt="background"
 						className={styles["img-left"]}
-						src={authIlustrationLeft}
+						src={authIllustrationLeft}
 					/>
 					<h1 className={styles["title"]}>Logo</h1>
 					<img
-						alt="sky blue ilustation"
+						alt="background"
 						className={styles["img-right"]}
-						src={authIlustrationRight}
+						src={authIllustrationRight}
 					/>
 				</section>
 			</main>
