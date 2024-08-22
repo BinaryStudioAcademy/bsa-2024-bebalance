@@ -49,9 +49,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						control={control}
 						errors={errors}
 						label="name"
-						name="email"
-						placeholder="name@gmail.com"
-						type="email"
+						name="name"
+						placeholder="name"
+						type="text"
 					/>
 
 					<Input
@@ -69,7 +69,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						label="Password"
 						name="password"
 						placeholder="*******"
-						type="text"
+						type="password"
 					/>
 
 					<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
