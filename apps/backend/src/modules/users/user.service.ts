@@ -49,6 +49,7 @@ class UserService implements Service {
 			items: items.map((item) => item.toObject()),
 		};
 	}
+
 	public findByEmail(email: string): Promise<null | UserEntity> {
 		return this.userRepository.findByEmail(email);
 	}
