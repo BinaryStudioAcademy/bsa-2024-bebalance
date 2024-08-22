@@ -1,4 +1,4 @@
-import lifeBalanceWheel from "~/assets/img//life-balance-wheel.svg";
+import lifeBalanceWheel from "~/assets/img/life-balance-wheel.svg";
 import { Button } from "~/libs/components/components.js";
 
 import styles from "./styles.module.css";
