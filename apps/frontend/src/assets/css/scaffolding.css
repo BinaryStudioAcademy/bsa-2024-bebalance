@@ -46,5 +46,5 @@ input,
 button,
 textarea,
 select {
-	font-family: Nunito, Arial, sans-serif;
+	font-family: inherit;
 }
