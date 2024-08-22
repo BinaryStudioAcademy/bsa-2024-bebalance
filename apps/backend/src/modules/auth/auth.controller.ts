@@ -4,7 +4,7 @@ import {
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
-import { AuthError, HTTPCode } from "~/libs/modules/http/http.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { UserDto } from "~/modules/users/libs/types/types.js";
 import {
@@ -16,6 +16,7 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
+import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthController extends BaseController {
 	private authService: AuthService;

@@ -1,1 +1,1 @@
-export { AuthError, HTTPError, ServerError } from "shared";
+export { HTTPError } from "shared";
