@@ -32,7 +32,7 @@ const BackgroundWrapper = ({ children }: Properties) => {
 				size="sm"
 				style={styles.leftPlanet}
 			/>
-			{children}
+
 			<Planet
 				color="pink"
 				gradientDirection="topToBottom"
@@ -45,6 +45,9 @@ const BackgroundWrapper = ({ children }: Properties) => {
 				}
 				style={[styles.image, styles.bottomImage]}
 			/>
+			<View style={[globalStyles.flex1, globalStyles.justifyContentCenter]}>
+				{children}
+			</View>
 		</View>
 	);
 };
