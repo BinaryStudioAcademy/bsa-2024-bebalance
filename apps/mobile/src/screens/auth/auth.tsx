@@ -96,6 +96,9 @@ const Auth: React.FC = () => {
 					>
 						<ScrollView
 							contentContainerStyle={{ flexGrow: 1 }}
+							overScrollMode="never"
+							showsHorizontalScrollIndicator={false}
+							showsVerticalScrollIndicator={false}
 							style={styles.formContainer}
 						>
 							<View style={[globalStyles.p32]}>
