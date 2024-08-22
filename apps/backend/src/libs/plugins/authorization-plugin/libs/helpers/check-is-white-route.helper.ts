@@ -1,4 +1,4 @@
-const checkWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
+const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 	const urlRegex = /^\/api\/v\d+.*(\/.+)$/;
 	const match = url.match(urlRegex);
 
@@ -11,4 +11,4 @@ const checkWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
 	return whiteRoutes.includes(route ?? "/");
 };
 
-export { checkWhiteRoute };
+export { checkIsWhiteRoute };

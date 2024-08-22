@@ -8,7 +8,7 @@ import { AuthError } from "~/modules/auth/auth.js";
 import { UserService } from "~/modules/users/users.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
-import { checkWhiteRoute } from "./libs/helpers/helpers.js";
+import { checkIsWhiteRoute } from "./libs/helpers/helpers.js";
 
 type PluginOptions = {
 	token: BaseToken<TokenPayload>;
@@ -22,7 +22,7 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 	app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
 		const { headers, url } = request;
 
-		if (checkWhiteRoute(url, whiteRoutes)) {
+		if (checkIsWhiteRoute(url, whiteRoutes)) {
 			return;
 		}
 
