@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.2...v1.11.3) (2024-08-22)
+
+
+### Bug Fixes
+
+* **frontend:** consistant sign in naming web bb-126 ([#123](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/123)) ([eb36a24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/eb36a246fb0ac30a7dbf1a4e08173242ffe0a2e1))
+
 ## [1.11.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.1...v1.11.2) (2024-08-22)
 
 
