@@ -15,7 +15,7 @@
 	border-radius: 32px;
 }
 
-.ilustration-container {
+.illustration-container {
 	position: relative;
 	display: flex;
 	flex-basis: 60%;
@@ -25,11 +25,11 @@
 	color: white;
 }
 
-.ilustration-container .title {
+.illustration-container .title {
 	font-size: 70px;
 }
 
-.ilustration-container .img-left {
+.illustration-container .img-left {
 	position: absolute;
 	top: -200px;
 	left: -300px;
@@ -37,7 +37,7 @@
 	width: 60%;
 }
 
-.ilustration-container .img-right {
+.illustration-container .img-right {
 	position: absolute;
 	right: -100px;
 	bottom: -200px;
