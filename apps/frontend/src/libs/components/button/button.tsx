@@ -7,6 +7,7 @@ type Properties = {
 	isPrimary?: boolean;
 	label: string;
 	type?: "button" | "submit";
+	variant: "dark" | "secondary";
 };
 
 const Button: React.FC<Properties> = ({

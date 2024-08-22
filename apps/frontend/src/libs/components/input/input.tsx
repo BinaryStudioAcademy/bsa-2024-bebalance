@@ -16,7 +16,7 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	placeholder?: string;
-	type?: "email" | "text";
+	type?: "email" | "password" | "text";
 };
 
 const Input = <T extends FieldValues>({
