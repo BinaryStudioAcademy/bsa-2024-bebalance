@@ -1,18 +1,16 @@
 import React from "react";
 
-import { type UserDto } from "~/libs/types/types.js";
+import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 
 import { UserHeaderInfo } from "./components/components.js";
 import styles from "./styles.module.css";
 
-type Properties = {
-	user: UserDto;
-};
+const Header: React.FC = () => {
+	const user = useAppSelector(({ users }) => users.user);
 
-const Header: React.FC<Properties> = ({ user }) => {
 	return (
 		<header className={styles["header"]}>
-			<UserHeaderInfo user={user} />
+			{user && <UserHeaderInfo user={user} />}
 		</header>
 	);
 };
