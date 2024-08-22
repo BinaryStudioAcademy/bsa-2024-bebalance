@@ -1,7 +1,9 @@
 import { isRejected, type Middleware } from "@reduxjs/toolkit";
 
-import { DEFAULT_ERROR_MESSAGE } from "~/libs/packages/toast-message/libs/constants/constants";
-import { toastMessage } from "~/libs/packages/toast-message/toast-message";
+import {
+	DEFAULT_ERROR_MESSAGE,
+	toastMessage,
+} from "~/libs/packages/toast-message/toast-message";
 
 type MiddlewareError = {
 	data?: { message: string };
