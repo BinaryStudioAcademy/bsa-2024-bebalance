@@ -1,15 +1,9 @@
 import Toast from "react-native-toast-message";
-import { type ValueOf } from "shared";
 
 import { ToastMessageTitle, ToastMessageType } from "~/libs/enums/enums";
+import { type ValueOf } from "~/libs/types/types";
 
-import { DEFAULT_ERROR_MESSAGE } from "./libs/constants/constants";
 import { typeToTitle } from "./libs/maps/maps";
-
-type ErrorProperties = {
-	message?: string | undefined;
-	title?: ValueOf<typeof ToastMessageTitle>;
-};
 
 type Properties = {
 	message: string;
@@ -18,17 +12,17 @@ type Properties = {
 
 class ToastMessage {
 	private showToast(
-		{ message, title }: ErrorProperties | Properties,
+		{ message, title }: Properties,
 		type: ValueOf<typeof ToastMessageType>,
 	): void {
 		Toast.show({
 			text1: title ?? typeToTitle[type],
-			text2: message ?? DEFAULT_ERROR_MESSAGE,
+			text2: message,
 			type: type,
 		});
 	}
 
-	public error(properties: ErrorProperties = {}): void {
+	public error(properties: Properties): void {
 		this.showToast(properties, ToastMessageType.ERROR);
 	}
 
