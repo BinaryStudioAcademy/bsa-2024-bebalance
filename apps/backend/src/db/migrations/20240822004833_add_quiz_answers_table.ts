@@ -22,7 +22,7 @@ const ValueLimits = {
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TableName.QUIZ_ANSWERS, (table) => {
 		table.increments(ColumnName.ID).primary();
-		table.text(ColumnName.LABEL).notNullable().unique();
+		table.text(ColumnName.LABEL).notNullable();
 		table
 			.integer(ColumnName.QUESTION_ID)
 			.references(ColumnName.ID)
