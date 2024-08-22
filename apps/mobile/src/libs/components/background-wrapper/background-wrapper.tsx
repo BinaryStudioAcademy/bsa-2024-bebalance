@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 
-import { Image, View } from "~/libs/components/components";
+import { Image, Planet, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 
-import { Planet } from "./libs/components/planet/planet";
 import { styles } from "./styles";
 
 type Properties = {

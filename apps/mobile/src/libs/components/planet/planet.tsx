@@ -5,7 +5,7 @@ import {
 	colorToGradientColors,
 	directionToGradient,
 	sizeToStyles,
-} from "../../maps/maps";
+} from "../background-wrapper/libs/maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
