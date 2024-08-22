@@ -1,8 +1,9 @@
-import { signUp } from "./actions";
+import { signIn, signUp } from "./actions";
 import { actions } from "./auth.slice";
 
 const allActions = {
 	...actions,
+	signIn,
 	signUp,
 };
 
