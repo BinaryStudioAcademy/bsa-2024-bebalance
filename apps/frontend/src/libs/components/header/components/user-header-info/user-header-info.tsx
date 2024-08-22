@@ -1,5 +1,6 @@
 import React from "react";
 
+import defaultAvatar from "~/assets/img/default-avatar.png";
 import { type UserDto } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -14,7 +15,7 @@ const UserHeaderInfo: React.FC<Properties> = ({ user }) => {
 			<img
 				alt={`${user.name}'s avatar`}
 				className={styles["user-avatar"]}
-				src={user.avatar}
+				src={defaultAvatar}
 			/>
 			<span className={styles["user-name"]}>{user.name}</span>
 		</div>
