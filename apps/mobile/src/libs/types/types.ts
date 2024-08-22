@@ -6,8 +6,10 @@ export {
 export {
 	type ImageSourcePropType,
 	type StyleProp,
+	type TextStyle,
 	type ViewStyle,
 } from "react-native";
+export { type LinearGradientProps } from "react-native-linear-gradient";
 export {
 	type ServerErrorDetail,
 	type ServerErrorResponse,
