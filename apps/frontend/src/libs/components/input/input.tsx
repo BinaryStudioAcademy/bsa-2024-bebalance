@@ -12,7 +12,7 @@ import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
-	errors: FieldErrors<T>;
+	errors?: FieldErrors<T>;
 	label: string;
 	name: FieldPath<T>;
 	options?: { label: string; value: string }[];
@@ -31,7 +31,7 @@ const Input = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 
-	const error = errors[name]?.message;
+	const error = errors && errors[name]?.message;
 	const hasError = Boolean(error);
 
 	const handleRadioChange = useCallback(

@@ -20,7 +20,7 @@ type FormValues = {
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
-	const { control, errors } = useAppForm<FormValues>({
+	const { control } = useAppForm<FormValues>({
 		defaultValues: { value: "" },
 	});
 	const dispatch = useAppDispatch();
@@ -56,7 +56,7 @@ const App: React.FC = () => {
 							<li key={user.id}>{user.email}</li>
 						))}
 					</ul>
-					<QuizQuestion control={control} errors={errors} />
+					<QuizQuestion control={control} />
 				</>
 			)}
 			<Notification />
