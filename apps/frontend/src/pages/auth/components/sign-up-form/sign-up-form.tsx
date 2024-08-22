@@ -1,10 +1,11 @@
+import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
+import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
+	userSignInValidationSchema,
 	type UserSignUpRequestDto,
-	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
@@ -17,7 +18,7 @@ type Properties = {
 const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
 		defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-		validationSchema: userSignUpValidationSchema,
+		validationSchema: userSignInValidationSchema,
 	});
 
 	const handleFormSubmit = useCallback(
@@ -28,51 +29,72 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<section className={styles["signup-container"]}>
-			<div className={styles["logo-container"]}>
-				<div
-					className={getValidClassNames(
-						styles["circle"],
-						styles["circle-pink"],
-					)}
-				/>
-				<h1>LOGO</h1>
-			</div>
-			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
-			<span className={styles["auth-info"]}>
-				Already have an account? Go to
-				<Link to={AppRoute.SIGN_IN}> Sign in</Link>
-			</span>
-			<form onSubmit={handleFormSubmit}>
-				<div className={styles["input-groups"]}>
+		<div className={styles["container"]}>
+			<div className={styles["form-container"]}>
+				<form className={styles["form"]} onSubmit={handleFormSubmit}>
+					<div className={styles["form-header"]}>
+						<div className={styles["form-header__logo-container"]}>
+							<div className={styles["form-header__logo"]} />
+							<span className={styles["form-header__logo-text"]}>LOGO</span>
+						</div>
+
+						<h1 className={styles["form-header__text"]}>CREATE AN ACCOUNT</h1>
+						<span className={styles["form-header__sub-text"]}>
+							Already have an account? Go to{" "}
+							<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+						</span>
+					</div>
+
 					<Input
 						control={control}
 						errors={errors}
-						label="Name"
-						name="name"
-						placeholder="name"
-						type="text"
+						label="name"
+						name="email"
+						placeholder="name@gmail.com"
+						type="email"
 					/>
+
 					<Input
 						control={control}
 						errors={errors}
 						label="Email"
 						name="email"
-						placeholder="email"
+						placeholder="name@gmail.com"
 						type="email"
 					/>
+
 					<Input
 						control={control}
 						errors={errors}
 						label="Password"
 						name="password"
-						placeholder="password"
-						type="password"
+						placeholder="*******"
+						type="text"
 					/>
-				</div>
-				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
-			</form>
-		</section>
+
+					<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
+				</form>
+			</div>
+
+			<div className={styles["logo-container"]}>
+				<span className={styles["logo"]}>LOGO</span>
+			</div>
+
+			<img
+				alt="ripple-effect-bg"
+				className={styles["ripple-effect__background1"]}
+				src={rippleEffectBg}
+			/>
+			<img
+				alt="ripple-effect-bg"
+				className={styles["ripple-effect__background2"]}
+				src={rippleEffectBg2}
+			/>
+
+			<div className={styles["circle-gradient1"]} />
+			<div className={styles["circle-gradient2"]} />
+			<div className={styles["circle-gradient3"]} />
+		</div>
 	);
 };
 
