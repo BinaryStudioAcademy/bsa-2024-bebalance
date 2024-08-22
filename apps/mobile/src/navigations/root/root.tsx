@@ -20,6 +20,7 @@ const Root: React.FC = () => {
 
 	const user = "User";
 	const hasUser = Boolean(user);
+
 	return (
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
@@ -28,10 +29,10 @@ const Root: React.FC = () => {
 					name={RootScreenName.WELCOME}
 				/>
 			) : (
-				<>
+				<NativeStack.Group>
 					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_IN} />
 					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_UP} />
-				</>
+				</NativeStack.Group>
 			)}
 		</NativeStack.Navigator>
 	);
