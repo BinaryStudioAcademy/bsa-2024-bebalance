@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.0...backend-v1.4.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** add missing "/api" prefix for white route check bb-11 ([#116](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/116)) ([12ac4d7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/12ac4d7c8cdae85ea5561e6ba74b82bed439281d))
+
 ## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.3.0...backend-v1.4.0) (2024-08-22)
 
 
