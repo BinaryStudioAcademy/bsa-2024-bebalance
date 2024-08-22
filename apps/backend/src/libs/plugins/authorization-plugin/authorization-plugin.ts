@@ -8,6 +8,7 @@ import { AuthError } from "~/modules/auth/auth.js";
 import { UserService } from "~/modules/users/users.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
+import { checkIsWhiteRoute } from "./libs/helpers/helpers.js";
 
 type PluginOptions = {
 	token: BaseToken<TokenPayload>;
@@ -19,15 +20,13 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 	const { token, userService, whiteRoutes = [] } = options;
 
 	app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
-		const isWhiteRoute = whiteRoutes.some((whiteRoute) =>
-			request.url.endsWith(whiteRoute),
-		);
+		const { headers, url } = request;
 
-		if (isWhiteRoute) {
+		if (checkIsWhiteRoute(url, whiteRoutes)) {
 			return;
 		}
 
-		const header = request.headers[HTTPHeader.AUTHORIZATION];
+		const header = headers[HTTPHeader.AUTHORIZATION];
 
 		if (!header) {
 			throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
