@@ -3,6 +3,7 @@ import React from "react";
 import { Button, Input, Link, Text, View } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
+import { globalStyles } from "~/libs/styles/styles";
 import { userSignUpValidationSchema } from "~/packages/users/libs/validation-schemas/validation-schemas";
 import { type UserSignUpRequestDto } from "~/packages/users/users";
 
@@ -22,25 +23,46 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	}, [handleSubmit, onSubmit]);
 
 	return (
-		<View>
-			<Text>Sign Up</Text>
+		<>
+			<Text preset="uppercase" size="xl" weight="bold">
+				Create an account
+			</Text>
+			<View
+				style={[
+					globalStyles.flexDirectionRow,
+					globalStyles.gap4,
+					globalStyles.alignItemsCenter,
+				]}
+			>
+				<Text weight="semiBold">Already have an account? Go to</Text>
+				<Link label="Sign In" to={`/${RootScreenName.SIGN_IN}`} />
+			</View>
 			<Input
 				control={control}
 				errors={errors}
+				isFocused={false}
+				label="Name"
+				name="name"
+				placeholder="name"
+			/>
+			<Input
+				control={control}
+				errors={errors}
+				isFocused={false}
 				label="Email"
 				name="email"
-				placeholder="Enter your email"
+				placeholder="name@gmail.com"
 			/>
 			<Input
 				control={control}
 				errors={errors}
+				isFocused={false}
 				label="Password"
 				name="password"
-				placeholder="Enter your password"
+				placeholder="*******"
 			/>
-			<Button label="Sign up" onPress={handleFormSubmit} />
-			<Link label="Go to Sign In" to={`/${RootScreenName.SIGN_IN}`} />
-		</View>
+			<Button label="Create an account" onPress={handleFormSubmit} />
+		</>
 	);
 };
 
