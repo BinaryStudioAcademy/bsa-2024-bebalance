@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useFormController } from "~/libs/hooks/hooks.js";
+import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
@@ -15,8 +15,9 @@ type Properties<T extends FieldValues> = {
 	errors: FieldErrors<T>;
 	label: string;
 	name: FieldPath<T>;
+	options?: { label: string; value: string }[];
 	placeholder?: string;
-	type?: "email" | "text";
+	type?: "email" | "radio" | "text";
 };
 
 const Input = <T extends FieldValues>({
@@ -24,6 +25,7 @@ const Input = <T extends FieldValues>({
 	errors,
 	label,
 	name,
+	options,
 	placeholder = "",
 	type = "text",
 }: Properties<T>): JSX.Element => {
@@ -32,16 +34,59 @@ const Input = <T extends FieldValues>({
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
 
+	// function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
+	// 	field.onChange(event.target.value);
+	// }
+
+	const handleRadioChange = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			field.onChange(event.target.value);
+		},
+		[field], // Dependency array ensures that this function is not recreated unnecessarily
+	);
+
+	// const createHandleRadioChange = (value: string) => {
+	// 	return (event: React.ChangeEvent<HTMLInputElement>) => {
+	// 		field.onChange(value);
+	// 	};
+	// };
+
 	return (
 		<label className={styles["input-wrapper"]}>
-			<span className={styles["input-label"]}>{label}</span>
+			<span
+				className={getValidClassNames(
+					styles["input-label"],
+					options && styles["radio-label"],
+				)}
+			>
+				{label}
+			</span>
 			<div className={styles["input-container"]}>
-				<input
-					className={getValidClassNames(styles["input-field"])}
-					{...field}
-					placeholder={placeholder}
-					type={type}
-				/>
+				{type === "radio" && options ? (
+					<div className={styles["radio-container"]}>
+						{options.map((option) => (
+							<label className={styles["radio-option"]} key={option.value}>
+								<input
+									checked={field.value === option.value}
+									className={getValidClassNames(styles["radio-field"])}
+									onChange={handleRadioChange}
+									// onChange={field.onChange(option.value)}
+									// onChange={createHandleRadioChange(option.value)}
+									type="radio"
+									value={option.value}
+								/>
+								{option.label}
+							</label>
+						))}
+					</div>
+				) : (
+					<input
+						className={getValidClassNames(styles["input-field"])}
+						{...field}
+						placeholder={placeholder}
+						type={type}
+					/>
+				)}
 			</div>
 
 			{hasError && (
