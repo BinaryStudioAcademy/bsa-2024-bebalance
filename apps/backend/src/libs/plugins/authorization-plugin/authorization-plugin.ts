@@ -13,53 +13,48 @@ type PluginOptions = {
 	token: BaseToken<TokenPayload>;
 	userService: UserService;
 	whiteRoutes?: string[];
-	whiteRoutesPrefix?: string;
 };
 
-const authorizationPlugin = fp<PluginOptions>(
-	(
-		app,
-		{ token, userService, whiteRoutes = [], whiteRoutesPrefix = "/v1" },
-		done,
-	) => {
-		app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
-			const isWhiteRoute = whiteRoutes.some((whiteRoute) => {
-				return request.url === `${whiteRoutesPrefix}${whiteRoute}`;
-			});
+const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
+	const { token, userService, whiteRoutes = [] } = options;
 
-			if (isWhiteRoute) {
-				return;
-			}
+	app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
+		const isWhiteRoute = whiteRoutes.some((whiteRoute) =>
+			request.url.endsWith(whiteRoute),
+		);
 
-			const header = request.headers[HTTPHeader.AUTHORIZATION];
+		if (isWhiteRoute) {
+			return;
+		}
 
-			if (!header) {
+		const header = request.headers[HTTPHeader.AUTHORIZATION];
+
+		if (!header) {
+			throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
+		}
+
+		try {
+			const {
+				payload: { userId },
+			} = await token.decode(header);
+
+			const user = await userService.find(userId);
+
+			if (!user) {
 				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 
-			try {
-				const {
-					payload: { userId },
-				} = await token.decode(header);
-
-				const user = await userService.find(userId);
-
-				if (!user) {
-					throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
-				}
-
-				request.user = user.toObject();
-			} catch (error) {
-				if (error instanceof AuthError) {
-					throw error;
-				}
-
-				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
+			request.user = user.toObject();
+		} catch (error) {
+			if (error instanceof AuthError) {
+				throw error;
 			}
-		});
 
-		done();
-	},
-);
+			throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
+		}
+	});
+
+	done();
+});
 
 export { authorizationPlugin };
