@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.3...v1.11.4) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** implement query related user details fetching in find(id) bb-137 ([#141](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/141)) ([e0e53ef](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e0e53efff689a3032cacaee044ab151a15b0f6a5))
+
 ## [1.11.3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.2...v1.11.3) (2024-08-22)
 
 
