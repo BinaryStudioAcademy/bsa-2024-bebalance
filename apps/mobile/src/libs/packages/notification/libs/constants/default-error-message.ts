@@ -1,4 +1,0 @@
-const DEFAULT_ERROR_MESSAGES = "Unexpected error.";
-const DEFAULT_ERROR_TITLE = "Error";
-
-export { DEFAULT_ERROR_MESSAGES, DEFAULT_ERROR_TITLE };

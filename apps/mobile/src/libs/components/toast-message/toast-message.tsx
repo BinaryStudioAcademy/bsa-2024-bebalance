@@ -1,7 +1,7 @@
 import Toast from "react-native-toast-message";
 
-const Notification = () => {
+const ToastMessage = () => {
 	return <Toast />;
 };
 
-export { Notification };
+export { ToastMessage };
