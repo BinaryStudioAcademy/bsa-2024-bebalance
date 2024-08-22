@@ -41,9 +41,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						<h1 className={styles["form-header__text"]}>SIGN IN</h1>
 						<span className={styles["form-header__sub-text"]}>
 							No account? Go to{" "}
-							<Link to={AppRoute.SIGN_UP} type="navLink">
-								Create an Account
-							</Link>
+							<Link to={AppRoute.SIGN_UP}>Create an Account</Link>
 						</span>
 					</div>
 
@@ -65,7 +63,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						type="text"
 					/>
 
-					<Button label="SIGN IN" type="submit" />
+					<Button label="SIGN IN" type="submit" variant="dark" />
 				</form>
 			</div>
 

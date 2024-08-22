@@ -1,3 +1,5 @@
+import authIllustrationLeft from "~/assets/img/auth-illustration-left.svg";
+import authIllustrationRight from "~/assets/img/auth-illustration-right.svg";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -11,6 +13,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
+import styles from "./style.module.css";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -43,7 +46,28 @@ const Auth: React.FC = () => {
 		return null;
 	};
 
-	return <>{getScreen(pathname)}</>;
+	return (
+		<>
+			<main className={styles["auth-container"]}>
+				<section className={styles["form-container"]}>
+					{getScreen(pathname)}
+				</section>
+				<section className={styles["illustration-container"]}>
+					<img
+						alt="background"
+						className={styles["img-left"]}
+						src={authIllustrationLeft}
+					/>
+					<h1 className={styles["title"]}>Logo</h1>
+					<img
+						alt="background"
+						className={styles["img-right"]}
+						src={authIllustrationRight}
+					/>
+				</section>
+			</main>
+		</>
+	);
 };
 
 export { Auth };

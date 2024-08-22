@@ -1,6 +1,4 @@
-import reactLogo from "~/assets/img/react.svg";
 import {
-	Link,
 	Loader,
 	Notification,
 	RouterOutlet,
@@ -36,21 +34,6 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<img alt="logo" className="App-logo" src={reactLogo} width="30" />
-
-			<ul className="App-navigation-list">
-				<li>
-					<Link to={AppRoute.ROOT}>Root</Link>
-				</li>
-				<li>
-					<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-				</li>
-				<li>
-					<Link to={AppRoute.SIGN_UP}>Sign up</Link>
-				</li>
-			</ul>
-			<p>Current path: {pathname}</p>
-
 			<div>
 				<RouterOutlet />
 			</div>
