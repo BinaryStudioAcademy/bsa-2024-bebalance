@@ -34,22 +34,12 @@ const Input = <T extends FieldValues>({
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
 
-	// function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
-	// 	field.onChange(event.target.value);
-	// }
-
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			field.onChange(event.target.value);
 		},
-		[field], // Dependency array ensures that this function is not recreated unnecessarily
+		[field],
 	);
-
-	// const createHandleRadioChange = (value: string) => {
-	// 	return (event: React.ChangeEvent<HTMLInputElement>) => {
-	// 		field.onChange(value);
-	// 	};
-	// };
 
 	return (
 		<label className={styles["input-wrapper"]}>
@@ -70,8 +60,6 @@ const Input = <T extends FieldValues>({
 									checked={field.value === option.value}
 									className={getValidClassNames(styles["radio-field"])}
 									onChange={handleRadioChange}
-									// onChange={field.onChange(option.value)}
-									// onChange={createHandleRadioChange(option.value)}
 									type="radio"
 									value={option.value}
 								/>
