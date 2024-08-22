@@ -19,15 +19,17 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 	const { token, userService, whiteRoutes = [] } = options;
 
 	app.addHook(ServerHooks.PRE_HANDLER, async (request) => {
-		const isWhiteRoute = whiteRoutes.some((whiteRoute) =>
-			request.url.endsWith(whiteRoute),
-		);
+		const { headers, url } = request;
+
+		const isWhiteRoute = whiteRoutes.some((whiteRoute) => {
+			return url.startsWith("/api") && url.endsWith(whiteRoute);
+		});
 
 		if (isWhiteRoute) {
 			return;
 		}
 
-		const header = request.headers[HTTPHeader.AUTHORIZATION];
+		const header = headers[HTTPHeader.AUTHORIZATION];
 
 		if (!header) {
 			throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
