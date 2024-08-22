@@ -6,7 +6,6 @@ const MyWheel: React.FC = () => {
 	return (
 		<div className={styles["pageContainer"]}>
 			<Sidebar />
-			<div />
 		</div>
 	);
 };

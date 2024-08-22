@@ -1,11 +1,11 @@
 import { Link } from "~/libs/components/components.js";
-import { type AppRoute, type sidebarLinkIcon } from "~/libs/enums/enums.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { type AppRoute } from "~/libs/enums/enums.js";
+import { type SidebarIcon, type ValueOf } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
-	icon: ValueOf<typeof sidebarLinkIcon>;
+	icon: SidebarIcon;
 	pathname: string;
 	title: string;
 	to: ValueOf<typeof AppRoute>;
@@ -21,9 +21,9 @@ const SidebarLink: React.FC<Properties> = ({
 	return (
 		<Link isActive={isActive} to={to} type="navLink">
 			<img
-				alt={icon.ALT}
+				alt={title}
 				className={styles["linkPicture"]}
-				src={isActive ? icon.ACTIVE : icon.INACTIVE}
+				src={isActive ? icon.active : icon.inactive}
 			/>
 			{title}
 		</Link>
