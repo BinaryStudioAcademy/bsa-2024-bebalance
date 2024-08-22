@@ -23,7 +23,7 @@ const Quiz: React.FC = () => {
 				</p>
 
 				<div className={styles["btn"]}>
-					<Button isFluid label="CONTINUE" type="button" />
+					<Button isFluid label="CONTINUE" type="button" variant="dark" />
 				</div>
 			</div>
 		</div>
