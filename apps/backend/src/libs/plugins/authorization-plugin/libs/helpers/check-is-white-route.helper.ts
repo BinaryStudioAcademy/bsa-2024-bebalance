@@ -1,12 +1,12 @@
 const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
-	const urlRegex = /^\/api\/v\d+.*(\/.+)$/;
-	const match = url.match(urlRegex);
+	const macthServerUrlRegex = /^\/api\/v\d+.*(\/.+)$/;
+	const result = url.match(macthServerUrlRegex);
 
-	if (!match) {
-		return false;
+	if (!result) {
+		return true;
 	}
 
-	const [, route] = match;
+	const [, route] = result;
 
 	return whiteRoutes.includes(route ?? "/");
 };
