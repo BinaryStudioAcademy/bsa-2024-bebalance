@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.9.0...v1.10.0) (2024-08-22)
+
+
+### Features
+
+* get authenticated user bb-13 ([#47](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/47)) ([dfb6769](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dfb67695905b4a1fe9050e4ea07f94e7af17bb4a))
+* Quiz introduction screen bb-87 ([#97](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/97)) ([f53bc9f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f53bc9f2f47a03c47426dc263a67bcfac71d9793))
+
+
+### Bug Fixes
+
+* **backend:** fix unresolved auth plugin and invalid white routes bb-11 ([#108](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/108)) ([bc97a65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc97a655d9833ad512c7d10526cf7ad43be05f4f))
+
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.8.0...v1.9.0) (2024-08-21)
+
+
+### Features
+
+* Button component bb-26 ([#54](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/54)) ([e9d535d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e9d535d7685a93cf35eda81e196ee7af7c1e2d1d))
+* impl protected routing bb-11 ([#50](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/50)) ([5f2c71c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5f2c71ccfd1dd50f4a894d1ab391690b674ab2eb))
+* sign in screen - mobile responsiveness bb-61 ([#78](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/78)) ([f8b36f2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f8b36f25d71b15d0be03091bdae04b0f664b6ede))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.7.0...v1.8.0) (2024-08-21)
+
+
+### Features
+
+* add background component bb-24 ([#84](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/84)) ([55dd338](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/55dd338c10a3b34fa0dc959def4606b62571f0d5))
+* authorization token (JWT) bb-10 ([#40](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/40)) ([16e3c35](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16e3c353ff700ab27a7b6af4fa7b3c17059cc916))
+* **backend:** add categories migration bb-34 ([#100](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/100)) ([43ececb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/43ececb50a49723b2d0ff52ef1041dcfe49be225))
+* error handling bb-16 ([#57](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/57)) ([4425001](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/442500105802ba497c02978fd1e9af88eb6ae53d))
+
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.6.0...v1.7.0) (2024-08-21)
+
+
+### Features
+
+* implement sign-in functionality bb-6 ([#37](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/37)) ([1f2b54c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1f2b54c94efa5e1553bc8b4bd24f2fdf2b0f8053))
+
 ## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.5.0...v1.6.0) (2024-08-21)
 
 

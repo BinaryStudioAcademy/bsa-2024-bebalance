@@ -1,4 +1,4 @@
-import { type TextStyle } from "react-native";
+import { type TextStyle } from "~/libs/types/types";
 
 const sizeToStyleMap = {
 	lg: { fontSize: 20, lineHeight: 25 } satisfies TextStyle,
