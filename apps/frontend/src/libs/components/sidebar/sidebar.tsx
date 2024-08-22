@@ -1,9 +1,8 @@
 import { useLocation } from "react-router-dom";
 
-import { sidebarItems } from "~/libs/enums/enums.js";
-
 import { SidebarLink } from "./components/sidebar-link/sidebar-link.js";
 import styles from "./styles.module.css";
+import { sidebarItems } from "./utils/sidebar-items.js";
 
 const Sidebar: React.FC = () => {
 	const { pathname } = useLocation();
