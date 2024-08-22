@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
 	formContainer: {
 		backgroundColor: BaseColor.BG_WHITE,
 		borderRadius: 25,
-		height: "80%",
 		width: "90%",
 	},
 });

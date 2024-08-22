@@ -8,5 +8,13 @@ export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Text } from "./text/text";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
-export { ActivityIndicator, Image, Pressable, View } from "react-native";
+export {
+	ActivityIndicator,
+	Image,
+	KeyboardAvoidingView,
+	Platform,
+	Pressable,
+	ScrollView,
+	View,
+} from "react-native";
 export { LinearGradient } from "react-native-linear-gradient";
