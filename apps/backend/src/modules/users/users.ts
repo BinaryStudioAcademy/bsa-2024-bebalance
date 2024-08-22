@@ -11,9 +11,9 @@ const userRepository = new UserRepository(UserModel, UserDetailsModel);
 const userService = new UserService(userRepository, encrypt);
 const userController = new UserController(logger, userService);
 
-export { userController, userService };
 export { UserValidationMessage } from "./libs/enums/enums.js";
 export {
+	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -23,3 +23,5 @@ export {
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
+export { UserService } from "./user.service.js";
+export { userController, userService };

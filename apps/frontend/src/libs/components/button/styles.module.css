@@ -1,5 +1,6 @@
 .btn {
 	display: inline-block;
+	width: 100%;
 	min-height: 16px;
 	padding: 12px 24px;
 	margin: 0;
@@ -9,8 +10,12 @@
 	text-align: center;
 	cursor: pointer;
 	border: none;
-	border-radius: 16px;
+	border-radius: 35px;
 	outline: 0;
+}
+
+.fluid {
+	width: 100%;
 }
 
 .primary {
