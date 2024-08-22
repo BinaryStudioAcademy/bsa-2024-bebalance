@@ -13,6 +13,7 @@ const userController = new UserController(logger, userService);
 
 export { UserValidationMessage } from "./libs/enums/enums.js";
 export {
+	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -22,4 +23,5 @@ export {
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
+export { UserService } from "./user.service.js";
 export { userController, userService };

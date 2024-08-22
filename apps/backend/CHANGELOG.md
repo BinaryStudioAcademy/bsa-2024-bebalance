@@ -1,5 +1,52 @@
 # Changelog
 
+## [1.4.4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.3...backend-v1.4.4) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** implement query related user details fetching in find(id) bb-137 ([#141](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/141)) ([e0e53ef](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e0e53efff689a3032cacaee044ab151a15b0f6a5))
+
+## [1.4.3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.2...backend-v1.4.3) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** fix invalid regex on white route helper bb-11 ([#130](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/130)) ([f1ef964](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f1ef9642ea3d3a59de8c2f44b8d02f88e40fe149))
+
+## [1.4.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.1...backend-v1.4.2) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** fix conflicted protected routes bb-11 ([#121](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/121)) ([81851eb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/81851eb378d4efd604de19be3424c3b62646f2a2))
+
+## [1.4.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.0...backend-v1.4.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **backend:** add missing "/api" prefix for white route check bb-11 ([#116](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/116)) ([12ac4d7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/12ac4d7c8cdae85ea5561e6ba74b82bed439281d))
+
+## [1.4.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.3.0...backend-v1.4.0) (2024-08-22)
+
+
+### Features
+
+* get authenticated user bb-13 ([#47](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/47)) ([dfb6769](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dfb67695905b4a1fe9050e4ea07f94e7af17bb4a))
+
+
+### Bug Fixes
+
+* **backend:** fix unresolved auth plugin and invalid white routes bb-11 ([#108](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/108)) ([bc97a65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc97a655d9833ad512c7d10526cf7ad43be05f4f))
+
+## [1.3.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.2.0...backend-v1.3.0) (2024-08-21)
+
+
+### Features
+
+* impl protected routing bb-11 ([#50](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/50)) ([5f2c71c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5f2c71ccfd1dd50f4a894d1ab391690b674ab2eb))
+
 ## [1.2.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.1.0...backend-v1.2.0) (2024-08-21)
 
 

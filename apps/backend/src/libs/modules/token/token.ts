@@ -9,4 +9,5 @@ const token = new BaseToken<TokenPayload>({
 	secret: Buffer.from(config.ENV.JWT.SECRET),
 });
 
+export { BaseToken } from "./base-token.module.js";
 export { token };
