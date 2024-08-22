@@ -67,10 +67,6 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				</form>
 			</div>
 
-			<div className={styles["logo-container"]}>
-				<span className={styles["logo"]}>LOGO</span>
-			</div>
-
 			<img
 				alt="ripple-effect-bg"
 				className={styles["ripple-effect__background1"]}
@@ -81,11 +77,6 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				className={styles["ripple-effect__background2"]}
 				src={rippleEffectBg2}
 			/>
-
-			<div className={styles["circle-gradient1"]} />
-			<div className={styles["circle-gradient2"]} />
-			<div className={styles["circle-gradient3"]} />
-			<div className={styles["circle-gradient4"]} />
 		</div>
 	);
 };
