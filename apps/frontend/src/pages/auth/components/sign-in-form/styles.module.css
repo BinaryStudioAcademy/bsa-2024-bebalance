@@ -1,3 +1,14 @@
+.container {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 30px;
+	height: 100dvh;
+	padding: 15px;
+	overflow: hidden;
+	background-color: var(--background);
+}
+
 .form-container {
 	z-index: 1;
 	display: flex;
