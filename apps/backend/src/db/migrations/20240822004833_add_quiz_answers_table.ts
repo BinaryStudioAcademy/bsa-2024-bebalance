@@ -1,15 +1,15 @@
 import { type Knex } from "knex";
 
 const TableName = {
-	CATEGORIES: "categories",
 	QUIZ_ANSWERS: "quiz_answers",
+	QUIZ_QUESTIONS: "quiz_questions",
 } as const;
 
 const ColumnName = {
-	CATEGORY_ID: "category_id",
 	CREATED_AT: "created_at",
 	ID: "id",
 	LABEL: "label",
+	QUESTION_ID: "question_id",
 	UPDATED_AT: "updated_at",
 	VALUE: "value",
 } as const;
@@ -24,9 +24,9 @@ function up(knex: Knex): Promise<void> {
 		table.increments(ColumnName.ID).primary();
 		table.text(ColumnName.LABEL).notNullable().unique();
 		table
-			.integer(ColumnName.CATEGORY_ID)
+			.integer(ColumnName.QUESTION_ID)
 			.references(ColumnName.ID)
-			.inTable(TableName.CATEGORIES)
+			.inTable(TableName.QUIZ_QUESTIONS)
 			.notNullable();
 		table
 			.dateTime(ColumnName.CREATED_AT)
