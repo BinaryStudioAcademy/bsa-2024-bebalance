@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 
+import { Planet } from "~/libs/components/background-wrapper/libs/components/planet/planet";
 import {
+	BackgroundWrapper,
 	LoaderWrapper,
 	ScreenWrapper,
 	Text,
@@ -24,6 +25,7 @@ import { actions as authActions } from "~/slices/auth/auth";
 import { actions as userActions } from "~/slices/users/users";
 
 import { SignInForm, SignUpForm } from "./components/components";
+import { styles } from "./styles";
 
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
@@ -69,52 +71,38 @@ const Auth: React.FC = () => {
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-			<ScreenWrapper>
-				<View
-					style={[
-						globalStyles.alignItemsCenter,
-						globalStyles.flex1,
-						globalStyles.justifyContentCenter,
-					]}
-				>
-					<View style={[globalStyles.p32, styles.formContainer]}>
-						<Text>state: {dataStatus}</Text>
-						<View
-							style={[
-								globalStyles.gap8,
-								globalStyles.alignItemsCenter,
-								globalStyles.flexDirectionRow,
-								globalStyles.mb32,
-								globalStyles.mt32,
-							]}
-						>
-							<View style={styles.logo}></View>
-							<Text preset="heading" size="xl">
-								LOGO
-							</Text>
+			<BackgroundWrapper>
+				<ScreenWrapper>
+					<View
+						style={[
+							globalStyles.alignItemsCenter,
+							globalStyles.flex1,
+							globalStyles.justifyContentCenter,
+						]}
+					>
+						<View style={[globalStyles.p32, styles.formContainer]}>
+							<Text>state: {dataStatus}</Text>
+							<View
+								style={[
+									globalStyles.gap8,
+									globalStyles.alignItemsCenter,
+									globalStyles.flexDirectionRow,
+									globalStyles.mb32,
+									globalStyles.mt32,
+								]}
+							>
+								<Planet color="pink" size="xs" />
+								<Text preset="heading" style={[globalStyles.ml48]}>
+									LOGO
+								</Text>
+							</View>
+							{getScreen(name)}
 						</View>
-						{getScreen(name)}
 					</View>
-				</View>
-			</ScreenWrapper>
+				</ScreenWrapper>
+			</BackgroundWrapper>
 		</LoaderWrapper>
 	);
 };
-
-const styles = StyleSheet.create({
-	formContainer: {
-		backgroundColor: "#fff",
-		borderRadius: 25,
-		height: "80%",
-		width: "90%",
-	},
-	logo: {
-		//temp
-		backgroundColor: "red",
-		borderRadius: 16.5,
-		height: 34,
-		width: 34,
-	},
-});
 
 export { Auth };
