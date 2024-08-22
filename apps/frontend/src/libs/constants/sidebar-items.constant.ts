@@ -1,4 +1,4 @@
-import wheelOfBalance from "~/assets/img/wheel-of-balance.svg";
+import wheelOfBalance from "~/assets/img/wheel-of-balance-active.svg";
 import wheelOfBalanceInactive from "~/assets/img/wheel-of-balance-inactive.svg";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { SidebarItem } from "~/libs/types/sidebar-item.type.js";

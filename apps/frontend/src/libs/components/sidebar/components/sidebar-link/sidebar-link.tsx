@@ -22,7 +22,7 @@ const SidebarLink: React.FC<Properties> = ({
 		<Link isActive={isActive} to={to} type="navLink">
 			<img
 				alt={title}
-				className={styles["linkPicture"]}
+				className={styles["linkIcon"]}
 				src={isActive ? icon.active : icon.inactive}
 			/>
 			{title}
