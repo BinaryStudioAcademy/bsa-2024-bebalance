@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Planet } from "~/libs/components/background-wrapper/libs/components/planet/planet";
 import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
@@ -32,6 +31,7 @@ import { styles } from "./styles";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
+const isIos = Platform.OS === "ios";
 
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
@@ -80,11 +80,9 @@ const Auth: React.FC = () => {
 			<BackgroundWrapper>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
-						behavior={Platform.OS === "ios" ? "padding" : "height"}
+						behavior={isIos ? "padding" : "height"}
 						keyboardVerticalOffset={
-							Platform.OS === "ios"
-								? IOS_KEYBOARD_OFFSET
-								: ANDROID_KEYBOARD_OFFSET
+							isIos ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
 						}
 						style={[
 							globalStyles.alignItemsCenter,
@@ -95,7 +93,7 @@ const Auth: React.FC = () => {
 						]}
 					>
 						<ScrollView
-							contentContainerStyle={{ flexGrow: 1 }}
+							contentContainerStyle={globalStyles.flexGrow1}
 							overScrollMode="never"
 							showsHorizontalScrollIndicator={false}
 							showsVerticalScrollIndicator={false}
@@ -112,8 +110,7 @@ const Auth: React.FC = () => {
 										globalStyles.mt32,
 									]}
 								>
-									<Planet color="pink" size="xs" />
-									<Text preset="heading" style={[globalStyles.ml48]}>
+									<Text preset="heading" style={globalStyles.ml48}>
 										LOGO
 									</Text>
 								</View>
