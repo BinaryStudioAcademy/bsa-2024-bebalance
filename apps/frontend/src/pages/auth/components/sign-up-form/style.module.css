@@ -1,7 +1,3 @@
-.signup-container {
-	font-family: var(--nunito-font);
-}
-
 .signup-container .logo-container {
 	display: flex;
 	gap: 8px;

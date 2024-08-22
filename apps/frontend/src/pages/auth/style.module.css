@@ -11,12 +11,11 @@
 	flex-direction: column;
 	padding: 80px 160px;
 	margin: 16px;
-	font-family: var(--nunito-font);
 	background-color: white;
 	border-radius: 32px;
 }
 
-.ilustration-container {
+.illustration-container {
 	position: relative;
 	display: flex;
 	flex-basis: 60%;
@@ -30,7 +29,7 @@
 	font-size: 70px;
 }
 
-.ilustration-container .img-left {
+.illustration-container .img-left {
 	position: absolute;
 	top: -200px;
 	left: -300px;
@@ -38,7 +37,7 @@
 	width: 60%;
 }
 
-.ilustration-container .img-right {
+.illustration-container .img-right {
 	position: absolute;
 	right: -100px;
 	bottom: -200px;

@@ -35,7 +35,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						styles["circle"],
 						styles["circle-pink"],
 					)}
-				></div>
+				/>
 				<h1>LOGO</h1>
 			</div>
 			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>

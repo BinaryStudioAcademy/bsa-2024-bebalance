@@ -1,4 +1,8 @@
-import { Loader, RouterOutlet } from "~/libs/components/components.js";
+import {
+	Loader,
+	Notification,
+	RouterOutlet,
+} from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -45,6 +49,7 @@ const App: React.FC = () => {
 					</ul>
 				</>
 			)}
+			<Notification />
 		</>
 	);
 };
