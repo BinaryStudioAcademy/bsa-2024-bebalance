@@ -1,14 +1,13 @@
 const checkIsWhiteRoute = (url: string, whiteRoutes: string[]): boolean => {
-	const matchServerUrlRegex = /^\/api\/v\d+.*(\/.+)$/;
-	const result = url.match(matchServerUrlRegex);
+	const regex = /^\/api\/v\d+.*(\/.+)$/;
+	const match = url.match(regex);
+	const [, route] = match ?? [];
 
-	if (!result) {
+	if (!route) {
 		return true;
 	}
 
-	const [, route] = result;
-
-	return whiteRoutes.includes(route ?? "/");
+	return whiteRoutes.includes(route);
 };
 
 export { checkIsWhiteRoute };
