@@ -1,4 +1,4 @@
-import { APIPath, ErrorMessage } from "~/libs/enums/enums.js";
+import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
@@ -16,7 +16,6 @@ import {
 
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
-import { AuthError } from "./libs/exceptions/exceptions.js";
 
 class AuthController extends BaseController {
 	private authService: AuthService;
@@ -87,12 +86,6 @@ class AuthController extends BaseController {
 			user: UserDto;
 		}>,
 	): APIHandlerResponse {
-		if (!options.user) {
-			throw new AuthError({
-				message: ErrorMessage.UNAUTHORIZED,
-				status: HTTPCode.UNAUTHORIZED,
-			});
-		}
 		return {
 			payload: options.user,
 			status: HTTPCode.OK,
