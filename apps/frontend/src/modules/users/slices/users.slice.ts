@@ -9,13 +9,11 @@ import { getAuthenticatedUser } from "./actions.js";
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	user: null | UserDto;
-	users: UserDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	user: null,
-	users: [],
 };
 
 const { actions, name, reducer } = createSlice({
