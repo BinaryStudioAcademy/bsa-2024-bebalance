@@ -19,6 +19,8 @@ const ValueLimits = {
 	MIN: 1,
 } as const;
 
+const CASCADE = "CASCADE";
+
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TableName.QUIZ_ANSWERS, (table) => {
 		table.increments(ColumnName.ID).primary();
@@ -27,6 +29,7 @@ function up(knex: Knex): Promise<void> {
 			.integer(ColumnName.QUESTION_ID)
 			.references(ColumnName.ID)
 			.inTable(TableName.QUIZ_QUESTIONS)
+			.onDelete(CASCADE)
 			.notNullable();
 		table
 			.dateTime(ColumnName.CREATED_AT)
