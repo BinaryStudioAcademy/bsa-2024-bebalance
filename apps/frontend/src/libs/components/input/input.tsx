@@ -1,3 +1,5 @@
+import crossedEye from "~/assets/img/crossed-eye.svg";
+import eye from "~/assets/img/eye.svg";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
@@ -12,8 +14,10 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
+	isDisplayedValue?: boolean;
 	label: string;
 	name: FieldPath<T>;
+	onToggle?: () => void;
 	options?: { label: string; value: string }[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
@@ -22,8 +26,10 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	isDisplayedValue = false,
 	label,
 	name,
+	onToggle,
 	options,
 	placeholder = "",
 	type = "text",
@@ -68,12 +74,25 @@ const Input = <T extends FieldValues>({
 						))}
 					</div>
 				) : (
-					<input
-						className={getValidClassNames(styles["input-field"])}
-						{...field}
-						placeholder={placeholder}
-						type={type}
-					/>
+					<>
+						<input
+							className={getValidClassNames(styles["input-field"])}
+							{...field}
+							placeholder={placeholder}
+							type={type === "password" && isDisplayedValue ? "text" : type}
+						/>
+						{type === "password" && onToggle && (
+							<button
+								className={styles["toggle-password-icon"]}
+								onClick={onToggle}
+							>
+								<img
+									alt={isDisplayedValue ? "Hide password" : "Show password"}
+									src={isDisplayedValue ? crossedEye : eye}
+								/>
+							</button>
+						)}
+					</>
 				)}
 			</div>
 

@@ -1,7 +1,7 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
@@ -19,6 +19,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
 		validationSchema: userSignUpValidationSchema,
 	});
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -26,6 +27,10 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[handleSubmit, onSubmit],
 	);
+
+	const handleTogglePasswordVisibility = useCallback(() => {
+		setIsPasswordVisible((previousState) => !previousState);
+	}, []);
 
 	return (
 		<section className={styles["signup-container"]}>
@@ -64,8 +69,10 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					<Input
 						control={control}
 						errors={errors}
+						isDisplayedValue={isPasswordVisible}
 						label="Password"
 						name="password"
+						onToggle={handleTogglePasswordVisibility}
 						placeholder="password"
 						type="password"
 					/>

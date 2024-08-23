@@ -2,7 +2,7 @@ import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
 import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -20,6 +20,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
 	});
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -27,6 +28,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[handleSubmit, onSubmit],
 	);
+
+	const handleTogglePasswordVisibility = useCallback(() => {
+		setIsPasswordVisible((previousState) => !previousState);
+	}, []);
 
 	return (
 		<div className={styles["container"]}>
@@ -57,10 +62,12 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					<Input
 						control={control}
 						errors={errors}
+						isDisplayedValue={isPasswordVisible}
 						label="Password"
 						name="password"
+						onToggle={handleTogglePasswordVisibility}
 						placeholder="*******"
-						type="text"
+						type="password"
 					/>
 
 					<Button label="SIGN IN" type="submit" variant="dark" />
