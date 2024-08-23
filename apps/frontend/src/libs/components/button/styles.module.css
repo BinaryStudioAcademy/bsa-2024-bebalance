@@ -1,0 +1,25 @@
+.btn {
+	display: inline-block;
+	width: 100%;
+	min-height: 16px;
+	padding: 12px 24px;
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 24px;
+	color: var(--black);
+	text-align: center;
+	cursor: pointer;
+	border: none;
+	border-radius: 35px;
+	outline: 0;
+}
+
+.fluid {
+	width: 100%;
+}
+
+.primary {
+	color: var(--white);
+	background-color: var(--black);
+}

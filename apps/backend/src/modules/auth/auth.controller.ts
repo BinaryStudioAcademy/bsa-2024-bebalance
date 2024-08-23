@@ -6,7 +6,10 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { UserDto } from "~/modules/users/users.js";
 import {
+	type UserSignInRequestDto,
+	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
@@ -35,6 +38,102 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getAuthenticatedUser(
+					options as APIHandlerOptions<{
+						user: UserDto;
+					}>,
+				),
+			method: "GET",
+			path: AuthApiPath.AUTHENTICATED_USER,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.signIn(
+					options as APIHandlerOptions<{
+						body: UserSignInRequestDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.SIGN_IN,
+			validation: {
+				body: userSignInValidationSchema,
+			},
+		});
+	}
+
+	/**
+	 * @swagger
+	 * /auth/authenticated-user:
+	 *   get:
+	 *     description: Return authenticated user
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
+	 */
+	private getAuthenticatedUser(
+		options: APIHandlerOptions<{
+			user: UserDto;
+		}>,
+	): APIHandlerResponse {
+		return {
+			payload: options.user,
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /auth/sign-in:
+	 *    post:
+	 *      description: Sign in user into the system
+	 *      requestBody:
+	 *        description: User auth data
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                email:
+	 *                  type: string
+	 *                  format: email
+	 *                password:
+	 *                  type: string
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  user:
+	 *                    $ref: "#/components/schemas/User"
+	 *                  token:
+	 *                    type: string
+	 *                    description: "Authentication token for the user."
+	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 */
+	private async signIn(
+		options: APIHandlerOptions<{
+			body: UserSignInRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.signIn(options.body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
@@ -63,10 +162,14 @@ class AuthController extends BaseController {
 	 *              schema:
 	 *                type: object
 	 *                properties:
-	 *                  message:
-	 *                    type: object
+	 *                  user:
 	 *                    $ref: "#/components/schemas/User"
+	 *                  token:
+	 *                    type: string
+	 *                    description: "Authentication token for the user."
+	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
+
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;

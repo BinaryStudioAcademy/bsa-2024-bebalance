@@ -1,7 +1,11 @@
 import React from "react";
 
-import { ScreenWrapper, Text } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
+import {
+	LoaderWrapper,
+	ScreenWrapper,
+	Text,
+} from "~/libs/components/components";
+import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppRoute,
@@ -18,8 +22,9 @@ import { SignInForm, SignUpForm } from "./components/components";
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ auth }) => ({
+	const { dataStatus, user } = useAppSelector(({ auth }) => ({
 		dataStatus: auth.dataStatus,
+		user: auth.user,
 	}));
 
 	const isSignUpScreen = name === RootScreenName.SIGN_UP;
@@ -29,6 +34,12 @@ const Auth: React.FC = () => {
 			void dispatch(userActions.loadAll());
 		}
 	}, [isSignUpScreen, dispatch]);
+
+	useEffect(() => {
+		if (!user) {
+			void dispatch(authActions.getAuthenticatedUser());
+		}
+	}, [user]);
 
 	const handleSignInSubmit = useCallback(() => {
 		// TODO: handle sign in
@@ -55,12 +66,12 @@ const Auth: React.FC = () => {
 	};
 
 	return (
-		<>
+		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 			<ScreenWrapper>
 				<Text>state: {dataStatus}</Text>
 				{getScreen(name)}
 			</ScreenWrapper>
-		</>
+		</LoaderWrapper>
 	);
 };
 

@@ -1,5 +1,9 @@
-import reactLogo from "~/assets/img/react.svg";
-import { Link, Loader, RouterOutlet } from "~/libs/components/components.js";
+import {
+	Header,
+	Loader,
+	Notification,
+	RouterOutlet,
+} from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -8,6 +12,7 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as userActions } from "~/modules/users/users.js";
+import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
@@ -31,27 +36,13 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<img alt="logo" className="App-logo" src={reactLogo} width="30" />
-
-			<ul className="App-navigation-list">
-				<li>
-					<Link to={AppRoute.ROOT}>Root</Link>
-				</li>
-				<li>
-					<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-				</li>
-				<li>
-					<Link to={AppRoute.SIGN_UP}>Sign up</Link>
-				</li>
-			</ul>
-			<p>Current path: {pathname}</p>
-
 			<div>
 				<RouterOutlet />
 			</div>
 			{isLoading && <Loader />}
 			{!isLoading && isRoot && (
 				<>
+					<Header />
 					<h2>Users: {user?.email}</h2>
 					<h3>Status: {dataStatus}</h3>
 					<ul>
@@ -59,8 +50,10 @@ const App: React.FC = () => {
 							<li key={user.id}>{user.email}</li>
 						))}
 					</ul>
+					<QuizForm />
 				</>
 			)}
+			<Notification />
 		</>
 	);
 };

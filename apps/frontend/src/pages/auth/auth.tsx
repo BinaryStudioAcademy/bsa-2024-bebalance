@@ -1,25 +1,30 @@
+import authIllustrationLeft from "~/assets/img/auth-illustration-left.svg";
+import authIllustrationRight from "~/assets/img/auth-illustration-right.svg";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
-	useAppSelector,
 	useCallback,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
-import { type UserSignUpRequestDto } from "~/modules/users/users.js";
+import {
+	type UserSignInRequestDto,
+	type UserSignUpRequestDto,
+} from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
+import styles from "./style.module.css";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ auth }) => ({
-		dataStatus: auth.dataStatus,
-	}));
 	const { pathname } = useLocation();
 
-	const handleSignInSubmit = useCallback((): void => {
-		// handle sign in
-	}, []);
+	const handleSignInSubmit = useCallback(
+		(payload: UserSignInRequestDto): void => {
+			void dispatch(authActions.signIn(payload));
+		},
+		[dispatch],
+	);
 
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
@@ -43,8 +48,24 @@ const Auth: React.FC = () => {
 
 	return (
 		<>
-			state: {dataStatus}
-			{getScreen(pathname)}
+			<main className={styles["auth-container"]}>
+				<section className={styles["form-container"]}>
+					{getScreen(pathname)}
+				</section>
+				<section className={styles["illustration-container"]}>
+					<img
+						alt="background"
+						className={styles["img-left"]}
+						src={authIllustrationLeft}
+					/>
+					<h1 className={styles["title"]}>Logo</h1>
+					<img
+						alt="background"
+						className={styles["img-right"]}
+						src={authIllustrationRight}
+					/>
+				</section>
+			</main>
 		</>
 	);
 };

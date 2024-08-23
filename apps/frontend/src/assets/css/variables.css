@@ -1,7 +1,39 @@
 :root {
 	--background: #76acec;
+	--background-gray: #f6f5fa;
+	--black: #000000;
+	--brand: #0085ff;
+	--blue-accent: #18a0fb;
+	--error: #df1c3d;
 	--light-blue: #b4d6ff;
 	--light-brand: #00f0ff;
-	--brand: #0085ff;
+	--light-gray: #e0e0e0;
 	--white: #ffffff;
+	--disable: #e0e0e0;
+	--pink-gradient: linear-gradient(
+		325deg,
+		hsl(338deg 100% 67%) 0%,
+		hsl(299deg 100% 72%) 100%
+	);
+	--complete: #c2eacd;
+	--completed: #f0fff4;
+	--physical-start: #ffe307;
+	--physical-end: #fff8b5;
+	--work-start: #69ff35;
+	--work-end: #c3ff19;
+	--friend-start: #7f21ce;
+	--friend-end: #cb00ff;
+	--love-start: #ff4040;
+	--love-end: #ff9432;
+	--money-start: #20b82f;
+	--money-end: #00f4d6;
+	--free-time-start: #ff5794;
+	--free-time-end: #fc72ff;
+	--spiritual-start: #ff7a00;
+	--spiritual-end: #ffe200;
+	--mental-start: #0085ff;
+	--mental-end: #00f0ff;
+	--z-index-low: 1;
+	--z-index-medium: 10;
+	--z-index-high: 100;
 }

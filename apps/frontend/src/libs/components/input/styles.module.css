@@ -1,0 +1,87 @@
+.input-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.input-label {
+	font-size: 16px;
+}
+
+.input-container {
+	position: relative;
+}
+
+.input-field {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	border: 2px solid var(--light-gray);
+	border-radius: 5px;
+	outline: none;
+}
+
+.input-field:focus {
+	border-color: var(--brand);
+}
+
+.input-error {
+	color: var(--error);
+}
+
+.radio-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.radio-label {
+	margin-bottom: 25px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.radio-option {
+	display: flex;
+	gap: 8px;
+	padding: 8px 10px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.4;
+	cursor: pointer;
+	border: 1px solid var(--light-gray);
+	border-radius: 5px;
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+	border-color: var(--blue-accent);
+}
+
+.radio-field {
+	position: relative;
+	width: 16px;
+	height: 16px;
+	appearance: none;
+	cursor: pointer;
+	border: 1px solid var(--light-gray);
+	border-radius: 50%;
+	transition: border-color 0.3s ease;
+}
+
+.radio-field:checked {
+	background-color: var(--blue-accent);
+	border-color: var(--blue-accent);
+	border-width: 4px;
+}
+
+.radio-field:checked::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 8px;
+	height: 8px;
+	content: "";
+	background-color: var(--white);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+}
