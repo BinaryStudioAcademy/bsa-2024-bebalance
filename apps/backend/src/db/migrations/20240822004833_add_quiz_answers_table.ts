@@ -14,7 +14,7 @@ const ColumnName = {
 	VALUE: "value",
 } as const;
 
-const ValueLimits = {
+const ValueLimit = {
 	MAX: 10,
 	MIN: 1,
 } as const;
@@ -42,7 +42,7 @@ function up(knex: Knex): Promise<void> {
 		table
 			.integer(ColumnName.VALUE)
 			.notNullable()
-			.checkBetween([ValueLimits.MIN, ValueLimits.MAX]);
+			.checkBetween([ValueLimit.MIN, ValueLimit.MAX]);
 	});
 }
 
