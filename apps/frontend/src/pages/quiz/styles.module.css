@@ -8,7 +8,7 @@
 
 .introduction {
 	position: relative;
-	z-index: 1;
+	z-index: var(--z-index-high);
 	display: flex;
 	flex-direction: column;
 	gap: 25px;
@@ -80,6 +80,7 @@
 	.ripple-effect__background1,
 	.ripple-effect__background2 {
 		position: absolute;
+		z-index: var(--z-index-low);
 		display: block;
 		width: 528px;
 		height: 528px;
@@ -93,6 +94,11 @@
 	.ripple-effect__background2 {
 		bottom: -291px;
 		left: -136px;
+	}
+
+	.circle-gradient1,
+	.circle-gradient2 {
+		z-index: var(--z-index-medium);
 	}
 
 	.circle-gradient1 {
