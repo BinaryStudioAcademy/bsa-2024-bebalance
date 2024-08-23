@@ -17,7 +17,7 @@ import { styles } from "./styles";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
-	isFocused: boolean;
+	isAutoFocused?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
@@ -26,16 +26,17 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
-	isFocused = true,
+	isAutoFocused = false,
 	label,
 	name,
 	placeholder,
 }: Properties<T>): JSX.Element => {
 	const [accessoryRight, setAccessoryRight] = useState(true);
+	const [isFocused, setIsFocused] = useState(false);
 
 	const { field } = useFormController({ control, name });
 
-	const { onBlur, onChange, value } = field;
+	const { onChange, value } = field;
 
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
@@ -75,8 +76,14 @@ const Input = <T extends FieldValues>({
 					]}
 				>
 					<TextInput
-						onBlur={onBlur}
+						autoFocus={isAutoFocused}
+						onBlur={() => {
+							setIsFocused(false);
+						}}
 						onChangeText={onChange}
+						onFocus={() => {
+							setIsFocused(true);
+						}}
 						placeholder={placeholder}
 						placeholderTextColor={BaseColor.LIGHT_GRAY}
 						secureTextEntry={!accessoryRight}
