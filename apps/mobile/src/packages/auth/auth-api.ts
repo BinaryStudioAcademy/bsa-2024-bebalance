@@ -4,7 +4,7 @@ import { type HTTP } from "~/libs/packages/http/http";
 import { type Storage } from "~/libs/packages/storage/storage";
 
 import {
-	UserGetAllItemResponseDto,
+	type UserDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "../users/users";
@@ -21,7 +21,7 @@ class AuthApi extends BaseHttpApi {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 
-	public async getAuthenticatedUser(): Promise<UserGetAllItemResponseDto> {
+	public async getAuthenticatedUser(): Promise<UserDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.AUTHENTICATED_USER, {}),
 			{
@@ -31,7 +31,7 @@ class AuthApi extends BaseHttpApi {
 			},
 		);
 
-		return await response.json<UserGetAllItemResponseDto>();
+		return await response.json<UserDto>();
 	}
 
 	public async signUp(
