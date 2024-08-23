@@ -2,9 +2,9 @@ import {
 	type Control,
 	type FieldPath,
 	type FieldValues,
-} from "react-hook-form";
+} from "~/libs/types/types.js";
 
-import { Input } from "../components.js";
+import { Input } from "../input/input.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {

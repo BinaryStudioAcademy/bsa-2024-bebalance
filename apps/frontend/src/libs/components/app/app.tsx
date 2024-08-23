@@ -1,28 +1,21 @@
 import {
 	Loader,
 	Notification,
-	QuizQuestion,
 	RouterOutlet,
 } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
-	useAppForm,
 	useAppSelector,
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as userActions } from "~/modules/users/users.js";
 
-type FormValues = {
-	value: string;
-};
+import { QuizForm } from "../../../pages/quiz/libs/components/quiz-form/quiz-form.js";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
-	const { control } = useAppForm<FormValues>({
-		defaultValues: { value: "" },
-	});
 	const dispatch = useAppDispatch();
 	const { dataStatus, user, users } = useAppSelector(({ users }) => ({
 		dataStatus: users.dataStatus,
@@ -56,7 +49,7 @@ const App: React.FC = () => {
 							<li key={user.id}>{user.email}</li>
 						))}
 					</ul>
-					<QuizQuestion control={control} />
+					<QuizForm />
 				</>
 			)}
 			<Notification />
