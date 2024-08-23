@@ -13,6 +13,8 @@ const ColumnName = {
 	UPDATED_AT: "updated_at",
 } as const;
 
+const DELETE_STRATEGY = "CASCADE";
+
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TableName.QUIZ_QUESTIONS, (table) => {
 		table.increments(ColumnName.ID).primary();
@@ -21,7 +23,8 @@ function up(knex: Knex): Promise<void> {
 			.integer(ColumnName.CATEGORY_ID)
 			.references(ColumnName.ID)
 			.inTable(TableName.CATEGORIES)
-			.notNullable();
+			.notNullable()
+			.onDelete(DELETE_STRATEGY);
 		table
 			.dateTime(ColumnName.CREATED_AT)
 			.notNullable()
