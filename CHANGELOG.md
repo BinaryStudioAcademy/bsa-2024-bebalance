@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.12.0...v1.13.0) (2024-08-23)
+
+
+### Features
+
+* **backend:** add quiz questions to db bb-59 ([#110](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/110)) ([3908ac4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3908ac4f7cd6bb8972bc8063e7320b0bf76dffb0))
+* **frontend:** add quiz question component bb-88 ([#140](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/140)) ([db70533](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/db7053323ef3127eb5fd2bfd0f41bd039b21b919))
+* **mobile:** get-authenticated-user bb-28 ([#101](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/101)) ([62aab58](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/62aab58a9902128c8bd783d7c0a140286883a880))
+
 ## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.4...v1.12.0) (2024-08-23)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.7.0...frontend-v1.8.0) (2024-08-23)
+
+
+### Features
+
+* **frontend:** add quiz question component bb-88 ([#140](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/140)) ([db70533](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/db7053323ef3127eb5fd2bfd0f41bd039b21b919))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.6.1...frontend-v1.7.0) (2024-08-23)
 
 
