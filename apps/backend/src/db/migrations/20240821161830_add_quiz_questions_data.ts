@@ -15,7 +15,7 @@ const TableName = {
 	QUIZ_QUESTIONS: "quiz_questions",
 } as const;
 
-const Categories = {
+const CategoryName = {
 	FREE_TIME: "Free time",
 	FRIENDS: "Friends",
 	LOVE: "Love",
@@ -37,7 +37,7 @@ const ColumnName = {
 
 const categoryToQuestions = new Map<string, string[]>([
 	[
-		Categories.FREE_TIME,
+		CategoryName.FREE_TIME,
 		[
 			"How satisfied are you with the amount of free time you have?",
 			"How often do you engage in hobbies or leisure activities?",
@@ -45,7 +45,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.FRIENDS,
+		CategoryName.FRIENDS,
 		[
 			"How satisfied are you with the quality of your friendships?",
 			"How often do you spend time with your friends?",
@@ -53,7 +53,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.LOVE,
+		CategoryName.LOVE,
 		[
 			"How satisfied are you with your romantic relationship(s)?",
 			"How well do you communicate with your partner?",
@@ -61,7 +61,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.MENTAL,
+		CategoryName.MENTAL,
 		[
 			"How would you rate your overall mental health?",
 			"How well do you manage stress and anxiety?",
@@ -69,7 +69,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.MONEY,
+		CategoryName.MONEY,
 		[
 			"How satisfied are you with your financial situation?",
 			"How well do you manage your personal finances?",
@@ -77,7 +77,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.PHYSICAL,
+		CategoryName.PHYSICAL,
 		[
 			"How often do you engage in physical exercise each week?",
 			"How would you rate your overall physical health and fitness?",
@@ -85,7 +85,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.SPIRITUAL,
+		CategoryName.SPIRITUAL,
 		[
 			"How connected do you feel to your spiritual beliefs or practices?",
 			"How often do you engage in spiritual or reflective practices (e.g., meditation, prayer)?",
@@ -93,7 +93,7 @@ const categoryToQuestions = new Map<string, string[]>([
 		],
 	],
 	[
-		Categories.WORK,
+		CategoryName.WORK,
 		[
 			"How satisfied are you with your current job or career?",
 			"How well do you manage work-related stress?",
@@ -105,7 +105,7 @@ const categoryToQuestions = new Map<string, string[]>([
 async function up(knex: Knex): Promise<void> {
 	const categories: Category[] = await knex<Category>(TableName.CATEGORIES)
 		.select(ColumnName.ID, ColumnName.NAME)
-		.whereIn(ColumnName.NAME, Object.values(Categories));
+		.whereIn(ColumnName.NAME, Object.values(CategoryName));
 
 	const categoryIdByLabel: Record<string, number> = Object.fromEntries(
 		categories.map((category) => [category.name, category.id]),
