@@ -41,7 +41,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
 			<span className={styles["auth-info"]}>
 				Already have an account? Go to
-				<Link to={AppRoute.SIGN_IN}> Log in</Link>
+				<Link to={AppRoute.SIGN_IN}> Sign in</Link>
 			</span>
 			<form onSubmit={handleFormSubmit}>
 				<div className={styles["input-groups"]}>
