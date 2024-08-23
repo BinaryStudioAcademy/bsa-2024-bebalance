@@ -1,4 +1,5 @@
 import {
+	Header,
 	Loader,
 	Notification,
 	RouterOutlet,
@@ -41,6 +42,7 @@ const App: React.FC = () => {
 			{isLoading && <Loader />}
 			{!isLoading && isRoot && (
 				<>
+					<Header />
 					<h2>Users: {user?.email}</h2>
 					<h3>Status: {dataStatus}</h3>
 					<ul>
