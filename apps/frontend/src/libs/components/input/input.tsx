@@ -59,7 +59,7 @@ const Input = <T extends FieldValues>({
 							<label className={styles["radio-option"]} key={option.value}>
 								<input
 									checked={field.value === option.value}
-									className={getValidClassNames(styles["radio-field"])}
+									className={styles["radio-field"]}
 									onChange={handleRadioChange}
 									type="radio"
 									value={option.value}
