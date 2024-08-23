@@ -4,7 +4,6 @@ import { storage, StorageKey } from "~/libs/packages/storage/storage";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import {
 	type UserDto,
-	type UserGetAllItemResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "~/packages/users/users";
@@ -12,7 +11,7 @@ import {
 import { name as sliceName } from "./auth.slice";
 
 const getAuthenticatedUser = createAsyncThunk<
-	UserGetAllItemResponseDto,
+	UserDto,
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
