@@ -11,6 +11,7 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as userActions } from "~/modules/users/users.js";
+import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
@@ -47,6 +48,7 @@ const App: React.FC = () => {
 							<li key={user.id}>{user.email}</li>
 						))}
 					</ul>
+					<QuizForm />
 				</>
 			)}
 			<Notification />
