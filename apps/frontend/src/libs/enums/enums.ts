@@ -1,3 +1,4 @@
 export { AppRoute } from "./app-route.enum.js";
 export { DataStatus } from "./data-status.enum.js";
+export { SidebarIconSource } from "./sidebar-icon-source.enum.js";
 export { APIPath, AppEnvironment, ContentType, ServerErrorType } from "shared";

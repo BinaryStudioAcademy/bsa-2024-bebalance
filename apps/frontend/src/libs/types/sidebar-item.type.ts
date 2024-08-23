@@ -1,9 +1,14 @@
 import { AppRoute } from "~/libs/enums/enums.js";
-import { type SidebarIcon, type ValueOf } from "~/libs/types/types.js";
+import { type ValueOf } from "~/libs/types/types.js";
+
+import { IconName } from "./icon-name.type.js";
 
 type SidebarItem = {
 	href: ValueOf<typeof AppRoute>;
-	icon: SidebarIcon;
+	icon: {
+		active: IconName;
+		inactive: IconName;
+	};
 	title: string;
 };
 

@@ -1,5 +1,3 @@
-import wheelOfBalance from "~/assets/img/wheel-of-balance-active.svg";
-import wheelOfBalanceInactive from "~/assets/img/wheel-of-balance-inactive.svg";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { SidebarItem } from "~/libs/types/sidebar-item.type.js";
 
@@ -7,8 +5,8 @@ const sidebarItems: SidebarItem[] = [
 	{
 		href: AppRoute.ROOT,
 		icon: {
-			active: wheelOfBalance,
-			inactive: wheelOfBalanceInactive,
+			active: "MY_WHEEL_ACTIVE",
+			inactive: "MY_WHEEL_INACTIVE",
 		},
 		title: "My Wheel",
 	},
