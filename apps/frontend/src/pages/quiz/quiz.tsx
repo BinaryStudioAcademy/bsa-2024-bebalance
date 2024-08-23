@@ -29,12 +29,12 @@ const Quiz: React.FC = () => {
 				</div>
 			</div>
 			<img
-				alt="ripple-effect-bg"
+				alt="ripple visual effect"
 				className={styles["ripple-effect__background1"]}
 				src={rippleEffectBg}
 			/>
 			<img
-				alt="ripple-effect-bg"
+				alt="ripple visual effect"
 				className={styles["ripple-effect__background2"]}
 				src={rippleEffectBg2}
 			/>
