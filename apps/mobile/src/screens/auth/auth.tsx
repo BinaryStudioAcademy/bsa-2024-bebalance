@@ -36,7 +36,7 @@ const Auth: React.FC = () => {
 	}, [isSignUpScreen, dispatch]);
 
 	useEffect(() => {
-		if (user) {
+		if (!user) {
 			void dispatch(authActions.getAuthenticatedUser());
 		}
 	}, [user]);
