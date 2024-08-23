@@ -1,9 +1,8 @@
-import { getAuthenticatedUser, loadAll } from "./actions";
+import { loadAll } from "./actions";
 import { actions } from "./users.slice";
 
 const allActions = {
 	...actions,
-	getAuthenticatedUser,
 	loadAll,
 };
 

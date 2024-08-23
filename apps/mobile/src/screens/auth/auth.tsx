@@ -37,7 +37,7 @@ const Auth: React.FC = () => {
 
 	useEffect(() => {
 		if (user) {
-			void dispatch(userActions.getAuthenticatedUser(user.id));
+			void dispatch(authActions.getAuthenticatedUser());
 		}
 	}, [user]);
 
