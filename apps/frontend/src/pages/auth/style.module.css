@@ -44,3 +44,39 @@
 	z-index: 0;
 	width: 90%;
 }
+
+@media (width <= 640px) {
+	.auth-container {
+		position: relative;
+		display: block;
+		padding: 50px 16px;
+	}
+
+	.form-container {
+		position: relative;
+		z-index: 99;
+		height: 100%;
+		padding: 50px 30px;
+		margin: 0;
+	}
+
+	.illustration-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.illustration-container .img-left {
+		top: 0;
+		left: -100px;
+		width: 100%;
+	}
+
+	.illustration-container .img-right {
+		right: -100px;
+		bottom: 0;
+		width: 100%;
+	}
+}
