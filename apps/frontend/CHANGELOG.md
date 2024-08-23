@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.6.1...frontend-v1.7.0) (2024-08-23)
+
+
+### Features
+
+* **frontend:** Apply global font bb-104 ([#113](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/113)) ([88e87bf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/88e87bf3a75b61b30a806f1b6f0d076a0647854a))
+
+## [1.6.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.6.0...frontend-v1.6.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **frontend:** consistant sign in naming web bb-126 ([#123](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/123)) ([eb36a24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/eb36a246fb0ac30a7dbf1a4e08173242ffe0a2e1))
+
 ## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.5.0...frontend-v1.6.0) (2024-08-22)
 
 

@@ -54,7 +54,10 @@ class UserRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
-		const user = await this.userModel.query().findById(id);
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.findById(id);
 
 		return user
 			? UserEntity.initialize({
