@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.4...v1.12.0) (2024-08-23)
+
+
+### Features
+
+* **frontend:** Apply global font bb-104 ([#113](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/113)) ([88e87bf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/88e87bf3a75b61b30a806f1b6f0d076a0647854a))
+* **mobile:** error handling bb-77 ([#105](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/105)) ([5918591](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5918591f17e486eec80f86ce7a261d917136f1cd))
+
 ## [1.11.4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.11.3...v1.11.4) (2024-08-22)
 
 
