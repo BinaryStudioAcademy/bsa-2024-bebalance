@@ -9,7 +9,7 @@ type Properties = {
 	user: UserDto;
 };
 
-const UserHeaderInfo: React.FC<Properties> = ({ user }) => {
+const UserHeaderInformation: React.FC<Properties> = ({ user }) => {
 	return (
 		<div className={styles["user-info"]}>
 			<img
@@ -22,4 +22,4 @@ const UserHeaderInfo: React.FC<Properties> = ({ user }) => {
 	);
 };
 
-export { UserHeaderInfo };
+export { UserHeaderInformation };

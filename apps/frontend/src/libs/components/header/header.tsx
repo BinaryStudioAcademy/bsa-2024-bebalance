@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
-import { UserHeaderInfo } from "./components/components.js";
+import { UserHeaderInformation } from "./components/components.js";
 import styles from "./styles.module.css";
 
 const Header: React.FC = () => {
@@ -10,7 +10,7 @@ const Header: React.FC = () => {
 
 	return (
 		<header className={styles["header"]}>
-			{user && <UserHeaderInfo user={user} />}
+			{user && <UserHeaderInformation user={user} />}
 		</header>
 	);
 };
