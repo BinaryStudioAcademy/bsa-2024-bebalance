@@ -1,4 +1,4 @@
-import { SidebarIconSource } from "~/libs/enums/sidebar-icon-source.enum.js";
+import { SidebarIconSource } from "~/libs/enums/enums.js";
 
 type IconName = keyof typeof SidebarIconSource;
 
