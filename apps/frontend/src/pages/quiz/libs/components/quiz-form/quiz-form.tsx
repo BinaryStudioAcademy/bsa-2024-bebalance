@@ -5,7 +5,7 @@ type FormValues = {
 	value: string;
 };
 
-const QuizForm = () => {
+const QuizForm: React.FC = () => {
 	const { control } = useAppForm<FormValues>({
 		defaultValues: { value: "" },
 	});

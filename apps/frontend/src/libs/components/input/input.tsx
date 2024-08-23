@@ -1,12 +1,11 @@
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
+import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
 	type Control,
 	type FieldErrors,
 	type FieldPath,
 	type FieldValues,
-} from "react-hook-form";
-
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
+} from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
