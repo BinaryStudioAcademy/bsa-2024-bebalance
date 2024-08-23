@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.4...backend-v1.5.0) (2024-08-23)
+
+
+### Features
+
+* **backend:** add quiz questions to db bb-59 ([#110](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/110)) ([3908ac4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3908ac4f7cd6bb8972bc8063e7320b0bf76dffb0))
+
 ## [1.4.4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.4.3...backend-v1.4.4) (2024-08-22)
 
 
