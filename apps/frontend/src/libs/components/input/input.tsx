@@ -31,8 +31,9 @@ const Input = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 
-	const error = errors && errors[name]?.message;
+	const error = errors?.[name]?.message;
 	const hasError = Boolean(error);
+	const isRadioWithOptions = type === "radio" && options?.length;
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +53,7 @@ const Input = <T extends FieldValues>({
 				{label}
 			</span>
 			<div className={styles["input-container"]}>
-				{type === "radio" && options ? (
+				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (
 							<label className={styles["radio-option"]} key={option.value}>
