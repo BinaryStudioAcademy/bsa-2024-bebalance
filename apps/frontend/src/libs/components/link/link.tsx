@@ -21,5 +21,4 @@ const Link: React.FC<Properties> = ({ children, to, type }: Properties) => (
 		{children}
 	</NavLink>
 );
-
 export { Link };
