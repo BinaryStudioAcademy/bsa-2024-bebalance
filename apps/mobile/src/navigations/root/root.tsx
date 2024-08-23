@@ -16,7 +16,7 @@ const screenOptions: NativeStackNavigationOptions = {
 };
 
 const Root: React.FC = () => {
-	// const user = useAppSelector(({ auth }) => auth.user);
+	// const user = useAppSelector((state) => state.auth.user);
 
 	const user = "User";
 	const hasUser = Boolean(user);
