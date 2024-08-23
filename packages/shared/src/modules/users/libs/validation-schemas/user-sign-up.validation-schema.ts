@@ -22,7 +22,18 @@ const userSignUp = z
 		name: z.string().trim().min(UserValidationRule.NAME_MINIMUM_LENGTH, {
 			message: UserValidationMessage.NAME_REQUIRE,
 		}),
-		password: z.string().trim(),
+		password: z
+			.string()
+			.trim()
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+				message: UserValidationMessage.PASSWORD_REQUIRE,
+			})
+			.max(UserValidationRule.PASSWORD_MAX_LENGTH, {
+				message: UserValidationMessage.PASSWORD_MAX_LENGTH,
+			})
+			.min(UserValidationRule.PASSWORD_MIN_LENGTH, {
+				message: UserValidationMessage.PASSWORD_MIN_LENGTH,
+			}),
 	})
 	.required();
 
