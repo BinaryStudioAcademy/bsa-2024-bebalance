@@ -6,6 +6,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { UserDto } from "~/modules/users/users.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -37,6 +38,18 @@ class AuthController extends BaseController {
 				body: userSignUpValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getAuthenticatedUser(
+					options as APIHandlerOptions<{
+						user: UserDto;
+					}>,
+				),
+			method: "GET",
+			path: AuthApiPath.AUTHENTICATED_USER,
+		});
+
 		this.addRoute({
 			handler: (options) =>
 				this.signIn(
@@ -50,6 +63,33 @@ class AuthController extends BaseController {
 				body: userSignInValidationSchema,
 			},
 		});
+	}
+
+	/**
+	 * @swagger
+	 * /auth/authenticated-user:
+	 *   get:
+	 *     description: Return authenticated user
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
+	 */
+	private getAuthenticatedUser(
+		options: APIHandlerOptions<{
+			user: UserDto;
+		}>,
+	): APIHandlerResponse {
+		return {
+			payload: options.user,
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
@@ -85,7 +125,6 @@ class AuthController extends BaseController {
 	 *                    description: "Authentication token for the user."
 	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
-
 	private async signIn(
 		options: APIHandlerOptions<{
 			body: UserSignInRequestDto;

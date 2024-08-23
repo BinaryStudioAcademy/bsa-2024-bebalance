@@ -5,6 +5,7 @@ export {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
 	type TokenPayload,
+	type UserDto,
 	type ValidationSchema,
 	type ValueOf,
 } from "shared";
