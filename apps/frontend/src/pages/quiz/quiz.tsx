@@ -1,4 +1,6 @@
 import lifeBalanceWheel from "~/assets/img/life-balance-wheel.svg";
+import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
+import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
 import { Button } from "~/libs/components/components.js";
 
 import styles from "./styles.module.css";
@@ -26,6 +28,18 @@ const Quiz: React.FC = () => {
 					<Button isFluid label="CONTINUE" type="button" variant="dark" />
 				</div>
 			</div>
+			<img
+				alt="ripple visual effect"
+				className={styles["ripple-effect__background1"]}
+				src={rippleEffectBg}
+			/>
+			<img
+				alt="ripple visual effect"
+				className={styles["ripple-effect__background2"]}
+				src={rippleEffectBg2}
+			/>
+			<div className={styles["circle-gradient1"]} />
+			<div className={styles["circle-gradient2"]} />
 		</div>
 	);
 };
