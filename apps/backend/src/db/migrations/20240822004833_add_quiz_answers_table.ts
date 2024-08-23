@@ -19,7 +19,7 @@ const ValueLimits = {
 	MIN: 1,
 } as const;
 
-const CASCADE = "CASCADE";
+const DELETE_STRATEGY = "CASCADE";
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TableName.QUIZ_ANSWERS, (table) => {
@@ -29,7 +29,7 @@ function up(knex: Knex): Promise<void> {
 			.integer(ColumnName.QUESTION_ID)
 			.references(ColumnName.ID)
 			.inTable(TableName.QUIZ_QUESTIONS)
-			.onDelete(CASCADE)
+			.onDelete(DELETE_STRATEGY)
 			.notNullable();
 		table
 			.dateTime(ColumnName.CREATED_AT)
