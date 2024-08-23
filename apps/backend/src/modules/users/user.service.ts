@@ -50,8 +50,8 @@ class UserService implements Service {
 		};
 	}
 
-	public findByEmail(email: string): Promise<null | UserEntity> {
-		return this.userRepository.findByEmail(email);
+	public async findByEmail(email: string): Promise<null | UserEntity> {
+		return await this.userRepository.findByEmail(email);
 	}
 
 	public update(): ReturnType<Service["update"]> {
