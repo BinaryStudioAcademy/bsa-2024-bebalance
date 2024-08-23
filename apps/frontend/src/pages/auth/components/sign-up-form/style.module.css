@@ -10,7 +10,7 @@
 }
 
 .form-container {
-	z-index: 1;
+	z-index: var(--z-index-low);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -52,10 +52,12 @@
 .form-header__logo-text {
 	font-size: 24px;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .form-header__text {
 	margin-block: 10px;
+	text-transform: uppercase;
 }
 
 .form-header__sub-text {
@@ -72,6 +74,7 @@
 	font-size: 40px;
 	font-weight: bold;
 	color: var(--white);
+	text-transform: uppercase;
 }
 
 .ripple-effect__background1 {

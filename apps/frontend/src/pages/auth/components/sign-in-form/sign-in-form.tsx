@@ -35,10 +35,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					<div className={styles["form-header"]}>
 						<div className={styles["form-header__logo-container"]}>
 							<div className={styles["form-header__logo"]} />
-							<span className={styles["form-header__logo-text"]}>LOGO</span>
+							<span className={styles["form-header__logo-text"]}>logo</span>
 						</div>
 
-						<h1 className={styles["form-header__text"]}>SIGN IN</h1>
+						<h1 className={styles["form-header__text"]}>sign in</h1>
 						<span className={styles["form-header__sub-text"]}>
 							No account? Go to{" "}
 							<Link to={AppRoute.SIGN_UP}>Create an account</Link>
@@ -68,7 +68,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			</div>
 
 			<div className={styles["logo-container"]}>
-				<span className={styles["logo"]}>LOGO</span>
+				<span className={styles["logo"]}>logo</span>
 			</div>
 
 			<img
