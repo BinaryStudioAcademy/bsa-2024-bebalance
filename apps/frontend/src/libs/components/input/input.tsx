@@ -85,6 +85,7 @@ const Input = <T extends FieldValues>({
 							<button
 								className={styles["toggle-password-icon"]}
 								onClick={onToggle}
+								type="button"
 							>
 								<img
 									alt={isDisplayedValue ? "Hide password" : "Show password"}
