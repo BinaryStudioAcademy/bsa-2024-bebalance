@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.9.0...frontend-v1.10.0) (2024-08-23)
+
+
+### Features
+
+* **frontend/shared:** header component bb-91 ([#120](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/120)) ([2fa4236](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2fa4236867ee7fc77365cba1ece1c9d2bba9b2a6))
+
+
+### Bug Fixes
+
+* **frontend:** background in signIn/signUp bb-148 ([#159](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/159)) ([c3bcd28](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c3bcd285f7c7f84e9abdfffdd34f40f6ad7e4158))
+
 ## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.8.0...frontend-v1.9.0) (2024-08-23)
 
 
