@@ -8,6 +8,7 @@ export {
 export {
 	type ServerErrorDetail,
 	type ServerErrorResponse,
+	type UserDto,
 	type ValidationSchema,
 	type ValueOf,
 } from "shared";
