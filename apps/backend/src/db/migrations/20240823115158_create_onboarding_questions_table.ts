@@ -1,6 +1,6 @@
 import { type Knex } from "knex";
 
-const TABLE_NAME = "onboarding questions";
+const TABLE_NAME = "onboarding_questions";
 
 const ColumnName = {
 	CREATED_AT: "created_at",
