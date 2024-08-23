@@ -4,7 +4,7 @@ import { Button, Input, Link, Text, View } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { userSignUpValidationSchema } from "~/packages/users/libs/validation-schemas/validation-schemas";
+import { userSignUpValidationSchema } from "~/packages/users/users";
 import { type UserSignUpRequestDto } from "~/packages/users/users";
 
 import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
@@ -40,7 +40,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Input
 				control={control}
 				errors={errors}
-				isFocused={false}
+				isAutoFocused
 				label="Name"
 				name="name"
 				placeholder="name"
@@ -48,7 +48,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Input
 				control={control}
 				errors={errors}
-				isFocused={false}
 				label="Email"
 				name="email"
 				placeholder="name@gmail.com"
@@ -56,7 +55,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Input
 				control={control}
 				errors={errors}
-				isFocused={false}
 				label="Password"
 				name="password"
 				placeholder="*******"
