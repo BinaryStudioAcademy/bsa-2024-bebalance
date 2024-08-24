@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { type UserSignInResponseDto, type UserSignUpResponseDto } from "shared";
+import { type UserDto } from "shared";
 
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
@@ -8,7 +8,7 @@ import { signUp } from "./actions";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	user: null | UserSignInResponseDto | UserSignUpResponseDto;
+	user: null | UserDto;
 };
 
 const initialState: State = {
