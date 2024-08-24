@@ -86,19 +86,15 @@
 .ripple-effect__background2 {
 	position: absolute;
 	bottom: -50%;
-	left: 42%;
-	width: 60%;
+	left: 25%;
+	width: 100%;
 	height: auto;
 	max-height: 500px;
 	transform: translateY(-50%);
 }
 
 .circle-gradient1 {
-	position: absolute;
-	top: 5%;
-	left: 58%;
-	width: 130px;
-	height: 130px;
+	display: none;
 	background: linear-gradient(
 		to bottom,
 		var(--physical-start) 0%,
@@ -110,8 +106,8 @@
 
 .circle-gradient2 {
 	position: absolute;
-	top: 20%;
-	right: 10%;
+	right: 40%;
+	bottom: 20%;
 	width: 35px;
 	height: 35px;
 	background: linear-gradient(
@@ -124,10 +120,10 @@
 
 .circle-gradient3 {
 	position: absolute;
-	right: 10%;
-	bottom: 10%;
-	width: 100px;
-	height: 100px;
+	top: 20%;
+	right: 35%;
+	width: 70px;
+	height: 70px;
 	background: linear-gradient(
 		to right,
 		var(--work-start) 0%,
@@ -138,7 +134,10 @@
 
 .circle-gradient4 {
 	position: absolute;
-	display: none;
+	top: 30%;
+	right: 10%;
+	width: 120px;
+	height: 120px;
 	background: linear-gradient(
 		to right,
 		var(--mental-start) 0%,
@@ -154,7 +153,7 @@
 
 	.container {
 		grid-template-columns: 1fr;
-		padding-top: 100px;
+		padding-top: 80px;
 		padding-bottom: 60px;
 	}
 
@@ -162,6 +161,7 @@
 		align-items: flex-start;
 		justify-content: stretch;
 		padding-top: 60px;
+		padding-bottom: 40px;
 	}
 
 	.form {
@@ -191,8 +191,8 @@
 	}
 
 	.circle-gradient3 {
-		bottom: -12%;
-		left: 0;
+		top: 90%;
+		left: -10%;
 		display: block;
 		width: 150px;
 		height: 150px;
