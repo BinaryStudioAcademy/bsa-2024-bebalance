@@ -37,6 +37,12 @@ const App: React.FC = () => {
 				<RouterOutlet />
 			</div>
 			{isLoading && <Loader />}
+			{!isLoading && isRoot && (
+				<>
+					<Header />
+					<QuizForm />
+				</>
+			)}
 			<Notification />
 		</>
 	);
