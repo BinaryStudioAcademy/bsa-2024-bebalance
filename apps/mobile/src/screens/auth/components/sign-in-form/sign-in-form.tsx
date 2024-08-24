@@ -4,8 +4,10 @@ import { Button, Input, Link, Text, View } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { userSignInValidationSchema } from "~/packages/users/libs/validation-schemas/validation-schemas";
-import { type UserSignInRequestDto } from "~/packages/users/users";
+import {
+	type UserSignInRequestDto,
+	userSignInValidationSchema,
+} from "~/packages/users/users";
 
 import { USER_SIGN_IN_DEFAULT_VALUES } from "./libs/constants";
 
