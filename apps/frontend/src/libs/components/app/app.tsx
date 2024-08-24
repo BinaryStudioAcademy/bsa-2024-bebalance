@@ -12,7 +12,7 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as userActions } from "~/modules/users/users.js";
-import { QuizForm } from "~/pages/quiz/components/quiz-form/quiz-form.jsx";
+import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
