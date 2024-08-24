@@ -15,6 +15,7 @@ import { styles } from "./styles";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	isSecureTextEntry?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
@@ -23,6 +24,7 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	isSecureTextEntry = false,
 	label,
 	name,
 	placeholder,
@@ -41,6 +43,7 @@ const Input = <T extends FieldValues>({
 				onBlur={onBlur}
 				onChangeText={onChange}
 				placeholder={placeholder}
+				secureTextEntry={isSecureTextEntry}
 				style={styles.input}
 				value={value}
 			/>

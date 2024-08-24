@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.15.0...v1.16.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+* **frontend:** responsive header bb-107 ([#165](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/165)) ([ee8935f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ee8935f3352a743041d9d38aad8496c75c6fb204))
+* **mobile:** protected routing bb-29 ([#98](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/98)) ([1ca8603](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1ca86037c3cbf6da7c126af9a8e68cfc5cbeae87))
+* **mobile:** removed landscape mode support bb-169 ([#170](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/170)) ([166d8d5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/166d8d523f0d412cbdd3d3b48ccc701b700f5916))
+
 ## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.14.0...v1.15.0) (2024-08-23)
 
 
