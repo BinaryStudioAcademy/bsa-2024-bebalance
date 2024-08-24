@@ -6,8 +6,7 @@ type Properties = {
 };
 
 const Icon: React.FC<Properties> = ({ name }: Properties) => {
-	const source = iconNameToSvg.get(name);
-	return <img alt="" src={source} />;
+	return <img alt={name} src={iconNameToSvg.get(name)} />;
 };
 
 export { Icon };
