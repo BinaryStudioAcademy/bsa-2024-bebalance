@@ -10,7 +10,7 @@ type OnboardingAnswer = {
 	[ColumnName.QUESTION_ID]: number;
 };
 
-const TABLE_NAME = {
+const TableName = {
 	ONBOARDING_ANSWERS: "onboarding_answers",
 	ONBOARDING_QUESTIONS: "onboarding_questions",
 } as const;
@@ -76,7 +76,7 @@ const questionToAnswers = new Map<string, string[]>([
 
 async function up(knex: Knex): Promise<void> {
 	const questions: OnboardingQuestion[] = await knex<OnboardingQuestion>(
-		TABLE_NAME.ONBOARDING_QUESTIONS,
+		TableName.ONBOARDING_QUESTIONS,
 	)
 		.select(ColumnName.ID, ColumnName.LABEL)
 		.whereIn(ColumnName.LABEL, [...questionToAnswers.keys()]);
@@ -94,16 +94,16 @@ async function up(knex: Knex): Promise<void> {
 		})),
 	);
 
-	await knex(TABLE_NAME.ONBOARDING_ANSWERS).insert(onboardingAnswers);
+	await knex(TableName.ONBOARDING_ANSWERS).insert(onboardingAnswers);
 }
 
 function down(knex: Knex): Promise<void> {
 	const questionLabels = [...questionToAnswers.keys()];
 
-	return knex<OnboardingAnswer>(TABLE_NAME.ONBOARDING_ANSWERS)
+	return knex<OnboardingAnswer>(TableName.ONBOARDING_ANSWERS)
 		.whereIn(
 			ColumnName.QUESTION_ID,
-			knex(TABLE_NAME.ONBOARDING_QUESTIONS)
+			knex(TableName.ONBOARDING_QUESTIONS)
 				.select(ColumnName.ID)
 				.whereIn(ColumnName.LABEL, questionLabels),
 		)
