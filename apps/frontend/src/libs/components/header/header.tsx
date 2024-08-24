@@ -5,9 +5,7 @@ import { UserDto } from "~/libs/types/types.js";
 import styles from "./styles.module.css";
 
 const Header: React.FC = () => {
-	const user: UserDto = useAppSelector(
-		({ auth }) => auth.user?.user as UserDto,
-	);
+	const user: UserDto = useAppSelector(({ auth }) => auth.user as UserDto);
 
 	return (
 		<>
