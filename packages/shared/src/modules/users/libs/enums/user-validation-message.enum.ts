@@ -13,6 +13,7 @@ const UserValidationMessage = {
 	)} characters long`,
 	PASSWORD_REQUIRE: "Password is not allowed to be empty",
 	PASSWORD_SHORT: "Password length must be at least 8 characters long",
+	PASSWORDS_MISSMATCH: "Passwords don't match",
 } as const;
 
 export { UserValidationMessage };
