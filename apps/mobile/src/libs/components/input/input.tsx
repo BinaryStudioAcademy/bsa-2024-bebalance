@@ -5,9 +5,14 @@ import {
 	type FieldPath,
 	type FieldValues,
 } from "react-hook-form";
-import { Pressable, TextInput } from "react-native";
 
-import { LinearGradient, Text, View } from "~/libs/components/components";
+import {
+	IconButton,
+	LinearGradient,
+	Text,
+	TextInput,
+	View,
+} from "~/libs/components/components";
 import { BaseColor, GradientColor } from "~/libs/enums/enums";
 import { useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
@@ -73,6 +78,7 @@ const Input = <T extends FieldValues>({
 						styles.input,
 						styles.rounded,
 						globalStyles.alignItemsCenter,
+						globalStyles.pr16,
 					]}
 				>
 					<TextInput
@@ -97,17 +103,13 @@ const Input = <T extends FieldValues>({
 						value={value}
 					/>
 					{name === "password" && (
-						<Pressable
+						<IconButton
+							color={BaseColor.LIGHT_GRAY}
+							name={accessoryRight ? "visibility" : "visibility-off"}
 							onPress={() => {
 								setAccessoryRight(!accessoryRight);
 							}}
-							style={[
-								{
-									backgroundColor: accessoryRight ? "green" : "red",
-									height: 20,
-									width: 20,
-								},
-							]}
+							size={20}
 						/>
 					)}
 				</View>
