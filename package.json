@@ -1,6 +1,6 @@
 {
 	"name": "bebalance",
-	"version": "1.7.0",
+	"version": "1.15.0",
 	"type": "module",
 	"workspaces": [
 		"apps/backend",
