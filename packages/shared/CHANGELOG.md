@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.5.0...shared-v1.6.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+
 ## [1.5.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.4.0...shared-v1.5.0) (2024-08-22)
 
 
