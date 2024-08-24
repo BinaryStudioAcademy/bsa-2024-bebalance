@@ -1,10 +1,8 @@
 import { z } from "zod";
 
-import { CONFIRM_PASSWORD_KEY } from "../constants/constants.js";
 import { UserValidationMessage, UserValidationRule } from "../enums/enums.js";
 
 type UserSignUpRequestValidationDto = {
-	confirmPassword: z.ZodString;
 	email: z.ZodString;
 	name: z.ZodString;
 	password: z.ZodString;
@@ -12,7 +10,6 @@ type UserSignUpRequestValidationDto = {
 
 const userSignUp = z
 	.object<UserSignUpRequestValidationDto>({
-		confirmPassword: z.string().trim(),
 		email: z
 			.string()
 			.trim()
@@ -38,10 +35,6 @@ const userSignUp = z
 				message: UserValidationMessage.PASSWORD_MIN_LENGTH,
 			}),
 	})
-	.required()
-	.refine((data) => data.password === data.confirmPassword, {
-		message: UserValidationMessage.PASSWORDS_MISSMATCH,
-		path: [CONFIRM_PASSWORD_KEY],
-	});
+	.required();
 
 export { userSignUp };

@@ -3,11 +3,17 @@ import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
+	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import {
+	CONFIRM_PASSWORD_ERROR_MESSAGE,
+	CONFIRM_PASSWORD_ERROR_TYPE,
+	CONFIRM_PASSWORD_KEY,
+	DEFAULT_SIGN_UP_PAYLOAD,
+} from "./libs/constants.js";
 import styles from "./style.module.css";
 
 type Properties = {
@@ -15,16 +21,27 @@ type Properties = {
 };
 
 const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
-		defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-		validationSchema: userSignUpValidationSchema,
-	});
+	const { control, errors, handleSubmit, setError } =
+		useAppForm<UserSignUpFormDto>({
+			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
+			validationSchema: userSignUpValidationSchema,
+		});
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(onSubmit)(event_);
+			void handleSubmit((payload: UserSignUpFormDto) => {
+				const { confirmPassword, ...userData } = payload;
+				if (confirmPassword === userData.password) {
+					onSubmit(userData);
+				} else {
+					setError(CONFIRM_PASSWORD_KEY, {
+						message: CONFIRM_PASSWORD_ERROR_MESSAGE,
+						type: CONFIRM_PASSWORD_ERROR_TYPE,
+					});
+				}
+			})(event_);
 		},
-		[handleSubmit, onSubmit],
+		[handleSubmit, onSubmit, setError],
 	);
 
 	return (
