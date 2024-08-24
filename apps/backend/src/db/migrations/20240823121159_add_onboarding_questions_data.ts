@@ -13,8 +13,6 @@ const QUESTIONS = [
 	"Which areas do you feel most challenged by right now?",
 	"What specific outcomes would you like to see by using the app?",
 	"Are there any specific types of tasks or practices you enjoy or find particularly motivating?",
-	"Spiritual",
-	"Mental",
 ];
 
 async function up(knex: Knex): Promise<void> {
