@@ -1,7 +1,7 @@
-import { type UserGetAllItemResponseDto } from "./user-get-all-item-response-dto.type.js";
+import { type UserDto } from "./user-dto.type.js";
 
 type UserGetAllResponseDto = {
-	items: UserGetAllItemResponseDto[];
+	items: UserDto[];
 };
 
 export { type UserGetAllResponseDto };
