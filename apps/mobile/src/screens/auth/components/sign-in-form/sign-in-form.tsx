@@ -6,7 +6,8 @@ import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { userSignInValidationSchema } from "~/packages/users/libs/validation-schemas/validation-schemas";
 import { type UserSignInRequestDto } from "~/packages/users/users";
-import { USER_SIGN_IN_DEFAULT_VALUES } from "~/screens/auth/components/sign-in-form/libs/constants";
+
+import { USER_SIGN_IN_DEFAULT_VALUES } from "./libs/constants";
 
 type Properties = {
 	onSubmit: (payload: UserSignInRequestDto) => void;
