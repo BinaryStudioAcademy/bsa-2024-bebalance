@@ -1,9 +1,9 @@
 import { type Knex } from "knex";
 
-const TABLE_NAME = "onboarding_questions";
+const TableName = "onboarding_questions";
 
 const ColumnName = {
-	QUESTION: "question",
+	LABEL: "label",
 } as const;
 
 const QUESTIONS = [
@@ -16,15 +16,15 @@ const QUESTIONS = [
 ];
 
 async function up(knex: Knex): Promise<void> {
-	await knex(TABLE_NAME).insert(
+	await knex(TableName).insert(
 		QUESTIONS.map((question) => ({
-			[ColumnName.QUESTION]: question,
+			[ColumnName.LABEL]: question,
 		})),
 	);
 }
 
 async function down(knex: Knex): Promise<void> {
-	await knex(TABLE_NAME).whereIn(ColumnName.QUESTION, QUESTIONS).del();
+	await knex(TableName).whereIn(ColumnName.LABEL, QUESTIONS).del();
 }
 
 export { down, up };
