@@ -36,7 +36,7 @@ const Input = <T extends FieldValues>({
 	name,
 	placeholder,
 }: Properties<T>): JSX.Element => {
-	const [accessoryRight, setAccessoryRight] = useState(true);
+	const [accessoryRight, setAccessoryRight] = useState(false);
 	const [isFocused, setIsFocused] = useState(false);
 
 	const { field } = useFormController({ control, name });

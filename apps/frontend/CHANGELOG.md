@@ -1,5 +1,51 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.10.0...frontend-v1.11.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+* **frontend:** responsive header bb-107 ([#165](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/165)) ([ee8935f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ee8935f3352a743041d9d38aad8496c75c6fb204))
+
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.9.0...frontend-v1.10.0) (2024-08-23)
+
+
+### Features
+
+* **frontend/shared:** header component bb-91 ([#120](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/120)) ([2fa4236](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2fa4236867ee7fc77365cba1ece1c9d2bba9b2a6))
+
+
+### Bug Fixes
+
+* **frontend:** background in signIn/signUp bb-148 ([#159](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/159)) ([c3bcd28](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c3bcd285f7c7f84e9abdfffdd34f40f6ad7e4158))
+
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.8.0...frontend-v1.9.0) (2024-08-23)
+
+
+### Features
+
+* **frontend:** quiz introduction screen mobile responsiveness bb-99 ([#124](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/124)) ([c303d15](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c303d154c91ca73cb803cca80ed5b2e23c533b8b))
+
+
+### Bug Fixes
+
+* **frontend:** different case in sign in bb-150 ([#157](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/157)) ([e7acab7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e7acab71352fc61b22e227a52c0500c71ab6b86a))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.7.0...frontend-v1.8.0) (2024-08-23)
+
+
+### Features
+
+* **frontend:** add quiz question component bb-88 ([#140](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/140)) ([db70533](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/db7053323ef3127eb5fd2bfd0f41bd039b21b919))
+
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.6.1...frontend-v1.7.0) (2024-08-23)
+
+
+### Features
+
+* **frontend:** Apply global font bb-104 ([#113](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/113)) ([88e87bf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/88e87bf3a75b61b30a806f1b6f0d076a0647854a))
+
 ## [1.6.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.6.0...frontend-v1.6.1) (2024-08-22)
 
 

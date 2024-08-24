@@ -11,7 +11,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
-import { getIsIos } from "~/libs/helpers/helpers";
+import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
 	useAppRoute,
@@ -20,7 +20,10 @@ import {
 	useEffect,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type UserSignUpRequestDto } from "~/packages/users/users";
+import {
+	type UserSignInRequestDto,
+	type UserSignUpRequestDto,
+} from "~/packages/users/users";
 import { actions as authActions } from "~/slices/auth/auth";
 import { actions as userActions } from "~/slices/users/users";
 
@@ -29,15 +32,11 @@ import { styles } from "./styles";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
-const isIos = getIsIos();
 
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
-	const { dataStatus, user } = useAppSelector(({ auth }) => ({
-		dataStatus: auth.dataStatus,
-		user: auth.user,
-	}));
+	const { dataStatus, user } = useAppSelector((state) => state.auth);
 
 	const isSignUpScreen = name === RootScreenName.SIGN_UP;
 
@@ -46,6 +45,19 @@ const Auth: React.FC = () => {
 			void dispatch(userActions.loadAll());
 		}
 	}, [isSignUpScreen, dispatch]);
+
+	useEffect(() => {
+		if (!user) {
+			void dispatch(authActions.getAuthenticatedUser());
+		}
+	}, [user]);
+
+	const handleSignInSubmit = useCallback(
+		(payload: UserSignInRequestDto): void => {
+			void dispatch(authActions.signIn(payload));
+		},
+		[dispatch],
+	);
 
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
@@ -57,7 +69,7 @@ const Auth: React.FC = () => {
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case RootScreenName.SIGN_IN: {
-				return <SignInForm onSubmit={() => {}} />;
+				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
 			case RootScreenName.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
@@ -72,9 +84,9 @@ const Auth: React.FC = () => {
 			<BackgroundWrapper>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
-						behavior={isIos ? "padding" : "height"}
+						behavior={checkIfAndroid() ? "height" : "padding"}
 						keyboardVerticalOffset={
-							isIos ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
+							checkIfIos() ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
 						}
 						style={[globalStyles.flex1, globalStyles.mv32]}
 					>
@@ -88,10 +100,7 @@ const Auth: React.FC = () => {
 							showsHorizontalScrollIndicator={false}
 							showsVerticalScrollIndicator={false}
 						>
-							<Text>
-								state: {dataStatus}
-								{JSON.stringify(user)}
-							</Text>
+							<Text>state: {dataStatus}</Text>
 							<View
 								style={[
 									globalStyles.pv32,

@@ -1,2 +1,2 @@
-export { getIsIos } from "./get-is-ios/get-is-ios";
+export { checkIfAndroid, checkIfIos } from "./check-platform/check-platform";
 export { configureString } from "shared";
