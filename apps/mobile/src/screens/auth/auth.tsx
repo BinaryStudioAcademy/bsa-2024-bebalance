@@ -10,7 +10,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
-import { isAndroid, isIos } from "~/libs/helpers/helpers";
+import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
 	useAppRoute,
@@ -83,9 +83,9 @@ const Auth: React.FC = () => {
 			<BackgroundWrapper>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
-						behavior={isAndroid() ? "height" : "padding"}
+						behavior={checkIfAndroid() ? "height" : "padding"}
 						keyboardVerticalOffset={
-							isIos() ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
+							checkIfIos() ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
 						}
 						style={[
 							globalStyles.alignItemsCenter,
@@ -102,7 +102,7 @@ const Auth: React.FC = () => {
 							showsVerticalScrollIndicator={false}
 							style={styles.formContainer}
 						>
-							<View style={[globalStyles.p32]}>
+							<View style={globalStyles.p32}>
 								<Text>state: {dataStatus}</Text>
 								<View
 									style={[

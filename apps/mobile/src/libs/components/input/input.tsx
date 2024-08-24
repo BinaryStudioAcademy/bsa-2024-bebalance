@@ -15,19 +15,19 @@ import { styles } from "./styles";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
+	isSecureTextEntry?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
-	secureTextEntry?: boolean;
 };
 
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	isSecureTextEntry = false,
 	label,
 	name,
 	placeholder,
-	secureTextEntry = false,
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 
@@ -43,7 +43,7 @@ const Input = <T extends FieldValues>({
 				onBlur={onBlur}
 				onChangeText={onChange}
 				placeholder={placeholder}
-				secureTextEntry={secureTextEntry}
+				secureTextEntry={isSecureTextEntry}
 				style={styles.input}
 				value={value}
 			/>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Input, Link, Text, View } from "~/libs/components/components";
+import { Button, Input, Link, Text } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
@@ -39,26 +39,17 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 				errors={errors}
 				label="Email"
 				name="email"
-				placeholder="name@gmail.com"
+				placeholder="name@example.com"
 			/>
 			<Input
 				control={control}
 				errors={errors}
+				isSecureTextEntry
 				label="Password"
 				name="password"
 				placeholder="********"
-				secureTextEntry
 			/>
 			<Button label="SIGN IN" onPress={handleFormSubmit} />
-			<View
-				style={[
-					globalStyles.alignItemsCenter,
-					globalStyles.justifyContentCenter,
-					globalStyles.mt16,
-				]}
-			>
-				<Link label="Forgot password?" to="/" />
-			</View>
 		</>
 	);
 };
