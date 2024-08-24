@@ -25,18 +25,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	return (
 		<>
 			<Text preset="uppercase" size="xl" weight="bold">
-				Create an account
+				CREATE AN ACCOUNT
 			</Text>
-			<View
-				style={[
-					globalStyles.flexDirectionRow,
-					globalStyles.gap4,
-					globalStyles.alignItemsCenter,
-				]}
-			>
-				<Text weight="semiBold">Already have an account? Go to</Text>
+			<Text style={[globalStyles.mb16]}>
+				Already have an account? Go to{" "}
 				<Link label="Sign In" to={`/${RootScreenName.SIGN_IN}`} />
-			</View>
+			</Text>
 			<Input
 				control={control}
 				errors={errors}
@@ -55,6 +49,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Input
 				control={control}
 				errors={errors}
+				isSecureTextEntry
 				label="Password"
 				name="password"
 				placeholder="*******"

@@ -44,6 +44,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Input
 				control={control}
 				errors={errors}
+				isSecureTextEntry
 				label="Password"
 				name="password"
 				placeholder="********"

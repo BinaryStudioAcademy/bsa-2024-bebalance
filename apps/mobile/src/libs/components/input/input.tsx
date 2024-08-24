@@ -23,6 +23,7 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
 	isAutoFocused?: boolean;
+	isSecureTextEntry?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
@@ -32,11 +33,12 @@ const Input = <T extends FieldValues>({
 	control,
 	errors,
 	isAutoFocused = false,
+	isSecureTextEntry = false,
 	label,
 	name,
 	placeholder,
 }: Properties<T>): JSX.Element => {
-	const [accessoryRight, setAccessoryRight] = useState(false);
+	const [secureTextEntry, setSecureTextEntry] = useState(isSecureTextEntry);
 	const [isFocused, setIsFocused] = useState(false);
 
 	const { field } = useFormController({ control, name });
@@ -92,7 +94,7 @@ const Input = <T extends FieldValues>({
 						}}
 						placeholder={placeholder}
 						placeholderTextColor={BaseColor.LIGHT_GRAY}
-						secureTextEntry={!accessoryRight}
+						secureTextEntry={secureTextEntry}
 						style={[
 							globalStyles.justifyContentCenter,
 							globalStyles.alignItemsCenter,
@@ -102,12 +104,12 @@ const Input = <T extends FieldValues>({
 						]}
 						value={value}
 					/>
-					{name === "password" && (
+					{isSecureTextEntry && (
 						<IconButton
 							color={BaseColor.LIGHT_GRAY}
-							name={accessoryRight ? "visibility" : "visibility-off"}
+							name={secureTextEntry ? "visibility-off" : "visibility"}
 							onPress={() => {
-								setAccessoryRight(!accessoryRight);
+								setSecureTextEntry(!secureTextEntry);
 							}}
 							size={20}
 						/>
