@@ -4,7 +4,7 @@ import { type AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
-import { LinkType } from "./libs/types/types.js";
+import { type LinkType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
