@@ -30,7 +30,7 @@
 	color: var(--black);
 }
 
-@media screen and (width <= 425px) {
+@media screen and (width <= 500px) {
 	.user-name {
 		display: none;
 	}
