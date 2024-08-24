@@ -1,6 +1,6 @@
 import { type Knex } from "knex";
 
-const TableName = {
+const TABLE_NAME = {
 	ONBOARDING_ANSWERS: "onboarding_answers",
 	ONBOARDING_QUESTIONS: "onboarding_questions",
 } as const;
@@ -13,15 +13,17 @@ const ColumnName = {
 	UPDATED_AT: "updated_at",
 } as const;
 
+const DELETE_STRATEGY = "CASCADE";
+
 async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable(TableName.ONBOARDING_ANSWERS, (table) => {
+	await knex.schema.createTable(TABLE_NAME.ONBOARDING_ANSWERS, (table) => {
 		table.increments(ColumnName.ID).primary();
 		table.string(ColumnName.LABEL).unique().notNullable();
 		table
 			.integer(ColumnName.QUESTION_ID)
 			.references(ColumnName.ID)
-			.inTable(TableName.ONBOARDING_QUESTIONS)
-			.onDelete("CASCADE")
+			.inTable(TABLE_NAME.ONBOARDING_QUESTIONS)
+			.onDelete(DELETE_STRATEGY)
 			.notNullable();
 		table
 			.dateTime(ColumnName.CREATED_AT)
@@ -35,7 +37,7 @@ async function up(knex: Knex): Promise<void> {
 }
 
 async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTableIfExists(TableName.ONBOARDING_ANSWERS);
+	await knex.schema.dropTableIfExists(TABLE_NAME.ONBOARDING_ANSWERS);
 }
 
 export { down, up };

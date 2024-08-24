@@ -1,6 +1,6 @@
 import { type Knex } from "knex";
 
-const TableName = "onboarding_questions";
+const TABLE_NAME = "onboarding_questions";
 
 const ColumnName = {
 	CREATED_AT: "created_at",
@@ -10,7 +10,7 @@ const ColumnName = {
 } as const;
 
 async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable(TableName, (table) => {
+	await knex.schema.createTable(TABLE_NAME, (table) => {
 		table.increments(ColumnName.ID).primary();
 		table.string(ColumnName.LABEL).notNullable().unique();
 		table
@@ -25,7 +25,7 @@ async function up(knex: Knex): Promise<void> {
 }
 
 async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTableIfExists(TableName);
+	await knex.schema.dropTableIfExists(TABLE_NAME);
 }
 
 export { down, up };
