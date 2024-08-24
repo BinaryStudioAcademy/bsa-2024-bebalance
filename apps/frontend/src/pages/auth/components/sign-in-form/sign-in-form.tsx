@@ -20,7 +20,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
 	});
-	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
