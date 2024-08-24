@@ -12,8 +12,9 @@
 .form-container {
 	z-index: var(--z-index-low);
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
+	padding-top: 120px;
 	background-color: var(--white);
 	border-radius: 20px;
 }
@@ -61,7 +62,7 @@
 }
 
 .form-header__sub-text {
-	font-size: medium;
+	font-size: 16px;
 }
 
 .logo-container {
