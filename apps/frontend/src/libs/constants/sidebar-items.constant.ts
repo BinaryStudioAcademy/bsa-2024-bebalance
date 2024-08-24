@@ -1,7 +1,7 @@
 import { AppRoute } from "~/libs/enums/enums.js";
 import { SidebarItem } from "~/libs/types/types.js";
 
-const sidebarItems: SidebarItem[] = [
+const SIDEBAR_ITEMS: SidebarItem[] = [
 	{
 		href: AppRoute.ROOT,
 		icon: {
@@ -10,6 +10,6 @@ const sidebarItems: SidebarItem[] = [
 		},
 		title: "My Wheel",
 	},
-] as const;
+];
 
 export { sidebarItems };
