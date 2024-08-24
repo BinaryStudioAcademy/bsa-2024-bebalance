@@ -1,5 +1,3 @@
-import { SidebarIconSource } from "~/libs/enums/enums.js";
-
-type IconName = keyof typeof SidebarIconSource;
+type IconName = "my-wheel-active" | "my-wheel-inactive";
 
 export { IconName };
