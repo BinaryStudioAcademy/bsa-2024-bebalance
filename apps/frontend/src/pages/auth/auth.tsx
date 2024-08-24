@@ -53,8 +53,8 @@ const Auth: React.FC = () => {
 					{getScreen(pathname)}
 				</section>
 				<section className={styles["illustration-container"]}>
-					<AuthIllustrationLeft />
-					<AuthIllustrationRight />
+					<AuthIllustrationLeft className={styles["img-left"]} />
+					<AuthIllustrationRight className={styles["img-right"]} />
 				</section>
 			</main>
 		</>
