@@ -40,7 +40,6 @@ class UserService implements Service {
 	public async find(id: number): Promise<null | UserEntity> {
 		return await this.userRepository.find(id);
 	}
-
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 
