@@ -1,0 +1,15 @@
+import { AppRoute } from "~/libs/enums/enums.js";
+import { SidebarItem } from "~/libs/types/types.js";
+
+const sidebarItems: SidebarItem[] = [
+	{
+		href: AppRoute.ROOT,
+		icon: {
+			active: "myWheelActive",
+			inactive: "myWheelInactive",
+		},
+		title: "My Wheel",
+	},
+] as const;
+
+export { sidebarItems };

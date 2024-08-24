@@ -1,6 +1,7 @@
 import reactPlugin from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 import { ConfigEnv, defineConfig, loadEnv } from "vite";
+import svgr from "vite-plugin-svgr";
 
 const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
 	const {
@@ -13,7 +14,18 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
 		build: {
 			outDir: "build",
 		},
-		plugins: [reactPlugin()],
+		plugins: [
+			reactPlugin(),
+			svgr({
+				include: "**/*.svg",
+				svgrOptions: {
+					exportType: "default",
+					ref: true,
+					svgo: false,
+					titleProp: true,
+				},
+			}),
+		],
 		resolve: {
 			alias: [
 				{
