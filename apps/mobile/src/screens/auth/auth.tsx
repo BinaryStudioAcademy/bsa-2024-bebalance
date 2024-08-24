@@ -36,8 +36,9 @@ const isIos = Platform.OS === "ios";
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ auth }) => ({
+	const { dataStatus, user } = useAppSelector(({ auth }) => ({
 		dataStatus: auth.dataStatus,
+		user: auth.user,
 	}));
 
 	const isSignUpScreen = name === RootScreenName.SIGN_UP;
@@ -47,6 +48,12 @@ const Auth: React.FC = () => {
 			void dispatch(userActions.loadAll());
 		}
 	}, [isSignUpScreen, dispatch]);
+
+	useEffect(() => {
+		if (!user) {
+			void dispatch(authActions.getAuthenticatedUser());
+		}
+	}, [user]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
