@@ -1,11 +1,16 @@
 import React from "react";
 
 import {
+	BackgroundWrapper,
+	KeyboardAvoidingView,
 	LoaderWrapper,
 	ScreenWrapper,
+	ScrollView,
 	Text,
+	View,
 } from "~/libs/components/components";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
 	useAppRoute,
@@ -13,11 +18,19 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks";
-import { type UserSignUpRequestDto } from "~/packages/users/users";
+import { globalStyles } from "~/libs/styles/styles";
+import {
+	type UserSignInRequestDto,
+	type UserSignUpRequestDto,
+} from "~/packages/users/users";
 import { actions as authActions } from "~/slices/auth/auth";
 import { actions as userActions } from "~/slices/users/users";
 
 import { SignInForm, SignUpForm } from "./components/components";
+import { styles } from "./styles";
+
+const IOS_KEYBOARD_OFFSET = 40;
+const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
@@ -38,9 +51,12 @@ const Auth: React.FC = () => {
 		}
 	}, [user]);
 
-	const handleSignInSubmit = useCallback(() => {
-		// TODO: handle sign in
-	}, []);
+	const handleSignInSubmit = useCallback(
+		(payload: UserSignInRequestDto): void => {
+			void dispatch(authActions.signIn(payload));
+		},
+		[dispatch],
+	);
 
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
@@ -64,10 +80,49 @@ const Auth: React.FC = () => {
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-			<ScreenWrapper>
-				<Text>state: {dataStatus}</Text>
-				{getScreen(name)}
-			</ScreenWrapper>
+			<BackgroundWrapper>
+				<ScreenWrapper>
+					<KeyboardAvoidingView
+						behavior={checkIfAndroid() ? "height" : "padding"}
+						keyboardVerticalOffset={
+							checkIfIos() ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
+						}
+						style={[
+							globalStyles.alignItemsCenter,
+							globalStyles.flex1,
+							globalStyles.justifyContentCenter,
+							globalStyles.mb48,
+							globalStyles.mt48,
+						]}
+					>
+						<ScrollView
+							contentContainerStyle={globalStyles.flexGrow1}
+							overScrollMode="never"
+							showsHorizontalScrollIndicator={false}
+							showsVerticalScrollIndicator={false}
+							style={styles.formContainer}
+						>
+							<View style={globalStyles.p32}>
+								<Text>state: {dataStatus}</Text>
+								<View
+									style={[
+										globalStyles.gap8,
+										globalStyles.alignItemsCenter,
+										globalStyles.flexDirectionRow,
+										globalStyles.mb32,
+										globalStyles.mt32,
+									]}
+								>
+									<Text preset="heading" style={globalStyles.ml48}>
+										LOGO
+									</Text>
+								</View>
+								{getScreen(name)}
+							</View>
+						</ScrollView>
+					</KeyboardAvoidingView>
+				</ScreenWrapper>
+			</BackgroundWrapper>
 		</LoaderWrapper>
 	);
 };
