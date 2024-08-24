@@ -5,8 +5,8 @@ const sidebarItems: SidebarItem[] = [
 	{
 		href: AppRoute.ROOT,
 		icon: {
-			active: "my-wheel-active",
-			inactive: "my-wheel-inactive",
+			active: "myWheelActive",
+			inactive: "myWheelInactive",
 		},
 		title: "My Wheel",
 	},

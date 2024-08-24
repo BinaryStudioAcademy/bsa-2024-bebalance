@@ -1,3 +1,3 @@
-type IconName = "my-wheel-active" | "my-wheel-inactive";
+type IconName = "myWheelActive" | "myWheelInactive";
 
 export { IconName };

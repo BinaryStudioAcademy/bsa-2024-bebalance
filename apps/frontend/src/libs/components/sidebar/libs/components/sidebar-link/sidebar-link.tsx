@@ -3,14 +3,14 @@ import { type AppRoute } from "~/libs/enums/enums.js";
 import { type IconName, type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
-	icon: IconName;
+	iconName: IconName;
 	pathname: string;
 	title: string;
 	to: ValueOf<typeof AppRoute>;
 };
 
 const SidebarLink: React.FC<Properties> = ({
-	icon,
+	iconName,
 	pathname,
 	title,
 	to,
@@ -18,7 +18,7 @@ const SidebarLink: React.FC<Properties> = ({
 	const isActive = pathname === to;
 	return (
 		<Link isActive={isActive} to={to} type="navLink">
-			<Icon name={icon} />
+			<Icon name={iconName} />
 			{title}
 		</Link>
 	);

@@ -1,7 +1,7 @@
 import { sidebarItems } from "~/libs/constants/constants.js";
 import { useLocation } from "~/libs/hooks/hooks.js";
 
-import { SidebarLink } from "./libs/components/sidebar-link/sidebar-link.js";
+import { SidebarLink } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Sidebar: React.FC = () => {
@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
 					const { active, inactive } = item.icon;
 					return (
 						<SidebarLink
-							icon={item.href === pathname ? active : inactive}
+							iconName={item.href === pathname ? active : inactive}
 							key={item.title}
 							pathname={pathname}
 							title={item.title}
