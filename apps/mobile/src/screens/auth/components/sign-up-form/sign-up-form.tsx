@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Input, Link, Text, View } from "~/libs/components/components";
+import { Button, Input, Link, Text } from "~/libs/components/components";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
