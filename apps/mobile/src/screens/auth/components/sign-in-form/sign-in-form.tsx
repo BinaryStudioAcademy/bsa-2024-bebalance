@@ -44,6 +44,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 				label="Password"
 				name="password"
 				placeholder="********"
+				secureTextEntry
 			/>
 			<Button label="SIGN IN" onPress={handleFormSubmit} />
 			<View

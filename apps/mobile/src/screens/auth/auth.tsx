@@ -4,13 +4,13 @@ import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
 	LoaderWrapper,
-	Platform,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import { isAndroid, isIos } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
 	useAppRoute,
@@ -31,7 +31,6 @@ import { styles } from "./styles";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
-const isIos = Platform.OS === "ios";
 
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
@@ -87,9 +86,9 @@ const Auth: React.FC = () => {
 			<BackgroundWrapper>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
-						behavior={isIos ? "padding" : "height"}
+						behavior={isAndroid() ? "height" : "padding"}
 						keyboardVerticalOffset={
-							isIos ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
+							isIos() ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
 						}
 						style={[
 							globalStyles.alignItemsCenter,

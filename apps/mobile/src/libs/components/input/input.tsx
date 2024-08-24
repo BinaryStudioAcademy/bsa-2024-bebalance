@@ -18,6 +18,7 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
+	secureTextEntry?: boolean;
 };
 
 const Input = <T extends FieldValues>({
@@ -26,6 +27,7 @@ const Input = <T extends FieldValues>({
 	label,
 	name,
 	placeholder,
+	secureTextEntry = false,
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 
@@ -41,6 +43,7 @@ const Input = <T extends FieldValues>({
 				onBlur={onBlur}
 				onChangeText={onChange}
 				placeholder={placeholder}
+				secureTextEntry={secureTextEntry}
 				style={styles.input}
 				value={value}
 			/>
