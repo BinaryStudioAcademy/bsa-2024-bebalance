@@ -24,7 +24,6 @@ import { UsersApiPath } from "./libs/enums/enums.js";
  *            format: email
  *          name:
  *            type: string
- *            format: string
  *          createdAt:
  *            type: string
  *            format: date-time
@@ -64,6 +63,7 @@ class UserController extends BaseController {
 	 *                items:
 	 *                  $ref: "#/components/schemas/User"
 	 */
+
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),

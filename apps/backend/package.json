@@ -1,7 +1,7 @@
 {
 	"name": "backend",
 	"type": "module",
-	"version": "1.5.0",
+	"version": "1.6.0",
 	"engines": {
 		"node": "20.x.x",
 		"npm": "10.x.x"
@@ -37,7 +37,8 @@
 		"pino": "9.3.2",
 		"pino-pretty": "11.2.2",
 		"shared": "*",
-		"swagger-jsdoc": "6.2.8"
+		"swagger-jsdoc": "6.2.8",
+		"ts-node": "10.9.2"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "5.0.2",

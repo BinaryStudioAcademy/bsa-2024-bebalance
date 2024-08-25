@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.10.0...frontend-v1.11.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+* **frontend:** responsive header bb-107 ([#165](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/165)) ([ee8935f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ee8935f3352a743041d9d38aad8496c75c6fb204))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.9.0...frontend-v1.10.0) (2024-08-23)
 
 
