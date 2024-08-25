@@ -59,9 +59,12 @@ class UserController extends BaseController {
 	 *          content:
 	 *            application/json:
 	 *              schema:
-	 *                type: array
-	 *                items:
-	 *                  $ref: "#/components/schemas/User"
+	 *                type: object
+	 *                properties:
+	 *                  items:
+	 *                    type: array
+	 *                    items:
+	 *                      $ref: "#/components/schemas/User"
 	 */
 
 	private async findAll(): Promise<APIHandlerResponse> {
