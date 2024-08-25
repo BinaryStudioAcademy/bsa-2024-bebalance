@@ -9,5 +9,12 @@ export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
-export { ActivityIndicator, Image, Pressable, View } from "react-native";
+export {
+	ActivityIndicator,
+	Image,
+	KeyboardAvoidingView,
+	Pressable,
+	ScrollView,
+	View,
+} from "react-native";
 export { LinearGradient } from "react-native-linear-gradient";
