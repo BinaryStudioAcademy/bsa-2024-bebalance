@@ -29,47 +29,41 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={styles["container"]}>
-			<div className={styles["form-container"]}>
-				<form className={styles["form"]} onSubmit={handleFormSubmit}>
-					<div className={styles["form-header"]}>
-						<div className={styles["form-header__logo-container"]}>
-							<div className={styles["form-header__logo"]} />
-							<span className={styles["form-header__logo-text"]}>logo</span>
-						</div>
-
-						<h1 className={styles["form-header__text"]}>sign in</h1>
-						<span className={styles["form-header__sub-text"]}>
-							No account? Go to{" "}
-							<Link to={AppRoute.SIGN_UP}>Create an account</Link>
-						</span>
+		<>
+			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<div className={styles["form-header"]}>
+					<div className={styles["form-header__logo-container"]}>
+						<div className={styles["form-header__logo"]} />
+						<span className={styles["form-header__logo-text"]}>logo</span>
 					</div>
 
-					<Input
-						control={control}
-						errors={errors}
-						label="Email"
-						name="email"
-						placeholder="name@gmail.com"
-						type="email"
-					/>
+					<h1 className={styles["form-header__text"]}>sign in</h1>
+					<span className={styles["form-header__sub-text"]}>
+						No account? Go to{" "}
+						<Link to={AppRoute.SIGN_UP}>Create an account</Link>
+					</span>
+				</div>
 
-					<Input
-						control={control}
-						errors={errors}
-						label="Password"
-						name="password"
-						placeholder="*******"
-						type="text"
-					/>
+				<Input
+					control={control}
+					errors={errors}
+					label="Email"
+					name="email"
+					placeholder="name@gmail.com"
+					type="email"
+				/>
 
-					<Button label="SIGN IN" type="submit" variant="dark" />
-				</form>
-			</div>
+				<Input
+					control={control}
+					errors={errors}
+					label="Password"
+					name="password"
+					placeholder="*******"
+					type="text"
+				/>
 
-			<div className={styles["logo-container"]}>
-				<span className={styles["logo"]}>logo</span>
-			</div>
+				<Button label="SIGN IN" type="submit" variant="dark" />
+			</form>
 
 			<img
 				alt="ripple-effect-bg"
@@ -86,7 +80,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			<div className={styles["circle-gradient2"]} />
 			<div className={styles["circle-gradient3"]} />
 			<div className={styles["circle-gradient4"]} />
-		</div>
+		</>
 	);
 };
 

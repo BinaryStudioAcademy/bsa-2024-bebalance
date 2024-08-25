@@ -1,31 +1,9 @@
-.container {
-	position: relative;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 30px;
-	height: 100dvh;
-	padding: 15px;
-	overflow: hidden;
-	background-color: var(--background);
-}
-
-.form-container {
-	z-index: var(--z-index-low);
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	padding-top: 120px;
-	background-color: var(--white);
-	border-radius: 20px;
-}
-
 .form {
+	z-index: var(--z-index-low);
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	width: 100%;
-	max-width: 350px;
-	padding-inline: 20px;
+	width: 350px;
 }
 
 .form-header {
@@ -170,7 +148,7 @@
 
 	.form {
 		align-items: stretch;
-		min-width: 100%;
+		width: 100%;
 	}
 
 	.ripple-effect__background1,

@@ -11,6 +11,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./components/components.js";
+import styles from "./style.module.css";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -43,7 +44,16 @@ const Auth: React.FC = () => {
 		return null;
 	};
 
-	return <>{getScreen(pathname)}</>;
+	return (
+		<>
+			<div className={styles["auth-container"]}>
+				<div className={styles["form-container"]}>{getScreen(pathname)}</div>
+				<div className={styles["title-container"]}>
+					<h1 className={styles["title"]}>Logo</h1>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export { Auth };

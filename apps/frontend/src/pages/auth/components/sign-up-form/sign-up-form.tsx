@@ -29,64 +29,58 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<div className={styles["container"]}>
-			<div className={styles["form-container"]}>
-				<form className={styles["form"]} onSubmit={handleFormSubmit}>
-					<div className={styles["form-header"]}>
-						<div className={styles["form-header__logo-container"]}>
-							<div className={styles["form-header__logo"]} />
-							<span className={styles["form-header__logo-text"]}>logo</span>
-						</div>
-
-						<h1 className={styles["form-header__text"]}>create an account</h1>
-						<span className={styles["form-header__sub-text"]}>
-							Already have an account? Go to{" "}
-							<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-						</span>
+		<>
+			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<div className={styles["form-header"]}>
+					<div className={styles["form-header__logo-container"]}>
+						<div className={styles["form-header__logo"]} />
+						<span className={styles["form-header__logo-text"]}>logo</span>
 					</div>
 
-					<Input
-						control={control}
-						errors={errors}
-						label="Name"
-						name="name"
-						placeholder="name"
-						type="text"
-					/>
+					<h1 className={styles["form-header__text"]}>create an account</h1>
+					<span className={styles["form-header__sub-text"]}>
+						Already have an account? Go to{" "}
+						<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+					</span>
+				</div>
 
-					<Input
-						control={control}
-						errors={errors}
-						label="Email"
-						name="email"
-						placeholder="name@example.com"
-						type="email"
-					/>
+				<Input
+					control={control}
+					errors={errors}
+					label="Name"
+					name="name"
+					placeholder="name"
+					type="text"
+				/>
 
-					<Input
-						control={control}
-						errors={errors}
-						label="Password"
-						name="password"
-						placeholder="*******"
-						type="password"
-					/>
+				<Input
+					control={control}
+					errors={errors}
+					label="Email"
+					name="email"
+					placeholder="name@example.com"
+					type="email"
+				/>
 
-					<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
-				</form>
-			</div>
+				<Input
+					control={control}
+					errors={errors}
+					label="Password"
+					name="password"
+					placeholder="*******"
+					type="password"
+				/>
 
-			<div className={styles["logo-container"]}>
-				<span className={styles["logo"]}>logo</span>
-			</div>
+				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
+			</form>
 
 			<img
-				alt="ripple visual effect"
+				alt="ripple-effect-bg"
 				className={styles["ripple-effect__background1"]}
 				src={rippleEffectBg}
 			/>
 			<img
-				alt="ripple visual effect"
+				alt="ripple-effect-bg"
 				className={styles["ripple-effect__background2"]}
 				src={rippleEffectBg2}
 			/>
@@ -94,7 +88,8 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />
 			<div className={styles["circle-gradient3"]} />
-		</div>
+			<div className={styles["circle-gradient4"]} />
+		</>
 	);
 };
 
