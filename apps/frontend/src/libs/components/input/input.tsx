@@ -1,5 +1,3 @@
-import crossedEye from "~/assets/img/crossed-eye.svg";
-import eye from "~/assets/img/eye.svg";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
@@ -9,6 +7,8 @@ import {
 	type FieldValues,
 } from "~/libs/types/types.js";
 
+import { Icon } from "../components.js";
+import { IconName } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
@@ -87,9 +87,8 @@ const Input = <T extends FieldValues>({
 								onClick={onToggle}
 								type="button"
 							>
-								<img
-									alt={isDisplayedValue ? "Hide password" : "Show password"}
-									src={isDisplayedValue ? crossedEye : eye}
+								<Icon
+									name={isDisplayedValue ? IconName.CROSSED_EYE : IconName.EYE}
 								/>
 							</button>
 						)}
