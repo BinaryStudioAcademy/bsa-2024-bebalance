@@ -12,6 +12,7 @@
 .form-container {
 	z-index: 1;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	background-color: var(--white);
@@ -28,14 +29,17 @@
 }
 
 .form-header {
-	margin-bottom: 5px;
+	width: 100%;
+	max-width: 350px;
+	padding-inline: 20px;
+	margin-bottom: 20px;
 }
 
 .form-header__logo-container {
 	display: flex;
 	gap: 7px;
 	align-items: center;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
 }
 
 .form-header__logo {
@@ -52,10 +56,12 @@
 .form-header__logo-text {
 	font-size: 24px;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .form-header__text {
 	margin-block: 10px;
+	text-transform: uppercase;
 }
 
 .form-header__sub-text {

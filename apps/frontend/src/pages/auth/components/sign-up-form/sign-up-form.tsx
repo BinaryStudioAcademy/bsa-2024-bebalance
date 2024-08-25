@@ -31,20 +31,19 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["form-container"]}>
-				<form className={styles["form"]} onSubmit={handleFormSubmit}>
-					<div className={styles["form-header"]}>
-						<div className={styles["form-header__logo-container"]}>
-							<div className={styles["form-header__logo"]} />
-							<span className={styles["form-header__logo-text"]}>LOGO</span>
-						</div>
-
-						<h1 className={styles["form-header__text"]}>CREATE AN ACCOUNT</h1>
-						<span className={styles["form-header__sub-text"]}>
-							Already have an account? Go to{" "}
-							<Link to={AppRoute.SIGN_IN}>Sign In</Link>
-						</span>
+				<div className={styles["form-header"]}>
+					<div className={styles["form-header__logo-container"]}>
+						<div className={styles["form-header__logo"]} />
+						<span className={styles["form-header__logo-text"]}>logo</span>
 					</div>
 
+					<h1 className={styles["form-header__text"]}>create an account</h1>
+					<span className={styles["form-header__sub-text"]}>
+						Already have an account? Go to{" "}
+						<Link to={AppRoute.SIGN_IN}>Sign In</Link>
+					</span>
+				</div>
+				<form className={styles["form"]} onSubmit={handleFormSubmit}>
 					<Input
 						control={control}
 						errors={errors}
