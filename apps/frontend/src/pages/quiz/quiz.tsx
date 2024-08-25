@@ -17,9 +17,11 @@ const Quiz: React.FC = () => {
 			case Step.ANALYZING: {
 				return <Analizing onNext={handleNextStep} />;
 			}
+
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
 			}
+
 			default: {
 				return null;
 			}
