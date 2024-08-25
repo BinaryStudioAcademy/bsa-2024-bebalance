@@ -1,11 +1,20 @@
 import React from "react";
 
-import { Text, View } from "~/libs/components/components";
+import { RadioGroup, Text, View } from "~/libs/components/components";
 
 const WelcomeScreen: React.FC = () => {
 	return (
 		<View>
 			<Text>Welcome to the App!</Text>
+			<RadioGroup
+				options={[
+					{ label: "Family and relationships", value: "family" },
+					{ label: "Career and professional growth", value: "career" },
+					{ label: "Personal development and learning", value: "personal" },
+					{ label: "Health and well-being", value: "health" },
+					{ label: "Financial stability", value: "financial" },
+				]}
+			/>
 		</View>
 	);
 };
