@@ -18,6 +18,7 @@ export {
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserSignUpSubmitDto,
 } from "./libs/types/types";
 export {
 	userSignInValidationSchema,

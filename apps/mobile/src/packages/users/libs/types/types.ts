@@ -5,4 +5,5 @@ export {
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserSignUpSubmitDto,
 } from "shared";
