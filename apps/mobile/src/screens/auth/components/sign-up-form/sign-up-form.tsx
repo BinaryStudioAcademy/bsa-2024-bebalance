@@ -1,13 +1,14 @@
 import React from "react";
 
 import { Button, Input, Link, Text } from "~/libs/components/components";
-import { RootScreenName, UserValidationMessage } from "~/libs/enums/enums";
+import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { userSignUpValidationSchema } from "~/packages/users/users";
 import {
 	type UserSignUpRequestDto,
 	type UserSignUpSubmitDto,
+	userSignUpValidationSchema,
+	UserValidationMessage,
 } from "~/packages/users/users";
 
 import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";

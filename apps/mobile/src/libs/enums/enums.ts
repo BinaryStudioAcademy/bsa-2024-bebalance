@@ -6,10 +6,4 @@ export {
 	ToastMessageType,
 } from "./app/app";
 export { RootScreenName } from "./navigation/navigation";
-export {
-	APIPath,
-	AppEnvironment,
-	ContentType,
-	ServerErrorType,
-	UserValidationMessage,
-} from "shared";
+export { APIPath, AppEnvironment, ContentType, ServerErrorType } from "shared";
