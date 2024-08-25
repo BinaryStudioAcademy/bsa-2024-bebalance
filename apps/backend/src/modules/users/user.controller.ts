@@ -43,6 +43,8 @@ class UserController extends BaseController {
 	 * /users:
 	 *    get:
 	 *      description: Returns an array of users
+	 *      security:
+	 *        - bearerAuth: []
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
