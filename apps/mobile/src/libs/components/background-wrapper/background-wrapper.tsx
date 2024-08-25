@@ -32,7 +32,7 @@ const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 				size="sm"
 				style={styles.leftPlanet}
 			/>
-
+			{children}
 			<Planet
 				color="pink"
 				gradientDirection="topToBottom"
@@ -45,7 +45,6 @@ const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 				}
 				style={[styles.image, styles.bottomImage]}
 			/>
-			{children}
 		</View>
 	);
 };
