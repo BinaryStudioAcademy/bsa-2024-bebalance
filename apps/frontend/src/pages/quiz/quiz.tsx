@@ -1,37 +1,33 @@
-import LifeBalanceWheel from "~/assets/img/life-balance-wheel.svg?react";
-import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
-import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
-import { Button } from "~/libs/components/components.js";
+import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
-import styles from "./styles.module.css";
+import { Analyzing, Introduction } from "./libs/components/components.js";
+import { STEP_INCREMENT } from "./libs/constants/constants.js";
+import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	return (
-		<div className={styles["container"]}>
-			<div className={styles["introduction"]}>
-				<h1 className={styles["header"]}>
-					Craft your personal Life Balance Wheel!
-				</h1>
+	const [step, setStep] = useState<number>(Step.ANALYZING);
 
-				<LifeBalanceWheel className={styles["wheel-img"]} />
+	const handleNextStep = useCallback((): void => {
+		setStep((previousStep) => previousStep + STEP_INCREMENT);
+	}, []);
 
-				<p className={styles["text"]}>
-					Answer a few questions to find out which areas of your life are
-					outstanding and which areas you are missing out on
-				</p>
+	const getScreen = (step: number): React.ReactNode => {
+		switch (step) {
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
+			}
 
-				<div className={styles["btn"]}>
-					<Button isFluid label="CONTINUE" type="button" variant="dark" />
-				</div>
-			</div>
+			case Step.INTRODUCTION: {
+				return <Introduction onNext={handleNextStep} />;
+			}
 
-			<RippleEffectBg className={styles["ripple-effect__background1"]} />
-			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+			default: {
+				return null;
+			}
+		}
+	};
 
-			<div className={styles["circle-gradient1"]} />
-			<div className={styles["circle-gradient2"]} />
-		</div>
-	);
+	return <>{getScreen(step)}</>;
 };
 
 export { Quiz };
