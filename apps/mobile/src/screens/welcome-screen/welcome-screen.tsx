@@ -9,7 +9,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
-import { ImageSourcePropType } from "~/libs/types/types";
+import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
