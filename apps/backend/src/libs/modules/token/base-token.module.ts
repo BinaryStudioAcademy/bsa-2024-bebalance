@@ -1,4 +1,9 @@
-import { JWTPayload, jwtVerify, JWTVerifyResult, SignJWT } from "jose";
+import {
+	type JWTPayload,
+	jwtVerify,
+	type JWTVerifyResult,
+	SignJWT,
+} from "jose";
 
 type Constructor = {
 	algorithm: string;

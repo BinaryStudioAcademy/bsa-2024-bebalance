@@ -50,3 +50,13 @@ declare module "@typescript-eslint/eslint-plugin" {
 		configs,
 	};
 }
+
+declare module "eslint-plugin-require-explicit-generics" {
+	import { type Linter } from "eslint";
+
+	const configs: Record<"string", Required<Linter.FlatConfig>>;
+
+	export default {
+		configs,
+	};
+}

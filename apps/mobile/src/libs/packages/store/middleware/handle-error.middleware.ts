@@ -18,6 +18,7 @@ const handleErrorMiddleware: Middleware = () => {
 				message: error.data?.message ?? error.message ?? DEFAULT_ERROR_MESSAGE,
 			});
 		}
+
 		return next(action);
 	};
 };
