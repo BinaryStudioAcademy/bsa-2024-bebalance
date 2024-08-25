@@ -1,6 +1,6 @@
 import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
-import { Analizing } from "./libs/components/analizing/analizing.js";
+import { Analyzing } from "./libs/components/analizing/analizing.js";
 import { Introduction } from "./libs/components/introduction/introduction.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
@@ -15,7 +15,7 @@ const Quiz: React.FC = () => {
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
 			case Step.ANALYZING: {
-				return <Analizing onNext={handleNextStep} />;
+				return <Analyzing onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {
