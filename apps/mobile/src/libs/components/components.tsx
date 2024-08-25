@@ -1,7 +1,6 @@
 export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
-export { RadioGroup } from "./custom-radio-group/radio-group";
 export { GradientText } from "./gradient-text/gradient-text";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
@@ -10,6 +9,7 @@ export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
+export { RadioGroup } from "~/libs/components/radio-group/radio-group";
 export {
 	ActivityIndicator,
 	Image,

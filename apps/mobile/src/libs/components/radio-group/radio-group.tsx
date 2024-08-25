@@ -6,11 +6,7 @@ import { BaseColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 import { type RadioButtonProps, type ViewStyle } from "~/libs/types/types";
 
-import {
-	DEFAULT_ACTIVE_BORDER_SIZE,
-	DEFAULT_BORDER_SIZE,
-	DEFAULT_CIRCLE_SIZE,
-} from "./libs/constants/constants";
+import { DefaultStyles } from "./libs/constants/constants";
 import { styles } from "./styles";
 
 type RadioGroupItemStyle = {
@@ -39,10 +35,10 @@ const RadioGroup: React.FC<Properties> = ({
 }: Properties) => {
 	const {
 		circleBorderColorActive = BaseColor.BG_BLUE,
-		circleBorderSize = DEFAULT_BORDER_SIZE,
-		circleBorderSizeActive = DEFAULT_ACTIVE_BORDER_SIZE,
+		circleBorderSize = DefaultStyles.DEFAULT_BORDER_SIZE,
+		circleBorderSizeActive = DefaultStyles.DEFAULT_ACTIVE_BORDER_SIZE,
 		circleColorActive = BaseColor.BG_WHITE,
-		circleSize = DEFAULT_CIRCLE_SIZE,
+		circleSize = DefaultStyles.DEFAULT_CIRCLE_SIZE,
 	} = itemContainerStyle;
 
 	const [selectedId, setSelectedId] = useState<string>("");
@@ -59,7 +55,7 @@ const RadioGroup: React.FC<Properties> = ({
 				<Text
 					preset="default"
 					size="md"
-					style={[globalStyles.ml8]}
+					style={globalStyles.ml8}
 					weight="semiBold"
 				>
 					{option.label}
@@ -83,18 +79,16 @@ const RadioGroup: React.FC<Properties> = ({
 	}
 
 	const onChangeHandler = (id: string): void => {
-		if (onChange) {
-			const chosenOption = itemsMap.get(id);
-			if (chosenOption) {
-				onChange(chosenOption);
-			}
+		const chosenOption = itemsMap.get(id);
+		if (onChange && chosenOption) {
+			onChange(chosenOption);
 		}
 		setSelectedId(id);
 	};
 
 	return (
 		<RNRadioGroup
-			containerStyle={[globalStyles.m16]}
+			containerStyle={globalStyles.m16}
 			onPress={onChangeHandler}
 			radioButtons={radioButtonsProperties}
 			selectedId={selectedId}
