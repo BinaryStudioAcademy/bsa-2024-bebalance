@@ -38,6 +38,7 @@ const Button: React.FC<Properties> = ({
 				const conditionalColors = isDisabled
 					? [BaseColor.LIGHT_GRAY, BaseColor.LIGHT_GRAY]
 					: activeButtonColors;
+
 				return (
 					<LinearGradient
 						angle={305}

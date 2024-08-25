@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React from "react";
 
 import { Image, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
@@ -8,10 +8,10 @@ import { Planet } from "./libs/components/planet/planet";
 import { styles } from "./styles";
 
 type Properties = {
-	children: ReactNode;
+	children: React.ReactNode;
 };
 
-const BackgroundWrapper = ({ children }: Properties) => {
+const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 	return (
 		<View style={[globalStyles.flex1, styles.container]}>
 			<Image

@@ -1,6 +1,7 @@
+import React from "react";
 import Toast from "react-native-toast-message";
 
-const ToastMessage = () => {
+const ToastMessage: React.FC = () => {
 	return <Toast />;
 };
 
