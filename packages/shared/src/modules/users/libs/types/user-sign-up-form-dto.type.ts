@@ -1,5 +1,5 @@
-import { UserSignUpRequestDto } from "./types.js";
+import { type UserSignUpRequestDto } from "./types.js";
 
 type UserSignUpFormDto = { confirmPassword: string } & UserSignUpRequestDto;
 
-export { UserSignUpFormDto };
+export { type UserSignUpFormDto };
