@@ -1,9 +1,11 @@
 import React from "react";
 
 import { MaterialIcon, Pressable } from "~/libs/components/components";
+import { type BaseColor } from "~/libs/enums/enums";
+import { type ValueOf } from "~/libs/types/types";
 
 type Properties = {
-	color: string;
+	color: ValueOf<typeof BaseColor>;
 	name: string;
 	onPress: () => void;
 	size: number;
