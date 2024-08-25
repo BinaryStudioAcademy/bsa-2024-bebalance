@@ -16,6 +16,7 @@ const getAuthenticatedUser = createAsyncThunk<
 	AsyncThunkConfig
 >(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
 	const { authApi } = extra;
+
 	return await authApi.getAuthenticatedUser();
 });
 
