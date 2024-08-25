@@ -1,5 +1,5 @@
-import authIllustrationLeft from "~/assets/img/auth-illustration-left.svg";
-import authIllustrationRight from "~/assets/img/auth-illustration-right.svg";
+import AuthIllustrationLeft from "~/assets/img/auth-illustration-left.svg?react";
+import AuthIllustrationRight from "~/assets/img/auth-illustration-right.svg?react";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -38,6 +38,7 @@ const Auth: React.FC = () => {
 			case AppRoute.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
+
 			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
@@ -53,17 +54,8 @@ const Auth: React.FC = () => {
 					{getScreen(pathname)}
 				</section>
 				<section className={styles["illustration-container"]}>
-					<img
-						alt="background"
-						className={styles["img-left"]}
-						src={authIllustrationLeft}
-					/>
-					<h1 className={styles["title"]}>Logo</h1>
-					<img
-						alt="background"
-						className={styles["img-right"]}
-						src={authIllustrationRight}
-					/>
+					<AuthIllustrationLeft className={styles["img-left"]} />
+					<AuthIllustrationRight className={styles["img-right"]} />
 				</section>
 			</main>
 		</>

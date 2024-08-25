@@ -23,6 +23,7 @@ class BaseEncrypt implements Encrypt {
 		salt: string,
 	): Promise<boolean> {
 		const hash = await this.generateHash(password, salt);
+
 		return hash === passwordHash;
 	}
 
