@@ -1,11 +1,14 @@
 import React from "react";
 
 import { Button, Input, Link, Text } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
+import { RootScreenName, UserValidationMessage } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { userSignUpValidationSchema } from "~/packages/users/users";
-import { type UserSignUpRequestDto } from "~/packages/users/users";
+import {
+	type UserSignUpRequestDto,
+	type UserSignUpSubmitDto,
+} from "~/packages/users/users";
 
 import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
 
@@ -13,14 +16,25 @@ type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;
 };
 const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
-	const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
-		defaultValues: USER_SIGN_UP_DEFAULT_VALUES,
-		validationSchema: userSignUpValidationSchema,
-	});
+	const { control, errors, handleSubmit, setError } =
+		useAppForm<UserSignUpSubmitDto>({
+			defaultValues: USER_SIGN_UP_DEFAULT_VALUES,
+			validationSchema: userSignUpValidationSchema,
+		});
 
 	const handleFormSubmit = useCallback((): void => {
-		void handleSubmit(onSubmit)();
-	}, [handleSubmit, onSubmit]);
+		void handleSubmit((data: UserSignUpSubmitDto) => {
+			const { confirmPassword, ...userData } = data;
+			if (confirmPassword === userData.password) {
+				onSubmit(userData);
+			} else {
+				setError("confirmPassword", {
+					message: UserValidationMessage.CONFIRM_PASSWORD_NOT_MATCH,
+					type: "manual",
+				});
+			}
+		})();
+	}, [handleSubmit, onSubmit, setError]);
 
 	return (
 		<>
@@ -52,6 +66,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				isSecureTextEntry
 				label="Password"
 				name="password"
+				placeholder="*******"
+			/>
+			<Input
+				control={control}
+				errors={errors}
+				isSecureTextEntry
+				label="Confirm password"
+				name="confirmPassword"
 				placeholder="*******"
 			/>
 			<Button label="Create an account" onPress={handleFormSubmit} />
