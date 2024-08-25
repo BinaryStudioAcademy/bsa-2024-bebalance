@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.7.0...backend-v1.7.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **backend:** add missing auth docs for `/users` endpoint bb-155 ([#178](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/178)) ([c20d2e3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c20d2e3161885ea6c75ed5fed4c03926896e8646))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.6.0...backend-v1.7.0) (2024-08-25)
 
 
