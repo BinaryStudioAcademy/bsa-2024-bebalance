@@ -11,21 +11,22 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
-import { actions as userActions } from "~/modules/users/users.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
 	const dispatch = useAppDispatch();
-	const { dataStatus } = useAppSelector(({ users }) => ({
-		dataStatus: users.dataStatus,
+
+	const { dataStatus } = useAppSelector(({ auth }) => ({
+		dataStatus: auth.dataStatus,
 	}));
 
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
 		if (isRoot) {
-			void dispatch(userActions.getAuthenticatedUser());
+			void dispatch(authActions.getAuthenticatedUser());
 		}
 	}, [isRoot, dispatch]);
 
