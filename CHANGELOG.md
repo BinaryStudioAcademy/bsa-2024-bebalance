@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.17.0...v1.17.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **backend:** add missing auth docs for `/users` endpoint bb-155 ([#178](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/178)) ([c20d2e3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c20d2e3161885ea6c75ed5fed4c03926896e8646))
+* **frontend:** move getAuthenticatedUser to auth store bb-171 ([#186](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/186)) ([bedb4f5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bedb4f51be8b1c6a3182ad3dcc16fec0ef2b99bb))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.16.0...v1.17.0) (2024-08-25)
 
 
