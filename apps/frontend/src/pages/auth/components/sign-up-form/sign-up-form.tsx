@@ -1,7 +1,6 @@
 import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
 import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
-import { Button, Input, Link } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpRequestDto,
@@ -31,19 +30,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	return (
 		<>
 			<form className={styles["form"]} onSubmit={handleFormSubmit}>
-				<div className={styles["form-header"]}>
-					<div className={styles["form-header__logo-container"]}>
-						<div className={styles["form-header__logo"]} />
-						<span className={styles["form-header__logo-text"]}>logo</span>
-					</div>
-
-					<h1 className={styles["form-header__text"]}>create an account</h1>
-					<span className={styles["form-header__sub-text"]}>
-						Already have an account? Go to{" "}
-						<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-					</span>
-				</div>
-
 				<Input
 					control={control}
 					errors={errors}

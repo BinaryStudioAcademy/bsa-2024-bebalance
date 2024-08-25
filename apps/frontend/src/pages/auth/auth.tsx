@@ -1,3 +1,4 @@
+import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -48,7 +49,32 @@ const Auth: React.FC = () => {
 	return (
 		<>
 			<div className={styles["auth-container"]}>
-				<div className={styles["form-container"]}>{getScreen(pathname)}</div>
+				<div className={styles["form-container"]}>
+					<div className={styles["form-header"]}>
+						<div className={styles["form-header__logo-container"]}>
+							<div className={styles["form-header__logo"]} />
+							<span className={styles["form-header__logo-text"]}>logo</span>
+						</div>
+
+						<h1 className={styles["form-header__text"]}>
+							{pathname === AppRoute.SIGN_IN ? "sign in" : "sign up"}
+						</h1>
+						<span className={styles["form-header__sub-text"]}>
+							{pathname === AppRoute.SIGN_IN ? (
+								<>
+									<span>No account? Go to </span>
+									<Link to={AppRoute.SIGN_UP}>Create an account</Link>
+								</>
+							) : (
+								<>
+									<span>Already have an account? Go to </span>
+									<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+								</>
+							)}
+						</span>
+					</div>
+					{getScreen(pathname)}
+				</div>
 				<div className={styles["title-container"]}>
 					<h1 className={styles["title"]}>Logo</h1>
 				</div>
