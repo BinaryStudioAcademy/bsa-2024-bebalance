@@ -1,4 +1,4 @@
-// import { RelationName } from "~/libs/enums/enums.js";
+import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 import { QuizQuestionsEntity } from "~/modules/quiz/quiz-questions.entity.js";
 
@@ -25,6 +25,7 @@ class QuizQuestionsRepository implements Repository {
 			.returning("*");
 
 		return QuizQuestionsEntity.initialize({
+			answers: null,
 			categoryId: question.categoryId,
 			createdAt: question.createdAt,
 			id: question.id,
@@ -38,10 +39,14 @@ class QuizQuestionsRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | QuizQuestionsEntity> {
-		const question = await this.quizQuestionsModel.query().findById(id);
+		const question = await this.quizQuestionsModel
+			.query()
+			.withGraphFetched(RelationName.QUIZ_ANSWERS)
+			.findById(id);
 
 		return question
 			? QuizQuestionsEntity.initialize({
+					answers: question.quizAnswers,
 					categoryId: question.categoryId,
 					createdAt: question.createdAt,
 					id: question.id,
@@ -52,10 +57,13 @@ class QuizQuestionsRepository implements Repository {
 	}
 
 	public async findAll(): Promise<QuizQuestionsEntity[]> {
-		const questions = await this.quizQuestionsModel.query();
+		const questions = await this.quizQuestionsModel
+			.query()
+			.withGraphFetched(RelationName.QUIZ_ANSWERS);
 
 		return questions.map((question) =>
 			QuizQuestionsEntity.initialize({
+				answers: question.quizAnswers,
 				categoryId: question.categoryId,
 				createdAt: question.createdAt,
 				id: question.id,

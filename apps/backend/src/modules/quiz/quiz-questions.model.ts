@@ -16,7 +16,7 @@ class QuizQuestionsModel extends AbstractModel {
 
 	static get relationMappings(): RelationMappings {
 		return {
-			quizQuestions: {
+			quizAnswers: {
 				join: {
 					from: `${DatabaseTableName.QUIZ_QUESTIONS}.id`,
 					to: `${DatabaseTableName.QUIZ_ANSWERS}.questionId`,

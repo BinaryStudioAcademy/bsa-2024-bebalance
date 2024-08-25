@@ -1,6 +1,10 @@
 import { type Entity } from "~/libs/types/types.js";
 
+import { QuizAnswersModel } from "./quiz-answers.model.js";
+
 class QuizQuestionsEntity implements Entity {
+	private answers: null | QuizAnswersModel;
+
 	private categoryId: number;
 
 	private createdAt: string;
@@ -12,18 +16,21 @@ class QuizQuestionsEntity implements Entity {
 	private updatedAt: string;
 
 	private constructor({
+		answers,
 		categoryId,
 		createdAt,
 		id,
 		label,
 		updatedAt,
 	}: {
+		answers: null | QuizAnswersModel;
 		categoryId: number;
 		createdAt: string;
 		id: null | number;
 		label: string;
 		updatedAt: string;
 	}) {
+		this.answers = answers;
 		this.categoryId = categoryId;
 		this.createdAt = createdAt;
 		this.id = id;
@@ -32,12 +39,14 @@ class QuizQuestionsEntity implements Entity {
 	}
 
 	public static initialize({
+		answers,
 		categoryId,
 		createdAt,
 		id,
 		label,
 		updatedAt,
 	}: {
+		answers: null | QuizAnswersModel;
 		categoryId: number;
 		createdAt: string;
 		id: number;
@@ -45,6 +54,7 @@ class QuizQuestionsEntity implements Entity {
 		updatedAt: string;
 	}): QuizQuestionsEntity {
 		return new QuizQuestionsEntity({
+			answers,
 			categoryId,
 			createdAt,
 			id,
@@ -61,6 +71,7 @@ class QuizQuestionsEntity implements Entity {
 		label: string;
 	}): QuizQuestionsEntity {
 		return new QuizQuestionsEntity({
+			answers: null,
 			categoryId,
 			createdAt: "",
 			id: null,
@@ -84,6 +95,7 @@ class QuizQuestionsEntity implements Entity {
 	}
 
 	public toObject(): {
+		answers: null | QuizAnswersModel;
 		categoryId: number;
 		createdAt: string;
 		id: number;
@@ -91,6 +103,7 @@ class QuizQuestionsEntity implements Entity {
 		updatedAt: string;
 	} {
 		return {
+			answers: this.answers,
 			categoryId: this.categoryId,
 			createdAt: this.createdAt,
 			id: this.id as number,
