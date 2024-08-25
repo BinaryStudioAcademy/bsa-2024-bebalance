@@ -1,6 +1,7 @@
 export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
+export { RadioGroup } from "./custom-radio-group/radio-group";
 export { GradientText } from "./gradient-text/gradient-text";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
