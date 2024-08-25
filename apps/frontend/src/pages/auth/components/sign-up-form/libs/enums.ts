@@ -1,9 +1,9 @@
-const ConfirmPassword = {
-	error: {
+const ConfirmPasswordField = {
+	KEY: "confirmPassword",
+	ValidationError: {
 		MESSAGE: "Passwords don't match",
 		TYPE: "custom",
 	},
-	KEY: "confirmPassword",
 } as const;
 
-export { ConfirmPassword };
+export { ConfirmPasswordField };

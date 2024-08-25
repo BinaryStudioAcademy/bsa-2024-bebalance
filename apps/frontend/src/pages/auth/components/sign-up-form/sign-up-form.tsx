@@ -9,7 +9,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
-import { ConfirmPassword } from "./libs/enums.js";
+import { ConfirmPasswordField } from "./libs/enums.js";
 import styles from "./style.module.css";
 
 type Properties = {
@@ -31,9 +31,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				if (confirmPassword === userData.password) {
 					onSubmit(userData);
 				} else {
-					setError(ConfirmPassword.KEY, {
-						message: ConfirmPassword.error.MESSAGE,
-						type: ConfirmPassword.error.TYPE,
+					setError(ConfirmPasswordField.KEY, {
+						message: ConfirmPasswordField.ValidationError.MESSAGE,
+						type: ConfirmPasswordField.ValidationError.TYPE,
 					});
 				}
 			})(event_);
