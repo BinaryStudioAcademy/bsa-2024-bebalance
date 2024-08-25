@@ -14,8 +14,8 @@ import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
-const WelcomeScreen: React.FC = () => {
-	const handleContinuePress = useCallback((): void => {
+const QuizEntryScreen: React.FC = () => {
+	const handleStartPress = useCallback((): void => {
 		// Handle Continue
 	}, []);
 
@@ -51,11 +51,11 @@ const WelcomeScreen: React.FC = () => {
 						Answer a few questions to find out which areas of your life are
 						outstanding and which areas you are missing out on
 					</Text>
-					<Button label="Continue" onPress={handleContinuePress} />
+					<Button label="Start" onPress={handleStartPress} />
 				</View>
 			</ScreenWrapper>
 		</BackgroundWrapper>
 	);
 };
 
-export { WelcomeScreen };
+export { QuizEntryScreen };

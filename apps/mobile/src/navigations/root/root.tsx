@@ -8,7 +8,7 @@ import { RootScreenName } from "~/libs/enums/enums";
 import { useAppSelector } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { Auth } from "~/screens/auth/auth";
-import { WelcomeScreen } from "~/screens/welcome-screen/welcome-screen";
+import { QuizEntryScreen } from "~/screens/quiz-entry-screen/quiz-entry-screen";
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -24,8 +24,8 @@ const Root: React.FC = () => {
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
 				<NativeStack.Screen
-					component={WelcomeScreen}
-					name={RootScreenName.WELCOME}
+					component={QuizEntryScreen}
+					name={RootScreenName.QUIZ_ENTRY}
 				/>
 			) : (
 				<NativeStack.Group>
