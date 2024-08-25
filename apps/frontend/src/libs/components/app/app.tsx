@@ -3,6 +3,7 @@ import {
 	Loader,
 	Notification,
 	RouterOutlet,
+	Sidebar,
 } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
@@ -41,6 +42,7 @@ const App: React.FC = () => {
 			{!isLoading && isRoot && (
 				<>
 					<Header />
+					<Sidebar />
 					<QuizForm />
 				</>
 			)}
