@@ -1,5 +1,5 @@
-import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
-import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
+import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
+import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
@@ -71,16 +71,8 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<span className={styles["logo"]}>LOGO</span>
 			</div>
 
-			<img
-				alt="ripple-effect-bg"
-				className={styles["ripple-effect__background1"]}
-				src={rippleEffectBg}
-			/>
-			<img
-				alt="ripple-effect-bg"
-				className={styles["ripple-effect__background2"]}
-				src={rippleEffectBg2}
-			/>
+			<RippleEffectBg className={styles["ripple-effect__background1"]} />
+			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
 
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />

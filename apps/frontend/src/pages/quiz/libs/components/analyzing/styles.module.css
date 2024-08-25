@@ -1,0 +1,49 @@
+.page-container {
+	height: 100vh;
+	padding: 35px;
+	background-color: var(--background);
+	background-image: url("../../../../../assets/img/circle-group-large.svg"),
+		url("../../../../../assets/img/circle-group-medium.svg"),
+		url("../../../../../assets/img/circle-group-small.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-position:
+		left -600px top 50%,
+		right -30% bottom -500px,
+		right 20% top -270px;
+}
+
+.border-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	border: 1px solid var(--white);
+	border-radius: 30px;
+}
+
+.content-container {
+	max-width: 450px;
+}
+
+.title {
+	margin-bottom: 24px;
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.2;
+	color: var(--white);
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 30px;
+	margin-bottom: 30px;
+	font-size: 14px;
+	line-height: 1.4;
+	color: var(--white);
+	background-color: var(--text-background);
+	border-radius: 14px;
+}
