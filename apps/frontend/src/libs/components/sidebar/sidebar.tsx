@@ -8,19 +8,19 @@ const Sidebar: React.FC = () => {
 	const { pathname } = useLocation();
 
 	return (
-		<div className={styles["sidebarContainer"]}>
-			<div className={styles["logoContainer"]}>Logo</div>
-			<div className={styles["buttonsContainer"]}>
-				{SIDEBAR_ITEMS.map((item) => {
-					const { active, inactive } = item.icon;
+		<div className={styles["sidebar-container"]}>
+			<div className={styles["logo-container"]}>Logo</div>
+			<div className={styles["buttons-container"]}>
+				{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
+					const { active, inactive } = icon;
 
 					return (
 						<SidebarLink
-							iconName={item.href === pathname ? active : inactive}
-							key={item.label}
-							label={item.label}
+							iconName={href === pathname ? active : inactive}
+							key={label}
+							label={label}
 							pathname={pathname}
-							to={item.href}
+							to={href}
 						/>
 					);
 				})}
