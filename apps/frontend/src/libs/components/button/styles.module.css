@@ -9,6 +9,7 @@
 	line-height: 24px;
 	color: var(--black);
 	text-align: center;
+	text-transform: uppercase;
 	cursor: pointer;
 	border: none;
 	border-radius: 35px;
