@@ -1,13 +1,11 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
-import { UserDto } from "~/libs/types/types.js";
+import { UserDto } from "~/modules/users/users.js";
 
 import styles from "./styles.module.css";
 
 const Header: React.FC = () => {
-	const user: UserDto = useAppSelector(
-		({ auth }) => auth.user?.user as UserDto,
-	);
+	const user: UserDto = useAppSelector(({ auth }) => auth.user as UserDto);
 
 	return (
 		<>
