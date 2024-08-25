@@ -8,7 +8,7 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 			active: "wheelActive",
 			inactive: "wheelInactive",
 		},
-		title: "My Wheel",
+		label: "My Wheel",
 	},
 ];
 

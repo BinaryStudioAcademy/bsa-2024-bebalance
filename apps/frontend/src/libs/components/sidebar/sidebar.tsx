@@ -17,9 +17,9 @@ const Sidebar: React.FC = () => {
 					return (
 						<SidebarLink
 							iconName={item.href === pathname ? active : inactive}
-							key={item.title}
+							key={item.label}
+							label={item.label}
 							pathname={pathname}
-							title={item.title}
 							to={item.href}
 						/>
 					);

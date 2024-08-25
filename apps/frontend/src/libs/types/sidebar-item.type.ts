@@ -9,7 +9,7 @@ type SidebarItem = {
 		active: IconName;
 		inactive: IconName;
 	};
-	title: string;
+	label: string;
 };
 
 export { type SidebarItem };
