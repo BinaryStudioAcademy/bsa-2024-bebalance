@@ -66,6 +66,7 @@ const RadioGroup: React.FC<Properties> = ({
 		} as RadioButtonProps;
 
 		const isActive = radioButtonProperty.id === selectedId;
+
 		if (isActive) {
 			radioButtonProperty.borderColor = circleBorderColorActive;
 			radioButtonProperty.borderSize = circleBorderSizeActive;
