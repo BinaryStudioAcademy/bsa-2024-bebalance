@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.2...frontend-v1.12.0) (2024-08-25)
+
+
+### Features
+
+* **frontend:** sidebar component bb-90 ([#115](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/115)) ([03ee06b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03ee06b2b6d91163c10f644e3782241407ca129e))
+
 ## [1.11.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.1...frontend-v1.11.2) (2024-08-25)
 
 
