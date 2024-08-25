@@ -5,8 +5,8 @@ import { RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
+	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
-	type UserSignUpSubmitDto,
 	userSignUpValidationSchema,
 	UserValidationMessage,
 } from "~/packages/users/users";
@@ -19,13 +19,13 @@ type Properties = {
 
 const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	const { control, errors, handleSubmit, setError } =
-		useAppForm<UserSignUpSubmitDto>({
+		useAppForm<UserSignUpFormDto>({
 			defaultValues: USER_SIGN_UP_DEFAULT_VALUES,
 			validationSchema: userSignUpValidationSchema,
 		});
 
 	const handleFormSubmit = useCallback((): void => {
-		void handleSubmit((data: UserSignUpSubmitDto) => {
+		void handleSubmit((data: UserSignUpFormDto) => {
 			const { confirmPassword, ...userData } = data;
 
 			if (confirmPassword === userData.password) {

@@ -3,7 +3,7 @@ export {
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
+	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
-	type UserSignUpSubmitDto,
 } from "shared";
