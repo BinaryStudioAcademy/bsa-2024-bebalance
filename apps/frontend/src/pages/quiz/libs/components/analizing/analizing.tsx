@@ -6,7 +6,7 @@ type Properties = {
 	onNext: () => void;
 };
 
-const Analizing: React.FC<Properties> = ({ onNext }: Properties) => {
+const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	return (
 		<div className={styles["page-container"]}>
 			<div className={styles["border-container"]}>
@@ -39,4 +39,4 @@ const Analizing: React.FC<Properties> = ({ onNext }: Properties) => {
 	);
 };
 
-export { Analizing };
+export { Analyzing };
