@@ -5,11 +5,11 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 	{
 		href: AppRoute.ROOT,
 		icon: {
-			active: "myWheelActive",
-			inactive: "myWheelInactive",
+			active: "wheelActive",
+			inactive: "wheelInactive",
 		},
 		title: "My Wheel",
 	},
 ];
 
-export { sidebarItems };
+export { SIDEBAR_ITEMS };

@@ -1,5 +1,5 @@
 import { iconNameToSvg } from "~/libs/maps/maps.js";
-import { IconName } from "~/libs/types/icon-name.type.js";
+import { IconName } from "~/libs/types/types.js";
 
 type Properties = {
 	name: IconName;

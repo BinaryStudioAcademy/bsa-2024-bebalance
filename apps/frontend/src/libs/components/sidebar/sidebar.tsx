@@ -1,4 +1,4 @@
-import { sidebarItems } from "~/libs/constants/constants.js";
+import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
 import { useLocation } from "~/libs/hooks/hooks.js";
 
 import { SidebarLink } from "./libs/components/components.js";
@@ -10,7 +10,7 @@ const Sidebar: React.FC = () => {
 		<div className={styles["sidebarContainer"]}>
 			<div className={styles["logoContainer"]}>Logo</div>
 			<div className={styles["buttonsContainer"]}>
-				{sidebarItems.map((item) => {
+				{SIDEBAR_ITEMS.map((item) => {
 					const { active, inactive } = item.icon;
 					return (
 						<SidebarLink

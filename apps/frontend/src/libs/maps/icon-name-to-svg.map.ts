@@ -6,8 +6,8 @@ const iconNameToSvg: Record<
 	IconName,
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
-	myWheelActive: WheelOfBalanceActive,
-	myWheelInactive: WheelOfBalanceInactive,
+	wheelActive: WheelOfBalanceActive,
+	wheelInactive: WheelOfBalanceInactive,
 };
 
 export { iconNameToSvg };

@@ -1,1 +1,1 @@
-export { sidebarItems } from "./sidebar-items.constant.js";
+export { SIDEBAR_ITEMS } from "./sidebar-items.constant.js";
