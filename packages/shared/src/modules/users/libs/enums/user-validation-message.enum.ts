@@ -1,6 +1,7 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
+	CONFIRM_PASSWORD_NOT_MATCH: "Confirm password does not match",
 	EMAIL_REQUIRE: "Email is required",
 	EMAIL_TAKEN: "Email is taken",
 	EMAIL_WRONG: "Email is wrong",
