@@ -14,7 +14,7 @@ import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
-const QuizEntryScreen: React.FC = () => {
+const QuizEntry: React.FC = () => {
 	const handleStartPress = useCallback((): void => {
 		// Handle Continue
 	}, []);
@@ -58,4 +58,4 @@ const QuizEntryScreen: React.FC = () => {
 	);
 };
 
-export { QuizEntryScreen };
+export { QuizEntry };
