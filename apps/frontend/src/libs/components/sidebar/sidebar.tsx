@@ -6,12 +6,14 @@ import styles from "./styles.module.css";
 
 const Sidebar: React.FC = () => {
 	const { pathname } = useLocation();
+
 	return (
 		<div className={styles["sidebarContainer"]}>
 			<div className={styles["logoContainer"]}>Logo</div>
 			<div className={styles["buttonsContainer"]}>
 				{SIDEBAR_ITEMS.map((item) => {
 					const { active, inactive } = item.icon;
+
 					return (
 						<SidebarLink
 							iconName={item.href === pathname ? active : inactive}

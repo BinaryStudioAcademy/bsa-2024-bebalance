@@ -1,3 +1,3 @@
 type IconName = "wheelActive" | "wheelInactive";
 
-export { IconName };
+export { type IconName };

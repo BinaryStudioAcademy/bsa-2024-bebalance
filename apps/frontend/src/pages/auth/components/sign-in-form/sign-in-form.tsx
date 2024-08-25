@@ -1,5 +1,5 @@
-import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
-import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
+import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
+import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";

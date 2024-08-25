@@ -1,6 +1,6 @@
-import LifeBalanceWheel from "~/assets/img/life-balance-wheel.svg";
-import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
-import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
+import LifeBalanceWheel from "~/assets/img/life-balance-wheel.svg?react";
+import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
+import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Button } from "~/libs/components/components.js";
 
 import styles from "./styles.module.css";

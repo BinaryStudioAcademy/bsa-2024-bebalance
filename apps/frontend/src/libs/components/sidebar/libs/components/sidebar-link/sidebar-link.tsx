@@ -16,6 +16,7 @@ const SidebarLink: React.FC<Properties> = ({
 	to,
 }: Properties) => {
 	const isActive = pathname === to;
+
 	return (
 		<Link isActive={isActive} to={to} type="navLink">
 			<Icon name={iconName} />

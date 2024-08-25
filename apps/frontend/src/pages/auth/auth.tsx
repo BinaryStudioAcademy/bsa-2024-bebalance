@@ -1,5 +1,5 @@
-import AuthIllustrationLeft from "~/assets/img/auth-illustration-left.svg";
-import AuthIllustrationRight from "~/assets/img/auth-illustration-right.svg";
+import AuthIllustrationLeft from "~/assets/img/auth-illustration-left.svg?react";
+import AuthIllustrationRight from "~/assets/img/auth-illustration-right.svg?react";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -38,6 +38,7 @@ const Auth: React.FC = () => {
 			case AppRoute.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
+
 			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
