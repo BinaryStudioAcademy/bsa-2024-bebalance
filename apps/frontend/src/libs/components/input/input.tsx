@@ -1,3 +1,4 @@
+import { IconName } from "~/libs/enums/icon-name.enum.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
@@ -8,7 +9,6 @@ import {
 } from "~/libs/types/types.js";
 
 import { Icon } from "../components.js";
-import { IconName } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
