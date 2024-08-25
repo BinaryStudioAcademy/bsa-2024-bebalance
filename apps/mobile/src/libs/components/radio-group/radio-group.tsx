@@ -81,9 +81,11 @@ const RadioGroup: React.FC<Properties> = ({
 
 	const onChangeHandler = (id: string): void => {
 		const chosenOption = itemsMap.get(id);
+
 		if (onChange && chosenOption) {
 			onChange(chosenOption);
 		}
+
 		setSelectedId(id);
 	};
 
