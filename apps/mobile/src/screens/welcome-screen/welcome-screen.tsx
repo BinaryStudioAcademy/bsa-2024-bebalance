@@ -8,16 +8,17 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
-const handleContinuePress = (): void => {
-	// Handle Continue
-};
-
 const WelcomeScreen: React.FC = () => {
+	const handleContinuePress = useCallback((): void => {
+		// Handle Continue
+	}, []);
+
 	return (
 		<BackgroundWrapper>
 			<ScreenWrapper>
