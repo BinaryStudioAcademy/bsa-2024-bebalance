@@ -1,0 +1,38 @@
+import { APIPath } from "~/libs/enums/enums.js";
+import {
+	type APIHandlerResponse,
+	BaseController,
+} from "~/libs/modules/controller/controller.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
+import { type Logger } from "~/libs/modules/logger/logger.js";
+import { QuizQuestionsService } from "~/modules/quiz/quiz.service.js";
+
+import { QuizApiPath } from "./libs/enums/enums.js";
+
+class QuizController extends BaseController {
+	private quizQuestionsService: QuizQuestionsService;
+
+	public constructor(
+		logger: Logger,
+		quizQuestionsService: QuizQuestionsService,
+	) {
+		super(logger, APIPath.QUIZ);
+
+		this.quizQuestionsService = quizQuestionsService;
+
+		this.addRoute({
+			handler: () => this.findAll(),
+			method: "GET",
+			path: QuizApiPath.QUIZ_QUESTION,
+		});
+	}
+
+	private async findAll(): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.quizQuestionsService.findAll(),
+			status: HTTPCode.OK,
+		};
+	}
+}
+
+export { QuizController };
