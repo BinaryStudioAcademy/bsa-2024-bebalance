@@ -38,6 +38,7 @@ const Auth: React.FC = () => {
 			case AppRoute.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
+
 			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
@@ -47,26 +48,24 @@ const Auth: React.FC = () => {
 	};
 
 	return (
-		<>
-			<main className={styles["auth-container"]}>
-				<section className={styles["form-container"]}>
-					{getScreen(pathname)}
-				</section>
-				<section className={styles["illustration-container"]}>
-					<img
-						alt="background"
-						className={styles["img-left"]}
-						src={authIllustrationLeft}
-					/>
-					<h1 className={styles["title"]}>Logo</h1>
-					<img
-						alt="background"
-						className={styles["img-right"]}
-						src={authIllustrationRight}
-					/>
-				</section>
-			</main>
-		</>
+		<main className={styles["auth-container"]}>
+			<section className={styles["form-container"]}>
+				{getScreen(pathname)}
+			</section>
+			<section className={styles["illustration-container"]}>
+				<img
+					alt="background"
+					className={styles["img-left"]}
+					src={authIllustrationLeft}
+				/>
+				<h1 className={styles["title"]}>Logo</h1>
+				<img
+					alt="background"
+					className={styles["img-right"]}
+					src={authIllustrationRight}
+				/>
+			</section>
+		</main>
 	);
 };
 
