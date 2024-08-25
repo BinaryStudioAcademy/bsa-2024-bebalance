@@ -70,6 +70,7 @@ const Auth: React.FC = () => {
 			case RootScreenName.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
+
 			case RootScreenName.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}

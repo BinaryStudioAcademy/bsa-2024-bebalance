@@ -2,4 +2,4 @@ type TokenPayload = {
 	userId: number;
 };
 
-export { TokenPayload };
+export { type TokenPayload };
