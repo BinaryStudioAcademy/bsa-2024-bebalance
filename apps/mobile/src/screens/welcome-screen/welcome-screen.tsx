@@ -1,7 +1,7 @@
 import React from "react";
 
-import { BackgroundWrapper } from "~/libs/components/background-wrapper/background-wrapper";
 import {
+	BackgroundWrapper,
 	Button,
 	Image,
 	ScreenWrapper,
@@ -12,6 +12,10 @@ import { globalStyles } from "~/libs/styles/styles";
 import { ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
+
+const handleContinuePress = (): void => {
+	// Handle Continue
+};
 
 const WelcomeScreen: React.FC = () => {
 	return (
@@ -40,18 +44,13 @@ const WelcomeScreen: React.FC = () => {
 					/>
 					<Text
 						preset="subheading"
-						style={[styles.text, globalStyles.pb12]}
+						style={[globalStyles.pb12, styles.text]}
 						weight="bold"
 					>
 						Answer a few questions to find out which areas of your life are
 						outstanding and which areas you are missing out on
 					</Text>
-					<Button
-						label="Continue"
-						onPress={(): void => {
-							// Handle Continue
-						}}
-					/>
+					<Button label="Continue" onPress={handleContinuePress} />
 				</View>
 			</ScreenWrapper>
 		</BackgroundWrapper>
