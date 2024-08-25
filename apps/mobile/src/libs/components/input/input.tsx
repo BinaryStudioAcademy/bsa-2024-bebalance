@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	type Control,
 	type FieldErrors,
@@ -14,7 +14,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { BaseColor, GradientColor } from "~/libs/enums/enums";
-import { useFormController } from "~/libs/hooks/hooks";
+import { useFormController, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
@@ -38,8 +38,9 @@ const Input = <T extends FieldValues>({
 	name,
 	placeholder,
 }: Properties<T>): JSX.Element => {
-	const [secureTextEntry, setSecureTextEntry] = useState(isSecureTextEntry);
-	const [isFocused, setIsFocused] = useState(false);
+	const [secureTextEntry, setSecureTextEntry] =
+		useState<boolean>(isSecureTextEntry);
+	const [isFocused, setIsFocused] = useState<boolean>(false);
 
 	const { field } = useFormController({ control, name });
 
@@ -56,6 +57,7 @@ const Input = <T extends FieldValues>({
 	const conditionalColors = hasError
 		? [BaseColor.RED, BaseColor.RED]
 		: borderColors;
+
 	return (
 		<View>
 			<Text color={BaseColor.BLACK} size="md" weight="semiBold">

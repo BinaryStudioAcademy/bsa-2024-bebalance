@@ -26,6 +26,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit((data: UserSignUpSubmitDto) => {
 			const { confirmPassword, ...userData } = data;
+
 			if (confirmPassword === userData.password) {
 				onSubmit(userData);
 			} else {
