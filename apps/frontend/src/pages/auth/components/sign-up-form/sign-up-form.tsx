@@ -27,6 +27,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload: UserSignUpFormDto) => {
 				const { confirmPassword, ...userData } = payload;
+
 				if (confirmPassword === userData.password) {
 					onSubmit(userData);
 				} else {
