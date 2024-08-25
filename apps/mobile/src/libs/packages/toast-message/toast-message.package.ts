@@ -1,6 +1,6 @@
 import Toast from "react-native-toast-message";
 
-import { ToastMessageTitle, ToastMessageType } from "~/libs/enums/enums";
+import { type ToastMessageTitle, ToastMessageType } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 
 import { typeToTitle } from "./libs/maps/maps";
@@ -18,7 +18,7 @@ class ToastMessage {
 		Toast.show({
 			text1: title ?? typeToTitle[type],
 			text2: message,
-			type: type,
+			type,
 		});
 	}
 

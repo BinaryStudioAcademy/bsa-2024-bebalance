@@ -2,7 +2,7 @@ import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import { UserDto } from "~/libs/types/types.js";
+import { type UserDto } from "~/libs/types/types.js";
 import {
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,

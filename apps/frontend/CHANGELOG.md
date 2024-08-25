@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.0...frontend-v1.11.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **frontend:** fix user is not saved in redux store after sign in/sign up bb-118 ([#160](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/160)) ([7d1a768](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7d1a768e6c38ff7947c3653a197f7f93b4d8d00f))
+
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.10.0...frontend-v1.11.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+* **frontend:** responsive header bb-107 ([#165](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/165)) ([ee8935f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ee8935f3352a743041d9d38aad8496c75c6fb204))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.9.0...frontend-v1.10.0) (2024-08-23)
 
 

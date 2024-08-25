@@ -11,7 +11,9 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 };
 
-const QuizQuestion = <T extends FieldValues>({ control }: Properties<T>) => {
+const QuizQuestion = <T extends FieldValues>({
+	control,
+}: Properties<T>): JSX.Element => {
 	return (
 		<div className={styles["quiz-question"]}>
 			<Input

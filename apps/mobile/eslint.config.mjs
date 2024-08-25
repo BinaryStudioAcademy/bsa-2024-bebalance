@@ -17,6 +17,16 @@ const mainConfig = {
 	},
 };
 
+/** @type {Config} */
+const explicitGenericsConfig = {
+	rules: {
+		"require-explicit-generics/require-explicit-generics": [
+			"error",
+			["useState"],
+		],
+	},
+};
+
 /** @type {Config[]} */
 const overridesConfigs = [
 	{
@@ -42,4 +52,9 @@ const overridesConfigs = [
 	},
 ];
 
-export default [...baseConfig, mainConfig, ...overridesConfigs];
+export default [
+	...baseConfig,
+	mainConfig,
+	explicitGenericsConfig,
+	...overridesConfigs,
+];

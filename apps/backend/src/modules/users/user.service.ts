@@ -1,4 +1,4 @@
-import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -40,7 +40,6 @@ class UserService implements Service {
 	public async find(id: number): Promise<null | UserEntity> {
 		return await this.userRepository.find(id);
 	}
-
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 

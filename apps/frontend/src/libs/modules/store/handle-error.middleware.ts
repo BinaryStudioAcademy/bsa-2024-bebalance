@@ -2,7 +2,7 @@ import { isRejected, type Middleware } from "@reduxjs/toolkit";
 
 import { notification } from "~/libs/modules/notification/notification.js";
 
-import { MiddlewareError } from "./libs/types/types.js";
+import { type MiddlewareError } from "./libs/types/types.js";
 
 const handleErrorMiddleware: Middleware = () => {
 	return (next) => (action) => {
@@ -10,6 +10,7 @@ const handleErrorMiddleware: Middleware = () => {
 			const error = action.error as MiddlewareError;
 			notification.error(error.data ? error.data.message : error.message);
 		}
+
 		return next(action);
 	};
 };

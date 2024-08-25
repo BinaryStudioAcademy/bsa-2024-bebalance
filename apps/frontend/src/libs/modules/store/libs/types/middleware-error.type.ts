@@ -3,4 +3,4 @@ type MiddlewareError = {
 	message?: string;
 };
 
-export { MiddlewareError };
+export { type MiddlewareError };

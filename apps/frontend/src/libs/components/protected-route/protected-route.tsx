@@ -1,7 +1,7 @@
 import { Navigate } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { type AppRoute } from "~/libs/enums/enums.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
-import { ValueOf } from "~/libs/types/types.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
 type Properties = {
 	component: React.ReactNode;
