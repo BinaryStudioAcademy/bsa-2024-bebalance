@@ -226,7 +226,7 @@ const overridesConfigs = [
 			"prettier.config.ts",
 			"stylelint.config.ts",
 			"knip.config.ts",
-			"index.d.ts",
+			"packages.d.ts",
 			"lint-staged.config.js",
 			"eslint.config.js",
 		],
