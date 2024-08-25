@@ -1,6 +1,6 @@
 import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
-import { Analyzing } from "./libs/components/analizing/analizing.js";
+import { Analyzing } from "./libs/components/analyzing/analyzing.js";
 import { Introduction } from "./libs/components/introduction/introduction.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
