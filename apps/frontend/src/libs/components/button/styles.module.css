@@ -33,6 +33,6 @@
 	width: fit-content;
 	padding: 0;
 	color: var(--gray);
-	background: none;
+	background-color: transparent;
 	transform: translateY(-50%);
 }

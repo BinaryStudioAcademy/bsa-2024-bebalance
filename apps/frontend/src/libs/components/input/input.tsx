@@ -8,7 +8,7 @@ import {
 	type IconName,
 } from "~/libs/types/types.js";
 
-import { Button, Icon } from "../components.js";
+import { Button } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
@@ -82,9 +82,14 @@ const Input = <T extends FieldValues>({
 							type={type}
 						/>
 						{iconName && (
-							<Button isIconButton type="button">
-								<Icon name={iconName} onClick={onIconClick} />
-							</Button>
+							<Button
+								hasVisuallyHiddenLabel
+								iconName={iconName}
+								label="Eye"
+								onClick={onIconClick}
+								type="button"
+								variant="icon"
+							/>
 						)}
 					</>
 				)}
