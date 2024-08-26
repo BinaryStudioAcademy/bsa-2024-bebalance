@@ -7,7 +7,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
-import { CustomValidation } from "./libs/enums.js";
+import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -29,9 +29,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				if (confirmPassword === userData.password) {
 					onSubmit(userData);
 				} else {
-					setError(CustomValidation.FIELD, {
-						message: CustomValidation.ERROR_MESSAGE,
-						type: CustomValidation.ERROR_TYPE,
+					setError(ConfirmPasswordCustomValidation.FIELD, {
+						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
+						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 					});
 				}
 			})(event_);
