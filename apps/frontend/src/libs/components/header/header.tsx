@@ -1,5 +1,5 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
-import { Icon } from "~/libs/components/components.js";
+import { Button, Icon } from "~/libs/components/components.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { type UserDto } from "~/modules/users/users.js";
 
@@ -14,9 +14,13 @@ const Header: React.FC<Properties> = ({ onSidebarToggle }: Properties) => {
 
 	return (
 		<header className={styles["header"]}>
-			<button className={styles["menu-btn"]} onClick={onSidebarToggle}>
-				<Icon name="menu" />
-			</button>
+			<div className={styles["menu-btn"]}>
+				<Button
+					icon={<Icon name="menu" />}
+					onClick={onSidebarToggle}
+					variant="secondary"
+				/>
+			</div>
 
 			<div className={styles["user-info"]}>
 				<img

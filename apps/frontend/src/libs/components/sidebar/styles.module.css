@@ -41,8 +41,6 @@
 		right: 10px;
 		display: flex;
 		cursor: pointer;
-		background-color: transparent;
-		border: none;
 	}
 
 	.close-btn:hover {

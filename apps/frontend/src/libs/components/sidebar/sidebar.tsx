@@ -1,4 +1,4 @@
-import { Icon } from "~/libs/components/components.js";
+import { Button, Icon } from "~/libs/components/components.js";
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useLocation } from "~/libs/hooks/hooks.js";
@@ -24,9 +24,13 @@ const Sidebar: React.FC<Properties> = ({
 				isSidebarOpen && styles["open"],
 			)}
 		>
-			<button className={styles["close-btn"]} onClick={onSidebarToggle}>
-				<Icon name="close" />
-			</button>
+			<div className={styles["close-btn"]}>
+				<Button
+					icon={<Icon name="close" />}
+					onClick={onSidebarToggle}
+					variant="secondary"
+				/>
+			</div>
 
 			<div className={styles["logo-container"]}>Logo</div>
 			<div className={styles["buttons-container"]}>

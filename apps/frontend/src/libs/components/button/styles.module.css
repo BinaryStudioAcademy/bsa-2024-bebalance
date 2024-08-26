@@ -24,3 +24,11 @@
 	color: var(--white);
 	background-color: var(--black);
 }
+
+.icon {
+	display: flex;
+	width: fit-content;
+	padding: 5px;
+	background-color: transparent;
+	border-radius: 0;
+}
