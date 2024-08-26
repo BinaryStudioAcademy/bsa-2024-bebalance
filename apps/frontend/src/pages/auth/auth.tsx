@@ -14,7 +14,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { SignInForm, SignUpForm } from "./libs/components/components.js";
-import styles from "./style.module.css";
+import styles from "./styles-new.module.css";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
