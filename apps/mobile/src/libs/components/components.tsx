@@ -2,6 +2,7 @@ export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
 export { GradientText } from "./gradient-text/gradient-text";
+export { Icon } from "./icon/icon";
 export { IconButton } from "./icon-button/icon-button";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
