@@ -54,6 +54,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<Input
 					control={control}
 					errors={errors}
+					iconName={isPasswordVisible ? "crossedEye" : "eye"}
 					isDisplayedValue={isPasswordVisible}
 					label="Password"
 					name="password"
