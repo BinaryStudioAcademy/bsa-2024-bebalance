@@ -110,7 +110,7 @@ const Input = <T extends FieldValues>({
 						]}
 						value={value}
 					/>
-					<>{accessoryRight}</>
+					{accessoryRight}
 				</View>
 			</LinearGradient>
 			{hasError && <Text color={BaseColor.RED}>{error as string}</Text>}
