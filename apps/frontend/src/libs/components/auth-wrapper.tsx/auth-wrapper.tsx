@@ -1,14 +1,23 @@
-import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
+// import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 import { Header, Sidebar } from "../components.js";
+import style from "./style.module.css";
 
-const AuthWrapper: React.FC = () => {
+type Properties = {
+	children: React.ReactNode;
+};
+
+const AuthWrapper: React.FC<Properties> = ({ children }: Properties) => {
 	return (
-		<>
-			<Header />
-			<Sidebar />
-			<QuizForm />
-		</>
+		<main className={style["auth-wrapper-container"]}>
+			<section className={style["left-side-section"]}>
+				<Sidebar />
+			</section>
+			<section className={style["right-side-section"]}>
+				<Header />
+				{children}
+			</section>
+		</main>
 	);
 };
 

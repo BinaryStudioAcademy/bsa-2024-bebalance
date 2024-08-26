@@ -6,14 +6,18 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { AuthWrapper } from "../auth-wrapper.tsx/auth-wrapper.js";
 
 type Properties = {
+	component: React.ReactNode;
 	redirectTo: ValueOf<typeof AppRoute>;
 };
 
-const ProtectedRoute: React.FC<Properties> = ({ redirectTo }: Properties) => {
+const ProtectedRoute: React.FC<Properties> = ({
+	component,
+	redirectTo,
+}: Properties) => {
 	const user = useAppSelector(({ auth }) => auth.user);
 
 	if (user) {
-		return <AuthWrapper />;
+		return <AuthWrapper>{component}</AuthWrapper>;
 	}
 
 	return <Navigate replace to={redirectTo} />;
