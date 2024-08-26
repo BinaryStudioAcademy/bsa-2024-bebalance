@@ -58,7 +58,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					label="Password"
 					name="password"
 					onToggle={handleTogglePasswordVisibility}
-					placeholder="password"
+					placeholder="*******"
 					type="password"
 				/>
 
