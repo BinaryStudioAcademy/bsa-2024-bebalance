@@ -1,11 +1,13 @@
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
+	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -13,16 +15,28 @@ type Properties = {
 };
 
 const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
-		defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-		validationSchema: userSignUpValidationSchema,
-	});
+	const { control, errors, handleSubmit, setError } =
+		useAppForm<UserSignUpFormDto>({
+			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
+			validationSchema: userSignUpValidationSchema,
+		});
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(onSubmit)(event_);
+			void handleSubmit((payload: UserSignUpFormDto) => {
+				const { confirmPassword, ...userData } = payload;
+
+				if (confirmPassword === userData.password) {
+					onSubmit(userData);
+				} else {
+					setError(ConfirmPasswordCustomValidation.FIELD, {
+						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
+						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
+					});
+				}
+			})(event_);
 		},
-		[handleSubmit, onSubmit],
+		[handleSubmit, onSubmit, setError],
 	);
 
 	return (
@@ -51,6 +65,15 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Password"
 					name="password"
+					placeholder="*******"
+					type="password"
+				/>
+
+				<Input
+					control={control}
+					errors={errors}
+					label="Confirm password"
+					name="confirmPassword"
 					placeholder="*******"
 					type="password"
 				/>

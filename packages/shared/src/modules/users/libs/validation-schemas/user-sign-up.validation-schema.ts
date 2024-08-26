@@ -25,11 +25,11 @@ const userSignUp = z
 		password: z
 			.string()
 			.trim()
-			.max(UserValidationRule.PASSWORD_MAX_LENGTH, {
-				message: UserValidationMessage.PASSWORD_MAX_LENGTH,
-			})
 			.min(UserValidationRule.PASSWORD_MIN_LENGTH, {
 				message: UserValidationMessage.PASSWORD_MIN_LENGTH,
+			})
+			.max(UserValidationRule.PASSWORD_MAX_LENGTH, {
+				message: UserValidationMessage.PASSWORD_MAX_LENGTH,
 			}),
 	})
 	.required();
