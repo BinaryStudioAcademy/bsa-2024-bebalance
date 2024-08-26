@@ -3,9 +3,7 @@ declare module "eslint-plugin-react" {
 
 	const configs: Record<"jsx-runtime" | "recommended", Required<Linter.Config>>;
 
-	export default {
-		configs,
-	};
+	export default { configs };
 }
 
 declare module "eslint-plugin-react-hooks" {
@@ -13,9 +11,7 @@ declare module "eslint-plugin-react-hooks" {
 
 	const configs: Record<"recommended", Required<Linter.Config>>;
 
-	export default {
-		configs,
-	};
+	export default { configs };
 }
 
 declare module "eslint-plugin-jsx-a11y" {
@@ -23,7 +19,5 @@ declare module "eslint-plugin-jsx-a11y" {
 
 	const configs: Record<"recommended", Required<Linter.Config>>;
 
-	export default {
-		configs,
-	};
+	export default { configs };
 }
