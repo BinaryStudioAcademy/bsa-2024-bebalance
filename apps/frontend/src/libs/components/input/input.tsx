@@ -39,6 +39,7 @@ const Input = <T extends FieldValues>({
 	const error = errors?.[name]?.message;
 	const hasError = Boolean(error);
 	const isRadioWithOptions = type === "radio" && options?.length;
+	const shouldShowIcon = iconName && typeof onIconClick === "function";
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,13 +82,13 @@ const Input = <T extends FieldValues>({
 							placeholder={placeholder}
 							type={type}
 						/>
-						{name === "password" && onIconClick && (
+						{shouldShowIcon && (
 							<button
 								className={styles["toggle-password-icon"]}
 								onClick={onIconClick}
 								type="button"
 							>
-								{iconName && <Icon name={iconName} />}
+								<Icon name={iconName} />
 							</button>
 						)}
 					</>
