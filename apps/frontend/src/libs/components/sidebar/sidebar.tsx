@@ -8,12 +8,12 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	isSidebarOpen: boolean;
-	toggleSidebar: () => void;
+	onSidebarToggle: () => void;
 };
 
 const Sidebar: React.FC<Properties> = ({
 	isSidebarOpen,
-	toggleSidebar,
+	onSidebarToggle,
 }: Properties) => {
 	const { pathname } = useLocation();
 
@@ -24,7 +24,7 @@ const Sidebar: React.FC<Properties> = ({
 				isSidebarOpen && styles["open"],
 			)}
 		>
-			<button className={styles["close-btn"]} onClick={toggleSidebar}>
+			<button className={styles["close-btn"]} onClick={onSidebarToggle}>
 				<Icon name="close" />
 			</button>
 

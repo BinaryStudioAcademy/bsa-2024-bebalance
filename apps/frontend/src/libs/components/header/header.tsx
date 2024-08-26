@@ -6,15 +6,15 @@ import { type UserDto } from "~/modules/users/users.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	toggleSidebar: () => void;
+	onSidebarToggle: () => void;
 };
 
-const Header: React.FC<Properties> = ({ toggleSidebar }: Properties) => {
+const Header: React.FC<Properties> = ({ onSidebarToggle }: Properties) => {
 	const user: UserDto = useAppSelector(({ auth }) => auth.user as UserDto);
 
 	return (
 		<header className={styles["header"]}>
-			<button className={styles["menu-btn"]} onClick={toggleSidebar}>
+			<button className={styles["menu-btn"]} onClick={onSidebarToggle}>
 				<Icon name="menu" />
 			</button>
 
