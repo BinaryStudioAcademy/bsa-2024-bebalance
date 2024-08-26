@@ -1,9 +1,7 @@
-import { type Entity } from "~/libs/types/types.js";
+import { type QuizAnswersDto } from "./libs/types/types.js";
 
-import { QuizAnswersModel } from "./quiz-answers.model.js";
-
-class QuizQuestionsEntity implements Entity {
-	private answers: null | QuizAnswersModel;
+class QuizQuestionsEntity {
+	private answers: QuizAnswersDto[];
 
 	private categoryId: number;
 
@@ -23,7 +21,7 @@ class QuizQuestionsEntity implements Entity {
 		label,
 		updatedAt,
 	}: {
-		answers: null | QuizAnswersModel;
+		answers: QuizAnswersDto[];
 		categoryId: number;
 		createdAt: string;
 		id: null | number;
@@ -46,7 +44,7 @@ class QuizQuestionsEntity implements Entity {
 		label,
 		updatedAt,
 	}: {
-		answers: null | QuizAnswersModel;
+		answers: QuizAnswersDto[];
 		categoryId: number;
 		createdAt: string;
 		id: number;
@@ -63,39 +61,8 @@ class QuizQuestionsEntity implements Entity {
 		});
 	}
 
-	public static initializeNew({
-		categoryId,
-		label,
-	}: {
-		categoryId: number;
-		label: string;
-	}): QuizQuestionsEntity {
-		return new QuizQuestionsEntity({
-			answers: null,
-			categoryId,
-			createdAt: "",
-			id: null,
-			label,
-			updatedAt: "",
-		});
-	}
-
-	public toNewObject(): {
-		categoryId: number;
-		createdAt: string;
-		label: string;
-		updatedAt: string;
-	} {
-		return {
-			categoryId: this.categoryId,
-			createdAt: this.createdAt,
-			label: this.label,
-			updatedAt: this.updatedAt,
-		};
-	}
-
 	public toObject(): {
-		answers: null | QuizAnswersModel;
+		answers: QuizAnswersDto[];
 		categoryId: number;
 		createdAt: string;
 		id: number;

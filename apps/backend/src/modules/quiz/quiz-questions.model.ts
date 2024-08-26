@@ -1,4 +1,4 @@
-import { Model, RelationMappings } from "objection";
+import { Model, type RelationMappings } from "objection";
 
 import {
 	AbstractModel,
@@ -12,7 +12,7 @@ class QuizQuestionsModel extends AbstractModel {
 
 	public label!: string;
 
-	public quizAnswers!: QuizAnswersModel;
+	public quizAnswers!: QuizAnswersModel[];
 
 	static get relationMappings(): RelationMappings {
 		return {

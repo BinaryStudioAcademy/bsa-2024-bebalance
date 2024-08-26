@@ -5,7 +5,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { QuizQuestionsService } from "~/modules/quiz/quiz.service.js";
+import { type QuizQuestionsService } from "~/modules/quiz/quiz.service.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
 

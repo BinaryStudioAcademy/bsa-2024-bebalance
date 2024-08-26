@@ -14,5 +14,4 @@ export {
 	type QuizQuestionsDto,
 	type QuizQuestionsGetAllReponseDto,
 } from "./libs/types/types.js";
-
 export { quizController };
