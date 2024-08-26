@@ -1,5 +1,3 @@
-// import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
-
 import { Header, Sidebar } from "../components.js";
 import style from "./style.module.css";
 

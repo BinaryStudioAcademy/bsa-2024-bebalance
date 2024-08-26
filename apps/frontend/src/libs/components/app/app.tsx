@@ -11,6 +11,7 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
@@ -36,6 +37,11 @@ const App: React.FC = () => {
 				<RouterOutlet />
 			</div>
 			{isLoading && <Loader />}
+			{!isLoading && isRoot && (
+				<>
+					<QuizForm />
+				</>
+			)}
 			<Notification />
 		</>
 	);

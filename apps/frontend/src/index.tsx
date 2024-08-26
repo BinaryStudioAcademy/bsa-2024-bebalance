@@ -12,7 +12,6 @@ import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 import { Auth } from "~/pages/auth/auth.jsx";
 import { NotFound } from "~/pages/not-found/not-found.jsx";
-import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
@@ -25,7 +24,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component={<QuizForm />}
+										component="Root"
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
