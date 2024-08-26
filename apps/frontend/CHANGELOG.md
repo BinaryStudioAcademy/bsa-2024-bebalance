@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.1...frontend-v1.14.0) (2024-08-26)
+
+
+### Features
+
+* **frontend:** create auth wrapper components bb-189 ([#201](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/201)) ([c9b5920](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c9b5920f60c034db581ddde155b08250452a47b8))
+
 ## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.0...frontend-v1.13.1) (2024-08-26)
 
 
