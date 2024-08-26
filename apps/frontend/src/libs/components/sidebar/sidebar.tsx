@@ -24,10 +24,6 @@ const Sidebar: React.FC<Properties> = ({
 				isSidebarOpen && styles["open"],
 			)}
 		>
-			{/* <label className={styles["close-btn"]} htmlFor="sidebar-toggler">
-				x
-			</label> */}
-
 			<button className={styles["close-btn"]} onClick={toggleSidebar}>
 				<Icon name="close" />
 			</button>
