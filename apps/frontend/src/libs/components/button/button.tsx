@@ -11,7 +11,7 @@ type Properties = {
 	isPrimary?: boolean;
 	label: string;
 	onClick?: (() => void) | undefined;
-	type: "button" | "submit";
+	type?: "button" | "submit";
 	variant?: "dark" | "icon" | "secondary";
 };
 
