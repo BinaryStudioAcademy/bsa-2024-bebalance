@@ -45,6 +45,7 @@
 
 	.header {
 		justify-content: space-between;
+		padding-inline: 15px;
 	}
 
 	.menu-btn {
