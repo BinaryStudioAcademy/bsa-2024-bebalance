@@ -16,7 +16,6 @@ export {
 	ActivityIndicator,
 	Image,
 	KeyboardAvoidingView,
-	Platform,
 	Pressable,
 	ScrollView,
 	TextInput,
