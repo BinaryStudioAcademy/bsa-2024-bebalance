@@ -1,2 +1,2 @@
-export { SignInForm } from "./sign-in-form/sign-in-form-new.js";
-export { SignUpForm } from "./sign-up-form/sign-up-form-new.js";
+export { SignInForm } from "./sign-in-form/sign-in-form.js";
+export { SignUpForm } from "./sign-up-form/sign-up-form.js";

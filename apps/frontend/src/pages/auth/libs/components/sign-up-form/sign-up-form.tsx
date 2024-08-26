@@ -1,21 +1,21 @@
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
-	type UserSignInRequestDto,
-	userSignInValidationSchema,
+	type UserSignUpRequestDto,
+	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants.js";
-import styles from "./styles-new.module.css";
+import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: UserSignInRequestDto) => void;
+	onSubmit: (payload: UserSignUpRequestDto) => void;
 };
 
-const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
-		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
-		validationSchema: userSignInValidationSchema,
+const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+	const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
+		defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
+		validationSchema: userSignUpValidationSchema,
 	});
 
 	const handleFormSubmit = useCallback(
@@ -28,6 +28,15 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	return (
 		<>
 			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<Input
+					control={control}
+					errors={errors}
+					label="Name"
+					name="name"
+					placeholder="name"
+					type="text"
+				/>
+
 				<Input
 					control={control}
 					errors={errors}
@@ -46,7 +55,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type="password"
 				/>
 
-				<Button label="SIGN IN" type="submit" variant="dark" />
+				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
@@ -57,4 +66,4 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 };
 
-export { SignInForm };
+export { SignUpForm };
