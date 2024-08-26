@@ -39,7 +39,6 @@ const Input = <T extends FieldValues>({
 	const error = errors?.[name]?.message;
 	const hasError = Boolean(error);
 	const isRadioWithOptions = type === "radio" && options?.length;
-	const shouldShowIconButton = iconName && typeof onIconClick === "function";
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,9 +81,9 @@ const Input = <T extends FieldValues>({
 							placeholder={placeholder}
 							type={type}
 						/>
-						{shouldShowIconButton && (
-							<Button isIconButton onClick={onIconClick} type="button">
-								<Icon name={iconName} />
+						{iconName && (
+							<Button isIconButton type="button">
+								<Icon name={iconName} onClick={onIconClick} />
 							</Button>
 						)}
 					</>
