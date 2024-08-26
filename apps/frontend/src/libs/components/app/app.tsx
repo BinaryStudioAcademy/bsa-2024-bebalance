@@ -46,7 +46,8 @@ const App: React.FC = () => {
 	return (
 		<>
 			{isLoading && <Loader />}
-			{!isLoading && isRoot && (
+
+			{!isLoading && isRoot ? (
 				<div
 					className={getValidClassNames(
 						styles["app-container"],
@@ -63,6 +64,8 @@ const App: React.FC = () => {
 						<RouterOutlet />
 					</div>
 				</div>
+			) : (
+				<RouterOutlet />
 			)}
 
 			<Notification />
