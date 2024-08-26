@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.12.0...frontend-v1.13.0) (2024-08-26)
+
+
+### Features
+
+* **frontend:** add analyzing screen bb-135 ([#184](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/184)) ([a0d698e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a0d698ebb1270ce004e2ade2258c04999bccf47f))
+* **frontend:** sign-up-mobile-responsiveness bb-60 ([#151](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/151)) ([648cb32](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/648cb3221cd4150dee0ce1aa84ffc3eff9b2033f))
+
+
+### Bug Fixes
+
+* **frontend:** signIn signUp screens markdown bb-129 ([#143](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/143)) ([521fe2c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/521fe2c4e7cbe885dc0c19c848dc9fe446bfcf85))
+
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.2...frontend-v1.12.0) (2024-08-25)
+
+
+### Features
+
+* **frontend:** sidebar component bb-90 ([#115](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/115)) ([03ee06b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03ee06b2b6d91163c10f644e3782241407ca129e))
+
+## [1.11.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.1...frontend-v1.11.2) (2024-08-25)
+
+
+### Bug Fixes
+
+* **frontend:** move getAuthenticatedUser to auth store bb-171 ([#186](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/186)) ([bedb4f5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bedb4f51be8b1c6a3182ad3dcc16fec0ef2b99bb))
+
 ## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.0...frontend-v1.11.1) (2024-08-25)
 
 
