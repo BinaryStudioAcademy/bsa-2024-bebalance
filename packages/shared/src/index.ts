@@ -34,6 +34,7 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
+export { QuizApiPath } from "./modules/quiz/quiz.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,

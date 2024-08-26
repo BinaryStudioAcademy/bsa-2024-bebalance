@@ -1,7 +1,7 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/service.type.js";
+import { type UserService } from "~/modules/users/user.service.js";
 
-import { type UserService } from "../users/users.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
@@ -13,11 +13,11 @@ class QuizAnswerService implements Service {
 	private userService: UserService;
 
 	public constructor(
-		quizAnswerRepository: QuizAnswerRepository,
 		userService: UserService,
+		quizAnswerRepository: QuizAnswerRepository,
 	) {
-		this.quizAnswerRepository = quizAnswerRepository;
 		this.userService = userService;
+		this.quizAnswerRepository = quizAnswerRepository;
 	}
 
 	public create(): Promise<null> {
@@ -30,7 +30,10 @@ class QuizAnswerService implements Service {
 	}: {
 		answerId: number;
 		userId: number;
-	}): Promise<{ relationId: number }> {
+	}): Promise<{
+		answer: QuizAnswerEntity;
+		relationId: number;
+	}> {
 		const user = await this.userService.find(userId);
 		const answer = await this.find(answerId);
 
@@ -54,7 +57,12 @@ class QuizAnswerService implements Service {
 			await this.quizAnswerRepository.deleteUserAnswer(userId, id);
 		}
 
-		return await this.quizAnswerRepository.createUserAnswer(userId, answerId);
+		const userAnswer = await this.quizAnswerRepository.createUserAnswer(
+			userId,
+			answerId,
+		);
+
+		return { answer, relationId: userAnswer.relationId };
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

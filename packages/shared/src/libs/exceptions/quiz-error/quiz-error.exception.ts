@@ -1,5 +1,5 @@
-import { HTTPCode } from "../../modules/http/http.js";
-import { ValueOf } from "../../types/types.js";
+import { type HTTPCode } from "../../modules/http/http.js";
+import { type ValueOf } from "../../types/types.js";
 import { HTTPError } from "../http-error/http-error.exception.js";
 
 type Constructor = {
