@@ -11,7 +11,7 @@ import {
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
-import { SignInForm, SignUpForm } from "./components/components.js";
+import { SignInForm, SignUpForm } from "./libs/components/components.js";
 import styles from "./style.module.css";
 
 const Auth: React.FC = () => {
