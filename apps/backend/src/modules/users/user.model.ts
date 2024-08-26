@@ -5,6 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
+import { QuizAnswerModel } from "../quiz-answers/quiz-answers.js";
 import { UserDetailsModel } from "./user-details.model.js";
 
 class UserModel extends AbstractModel {
@@ -18,6 +19,18 @@ class UserModel extends AbstractModel {
 
 	static get relationMappings(): RelationMappings {
 		return {
+			quizAnswers: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					through: {
+						from: `${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.userId`,
+						to: `${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.quizAnswerId`,
+					},
+					to: `${DatabaseTableName.QUIZ_ANSWERS}.id`,
+				},
+				modelClass: QuizAnswerModel,
+				relation: Model.HasManyRelation,
+			},
 			userDetails: {
 				join: {
 					from: `${DatabaseTableName.USERS}.id`,
