@@ -1,8 +1,14 @@
 import React from "react";
 
-import { Button, Input, Link, Text } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks";
+import {
+	Button,
+	IconButton,
+	Input,
+	Link,
+	Text,
+} from "~/libs/components/components";
+import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type UserSignUpFormDto,
@@ -18,6 +24,18 @@ type Properties = {
 };
 
 const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
+	const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
+	const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] =
+		useState<boolean>(true);
+
+	const handlePasswordIconPress = (): void => {
+		setIsPasswordHidden(!isPasswordHidden);
+	};
+
+	const handleConfirmPasswordIconPress = (): void => {
+		setIsConfirmPasswordHidden(!isConfirmPasswordHidden);
+	};
+
 	const { control, errors, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: USER_SIGN_UP_DEFAULT_VALUES,
@@ -64,17 +82,33 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				placeholder="name@gmail.com"
 			/>
 			<Input
+				accessoryRight={
+					<IconButton
+						iconColor={BaseColor.LIGHT_GRAY}
+						iconSize={20}
+						name={isPasswordHidden ? "visibility-off" : "visibility"}
+						onPress={handlePasswordIconPress}
+					/>
+				}
 				control={control}
 				errors={errors}
-				isSecureTextEntry
+				isSecureTextEntry={isPasswordHidden}
 				label="Password"
 				name="password"
 				placeholder="*******"
 			/>
 			<Input
+				accessoryRight={
+					<IconButton
+						iconColor={BaseColor.LIGHT_GRAY}
+						iconSize={20}
+						name={isPasswordHidden ? "visibility-off" : "visibility"}
+						onPress={handleConfirmPasswordIconPress}
+					/>
+				}
 				control={control}
 				errors={errors}
-				isSecureTextEntry
+				isSecureTextEntry={isConfirmPasswordHidden}
 				label="Confirm password"
 				name="confirmPassword"
 				placeholder="*******"

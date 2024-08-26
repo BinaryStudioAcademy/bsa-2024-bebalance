@@ -7,7 +7,6 @@ import {
 } from "react-hook-form";
 
 import {
-	IconButton,
 	LinearGradient,
 	Text,
 	TextInput,
@@ -20,6 +19,7 @@ import { globalStyles } from "~/libs/styles/styles";
 import { styles } from "./styles";
 
 type Properties<T extends FieldValues> = {
+	accessoryRight?: JSX.Element;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
 	isAutoFocused?: boolean;
@@ -27,9 +27,11 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
+	secureTextEntry?: boolean;
 };
 
 const Input = <T extends FieldValues>({
+	accessoryRight,
 	control,
 	errors,
 	isAutoFocused = false,
@@ -38,8 +40,6 @@ const Input = <T extends FieldValues>({
 	name,
 	placeholder,
 }: Properties<T>): JSX.Element => {
-	const [secureTextEntry, setSecureTextEntry] =
-		useState<boolean>(isSecureTextEntry);
 	const [isFocused, setIsFocused] = useState<boolean>(false);
 
 	const { field } = useFormController({ control, name });
@@ -100,7 +100,7 @@ const Input = <T extends FieldValues>({
 						onFocus={handleInputFocus}
 						placeholder={placeholder}
 						placeholderTextColor={BaseColor.LIGHT_GRAY}
-						secureTextEntry={secureTextEntry}
+						secureTextEntry={isSecureTextEntry}
 						style={[
 							globalStyles.justifyContentCenter,
 							globalStyles.alignItemsCenter,
@@ -110,16 +110,7 @@ const Input = <T extends FieldValues>({
 						]}
 						value={value}
 					/>
-					{isSecureTextEntry && (
-						<IconButton
-							color={BaseColor.LIGHT_GRAY}
-							name={secureTextEntry ? "visibility-off" : "visibility"}
-							onPress={() => {
-								setSecureTextEntry(!secureTextEntry);
-							}}
-							size={20}
-						/>
-					)}
+					<>{accessoryRight}</>
 				</View>
 			</LinearGradient>
 			{hasError && <Text color={BaseColor.RED}>{error as string}</Text>}
