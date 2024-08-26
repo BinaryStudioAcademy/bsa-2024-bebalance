@@ -1,39 +1,22 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
-import menu from "~/assets/img/menu.svg";
-import { useAppSelector, useCallback } from "~/libs/hooks/hooks.js";
+import { Icon } from "~/libs/components/components.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
-	isSidebarOpen: boolean;
-	setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	toggleSidebar: () => void;
 };
 
-const Header: React.FC<Properties> = ({
-	isSidebarOpen,
-	setIsSidebarOpen,
-}: Properties) => {
+const Header: React.FC<Properties> = ({ toggleSidebar }: Properties) => {
 	const user: UserDto = useAppSelector(({ auth }) => auth.user as UserDto);
-
-	const toggleSidebar = useCallback((): void => {
-		setIsSidebarOpen((previous) => !previous);
-	}, [setIsSidebarOpen]);
 
 	return (
 		<header className={styles["header"]}>
-			<div className={styles["menu-container"]}>
-				<input
-					checked={isSidebarOpen}
-					hidden
-					id="sidebar-toggler"
-					onChange={toggleSidebar}
-					type="checkbox"
-				/>
-				<label htmlFor="sidebar-toggler">
-					<img alt="Menu" className={styles["menu"]} src={menu} />
-				</label>
-			</div>
+			<button className={styles["menu-btn"]} onClick={toggleSidebar}>
+				<Icon name="menu" />
+			</button>
 
 			<div className={styles["user-info"]}>
 				<img

@@ -10,6 +10,7 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
+	useCallback,
 	useEffect,
 	useLocation,
 	useState,
@@ -38,6 +39,10 @@ const App: React.FC = () => {
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
+	const toggleSidebar = useCallback((): void => {
+		setIsSidebarOpen((previous) => !previous);
+	}, [setIsSidebarOpen]);
+
 	return (
 		<>
 			{isLoading && <Loader />}
@@ -48,12 +53,12 @@ const App: React.FC = () => {
 						isSidebarOpen && styles["open"],
 					)}
 				>
-					<Sidebar isSidebarOpen={isSidebarOpen} />
+					<Sidebar
+						isSidebarOpen={isSidebarOpen}
+						toggleSidebar={toggleSidebar}
+					/>
 					<div className={styles["main"]}>
-						<Header
-							isSidebarOpen={isSidebarOpen}
-							setIsSidebarOpen={setIsSidebarOpen}
-						/>
+						<Header toggleSidebar={toggleSidebar} />
 						<QuizForm />
 						<RouterOutlet />
 					</div>

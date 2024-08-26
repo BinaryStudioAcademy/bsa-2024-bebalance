@@ -39,11 +39,10 @@
 		position: absolute;
 		top: 10px;
 		right: 10px;
-		display: block;
-		padding-inline: 10px;
-		font-size: 20px;
-		font-weight: bold;
+		display: flex;
 		cursor: pointer;
+		background-color: transparent;
+		border: none;
 	}
 
 	.close-btn:hover {

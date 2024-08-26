@@ -1,3 +1,3 @@
-type IconName = "wheelActive" | "wheelInactive";
+type IconName = "close" | "menu" | "wheelActive" | "wheelInactive";
 
 export { type IconName };

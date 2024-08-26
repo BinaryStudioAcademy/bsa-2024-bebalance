@@ -12,12 +12,8 @@
 	border-bottom: 1px solid var(--background-gray);
 }
 
-.menu-container {
+.menu-btn {
 	display: none;
-}
-
-.menu {
-	cursor: pointer;
 }
 
 .user-info {
@@ -51,9 +47,11 @@
 		justify-content: space-between;
 	}
 
-	.menu-container {
+	.menu-btn {
 		display: flex;
-		align-items: center;
 		justify-content: center;
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
 	}
 }
