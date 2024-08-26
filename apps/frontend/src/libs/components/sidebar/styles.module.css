@@ -1,0 +1,16 @@
+.sidebar-container {
+	background-color: var(--background-gray);
+}
+
+.logo-container {
+	padding-top: 24px;
+	padding-bottom: 25px;
+	padding-left: 40px;
+	font-size: 28px;
+	font-weight: 800;
+	border-bottom: 1px solid var(--white);
+}
+
+.buttons-container {
+	padding: 14px 12px;
+}
