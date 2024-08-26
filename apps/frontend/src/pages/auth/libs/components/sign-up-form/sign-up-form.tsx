@@ -21,6 +21,8 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			validationSchema: userSignUpValidationSchema,
 		});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+		useState<boolean>(false);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -42,6 +44,10 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	const handleTogglePasswordVisibility = useCallback(() => {
 		setIsPasswordVisible((previousState) => !previousState);
+	}, []);
+
+	const handleToggleConfirmPasswordVisibility = useCallback(() => {
+		setIsConfirmPasswordVisible((previousState) => !previousState);
 	}, []);
 
 	return (
@@ -79,10 +85,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<Input
 					control={control}
 					errors={errors}
+					iconName={isConfirmPasswordVisible ? "crossedEye" : "eye"}
 					label="Confirm password"
 					name="confirmPassword"
+					onIconClick={handleToggleConfirmPasswordVisibility}
 					placeholder="*******"
-					type="password"
+					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
 				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
