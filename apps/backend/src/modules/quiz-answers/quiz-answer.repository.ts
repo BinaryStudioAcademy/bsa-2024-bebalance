@@ -3,7 +3,7 @@ import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
-import { QuizAnswerModel } from "./quiz-answer.model.js";
+import { type QuizAnswerModel } from "./quiz-answer.model.js";
 
 class QuizAnswerRepository implements Repository {
 	private quizAnswerModel: typeof QuizAnswerModel;

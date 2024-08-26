@@ -1,11 +1,11 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { Service } from "~/libs/types/service.type.js";
+import { type Service } from "~/libs/types/service.type.js";
 
-import { UserService } from "../users/users.js";
+import { type UserService } from "../users/users.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
-import { QuizAnswerEntity } from "./quiz-answer.entity.js";
-import { QuizAnswerRepository } from "./quiz-answer.repository.js";
+import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
+import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 
 class QuizAnswerService implements Service {
 	private quizAnswerRepository: QuizAnswerRepository;
@@ -40,10 +40,13 @@ class QuizAnswerService implements Service {
 		return Promise.resolve(null);
 	}
 
-	public async updateUserAnswer(
-		userId: number,
-		answerId: number,
-	): Promise<{ relationId: number }> {
+	public async updateUserAnswer({
+		answerId,
+		userId,
+	}: {
+		answerId: number;
+		userId: number;
+	}): Promise<{ relationId: number }> {
 		const user = await this.userService.find(userId);
 		const answer = await this.find(answerId);
 
