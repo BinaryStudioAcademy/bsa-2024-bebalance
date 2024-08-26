@@ -24,3 +24,15 @@
 	color: var(--white);
 	background-color: var(--black);
 }
+
+.icon-button {
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	display: flex;
+	width: fit-content;
+	padding: 0;
+	color: var(--gray);
+	background: none;
+	transform: translateY(-50%);
+}

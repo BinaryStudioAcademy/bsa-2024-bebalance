@@ -3,16 +3,20 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	children?: React.ReactNode;
 	isFluid?: boolean;
+	isIconButton?: boolean;
 	isPrimary?: boolean;
-	label: string;
+	label?: string;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
-	type?: "button" | "submit";
-	variant: "dark" | "secondary";
+	type: "button" | "submit";
+	variant?: "dark" | "secondary";
 };
 
 const Button: React.FC<Properties> = ({
+	children,
 	isFluid = false,
+	isIconButton = false,
 	isPrimary = true,
 	label,
 	onClick,
@@ -23,11 +27,13 @@ const Button: React.FC<Properties> = ({
 			styles["btn"],
 			isFluid && styles["fluid"],
 			isPrimary && styles["primary"],
+			isIconButton && styles["icon-button"],
 		)}
 		onClick={onClick}
 		type={type}
 	>
 		{label}
+		{children}
 	</button>
 );
 
