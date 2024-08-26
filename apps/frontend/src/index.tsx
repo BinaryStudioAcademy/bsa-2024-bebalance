@@ -14,6 +14,8 @@ import { Auth } from "~/pages/auth/auth.jsx";
 import { NotFound } from "~/pages/not-found/not-found.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
 
+import { AuthWrapper } from "./libs/components/auth-wrapper.tsx/auth-wrapper.js";
+
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
 		<StoreProvider store={store.instance}>
@@ -24,7 +26,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component="Root"
+										component={<AuthWrapper />}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
