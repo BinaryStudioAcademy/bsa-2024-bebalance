@@ -1,5 +1,14 @@
 .sidebar-container {
+	position: sticky;
+	top: 0;
+	z-index: var(--z-index-high);
+	width: 300px;
+	height: 100vh;
 	background-color: var(--background-gray);
+}
+
+.close-btn {
+	display: none;
 }
 
 .logo-container {
@@ -13,4 +22,31 @@
 
 .buttons-container {
 	padding: 14px 12px;
+}
+
+@media (width <= 768px) {
+	.sidebar-container {
+		position: fixed;
+		transition: transform 0.3s ease;
+		transform: translateX(-100%);
+	}
+
+	.sidebar-container.open {
+		transform: translateX(0);
+	}
+
+	.close-btn {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		display: block;
+		padding-inline: 10px;
+		font-size: 20px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.close-btn:hover {
+		opacity: 0.6;
+	}
 }

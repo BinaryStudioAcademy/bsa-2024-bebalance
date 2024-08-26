@@ -1,14 +1,27 @@
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useLocation } from "~/libs/hooks/hooks.js";
 
 import { SidebarLink } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
-const Sidebar: React.FC = () => {
+type Properties = {
+	isSidebarOpen: boolean;
+};
+
+const Sidebar: React.FC<Properties> = ({ isSidebarOpen }: Properties) => {
 	const { pathname } = useLocation();
 
 	return (
-		<div className={styles["sidebar-container"]}>
+		<div
+			className={getValidClassNames(
+				styles["sidebar-container"],
+				isSidebarOpen && styles["open"],
+			)}
+		>
+			<label className={styles["close-btn"]} htmlFor="sidebar-toggler">
+				x
+			</label>
 			<div className={styles["logo-container"]}>Logo</div>
 			<div className={styles["buttons-container"]}>
 				{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
