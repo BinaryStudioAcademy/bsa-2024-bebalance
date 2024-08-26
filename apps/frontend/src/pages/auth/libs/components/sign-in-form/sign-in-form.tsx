@@ -46,12 +46,11 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					control={control}
 					errors={errors}
 					iconName={isPasswordVisible ? "crossedEye" : "eye"}
-					isDisplayedValue={isPasswordVisible}
 					label="Password"
 					name="password"
-					onToggle={handleTogglePasswordVisibility}
+					onIconClick={handleTogglePasswordVisibility}
 					placeholder="*******"
-					type="password"
+					type={isPasswordVisible ? "text" : "password"}
 				/>
 
 				<Button label="SIGN IN" type="submit" variant="dark" />

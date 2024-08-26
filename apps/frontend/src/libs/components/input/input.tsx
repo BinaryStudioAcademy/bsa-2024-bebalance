@@ -15,10 +15,9 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
 	iconName?: IconName;
-	isDisplayedValue?: boolean;
 	label: string;
 	name: FieldPath<T>;
-	onToggle?: () => void;
+	onIconClick?: () => void;
 	options?: { label: string; value: string }[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
@@ -28,10 +27,9 @@ const Input = <T extends FieldValues>({
 	control,
 	errors,
 	iconName,
-	isDisplayedValue = false,
 	label,
 	name,
-	onToggle,
+	onIconClick,
 	options,
 	placeholder = "",
 	type = "text",
@@ -81,12 +79,12 @@ const Input = <T extends FieldValues>({
 							className={getValidClassNames(styles["input-field"])}
 							{...field}
 							placeholder={placeholder}
-							type={type === "password" && isDisplayedValue ? "text" : type}
+							type={type}
 						/>
-						{type === "password" && onToggle && (
+						{name === "password" && onIconClick && (
 							<button
 								className={styles["toggle-password-icon"]}
-								onClick={onToggle}
+								onClick={onIconClick}
 								type="button"
 							>
 								{iconName && <Icon name={iconName} />}
