@@ -27,7 +27,6 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	placeholder: string;
-	secureTextEntry?: boolean;
 };
 
 const Input = <T extends FieldValues>({
@@ -50,6 +49,8 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 	const FIRST_COLOR_STOP = -0.4;
 	const SECOND_COLOR_STOP = 0.9;
+	const GRADIENT_ANGLE = 305;
+	const ANGLE_CENTER_POINT = 0.5;
 
 	const borderColors = isFocused
 		? [...GradientColor.BLUE]
@@ -72,8 +73,8 @@ const Input = <T extends FieldValues>({
 				{label}
 			</Text>
 			<LinearGradient
-				angle={305}
-				angleCenter={{ x: 0.5, y: 0.5 }}
+				angle={GRADIENT_ANGLE}
+				angleCenter={{ x: ANGLE_CENTER_POINT, y: ANGLE_CENTER_POINT }}
 				colors={conditionalColors}
 				locations={[FIRST_COLOR_STOP, SECOND_COLOR_STOP]}
 				style={[
