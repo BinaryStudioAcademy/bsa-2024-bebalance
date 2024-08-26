@@ -12,7 +12,7 @@ import {
 	TextInput,
 	View,
 } from "~/libs/components/components";
-import { BaseColor, GradientColor } from "~/libs/enums/enums";
+import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
 import { useFormController, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
@@ -47,10 +47,6 @@ const Input = <T extends FieldValues>({
 
 	const error = errors[name]?.message;
 	const hasError = Boolean(error);
-	const FIRST_COLOR_STOP = -0.4;
-	const SECOND_COLOR_STOP = 0.9;
-	const GRADIENT_ANGLE = 305;
-	const ANGLE_CENTER_POINT = 0.5;
 
 	const borderColors = isFocused
 		? [...GradientColor.BLUE]
@@ -73,10 +69,10 @@ const Input = <T extends FieldValues>({
 				{label}
 			</Text>
 			<LinearGradient
-				angle={GRADIENT_ANGLE}
-				angleCenter={{ x: ANGLE_CENTER_POINT, y: ANGLE_CENTER_POINT }}
+				angle={AngleGradient.ANGLE}
+				angleCenter={{ x: AngleGradient.X_POINT, y: AngleGradient.SECOND_STOP }}
 				colors={conditionalColors}
-				locations={[FIRST_COLOR_STOP, SECOND_COLOR_STOP]}
+				locations={[AngleGradient.FIRST_STOP, AngleGradient.SECOND_STOP]}
 				style={[
 					globalStyles.alignItemsCenter,
 					globalStyles.justifyContentCenter,
