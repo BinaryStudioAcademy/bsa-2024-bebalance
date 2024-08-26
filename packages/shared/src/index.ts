@@ -34,7 +34,6 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
-	UserCustomValidation,
 	type UserDto,
 	type UserGetAllResponseDto,
 	UsersApiPath,

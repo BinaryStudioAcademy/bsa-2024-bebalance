@@ -7,12 +7,15 @@ import {
 	Link,
 	Text,
 } from "~/libs/components/components";
-import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import {
+	BaseColor,
+	ConfirmPasswordCustomValidation,
+	RootScreenName,
+} from "~/libs/enums/enums";
 import { getSecurityInputIconName } from "~/libs/helpers/helpers";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
-	UserCustomValidation,
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
@@ -45,16 +48,16 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 		});
 
 	const handleFormSubmit = useCallback((): void => {
-		void handleSubmit((data: UserSignUpFormDto) => {
-			const { password } = data;
-			const confirmPassword = watch(UserCustomValidation.FIELD);
+		void handleSubmit((signUpSubmissionData: UserSignUpFormDto) => {
+			const { password } = signUpSubmissionData;
+			const confirmPassword = watch(ConfirmPasswordCustomValidation.FIELD);
 
 			if (confirmPassword === password) {
-				onSubmit(data);
+				onSubmit(signUpSubmissionData);
 			} else {
-				setError(UserCustomValidation.FIELD, {
-					message: UserCustomValidation.ERROR_MESSAGE,
-					type: UserCustomValidation.ERROR_TYPE,
+				setError(ConfirmPasswordCustomValidation.FIELD, {
+					message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
+					type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 				});
 			}
 		})();
