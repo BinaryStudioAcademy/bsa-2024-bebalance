@@ -11,10 +11,10 @@ import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
+	UserCustomValidation,
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
-	UserValidationMessage,
 } from "~/packages/users/users";
 
 import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
@@ -49,9 +49,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			if (confirmPassword === userData.password) {
 				onSubmit(userData);
 			} else {
-				setError("confirmPassword", {
-					message: UserValidationMessage.CONFIRM_PASSWORD_NOT_MATCH,
-					type: "manual",
+				setError(UserCustomValidation.FIELD, {
+					message: UserCustomValidation.ERROR_MESSAGE,
+					type: UserCustomValidation.ERROR_TYPE,
 				});
 			}
 		})();

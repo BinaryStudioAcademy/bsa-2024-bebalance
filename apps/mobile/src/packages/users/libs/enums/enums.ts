@@ -1,2 +1,2 @@
 export { UsersApiPath } from "shared";
-export { UserValidationMessage } from "shared";
+export { UserCustomValidation, UserValidationMessage } from "shared";
