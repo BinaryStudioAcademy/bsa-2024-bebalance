@@ -1,6 +1,4 @@
-import { Button, Input, Link } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
+import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpRequestDto,
@@ -33,53 +31,45 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	}, []);
 
 	return (
-		<section className={styles["signup-container"]}>
-			<div className={styles["logo-container"]}>
-				<div
-					className={getValidClassNames(
-						styles["circle"],
-						styles["circle-pink"],
-					)}
+		<>
+			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<Input
+					control={control}
+					errors={errors}
+					label="Name"
+					name="name"
+					placeholder="name"
+					type="text"
 				/>
-				<h1>LOGO</h1>
-			</div>
-			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
-			<span className={styles["auth-info"]}>
-				Already have an account? Go to
-				<Link to={AppRoute.SIGN_IN}> Sign in</Link>
-			</span>
-			<form onSubmit={handleFormSubmit}>
-				<div className={styles["input-groups"]}>
-					<Input
-						control={control}
-						errors={errors}
-						label="Name"
-						name="name"
-						placeholder="name"
-						type="text"
-					/>
-					<Input
-						control={control}
-						errors={errors}
-						label="Email"
-						name="email"
-						placeholder="email"
-						type="email"
-					/>
-					<Input
-						control={control}
-						errors={errors}
-						isDisplayedValue={isPasswordVisible}
-						label="Password"
-						name="password"
-						onToggle={handleTogglePasswordVisibility}
-						placeholder="password"
-						type="password"
-					/>
-				</div>
+
+				<Input
+					control={control}
+					errors={errors}
+					label="Email"
+					name="email"
+					placeholder="name@example.com"
+					type="email"
+				/>
+
+				<Input
+					control={control}
+					errors={errors}
+					isDisplayedValue={isPasswordVisible}
+					label="Password"
+					name="password"
+					onToggle={handleTogglePasswordVisibility}
+					placeholder="password"
+					type="password"
+				/>
+
 				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
 			</form>
-		</section>
+
+			<div className={styles["circle-gradient1"]} />
+			<div className={styles["circle-gradient2"]} />
+			<div className={styles["circle-gradient3"]} />
+			<div className={styles["circle-gradient4"]} />
+		</>
 	);
 };
 

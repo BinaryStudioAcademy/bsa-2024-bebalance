@@ -1,33 +1,102 @@
-.signup-container .logo-container {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-}
-
-.circle {
-	width: 30px;
-	height: 30px;
-	border-radius: 100%;
-}
-
-.circle-pink {
-	background: var(--pink-gradient);
-}
-
-.title-form {
-	margin-top: 30px;
-	margin-bottom: 8px;
-	font-weight: 700;
-}
-
-.signup-container .auth-info {
-	font-family: inherit;
-	font-weight: 600;
-}
-
-.input-groups {
+.form {
+	z-index: var(--z-index-low);
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-	margin: 24px 0;
+	gap: 20px;
+	width: 350px;
+}
+
+.circle-gradient1 {
+	position: absolute;
+	top: 10%;
+	left: 63%;
+	width: 80px;
+	height: 80px;
+	background: linear-gradient(
+		to right,
+		var(--work-start) 0%,
+		var(--work-end) 100%
+	);
+	border-radius: 50%;
+	transform: translateX(-50%);
+}
+
+.circle-gradient2 {
+	position: absolute;
+	top: 20%;
+	right: 5%;
+	width: 150px;
+	height: 150px;
+	background: linear-gradient(
+		to bottom,
+		var(--mental-start) 0%,
+		var(--mental-end) 100%
+	);
+	border-radius: 50%;
+}
+
+.circle-gradient3 {
+	position: absolute;
+	right: 40%;
+	bottom: 10%;
+	width: 35px;
+	height: 35px;
+	background: linear-gradient(
+		to right,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
+	border-radius: 50%;
+}
+
+.circle-gradient4 {
+	position: absolute;
+	right: 40%;
+	bottom: 10%;
+	width: 35px;
+	height: 35px;
+	background: linear-gradient(
+		to right,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
+	border-radius: 50%;
+}
+
+@media (width <= 768px) {
+	.form {
+		align-items: stretch;
+		width: 100%;
+	}
+
+	.circle-gradient1,
+	.circle-gradient2 {
+		display: none;
+	}
+
+	.circle-gradient3 {
+		top: -3%;
+		right: 20%;
+		display: block;
+		width: 90px;
+		height: 90px;
+		background: linear-gradient(
+			to right,
+			var(--mental-start) 0%,
+			var(--mental-end) 100%
+		);
+	}
+
+	.circle-gradient4 {
+		bottom: -10%;
+		left: -10%;
+		display: block;
+		width: 190px;
+		height: 190px;
+		background: linear-gradient(
+			to right,
+			var(--work-start) 0%,
+			var(--work-end) 100%
+		);
+	}
 }

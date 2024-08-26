@@ -1,7 +1,4 @@
-import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
-import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
-import { Button, Input, Link } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
@@ -34,59 +31,37 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	}, []);
 
 	return (
-		<div className={styles["container"]}>
-			<div className={styles["form-container"]}>
-				<form className={styles["form"]} onSubmit={handleFormSubmit}>
-					<div className={styles["form-header"]}>
-						<div className={styles["form-header__logo-container"]}>
-							<div className={styles["form-header__logo"]} />
-							<span className={styles["form-header__logo-text"]}>LOGO</span>
-						</div>
+		<>
+			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<Input
+					control={control}
+					errors={errors}
+					label="Email"
+					name="email"
+					placeholder="name@example.com"
+					type="email"
+				/>
 
-						<h1 className={styles["form-header__text"]}>SIGN IN</h1>
-						<span className={styles["form-header__sub-text"]}>
-							No account? Go to{" "}
-							<Link to={AppRoute.SIGN_UP}>Create an account</Link>
-						</span>
-					</div>
+				<Input
+					control={control}
+					errors={errors}
+					iconName={isPasswordVisible ? "crossedEye" : "eye"}
+					isDisplayedValue={isPasswordVisible}
+					label="Password"
+					name="password"
+					onToggle={handleTogglePasswordVisibility}
+					placeholder="*******"
+					type="password"
+				/>
 
-					<Input
-						control={control}
-						errors={errors}
-						label="Email"
-						name="email"
-						placeholder="name@gmail.com"
-						type="email"
-					/>
-
-					<Input
-						control={control}
-						errors={errors}
-						iconName={isPasswordVisible ? "crossedEye" : "eye"}
-						isDisplayedValue={isPasswordVisible}
-						label="Password"
-						name="password"
-						onToggle={handleTogglePasswordVisibility}
-						placeholder="*******"
-						type="password"
-					/>
-
-					<Button label="SIGN IN" type="submit" variant="dark" />
-				</form>
-			</div>
-
-			<div className={styles["logo-container"]}>
-				<span className={styles["logo"]}>LOGO</span>
-			</div>
-
-			<RippleEffectBg className={styles["ripple-effect__background1"]} />
-			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+				<Button label="SIGN IN" type="submit" variant="dark" />
+			</form>
 
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />
 			<div className={styles["circle-gradient3"]} />
 			<div className={styles["circle-gradient4"]} />
-		</div>
+		</>
 	);
 };
 
