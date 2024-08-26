@@ -40,7 +40,7 @@ const App: React.FC = () => {
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	const handleSidebarToggle = useCallback((): void => {
-		setIsSidebarOpen((previous) => !previous);
+		setIsSidebarOpen((previousState) => !previousState);
 	}, [setIsSidebarOpen]);
 
 	return (
