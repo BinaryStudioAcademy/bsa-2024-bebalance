@@ -59,7 +59,7 @@ const Input = <T extends FieldValues>({
 		? [BaseColor.RED, BaseColor.RED]
 		: borderColors;
 
-	const hadleInputBlur = (): void => {
+	const handleInputBlur = (): void => {
 		setIsFocused(false);
 	};
 
@@ -96,7 +96,7 @@ const Input = <T extends FieldValues>({
 				>
 					<TextInput
 						autoFocus={isAutoFocused}
-						onBlur={hadleInputBlur}
+						onBlur={handleInputBlur}
 						onChangeText={onChange}
 						onFocus={handleInputFocus}
 						placeholder={placeholder}
