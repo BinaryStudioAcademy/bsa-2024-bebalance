@@ -1,6 +1,7 @@
+import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
+import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpRequestDto,
@@ -28,23 +29,21 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<section className={styles["signup-container"]}>
-			<div className={styles["logo-container"]}>
-				<div
-					className={getValidClassNames(
-						styles["circle"],
-						styles["circle-pink"],
-					)}
-				/>
-				<h1>LOGO</h1>
-			</div>
-			<h3 className={styles["title-form"]}>CREATE AN ACCOUNT</h3>
-			<span className={styles["auth-info"]}>
-				Already have an account? Go to
-				<Link to={AppRoute.SIGN_IN}> Sign in</Link>
-			</span>
-			<form onSubmit={handleFormSubmit}>
-				<div className={styles["input-groups"]}>
+		<div className={styles["container"]}>
+			<div className={styles["form-container"]}>
+				<div className={styles["form-header"]}>
+					<div className={styles["form-header__logo-container"]}>
+						<div className={styles["form-header__logo"]} />
+						<span className={styles["form-header__logo-text"]}>logo</span>
+					</div>
+
+					<h1 className={styles["form-header__text"]}>create an account</h1>
+					<span className={styles["form-header__sub-text"]}>
+						Already have an account? Go to{" "}
+						<Link to={AppRoute.SIGN_IN}>Sign In</Link>
+					</span>
+				</div>
+				<form className={styles["form"]} onSubmit={handleFormSubmit}>
 					<Input
 						control={control}
 						errors={errors}
@@ -58,7 +57,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						errors={errors}
 						label="Email"
 						name="email"
-						placeholder="email"
+						placeholder="name@example.com"
 						type="email"
 					/>
 					<Input
@@ -66,13 +65,34 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						errors={errors}
 						label="Password"
 						name="password"
-						placeholder="password"
+						placeholder="*******"
 						type="password"
 					/>
-				</div>
-				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
-			</form>
-		</section>
+
+					<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
+				</form>
+			</div>
+
+			<div className={styles["logo-container"]}>
+				<span className={styles["logo"]}>LOGO</span>
+			</div>
+
+			<img
+				alt="ripple visual effect"
+				className={styles["ripple-effect__background1"]}
+				src={rippleEffectBg}
+			/>
+			<img
+				alt="ripple visual effect"
+				className={styles["ripple-effect__background2"]}
+				src={rippleEffectBg2}
+			/>
+
+			<div className={styles["circle-gradient1"]} />
+			<div className={styles["circle-gradient2"]} />
+			<div className={styles["circle-gradient3"]} />
+			<div className={styles["circle-gradient4"]} />
+		</div>
 	);
 };
 
