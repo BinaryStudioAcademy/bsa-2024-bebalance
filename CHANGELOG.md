@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.17.1...v1.18.0) (2024-08-25)
+
+
+### Features
+
+* **frontend:** sidebar component bb-90 ([#115](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/115)) ([03ee06b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03ee06b2b6d91163c10f644e3782241407ca129e))
+* **mobile:** quiz entry screen bb-80 ([#185](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/185)) ([d227e33](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d227e33b417f397fbded1d2d339d279ed109b276))
+
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.17.0...v1.17.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **backend:** add missing auth docs for `/users` endpoint bb-155 ([#178](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/178)) ([c20d2e3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c20d2e3161885ea6c75ed5fed4c03926896e8646))
+* **frontend:** move getAuthenticatedUser to auth store bb-171 ([#186](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/186)) ([bedb4f5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bedb4f51be8b1c6a3182ad3dcc16fec0ef2b99bb))
+
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.16.0...v1.17.0) (2024-08-25)
+
+
+### Features
+
+* **backend:** onboarding questions and answers bb-133 ([#152](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/152)) ([444ba83](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/444ba83f6ceaf088a36a146ace3809a9924d83d9))
+* **mobile:** sign-in bb-20 ([#139](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/139)) ([ad9892b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ad9892b77d11fc5eb336916a5dd1854d28778577))
+
+
+### Bug Fixes
+
+* **frontend:** fix user is not saved in redux store after sign in/sign up bb-118 ([#160](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/160)) ([7d1a768](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7d1a768e6c38ff7947c3653a197f7f93b4d8d00f))
+
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.15.0...v1.16.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+* **frontend:** responsive header bb-107 ([#165](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/165)) ([ee8935f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ee8935f3352a743041d9d38aad8496c75c6fb204))
+* **mobile:** protected routing bb-29 ([#98](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/98)) ([1ca8603](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1ca86037c3cbf6da7c126af9a8e68cfc5cbeae87))
+* **mobile:** removed landscape mode support bb-169 ([#170](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/170)) ([166d8d5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/166d8d523f0d412cbdd3d3b48ccc701b700f5916))
+
 ## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.14.0...v1.15.0) (2024-08-23)
 
 

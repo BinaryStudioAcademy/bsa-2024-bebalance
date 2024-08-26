@@ -1,5 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type UserSignInRequestDto,

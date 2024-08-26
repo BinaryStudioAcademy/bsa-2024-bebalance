@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.2...frontend-v1.12.0) (2024-08-25)
+
+
+### Features
+
+* **frontend:** sidebar component bb-90 ([#115](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/115)) ([03ee06b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03ee06b2b6d91163c10f644e3782241407ca129e))
+
+## [1.11.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.1...frontend-v1.11.2) (2024-08-25)
+
+
+### Bug Fixes
+
+* **frontend:** move getAuthenticatedUser to auth store bb-171 ([#186](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/186)) ([bedb4f5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bedb4f51be8b1c6a3182ad3dcc16fec0ef2b99bb))
+
+## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.0...frontend-v1.11.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **frontend:** fix user is not saved in redux store after sign in/sign up bb-118 ([#160](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/160)) ([7d1a768](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7d1a768e6c38ff7947c3653a197f7f93b4d8d00f))
+
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.10.0...frontend-v1.11.0) (2024-08-24)
+
+
+### Features
+
+* **backend/frontend:** clean up bb-69 ([#117](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/117)) ([955363d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/955363d521e636a287ec2f69b002dd6b981dce33))
+* **frontend:** responsive header bb-107 ([#165](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/165)) ([ee8935f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ee8935f3352a743041d9d38aad8496c75c6fb204))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.9.0...frontend-v1.10.0) (2024-08-23)
 
 
