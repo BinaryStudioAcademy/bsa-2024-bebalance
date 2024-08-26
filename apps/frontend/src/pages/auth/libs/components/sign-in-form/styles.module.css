@@ -19,25 +19,6 @@
 	text-transform: uppercase;
 }
 
-.ripple-effect__background1 {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 30%;
-	height: auto;
-	transform: translateX(-50%);
-}
-
-.ripple-effect__background2 {
-	position: absolute;
-	bottom: -35%;
-	left: 42%;
-	width: 60%;
-	height: auto;
-	max-height: 500px;
-	transform: translateY(-50%);
-}
-
 .circle-gradient1 {
 	position: absolute;
 	top: 5%;
@@ -92,7 +73,7 @@
 	border-radius: 50%;
 }
 
-@media (width <= 640px) {
+@media (width <= 768px) {
 	.logo-container {
 		display: none;
 	}
@@ -112,22 +93,6 @@
 	.form {
 		align-items: stretch;
 		width: 100%;
-	}
-
-	.ripple-effect__background1,
-	.ripple-effect__background2 {
-		width: 528px;
-		height: 528px;
-	}
-
-	.ripple-effect__background1 {
-		top: -5%;
-		left: 100%;
-	}
-
-	.ripple-effect__background2 {
-		bottom: -60%;
-		left: -45%;
 	}
 
 	.circle-gradient1,

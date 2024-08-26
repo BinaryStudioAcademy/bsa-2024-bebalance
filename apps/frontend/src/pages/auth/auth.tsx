@@ -1,3 +1,5 @@
+import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
+import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
@@ -49,6 +51,8 @@ const Auth: React.FC = () => {
 	return (
 		<>
 			<div className={styles["auth-container"]}>
+				<RippleEffectBg className={styles["ripple-effect__background1"]} />
+				<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
 				<div className={styles["form-container"]}>
 					<div className={styles["form-header"]}>
 						<div className={styles["form-header__logo-container"]}>

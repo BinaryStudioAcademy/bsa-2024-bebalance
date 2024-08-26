@@ -1,5 +1,3 @@
-import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
-import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
@@ -50,9 +48,6 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 				<Button label="SIGN IN" type="submit" variant="dark" />
 			</form>
-
-			<RippleEffectBg className={styles["ripple-effect__background1"]} />
-			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
 
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />

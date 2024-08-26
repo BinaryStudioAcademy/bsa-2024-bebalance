@@ -1,5 +1,3 @@
-import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
-import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
@@ -59,17 +57,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
 			</form>
-
-			<img
-				alt="ripple-effect-bg"
-				className={styles["ripple-effect__background1"]}
-				src={rippleEffectBg}
-			/>
-			<img
-				alt="ripple-effect-bg"
-				className={styles["ripple-effect__background2"]}
-				src={rippleEffectBg2}
-			/>
 
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />
