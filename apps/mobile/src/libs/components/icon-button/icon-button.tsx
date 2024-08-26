@@ -24,8 +24,10 @@ const IconButton: React.FC<Properties> = ({
 	onPress,
 	style,
 }) => {
+	const HIT_SLOP_SIZE = 10;
+
 	return (
-		<TouchableOpacity hitSlop={10} onPress={onPress} style={style}>
+		<TouchableOpacity hitSlop={HIT_SLOP_SIZE} onPress={onPress} style={style}>
 			<Icon color={iconColor} name={name} size={iconSize} />
 		</TouchableOpacity>
 	);
