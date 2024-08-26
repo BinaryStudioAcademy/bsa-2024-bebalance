@@ -24,23 +24,7 @@ class QuizAnswerService implements Service {
 		return Promise.resolve(null);
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
-	}
-
-	public async find(id: number): Promise<null | QuizAnswerEntity> {
-		return await this.quizAnswerRepository.find(id);
-	}
-
-	public findAll(): Promise<{ items: null[] }> {
-		return Promise.resolve({ items: [null] });
-	}
-
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
-	}
-
-	public async updateUserAnswer({
+	public async createUserAnswer({
 		answerId,
 		userId,
 	}: {
@@ -71,6 +55,22 @@ class QuizAnswerService implements Service {
 		}
 
 		return await this.quizAnswerRepository.createUserAnswer(userId, answerId);
+	}
+
+	public delete(): ReturnType<Service["delete"]> {
+		return Promise.resolve(true);
+	}
+
+	public async find(id: number): Promise<null | QuizAnswerEntity> {
+		return await this.quizAnswerRepository.find(id);
+	}
+
+	public findAll(): Promise<{ items: null[] }> {
+		return Promise.resolve({ items: [null] });
+	}
+
+	public update(): ReturnType<Service["update"]> {
+		return Promise.resolve(null);
 	}
 }
 
