@@ -8,6 +8,7 @@
 }
 
 .form-container {
+	z-index: var(--z-index-low);
 	display: flex;
 	flex-direction: column;
 	align-items: center;

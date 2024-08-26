@@ -6,19 +6,6 @@
 	width: 350px;
 }
 
-.logo-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.logo {
-	font-size: 40px;
-	font-weight: bold;
-	color: var(--white);
-	text-transform: uppercase;
-}
-
 .circle-gradient1 {
 	position: absolute;
 	top: 5%;
@@ -74,22 +61,6 @@
 }
 
 @media (width <= 768px) {
-	.logo-container {
-		display: none;
-	}
-
-	.container {
-		grid-template-columns: 1fr;
-		padding-top: 100px;
-		padding-bottom: 60px;
-	}
-
-	.form-container {
-		align-items: flex-start;
-		justify-content: stretch;
-		padding-top: 60px;
-	}
-
 	.form {
 		align-items: stretch;
 		width: 100%;
@@ -111,7 +82,6 @@
 	.circle-gradient4 {
 		right: -10%;
 		bottom: 12%;
-		z-index: 2;
 		display: block;
 		width: 86px;
 		height: 86px;
