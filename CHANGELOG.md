@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.17.1...v1.18.0) (2024-08-25)
+
+
+### Features
+
+* **frontend:** sidebar component bb-90 ([#115](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/115)) ([03ee06b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03ee06b2b6d91163c10f644e3782241407ca129e))
+* **mobile:** quiz entry screen bb-80 ([#185](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/185)) ([d227e33](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d227e33b417f397fbded1d2d339d279ed109b276))
+
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.17.0...v1.17.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **backend:** add missing auth docs for `/users` endpoint bb-155 ([#178](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/178)) ([c20d2e3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c20d2e3161885ea6c75ed5fed4c03926896e8646))
+* **frontend:** move getAuthenticatedUser to auth store bb-171 ([#186](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/186)) ([bedb4f5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bedb4f51be8b1c6a3182ad3dcc16fec0ef2b99bb))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.16.0...v1.17.0) (2024-08-25)
 
 

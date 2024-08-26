@@ -6,6 +6,7 @@ type Properties = {
 	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	type?: "button" | "submit";
 	variant: "dark" | "secondary";
 };
@@ -14,6 +15,7 @@ const Button: React.FC<Properties> = ({
 	isFluid = false,
 	isPrimary = true,
 	label,
+	onClick,
 	type = "button",
 }: Properties) => (
 	<button
@@ -22,6 +24,7 @@ const Button: React.FC<Properties> = ({
 			isFluid && styles["fluid"],
 			isPrimary && styles["primary"],
 		)}
+		onClick={onClick}
 		type={type}
 	>
 		{label}
