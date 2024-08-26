@@ -49,41 +49,39 @@ const Auth: React.FC = () => {
 	};
 
 	return (
-		<>
-			<div className={styles["auth-container"]}>
-				<RippleEffectBg className={styles["ripple-effect__background1"]} />
-				<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
-				<div className={styles["form-container"]}>
-					<div className={styles["form-header"]}>
-						<div className={styles["form-header__logo-container"]}>
-							<div className={styles["form-header__logo"]} />
-							<span className={styles["form-header__logo-text"]}>logo</span>
-						</div>
-
-						<h1 className={styles["form-header__text"]}>
-							{pathname === AppRoute.SIGN_IN ? "sign in" : "sign up"}
-						</h1>
-						<span className={styles["form-header__sub-text"]}>
-							{pathname === AppRoute.SIGN_IN ? (
-								<>
-									<span>No account? Go to </span>
-									<Link to={AppRoute.SIGN_UP}>Create an account</Link>
-								</>
-							) : (
-								<>
-									<span>Already have an account? Go to </span>
-									<Link to={AppRoute.SIGN_IN}>Sign in</Link>
-								</>
-							)}
-						</span>
+		<div className={styles["auth-container"]}>
+			<RippleEffectBg className={styles["ripple-effect__background1"]} />
+			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+			<div className={styles["form-container"]}>
+				<div className={styles["form-header"]}>
+					<div className={styles["form-header__logo-container"]}>
+						<div className={styles["form-header__logo"]} />
+						<span className={styles["form-header__logo-text"]}>logo</span>
 					</div>
-					{getScreen(pathname)}
+
+					<h1 className={styles["form-header__text"]}>
+						{pathname === AppRoute.SIGN_IN ? "sign in" : "sign up"}
+					</h1>
+					<span className={styles["form-header__sub-text"]}>
+						{pathname === AppRoute.SIGN_IN ? (
+							<>
+								<span>No account? Go to </span>
+								<Link to={AppRoute.SIGN_UP}>Create an account</Link>
+							</>
+						) : (
+							<>
+								<span>Already have an account? Go to </span>
+								<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+							</>
+						)}
+					</span>
 				</div>
-				<div className={styles["title-container"]}>
-					<h1 className={styles["title"]}>Logo</h1>
-				</div>
+				{getScreen(pathname)}
 			</div>
-		</>
+			<div className={styles["title-container"]}>
+				<h1 className={styles["title"]}>Logo</h1>
+			</div>
+		</div>
 	);
 };
 
