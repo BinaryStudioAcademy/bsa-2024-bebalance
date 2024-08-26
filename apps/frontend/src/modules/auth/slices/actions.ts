@@ -1,21 +1,51 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type UserDto,
+	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
 } from "~/modules/users/users.js";
 
 import { name as sliceName } from "./auth.slice.js";
 
-const signUp = createAsyncThunk<
-	UserSignUpResponseDto,
-	UserSignUpRequestDto,
+const signIn = createAsyncThunk<
+	UserDto,
+	UserSignInRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/sign-up`, (registerPayload, { extra }) => {
+>(`${sliceName}/sign-in`, async (signInPayload, { extra }) => {
 	const { authApi } = extra;
 
-	return authApi.signUp(registerPayload);
+	const { token, user } = await authApi.signIn(signInPayload);
+
+	void storage.set(StorageKey.TOKEN, token);
+
+	return user;
 });
 
-export { signUp };
+const signUp = createAsyncThunk<
+	UserDto,
+	UserSignUpRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
+	const { authApi } = extra;
+
+	const { token, user } = await authApi.signUp(registerPayload);
+
+	void storage.set(StorageKey.TOKEN, token);
+
+	return user;
+});
+
+const getAuthenticatedUser = createAsyncThunk<
+	UserDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
+	const { authApi } = extra;
+
+	return await authApi.getAuthenticatedUser();
+});
+
+export { getAuthenticatedUser, signIn, signUp };

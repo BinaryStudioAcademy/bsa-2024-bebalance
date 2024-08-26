@@ -1,0 +1,132 @@
+.auth-container {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 30px;
+	overflow: hidden;
+	background-color: var(--background);
+}
+
+.form-container {
+	z-index: var(--z-index-low);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 120px 20px 20px;
+	margin: 15px;
+	background-color: var(--white);
+	border-radius: 20px;
+}
+
+.form-header {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 350px;
+	margin-bottom: 5px;
+}
+
+.form-header__logo-container {
+	display: flex;
+	gap: 7px;
+	align-items: center;
+	margin-bottom: 35px;
+}
+
+.form-header__logo {
+	width: 33px;
+	height: 33px;
+	background: linear-gradient(
+		to right,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
+	border-radius: 50%;
+}
+
+.form-header__logo-text {
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.form-header__text {
+	margin-block: 10px;
+	text-transform: uppercase;
+}
+
+.form-header__sub-text {
+	font-size: 16px;
+}
+
+.title-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.title {
+	font-size: 70px;
+	color: var(--white);
+	text-transform: uppercase;
+}
+
+.ripple-effect__background1 {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 30%;
+	height: auto;
+	transform: translateX(-50%);
+}
+
+.ripple-effect__background2 {
+	position: absolute;
+	bottom: -35%;
+	left: 42%;
+	width: 60%;
+	height: auto;
+	max-height: 500px;
+	transform: translateY(-50%);
+}
+
+@media (width <= 768px) {
+	.title-container {
+		display: none;
+	}
+
+	.auth-container {
+		grid-template-columns: 1fr;
+		height: 100vh;
+		padding-top: 100px;
+		padding-bottom: 60px;
+	}
+
+	.form-container {
+		align-items: flex-start;
+		justify-content: stretch;
+		padding: 60px 20px 20px;
+	}
+
+	.form-header {
+		width: 100%;
+	}
+
+	.ripple-effect__background1,
+	.ripple-effect__background2 {
+		width: 528px;
+		height: 528px;
+	}
+
+	.ripple-effect__background1 {
+		top: -5%;
+		left: 100%;
+	}
+
+	.ripple-effect__background2 {
+		bottom: -60%;
+		left: -45%;
+	}
+}

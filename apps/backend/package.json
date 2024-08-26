@@ -1,7 +1,7 @@
 {
 	"name": "backend",
 	"type": "module",
-	"version": "1.0.0",
+	"version": "1.7.1",
 	"engines": {
 		"node": "20.x.x",
 		"npm": "10.x.x"
@@ -25,20 +25,26 @@
 		"@fastify/static": "7.0.4",
 		"@fastify/swagger": "8.15.0",
 		"@fastify/swagger-ui": "4.1.0",
+		"bcrypt": "5.1.1",
 		"convict": "6.2.4",
 		"dotenv": "16.4.5",
 		"fastify": "4.28.1",
+		"fastify-plugin": "4.5.1",
+		"jose": "5.6.3",
 		"knex": "3.1.0",
 		"objection": "3.1.4",
 		"pg": "8.12.0",
 		"pino": "9.3.2",
 		"pino-pretty": "11.2.2",
+		"shared": "*",
 		"swagger-jsdoc": "6.2.8",
-		"shared": "*"
+		"ts-node": "10.9.2"
 	},
 	"devDependencies": {
+		"@types/bcrypt": "5.0.2",
 		"@types/convict": "6.1.6",
 		"@types/swagger-jsdoc": "6.0.4",
+		"ts-node": "10.9.2",
 		"ts-paths-esm-loader": "1.4.3",
 		"tsx": "4.17.0"
 	}

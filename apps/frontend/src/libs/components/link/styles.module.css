@@ -1,0 +1,44 @@
+.link {
+	color: #00c2fc;
+	text-decoration: none;
+}
+
+.button {
+	display: inline-block;
+	width: 100%;
+	max-width: 322px;
+	height: 42px;
+	padding: 10px 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--white);
+	text-align: center;
+	text-transform: uppercase;
+	background-color: var(--black);
+	border-radius: 35px;
+}
+
+.button:hover {
+	color: var(--black);
+	background-color: var(--white);
+	border: 1px solid var(--black);
+}
+
+.navLink {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	width: 100%;
+	height: 60px;
+	padding: 18px;
+	font-size: 18px;
+	border-radius: 30px;
+}
+
+.navLink-active {
+	background-color: var(--white);
+}
+
+.navLink:visited {
+	color: var(--black);
+}

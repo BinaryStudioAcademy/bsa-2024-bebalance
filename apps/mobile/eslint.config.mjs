@@ -17,18 +17,23 @@ const mainConfig = {
 	},
 };
 
+/** @type {Config} */
+const explicitGenericsConfig = {
+	rules: {
+		"require-explicit-generics/require-explicit-generics": [
+			"error",
+			["useState"],
+		],
+	},
+};
+
 /** @type {Config[]} */
 const overridesConfigs = [
 	{
 		rules: {
+			"@typescript-eslint/no-require-imports": ["off"],
 			"@typescript-eslint/no-unnecessary-type-parameters": ["off"],
 			"import/extensions": ["off"],
-		},
-	},
-	{
-		files: ["babel.config.js", "metro.config.js", "lint-staged.config.mjs"],
-		rules: {
-			"@typescript-eslint/no-require-imports": ["off"],
 			"unicorn/prefer-module": ["off"],
 		},
 	},
@@ -47,4 +52,9 @@ const overridesConfigs = [
 	},
 ];
 
-export default [...baseConfig, mainConfig, ...overridesConfigs];
+export default [
+	...baseConfig,
+	mainConfig,
+	explicitGenericsConfig,
+	...overridesConfigs,
+];

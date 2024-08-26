@@ -1,8 +1,8 @@
 import {
 	configureStore,
 	type ThunkMiddleware,
-	Tuple,
-	UnknownAction,
+	type Tuple,
+	type UnknownAction,
 } from "@reduxjs/toolkit";
 
 import { AppEnvironment } from "~/libs/enums/enums";
@@ -12,6 +12,7 @@ import { reducer as authReducer } from "~/slices/auth/auth";
 import { reducer as usersReducer } from "~/slices/users/users";
 
 import { type Config } from "../config/config";
+import { handleErrorMiddleware } from "./middleware/handle-error.middleware";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
@@ -39,7 +40,7 @@ class Store {
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
-				});
+				}).prepend([handleErrorMiddleware]);
 			},
 			reducer: {
 				auth: authReducer,

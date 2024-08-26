@@ -1,48 +1,55 @@
+import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { type Service } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
+	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
-	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
+	private encrypt: Encrypt;
 	private userRepository: UserRepository;
 
-	public constructor(userRepository: UserRepository) {
+	public constructor(userRepository: UserRepository, encrypt: Encrypt) {
 		this.userRepository = userRepository;
+		this.encrypt = encrypt;
 	}
 
-	public async create(
-		payload: UserSignUpRequestDto,
-	): Promise<UserSignUpResponseDto> {
-		const item = await this.userRepository.create(
+	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
+		const { hash, salt } = await this.encrypt.encrypt(payload.password);
+
+		const user = await this.userRepository.create(
 			UserEntity.initializeNew({
 				email: payload.email,
-				passwordHash: "HASH", // TODO
-				passwordSalt: "SALT", // TODO
+				name: payload.name,
+				passwordHash: hash,
+				passwordSalt: salt,
 			}),
 		);
 
-		return item.toObject();
+		return user.toObject();
 	}
 
 	public delete(): ReturnType<Service["delete"]> {
 		return Promise.resolve(true);
 	}
 
-	public find(): ReturnType<Service["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | UserEntity> {
+		return await this.userRepository.find(id);
 	}
-
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 
 		return {
 			items: items.map((item) => item.toObject()),
 		};
+	}
+
+	public findByEmail(email: string): Promise<null | UserEntity> {
+		return this.userRepository.findByEmail(email);
 	}
 
 	public update(): ReturnType<Service["update"]> {

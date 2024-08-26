@@ -34,8 +34,10 @@ const reactConfig = {
 	rules: {
 		...react.configs["jsx-runtime"].rules,
 		...react.configs["recommended"].rules,
+		"react/jsx-boolean-value": ["error"],
+		"react/jsx-curly-brace-presence": ["error"],
 		"react/jsx-no-bind": ["error", { ignoreRefs: true }],
-		"react/react-in-jsx-scope": ["off"],
+		"react/self-closing-comp": ["error"],
 	},
 };
 
@@ -55,6 +57,16 @@ const jsxA11yConfig = {
 		"jsx-a11y": jsxA11y,
 	},
 	rules: jsxA11y.configs.recommended.rules,
+};
+
+/** @type {Config} */
+const explicitGenericsConfig = {
+	rules: {
+		"require-explicit-generics/require-explicit-generics": [
+			"error",
+			["useState"],
+		],
+	},
 };
 
 /** @type {Config[]} */
@@ -81,6 +93,7 @@ const config = [
 	reactConfig,
 	reactHooksConfig,
 	jsxA11yConfig,
+	explicitGenericsConfig,
 	...overridesConfigs,
 ];
 
