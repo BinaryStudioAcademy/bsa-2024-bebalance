@@ -1,4 +1,3 @@
-import { IconName } from "~/libs/enums/icon-name.enum.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
@@ -6,6 +5,7 @@ import {
 	type FieldErrors,
 	type FieldPath,
 	type FieldValues,
+	type IconName,
 } from "~/libs/types/types.js";
 
 import { Icon } from "../components.js";
@@ -14,6 +14,7 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
+	iconName?: IconName;
 	isDisplayedValue?: boolean;
 	label: string;
 	name: FieldPath<T>;
@@ -26,6 +27,7 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	iconName,
 	isDisplayedValue = false,
 	label,
 	name,
@@ -87,9 +89,7 @@ const Input = <T extends FieldValues>({
 								onClick={onToggle}
 								type="button"
 							>
-								<Icon
-									name={isDisplayedValue ? IconName.CROSSED_EYE : IconName.EYE}
-								/>
+								{iconName && <Icon name={iconName} />}
 							</button>
 						)}
 					</>
