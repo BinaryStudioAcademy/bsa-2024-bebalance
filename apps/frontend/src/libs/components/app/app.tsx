@@ -39,7 +39,7 @@ const App: React.FC = () => {
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
-	const onSidebarToggle = useCallback((): void => {
+	const handleSidebarToggle = useCallback((): void => {
 		setIsSidebarOpen((previous) => !previous);
 	}, [setIsSidebarOpen]);
 
@@ -55,10 +55,10 @@ const App: React.FC = () => {
 				>
 					<Sidebar
 						isSidebarOpen={isSidebarOpen}
-						onSidebarToggle={onSidebarToggle}
+						onSidebarToggle={handleSidebarToggle}
 					/>
 					<div className={styles["main"]}>
-						<Header onSidebarToggle={onSidebarToggle} />
+						<Header onSidebarToggle={handleSidebarToggle} />
 						<QuizForm />
 						<RouterOutlet />
 					</div>
