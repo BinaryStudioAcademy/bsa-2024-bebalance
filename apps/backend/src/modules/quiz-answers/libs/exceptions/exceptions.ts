@@ -1,1 +1,1 @@
-export { HTTPError } from "~/libs/modules/http/http.js";
+export { QuizError } from "../../../quiz/quiz.js";

@@ -3,7 +3,7 @@ import { Service } from "~/libs/types/service.type.js";
 
 import { UserService } from "../users/users.js";
 import { HTTPCode } from "./libs/enums/enums.js";
-import { HTTPError } from "./libs/exceptions/exceptions.js";
+import { QuizError } from "./libs/exceptions/exceptions.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { QuizAnswerRepository } from "./quiz-answer.repository.js";
 
@@ -48,7 +48,7 @@ class QuizAnswerService implements Service {
 		const answer = await this.find(answerId);
 
 		if (!answer || !user) {
-			throw new HTTPError({
+			throw new QuizError({
 				message: ErrorMessage.NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
 			});
