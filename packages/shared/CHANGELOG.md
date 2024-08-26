@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.6.0...shared-v1.6.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* **frontend/shared:** add confirm password field on sign up page bb-144 ([#168](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/168)) ([30aee02](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/30aee027f0ad5e393f8de61f109cb613bc0cb92e))
+
 ## [1.6.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.5.0...shared-v1.6.0) (2024-08-24)
 
 
