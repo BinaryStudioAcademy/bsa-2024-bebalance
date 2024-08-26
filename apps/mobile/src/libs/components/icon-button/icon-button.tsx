@@ -1,21 +1,33 @@
 import React from "react";
 
-import { MaterialIcon, Pressable } from "~/libs/components/components";
+import { Icon, TouchableOpacity } from "~/libs/components/components";
 import { type BaseColor } from "~/libs/enums/enums";
-import { type ValueOf } from "~/libs/types/types";
+import {
+	type IconName,
+	type StyleProp,
+	type ValueOf,
+	type ViewStyle,
+} from "~/libs/types/types";
 
 type Properties = {
-	color: ValueOf<typeof BaseColor>;
-	name: string;
+	iconColor: ValueOf<typeof BaseColor>;
+	iconSize: number;
+	name: IconName;
 	onPress: () => void;
-	size: number;
+	style?: StyleProp<ViewStyle>;
 };
 
-const IconButton: React.FC<Properties> = ({ color, name, onPress, size }) => {
+const IconButton: React.FC<Properties> = ({
+	iconColor,
+	iconSize,
+	name,
+	onPress,
+	style,
+}) => {
 	return (
-		<Pressable onPress={onPress}>
-			<MaterialIcon color={color} name={name} size={size} />
-		</Pressable>
+		<TouchableOpacity hitSlop={10} onPress={onPress} style={style}>
+			<Icon color={iconColor} name={name} size={iconSize} />
+		</TouchableOpacity>
 	);
 };
 

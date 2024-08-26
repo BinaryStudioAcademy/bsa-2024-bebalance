@@ -20,6 +20,7 @@ export {
 	Pressable,
 	ScrollView,
 	TextInput,
+	TouchableOpacity,
 	View,
 } from "react-native";
 export { LinearGradient } from "react-native-linear-gradient";
