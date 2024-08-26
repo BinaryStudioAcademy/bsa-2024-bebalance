@@ -23,6 +23,9 @@ const Flex = {
 	flexDirectionRow: {
 		flexDirection: "row",
 	},
+	flexGrow1: {
+		flexGrow: 1,
+	},
 	justifyContentCenter: {
 		justifyContent: "center",
 	},

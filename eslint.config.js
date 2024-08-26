@@ -1,10 +1,12 @@
 import js from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import ts from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import { resolve as tsResolver } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import";
 import jsdoc from "eslint-plugin-jsdoc";
 import perfectionist from "eslint-plugin-perfectionist";
+import explicitGenerics from "eslint-plugin-require-explicit-generics";
 import sonarjs from "eslint-plugin-sonarjs";
 import unicorn from "eslint-plugin-unicorn";
 import globals from "globals";
@@ -68,6 +70,8 @@ const jsConfig = {
 					"ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]",
 			},
 		],
+		"object-shorthand": ["error"],
+		"prefer-destructuring": ["error"],
 		quotes: ["error", "double"],
 	},
 };
@@ -144,6 +148,19 @@ const typescriptConfig = {
 	},
 	rules: {
 		...ts.configs["strict-type-checked"].rules,
+		"@typescript-eslint/consistent-type-exports": ["error"],
+		"@typescript-eslint/consistent-type-imports": [
+			"error",
+			{
+				fixStyle: "inline-type-imports",
+			},
+		],
+		"@typescript-eslint/explicit-function-return-type": [
+			"error",
+			{
+				allowTypedFunctionExpressions: true,
+			},
+		],
 		"@typescript-eslint/no-magic-numbers": [
 			"error",
 			{
@@ -167,6 +184,40 @@ const jsdocConfig = {
 	},
 };
 
+/** @type {Config} */
+const stylisticConfig = {
+	plugins: {
+		"@stylistic": stylistic,
+	},
+	rules: {
+		"@stylistic/padding-line-between-statements": [
+			"error",
+			{
+				blankLine: "never",
+				next: "export",
+				prev: "export",
+			},
+			{
+				blankLine: "always",
+				next: "*",
+				prev: ["block-like", "throw"],
+			},
+			{
+				blankLine: "always",
+				next: ["return", "block-like", "throw"],
+				prev: "*",
+			},
+		],
+	},
+};
+
+/** @type {Config} */
+const explicitGenericsConfig = {
+	plugins: {
+		"require-explicit-generics": explicitGenerics,
+	},
+};
+
 /** @type {Config[]} */
 const overridesConfigs = [
 	{
@@ -183,6 +234,12 @@ const overridesConfigs = [
 			"import/no-default-export": ["off"],
 		},
 	},
+	{
+		files: ["*.js"],
+		rules: {
+			"@typescript-eslint/explicit-function-return-type": ["off"],
+		},
+	},
 ];
 
 /** @type {Config[]} */
@@ -196,6 +253,8 @@ const config = [
 	perfectionistConfig,
 	typescriptConfig,
 	jsdocConfig,
+	stylisticConfig,
+	explicitGenericsConfig,
 	...overridesConfigs,
 ];
 

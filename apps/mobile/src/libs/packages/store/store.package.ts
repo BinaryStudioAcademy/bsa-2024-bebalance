@@ -1,8 +1,8 @@
 import {
 	configureStore,
 	type ThunkMiddleware,
-	Tuple,
-	UnknownAction,
+	type Tuple,
+	type UnknownAction,
 } from "@reduxjs/toolkit";
 
 import { AppEnvironment } from "~/libs/enums/enums";

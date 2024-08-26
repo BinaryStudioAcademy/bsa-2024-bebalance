@@ -2,10 +2,10 @@ import fp from "fastify-plugin";
 
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPHeader } from "~/libs/modules/http/http.js";
-import { BaseToken } from "~/libs/modules/token/token.js";
-import { TokenPayload } from "~/libs/types/types.js";
+import { type BaseToken } from "~/libs/modules/token/token.js";
+import { type TokenPayload } from "~/libs/types/types.js";
 import { AuthError } from "~/modules/auth/auth.js";
-import { UserService } from "~/modules/users/users.js";
+import { type UserService } from "~/modules/users/users.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
 import { checkIsWhiteRoute } from "./libs/helpers/helpers.js";
