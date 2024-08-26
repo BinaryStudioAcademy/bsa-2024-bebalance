@@ -31,6 +31,7 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	CustomValidation,
 	type UserDto,
 	type UserGetAllResponseDto,
 	UsersApiPath,
