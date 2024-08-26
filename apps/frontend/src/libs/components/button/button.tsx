@@ -1,5 +1,5 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { type IconName } from "~/libs/types/icon-name.type.js";
+import { type IconName } from "~/libs/types/types.js";
 
 import { Icon } from "../components.js";
 import styles from "./styles.module.css";
@@ -12,7 +12,7 @@ type Properties = {
 	label: string;
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant?: "dark" | "icon" | "secondary";
+	variant?: "icon";
 };
 
 const Button: React.FC<Properties> = ({

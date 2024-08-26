@@ -93,7 +93,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
+				<Button label="CREATE AN ACCOUNT" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

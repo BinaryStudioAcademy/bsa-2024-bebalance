@@ -53,7 +53,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button label="SIGN IN" type="submit" variant="dark" />
+				<Button label="SIGN IN" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

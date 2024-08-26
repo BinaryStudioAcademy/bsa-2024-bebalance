@@ -8,7 +8,7 @@ import {
 	type IconName,
 } from "~/libs/types/types.js";
 
-import { Button } from "../components.js";
+import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
