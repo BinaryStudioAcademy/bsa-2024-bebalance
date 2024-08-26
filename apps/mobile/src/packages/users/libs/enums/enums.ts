@@ -1,2 +1,1 @@
-export { UsersApiPath } from "shared";
-export { UserValidationMessage } from "shared";
+export { UsersApiPath, UserValidationMessage } from "shared";
