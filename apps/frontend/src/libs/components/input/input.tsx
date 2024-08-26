@@ -85,7 +85,7 @@ const Input = <T extends FieldValues>({
 							<Button
 								hasVisuallyHiddenLabel
 								iconName={iconName}
-								label=""
+								label="Icon"
 								onClick={onIconClick}
 								type="button"
 								variant="icon"
