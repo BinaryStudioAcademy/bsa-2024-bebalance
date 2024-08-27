@@ -197,3 +197,70 @@ Examples:
 ## 8. Deployment
 
 CI/CD implemented using [GitHub Actions](https://docs.github.com/en/actions)
+
+```mermaid
+
+erDiagram
+    users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar email
+        text password_hash
+        text password_salt
+    }
+
+    user_details ||--|| users : user_id
+    user_details {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar name
+        int user_id FK
+    }
+
+    categories {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar name UK
+    }
+
+    quiz_questions }|--o| categories : category_id
+    quiz_questions {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label UK
+        int category_id FK
+    }
+
+    quiz_answers }|--o| quiz_questions : question_id
+    quiz_answers {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label
+        int value
+        int question_id FK
+    }
+
+    onboarding_questions {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label UK
+    }
+
+    onboarding_answers }|--o| onboarding_questions : question_id
+    onboarding_answers {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label
+        int question_id FK
+    }
+
+
+
+```
