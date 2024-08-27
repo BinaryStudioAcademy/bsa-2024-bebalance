@@ -1,12 +1,12 @@
 import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
-import { OnboardingAnswerEntity } from "./onboarding/onboarding-answer.entuty.js";
-import { type OnboardingAnswerModel } from "./onboarding/onboarding-answer.model.js";
-import { OnboardingQuestionEntity } from "./onboarding/onboarding-question.entity.js";
-import { type OnboardingQuestionModel } from "./onboarding/onboarding-question.model.js";
+import { OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
+import { type OnboardingAnswerModel } from "./onboarding-answer.model.js";
+import { OnboardingQuestionEntity } from "./onboarding-question.entity.js";
+import { type OnboardingQuestionModel } from "./onboarding-question.model.js";
 
-class SurveyRepository implements Repository {
+class OnboardingRepository implements Repository {
 	private onboardingAnswerModel: typeof OnboardingAnswerModel;
 	private onboardingQuestionModel: typeof OnboardingQuestionModel;
 
@@ -63,4 +63,4 @@ class SurveyRepository implements Repository {
 	}
 }
 
-export { SurveyRepository };
+export { OnboardingRepository };

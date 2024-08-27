@@ -1,6 +1,6 @@
 import { type Entity } from "~/libs/types/types.js";
 
-import { type SurveyAnswerDto } from "../libs/types/types.js";
+import { type OnboardingAnswerDto } from "./libs/types/types.js";
 import { type OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
 
 class OnboardingQuestionEntity implements Entity {
@@ -79,7 +79,7 @@ class OnboardingQuestionEntity implements Entity {
 	}
 
 	public toObject(): {
-		answers: SurveyAnswerDto[];
+		answers: OnboardingAnswerDto[];
 		createdAt: string;
 		id: number;
 		label: string;

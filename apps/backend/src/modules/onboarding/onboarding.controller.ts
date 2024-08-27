@@ -6,8 +6,8 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
-import { SurveyApiPath } from "./libs/enums/enums.js";
-import { type SurveyService } from "./survey.service.js";
+import { OnboardingApiPath } from "./libs/enums/enums.js";
+import { type OnboardingService } from "./onboarding.service.js";
 
 /**
  * @swagger
@@ -64,34 +64,34 @@ import { type SurveyService } from "./survey.service.js";
  *           description: The last update date of the question.
  */
 
-class SurveyController extends BaseController {
-	private surveyService: SurveyService;
+class OnboardingController extends BaseController {
+	private onboardingService: OnboardingService;
 
-	public constructor(logger: Logger, surveyService: SurveyService) {
-		super(logger, APIPath.SURVEYS);
+	public constructor(logger: Logger, onboardingService: OnboardingService) {
+		super(logger, APIPath.ONBOARDING);
 
-		this.surveyService = surveyService;
+		this.onboardingService = onboardingService;
 
 		this.addRoute({
-			handler: () => this.getOnboardingQuestions(),
+			handler: () => this.findAll(),
 			method: "GET",
-			path: SurveyApiPath.ONBOARDING,
+			path: OnboardingApiPath.ROOT,
 		});
 	}
 
 	/**
 	 * @swagger
 	 * tags:
-	 *   - name: Surveys
-	 *     description: Endpoints related to surveys
+	 *   - name: Onboarding
+	 *     description: Endpoints related to onboarding
 	 */
 
 	/**
 	 * @swagger
-	 * /surveys/onboarding:
+	 * /onboarding:
 	 *   get:
 	 *     tags:
-	 *       - Surveys
+	 *       - Onboarding
 	 *     summary: Get onboarding questions
 	 *     description: Returns an array of onboarding questions with possible answers.
 	 *     security:
@@ -106,12 +106,12 @@ class SurveyController extends BaseController {
 	 *               items:
 	 *                 $ref: "#/components/schemas/OnboardingQuestion"
 	 */
-	private async getOnboardingQuestions(): Promise<APIHandlerResponse> {
+	private async findAll(): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.surveyService.getOnboardingSurvey(),
+			payload: await this.onboardingService.findAll(),
 			status: HTTPCode.OK,
 		};
 	}
 }
 
-export { SurveyController };
+export { OnboardingController };
