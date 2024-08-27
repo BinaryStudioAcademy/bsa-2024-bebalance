@@ -21,6 +21,9 @@ const screenOptions: BottomTabNavigationOptions = {
 		fontSize: 10,
 		fontWeight: 700,
 	},
+	tabBarStyle: {
+		backgroundColor: BaseColor.BG_WHITE,
+	},
 };
 
 const BottomTabsNavigator = () => {
