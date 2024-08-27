@@ -9,16 +9,29 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	children: React.ReactNode;
+	isActive?: boolean;
 	to: ValueOf<typeof AppRoute>;
 	type?: LinkType;
 };
 
-const Link: React.FC<Properties> = ({ children, to, type }: Properties) => (
-	<NavLink
-		className={getValidClassNames(styles["link"], type && styles[type])}
-		to={to}
-	>
-		{children}
-	</NavLink>
-);
+const Link: React.FC<Properties> = ({
+	children,
+	isActive,
+	to,
+	type,
+}: Properties) => {
+	return (
+		<NavLink
+			className={getValidClassNames(
+				styles["link"],
+				isActive && type && styles[`${type}-active`],
+				type && styles[type],
+			)}
+			to={to}
+		>
+			{children}
+		</NavLink>
+	);
+};
+
 export { Link };

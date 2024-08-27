@@ -6,8 +6,8 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { UserDto } from "~/modules/users/users.js";
 import {
+	type UserDto,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -152,6 +152,8 @@ class AuthController extends BaseController {
 	 *                email:
 	 *                  type: string
 	 *                  format: email
+	 *                name:
+	 *                  type: string
 	 *                password:
 	 *                  type: string
 	 *      responses:

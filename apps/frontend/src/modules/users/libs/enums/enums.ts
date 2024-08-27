@@ -1,1 +1,0 @@
-export { UsersApiPath } from "shared";

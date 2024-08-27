@@ -11,6 +11,7 @@ import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
 type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;
 };
+
 const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
 		defaultValues: USER_SIGN_UP_DEFAULT_VALUES,
@@ -30,6 +31,13 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				label="Email"
 				name="email"
 				placeholder="Enter your email"
+			/>
+			<Input
+				control={control}
+				errors={errors}
+				label="Name"
+				name="name"
+				placeholder="Enter your name"
 			/>
 			<Input
 				control={control}

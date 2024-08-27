@@ -1,7 +1,9 @@
 import { Navigate } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { type AppRoute } from "~/libs/enums/enums.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
-import { ValueOf } from "~/libs/types/types.js";
+import { type ValueOf } from "~/libs/types/types.js";
+
+import { AuthWrapper } from "../auth-wrapper/auth-wrapper.js";
 
 type Properties = {
 	component: React.ReactNode;
@@ -15,7 +17,7 @@ const ProtectedRoute: React.FC<Properties> = ({
 	const user = useAppSelector(({ auth }) => auth.user);
 
 	if (user) {
-		return component;
+		return <AuthWrapper>{component}</AuthWrapper>;
 	}
 
 	return <Navigate replace to={redirectTo} />;

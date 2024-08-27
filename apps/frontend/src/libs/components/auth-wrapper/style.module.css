@@ -1,0 +1,7 @@
+.auth-wrapper-container {
+	display: flex;
+}
+
+.right-side-section {
+	flex: 1;
+}

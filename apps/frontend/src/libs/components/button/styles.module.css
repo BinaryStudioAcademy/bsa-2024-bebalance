@@ -4,10 +4,11 @@
 	min-height: 16px;
 	padding: 12px 24px;
 	margin: 0;
+	font-size: 16px;
 	font-weight: 700;
-	line-height: 16px;
-	color: var(--black);
+	line-height: 24px;
 	text-align: center;
+	text-transform: uppercase;
 	cursor: pointer;
 	border: none;
 	border-radius: 35px;
@@ -21,4 +22,28 @@
 .primary {
 	color: var(--white);
 	background-color: var(--black);
+}
+
+.icon-button {
+	position: absolute;
+	top: 50%;
+	display: flex;
+	width: fit-content;
+	padding: 0;
+	color: var(--gray);
+	background-color: transparent;
+	transform: translateY(-50%);
+}
+
+.position-right {
+	right: 20px;
+}
+
+.position-center {
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.position-left {
+	left: 20px;
 }

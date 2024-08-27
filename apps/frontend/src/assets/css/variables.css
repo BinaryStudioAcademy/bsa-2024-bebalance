@@ -3,9 +3,11 @@
 	--background-gray: #f6f5fa;
 	--black: #000000;
 	--brand: #0085ff;
+	--blue-accent: #18a0fb;
 	--error: #df1c3d;
 	--light-blue: #b4d6ff;
 	--light-brand: #00f0ff;
+	--text-background: #63a0e7;
 	--light-gray: #e0e0e0;
 	--white: #ffffff;
 	--disable: #e0e0e0;
@@ -32,4 +34,7 @@
 	--spiritual-end: #ffe200;
 	--mental-start: #0085ff;
 	--mental-end: #00f0ff;
+	--z-index-low: 1;
+	--z-index-medium: 10;
+	--z-index-high: 100;
 }

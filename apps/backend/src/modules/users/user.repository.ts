@@ -3,7 +3,7 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { UserDetailsModel } from "./user-details.model.js";
+import { type UserDetailsModel } from "./user-details.model.js";
 
 class UserRepository implements Repository {
 	private userDetailsModel: typeof UserDetailsModel;
@@ -54,7 +54,10 @@ class UserRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
-		const user = await this.userModel.query().findById(id);
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.findById(id);
 
 		return user
 			? UserEntity.initialize({
@@ -93,6 +96,7 @@ class UserRepository implements Repository {
 			.withGraphFetched(RelationName.USER_DETAILS)
 			.where({ email })
 			.first();
+
 		return user
 			? UserEntity.initialize({
 					createdAt: user.createdAt,

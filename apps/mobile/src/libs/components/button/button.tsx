@@ -38,6 +38,7 @@ const Button: React.FC<Properties> = ({
 				const conditionalColors = isDisabled
 					? [BaseColor.LIGHT_GRAY, BaseColor.LIGHT_GRAY]
 					: activeButtonColors;
+
 				return (
 					<LinearGradient
 						angle={305}
@@ -54,7 +55,12 @@ const Button: React.FC<Properties> = ({
 						useAngle
 					>
 						{isFilled ? (
-							<Text color={BaseColor.BG_WHITE} preset="uppercase" size="md">
+							<Text
+								color={BaseColor.BG_WHITE}
+								preset="uppercase"
+								size="md"
+								weight="bold"
+							>
 								{label}
 							</Text>
 						) : (

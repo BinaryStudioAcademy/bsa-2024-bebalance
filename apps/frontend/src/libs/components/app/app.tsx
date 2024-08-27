@@ -10,25 +10,22 @@ import {
 	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
-import { actions as userActions } from "~/modules/users/users.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
+import { QuizForm } from "~/pages/quiz/libs/components/quiz-form/quiz-form.jsx";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
 	const dispatch = useAppDispatch();
-	const { dataStatus, user, users } = useAppSelector(({ users }) => ({
-		dataStatus: users.dataStatus,
-		user: users.user,
-		users: users.users,
+
+	const { dataStatus } = useAppSelector(({ auth }) => ({
+		dataStatus: auth.dataStatus,
 	}));
 
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
-		if (isRoot) {
-			void dispatch(userActions.loadAll());
-			void dispatch(userActions.getAuthenticatedUser());
-		}
-	}, [isRoot, dispatch]);
+		void dispatch(authActions.getAuthenticatedUser());
+	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
@@ -40,13 +37,7 @@ const App: React.FC = () => {
 			{isLoading && <Loader />}
 			{!isLoading && isRoot && (
 				<>
-					<h2>Users: {user?.email}</h2>
-					<h3>Status: {dataStatus}</h3>
-					<ul>
-						{users.map((user) => (
-							<li key={user.id}>{user.email}</li>
-						))}
-					</ul>
+					<QuizForm />
 				</>
 			)}
 			<Notification />
