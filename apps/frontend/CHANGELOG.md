@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.1...frontend-v1.14.0) (2024-08-26)
+
+
+### Features
+
+* **frontend:** create auth wrapper components bb-189 ([#201](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/201)) ([c9b5920](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c9b5920f60c034db581ddde155b08250452a47b8))
+
+## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.0...frontend-v1.13.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* **frontend/shared:** add confirm password field on sign up page bb-144 ([#168](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/168)) ([30aee02](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/30aee027f0ad5e393f8de61f109cb613bc0cb92e))
+* update breakpoint on quiz introduction screen bb-199 ([#200](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/200)) ([c712c43](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c712c43fe2c60cb3b417b3644dbda779584d5b24))
+
 ## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.12.0...frontend-v1.13.0) (2024-08-26)
 
 

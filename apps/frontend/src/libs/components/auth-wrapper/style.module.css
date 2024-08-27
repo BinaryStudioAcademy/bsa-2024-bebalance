@@ -1,0 +1,12 @@
+.auth-wrapper-container {
+	display: flex;
+	height: 100vh;
+}
+
+.left-side-section {
+	height: 100%;
+}
+
+.right-side-section {
+	width: 100%;
+}

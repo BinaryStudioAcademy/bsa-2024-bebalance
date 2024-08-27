@@ -1,37 +1,48 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
+import { type IconName } from "~/libs/types/types.js";
 
+import { Icon } from "../icon/icon.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	icon?: React.ReactNode;
+	hasVisuallyHiddenLabel?: boolean;
+	iconName?: IconName;
 	isFluid?: boolean;
 	isPrimary?: boolean;
-	label?: string;
-	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	label: string;
+	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant: "dark" | "secondary";
+	variant?: "icon";
 };
 
 const Button: React.FC<Properties> = ({
-	icon,
+	hasVisuallyHiddenLabel = false,
+	iconName,
 	isFluid = false,
 	isPrimary = true,
 	label,
 	onClick,
 	type = "button",
+	variant,
 }: Properties) => (
 	<button
 		className={getValidClassNames(
 			styles["btn"],
-			icon && styles["icon"],
 			isFluid && styles["fluid"],
 			isPrimary && styles["primary"],
+			variant && styles[`${variant}-button`],
 		)}
 		onClick={onClick}
 		type={type}
 	>
-		{icon}
-		{label}
+		<span
+			className={getValidClassNames(
+				hasVisuallyHiddenLabel && "visually-hidden",
+			)}
+		>
+			{label}
+		</span>
+		{iconName && <Icon name={iconName} />}
 	</button>
 );
 
