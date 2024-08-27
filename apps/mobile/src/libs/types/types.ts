@@ -3,6 +3,7 @@ export {
 	type NavigationScreenProperties,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
+export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type ImageSourcePropType,
 	type StyleProp,
