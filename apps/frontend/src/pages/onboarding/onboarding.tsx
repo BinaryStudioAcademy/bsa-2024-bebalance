@@ -66,7 +66,7 @@ const Onboarding: React.FC = () => {
 
 	const handleFinish = useCallback(() => {
 		if (isAnswerSelected) {
-			alert("All steps completed!");
+			//TODO: add finish logic
 		}
 	}, [isAnswerSelected]);
 
@@ -77,9 +77,7 @@ const Onboarding: React.FC = () => {
 	const isLastStep = currentStep === steps.length - ONE_STEP_OFFSET;
 	const isLoading = dataStatus === DataStatus.PENDING;
 
-	// if (onboarding) {
 	surveyData = onboarding[currentStep];
-	// }
 
 	return (
 		<div className={styles["container"]}>
