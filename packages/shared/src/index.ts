@@ -30,7 +30,12 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
-export { QuizApiPath } from "./modules/quiz/quiz.js";
+export {
+	type QuizAnswersDto,
+	QuizApiPath,
+	type QuizQuestionsDto,
+	type QuizQuestionsGetAllReponseDto,
+} from "./modules/quiz/quiz.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
