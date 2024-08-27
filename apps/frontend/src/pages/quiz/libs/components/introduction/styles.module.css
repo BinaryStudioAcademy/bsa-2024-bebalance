@@ -49,7 +49,7 @@
 	display: none;
 }
 
-@media (width <= 640px) {
+@media (width <= 768px) {
 	.container {
 		padding-top: 100px;
 		padding-bottom: 60px;
