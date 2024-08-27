@@ -24,7 +24,8 @@ const OnboardingAnswer = <T extends FieldValues>({
 		<div className={styles["onboarding-answer"]}>
 			<Input
 				control={control}
-				label=""
+				hasVisuallyHiddenLabel
+				label="answer"
 				name={name as FieldPath<T>}
 				options={options}
 				type="radio"

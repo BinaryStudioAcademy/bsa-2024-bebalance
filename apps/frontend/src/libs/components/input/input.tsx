@@ -14,6 +14,7 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
+	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	label: string;
 	name: FieldPath<T>;
@@ -26,6 +27,7 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	hasVisuallyHiddenLabel,
 	iconName,
 	label,
 	name,
@@ -53,6 +55,7 @@ const Input = <T extends FieldValues>({
 				className={getValidClassNames(
 					styles["input-label"],
 					options && styles["radio-label"],
+					hasVisuallyHiddenLabel && "visually-hidden",
 				)}
 			>
 				{label}
