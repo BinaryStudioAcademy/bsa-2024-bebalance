@@ -7,11 +7,7 @@ import {
 	Link,
 	Text,
 } from "~/libs/components/components";
-import {
-	BaseColor,
-	ConfirmPasswordCustomValidation,
-	RootScreenName,
-} from "~/libs/enums/enums";
+import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { getSecurityInputIconName } from "~/libs/helpers/helpers";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
@@ -22,6 +18,7 @@ import {
 } from "~/packages/users/users";
 
 import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
+import { ConfirmPasswordCustomValidation } from "./libs/enums/enums";
 
 type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;
