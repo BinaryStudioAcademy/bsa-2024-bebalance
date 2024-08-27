@@ -1,5 +1,5 @@
-export { AngleGradient } from "./angle-gradient.enum";
 export {
+	AngleGradient,
 	BaseColor,
 	DataStatus,
 	GradientColor,
