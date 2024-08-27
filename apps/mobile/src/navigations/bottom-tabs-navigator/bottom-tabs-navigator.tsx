@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/bottom-tabs";
 import React from "react";
 
-import { GradientTabIcon } from "~/libs/components/components";
+import { GradientTabIcon, Text } from "~/libs/components/components";
 import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
 import { Chat } from "~/screens/chat/chat";
@@ -16,12 +16,14 @@ const BottomTabs = createBottomTabNavigator<BottomTabNavigationParameterList>();
 
 const screenOptions: BottomTabNavigationOptions = {
 	headerShown: false,
-	tabBarActiveTintColor: BaseColor.BLACK,
-	tabBarInactiveTintColor: BaseColor.DARK_GRAY,
-	tabBarLabelStyle: {
-		fontSize: 10,
-		fontWeight: 700,
-	},
+	tabBarLabel: ({ children, focused }) => (
+		<Text
+			color={focused ? BaseColor.BLACK : BaseColor.DARK_GRAY}
+			preset="tabBarLabel"
+		>
+			{children}
+		</Text>
+	),
 	tabBarStyle: {
 		backgroundColor: BaseColor.BG_WHITE,
 	},
@@ -38,7 +40,7 @@ const BottomTabsNavigator: React.FC = () => {
 				name={BottomTabScreenName.CHAT}
 				options={{
 					tabBarIcon: ({ focused }) => (
-						<GradientTabIcon focused={focused} name="sms" />
+						<GradientTabIcon isFocused={focused} name="sms" />
 					),
 				}}
 			/>
@@ -47,7 +49,7 @@ const BottomTabsNavigator: React.FC = () => {
 				name={BottomTabScreenName.WHEEL}
 				options={{
 					tabBarIcon: ({ focused }) => (
-						<GradientTabIcon focused={focused} name="donut-small" />
+						<GradientTabIcon isFocused={focused} name="donut-small" />
 					),
 				}}
 			/>
@@ -56,7 +58,7 @@ const BottomTabsNavigator: React.FC = () => {
 				name={BottomTabScreenName.TASKS}
 				options={{
 					tabBarIcon: ({ focused }) => (
-						<GradientTabIcon focused={focused} name="task" />
+						<GradientTabIcon isFocused={focused} name="task" />
 					),
 				}}
 			/>
@@ -65,7 +67,7 @@ const BottomTabsNavigator: React.FC = () => {
 				name={BottomTabScreenName.SETTINGS}
 				options={{
 					tabBarIcon: ({ focused }) => (
-						<GradientTabIcon focused={focused} name="settings" />
+						<GradientTabIcon isFocused={focused} name="settings" />
 					),
 				}}
 			/>

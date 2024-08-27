@@ -7,6 +7,7 @@ const sizeToStyleMap = {
 	xl: { fontSize: 24, lineHeight: 26 } satisfies TextStyle,
 	xs: { fontSize: 12, lineHeight: 16 } satisfies TextStyle,
 	xxl: { fontSize: 32, lineHeight: 40 } satisfies TextStyle,
+	xxs: { fontSize: 10, lineHeight: 14 } satisfies TextStyle,
 };
 
 export { sizeToStyleMap };
