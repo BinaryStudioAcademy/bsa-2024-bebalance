@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React from "react";
 
 import {
 	LinearGradient,
@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 type Properties = {
 	gradientProps: LinearGradientProps;
-	textProps: ComponentProps<typeof Text>;
+	textProps: React.ComponentProps<typeof Text>;
 };
 
 const GradientText: React.FC<Properties> = ({ gradientProps, textProps }) => {

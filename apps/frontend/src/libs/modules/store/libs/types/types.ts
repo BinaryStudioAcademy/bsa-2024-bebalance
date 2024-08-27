@@ -1,1 +1,1 @@
-export { MiddlewareError } from "./middleware-error.type.js";
+export { type MiddlewareError } from "./middleware-error.type.js";
