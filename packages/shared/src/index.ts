@@ -34,10 +34,11 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
-	type SurveyAnswerDto,
-	SurveyApiPath,
-	type SurveyResponseDto,
-} from "./modules/surveys/surveys.js";
+	type OnboardingAnswerDto,
+	OnboardingApiPath,
+	type OnboardingGetAllResponseDto,
+	type OnboardingQuestionDto,
+} from "./modules/onboarding/onboarding.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
