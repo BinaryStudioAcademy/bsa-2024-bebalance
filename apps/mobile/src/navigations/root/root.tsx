@@ -10,6 +10,7 @@ import { type RootNavigationParameterList } from "~/libs/types/types";
 import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
 import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
+import { Welcome } from "~/screens/welcome/welcome";
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -25,6 +26,10 @@ const Root: React.FC = () => {
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
 				<NativeStack.Group>
+					<NativeStack.Screen
+						component={Welcome}
+						name={RootScreenName.WELCOME}
+					/>
 					<NativeStack.Screen
 						component={QuizEntry}
 						name={RootScreenName.QUIZ_ENTRY}
