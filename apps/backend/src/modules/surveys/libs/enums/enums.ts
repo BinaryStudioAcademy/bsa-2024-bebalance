@@ -1,1 +1,0 @@
-export { SurveyApiPath } from "shared";
