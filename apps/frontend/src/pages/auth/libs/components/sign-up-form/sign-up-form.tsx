@@ -1,5 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
@@ -20,6 +20,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
 			validationSchema: userSignUpValidationSchema,
 		});
+	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+		useState<boolean>(false);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -38,6 +41,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[handleSubmit, onSubmit, setError],
 	);
+
+	const handleTogglePasswordVisibility = useCallback(() => {
+		setIsPasswordVisible((previousState) => !previousState);
+	}, []);
+
+	const handleToggleConfirmPasswordVisibility = useCallback(() => {
+		setIsConfirmPasswordVisible((previousState) => !previousState);
+	}, []);
 
 	return (
 		<>
@@ -63,22 +74,26 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<Input
 					control={control}
 					errors={errors}
+					iconName={isPasswordVisible ? "crossedEye" : "eye"}
 					label="Password"
 					name="password"
+					onIconClick={handleTogglePasswordVisibility}
 					placeholder="*******"
-					type="password"
+					type={isPasswordVisible ? "text" : "password"}
 				/>
 
 				<Input
 					control={control}
 					errors={errors}
+					iconName={isConfirmPasswordVisible ? "crossedEye" : "eye"}
 					label="Confirm password"
 					name="confirmPassword"
+					onIconClick={handleToggleConfirmPasswordVisibility}
 					placeholder="*******"
-					type="password"
+					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button label="CREATE AN ACCOUNT" type="submit" variant="dark" />
+				<Button label="CREATE AN ACCOUNT" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
