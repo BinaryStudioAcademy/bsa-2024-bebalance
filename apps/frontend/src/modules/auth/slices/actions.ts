@@ -56,7 +56,9 @@ const sendForgotPasswordLink = createAsyncThunk<
 >(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
 	const { authApi } = extra;
 
-	return await authApi.sendResetPasswordLink(emailPayload);
+	const payload = await authApi.sendResetPasswordLink(emailPayload);
+
+	return payload.message;
 });
 
 export { getAuthenticatedUser, sendForgotPasswordLink, signIn, signUp };

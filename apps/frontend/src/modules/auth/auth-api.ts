@@ -37,7 +37,9 @@ class AuthApi extends BaseHTTPApi {
 		return await response.json<UserDto>();
 	}
 
-	public async sendResetPasswordLink(payload: EmailDto): Promise<string> {
+	public async sendResetPasswordLink(
+		payload: EmailDto,
+	): Promise<{ message: "string" }> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}),
 			{
@@ -48,7 +50,7 @@ class AuthApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<string>();
+		return await response.json();
 	}
 
 	public async signIn(

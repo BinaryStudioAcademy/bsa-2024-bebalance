@@ -24,7 +24,7 @@ class AuthService {
 		this.encrypt = encrypt;
 	}
 
-	public async forgotPassword(payload: EmailDto): Promise<string> {
+	public async forgotPassword(payload: EmailDto): Promise<{ message: string }> {
 		const { email: targetEmail } = payload;
 
 		const user = await this.userService.findByEmail(targetEmail);
@@ -50,7 +50,7 @@ class AuthService {
 			resetLink: link,
 		});
 
-		return "Email sent";
+		return { message: "Email sent" };
 	}
 
 	public async signIn(
