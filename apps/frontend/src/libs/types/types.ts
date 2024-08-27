@@ -8,6 +8,7 @@ export {
 export {
 	type ServerErrorDetail,
 	type ServerErrorResponse,
+	type SurveyResponseDto,
 	type UserDto,
 	type ValidationSchema,
 	type ValueOf,
