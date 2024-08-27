@@ -1,3 +1,5 @@
+import React from "react";
+
 import { LinearGradient } from "~/libs/components/components";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 
@@ -15,7 +17,7 @@ type Properties = {
 	style?: StyleProp<ViewStyle>;
 };
 
-const Planet = ({
+const Planet: React.FC<Properties> = ({
 	color,
 	gradientDirection = "leftToRight",
 	size,

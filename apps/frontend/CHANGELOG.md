@@ -1,5 +1,66 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.14.0...frontend-v1.15.0) (2024-08-27)
+
+
+### Features
+
+* **frontend:** get authenticated user saved on store bb-14 ([#195](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/195)) ([b1ab4d6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b1ab4d643e16bf829c371aa5420feb92c56d991c))
+
+
+### Bug Fixes
+
+* add toggle eye in password bb-145 ([#164](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/164)) ([bc4d9db](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc4d9dba6e219a919deae52cf5d2cab7633ddcdb))
+
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.1...frontend-v1.14.0) (2024-08-26)
+
+
+### Features
+
+* **frontend:** create auth wrapper components bb-189 ([#201](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/201)) ([c9b5920](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c9b5920f60c034db581ddde155b08250452a47b8))
+
+## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.0...frontend-v1.13.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* **frontend/shared:** add confirm password field on sign up page bb-144 ([#168](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/168)) ([30aee02](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/30aee027f0ad5e393f8de61f109cb613bc0cb92e))
+* update breakpoint on quiz introduction screen bb-199 ([#200](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/200)) ([c712c43](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c712c43fe2c60cb3b417b3644dbda779584d5b24))
+
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.12.0...frontend-v1.13.0) (2024-08-26)
+
+
+### Features
+
+* **frontend:** add analyzing screen bb-135 ([#184](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/184)) ([a0d698e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a0d698ebb1270ce004e2ade2258c04999bccf47f))
+* **frontend:** sign-up-mobile-responsiveness bb-60 ([#151](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/151)) ([648cb32](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/648cb3221cd4150dee0ce1aa84ffc3eff9b2033f))
+
+
+### Bug Fixes
+
+* **frontend:** signIn signUp screens markdown bb-129 ([#143](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/143)) ([521fe2c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/521fe2c4e7cbe885dc0c19c848dc9fe446bfcf85))
+
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.2...frontend-v1.12.0) (2024-08-25)
+
+
+### Features
+
+* **frontend:** sidebar component bb-90 ([#115](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/115)) ([03ee06b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03ee06b2b6d91163c10f644e3782241407ca129e))
+
+## [1.11.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.1...frontend-v1.11.2) (2024-08-25)
+
+
+### Bug Fixes
+
+* **frontend:** move getAuthenticatedUser to auth store bb-171 ([#186](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/186)) ([bedb4f5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bedb4f51be8b1c6a3182ad3dcc16fec0ef2b99bb))
+
+## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.11.0...frontend-v1.11.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **frontend:** fix user is not saved in redux store after sign in/sign up bb-118 ([#160](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/160)) ([7d1a768](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7d1a768e6c38ff7947c3653a197f7f93b4d8d00f))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.10.0...frontend-v1.11.0) (2024-08-24)
 
 

@@ -1,4 +1,4 @@
-import { UserDto } from "./user-dto.type.js";
+import { type UserDto } from "./user-dto.type.js";
 
 type UserSignUpResponseDto = {
 	token: string;

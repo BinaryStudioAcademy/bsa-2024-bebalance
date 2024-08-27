@@ -1,47 +1,33 @@
-import lifeBalanceWheel from "~/assets/img/life-balance-wheel.svg";
-import rippleEffectBg from "~/assets/img/ripple-effect-bg.svg";
-import rippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg";
-import { Button } from "~/libs/components/components.js";
+import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
-import styles from "./styles.module.css";
+import { Analyzing, Introduction } from "./libs/components/components.js";
+import { STEP_INCREMENT } from "./libs/constants/constants.js";
+import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	return (
-		<div className={styles["container"]}>
-			<div className={styles["introduction"]}>
-				<h1 className={styles["header"]}>
-					Craft your personal Life Balance Wheel!
-				</h1>
+	const [step, setStep] = useState<number>(Step.ANALYZING);
 
-				<img
-					alt="Life Balance Wheel"
-					className={styles["wheel-img"]}
-					src={lifeBalanceWheel}
-				/>
+	const handleNextStep = useCallback((): void => {
+		setStep((previousStep) => previousStep + STEP_INCREMENT);
+	}, []);
 
-				<p className={styles["text"]}>
-					Answer a few questions to find out which areas of your life are
-					outstanding and which areas you are missing out on
-				</p>
+	const getScreen = (step: number): React.ReactNode => {
+		switch (step) {
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
+			}
 
-				<div className={styles["btn"]}>
-					<Button isFluid label="CONTINUE" type="button" variant="dark" />
-				</div>
-			</div>
-			<img
-				alt="ripple visual effect"
-				className={styles["ripple-effect__background1"]}
-				src={rippleEffectBg}
-			/>
-			<img
-				alt="ripple visual effect"
-				className={styles["ripple-effect__background2"]}
-				src={rippleEffectBg2}
-			/>
-			<div className={styles["circle-gradient1"]} />
-			<div className={styles["circle-gradient2"]} />
-		</div>
-	);
+			case Step.INTRODUCTION: {
+				return <Introduction onNext={handleNextStep} />;
+			}
+
+			default: {
+				return null;
+			}
+		}
+	};
+
+	return <>{getScreen(step)}</>;
 };
 
 export { Quiz };
