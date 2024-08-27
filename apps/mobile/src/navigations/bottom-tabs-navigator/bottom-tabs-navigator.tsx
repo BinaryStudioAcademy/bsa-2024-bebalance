@@ -29,7 +29,10 @@ const screenOptions: BottomTabNavigationOptions = {
 
 const BottomTabsNavigator: React.FC = () => {
 	return (
-		<BottomTabs.Navigator screenOptions={screenOptions}>
+		<BottomTabs.Navigator
+			initialRouteName={BottomTabScreenName.WHEEL}
+			screenOptions={screenOptions}
+		>
 			<BottomTabs.Screen
 				component={Chat}
 				name={BottomTabScreenName.CHAT}
