@@ -49,6 +49,8 @@
 	}
 
 	.menu-btn {
+		position: relative;
 		display: block;
+		margin-left: 15px;
 	}
 }

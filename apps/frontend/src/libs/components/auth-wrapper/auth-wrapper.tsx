@@ -16,12 +16,11 @@ const AuthWrapper: React.FC<Properties> = ({ children }: Properties) => {
 
 	return (
 		<main className={style["auth-wrapper-container"]}>
-			<section className={style["left-side-section"]}>
-				<Sidebar
-					isSidebarOpen={isSidebarOpen}
-					onSidebarToggle={handleSidebarToggle}
-				/>
-			</section>
+			<Sidebar
+				isSidebarOpen={isSidebarOpen}
+				onSidebarToggle={handleSidebarToggle}
+			/>
+
 			<section className={style["right-side-section"]}>
 				<Header onSidebarToggle={handleSidebarToggle} />
 				{children}

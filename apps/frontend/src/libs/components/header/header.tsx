@@ -18,8 +18,10 @@ const Header: React.FC<Properties> = ({ onSidebarToggle }: Properties) => {
 				<Button
 					hasVisuallyHiddenLabel
 					iconName="menu"
+					iconPosition="center"
 					label="Menu"
 					onClick={onSidebarToggle}
+					variant="icon"
 				/>
 			</div>
 

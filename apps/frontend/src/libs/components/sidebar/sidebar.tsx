@@ -28,8 +28,10 @@ const Sidebar: React.FC<Properties> = ({
 				<Button
 					hasVisuallyHiddenLabel
 					iconName="close"
+					iconPosition="center"
 					label="Close"
 					onClick={onSidebarToggle}
+					variant="icon"
 				/>
 			</div>
 
