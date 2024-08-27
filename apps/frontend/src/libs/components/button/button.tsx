@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
+	iconPosition?: "center" | "left" | "right";
 	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
@@ -18,6 +19,7 @@ type Properties = {
 const Button: React.FC<Properties> = ({
 	hasVisuallyHiddenLabel = false,
 	iconName,
+	iconPosition = "right",
 	isFluid = false,
 	isPrimary = true,
 	label,
@@ -28,6 +30,7 @@ const Button: React.FC<Properties> = ({
 	<button
 		className={getValidClassNames(
 			styles["btn"],
+			variant === "icon" && styles[`position-${iconPosition}`],
 			isFluid && styles["fluid"],
 			isPrimary && styles["primary"],
 			variant && styles[`${variant}-button`],
