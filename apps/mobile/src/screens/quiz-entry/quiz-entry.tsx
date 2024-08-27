@@ -4,12 +4,10 @@ import {
 	BackgroundWrapper,
 	Button,
 	Image,
-	Link,
 	ScreenWrapper,
 	Text,
 	View,
 } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
 import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
@@ -54,10 +52,6 @@ const QuizEntry: React.FC = () => {
 						outstanding and which areas you are missing out on
 					</Text>
 					<Button label="Start" onPress={handleStartPress} />
-					<Link
-						label="BOTTOM BAR"
-						to={`/${RootScreenName.BOTTOM_TABS_NAVIGATOR}`}
-					/>
 				</View>
 			</ScreenWrapper>
 		</BackgroundWrapper>
