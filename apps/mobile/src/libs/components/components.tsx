@@ -10,6 +10,8 @@ export { IconButton } from "./icon-button/icon-button";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
+export { ProgressBar } from "./progress-bar/progress-bar";
+export { RadioGroup } from "./radio-group/radio-group";
 export { Planet } from "./planet/planet";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Tag } from "./tag/tag";

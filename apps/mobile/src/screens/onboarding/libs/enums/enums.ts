@@ -1,0 +1,1 @@
+export { OnboardingValidationMessage } from "shared";

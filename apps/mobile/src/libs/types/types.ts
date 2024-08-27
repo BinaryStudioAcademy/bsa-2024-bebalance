@@ -14,7 +14,9 @@ export {
 	type ViewStyle,
 } from "react-native";
 export { type LinearGradientProps } from "react-native-linear-gradient";
+export { type RadioButtonProps } from "react-native-radio-buttons-group";
 export {
+	type OnboardingQuestionResponseDto,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type ValidationSchema,
