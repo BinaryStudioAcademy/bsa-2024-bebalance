@@ -1,1 +1,1 @@
-export { APIPath, QuizApiPath } from "shared";
+export { QuizApiPath } from "shared";

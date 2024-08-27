@@ -5,7 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
-import { UserModel } from "../users/users.js";
+import { UserModel } from "../users/user.model.js";
 
 class QuizAnswerModel extends AbstractModel {
 	public label!: string;

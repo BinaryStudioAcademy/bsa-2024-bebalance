@@ -1,3 +1,4 @@
+import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
@@ -7,7 +8,7 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { type QuizAnswerService } from "../quiz-answers/quiz-answers.js";
-import { APIPath, QuizApiPath } from "./libs/enums/enums.js";
+import { QuizApiPath } from "./libs/enums/enums.js";
 import { type UserDto } from "./libs/types/types.js";
 
 class QuizController extends BaseController {
