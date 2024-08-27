@@ -55,7 +55,12 @@ const Button: React.FC<Properties> = ({
 						useAngle
 					>
 						{isFilled ? (
-							<Text color={BaseColor.BG_WHITE} preset="uppercase" size="md">
+							<Text
+								color={BaseColor.BG_WHITE}
+								preset="uppercase"
+								size="md"
+								weight="bold"
+							>
 								{label}
 							</Text>
 						) : (

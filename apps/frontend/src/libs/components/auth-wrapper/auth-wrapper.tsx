@@ -1,3 +1,5 @@
+import { useCallback, useState } from "~/libs/hooks/hooks.js";
+
 import { Header, Sidebar } from "../components.js";
 import style from "./style.module.css";
 
@@ -6,13 +8,21 @@ type Properties = {
 };
 
 const AuthWrapper: React.FC<Properties> = ({ children }: Properties) => {
+	const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+	const handleSidebarToggle = useCallback((): void => {
+		setIsSidebarOpen((previousState) => !previousState);
+	}, [setIsSidebarOpen]);
+
 	return (
 		<main className={style["auth-wrapper-container"]}>
-			<section className={style["left-side-section"]}>
-				<Sidebar />
-			</section>
+			<Sidebar
+				isSidebarOpen={isSidebarOpen}
+				onSidebarToggle={handleSidebarToggle}
+			/>
+
 			<section className={style["right-side-section"]}>
-				<Header />
+				<Header onSidebarToggle={handleSidebarToggle} />
 				{children}
 			</section>
 		</main>
