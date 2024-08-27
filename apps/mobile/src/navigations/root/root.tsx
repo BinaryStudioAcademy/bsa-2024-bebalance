@@ -7,6 +7,7 @@ import React from "react";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppSelector } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
+import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
 import { WelcomeScreen } from "~/screens/welcome-screen/welcome-screen";
 
@@ -23,10 +24,16 @@ const Root: React.FC = () => {
 	return (
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
-				<NativeStack.Screen
-					component={WelcomeScreen}
-					name={RootScreenName.WELCOME}
-				/>
+				<NativeStack.Group>
+					<NativeStack.Screen
+						component={WelcomeScreen}
+						name={RootScreenName.WELCOME}
+					/>
+					<NativeStack.Screen
+						component={BottomTabsNavigator}
+						name={RootScreenName.BOTTOM_TABS_NAVIGATOR}
+					/>
+				</NativeStack.Group>
 			) : (
 				<NativeStack.Group>
 					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_IN} />
