@@ -52,6 +52,7 @@ const Auth: React.FC = () => {
 		<div className={styles["auth-container"]}>
 			<RippleEffectBg className={styles["ripple-effect__background1"]} />
 			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+			<div className={styles["white-dots"]} />
 			<div className={styles["form-container"]}>
 				<div className={styles["form-header"]}>
 					<div className={styles["form-header__logo-container"]}>
@@ -60,7 +61,7 @@ const Auth: React.FC = () => {
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
-						{pathname === AppRoute.SIGN_IN ? "sign in" : "sign up"}
+						{pathname === AppRoute.SIGN_IN ? "sign in" : "create an account"}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
 						{pathname === AppRoute.SIGN_IN ? (
@@ -71,7 +72,7 @@ const Auth: React.FC = () => {
 						) : (
 							<>
 								<span>Already have an account? Go to </span>
-								<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
 							</>
 						)}
 					</span>
