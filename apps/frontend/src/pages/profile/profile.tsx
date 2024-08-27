@@ -10,7 +10,7 @@ const Profile: React.FC = () => {
 
 	return (
 		<div className={styles["page-container"]}>
-			<h2 className={styles["title"]}>Profile</h2>
+			<h4 className={styles["title"]}>Profile</h4>
 			<div className={styles["content-container"]}>
 				<img
 					alt={`${user.name}'s avatar`}

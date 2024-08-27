@@ -1,7 +1,6 @@
 .page-container {
 	height: 100vh;
 	padding: 35px;
-	background-color: var(--background-gray);
 }
 
 .content-container {
@@ -12,9 +11,9 @@
 
 .title {
 	margin-bottom: 24px;
-	font-size: 32px;
+	font-size: 20px;
 	font-weight: 700;
-	line-height: 1.2;
+	line-height: 25px;
 }
 
 .user-avatar {
@@ -25,15 +24,15 @@
 
 .user-info {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: auto auto;
 	gap: 10px;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .user-info-container {
 	display: flex;
 	flex-direction: column;
-	gap: 25px;
+	gap: 35px;
 }
 
 .label {
