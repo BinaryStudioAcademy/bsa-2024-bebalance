@@ -32,10 +32,12 @@ class QuizAnswerService implements Service {
 		userId: number;
 	}): Promise<{
 		answer: QuizAnswerEntity;
-		relationId: number;
+		isAnswerStored: boolean;
+		isPreviousAnswerDeleted: boolean;
 	}> {
 		const user = await this.userService.find(userId);
 		const answer = await this.find(answerId);
+		let isPreviousAnswerDeleted = false;
 
 		if (!answer || !user) {
 			throw new QuizError({
@@ -54,15 +56,16 @@ class QuizAnswerService implements Service {
 
 		if (userAnswerToQuestion) {
 			const { id } = userAnswerToQuestion.toObject();
-			await this.quizAnswerRepository.deleteUserAnswer(userId, id);
+			isPreviousAnswerDeleted =
+				await this.quizAnswerRepository.deleteUserAnswer(userId, id);
 		}
 
-		const userAnswer = await this.quizAnswerRepository.createUserAnswer(
+		const isAnswerStored = await this.quizAnswerRepository.createUserAnswer(
 			userId,
 			answerId,
 		);
 
-		return { answer, relationId: userAnswer.relationId };
+		return { answer, isAnswerStored, isPreviousAnswerDeleted };
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

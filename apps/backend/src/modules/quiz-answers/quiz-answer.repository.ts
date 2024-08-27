@@ -19,13 +19,13 @@ class QuizAnswerRepository implements Repository {
 	public async createUserAnswer(
 		userId: number,
 		answerId: number,
-	): Promise<{ relationId: number }> {
-		const relationId = await this.quizAnswerModel
+	): Promise<boolean> {
+		const insertedItemsNumber = await this.quizAnswerModel
 			.relatedQuery(RelationName.USERS)
 			.for(answerId)
 			.relate(userId);
 
-		return { relationId };
+		return Boolean(insertedItemsNumber);
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
