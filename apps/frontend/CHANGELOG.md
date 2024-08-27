@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.14.0...frontend-v1.15.0) (2024-08-27)
+
+
+### Features
+
+* **frontend:** get authenticated user saved on store bb-14 ([#195](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/195)) ([b1ab4d6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b1ab4d643e16bf829c371aa5420feb92c56d991c))
+
+
+### Bug Fixes
+
+* add toggle eye in password bb-145 ([#164](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/164)) ([bc4d9db](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc4d9dba6e219a919deae52cf5d2cab7633ddcdb))
+
 ## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.13.1...frontend-v1.14.0) (2024-08-26)
 
 
