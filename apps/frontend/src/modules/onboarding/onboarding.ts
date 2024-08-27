@@ -12,7 +12,8 @@ const onboardingApi = new OnboardingApi({
 
 export { onboardingApi };
 export {
-	type SurveyAnswerDto,
-	type SurveyResponseDto,
+	type OnboardingAnswerDto,
+	type OnboardingGetAllResponseDto,
+	type OnboardingQuestionDto,
 } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/onboarding.js";

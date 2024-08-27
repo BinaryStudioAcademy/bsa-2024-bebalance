@@ -14,7 +14,7 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { type SurveyResponseDto } from "~/libs/types/types.js";
+import { type OnboardingQuestionDto } from "~/libs/types/types.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
@@ -32,23 +32,23 @@ const Onboarding: React.FC = () => {
 	const [steps, setSteps] = useState<Step[]>([]);
 	const [currentStep, setCurrentStep] = useState<number>(FIRST_STEP_INDEX);
 	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
-	let surveyData: SurveyResponseDto | undefined;
+	let surveyData: OnboardingQuestionDto | undefined;
 
-	const { dataStatus, onboardingSurvey } = useAppSelector(({ onboarding }) => ({
+	const { dataStatus, onboarding } = useAppSelector(({ onboarding }) => ({
 		dataStatus: onboarding.dataStatus,
-		onboardingSurvey: onboarding.onboardingSurvey,
+		onboarding: onboarding.onboarding,
 	}));
 
 	useEffect(() => {
-		void dispatch(onboardingActions.getOnboardingSurvey());
+		void dispatch(onboardingActions.getAll());
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (dataStatus === "fulfilled" && onboardingSurvey) {
-			const initialSteps = createSteps(onboardingSurvey.length);
+		if (dataStatus === "fulfilled") {
+			const initialSteps = createSteps(onboarding.length);
 			setSteps(initialSteps);
 		}
-	}, [onboardingSurvey, dataStatus]);
+	}, [onboarding, dataStatus]);
 
 	const { control } = useAppForm<FormValues>({
 		defaultValues: {
@@ -77,9 +77,9 @@ const Onboarding: React.FC = () => {
 	const isLastStep = currentStep === steps.length - ONE_STEP_OFFSET;
 	const isLoading = dataStatus === DataStatus.PENDING;
 
-	if (onboardingSurvey) {
-		surveyData = onboardingSurvey[currentStep];
-	}
+	// if (onboarding) {
+	surveyData = onboarding[currentStep];
+	// }
 
 	return (
 		<div className={styles["container"]}>

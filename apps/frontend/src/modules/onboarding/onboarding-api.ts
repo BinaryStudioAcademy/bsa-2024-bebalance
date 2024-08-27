@@ -3,8 +3,8 @@ import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
-import { SurveyApiPath } from "./libs/enums/enums.js";
-import { type SurveyResponseDto } from "./libs/types/types.js";
+import { OnboardingApiPath } from "./libs/enums/enums.js";
+import { type OnboardingGetAllResponseDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -14,12 +14,12 @@ type Constructor = {
 
 class OnboardingApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ baseUrl, http, path: APIPath.SURVEYS, storage });
+		super({ baseUrl, http, path: APIPath.ONBOARDING, storage });
 	}
 
-	public async getOnboardingSurvey(): Promise<SurveyResponseDto[]> {
+	public async getAll(): Promise<OnboardingGetAllResponseDto> {
 		const response = await this.load(
-			this.getFullEndpoint(SurveyApiPath.ONBOARDING, {}),
+			this.getFullEndpoint(OnboardingApiPath.ROOT, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -27,7 +27,7 @@ class OnboardingApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<SurveyResponseDto[]>();
+		return await response.json<OnboardingGetAllResponseDto>();
 	}
 }
 

@@ -1,9 +1,9 @@
-import { getOnboardingSurvey } from "./actions.js";
+import { getAll } from "./actions.js";
 import { actions } from "./onboarding.slice.js";
 
 const allActions = {
 	...actions,
-	getOnboardingSurvey,
+	getAll,
 };
 
 export { allActions as actions };

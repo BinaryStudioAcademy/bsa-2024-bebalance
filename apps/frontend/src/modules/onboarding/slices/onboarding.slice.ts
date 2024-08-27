@@ -2,30 +2,30 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type SurveyResponseDto } from "~/modules/onboarding/onboarding.js";
+import { type OnboardingQuestionDto } from "~/modules/onboarding/onboarding.js";
 
-import { getOnboardingSurvey } from "./actions.js";
+import { getAll } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	onboardingSurvey: null | SurveyResponseDto[];
+	onboarding: OnboardingQuestionDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	onboardingSurvey: null,
+	onboarding: [],
 };
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(getOnboardingSurvey.pending, (state) => {
+		builder.addCase(getAll.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(getOnboardingSurvey.fulfilled, (state, action) => {
-			state.onboardingSurvey = action.payload;
+		builder.addCase(getAll.fulfilled, (state, action) => {
+			state.onboarding = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
 		});
-		builder.addCase(getOnboardingSurvey.rejected, (state) => {
+		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
