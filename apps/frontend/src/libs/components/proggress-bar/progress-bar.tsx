@@ -45,5 +45,4 @@ const ProgressBar: React.FC<Properties> = ({ steps }) => {
 };
 
 export { ProgressBar };
-
 export { type Step } from "./libs/types/types.js";

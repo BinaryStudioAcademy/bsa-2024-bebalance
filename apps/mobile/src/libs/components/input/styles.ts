@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
 	input: {
 		borderColor: GradientColor.BLUE[COLOR_INDEX],
 		borderWidth: 1,
+		fontFamily: "Nunito-Regular",
 	},
 });
 

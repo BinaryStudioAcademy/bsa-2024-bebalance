@@ -1,7 +1,7 @@
 import { type Entity } from "~/libs/types/types.js";
 
 import { type SurveyAnswerDto } from "../libs/types/types.js";
-import { OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
+import { type OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
 
 class OnboardingQuestionEntity implements Entity {
 	private answers: OnboardingAnswerEntity[];

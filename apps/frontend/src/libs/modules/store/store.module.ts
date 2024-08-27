@@ -12,20 +12,17 @@ import {
 	onboardingApi,
 	reducer as onboardingReducer,
 } from "~/modules/onboarding/onboarding.js";
-import { userApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import { handleErrorMiddleware } from "./handle-error.middleware.js";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
-	users: ReturnType<typeof usersReducer>;
 };
 
 type ExtraArguments = {
 	authApi: typeof authApi;
 	onboardingApi: typeof onboardingApi;
-	userApi: typeof userApi;
 };
 
 class Store {
@@ -50,7 +47,6 @@ class Store {
 			reducer: {
 				auth: authReducer,
 				onboarding: onboardingReducer,
-				users: usersReducer,
 			},
 		});
 	}
@@ -59,7 +55,6 @@ class Store {
 		return {
 			authApi,
 			onboardingApi,
-			userApi,
 		};
 	}
 }

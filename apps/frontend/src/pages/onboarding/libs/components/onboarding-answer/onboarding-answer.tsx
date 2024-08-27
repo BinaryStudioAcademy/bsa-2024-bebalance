@@ -19,7 +19,7 @@ const OnboardingAnswer = <T extends FieldValues>({
 	control,
 	name,
 	options = [],
-}: AnswerProperties<T>) => {
+}: AnswerProperties<T>): JSX.Element => {
 	return (
 		<div className={styles["onboarding-answer"]}>
 			<Input

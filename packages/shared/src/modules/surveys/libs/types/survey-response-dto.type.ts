@@ -1,4 +1,4 @@
-import { SurveyAnswerDto } from "./survey-ansver-dto.type.js";
+import { type SurveyAnswerDto } from "./survey-ansver-dto.type.js";
 
 type SurveyResponseDto = {
 	answers: SurveyAnswerDto[];

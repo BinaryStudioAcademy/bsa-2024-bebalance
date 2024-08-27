@@ -12,12 +12,14 @@ const createSteps = (questionsLength: number): Step[] => {
 
 const advanceStep = (steps: Step[]): Step[] => {
 	const currentStepIndex = steps.findIndex((step) => step.status === "current");
+
 	return steps.map((step, index) => {
 		if (index === currentStepIndex) {
 			return { ...step, status: "completed" };
 		} else if (index === currentStepIndex + NEXT_STEP_OFFSET) {
 			return { ...step, status: "current" };
 		}
+
 		return step;
 	});
 };

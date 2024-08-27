@@ -30,8 +30,8 @@ type FormValues = {
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [steps, setSteps] = useState<Step[]>([]);
-	const [currentStep, setCurrentStep] = useState(FIRST_STEP_INDEX);
-	const [isAnswerSelected, setIsAnswerSelected] = useState(false);
+	const [currentStep, setCurrentStep] = useState<number>(FIRST_STEP_INDEX);
+	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 	let surveyData: SurveyResponseDto | undefined;
 
 	const { dataStatus, onboardingSurvey } = useAppSelector(({ onboarding }) => ({
@@ -109,7 +109,6 @@ const Onboarding: React.FC = () => {
 									label="ANALYZE"
 									onClick={handleFinish}
 									type="button"
-									variant="dark"
 								/>
 							) : (
 								<Button
@@ -117,7 +116,6 @@ const Onboarding: React.FC = () => {
 									label="NEXT"
 									onClick={handleNextStep}
 									type="button"
-									variant="dark"
 								/>
 							)}
 						</div>

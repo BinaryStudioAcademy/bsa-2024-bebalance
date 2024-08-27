@@ -29,6 +29,7 @@ class SurveyService implements Service {
 	public async getOnboardingSurvey(): Promise<SurveyResponseDto[]> {
 		const onboardingQuestions =
 			await this.surveyRepository.getOnboardingSurvey();
+
 		return onboardingQuestions.map((question) => question.toObject());
 	}
 

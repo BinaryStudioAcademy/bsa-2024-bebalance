@@ -1,4 +1,4 @@
-import { StepStatus } from "./step-status.type.js";
+import { type StepStatus } from "./step-status.type.js";
 
 type Step = {
 	status: StepStatus;
