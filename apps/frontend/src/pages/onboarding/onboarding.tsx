@@ -65,8 +65,10 @@ const Onboarding: React.FC = () => {
 	}, [steps, currentStep, isAnswerSelected]);
 
 	const handleFinish = useCallback(() => {
-		alert("All steps completed!");
-	}, []);
+		if (isAnswerSelected) {
+			alert("All steps completed!");
+		}
+	}, [isAnswerSelected]);
 
 	const handleFormChange = useCallback(() => {
 		setIsAnswerSelected(true);
