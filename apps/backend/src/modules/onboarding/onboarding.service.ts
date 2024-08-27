@@ -32,16 +32,6 @@ class OnboardingService implements Service {
 		};
 	}
 
-	public async getOnboardingSurvey(): Promise<OnboardingGetAllResponseDto> {
-		const onboardingQuestions =
-			await this.onboardingRepository.getOnboardingSurvey();
-
-		// return onboardingQuestions.map((question) => question.toObject());
-		return {
-			items: onboardingQuestions.map((item) => item.toObject()),
-		};
-	}
-
 	public update(): ReturnType<Service["update"]> {
 		return Promise.resolve(null);
 	}
