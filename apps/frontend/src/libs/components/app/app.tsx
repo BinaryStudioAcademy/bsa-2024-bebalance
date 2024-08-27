@@ -26,9 +26,7 @@ const App: React.FC = () => {
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
-		if (isRoot) {
-			void dispatch(authActions.getAuthenticatedUser());
-		}
+		void dispatch(authActions.getAuthenticatedUser());
 	}, [isRoot, dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;

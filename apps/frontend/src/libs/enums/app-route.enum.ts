@@ -1,5 +1,6 @@
 const AppRoute = {
 	ANY: "*",
+	PROFILE: "/profile",
 	QUIZ: "/quiz",
 	ROOT: "/",
 	SIGN_IN: "/sign-in",

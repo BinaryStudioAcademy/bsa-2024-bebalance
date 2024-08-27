@@ -1,0 +1,41 @@
+.page-container {
+	height: 100vh;
+	padding: 35px;
+	background-color: var(--background-gray);
+}
+
+.content-container {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+.title {
+	margin-bottom: 24px;
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.user-avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+.user-info {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	font-size: 18px;
+}
+
+.user-info-container {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
+.label {
+	font-weight: bold;
+}
