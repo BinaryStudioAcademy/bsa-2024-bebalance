@@ -44,5 +44,6 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
+	type UserUpdateRequestDto,
 	UserValidationMessage,
 } from "./modules/users/users.js";

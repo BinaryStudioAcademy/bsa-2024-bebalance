@@ -1,5 +1,6 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
@@ -8,6 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
+import { type UserUpdateRequestDto } from "./libs/types/types.js";
 
 /*** @swagger
  * components:
@@ -44,6 +46,18 @@ class UserController extends BaseController {
 			method: "GET",
 			path: UsersApiPath.ROOT,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.update(
+					options as APIHandlerOptions<{
+						body: UserUpdateRequestDto;
+						params: number;
+					}>,
+				),
+			method: "POST",
+			path: UsersApiPath.UPDATE,
+		});
 	}
 
 	/**
@@ -70,6 +84,18 @@ class UserController extends BaseController {
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async update(
+		options: APIHandlerOptions<{
+			body: UserUpdateRequestDto;
+			params: number;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.userService.update(options.params, options.body),
 			status: HTTPCode.OK,
 		};
 	}
