@@ -33,6 +33,7 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
+export { OnboardingApiPath } from "./modules/onboarding/onboarding.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
