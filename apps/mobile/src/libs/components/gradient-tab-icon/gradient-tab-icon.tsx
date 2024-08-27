@@ -28,6 +28,7 @@ const GradientTabIcon: React.FC<Properties> = ({ focused, name }) => {
 			/>
 		);
 	}
+
 	return <Icon color={BaseColor.GRAY} name={name} size={iconSize} />;
 };
 

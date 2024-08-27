@@ -2,6 +2,7 @@ import {
 	type BottomTabNavigationOptions,
 	createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
+import React from "react";
 
 import { GradientTabIcon } from "~/libs/components/components";
 import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
@@ -26,7 +27,7 @@ const screenOptions: BottomTabNavigationOptions = {
 	},
 };
 
-const BottomTabsNavigator = () => {
+const BottomTabsNavigator: React.FC = () => {
 	return (
 		<BottomTabs.Navigator screenOptions={screenOptions}>
 			<BottomTabs.Screen

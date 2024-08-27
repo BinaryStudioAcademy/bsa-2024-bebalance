@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 
-import { MaterialIcon } from "~/libs/components/components";
+import { type MaterialIcon } from "~/libs/components/components";
 
 type IconName = ComponentPropsWithoutRef<typeof MaterialIcon>["name"];
 

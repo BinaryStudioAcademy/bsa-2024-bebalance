@@ -9,8 +9,8 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { useCallback } from "~/libs/hooks/hooks";
 import { RootScreenName } from "~/libs/enums/enums";
+import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 
