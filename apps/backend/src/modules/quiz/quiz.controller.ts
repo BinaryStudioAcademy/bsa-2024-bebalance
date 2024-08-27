@@ -23,7 +23,7 @@ class QuizController extends BaseController {
 			handler: (options) =>
 				this.createUserAnswer(
 					options as APIHandlerOptions<{
-						body: { answerId: number };
+						body: { answerIds: number[] };
 						user: UserDto;
 					}>,
 				),
@@ -36,7 +36,7 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/answer:
 	 *   put:
-	 *     description: Create a user answer and remove previous answer to the same question
+	 *     description: Saves user answers for all quiz questions at once
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -44,8 +44,8 @@ class QuizController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               answerId:
-	 *                 type: number
+	 *               answerIds:
+	 *                 type: number[]
 	 *
 	 *
 	 *     responses:
@@ -78,13 +78,15 @@ class QuizController extends BaseController {
 	 */
 	private async createUserAnswer(
 		options: APIHandlerOptions<{
-			body: { answerId: number };
+			body: { answerIds: number[] };
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
+		const { answerIds } = options.body;
+
 		return {
-			payload: await this.quizAnswerService.createUserAnswer({
-				answerId: options.body.answerId,
+			payload: await this.quizAnswerService.createUserAnswers({
+				answerIds,
 				userId: options.user.id,
 			}),
 			status: HTTPCode.OK,

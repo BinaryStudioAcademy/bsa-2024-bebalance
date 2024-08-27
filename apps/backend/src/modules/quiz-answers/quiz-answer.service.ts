@@ -17,47 +17,44 @@ class QuizAnswerService implements Service {
 		return Promise.resolve(null);
 	}
 
-	public async createUserAnswer({
-		answerId,
+	public async createUserAnswers({
+		answerIds,
 		userId,
 	}: {
-		answerId: number;
+		answerIds: number[];
 		userId: number;
 	}): Promise<{
-		answer: QuizAnswerEntity;
-		isAnswerStored: boolean;
-		isPreviousAnswerDeleted: boolean;
+		savedAnswersCount: number;
 	}> {
-		const answer = await this.find(answerId);
-		let isPreviousAnswerDeleted = false;
+		const answers = await Promise.all(answerIds.map((id) => this.find(id)));
+		const existingAnswers = answers.filter((answer) => answer !== null);
 
-		if (!answer) {
+		if (existingAnswers.length !== answerIds.length) {
 			throw new QuizError({
-				message: ErrorMessage.NOT_FOUND,
+				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
 			});
 		}
 
-		const { questionId } = answer.toObject();
+		const answerEntities = existingAnswers.map((answer) => answer.toObject());
+		const questionIds = answerEntities.map((answer) => answer.questionId);
+		const uniqueQuestionIds = new Set(questionIds);
 
-		const userAnswerToQuestion =
-			await this.quizAnswerRepository.findUserAnswerByQuestion(
-				questionId,
-				userId,
-			);
-
-		if (userAnswerToQuestion) {
-			const { id } = userAnswerToQuestion.toObject();
-			isPreviousAnswerDeleted =
-				await this.quizAnswerRepository.deleteUserAnswer(userId, id);
+		if (uniqueQuestionIds.size !== questionIds.length) {
+			throw new QuizError({
+				message: ErrorMessage.DUPLICATE_ANSWER,
+				status: HTTPCode.BAD_REQUEST,
+			});
 		}
 
-		const isAnswerStored = await this.quizAnswerRepository.createUserAnswer(
+		// TODO: Implement storing scores
+
+		const savedAnswersCount = await this.quizAnswerRepository.createUserAnswers(
 			userId,
-			answerId,
+			answerIds,
 		);
 
-		return { answer, isAnswerStored, isPreviousAnswerDeleted };
+		return { savedAnswersCount };
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

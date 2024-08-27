@@ -1,6 +1,7 @@
 const ErrorMessage = {
+	DUPLICATE_ANSWER: "Answers contain multiple answers to the same question.",
 	INCORRECT_CREDENTIALS: "Incorrect credentials.",
-	NOT_FOUND: "Requested resource not found.",
+	REQUESTED_ENTITY_NOT_FOUND: "The requested entity was not found.",
 	UNAUTHORIZED: "You are unauthorized to access the requested resource.",
 } as const;
 
