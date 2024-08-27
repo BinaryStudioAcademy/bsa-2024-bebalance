@@ -24,16 +24,18 @@ const Root: React.FC = () => {
 	return (
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
-				<NativeStack.Screen
-					component={QuizEntry}
-					name={RootScreenName.QUIZ_ENTRY}
-				/>
-			) : (
 				<NativeStack.Group>
 					<NativeStack.Screen
 						component={Welcome}
 						name={RootScreenName.WELCOME}
 					/>
+					<NativeStack.Screen
+						component={QuizEntry}
+						name={RootScreenName.QUIZ_ENTRY}
+					/>
+				</NativeStack.Group>
+			) : (
+				<NativeStack.Group>
 					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_IN} />
 					<NativeStack.Screen component={Auth} name={RootScreenName.SIGN_UP} />
 				</NativeStack.Group>
