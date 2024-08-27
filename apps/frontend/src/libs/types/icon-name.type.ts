@@ -1,3 +1,9 @@
-type IconName = "crossedEye" | "eye" | "wheelActive" | "wheelInactive";
+type IconName =
+	| "close"
+	| "crossedEye"
+	| "eye"
+	| "menu"
+	| "wheelActive"
+	| "wheelInactive";
 
 export { type IconName };
