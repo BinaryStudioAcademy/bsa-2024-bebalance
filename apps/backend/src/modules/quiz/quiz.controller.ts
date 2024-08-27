@@ -31,6 +31,50 @@ class QuizController extends BaseController {
 		});
 	}
 
+	/**
+	 * @swagger
+	 * /quiz/answer:
+	 *   put:
+	 *     description: Create a user answer and remove previous answer to the same question
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               answerId:
+	 *                 type: number
+	 *
+	 *
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 isAnswerStored:
+	 *                   type: boolean
+	 *                 isPreviousAnswerDeleted:
+	 *                   type: boolean
+	 *                 answer:
+	 *                   type: object
+	 *                   properties:
+	 *                     createdAt:
+	 *                       type: string
+	 *                     id:
+	 *                       type: number
+	 *                     label:
+	 *                       type: string
+	 *                     questionId:
+	 *                       type: number
+	 *                     updatedAt:
+	 *                       type: string
+	 *                     value:
+	 *                       type: number
+	 */
 	private async createUserAnswer(
 		options: APIHandlerOptions<{
 			body: { answerId: number };
