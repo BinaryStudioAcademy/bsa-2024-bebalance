@@ -10,6 +10,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type QuizAnswerService } from "../quiz-answers/quiz-answers.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
 import { type UserDto } from "./libs/types/types.js";
+import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 class QuizController extends BaseController {
 	private quizAnswerService: QuizAnswerService;
@@ -29,6 +30,9 @@ class QuizController extends BaseController {
 				),
 			method: "PUT",
 			path: QuizApiPath.ANSWER,
+			validation: {
+				body: quizUserAnswersValidationSchema,
+			},
 		});
 	}
 
