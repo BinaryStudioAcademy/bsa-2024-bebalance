@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Text, View } from "~/libs/components/components";
+import { ScreenWrapper, Text } from "~/libs/components/components";
 
 const Tasks: React.FC = () => {
 	return (
-		<View>
+		<ScreenWrapper>
 			<Text>Tasks</Text>
-		</View>
+		</ScreenWrapper>
 	);
 };
 
