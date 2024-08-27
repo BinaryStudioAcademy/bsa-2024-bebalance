@@ -1,4 +1,4 @@
-import { Button, Input } from "~/libs/components/components.js";
+import { Button, Input, useNavigate } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpFormDto,
@@ -24,6 +24,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
 
+	const navigate = useNavigate();
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload: UserSignUpFormDto) => {
@@ -31,6 +32,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 				if (confirmPassword === userData.password) {
 					onSubmit(userData);
+					navigate("/");
 				} else {
 					setError(ConfirmPasswordCustomValidation.FIELD, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
@@ -39,7 +41,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				}
 			})(event_);
 		},
-		[handleSubmit, onSubmit, setError],
+		[handleSubmit, onSubmit, setError, navigate],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {
