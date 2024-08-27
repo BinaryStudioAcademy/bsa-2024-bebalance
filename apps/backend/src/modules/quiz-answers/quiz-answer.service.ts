@@ -1,6 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/service.type.js";
-import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
@@ -10,13 +9,7 @@ import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 class QuizAnswerService implements Service {
 	private quizAnswerRepository: QuizAnswerRepository;
 
-	private userService: UserService;
-
-	public constructor(
-		userService: UserService,
-		quizAnswerRepository: QuizAnswerRepository,
-	) {
-		this.userService = userService;
+	public constructor(quizAnswerRepository: QuizAnswerRepository) {
 		this.quizAnswerRepository = quizAnswerRepository;
 	}
 
@@ -35,11 +28,10 @@ class QuizAnswerService implements Service {
 		isAnswerStored: boolean;
 		isPreviousAnswerDeleted: boolean;
 	}> {
-		const user = await this.userService.find(userId);
 		const answer = await this.find(answerId);
 		let isPreviousAnswerDeleted = false;
 
-		if (!answer || !user) {
+		if (!answer) {
 			throw new QuizError({
 				message: ErrorMessage.NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
