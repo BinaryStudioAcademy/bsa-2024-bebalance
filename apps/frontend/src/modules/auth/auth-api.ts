@@ -4,6 +4,7 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type UserDto } from "~/libs/types/types.js";
 import {
+	type EmailDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -34,6 +35,20 @@ class AuthApi extends BaseHTTPApi {
 		);
 
 		return await response.json<UserDto>();
+	}
+
+	public async sendResetPasswordLink(payload: EmailDto): Promise<string> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<string>();
 	}
 
 	public async signIn(

@@ -7,6 +7,7 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
+	type EmailDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -63,6 +64,28 @@ class AuthController extends BaseController {
 				body: userSignInValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.forgotPassword(
+					options as APIHandlerOptions<{
+						body: EmailDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.FORGOT_PASSWORD,
+		});
+	}
+
+	private async forgotPassword(
+		options: APIHandlerOptions<{
+			body: EmailDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.forgotPassword(options.body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**

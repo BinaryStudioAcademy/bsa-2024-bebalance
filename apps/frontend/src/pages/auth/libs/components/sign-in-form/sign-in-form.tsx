@@ -1,4 +1,5 @@
-import { Button, Input } from "~/libs/components/components.js";
+import { Button, Input, Link } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
@@ -47,6 +48,9 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				/>
 
 				<Button label="SIGN IN" type="submit" variant="dark" />
+				<div className={styles["forgot-password-container"]}>
+					<Link to={AppRoute.FORGOT_PASSWORD}>Forgot password?</Link>
+				</div>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

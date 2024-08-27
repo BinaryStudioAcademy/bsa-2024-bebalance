@@ -31,8 +31,12 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
+	type EmailDto,
+	type NewPasswordDto,
 	type UserDto,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
+	userResetPasswordValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,

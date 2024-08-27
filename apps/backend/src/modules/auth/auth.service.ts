@@ -1,7 +1,10 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { mail } from "~/libs/modules/mail/mail.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
+	type EmailDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -19,6 +22,35 @@ class AuthService {
 	public constructor(userService: UserService, encrypt: Encrypt) {
 		this.userService = userService;
 		this.encrypt = encrypt;
+	}
+
+	public async forgotPassword(payload: EmailDto): Promise<string> {
+		const { email: targetEmail } = payload;
+
+		const user = await this.userService.findByEmail(targetEmail);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		const userDetails = user.toObject();
+
+		const jwtToken = await token.createToken({
+			email: userDetails.email,
+			userId: userDetails.id,
+		});
+
+		const link = `http://${config.ENV.APP.HOST}:3000/reset-password/${userDetails.id.toString()}/${jwtToken}`;
+
+		mail.sendResetPasswordEmail({
+			recipient: userDetails.email,
+			resetLink: link,
+		});
+
+		return "Email sent";
 	}
 
 	public async signIn(

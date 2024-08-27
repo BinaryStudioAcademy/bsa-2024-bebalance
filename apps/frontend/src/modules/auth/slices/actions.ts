@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type EmailDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -48,4 +49,14 @@ const getAuthenticatedUser = createAsyncThunk<
 	return await authApi.getAuthenticatedUser();
 });
 
-export { getAuthenticatedUser, signIn, signUp };
+const sendForgotPasswordLink = createAsyncThunk<
+	string,
+	EmailDto,
+	AsyncThunkConfig
+>(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
+	const { authApi } = extra;
+
+	return await authApi.sendResetPasswordLink(emailPayload);
+});
+
+export { getAuthenticatedUser, sendForgotPasswordLink, signIn, signUp };

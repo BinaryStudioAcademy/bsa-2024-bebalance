@@ -9,11 +9,17 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
+	type EmailDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
-import { SignInForm, SignUpForm } from "./libs/components/components.js";
+import {
+	ForgotPasswordForm,
+	SignInForm,
+	SignUpForm,
+} from "./libs/components/components.js";
+import { authRouteToHeader } from "./libs/maps/maps.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
@@ -34,6 +40,13 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleForgotPasswordSubmit = useCallback(
+		(payload: EmailDto): void => {
+			void dispatch(authActions.sendForgotPasswordLink(payload));
+		},
+		[dispatch],
+	);
+
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case AppRoute.SIGN_IN: {
@@ -42,6 +55,10 @@ const Auth: React.FC = () => {
 
 			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+			}
+
+			case AppRoute.FORGOT_PASSWORD: {
+				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
 		}
 
@@ -60,7 +77,7 @@ const Auth: React.FC = () => {
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
-						{pathname === AppRoute.SIGN_IN ? "sign in" : "sign up"}
+						{authRouteToHeader[pathname]}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
 						{pathname === AppRoute.SIGN_IN ? (
