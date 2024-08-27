@@ -26,7 +26,9 @@ const Sidebar: React.FC<Properties> = ({
 		>
 			<div className={styles["close-btn"]}>
 				<Button
-					icon={<Icon name="close" />}
+					hasVisuallyHiddenLabel
+					icon={<Icon iconName="close" />}
+					label="close"
 					onClick={onSidebarToggle}
 					variant="secondary"
 				/>

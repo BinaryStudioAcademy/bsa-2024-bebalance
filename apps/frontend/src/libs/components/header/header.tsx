@@ -16,7 +16,9 @@ const Header: React.FC<Properties> = ({ onSidebarToggle }: Properties) => {
 		<header className={styles["header"]}>
 			<div className={styles["menu-btn"]}>
 				<Button
-					icon={<Icon name="menu" />}
+					hasVisuallyHiddenLabel
+					icon={<Icon iconName="menu" />}
+					label="Menu"
 					onClick={onSidebarToggle}
 					variant="secondary"
 				/>

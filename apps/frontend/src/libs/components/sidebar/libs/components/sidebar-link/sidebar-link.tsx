@@ -19,7 +19,7 @@ const SidebarLink: React.FC<Properties> = ({
 
 	return (
 		<Link isActive={isActive} to={to} type="navLink">
-			<Icon name={iconName} />
+			<Icon iconName={iconName} />
 			{label}
 		</Link>
 	);

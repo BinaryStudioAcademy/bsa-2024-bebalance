@@ -3,16 +3,18 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	hasVisuallyHiddenLabel?: boolean;
 	icon?: React.ReactNode;
 	isFluid?: boolean;
 	isPrimary?: boolean;
-	label?: string;
+	label: string;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	type?: "button" | "submit";
 	variant: "dark" | "secondary";
 };
 
 const Button: React.FC<Properties> = ({
+	hasVisuallyHiddenLabel,
 	icon,
 	isFluid = false,
 	isPrimary = true,
@@ -31,7 +33,7 @@ const Button: React.FC<Properties> = ({
 		type={type}
 	>
 		{icon}
-		{label}
+		{!hasVisuallyHiddenLabel && label}
 	</button>
 );
 
