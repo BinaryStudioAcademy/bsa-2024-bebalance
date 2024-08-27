@@ -1,5 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -17,6 +17,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
 	});
+	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -24,6 +25,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[handleSubmit, onSubmit],
 	);
+
+	const handleTogglePasswordVisibility = useCallback(() => {
+		setIsPasswordVisible((previousState) => !previousState);
+	}, []);
 
 	return (
 		<>
@@ -40,13 +45,15 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				<Input
 					control={control}
 					errors={errors}
+					iconName={isPasswordVisible ? "crossedEye" : "eye"}
 					label="Password"
 					name="password"
+					onIconClick={handleTogglePasswordVisibility}
 					placeholder="*******"
-					type="password"
+					type={isPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button label="SIGN IN" type="submit" variant="dark" />
+				<Button label="SIGN IN" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
