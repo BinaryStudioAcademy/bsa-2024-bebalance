@@ -97,6 +97,7 @@ const Auth: React.FC = () => {
 								globalStyles.ph16,
 								styles.wideView,
 							]}
+							keyboardShouldPersistTaps="handled"
 							overScrollMode="never"
 							showsHorizontalScrollIndicator={false}
 							showsVerticalScrollIndicator={false}
