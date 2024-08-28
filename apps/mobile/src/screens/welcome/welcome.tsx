@@ -66,7 +66,7 @@ const Welcome: React.FC = () => {
 					</View>
 					<Button label="Let's Continue" onPress={handleContinuePress} />
 					<Link
-						label="BOTTOM BAR"
+						label="Go to the Wheel"
 						to={`/${RootScreenName.BOTTOM_TABS_NAVIGATOR}`}
 					/>
 				</View>
