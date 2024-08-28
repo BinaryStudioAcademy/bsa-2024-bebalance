@@ -55,16 +55,14 @@ class OnboardingAnswerEntity implements Entity {
 
 	public static initializeNew({
 		label,
-		questionId,
 	}: {
 		label: string;
-		questionId: number;
 	}): OnboardingAnswerEntity {
 		return new OnboardingAnswerEntity({
 			createdAt: "",
 			id: null,
 			label,
-			questionId,
+			questionId: 0,
 			updatedAt: "",
 		});
 	}
