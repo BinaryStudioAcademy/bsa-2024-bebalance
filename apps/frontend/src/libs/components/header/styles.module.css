@@ -1,11 +1,19 @@
 .header {
+	position: sticky;
+	top: 0;
+	z-index: var(--z-index-medium);
 	display: flex;
+	align-items: center;
 	justify-content: flex-end;
 	width: 100%;
 	height: 77px;
-	padding-right: 51px;
+	padding-inline: 40px;
 	background-color: var(--white);
 	border-bottom: 1px solid var(--background-gray);
+}
+
+.menu-btn {
+	display: none;
 }
 
 .user-info {
@@ -30,8 +38,19 @@
 	color: var(--black);
 }
 
-@media screen and (width <= 500px) {
+@media screen and (width <= 768px) {
 	.user-name {
 		display: none;
+	}
+
+	.header {
+		justify-content: space-between;
+		padding-inline: 15px;
+	}
+
+	.menu-btn {
+		position: relative;
+		display: block;
+		margin-left: 15px;
 	}
 }
