@@ -47,15 +47,15 @@ class QuizAnswerService implements Service {
 			countByCategoryId.set(categoryId, currentScore + value);
 		}
 
-		const scores: { categoryId: number; score: number }[] = [];
+		const scores = [];
 
 		for (const [categoryId, score] of countByCategoryId.entries()) {
-			await this.categoryService.createScore({
+			const quizScore = await this.categoryService.createScore({
 				categoryId,
 				score,
 				userId,
 			});
-			scores.push({ categoryId, score });
+			scores.push(quizScore);
 		}
 
 		return scores;

@@ -8,7 +8,11 @@ import {
 import { UserModel } from "../users/user.model.js";
 
 class CategoryModel extends AbstractModel {
-	public users!: UserModel[];
+	public categoryId!: number;
+
+	public score!: number;
+
+	public userId!: number;
 
 	static get relationMappings(): RelationMappings {
 		return {

@@ -1,4 +1,3 @@
-import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
@@ -23,16 +22,29 @@ class CategoryRepository implements Repository {
 		categoryId: number;
 		score: number;
 		userId: number;
-	}): Promise<boolean> {
-		const itemCount = await this.categoryModel
-			.relatedQuery(RelationName.USERS)
-			.for(categoryId)
-			.relate({
-				id: userId,
+	}): Promise<{
+		categoryId: number;
+		createdAt: string;
+		score: number;
+		updatedAt: string;
+		userId: number;
+	}> {
+		const item = await this.categoryModel
+			.query()
+			.from(DatabaseTableName.QUIZ_SCORES)
+			.insertAndFetch({
+				categoryId,
 				score,
+				userId,
 			});
 
-		return Boolean(itemCount);
+		return {
+			categoryId: item.categoryId,
+			createdAt: item.createdAt,
+			score: item.score,
+			updatedAt: item.updatedAt,
+			userId: item.userId,
+		};
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {

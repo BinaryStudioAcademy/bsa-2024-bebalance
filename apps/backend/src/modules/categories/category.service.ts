@@ -21,7 +21,13 @@ class CategoryService implements Service {
 		categoryId: number;
 		score: number;
 		userId: number;
-	}): Promise<boolean> {
+	}): Promise<{
+		categoryId: number;
+		createdAt: string;
+		score: number;
+		updatedAt: string;
+		userId: number;
+	}> {
 		return this.categoryRepository.createScore({
 			categoryId,
 			score,
