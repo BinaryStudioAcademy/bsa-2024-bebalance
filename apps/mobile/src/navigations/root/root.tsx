@@ -9,7 +9,6 @@ import { useAppSelector } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
-import { ChatScreen } from "~/screens/chat-screen/chat-screen";
 import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
 import { Welcome } from "~/screens/welcome/welcome";
 
@@ -36,8 +35,6 @@ const Root: React.FC = () => {
 						name={RootScreenName.QUIZ_ENTRY}
 					/>
 					<NativeStack.Screen
-						component={ChatScreen}
-						name={RootScreenName.CHAT}
 						component={BottomTabsNavigator}
 						name={RootScreenName.BOTTOM_TABS_NAVIGATOR}
 					/>

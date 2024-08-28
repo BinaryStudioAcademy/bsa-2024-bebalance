@@ -8,23 +8,14 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
-import { useCallback, useNavigation } from "~/libs/hooks/hooks";
+import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import {
-	type ImageSourcePropType,
-	type NativeStackNavigationProp,
-	type RootNavigationParameterList,
-} from "~/libs/types/types";
+import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 const QuizEntry: React.FC = () => {
-	const navigation =
-		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
-	const handleStartPress = useCallback((): void => {
-		navigation.navigate(RootScreenName.CHAT);
-	}, []);
+	const handleStartPress = useCallback((): void => {}, []);
 
 	return (
 		<BackgroundWrapper>

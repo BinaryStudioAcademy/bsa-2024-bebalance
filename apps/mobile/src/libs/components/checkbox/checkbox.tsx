@@ -1,24 +1,25 @@
-import CheckBox from "@react-native-community/checkbox";
+import LibraryCheckbox, {
+	type CheckBoxProps,
+} from "@react-native-community/checkbox";
 import React from "react";
 
 import { LinearGradient, Text, View } from "~/libs/components/components";
-import { BaseColor, GradientColor, GradientPoint } from "~/libs/enums/enums";
+import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/global-styles/global-styles";
 
 import { styles } from "./styles";
 
 type Properties = {
+	hasVisuallyHiddenLabel?: boolean;
 	isChecked: boolean;
-	label?: string;
-	name?: string;
-	onValueChange: (newValue: boolean) => void;
+	label: string;
 	restProperties?: Record<string, unknown>;
-};
+} & CheckBoxProps;
 
 const Checkbox: React.FC<Properties> = ({
+	hasVisuallyHiddenLabel = false,
 	isChecked,
 	label,
-	onValueChange,
 	...restProperties
 }) => {
 	const borderColors = isChecked
@@ -27,16 +28,13 @@ const Checkbox: React.FC<Properties> = ({
 
 	return (
 		<LinearGradient
-			angle={GradientPoint.GRADIENT_ANGLE}
+			angle={AngleGradient.ANGLE}
 			angleCenter={{
-				x: GradientPoint.ANGLE_CENTER_POINT,
-				y: GradientPoint.ANGLE_CENTER_POINT,
+				x: AngleGradient.X_POINT,
+				y: AngleGradient.Y_POINT,
 			}}
 			colors={borderColors}
-			locations={[
-				GradientPoint.FIRST_COLOR_STOP,
-				GradientPoint.SECOND_COLOR_STOP,
-			]}
+			locations={[AngleGradient.FIRST_STOP, AngleGradient.SECOND_STOP]}
 			style={styles.gradientContainer}
 			useAngle
 		>
@@ -48,11 +46,10 @@ const Checkbox: React.FC<Properties> = ({
 					styles.innerContainer,
 				]}
 			>
-				<CheckBox
+				<LibraryCheckbox
 					onCheckColor={BaseColor.BG_WHITE}
 					onFillColor={BaseColor.CHECKBOX_BLUE}
 					onTintColor={BaseColor.CHECKBOX_BLUE}
-					onValueChange={onValueChange}
 					style={globalStyles.mr8}
 					tintColors={{
 						false: BaseColor.LIGHT_GRAY,
@@ -61,7 +58,7 @@ const Checkbox: React.FC<Properties> = ({
 					value={isChecked}
 					{...restProperties}
 				/>
-				{label && (
+				{!hasVisuallyHiddenLabel && (
 					<Text preset="subheading" weight="bold">
 						{label}
 					</Text>
