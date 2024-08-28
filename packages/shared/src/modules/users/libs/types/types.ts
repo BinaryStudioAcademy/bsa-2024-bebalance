@@ -5,4 +5,5 @@ export { type UserSignInResponseDto } from "./user-sign-in-response-dto.type.js"
 export { type UserSignUpFormDto } from "./user-sign-up-form-dto.type.js";
 export { type UserSignUpRequestDto } from "./user-sign-up-request-dto.type.js";
 export { type UserSignUpResponseDto } from "./user-sign-up-response-dto.type.js";
+export { type UserUpdateParametersDto } from "./user-update-parameters-dto.type.js";
 export { type UserUpdateRequestDto } from "./user-update-request-dto.type.js";

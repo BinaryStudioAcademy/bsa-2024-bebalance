@@ -115,7 +115,7 @@ class UserRepository implements Repository {
 		id: number,
 		payload: UserUpdateRequestDto,
 	): Promise<null | UserEntity> {
-		await this.userDetailsModel.query().updateAndFetchById(id, payload);
+		await this.userDetailsModel.query().patch(payload).where({ user_id: id });
 
 		return await this.find(id);
 	}

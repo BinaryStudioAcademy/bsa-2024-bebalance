@@ -9,7 +9,10 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { type UserUpdateRequestDto } from "./libs/types/types.js";
+import {
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
+} from "./libs/types/types.js";
 
 /*** @swagger
  * components:
@@ -52,7 +55,7 @@ class UserController extends BaseController {
 				this.update(
 					options as APIHandlerOptions<{
 						body: UserUpdateRequestDto;
-						params: number;
+						params: UserUpdateParametersDto;
 					}>,
 				),
 			method: "POST",
@@ -91,11 +94,11 @@ class UserController extends BaseController {
 	private async update(
 		options: APIHandlerOptions<{
 			body: UserUpdateRequestDto;
-			params: number;
+			params: UserUpdateParametersDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.userService.update(options.params, options.body),
+			payload: await this.userService.update(options.params.id, options.body),
 			status: HTTPCode.OK,
 		};
 	}
