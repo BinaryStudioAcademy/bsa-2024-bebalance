@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { BaseColor } from "~/libs/enums/app/base-color.enum";
+import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
 	gradientContainer: {

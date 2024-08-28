@@ -2,7 +2,7 @@ export {
 	BaseColor,
 	DataStatus,
 	GradientColor,
-	GradientPoints,
+	GradientPoint,
 	ToastMessageTitle,
 	ToastMessageType,
 } from "./app/app";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
 	Checkbox,
@@ -6,6 +6,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import { useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
 const mockCategories = [
@@ -34,6 +35,14 @@ const ChatScreen: React.FC = () => {
 		}));
 	};
 
+	const handleCheckbox = (
+		categoryName: string,
+	): ((newValue: boolean) => void) => {
+		return (newValue: boolean): void => {
+			handleCheckboxChange(categoryName.toLowerCase(), newValue);
+		};
+	};
+
 	const FIRST_CHAR_INDEX = 0;
 	const SECOND_CHAR_INDEX = 1;
 
@@ -46,9 +55,7 @@ const ChatScreen: React.FC = () => {
 						key={category.id}
 						label={category.name}
 						name={category.name.toLowerCase()}
-						onValueChange={(newValue) => {
-							handleCheckboxChange(category.name.toLowerCase(), newValue);
-						}}
+						onValueChange={handleCheckbox(category.name)}
 					/>
 				))}
 
