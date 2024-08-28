@@ -1,7 +1,7 @@
 import { type Entity } from "~/libs/types/types.js";
 
 import { type OnboardingAnswerDto } from "./libs/types/types.js";
-import { type OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
+import { OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
 
 class OnboardingQuestionEntity implements Entity {
 	private answers: OnboardingAnswerEntity[];
@@ -15,7 +15,7 @@ class OnboardingQuestionEntity implements Entity {
 	private updatedAt: string;
 
 	private constructor({
-		answers,
+		answers = [],
 		createdAt,
 		id,
 		label,
@@ -57,12 +57,18 @@ class OnboardingQuestionEntity implements Entity {
 	}
 
 	public static initializeNew({
+		answers,
 		label,
 	}: {
+		answers: { label: string }[];
 		label: string;
 	}): OnboardingQuestionEntity {
 		return new OnboardingQuestionEntity({
-			answers: [],
+			answers: answers.map((answer) => {
+				return OnboardingAnswerEntity.initializeNew({
+					label: answer.label,
+				});
+			}),
 			createdAt: "",
 			id: null,
 			label,
