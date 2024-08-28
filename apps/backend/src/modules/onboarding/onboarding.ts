@@ -11,5 +11,7 @@ const onboardingController = new OnboardingController(
 	logger,
 	onboardingService,
 );
+
 export { OnboardingApiPath } from "./libs/enums/enums.js";
+export { QuizError } from "./libs/exceptions/exceptions.js";
 export { onboardingController };
