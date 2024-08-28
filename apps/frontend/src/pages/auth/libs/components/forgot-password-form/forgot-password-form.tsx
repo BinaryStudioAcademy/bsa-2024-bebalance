@@ -5,7 +5,7 @@ import {
 	userForgotPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants-new.js";
+import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -39,7 +39,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 				<Button label="SEND LINK" type="submit" variant="dark" />
 			</form>
-
+			``
 			<div className={styles["circle-gradient1"]} />
 			<div className={styles["circle-gradient2"]} />
 			<div className={styles["circle-gradient3"]} />
