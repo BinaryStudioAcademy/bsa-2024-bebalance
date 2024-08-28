@@ -1,5 +1,12 @@
 import { Button, Input, useNavigate } from "~/libs/components/components.js";
-import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import {
+	useAppForm,
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
@@ -15,6 +22,15 @@ type Properties = {
 };
 
 const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+	const user = useAppSelector(({ auth }) => auth.user);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (user) {
+			navigate(AppRoute.ROOT);
+		}
+	});
+
 	const { control, errors, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
@@ -24,7 +40,6 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
 
-	const navigate = useNavigate();
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload: UserSignUpFormDto) => {
@@ -32,7 +47,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 				if (confirmPassword === userData.password) {
 					onSubmit(userData);
-					navigate("/");
+					navigate(AppRoute.ROOT);
 				} else {
 					setError(ConfirmPasswordCustomValidation.FIELD, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
