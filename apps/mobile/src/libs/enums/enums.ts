@@ -1,4 +1,5 @@
 export {
+	AngleGradient,
 	BaseColor,
 	DataStatus,
 	GradientColor,
