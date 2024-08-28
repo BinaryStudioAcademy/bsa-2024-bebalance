@@ -15,7 +15,7 @@ type Properties = {
 };
 
 const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit, setError, watch } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
 			validationSchema: userSignUpValidationSchema,
@@ -27,9 +27,8 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload: UserSignUpRequestDto) => {
+				const { confirmPassword } = getValues();
 				const { password } = payload;
-
-				const confirmPassword = watch(ConfirmPasswordCustomValidation.FIELD);
 
 				if (confirmPassword === password) {
 					onSubmit(payload);
@@ -41,7 +40,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				}
 			})(event_);
 		},
-		[handleSubmit, onSubmit, setError, watch],
+		[handleSubmit, onSubmit, setError, getValues],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {
