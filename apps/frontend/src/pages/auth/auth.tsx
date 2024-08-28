@@ -66,6 +66,7 @@ const Auth: React.FC = () => {
 		<div className={styles["auth-container"]}>
 			<RippleEffectBg className={styles["ripple-effect__background1"]} />
 			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+			<div className={styles["white-dots"]} />
 			<div className={styles["form-container"]}>
 				<div className={styles["form-header"]}>
 					<div className={styles["form-header__logo-container"]}>
@@ -91,6 +92,12 @@ const Auth: React.FC = () => {
 					</span>
 				</div>
 				{getScreen(pathname)}
+
+				{pathname === AppRoute.SIGN_IN && (
+					<div className={styles["forgot-password"]}>
+						<Link to={AppRoute.ANY}>Forgot password?</Link>
+					</div>
+				)}
 			</div>
 			<div className={styles["title-container"]}>
 				<h1 className={styles["title"]}>Logo</h1>
