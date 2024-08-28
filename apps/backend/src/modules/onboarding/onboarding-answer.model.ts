@@ -5,7 +5,8 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
-import { UserModel } from "../users/user.model.js";
+import { UserModel } from "../users/users.js";
+import { OnboardingQuestionModel } from "./onboarding-question.model.js";
 
 class OnboardingAnswerModel extends AbstractModel {
 	public label!: string;
@@ -16,6 +17,14 @@ class OnboardingAnswerModel extends AbstractModel {
 
 	static get relationMappings(): RelationMappings {
 		return {
+			question: {
+				join: {
+					from: `${DatabaseTableName.ONBOARDING_ANSWERS}.question_id`,
+					to: `${DatabaseTableName.ONBOARDING_QUESTIONS}.id`,
+				},
+				modelClass: OnboardingQuestionModel,
+				relation: Model.BelongsToOneRelation,
+			},
 			users: {
 				join: {
 					from: `${DatabaseTableName.ONBOARDING_ANSWERS}.id`,
