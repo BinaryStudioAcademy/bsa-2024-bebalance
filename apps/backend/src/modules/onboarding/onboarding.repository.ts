@@ -18,8 +18,8 @@ class OnboardingRepository implements Repository {
 	public async createUserAnswers(
 		userId: number,
 		answerIds: number[],
-	): Promise<number> {
-		const userAnswers = await Promise.all(
+	): Promise<OnboardingAnswerEntity[]> {
+		await Promise.all(
 			answerIds.map((answerId) =>
 				this.onboardingAnswerModel
 					.relatedQuery(RelationName.USERS)
@@ -28,7 +28,19 @@ class OnboardingRepository implements Repository {
 			),
 		);
 
-		return userAnswers.length;
+		const savedAnswers = await this.onboardingAnswerModel
+			.query()
+			.whereIn("id", answerIds);
+
+		return savedAnswers.map((answer) =>
+			OnboardingAnswerEntity.initialize({
+				createdAt: answer.createdAt,
+				id: answer.id,
+				label: answer.label,
+				questionId: answer.questionId,
+				updatedAt: answer.updatedAt,
+			}),
+		);
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
