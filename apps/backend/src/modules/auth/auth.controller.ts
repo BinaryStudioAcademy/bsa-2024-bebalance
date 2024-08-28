@@ -89,6 +89,18 @@ class AuthController extends BaseController {
 		});
 	}
 
+	/**
+	 * @swagger
+	 * /auth/forgot-password:
+	 *   post:
+	 *     description: Return authenticated user
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 */
+
 	private async forgotPassword(
 		options: APIHandlerOptions<{
 			body: EmailDto;
@@ -126,6 +138,18 @@ class AuthController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
+
+	/**
+	 * @swagger
+	 * /auth/reset-password:
+	 *   post:
+	 *     description: Return authenticated user
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 */
 
 	private async resetPassword(
 		options: APIHandlerOptions<{

@@ -25,7 +25,7 @@ class AuthService {
 		this.encrypt = encrypt;
 	}
 
-	public async forgotPassword(payload: EmailDto): Promise<{ message: string }> {
+	public async forgotPassword(payload: EmailDto): Promise<null> {
 		const { email: targetEmail } = payload;
 
 		const user = await this.userService.findByEmail(targetEmail);
@@ -50,12 +50,12 @@ class AuthService {
 			resetLink: link,
 		});
 
-		return { message: "Email sent" };
+		return await Promise.resolve(null);
 	}
 
 	public async resetPassword(
 		payload: Omit<ResetPasswordDto, "confirmPassword">,
-	): Promise<{ message: string }> {
+	): Promise<null> {
 		const { jwtToken, newPassword } = payload;
 
 		const decoded = await token.decode(jwtToken);
@@ -73,7 +73,7 @@ class AuthService {
 
 		await this.userService.updatePassword(userId, newPassword);
 
-		return { message: "Password reset succesfull" };
+		return await Promise.resolve(null);
 	}
 
 	public async signIn(
