@@ -1,7 +1,7 @@
 import { type Entity } from "~/libs/types/types.js";
 
 class QuizAnswerEntity implements Entity {
-	private answerId: number;
+	private answerId: null | number;
 
 	private createdAt: string;
 
@@ -13,7 +13,7 @@ class QuizAnswerEntity implements Entity {
 
 	private updatedAt: string;
 
-	private userId: number;
+	private userId: null | number;
 
 	private value: number;
 
@@ -27,13 +27,13 @@ class QuizAnswerEntity implements Entity {
 		userId,
 		value,
 	}: {
-		answerId: number;
+		answerId: null | number;
 		createdAt: string;
 		id: null | number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
-		userId: number;
+		userId: null | number;
 		value: number;
 	}) {
 		this.answerId = answerId;
@@ -78,46 +78,40 @@ class QuizAnswerEntity implements Entity {
 	}
 
 	public static initializeNew({
-		answerId,
 		label,
 		questionId,
-		userId,
 		value,
 	}: {
-		answerId: number;
 		label: string;
 		questionId: number;
-		userId: number;
 		value: number;
 	}): QuizAnswerEntity {
 		return new QuizAnswerEntity({
-			answerId,
+			answerId: null,
 			createdAt: "",
 			id: null,
 			label,
 			questionId,
 			updatedAt: "",
-			userId,
+			userId: null,
 			value,
 		});
 	}
 
 	public toNewObject(): {
-		answerId: number;
 		createdAt: string;
+		id: number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
-		userId: number;
 		value: number;
 	} {
 		return {
-			answerId: this.answerId,
 			createdAt: this.createdAt,
+			id: this.id as number,
 			label: this.label,
 			questionId: this.questionId,
 			updatedAt: this.updatedAt,
-			userId: this.userId,
 			value: this.value,
 		};
 	}
@@ -133,13 +127,13 @@ class QuizAnswerEntity implements Entity {
 		value: number;
 	} {
 		return {
-			answerId: this.answerId,
+			answerId: this.answerId as number,
 			createdAt: this.createdAt,
 			id: this.id as number,
 			label: this.label,
 			questionId: this.questionId,
 			updatedAt: this.updatedAt,
-			userId: this.userId,
+			userId: this.userId as number,
 			value: this.value,
 		};
 	}
