@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-	Checkbox,
-	ScreenWrapper,
-	Text,
-	View,
-} from "~/libs/components/components";
+import { Checkbox, ScreenWrapper, View } from "~/libs/components/components";
 import { useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
@@ -43,9 +38,6 @@ const Chat: React.FC = () => {
 		};
 	};
 
-	const FIRST_CHAR_INDEX = 0;
-	const SECOND_CHAR_INDEX = 1;
-
 	return (
 		<ScreenWrapper>
 			<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}>
@@ -57,17 +49,6 @@ const Chat: React.FC = () => {
 						onValueChange={handleCheckbox(category.name)}
 					/>
 				))}
-
-				<View style={globalStyles.mt16}>
-					<Text>Submitted Data:</Text>
-					{Object.entries(formData).map(([key, value]) => (
-						<Text key={key}>
-							{key.charAt(FIRST_CHAR_INDEX).toUpperCase() +
-								key.slice(SECOND_CHAR_INDEX)}
-							: {value ? "Yes" : "No"}
-						</Text>
-					))}
-				</View>
 			</View>
 		</ScreenWrapper>
 	);

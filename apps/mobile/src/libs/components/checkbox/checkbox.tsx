@@ -5,7 +5,7 @@ import React from "react";
 
 import { LinearGradient, Text, View } from "~/libs/components/components";
 import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
-import { globalStyles } from "~/libs/styles/global-styles/global-styles";
+import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
 
@@ -13,14 +13,14 @@ type Properties = {
 	hasVisuallyHiddenLabel?: boolean;
 	isChecked: boolean;
 	label: string;
-	restProperties?: Record<string, unknown>;
+	onValueChange: (newValue: boolean) => void;
 } & CheckBoxProps;
 
 const Checkbox: React.FC<Properties> = ({
 	hasVisuallyHiddenLabel = false,
 	isChecked,
 	label,
-	...restProperties
+	onValueChange,
 }) => {
 	const borderColors = isChecked
 		? [...GradientColor.BLUE]
@@ -56,7 +56,7 @@ const Checkbox: React.FC<Properties> = ({
 						true: BaseColor.CHECKBOX_BLUE,
 					}}
 					value={isChecked}
-					{...restProperties}
+					onValueChange={onValueChange}
 				/>
 				{!hasVisuallyHiddenLabel && (
 					<Text preset="subheading" weight="bold">
