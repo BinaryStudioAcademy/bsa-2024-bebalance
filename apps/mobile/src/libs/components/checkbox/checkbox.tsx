@@ -50,13 +50,13 @@ const Checkbox: React.FC<Properties> = ({
 					onCheckColor={BaseColor.BG_WHITE}
 					onFillColor={BaseColor.CHECKBOX_BLUE}
 					onTintColor={BaseColor.CHECKBOX_BLUE}
+					onValueChange={onValueChange}
 					style={globalStyles.mr8}
 					tintColors={{
 						false: BaseColor.LIGHT_GRAY,
 						true: BaseColor.CHECKBOX_BLUE,
 					}}
 					value={isChecked}
-					onValueChange={onValueChange}
 				/>
 				{!hasVisuallyHiddenLabel && (
 					<Text preset="subheading" weight="bold">
