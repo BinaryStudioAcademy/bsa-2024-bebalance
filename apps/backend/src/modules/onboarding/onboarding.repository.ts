@@ -77,6 +77,22 @@ class OnboardingRepository implements Repository {
 		);
 	}
 
+	public async findAnswersByIds(
+		ids: number[],
+	): Promise<OnboardingAnswerEntity[]> {
+		const results = await this.onboardingAnswerModel.query().whereIn("id", ids);
+
+		return results.map((result) =>
+			OnboardingAnswerEntity.initialize({
+				createdAt: result.createdAt,
+				id: result.id,
+				label: result.label,
+				questionId: result.questionId,
+				updatedAt: result.updatedAt,
+			}),
+		);
+	}
+
 	public update(): ReturnType<Repository["update"]> {
 		return Promise.resolve(null);
 	}
