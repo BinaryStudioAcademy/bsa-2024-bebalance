@@ -16,6 +16,8 @@ class UserModel extends AbstractModel {
 
 	public passwordSalt!: string;
 
+	public quizAnswers!: QuizAnswerModel[];
+
 	public score!: number;
 
 	public userDetails!: UserDetailsModel;

@@ -20,17 +20,18 @@ class QuizAnswerRepository implements Repository {
 	public async createUserAnswers(
 		userId: number,
 		answerIds: number[],
-	): Promise<number> {
-		const userAnswers = await Promise.all(
+	): Promise<QuizAnswerModel[]> {
+		return await Promise.all(
 			answerIds.map((answerId) =>
 				this.quizAnswerModel
-					.relatedQuery(RelationName.USERS)
-					.for(answerId)
-					.relate(userId),
+					.query()
+					.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
+					.insertAndFetch({
+						answerId,
+						userId,
+					}),
 			),
 		);
-
-		return userAnswers.length;
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {

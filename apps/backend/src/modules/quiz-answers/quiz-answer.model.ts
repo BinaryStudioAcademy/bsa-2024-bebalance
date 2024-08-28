@@ -9,9 +9,13 @@ import { UserModel } from "../users/user.model.js";
 import { QuizQuestionModel } from "./quiz-question.model.js";
 
 class QuizAnswerModel extends AbstractModel {
+	public answerId!: number;
+
 	public label!: string;
 
 	public questionId!: number;
+
+	public userId!: number;
 
 	public users!: UserModel[];
 

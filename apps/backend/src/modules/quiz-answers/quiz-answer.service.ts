@@ -6,6 +6,7 @@ import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
+import { type QuizAnswerModel } from "./quiz-answer.model.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 
 class QuizAnswerService implements Service {
@@ -67,8 +68,8 @@ class QuizAnswerService implements Service {
 		answerIds: number[];
 		userId: number;
 	}): Promise<{
-		savedAnswersCount: number;
 		scores: { categoryId: number; score: number }[];
+		userAnswers: QuizAnswerModel[];
 	}> {
 		const answers = await Promise.all(answerIds.map((id) => this.find(id)));
 		const existingAnswers = answers.filter((answer) => answer !== null);
@@ -94,13 +95,13 @@ class QuizAnswerService implements Service {
 		await this.quizAnswerRepository.deleteUserAnswers(userId);
 		await this.categoryService.deleteUserScores(userId);
 
-		const savedAnswersCount = await this.quizAnswerRepository.createUserAnswers(
+		const userAnswers = await this.quizAnswerRepository.createUserAnswers(
 			userId,
 			answerIds,
 		);
 		const scores = await this.createScores({ answerIds, userId });
 
-		return { savedAnswersCount, scores };
+		return { scores, userAnswers };
 	}
 
 	public delete(): ReturnType<Service["delete"]> {
