@@ -1,8 +1,15 @@
 import React from "react";
 
-import { Button, Input, Link, Text } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks";
+import {
+	Button,
+	IconButton,
+	Input,
+	Link,
+	Text,
+} from "~/libs/components/components";
+import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { getSecurityInputIconName } from "~/libs/helpers/helpers";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type UserSignInRequestDto,
@@ -16,6 +23,13 @@ type Properties = {
 };
 
 const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
+	const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
+	const INPUT_ICON_SIZE = 20;
+
+	const handlePasswordIconPress = (): void => {
+		setIsPasswordHidden(!isPasswordHidden);
+	};
+
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: USER_SIGN_IN_DEFAULT_VALUES,
 		validationSchema: userSignInValidationSchema,
@@ -27,7 +41,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 
 	return (
 		<>
-			<Text preset="heading" size="xl">
+			<Text preset="uppercase" size="xl" weight="bold">
 				SIGN IN
 			</Text>
 			<Text style={[globalStyles.mb16]}>
@@ -42,9 +56,17 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 				placeholder="name@example.com"
 			/>
 			<Input
+				accessoryRight={
+					<IconButton
+						iconColor={BaseColor.LIGHT_GRAY}
+						iconSize={INPUT_ICON_SIZE}
+						name={getSecurityInputIconName(isPasswordHidden)}
+						onPress={handlePasswordIconPress}
+					/>
+				}
 				control={control}
 				errors={errors}
-				isSecureTextEntry
+				isSecureTextEntry={isPasswordHidden}
 				label="Password"
 				name="password"
 				placeholder="********"

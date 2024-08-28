@@ -11,11 +11,13 @@ const userApi = new UserApi({
 });
 
 export { userApi };
+export { UserValidationMessage } from "./libs/enums/enums";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
+	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 } from "./libs/types/types";
