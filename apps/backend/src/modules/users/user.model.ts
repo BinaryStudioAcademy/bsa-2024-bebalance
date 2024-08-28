@@ -26,12 +26,12 @@ class UserModel extends AbstractModel {
 					from: `${DatabaseTableName.USERS}.id`,
 					through: {
 						from: `${DatabaseTableName.ONBOARDING_ANSWERS_TO_USERS}.userId`,
-						to: `${DatabaseTableName.ONBOARDING_ANSWERS_TO_USERS}.onboardingAnswerId`,
+						to: `${DatabaseTableName.ONBOARDING_ANSWERS_TO_USERS}.answerId`,
 					},
 					to: `${DatabaseTableName.ONBOARDING_ANSWERS}.id`,
 				},
 				modelClass: OnboardingAnswerModel,
-				relation: Model.HasManyRelation,
+				relation: Model.ManyToManyRelation,
 			},
 			userDetails: {
 				join: {
