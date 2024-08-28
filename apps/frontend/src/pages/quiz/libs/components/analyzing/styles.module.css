@@ -47,3 +47,34 @@
 	background-color: var(--text-background);
 	border-radius: 14px;
 }
+
+@media (width <= 768px) {
+	.page-container {
+		background-image: url("../../../../../assets/img/blue-circle.svg"),
+			url("../../../../../assets/img/pink-circle.svg"),
+			url("../../../../../assets/img/green-circle.svg"),
+			url("../../../../../assets/img/ripple-effect-bg.svg"),
+			url("../../../../../assets/img/ripple-effect-bg2.svg");
+		background-position:
+			left -10% top 40%,
+			right -10% bottom 13%,
+			right 30% top -2%,
+			right 200% top 0%,
+			right 0% bottom -60%;
+		background-size:
+			100px 100px,
+			150px 150px,
+			100px 100px,
+			500px 500px,
+			500px 500px;
+	}
+
+	.border-container {
+		border: none;
+	}
+
+	.title {
+		margin-bottom: 32px;
+		text-align: center;
+	}
+}
