@@ -7,6 +7,7 @@ import React from "react";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppSelector } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
+import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
 import { ChatScreen } from "~/screens/chat-screen/chat-screen";
 import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
@@ -37,6 +38,8 @@ const Root: React.FC = () => {
 					<NativeStack.Screen
 						component={ChatScreen}
 						name={RootScreenName.CHAT}
+						component={BottomTabsNavigator}
+						name={RootScreenName.BOTTOM_TABS_NAVIGATOR}
 					/>
 				</NativeStack.Group>
 			) : (
