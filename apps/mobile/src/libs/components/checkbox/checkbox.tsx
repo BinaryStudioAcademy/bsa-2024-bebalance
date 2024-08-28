@@ -58,7 +58,7 @@ const Checkbox: React.FC<Properties> = ({
 				/>
 				<Text
 					preset="subheading"
-					style={hasVisuallyHiddenLabel && globalStyles.Hidden}
+					style={hasVisuallyHiddenLabel && globalStyles.visuallyHidden}
 					weight="bold"
 				>
 					{label}

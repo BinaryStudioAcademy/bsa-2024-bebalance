@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const visuallyHidden = StyleSheet.create({
-	Hidden: {
+	visuallyHidden: {
 		height: 1,
 		opacity: 0,
 		overflow: "hidden",
