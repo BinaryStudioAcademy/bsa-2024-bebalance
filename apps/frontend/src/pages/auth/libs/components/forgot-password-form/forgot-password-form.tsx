@@ -51,7 +51,7 @@ const ForgotPasswordForm: React.FC = () => {
 					type="email"
 				/>
 
-				<Button label="SEND LINK" type="submit" variant="dark" />
+				<Button label="SEND LINK" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

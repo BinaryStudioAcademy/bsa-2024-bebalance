@@ -1,1 +1,4 @@
-export { AuthApiPath } from "./libs/enums/enums.js";
+export {
+	AuthApiPath,
+	ConfirmPasswordCustomValidation,
+} from "./libs/enums/enums.js";

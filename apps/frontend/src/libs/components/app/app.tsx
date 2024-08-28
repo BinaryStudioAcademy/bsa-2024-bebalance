@@ -1,9 +1,7 @@
 import {
-	Header,
 	Loader,
 	Notification,
 	RouterOutlet,
-	Sidebar,
 } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
@@ -26,10 +24,8 @@ const App: React.FC = () => {
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
-		if (isRoot) {
-			void dispatch(authActions.getAuthenticatedUser());
-		}
-	}, [isRoot, dispatch]);
+		void dispatch(authActions.getAuthenticatedUser());
+	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
@@ -41,8 +37,6 @@ const App: React.FC = () => {
 			{isLoading && <Loader />}
 			{!isLoading && isRoot && (
 				<>
-					<Header />
-					<Sidebar />
 					<QuizForm />
 				</>
 			)}

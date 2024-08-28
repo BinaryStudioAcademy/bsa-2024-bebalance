@@ -75,7 +75,7 @@ const ResetPasswordForm: React.FC = () => {
 					placeholder="********"
 					type="password"
 				/>
-				<Button label="RESET PASSWORD" type="submit" variant="dark" />
+				<Button label="RESET PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
