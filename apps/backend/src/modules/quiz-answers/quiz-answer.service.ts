@@ -6,7 +6,6 @@ import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import { type UserAnswer, type UserScore } from "./libs/types/types.js";
-import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 
 class QuizAnswerService implements Service {
@@ -70,8 +69,8 @@ class QuizAnswerService implements Service {
 		scores: UserScore[];
 		userAnswers: UserAnswer[];
 	}> {
-		const answers = await Promise.all(answerIds.map((id) => this.find(id)));
-		const existingAnswers = answers.filter((answer) => answer !== null);
+		const existingAnswers =
+			await this.quizAnswerRepository.findByIds(answerIds);
 
 		if (existingAnswers.length !== answerIds.length) {
 			throw new QuizError({
@@ -107,8 +106,8 @@ class QuizAnswerService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public async find(id: number): Promise<null | QuizAnswerEntity> {
-		return await this.quizAnswerRepository.find(id);
+	public find(): Promise<null> {
+		return Promise.resolve(null);
 	}
 
 	public findAll(): Promise<{ items: null[] }> {

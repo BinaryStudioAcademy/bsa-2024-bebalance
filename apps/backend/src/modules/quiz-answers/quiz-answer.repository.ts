@@ -56,23 +56,27 @@ class QuizAnswerRepository implements Repository {
 			.delete();
 	}
 
-	public async find(id: number): Promise<null | QuizAnswerEntity> {
-		const item = await this.quizAnswerModel.query().findById(id);
-
-		return item
-			? QuizAnswerEntity.initialize({
-					createdAt: item.createdAt,
-					id: item.id,
-					label: item.label,
-					questionId: item.questionId,
-					updatedAt: item.updatedAt,
-					value: item.value,
-				})
-			: null;
+	public find(): Promise<null> {
+		return Promise.resolve(null);
 	}
 
 	public findAll(): Promise<null[]> {
 		return Promise.resolve([null]);
+	}
+
+	public async findByIds(ids: number[]): Promise<QuizAnswerEntity[]> {
+		const items = await this.quizAnswerModel.query().findByIds(ids);
+
+		return items.map((item) =>
+			QuizAnswerEntity.initialize({
+				createdAt: item.createdAt,
+				id: item.id,
+				label: item.label,
+				questionId: item.questionId,
+				updatedAt: item.updatedAt,
+				value: item.value,
+			}),
+		);
 	}
 
 	public async getCategoriezedAnswer(id: number): Promise<{
