@@ -1,10 +1,7 @@
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
-import {
-	type CategoriezedQuizAnswerModel,
-	type UserAnswer,
-} from "./libs/types/types.js";
+import { type CategorizedQuizAnswerModel } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerModel } from "./quiz-answer.model.js";
 
@@ -22,8 +19,8 @@ class QuizAnswerRepository implements Repository {
 	public async createUserAnswers(
 		userId: number,
 		answerIds: number[],
-	): Promise<UserAnswer[]> {
-		const answers = await Promise.all(
+	): Promise<QuizAnswerEntity[]> {
+		const items = await Promise.all(
 			answerIds.map((answerId) =>
 				this.quizAnswerModel
 					.query()
@@ -35,13 +32,18 @@ class QuizAnswerRepository implements Repository {
 			),
 		);
 
-		return answers.map((answer) => ({
-			answerId: answer.answerId,
-			createdAt: answer.createdAt,
-			id: answer.id,
-			updatedAt: answer.updatedAt,
-			userId: answer.userId,
-		}));
+		return items.map((answer) =>
+			QuizAnswerEntity.initialize({
+				answerId: answer.answerId,
+				createdAt: answer.createdAt,
+				id: answer.id,
+				label: answer.label,
+				questionId: answer.questionId,
+				updatedAt: answer.updatedAt,
+				userId: answer.userId,
+				value: answer.value,
+			}),
+		);
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
@@ -69,17 +71,19 @@ class QuizAnswerRepository implements Repository {
 
 		return items.map((item) =>
 			QuizAnswerEntity.initialize({
+				answerId: item.answerId,
 				createdAt: item.createdAt,
 				id: item.id,
 				label: item.label,
 				questionId: item.questionId,
 				updatedAt: item.updatedAt,
+				userId: item.userId,
 				value: item.value,
 			}),
 		);
 	}
 
-	public async getCategoriezedAnswer(id: number): Promise<{
+	public async getCategorizedAnswer(id: number): Promise<{
 		answerId: number;
 		categoryId: number;
 		value: number;
@@ -91,7 +95,7 @@ class QuizAnswerRepository implements Repository {
 				question: {
 					category: true,
 				},
-			})) as CategoriezedQuizAnswerModel;
+			})) as CategorizedQuizAnswerModel;
 
 		return {
 			answerId: item.id,

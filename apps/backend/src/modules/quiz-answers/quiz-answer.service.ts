@@ -37,7 +37,7 @@ class QuizAnswerService implements Service {
 
 		const categorizedAnswers = await Promise.all(
 			answerIds.map((answerId) =>
-				this.quizAnswerRepository.getCategoriezedAnswer(answerId),
+				this.quizAnswerRepository.getCategorizedAnswer(answerId),
 			),
 		);
 
@@ -91,10 +91,11 @@ class QuizAnswerService implements Service {
 		}
 
 		await this.quizAnswerRepository.deleteUserAnswers(userId);
-		const userAnswers = await this.quizAnswerRepository.createUserAnswers(
+		const userAnswersEntity = await this.quizAnswerRepository.createUserAnswers(
 			userId,
 			answerIds,
 		);
+		const userAnswers = userAnswersEntity.map((answer) => answer.toObject());
 
 		await this.categoryService.deleteUserScores(userId);
 		const scores = await this.createScores({ answerIds, userId });
