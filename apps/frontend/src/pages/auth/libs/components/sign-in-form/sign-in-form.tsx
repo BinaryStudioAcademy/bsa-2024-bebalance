@@ -1,6 +1,7 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/app-route.enum.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -9,21 +10,26 @@ import {
 import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
-type Properties = {
-	onSubmit: (payload: UserSignInRequestDto) => void;
-};
-
-const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const SignInForm: React.FC = () => {
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
 		validationSchema: userSignInValidationSchema,
 	});
 
+	const dispatch = useAppDispatch();
+
+	const handleSignInSubmit = useCallback(
+		(payload: UserSignInRequestDto): void => {
+			void dispatch(authActions.signIn(payload));
+		},
+		[dispatch],
+	);
+
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(onSubmit)(event_);
+			void handleSubmit(handleSignInSubmit)(event_);
 		},
-		[handleSubmit, onSubmit],
+		[handleSignInSubmit, handleSubmit],
 	);
 
 	return (

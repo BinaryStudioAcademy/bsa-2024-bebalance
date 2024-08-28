@@ -7,6 +7,7 @@ import {
 	useNavigate,
 	useParams,
 } from "~/libs/hooks/hooks.js";
+import { notification } from "~/libs/modules/notification/notification.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type ResetPasswordDto,
@@ -26,18 +27,25 @@ const ResetPasswordForm: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const parameters = useParams();
+	const { token } = useParams();
 
 	const handleResetPasswordSubmit = useCallback(
 		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
-			const fullPayload = {
-				jwtToken: parameters["token"] as string,
-				newPassword: payload.newPassword,
-			};
-			void dispatch(authActions.resetPassword(fullPayload));
+			if (!token) {
+				notification.error("invalid reset password url");
+
+				return;
+			}
+
+			void dispatch(
+				authActions.resetPassword({
+					jwtToken: token,
+					newPassword: payload.newPassword,
+				}),
+			);
 			navigate(AppRoute.SIGN_IN);
 		},
-		[dispatch, navigate, parameters],
+		[dispatch, navigate, token],
 	);
 
 	const handleFormSubmit = useCallback(

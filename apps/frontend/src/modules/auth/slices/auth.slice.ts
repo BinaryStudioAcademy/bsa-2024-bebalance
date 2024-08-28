@@ -7,7 +7,8 @@ import { type UserDto } from "~/modules/users/users.js";
 
 import {
 	getAuthenticatedUser,
-	sendForgotPasswordLink,
+	resetPassword,
+	sendResetPasswordLink,
 	signIn,
 	signUp,
 } from "./actions.js";
@@ -56,8 +57,11 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAuthenticatedUser.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(sendForgotPasswordLink.fulfilled, (state, action) => {
-			notification.success(action.payload);
+		builder.addCase(sendResetPasswordLink.fulfilled, () => {
+			notification.success("reset email sent");
+		});
+		builder.addCase(resetPassword.fulfilled, () => {
+			notification.success("password has been changed");
 		});
 	},
 	initialState,

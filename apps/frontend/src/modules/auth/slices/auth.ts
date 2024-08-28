@@ -1,7 +1,7 @@
 import {
 	getAuthenticatedUser,
 	resetPassword,
-	sendForgotPasswordLink,
+	sendResetPasswordLink,
 	signIn,
 	signUp,
 } from "./actions.js";
@@ -11,7 +11,7 @@ const allActions = {
 	...actions,
 	getAuthenticatedUser,
 	resetPassword,
-	sendForgotPasswordLink,
+	sendResetPasswordLink,
 	signIn,
 	signUp,
 };

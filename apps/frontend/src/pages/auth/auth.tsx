@@ -2,18 +2,7 @@ import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
 import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
-import {
-	useAppDispatch,
-	useCallback,
-	useLocation,
-	useNavigate,
-} from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
-import {
-	type EmailDto,
-	type UserSignInRequestDto,
-	type UserSignUpRequestDto,
-} from "~/modules/users/users.js";
+import { useLocation } from "~/libs/hooks/hooks.js";
 
 import {
 	ForgotPasswordForm,
@@ -25,44 +14,20 @@ import { authRouteToHeader } from "./libs/maps/maps.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
-	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
-	const navigate = useNavigate();
-
-	const handleSignInSubmit = useCallback(
-		(payload: UserSignInRequestDto): void => {
-			void dispatch(authActions.signIn(payload));
-		},
-		[dispatch],
-	);
-
-	const handleSignUpSubmit = useCallback(
-		(payload: UserSignUpRequestDto): void => {
-			void dispatch(authActions.signUp(payload));
-		},
-		[dispatch],
-	);
-
-	const handleForgotPasswordSubmit = useCallback(
-		(payload: EmailDto): void => {
-			void dispatch(authActions.sendForgotPasswordLink(payload));
-			navigate(AppRoute.SIGN_IN);
-		},
-		[dispatch, navigate],
-	);
 
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case AppRoute.SIGN_IN: {
-				return <SignInForm onSubmit={handleSignInSubmit} />;
+				return <SignInForm />;
 			}
 
 			case AppRoute.SIGN_UP: {
-				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+				return <SignUpForm />;
 			}
 
 			case AppRoute.FORGOT_PASSWORD: {
-				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
+				return <ForgotPasswordForm />;
 			}
 
 			default: {
