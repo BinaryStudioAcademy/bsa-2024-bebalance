@@ -47,7 +47,7 @@ class UserModel extends AbstractModel {
 					to: `${DatabaseTableName.QUIZ_ANSWERS}.id`,
 				},
 				modelClass: QuizAnswerModel,
-				relation: Model.HasManyRelation,
+				relation: Model.ManyToManyRelation,
 			},
 			userDetails: {
 				join: {
