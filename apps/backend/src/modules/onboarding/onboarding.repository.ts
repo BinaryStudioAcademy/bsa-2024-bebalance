@@ -18,23 +18,72 @@ class OnboardingRepository implements Repository {
 		this.onboardingQuestionModel = onboardingQuestionModel;
 	}
 
-	public create(): ReturnType<Repository["create"]> {
-		return Promise.resolve(null);
+	public async create(
+		entity: OnboardingQuestionEntity,
+	): Promise<OnboardingQuestionEntity> {
+		const { answers, label } = entity.toNewObject();
+
+		const onboardingQuestion = await this.onboardingQuestionModel
+			.query()
+			.insertGraph({
+				answers,
+				label,
+			})
+			.returning("*");
+
+		return OnboardingQuestionEntity.initialize({
+			answers: onboardingQuestion.answers.map((onboardingAnswer) => {
+				return OnboardingAnswerEntity.initialize({
+					createdAt: onboardingAnswer.createdAt,
+					id: onboardingAnswer.id,
+					label: onboardingAnswer.label,
+					questionId: onboardingAnswer.questionId,
+					updatedAt: onboardingAnswer.updatedAt,
+				});
+			}),
+			createdAt: onboardingQuestion.createdAt,
+			id: onboardingQuestion.id,
+			label: onboardingQuestion.label,
+			updatedAt: onboardingQuestion.updatedAt,
+		});
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const deletedOnboardingQuestion = await this.onboardingQuestionModel
+			.query()
+			.delete()
+			.where({ id })
+			.withGraphFetched(RelationName.ONBOARDING_ANSWERS);
+
+		return Boolean(deletedOnboardingQuestion);
 	}
 
-	public find(): ReturnType<Repository["find"]> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | OnboardingQuestionEntity> {
+		const onboardingQuestion = await this.onboardingQuestionModel
+			.query()
+			.findById(id)
+			.withGraphJoined(RelationName.ONBOARDING_ANSWERS);
+
+		return onboardingQuestion
+			? OnboardingQuestionEntity.initialize({
+					answers: onboardingQuestion.answers.map((onboardingAnswer) => {
+						return OnboardingAnswerEntity.initialize({
+							createdAt: onboardingAnswer.createdAt,
+							id: onboardingAnswer.id,
+							label: onboardingAnswer.label,
+							questionId: onboardingAnswer.questionId,
+							updatedAt: onboardingAnswer.updatedAt,
+						});
+					}),
+					createdAt: onboardingQuestion.createdAt,
+					id: onboardingQuestion.id,
+					label: onboardingQuestion.label,
+					updatedAt: onboardingQuestion.updatedAt,
+				})
+			: null;
 	}
 
-	public findAll(): ReturnType<Repository["findAll"]> {
-		return Promise.resolve([]);
-	}
-
-	public async getOnboardingSurvey(): Promise<OnboardingQuestionEntity[]> {
+	public async findAll(): Promise<OnboardingQuestionEntity[]> {
 		const onboardingQuestions = await this.onboardingQuestionModel
 			.query()
 			.withGraphFetched(RelationName.ONBOARDING_ANSWERS);
@@ -58,8 +107,42 @@ class OnboardingRepository implements Repository {
 		);
 	}
 
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		entity: OnboardingQuestionEntity,
+	): Promise<OnboardingQuestionEntity> {
+		const { answers, label } = entity.toNewObject();
+
+		const updatedOnboardingQuestion = await this.onboardingQuestionModel
+			.query()
+			.upsertGraphAndFetch(
+				{
+					answers: answers.map((answer) => ({
+						label: answer.label,
+						questionId: id,
+					})),
+					id,
+					label,
+				},
+				{ relate: true, unrelate: true },
+			)
+			.withGraphFetched(RelationName.ONBOARDING_ANSWERS);
+
+		return OnboardingQuestionEntity.initialize({
+			answers: updatedOnboardingQuestion.answers.map((onboardingAnswer) => {
+				return OnboardingAnswerEntity.initialize({
+					createdAt: onboardingAnswer.createdAt,
+					id: onboardingAnswer.id,
+					label: onboardingAnswer.label,
+					questionId: onboardingAnswer.questionId,
+					updatedAt: onboardingAnswer.updatedAt,
+				});
+			}),
+			createdAt: updatedOnboardingQuestion.createdAt,
+			id: updatedOnboardingQuestion.id,
+			label: updatedOnboardingQuestion.label,
+			updatedAt: updatedOnboardingQuestion.updatedAt,
+		});
 	}
 }
 
