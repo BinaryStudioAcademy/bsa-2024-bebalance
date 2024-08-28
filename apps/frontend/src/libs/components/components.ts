@@ -11,8 +11,4 @@ export { QuizQuestion } from "./quiz-question/quiz-question.js";
 export { RouterProvider } from "./router-provider/router-provider.js";
 export { Sidebar } from "./sidebar/sidebar.js";
 export { Provider as StoreProvider } from "react-redux";
-export {
-	Navigate,
-	Outlet as RouterOutlet,
-	useNavigate,
-} from "react-router-dom";
+export { Navigate, Outlet as RouterOutlet } from "react-router-dom";
