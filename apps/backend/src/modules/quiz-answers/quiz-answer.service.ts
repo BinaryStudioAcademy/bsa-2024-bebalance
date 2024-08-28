@@ -7,8 +7,8 @@ import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import {
 	type QuizAnswer,
+	type Score,
 	type UserAnswer,
-	type UserScore,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
@@ -40,7 +40,7 @@ class QuizAnswerService implements Service {
 	}: {
 		answerIds: number[];
 		userId: number;
-	}): Promise<UserScore[]> {
+	}): Promise<Score[]> {
 		const countByCategoryId = new Map<number, number>();
 		const scores = [];
 
@@ -75,7 +75,7 @@ class QuizAnswerService implements Service {
 		answerIds: number[];
 		userId: number;
 	}): Promise<{
-		scores: UserScore[];
+		scores: Score[];
 		userAnswers: UserAnswer[];
 	}> {
 		const existingAnswers =

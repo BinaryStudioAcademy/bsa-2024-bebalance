@@ -2,7 +2,11 @@ import { type Service } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
-import { type Category, type UserScore } from "./libs/types/types.js";
+import {
+	type Category,
+	type Score,
+	type ScoreData,
+} from "./libs/types/types.js";
 
 class CategoryService implements Service {
 	private categoryRepository: CategoryRepository;
@@ -23,11 +27,7 @@ class CategoryService implements Service {
 		categoryId,
 		score,
 		userId,
-	}: {
-		categoryId: number;
-		score: number;
-		userId: number;
-	}): Promise<UserScore> {
+	}: ScoreData): Promise<Score> {
 		const userScore = await this.categoryRepository.createScore({
 			categoryId,
 			score,
