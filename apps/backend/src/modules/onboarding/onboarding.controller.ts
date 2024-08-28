@@ -8,7 +8,11 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { OnboardingApiPath } from "./libs/enums/enums.js";
-import { type UserDto } from "./libs/types/types.js";
+import {
+	type OnboardingAnswerRequestBody,
+	type UserDto,
+} from "./libs/types/types.js";
+import { onboardingAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type OnboardingService } from "./onboarding.service.js";
 
 class OnboardingController extends BaseController {
@@ -23,12 +27,15 @@ class OnboardingController extends BaseController {
 			handler: (options) =>
 				this.saveOnboardingAnswers(
 					options as APIHandlerOptions<{
-						body: { answerIds: number[] };
+						body: OnboardingAnswerRequestBody;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
 			path: OnboardingApiPath.ANSWER,
+			validation: {
+				body: onboardingAnswersValidationSchema,
+			},
 		});
 	}
 
@@ -84,7 +91,7 @@ class OnboardingController extends BaseController {
 
 	private async saveOnboardingAnswers(
 		options: APIHandlerOptions<{
-			body: { answerIds: number[] };
+			body: OnboardingAnswerRequestBody;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
