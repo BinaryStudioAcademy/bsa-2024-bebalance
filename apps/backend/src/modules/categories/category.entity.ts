@@ -83,7 +83,7 @@ class CategoryEntity implements Entity {
 
 	public toNewObject(): {
 		createdAt: string;
-		id: null | number;
+		id: number;
 		name: string;
 		updatedAt: string;
 	} {
@@ -98,7 +98,7 @@ class CategoryEntity implements Entity {
 	public toObject(): {
 		categoryId: number;
 		createdAt: string;
-		id: null | number;
+		id: number;
 		name: string;
 		score: number;
 		updatedAt: string;

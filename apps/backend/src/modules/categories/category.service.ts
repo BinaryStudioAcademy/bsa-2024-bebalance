@@ -1,7 +1,8 @@
 import { type Service } from "~/libs/types/types.js";
 
+import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
-import { type UserScore } from "./libs/types/types.js";
+import { type Category, type UserScore } from "./libs/types/types.js";
 
 class CategoryService implements Service {
 	private categoryRepository: CategoryRepository;
@@ -10,8 +11,12 @@ class CategoryService implements Service {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public create(): Promise<null> {
-		return Promise.resolve(null);
+	public async create(payload: Category): Promise<Category> {
+		const category = await this.categoryRepository.create(
+			CategoryEntity.initializeNew(payload),
+		);
+
+		return category.toObject();
 	}
 
 	public async createScore({
@@ -23,33 +28,42 @@ class CategoryService implements Service {
 		score: number;
 		userId: number;
 	}): Promise<UserScore> {
-		const item = await this.categoryRepository.createScore({
+		const userScore = await this.categoryRepository.createScore({
 			categoryId,
 			score,
 			userId,
 		});
 
-		return item.toObject();
+		return userScore.toObject();
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
+	public delete(id: number): Promise<boolean> {
+		return this.categoryRepository.delete(id);
 	}
 
 	public deleteUserScores(userId: number): Promise<number> {
 		return this.categoryRepository.deleteUserScores(userId);
 	}
 
-	public find(): Promise<null> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<Category | null> {
+		const category = await this.categoryRepository.find({ id });
+
+		return category ? category.toObject() : null;
 	}
 
-	public findAll(): Promise<{ items: null[] }> {
-		return Promise.resolve({ items: [null] });
+	public async findAll(): Promise<{ items: Category[] }> {
+		const categories = await this.categoryRepository.findAll();
+
+		return { items: categories.map((category) => category.toObject()) };
 	}
 
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<Category>,
+	): Promise<Category> {
+		const category = await this.categoryRepository.update(id, payload);
+
+		return category.toObject();
 	}
 }
 
