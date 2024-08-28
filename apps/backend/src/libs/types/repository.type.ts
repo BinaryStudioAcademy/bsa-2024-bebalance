@@ -5,7 +5,8 @@ type Repository<T = unknown> = {
 	delete(): Promise<boolean>;
 	findAll(): Promise<T[]>;
 	findById(id: number): Promise<T>;
-	update(id: number, changes: UpdatePayload): Promise<T>;
+	patch(id: number, changes: UpdatePayload): Promise<T>;
+	update(): Promise<T>;
 };
 
 export { type Repository };

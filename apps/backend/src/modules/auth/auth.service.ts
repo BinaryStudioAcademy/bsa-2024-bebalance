@@ -71,7 +71,7 @@ class AuthService {
 			});
 		}
 
-		await this.userService.updatePassword(userId, newPassword);
+		await this.userService.changePassword(userId, newPassword);
 
 		return await Promise.resolve(null);
 	}

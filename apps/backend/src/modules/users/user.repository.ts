@@ -110,7 +110,7 @@ class UserRepository implements Repository {
 			: null;
 	}
 
-	public async update(
+	public async patch(
 		id: number,
 		updates: Partial<UserModel>,
 	): Promise<UserEntity> {
@@ -128,6 +128,10 @@ class UserRepository implements Repository {
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
 		});
+	}
+
+	public update(): ReturnType<Repository["update"]> {
+		return Promise.resolve(true);
 	}
 }
 

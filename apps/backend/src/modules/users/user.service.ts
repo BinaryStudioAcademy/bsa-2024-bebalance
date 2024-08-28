@@ -18,6 +18,20 @@ class UserService implements Service {
 		this.encrypt = encrypt;
 	}
 
+	public async changePassword(
+		id: number,
+		password: string,
+	): Promise<UserEntity> {
+		const { hash, salt } = await this.encrypt.encrypt(password);
+
+		const updates = {
+			passwordHash: hash,
+			passwordSalt: salt,
+		};
+
+		return await this.userRepository.patch(id, updates);
+	}
+
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const { hash, salt } = await this.encrypt.encrypt(payload.password);
 
@@ -52,22 +66,9 @@ class UserService implements Service {
 	public async findById(id: number): Promise<null | UserEntity> {
 		return await this.userRepository.findById(id);
 	}
+
 	public update(): ReturnType<Service["update"]> {
 		return Promise.resolve(true);
-	}
-
-	public async updatePassword(
-		id: number,
-		password: string,
-	): Promise<UserEntity> {
-		const { hash, salt } = await this.encrypt.encrypt(password);
-
-		const updates = {
-			passwordHash: hash,
-			passwordSalt: salt,
-		};
-
-		return await this.userRepository.update(id, updates);
 	}
 }
 
