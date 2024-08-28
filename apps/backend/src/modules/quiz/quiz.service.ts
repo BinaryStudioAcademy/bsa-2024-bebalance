@@ -1,6 +1,6 @@
 import { type QuizQuestionsRepository } from "~/modules/quiz/quiz.repository.js";
 
-import { type QuizQuestionsGetAllReponseDto } from "./libs/types/types.js";
+import { type QuizQuestionsDto } from "./libs/types/types.js";
 
 class QuizQuestionsService {
 	private quizQuestionsRepository: QuizQuestionsRepository;
@@ -9,12 +9,10 @@ class QuizQuestionsService {
 		this.quizQuestionsRepository = quizQuestionsRepository;
 	}
 
-	public async findAll(): Promise<QuizQuestionsGetAllReponseDto> {
+	public async findAll(): Promise<QuizQuestionsDto[]> {
 		const items = await this.quizQuestionsRepository.findAll();
 
-		return {
-			items: items.map((item) => item.toObject()),
-		};
+		return items.map((item) => item.toObject());
 	}
 }
 

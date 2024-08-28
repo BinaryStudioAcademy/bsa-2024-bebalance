@@ -1,0 +1,19 @@
+.quiz-form {
+	padding: 34px;
+	background-color: var(--background);
+}
+
+.questions-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 41px;
+	border-radius: 30px;
+}
+
+.quiz-header {
+	margin-bottom: 65px;
+	font-size: 32px;
+}

@@ -14,6 +14,7 @@ import { handleErrorMiddleware } from "./handle-error.middleware.js";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	quiz: ReturnType<typeof quizReducer>;
 };
 
 type ExtraArguments = {

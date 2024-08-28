@@ -10,8 +10,5 @@ const quizService = new QuizQuestionsService(quizQuestionsRepository);
 const quizController = new QuizController(logger, quizService);
 
 export { QuizApiPath } from "./libs/enums/enums.js";
-export {
-	type QuizQuestionsDto,
-	type QuizQuestionsGetAllReponseDto,
-} from "./libs/types/types.js";
+export { type QuizQuestionsDto } from "./libs/types/types.js";
 export { quizController };

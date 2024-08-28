@@ -1,5 +1,6 @@
 .quiz-question {
 	position: relative;
+	max-width: 603px;
 	margin-bottom: 40px;
 }
 
