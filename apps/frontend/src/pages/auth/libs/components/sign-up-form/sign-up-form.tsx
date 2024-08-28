@@ -26,7 +26,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit((payload: UserSignUpFormDto) => {
+			void handleSubmit((payload: UserSignUpRequestDto) => {
 				const { password } = payload;
 
 				const confirmPassword = watch(ConfirmPasswordCustomValidation.FIELD);
