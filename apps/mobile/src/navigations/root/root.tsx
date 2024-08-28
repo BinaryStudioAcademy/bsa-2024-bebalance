@@ -7,6 +7,7 @@ import React from "react";
 import { RootScreenName } from "~/libs/enums/enums";
 import { useAppSelector } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
+import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
 import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
 import { Welcome } from "~/screens/welcome/welcome";
@@ -32,6 +33,10 @@ const Root: React.FC = () => {
 					<NativeStack.Screen
 						component={QuizEntry}
 						name={RootScreenName.QUIZ_ENTRY}
+					/>
+					<NativeStack.Screen
+						component={BottomTabsNavigator}
+						name={RootScreenName.BOTTOM_TABS_NAVIGATOR}
 					/>
 				</NativeStack.Group>
 			) : (

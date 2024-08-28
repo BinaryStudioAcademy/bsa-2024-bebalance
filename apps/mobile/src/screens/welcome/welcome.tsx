@@ -3,11 +3,12 @@ import React from "react";
 import {
 	BackgroundWrapper,
 	Button,
+	Link,
 	ScreenWrapper,
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
+import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
@@ -64,6 +65,10 @@ const Welcome: React.FC = () => {
 						</Text>
 					</View>
 					<Button label="Let's Continue" onPress={handleContinuePress} />
+					<Link
+						label="Go to the Wheel"
+						to={`/${RootScreenName.BOTTOM_TABS_NAVIGATOR}`}
+					/>
 				</View>
 			</ScreenWrapper>
 		</BackgroundWrapper>
