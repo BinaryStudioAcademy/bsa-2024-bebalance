@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 		borderRadius: 32,
 		borderWidth: 1,
 		elevation: 5,
-		paddingLeft: 71,
+		paddingLeft: 70,
 		shadowColor: BaseColor.CHECKBOX_BLUE,
 	},
 });
