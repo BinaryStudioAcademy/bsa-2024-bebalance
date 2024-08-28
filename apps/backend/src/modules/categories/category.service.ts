@@ -1,7 +1,7 @@
 import { type Service } from "~/libs/types/types.js";
 
 import { type CategoryRepository } from "./category.repository.js";
-import { type UserScore } from "./libs/types/user-score.type.js";
+import { type UserScore } from "./libs/types/types.js";
 
 class CategoryService implements Service {
 	private categoryRepository: CategoryRepository;

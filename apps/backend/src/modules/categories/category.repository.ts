@@ -2,7 +2,7 @@ import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { type CategoryModel } from "./category.model.js";
-import { type UserScore } from "./libs/types/user-score.type.js";
+import { type UserScore } from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
