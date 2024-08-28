@@ -1,7 +1,10 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/types.js";
 
-import { type CategoryService } from "../categories/categories.js";
+import {
+	type CategoryService,
+	type UserScore,
+} from "../categories/categories.js";
 import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
@@ -32,14 +35,15 @@ class QuizAnswerService implements Service {
 	}: {
 		answerIds: number[];
 		userId: number;
-	}): Promise<{ categoryId: number; score: number }[]> {
+	}): Promise<UserScore[]> {
+		const countByCategoryId = new Map<number, number>();
+		const scores = [];
+
 		const categorizedAnswers = await Promise.all(
 			answerIds.map((answerId) =>
 				this.quizAnswerRepository.getCategoriezedAnswer(answerId),
 			),
 		);
-
-		const countByCategoryId = new Map<number, number>();
 
 		for (const answer of categorizedAnswers) {
 			const { categoryId, value } = answer;
@@ -47,15 +51,13 @@ class QuizAnswerService implements Service {
 			countByCategoryId.set(categoryId, currentScore + value);
 		}
 
-		const scores = [];
-
 		for (const [categoryId, score] of countByCategoryId.entries()) {
-			const quizScore = await this.categoryService.createScore({
+			const userScore = await this.categoryService.createScore({
 				categoryId,
 				score,
 				userId,
 			});
-			scores.push(quizScore);
+			scores.push(userScore);
 		}
 
 		return scores;
@@ -68,7 +70,7 @@ class QuizAnswerService implements Service {
 		answerIds: number[];
 		userId: number;
 	}): Promise<{
-		scores: { categoryId: number; score: number }[];
+		scores: UserScore[];
 		userAnswers: QuizAnswerModel[];
 	}> {
 		const answers = await Promise.all(answerIds.map((id) => this.find(id)));

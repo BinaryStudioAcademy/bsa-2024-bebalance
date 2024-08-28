@@ -6,4 +6,5 @@ const categoryRepository = new CategoryRepository(CategoryModel);
 const categoryService = new CategoryService(categoryRepository);
 
 export { CategoryService } from "./category.service.js";
+export { type UserScore } from "./libs/types/types.js";
 export { categoryService };

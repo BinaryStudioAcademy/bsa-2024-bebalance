@@ -1,6 +1,7 @@
 import { type Service } from "~/libs/types/types.js";
 
 import { type CategoryRepository } from "./category.repository.js";
+import { type UserScore } from "./libs/types/user-score.type.js";
 
 class CategoryService implements Service {
 	private categoryRepository: CategoryRepository;
@@ -21,13 +22,7 @@ class CategoryService implements Service {
 		categoryId: number;
 		score: number;
 		userId: number;
-	}): Promise<{
-		categoryId: number;
-		createdAt: string;
-		score: number;
-		updatedAt: string;
-		userId: number;
-	}> {
+	}): Promise<UserScore> {
 		return this.categoryRepository.createScore({
 			categoryId,
 			score,

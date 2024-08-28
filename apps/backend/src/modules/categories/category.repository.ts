@@ -2,6 +2,7 @@ import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { type CategoryModel } from "./category.model.js";
+import { type UserScore } from "./libs/types/user-score.type.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
@@ -22,13 +23,7 @@ class CategoryRepository implements Repository {
 		categoryId: number;
 		score: number;
 		userId: number;
-	}): Promise<{
-		categoryId: number;
-		createdAt: string;
-		score: number;
-		updatedAt: string;
-		userId: number;
-	}> {
+	}): Promise<UserScore> {
 		const item = await this.categoryModel
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
