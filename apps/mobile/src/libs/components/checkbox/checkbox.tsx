@@ -58,11 +58,13 @@ const Checkbox: React.FC<Properties> = ({
 					}}
 					value={isChecked}
 				/>
-				{!hasVisuallyHiddenLabel && (
-					<Text preset="subheading" weight="bold">
-						{label}
-					</Text>
-				)}
+				<Text
+					preset="subheading"
+					style={hasVisuallyHiddenLabel && styles.visuallyHidden}
+					weight="bold"
+				>
+					{label}
+				</Text>
 			</View>
 		</LinearGradient>
 	);

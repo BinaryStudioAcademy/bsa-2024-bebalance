@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
 		paddingLeft: 70,
 		shadowColor: BaseColor.CHECKBOX_BLUE,
 	},
+	visuallyHidden: {
+		height: 1,
+		opacity: 0,
+		overflow: "hidden",
+		position: "absolute",
+		width: 1,
+	},
 });
 
 export { styles };
