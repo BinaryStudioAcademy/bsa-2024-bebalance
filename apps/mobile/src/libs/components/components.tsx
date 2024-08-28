@@ -5,9 +5,11 @@ export { GradientTabIcon } from "./gradient-tab-icon/gradient-tab-icon";
 export { GradientText } from "./gradient-text/gradient-text";
 export { GradientIcon } from "./icon/gradient-icon";
 export { Icon } from "./icon/icon";
+export { IconButton } from "./icon-button/icon-button";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
+export { Planet } from "./planet/planet";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
@@ -18,6 +20,8 @@ export {
 	KeyboardAvoidingView,
 	Pressable,
 	ScrollView,
+	TextInput,
+	TouchableOpacity,
 	View,
 } from "react-native";
 export { LinearGradient } from "react-native-linear-gradient";

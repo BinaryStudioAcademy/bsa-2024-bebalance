@@ -1,6 +1,7 @@
-import { type UserSignUpRequestDto } from "~/packages/users/users";
+import { type UserSignUpFormDto } from "~/packages/users/users";
 
-const USER_SIGN_UP_DEFAULT_VALUES: UserSignUpRequestDto = {
+const USER_SIGN_UP_DEFAULT_VALUES: UserSignUpFormDto = {
+	confirmPassword: "",
 	email: "",
 	name: "",
 	password: "",
