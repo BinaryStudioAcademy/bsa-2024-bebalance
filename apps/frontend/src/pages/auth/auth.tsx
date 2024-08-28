@@ -6,7 +6,6 @@ import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
-	useEffect,
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
@@ -40,12 +39,6 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
-	useEffect(() => {
-		if (user) {
-			<Navigate replace to={AppRoute.ROOT} />;
-		}
-	}, [user]);
-
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case AppRoute.SIGN_IN: {
@@ -59,6 +52,10 @@ const Auth: React.FC = () => {
 
 		return null;
 	};
+
+	if (user) {
+		<Navigate replace to={AppRoute.ROOT} />;
+	}
 
 	return (
 		<div className={styles["auth-container"]}>
