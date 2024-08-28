@@ -35,8 +35,8 @@ class OnboardingController extends BaseController {
 	/**
 	 * @swagger
 	 * /onboarding/answer:
-	 *   put:
-	 *     description: Saves user answers for onboarding questions at once
+	 *   post:
+	 *     description: Saves user answers for onboarding questions
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -45,9 +45,16 @@ class OnboardingController extends BaseController {
 	 *             type: object
 	 *             properties:
 	 *               answerIds:
-	 *                 type: number[]
-	 *
-	 *
+	 *                 type: array
+	 *                 items:
+	 *                   type: number
+	 *               user:
+	 *                 type: object
+	 *                 properties:
+	 *                   id:
+	 *                     type: number
+	 *                   email:
+	 *                     type: string
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -56,24 +63,25 @@ class OnboardingController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 isAnswerStored:
-	 *                   type: boolean
-	 *                 isPreviousAnswerDeleted:
-	 *                   type: boolean
-	 *                 answer:
-	 *                   type: object
-	 *                   properties:
-	 *                     createdAt:
-	 *                       type: string
-	 *                     id:
-	 *                       type: number
-	 *                     label:
-	 *                       type: string
-	 *                     questionId:
-	 *                       type: number
-	 *                     updatedAt:
-	 *                       type: string
+	 *                 addedAnswers:
+	 *                   type: array
+	 *                   items:
+	 *                     type: object
+	 *                     properties:
+	 *                       id:
+	 *                         type: number
+	 *                       label:
+	 *                         type: string
+	 *                       questionId:
+	 *                         type: number
+	 *                       createdAt:
+	 *                         type: string
+	 *                         format: date-time
+	 *                       updatedAt:
+	 *                         type: string
+	 *                         format: date-time
 	 */
+
 	private async saveOnboardingAnswers(
 		options: APIHandlerOptions<{
 			body: { answerIds: number[] };
