@@ -12,6 +12,46 @@ import { QuizApiPath } from "./libs/enums/enums.js";
 import { type UserDto } from "./libs/types/types.js";
 import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
+/*** @swagger
+ * components:
+ *    schemas:
+ *      UserScore:
+ *        type: object
+ *        properties:
+ *          categoryId:
+ *            type: number
+ *            format: int64
+ *          createdAt:
+ *            type: string
+ *            format: date-time
+ *          score:
+ *            type: number
+ *            format: float
+ *          updatedAt:
+ *            type: string
+ *            format: date-time
+ *          userId:
+ *            type: number
+ *            format: int64
+ *      UserAnswer:
+ *        type: object
+ *        properties:
+ *          answerId:
+ *            type: number
+ *            format: int64
+ *          createdAt:
+ *            type: string
+ *            format: date-time
+ *          id:
+ *            type: number
+ *            format: int64
+ *          updatedAt:
+ *            type: string
+ *            format: date-time
+ *          userId:
+ *            type: number
+ *            format: int64
+ */
 class QuizController extends BaseController {
 	private quizAnswerService: QuizAnswerService;
 
@@ -60,25 +100,14 @@ class QuizController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 isAnswerStored:
-	 *                   type: boolean
-	 *                 isPreviousAnswerDeleted:
-	 *                   type: boolean
-	 *                 answer:
-	 *                   type: object
-	 *                   properties:
-	 *                     createdAt:
-	 *                       type: string
-	 *                     id:
-	 *                       type: number
-	 *                     label:
-	 *                       type: string
-	 *                     questionId:
-	 *                       type: number
-	 *                     updatedAt:
-	 *                       type: string
-	 *                     value:
-	 *                       type: number
+	 *                 scores:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/UserScore"
+	 *                 userAnswers:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/UserAnswer"
 	 */
 	private async createUserAnswer(
 		options: APIHandlerOptions<{
