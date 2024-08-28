@@ -1,4 +1,5 @@
 export { type AsyncThunkConfig } from "./app/app";
+export { type IconName } from "./icon/icon";
 export {
 	type NavigationScreenProperties,
 	type RootNavigationParameterList,

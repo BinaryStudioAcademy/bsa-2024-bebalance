@@ -4,6 +4,7 @@ import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
 	LoaderWrapper,
+	Planet,
 	ScreenWrapper,
 	ScrollView,
 	Text,
@@ -88,37 +89,45 @@ const Auth: React.FC = () => {
 						keyboardVerticalOffset={
 							checkIfIos() ? IOS_KEYBOARD_OFFSET : ANDROID_KEYBOARD_OFFSET
 						}
-						style={[
-							globalStyles.alignItemsCenter,
-							globalStyles.flex1,
-							globalStyles.justifyContentCenter,
-							globalStyles.mb48,
-							globalStyles.mt48,
-						]}
+						style={[globalStyles.flex1, globalStyles.mv32]}
 					>
 						<ScrollView
-							contentContainerStyle={globalStyles.flexGrow1}
+							contentContainerStyle={[
+								globalStyles.justifyContentCenter,
+								globalStyles.ph16,
+								styles.wideView,
+							]}
 							overScrollMode="never"
 							showsHorizontalScrollIndicator={false}
 							showsVerticalScrollIndicator={false}
-							style={styles.formContainer}
 						>
-							<View style={globalStyles.p32}>
-								<Text>state: {dataStatus}</Text>
+							<Text>state: {dataStatus}</Text>
+							<View
+								style={[
+									globalStyles.pv32,
+									globalStyles.ph16,
+									styles.formContainer,
+								]}
+							>
 								<View
 									style={[
 										globalStyles.gap8,
 										globalStyles.alignItemsCenter,
 										globalStyles.flexDirectionRow,
 										globalStyles.mb32,
-										globalStyles.mt32,
 									]}
 								>
-									<Text preset="heading" style={globalStyles.ml48}>
-										LOGO
+									<Planet color="pink" size="xs" />
+									<Text
+										preset="uppercase"
+										size="xl"
+										style={globalStyles.ml48}
+										weight="bold"
+									>
+										Logo
 									</Text>
 								</View>
-								{getScreen(name)}
+								<View style={globalStyles.gap24}>{getScreen(name)}</View>
 							</View>
 						</ScrollView>
 					</KeyboardAvoidingView>
