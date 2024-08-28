@@ -32,7 +32,7 @@ export {
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
 	type EmailDto,
-	type NewPasswordDto,
+	type ResetPasswordDto,
 	type UserDto,
 	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,

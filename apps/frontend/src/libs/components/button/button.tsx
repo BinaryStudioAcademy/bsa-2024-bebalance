@@ -3,6 +3,7 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	isDisabled?: boolean;
 	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
@@ -12,6 +13,7 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({
+	isDisabled = false,
 	isFluid = false,
 	isPrimary = true,
 	label,
@@ -24,6 +26,7 @@ const Button: React.FC<Properties> = ({
 			isFluid && styles["fluid"],
 			isPrimary && styles["primary"],
 		)}
+		disabled={isDisabled}
 		onClick={onClick}
 		type={type}
 	>

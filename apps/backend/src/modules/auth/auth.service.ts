@@ -5,6 +5,7 @@ import { mail } from "~/libs/modules/mail/mail.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type EmailDto,
+	type ResetPasswordDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -39,11 +40,10 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			email: userDetails.email,
 			userId: userDetails.id,
 		});
 
-		const link = `http://${config.ENV.APP.HOST}:3000/reset-password/${userDetails.id.toString()}/${jwtToken}`;
+		const link = `http://${config.ENV.APP.HOST}:3000/reset-password/${jwtToken}`;
 
 		mail.sendResetPasswordEmail({
 			recipient: userDetails.email,
@@ -51,6 +51,29 @@ class AuthService {
 		});
 
 		return { message: "Email sent" };
+	}
+
+	public async resetPassword(
+		payload: Omit<ResetPasswordDto, "confirmPassword">,
+	): Promise<{ message: string }> {
+		const { jwtToken, newPassword } = payload;
+
+		const decoded = await token.decode(jwtToken);
+
+		const { userId } = decoded.payload;
+
+		const user = await this.userService.findById(userId);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		await this.userService.updatePassword(userId, newPassword);
+
+		return { message: "Password reset succesfull" };
 	}
 
 	public async signIn(

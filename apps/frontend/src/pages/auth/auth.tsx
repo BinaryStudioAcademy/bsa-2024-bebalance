@@ -6,6 +6,7 @@ import {
 	useAppDispatch,
 	useCallback,
 	useLocation,
+	useNavigate,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
@@ -16,6 +17,7 @@ import {
 
 import {
 	ForgotPasswordForm,
+	ResetPasswordForm,
 	SignInForm,
 	SignUpForm,
 } from "./libs/components/components.js";
@@ -25,6 +27,7 @@ import styles from "./styles.module.css";
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -43,8 +46,9 @@ const Auth: React.FC = () => {
 	const handleForgotPasswordSubmit = useCallback(
 		(payload: EmailDto): void => {
 			void dispatch(authActions.sendForgotPasswordLink(payload));
+			navigate(AppRoute.SIGN_IN);
 		},
-		[dispatch],
+		[dispatch, navigate],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
@@ -60,9 +64,11 @@ const Auth: React.FC = () => {
 			case AppRoute.FORGOT_PASSWORD: {
 				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
-		}
 
-		return null;
+			default: {
+				return <ResetPasswordForm />;
+			}
+		}
 	};
 
 	return (

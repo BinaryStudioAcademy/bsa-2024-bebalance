@@ -1,5 +1,6 @@
 import {
 	getAuthenticatedUser,
+	resetPassword,
 	sendForgotPasswordLink,
 	signIn,
 	signUp,
@@ -9,6 +10,7 @@ import { actions } from "./auth.slice.js";
 const allActions = {
 	...actions,
 	getAuthenticatedUser,
+	resetPassword,
 	sendForgotPasswordLink,
 	signIn,
 	signUp,

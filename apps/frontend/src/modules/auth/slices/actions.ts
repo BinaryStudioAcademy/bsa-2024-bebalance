@@ -4,6 +4,7 @@ import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type EmailDto,
+	type ResetPasswordDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -61,4 +62,22 @@ const sendForgotPasswordLink = createAsyncThunk<
 	return payload.message;
 });
 
-export { getAuthenticatedUser, sendForgotPasswordLink, signIn, signUp };
+const resetPassword = createAsyncThunk<
+	string,
+	Omit<ResetPasswordDto, "confirmPassword">,
+	AsyncThunkConfig
+>(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
+	const { authApi } = extra;
+
+	const payload = await authApi.resetPassword(emailPayload);
+
+	return payload.message;
+});
+
+export {
+	getAuthenticatedUser,
+	resetPassword,
+	sendForgotPasswordLink,
+	signIn,
+	signUp,
+};

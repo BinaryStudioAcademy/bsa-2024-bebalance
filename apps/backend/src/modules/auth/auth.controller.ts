@@ -8,6 +8,7 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type EmailDto,
+	type ResetPasswordDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -75,6 +76,17 @@ class AuthController extends BaseController {
 			method: "POST",
 			path: AuthApiPath.FORGOT_PASSWORD,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.resetPassword(
+					options as APIHandlerOptions<{
+						body: ResetPasswordDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.RESET_PASSWORD,
+		});
 	}
 
 	private async forgotPassword(
@@ -111,6 +123,17 @@ class AuthController extends BaseController {
 	): APIHandlerResponse {
 		return {
 			payload: options.user,
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async resetPassword(
+		options: APIHandlerOptions<{
+			body: ResetPasswordDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.resetPassword(options.body),
 			status: HTTPCode.OK,
 		};
 	}

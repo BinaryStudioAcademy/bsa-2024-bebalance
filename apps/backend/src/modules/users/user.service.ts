@@ -37,9 +37,6 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public async find(id: number): Promise<null | UserEntity> {
-		return await this.userRepository.find(id);
-	}
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 
@@ -52,8 +49,25 @@ class UserService implements Service {
 		return this.userRepository.findByEmail(email);
 	}
 
+	public async findById(id: number): Promise<null | UserEntity> {
+		return await this.userRepository.findById(id);
+	}
 	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
+		return Promise.resolve(true);
+	}
+
+	public async updatePassword(
+		id: number,
+		password: string,
+	): Promise<UserEntity> {
+		const { hash, salt } = await this.encrypt.encrypt(password);
+
+		const updates = {
+			passwordHash: hash,
+			passwordSalt: salt,
+		};
+
+		return await this.userRepository.update(id, updates);
 	}
 }
 

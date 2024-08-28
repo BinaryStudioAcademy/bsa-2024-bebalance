@@ -12,7 +12,7 @@
 		"lint:js": "npx eslint . --max-warnings=0",
 		"lint:type": "npx tsc --noEmit",
 		"lint": "concurrently \"npm:lint:*\"",
-		"start:dev": "vite",
+		"start:dev": "vite --force",
 		"build": "tsc -p tsconfig.build.json && vite build",
 		"preview": "vite preview"
 	},

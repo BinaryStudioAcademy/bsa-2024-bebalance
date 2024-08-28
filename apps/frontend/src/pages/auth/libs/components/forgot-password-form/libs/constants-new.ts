@@ -1,0 +1,5 @@
+const DEFAULT_FORGOT_PASSWORD_PAYLOAD = {
+	email: "",
+};
+
+export { DEFAULT_FORGOT_PASSWORD_PAYLOAD };

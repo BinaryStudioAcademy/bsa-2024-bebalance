@@ -5,6 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type UserDto } from "~/libs/types/types.js";
 import {
 	type EmailDto,
+	type ResetPasswordDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -35,6 +36,22 @@ class AuthApi extends BaseHTTPApi {
 		);
 
 		return await response.json<UserDto>();
+	}
+
+	public async resetPassword(
+		payload: Omit<ResetPasswordDto, "confirmPassword">,
+	): Promise<{ message: "string" }> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json();
 	}
 
 	public async sendResetPasswordLink(

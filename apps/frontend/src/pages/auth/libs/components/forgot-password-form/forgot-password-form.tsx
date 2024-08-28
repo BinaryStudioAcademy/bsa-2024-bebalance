@@ -5,7 +5,7 @@ import {
 	userForgotPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants-new.js";
 import styles from "./styles.module.css";
 
 type Properties = {

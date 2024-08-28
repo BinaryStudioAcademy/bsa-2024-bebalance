@@ -53,25 +53,6 @@ class UserRepository implements Repository {
 		return Promise.resolve(true);
 	}
 
-	public async find(id: number): Promise<null | UserEntity> {
-		const user = await this.userModel
-			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
-			.findById(id);
-
-		return user
-			? UserEntity.initialize({
-					createdAt: user.createdAt,
-					email: user.email,
-					id: user.id,
-					name: user.userDetails.name,
-					passwordHash: user.passwordHash,
-					passwordSalt: user.passwordSalt,
-					updatedAt: user.updatedAt,
-				})
-			: null;
-	}
-
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
@@ -110,8 +91,43 @@ class UserRepository implements Repository {
 			: null;
 	}
 
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
+	public async findById(id: number): Promise<null | UserEntity> {
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.findById(id);
+
+		return user
+			? UserEntity.initialize({
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
+	}
+
+	public async update(
+		id: number,
+		updates: Partial<UserModel>,
+	): Promise<UserEntity> {
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.patchAndFetchById(id, updates);
+
+		return UserEntity.initialize({
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
 	}
 }
 
