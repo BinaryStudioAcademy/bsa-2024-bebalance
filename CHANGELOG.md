@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.21.0...v1.22.0) (2024-08-28)
+
+
+### Features
+
+* added db schema to readme file bb-156 ([#217](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/217)) ([20db5e4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/20db5e4cf9891bd005402576027b3cfc88f77880))
+* **frontend:** analyzing screen mobile responsiveness bb-136 ([#213](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/213)) ([1c8b8c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1c8b8c7ec3ed2ca563be922fd97c1d967c98218e))
+* **frontend:** Sidebar component mobile responsiveness bb-106 ([#192](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/192)) ([f9f0ba8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f9f0ba8aa4907fc557afdad0dcf5e34195dcc5fb))
+* **frontend:** Sign in bb-7 ([#223](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/223)) ([ce92bac](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ce92baccb5ed7337664322473c62c5f1b77f7257))
+* **mobile:** add sign up bb-21 ([#177](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/177)) ([51ebe65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/51ebe65e56f875d07501eef0c436bc442cf8b71f))
+* **mobile:** Welcome screen bb-183 ([#206](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/206)) ([fa8036d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fa8036d15831cadb3da9bdb6d9c82a81c5c7d8cb))
+
 ## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.20.0...v1.21.0) (2024-08-27)
 
 
