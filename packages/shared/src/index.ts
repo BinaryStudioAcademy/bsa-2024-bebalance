@@ -35,9 +35,11 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	type OnboardingAnswerDto,
+	type OnboardingAnswerRequestDto,
 	OnboardingApiPath,
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionDto,
+	type OnboardingQuestionRequestDto,
 } from "./modules/onboarding/onboarding.js";
 export {
 	type UserDto,
