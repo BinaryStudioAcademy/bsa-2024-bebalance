@@ -5,7 +5,12 @@ import { type CategoryService } from "../categories/categories.js";
 import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
-import { type UserAnswer, type UserScore } from "./libs/types/types.js";
+import {
+	type QuizAnswer,
+	type UserAnswer,
+	type UserScore,
+} from "./libs/types/types.js";
+import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 
 class QuizAnswerService implements Service {
@@ -21,8 +26,12 @@ class QuizAnswerService implements Service {
 		this.categoryService = categoryService;
 	}
 
-	public create(): Promise<null> {
-		return Promise.resolve(null);
+	public async create(payload: QuizAnswer): Promise<QuizAnswer> {
+		const item = await this.quizAnswerRepository.create(
+			QuizAnswerEntity.initializeNew(payload),
+		);
+
+		return item.toObject();
 	}
 
 	public async createScores({
@@ -103,20 +112,29 @@ class QuizAnswerService implements Service {
 		return { scores, userAnswers };
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
+	public delete(id: number): Promise<boolean> {
+		return this.quizAnswerRepository.delete(id);
 	}
 
-	public find(): Promise<null> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | QuizAnswer> {
+		const item = await this.quizAnswerRepository.find(id);
+
+		return item ? item.toObject() : null;
 	}
 
-	public findAll(): Promise<{ items: null[] }> {
-		return Promise.resolve({ items: [null] });
+	public async findAll(): Promise<{ items: QuizAnswer[] }> {
+		const items = await this.quizAnswerRepository.findAll();
+
+		return { items: items.map((item) => item.toObject()) };
 	}
 
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<QuizAnswer>,
+	): Promise<QuizAnswer> {
+		const item = await this.quizAnswerRepository.update(id, payload);
+
+		return item.toObject();
 	}
 }
 

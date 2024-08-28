@@ -1,7 +1,10 @@
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
-import { type CategorizedQuizAnswerModel } from "./libs/types/types.js";
+import {
+	type CategorizedQuizAnswerModel,
+	type QuizAnswer,
+} from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerModel } from "./quiz-answer.model.js";
 
@@ -12,8 +15,23 @@ class QuizAnswerRepository implements Repository {
 		this.quizAnswerModel = quizAnswerModel;
 	}
 
-	public create(): Promise<null> {
-		return Promise.resolve(null);
+	public async create(entity: QuizAnswerEntity): Promise<QuizAnswerEntity> {
+		const { label, questionId, value } = entity.toNewObject();
+		const item = await this.quizAnswerModel
+			.query()
+			.insert({ label, questionId, value })
+			.returning("*");
+
+		return QuizAnswerEntity.initialize({
+			answerId: item.answerId,
+			createdAt: item.createdAt,
+			id: item.id,
+			label: item.label,
+			questionId: item.questionId,
+			updatedAt: item.updatedAt,
+			userId: item.userId,
+			value: item.value,
+		});
 	}
 
 	public async createUserAnswers(
@@ -46,8 +64,10 @@ class QuizAnswerRepository implements Repository {
 		);
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const rowsDeleted = await this.quizAnswerModel.query().deleteById(id);
+
+		return Boolean(rowsDeleted);
 	}
 
 	public async deleteUserAnswers(userId: number): Promise<number> {
@@ -58,12 +78,38 @@ class QuizAnswerRepository implements Repository {
 			.delete();
 	}
 
-	public find(): Promise<null> {
-		return Promise.resolve(null);
+	public async find(id: number): Promise<null | QuizAnswerEntity> {
+		const item = await this.quizAnswerModel.query().findById(id);
+
+		return item
+			? QuizAnswerEntity.initialize({
+					answerId: item.answerId,
+					createdAt: item.createdAt,
+					id: item.id,
+					label: item.label,
+					questionId: item.questionId,
+					updatedAt: item.updatedAt,
+					userId: item.userId,
+					value: item.value,
+				})
+			: null;
 	}
 
-	public findAll(): Promise<null[]> {
-		return Promise.resolve([null]);
+	public async findAll(): Promise<QuizAnswerEntity[]> {
+		const items = await this.quizAnswerModel.query().select("*");
+
+		return items.map((item) =>
+			QuizAnswerEntity.initialize({
+				answerId: item.answerId,
+				createdAt: item.createdAt,
+				id: item.id,
+				label: item.label,
+				questionId: item.questionId,
+				updatedAt: item.updatedAt,
+				userId: item.userId,
+				value: item.value,
+			}),
+		);
 	}
 
 	public async findByIds(ids: number[]): Promise<QuizAnswerEntity[]> {
@@ -104,8 +150,24 @@ class QuizAnswerRepository implements Repository {
 		};
 	}
 
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<QuizAnswer>,
+	): Promise<QuizAnswerEntity> {
+		const item = await this.quizAnswerModel
+			.query()
+			.patchAndFetchById(id, { ...payload });
+
+		return QuizAnswerEntity.initialize({
+			answerId: item.answerId,
+			createdAt: item.createdAt,
+			id: item.id,
+			label: item.label,
+			questionId: item.questionId,
+			updatedAt: item.updatedAt,
+			userId: item.userId,
+			value: item.value,
+		});
 	}
 }
 
