@@ -85,18 +85,18 @@ class QuizAnswerService implements Service {
 
 		if (uniqueQuestionIds.size !== questionIds.length) {
 			throw new QuizError({
-				message: ErrorMessage.DUPLICATE_ANSWER,
+				message: ErrorMessage.DUPLICATE_QUESTION_ANSWER,
 				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
 		await this.quizAnswerRepository.deleteUserAnswers(userId);
-		await this.categoryService.deleteUserScores(userId);
-
 		const userAnswers = await this.quizAnswerRepository.createUserAnswers(
 			userId,
 			answerIds,
 		);
+
+		await this.categoryService.deleteUserScores(userId);
 		const scores = await this.createScores({ answerIds, userId });
 
 		return { scores, userAnswers };
