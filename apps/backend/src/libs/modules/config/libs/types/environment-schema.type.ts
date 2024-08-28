@@ -18,6 +18,10 @@ type EnvironmentSchema = {
 		EXPIRATION_TIME: string;
 		SECRET: string;
 	};
+	MAILER: {
+		ADDRESS: string;
+		APP_PASSWORD: string;
+	};
 };
 
 export { type EnvironmentSchema };

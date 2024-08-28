@@ -58,9 +58,9 @@ class AuthService {
 	): Promise<null> {
 		const { jwtToken, newPassword } = payload;
 
-		const decoded = await token.decode(jwtToken);
-
-		const { userId } = decoded.payload;
+		const {
+			payload: { userId },
+		} = await token.decode(jwtToken);
 
 		const user = await this.userService.findById(userId);
 

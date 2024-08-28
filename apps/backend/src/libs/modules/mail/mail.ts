@@ -1,11 +1,13 @@
 import NodeMailer from "nodemailer";
 
+import { config } from "~/libs/modules/config/config.js";
+
 import { BaseMail } from "./base-mail.module.js";
 
 const transporter = NodeMailer.createTransport({
 	auth: {
-		pass: "siph gtpe jgvu fvwv",
-		user: "lysak.ihor4221@gmail.com",
+		pass: config.ENV.MAILER.APP_PASSWORD,
+		user: config.ENV.MAILER.ADDRESS,
 	},
 	host: "smtp.gmail.com",
 	port: 465,

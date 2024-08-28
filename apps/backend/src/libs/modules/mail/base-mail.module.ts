@@ -1,7 +1,9 @@
 import { type Transporter } from "nodemailer";
 
+import { config } from "~/libs/modules/config/config.js";
+
 class BaseMail {
-	private sender = "lysak.ihor4221@gmail.com";
+	private sender = config.ENV.MAILER.ADDRESS;
 	private transporter: Transporter;
 
 	constructor(transporter: Transporter) {

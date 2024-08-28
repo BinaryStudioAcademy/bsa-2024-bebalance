@@ -50,7 +50,7 @@ class UserRepository implements Repository {
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+		return Promise.resolve(false);
 	}
 
 	public async findAll(): Promise<UserEntity[]> {
@@ -131,7 +131,7 @@ class UserRepository implements Repository {
 	}
 
 	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(true);
+		return Promise.resolve(null);
 	}
 }
 

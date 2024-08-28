@@ -1,5 +1,4 @@
 type TokenPayload = {
-	email?: string;
 	userId: number;
 };
 

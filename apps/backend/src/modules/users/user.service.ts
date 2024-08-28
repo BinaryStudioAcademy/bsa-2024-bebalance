@@ -68,7 +68,7 @@ class UserService implements Service {
 	}
 
 	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(true);
+		return Promise.resolve(null);
 	}
 }
 
