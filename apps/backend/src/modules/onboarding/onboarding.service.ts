@@ -1,8 +1,12 @@
 import { type Service } from "~/libs/types/types.js";
 
-import { type OnboardingGetAllResponseDto } from "./libs/types/types.js";
+import {
+	type OnboardingGetAllResponseDto,
+	type OnboardingQuestionDto,
+	type OnboardingQuestionRequestDto,
+} from "./libs/types/types.js";
 import { type OnboardingRepository } from "./onboarding.repository.js";
-import { type OnboardingQuestionEntity } from "./onboarding-question.entity.js";
+import { OnboardingQuestionEntity } from "./onboarding-question.entity.js";
 
 class OnboardingService implements Service {
 	private onboardingRepository: OnboardingRepository;
@@ -11,29 +15,62 @@ class OnboardingService implements Service {
 		this.onboardingRepository = onboardingRepository;
 	}
 
-	public create(): ReturnType<Service["create"]> {
-		return Promise.resolve(null);
+	public async create(
+		payload: OnboardingQuestionRequestDto,
+	): Promise<OnboardingQuestionDto> {
+		const { answers, label } = payload;
+
+		const newQuestionEntity = OnboardingQuestionEntity.initializeNew({
+			answers: answers.map((answer) => ({
+				label: answer.label,
+			})),
+			label,
+		});
+
+		const savedQuestionEntity =
+			await this.onboardingRepository.create(newQuestionEntity);
+
+		return savedQuestionEntity.toObject();
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		return await this.onboardingRepository.delete(id);
 	}
 
-	public find(): ReturnType<Service["find"]> {
-		return Promise.resolve(true);
+	public async find(id: number): Promise<null | OnboardingQuestionDto> {
+		const onboardingQuestion = await this.onboardingRepository.find(id);
+
+		return onboardingQuestion ? onboardingQuestion.toObject() : null;
 	}
 
 	public async findAll(): Promise<OnboardingGetAllResponseDto> {
 		const items: OnboardingQuestionEntity[] =
-			await this.onboardingRepository.getOnboardingSurvey();
+			await this.onboardingRepository.findAll();
 
 		return {
 			items: items.map((item) => item.toObject()),
 		};
 	}
 
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: OnboardingQuestionDto,
+	): Promise<OnboardingQuestionRequestDto> {
+		const { answers, label } = payload;
+
+		const questionEntity = OnboardingQuestionEntity.initializeNew({
+			answers: answers.map((answer) => ({
+				label: answer.label,
+			})),
+			label,
+		});
+
+		const updatedQuestionEntity = await this.onboardingRepository.update(
+			id,
+			questionEntity,
+		);
+
+		return updatedQuestionEntity.toObject();
 	}
 }
 
