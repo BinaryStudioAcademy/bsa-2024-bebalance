@@ -53,8 +53,10 @@ const Auth: React.FC = () => {
 		return null;
 	};
 
-	if (user) {
-		<Navigate replace to={AppRoute.ROOT} />;
+	const hasUser = Boolean(user);
+
+	if (hasUser) {
+		return <Navigate replace to={AppRoute.ROOT} />;
 	}
 
 	return (
@@ -87,12 +89,6 @@ const Auth: React.FC = () => {
 					</span>
 				</div>
 				{getScreen(pathname)}
-
-				{pathname === AppRoute.SIGN_IN && (
-					<div className={styles["forgot-password"]}>
-						<Link to={AppRoute.ANY}>Forgot password?</Link>
-					</div>
-				)}
 			</div>
 			<div className={styles["title-container"]}>
 				<h1 className={styles["title"]}>Logo</h1>
