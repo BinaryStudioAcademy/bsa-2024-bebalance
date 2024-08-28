@@ -1,15 +1,12 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/types.js";
 
-import {
-	type CategoryService,
-	type UserScore,
-} from "../categories/categories.js";
+import { type CategoryService } from "../categories/categories.js";
 import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
+import { type UserAnswer, type UserScore } from "./libs/types/types.js";
 import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
-import { type QuizAnswerModel } from "./quiz-answer.model.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 
 class QuizAnswerService implements Service {
@@ -71,7 +68,7 @@ class QuizAnswerService implements Service {
 		userId: number;
 	}): Promise<{
 		scores: UserScore[];
-		userAnswers: QuizAnswerModel[];
+		userAnswers: UserAnswer[];
 	}> {
 		const answers = await Promise.all(answerIds.map((id) => this.find(id)));
 		const existingAnswers = answers.filter((answer) => answer !== null);

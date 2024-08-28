@@ -17,8 +17,6 @@ class QuizAnswerModel extends AbstractModel {
 
 	public userId!: number;
 
-	public users!: UserModel[];
-
 	public value!: number;
 
 	static get relationMappings(): RelationMappings {

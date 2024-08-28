@@ -2,7 +2,10 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
-import { type CategoriezedQuizAnswerModel } from "./libs/types/types.js";
+import {
+	type CategoriezedQuizAnswerModel,
+	type UserAnswer,
+} from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerModel } from "./quiz-answer.model.js";
 
@@ -20,8 +23,8 @@ class QuizAnswerRepository implements Repository {
 	public async createUserAnswers(
 		userId: number,
 		answerIds: number[],
-	): Promise<QuizAnswerModel[]> {
-		return await Promise.all(
+	): Promise<UserAnswer[]> {
+		const answers = await Promise.all(
 			answerIds.map((answerId) =>
 				this.quizAnswerModel
 					.query()
@@ -32,6 +35,14 @@ class QuizAnswerRepository implements Repository {
 					}),
 			),
 		);
+
+		return answers.map((answer) => ({
+			answerId: answer.answerId,
+			createdAt: answer.createdAt,
+			id: answer.id,
+			updatedAt: answer.updatedAt,
+			userId: answer.userId,
+		}));
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
