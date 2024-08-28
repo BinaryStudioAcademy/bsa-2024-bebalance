@@ -5,6 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
+import { CategoryModel } from "../categories/category.model.js";
 import { QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
 import { UserDetailsModel } from "./user-details.model.js";
 
@@ -15,10 +16,25 @@ class UserModel extends AbstractModel {
 
 	public passwordSalt!: string;
 
+	public score!: number;
+
 	public userDetails!: UserDetailsModel;
 
 	static get relationMappings(): RelationMappings {
 		return {
+			categories: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					through: {
+						extra: ["score"],
+						from: `${DatabaseTableName.QUIZ_SCORES}.userId`,
+						to: `${DatabaseTableName.QUIZ_SCORES}.categoryId`,
+					},
+					to: `${DatabaseTableName.CATEGORIES}.id`,
+				},
+				modelClass: CategoryModel,
+				relation: Model.ManyToManyRelation,
+			},
 			quizAnswers: {
 				join: {
 					from: `${DatabaseTableName.USERS}.id`,
