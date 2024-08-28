@@ -8,7 +8,7 @@ export {
 export {
 	AuthError,
 	HTTPError,
-	QuizError,
+	OnboardingError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";

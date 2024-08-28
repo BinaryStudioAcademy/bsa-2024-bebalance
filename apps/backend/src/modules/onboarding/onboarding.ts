@@ -13,5 +13,5 @@ const onboardingController = new OnboardingController(
 );
 
 export { OnboardingApiPath } from "./libs/enums/enums.js";
-export { QuizError } from "./libs/exceptions/exceptions.js";
+export { OnboardingError } from "./libs/exceptions/exceptions.js";
 export { onboardingController };

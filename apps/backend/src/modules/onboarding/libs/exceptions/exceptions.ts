@@ -1,1 +1,1 @@
-export { QuizError } from "shared";
+export { OnboardingError } from "shared";

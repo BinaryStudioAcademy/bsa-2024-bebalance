@@ -8,10 +8,10 @@ type Constructor = {
 	status: ValueOf<typeof HTTPCode>;
 };
 
-class QuizError extends HTTPError {
+class OnboardingError extends HTTPError {
 	public constructor({ cause, message, status }: Constructor) {
 		super({ cause, message, status });
 	}
 }
 
-export { QuizError };
+export { OnboardingError };
