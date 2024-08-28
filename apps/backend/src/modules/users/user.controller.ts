@@ -9,7 +9,8 @@ import { type UserService } from "~/modules/users/user.service.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
 
-/*** @swagger
+/**
+ * @swagger
  * components:
  *    schemas:
  *      User:
@@ -66,7 +67,6 @@ class UserController extends BaseController {
 	 *                    items:
 	 *                      $ref: "#/components/schemas/User"
 	 */
-
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),

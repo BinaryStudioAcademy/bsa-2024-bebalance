@@ -33,7 +33,11 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
-export { QuizApiPath, type QuizCategoryDto } from "./modules/quiz/quiz.js";
+export {
+	QuizApiPath,
+	type QuizCategoryDto,
+	type QuizGetAllCategoriesResponseDto,
+} from "./modules/quiz/quiz.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
