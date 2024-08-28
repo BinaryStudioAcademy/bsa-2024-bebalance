@@ -14,7 +14,7 @@ class CategoryService implements Service {
 		return Promise.resolve(null);
 	}
 
-	public createScore({
+	public async createScore({
 		categoryId,
 		score,
 		userId,
@@ -23,11 +23,13 @@ class CategoryService implements Service {
 		score: number;
 		userId: number;
 	}): Promise<UserScore> {
-		return this.categoryRepository.createScore({
+		const item = await this.categoryRepository.createScore({
 			categoryId,
 			score,
 			userId,
 		});
+
+		return item.toObject();
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

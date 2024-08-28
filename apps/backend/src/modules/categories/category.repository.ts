@@ -1,8 +1,8 @@
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
+import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
-import { type UserScore } from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
@@ -23,7 +23,7 @@ class CategoryRepository implements Repository {
 		categoryId: number;
 		score: number;
 		userId: number;
-	}): Promise<UserScore> {
+	}): Promise<CategoryEntity> {
 		const item = await this.categoryModel
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
@@ -33,13 +33,15 @@ class CategoryRepository implements Repository {
 				userId,
 			});
 
-		return {
+		return CategoryEntity.initialize({
 			categoryId: item.categoryId,
 			createdAt: item.createdAt,
+			id: item.id,
+			name: item.name,
 			score: item.score,
 			updatedAt: item.updatedAt,
 			userId: item.userId,
-		};
+		});
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {

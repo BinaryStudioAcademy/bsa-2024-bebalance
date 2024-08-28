@@ -10,6 +10,8 @@ import { UserModel } from "../users/user.model.js";
 class CategoryModel extends AbstractModel {
 	public categoryId!: number;
 
+	public name!: string;
+
 	public score!: number;
 
 	public userId!: number;
