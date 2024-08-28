@@ -1,4 +1,3 @@
-import { RelationName } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
@@ -74,36 +73,6 @@ class QuizAnswerRepository implements Repository {
 
 	public findAll(): Promise<null[]> {
 		return Promise.resolve([null]);
-	}
-
-	public async findUserAnswerByQuestion(
-		questionId: number,
-		userId: number,
-	): Promise<null | QuizAnswerEntity> {
-		const item = await this.quizAnswerModel
-			.query()
-			.where({ questionId })
-			.whereExists(
-				this.quizAnswerModel
-					.relatedQuery(RelationName.USERS)
-					.where(`${DatabaseTableName.USERS}.id`, userId)
-					.andWhere(
-						`${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.answerId`,
-						this.quizAnswerModel.ref("id"),
-					),
-			)
-			.first();
-
-		return item
-			? QuizAnswerEntity.initialize({
-					createdAt: item.createdAt,
-					id: item.id,
-					label: item.label,
-					questionId: item.questionId,
-					updatedAt: item.updatedAt,
-					value: item.value,
-				})
-			: null;
 	}
 
 	public async getCategoriezedAnswer(id: number): Promise<{
