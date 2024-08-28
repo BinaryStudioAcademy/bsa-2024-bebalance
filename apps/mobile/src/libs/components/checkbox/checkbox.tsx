@@ -1,6 +1,4 @@
-import LibraryCheckbox, {
-	type CheckBoxProps,
-} from "@react-native-community/checkbox";
+import LibraryCheckbox from "@react-native-community/checkbox";
 import React from "react";
 
 import { LinearGradient, Text, View } from "~/libs/components/components";
@@ -14,7 +12,7 @@ type Properties = {
 	isChecked: boolean;
 	label: string;
 	onValueChange: (newValue: boolean) => void;
-} & CheckBoxProps;
+};
 
 const Checkbox: React.FC<Properties> = ({
 	hasVisuallyHiddenLabel = false,
@@ -60,7 +58,7 @@ const Checkbox: React.FC<Properties> = ({
 				/>
 				<Text
 					preset="subheading"
-					style={hasVisuallyHiddenLabel && styles.visuallyHidden}
+					style={hasVisuallyHiddenLabel && globalStyles.Hidden}
 					weight="bold"
 				>
 					{label}
