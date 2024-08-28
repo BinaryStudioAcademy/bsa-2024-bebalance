@@ -1,6 +1,6 @@
 import { type QuizAnswerModel } from "../../quiz-answer.model.js";
 
-type CategoriezedQuizAnswerModel = {
+type CategorizedQuizAnswerModel = {
 	question: {
 		category: {
 			id: number;
@@ -8,4 +8,4 @@ type CategoriezedQuizAnswerModel = {
 	};
 } & QuizAnswerModel;
 
-export { type CategoriezedQuizAnswerModel };
+export { type CategorizedQuizAnswerModel };
