@@ -27,7 +27,6 @@ const questionToAnswers = new Map<string, string[]>([
 		[
 			"Reflective journaling",
 			"Physical exercise or wellness routines",
-			"Meditation or mindfulness practices",
 			"Creative activities (e.g., art, music)",
 			"Setting and achieving small goals",
 		],
