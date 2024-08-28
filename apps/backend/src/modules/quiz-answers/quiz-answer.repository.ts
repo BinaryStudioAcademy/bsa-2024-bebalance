@@ -2,6 +2,7 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
+import { type CategoriezedQuizAnswerModel } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerModel } from "./quiz-answer.model.js";
 
@@ -36,17 +37,12 @@ class QuizAnswerRepository implements Repository {
 		return Promise.resolve(true);
 	}
 
-	public async deleteUserAnswer(
-		userId: number,
-		answerId: number,
-	): Promise<boolean> {
-		await this.quizAnswerModel
-			.relatedQuery(RelationName.USERS)
-			.for(answerId)
-			.unrelate()
-			.where(`${DatabaseTableName.USERS}.id`, userId);
-
-		return true;
+	public async deleteUserAnswers(userId: number): Promise<number> {
+		return await this.quizAnswerModel
+			.query()
+			.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
+			.where("userId", userId)
+			.delete();
 	}
 
 	public async find(id: number): Promise<null | QuizAnswerEntity> {
@@ -96,6 +92,27 @@ class QuizAnswerRepository implements Repository {
 					value: item.value,
 				})
 			: null;
+	}
+
+	public async getCategoriezedAnswer(id: number): Promise<{
+		answerId: number;
+		categoryId: number;
+		value: number;
+	}> {
+		const item = (await this.quizAnswerModel
+			.query()
+			.findById(id)
+			.withGraphFetched({
+				question: {
+					category: true,
+				},
+			})) as CategoriezedQuizAnswerModel;
+
+		return {
+			answerId: item.id,
+			categoryId: item.question.category.id,
+			value: item.value,
+		};
 	}
 
 	public update(): ReturnType<Repository["update"]> {

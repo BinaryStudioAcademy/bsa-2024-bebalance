@@ -1,20 +1,63 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/types.js";
 
+import { type CategoryService } from "../categories/categories.js";
+import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
 
 class QuizAnswerService implements Service {
+	private categoryService: CategoryService;
+
 	private quizAnswerRepository: QuizAnswerRepository;
 
-	public constructor(quizAnswerRepository: QuizAnswerRepository) {
+	public constructor(
+		quizAnswerRepository: QuizAnswerRepository,
+		categoryService: CategoryService,
+	) {
 		this.quizAnswerRepository = quizAnswerRepository;
+		this.categoryService = categoryService;
 	}
 
 	public create(): Promise<null> {
 		return Promise.resolve(null);
+	}
+
+	public async createScores({
+		answerIds,
+		userId,
+	}: {
+		answerIds: number[];
+		userId: number;
+	}): Promise<{ categoryId: number; score: number }[]> {
+		const categorizedAnswers = await Promise.all(
+			answerIds.map((answerId) =>
+				this.quizAnswerRepository.getCategoriezedAnswer(answerId),
+			),
+		);
+
+		const countByCategoryId = new Map<number, number>();
+
+		for (const answer of categorizedAnswers) {
+			const { categoryId, value } = answer;
+			const currentScore = countByCategoryId.get(categoryId) || INITIAL_SCORE;
+			countByCategoryId.set(categoryId, currentScore + value);
+		}
+
+		const scores: { categoryId: number; score: number }[] = [];
+
+		for (const [categoryId, score] of countByCategoryId.entries()) {
+			await this.categoryService.createScore({
+				categoryId,
+				score,
+				userId,
+			});
+			scores.push({ categoryId, score });
+		}
+
+		return scores;
 	}
 
 	public async createUserAnswers({
@@ -25,6 +68,7 @@ class QuizAnswerService implements Service {
 		userId: number;
 	}): Promise<{
 		savedAnswersCount: number;
+		scores: { categoryId: number; score: number }[];
 	}> {
 		const answers = await Promise.all(answerIds.map((id) => this.find(id)));
 		const existingAnswers = answers.filter((answer) => answer !== null);
@@ -47,14 +91,16 @@ class QuizAnswerService implements Service {
 			});
 		}
 
-		// TODO: Implement storing scores
+		await this.quizAnswerRepository.deleteUserAnswers(userId);
+		await this.categoryService.deleteUserScores(userId);
 
 		const savedAnswersCount = await this.quizAnswerRepository.createUserAnswers(
 			userId,
 			answerIds,
 		);
+		const scores = await this.createScores({ answerIds, userId });
 
-		return { savedAnswersCount };
+		return { savedAnswersCount, scores };
 	}
 
 	public delete(): ReturnType<Service["delete"]> {

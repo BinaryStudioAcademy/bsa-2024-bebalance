@@ -6,6 +6,7 @@ import {
 } from "~/libs/modules/database/database.js";
 
 import { UserModel } from "../users/user.model.js";
+import { QuizQuestionModel } from "./quiz-question.model.js";
 
 class QuizAnswerModel extends AbstractModel {
 	public label!: string;
@@ -18,6 +19,14 @@ class QuizAnswerModel extends AbstractModel {
 
 	static get relationMappings(): RelationMappings {
 		return {
+			question: {
+				join: {
+					from: `${DatabaseTableName.QUIZ_ANSWERS}.questionId`,
+					to: `${DatabaseTableName.QUIZ_QUESTIONS}.id`,
+				},
+				modelClass: QuizQuestionModel,
+				relation: Model.BelongsToOneRelation,
+			},
 			users: {
 				join: {
 					from: `${DatabaseTableName.QUIZ_ANSWERS}.id`,
