@@ -17,7 +17,7 @@ import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const SignUpForm: React.FC = () => {
-	const { control, errors, handleSubmit, setError } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
 			validationSchema: userSignUpValidationSchema,
@@ -37,11 +37,12 @@ const SignUpForm: React.FC = () => {
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit((payload: UserSignUpFormDto) => {
-				const { confirmPassword, ...userData } = payload;
+			void handleSubmit((payload: UserSignUpRequestDto) => {
+				const { confirmPassword } = getValues();
+				const { password } = payload;
 
-				if (confirmPassword === userData.password) {
-					handleSignUpSubmit(userData);
+				if (confirmPassword === password) {
+					handleSignUpSubmit(payload);
 				} else {
 					setError(ConfirmPasswordCustomValidation.FIELD, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
@@ -50,7 +51,7 @@ const SignUpForm: React.FC = () => {
 				}
 			})(event_);
 		},
-		[handleSubmit, handleSignUpSubmit, setError],
+		[handleSignUpSubmit, handleSubmit, setError, getValues],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {
