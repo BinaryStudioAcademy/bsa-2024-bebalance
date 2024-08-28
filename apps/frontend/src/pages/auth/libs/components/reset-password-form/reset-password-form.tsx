@@ -13,7 +13,7 @@ import {
 	userResetPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_RESET_PASSWORD_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_RESET_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 const ResetPasswordForm: React.FC = () => {

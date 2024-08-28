@@ -6,7 +6,7 @@ import {
 	userSignInValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {

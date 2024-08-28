@@ -5,7 +5,7 @@ import {
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
