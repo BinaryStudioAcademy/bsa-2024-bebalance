@@ -7,7 +7,7 @@ import {
 	colorToGradientColors,
 	directionToGradient,
 	sizeToStyles,
-} from "../../maps/maps";
+} from "./libs/maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
