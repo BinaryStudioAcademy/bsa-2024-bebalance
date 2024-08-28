@@ -4,8 +4,11 @@ import { Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
+	useAppSelector,
 	useCallback,
+	useEffect,
 	useLocation,
+	useNavigate,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
@@ -18,7 +21,12 @@ import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const { pathname } = useLocation();
+
+	const { user } = useAppSelector(({ auth }) => ({
+		user: auth.user,
+	}));
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -33,6 +41,12 @@ const Auth: React.FC = () => {
 		},
 		[dispatch],
 	);
+
+	useEffect(() => {
+		if (user) {
+			navigate(AppRoute.ROOT, { replace: true });
+		}
+	}, [navigate, user]);
 
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
