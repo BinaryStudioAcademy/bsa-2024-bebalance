@@ -35,7 +35,7 @@ class OnboardingService implements Service {
 			answerIds,
 		);
 
-		return { addedAnswers: addedAnswers.map((answer) => answer.toObject()) };
+		return { answers: addedAnswers.map((answer) => answer.toObject()) };
 	}
 
 	public delete(): ReturnType<Service["delete"]> {
