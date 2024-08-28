@@ -9,7 +9,6 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { OnboardingApiPath } from "./libs/enums/enums.js";
 import { type UserDto } from "./libs/types/types.js";
-// import { onboardingAnswersValidationSchema } from "../libs/validation-schemas/validation-schemas.js";
 import { type OnboardingService } from "./onboarding.service.js";
 
 class OnboardingController extends BaseController {
@@ -28,11 +27,8 @@ class OnboardingController extends BaseController {
 						user: UserDto;
 					}>,
 				),
-			method: "PUT",
+			method: "POST",
 			path: OnboardingApiPath.ANSWER,
-			// validation: {
-			// 	body: onboardingAnswersValidationSchema,
-			// },
 		});
 	}
 
