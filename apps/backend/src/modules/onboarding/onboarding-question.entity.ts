@@ -71,9 +71,13 @@ class OnboardingQuestionEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		answers: { label: string }[];
 		label: string;
 	} {
 		return {
+			answers: this.answers.map((answer) => {
+				return answer.toNewObject();
+			}),
 			label: this.label,
 		};
 	}

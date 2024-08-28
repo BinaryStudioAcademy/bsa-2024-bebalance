@@ -71,11 +71,9 @@ class OnboardingAnswerEntity implements Entity {
 
 	public toNewObject(): {
 		label: string;
-		questionId: number;
 	} {
 		return {
 			label: this.label,
-			questionId: this.questionId,
 		};
 	}
 
