@@ -1,4 +1,5 @@
 type IconName =
+	| "check"
 	| "close"
 	| "crossedEye"
 	| "eye"

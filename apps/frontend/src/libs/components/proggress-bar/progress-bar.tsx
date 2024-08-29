@@ -1,4 +1,4 @@
-import CheckIcon from "~/assets/img/check-icon.svg?react";
+import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 
@@ -32,7 +32,7 @@ const ProgressBar: React.FC = () => {
 								isUpcoming && styles["upcoming"],
 							)}
 						>
-							{isCompleted && <CheckIcon className={styles["check-icon"]} />}
+							{isCompleted && <Icon name="check" />}
 						</div>
 						{!isLastStep && (
 							<div
