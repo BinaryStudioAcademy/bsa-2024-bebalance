@@ -9,6 +9,7 @@ import {
 	type QuizAnswer,
 	type QuizAnswersResponseDto,
 	type QuizScoreDto,
+	type UserAnswersRequestData,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerRepository } from "./quiz-answer.repository.js";
@@ -37,10 +38,7 @@ class QuizAnswerService implements Service {
 	public async createScores({
 		answerIds,
 		userId,
-	}: {
-		answerIds: number[];
-		userId: number;
-	}): Promise<QuizScoreDto[]> {
+	}: UserAnswersRequestData): Promise<QuizScoreDto[]> {
 		const countByCategoryId = new Map<number, number>();
 		const scores = [];
 
@@ -71,10 +69,7 @@ class QuizAnswerService implements Service {
 	public async createUserAnswers({
 		answerIds,
 		userId,
-	}: {
-		answerIds: number[];
-		userId: number;
-	}): Promise<QuizAnswersResponseDto> {
+	}: UserAnswersRequestData): Promise<QuizAnswersResponseDto> {
 		const existingAnswers =
 			await this.quizAnswerRepository.findByIds(answerIds);
 
