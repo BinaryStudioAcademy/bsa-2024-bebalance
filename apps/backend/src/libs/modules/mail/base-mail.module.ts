@@ -27,8 +27,6 @@ class BaseMail {
 			(error) => {
 				if (error) {
 					throw new Error(error.message);
-				} else {
-					return;
 				}
 			},
 		);

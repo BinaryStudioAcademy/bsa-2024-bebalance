@@ -49,7 +49,7 @@ class AuthApi extends BaseHTTPApi {
 				payload: JSON.stringify(payload),
 			});
 
-			return await Promise.resolve(null);
+			return null;
 		} catch (error) {
 			return await Promise.reject(error as Error);
 		}
@@ -64,7 +64,7 @@ class AuthApi extends BaseHTTPApi {
 				payload: JSON.stringify(payload),
 			});
 
-			return await Promise.resolve(null);
+			return null;
 		} catch (error) {
 			return await Promise.reject(error as Error);
 		}

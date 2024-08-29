@@ -50,7 +50,7 @@ class AuthService {
 			resetLink: link,
 		});
 
-		return await Promise.resolve(null);
+		return null;
 	}
 
 	public async resetPassword(
@@ -73,7 +73,7 @@ class AuthService {
 
 		await this.userService.changePassword(userId, newPassword);
 
-		return await Promise.resolve(null);
+		return null;
 	}
 
 	public async signIn(

@@ -99,7 +99,7 @@ class BaseConfig implements Config {
 			MAILER: {
 				ADDRESS: {
 					default: null,
-					doc: "email used to connect to Google's SMTP service",
+					doc: "Email used to connect to Google's SMTP service",
 					env: "MAILER_ADDRESS",
 					format: String,
 				},
