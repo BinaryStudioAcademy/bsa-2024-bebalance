@@ -95,16 +95,16 @@ class OnboardingRepository implements Repository {
 	public async findAll(): Promise<OnboardingAnswerEntity[]> {
 		const results = await this.onboardingAnswerModel.query();
 
-		return results.map((result) =>
-			OnboardingAnswerEntity.initialize({
+		return results.map((result) => {
+			return OnboardingAnswerEntity.initialize({
 				createdAt: result.createdAt,
 				id: result.id,
 				label: result.label,
 				questionId: result.questionId,
 				updatedAt: result.updatedAt,
 				userId: result.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async findAnswersByIds(
@@ -112,16 +112,16 @@ class OnboardingRepository implements Repository {
 	): Promise<OnboardingAnswerEntity[]> {
 		const results = await this.onboardingAnswerModel.query().whereIn("id", ids);
 
-		return results.map((result) =>
-			OnboardingAnswerEntity.initialize({
+		return results.map((result) => {
+			return OnboardingAnswerEntity.initialize({
 				createdAt: result.createdAt,
 				id: result.id,
 				label: result.label,
 				questionId: result.questionId,
 				updatedAt: result.updatedAt,
 				userId: result.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async update(
