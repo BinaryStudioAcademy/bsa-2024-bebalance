@@ -4,6 +4,7 @@ import { type Service } from "~/libs/types/types.js";
 
 import { OnboardingError } from "./libs/exceptions/exceptions.js";
 import {
+	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestDto,
 	type OnboardingAnswerResponseDto,
 } from "./libs/types/types.js";
@@ -38,18 +39,20 @@ class OnboardingService implements Service {
 		return { answers: addedAnswers.map((answer) => answer.toObject()) };
 	}
 
-	public delete(): ReturnType<Service["delete"]> {
-		return Promise.resolve(true);
+	public delete(id: number): Promise<boolean> {
+		return this.onboardingRepository.delete(id);
 	}
 
-	public async find(id: number): Promise<null | OnboardingAnswerEntity> {
-		return await this.onboardingRepository.find(id);
+	public async find(id: number): Promise<null | OnboardingAnswerDto> {
+		const answer = await this.onboardingRepository.find(id);
+
+		return answer ? answer.toObject() : null;
 	}
 
-	public async findAll(): Promise<{ items: OnboardingAnswerEntity[] }> {
-		const items = await this.onboardingRepository.findAll();
+	public async findAll(): Promise<{ items: OnboardingAnswerDto[] }> {
+		const answers = await this.onboardingRepository.findAll();
 
-		return { items };
+		return { items: answers.map((answer) => answer.toObject()) };
 	}
 
 	public async findAnswersByIds(
@@ -58,8 +61,13 @@ class OnboardingService implements Service {
 		return await this.onboardingRepository.findAnswersByIds(ids);
 	}
 
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<OnboardingAnswerDto>,
+	): Promise<OnboardingAnswerDto> {
+		const answer = await this.onboardingRepository.update(id, payload);
+
+		return answer.toObject();
 	}
 }
 export { OnboardingService };
