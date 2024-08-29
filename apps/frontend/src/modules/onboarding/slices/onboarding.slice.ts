@@ -7,13 +7,17 @@ import { type OnboardingQuestionDto } from "~/modules/onboarding/onboarding.js";
 import { getAll } from "./actions.js";
 
 type State = {
+	allQuestions: OnboardingQuestionDto[];
+	currentQuestion: OnboardingQuestionDto | undefined;
+	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
-	questions: OnboardingQuestionDto[];
 };
 
 const initialState: State = {
+	allQuestions: [],
+	currentQuestion: undefined,
+	currentQuestionIndex: 0,
 	dataStatus: DataStatus.IDLE,
-	questions: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -22,8 +26,9 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.PENDING;
 		});
 		builder.addCase(getAll.fulfilled, (state, action) => {
-			state.questions = action.payload.items;
+			state.allQuestions = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
+			state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -31,7 +36,12 @@ const { actions, name, reducer } = createSlice({
 	},
 	initialState,
 	name: "onboarding",
-	reducers: {},
+	reducers: {
+		nextQuestion(state) {
+			state.currentQuestionIndex += 1;
+			state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
+		},
+	},
 });
 
 export { actions, name, reducer };
