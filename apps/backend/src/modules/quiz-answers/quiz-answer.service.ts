@@ -6,7 +6,7 @@ import { INITIAL_SCORE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import {
-	type QuizAnswer,
+	type QuizAnswerDto,
 	type QuizAnswersResponseDto,
 	type QuizScoreDto,
 	type UserAnswersRequestData,
@@ -27,7 +27,7 @@ class QuizAnswerService implements Service {
 		this.categoryService = categoryService;
 	}
 
-	public async create(payload: QuizAnswer): Promise<QuizAnswer> {
+	public async create(payload: QuizAnswerDto): Promise<QuizAnswerDto> {
 		const item = await this.quizAnswerRepository.create(
 			QuizAnswerEntity.initializeNew(payload),
 		);
@@ -108,13 +108,13 @@ class QuizAnswerService implements Service {
 		return this.quizAnswerRepository.delete(id);
 	}
 
-	public async find(id: number): Promise<null | QuizAnswer> {
+	public async find(id: number): Promise<null | QuizAnswerDto> {
 		const item = await this.quizAnswerRepository.find(id);
 
 		return item ? item.toObject() : null;
 	}
 
-	public async findAll(): Promise<{ items: QuizAnswer[] }> {
+	public async findAll(): Promise<{ items: QuizAnswerDto[] }> {
 		const items = await this.quizAnswerRepository.findAll();
 
 		return { items: items.map((item) => item.toObject()) };
@@ -122,8 +122,8 @@ class QuizAnswerService implements Service {
 
 	public async update(
 		id: number,
-		payload: Partial<QuizAnswer>,
-	): Promise<QuizAnswer> {
+		payload: Partial<QuizAnswerDto>,
+	): Promise<QuizAnswerDto> {
 		const item = await this.quizAnswerRepository.update(id, payload);
 
 		return item.toObject();

@@ -35,6 +35,8 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
+	type CategoryDto,
+	type QuizAnswerDto,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizApiPath,

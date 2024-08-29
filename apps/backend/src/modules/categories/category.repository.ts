@@ -3,7 +3,7 @@ import { type Repository } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
-import { type Category, type ScoreRequestData } from "./libs/types/types.js";
+import { type CategoryDto, type ScoreRequestData } from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
@@ -104,7 +104,7 @@ class CategoryRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<Category>,
+		payload: Partial<CategoryDto>,
 	): Promise<CategoryEntity> {
 		const category = await this.categoryModel
 			.query()

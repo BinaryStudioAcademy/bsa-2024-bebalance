@@ -3,7 +3,7 @@ import { type Repository } from "~/libs/types/types.js";
 
 import {
 	type CategorizedQuizAnswerModel,
-	type QuizAnswer,
+	type QuizAnswerDto,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerModel } from "./quiz-answer.model.js";
@@ -153,7 +153,7 @@ class QuizAnswerRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<QuizAnswer>,
+		payload: Partial<QuizAnswerDto>,
 	): Promise<QuizAnswerEntity> {
 		const item = await this.quizAnswerModel
 			.query()
