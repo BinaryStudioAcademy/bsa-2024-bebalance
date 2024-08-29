@@ -45,7 +45,7 @@ const QuizEntry: React.FC = () => {
 					/>
 					<Text
 						preset="subheading"
-						style={[globalStyles.pb12, styles.text]}
+						style={[globalStyles.pb12, globalStyles.ph12, styles.text]}
 						weight="bold"
 					>
 						Answer a few questions to find out which areas of your life are
