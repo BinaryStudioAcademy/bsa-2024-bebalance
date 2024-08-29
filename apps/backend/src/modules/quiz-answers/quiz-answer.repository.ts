@@ -134,14 +134,15 @@ class QuizAnswerRepository implements Repository {
 		categoryId: number;
 		value: number;
 	}> {
-		const item = (await this.quizAnswerModel
+		const item = await this.quizAnswerModel
 			.query()
 			.findById(id)
 			.withGraphFetched({
 				question: {
 					category: true,
 				},
-			})) as CategorizedQuizAnswerModel;
+			})
+			.castTo<CategorizedQuizAnswerModel>();
 
 		return {
 			answerId: item.id,
