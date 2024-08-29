@@ -70,10 +70,8 @@ class CategoryRepository implements Repository {
 			.delete();
 	}
 
-	public async find(
-		payload: Partial<Category>,
-	): Promise<CategoryEntity | null> {
-		const category = await this.categoryModel.query().where(payload).first();
+	public async find(id: number): Promise<CategoryEntity | null> {
+		const category = await this.categoryModel.query().findById(id);
 
 		return category
 			? CategoryEntity.initialize({

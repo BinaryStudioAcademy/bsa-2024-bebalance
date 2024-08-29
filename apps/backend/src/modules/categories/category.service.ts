@@ -46,7 +46,7 @@ class CategoryService implements Service {
 	}
 
 	public async find(id: number): Promise<Category | null> {
-		const category = await this.categoryRepository.find({ id });
+		const category = await this.categoryRepository.find(id);
 
 		return category ? category.toObject() : null;
 	}
