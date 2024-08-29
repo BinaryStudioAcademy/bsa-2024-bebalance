@@ -3,7 +3,7 @@ import { type Repository } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
-import { type Category, type ScoreData } from "./libs/types/types.js";
+import { type Category, type ScoreRequestData } from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
@@ -35,7 +35,7 @@ class CategoryRepository implements Repository {
 		categoryId,
 		score,
 		userId,
-	}: ScoreData): Promise<CategoryEntity> {
+	}: ScoreRequestData): Promise<CategoryEntity> {
 		const category = await this.categoryModel
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)

@@ -9,7 +9,10 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { type QuizAnswerService } from "../quiz-answers/quiz-answers.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
-import { type UserDto } from "./libs/types/types.js";
+import {
+	type QuizAnswersRequestDto,
+	type UserDto,
+} from "./libs/types/types.js";
 import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 /*** @swagger
@@ -64,7 +67,7 @@ class QuizController extends BaseController {
 			handler: (options) =>
 				this.createUserAnswer(
 					options as APIHandlerOptions<{
-						body: { answerIds: number[] };
+						body: QuizAnswersRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -111,7 +114,7 @@ class QuizController extends BaseController {
 	 */
 	private async createUserAnswer(
 		options: APIHandlerOptions<{
-			body: { answerIds: number[] };
+			body: QuizAnswersRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {

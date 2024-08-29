@@ -9,6 +9,11 @@ const quizAnswerService = new QuizAnswerService(
 	categoryService,
 );
 
+export {
+	type QuizAnswersRequestDto,
+	type QuizAnswersResponseDto,
+	type QuizUserAnswerDto,
+} from "./libs/types/types.js";
 export { QuizAnswerModel } from "./quiz-answer.model.js";
 export { QuizAnswerService } from "./quiz-answer.service.js";
 export { quizAnswerService };

@@ -4,8 +4,8 @@ import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
 import {
 	type Category,
-	type Score,
-	type ScoreData,
+	type QuizScoreDto,
+	type ScoreRequestData,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -27,7 +27,7 @@ class CategoryService implements Service {
 		categoryId,
 		score,
 		userId,
-	}: ScoreData): Promise<Score> {
+	}: ScoreRequestData): Promise<QuizScoreDto> {
 		const userScore = await this.categoryRepository.createScore({
 			categoryId,
 			score,

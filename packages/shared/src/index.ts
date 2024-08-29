@@ -35,7 +35,11 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
+	type QuizAnswersRequestDto,
+	type QuizAnswersResponseDto,
 	QuizApiPath,
+	type QuizScoreDto,
+	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
