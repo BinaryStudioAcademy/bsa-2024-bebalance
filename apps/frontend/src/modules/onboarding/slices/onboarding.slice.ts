@@ -8,12 +8,12 @@ import { getAll } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	onboarding: OnboardingQuestionDto[];
+	questions: OnboardingQuestionDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	onboarding: [],
+	questions: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -22,7 +22,7 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.PENDING;
 		});
 		builder.addCase(getAll.fulfilled, (state, action) => {
-			state.onboarding = action.payload.items;
+			state.questions = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(getAll.rejected, (state) => {

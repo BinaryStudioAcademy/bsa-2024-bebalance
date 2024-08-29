@@ -34,9 +34,9 @@ const Onboarding: React.FC = () => {
 	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 	let surveyData: OnboardingQuestionDto | undefined;
 
-	const { dataStatus, onboarding } = useAppSelector(({ onboarding }) => ({
+	const { dataStatus, questions } = useAppSelector(({ onboarding }) => ({
 		dataStatus: onboarding.dataStatus,
-		onboarding: onboarding.onboarding,
+		questions: onboarding.questions,
 	}));
 
 	useEffect(() => {
@@ -45,10 +45,10 @@ const Onboarding: React.FC = () => {
 
 	useEffect(() => {
 		if (dataStatus === "fulfilled") {
-			const initialSteps = createSteps(onboarding.length);
+			const initialSteps = createSteps(questions.length);
 			setSteps(initialSteps);
 		}
-	}, [onboarding, dataStatus]);
+	}, [questions, dataStatus]);
 
 	const { control } = useAppForm<FormValues>({
 		defaultValues: {
@@ -77,7 +77,7 @@ const Onboarding: React.FC = () => {
 	const isLastStep = currentStep === steps.length - ONE_STEP_OFFSET;
 	const isLoading = dataStatus === DataStatus.PENDING;
 
-	surveyData = onboarding[currentStep];
+	surveyData = questions[currentStep];
 
 	return (
 		<div className={styles["container"]}>
