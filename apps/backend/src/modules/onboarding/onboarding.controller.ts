@@ -100,11 +100,14 @@ class OnboardingController extends BaseController {
 	 *       200:
 	 *         description: Successful operation
 	 *         content:
-	 *           application/json:
-	 *             schema:
-	 *               type: array
-	 *               items:
-	 *                 $ref: "#/components/schemas/OnboardingQuestion"
+	 *             application/json:
+	 *               schema:
+	 *                 type: object
+	 *                 properties:
+	 *                   items:
+	 *                     type: array
+	 *                     items:
+	 *                      $ref: "#/components/schemas/OnboardingQuestion"
 	 */
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
