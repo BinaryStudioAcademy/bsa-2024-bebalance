@@ -1,7 +1,7 @@
 import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
-import { OnboardingAnswerEntity } from "./onboarding-answer.entuty.js";
+import { OnboardingAnswerEntity } from "./onboarding-answer.entity.js";
 import { type OnboardingAnswerModel } from "./onboarding-answer.model.js";
 import { OnboardingQuestionEntity } from "./onboarding-question.entity.js";
 import { type OnboardingQuestionModel } from "./onboarding-question.model.js";
