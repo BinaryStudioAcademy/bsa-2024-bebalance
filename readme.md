@@ -85,8 +85,8 @@ erDiagram
         int question_id FK
     }
 
-    onboarding_answers_to_users }|--o| onboarding_answers : answer_id
-    onboarding_answers_to_users }|--o| users : user_id
+    onboarding_answers_to_users }o--|| onboarding_answers : answer_id
+    onboarding_answers_to_users }o--|| users : user_id
     onboarding_answers_to_users {
         int id PK
         dateTime created_at
