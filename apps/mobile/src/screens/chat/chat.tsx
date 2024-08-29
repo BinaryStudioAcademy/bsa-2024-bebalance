@@ -41,14 +41,16 @@ const Chat: React.FC = () => {
 	return (
 		<ScreenWrapper>
 			<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}>
-				{mockCategories.map((category) => (
-					<Checkbox
-						isChecked={formData[category.name.toLowerCase()] || false}
-						key={category.id}
-						label={category.name}
-						onValueChange={handleCheckbox(category.name)}
-					/>
-				))}
+				{mockCategories.map((category) => {
+					return (
+						<Checkbox
+							isChecked={formData[category.name.toLowerCase()] || false}
+							key={category.id}
+							label={category.name}
+							onValueChange={handleCheckbox(category.name)}
+						/>
+					);
+				})}
 			</View>
 		</ScreenWrapper>
 	);
