@@ -2,10 +2,11 @@ import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/types.js";
 
 import { type CategoryService } from "../categories/categories.js";
-import { INITIAL_SCORE } from "./libs/constants/constants.js";
+import { INITIAL_STATISTIC_VALUE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import {
+	type CategoryStatistic,
 	type QuizAnswerDto,
 	type QuizAnswersResponseDto,
 	type QuizScoreDto,
@@ -39,7 +40,7 @@ class QuizAnswerService implements Service {
 		answerIds,
 		userId,
 	}: UserAnswersRequestData): Promise<QuizScoreDto[]> {
-		const countByCategoryId = new Map<number, number>();
+		const categoryStatistics = new Map<number, CategoryStatistic>();
 		const scores = [];
 
 		const categorizedAnswers = await Promise.all(
@@ -50,14 +51,22 @@ class QuizAnswerService implements Service {
 
 		for (const answer of categorizedAnswers) {
 			const { categoryId, value } = answer;
-			const currentScore = countByCategoryId.get(categoryId) || INITIAL_SCORE;
-			countByCategoryId.set(categoryId, currentScore + value);
+			const statistic = categoryStatistics.get(categoryId) || {
+				accumulatedSum: INITIAL_STATISTIC_VALUE,
+				categoryCount: INITIAL_STATISTIC_VALUE,
+			};
+			statistic.accumulatedSum += value;
+			statistic.categoryCount += 1;
+			categoryStatistics.set(categoryId, statistic);
 		}
 
-		for (const [categoryId, score] of countByCategoryId.entries()) {
+		for (const [categoryId, stats] of categoryStatistics.entries()) {
+			const averageScore = Math.round(
+				stats.accumulatedSum / stats.categoryCount,
+			);
 			const userScore = await this.categoryService.createScore({
 				categoryId,
-				score,
+				score: averageScore,
 				userId,
 			});
 			scores.push(userScore);

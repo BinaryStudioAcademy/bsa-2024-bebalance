@@ -1,3 +1,3 @@
-const INITIAL_SCORE = 0;
+const INITIAL_STATISTIC_VALUE = 0;
 
-export { INITIAL_SCORE };
+export { INITIAL_STATISTIC_VALUE };
