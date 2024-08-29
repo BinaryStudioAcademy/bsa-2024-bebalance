@@ -10,6 +10,7 @@ import { type UserService } from "~/modules/users/user.service.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
 import {
+	type UserGetParametersDto,
 	type UserUpdateParametersDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
@@ -52,6 +53,17 @@ class UserController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.getById(
+					options as APIHandlerOptions<{
+						params: UserGetParametersDto;
+					}>,
+				),
+			method: "GET",
+			path: UsersApiPath.GET,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.update(
 					options as APIHandlerOptions<{
 						body: UserUpdateRequestDto;
@@ -87,6 +99,17 @@ class UserController extends BaseController {
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async getById(
+		options: APIHandlerOptions<{
+			params: UserGetParametersDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.userService.find(options.params.id),
 			status: HTTPCode.OK,
 		};
 	}
