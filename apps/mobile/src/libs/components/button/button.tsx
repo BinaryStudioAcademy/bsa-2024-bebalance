@@ -7,7 +7,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor, GradientColor } from "~/libs/enums/enums";
+import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
@@ -41,10 +41,10 @@ const Button: React.FC<Properties> = ({
 
 				return (
 					<LinearGradient
-						angle={305}
-						angleCenter={{ x: 0.5, y: 0.5 }}
+						angle={AngleGradient.ANGLE}
+						angleCenter={{ x: AngleGradient.X_POINT, y: AngleGradient.Y_POINT }}
 						colors={conditionalColors}
-						locations={[FIRST_COLOR_STOP, SECOND_COLOR_STOP]}
+						locations={[AngleGradient.FIRST_STOP, AngleGradient.SECOND_STOP]}
 						style={[
 							globalStyles.alignItemsCenter,
 							globalStyles.flex1,
@@ -55,7 +55,12 @@ const Button: React.FC<Properties> = ({
 						useAngle
 					>
 						{isFilled ? (
-							<Text color={BaseColor.BG_WHITE} preset="uppercase" size="md">
+							<Text
+								color={BaseColor.BG_WHITE}
+								preset="uppercase"
+								size="md"
+								weight="bold"
+							>
 								{label}
 							</Text>
 						) : (

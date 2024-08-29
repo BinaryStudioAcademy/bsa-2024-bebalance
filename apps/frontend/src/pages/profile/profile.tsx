@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
 						<div className={styles["label"]}>Email: </div>
 						<div>{user.email}</div>
 					</div>
-					<Button label="Edit profile" type="button" variant="dark" />
+					<Button label="Edit profile" type="button" />
 				</div>
 			</div>
 		</div>
