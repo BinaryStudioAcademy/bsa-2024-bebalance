@@ -1,7 +1,7 @@
 const Step = {
-	ANALYZING: 1,
-	INTRODUCTION: 2,
-	QUIZ: 3,
+	ANALYZING: 3,
+	INTRODUCTION: 1,
+	QUIZ: 2,
 } as const;
 
 export { Step };
