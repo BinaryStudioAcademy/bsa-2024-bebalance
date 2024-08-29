@@ -74,7 +74,7 @@ class QuizAnswerRepository implements Repository {
 		return await this.quizAnswerModel
 			.query()
 			.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
-			.where("userId", userId)
+			.where({ userId })
 			.delete();
 	}
 

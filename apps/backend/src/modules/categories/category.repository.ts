@@ -66,7 +66,7 @@ class CategoryRepository implements Repository {
 		return await this.categoryModel
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
-			.where("userId", userId)
+			.where({ userId })
 			.delete();
 	}
 
