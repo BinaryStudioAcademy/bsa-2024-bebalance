@@ -50,8 +50,8 @@ class QuizAnswerRepository implements Repository {
 			}),
 		);
 
-		return answers.map((answer) =>
-			QuizAnswerEntity.initialize({
+		return answers.map((answer) => {
+			return QuizAnswerEntity.initialize({
 				answerId: answer.answerId,
 				createdAt: answer.createdAt,
 				id: answer.id,
@@ -60,8 +60,8 @@ class QuizAnswerRepository implements Repository {
 				updatedAt: answer.updatedAt,
 				userId: answer.userId,
 				value: answer.value,
-			}),
-		);
+			});
+		});
 	}
 
 	public async delete(id: number): Promise<boolean> {
@@ -98,8 +98,8 @@ class QuizAnswerRepository implements Repository {
 	public async findAll(): Promise<QuizAnswerEntity[]> {
 		const answers = await this.quizAnswerModel.query().select("*");
 
-		return answers.map((answer) =>
-			QuizAnswerEntity.initialize({
+		return answers.map((answer) => {
+			return QuizAnswerEntity.initialize({
 				answerId: answer.answerId,
 				createdAt: answer.createdAt,
 				id: answer.id,
@@ -108,15 +108,15 @@ class QuizAnswerRepository implements Repository {
 				updatedAt: answer.updatedAt,
 				userId: answer.userId,
 				value: answer.value,
-			}),
-		);
+			});
+		});
 	}
 
 	public async findByIds(ids: number[]): Promise<QuizAnswerEntity[]> {
 		const answers = await this.quizAnswerModel.query().findByIds(ids);
 
-		return answers.map((answer) =>
-			QuizAnswerEntity.initialize({
+		return answers.map((answer) => {
+			return QuizAnswerEntity.initialize({
 				answerId: answer.answerId,
 				createdAt: answer.createdAt,
 				id: answer.id,
@@ -125,8 +125,8 @@ class QuizAnswerRepository implements Repository {
 				updatedAt: answer.updatedAt,
 				userId: answer.userId,
 				value: answer.value,
-			}),
-		);
+			});
+		});
 	}
 
 	public async getCategorizedAnswer(id: number): Promise<{

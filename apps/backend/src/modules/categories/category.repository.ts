@@ -89,8 +89,8 @@ class CategoryRepository implements Repository {
 	public async findAll(): Promise<CategoryEntity[]> {
 		const categories = await this.categoryModel.query().select("*");
 
-		return categories.map((category) =>
-			CategoryEntity.initialize({
+		return categories.map((category) => {
+			return CategoryEntity.initialize({
 				categoryId: category.categoryId,
 				createdAt: category.createdAt,
 				id: category.id,
@@ -98,8 +98,8 @@ class CategoryRepository implements Repository {
 				score: category.score,
 				updatedAt: category.updatedAt,
 				userId: category.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async update(
