@@ -18,14 +18,12 @@ import { type OnboardingQuestionDto } from "~/libs/types/types.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constatns/constants.js";
+import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const ONE_STEP_OFFSET = 1;
 const FIRST_STEP_INDEX = 0;
-
-type FormValues = {
-	answer: string;
-};
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -50,10 +48,8 @@ const Onboarding: React.FC = () => {
 		}
 	}, [questions, dataStatus]);
 
-	const { control } = useAppForm<FormValues>({
-		defaultValues: {
-			answer: "",
-		},
+	const { control } = useAppForm<OnboardingFormValues>({
+		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
 	});
 
 	const handleNextStep = useCallback(() => {
