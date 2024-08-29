@@ -44,7 +44,7 @@ const Chat: React.FC = () => {
 				{mockCategories.map((category) => {
 					return (
 						<Checkbox
-							isChecked={formData[category.name.toLowerCase()] || false}
+							isChecked={formData[category.name.toLowerCase()] ?? false}
 							key={category.id}
 							label={category.name}
 							onValueChange={handleCheckbox(category.name)}
