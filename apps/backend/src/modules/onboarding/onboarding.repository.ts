@@ -37,28 +37,28 @@ class OnboardingRepository implements Repository {
 		answerIds: number[],
 	): Promise<OnboardingAnswerEntity[]> {
 		await Promise.all(
-			answerIds.map((answerId) =>
-				this.onboardingAnswerModel
+			answerIds.map((answerId) => {
+				return this.onboardingAnswerModel
 					.relatedQuery(RelationName.USERS)
 					.for(answerId)
-					.relate(userId),
-			),
+					.relate(userId);
+			}),
 		);
 
 		const savedAnswers = await this.onboardingAnswerModel
 			.query()
 			.whereIn("id", answerIds);
 
-		return savedAnswers.map((answer) =>
-			OnboardingAnswerEntity.initialize({
+		return savedAnswers.map((answer) => {
+			return OnboardingAnswerEntity.initialize({
 				createdAt: answer.createdAt,
 				id: answer.id,
 				label: answer.label,
 				questionId: answer.questionId,
 				updatedAt: answer.updatedAt,
 				userId: answer.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async delete(id: number): Promise<boolean> {
