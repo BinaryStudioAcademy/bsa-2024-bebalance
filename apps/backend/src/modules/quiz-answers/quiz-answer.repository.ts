@@ -17,20 +17,20 @@ class QuizAnswerRepository implements Repository {
 
 	public async create(entity: QuizAnswerEntity): Promise<QuizAnswerEntity> {
 		const { label, questionId, value } = entity.toNewObject();
-		const item = await this.quizAnswerModel
+		const answer = await this.quizAnswerModel
 			.query()
 			.insert({ label, questionId, value })
 			.returning("*");
 
 		return QuizAnswerEntity.initialize({
-			answerId: item.answerId,
-			createdAt: item.createdAt,
-			id: item.id,
-			label: item.label,
-			questionId: item.questionId,
-			updatedAt: item.updatedAt,
-			userId: item.userId,
-			value: item.value,
+			answerId: answer.answerId,
+			createdAt: answer.createdAt,
+			id: answer.id,
+			label: answer.label,
+			questionId: answer.questionId,
+			updatedAt: answer.updatedAt,
+			userId: answer.userId,
+			value: answer.value,
 		});
 	}
 
@@ -38,7 +38,7 @@ class QuizAnswerRepository implements Repository {
 		userId: number,
 		answerIds: number[],
 	): Promise<QuizAnswerEntity[]> {
-		const items = await Promise.all(
+		const answers = await Promise.all(
 			answerIds.map((answerId) => {
 				return this.quizAnswerModel
 					.query()
@@ -50,7 +50,7 @@ class QuizAnswerRepository implements Repository {
 			}),
 		);
 
-		return items.map((answer) =>
+		return answers.map((answer) =>
 			QuizAnswerEntity.initialize({
 				answerId: answer.answerId,
 				createdAt: answer.createdAt,
@@ -79,52 +79,52 @@ class QuizAnswerRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | QuizAnswerEntity> {
-		const item = await this.quizAnswerModel.query().findById(id);
+		const answer = await this.quizAnswerModel.query().findById(id);
 
-		return item
+		return answer
 			? QuizAnswerEntity.initialize({
-					answerId: item.answerId,
-					createdAt: item.createdAt,
-					id: item.id,
-					label: item.label,
-					questionId: item.questionId,
-					updatedAt: item.updatedAt,
-					userId: item.userId,
-					value: item.value,
+					answerId: answer.answerId,
+					createdAt: answer.createdAt,
+					id: answer.id,
+					label: answer.label,
+					questionId: answer.questionId,
+					updatedAt: answer.updatedAt,
+					userId: answer.userId,
+					value: answer.value,
 				})
 			: null;
 	}
 
 	public async findAll(): Promise<QuizAnswerEntity[]> {
-		const items = await this.quizAnswerModel.query().select("*");
+		const answers = await this.quizAnswerModel.query().select("*");
 
-		return items.map((item) =>
+		return answers.map((answer) =>
 			QuizAnswerEntity.initialize({
-				answerId: item.answerId,
-				createdAt: item.createdAt,
-				id: item.id,
-				label: item.label,
-				questionId: item.questionId,
-				updatedAt: item.updatedAt,
-				userId: item.userId,
-				value: item.value,
+				answerId: answer.answerId,
+				createdAt: answer.createdAt,
+				id: answer.id,
+				label: answer.label,
+				questionId: answer.questionId,
+				updatedAt: answer.updatedAt,
+				userId: answer.userId,
+				value: answer.value,
 			}),
 		);
 	}
 
 	public async findByIds(ids: number[]): Promise<QuizAnswerEntity[]> {
-		const items = await this.quizAnswerModel.query().findByIds(ids);
+		const answers = await this.quizAnswerModel.query().findByIds(ids);
 
-		return items.map((item) =>
+		return answers.map((answer) =>
 			QuizAnswerEntity.initialize({
-				answerId: item.answerId,
-				createdAt: item.createdAt,
-				id: item.id,
-				label: item.label,
-				questionId: item.questionId,
-				updatedAt: item.updatedAt,
-				userId: item.userId,
-				value: item.value,
+				answerId: answer.answerId,
+				createdAt: answer.createdAt,
+				id: answer.id,
+				label: answer.label,
+				questionId: answer.questionId,
+				updatedAt: answer.updatedAt,
+				userId: answer.userId,
+				value: answer.value,
 			}),
 		);
 	}
@@ -134,7 +134,7 @@ class QuizAnswerRepository implements Repository {
 		categoryId: number;
 		value: number;
 	}> {
-		const item = await this.quizAnswerModel
+		const answer = await this.quizAnswerModel
 			.query()
 			.findById(id)
 			.withGraphFetched({
@@ -145,9 +145,9 @@ class QuizAnswerRepository implements Repository {
 			.castTo<CategorizedQuizAnswerModel>();
 
 		return {
-			answerId: item.id,
-			categoryId: item.question.category.id,
-			value: item.value,
+			answerId: answer.id,
+			categoryId: answer.question.category.id,
+			value: answer.value,
 		};
 	}
 
@@ -155,19 +155,19 @@ class QuizAnswerRepository implements Repository {
 		id: number,
 		payload: Partial<QuizAnswerDto>,
 	): Promise<QuizAnswerEntity> {
-		const item = await this.quizAnswerModel
+		const answer = await this.quizAnswerModel
 			.query()
 			.patchAndFetchById(id, { ...payload });
 
 		return QuizAnswerEntity.initialize({
-			answerId: item.answerId,
-			createdAt: item.createdAt,
-			id: item.id,
-			label: item.label,
-			questionId: item.questionId,
-			updatedAt: item.updatedAt,
-			userId: item.userId,
-			value: item.value,
+			answerId: answer.answerId,
+			createdAt: answer.createdAt,
+			id: answer.id,
+			label: answer.label,
+			questionId: answer.questionId,
+			updatedAt: answer.updatedAt,
+			userId: answer.userId,
+			value: answer.value,
 		});
 	}
 }

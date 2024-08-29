@@ -28,11 +28,11 @@ class QuizAnswerService implements Service {
 	}
 
 	public async create(payload: QuizAnswerDto): Promise<QuizAnswerDto> {
-		const item = await this.quizAnswerRepository.create(
+		const answer = await this.quizAnswerRepository.create(
 			QuizAnswerEntity.initializeNew(payload),
 		);
 
-		return item.toObject();
+		return answer.toObject();
 	}
 
 	public async createScores({
@@ -109,24 +109,24 @@ class QuizAnswerService implements Service {
 	}
 
 	public async find(id: number): Promise<null | QuizAnswerDto> {
-		const item = await this.quizAnswerRepository.find(id);
+		const answer = await this.quizAnswerRepository.find(id);
 
-		return item ? item.toObject() : null;
+		return answer ? answer.toObject() : null;
 	}
 
 	public async findAll(): Promise<{ items: QuizAnswerDto[] }> {
-		const items = await this.quizAnswerRepository.findAll();
+		const answers = await this.quizAnswerRepository.findAll();
 
-		return { items: items.map((item) => item.toObject()) };
+		return { items: answers.map((answer) => answer.toObject()) };
 	}
 
 	public async update(
 		id: number,
 		payload: Partial<QuizAnswerDto>,
 	): Promise<QuizAnswerDto> {
-		const item = await this.quizAnswerRepository.update(id, payload);
+		const answer = await this.quizAnswerRepository.update(id, payload);
 
-		return item.toObject();
+		return answer.toObject();
 	}
 }
 
