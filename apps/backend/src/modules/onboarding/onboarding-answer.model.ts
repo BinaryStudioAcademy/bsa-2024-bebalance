@@ -16,7 +16,7 @@ class OnboardingAnswerModel extends AbstractModel {
 		return {
 			question: {
 				join: {
-					from: `${DatabaseTableName.ONBOARDING_ANSWERS}.question_id`,
+					from: `${DatabaseTableName.ONBOARDING_ANSWERS}.questionId`,
 					to: `${DatabaseTableName.ONBOARDING_QUESTIONS}.id`,
 				},
 				modelClass: OnboardingQuestionModel,
