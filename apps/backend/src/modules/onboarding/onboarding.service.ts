@@ -21,9 +21,11 @@ class OnboardingService implements Service {
 		const { answers, label } = payload;
 
 		const newQuestionEntity = OnboardingQuestionEntity.initializeNew({
-			answers: answers.map((answer) => ({
-				label: answer.label,
-			})),
+			answers: answers.map((answer) => {
+				return {
+					label: answer.label,
+				};
+			}),
 			label,
 		});
 
@@ -48,7 +50,11 @@ class OnboardingService implements Service {
 			await this.onboardingRepository.findAll();
 
 		return {
-			items: items.map((item) => item.toObject()),
+			items: items.map((item) => {
+				return {
+					...item.toObject(),
+				};
+			}),
 		};
 	}
 
@@ -59,9 +65,11 @@ class OnboardingService implements Service {
 		const { answers, label } = payload;
 
 		const questionEntity = OnboardingQuestionEntity.initializeNew({
-			answers: answers.map((answer) => ({
-				label: answer.label,
-			})),
+			answers: answers.map((answer) => {
+				return {
+					label: answer.label,
+				};
+			}),
 			label,
 		});
 

@@ -117,10 +117,12 @@ class OnboardingRepository implements Repository {
 			.query()
 			.upsertGraphAndFetch(
 				{
-					answers: answers.map((answer) => ({
-						label: answer.label,
-						questionId: id,
-					})),
+					answers: answers.map((answer) => {
+						return {
+							label: answer.label,
+							questionId: id,
+						};
+					}),
 					id,
 					label,
 				},

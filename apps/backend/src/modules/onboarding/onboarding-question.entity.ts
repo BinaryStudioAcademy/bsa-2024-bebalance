@@ -82,7 +82,9 @@ class OnboardingQuestionEntity implements Entity {
 	} {
 		return {
 			answers: this.answers.map((answer) => {
-				return answer.toNewObject();
+				return {
+					...answer.toNewObject(),
+				};
 			}),
 			label: this.label,
 		};
@@ -97,7 +99,9 @@ class OnboardingQuestionEntity implements Entity {
 	} {
 		return {
 			answers: this.answers.map((answer) => {
-				return answer.toObject();
+				return {
+					...answer.toObject(),
+				};
 			}),
 			createdAt: this.createdAt,
 			id: this.id as number,
