@@ -44,9 +44,9 @@ class QuizAnswerService implements Service {
 		const scores = [];
 
 		const categorizedAnswers = await Promise.all(
-			answerIds.map((answerId) =>
-				this.quizAnswerRepository.getCategorizedAnswer(answerId),
-			),
+			answerIds.map((answerId) => {
+				return this.quizAnswerRepository.getCategorizedAnswer(answerId);
+			}),
 		);
 
 		for (const answer of categorizedAnswers) {
