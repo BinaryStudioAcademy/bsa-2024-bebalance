@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.1...frontend-v1.16.2) (2024-08-29)
+
+
+### Bug Fixes
+
+* **frontend:** wrap quiz component into protected route bb-234 ([#235](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/235)) ([b55f92f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b55f92f05bc2995e52f7b90d87f4dff110e80b4f))
+
 ## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.0...frontend-v1.16.1) (2024-08-28)
 
 

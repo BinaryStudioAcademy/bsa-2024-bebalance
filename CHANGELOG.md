@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.23.0...v1.24.0) (2024-08-29)
+
+
+### Features
+
+* **mobile:** added configuration to make apk builds bb-236 ([#238](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/238)) ([221867d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/221867d4338131e9b1b6632b677f71eddaf4750a))
+
+
+### Bug Fixes
+
+* **frontend:** wrap quiz component into protected route bb-234 ([#235](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/235)) ([b55f92f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b55f92f05bc2995e52f7b90d87f4dff110e80b4f))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.22.0...v1.23.0) (2024-08-28)
 
 
