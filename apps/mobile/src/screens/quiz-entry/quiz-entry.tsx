@@ -3,21 +3,35 @@ import React from "react";
 import {
 	BackgroundWrapper,
 	Button,
-	Image,
 	ScreenWrapper,
 	Text,
 	View,
+	Wheel,
 } from "~/libs/components/components";
+import { GradientColor } from "~/libs/enums/enums";
 import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type ImageSourcePropType } from "~/libs/types/types";
 
 import { styles } from "./styles";
+
+const mockData = [
+	{ colors: GradientColor.YELLOW, label: "Physical", score: 9 },
+	{ colors: GradientColor.LIME, label: "Work", score: 8 },
+	{ colors: GradientColor.VIOLET, label: "Friends", score: 7 },
+	{ colors: GradientColor.RED, label: "Love", score: 6 },
+	{ colors: GradientColor.GREEN, label: "Money", score: 5 },
+	{ colors: GradientColor.ROSE, label: "Free time", score: 8 },
+	{ colors: GradientColor.ORANGE, label: "Spiritual", score: 5 },
+	{ colors: GradientColor.BLUE, label: "Mental", score: 7 },
+];
 
 const QuizEntry: React.FC = () => {
 	const handleStartPress = useCallback((): void => {
 		// Handle Continue
 	}, []);
+
+	const MAX_SCORE = 10;
+	const WHEEL_SIZE = 220;
 
 	return (
 		<BackgroundWrapper>
@@ -37,12 +51,13 @@ const QuizEntry: React.FC = () => {
 					<Text preset="heading" style={styles.text} weight="extraBold">
 						Craft your personal{"\n"}Life Balance Wheel!
 					</Text>
-					<Image
-						source={
-							require("~/assets/images/balance-wheel.png") as ImageSourcePropType
-						}
-						style={styles.image}
-					/>
+					<View style={globalStyles.alignItemsCenter}>
+						<Wheel
+							categoriesData={mockData}
+							maxScore={MAX_SCORE}
+							size={WHEEL_SIZE}
+						/>
+					</View>
 					<Text
 						preset="subheading"
 						style={[globalStyles.pb12, styles.text]}
