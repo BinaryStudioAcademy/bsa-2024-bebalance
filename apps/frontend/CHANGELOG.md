@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.0...frontend-v1.16.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* **frontend:** fix passwords don't match error even when passwords the same bb-226 ([#229](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/229)) ([6db0f2a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6db0f2a295c002a51fcdcdebf799f64db613be2e))
+
 ## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.15.0...frontend-v1.16.0) (2024-08-28)
 
 

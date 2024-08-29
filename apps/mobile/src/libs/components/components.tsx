@@ -1,7 +1,9 @@
 export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
+export { GradientTabIcon } from "./gradient-tab-icon/gradient-tab-icon";
 export { GradientText } from "./gradient-text/gradient-text";
+export { GradientIcon } from "./icon/gradient-icon";
 export { Icon } from "./icon/icon";
 export { IconButton } from "./icon-button/icon-button";
 export { Input } from "./input/input";

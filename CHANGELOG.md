@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.22.0...v1.23.0) (2024-08-28)
+
+
+### Features
+
+* **mobile:** add  bottom tab navigator bb-128 ([#214](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/214)) ([0848203](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/084820386a667ea406bd8c93680ab687c8a6ab25))
+* **mobile:** sign in form bb-20 ([#228](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/228)) ([96ed037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/96ed037c7efec2b4058500c139d879030725d792))
+
+
+### Bug Fixes
+
+* **frontend:** fix passwords don't match error even when passwords the same bb-226 ([#229](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/229)) ([6db0f2a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6db0f2a295c002a51fcdcdebf799f64db613be2e))
+
 ## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.21.0...v1.22.0) (2024-08-28)
 
 
