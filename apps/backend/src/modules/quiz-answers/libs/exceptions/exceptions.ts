@@ -1,1 +1,1 @@
-export { QuizError } from "../../../quiz/quiz.js";
+export { QuizError } from "~/modules/quiz/quiz.js";
