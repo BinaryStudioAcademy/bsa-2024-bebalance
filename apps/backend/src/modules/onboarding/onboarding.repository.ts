@@ -1,6 +1,8 @@
 import { RelationName } from "~/libs/enums/enums.js";
+import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
+import { type OnboardingAnswerDto } from "./libs/types/types.js";
 import { OnboardingAnswerEntity } from "./onboarding-answer.entity.js";
 import { type OnboardingAnswerModel } from "./onboarding-answer.model.js";
 
@@ -11,8 +13,23 @@ class OnboardingRepository implements Repository {
 		this.onboardingAnswerModel = onboardingAnswerModel;
 	}
 
-	public create(): ReturnType<Repository["create"]> {
-		return Promise.resolve(null);
+	public async create(
+		entity: OnboardingAnswerEntity,
+	): Promise<OnboardingAnswerEntity> {
+		const { label, questionId } = entity.toNewObject();
+		const answer = await this.onboardingAnswerModel
+			.query()
+			.insert({ label, questionId })
+			.returning("*");
+
+		return OnboardingAnswerEntity.initialize({
+			createdAt: answer.createdAt,
+			id: answer.id,
+			label: answer.label,
+			questionId: answer.questionId,
+			updatedAt: answer.updatedAt,
+			userId: answer.userId,
+		});
 	}
 
 	public async createUserAnswers(
@@ -39,12 +56,23 @@ class OnboardingRepository implements Repository {
 				label: answer.label,
 				questionId: answer.questionId,
 				updatedAt: answer.updatedAt,
+				userId: answer.userId,
 			}),
 		);
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const rowsDeleted = await this.onboardingAnswerModel.query().deleteById(id);
+
+		return Boolean(rowsDeleted);
+	}
+
+	public async deleteUserAnswers(userId: number): Promise<number> {
+		return await this.onboardingAnswerModel
+			.query()
+			.from(DatabaseTableName.ONBOARDING_ANSWERS_TO_USERS)
+			.where({ userId })
+			.delete();
 	}
 
 	public async find(id: number): Promise<null | OnboardingAnswerEntity> {
@@ -60,6 +88,7 @@ class OnboardingRepository implements Repository {
 			label: result.label,
 			questionId: result.questionId,
 			updatedAt: result.updatedAt,
+			userId: result.userId,
 		});
 	}
 
@@ -73,6 +102,7 @@ class OnboardingRepository implements Repository {
 				label: result.label,
 				questionId: result.questionId,
 				updatedAt: result.updatedAt,
+				userId: result.userId,
 			}),
 		);
 	}
@@ -89,12 +119,27 @@ class OnboardingRepository implements Repository {
 				label: result.label,
 				questionId: result.questionId,
 				updatedAt: result.updatedAt,
+				userId: result.userId,
 			}),
 		);
 	}
 
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<OnboardingAnswerDto>,
+	): Promise<OnboardingAnswerEntity> {
+		const answer = await this.onboardingAnswerModel
+			.query()
+			.patchAndFetchById(id, { ...payload });
+
+		return OnboardingAnswerEntity.initialize({
+			createdAt: answer.createdAt,
+			id: answer.id,
+			label: answer.label,
+			questionId: answer.questionId,
+			updatedAt: answer.updatedAt,
+			userId: answer.userId,
+		});
 	}
 }
 
