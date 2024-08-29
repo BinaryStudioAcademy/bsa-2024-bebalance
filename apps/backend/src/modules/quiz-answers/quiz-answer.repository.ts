@@ -39,15 +39,15 @@ class QuizAnswerRepository implements Repository {
 		answerIds: number[],
 	): Promise<QuizAnswerEntity[]> {
 		const items = await Promise.all(
-			answerIds.map((answerId) =>
-				this.quizAnswerModel
+			answerIds.map((answerId) => {
+				return this.quizAnswerModel
 					.query()
 					.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
 					.insertAndFetch({
 						answerId,
 						userId,
-					}),
-			),
+					});
+			}),
 		);
 
 		return items.map((answer) =>
