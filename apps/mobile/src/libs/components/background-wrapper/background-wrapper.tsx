@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Image, View } from "~/libs/components/components";
+import { Image, Planet, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 
-import { Planet } from "./libs/components/planet/planet";
 import { styles } from "./styles";
 
 type Properties = {
@@ -32,7 +31,7 @@ const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 				size="sm"
 				style={styles.leftPlanet}
 			/>
-			{children}
+
 			<Planet
 				color="pink"
 				gradientDirection="topToBottom"
@@ -45,6 +44,9 @@ const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 				}
 				style={[styles.image, styles.bottomImage]}
 			/>
+			<View style={[globalStyles.flex1, globalStyles.justifyContentCenter]}>
+				{children}
+			</View>
 		</View>
 	);
 };
