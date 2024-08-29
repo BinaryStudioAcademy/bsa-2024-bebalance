@@ -4,6 +4,7 @@ type OnboardingAnswerDto = {
 	label: string;
 	questionId: number;
 	updatedAt: string;
+	userId: number;
 };
 
 export { type OnboardingAnswerDto };
