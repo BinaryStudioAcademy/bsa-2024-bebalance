@@ -1,11 +1,4 @@
-import {
-	Button,
-	Loader,
-	ProgressBar,
-	type Step,
-} from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/data-status.enum.js";
-import { advanceStep, createSteps } from "~/libs/helpers/helpers.js";
+import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -14,7 +7,6 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { type OnboardingQuestionDto } from "~/libs/types/types.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
@@ -22,31 +14,23 @@ import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constatns/constants.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const ONE_STEP_OFFSET = 1;
-const FIRST_STEP_INDEX = 0;
+const ONE_INDEX_OFFSET = 1;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const [steps, setSteps] = useState<Step[]>([]);
-	const [currentStep, setCurrentStep] = useState<number>(FIRST_STEP_INDEX);
-	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
-	let surveyData: OnboardingQuestionDto | undefined;
 
-	const { dataStatus, questions } = useAppSelector(({ onboarding }) => ({
-		dataStatus: onboarding.dataStatus,
-		questions: onboarding.questions,
+	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
+
+	const { isLastQuestion, question } = useAppSelector(({ onboarding }) => ({
+		isLastQuestion:
+			onboarding.currentQuestionIndex ===
+			onboarding.allQuestions.length - ONE_INDEX_OFFSET,
+		question: onboarding.currentQuestion,
 	}));
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
 	}, [dispatch]);
-
-	useEffect(() => {
-		if (dataStatus === "fulfilled") {
-			const initialSteps = createSteps(questions.length);
-			setSteps(initialSteps);
-		}
-	}, [questions, dataStatus]);
 
 	const { control } = useAppForm<OnboardingFormValues>({
 		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
@@ -54,11 +38,10 @@ const Onboarding: React.FC = () => {
 
 	const handleNextStep = useCallback(() => {
 		if (isAnswerSelected) {
-			setSteps(advanceStep(steps));
-			setCurrentStep(currentStep + ONE_STEP_OFFSET);
 			setIsAnswerSelected(false);
+			void dispatch(onboardingActions.nextQuestion());
 		}
-	}, [steps, currentStep, isAnswerSelected]);
+	}, [isAnswerSelected, dispatch]);
 
 	const handleFinish = useCallback(() => {
 		if (isAnswerSelected) {
@@ -70,23 +53,18 @@ const Onboarding: React.FC = () => {
 		setIsAnswerSelected(true);
 	}, []);
 
-	const isLastStep = currentStep === steps.length - ONE_STEP_OFFSET;
-	const isLoading = dataStatus === DataStatus.PENDING;
-
-	surveyData = questions[currentStep];
-
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["onboarding"]}>
-				{!isLoading && surveyData ? (
+				{question ? (
 					<>
 						<div className={styles["progress-bar"]}>
-							<ProgressBar steps={steps} />
+							<ProgressBar />
 						</div>
-						<h2 className={styles["question"]}>{surveyData.label}</h2>
+						<h2 className={styles["question"]}>{question.label}</h2>
 						<div className={styles["answers"]}>
 							<form className={styles["answers"]} onChange={handleFormChange}>
-								{surveyData.answers.map((answer) => (
+								{question.answers.map((answer) => (
 									<OnboardingAnswer
 										control={control}
 										key={answer.id}
@@ -97,7 +75,7 @@ const Onboarding: React.FC = () => {
 							</form>
 						</div>
 						<div className={styles["button-container"]}>
-							{isLastStep ? (
+							{isLastQuestion ? (
 								<Button
 									isPrimary={isAnswerSelected}
 									label="ANALYZE"
