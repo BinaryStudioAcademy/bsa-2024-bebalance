@@ -1,28 +1,35 @@
 import CheckIcon from "~/assets/img/check-icon.svg?react";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
+import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
 
-import { type Step } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const LAST_INDEX_OFFSET = 1;
+const ONE_INDEX_OFFSET = 1;
 
-type Properties = {
-	steps: Step[];
-};
+const ProgressBar: React.FC = () => {
+	const { currentQuestionIndex, totalQuestionsAmount } = useAppSelector(
+		({ onboarding }) => ({
+			currentQuestionIndex: onboarding.currentQuestionIndex,
+			totalQuestionsAmount: onboarding.allQuestions.length,
+		}),
+	);
 
-const ProgressBar: React.FC<Properties> = ({ steps }: Properties) => {
 	return (
 		<div className={styles["progress-bar"]}>
-			{steps.map((stepObject, index) => {
-				const isLastStep = index === steps.length - LAST_INDEX_OFFSET;
-				const isCompleted = stepObject.status === "completed";
+			{Array.from({ length: totalQuestionsAmount }).map((_, index) => {
+				const isLastStep = index === totalQuestionsAmount - ONE_INDEX_OFFSET;
+				const isCompleted = index < currentQuestionIndex;
+				const isCurrent = index === currentQuestionIndex;
+				const isUpcoming = index > currentQuestionIndex;
 
 				return (
 					<>
 						<div
 							className={getValidClassNames(
 								styles["progress-step"],
-								styles[stepObject.status],
+								isCompleted && styles["completed"],
+								isCurrent && styles["current"],
+								isUpcoming && styles["upcoming"],
 							)}
 						>
 							{isCompleted && <CheckIcon className={styles["check-icon"]} />}
@@ -43,4 +50,3 @@ const ProgressBar: React.FC<Properties> = ({ steps }: Properties) => {
 };
 
 export { ProgressBar };
-export { type Step } from "./libs/types/types.js";
