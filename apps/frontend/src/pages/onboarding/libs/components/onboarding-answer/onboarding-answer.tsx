@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Input } from "~/libs/components/components.js";
 import {
 	type Control,

@@ -1,5 +1,3 @@
-import React from "react";
-
 import CheckIcon from "~/assets/img/check-icon.svg?react";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
@@ -12,7 +10,7 @@ type Properties = {
 	steps: Step[];
 };
 
-const ProgressBar: React.FC<Properties> = ({ steps }) => {
+const ProgressBar: React.FC<Properties> = ({ steps }: Properties) => {
 	return (
 		<div className={styles["progress-bar"]}>
 			{steps.map((stepObject, index) => {
@@ -20,7 +18,7 @@ const ProgressBar: React.FC<Properties> = ({ steps }) => {
 				const isCompleted = stepObject.status === "completed";
 
 				return (
-					<React.Fragment key={stepObject.step}>
+					<>
 						<div
 							className={getValidClassNames(
 								styles["progress-step"],
@@ -37,7 +35,7 @@ const ProgressBar: React.FC<Properties> = ({ steps }) => {
 								)}
 							/>
 						)}
-					</React.Fragment>
+					</>
 				);
 			})}
 		</div>
