@@ -4,6 +4,7 @@ export {
 	type NavigationScreenProperties,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
+export { type WheelDataItem } from "./wheel/wheel";
 export {
 	type ImageSourcePropType,
 	type StyleProp,
