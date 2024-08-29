@@ -51,6 +51,10 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
+	public async find(id: number): Promise<null | UserEntity> {
+		return await this.userRepository.find(id);
+	}
+
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 
@@ -61,10 +65,6 @@ class UserService implements Service {
 
 	public findByEmail(email: string): Promise<null | UserEntity> {
 		return this.userRepository.findByEmail(email);
-	}
-
-	public async findById(id: number): Promise<null | UserEntity> {
-		return await this.userRepository.findById(id);
 	}
 
 	public update(): ReturnType<Service["update"]> {

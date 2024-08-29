@@ -62,7 +62,7 @@ class AuthService {
 			payload: { userId },
 		} = await token.decode(jwtToken);
 
-		const user = await this.userService.findById(userId);
+		const user = await this.userService.find(userId);
 
 		if (!user) {
 			throw new AuthError({

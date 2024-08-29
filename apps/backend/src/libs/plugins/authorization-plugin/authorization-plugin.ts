@@ -39,7 +39,7 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 				payload: { userId },
 			} = await token.decode(headerToken);
 
-			const user = await userService.findById(userId);
+			const user = await userService.find(userId);
 
 			if (!user) {
 				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });

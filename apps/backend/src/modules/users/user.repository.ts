@@ -53,6 +53,25 @@ class UserRepository implements Repository {
 		return Promise.resolve(false);
 	}
 
+	public async find(id: number): Promise<null | UserEntity> {
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.findById(id);
+
+		return user
+			? UserEntity.initialize({
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
+	}
+
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
@@ -77,25 +96,6 @@ class UserRepository implements Repository {
 			.withGraphFetched(RelationName.USER_DETAILS)
 			.where({ email })
 			.first();
-
-		return user
-			? UserEntity.initialize({
-					createdAt: user.createdAt,
-					email: user.email,
-					id: user.id,
-					name: user.userDetails.name,
-					passwordHash: user.passwordHash,
-					passwordSalt: user.passwordSalt,
-					updatedAt: user.updatedAt,
-				})
-			: null;
-	}
-
-	public async findById(id: number): Promise<null | UserEntity> {
-		const user = await this.userModel
-			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
-			.findById(id);
 
 		return user
 			? UserEntity.initialize({
