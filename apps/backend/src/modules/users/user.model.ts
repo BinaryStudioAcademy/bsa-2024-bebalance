@@ -5,7 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
-import { OnboardingAnswerModel } from "../onboarding/onboarding-answer.model.js";
+import { OnboardingAnswerModel } from "../onboarding/onboarding.js";
 import { UserDetailsModel } from "./user-details.model.js";
 
 class UserModel extends AbstractModel {

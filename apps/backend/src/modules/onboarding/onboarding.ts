@@ -14,4 +14,5 @@ const onboardingController = new OnboardingController(
 
 export { OnboardingApiPath } from "./libs/enums/enums.js";
 export { OnboardingError } from "./libs/exceptions/exceptions.js";
+export { OnboardingAnswerModel } from "./onboarding-answer.model.js";
 export { onboardingController };

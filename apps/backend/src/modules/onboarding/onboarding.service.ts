@@ -36,7 +36,11 @@ class OnboardingService implements Service {
 			answerIds,
 		);
 
-		return { answers: addedAnswers.map((answer) => answer.toObject()) };
+		return {
+			answers: addedAnswers.map((answer) => {
+				return answer.toObject();
+			}),
+		};
 	}
 
 	public delete(id: number): Promise<boolean> {
@@ -52,7 +56,11 @@ class OnboardingService implements Service {
 	public async findAll(): Promise<{ items: OnboardingAnswerDto[] }> {
 		const answers = await this.onboardingRepository.findAll();
 
-		return { items: answers.map((answer) => answer.toObject()) };
+		return {
+			items: answers.map((answer) => {
+				return answer.toObject();
+			}),
+		};
 	}
 
 	public async findAnswersByIds(
