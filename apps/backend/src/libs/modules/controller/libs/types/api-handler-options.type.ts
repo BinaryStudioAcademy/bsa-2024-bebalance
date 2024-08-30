@@ -11,7 +11,7 @@ type APIHandlerOptions<
 	body: T["body"];
 	params: T["params"];
 	query: T["query"];
-	user?: T["user"];
+	user: T["user"];
 };
 
 export { type APIHandlerOptions };
