@@ -5,6 +5,7 @@ export {
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	type QuizQuestionDto,
+	type QuizQuestionRequestDto,
 	type QuizScoreDto,
 	type QuizUserAnswerDto,
 } from "./libs/types/types.js";

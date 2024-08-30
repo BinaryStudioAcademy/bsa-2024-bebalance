@@ -1,8 +1,8 @@
 import { type Service } from "~/libs/types/service.type.js";
 
 import {
-	type QuestionRequestData,
 	type QuizQuestionDto,
+	type QuizQuestionRequestDto,
 } from "./libs/types/types.js";
 import { QuizQuestionEntity } from "./quiz-question.entity.js";
 import { type QuizQuestionRepository } from "./quiz-question.repository.js";
@@ -14,7 +14,9 @@ class QuizQuestionService implements Service {
 		this.quizQuestionRepository = quizQuestionRepository;
 	}
 
-	public async create(payload: QuizQuestionDto): Promise<QuizQuestionDto> {
+	public async create(
+		payload: QuizQuestionRequestDto,
+	): Promise<QuizQuestionDto> {
 		const question = await this.quizQuestionRepository.create(
 			QuizQuestionEntity.initializeNew(payload),
 		);
@@ -40,7 +42,7 @@ class QuizQuestionService implements Service {
 
 	public async update(
 		id: number,
-		payload: QuestionRequestData,
+		payload: Partial<QuizQuestionRequestDto>,
 	): Promise<QuizQuestionDto> {
 		const question = await this.quizQuestionRepository.update(id, payload);
 

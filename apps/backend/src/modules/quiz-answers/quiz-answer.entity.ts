@@ -74,12 +74,10 @@ class QuizAnswerEntity implements Entity {
 	public static initializeNew({
 		label,
 		questionId,
-		userAnswers,
 		value,
 	}: {
 		label: string;
 		questionId: number;
-		userAnswers: QuizUserAnswerDto[];
 		value: number;
 	}): QuizAnswerEntity {
 		return new QuizAnswerEntity({
@@ -88,7 +86,7 @@ class QuizAnswerEntity implements Entity {
 			label,
 			questionId,
 			updatedAt: "",
-			userAnswers,
+			userAnswers: [],
 			value,
 		});
 	}

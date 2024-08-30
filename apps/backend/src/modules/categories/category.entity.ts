@@ -55,18 +55,12 @@ class CategoryEntity implements Entity {
 		});
 	}
 
-	public static initializeNew({
-		name,
-		scores,
-	}: {
-		name: string;
-		scores: QuizScoreDto[];
-	}): CategoryEntity {
+	public static initializeNew({ name }: { name: string }): CategoryEntity {
 		return new CategoryEntity({
 			createdAt: "",
 			id: null,
 			name,
-			scores,
+			scores: [],
 			updatedAt: "",
 		});
 	}

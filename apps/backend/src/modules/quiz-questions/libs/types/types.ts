@@ -1,2 +1,1 @@
-export { type QuestionRequestData } from "./question-request-data.js";
-export { type QuizQuestionDto } from "shared";
+export { type QuizQuestionDto, type QuizQuestionRequestDto } from "shared";

@@ -63,16 +63,14 @@ class QuizQuestionEntity implements Entity {
 	}
 
 	public static initializeNew({
-		answers,
 		categoryId,
 		label,
 	}: {
-		answers: QuizAnswerDto[];
 		categoryId: number;
 		label: string;
 	}): QuizQuestionEntity {
 		return new QuizQuestionEntity({
-			answers,
+			answers: [],
 			categoryId,
 			createdAt: "",
 			id: null,

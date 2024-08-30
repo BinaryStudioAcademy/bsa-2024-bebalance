@@ -2,7 +2,7 @@ import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { type Repository } from "~/libs/types/repository.type.js";
 
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
-import { type QuestionRequestData } from "./libs/types/types.js";
+import { type QuizQuestionRequestDto } from "./libs/types/types.js";
 import { QuizQuestionEntity } from "./quiz-question.entity.js";
 import { type QuizQuestionModel } from "./quiz-question.model.js";
 
@@ -80,7 +80,7 @@ class QuizQuestionRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<QuestionRequestData>,
+		payload: Partial<QuizQuestionRequestDto>,
 	): Promise<QuizQuestionEntity> {
 		const question = await this.quizQuestionModel
 			.query()
