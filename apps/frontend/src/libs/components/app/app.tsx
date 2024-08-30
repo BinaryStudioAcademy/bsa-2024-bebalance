@@ -30,17 +30,17 @@ const App: React.FC = () => {
 	const isLoading =
 		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
 
+	if (isLoading) {
+		return <Loader />;
+	}
+
 	return (
 		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<div>
-					<RouterOutlet />
-				</div>
-			)}
+			<div>
+				<RouterOutlet />
+			</div>
 
-			{!isLoading && isRoot && (
+			{isRoot && (
 				<>
 					<QuizForm />
 				</>
