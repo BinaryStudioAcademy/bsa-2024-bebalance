@@ -2,6 +2,7 @@ import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Service } from "~/libs/types/types.js";
 
 import { type CategoryService } from "../categories/categories.js";
+import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { INITIAL_STATISTIC_VALUE } from "./libs/constants/constants.js";
 import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
@@ -20,12 +21,16 @@ class QuizAnswerService implements Service {
 
 	private quizAnswerRepository: QuizAnswerRepository;
 
+	private quizQuestionService: QuizQuestionService;
+
 	public constructor(
 		quizAnswerRepository: QuizAnswerRepository,
 		categoryService: CategoryService,
+		quizQuestionService: QuizQuestionService,
 	) {
 		this.quizAnswerRepository = quizAnswerRepository;
 		this.categoryService = categoryService;
+		this.quizQuestionService = quizQuestionService;
 	}
 
 	public async create(payload: QuizAnswerDto): Promise<QuizAnswerDto> {
@@ -86,6 +91,15 @@ class QuizAnswerService implements Service {
 			throw new QuizError({
 				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const questions = await this.quizQuestionService.findAll();
+
+		if (questions.items.length !== existingAnswers.length) {
+			throw new QuizError({
+				message: ErrorMessage.MISSING_QUESTION_ANSWERS,
+				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 

@@ -5,8 +5,8 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
+import { QuizQuestionModel } from "../quiz-questions/quiz-question.model.js";
 import { UserModel } from "../users/user.model.js";
-import { QuizQuestionModel } from "./quiz-question.model.js";
 
 class QuizAnswerModel extends AbstractModel {
 	public answerId!: number;

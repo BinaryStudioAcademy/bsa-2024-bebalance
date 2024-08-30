@@ -6,9 +6,11 @@ import {
 } from "~/libs/modules/database/database.js";
 
 import { CategoryModel } from "../categories/category.model.js";
-import { QuizAnswerModel } from "./quiz-answer.model.js";
+import { QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
 
 class QuizQuestionModel extends AbstractModel {
+	public answers!: QuizAnswerModel[];
+
 	public categoryId!: number;
 
 	public label!: string;
