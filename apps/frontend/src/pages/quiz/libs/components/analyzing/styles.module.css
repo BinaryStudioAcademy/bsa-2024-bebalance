@@ -48,25 +48,62 @@
 	border-radius: 14px;
 }
 
+@media (width <= 1024px) {
+	.page-container {
+		background-image: url("../../../../../assets/img/blue-circle.svg"),
+			url("../../../../../assets/img/pink-circle.svg"),
+			url("../../../../../assets/img/green-circle.svg"),
+			url("../../../../../assets/img/ripple-effect-bg.svg"),
+			url("../../../../../assets/img/ripple-effect-bg2.svg"),
+			url("../../../../../assets/img/ripple-effect-bg3.svg"),
+			url("../../../../../assets/img/ellipse.svg"),
+			url("../../../../../assets/img/ellipse.svg"),
+			url("../../../../../assets/img/ellipse.svg");
+		background-position:
+			right 40% bottom 15%,
+			left 15% top 45%,
+			right 10% top 20%,
+			left 50% top -60%,
+			right -20% bottom -150%,
+			left 0% bottom 45%,
+			right 10% top 10%,
+			right 15% top 50%,
+			right 20% top 35%;
+		background-size:
+			65px 65px,
+			40px 40px,
+			130px 130px,
+			500px 500px,
+			600px 600px,
+			500px 500px,
+			4.5px 4.5px,
+			4.5px 4.5px,
+			4.5px 4.5px;
+	}
+}
+
 @media (width <= 768px) {
 	.page-container {
 		background-image: url("../../../../../assets/img/blue-circle.svg"),
 			url("../../../../../assets/img/pink-circle.svg"),
 			url("../../../../../assets/img/green-circle.svg"),
 			url("../../../../../assets/img/ripple-effect-bg.svg"),
-			url("../../../../../assets/img/ripple-effect-bg2.svg");
+			url("../../../../../assets/img/ripple-effect-bg4.svg"),
+			url("../../../../../assets/img/ellipse.svg");
 		background-position:
 			left -10% top 40%,
 			right -10% bottom 13%,
 			right 30% top -2%,
-			right 200% top 0%,
-			right 0% bottom -60%;
+			right -90% top -10%,
+			left 0% bottom -60%,
+			left 20% top 20%;
 		background-size:
 			100px 100px,
 			150px 150px,
 			100px 100px,
 			500px 500px,
-			500px 500px;
+			500px 500px,
+			4.5px 4.5px;
 	}
 
 	.border-container {
@@ -76,5 +113,30 @@
 	.title {
 		margin-bottom: 32px;
 		text-align: center;
+	}
+}
+
+@media (width <= 640px) {
+	.page-container {
+		background-image: url("../../../../../assets/img/blue-circle.svg"),
+			url("../../../../../assets/img/pink-circle.svg"),
+			url("../../../../../assets/img/green-circle.svg"),
+			url("../../../../../assets/img/ripple-effect-bg.svg"),
+			url("../../../../../assets/img/ripple-effect-bg4.svg"),
+			url("../../../../../assets/img/ellipse.svg");
+		background-position:
+			left -10% top 40%,
+			right -10% bottom 13%,
+			right 30% top -2%,
+			right -300px top -10%,
+			left -100px bottom -300px,
+			left 20% top 20%;
+		background-size:
+			100px 100px,
+			150px 150px,
+			100px 100px,
+			600px 600px,
+			600px 600px,
+			4.5px 4.5px;
 	}
 }
