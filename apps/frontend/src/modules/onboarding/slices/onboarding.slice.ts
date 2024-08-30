@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type OnboardingQuestionDto } from "~/modules/onboarding/onboarding.js";
+import { type OnboardingQuestionResponseDto } from "~/modules/onboarding/onboarding.js";
 
 import { getAll } from "./actions.js";
 
 type State = {
-	allQuestions: OnboardingQuestionDto[];
-	currentQuestion: OnboardingQuestionDto | undefined;
+	allQuestions: OnboardingQuestionResponseDto[];
+	currentQuestion: OnboardingQuestionResponseDto | undefined;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 };

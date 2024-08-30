@@ -14,6 +14,6 @@ export { onboardingApi };
 export {
 	type OnboardingAnswerDto,
 	type OnboardingGetAllResponseDto,
-	type OnboardingQuestionDto,
+	type OnboardingQuestionResponseDto,
 } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/onboarding.js";

@@ -38,8 +38,8 @@ export {
 	type OnboardingAnswerRequestDto,
 	OnboardingApiPath,
 	type OnboardingGetAllResponseDto,
-	type OnboardingQuestionDto,
 	type OnboardingQuestionRequestDto,
+	type OnboardingQuestionResponseDto,
 } from "./modules/onboarding/onboarding.js";
 export {
 	type UserDto,

@@ -1,6 +1,6 @@
-import { type OnboardingQuestionDto } from "./onboarding-question-dto.type.js";
+import { type OnboardingQuestionResponseDto } from "./onboarding-question-response-dto.type.js";
 
 type OnboardingGetAllResponseDto = {
-	items: OnboardingQuestionDto[];
+	items: OnboardingQuestionResponseDto[];
 };
 export { type OnboardingGetAllResponseDto };

@@ -2,8 +2,8 @@ import { type Service } from "~/libs/types/types.js";
 
 import {
 	type OnboardingGetAllResponseDto,
-	type OnboardingQuestionDto,
 	type OnboardingQuestionRequestDto,
+	type OnboardingQuestionResponseDto,
 } from "./libs/types/types.js";
 import { type OnboardingRepository } from "./onboarding.repository.js";
 import { OnboardingQuestionEntity } from "./onboarding-question.entity.js";
@@ -17,7 +17,7 @@ class OnboardingService implements Service {
 
 	public async create(
 		payload: OnboardingQuestionRequestDto,
-	): Promise<OnboardingQuestionDto> {
+	): Promise<OnboardingQuestionResponseDto> {
 		const { answers, label } = payload;
 
 		const newQuestionEntity = OnboardingQuestionEntity.initializeNew({
@@ -39,7 +39,7 @@ class OnboardingService implements Service {
 		return await this.onboardingRepository.delete(id);
 	}
 
-	public async find(id: number): Promise<null | OnboardingQuestionDto> {
+	public async find(id: number): Promise<null | OnboardingQuestionResponseDto> {
 		const onboardingQuestion = await this.onboardingRepository.find(id);
 
 		return onboardingQuestion ? onboardingQuestion.toObject() : null;
@@ -60,7 +60,7 @@ class OnboardingService implements Service {
 
 	public async update(
 		id: number,
-		payload: OnboardingQuestionDto,
+		payload: OnboardingQuestionResponseDto,
 	): Promise<OnboardingQuestionRequestDto> {
 		const { answers, label } = payload;
 

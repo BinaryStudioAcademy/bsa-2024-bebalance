@@ -8,7 +8,7 @@ export {
 	type FieldValues,
 } from "react-hook-form";
 export {
-	type OnboardingQuestionDto,
+	type OnboardingQuestionResponseDto,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type UserDto,
