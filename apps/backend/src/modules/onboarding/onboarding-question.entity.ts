@@ -67,6 +67,7 @@ class OnboardingQuestionEntity implements Entity {
 			answers: answers.map((answer) => {
 				return OnboardingAnswerEntity.initializeNew({
 					label: answer.label,
+					questionId: 0,
 				});
 			}),
 			createdAt: "",
