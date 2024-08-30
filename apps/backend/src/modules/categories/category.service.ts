@@ -28,13 +28,11 @@ class CategoryService implements Service {
 		score,
 		userId,
 	}: ScoreRequestData): Promise<QuizScoreDto> {
-		const userScore = await this.categoryRepository.createScore({
+		return await this.categoryRepository.createScore({
 			categoryId,
 			score,
 			userId,
 		});
-
-		return userScore.toObject();
 	}
 
 	public delete(id: number): Promise<boolean> {

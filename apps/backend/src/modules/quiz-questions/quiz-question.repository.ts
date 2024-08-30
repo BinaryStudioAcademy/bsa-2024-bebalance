@@ -2,7 +2,7 @@ import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { type Repository } from "~/libs/types/repository.type.js";
 
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
-import { type QuizQuestionUpdatable } from "./libs/types/types.js";
+import { type QuestionRequestData } from "./libs/types/types.js";
 import { type QuizQuestionModel } from "./quiz-question.model.js";
 import { QuizQuestionEntity } from "./quiz-questions.entity.ts.js";
 
@@ -18,15 +18,11 @@ class QuizQuestionRepository implements Repository {
 		const question = await this.quizQuestionModel
 			.query()
 			.insert({ categoryId, label })
+			.withGraphFetched(RelationName.ANSWERS)
 			.returning("*");
 
-		const answers = await this.quizQuestionModel
-			.relatedQuery(RelationName.ANSWERS)
-			.for(question.id)
-			.select("*");
-
 		return QuizQuestionEntity.initialize({
-			answers,
+			answers: question.answers,
 			categoryId: question.categoryId,
 			createdAt: question.createdAt,
 			id: question.id,
@@ -42,25 +38,21 @@ class QuizQuestionRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | QuizQuestionEntity> {
-		const question = await this.quizQuestionModel.query().findById(id);
+		const question = await this.quizQuestionModel
+			.query()
+			.findById(id)
+			.withGraphJoined(RelationName.ANSWERS);
 
-		if (!question) {
-			return null;
-		}
-
-		const answers = await this.quizQuestionModel
-			.relatedQuery(RelationName.ANSWERS)
-			.for(question.id)
-			.select("*");
-
-		return QuizQuestionEntity.initialize({
-			answers,
-			categoryId: question.categoryId,
-			createdAt: question.createdAt,
-			id: question.id,
-			label: question.label,
-			updatedAt: question.updatedAt,
-		});
+		return question
+			? QuizQuestionEntity.initialize({
+					answers: question.answers,
+					categoryId: question.categoryId,
+					createdAt: question.createdAt,
+					id: question.id,
+					label: question.label,
+					updatedAt: question.updatedAt,
+				})
+			: null;
 	}
 
 	public async findAll(): Promise<QuizQuestionEntity[]> {
@@ -88,19 +80,15 @@ class QuizQuestionRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: QuizQuestionUpdatable,
+		payload: Partial<QuestionRequestData>,
 	): Promise<QuizQuestionEntity> {
 		const question = await this.quizQuestionModel
 			.query()
-			.patchAndFetchById(id, { ...payload });
-
-		const answers = await this.quizQuestionModel
-			.relatedQuery(RelationName.ANSWERS)
-			.for(question.id)
-			.select("*");
+			.patchAndFetchById(id, { ...payload })
+			.withGraphJoined(RelationName.ANSWERS);
 
 		return QuizQuestionEntity.initialize({
-			answers,
+			answers: question.answers,
 			categoryId: question.categoryId,
 			createdAt: question.createdAt,
 			id: question.id,

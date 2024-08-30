@@ -1,83 +1,73 @@
 import { type Entity } from "~/libs/types/types.js";
 
-class CategoryEntity implements Entity {
-	private categoryId: null | number;
+import { type QuizScoreDto } from "./libs/types/types.js";
 
+class CategoryEntity implements Entity {
 	private createdAt: string;
 
 	private id: null | number;
 
 	private name: string;
 
-	private score: null | number;
+	private scores: QuizScoreDto[];
 
 	private updatedAt: string;
 
-	private userId: null | number;
-
 	private constructor({
-		categoryId,
 		createdAt,
 		id,
 		name,
-		score,
+		scores,
 		updatedAt,
-		userId,
 	}: {
-		categoryId: null | number;
 		createdAt: string;
 		id: null | number;
 		name: string;
-		score: null | number;
+		scores: QuizScoreDto[];
 		updatedAt: string;
-		userId: null | number;
 	}) {
-		this.categoryId = categoryId;
 		this.createdAt = createdAt;
 		this.id = id;
 		this.name = name;
-		this.score = score;
+		this.scores = scores;
 		this.updatedAt = updatedAt;
-		this.userId = userId;
 	}
 
 	public static initialize({
-		categoryId,
 		createdAt,
 		id,
 		name,
-		score,
+		scores,
 		updatedAt,
-		userId,
 	}: {
-		categoryId: number;
 		createdAt: string;
 		id: null | number;
 		name: string;
-		score: number;
+		scores: QuizScoreDto[];
 		updatedAt: string;
-		userId: number;
 	}): CategoryEntity {
 		return new CategoryEntity({
-			categoryId,
 			createdAt,
 			id,
 			name,
-			score,
+			scores,
 			updatedAt,
-			userId,
 		});
 	}
 
-	public static initializeNew({ name }: { name: string }): CategoryEntity {
+	public static initializeNew({
+		name,
+		scores,
+	}: {
+		name: string;
+		scores: QuizScoreDto[];
+	}): CategoryEntity {
 		return new CategoryEntity({
-			categoryId: null,
 			createdAt: "",
 			id: null,
 			name,
-			score: null,
+			scores,
 			updatedAt: "",
-			userId: null,
 		});
 	}
 
@@ -85,34 +75,26 @@ class CategoryEntity implements Entity {
 		createdAt: string;
 		id: number;
 		name: string;
+		scores: QuizScoreDto[];
 		updatedAt: string;
 	} {
 		return {
 			createdAt: this.createdAt,
 			id: this.id as number,
 			name: this.name,
+			scores: this.scores,
 			updatedAt: this.updatedAt,
 		};
 	}
 
 	public toObject(): {
-		categoryId: number;
 		createdAt: string;
 		id: number;
 		name: string;
-		score: number;
+		scores: QuizScoreDto[];
 		updatedAt: string;
-		userId: number;
 	} {
-		return {
-			categoryId: this.categoryId as number,
-			createdAt: this.createdAt,
-			id: this.id as number,
-			name: this.name,
-			score: this.score as number,
-			updatedAt: this.updatedAt,
-			userId: this.userId as number,
-		};
+		return this.toNewObject();
 	}
 }
 

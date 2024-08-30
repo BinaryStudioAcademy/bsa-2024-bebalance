@@ -1,9 +1,14 @@
+import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
-import { type CategoryDto, type ScoreRequestData } from "./libs/types/types.js";
+import {
+	type CategoryDto,
+	type CategoryScoreModel,
+	type QuizScoreDto,
+} from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
@@ -18,16 +23,15 @@ class CategoryRepository implements Repository {
 		const category = await this.categoryModel
 			.query()
 			.insert({ name })
+			.withGraphFetched(RelationName.SCORES)
 			.returning("*");
 
 		return CategoryEntity.initialize({
-			categoryId: category.categoryId,
 			createdAt: category.createdAt,
 			id: category.id,
 			name: category.name,
-			score: category.score,
+			scores: category.scores,
 			updatedAt: category.updatedAt,
-			userId: category.userId,
 		});
 	}
 
@@ -35,25 +39,25 @@ class CategoryRepository implements Repository {
 		categoryId,
 		score,
 		userId,
-	}: ScoreRequestData): Promise<CategoryEntity> {
+	}: {
+		categoryId: number;
+		score: number;
+		userId: number;
+	}): Promise<QuizScoreDto> {
 		const category = await this.categoryModel
 			.query()
-			.from(DatabaseTableName.QUIZ_SCORES)
-			.insertAndFetch({
-				categoryId,
-				score,
-				userId,
-			});
+			.findById(categoryId)
+			.castTo<CategoryModel>();
 
-		return CategoryEntity.initialize({
-			categoryId: category.categoryId,
-			createdAt: category.createdAt,
-			id: category.id,
-			name: category.name,
-			score: category.score,
-			updatedAt: category.updatedAt,
-			userId: category.userId,
-		});
+		await category
+			.$relatedQuery<CategoryScoreModel>(RelationName.SCORES)
+			.relate({ id: userId, score });
+
+		return await this.categoryModel
+			.query()
+			.from(DatabaseTableName.QUIZ_SCORES)
+			.findOne({ categoryId, userId })
+			.castTo<QuizScoreDto>();
 	}
 
 	public async delete(id: number): Promise<boolean> {
@@ -71,17 +75,18 @@ class CategoryRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<CategoryEntity | null> {
-		const category = await this.categoryModel.query().findById(id);
+		const category = await this.categoryModel
+			.query()
+			.findById(id)
+			.withGraphJoined(RelationName.SCORES);
 
 		return category
 			? CategoryEntity.initialize({
-					categoryId: category.categoryId,
 					createdAt: category.createdAt,
 					id: category.id,
 					name: category.name,
-					score: category.score,
+					scores: category.scores,
 					updatedAt: category.updatedAt,
-					userId: category.userId,
 				})
 			: null;
 	}
@@ -89,17 +94,23 @@ class CategoryRepository implements Repository {
 	public async findAll(): Promise<CategoryEntity[]> {
 		const categories = await this.categoryModel.query().select("*");
 
-		return categories.map((category) => {
-			return CategoryEntity.initialize({
-				categoryId: category.categoryId,
-				createdAt: category.createdAt,
-				id: category.id,
-				name: category.name,
-				score: category.score,
-				updatedAt: category.updatedAt,
-				userId: category.userId,
-			});
-		});
+		return await Promise.all(
+			categories.map(async (category) => {
+				const scoresModel = await this.categoryModel
+					.query()
+					.from(DatabaseTableName.QUIZ_SCORES)
+					.where({ categoryId: category.id })
+					.castTo<QuizScoreDto[]>();
+
+				return CategoryEntity.initialize({
+					createdAt: category.createdAt,
+					id: category.id,
+					name: category.name,
+					scores: scoresModel,
+					updatedAt: category.updatedAt,
+				});
+			}),
+		);
 	}
 
 	public async update(
@@ -108,16 +119,15 @@ class CategoryRepository implements Repository {
 	): Promise<CategoryEntity> {
 		const category = await this.categoryModel
 			.query()
-			.patchAndFetchById(id, { ...payload });
+			.patchAndFetchById(id, { ...payload })
+			.withGraphJoined(RelationName.SCORES);
 
 		return CategoryEntity.initialize({
-			categoryId: category.categoryId,
 			createdAt: category.createdAt,
 			id: category.id,
 			name: category.name,
-			score: category.score,
+			scores: category.scores,
 			updatedAt: category.updatedAt,
-			userId: category.userId,
 		});
 	}
 }

@@ -6,19 +6,16 @@ import {
 } from "~/libs/modules/database/database.js";
 
 import { UserModel } from "../users/user.model.js";
+import { type QuizScoreDto } from "./libs/types/types.js";
 
 class CategoryModel extends AbstractModel {
-	public categoryId!: number;
-
 	public name!: string;
 
-	public score!: number;
-
-	public userId!: number;
+	public scores!: QuizScoreDto[];
 
 	static get relationMappings(): RelationMappings {
 		return {
-			users: {
+			scores: {
 				join: {
 					from: `${DatabaseTableName.CATEGORIES}.id`,
 					through: {

@@ -18,25 +18,10 @@ class UserModel extends AbstractModel {
 
 	public quizAnswers!: QuizAnswerModel[];
 
-	public score!: number;
-
 	public userDetails!: UserDetailsModel;
 
 	static get relationMappings(): RelationMappings {
 		return {
-			categories: {
-				join: {
-					from: `${DatabaseTableName.USERS}.id`,
-					through: {
-						extra: ["score"],
-						from: `${DatabaseTableName.QUIZ_SCORES}.userId`,
-						to: `${DatabaseTableName.QUIZ_SCORES}.categoryId`,
-					},
-					to: `${DatabaseTableName.CATEGORIES}.id`,
-				},
-				modelClass: CategoryModel,
-				relation: Model.ManyToManyRelation,
-			},
 			quizAnswers: {
 				join: {
 					from: `${DatabaseTableName.USERS}.id`,
@@ -47,6 +32,19 @@ class UserModel extends AbstractModel {
 					to: `${DatabaseTableName.QUIZ_ANSWERS}.id`,
 				},
 				modelClass: QuizAnswerModel,
+				relation: Model.ManyToManyRelation,
+			},
+			scores: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					through: {
+						extra: ["score"],
+						from: `${DatabaseTableName.QUIZ_SCORES}.userId`,
+						to: `${DatabaseTableName.QUIZ_SCORES}.categoryId`,
+					},
+					to: `${DatabaseTableName.CATEGORIES}.id`,
+				},
+				modelClass: CategoryModel,
 				relation: Model.ManyToManyRelation,
 			},
 			userDetails: {

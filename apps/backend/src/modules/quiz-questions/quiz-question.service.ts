@@ -1,7 +1,7 @@
 import { type Service } from "~/libs/types/service.type.js";
 
 import { type QuizQuestionDto } from "./libs/types/quiz-question-dto.type.js";
-import { type QuizQuestionUpdatable } from "./libs/types/types.js";
+import { type QuestionRequestData } from "./libs/types/types.js";
 import { type QuizQuestionRepository } from "./quiz-question.repository.js";
 import { QuizQuestionEntity } from "./quiz-questions.entity.ts.js";
 
@@ -38,7 +38,7 @@ class QuizQuestionService implements Service {
 
 	public async update(
 		id: number,
-		payload: QuizQuestionUpdatable,
+		payload: QuestionRequestData,
 	): Promise<QuizQuestionDto> {
 		const question = await this.quizQuestionRepository.update(id, payload);
 
