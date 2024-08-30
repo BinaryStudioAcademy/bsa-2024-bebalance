@@ -5,18 +5,23 @@ import { type Repository } from "~/libs/types/types.js";
 import { type OnboardingAnswerDto } from "./libs/types/types.js";
 import { OnboardingAnswerEntity } from "./onboarding-answer.entity.js";
 import { type OnboardingAnswerModel } from "./onboarding-answer.model.js";
+import { type OnboardingQuestionModel } from "./onboarding-question.model.js";
 
 class OnboardingRepository implements Repository {
 	private onboardingAnswerModel: typeof OnboardingAnswerModel;
 
-	public constructor(onboardingAnswerModel: typeof OnboardingAnswerModel) {
+	private onboardingQuestionModel: typeof OnboardingQuestionModel;
+
+	public constructor(
+		onboardingAnswerModel: typeof OnboardingAnswerModel,
+		onboardingQuestionModel: typeof OnboardingQuestionModel,
+	) {
 		this.onboardingAnswerModel = onboardingAnswerModel;
+		this.onboardingQuestionModel = onboardingQuestionModel;
 	}
 
 	public async countQuestions(): Promise<number> {
-		return await this.onboardingAnswerModel
-			.relatedQuery("question")
-			.resultSize();
+		return await this.onboardingQuestionModel.query().resultSize();
 	}
 
 	public async create(
