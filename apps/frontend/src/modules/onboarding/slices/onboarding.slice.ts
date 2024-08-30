@@ -41,6 +41,12 @@ const { actions, name, reducer } = createSlice({
 			state.currentQuestionIndex += 1;
 			state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
 		},
+		previousQuestion(state) {
+			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
+				state.currentQuestionIndex -= 1;
+				state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
+			}
+		},
 	},
 });
 
