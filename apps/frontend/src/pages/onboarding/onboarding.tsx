@@ -1,4 +1,5 @@
 import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
+import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -14,8 +15,6 @@ import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constatns/constants.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const ONE_INDEX_OFFSET = 1;
-
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
 
@@ -24,7 +23,7 @@ const Onboarding: React.FC = () => {
 	const { isLastQuestion, question } = useAppSelector(({ onboarding }) => ({
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
-			onboarding.allQuestions.length - ONE_INDEX_OFFSET,
+			onboarding.allQuestions.length - PREVIOUS_INDEX_OFFSET,
 		question: onboarding.currentQuestion,
 	}));
 
