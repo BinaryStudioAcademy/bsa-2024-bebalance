@@ -49,7 +49,12 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								path: AppRoute.QUIZ,
 							},
 							{
-								element: <Onboarding />,
+								element: (
+									<ProtectedRoute
+										component={<Onboarding />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
 								path: AppRoute.ONBOARDING,
 							},
 						],
