@@ -5,10 +5,11 @@ import { notification } from "~/libs/modules/notification/notification.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
+import { NewPasswordMessage } from "../libs/enums/enums.js";
 import {
 	getAuthenticatedUser,
+	requestResetPassword,
 	resetPassword,
-	sendResetPasswordLink,
 	signIn,
 	signUp,
 } from "./actions.js";
@@ -57,11 +58,11 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAuthenticatedUser.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(sendResetPasswordLink.fulfilled, () => {
-			notification.success("reset email sent");
+		builder.addCase(requestResetPassword.fulfilled, () => {
+			notification.success(NewPasswordMessage.LINK_SENT);
 		});
 		builder.addCase(resetPassword.fulfilled, () => {
-			notification.success("password has been changed");
+			notification.success(NewPasswordMessage.PASSWORD_RESET);
 		});
 	},
 	initialState,

@@ -10,6 +10,8 @@ import {
 	type EmailDto,
 	type ResetPasswordDto,
 	type UserDto,
+	userForgotPasswordVaidationSchema,
+	userResetPasswordValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -75,17 +77,23 @@ class AuthController extends BaseController {
 				),
 			method: "POST",
 			path: AuthApiPath.FORGOT_PASSWORD,
+			validation: {
+				body: userForgotPasswordVaidationSchema,
+			},
 		});
 
 		this.addRoute({
 			handler: (options) =>
 				this.resetPassword(
 					options as APIHandlerOptions<{
-						body: ResetPasswordDto;
+						body: Omit<ResetPasswordDto, "confirmPassword">;
 					}>,
 				),
-			method: "POST",
+			method: "PATCH",
 			path: AuthApiPath.RESET_PASSWORD,
+			validation: {
+				body: userResetPasswordValidationSchema,
+			},
 		});
 	}
 
@@ -153,7 +161,7 @@ class AuthController extends BaseController {
 
 	private async resetPassword(
 		options: APIHandlerOptions<{
-			body: ResetPasswordDto;
+			body: Omit<ResetPasswordDto, "confirmPassword">;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {

@@ -2,7 +2,7 @@ import { type Transporter } from "nodemailer";
 
 import { config } from "~/libs/modules/config/config.js";
 
-class BaseMail {
+class BaseMailer {
 	private sender = config.ENV.MAILER.ADDRESS;
 	private transporter: Transporter;
 
@@ -20,17 +20,19 @@ class BaseMail {
 		this.transporter.sendMail(
 			{
 				from: this.sender,
-				subject: "bebalance: password reset",
-				text: `follow this link to reset your password: ${resetLink}`,
+				subject: "BeBalance: password reset",
+				text: `Follow this link to reset your password: ${resetLink}`,
 				to: recipient,
 			},
 			(error) => {
 				if (error) {
 					throw new Error(error.message);
+				} else {
+					return;
 				}
 			},
 		);
 	}
 }
 
-export { BaseMail };
+export { BaseMailer };

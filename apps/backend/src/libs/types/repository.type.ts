@@ -3,8 +3,7 @@ type Repository<T = unknown> = {
 	delete(): Promise<boolean>;
 	find(id: number): Promise<T>;
 	findAll(): Promise<T[]>;
-	patch(id: number, changes: Partial<T>): Promise<T>;
-	update(): Promise<T>;
+	update(id: number, changes: Partial<T>): Promise<T>;
 };
 
 export { type Repository };

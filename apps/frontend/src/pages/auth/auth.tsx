@@ -2,7 +2,20 @@ import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
 import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import { Link, Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
-import { useAppSelector, useLocation } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+	useLocation,
+	useNavigate,
+} from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
+import {
+	type EmailDto,
+	type ResetPasswordDto,
+	type UserSignInRequestDto,
+	type UserSignUpRequestDto,
+} from "~/modules/users/users.js";
 
 import {
 	ForgotPasswordForm,
@@ -10,7 +23,10 @@ import {
 	SignInForm,
 	SignUpForm,
 } from "./libs/components/components.js";
-import { authRouteToHeader } from "./libs/maps/maps.js";
+import {
+	getFormHeader,
+	matchResetPasswordRoute,
+} from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
@@ -20,22 +36,60 @@ const Auth: React.FC = () => {
 		user: auth.user,
 	}));
 
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const handleSignInSubmit = useCallback(
+		(payload: UserSignInRequestDto): void => {
+			void dispatch(authActions.signIn(payload));
+		},
+		[dispatch],
+	);
+
+	const handleSignUpSubmit = useCallback(
+		(payload: UserSignUpRequestDto): void => {
+			void dispatch(authActions.signUp(payload));
+		},
+		[dispatch],
+	);
+
+	const handleForgotPasswordSubmit = useCallback(
+		(payload: EmailDto): void => {
+			void dispatch(authActions.requestResetPassword(payload));
+			navigate(AppRoute.SIGN_IN);
+		},
+		[dispatch, navigate],
+	);
+
+	const handleResetPasswordSubmit = useCallback(
+		(payload: Omit<ResetPasswordDto, "confirmPassword">): void => {
+			void dispatch(
+				authActions.resetPassword({
+					jwtToken: payload.jwtToken,
+					newPassword: payload.newPassword,
+				}),
+			);
+			navigate(AppRoute.SIGN_IN);
+		},
+		[dispatch, navigate],
+	);
+
 	const getScreen = (screen: string): React.ReactNode => {
-		switch (screen) {
-			case AppRoute.SIGN_IN: {
-				return <SignInForm />;
+		switch (true) {
+			case screen === AppRoute.SIGN_IN: {
+				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
 
-			case AppRoute.SIGN_UP: {
-				return <SignUpForm />;
+			case screen === AppRoute.SIGN_UP: {
+				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
 
-			case AppRoute.FORGOT_PASSWORD: {
-				return <ForgotPasswordForm />;
+			case screen === AppRoute.FORGOT_PASSWORD: {
+				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
 
-			default: {
-				return <ResetPasswordForm />;
+			case matchResetPasswordRoute(screen): {
+				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
 			}
 		}
 	};
@@ -59,7 +113,7 @@ const Auth: React.FC = () => {
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
-						{authRouteToHeader[pathname]}
+						{getFormHeader(pathname)}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
 						{pathname === AppRoute.SIGN_IN ? (

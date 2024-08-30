@@ -37,7 +37,7 @@ export {
 	type EmailDto,
 	type ResetPasswordDto,
 	type UserDto,
-	userForgotPasswordValidationSchema,
+	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
 	userResetPasswordValidationSchema,
 	UsersApiPath,
@@ -49,4 +49,5 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 	UserValidationMessage,
+	UserValidationRule,
 } from "./modules/users/users.js";

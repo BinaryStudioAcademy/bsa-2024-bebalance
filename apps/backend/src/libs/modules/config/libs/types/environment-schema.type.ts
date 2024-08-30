@@ -7,6 +7,9 @@ type EnvironmentSchema = {
 		HOST: string;
 		PORT: number;
 	};
+	BASE_URLS: {
+		RESET_PASSWORD_URL: string;
+	};
 	DB: {
 		CONNECTION_STRING: string;
 		DIALECT: string;
@@ -21,6 +24,9 @@ type EnvironmentSchema = {
 	MAILER: {
 		ADDRESS: string;
 		APP_PASSWORD: string;
+		HOST: string;
+		PORT: number;
+		SERVICE: string;
 	};
 };
 

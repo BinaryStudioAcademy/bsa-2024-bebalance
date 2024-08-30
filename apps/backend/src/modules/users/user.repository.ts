@@ -50,7 +50,7 @@ class UserRepository implements Repository {
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(false);
+		return Promise.resolve(true);
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
@@ -110,7 +110,7 @@ class UserRepository implements Repository {
 			: null;
 	}
 
-	public async patch(
+	public async update(
 		id: number,
 		updates: Partial<UserModel>,
 	): Promise<UserEntity> {
@@ -128,10 +128,6 @@ class UserRepository implements Repository {
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
 		});
-	}
-
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
 	}
 }
 

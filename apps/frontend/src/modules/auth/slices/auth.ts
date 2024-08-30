@@ -1,7 +1,7 @@
 import {
 	getAuthenticatedUser,
+	requestResetPassword,
 	resetPassword,
-	sendResetPasswordLink,
 	signIn,
 	signUp,
 } from "./actions.js";
@@ -10,8 +10,8 @@ import { actions } from "./auth.slice.js";
 const allActions = {
 	...actions,
 	getAuthenticatedUser,
+	requestResetPassword,
 	resetPassword,
-	sendResetPasswordLink,
 	signIn,
 	signUp,
 };

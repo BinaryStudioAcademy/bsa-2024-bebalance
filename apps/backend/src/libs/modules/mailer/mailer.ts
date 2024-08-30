@@ -2,19 +2,19 @@ import NodeMailer from "nodemailer";
 
 import { config } from "~/libs/modules/config/config.js";
 
-import { BaseMail } from "./base-mail.module.js";
+import { BaseMailer } from "./base-mailer.module.js";
 
 const transporter = NodeMailer.createTransport({
 	auth: {
 		pass: config.ENV.MAILER.APP_PASSWORD,
 		user: config.ENV.MAILER.ADDRESS,
 	},
-	host: "smtp.gmail.com",
-	port: 465,
+	host: config.ENV.MAILER.HOST,
+	port: config.ENV.MAILER.PORT,
 	secure: true,
-	service: "Gmail",
+	service: config.ENV.MAILER.SERVICE,
 });
 
-const mail = new BaseMail(transporter);
+const mailer = new BaseMailer(transporter);
 
-export { mail };
+export { mailer };

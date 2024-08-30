@@ -38,36 +38,28 @@ class AuthApi extends BaseHTTPApi {
 		return await response.json<UserDto>();
 	}
 
+	public async requestResetPassword(payload: EmailDto): Promise<null> {
+		await this.load(this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}), {
+			contentType: ContentType.JSON,
+			hasAuth: false,
+			method: "POST",
+			payload: JSON.stringify(payload),
+		});
+
+		return null;
+	}
+
 	public async resetPassword(
 		payload: Omit<ResetPasswordDto, "confirmPassword">,
 	): Promise<null> {
-		try {
-			await this.load(this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}), {
-				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: "POST",
-				payload: JSON.stringify(payload),
-			});
+		await this.load(this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}), {
+			contentType: ContentType.JSON,
+			hasAuth: false,
+			method: "PATCH",
+			payload: JSON.stringify(payload),
+		});
 
-			return null;
-		} catch (error) {
-			return await Promise.reject(error as Error);
-		}
-	}
-
-	public async sendResetPasswordLink(payload: EmailDto): Promise<null> {
-		try {
-			await this.load(this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}), {
-				contentType: ContentType.JSON,
-				hasAuth: false,
-				method: "POST",
-				payload: JSON.stringify(payload),
-			});
-
-			return null;
-		} catch (error) {
-			return await Promise.reject(error as Error);
-		}
+		return null;
 	}
 
 	public async signIn(

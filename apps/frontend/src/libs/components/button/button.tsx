@@ -8,7 +8,6 @@ type Properties = {
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	iconPosition?: "center" | "left" | "right";
-	isDisabled?: boolean;
 	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
@@ -21,7 +20,6 @@ const Button: React.FC<Properties> = ({
 	hasVisuallyHiddenLabel = false,
 	iconName,
 	iconPosition = "right",
-	isDisabled = false,
 	isFluid = false,
 	isPrimary = true,
 	label,
@@ -37,7 +35,6 @@ const Button: React.FC<Properties> = ({
 			isPrimary && styles["primary"],
 			variant && styles[`${variant}-button`],
 		)}
-		disabled={isDisabled}
 		onClick={onClick}
 		type={type}
 	>

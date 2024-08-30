@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
 	Button,
 	IconButton,
@@ -9,7 +7,7 @@ import {
 } from "~/libs/components/components";
 import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { getSecurityInputIconName } from "~/libs/helpers/helpers";
-import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type UserSignUpFormDto,

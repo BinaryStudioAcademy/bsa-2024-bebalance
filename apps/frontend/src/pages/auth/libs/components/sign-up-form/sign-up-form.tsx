@@ -1,11 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import {
-	useAppDispatch,
-	useAppForm,
-	useCallback,
-	useState,
-} from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
@@ -16,7 +10,11 @@ import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants/constants.js";
 import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
-const SignUpForm: React.FC = () => {
+type Properties = {
+	onSubmit: (payload: UserSignUpRequestDto) => void;
+};
+
+const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
@@ -26,15 +24,6 @@ const SignUpForm: React.FC = () => {
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
 
-	const dispatch = useAppDispatch();
-
-	const handleSignUpSubmit = useCallback(
-		(payload: UserSignUpRequestDto): void => {
-			void dispatch(authActions.signUp(payload));
-		},
-		[dispatch],
-	);
-
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload: UserSignUpRequestDto) => {
@@ -42,7 +31,7 @@ const SignUpForm: React.FC = () => {
 				const { password } = payload;
 
 				if (confirmPassword === password) {
-					handleSignUpSubmit(payload);
+					onSubmit(payload);
 				} else {
 					setError(ConfirmPasswordCustomValidation.FIELD, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
@@ -51,7 +40,7 @@ const SignUpForm: React.FC = () => {
 				}
 			})(event_);
 		},
-		[handleSignUpSubmit, handleSubmit, setError, getValues],
+		[onSubmit, handleSubmit, setError, getValues],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {

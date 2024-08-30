@@ -1,6 +1,10 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["**/*.ts", "**/*.js"],
+	"include": [
+		"**/*.ts",
+		"**/*.js",
+		"../../apps/frontend/src/pages/auth/libs/components/forgot-password-form/libs/validation-schemas/user-forgot-password.validation-schema.ts"
+	],
 	"exclude": ["node_modules", "build"],
 	"compilerOptions": {
 		"baseUrl": "."

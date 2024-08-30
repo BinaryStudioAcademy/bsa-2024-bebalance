@@ -1,7 +1,7 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
-import { mail } from "~/libs/modules/mail/mail.js";
+import { mailer } from "~/libs/modules/mailer/mailer.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type EmailDto,
@@ -43,9 +43,9 @@ class AuthService {
 			userId: userDetails.id,
 		});
 
-		const link = `http://${config.ENV.APP.HOST}:3000/reset-password/${jwtToken}`;
+		const link = `${config.ENV.BASE_URLS.RESET_PASSWORD_URL}/${jwtToken}`;
 
-		mail.sendResetPasswordEmail({
+		mailer.sendResetPasswordEmail({
 			recipient: userDetails.email,
 			resetLink: link,
 		});

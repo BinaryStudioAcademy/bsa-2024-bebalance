@@ -1,4 +1,8 @@
-export { UsersApiPath, UserValidationMessage } from "./libs/enums/enums.js";
+export {
+	UsersApiPath,
+	UserValidationMessage,
+	UserValidationRule,
+} from "./libs/enums/enums.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
@@ -11,7 +15,7 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 export {
-	userForgotPassword as userForgotPasswordValidationSchema,
+	userForgotPassword as userForgotPasswordVaidationSchema,
 	userResetPassword as userResetPasswordValidationSchema,
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
