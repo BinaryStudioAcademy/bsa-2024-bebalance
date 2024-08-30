@@ -53,9 +53,7 @@ class AuthService {
 		return null;
 	}
 
-	public async resetPassword(
-		payload: Omit<ResetPasswordDto, "confirmPassword">,
-	): Promise<null> {
+	public async resetPassword(payload: ResetPasswordDto): Promise<null> {
 		const { jwtToken, newPassword } = payload;
 
 		const {

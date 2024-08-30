@@ -62,7 +62,7 @@ const Auth: React.FC = () => {
 	);
 
 	const handleResetPasswordSubmit = useCallback(
-		(payload: Omit<ResetPasswordDto, "confirmPassword">): void => {
+		(payload: ResetPasswordDto): void => {
 			void dispatch(
 				authActions.resetPassword({
 					jwtToken: payload.jwtToken,

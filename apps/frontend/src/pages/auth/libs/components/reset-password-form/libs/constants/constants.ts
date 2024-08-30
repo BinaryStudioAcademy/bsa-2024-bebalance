@@ -1,6 +1,6 @@
-import { type ResetPasswordDto } from "~/modules/users/users.js";
+import { type ResetPasswordFormDto } from "~/modules/users/users.js";
 
-const DEFAULT_RESET_PASSWORD_PAYLOAD: Omit<ResetPasswordDto, "jwtToken"> = {
+const DEFAULT_RESET_PASSWORD_PAYLOAD: ResetPasswordFormDto = {
 	confirmPassword: "",
 	newPassword: "",
 };

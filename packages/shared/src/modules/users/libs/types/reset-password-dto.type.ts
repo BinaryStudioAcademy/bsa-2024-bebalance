@@ -1,5 +1,4 @@
 type ResetPasswordDto = {
-	confirmPassword: string;
 	jwtToken: string;
 	newPassword: string;
 };

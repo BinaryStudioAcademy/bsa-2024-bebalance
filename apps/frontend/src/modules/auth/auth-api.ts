@@ -49,9 +49,7 @@ class AuthApi extends BaseHTTPApi {
 		return null;
 	}
 
-	public async resetPassword(
-		payload: Omit<ResetPasswordDto, "confirmPassword">,
-	): Promise<null> {
+	public async resetPassword(payload: ResetPasswordDto): Promise<null> {
 		await this.load(this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}), {
 			contentType: ContentType.JSON,
 			hasAuth: false,

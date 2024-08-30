@@ -36,6 +36,7 @@ export {
 export {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	type UserDto,
 	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,

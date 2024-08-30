@@ -67,7 +67,7 @@ const requestResetPassword = createAsyncThunk<null, EmailDto, AsyncThunkConfig>(
 
 const resetPassword = createAsyncThunk<
 	null,
-	Omit<ResetPasswordDto, "confirmPassword">,
+	ResetPasswordDto,
 	AsyncThunkConfig
 >(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
 	const { authApi } = extra;

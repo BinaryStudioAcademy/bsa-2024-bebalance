@@ -3,6 +3,7 @@ import { useAppForm, useCallback, useParams } from "~/libs/hooks/hooks.js";
 import { notification } from "~/libs/modules/notification/notification.js";
 import {
 	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	userResetPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
@@ -11,16 +12,15 @@ import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: Omit<ResetPasswordDto, "confirmPassword">) => void;
+	onSubmit: (payload: ResetPasswordDto) => void;
 };
 
 const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, getValues, handleSubmit, setError } = useAppForm<
-		Omit<ResetPasswordDto, "jwtToken">
-	>({
-		defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
-		validationSchema: userResetPasswordValidationSchema,
-	});
+	const { control, errors, getValues, handleSubmit, setError } =
+		useAppForm<ResetPasswordFormDto>({
+			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
+			validationSchema: userResetPasswordValidationSchema,
+		});
 
 	const { token } = useParams();
 

@@ -86,7 +86,7 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.resetPassword(
 					options as APIHandlerOptions<{
-						body: Omit<ResetPasswordDto, "confirmPassword">;
+						body: ResetPasswordDto;
 					}>,
 				),
 			method: "PATCH",
@@ -161,7 +161,7 @@ class AuthController extends BaseController {
 
 	private async resetPassword(
 		options: APIHandlerOptions<{
-			body: Omit<ResetPasswordDto, "confirmPassword">;
+			body: ResetPasswordDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
