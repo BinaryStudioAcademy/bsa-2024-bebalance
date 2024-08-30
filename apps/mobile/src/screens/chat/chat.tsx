@@ -15,26 +15,29 @@ const mockCategories = [
 	},
 ];
 
-type FormData = Record<string, boolean>;
-
 const Chat: React.FC = () => {
-	const [formData, setFormData] = useState<FormData>({
-		physical: false,
-		work: false,
-	});
+	const [physicalChecked, setPhysicalChecked] = useState<boolean>(false);
+	const [workChecked, setWorkChecked] = useState<boolean>(false);
 
-	const handleCheckboxChange = (name: string, value: boolean): void => {
-		setFormData((previousData) => ({
-			...previousData,
-			[name]: value,
-		}));
+	const setCheckedMap: Record<
+		string,
+		React.Dispatch<React.SetStateAction<boolean>>
+	> = {
+		Physical: setPhysicalChecked,
+		Work: setWorkChecked,
 	};
 
-	const handleCheckbox = (
-		categoryName: string,
-	): ((newValue: boolean) => void) => {
-		return (newValue: boolean): void => {
-			handleCheckboxChange(categoryName.toLowerCase(), newValue);
+	const handleCheckboxChange = (categoryName: string, value: boolean): void => {
+		const setChecked = setCheckedMap[categoryName];
+
+		if (setChecked) {
+			setChecked(value);
+		}
+	};
+
+	const handleChange = (categoryName: string): ((value: boolean) => void) => {
+		return (value: boolean): void => {
+			handleCheckboxChange(categoryName, value);
 		};
 	};
 
@@ -42,12 +45,15 @@ const Chat: React.FC = () => {
 		<ScreenWrapper>
 			<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}>
 				{mockCategories.map((category) => {
+					const isChecked =
+						category.name === "Physical" ? physicalChecked : workChecked;
+
 					return (
 						<Checkbox
-							isChecked={formData[category.name.toLowerCase()] ?? false}
+							isChecked={isChecked}
 							key={category.id}
 							label={category.name}
-							onValueChange={handleCheckbox(category.name)}
+							onValueChange={handleChange(category.name)}
 						/>
 					);
 				})}
