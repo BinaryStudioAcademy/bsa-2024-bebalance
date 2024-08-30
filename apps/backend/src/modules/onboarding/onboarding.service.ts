@@ -51,9 +51,7 @@ class OnboardingService implements Service {
 
 		return {
 			items: items.map((item) => {
-				return {
-					...item.toObject(),
-				};
+				return item.toObject();
 			}),
 		};
 	}
