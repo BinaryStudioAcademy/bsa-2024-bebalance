@@ -24,6 +24,12 @@
 	background-color: var(--black);
 }
 
+.secondary {
+	color: var(--black);
+	background-color: transparent;
+	border: 1px solid var(--black);
+}
+
 .icon-button {
 	position: absolute;
 	top: 50%;

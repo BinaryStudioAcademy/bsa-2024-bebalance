@@ -21,9 +21,11 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	type UserUpdatePayload,
+	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
+	userUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/users.js";
