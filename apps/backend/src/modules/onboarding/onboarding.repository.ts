@@ -13,6 +13,12 @@ class OnboardingRepository implements Repository {
 		this.onboardingAnswerModel = onboardingAnswerModel;
 	}
 
+	public async countQuestions(): Promise<number> {
+		return await this.onboardingAnswerModel
+			.relatedQuery("question")
+			.resultSize();
+	}
+
 	public async create(
 		entity: OnboardingAnswerEntity,
 	): Promise<OnboardingAnswerEntity> {

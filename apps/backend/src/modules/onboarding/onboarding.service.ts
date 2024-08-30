@@ -31,6 +31,15 @@ class OnboardingService implements Service {
 			});
 		}
 
+		const totalQuestions = await this.onboardingRepository.countQuestions();
+
+		if (answerIds.length !== totalQuestions) {
+			throw new OnboardingError({
+				message: ErrorMessage.INSUFFICIENT_ANSWERS,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
 		const addedAnswers = await this.onboardingRepository.createUserAnswers(
 			userId,
 			answerIds,
