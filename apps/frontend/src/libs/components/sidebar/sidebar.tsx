@@ -1,7 +1,12 @@
 import { Button } from "~/libs/components/components.js";
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useLocation } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useCallback,
+	useLocation,
+} from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 
 import { SidebarLink } from "./libs/components/components.js";
 import styles from "./styles.module.css";
@@ -16,6 +21,13 @@ const Sidebar: React.FC<Properties> = ({
 	onSidebarToggle,
 }: Properties) => {
 	const { pathname } = useLocation();
+
+	const dispatch = useAppDispatch();
+
+	const handleLogOut = useCallback(
+		() => dispatch(authActions.logOut()),
+		[dispatch],
+	);
 
 	return (
 		<div
@@ -51,6 +63,7 @@ const Sidebar: React.FC<Properties> = ({
 					);
 				})}
 			</div>
+			<Button label="Log out" onClick={handleLogOut} />
 		</div>
 	);
 };
