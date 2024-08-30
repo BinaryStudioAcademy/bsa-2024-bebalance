@@ -47,7 +47,12 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								path: AppRoute.RESET_PASSWORD,
 							},
 							{
-								element: <Quiz />,
+								element: (
+									<ProtectedRoute
+										component={<Quiz />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
 								path: AppRoute.QUIZ,
 							},
 						],
