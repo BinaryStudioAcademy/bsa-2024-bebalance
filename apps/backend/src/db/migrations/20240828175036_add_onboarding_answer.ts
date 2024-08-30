@@ -16,38 +16,36 @@ const ColumnName = {
 	QUESTION_ID: "question_id",
 } as const;
 
-const questionLabel =
+const QUESTION_LABEL =
 	"Are there any specific types of tasks or practices you enjoy or find particularly motivating?";
-const answerLabel = "Meditation or mindfulness practices";
+const ANSWER_LABEL = "Meditation or mindfulness practices";
 
 async function up(knex: Knex): Promise<void> {
 	const question = await knex<OnboardingQuestion>(
 		TableName.ONBOARDING_QUESTIONS,
 	)
 		.select("id")
-		.where({ label: questionLabel })
+		.where({ label: QUESTION_LABEL })
 		.first();
 
 	if (question) {
 		await knex(TableName.ONBOARDING_ANSWERS).insert({
-			label: answerLabel,
-			question_id: question.id,
+			label: ANSWER_LABEL,
+			questionId: question.id,
 		});
 	}
 }
 
 async function down(knex: Knex): Promise<void> {
-	const question = await knex<OnboardingQuestion>(
-		TableName.ONBOARDING_QUESTIONS,
-	)
+	const answer = await knex<OnboardingQuestion>(TableName.ONBOARDING_QUESTIONS)
 		.select("id")
-		.where({ label: questionLabel })
+		.where({ label: ANSWER_LABEL })
 		.first();
 
-	if (question) {
+	if (answer) {
 		await knex(TableName.ONBOARDING_ANSWERS)
 			.where({
-				question_id: question.id,
+				id: answer.id,
 			})
 			.del();
 	}
