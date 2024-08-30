@@ -3,8 +3,8 @@ import { type Repository } from "~/libs/types/repository.type.js";
 
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
 import { type QuestionRequestData } from "./libs/types/types.js";
+import { QuizQuestionEntity } from "./quiz-question.entity.js";
 import { type QuizQuestionModel } from "./quiz-question.model.js";
-import { QuizQuestionEntity } from "./quiz-questions.entity.ts.js";
 
 class QuizQuestionRepository implements Repository {
 	private quizQuestionModel: typeof QuizQuestionModel;

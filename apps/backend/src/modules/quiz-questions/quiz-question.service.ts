@@ -4,8 +4,8 @@ import {
 	type QuestionRequestData,
 	type QuizQuestionDto,
 } from "./libs/types/types.js";
+import { QuizQuestionEntity } from "./quiz-question.entity.js";
 import { type QuizQuestionRepository } from "./quiz-question.repository.js";
-import { QuizQuestionEntity } from "./quiz-questions.entity.ts.js";
 
 class QuizQuestionService implements Service {
 	private quizQuestionRepository: QuizQuestionRepository;
