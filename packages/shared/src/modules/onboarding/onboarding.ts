@@ -1,7 +1,7 @@
 export { OnboardingApiPath } from "./libs/enums/enums.js";
 export {
 	type OnboardingAnswerDto,
-	type OnboardingAnswerRequestBody,
+	type OnboardingAnswerRequestBodyDto,
 	type OnboardingAnswerRequestDto,
 	type OnboardingAnswerResponseDto,
 } from "./libs/types/types.js";

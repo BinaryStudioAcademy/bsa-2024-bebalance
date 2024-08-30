@@ -36,7 +36,7 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	type OnboardingAnswerDto,
-	type OnboardingAnswerRequestBody,
+	type OnboardingAnswerRequestBodyDto,
 	type OnboardingAnswerRequestDto,
 	type OnboardingAnswerResponseDto,
 	onboardingAnswersValidationSchema,
