@@ -1,5 +1,5 @@
 const OnboardingApiPath = {
-	ROOT: "",
+	ROOT: "/",
 } as const;
 
 export { OnboardingApiPath };
