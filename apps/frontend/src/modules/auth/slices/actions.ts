@@ -55,13 +55,9 @@ const requestResetPassword = createAsyncThunk<null, EmailDto, AsyncThunkConfig>(
 	async (emailPayload, { extra }) => {
 		const { authApi } = extra;
 
-		try {
-			await authApi.requestResetPassword(emailPayload);
+		await authApi.requestResetPassword(emailPayload);
 
-			return null;
-		} catch (error) {
-			throw error as Error;
-		}
+		return null;
 	},
 );
 
@@ -72,13 +68,9 @@ const resetPassword = createAsyncThunk<
 >(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
 	const { authApi } = extra;
 
-	try {
-		await authApi.resetPassword(emailPayload);
+	await authApi.resetPassword(emailPayload);
 
-		return null;
-	} catch (error) {
-		throw error as Error;
-	}
+	return null;
 });
 
 export {

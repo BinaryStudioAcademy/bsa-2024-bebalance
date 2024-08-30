@@ -1,6 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useParams } from "~/libs/hooks/hooks.js";
-import { notification } from "~/libs/modules/notification/notification.js";
 import {
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
@@ -27,18 +26,12 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload) => {
-				if (!token) {
-					notification.error("invalid reset password url");
-
-					return;
-				}
-
 				const { newPassword } = payload;
 				const confirmPassword = getValues("confirmPassword");
 
 				if (confirmPassword === newPassword) {
 					onSubmit({
-						jwtToken: token,
+						jwtToken: token as string,
 						newPassword,
 					});
 				} else {
