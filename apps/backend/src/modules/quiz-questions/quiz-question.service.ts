@@ -14,6 +14,10 @@ class QuizQuestionService implements Service {
 		this.quizQuestionRepository = quizQuestionRepository;
 	}
 
+	public async countAll(): Promise<number> {
+		return await this.quizQuestionRepository.countAll();
+	}
+
 	public async create(
 		payload: QuizQuestionRequestDto,
 	): Promise<QuizQuestionDto> {

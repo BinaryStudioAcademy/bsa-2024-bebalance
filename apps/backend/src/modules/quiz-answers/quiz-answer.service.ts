@@ -97,9 +97,9 @@ class QuizAnswerService implements Service {
 			});
 		}
 
-		const questions = await this.quizQuestionService.findAll();
+		const questionsCount = await this.quizQuestionService.countAll();
 
-		if (questions.items.length !== existingAnswers.length) {
+		if (questionsCount !== existingAnswers.length) {
 			throw new QuizError({
 				message: ErrorMessage.MISSING_QUESTION_ANSWERS,
 				status: HTTPCode.BAD_REQUEST,

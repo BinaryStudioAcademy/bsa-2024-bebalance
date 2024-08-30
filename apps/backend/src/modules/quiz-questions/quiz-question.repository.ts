@@ -2,6 +2,7 @@ import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { type Repository } from "~/libs/types/repository.type.js";
 
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
+import { FIRST_ELEMENT_INDEX } from "./libs/constants/constants.js";
 import { type QuizQuestionRequestDto } from "./libs/types/types.js";
 import { QuizQuestionEntity } from "./quiz-question.entity.js";
 import { type QuizQuestionModel } from "./quiz-question.model.js";
@@ -11,6 +12,15 @@ class QuizQuestionRepository implements Repository {
 
 	public constructor(quizQuestionModel: typeof QuizQuestionModel) {
 		this.quizQuestionModel = quizQuestionModel;
+	}
+
+	public async countAll(): Promise<number> {
+		const questionModelCount = await this.quizQuestionModel
+			.query()
+			.count()
+			.castTo<[{ count: string }]>();
+
+		return Number(questionModelCount[FIRST_ELEMENT_INDEX].count);
 	}
 
 	public async create(entity: QuizQuestionEntity): Promise<QuizQuestionEntity> {
