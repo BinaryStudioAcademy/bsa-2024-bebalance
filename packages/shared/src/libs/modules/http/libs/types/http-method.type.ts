@@ -1,3 +1,3 @@
-type HTTPMethod = "GET" | "POST" | "PUT";
+type HTTPMethod = "GET" | "POST";
 
 export { type HTTPMethod };

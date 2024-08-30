@@ -71,7 +71,7 @@ class QuizController extends BaseController {
 						user: UserDto;
 					}>,
 				),
-			method: "PUT",
+			method: "POST",
 			path: QuizApiPath.ANSWER,
 			validation: {
 				body: quizUserAnswersValidationSchema,
@@ -82,7 +82,7 @@ class QuizController extends BaseController {
 	/**
 	 * @swagger
 	 * /quiz/answer:
-	 *   put:
+	 *   post:
 	 *     description: Saves user answers for all quiz questions at once
 	 *     requestBody:
 	 *       required: true
@@ -96,7 +96,7 @@ class QuizController extends BaseController {
 	 *
 	 *
 	 *     responses:
-	 *       200:
+	 *       201:
 	 *         description: Successful operation
 	 *         content:
 	 *           application/json:
@@ -125,7 +125,7 @@ class QuizController extends BaseController {
 				answerIds,
 				userId: options.user.id,
 			}),
-			status: HTTPCode.OK,
+			status: HTTPCode.CREATED,
 		};
 	}
 }
