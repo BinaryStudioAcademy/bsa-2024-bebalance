@@ -101,7 +101,7 @@ class QuizAnswerService implements Service {
 
 		if (questionsCount !== existingAnswers.length) {
 			throw new QuizError({
-				message: ErrorMessage.MISSING_QUESTION_ANSWERS,
+				message: ErrorMessage.INSUFFICIENT_ANSWERS,
 				status: HTTPCode.BAD_REQUEST,
 			});
 		}
