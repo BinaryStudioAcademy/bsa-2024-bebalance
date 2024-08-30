@@ -40,6 +40,7 @@ export {
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizApiPath,
+	type QuizQuestionDto,
 	type QuizScoreDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,

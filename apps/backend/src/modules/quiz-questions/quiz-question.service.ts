@@ -1,7 +1,9 @@
 import { type Service } from "~/libs/types/service.type.js";
 
-import { type QuizQuestionDto } from "./libs/types/quiz-question-dto.type.js";
-import { type QuestionRequestData } from "./libs/types/types.js";
+import {
+	type QuestionRequestData,
+	type QuizQuestionDto,
+} from "./libs/types/types.js";
 import { type QuizQuestionRepository } from "./quiz-question.repository.js";
 import { QuizQuestionEntity } from "./quiz-questions.entity.ts.js";
 

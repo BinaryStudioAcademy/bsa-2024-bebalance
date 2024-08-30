@@ -1,4 +1,4 @@
-import { type QuizAnswerDto } from "~/modules/quiz-answers/quiz-answers.js";
+import { type QuizAnswerDto } from "./types.js";
 
 type QuizQuestionDto = {
 	answers: QuizAnswerDto[];
