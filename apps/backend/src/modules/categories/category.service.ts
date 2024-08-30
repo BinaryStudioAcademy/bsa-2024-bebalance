@@ -4,6 +4,7 @@ import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
 import {
 	type CategoryDto,
+	type CategoryRequestDto,
 	type QuizScoreDto,
 	type ScoreRequestData,
 } from "./libs/types/types.js";
@@ -15,7 +16,7 @@ class CategoryService implements Service {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public async create(payload: CategoryDto): Promise<CategoryDto> {
+	public async create(payload: CategoryRequestDto): Promise<CategoryDto> {
 		const category = await this.categoryRepository.create(
 			CategoryEntity.initializeNew(payload),
 		);
@@ -57,7 +58,7 @@ class CategoryService implements Service {
 
 	public async update(
 		id: number,
-		payload: Partial<CategoryDto>,
+		payload: Partial<CategoryRequestDto>,
 	): Promise<CategoryDto> {
 		const category = await this.categoryRepository.update(id, payload);
 

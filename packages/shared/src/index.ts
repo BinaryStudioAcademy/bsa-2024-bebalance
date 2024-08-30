@@ -36,6 +36,7 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	type CategoryDto,
+	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
