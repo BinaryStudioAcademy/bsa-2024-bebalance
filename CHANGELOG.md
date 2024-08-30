@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.23.0...v1.24.0) (2024-08-29)
+
+
+### Features
+
+* **mobile:** added configuration to make apk builds bb-236 ([#238](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/238)) ([221867d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/221867d4338131e9b1b6632b677f71eddaf4750a))
+
+
+### Bug Fixes
+
+* **frontend:** wrap quiz component into protected route bb-234 ([#235](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/235)) ([b55f92f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b55f92f05bc2995e52f7b90d87f4dff110e80b4f))
+
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.22.0...v1.23.0) (2024-08-28)
+
+
+### Features
+
+* **mobile:** add  bottom tab navigator bb-128 ([#214](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/214)) ([0848203](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/084820386a667ea406bd8c93680ab687c8a6ab25))
+* **mobile:** sign in form bb-20 ([#228](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/228)) ([96ed037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/96ed037c7efec2b4058500c139d879030725d792))
+
+
+### Bug Fixes
+
+* **frontend:** fix passwords don't match error even when passwords the same bb-226 ([#229](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/229)) ([6db0f2a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6db0f2a295c002a51fcdcdebf799f64db613be2e))
+
 ## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.21.0...v1.22.0) (2024-08-28)
 
 
