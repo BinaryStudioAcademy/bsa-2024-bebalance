@@ -22,6 +22,7 @@ export {
 export {
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
+	userUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 export { UserService } from "./user.service.js";
 export { userController, userService };
