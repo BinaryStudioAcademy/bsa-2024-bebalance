@@ -1,7 +1,7 @@
 import { Icon } from "~/libs/components/components.js";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useAppSelector } from "~/libs/hooks/use-app-selector/use-app-selector.hook.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
