@@ -3,8 +3,6 @@ import { type Entity } from "~/libs/types/types.js";
 import { type QuizUserAnswerDto } from "./libs/types/types.js";
 
 class QuizAnswerEntity implements Entity {
-	// private answerId: null | number;
-
 	private createdAt: string;
 
 	private id: null | number;
@@ -16,8 +14,6 @@ class QuizAnswerEntity implements Entity {
 	private updatedAt: string;
 
 	private userAnswers: QuizUserAnswerDto[];
-
-	// private userId: null | number;
 
 	private value: number;
 

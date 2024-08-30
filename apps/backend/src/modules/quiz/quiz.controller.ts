@@ -7,12 +7,12 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
-import { type QuizAnswerService } from "../quiz-answers/quiz-answers.js";
-import { QuizApiPath } from "./libs/enums/enums.js";
 import {
+	type QuizAnswerService,
 	type QuizAnswersRequestDto,
-	type UserDto,
-} from "./libs/types/types.js";
+} from "../quiz-answers/quiz-answers.js";
+import { type UserDto } from "../users/users.js";
+import { QuizApiPath } from "./libs/enums/enums.js";
 import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 /*** @swagger

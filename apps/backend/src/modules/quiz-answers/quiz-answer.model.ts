@@ -10,15 +10,11 @@ import { UserModel } from "../users/user.model.js";
 import { type QuizUserAnswerDto } from "./libs/types/types.js";
 
 class QuizAnswerModel extends AbstractModel {
-	// public answerId!: number;
-
 	public label!: string;
 
 	public questionId!: number;
 
 	public userAnswers!: QuizUserAnswerDto[];
-
-	// public userId!: number;
 
 	public value!: number;
 

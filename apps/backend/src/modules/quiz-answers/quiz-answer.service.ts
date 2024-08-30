@@ -1,16 +1,18 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 
-import { type CategoryService } from "../categories/categories.js";
+import {
+	type CategoryService,
+	type QuizScoreDto,
+} from "../categories/categories.js";
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { INITIAL_STATISTIC_VALUE } from "./libs/constants/constants.js";
-import { HTTPCode } from "./libs/enums/enums.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoryStatistic,
 	type QuizAnswerDto,
 	type QuizAnswersResponseDto,
-	type QuizScoreDto,
 	type UserAnswersRequestData,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
