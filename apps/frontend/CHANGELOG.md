@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.2...frontend-v1.17.0) (2024-08-30)
+
+
+### Features
+
+* **frontend:** analyzing screen mobile responsiveness bb-136 ([#231](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/231)) ([3fa478c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3fa478c516bd16ea45cdc9aea3299d78af0966a9))
+
 ## [1.16.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.1...frontend-v1.16.2) (2024-08-29)
 
 
