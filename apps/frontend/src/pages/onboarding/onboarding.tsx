@@ -20,11 +20,18 @@ const Onboarding: React.FC = () => {
 
 	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 
-	const { isLastQuestion, question } = useAppSelector(({ onboarding }) => ({
+	const {
+		currentQuestionIndex,
+		isLastQuestion,
+		question,
+		totalQuestionsAmount,
+	} = useAppSelector(({ onboarding }) => ({
+		currentQuestionIndex: onboarding.currentQuestionIndex,
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
 			onboarding.allQuestions.length - PREVIOUS_INDEX_OFFSET,
 		question: onboarding.currentQuestion,
+		totalQuestionsAmount: onboarding.allQuestions.length,
 	}));
 
 	useEffect(() => {
@@ -58,7 +65,10 @@ const Onboarding: React.FC = () => {
 				{question ? (
 					<>
 						<div className={styles["progress-bar"]}>
-							<ProgressBar />
+							<ProgressBar
+								currentQuestionIndex={currentQuestionIndex}
+								totalQuestionsAmount={totalQuestionsAmount}
+							/>
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>
 						<div className={styles["answers"]}>

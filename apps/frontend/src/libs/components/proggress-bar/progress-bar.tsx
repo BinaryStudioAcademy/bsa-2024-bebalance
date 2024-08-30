@@ -1,18 +1,18 @@
 import { Icon } from "~/libs/components/components.js";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useAppSelector } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
-const ProgressBar: React.FC = () => {
-	const { currentQuestionIndex, totalQuestionsAmount } = useAppSelector(
-		({ onboarding }) => ({
-			currentQuestionIndex: onboarding.currentQuestionIndex,
-			totalQuestionsAmount: onboarding.allQuestions.length,
-		}),
-	);
+type Properties = {
+	currentQuestionIndex: number;
+	totalQuestionsAmount: number;
+};
 
+const ProgressBar: React.FC<Properties> = ({
+	currentQuestionIndex,
+	totalQuestionsAmount,
+}: Properties) => {
 	return (
 		<div className={styles["progress-bar"]}>
 			{Array.from({ length: totalQuestionsAmount }).map((_, index) => {
