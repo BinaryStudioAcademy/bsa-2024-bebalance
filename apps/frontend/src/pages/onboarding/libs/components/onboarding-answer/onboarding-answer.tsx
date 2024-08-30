@@ -7,7 +7,7 @@ import {
 
 import styles from "./styles.module.css";
 
-type AnswerProperties<T extends FieldValues> = {
+type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	name: FieldPath<T>;
 	options?: { label: string; value: string }[];
@@ -17,7 +17,7 @@ const OnboardingAnswer = <T extends FieldValues>({
 	control,
 	name,
 	options = [],
-}: AnswerProperties<T>): JSX.Element => {
+}: Properties<T>): JSX.Element => {
 	return (
 		<div className={styles["onboarding-answer"]}>
 			<Input
