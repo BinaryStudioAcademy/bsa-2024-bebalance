@@ -4,7 +4,7 @@ import { type Repository } from "~/libs/types/types.js";
 
 import {
 	type CategorizedQuizAnswerModel,
-	type QuizAnswerDto,
+	type QuizAnswerRequestDto,
 	type QuizUserAnswerDto,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
@@ -147,7 +147,7 @@ class QuizAnswerRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<QuizAnswerDto>,
+		payload: Partial<QuizAnswerRequestDto>,
 	): Promise<QuizAnswerEntity> {
 		const answer = await this.quizAnswerModel
 			.query()

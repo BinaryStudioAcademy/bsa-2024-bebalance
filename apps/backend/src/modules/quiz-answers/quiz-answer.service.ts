@@ -12,6 +12,7 @@ import { QuizError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoryStatistic,
 	type QuizAnswerDto,
+	type QuizAnswerRequestDto,
 	type QuizAnswersResponseDto,
 	type UserAnswersRequestData,
 } from "./libs/types/types.js";
@@ -35,7 +36,7 @@ class QuizAnswerService implements Service {
 		this.quizQuestionService = quizQuestionService;
 	}
 
-	public async create(payload: QuizAnswerDto): Promise<QuizAnswerDto> {
+	public async create(payload: QuizAnswerRequestDto): Promise<QuizAnswerDto> {
 		const answer = await this.quizAnswerRepository.create(
 			QuizAnswerEntity.initializeNew(payload),
 		);
@@ -146,7 +147,7 @@ class QuizAnswerService implements Service {
 
 	public async update(
 		id: number,
-		payload: Partial<QuizAnswerDto>,
+		payload: Partial<QuizAnswerRequestDto>,
 	): Promise<QuizAnswerDto> {
 		const answer = await this.quizAnswerRepository.update(id, payload);
 

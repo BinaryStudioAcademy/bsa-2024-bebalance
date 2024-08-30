@@ -38,6 +38,7 @@ export {
 	type CategoryDto,
 	type CategoryRequestDto,
 	type QuizAnswerDto,
+	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizApiPath,
