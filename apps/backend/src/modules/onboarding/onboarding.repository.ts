@@ -2,7 +2,14 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
-import { type OnboardingAnswerDto } from "./libs/types/types.js";
+import {
+	DEFAULT_COUNT_VALUE,
+	FIRST_ELEMENT_INDEX,
+} from "./libs/constants/constants.js";
+import {
+	type CountResult,
+	type OnboardingAnswerDto,
+} from "./libs/types/types.js";
 import { OnboardingAnswerEntity } from "./onboarding-answer.entity.js";
 import { type OnboardingAnswerModel } from "./onboarding-answer.model.js";
 import { type OnboardingQuestionModel } from "./onboarding-question.model.js";
@@ -21,7 +28,16 @@ class OnboardingRepository implements Repository {
 	}
 
 	public async countQuestions(): Promise<number> {
-		return await this.onboardingQuestionModel.query().resultSize();
+		const result = await this.onboardingQuestionModel
+			.query()
+			.count("* as count");
+
+		const countResult: CountResult[] = result as CountResult[];
+
+		const countString =
+			countResult[FIRST_ELEMENT_INDEX]?.count ?? DEFAULT_COUNT_VALUE.toString();
+
+		return Number.parseInt(countString, 10);
 	}
 
 	public async create(
