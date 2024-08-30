@@ -7,15 +7,18 @@ import {
 
 import { QuizQuestionModel } from "../quiz-questions/quiz-question.model.js";
 import { UserModel } from "../users/user.model.js";
+import { type QuizUserAnswerDto } from "./libs/types/types.js";
 
 class QuizAnswerModel extends AbstractModel {
-	public answerId!: number;
+	// public answerId!: number;
 
 	public label!: string;
 
 	public questionId!: number;
 
-	public userId!: number;
+	public userAnswers!: QuizUserAnswerDto[];
+
+	// public userId!: number;
 
 	public value!: number;
 

@@ -1,2 +1,2 @@
+export { type QuestionRequestData } from "./question-request-data.js";
 export { type QuizQuestionDto } from "./quiz-question-dto.type.js";
-export { type QuizQuestionUpdatable } from "./quiz-question-updatable.type.js";

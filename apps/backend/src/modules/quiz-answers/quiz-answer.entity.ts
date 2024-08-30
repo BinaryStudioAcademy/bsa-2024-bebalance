@@ -1,7 +1,9 @@
 import { type Entity } from "~/libs/types/types.js";
 
+import { type QuizUserAnswerDto } from "./libs/types/types.js";
+
 class QuizAnswerEntity implements Entity {
-	private answerId: null | number;
+	// private answerId: null | number;
 
 	private createdAt: string;
 
@@ -13,66 +15,62 @@ class QuizAnswerEntity implements Entity {
 
 	private updatedAt: string;
 
-	private userId: null | number;
+	private userAnswers: QuizUserAnswerDto[];
+
+	// private userId: null | number;
 
 	private value: number;
 
 	private constructor({
-		answerId,
 		createdAt,
 		id,
 		label,
 		questionId,
 		updatedAt,
-		userId,
+		userAnswers,
 		value,
 	}: {
-		answerId: null | number;
 		createdAt: string;
 		id: null | number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
-		userId: null | number;
+		userAnswers: QuizUserAnswerDto[];
 		value: number;
 	}) {
-		this.answerId = answerId;
 		this.createdAt = createdAt;
 		this.id = id;
 		this.label = label;
 		this.questionId = questionId;
 		this.updatedAt = updatedAt;
-		this.userId = userId;
+		this.userAnswers = userAnswers;
 		this.value = value;
 	}
 
 	public static initialize({
-		answerId,
 		createdAt,
 		id,
 		label,
 		questionId,
 		updatedAt,
-		userId,
+		userAnswers,
 		value,
 	}: {
-		answerId: number;
 		createdAt: string;
 		id: number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
-		userId: number;
+		userAnswers: QuizUserAnswerDto[];
 		value: number;
 	}): QuizAnswerEntity {
 		return new QuizAnswerEntity({
-			answerId,
 			createdAt,
 			id,
 			label,
 			questionId,
 			updatedAt,
-			userId,
+			userAnswers,
 			value,
 		});
 	}
@@ -80,20 +78,21 @@ class QuizAnswerEntity implements Entity {
 	public static initializeNew({
 		label,
 		questionId,
+		userAnswers,
 		value,
 	}: {
 		label: string;
 		questionId: number;
+		userAnswers: QuizUserAnswerDto[];
 		value: number;
 	}): QuizAnswerEntity {
 		return new QuizAnswerEntity({
-			answerId: null,
 			createdAt: "",
 			id: null,
 			label,
 			questionId,
 			updatedAt: "",
-			userId: null,
+			userAnswers,
 			value,
 		});
 	}
@@ -104,6 +103,7 @@ class QuizAnswerEntity implements Entity {
 		label: string;
 		questionId: number;
 		updatedAt: string;
+		userAnswers: QuizUserAnswerDto[];
 		value: number;
 	} {
 		return {
@@ -112,30 +112,21 @@ class QuizAnswerEntity implements Entity {
 			label: this.label,
 			questionId: this.questionId,
 			updatedAt: this.updatedAt,
+			userAnswers: this.userAnswers,
 			value: this.value,
 		};
 	}
 
 	public toObject(): {
-		answerId: number;
 		createdAt: string;
 		id: number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
-		userId: number;
+		userAnswers: QuizUserAnswerDto[];
 		value: number;
 	} {
-		return {
-			answerId: this.answerId as number,
-			createdAt: this.createdAt,
-			id: this.id as number,
-			label: this.label,
-			questionId: this.questionId,
-			updatedAt: this.updatedAt,
-			userId: this.userId as number,
-			value: this.value,
-		};
+		return this.toNewObject();
 	}
 }
 

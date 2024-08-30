@@ -1,9 +1,11 @@
+import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import {
 	type CategorizedQuizAnswerModel,
 	type QuizAnswerDto,
+	type QuizUserAnswerDto,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
 import { type QuizAnswerModel } from "./quiz-answer.model.js";
@@ -20,16 +22,16 @@ class QuizAnswerRepository implements Repository {
 		const answer = await this.quizAnswerModel
 			.query()
 			.insert({ label, questionId, value })
+			.withGraphFetched(RelationName.QUESTION)
 			.returning("*");
 
 		return QuizAnswerEntity.initialize({
-			answerId: answer.answerId,
 			createdAt: answer.createdAt,
 			id: answer.id,
 			label: answer.label,
 			questionId: answer.questionId,
 			updatedAt: answer.updatedAt,
-			userId: answer.userId,
+			userAnswers: answer.userAnswers,
 			value: answer.value,
 		});
 	}
@@ -37,31 +39,23 @@ class QuizAnswerRepository implements Repository {
 	public async createUserAnswers(
 		userId: number,
 		answerIds: number[],
-	): Promise<QuizAnswerEntity[]> {
-		const answers = await Promise.all(
-			answerIds.map((answerId) => {
-				return this.quizAnswerModel
+	): Promise<QuizUserAnswerDto[]> {
+		await Promise.all(
+			answerIds.map(async (answerId) => {
+				const answer = await this.quizAnswerModel
 					.query()
-					.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
-					.insertAndFetch({
-						answerId,
-						userId,
-					});
+					.findById(answerId)
+					.castTo<QuizAnswerModel>();
+
+				await answer.$relatedQuery(RelationName.USERS).relate(userId);
 			}),
 		);
 
-		return answers.map((answer) => {
-			return QuizAnswerEntity.initialize({
-				answerId: answer.answerId,
-				createdAt: answer.createdAt,
-				id: answer.id,
-				label: answer.label,
-				questionId: answer.questionId,
-				updatedAt: answer.updatedAt,
-				userId: answer.userId,
-				value: answer.value,
-			});
-		});
+		return await this.quizAnswerModel
+			.query()
+			.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
+			.where({ userId })
+			.castTo<QuizUserAnswerDto[]>();
 	}
 
 	public async delete(id: number): Promise<boolean> {
@@ -79,17 +73,19 @@ class QuizAnswerRepository implements Repository {
 	}
 
 	public async find(id: number): Promise<null | QuizAnswerEntity> {
-		const answer = await this.quizAnswerModel.query().findById(id);
+		const answer = await this.quizAnswerModel
+			.query()
+			.findById(id)
+			.withGraphJoined(RelationName.QUESTION);
 
 		return answer
 			? QuizAnswerEntity.initialize({
-					answerId: answer.answerId,
 					createdAt: answer.createdAt,
 					id: answer.id,
 					label: answer.label,
 					questionId: answer.questionId,
 					updatedAt: answer.updatedAt,
-					userId: answer.userId,
+					userAnswers: answer.userAnswers,
 					value: answer.value,
 				})
 			: null;
@@ -100,13 +96,12 @@ class QuizAnswerRepository implements Repository {
 
 		return answers.map((answer) => {
 			return QuizAnswerEntity.initialize({
-				answerId: answer.answerId,
 				createdAt: answer.createdAt,
 				id: answer.id,
 				label: answer.label,
 				questionId: answer.questionId,
 				updatedAt: answer.updatedAt,
-				userId: answer.userId,
+				userAnswers: answer.userAnswers,
 				value: answer.value,
 			});
 		});
@@ -117,13 +112,12 @@ class QuizAnswerRepository implements Repository {
 
 		return answers.map((answer) => {
 			return QuizAnswerEntity.initialize({
-				answerId: answer.answerId,
 				createdAt: answer.createdAt,
 				id: answer.id,
 				label: answer.label,
 				questionId: answer.questionId,
 				updatedAt: answer.updatedAt,
-				userId: answer.userId,
+				userAnswers: answer.userAnswers,
 				value: answer.value,
 			});
 		});
@@ -157,16 +151,16 @@ class QuizAnswerRepository implements Repository {
 	): Promise<QuizAnswerEntity> {
 		const answer = await this.quizAnswerModel
 			.query()
-			.patchAndFetchById(id, { ...payload });
+			.patchAndFetchById(id, { ...payload })
+			.withGraphJoined(RelationName.QUESTION);
 
 		return QuizAnswerEntity.initialize({
-			answerId: answer.answerId,
 			createdAt: answer.createdAt,
 			id: answer.id,
 			label: answer.label,
 			questionId: answer.questionId,
 			updatedAt: answer.updatedAt,
-			userId: answer.userId,
+			userAnswers: answer.userAnswers,
 			value: answer.value,
 		});
 	}

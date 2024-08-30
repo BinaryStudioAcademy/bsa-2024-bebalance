@@ -115,11 +115,10 @@ class QuizAnswerService implements Service {
 		}
 
 		await this.quizAnswerRepository.deleteUserAnswers(userId);
-		const userAnswersEntity = await this.quizAnswerRepository.createUserAnswers(
+		const userAnswers = await this.quizAnswerRepository.createUserAnswers(
 			userId,
 			answerIds,
 		);
-		const userAnswers = userAnswersEntity.map((answer) => answer.toObject());
 
 		await this.categoryService.deleteUserScores(userId);
 		const scores = await this.createScores({ answerIds, userId });
