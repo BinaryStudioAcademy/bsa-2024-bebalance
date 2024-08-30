@@ -43,6 +43,7 @@
 		"@types/bcrypt": "5.0.2",
 		"@types/convict": "6.1.6",
 		"@types/swagger-jsdoc": "6.0.4",
+		"ts-node": "10.9.2",
 		"ts-paths-esm-loader": "1.4.3",
 		"tsx": "4.17.0"
 	}
