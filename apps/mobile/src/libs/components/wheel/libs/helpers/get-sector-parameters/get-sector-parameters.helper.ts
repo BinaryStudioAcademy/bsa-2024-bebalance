@@ -6,6 +6,10 @@ type GetSectorParametersArguments = {
 	startPercent: number;
 };
 
+const QUATER_PERCENT = 25;
+const TWO = 2;
+const MAX_PERCENT = 100;
+
 const getSectorParameters = ({
 	centerGap,
 	endPercent,
@@ -19,10 +23,6 @@ const getSectorParameters = ({
 	radius: number;
 	strokeWidth: number;
 } => {
-	const QUATER_PERCENT = 25;
-	const TWO = 2;
-	const MAX_PERCENT = 100;
-
 	const strokeWidth = height - layerOffset * TWO - centerGap;
 	const radius = (height + centerGap) / TWO;
 	const circumference = radius * TWO * Math.PI;

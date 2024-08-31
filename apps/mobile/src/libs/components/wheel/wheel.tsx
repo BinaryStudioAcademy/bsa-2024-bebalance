@@ -18,15 +18,15 @@ type Properties = {
 	size: number;
 };
 
+const MINIFY_TWICE_COEFFICIENT = 0.5;
+const ANIMATION_TIME = 500;
+
 const Wheel: React.FC<Properties> = ({
 	categoriesData,
 	isLabelShown = true,
 	maxScore,
 	size,
 }: Properties) => {
-	const MINIFY_TWICE_COEFFICIENT = 0.5;
-	const ANIMATION_TIME = 500;
-
 	const wheelRadius = size * MINIFY_TWICE_COEFFICIENT;
 	const outerSize = isLabelShown
 		? (size * WheelSetting.OUTER_SIZE_PERCENT) / WheelSetting.MAX_PERCENT
