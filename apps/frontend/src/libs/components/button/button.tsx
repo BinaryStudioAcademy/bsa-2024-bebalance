@@ -13,7 +13,7 @@ type Properties = {
 	label: string;
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant?: "icon";
+	variant?: "icon" | "sidebarItem";
 };
 
 const Button: React.FC<Properties> = ({
@@ -41,6 +41,7 @@ const Button: React.FC<Properties> = ({
 		<span
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
+				variant === "sidebarItem" && styles["last"],
 			)}
 		>
 			{label}

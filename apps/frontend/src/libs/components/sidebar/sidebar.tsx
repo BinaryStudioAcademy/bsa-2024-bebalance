@@ -24,7 +24,7 @@ const Sidebar: React.FC<Properties> = ({
 
 	const dispatch = useAppDispatch();
 
-	const handleLogOut = useCallback(
+	const handleSignOut = useCallback(
 		() => dispatch(authActions.logOut()),
 		[dispatch],
 	);
@@ -49,21 +49,28 @@ const Sidebar: React.FC<Properties> = ({
 
 			<div className={styles["logo-container"]}>Logo</div>
 			<div className={styles["buttons-container"]}>
-				{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
-					const { active, inactive } = icon;
+				<div className={styles["navlinks-container"]}>
+					{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
+						const { active, inactive } = icon;
 
-					return (
-						<SidebarLink
-							iconName={href === pathname ? active : inactive}
-							key={label}
-							label={label}
-							pathname={pathname}
-							to={href}
-						/>
-					);
-				})}
+						return (
+							<SidebarLink
+								iconName={href === pathname ? active : inactive}
+								key={label}
+								label={label}
+								pathname={pathname}
+								to={href}
+							/>
+						);
+					})}
+				</div>
+				<Button
+					iconName="signOut"
+					label="Sign out"
+					onClick={handleSignOut}
+					variant="sidebarItem"
+				/>
 			</div>
-			<Button label="Log out" onClick={handleLogOut} />
 		</div>
 	);
 };

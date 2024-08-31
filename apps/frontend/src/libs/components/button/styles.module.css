@@ -35,8 +35,22 @@
 	transform: translateY(-50%);
 }
 
+.sidebarItem-button {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	color: var(--black);
+	background: none;
+	border-top: 1px solid var(--white);
+	border-radius: 0%;
+}
+
 .position-right {
 	right: 20px;
+}
+
+.last {
+	order: 1;
 }
 
 .position-center {
