@@ -29,7 +29,7 @@ class UserService implements Service {
 			passwordSalt: salt,
 		};
 
-		return await this.userRepository.update(id, updates);
+		return await this.userRepository.updatePassword(id, updates);
 	}
 
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {

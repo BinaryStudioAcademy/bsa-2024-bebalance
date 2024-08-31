@@ -12,8 +12,6 @@ const UserValidationMessage = {
 		UserValidationRule.PASSWORD_MIN_LENGTH,
 	)} characters long`,
 	PASSWORD_REQUIRE: "Password is not allowed to be empty",
-	PASSWORD_RESET_MISMATCH: "Passwords do not match.",
-	PASSWORD_SHORT: "Password length must be at least 8 characters long",
 } as const;
 
 export { UserValidationMessage };

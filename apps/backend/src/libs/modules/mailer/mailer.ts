@@ -15,6 +15,9 @@ const transporter = NodeMailer.createTransport({
 	service: config.ENV.MAILER.SERVICE,
 });
 
-const mailer = new BaseMailer(transporter);
+const mailer = new BaseMailer(
+	transporter,
+	config.ENV.BASE_URLS.RESET_PASSWORD_URL,
+);
 
 export { mailer };

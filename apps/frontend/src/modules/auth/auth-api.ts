@@ -2,10 +2,10 @@ import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import { type UserDto } from "~/libs/types/types.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -38,26 +38,34 @@ class AuthApi extends BaseHTTPApi {
 		return await response.json<UserDto>();
 	}
 
-	public async requestResetPassword(payload: EmailDto): Promise<null> {
-		await this.load(this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}), {
-			contentType: ContentType.JSON,
-			hasAuth: false,
-			method: "POST",
-			payload: JSON.stringify(payload),
-		});
+	public async requestResetPassword(payload: EmailDto): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
 
-		return null;
+		return await response.json<boolean>();
 	}
 
-	public async resetPassword(payload: ResetPasswordDto): Promise<null> {
-		await this.load(this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}), {
-			contentType: ContentType.JSON,
-			hasAuth: false,
-			method: "PATCH",
-			payload: JSON.stringify(payload),
-		});
+	public async resetPassword(
+		payload: ResetPasswordDto,
+	): Promise<UserSignInResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "PATCH",
+				payload: JSON.stringify(payload),
+			},
+		);
 
-		return null;
+		return await response.json<UserSignInResponseDto>();
 	}
 
 	public async signIn(

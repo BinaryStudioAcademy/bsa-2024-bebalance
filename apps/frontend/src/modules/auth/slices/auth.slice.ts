@@ -57,11 +57,20 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAuthenticatedUser.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
+
 		builder.addCase(requestResetPassword.fulfilled, () => {
 			notification.success(NotificationMessage.LINK_SENT);
 		});
-		builder.addCase(resetPassword.fulfilled, () => {
-			notification.success(NotificationMessage.PASSWORD_RESET);
+
+		builder.addCase(resetPassword.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(resetPassword.fulfilled, (state, action) => {
+			state.user = action.payload;
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(resetPassword.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
 	initialState,

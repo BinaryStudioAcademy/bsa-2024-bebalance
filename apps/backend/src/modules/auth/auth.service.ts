@@ -1,5 +1,4 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { mailer } from "~/libs/modules/mailer/mailer.js";
 import { token } from "~/libs/modules/token/token.js";
@@ -25,7 +24,7 @@ class AuthService {
 		this.encrypt = encrypt;
 	}
 
-	public async forgotPassword(payload: EmailDto): Promise<null> {
+	public async forgotPassword(payload: EmailDto): Promise<boolean> {
 		const { email: targetEmail } = payload;
 
 		const user = await this.userService.findByEmail(targetEmail);
@@ -43,17 +42,17 @@ class AuthService {
 			userId: userDetails.id,
 		});
 
-		const link = `${config.ENV.BASE_URLS.RESET_PASSWORD_URL}/${jwtToken}`;
-
 		mailer.sendResetPasswordEmail({
 			recipient: userDetails.email,
-			resetLink: link,
+			token: jwtToken,
 		});
 
-		return null;
+		return true;
 	}
 
-	public async resetPassword(payload: ResetPasswordDto): Promise<null> {
+	public async resetPassword(
+		payload: ResetPasswordDto,
+	): Promise<UserSignInResponseDto> {
 		const { jwtToken, newPassword } = payload;
 
 		const {
@@ -71,7 +70,10 @@ class AuthService {
 
 		await this.userService.changePassword(userId, newPassword);
 
-		return null;
+		return {
+			token: jwtToken,
+			user: user.toObject(),
+		};
 	}
 
 	public async signIn(

@@ -57,27 +57,28 @@ const getAuthenticatedUser = createAsyncThunk<
 	return await authApi.getAuthenticatedUser();
 });
 
-const requestResetPassword = createAsyncThunk<null, EmailDto, AsyncThunkConfig>(
-	`${sliceName}/send-reset-password-link`,
-	async (emailPayload, { extra }) => {
-		const { authApi } = extra;
+const requestResetPassword = createAsyncThunk<
+	boolean,
+	EmailDto,
+	AsyncThunkConfig
+>(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
+	const { authApi } = extra;
 
-		await authApi.requestResetPassword(emailPayload);
-
-		return null;
-	},
-);
+	return await authApi.requestResetPassword(emailPayload);
+});
 
 const resetPassword = createAsyncThunk<
-	null,
+	UserDto,
 	ResetPasswordDto,
 	AsyncThunkConfig
 >(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
 	const { authApi } = extra;
 
-	await authApi.resetPassword(emailPayload);
+	const { token, user } = await authApi.resetPassword(emailPayload);
 
-	return null;
+	void storage.set(StorageKey.TOKEN, token);
+
+	return user;
 });
 
 export {

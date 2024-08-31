@@ -112,12 +112,31 @@ class UserRepository implements Repository {
 
 	public async update(
 		id: number,
-		updates: Partial<UserModel>,
+		payload: Partial<UserModel>,
 	): Promise<UserEntity> {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(RelationName.USER_DETAILS)
-			.patchAndFetchById(id, updates);
+			.patchAndFetchById(id, payload);
+
+		return UserEntity.initialize({
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
+	}
+	public async updatePassword(
+		id: number,
+		passwordPayload: { passwordHash: string; passwordSalt: string },
+	): Promise<UserEntity> {
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.patchAndFetchById(id, passwordPayload);
 
 		return UserEntity.initialize({
 			createdAt: user.createdAt,
