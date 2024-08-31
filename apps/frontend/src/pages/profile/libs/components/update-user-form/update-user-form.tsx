@@ -2,6 +2,7 @@ import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserDto,
+	type UserUpdateFormDto,
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 } from "~/modules/users/users.js";
@@ -9,18 +10,17 @@ import {
 import styles from "./styles.module.css";
 
 type Properties = {
-	onCancel: () => void;
 	onSubmit: (payload: UserUpdateRequestDto) => void;
 	user?: UserDto;
 };
 
 const UpdateUserForm: React.FC<Properties> = ({
-	onCancel,
 	onSubmit,
 	user,
 }: Properties) => {
-	const { control, errors, handleSubmit } = useAppForm<UserUpdateRequestDto>({
-		defaultValues: { name: (user as UserDto).name },
+	const { email, name } = user as UserDto;
+	const { control, errors, handleSubmit } = useAppForm<UserUpdateFormDto>({
+		defaultValues: { email, name },
 		validationSchema: userUpdateValidationSchema,
 	});
 
@@ -41,15 +41,16 @@ const UpdateUserForm: React.FC<Properties> = ({
 				placeholder="name"
 				type="text"
 			/>
-			<div className={styles["buttons-container"]}>
-				<Button
-					isPrimary={false}
-					label="CANCEL"
-					onClick={onCancel}
-					type="button"
-				/>
-				<Button label="SAVE" type="submit" />
-			</div>
+			<Input
+				control={control}
+				errors={errors}
+				isDisabled
+				label="Email"
+				name="email"
+				placeholder="email"
+				type="email"
+			/>
+			<Button label="SAVE" type="submit" />
 		</form>
 	);
 };

@@ -20,6 +20,7 @@ export {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdateFormDto,
 	type UserUpdatePayload,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";

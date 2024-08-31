@@ -1,12 +1,11 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
-import { Button, Loader } from "~/libs/components/components.js";
+import { Loader } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useState,
 } from "~/libs/hooks/hooks.js";
 import {
 	type UserDto,
@@ -23,21 +22,10 @@ const Profile: React.FC = () => {
 		dataStatus: users.dataStatus,
 		user: users.user,
 	}));
-	const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
 	useEffect(() => {
 		void dispatch(usersActions.getUserFromAuth());
 	}, [dispatch]);
-
-	useEffect(() => {
-		if (dataStatus === DataStatus.FULFILLED) {
-			setIsUpdating(false);
-		}
-	}, [dataStatus]);
-
-	const toggleIsUpdate = useCallback((): void => {
-		setIsUpdating(!isUpdating);
-	}, [setIsUpdating, isUpdating]);
 
 	const handleUpdateSubmit = useCallback(
 		(payload: UserUpdateRequestDto): void => {
@@ -62,27 +50,7 @@ const Profile: React.FC = () => {
 							className={styles["user-avatar"]}
 							src={defaultAvatar}
 						/>
-						{isUpdating ? (
-							<UpdateUserForm
-								onCancel={toggleIsUpdate}
-								onSubmit={handleUpdateSubmit}
-								user={user}
-							/>
-						) : (
-							<div className={styles["user-info-container"]}>
-								<div className={styles["user-info"]}>
-									<div className={styles["label"]}>Name:</div>
-									<div>{user.name}</div>
-									<div className={styles["label"]}>Email: </div>
-									<div>{user.email}</div>
-								</div>
-								<Button
-									label="Edit profile"
-									onClick={toggleIsUpdate}
-									type="button"
-								/>
-							</div>
-						)}
+						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
 					</div>
 				</div>
 			)}

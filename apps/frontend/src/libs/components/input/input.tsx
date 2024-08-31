@@ -15,6 +15,7 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
 	iconName?: IconName;
+	isDisabled?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	onIconClick?: () => void;
@@ -27,6 +28,7 @@ const Input = <T extends FieldValues>({
 	control,
 	errors,
 	iconName,
+	isDisabled = false,
 	label,
 	name,
 	onIconClick,
@@ -78,6 +80,7 @@ const Input = <T extends FieldValues>({
 						<input
 							className={getValidClassNames(styles["input-field"])}
 							{...field}
+							disabled={isDisabled}
 							placeholder={placeholder}
 							type={type}
 						/>

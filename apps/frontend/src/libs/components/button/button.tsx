@@ -32,7 +32,7 @@ const Button: React.FC<Properties> = ({
 			styles["btn"],
 			variant === "icon" && styles[`position-${iconPosition}`],
 			isFluid && styles["fluid"],
-			isPrimary ? styles["primary"] : styles["secondary"],
+			isPrimary && styles["primary"],
 			variant && styles[`${variant}-button`],
 		)}
 		onClick={onClick}

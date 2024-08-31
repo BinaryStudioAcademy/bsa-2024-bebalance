@@ -8,5 +8,6 @@ export {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdateFormDto,
 	type UserUpdateRequestDto,
 } from "shared";

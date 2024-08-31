@@ -8,6 +8,7 @@ export {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdateFormDto,
 	type UserUpdateParametersDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
