@@ -3,18 +3,27 @@ import React from "react";
 import {
 	BackgroundWrapper,
 	Button,
+	Link,
 	ScreenWrapper,
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
-import { useCallback } from "~/libs/hooks/hooks";
+import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type NativeStackNavigationProp,
+	type RootNavigationParameterList,
+} from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 const Welcome: React.FC = () => {
-	const handleContinuePress = useCallback((): void => {}, []);
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
+	const handleContinuePress = useCallback((): void => {
+		navigation.navigate(RootScreenName.QUIZ_ENTRY);
+	}, []);
 
 	return (
 		<BackgroundWrapper>
@@ -64,6 +73,10 @@ const Welcome: React.FC = () => {
 						</Text>
 					</View>
 					<Button label="Let's Continue" onPress={handleContinuePress} />
+					<Link
+						label="Go to the Wheel"
+						to={`/${RootScreenName.BOTTOM_TABS_NAVIGATOR}`}
+					/>
 				</View>
 			</ScreenWrapper>
 		</BackgroundWrapper>
