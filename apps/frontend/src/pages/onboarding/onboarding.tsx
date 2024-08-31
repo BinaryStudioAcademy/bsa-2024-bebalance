@@ -6,19 +6,21 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useState,
 } from "~/libs/hooks/hooks.js";
-import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
+import { notification } from "~/libs/modules/notification/notification.js";
+import {
+	actions as onboardingActions,
+	oneAnswerSelectedValidationSchema,
+} from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constatns/constants.js";
+import { OnboardingValidationMessage } from "./libs/enums/emuns.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
-
-	const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 
 	const {
 		currentQuestionIndex,
@@ -38,26 +40,40 @@ const Onboarding: React.FC = () => {
 		void dispatch(onboardingActions.getAll());
 	}, [dispatch]);
 
-	const { control } = useAppForm<OnboardingFormValues>({
-		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
-	});
+	const { control, handleSubmit, isValid, reset } =
+		useAppForm<OnboardingFormValues>({
+			defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
+			validationSchema: oneAnswerSelectedValidationSchema,
+		});
 
-	const handleNextStep = useCallback(() => {
-		if (isAnswerSelected) {
-			setIsAnswerSelected(false);
-			void dispatch(onboardingActions.nextQuestion());
-		}
-	}, [isAnswerSelected, dispatch]);
-
-	const handleFinish = useCallback(() => {
-		if (isAnswerSelected) {
-			//TODO: add finish logic
-		}
-	}, [isAnswerSelected]);
-
-	const handleFormChange = useCallback(() => {
-		setIsAnswerSelected(true);
+	const handleSaveAnswers = useCallback((data: OnboardingFormValues) => {
+		//TODO: add save to backend
+		return data;
 	}, []);
+
+	const handleNextStep = useCallback(
+		(data: OnboardingFormValues) => {
+			if (isLastQuestion) {
+				return handleSaveAnswers(data);
+			}
+
+			void dispatch(onboardingActions.nextQuestion());
+			reset();
+		},
+
+		[isLastQuestion, dispatch, reset, handleSaveAnswers],
+	);
+
+	const handleFormSubmit = useCallback(
+		(event_: React.BaseSyntheticEvent): void => {
+			if (!isValid) {
+				notification.error(OnboardingValidationMessage.ONE_ANSWER_REQUIRED);
+			}
+
+			void handleSubmit(handleNextStep)(event_);
+		},
+		[handleNextStep, handleSubmit, isValid],
+	);
 
 	return (
 		<div className={styles["container"]}>
@@ -72,7 +88,7 @@ const Onboarding: React.FC = () => {
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>
 						<div className={styles["answers"]}>
-							<form className={styles["answers"]} onChange={handleFormChange}>
+							<form className={styles["answers"]}>
 								{question.answers.map((answer) => (
 									<OnboardingAnswer
 										control={control}
@@ -81,24 +97,14 @@ const Onboarding: React.FC = () => {
 										options={[{ label: answer.label, value: answer.label }]}
 									/>
 								))}
+								<div className={styles["button-container"]}>
+									<Button
+										label={isLastQuestion ? "ANALYZE" : "NEXT"}
+										onClick={handleFormSubmit}
+										type="button"
+									/>
+								</div>
 							</form>
-						</div>
-						<div className={styles["button-container"]}>
-							{isLastQuestion ? (
-								<Button
-									isPrimary={isAnswerSelected}
-									label="ANALYZE"
-									onClick={handleFinish}
-									type="button"
-								/>
-							) : (
-								<Button
-									isPrimary={isAnswerSelected}
-									label="NEXT"
-									onClick={handleNextStep}
-									type="button"
-								/>
-							)}
 						</div>
 					</>
 				) : (
