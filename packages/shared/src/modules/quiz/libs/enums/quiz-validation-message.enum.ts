@@ -1,5 +1,5 @@
 const QuizValidationMessage = {
-	NUMBER_ID_REQUIRED: "Please enter only numeric answer values.",
+	INVALID_REQUEST: "Invalid request.",
 	UNIQUE_ANSWERS: "Answers must be unique.",
 } as const;
 

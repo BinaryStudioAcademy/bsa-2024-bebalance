@@ -8,7 +8,7 @@ type QuizUserAnswersValidationSchema = {
 
 const quizUserAnswers = z.object<QuizUserAnswersValidationSchema>({
 	answerIds: z
-		.array(z.number({ message: QuizValidationMessage.NUMBER_ID_REQUIRED }))
+		.array(z.number({ message: QuizValidationMessage.INVALID_REQUEST }))
 		.refine((ids) => new Set(ids).size === ids.length, {
 			message: QuizValidationMessage.UNIQUE_ANSWERS,
 		}),
