@@ -65,7 +65,7 @@ class QuizController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.createUserAnswer(
+				this.createUserAnswers(
 					options as APIHandlerOptions<{
 						body: QuizAnswersRequestDto;
 						user: UserDto;
@@ -112,7 +112,7 @@ class QuizController extends BaseController {
 	 *                   items:
 	 *                     $ref: "#/components/schemas/UserAnswer"
 	 */
-	private async createUserAnswer(
+	private async createUserAnswers(
 		options: APIHandlerOptions<{
 			body: QuizAnswersRequestDto;
 			user: UserDto;
