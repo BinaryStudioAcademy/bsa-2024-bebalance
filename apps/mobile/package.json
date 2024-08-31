@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "3.9.0",
+		"@react-native-community/checkbox": "0.5.17",
 		"@react-native-masked-view/masked-view": "0.3.1",
 		"@react-navigation/bottom-tabs": "6.6.1",
 		"@react-navigation/native": "6.1.18",
