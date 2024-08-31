@@ -6,7 +6,7 @@ import {
 	type CategoryDto,
 	type CategoryRequestDto,
 	type QuizScoreDto,
-	type ScoreRequestDto,
+	type QuizScoreRequestDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -28,7 +28,7 @@ class CategoryService implements Service {
 		categoryId,
 		score,
 		userId,
-	}: ScoreRequestDto): Promise<QuizScoreDto> {
+	}: QuizScoreRequestDto): Promise<QuizScoreDto> {
 		return await this.categoryRepository.createScore({
 			categoryId,
 			score,

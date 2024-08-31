@@ -4,7 +4,7 @@ import { type Service } from "~/libs/types/types.js";
 
 import {
 	type CategoryService,
-	type QuizScoreDto,
+	type QuizScoreResponseDto,
 } from "../categories/categories.js";
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { INITIAL_STATISTIC_VALUE } from "./libs/constants/constants.js";
@@ -64,7 +64,7 @@ class QuizAnswerService implements Service {
 	public async createScores({
 		answerIds,
 		userId,
-	}: UserAnswersRequestDto): Promise<QuizScoreDto[]> {
+	}: UserAnswersRequestDto): Promise<QuizScoreResponseDto> {
 		const categoryStatistics = new Map<number, CategoryStatistic>();
 		const scores = [];
 
@@ -97,7 +97,7 @@ class QuizAnswerService implements Service {
 			scores.push(userScore);
 		}
 
-		return scores;
+		return { scores };
 	}
 
 	public async createUserAnswers({
@@ -141,7 +141,7 @@ class QuizAnswerService implements Service {
 		);
 
 		await this.categoryService.deleteUserScores(userId);
-		const scores = await this.createScores({ answerIds, userId });
+		const { scores } = await this.createScores({ answerIds, userId });
 
 		return { scores, userAnswers };
 	}
