@@ -31,7 +31,7 @@ const QuizEntry: React.FC = () => {
 	}, []);
 
 	const MAX_SCORE = 10;
-	const WHEEL_SIZE = 220;
+	const WHEEL_SIZE = 250;
 
 	return (
 		<BackgroundWrapper>
