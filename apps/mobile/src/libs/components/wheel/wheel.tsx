@@ -11,7 +11,7 @@ import { getWheelCategoryParameters } from "./libs/helpers/helpers";
 
 type Properties = {
 	categoriesData: WheelDataItem[];
-	isLabelShown: boolean;
+	isLabelShown?: boolean;
 	maxScore: number;
 	size: number;
 };
