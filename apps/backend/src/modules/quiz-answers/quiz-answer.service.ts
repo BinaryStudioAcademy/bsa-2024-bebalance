@@ -4,6 +4,7 @@ import { type Service } from "~/libs/types/types.js";
 
 import {
 	type CategoryService,
+	type QuizScoreDto,
 	type QuizScoreResponseDto,
 } from "../categories/categories.js";
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
@@ -84,7 +85,7 @@ class QuizAnswerService implements Service {
 			categoryStatistics.set(categoryId, statistic);
 		}
 
-		const scores = await Promise.all(
+		const scores: QuizScoreDto[] = await Promise.all(
 			[...categoryStatistics.entries()].map(async ([categoryId, stats]) => {
 				const averageScore = Math.round(
 					stats.accumulatedSum / stats.categoryCount,
