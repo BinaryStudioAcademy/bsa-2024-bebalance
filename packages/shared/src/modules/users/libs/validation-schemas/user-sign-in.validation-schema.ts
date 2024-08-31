@@ -52,8 +52,11 @@ const userSignIn = z
 			.max(UserValidationRule.PASSWORD_MAX_LENGTH, {
 				message: UserValidationMessage.PASSWORD_MAX_LENGTH,
 			})
-			.regex(/^(?=.*[A-Za-z])(?=.*\d)[\d!#$@A-Za-z]*$/, {
+			.regex(/^[\d!#$@A-Za-z]*$/, {
 				message: UserValidationMessage.PASSWORD_INVALID_CHARACTERS,
+			})
+			.regex(/^(?=.*[A-Za-z])(?=.*\d)/, {
+				message: UserValidationMessage.PASSWORD_REQUIRES_LETTER_AND_NUMBER,
 			}),
 	})
 	.required();
