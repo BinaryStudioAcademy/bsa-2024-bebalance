@@ -39,13 +39,16 @@ const signUp = createAsyncThunk<
 });
 
 const getAuthenticatedUser = createAsyncThunk<
-	UserDto,
+	null | UserDto,
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
+>(`${sliceName}/get-authenticated-user`, async (_, { extra, getState }) => {
 	const { authApi } = extra;
 
-	return await authApi.getAuthenticatedUser();
+	const { user } = getState().auth;
+	const token = await storage.get(StorageKey.TOKEN);
+
+	return token && !user ? await authApi.getAuthenticatedUser() : null;
 });
 
 export { getAuthenticatedUser, signIn, signUp };
