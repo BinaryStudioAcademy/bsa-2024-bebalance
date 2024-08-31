@@ -1,8 +1,8 @@
 const UsersApiPath = {
 	AUTHENTICATED_USER: "/authenticated-user",
-	GET: "/get/:id",
+	GET: "/:id",
+	PATCH: "/:id",
 	ROOT: "/",
-	UPDATE: "/update/:id",
 } as const;
 
 export { UsersApiPath };

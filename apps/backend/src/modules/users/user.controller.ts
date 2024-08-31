@@ -72,7 +72,7 @@ class UserController extends BaseController {
 					}>,
 				),
 			method: "PATCH",
-			path: UsersApiPath.UPDATE,
+			path: UsersApiPath.PATCH,
 			validation: {
 				body: userUpdateValidationSchema,
 			},
@@ -109,7 +109,7 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /users/get/:id:
+	 * /users/:id:
 	 *    get:
 	 *      description: Return user by id
 	 *      security:
@@ -136,8 +136,8 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /users/update/:id:
-	 *    post:
+	 * /users/:id:
+	 *    patch:
 	 *      description: Update user by id
 	 *      requestBody:
 	 *        description: Data to update

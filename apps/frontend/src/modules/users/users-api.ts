@@ -36,7 +36,7 @@ class UsersApi extends BaseHTTPApi {
 		user: UserUpdateRequestDto,
 	): Promise<UserDto> {
 		const response = await this.load(
-			this.getFullEndpoint(UsersApiPath.UPDATE, { id: id.toString() }),
+			this.getFullEndpoint(UsersApiPath.PATCH, { id: id.toString() }),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
