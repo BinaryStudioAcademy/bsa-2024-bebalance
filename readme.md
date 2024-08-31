@@ -84,6 +84,16 @@ erDiagram
         text label
         int question_id FK
     }
+
+    onboarding_answers_to_users }o--|| onboarding_answers : answer_id
+    onboarding_answers_to_users }o--|| users : user_id
+    onboarding_answers_to_users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int answer_id FK
+        int user_id FK
+    }
 ```
 
 ## 5. Architecture
