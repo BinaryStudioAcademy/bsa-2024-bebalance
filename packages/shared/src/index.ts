@@ -1,4 +1,3 @@
-export {} from "./libs/constants/constant.js";
 export { PREVIOUS_INDEX_OFFSET } from "./libs/constants/constant.js";
 export {
 	APIPath,
