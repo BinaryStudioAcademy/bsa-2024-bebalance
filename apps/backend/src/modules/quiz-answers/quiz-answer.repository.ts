@@ -22,7 +22,7 @@ class QuizAnswerRepository implements Repository {
 		const answer = await this.quizAnswerModel
 			.query()
 			.insert({ label, questionId, value })
-			.withGraphFetched(RelationName.QUESTION)
+			.withGraphFetched(RelationName.QUIZ_QUESTION)
 			.returning("*");
 
 		return QuizAnswerEntity.initialize({
@@ -76,7 +76,7 @@ class QuizAnswerRepository implements Repository {
 		const answer = await this.quizAnswerModel
 			.query()
 			.findById(id)
-			.withGraphJoined(RelationName.QUESTION);
+			.withGraphJoined(RelationName.QUIZ_QUESTION);
 
 		return answer
 			? QuizAnswerEntity.initialize({
@@ -152,7 +152,7 @@ class QuizAnswerRepository implements Repository {
 		const answer = await this.quizAnswerModel
 			.query()
 			.patchAndFetchById(id, { ...payload })
-			.withGraphJoined(RelationName.QUESTION);
+			.withGraphJoined(RelationName.QUIZ_QUESTION);
 
 		return QuizAnswerEntity.initialize({
 			createdAt: answer.createdAt,

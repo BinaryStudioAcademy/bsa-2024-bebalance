@@ -1,8 +1,8 @@
 const RelationName = {
-	ANSWERS: "answers",
 	ONBOARDING_ANSWERS: "answers",
 	ONBOARDING_QUESTION: "question",
-	QUESTION: "question",
+	QUIZ_ANSWERS: "answers",
+	QUIZ_QUESTION: "question",
 	SCORES: "scores",
 	USER_DETAILS: "userDetails",
 	USERS: "users",

@@ -29,7 +29,7 @@ class QuizQuestionRepository implements Repository {
 		const question = await this.quizQuestionModel
 			.query()
 			.insert({ categoryId, label })
-			.withGraphFetched(RelationName.ANSWERS)
+			.withGraphFetched(RelationName.QUIZ_ANSWERS)
 			.returning("*");
 
 		const answerEntities = question.answers.map((answer) => {
@@ -56,7 +56,7 @@ class QuizQuestionRepository implements Repository {
 		const question = await this.quizQuestionModel
 			.query()
 			.findById(id)
-			.withGraphJoined(RelationName.ANSWERS);
+			.withGraphJoined(RelationName.QUIZ_ANSWERS);
 
 		if (!question) {
 			return null;
@@ -82,7 +82,7 @@ class QuizQuestionRepository implements Repository {
 		return await Promise.all(
 			questions.map(async (question) => {
 				const answersModel = await this.quizQuestionModel
-					.relatedQuery(RelationName.ANSWERS)
+					.relatedQuery(RelationName.QUIZ_ANSWERS)
 					.for(question.id)
 					.select("*")
 					.castTo<QuizAnswerModel[]>();
@@ -110,7 +110,7 @@ class QuizQuestionRepository implements Repository {
 		const question = await this.quizQuestionModel
 			.query()
 			.patchAndFetchById(id, { ...payload })
-			.withGraphJoined(RelationName.ANSWERS);
+			.withGraphJoined(RelationName.QUIZ_ANSWERS);
 
 		const answerEntities = question.answers.map((answer) => {
 			return QuizAnswerEntity.initializeNew(answer);
