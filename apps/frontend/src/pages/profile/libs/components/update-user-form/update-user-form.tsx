@@ -20,7 +20,7 @@ const UpdateUserForm: React.FC<Properties> = ({
 	user,
 }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<UserUpdateRequestDto>({
-		defaultValues: { name: user?.name ?? "" },
+		defaultValues: { name: (user as UserDto).name },
 		validationSchema: userUpdateValidationSchema,
 	});
 

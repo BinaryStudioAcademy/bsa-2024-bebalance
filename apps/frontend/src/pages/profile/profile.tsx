@@ -6,10 +6,10 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useParams,
 	useState,
 } from "~/libs/hooks/hooks.js";
 import {
+	type UserDto,
 	actions as usersActions,
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
@@ -18,7 +18,6 @@ import { UpdateUserForm } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Profile: React.FC = () => {
-	const { id } = useParams();
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector(({ users }) => ({
 		dataStatus: users.dataStatus,
@@ -27,10 +26,8 @@ const Profile: React.FC = () => {
 	const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (id) {
-			void dispatch(usersActions.getById({ id: +id }));
-		}
-	}, [dispatch, id]);
+		void dispatch(usersActions.getUserFromAuth());
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (dataStatus === DataStatus.FULFILLED) {
@@ -44,11 +41,11 @@ const Profile: React.FC = () => {
 
 	const handleUpdateSubmit = useCallback(
 		(payload: UserUpdateRequestDto): void => {
-			if (id) {
-				void dispatch(usersActions.update({ data: payload, id: +id }));
-			}
+			void dispatch(
+				usersActions.update({ data: payload, id: (user as UserDto).id }),
+			);
 		},
-		[dispatch, id],
+		[dispatch, user],
 	);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
