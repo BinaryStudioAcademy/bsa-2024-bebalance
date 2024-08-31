@@ -5,7 +5,9 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
+import { CategoryModel } from "../categories/category.model.js";
 import { OnboardingAnswerModel } from "../onboarding/onboarding.js";
+import { QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
 import { UserDetailsModel } from "./user-details.model.js";
 
 class UserModel extends AbstractModel {
@@ -16,6 +18,8 @@ class UserModel extends AbstractModel {
 	public passwordHash!: string;
 
 	public passwordSalt!: string;
+
+	public quizAnswers!: QuizAnswerModel[];
 
 	public userDetails!: UserDetailsModel;
 
@@ -31,6 +35,31 @@ class UserModel extends AbstractModel {
 					to: `${DatabaseTableName.ONBOARDING_ANSWERS}.id`,
 				},
 				modelClass: OnboardingAnswerModel,
+				relation: Model.ManyToManyRelation,
+			},
+			quizAnswers: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					through: {
+						from: `${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.userId`,
+						to: `${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.quizAnswerId`,
+					},
+					to: `${DatabaseTableName.QUIZ_ANSWERS}.id`,
+				},
+				modelClass: QuizAnswerModel,
+				relation: Model.ManyToManyRelation,
+			},
+			scores: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					through: {
+						extra: ["score"],
+						from: `${DatabaseTableName.QUIZ_SCORES}.userId`,
+						to: `${DatabaseTableName.QUIZ_SCORES}.categoryId`,
+					},
+					to: `${DatabaseTableName.CATEGORIES}.id`,
+				},
+				modelClass: CategoryModel,
 				relation: Model.ManyToManyRelation,
 			},
 			userDetails: {
