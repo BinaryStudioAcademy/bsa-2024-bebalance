@@ -112,10 +112,9 @@ class UserRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<UserDetailsModel | UserModel>,
+		payload: Partial<UserDetailsModel>,
 	): Promise<null | UserEntity> {
 		await this.userDetailsModel.query().patch(payload).where({ user_id: id });
-		await this.userModel.query().patch(payload).where({ id });
 
 		return await this.find(id);
 	}
