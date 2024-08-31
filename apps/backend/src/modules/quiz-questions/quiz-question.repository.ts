@@ -2,6 +2,7 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/repository.type.js";
 
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
+import { QuizAnswerEntity } from "../quiz-answers/quiz-answers.js";
 import { FIRST_ELEMENT_INDEX } from "./libs/constants/constants.js";
 import { type QuizQuestionRequestDto } from "./libs/types/types.js";
 import { QuizQuestionEntity } from "./quiz-question.entity.js";
@@ -31,8 +32,12 @@ class QuizQuestionRepository implements Repository {
 			.withGraphFetched(RelationName.ANSWERS)
 			.returning("*");
 
+		const answerEntities = question.answers.map((answer) => {
+			return QuizAnswerEntity.initializeNew(answer);
+		});
+
 		return QuizQuestionEntity.initialize({
-			answers: question.answers,
+			answers: answerEntities,
 			categoryId: question.categoryId,
 			createdAt: question.createdAt,
 			id: question.id,
@@ -53,16 +58,22 @@ class QuizQuestionRepository implements Repository {
 			.findById(id)
 			.withGraphJoined(RelationName.ANSWERS);
 
-		return question
-			? QuizQuestionEntity.initialize({
-					answers: question.answers,
-					categoryId: question.categoryId,
-					createdAt: question.createdAt,
-					id: question.id,
-					label: question.label,
-					updatedAt: question.updatedAt,
-				})
-			: null;
+		if (!question) {
+			return null;
+		}
+
+		const answerEntities = question.answers.map((answer) => {
+			return QuizAnswerEntity.initializeNew(answer);
+		});
+
+		return QuizQuestionEntity.initialize({
+			answers: answerEntities,
+			categoryId: question.categoryId,
+			createdAt: question.createdAt,
+			id: question.id,
+			label: question.label,
+			updatedAt: question.updatedAt,
+		});
 	}
 
 	public async findAll(): Promise<QuizQuestionEntity[]> {
@@ -76,8 +87,12 @@ class QuizQuestionRepository implements Repository {
 					.select("*")
 					.castTo<QuizAnswerModel[]>();
 
+				const answerEntities = answersModel.map((answer) => {
+					return QuizAnswerEntity.initializeNew(answer);
+				});
+
 				return QuizQuestionEntity.initialize({
-					answers: answersModel,
+					answers: answerEntities,
 					categoryId: question.categoryId,
 					createdAt: question.createdAt,
 					id: question.id,
@@ -97,8 +112,12 @@ class QuizQuestionRepository implements Repository {
 			.patchAndFetchById(id, { ...payload })
 			.withGraphJoined(RelationName.ANSWERS);
 
+		const answerEntities = question.answers.map((answer) => {
+			return QuizAnswerEntity.initializeNew(answer);
+		});
+
 		return QuizQuestionEntity.initialize({
-			answers: question.answers,
+			answers: answerEntities,
 			categoryId: question.categoryId,
 			createdAt: question.createdAt,
 			id: question.id,

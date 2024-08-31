@@ -14,6 +14,7 @@ import {
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersResponseDto,
+	type QuizUserAnswerDto,
 	type UserAnswersRequestDto,
 } from "./libs/types/types.js";
 import { QuizAnswerEntity } from "./quiz-answer.entity.js";
@@ -36,12 +37,28 @@ class QuizAnswerService implements Service {
 		this.quizQuestionService = quizQuestionService;
 	}
 
+	public convertAnswerEntityToDto(
+		answerEntity: QuizAnswerEntity,
+	): QuizAnswerDto {
+		const answer = answerEntity.toObject();
+		const userAnswers: QuizUserAnswerDto[] = answer.userAnswers.map(
+			(userAnswer: QuizAnswerEntity) => {
+				return userAnswer.toObject() as QuizUserAnswerDto;
+			},
+		);
+
+		return {
+			...answer,
+			userAnswers,
+		};
+	}
+
 	public async create(payload: QuizAnswerRequestDto): Promise<QuizAnswerDto> {
-		const answer = await this.quizAnswerRepository.create(
+		const answerEntity = await this.quizAnswerRepository.create(
 			QuizAnswerEntity.initializeNew(payload),
 		);
 
-		return answer.toObject();
+		return this.convertAnswerEntityToDto(answerEntity);
 	}
 
 	public async createScores({
@@ -134,24 +151,28 @@ class QuizAnswerService implements Service {
 	}
 
 	public async find(id: number): Promise<null | QuizAnswerDto> {
-		const answer = await this.quizAnswerRepository.find(id);
+		const answerEntity = await this.quizAnswerRepository.find(id);
 
-		return answer ? answer.toObject() : null;
+		return answerEntity ? this.convertAnswerEntityToDto(answerEntity) : null;
 	}
 
 	public async findAll(): Promise<{ items: QuizAnswerDto[] }> {
 		const answers = await this.quizAnswerRepository.findAll();
 
-		return { items: answers.map((answer) => answer.toObject()) };
+		const items = answers.map((answerEntity) => {
+			return this.convertAnswerEntityToDto(answerEntity);
+		});
+
+		return { items };
 	}
 
 	public async update(
 		id: number,
 		payload: Partial<QuizAnswerRequestDto>,
 	): Promise<QuizAnswerDto> {
-		const answer = await this.quizAnswerRepository.update(id, payload);
+		const answerEntity = await this.quizAnswerRepository.update(id, payload);
 
-		return answer.toObject();
+		return this.convertAnswerEntityToDto(answerEntity);
 	}
 }
 

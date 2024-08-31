@@ -17,6 +17,7 @@ export {
 	type QuizAnswersResponseDto,
 	type QuizUserAnswerDto,
 } from "./libs/types/types.js";
+export { QuizAnswerEntity } from "./quiz-answer.entity.js";
 export { QuizAnswerModel } from "./quiz-answer.model.js";
 export { QuizAnswerService } from "./quiz-answer.service.js";
 export { quizAnswerService };

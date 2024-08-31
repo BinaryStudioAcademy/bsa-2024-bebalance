@@ -1,6 +1,10 @@
 import { type Service } from "~/libs/types/service.type.js";
 
 import {
+	type QuizAnswerDto,
+	type QuizAnswerEntity,
+} from "../quiz-answers/quiz-answers.js";
+import {
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 } from "./libs/types/types.js";
@@ -14,6 +18,27 @@ class QuizQuestionService implements Service {
 		this.quizQuestionRepository = quizQuestionRepository;
 	}
 
+	public convertQuestionEntityToDto(
+		questionEntity: QuizQuestionEntity,
+	): QuizQuestionDto {
+		const question = questionEntity.toObject();
+		const answers: QuizAnswerDto[] = question.answers.map(
+			(answerEntity: QuizAnswerEntity) => {
+				const answer = answerEntity.toObject();
+
+				return {
+					...answer,
+					userAnswers: [],
+				};
+			},
+		);
+
+		return {
+			...question,
+			answers,
+		};
+	}
+
 	public async countAll(): Promise<number> {
 		return await this.quizQuestionRepository.countAll();
 	}
@@ -21,11 +46,11 @@ class QuizQuestionService implements Service {
 	public async create(
 		payload: QuizQuestionRequestDto,
 	): Promise<QuizQuestionDto> {
-		const question = await this.quizQuestionRepository.create(
+		const questionEntity = await this.quizQuestionRepository.create(
 			QuizQuestionEntity.initializeNew(payload),
 		);
 
-		return question.toObject();
+		return this.convertQuestionEntityToDto(questionEntity);
 	}
 
 	public delete(id: number): Promise<boolean> {
@@ -33,24 +58,33 @@ class QuizQuestionService implements Service {
 	}
 
 	public async find(id: number): Promise<null | QuizQuestionDto> {
-		const question = await this.quizQuestionRepository.find(id);
+		const questionEntity = await this.quizQuestionRepository.find(id);
 
-		return question?.toObject() ?? null;
+		return questionEntity
+			? this.convertQuestionEntityToDto(questionEntity)
+			: null;
 	}
 
 	public async findAll(): Promise<{ items: QuizQuestionDto[] }> {
 		const questions = await this.quizQuestionRepository.findAll();
 
-		return { items: questions.map((question) => question.toObject()) };
+		const items = questions.map((questionEntity) => {
+			return this.convertQuestionEntityToDto(questionEntity);
+		});
+
+		return { items };
 	}
 
 	public async update(
 		id: number,
 		payload: Partial<QuizQuestionRequestDto>,
 	): Promise<QuizQuestionDto> {
-		const question = await this.quizQuestionRepository.update(id, payload);
+		const questionEntity = await this.quizQuestionRepository.update(
+			id,
+			payload,
+		);
 
-		return question.toObject();
+		return this.convertQuestionEntityToDto(questionEntity);
 	}
 }
 

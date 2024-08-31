@@ -1,8 +1,9 @@
 import { type Entity } from "~/libs/types/types.js";
-import { type QuizAnswerDto } from "~/modules/quiz-answers/quiz-answers.js";
+
+import { type QuizAnswerEntity } from "../quiz-answers/quiz-answers.js";
 
 class QuizQuestionEntity implements Entity {
-	private answers: QuizAnswerDto[];
+	private answers: QuizAnswerEntity[];
 
 	private categoryId: number;
 
@@ -22,7 +23,7 @@ class QuizQuestionEntity implements Entity {
 		label,
 		updatedAt,
 	}: {
-		answers: QuizAnswerDto[];
+		answers: QuizAnswerEntity[];
 		categoryId: number;
 		createdAt: string;
 		id: null | number;
@@ -45,7 +46,7 @@ class QuizQuestionEntity implements Entity {
 		label,
 		updatedAt,
 	}: {
-		answers: QuizAnswerDto[];
+		answers: QuizAnswerEntity[];
 		categoryId: number;
 		createdAt: string;
 		id: number;
@@ -80,7 +81,7 @@ class QuizQuestionEntity implements Entity {
 	}
 
 	public toNewObject(): {
-		answers: QuizAnswerDto[];
+		answers: QuizAnswerEntity[];
 		categoryId: number;
 		createdAt: string;
 		id: number;
@@ -98,7 +99,7 @@ class QuizQuestionEntity implements Entity {
 	}
 
 	public toObject(): {
-		answers: QuizAnswerDto[];
+		answers: QuizAnswerEntity[];
 		categoryId: number;
 		createdAt: string;
 		id: number;

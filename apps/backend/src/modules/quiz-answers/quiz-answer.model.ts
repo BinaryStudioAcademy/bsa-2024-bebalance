@@ -7,14 +7,14 @@ import {
 
 import { QuizQuestionModel } from "../quiz-questions/quiz-question.model.js";
 import { UserModel } from "../users/user.model.js";
-import { type QuizUserAnswerDto } from "./libs/types/types.js";
+import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
 
 class QuizAnswerModel extends AbstractModel {
 	public label!: string;
 
 	public questionId!: number;
 
-	public userAnswers!: QuizUserAnswerDto[];
+	public userAnswers!: QuizAnswerEntity[];
 
 	public value!: number;
 
