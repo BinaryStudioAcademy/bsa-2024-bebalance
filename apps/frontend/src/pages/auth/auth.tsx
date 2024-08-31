@@ -124,7 +124,7 @@ const Auth: React.FC = () => {
 						) : (
 							<>
 								<span>Already have an account? Go to </span>
-								<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
 							</>
 						)}
 					</span>
