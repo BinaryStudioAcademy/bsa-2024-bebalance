@@ -9,7 +9,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	width: 100%;
 	padding: 41px;
 	background-color: white;
@@ -31,13 +31,21 @@
 	justify-content: center;
 }
 
-.btn,
-.btn-secondary {
-	width: 122px;
+.btn button,
+.btn-secondary button {
+	padding: 10px 35px;
 }
 
 .btn-secondary button {
 	color: black;
 	background-color: white;
 	border: 1px solid black;
+}
+
+.isHidden {
+	display: none;
+}
+
+.isVisible {
+	display: block;
 }

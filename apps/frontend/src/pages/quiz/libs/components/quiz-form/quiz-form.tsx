@@ -1,16 +1,5 @@
-import {
-	Button,
-	Loader,
-	ProgressBar,
-	QuizQuestion,
-	type Step,
-} from "~/libs/components/components.js";
+import { Button, Loader, QuizQuestion } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/data-status.enum.js";
-import {
-	advanceStep,
-	createSteps,
-	reduceStep,
-} from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -19,7 +8,11 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { actions as quizActions } from "~/modules/quiz/quiz.js";
+import {
+	actions as quizActions,
+	type QuizQuestionsDto,
+} from "~/modules/quiz/quiz.js";
+import { ProgressBar } from "~/pages/quiz/libs/components/components.js";
 
 import styles from "./styles.module.css";
 
@@ -32,12 +25,13 @@ type Properties = {
 };
 
 const ONE_STEP_OFFSET = 1;
-const ALL_STEPS = 6;
+const INITIAL_STEP = 0;
 
-const QuizForm: React.FC<Properties> = () => {
+const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
-	const [steps, setSteps] = useState<Step[]>([]);
-	const [currentStep, setCurrentStep] = useState<number>(ONE_STEP_OFFSET);
+	const [categories, setCategories] = useState<QuizQuestionsDto[][]>();
+	const [isLast, setIsLast] = useState<boolean>(false);
+	const [currentStep, setCurrentStep] = useState<number>(INITIAL_STEP);
 	const { control } = useAppForm<FormValues>({
 		defaultValues: { value: "" },
 	});
@@ -51,31 +45,50 @@ const QuizForm: React.FC<Properties> = () => {
 		void dispatch(quizActions.getQuestions());
 	}, [dispatch]);
 	useEffect(() => {
-		if (dataStatus === "fulfilled") {
-			const initialSteps = createSteps(ALL_STEPS);
-			setSteps(initialSteps);
+		if (questions) {
+			const groupedByCategory: Record<number, QuizQuestionsDto[]> = {};
+
+			for (const question of questions) {
+				const { categoryId } = question;
+
+				if (!groupedByCategory[categoryId]) {
+					groupedByCategory[categoryId] = [];
+				}
+
+				groupedByCategory[categoryId].push(question);
+			}
+
+			const result = Object.values(groupedByCategory);
+			setCategories(result);
 		}
-	}, [dataStatus]);
+	}, [questions]);
+	useEffect(() => {
+		if (categories) {
+			setIsLast(currentStep === categories.length - ONE_STEP_OFFSET);
+		}
+	}, [currentStep, categories]);
 
 	const handleBackStep = useCallback(() => {
-		setSteps(reduceStep(steps));
-		setCurrentStep(currentStep - ONE_STEP_OFFSET);
-	}, [currentStep, steps]);
+		if (currentStep !== INITIAL_STEP) {
+			setCurrentStep(currentStep - ONE_STEP_OFFSET);
+		}
+	}, [currentStep]);
 	const handleNextStep = useCallback(() => {
-		setSteps(advanceStep(steps));
 		setCurrentStep(currentStep + ONE_STEP_OFFSET);
-	}, [currentStep, steps]);
+	}, [currentStep]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
 		<div className={styles["quiz-container"]}>
 			<form className={styles["questions-form"]}>
-				<ProgressBar steps={steps} />
+				{categories && (
+					<ProgressBar currentStep={currentStep} steps={categories.length} />
+				)}
 				<h2 className={styles["quiz-header"]}>Wheel Quiz questions</h2>
 				<div className={styles["questions-wrapper"]}>
-					{!isLoading && questions ? (
-						questions.map((question) => (
+					{!isLoading && categories ? (
+						categories[currentStep]?.map((question) => (
 							<QuizQuestion
 								control={control}
 								key={question.id}
@@ -95,11 +108,26 @@ const QuizForm: React.FC<Properties> = () => {
 				</div>
 				<div className={styles["form-footer"]}>
 					<div className={styles["btn-secondary"]}>
-						<Button label="BACK" onClick={handleBackStep} variant="secondary" />
+						<Button
+							isPrimary
+							label="BACK"
+							onClick={handleBackStep}
+							variant="dark"
+						/>
 					</div>
-					<div className={styles["btn"]}>
-						<Button label="NEXT" onClick={handleNextStep} variant="secondary" />
-					</div>
+					{isLast ? (
+						<div className={styles["btn"]}>
+							<Button label="CONTINUE" onClick={onNext} variant="secondary" />
+						</div>
+					) : (
+						<div className={styles["btn"]}>
+							<Button
+								label="NEXT"
+								onClick={handleNextStep}
+								variant="secondary"
+							/>
+						</div>
+					)}
 				</div>
 			</form>
 		</div>

@@ -11,7 +11,7 @@
 	transition: background-color 1s ease;
 }
 
-.progress-line-completed {
+.progress-line.completed {
 	background-color: var(--mental-start);
 }
 
