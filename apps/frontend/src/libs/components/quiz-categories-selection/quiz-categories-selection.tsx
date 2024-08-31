@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { DataStatus } from "~/libs/enums/enums.js";
-import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
-import { actions as quizCategoriesActions } from "~/modules/quiz-categories/quiz-categories.js";
-
+import { Button } from "../components.js";
 import { QuizCategoriesSelectionCheckbox } from "./libs/components/components.js";
+import { useQuizCategories } from "./libs/hooks/hooks.js";
 
 type InputState = {
 	isChecked: boolean;
@@ -13,19 +11,8 @@ type InputState = {
 };
 
 const QuizCategoriesSelection: React.FC = () => {
-	const dispatch = useAppDispatch();
-
-	const isLoading = useAppSelector(
-		({ quizCategories }) => quizCategories.dataStatus === DataStatus.PENDING,
-	);
-	const quizCategories = useAppSelector(
-		({ quizCategories }) => quizCategories.items,
-	);
+	const { isLoading, quizCategories } = useQuizCategories();
 	const [inputStates, setInputStates] = useState<InputState[]>([]);
-
-	useEffect(() => {
-		dispatch(quizCategoriesActions.fetchQuizCategories()).catch(() => {});
-	}, [dispatch]);
 
 	useEffect(() => {
 		setInputStates(
@@ -95,6 +82,7 @@ const QuizCategoriesSelection: React.FC = () => {
 						/>
 					);
 				})}
+				<Button label="Retake Quiz" type="submit" />
 			</form>
 		</section>
 	);
