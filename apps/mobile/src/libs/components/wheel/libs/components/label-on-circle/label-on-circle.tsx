@@ -14,6 +14,8 @@ type Properties = {
 	wheelRadius: number;
 };
 
+const ZERO = 0;
+
 const LabelOnCircle: React.FC<Properties> = ({
 	centerPoint,
 	circleColor,
@@ -53,7 +55,7 @@ const LabelOnCircle: React.FC<Properties> = ({
 				fontFamily="Nunito-Bold"
 				fontSize={wheelRadius * LabelCoefficient.TEXT_SIZE}
 				textAnchor="middle"
-				x={0}
+				x={ZERO}
 				y={textVerticalShift}
 			>
 				{text}
@@ -65,8 +67,8 @@ const LabelOnCircle: React.FC<Properties> = ({
 				fontFamily="Nunito-Bold"
 				fontSize={wheelRadius * LabelCoefficient.SCORE_SIZE}
 				textAnchor="middle"
-				x={0}
-				y={0}
+				x={ZERO}
+				y={ZERO}
 			>
 				{score}
 			</SvgText>
