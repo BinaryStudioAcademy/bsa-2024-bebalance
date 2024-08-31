@@ -1,8 +1,6 @@
-import { type QuizQuestionDto } from "./types.js";
-
-type QuizQuestionRequestDto = Omit<
-	QuizQuestionDto,
-	"answers" | "createdAt" | "id" | "updatedAt"
->;
+type QuizQuestionRequestDto = {
+	categoryId: number;
+	label: string;
+};
 
 export { type QuizQuestionRequestDto };

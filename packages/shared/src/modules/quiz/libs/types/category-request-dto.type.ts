@@ -1,8 +1,5 @@
-import { type CategoryDto } from "./types.js";
-
-type CategoryRequestDto = Omit<
-	CategoryDto,
-	"createdAt" | "id" | "scores" | "updatedAt"
->;
+type CategoryRequestDto = {
+	name: string;
+};
 
 export { type CategoryRequestDto };
