@@ -110,18 +110,18 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users/get/:id:
-	 *   get:
-	 *     description: Return user by id
-	 *     security:
-	 *       - bearerAuth: []
-	 *     responses:
-	 *       200:
-	 *         description: Successfull operation
-	 *         content:
-	 *           application/json:
-	 *             schema:
-	 *               type: object
-	 *               $ref: "#/components/schemas/User"
+	 *    get:
+	 *      description: Return user by id
+	 *      security:
+	 *        - bearerAuth: []
+	 *      responses:
+	 *        200:
+	 *          description: Successfull operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                $ref: "#/components/schemas/User"
 	 */
 	private async getById(
 		options: APIHandlerOptions<{
