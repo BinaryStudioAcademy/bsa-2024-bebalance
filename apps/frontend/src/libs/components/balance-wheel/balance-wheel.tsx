@@ -34,6 +34,7 @@ const DATASET_INDEX = 0;
 
 const options: ChartOptions<"polarArea"> = {
 	animation: {
+		animateRotate: false,
 		easing: "easeInOutQuad",
 	},
 	scales: {
