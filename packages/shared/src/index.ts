@@ -9,6 +9,7 @@ export {
 	AuthError,
 	HTTPError,
 	OnboardingError,
+	QuizError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
@@ -42,6 +43,20 @@ export {
 	onboardingAnswersValidationSchema,
 	OnboardingApiPath,
 } from "./modules/onboarding/onboarding.js";
+export {
+	type CategoryDto,
+	type CategoryRequestDto,
+	type QuizAnswerDto,
+	type QuizAnswerRequestDto,
+	type QuizAnswersRequestDto,
+	type QuizAnswersResponseDto,
+	QuizApiPath,
+	type QuizQuestionDto,
+	type QuizQuestionRequestDto,
+	type QuizScoreDto,
+	type QuizUserAnswerDto,
+	quizUserAnswersValidationSchema,
+} from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
