@@ -1,11 +1,4 @@
-import { type UserUpdateRequestDto } from "shared";
-
-type UserUpdatePayload = {
-	data: UserUpdateRequestDto;
-	id: number;
-};
-
-export { type UserUpdatePayload };
+export { type UserUpdatePayload } from "./user-update-payload.type.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
