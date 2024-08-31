@@ -24,7 +24,7 @@ const userSignIn = z
 			.regex(/^[\w!#$&'*+.=–]+(?:\.[\w!#$&'*+=–]+)*(?=@)/, {
 				message: UserValidationMessage.EMAIL_WRONG,
 			})
-			.regex(/(?<=@)(?!.*[.-]{2})[\w!#$&'*+.=–-]*/, {
+			.regex(/(?<=@)(?!.*[.-]{2})[\w-]*/, {
 				message: UserValidationMessage.EMAIL_WRONG,
 			})
 			.regex(
@@ -37,7 +37,7 @@ const userSignIn = z
 			)
 			.regex(
 				new RegExp(
-					`(?<=@)[\\w*#$!=&'_+–.-]{3,${String(UserValidationRule.EMAIL_DOMAIN_PART_MAX_LENGTH)}}$`,
+					`(?<=@)[\\w-]{3,${String(UserValidationRule.EMAIL_DOMAIN_PART_MAX_LENGTH)}}$`,
 				),
 				{
 					message: UserValidationMessage.EMAIL_DOMAIN_PART_MAX_LENGTH,
