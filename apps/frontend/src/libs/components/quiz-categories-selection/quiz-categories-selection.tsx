@@ -1,4 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+import { DataStatus } from "~/libs/enums/enums.js";
+import { useAppDispatch, useAppSelector } from "~/libs/hooks/hooks.js";
+import { actions as quizCategoriesActions } from "~/modules/quiz-categories/quiz-categories.js";
 
 import { QuizCategoriesSelectionCheckbox } from "./libs/components/components.js";
 
@@ -8,18 +12,32 @@ type InputState = {
 	value: number;
 };
 
-const categories = [
-	{ id: 1, name: "Physical" },
-	{ id: 2, name: "Work" },
-	{ id: 3, name: "Friends" },
-];
-
 const QuizCategoriesSelection: React.FC = () => {
-	const [inputStates, setInputStates] = useState<InputState[]>(
-		categories.map(({ id, name }) => {
-			return { isChecked: false, label: name, value: id };
-		}),
+	const dispatch = useAppDispatch();
+
+	const isLoading = useAppSelector(
+		({ quizCategories }) => quizCategories.dataStatus === DataStatus.PENDING,
 	);
+	const quizCategories = useAppSelector(
+		({ quizCategories }) => quizCategories.items,
+	);
+	const [inputStates, setInputStates] = useState<InputState[]>([]);
+
+	useEffect(() => {
+		dispatch(quizCategoriesActions.fetchQuizCategories()).catch(() => {});
+	}, [dispatch]);
+
+	useEffect(() => {
+		setInputStates(
+			quizCategories.map((category) => {
+				return {
+					isChecked: false,
+					label: category.name,
+					value: category.id,
+				};
+			}),
+		);
+	}, [quizCategories]);
 
 	const isAllInputsChecked = inputStates.every((inputState) => {
 		return inputState.isChecked;
@@ -51,6 +69,10 @@ const QuizCategoriesSelection: React.FC = () => {
 			});
 		});
 	}, [isAllInputsChecked]);
+
+	if (isLoading) {
+		return <p>Loading quiz categories...</p>;
+	}
 
 	return (
 		<section>
