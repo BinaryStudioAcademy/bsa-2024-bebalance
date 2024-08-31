@@ -11,37 +11,36 @@ import { getSectorParameters } from "../../helpers/helpers";
 
 type Properties = {
 	animationTime: number;
+	centerGap: number;
 	centerPoint: number;
 	endPercent: number;
 	height: number;
-	holeSize: number;
 	layerOffset: number;
 	startPercent: number;
 	stroke: string;
 };
 
+const ZERO = 0;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedSector: React.FC<Properties> = ({
 	animationTime,
+	centerGap,
 	centerPoint,
 	endPercent,
 	height,
-	holeSize,
 	layerOffset,
 	startPercent,
 	stroke,
 }) => {
 	const { dashArrayDash, dashArrayGap, dashOffset, radius, strokeWidth } =
 		getSectorParameters({
+			centerGap,
 			endPercent,
 			height,
-			holeSize,
 			layerOffset,
 			startPercent,
 		});
-
-	const ZERO = 0;
 
 	const animatedArrayDash = useSharedValue(ZERO);
 	const animatedArrayGap = useSharedValue(ZERO);

@@ -59,7 +59,7 @@ const Wheel: React.FC<Properties> = ({
 					(WheelSetting.MAX_PERCENT * MINIFY_TWICE_COEFFICIENT) / array.length,
 			);
 
-			const wheelHoleSize =
+			const wheelCenterGapSize =
 				(size * WheelSetting.HOLE_SIZE_PERCENT) / WheelSetting.MAX_PERCENT;
 			const layerOsffsetInner =
 				(size * WheelSetting.SPACING_SIZE_PERCENT) / WheelSetting.MAX_PERCENT;
@@ -91,10 +91,10 @@ const Wheel: React.FC<Properties> = ({
 
 					<AnimatedSector
 						animationTime={ANIMATION_TIME}
+						centerGap={wheelCenterGapSize}
 						centerPoint={centerPoint}
 						endPercent={endPercent}
 						height={height}
-						holeSize={wheelHoleSize}
 						key={outerSectorKey}
 						layerOffset={WheelSetting.INITIAL_POSITION}
 						startPercent={startPercent}
@@ -102,10 +102,10 @@ const Wheel: React.FC<Properties> = ({
 					/>
 					<AnimatedSector
 						animationTime={ANIMATION_TIME}
+						centerGap={wheelCenterGapSize}
 						centerPoint={centerPoint}
 						endPercent={endPercentInner}
 						height={height}
-						holeSize={wheelHoleSize}
 						key={innerSectorKey}
 						layerOffset={layerOsffsetInner}
 						startPercent={startPercentInner}

@@ -1,15 +1,15 @@
 type GetSectorParametersArguments = {
+	centerGap: number;
 	endPercent: number;
 	height: number;
-	holeSize: number;
 	layerOffset: number;
 	startPercent: number;
 };
 
 const getSectorParameters = ({
+	centerGap,
 	endPercent,
 	height,
-	holeSize,
 	layerOffset,
 	startPercent,
 }: GetSectorParametersArguments): {
@@ -23,8 +23,8 @@ const getSectorParameters = ({
 	const TWO = 2;
 	const MAX_PERCENT = 100;
 
-	const strokeWidth = height - layerOffset * TWO - holeSize;
-	const radius = (height + holeSize) / TWO;
+	const strokeWidth = height - layerOffset * TWO - centerGap;
+	const radius = (height + centerGap) / TWO;
 	const circumference = radius * TWO * Math.PI;
 	const dashArrayDash =
 		((endPercent - startPercent) * circumference) / MAX_PERCENT;
