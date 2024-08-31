@@ -18,7 +18,7 @@ type Properties<T extends FieldValues> = {
 	iconName?: IconName;
 	label: string;
 	name: FieldPath<T>;
-	onIconClick?: () => void;
+	onIconClick?: React.MouseEventHandler<HTMLButtonElement>;
 	options?: { label: string; value: string }[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";

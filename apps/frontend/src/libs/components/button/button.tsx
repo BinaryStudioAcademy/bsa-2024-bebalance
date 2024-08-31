@@ -11,7 +11,7 @@ type Properties = {
 	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
-	onClick?: (() => void) | undefined;
+	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 	type?: "button" | "submit";
 	variant?: "icon";
 };
