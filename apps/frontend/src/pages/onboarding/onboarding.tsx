@@ -12,9 +12,9 @@ import {
 	actions as onboardingActions,
 	oneAnswerSelectedValidationSchema,
 } from "~/modules/onboarding/onboarding.js";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "~/pages/onboarding/libs/constants/constants.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constatns/constants.js";
 import { OnboardingValidationMessage } from "./libs/enums/emuns.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
