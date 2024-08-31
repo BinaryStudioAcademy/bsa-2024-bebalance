@@ -1,4 +1,4 @@
-import { RelationName } from "~/libs/enums/relation-name.enum.js";
+import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/repository.type.js";
 
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";

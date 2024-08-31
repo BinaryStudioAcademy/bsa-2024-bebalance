@@ -1,4 +1,4 @@
-import { RelationName } from "~/libs/enums/relation-name.enum.js";
+import { RelationName } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
