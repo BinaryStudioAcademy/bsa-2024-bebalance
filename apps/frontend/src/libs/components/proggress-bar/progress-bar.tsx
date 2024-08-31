@@ -31,8 +31,11 @@ const ProgressBar: React.FC<Properties> = ({
 								isCurrent && styles["current"],
 								isUpcoming && styles["upcoming"],
 							)}
+							key={`step${String(index)}`}
 						>
-							{isCompleted && <Icon name="check" />}
+							{isCompleted && (
+								<Icon key={`checked${String(index)}`} name="check" />
+							)}
 						</div>
 						{!isLastStep && (
 							<div
@@ -40,6 +43,7 @@ const ProgressBar: React.FC<Properties> = ({
 									styles["progress-line"],
 									isCompleted && styles["progress-line-completed"],
 								)}
+								key={`line${String(index)}`}
 							/>
 						)}
 					</>
