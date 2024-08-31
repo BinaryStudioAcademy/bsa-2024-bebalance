@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import { UserValidationMessage, UserValidationRule } from "../enums/enums.js";
+import {
+	UserValidationMessage,
+	UserValidationRegexRule,
+	UserValidationRule,
+} from "../enums/enums.js";
 
 type UserSignUpRequestValidationDto = {
 	email: z.ZodString;
@@ -22,28 +26,18 @@ const userSignUp = z
 			.email({
 				message: UserValidationMessage.EMAIL_WRONG,
 			})
-			.regex(/^[\w!#$&'*+.=–]+(?:\.[\w!#$&'*+=–]+)*(?=@)/, {
+			.regex(UserValidationRegexRule.EMAIL_LOCAL_PART_VALID_CHARS, {
 				message: UserValidationMessage.EMAIL_WRONG,
 			})
-			.regex(/(?<=@)(?!.*[.-]{2})[\w-]*/, {
+			.regex(UserValidationRegexRule.EMAIL_DOMAIN_PART_VALID_CHARS, {
 				message: UserValidationMessage.EMAIL_WRONG,
 			})
-			.regex(
-				new RegExp(
-					`^[\\w*#$!=&'_+–.]{1,${String(UserValidationRule.EMAIL_LOCAL_PART_MAX_LENGTH)}}(?=@)`,
-				),
-				{
-					message: UserValidationMessage.EMAIL_LOCAL_PART_MAX_LENGTH,
-				},
-			)
-			.regex(
-				new RegExp(
-					`(?<=@)[\\w-]{3,${String(UserValidationRule.EMAIL_DOMAIN_PART_MAX_LENGTH)}}$`,
-				),
-				{
-					message: UserValidationMessage.EMAIL_DOMAIN_PART_MAX_LENGTH,
-				},
-			),
+			.regex(UserValidationRegexRule.EMAIL_LOCAL_PART_LENGTH, {
+				message: UserValidationMessage.EMAIL_LOCAL_PART_MAX_LENGTH,
+			})
+			.regex(UserValidationRegexRule.EMAIL_DOMAIN_PART_LENGTH, {
+				message: UserValidationMessage.EMAIL_DOMAIN_PART_MAX_LENGTH,
+			}),
 		name: z
 			.string()
 			.trim()
@@ -53,7 +47,7 @@ const userSignUp = z
 			.max(UserValidationRule.NAME_MAX_LENGTH, {
 				message: UserValidationMessage.NAME_MAX_LENGTH,
 			})
-			.regex(/^[\w-]+$/, {
+			.regex(UserValidationRegexRule.NAME_VALID_CHARS, {
 				message: UserValidationMessage.NAME_INVALID_CHARACTERS,
 			}),
 		password: z
@@ -65,10 +59,10 @@ const userSignUp = z
 			.max(UserValidationRule.PASSWORD_MAX_LENGTH, {
 				message: UserValidationMessage.PASSWORD_MAX_LENGTH,
 			})
-			.regex(/^[\d!#$@A-Za-z]*$/, {
+			.regex(UserValidationRegexRule.PASSWORD_VALID_CHARS, {
 				message: UserValidationMessage.PASSWORD_INVALID_CHARACTERS,
 			})
-			.regex(/^(?=.*[A-Za-z])(?=.*\d)/, {
+			.regex(UserValidationRegexRule.PASSWORD_CONTAINS_LETTER_AND_NUMBER, {
 				message: UserValidationMessage.PASSWORD_REQUIRES_LETTER_AND_NUMBER,
 			}),
 	})
