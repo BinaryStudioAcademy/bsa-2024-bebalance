@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.6.1...shared-v1.7.0) (2024-08-31)
+
+
+### Features
+
+* **backend/shared:** save onboarding quiz answers to DB bb-167 ([#227](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/227)) ([6779d9d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6779d9d3310ed2e3fa1a48ca34ffe186a5eb2ca3))
+
 ## [1.6.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.6.0...shared-v1.6.1) (2024-08-26)
 
 
