@@ -3,7 +3,6 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { type UserUpdateRequestDto } from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 
 class UserRepository implements Repository {
@@ -113,9 +112,10 @@ class UserRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: UserUpdateRequestDto,
+		payload: Partial<UserDetailsModel | UserModel>,
 	): Promise<null | UserEntity> {
 		await this.userDetailsModel.query().patch(payload).where({ user_id: id });
+		await this.userModel.query().patch(payload).where({ id });
 
 		return await this.find(id);
 	}

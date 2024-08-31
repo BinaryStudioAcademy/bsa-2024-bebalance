@@ -71,7 +71,7 @@ class UserController extends BaseController {
 						params: UserUpdateParametersDto;
 					}>,
 				),
-			method: "POST",
+			method: "PATCH",
 			path: UsersApiPath.UPDATE,
 			validation: {
 				body: userUpdateValidationSchema,
@@ -107,6 +107,22 @@ class UserController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /users/get/:id:
+	 *   get:
+	 *     description: Return user by id
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
+	 */
 	private async getById(
 		options: APIHandlerOptions<{
 			params: UserGetParametersDto;
@@ -118,6 +134,30 @@ class UserController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /users/update/:id:
+	 *    post:
+	 *      description: Update user by id
+	 *      requestBody:
+	 *        description: Data to update
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                name:
+	 *                  type: string
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
+	 */
 	private async update(
 		options: APIHandlerOptions<{
 			body: UserUpdateRequestDto;
