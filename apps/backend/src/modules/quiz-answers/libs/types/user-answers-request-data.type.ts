@@ -1,7 +1,7 @@
 import { type QuizAnswersRequestDto } from "./types.js";
 
-type UserAnswersRequestData = {
+type UserAnswersRequestDto = {
 	userId: number;
 } & QuizAnswersRequestDto;
 
-export { type UserAnswersRequestData };
+export { type UserAnswersRequestDto };
