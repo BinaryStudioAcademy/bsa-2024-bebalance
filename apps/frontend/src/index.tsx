@@ -32,7 +32,12 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								path: AppRoute.ROOT,
 							},
 							{
-								element: <Profile />,
+								element: (
+									<ProtectedRoute
+										component={<Profile />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
 								path: AppRoute.PROFILE,
 							},
 							{
