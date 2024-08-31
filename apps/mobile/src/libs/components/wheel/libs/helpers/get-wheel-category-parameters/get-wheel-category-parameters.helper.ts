@@ -1,6 +1,5 @@
-import { type ValueOf } from "shared";
-
 import { type GradientColor } from "~/libs/enums/enums";
+import { type ValueOf } from "~/libs/types/types";
 
 type GetWheelCategoryParameters = (data: {
 	categoriesLength: number;
@@ -23,6 +22,10 @@ type GetWheelCategoryParameters = (data: {
 	startPercent: number;
 };
 
+const MAX_PERCENT = 100;
+const INNER_COLOR_OFFSET = 1;
+const OUTER_COLOR_OFFSET = 0;
+
 const getWheelCategoryParameters: GetWheelCategoryParameters = ({
 	categoriesLength,
 	colors,
@@ -31,10 +34,6 @@ const getWheelCategoryParameters: GetWheelCategoryParameters = ({
 	score,
 	wheelRadius,
 }) => {
-	const MAX_PERCENT = 100;
-	const INNER_COLOR_OFFSET = 1;
-	const OUTER_COLOR_OFFSET = 0;
-
 	const uniqueIndex = index.toString();
 	const innerSectorKey = uniqueIndex + "-inner";
 	const outerSectorKey = uniqueIndex + "-outer";
