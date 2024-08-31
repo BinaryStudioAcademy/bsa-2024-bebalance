@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.24.0...v1.25.0) (2024-08-30)
+
+
+### Features
+
+* **frontend:** analyzing screen mobile responsiveness bb-136 ([#231](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/231)) ([3fa478c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3fa478c516bd16ea45cdc9aea3299d78af0966a9))
+* **mobile:** checkbox component bb-174 ([#221](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/221)) ([a5987ab](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a5987ab94f470c396c4c324ffc72c7720d3d0696))
+
+
+### Bug Fixes
+
+* **mobile:** quiz entry screen bb-80 ([#244](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/244)) ([12eb0c1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/12eb0c1940b4b775a30052757a67c8cbe3be55f2))
+
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.23.0...v1.24.0) (2024-08-29)
+
+
+### Features
+
+* **mobile:** added configuration to make apk builds bb-236 ([#238](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/238)) ([221867d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/221867d4338131e9b1b6632b677f71eddaf4750a))
+
+
+### Bug Fixes
+
+* **frontend:** wrap quiz component into protected route bb-234 ([#235](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/235)) ([b55f92f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b55f92f05bc2995e52f7b90d87f4dff110e80b4f))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.22.0...v1.23.0) (2024-08-28)
 
 

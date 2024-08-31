@@ -9,13 +9,21 @@ import {
 	View,
 } from "~/libs/components/components";
 import { BaseColor, RootScreenName } from "~/libs/enums/enums";
-import { useCallback } from "~/libs/hooks/hooks";
+import { useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type NativeStackNavigationProp,
+	type RootNavigationParameterList,
+} from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 const Welcome: React.FC = () => {
-	const handleContinuePress = useCallback((): void => {}, []);
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
+	const handleContinuePress = useCallback((): void => {
+		navigation.navigate(RootScreenName.QUIZ_ENTRY);
+	}, []);
 
 	return (
 		<BackgroundWrapper>

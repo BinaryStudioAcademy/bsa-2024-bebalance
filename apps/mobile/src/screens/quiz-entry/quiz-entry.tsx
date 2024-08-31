@@ -26,9 +26,7 @@ const mockData = [
 ];
 
 const QuizEntry: React.FC = () => {
-	const handleStartPress = useCallback((): void => {
-		// Handle Continue
-	}, []);
+	const handleStartPress = useCallback((): void => {}, []);
 
 	const MAX_SCORE = 10;
 	const WHEEL_SIZE = 250;
@@ -60,7 +58,7 @@ const QuizEntry: React.FC = () => {
 					</View>
 					<Text
 						preset="subheading"
-						style={[globalStyles.pb12, styles.text]}
+						style={[globalStyles.pb12, globalStyles.ph12, styles.text]}
 						weight="bold"
 					>
 						Answer a few questions to find out which areas of your life are

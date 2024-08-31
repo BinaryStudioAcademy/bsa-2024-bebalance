@@ -1,0 +1,1 @@
+export { onboardingAnswersValidationSchema } from "shared";
