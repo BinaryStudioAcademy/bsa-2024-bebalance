@@ -31,9 +31,9 @@ const Onboarding: React.FC = () => {
 		currentQuestionIndex: onboarding.currentQuestionIndex,
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
-			onboarding.allQuestions.length - PREVIOUS_INDEX_OFFSET,
+			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
 		question: onboarding.currentQuestion,
-		totalQuestionsAmount: onboarding.allQuestions.length,
+		totalQuestionsAmount: onboarding.questions.length,
 	}));
 
 	useEffect(() => {

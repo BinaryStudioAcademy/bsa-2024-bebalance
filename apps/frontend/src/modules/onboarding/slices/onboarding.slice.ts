@@ -7,17 +7,17 @@ import { type OnboardingQuestionResponseDto } from "~/modules/onboarding/onboard
 import { getAll } from "./actions.js";
 
 type State = {
-	allQuestions: OnboardingQuestionResponseDto[];
 	currentQuestion: OnboardingQuestionResponseDto | undefined;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
+	questions: OnboardingQuestionResponseDto[];
 };
 
 const initialState: State = {
-	allQuestions: [],
 	currentQuestion: undefined,
 	currentQuestionIndex: 0,
 	dataStatus: DataStatus.IDLE,
+	questions: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -26,9 +26,9 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.PENDING;
 		});
 		builder.addCase(getAll.fulfilled, (state, action) => {
-			state.allQuestions = action.payload.items;
+			state.questions = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
-			state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
+			state.currentQuestion = state.questions[state.currentQuestionIndex];
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -39,12 +39,12 @@ const { actions, name, reducer } = createSlice({
 	reducers: {
 		nextQuestion(state) {
 			state.currentQuestionIndex += 1;
-			state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
+			state.currentQuestion = state.questions[state.currentQuestionIndex];
 		},
 		previousQuestion(state) {
 			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
 				state.currentQuestionIndex -= 1;
-				state.currentQuestion = state.allQuestions[state.currentQuestionIndex];
+				state.currentQuestion = state.questions[state.currentQuestionIndex];
 			}
 		},
 	},
