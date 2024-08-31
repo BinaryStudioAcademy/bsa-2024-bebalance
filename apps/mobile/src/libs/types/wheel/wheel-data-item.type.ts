@@ -1,6 +1,5 @@
-import { type ValueOf } from "shared";
-
 import { type GradientColor } from "~/libs/enums/enums";
+import { type ValueOf } from "~/libs/types/types";
 
 type WheelDataItem = {
 	colors: ValueOf<typeof GradientColor>;
