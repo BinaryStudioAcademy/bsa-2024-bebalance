@@ -5,6 +5,7 @@ import "~/assets/css/styles.css";
 import {
 	App,
 	ProtectedRoute,
+	QuizCategoriesSelection,
 	RouterProvider,
 	StoreProvider,
 } from "~/libs/components/components.js";
@@ -24,7 +25,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component="Root"
+										component={<QuizCategoriesSelection />}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
