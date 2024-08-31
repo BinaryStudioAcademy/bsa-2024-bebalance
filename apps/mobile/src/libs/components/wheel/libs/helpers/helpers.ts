@@ -1,1 +1,2 @@
-export { getWheelSectorParameters } from "./get-wheel-sector-parameters/get-wheel-sector-parameters";
+export { getSectorParameters } from "./get-sector-parameters/get-sector-parameters";
+export { getWheelCategoryParameters } from "./get-wheel-category-parameters/get-wheel-category-parameters";
