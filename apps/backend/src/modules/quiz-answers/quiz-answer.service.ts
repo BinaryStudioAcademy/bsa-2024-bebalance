@@ -66,7 +66,6 @@ class QuizAnswerService implements Service {
 		userId,
 	}: UserAnswersRequestDto): Promise<QuizScoreResponseDto> {
 		const categoryStatistics = new Map<number, CategoryStatistic>();
-		const scores = [];
 
 		const categorizedAnswers = await Promise.all(
 			answerIds.map((answerId) => {
@@ -85,17 +84,19 @@ class QuizAnswerService implements Service {
 			categoryStatistics.set(categoryId, statistic);
 		}
 
-		for (const [categoryId, stats] of categoryStatistics.entries()) {
-			const averageScore = Math.round(
-				stats.accumulatedSum / stats.categoryCount,
-			);
-			const userScore = await this.categoryService.createScore({
-				categoryId,
-				score: averageScore,
-				userId,
-			});
-			scores.push(userScore);
-		}
+		const scores = await Promise.all(
+			[...categoryStatistics.entries()].map(async ([categoryId, stats]) => {
+				const averageScore = Math.round(
+					stats.accumulatedSum / stats.categoryCount,
+				);
+
+				return await this.categoryService.createScore({
+					categoryId,
+					score: averageScore,
+					userId,
+				});
+			}),
+		);
 
 		return { scores };
 	}
