@@ -8,6 +8,8 @@ export {
 export {
 	AuthError,
 	HTTPError,
+	OnboardingError,
+	QuizError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
@@ -33,6 +35,28 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
+export {
+	type OnboardingAnswerDto,
+	type OnboardingAnswerRequestBodyDto,
+	type OnboardingAnswerRequestDto,
+	type OnboardingAnswerResponseDto,
+	onboardingAnswersValidationSchema,
+	OnboardingApiPath,
+} from "./modules/onboarding/onboarding.js";
+export {
+	type CategoryDto,
+	type CategoryRequestDto,
+	type QuizAnswerDto,
+	type QuizAnswerRequestDto,
+	type QuizAnswersRequestDto,
+	type QuizAnswersResponseDto,
+	QuizApiPath,
+	type QuizQuestionDto,
+	type QuizQuestionRequestDto,
+	type QuizScoreDto,
+	type QuizUserAnswerDto,
+	quizUserAnswersValidationSchema,
+} from "./modules/quiz/quiz.js";
 export {
 	type UserDto,
 	type UserGetAllResponseDto,

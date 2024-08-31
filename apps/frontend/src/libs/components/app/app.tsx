@@ -27,15 +27,20 @@ const App: React.FC = () => {
 		void dispatch(authActions.getAuthenticatedUser());
 	}, [dispatch]);
 
-	const isLoading = dataStatus === DataStatus.PENDING;
+	const isLoading =
+		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	return (
 		<>
 			<div>
 				<RouterOutlet />
 			</div>
-			{isLoading && <Loader />}
-			{!isLoading && isRoot && (
+
+			{isRoot && (
 				<>
 					<QuizForm />
 				</>
