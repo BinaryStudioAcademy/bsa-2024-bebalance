@@ -9,24 +9,33 @@ import {
 	Tooltip,
 } from "chart.js";
 
-import { useRef } from "~/libs/hooks/hooks.js";
+import { useEffect, useRef, useState } from "~/libs/hooks/hooks.js";
 
-import { generateGradientColor } from "./libs/helpers/helpers.js";
+import {
+	generateGradientColor,
+	generateRandomData,
+} from "./libs/helpers/helpers.js";
 import { type ChartDataType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
 
 type Properties = {
-	data: ChartDataType[];
+	data: ChartDataType[] | null;
+	isAnimating: boolean;
 };
 
 const CENTER_DIVISOR = 2;
 const RADIUS_DIVISOR = 32;
 const START_ANGLE = 0;
 const END_ANGLE = CENTER_DIVISOR * Math.PI;
+const ANIMATION_INTERVAL = 2000;
+const DATASET_INDEX = 0;
 
 const options: ChartOptions<"polarArea"> = {
+	animation: {
+		easing: "easeInOutQuad",
+	},
 	scales: {
 		r: {
 			display: false,
@@ -34,27 +43,33 @@ const options: ChartOptions<"polarArea"> = {
 	},
 };
 
-const BalanceWheel: React.FC<Properties> = ({ data }: Properties) => {
-	const chartReference = useRef<ChartJS<"polarArea"> | null>(null);
-
-	const mapLabels = data.map((entry) => entry.label);
-	const mapData = data.map((entry) => entry.data);
-
-	const chartData: ChartData<"polarArea"> = {
+const BalanceWheel: React.FC<Properties> = ({
+	data,
+	isAnimating,
+}: Properties) => {
+	const [chartData, setChartData] = useState<ChartData<"polarArea">>({
 		datasets: [
 			{
 				backgroundColor: generateGradientColor,
-				borderRadius: 10,
-				borderWidth: 5,
-				data: mapData,
+				borderRadius: 5,
+				borderWidth: 3,
+				data: data ? data.map((entry) => entry.data) : generateRandomData(),
 			},
 		],
-		labels: mapLabels,
-	};
+		labels: data ? data.map((entry) => entry.label) : [],
+	});
+	const chartReference = useRef<ChartJS<"polarArea"> | null>(null);
 
 	const config: ChartConfiguration<"polarArea"> = {
 		data: chartData,
-		options,
+		options: {
+			...options,
+			plugins: {
+				tooltip: {
+					enabled: !isAnimating,
+				},
+			},
+		},
 		plugins: [
 			{
 				afterDraw: (chart): void => {
@@ -92,9 +107,29 @@ const BalanceWheel: React.FC<Properties> = ({ data }: Properties) => {
 		const context = canvas.getContext("2d");
 
 		if (context) {
-			chartReference.current = new ChartJS<"polarArea">(context, { ...config });
+			chartReference.current = new ChartJS<"polarArea">(context, config);
 		}
 	};
+
+	useEffect(() => {
+		if (isAnimating) {
+			const intervalId = setInterval(() => {
+				setChartData((previousData) => ({
+					...previousData,
+					datasets: [
+						{
+							...previousData.datasets[DATASET_INDEX],
+							data: generateRandomData(),
+						},
+					],
+				}));
+			}, ANIMATION_INTERVAL);
+
+			return (): void => {
+				clearInterval(intervalId);
+			};
+		}
+	}, [isAnimating]);
 
 	return (
 		<div className={styles["container"]}>
