@@ -6,12 +6,12 @@ import {
 } from "~/libs/modules/database/database.js";
 
 import { UserModel } from "../users/user.model.js";
-import { type QuizScoreDto } from "./libs/types/types.js";
+import { type CategoryEntity } from "./category.entity.js";
 
 class CategoryModel extends AbstractModel {
 	public name!: string;
 
-	public scores!: QuizScoreDto[];
+	public scores!: CategoryEntity[];
 
 	static get relationMappings(): RelationMappings {
 		return {

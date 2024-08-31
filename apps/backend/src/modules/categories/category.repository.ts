@@ -100,13 +100,17 @@ class CategoryRepository implements Repository {
 					.query()
 					.from(DatabaseTableName.QUIZ_SCORES)
 					.where({ categoryId: category.id })
-					.castTo<QuizScoreDto[]>();
+					.castTo<CategoryModel[]>();
+
+				const scoreEntities = scoresModel.map((score) => {
+					return CategoryEntity.initializeNew(score);
+				});
 
 				return CategoryEntity.initialize({
 					createdAt: category.createdAt,
 					id: category.id,
 					name: category.name,
-					scores: scoresModel,
+					scores: scoreEntities,
 					updatedAt: category.updatedAt,
 				});
 			}),
