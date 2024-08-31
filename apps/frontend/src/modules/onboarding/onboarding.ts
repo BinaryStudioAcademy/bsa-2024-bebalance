@@ -16,4 +16,5 @@ export {
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionResponseDto,
 } from "./libs/types/types.js";
+export { oneAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/onboarding.js";
