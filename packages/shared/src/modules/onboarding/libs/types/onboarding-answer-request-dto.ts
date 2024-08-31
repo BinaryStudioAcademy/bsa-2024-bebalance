@@ -1,5 +1,5 @@
 type OnboardingAnswerRequestDto = {
-	id?: number;
+	id: number;
 	label: string;
 };
 

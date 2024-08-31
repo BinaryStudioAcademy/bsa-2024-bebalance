@@ -2,7 +2,7 @@ import { type OnboardingAnswerRequestDto } from "./onboarding-answer-request-dto
 
 type OnboardingQuestionRequestDto = {
 	answers: OnboardingAnswerRequestDto[];
-	id?: number;
+	id: number;
 	label: string;
 };
 
