@@ -1,5 +1,4 @@
 import React from "react";
-import { getRadiansFromPercent } from "shared";
 
 import { Defs, Stop, Svg, SvgGradient } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
@@ -7,7 +6,10 @@ import { type WheelDataItem } from "~/libs/types/types";
 
 import { AnimatedSector, LabelOnCircle } from "./libs/components/components";
 import { WheelSetting } from "./libs/enums/enums";
-import { getWheelCategoryParameters } from "./libs/helpers/helpers";
+import {
+	getRadiansFromPercent,
+	getWheelCategoryParameters,
+} from "./libs/helpers/helpers";
 
 type Properties = {
 	categoriesData: WheelDataItem[];

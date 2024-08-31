@@ -1,9 +1,9 @@
 import React from "react";
-import { getCircumferencePointCoordinates } from "shared";
 
 import { Circle, SvgText } from "~/libs/components/components";
 
 import { LabelCoefficient } from "../../enums/label-coefficient.enum";
+import { getCircumferencePointCoordinates } from "../../helpers/helpers";
 
 type Properties = {
 	centerPoint: number;
