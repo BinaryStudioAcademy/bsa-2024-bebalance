@@ -26,4 +26,13 @@ export {
 	View,
 } from "react-native";
 export { LinearGradient } from "react-native-linear-gradient";
+export { default as Animated } from "react-native-reanimated";
+export {
+	Circle,
+	default as Svg,
+	Defs,
+	RadialGradient as SvgGradient,
+	Stop,
+	Text as SvgText,
+} from "react-native-svg";
 export { default as MaterialIcon } from "react-native-vector-icons/MaterialIcons";
