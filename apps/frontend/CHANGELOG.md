@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.17.0...frontend-v1.17.1) (2024-08-31)
+
+
+### Bug Fixes
+
+* **frontend:** fix problem with loading pages bb-246 ([#247](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/247)) ([36961a6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/36961a642e04eeedcf2f2dc58ab54053d281edd1))
+
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.2...frontend-v1.17.0) (2024-08-30)
+
+
+### Features
+
+* **frontend:** analyzing screen mobile responsiveness bb-136 ([#231](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/231)) ([3fa478c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3fa478c516bd16ea45cdc9aea3299d78af0966a9))
+
+## [1.16.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.1...frontend-v1.16.2) (2024-08-29)
+
+
+### Bug Fixes
+
+* **frontend:** wrap quiz component into protected route bb-234 ([#235](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/235)) ([b55f92f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b55f92f05bc2995e52f7b90d87f4dff110e80b4f))
+
+## [1.16.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.16.0...frontend-v1.16.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* **frontend:** fix passwords don't match error even when passwords the same bb-226 ([#229](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/229)) ([6db0f2a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6db0f2a295c002a51fcdcdebf799f64db613be2e))
+
 ## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.15.0...frontend-v1.16.0) (2024-08-28)
 
 
