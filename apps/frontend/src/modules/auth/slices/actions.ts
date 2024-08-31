@@ -30,9 +30,7 @@ const signUp = createAsyncThunk<
 	AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
 	const { authApi } = extra;
-
 	const { token, user } = await authApi.signUp(registerPayload);
-
 	void storage.set(StorageKey.TOKEN, token);
 
 	return user;
