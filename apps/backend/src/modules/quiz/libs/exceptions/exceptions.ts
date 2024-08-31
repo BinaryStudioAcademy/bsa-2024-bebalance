@@ -1,0 +1,1 @@
+export { QuizError } from "shared";
