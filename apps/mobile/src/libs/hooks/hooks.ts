@@ -5,3 +5,4 @@ export { useAppSelector } from "./use-app-selector/use-app-selector.hook";
 export { useNavigation } from "@react-navigation/native";
 export { useCallback, useEffect, useState } from "react";
 export { useController as useFormController } from "react-hook-form";
+export { useAnimatedProps, useSharedValue } from "react-native-reanimated";
