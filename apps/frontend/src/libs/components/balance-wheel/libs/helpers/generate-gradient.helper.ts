@@ -1,9 +1,7 @@
 import { type ScriptableContext } from "chart.js";
 
-import {
-	BACKGROUND_COLORS,
-	FALLBACK_BACKGROUND_COLOR,
-} from "../constants/constants.js";
+import { FALLBACK_BACKGROUND_COLOR } from "../constants/constants.js";
+import { BACKGROUND_COLORS } from "../enums/enums.js";
 
 const CENTER_DIVISOR = 2;
 const INITIAL_RADIUS = 0;

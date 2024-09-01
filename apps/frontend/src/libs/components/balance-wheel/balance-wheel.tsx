@@ -1,102 +1,76 @@
 import {
 	ArcElement,
-	type ChartConfiguration,
-	type ChartData,
 	Chart as ChartJS,
-	type ChartOptions,
 	PolarAreaController,
 	RadialLinearScale,
 	Tooltip,
 } from "chart.js";
 
-import { useEffect, useRef, useState } from "~/libs/hooks/hooks.js";
+import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 
-import {
-	generateGradientColor,
-	generateRandomData,
-} from "./libs/helpers/helpers.js";
+import { chartConfig } from "./libs/configs/configs.js";
+import { ANIMATION_INTERVAL } from "./libs/constants/constants.js";
+import { generateRandomData } from "./libs/helpers/generate-random-data.helper.js";
 import { type ChartDataType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
 
 type Properties = {
-	data: ChartDataType[] | null;
+	data?: ChartDataType[];
 	isAnimating: boolean;
-};
-
-const CENTER_DIVISOR = 2;
-const RADIUS_DIVISOR = 32;
-const START_ANGLE = 0;
-const END_ANGLE = CENTER_DIVISOR * Math.PI;
-const ANIMATION_INTERVAL = 2000;
-const DATASET_INDEX = 0;
-
-const options: ChartOptions<"polarArea"> = {
-	animation: {
-		animateRotate: false,
-		easing: "easeInOutQuad",
-	},
-	scales: {
-		r: {
-			display: false,
-		},
-	},
 };
 
 const BalanceWheel: React.FC<Properties> = ({
 	data,
 	isAnimating,
 }: Properties) => {
-	const [chartData, setChartData] = useState<ChartData<"polarArea">>({
-		datasets: [
-			{
-				backgroundColor: generateGradientColor,
-				borderRadius: 5,
-				borderWidth: 3,
-				data: data ? data.map((entry) => entry.data) : generateRandomData(),
-			},
-		],
-		labels: data ? data.map((entry) => entry.label) : [],
-	});
 	const chartReference = useRef<ChartJS<"polarArea"> | null>(null);
 
-	const config: ChartConfiguration<"polarArea"> = {
-		data: chartData,
-		options: {
-			...options,
-			plugins: {
-				tooltip: {
-					enabled: !isAnimating,
-				},
-			},
-		},
-		plugins: [
-			{
-				afterDraw: (chart): void => {
-					const { chartArea, ctx } = chart;
-					const centerX = (chartArea.left + chartArea.right) / CENTER_DIVISOR;
-					const centerY = (chartArea.top + chartArea.bottom) / CENTER_DIVISOR;
-					const radius =
-						Math.min(
-							chartArea.right - chartArea.left,
-							chartArea.bottom - chartArea.top,
-						) / RADIUS_DIVISOR;
+	// update the chartInstance directly to prevent the whole chart from rerendering when data is change
+	const updateChartData = useCallback((): void => {
+		const chartInstance = chartReference.current;
+		const INDEX = 0;
 
-					ctx.save();
-					ctx.beginPath();
-					ctx.arc(centerX, centerY, radius, START_ANGLE, END_ANGLE);
-					ctx.fillStyle = "white";
-					ctx.fill();
-					ctx.restore();
-				},
-				id: "centerCircle",
-			},
-		],
-		type: "polarArea",
-	};
+		if (!data || !chartInstance || !chartInstance.data.datasets[INDEX]?.data) {
+			return;
+		}
 
-	const renderChart = (canvas: HTMLCanvasElement | null): void => {
+		chartInstance.data.datasets[INDEX].data = data.map((entry) => entry.data);
+		chartInstance.data.labels = data.map((entry) => entry.label);
+
+		chartInstance.update();
+	}, [data]);
+
+	const animateChartData = useCallback(() => {
+		if (!isAnimating) {
+			return;
+		}
+
+		const chartInstance = chartReference.current;
+		const INDEX = 0;
+
+		if (!chartInstance || !chartInstance.data.datasets[INDEX]?.data) {
+			return;
+		}
+
+		chartInstance.data.datasets[INDEX].data = generateRandomData();
+		chartInstance.update();
+	}, [isAnimating]);
+
+	useEffect(() => {
+		const intervalId = setInterval(animateChartData, ANIMATION_INTERVAL);
+
+		return (): void => {
+			clearInterval(intervalId);
+		};
+	}, [animateChartData]);
+
+	useEffect(() => {
+		updateChartData();
+	}, [updateChartData]);
+
+	const renderChart = useCallback((canvas?: HTMLCanvasElement | null): void => {
 		if (!canvas) {
 			return;
 		}
@@ -108,29 +82,9 @@ const BalanceWheel: React.FC<Properties> = ({
 		const context = canvas.getContext("2d");
 
 		if (context) {
-			chartReference.current = new ChartJS<"polarArea">(context, config);
+			chartReference.current = new ChartJS<"polarArea">(context, chartConfig);
 		}
-	};
-
-	useEffect(() => {
-		if (isAnimating) {
-			const intervalId = setInterval(() => {
-				setChartData((previousData) => ({
-					...previousData,
-					datasets: [
-						{
-							...previousData.datasets[DATASET_INDEX],
-							data: generateRandomData(),
-						},
-					],
-				}));
-			}, ANIMATION_INTERVAL);
-
-			return (): void => {
-				clearInterval(intervalId);
-			};
-		}
-	}, [isAnimating]);
+	}, []);
 
 	return (
 		<div className={styles["container"]}>

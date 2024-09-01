@@ -1,16 +1,15 @@
-const ARC_COUNT = 7;
-const MINIMUM_DATA_VALUE = 5;
-const MAXIMUM_DATA_VALUE = 10;
-const RANGE_OFFSET = 1;
+import { RANDOM_DATA_CONFIG } from "../enums/enums.js";
 
 const generateRandomData = (): number[] => {
 	return Array.from(
-		{ length: ARC_COUNT },
+		{ length: RANDOM_DATA_CONFIG.SEGMENT_COUNT },
 		() =>
 			Math.floor(
 				Math.random() *
-					(MAXIMUM_DATA_VALUE - MINIMUM_DATA_VALUE + RANGE_OFFSET),
-			) + MINIMUM_DATA_VALUE,
+					(RANDOM_DATA_CONFIG.MAXIMUM_DATA_VALUE -
+						RANDOM_DATA_CONFIG.MINIMUM_DATA_VALUE +
+						RANDOM_DATA_CONFIG.RANGE_OFFSET),
+			) + RANDOM_DATA_CONFIG.MINIMUM_DATA_VALUE,
 	);
 };
 
