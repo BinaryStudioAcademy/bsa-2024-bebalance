@@ -25,7 +25,7 @@ const Sidebar: React.FC<Properties> = ({
 	const dispatch = useAppDispatch();
 
 	const handleSignOut = useCallback(
-		() => dispatch(authActions.logOut()),
+		() => void dispatch(authActions.logOut()),
 		[dispatch],
 	);
 
