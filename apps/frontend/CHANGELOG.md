@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.17.1...frontend-v1.18.0) (2024-09-01)
+
+
+### Features
+
+* **frontend:** sign up bb-9 ([#218](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/218)) ([917e652](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/917e6525945033ce33df1712dcaaf7c75b0b4bc3))
+
+
+### Bug Fixes
+
+* **frontend:** "You are unauthorized to access the requested resource." error message is shown on the Sign-In/ Sign-Up page bb-222 ([#248](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/248)) ([601cfa2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/601cfa2f41665dcc5448fc034fde6ed3d431b88b))
+
 ## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.17.0...frontend-v1.17.1) (2024-08-31)
 
 
