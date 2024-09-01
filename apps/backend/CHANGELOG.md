@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.8.0...backend-v1.9.0) (2024-09-01)
+
+
+### Features
+
+* **backend/shared:** save quiz response to db bb-166 ([#208](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/208)) ([42b4cbb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/42b4cbb32ddbe609d3555d24b755199783429600))
+
 ## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.7.1...backend-v1.8.0) (2024-08-31)
 
 
