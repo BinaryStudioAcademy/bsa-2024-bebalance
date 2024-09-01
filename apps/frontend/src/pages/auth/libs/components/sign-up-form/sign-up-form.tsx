@@ -59,7 +59,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Name"
 					name="name"
-					placeholder="name"
+					placeholder="Name"
 					type="text"
 				/>
 
@@ -68,7 +68,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Email"
 					name="email"
-					placeholder="name@example.com"
+					placeholder="be@balance.com"
 					type="email"
 				/>
 
@@ -79,7 +79,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					label="Password"
 					name="password"
 					onIconClick={handleTogglePasswordVisibility}
-					placeholder="*******"
+					placeholder="••••••"
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
@@ -90,7 +90,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					label="Confirm password"
 					name="confirmPassword"
 					onIconClick={handleToggleConfirmPasswordVisibility}
-					placeholder="*******"
+					placeholder="••••••"
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 

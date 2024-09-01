@@ -9,8 +9,10 @@ const UserValidationRegexRule = {
 		`^[\\w*#$!=&'_+–.]{1,${String(UserValidationRule.EMAIL_LOCAL_PART_MAX_LENGTH)}}(?=@)`,
 	),
 	EMAIL_LOCAL_PART_VALID_CHARS: /^[\w!#$&'*+.=–]+(?:\.[\w!#$&'*+=–]+)*(?=@)/,
-	NAME_VALID_CHARS: /^[\w-]+$/,
-	PASSWORD_CONTAINS_LETTER_AND_NUMBER: /^(?=.*[A-Za-z])(?=.*\d)/,
+	NAME_VALID_CHARS_MIN_MAX: /^[\w-]{3,4}$/,
+	PASSWORD_CONTAINS_LETTER_NUMBER_AND_LENGTH: new RegExp(
+		`/^(?=.*[a-zA-Z])(?=.*\\d).{${String(UserValidationRule.PASSWORD_MIN_LENGTH)},${String(UserValidationRule.PASSWORD_MAX_LENGTH)}}$/`,
+	),
 	PASSWORD_VALID_CHARS: /^[\d!#$@A-Za-z]*$/,
 } as const;
 
