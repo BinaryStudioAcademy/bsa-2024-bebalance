@@ -11,11 +11,11 @@ class QuizCategoryService implements Service {
 	}
 
 	create(): Promise<unknown> {
-		throw new Error("Method not implemented.");
+		return this.quizCategoryRepository.create();
 	}
 
 	delete(): Promise<boolean> {
-		throw new Error("Method not implemented.");
+		return this.quizCategoryRepository.delete();
 	}
 
 	async find(id: number): Promise<null | QuizCategoryDto> {
@@ -39,7 +39,7 @@ class QuizCategoryService implements Service {
 	}
 
 	update(): Promise<unknown> {
-		throw new Error("Method not implemented.");
+		return this.quizCategoryRepository.update();
 	}
 }
 

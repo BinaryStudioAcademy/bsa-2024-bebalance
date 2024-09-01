@@ -14,7 +14,7 @@ const useQuizCategories = (): {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		dispatch(quizCategoriesActions.fetchQuizCategories()).catch(() => {});
+		void dispatch(quizCategoriesActions.fetchQuizCategories());
 	}, [dispatch]);
 
 	return useAppSelector(({ quizCategories }) => {

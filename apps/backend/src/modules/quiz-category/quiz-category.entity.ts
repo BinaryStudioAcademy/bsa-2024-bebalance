@@ -1,18 +1,5 @@
 import { type Entity } from "~/libs/types/types.js";
 
-type QuizCategoryObject = {
-	createdAt: string;
-	id: number;
-	name: string;
-	updatedAt: string;
-};
-
-type NewQuizCategoryObject = {
-	createdAt: string;
-	name: string;
-	updatedAt: string;
-};
-
 type Constructor = {
 	createdAt: string;
 	id: null | number;
@@ -36,19 +23,24 @@ class QuizCategoryEntity implements Entity {
 		this.updatedAt = updatedAt;
 	}
 
-	public static initialize(
-		quizCategory: QuizCategoryObject,
-	): QuizCategoryEntity {
+	public static initialize(quizCategory: {
+		createdAt: string;
+		id: number;
+		name: string;
+		updatedAt: string;
+	}): QuizCategoryEntity {
 		return new QuizCategoryEntity(quizCategory);
 	}
 
-	public static initializeNew(
-		newQuizCategory: NewQuizCategoryObject,
-	): QuizCategoryEntity {
+	public static initializeNew(newQuizCategory: {
+		createdAt: string;
+		name: string;
+		updatedAt: string;
+	}): QuizCategoryEntity {
 		return new QuizCategoryEntity({ id: null, ...newQuizCategory });
 	}
 
-	toNewObject(): NewQuizCategoryObject {
+	toNewObject(): { createdAt: string; name: string; updatedAt: string } {
 		return {
 			createdAt: this.createdAt,
 			name: this.name,
@@ -56,7 +48,12 @@ class QuizCategoryEntity implements Entity {
 		};
 	}
 
-	toObject(): QuizCategoryObject {
+	toObject(): {
+		createdAt: string;
+		id: number;
+		name: string;
+		updatedAt: string;
+	} {
 		return {
 			createdAt: this.createdAt,
 			id: this.id as number,

@@ -1,5 +1,6 @@
 import { useCallback } from "react";
-import { useForm } from "react-hook-form";
+
+import { useAppForm } from "~/libs/hooks/hooks.js";
 
 import { Button } from "../components.js";
 import { useQuizCategories } from "./libs/hooks/hooks.js";
@@ -18,16 +19,15 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	onSubmit = (): void => {},
 	submitLabel,
 }: Properties) => {
-	const { handleSubmit, register, setValue, watch } = useForm<FormFields>({
+	const { handleSubmit, register, setValue, watch } = useAppForm<FormFields>({
 		defaultValues: { categoriesIds: [] },
 	});
 
 	const { isLoading, quizCategories } = useQuizCategories();
-
 	const isAllInputsChecked =
 		watch("categoriesIds").length === quizCategories.length;
 
-	const onAllInputClick: () => void = useCallback(() => {
+	const handleAllInputClick: () => void = useCallback(() => {
 		setValue(
 			"categoriesIds",
 			isAllInputsChecked
@@ -52,7 +52,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 			<label className={styles["input-container"]}>
 				<input
 					checked={isAllInputsChecked}
-					onClick={onAllInputClick}
+					onClick={handleAllInputClick}
 					readOnly
 					type="checkbox"
 				/>
