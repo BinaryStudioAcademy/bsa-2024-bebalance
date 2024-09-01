@@ -1,5 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
@@ -15,6 +15,10 @@ type Properties = {
 };
 
 const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+		useState<boolean>(false);
+
 	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<ResetPasswordFormDto>({
 			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
@@ -42,25 +46,37 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		[handleSubmit, onSubmit, setError, getValues],
 	);
 
+	const handleTogglePasswordVisibility = useCallback(() => {
+		setIsPasswordVisible((previousState) => !previousState);
+	}, []);
+
+	const handleToggleConfirmPasswordVisibility = useCallback(() => {
+		setIsConfirmPasswordVisible((previousState) => !previousState);
+	}, []);
+
 	return (
 		<>
 			<form className={styles["form"]} onSubmit={handleFormSubmit}>
 				<Input
 					control={control}
 					errors={errors}
-					label="New password"
+					iconName={isPasswordVisible ? "crossedEye" : "eye"}
+					label="Password"
 					name="newPassword"
-					placeholder="********"
-					type="password"
+					onIconClick={handleTogglePasswordVisibility}
+					placeholder="*******"
+					type={isPasswordVisible ? "text" : "password"}
 				/>
 
 				<Input
 					control={control}
 					errors={errors}
+					iconName={isConfirmPasswordVisible ? "crossedEye" : "eye"}
 					label="Confirm password"
 					name="confirmPassword"
-					placeholder="********"
-					type="password"
+					onIconClick={handleToggleConfirmPasswordVisibility}
+					placeholder="*******"
+					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 				<Button label="RESET PASSWORD" type="submit" />
 			</form>
