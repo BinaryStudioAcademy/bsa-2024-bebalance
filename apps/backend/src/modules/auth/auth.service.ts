@@ -1,4 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { mailer } from "~/libs/modules/mailer/mailer.js";
 import { token } from "~/libs/modules/token/token.js";
@@ -42,9 +43,10 @@ class AuthService {
 			userId: userDetails.id,
 		});
 
-		mailer.sendResetPasswordEmail({
-			recipient: userDetails.email,
-			token: jwtToken,
+		mailer.sendEmail({
+			subject: "BeBalance: reset password",
+			text: `Here is a link to reset your password: ${config.ENV.BASE_URLS.RESET_PASSWORD_URL}/${jwtToken}`,
+			to: userDetails.email,
 		});
 
 		return true;

@@ -8,6 +8,7 @@ import {
 	useCallback,
 	useLocation,
 	useNavigate,
+	useParams,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
@@ -23,10 +24,7 @@ import {
 	SignInForm,
 	SignUpForm,
 } from "./libs/components/components.js";
-import {
-	getFormHeader,
-	matchResetPasswordRoute,
-} from "./libs/helpers/helpers.js";
+import { getFormHeader } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
@@ -38,6 +36,8 @@ const Auth: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+
+	const { token } = useParams();
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -62,33 +62,33 @@ const Auth: React.FC = () => {
 	);
 
 	const handleResetPasswordSubmit = useCallback(
-		(payload: ResetPasswordDto): void => {
+		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
 			void dispatch(
 				authActions.resetPassword({
-					jwtToken: payload.jwtToken,
+					jwtToken: token as string,
 					newPassword: payload.newPassword,
 				}),
 			);
 			navigate(AppRoute.SIGN_IN);
 		},
-		[dispatch, navigate],
+		[dispatch, navigate, token],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
-		switch (true) {
-			case screen === AppRoute.SIGN_IN: {
+		switch (screen) {
+			case AppRoute.SIGN_IN: {
 				return <SignInForm onSubmit={handleSignInSubmit} />;
 			}
 
-			case screen === AppRoute.SIGN_UP: {
+			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
 
-			case screen === AppRoute.FORGOT_PASSWORD: {
+			case AppRoute.FORGOT_PASSWORD: {
 				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
 
-			case matchResetPasswordRoute(screen): {
+			case `${AppRoute.RESET_PASSWORD}/${token as string}`: {
 				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
 			}
 		}

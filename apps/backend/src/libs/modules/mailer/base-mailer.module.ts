@@ -1,33 +1,45 @@
 import { type Transporter } from "nodemailer";
+import NodeMailer from "nodemailer";
 
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { MailError } from "~/libs/exceptions/exceptions.js";
 import { config } from "~/libs/modules/config/config.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 
+const transporter = NodeMailer.createTransport({
+	auth: {
+		pass: config.ENV.MAILER.APP_PASSWORD,
+		user: config.ENV.MAILER.ADDRESS,
+	},
+	host: config.ENV.MAILER.HOST,
+	port: config.ENV.MAILER.PORT,
+	secure: true,
+	service: config.ENV.MAILER.SERVICE,
+});
+
 class BaseMailer {
-	private resetEmailUrl: string;
 	private sender = config.ENV.MAILER.ADDRESS;
 	private transporter: Transporter;
 
-	constructor(transporter: Transporter, resetEmailUrl: string) {
+	constructor(transporter: Transporter) {
 		this.transporter = transporter;
-		this.resetEmailUrl = resetEmailUrl;
 	}
 
-	public sendResetPasswordEmail({
-		recipient,
-		token,
+	public sendEmail({
+		subject,
+		text,
+		to,
 	}: {
-		recipient: string;
-		token: string;
+		subject: string;
+		text: string;
+		to: string;
 	}): void {
 		this.transporter.sendMail(
 			{
 				from: this.sender,
-				subject: "BeBalance: password reset",
-				text: `Follow this link to reset your password: ${this.resetEmailUrl}/${token}`,
-				to: recipient,
+				subject,
+				text,
+				to,
 			},
 			(error) => {
 				if (error) {
@@ -44,4 +56,4 @@ class BaseMailer {
 	}
 }
 
-export { BaseMailer };
+export { BaseMailer, transporter };

@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { NotificationMessage } from "~/libs/enums/enums.js";
+import { notification } from "~/libs/modules/notification/notification.js";
 import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
@@ -61,6 +63,8 @@ const requestResetPassword = createAsyncThunk<
 	AsyncThunkConfig
 >(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
 	const { authApi } = extra;
+
+	notification.success(NotificationMessage.LINK_SENT);
 
 	return await authApi.requestResetPassword(emailPayload);
 });

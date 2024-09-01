@@ -1,5 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback, useParams } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
@@ -11,7 +11,7 @@ import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: ResetPasswordDto) => void;
+	onSubmit: (payload: Omit<ResetPasswordDto, "jwtToken">) => void;
 };
 
 const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
@@ -21,8 +21,6 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			validationSchema: userResetPasswordValidationSchema,
 		});
 
-	const { token } = useParams();
-
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload) => {
@@ -31,7 +29,6 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 				if (confirmPassword === newPassword) {
 					onSubmit({
-						jwtToken: token as string,
 						newPassword,
 					});
 				} else {
@@ -42,7 +39,7 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				}
 			})(event_);
 		},
-		[handleSubmit, onSubmit, setError, getValues, token],
+		[handleSubmit, onSubmit, setError, getValues],
 	);
 
 	return (

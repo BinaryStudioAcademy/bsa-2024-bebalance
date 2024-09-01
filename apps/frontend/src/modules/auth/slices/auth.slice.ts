@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { DataStatus, NotificationMessage } from "~/libs/enums/enums.js";
-import { notification } from "~/libs/modules/notification/notification.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import {
 	getAuthenticatedUser,
-	requestResetPassword,
 	resetPassword,
 	signIn,
 	signUp,
@@ -56,10 +54,6 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAuthenticatedUser.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
-		});
-
-		builder.addCase(requestResetPassword.fulfilled, () => {
-			notification.success(NotificationMessage.LINK_SENT);
 		});
 
 		builder.addCase(resetPassword.pending, (state) => {
