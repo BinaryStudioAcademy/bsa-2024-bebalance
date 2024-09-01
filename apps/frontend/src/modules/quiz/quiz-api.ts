@@ -2,7 +2,7 @@ import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import { type QuizQuestionsDto } from "~/modules/quiz/quiz.js";
+import { type QuizQuestionsGetAllReponseDto } from "~/modules/quiz/quiz.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
 
@@ -17,9 +17,9 @@ class QuizApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
-	public async getQuestions(): Promise<QuizQuestionsDto[]> {
+	public async getQuestions(): Promise<QuizQuestionsGetAllReponseDto> {
 		const response = await this.load(
-			this.getFullEndpoint(QuizApiPath.QUIZ_QUESTION, {}),
+			this.getFullEndpoint(QuizApiPath.QUESTION, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -27,7 +27,7 @@ class QuizApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<QuizQuestionsDto[]>();
+		return await response.json<QuizQuestionsGetAllReponseDto>();
 	}
 }
 

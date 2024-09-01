@@ -6,6 +6,7 @@ export { Input } from "./input/input.js";
 export { Link } from "./link/link.js";
 export { Loader } from "./loader/loader.js";
 export { Notification } from "./notification/notification.js";
+export { ProgressBar } from "./progress-bar/progress-bar.js";
 export { ProtectedRoute } from "./protected-route/protected-route.js";
 export { QuizQuestion } from "./quiz-question/quiz-question.js";
 export { RouterProvider } from "./router-provider/router-provider.js";

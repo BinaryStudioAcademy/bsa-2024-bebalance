@@ -1,2 +1,5 @@
-export { type QuizAnswersDto } from "./quiz-answers-dto.type.js";
-export { type QuizQuestionsDto } from "./quiz-questions-dto.type.js";
+export {
+	type QuizAnswerDto,
+	type QuizQuestionDto,
+	type QuizQuestionsGetAllReponseDto,
+} from "shared";

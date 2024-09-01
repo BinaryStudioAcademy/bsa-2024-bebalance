@@ -1,5 +1,5 @@
 export {
-	type QuizAnswersDto,
-	type QuizQuestionsDto,
+	type QuizAnswerDto,
+	type QuizQuestionDto,
 	type QuizQuestionsGetAllReponseDto,
 } from "shared";

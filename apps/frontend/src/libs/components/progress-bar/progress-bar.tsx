@@ -1,5 +1,3 @@
-import React from "react";
-
 import CheckIcon from "~/assets/img/check-icon.svg?react";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
@@ -27,7 +25,7 @@ const ProgressBar: React.FC<Properties> = ({
 				const isLastStep = index === steps - LAST_INDEX_OFFSET;
 
 				return (
-					<React.Fragment key={index}>
+					<div className={styles["progress"]} key={index}>
 						<div
 							className={getValidClassNames(
 								styles["progress-step"],
@@ -46,7 +44,7 @@ const ProgressBar: React.FC<Properties> = ({
 								)}
 							/>
 						)}
-					</React.Fragment>
+					</div>
 				);
 			})}
 		</div>

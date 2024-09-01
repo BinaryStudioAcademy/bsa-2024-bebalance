@@ -3,6 +3,11 @@
 	align-items: center;
 }
 
+.progress {
+	display: flex;
+	align-items: center;
+}
+
 .progress-line {
 	flex-grow: 1;
 	width: 72px;

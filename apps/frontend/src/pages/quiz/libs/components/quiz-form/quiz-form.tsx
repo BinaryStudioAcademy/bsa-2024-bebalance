@@ -1,4 +1,9 @@
-import { Button, Loader, QuizQuestion } from "~/libs/components/components.js";
+import {
+	Button,
+	Loader,
+	ProgressBar,
+	QuizQuestion,
+} from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/data-status.enum.js";
 import {
 	useAppDispatch,
@@ -10,9 +15,8 @@ import {
 } from "~/libs/hooks/hooks.js";
 import {
 	actions as quizActions,
-	type QuizQuestionsDto,
+	type QuizQuestionDto,
 } from "~/modules/quiz/quiz.js";
-import { ProgressBar } from "~/pages/quiz/libs/components/components.js";
 
 import styles from "./styles.module.css";
 
@@ -29,7 +33,7 @@ const INITIAL_STEP = 0;
 
 const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
-	const [categories, setCategories] = useState<QuizQuestionsDto[][]>();
+	const [categories, setCategories] = useState<QuizQuestionDto[][]>();
 	const [isLast, setIsLast] = useState<boolean>(false);
 	const [currentStep, setCurrentStep] = useState<number>(INITIAL_STEP);
 	const { control } = useAppForm<FormValues>({
@@ -45,8 +49,8 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		void dispatch(quizActions.getQuestions());
 	}, [dispatch]);
 	useEffect(() => {
-		if (questions) {
-			const groupedByCategory: Record<number, QuizQuestionsDto[]> = {};
+		if (dataStatus === DataStatus.FULFILLED) {
+			const groupedByCategory: Record<number, QuizQuestionDto[]> = {};
 
 			for (const question of questions) {
 				const { categoryId } = question;
@@ -61,7 +65,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			const result = Object.values(groupedByCategory);
 			setCategories(result);
 		}
-	}, [questions]);
+	}, [dataStatus, questions]);
 	useEffect(() => {
 		if (categories) {
 			setIsLast(currentStep === categories.length - ONE_STEP_OFFSET);
@@ -88,18 +92,21 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				<h2 className={styles["quiz-header"]}>Wheel Quiz questions</h2>
 				<div className={styles["questions-wrapper"]}>
 					{!isLoading && categories ? (
-						categories[currentStep]?.map((question) => (
-							<QuizQuestion
-								control={control}
-								key={question.id}
-								label={`${question.id.toString()}. ${question.label}`}
-								name={question.label}
-								options={question.answers.map(({ label, value }) => ({
-									label,
-									value: value.toString(),
-								}))}
-							/>
-						))
+						categories[currentStep]?.map(
+							(question) =>
+								question.answers && (
+									<QuizQuestion
+										control={control}
+										key={question.id}
+										label={`${question.id.toString()}. ${question.label}`}
+										name={question.label}
+										options={question.answers.map(({ label, value }) => ({
+											label,
+											value: value.toString(),
+										}))}
+									/>
+								),
+						)
 					) : (
 						<div className={styles["loader"]}>
 							<Loader />

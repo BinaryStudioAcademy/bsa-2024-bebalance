@@ -2,18 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type QuizQuestionsDto } from "~/modules/quiz/quiz.js";
+import { type QuizQuestionDto } from "~/modules/quiz/quiz.js";
 
 import { getQuestions } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	questions: null | QuizQuestionsDto[];
+	questions: QuizQuestionDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	questions: null,
+	questions: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -23,7 +23,7 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getQuestions.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload;
+			state.questions = action.payload.items;
 		});
 		builder.addCase(getQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;

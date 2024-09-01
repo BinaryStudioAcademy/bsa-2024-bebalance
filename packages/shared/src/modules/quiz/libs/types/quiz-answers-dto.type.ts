@@ -1,4 +1,4 @@
-type QuizAnswersDto = {
+type QuizAnswerDto = {
 	createdAt: string;
 	id: number;
 	label: string;
@@ -7,4 +7,4 @@ type QuizAnswersDto = {
 	value: number;
 };
 
-export { type QuizAnswersDto };
+export { type QuizAnswerDto };

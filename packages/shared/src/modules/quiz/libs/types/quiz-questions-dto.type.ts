@@ -1,7 +1,7 @@
-import { type QuizAnswersDto } from "./quiz-answers-dto.type.js";
+import { type QuizAnswerDto } from "./quiz-answers-dto.type.js";
 
-type QuizQuestionsDto = {
-	answers: QuizAnswersDto[];
+type QuizQuestionDto = {
+	answers: null | QuizAnswerDto[];
 	categoryId: number;
 	createdAt: string;
 	id: number;
@@ -9,4 +9,4 @@ type QuizQuestionsDto = {
 	updatedAt: string;
 };
 
-export { type QuizQuestionsDto };
+export { type QuizQuestionDto };

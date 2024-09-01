@@ -31,9 +31,9 @@ export {
 } from "./libs/types/types.js";
 export { AuthApiPath } from "./modules/auth/auth.js";
 export {
-	type QuizAnswersDto,
+	type QuizAnswerDto,
 	QuizApiPath,
-	type QuizQuestionsDto,
+	type QuizQuestionDto,
 	type QuizQuestionsGetAllReponseDto,
 } from "./modules/quiz/quiz.js";
 export {

@@ -11,8 +11,8 @@ const quizApi = new QuizApi({
 });
 
 export {
-	type QuizAnswersDto,
-	type QuizQuestionsDto,
+	type QuizAnswerDto,
+	type QuizQuestionDto,
 	type QuizQuestionsGetAllReponseDto,
 } from "./libs/types/types.js";
 export { quizApi };

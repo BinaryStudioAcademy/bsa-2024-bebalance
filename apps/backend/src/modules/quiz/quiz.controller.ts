@@ -45,7 +45,7 @@ class QuizController extends BaseController {
 		this.addRoute({
 			handler: () => this.findAll(),
 			method: "GET",
-			path: QuizApiPath.QUIZ_QUESTION,
+			path: QuizApiPath.QUESTION,
 		});
 	}
 

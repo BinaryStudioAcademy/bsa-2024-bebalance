@@ -7,18 +7,23 @@ import {
 import { Input } from "../input/input.js";
 import styles from "./styles.module.css";
 
+type options = {
+	label: string;
+	value: string;
+};
+
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	label: string;
 	name: string;
-	options?: { label: string; value: string }[];
+	options: options[];
 };
 
 const QuizQuestion = <T extends FieldValues>({
 	control,
 	label,
 	name,
-	options = [],
+	options,
 }: Properties<T>): JSX.Element => {
 	return (
 		<div className={styles["quiz-question"]}>

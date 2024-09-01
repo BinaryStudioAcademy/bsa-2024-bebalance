@@ -9,12 +9,17 @@ import {
 
 import styles from "./styles.module.css";
 
+type options = {
+	label: string;
+	value: string;
+};
+
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
 	label: string;
 	name: FieldPath<T>;
-	options?: { label: string; value: string }[];
+	options?: options[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
 };

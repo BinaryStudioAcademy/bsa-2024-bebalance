@@ -1,10 +1,6 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": [
-		"**/*.ts",
-		"**/*.js",
-		"../../apps/backend/src/modules/quiz/libs/types/quiz-questions-get-all-response.type.ts"
-	],
+	"include": ["**/*.ts", "**/*.js"],
 	"exclude": ["node_modules", "build"],
 	"compilerOptions": {
 		"baseUrl": "."
