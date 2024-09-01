@@ -49,10 +49,6 @@
 	right: 20px;
 }
 
-.last {
-	order: 1;
-}
-
 .position-center {
 	left: 50%;
 	transform: translate(-50%, -50%);

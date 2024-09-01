@@ -28,9 +28,6 @@
 	flex-direction: column;
 	flex-grow: 1;
 	justify-content: space-between;
-}
-
-.navlinks-container {
 	padding: 14px 12px;
 }
 
