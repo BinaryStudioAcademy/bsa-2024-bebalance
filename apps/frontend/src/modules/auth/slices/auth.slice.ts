@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
-import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
@@ -58,12 +57,7 @@ const { actions, name, reducer } = createSlice({
 	},
 	initialState,
 	name: "auth",
-	reducers: {
-		logOut: (state) => {
-			state.user = null;
-			localStorage.removeItem(StorageKey.TOKEN);
-		},
-	},
+	reducers: {},
 });
 
 export { actions, name, reducer };
