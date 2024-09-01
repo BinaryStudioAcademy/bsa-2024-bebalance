@@ -34,10 +34,10 @@ const Auth: React.FC = () => {
 		user: auth.user,
 	}));
 
+	const token = useQuery().get("token");
+
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-
-	const query = useQuery();
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -65,13 +65,13 @@ const Auth: React.FC = () => {
 		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
 			void dispatch(
 				authActions.resetPassword({
-					jwtToken: query.get("token") as string,
+					jwtToken: token as string,
 					newPassword: payload.newPassword,
 				}),
 			);
 			navigate(AppRoute.SIGN_IN);
 		},
-		[dispatch, navigate, query],
+		[dispatch, navigate, token],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
