@@ -64,6 +64,10 @@ const Onboarding: React.FC = () => {
 		[isLastQuestion, dispatch, reset, handleSaveAnswers],
 	);
 
+	const handlePreviousStep = useCallback(() => {
+		void dispatch(onboardingActions.previousQuestion());
+	}, [dispatch]);
+
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			if (!isValid) {
@@ -98,6 +102,13 @@ const Onboarding: React.FC = () => {
 									/>
 								))}
 								<div className={styles["button-container"]}>
+									{!isLastQuestion && (
+										<Button
+											label="BACK"
+											onClick={handlePreviousStep}
+											type="button"
+										/>
+									)}
 									<Button
 										label={isLastQuestion ? "ANALYZE" : "NEXT"}
 										onClick={handleFormSubmit}

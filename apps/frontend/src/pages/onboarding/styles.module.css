@@ -36,12 +36,18 @@
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+	align-items: center;
+	justify-content: center;
 	width: 342px;
 	padding-bottom: 78px;
 }
 
 .button-container {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
-	max-width: 322px;
+	max-width: 122px;
 	padding-bottom: 226px;
 }
