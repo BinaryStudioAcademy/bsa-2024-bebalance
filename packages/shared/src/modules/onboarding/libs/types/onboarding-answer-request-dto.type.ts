@@ -1,6 +1,6 @@
 type OnboardingAnswerRequestDto = {
-	id: number;
-	label: string;
+	answerIds: number[];
+	userId: number;
 };
 
 export { type OnboardingAnswerRequestDto };

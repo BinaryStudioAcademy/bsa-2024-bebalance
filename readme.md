@@ -69,6 +69,27 @@ erDiagram
         int question_id FK
     }
 
+    quiz_scores }o--|| categories : category_id
+    quiz_scores }o--|| users : user_id
+    quiz_scores {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int score
+        int category_id FK
+        int user_id FK
+    }
+
+    quiz_answers_to_users }o--|| quiz_answers : answer_id
+    quiz_answers_to_users }o--|| users : user_id
+    quiz_answers_to_users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int user_id FK
+        int answer_id FK
+    }
+
     onboarding_questions {
         int id PK
         dateTime created_at
@@ -83,6 +104,16 @@ erDiagram
         dateTime updated_at
         text label
         int question_id FK
+    }
+
+    onboarding_answers_to_users }o--|| onboarding_answers : answer_id
+    onboarding_answers_to_users }o--|| users : user_id
+    onboarding_answers_to_users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int answer_id FK
+        int user_id FK
     }
 ```
 

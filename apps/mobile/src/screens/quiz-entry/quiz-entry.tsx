@@ -15,9 +15,7 @@ import { type ImageSourcePropType } from "~/libs/types/types";
 import { styles } from "./styles";
 
 const QuizEntry: React.FC = () => {
-	const handleStartPress = useCallback((): void => {
-		// Handle Continue
-	}, []);
+	const handleStartPress = useCallback((): void => {}, []);
 
 	return (
 		<BackgroundWrapper>

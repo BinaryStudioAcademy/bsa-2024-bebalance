@@ -1,7 +1,7 @@
-import { type OnboardingAnswerRequestDto } from "./onboarding-answer-request-dto.js";
+import { type OnboardingAnswerDto } from "./onboarding-answer-dto.type.js";
 
 type OnboardingQuestionRequestDto = {
-	answers: OnboardingAnswerRequestDto[];
+	answers: OnboardingAnswerDto[];
 	id: number;
 	label: string;
 };

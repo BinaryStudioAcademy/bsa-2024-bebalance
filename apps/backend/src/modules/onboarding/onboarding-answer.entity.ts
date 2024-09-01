@@ -11,24 +11,30 @@ class OnboardingAnswerEntity implements Entity {
 
 	private updatedAt: string;
 
+	private userId: null | number;
+
 	private constructor({
 		createdAt,
 		id,
 		label,
 		questionId,
 		updatedAt,
+		userId,
 	}: {
 		createdAt: string;
 		id: null | number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
+		userId: null | number;
 	}) {
 		this.label = label;
 		this.createdAt = createdAt;
 		this.id = id;
+		this.label = label;
 		this.questionId = questionId;
 		this.updatedAt = updatedAt;
+		this.userId = userId;
 	}
 
 	public static initialize({
@@ -37,12 +43,14 @@ class OnboardingAnswerEntity implements Entity {
 		label,
 		questionId,
 		updatedAt,
+		userId,
 	}: {
 		createdAt: string;
 		id: number;
 		label: string;
 		questionId: number;
 		updatedAt: string;
+		userId: number;
 	}): OnboardingAnswerEntity {
 		return new OnboardingAnswerEntity({
 			createdAt,
@@ -50,6 +58,7 @@ class OnboardingAnswerEntity implements Entity {
 			label,
 			questionId,
 			updatedAt,
+			userId,
 		});
 	}
 
@@ -66,14 +75,21 @@ class OnboardingAnswerEntity implements Entity {
 			label,
 			questionId,
 			updatedAt: "",
+			userId: null,
 		});
 	}
 
 	public toNewObject(): {
+		createdAt: string;
 		label: string;
+		questionId: number;
+		updatedAt: string;
 	} {
 		return {
+			createdAt: this.createdAt,
 			label: this.label,
+			questionId: this.questionId,
+			updatedAt: this.updatedAt,
 		};
 	}
 
@@ -83,6 +99,7 @@ class OnboardingAnswerEntity implements Entity {
 		label: string;
 		questionId: number;
 		updatedAt: string;
+		userId: number;
 	} {
 		return {
 			createdAt: this.createdAt,
@@ -90,6 +107,7 @@ class OnboardingAnswerEntity implements Entity {
 			label: this.label,
 			questionId: this.questionId,
 			updatedAt: this.updatedAt,
+			userId: this.userId as number,
 		};
 	}
 }
