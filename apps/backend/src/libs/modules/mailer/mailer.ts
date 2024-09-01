@@ -1,5 +1,5 @@
-import { BaseMailer, transporter } from "./base-mailer.module.js";
+import { BaseMailer } from "./base-mailer.module.js";
 
-const mailer = new BaseMailer(transporter);
+const mailer = new BaseMailer();
 
 export { mailer };

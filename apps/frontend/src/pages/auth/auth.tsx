@@ -8,7 +8,7 @@ import {
 	useCallback,
 	useLocation,
 	useNavigate,
-	useParams,
+	useQuery,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
@@ -37,7 +37,7 @@ const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const { token } = useParams();
+	const query = useQuery();
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -65,13 +65,13 @@ const Auth: React.FC = () => {
 		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
 			void dispatch(
 				authActions.resetPassword({
-					jwtToken: token as string,
+					jwtToken: query.get("token") as string,
 					newPassword: payload.newPassword,
 				}),
 			);
 			navigate(AppRoute.SIGN_IN);
 		},
-		[dispatch, navigate, token],
+		[dispatch, navigate, query],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
@@ -88,7 +88,7 @@ const Auth: React.FC = () => {
 				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
 
-			case `${AppRoute.RESET_PASSWORD}/${token as string}`: {
+			case AppRoute.RESET_PASSWORD: {
 				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
 			}
 		}

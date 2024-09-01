@@ -44,7 +44,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							},
 							{
 								element: <Auth />,
-								path: `${AppRoute.RESET_PASSWORD}/:token`,
+								path: AppRoute.RESET_PASSWORD,
 							},
 							{
 								element: (

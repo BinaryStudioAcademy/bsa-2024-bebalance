@@ -45,7 +45,7 @@ class AuthService {
 
 		mailer.sendEmail({
 			subject: "BeBalance: reset password",
-			text: `Here is a link to reset your password: ${config.ENV.BASE_URLS.RESET_PASSWORD_URL}/${jwtToken}`,
+			text: `Here is a link to reset your password: ${config.ENV.BASE_URLS.RESET_PASSWORD_URL}?token=${jwtToken}`,
 			to: userDetails.email,
 		});
 
