@@ -7,6 +7,7 @@ import {
 	type CategoryRequestDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
+	type QuizScoresResponseDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -82,6 +83,26 @@ class CategoryService implements Service {
 		});
 
 		return { items };
+	}
+
+	public async findUserScores(userId: number): Promise<QuizScoresResponseDto> {
+		const categoryEntities =
+			await this.categoryRepository.findUserScores(userId);
+
+		const scores = categoryEntities.map((scoreEntity) => {
+			const score = scoreEntity.toObject();
+
+			return {
+				categoryId: score.categoryId,
+				createdAt: score.createdAt,
+				id: score.id,
+				score: score.score,
+				updatedAt: score.updatedAt,
+				userId: score.userId,
+			};
+		});
+
+		return { items: scores };
 	}
 
 	public async update(
