@@ -86,7 +86,6 @@ class OnboardingController extends BaseController {
 	 *                         type: string
 	 *                         format: date-time
 	 */
-
 	private async saveOnboardingAnswers(
 		options: APIHandlerOptions<{
 			body: OnboardingAnswerRequestBodyDto;

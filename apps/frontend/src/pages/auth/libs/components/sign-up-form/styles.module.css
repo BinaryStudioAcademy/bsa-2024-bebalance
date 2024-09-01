@@ -2,7 +2,7 @@
 	z-index: var(--z-index-low);
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 24px;
 	width: 350px;
 }
 
