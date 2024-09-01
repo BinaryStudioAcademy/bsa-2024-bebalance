@@ -34,6 +34,19 @@
 	padding: 14px 12px;
 }
 
+.signOut-btn {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	padding: 10px;
+	font-size: 20px;
+	color: var(--black);
+	background: none;
+	border: none;
+	border-top: 1px solid var(--white);
+	border-radius: 0%;
+}
+
 @media (width <= 768px) {
 	.sidebar-container {
 		position: fixed;

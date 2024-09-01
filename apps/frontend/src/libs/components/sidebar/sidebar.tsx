@@ -1,4 +1,4 @@
-import { Button } from "~/libs/components/components.js";
+import { Button, Icon } from "~/libs/components/components.js";
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
@@ -64,12 +64,10 @@ const Sidebar: React.FC<Properties> = ({
 						);
 					})}
 				</div>
-				<Button
-					iconName="signOut"
-					label="Sign out"
-					onClick={handleSignOut}
-					variant="sidebarItem"
-				/>
+				<button className={styles["signOut-btn"]} onClick={handleSignOut}>
+					<Icon name="signOut" />
+					Sign out
+				</button>
 			</div>
 		</div>
 	);
