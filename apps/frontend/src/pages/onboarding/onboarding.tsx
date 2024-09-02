@@ -6,6 +6,7 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useState,
 } from "~/libs/hooks/hooks.js";
 import {
 	actions as onboardingActions,
@@ -14,11 +15,18 @@ import {
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "~/pages/onboarding/libs/constants/constants.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
-import { type OnboardingFormValues } from "./libs/types/types.js";
+import {
+	type OnboardingAnswerRequestBodyDto,
+	type OnboardingFormValues,
+} from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
+
+	const [answerIds, setAnswerIds] = useState<OnboardingAnswerRequestBodyDto>({
+		answerIds: [],
+	});
 
 	const {
 		currentQuestionIndex,
@@ -44,22 +52,31 @@ const Onboarding: React.FC = () => {
 			validationSchema: oneAnswerSelectedValidationSchema,
 		});
 
-	const handleSaveAnswers = useCallback((data: OnboardingFormValues) => {
-		//TODO: add save to backend
-		return data;
-	}, []);
+	const handleSaveAnswers = useCallback(
+		(payload: OnboardingAnswerRequestBodyDto) => {
+			// void dispatch(onboardingActions.saveAnswers(payload));
+			return payload;
+		},
+		[],
+	);
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
+			setAnswerIds((previousState) => ({
+				answerIds: [...previousState.answerIds, Number(data.answer)],
+			}));
+
 			if (isLastQuestion) {
-				return handleSaveAnswers(data);
+				handleSaveAnswers(answerIds);
+
+				return;
 			}
 
 			void dispatch(onboardingActions.nextQuestion());
 			reset();
 		},
 
-		[isLastQuestion, dispatch, reset, handleSaveAnswers],
+		[answerIds, dispatch, handleSaveAnswers, isLastQuestion, reset],
 	);
 
 	const handlePreviousStep = useCallback(() => {
@@ -92,7 +109,9 @@ const Onboarding: React.FC = () => {
 										control={control}
 										key={answer.id}
 										name="answer"
-										options={[{ label: answer.label, value: answer.label }]}
+										options={[
+											{ label: answer.label, value: answer.id.toString() },
+										]}
 									/>
 								))}
 								<div className={styles["button-container"]}>
