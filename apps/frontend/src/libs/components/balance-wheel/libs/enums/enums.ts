@@ -1,2 +1,2 @@
-export { BACKGROUND_COLORS } from "./chart-bg-colors.enum.js";
-export { DATA_CONFIG } from "./data-config.enum.js";
+export { BALANCE_WHEEL_BACKGROUND_COLORS } from "./balance-wheel-background-colors.enum.js";
+export { BALANCE_WHEEL_CHART_DATA_CONFIG } from "./balance-wheel-data-config.enum.js";

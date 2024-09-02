@@ -1,4 +1,4 @@
-const BACKGROUND_COLORS = [
+const BALANCE_WHEEL_BACKGROUND_COLORS = [
 	{
 		end: "#fff8b5",
 		start: "#ffe307",
@@ -33,4 +33,4 @@ const BACKGROUND_COLORS = [
 	},
 ] as const;
 
-export { BACKGROUND_COLORS };
+export { BALANCE_WHEEL_BACKGROUND_COLORS };
