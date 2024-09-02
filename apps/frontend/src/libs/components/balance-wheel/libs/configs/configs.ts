@@ -1,1 +1,1 @@
-export { chartConfig } from "./chart.config.js";
+export { WHEEL_CHART_CONFIG } from "./chart.config.js";

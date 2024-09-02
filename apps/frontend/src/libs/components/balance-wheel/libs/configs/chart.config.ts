@@ -6,7 +6,7 @@ import {
 	generateRandomData,
 } from "../helpers/helpers.js";
 
-const chartConfig: ChartConfiguration<"polarArea"> = {
+const WHEEL_CHART_CONFIG: ChartConfiguration<"polarArea"> = {
 	data: {
 		datasets: [
 			{
@@ -21,6 +21,11 @@ const chartConfig: ChartConfiguration<"polarArea"> = {
 	options: {
 		animation: {
 			easing: "easeInOutQuad",
+		},
+		plugins: {
+			tooltip: {
+				enabled: false,
+			},
 		},
 		scales: {
 			r: {
@@ -61,4 +66,4 @@ const chartConfig: ChartConfiguration<"polarArea"> = {
 	type: "polarArea",
 };
 
-export { chartConfig };
+export { WHEEL_CHART_CONFIG };
