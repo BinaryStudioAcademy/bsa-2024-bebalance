@@ -1,13 +1,10 @@
 import React from "react";
 
 import { LinearGradient } from "~/libs/components/components";
+import { colorToGradientColors } from "~/libs/maps/maps";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 
-import {
-	colorToGradientColors,
-	directionToGradient,
-	sizeToStyles,
-} from "./libs/maps/maps";
+import { directionToGradient, sizeToStyles } from "./libs/maps/maps";
 import { styles } from "./styles";
 
 type Properties = {

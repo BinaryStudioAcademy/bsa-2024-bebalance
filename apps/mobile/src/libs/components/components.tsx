@@ -12,8 +12,10 @@ export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { Planet } from "./planet/planet";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
+export { Tag } from "./tag/tag";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
+export { Wheel } from "./wheel/wheel";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
 export {
 	ActivityIndicator,
@@ -26,4 +28,13 @@ export {
 	View,
 } from "react-native";
 export { LinearGradient } from "react-native-linear-gradient";
+export { default as Animated } from "react-native-reanimated";
+export {
+	Circle,
+	default as Svg,
+	Defs,
+	RadialGradient as SvgGradient,
+	Stop,
+	Text as SvgText,
+} from "react-native-svg";
 export { default as MaterialIcon } from "react-native-vector-icons/MaterialIcons";
