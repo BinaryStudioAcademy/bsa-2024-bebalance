@@ -8,6 +8,8 @@ import {
 import { UserModel } from "./user.model.js";
 
 class UserDetailsModel extends AbstractModel {
+	public allowNotifications!: boolean;
+
 	public name!: string;
 
 	public userId!: number;
