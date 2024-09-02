@@ -1,4 +1,5 @@
 type UserDto = {
+	avatarUrl: string;
 	createdAt: string;
 	email: string;
 	id: number;

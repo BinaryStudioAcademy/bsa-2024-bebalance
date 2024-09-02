@@ -1,5 +1,7 @@
 import { encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { logger } from "~/libs/modules/logger/logger.js";
+import { fileService } from "~/modules/files/files.js";
+import { FileModel } from "~/modules/files/files.model.js";
 
 import { UserController } from "./user.controller.js";
 import { UserModel } from "./user.model.js";
@@ -7,8 +9,12 @@ import { UserRepository } from "./user.repository.js";
 import { UserService } from "./user.service.js";
 import { UserDetailsModel } from "./user-details.model.js";
 
-const userRepository = new UserRepository(UserModel, UserDetailsModel);
-const userService = new UserService(userRepository, encrypt);
+const userRepository = new UserRepository(
+	UserModel,
+	UserDetailsModel,
+	FileModel,
+);
+const userService = new UserService(userRepository, encrypt, fileService);
 const userController = new UserController(logger, userService);
 
 export { UserValidationMessage } from "./libs/enums/enums.js";

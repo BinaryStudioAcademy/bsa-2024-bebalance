@@ -1,3 +1,5 @@
+import { type MultipartFile } from "@fastify/multipart";
+
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type ServerApplicationRouteParameters } from "~/libs/modules/server-application/server-application.js";
 
@@ -29,6 +31,11 @@ class BaseController implements Controller {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
 		const handlerOptions = this.mapRequest(request);
+
+		if (request.isMultipart()) {
+			handlerOptions.file = (await request.file()) as MultipartFile;
+		}
+
 		const { payload, status } = await handler(handlerOptions);
 
 		return await reply.status(status).send(payload);

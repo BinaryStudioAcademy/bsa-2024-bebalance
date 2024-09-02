@@ -1,6 +1,8 @@
 import { type Entity } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
+	private avatarUrl: string;
+
 	private createdAt: string;
 
 	private email: string;
@@ -16,6 +18,7 @@ class UserEntity implements Entity {
 	private updatedAt: string;
 
 	private constructor({
+		avatarUrl,
 		createdAt,
 		email,
 		id,
@@ -24,6 +27,7 @@ class UserEntity implements Entity {
 		passwordSalt,
 		updatedAt,
 	}: {
+		avatarUrl: string;
 		createdAt: string;
 		email: string;
 		id: null | number;
@@ -32,6 +36,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 		updatedAt: string;
 	}) {
+		this.avatarUrl = avatarUrl;
 		this.createdAt = createdAt;
 		this.id = id;
 		this.email = email;
@@ -42,6 +47,7 @@ class UserEntity implements Entity {
 	}
 
 	public static initialize({
+		avatarUrl,
 		createdAt,
 		email,
 		id,
@@ -50,15 +56,17 @@ class UserEntity implements Entity {
 		passwordSalt,
 		updatedAt,
 	}: {
+		avatarUrl: string;
 		createdAt: string;
 		email: string;
-		id: number;
+		id: null | number;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarUrl,
 			createdAt,
 			email,
 			id,
@@ -81,6 +89,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarUrl: "",
 			createdAt: "",
 			email,
 			id: null,
@@ -92,6 +101,7 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		avatarUrl: string;
 		createdAt: string;
 		email: string;
 		name: string;
@@ -100,6 +110,7 @@ class UserEntity implements Entity {
 		updatedAt: string;
 	} {
 		return {
+			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
 			name: this.name,
@@ -110,6 +121,7 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
+		avatarUrl: string;
 		createdAt: string;
 		email: string;
 		id: number;
@@ -117,6 +129,7 @@ class UserEntity implements Entity {
 		updatedAt: string;
 	} {
 		return {
+			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
 			id: this.id as number,

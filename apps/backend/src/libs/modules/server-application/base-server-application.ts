@@ -1,3 +1,4 @@
+import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import swagger, { type StaticDocumentSpec } from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
@@ -215,6 +216,8 @@ class BaseServerApplication implements ServerApplication {
 					userService,
 					whiteRoutes: WHITE_ROUTES,
 				});
+
+				await this.app.register(fastifyMultipart);
 			}),
 		);
 	}
