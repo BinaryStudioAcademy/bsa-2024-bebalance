@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 import {
 	ArcElement,
-	ChartJS,
+	Chart as ChartJS,
 	PolarAreaController,
 	RadialLinearScale,
 	Tooltip,
-} from "~/libs/types/types.js";
+} from "chart.js";
+
+import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 
 import { WHEEL_CHART_CONFIG } from "./libs/configs/configs.js";
 import { ANIMATION_INTERVAL } from "./libs/constants/constants.js";
