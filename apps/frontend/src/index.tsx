@@ -25,7 +25,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component={<QuizCategoriesForm submitLabel="Retake Quiz" />}
+										component={<h1>Root Page</h1>}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
@@ -47,6 +47,15 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 									/>
 								),
 								path: AppRoute.QUIZ,
+							},
+							{
+								element: (
+									<ProtectedRoute
+										component={<QuizCategoriesForm />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
+								path: AppRoute.CHAT,
 							},
 						],
 						element: <App />,

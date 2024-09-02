@@ -1,6 +1,4 @@
-import { useCallback } from "react";
-
-import { useAppForm } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 
 import { Button } from "../components.js";
 import { useQuizCategories } from "./libs/hooks/hooks.js";
@@ -12,12 +10,10 @@ type FormFields = {
 
 type Properties = {
 	onSubmit?: (payload: FormFields) => void;
-	submitLabel: string;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({
 	onSubmit = (): void => {},
-	submitLabel,
 }: Properties) => {
 	const { handleSubmit, register, setValue, watch } = useAppForm<FormFields>({
 		defaultValues: { categoriesIds: [] },
@@ -74,7 +70,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 					);
 				})}
 				<br />
-				<Button label={submitLabel} type="submit" />
+				<Button label="Retake Quiz" type="submit" />
 			</form>
 		</section>
 	);
