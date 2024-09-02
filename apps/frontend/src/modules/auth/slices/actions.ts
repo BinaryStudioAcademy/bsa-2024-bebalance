@@ -73,13 +73,13 @@ const requestResetPassword = createAsyncThunk<
 >(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
 	const { authApi, notification } = extra;
 
-	const isSuccesful = await authApi.requestResetPassword(emailPayload);
+	const isSuccessful = await authApi.requestResetPassword(emailPayload);
 
-	if (isSuccesful) {
+	if (isSuccessful) {
 		notification.success(NotificationMessage.LINK_SENT);
 	}
 
-	return isSuccesful;
+	return isSuccessful;
 });
 
 const resetPassword = createAsyncThunk<
