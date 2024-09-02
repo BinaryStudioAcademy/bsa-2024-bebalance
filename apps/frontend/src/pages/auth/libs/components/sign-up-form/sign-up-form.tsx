@@ -1,3 +1,5 @@
+import { UserValidationRule } from "shared/src/modules/users/libs/enums/enums.js";
+
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
@@ -94,7 +96,11 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button label="CREATE AN ACCOUNT" type="submit" />
+				<Button
+					isDisabled={Object.keys(errors).length > UserValidationRule.NO_ERROR}
+					label="CREATE AN ACCOUNT"
+					type="submit"
+				/>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

@@ -35,6 +35,11 @@
 	transform: translateY(-50%);
 }
 
+.disabled-button {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
 .position-right {
 	right: 20px;
 }
