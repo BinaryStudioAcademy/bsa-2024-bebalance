@@ -1,6 +1,5 @@
-import { type ChartConfiguration } from "chart.js";
+import { type ChartConfiguration } from "~/libs/types/types.js";
 
-import { CHART_CONFIG } from "../enums/enums.js";
 import {
 	generateGradientColor,
 	generateRandomData,
@@ -33,36 +32,6 @@ const WHEEL_CHART_CONFIG: ChartConfiguration<"polarArea"> = {
 			},
 		},
 	},
-	plugins: [
-		{
-			afterDraw: (chart): void => {
-				const { chartArea, ctx } = chart;
-				const centerX =
-					(chartArea.left + chartArea.right) / CHART_CONFIG.CENTER_DIVISOR;
-				const centerY =
-					(chartArea.top + chartArea.bottom) / CHART_CONFIG.CENTER_DIVISOR;
-				const radius =
-					Math.min(
-						chartArea.right - chartArea.left,
-						chartArea.bottom - chartArea.top,
-					) / CHART_CONFIG.RADIUS_DIVISOR;
-
-				ctx.save();
-				ctx.beginPath();
-				ctx.arc(
-					centerX,
-					centerY,
-					radius,
-					CHART_CONFIG.START_ANGLE,
-					CHART_CONFIG.END_ANGLE,
-				);
-				ctx.fillStyle = "white";
-				ctx.fill();
-				ctx.restore();
-			},
-			id: "centerCircle",
-		},
-	],
 	type: "polarArea",
 };
 
