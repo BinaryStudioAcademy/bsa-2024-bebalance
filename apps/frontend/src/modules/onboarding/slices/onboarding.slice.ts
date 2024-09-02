@@ -7,14 +7,14 @@ import { type OnboardingQuestionResponseDto } from "~/modules/onboarding/onboard
 import { getAll } from "./actions.js";
 
 type State = {
-	currentQuestion: OnboardingQuestionResponseDto | undefined;
+	currentQuestion: null | OnboardingQuestionResponseDto;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: OnboardingQuestionResponseDto[];
 };
 
 const initialState: State = {
-	currentQuestion: undefined,
+	currentQuestion: null,
 	currentQuestionIndex: 0,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
@@ -28,7 +28,8 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAll.fulfilled, (state, action) => {
 			state.questions = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
-			state.currentQuestion = state.questions[state.currentQuestionIndex];
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] || null;
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -39,12 +40,14 @@ const { actions, name, reducer } = createSlice({
 	reducers: {
 		nextQuestion(state) {
 			state.currentQuestionIndex += 1;
-			state.currentQuestion = state.questions[state.currentQuestionIndex];
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] || null;
 		},
 		previousQuestion(state) {
 			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
 				state.currentQuestionIndex -= 1;
-				state.currentQuestion = state.questions[state.currentQuestionIndex];
+				state.currentQuestion =
+					state.questions[state.currentQuestionIndex] || null;
 			}
 		},
 	},
