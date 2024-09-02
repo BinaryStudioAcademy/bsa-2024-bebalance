@@ -10,6 +10,10 @@ type ServerApplicationRouteParameters = {
 	) => Promise<void> | void;
 	method: HTTPMethod;
 	path: string;
+	preHandler?: (
+		request: FastifyRequest,
+		reply: FastifyReply,
+	) => Promise<void> | void;
 	validation?: {
 		body?: ValidationSchema;
 	};

@@ -4,6 +4,7 @@ import { type ServerApplicationRouteParameters } from "~/libs/modules/server-app
 import {
 	type APIHandler,
 	type APIHandlerOptions,
+	type APIPreHandler,
 	type Controller,
 	type ControllerRouteParameters,
 } from "./libs/types/types.js";
@@ -29,9 +30,30 @@ class BaseController implements Controller {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
 		const handlerOptions = this.mapRequest(request);
-		const { payload, status } = await handler(handlerOptions);
+		const handlerResponse = await handler(handlerOptions);
 
-		return await reply.status(status).send(payload);
+		if (handlerResponse) {
+			const { payload, status } = handlerResponse;
+
+			return await reply.status(status).send(payload);
+		}
+	}
+
+	private async mapPreHandler(
+		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
+		reply: Parameters<ServerApplicationRouteParameters["handler"]>[1],
+		preHandler?: APIPreHandler,
+	): Promise<void> {
+		if (!preHandler) {
+			return;
+		}
+
+		const handlerOptions = this.mapRequest(request);
+		const preHandlerResponse = await preHandler(handlerOptions);
+
+		if (preHandlerResponse) {
+			throw preHandlerResponse.error;
+		}
 	}
 
 	private mapRequest(
@@ -48,13 +70,15 @@ class BaseController implements Controller {
 	}
 
 	public addRoute(options: ControllerRouteParameters): void {
-		const { handler, path } = options;
+		const { handler, path, preHandler } = options;
 		const fullPath = this.apiUrl + path;
 
 		this.routes.push({
 			...options,
 			handler: (request, reply) => this.mapHandler(handler, request, reply),
 			path: fullPath,
+			preHandler: (request, reply) =>
+				this.mapPreHandler(request, reply, preHandler),
 		});
 	}
 }

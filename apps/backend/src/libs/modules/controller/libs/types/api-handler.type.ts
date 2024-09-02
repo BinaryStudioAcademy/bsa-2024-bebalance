@@ -3,6 +3,6 @@ import { type APIHandlerResponse } from "./api-handler-response.type.js";
 
 type APIHandler = (
 	options: APIHandlerOptions,
-) => APIHandlerResponse | Promise<APIHandlerResponse>;
+) => APIHandlerResponse | Promise<APIHandlerResponse> | undefined;
 
 export { type APIHandler };

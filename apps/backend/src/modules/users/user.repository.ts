@@ -114,7 +114,7 @@ class UserRepository implements Repository {
 		id: number,
 		payload: Partial<UserDetailsModel>,
 	): Promise<null | UserEntity> {
-		await this.userDetailsModel.query().patch(payload).where({ user_id: id });
+		await this.userDetailsModel.query().patch(payload).where({ userId: id });
 
 		return await this.find(id);
 	}
