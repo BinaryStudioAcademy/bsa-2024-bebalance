@@ -6,6 +6,7 @@ import { type UserRepository } from "~/modules/users/user.repository.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
+	type UserPreferencesPayloadDto,
 	type UserSignUpRequestDto,
 } from "./libs/types/types.js";
 
@@ -50,6 +51,17 @@ class UserService implements Service {
 
 	public findByEmail(email: string): Promise<null | UserEntity> {
 		return this.userRepository.findByEmail(email);
+	}
+
+	public async setUserPreferences(
+		id: number,
+		payload: UserPreferencesPayloadDto,
+	): Promise<null | UserEntity> {
+		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
+
+		return await this.userRepository.updateUserDetails(id, {
+			allowNotifications: payload.allowNotifications,
+		});
 	}
 
 	public update(): ReturnType<Service["update"]> {
