@@ -5,7 +5,6 @@ import {
 	IconButton,
 	Input,
 	Link,
-	Tag,
 	Text,
 } from "~/libs/components/components";
 import { BaseColor, RootScreenName } from "~/libs/enums/enums";
@@ -73,7 +72,6 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 				placeholder="********"
 			/>
 			<Button label="SIGN IN" onPress={handleFormSubmit} />
-			<Tag color="green" label="Love" />
 		</>
 	);
 };
