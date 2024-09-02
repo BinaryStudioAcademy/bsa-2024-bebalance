@@ -1,5 +1,4 @@
-import { HALF_PI } from "chart.js/helpers";
-
+import { HALF_PI } from "~/libs/constants/constants.js";
 import { type Chart, type RadialLinearScale } from "~/libs/types/types.js";
 
 import {

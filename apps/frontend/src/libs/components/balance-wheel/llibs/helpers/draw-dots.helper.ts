@@ -1,5 +1,4 @@
-import { HALF_PI, TAU } from "chart.js/helpers";
-
+import { HALF_PI, TAU } from "~/libs/constants/constants.js";
 import { type ChartMeta, type RadialLinearScale } from "~/libs/types/types.js";
 
 import { DOT_RADIUS, START_ANGLE } from "../constants/constants.js";

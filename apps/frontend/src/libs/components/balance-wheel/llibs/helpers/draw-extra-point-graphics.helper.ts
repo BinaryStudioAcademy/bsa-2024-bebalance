@@ -1,5 +1,4 @@
-import { TAU } from "chart.js/helpers";
-
+import { TAU } from "~/libs/constants/constants.js";
 import { type Chart, type RadialLinearScale } from "~/libs/types/types.js";
 
 import {
