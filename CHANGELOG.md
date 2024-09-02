@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.27.0...v1.28.0) (2024-09-02)
+
+
+### Features
+
+* **frontend:** sign-out functionality bb-241 ([#264](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/264)) ([d6b5fff](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d6b5fff860ac41666d3cd00b17945415d859a6db))
+
 ## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.26.0...v1.27.0) (2024-09-01)
 
 
