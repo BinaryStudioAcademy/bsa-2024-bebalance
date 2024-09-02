@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.26.0...v1.27.0) (2024-09-01)
+
+
+### Features
+
+* **backend/shared:** save quiz response to db bb-166 ([#208](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/208)) ([42b4cbb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/42b4cbb32ddbe609d3555d24b755199783429600))
+* **frontend:** sign up bb-9 ([#218](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/218)) ([917e652](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/917e6525945033ce33df1712dcaaf7c75b0b4bc3))
+* **mobile:** requirements for authorization pages bb-210 ([#259](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/259)) ([57bf893](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/57bf8934e7cc52094630d5a40afbd53e96cd3a16))
+
+
+### Bug Fixes
+
+* **frontend:** "You are unauthorized to access the requested resource." error message is shown on the Sign-In/ Sign-Up page bb-222 ([#248](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/248)) ([601cfa2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/601cfa2f41665dcc5448fc034fde6ed3d431b88b))
+* **mobile:** an error message appears after tap on "create an account" link bb-219 ([#262](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/262)) ([00c2296](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/00c22967cd8524b45d9469ffe9a03685e0edb972))
+
 ## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.25.0...v1.26.0) (2024-08-31)
 
 
