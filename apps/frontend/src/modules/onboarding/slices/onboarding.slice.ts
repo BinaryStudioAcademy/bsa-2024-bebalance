@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "~/libs/constants/constants.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type OnboardingQuestionResponseDto } from "~/modules/onboarding/onboarding.js";
@@ -15,7 +19,7 @@ type State = {
 
 const initialState: State = {
 	currentQuestion: null,
-	currentQuestionIndex: 0,
+	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
 };
@@ -39,13 +43,13 @@ const { actions, name, reducer } = createSlice({
 	name: "onboarding",
 	reducers: {
 		nextQuestion(state) {
-			state.currentQuestionIndex += 1;
+			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentQuestion =
 				state.questions[state.currentQuestionIndex] || null;
 		},
 		previousQuestion(state) {
 			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
-				state.currentQuestionIndex -= 1;
+				state.currentQuestionIndex -= PREVIOUS_INDEX_OFFSET;
 				state.currentQuestion =
 					state.questions[state.currentQuestionIndex] || null;
 			}
