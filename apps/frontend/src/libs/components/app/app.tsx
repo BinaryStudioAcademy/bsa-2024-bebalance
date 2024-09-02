@@ -24,20 +24,23 @@ const App: React.FC = () => {
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
-		if (isRoot) {
-			void dispatch(authActions.getAuthenticatedUser());
-		}
-	}, [isRoot, dispatch]);
+		void dispatch(authActions.getAuthenticatedUser());
+	}, [dispatch]);
 
-	const isLoading = dataStatus === DataStatus.PENDING;
+	const isLoading =
+		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	return (
 		<>
 			<div>
 				<RouterOutlet />
 			</div>
-			{isLoading && <Loader />}
-			{!isLoading && isRoot && (
+
+			{isRoot && (
 				<>
 					<QuizForm />
 				</>

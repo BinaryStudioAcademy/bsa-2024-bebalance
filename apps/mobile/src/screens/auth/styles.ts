@@ -5,8 +5,13 @@ import { BaseColor } from "~/libs/enums/enums";
 const styles = StyleSheet.create({
 	formContainer: {
 		backgroundColor: BaseColor.BG_WHITE,
-		borderRadius: 25,
-		width: "90%",
+		borderRadius: 30,
+		minHeight: "95%",
+		width: "100%",
+	},
+	wideView: {
+		minHeight: "100%",
+		minWidth: "100%",
 	},
 });
 

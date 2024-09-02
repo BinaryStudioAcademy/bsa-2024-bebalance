@@ -13,7 +13,7 @@ type APIHandlerOptions<
 	file?: T["file"];
 	params: T["params"];
 	query: T["query"];
-	user?: T["user"];
+	user: T["user"];
 };
 
 export { type APIHandlerOptions };

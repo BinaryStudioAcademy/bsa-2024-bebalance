@@ -1,6 +1,17 @@
 .sidebar-container {
-	height: 100%;
+	position: sticky;
+	top: 0;
+	z-index: var(--z-index-high);
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	width: 300px;
+	height: 100vh;
 	background-color: var(--background-gray);
+}
+
+.close-btn {
+	display: none;
 }
 
 .logo-container {
@@ -13,5 +24,46 @@
 }
 
 .buttons-container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	justify-content: space-between;
 	padding: 14px 12px;
+}
+
+.signOut-btn {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	padding: 10px;
+	font-size: 20px;
+	color: var(--black);
+	background: none;
+	border: none;
+	border-top: 1px solid var(--white);
+	border-radius: 0%;
+}
+
+@media (width <= 768px) {
+	.sidebar-container {
+		position: fixed;
+		transition: transform 0.3s ease;
+		transform: translateX(-100%);
+	}
+
+	.sidebar-container.open {
+		transform: translateX(0);
+	}
+
+	.close-btn {
+		position: absolute;
+		top: 25px;
+		right: 25px;
+		display: flex;
+		cursor: pointer;
+	}
+
+	.close-btn:hover {
+		opacity: 0.6;
+	}
 }

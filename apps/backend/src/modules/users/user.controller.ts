@@ -168,7 +168,7 @@ class UserController extends BaseController {
 		}
 
 		const user = await this.userService.updateAvatar(
-			(options.user as UserDto).id,
+			options.user.id,
 			options.file,
 		);
 
