@@ -27,25 +27,26 @@ const BalanceWheel: React.FC<Properties> = ({
 }: Properties) => {
 	const chartReference = useRef<ChartJS<"polarArea"> | null>(null);
 
-	const updateChartData = useCallback((): void => {
-		const chartInstance = chartReference.current;
-		const INDEX = 0;
+	const handleUpdateChartData = useCallback(
+		(chartData: ChartDataType[]): void => {
+			const chartInstance = chartReference.current;
+			const INDEX = 0;
 
-		if (!chartInstance || !chartInstance.data.datasets[INDEX]?.data) {
-			return;
-		}
+			if (!chartInstance || !chartInstance.data.datasets[INDEX]?.data) {
+				return;
+			}
 
-		chartInstance.data.datasets[INDEX].data = data.map((entry) => entry.data);
-		chartInstance.data.labels = data.map((entry) => entry.label);
+			chartInstance.data.datasets[INDEX].data = chartData.map(
+				(entry) => entry.data,
+			);
+			chartInstance.data.labels = chartData.map((entry) => entry.label);
 
-		chartInstance.update();
-	}, [data]);
+			chartInstance.update();
+		},
+		[],
+	);
 
-	const animateChartData = useCallback(() => {
-		if (!isAnimating) {
-			return;
-		}
-
+	const handleAnimateChart = useCallback(() => {
 		const chartInstance = chartReference.current;
 		const INDEX = 0;
 
@@ -55,19 +56,21 @@ const BalanceWheel: React.FC<Properties> = ({
 
 		chartInstance.data.datasets[INDEX].data = generateRandomData();
 		chartInstance.update();
-	}, [isAnimating]);
+	}, []);
 
 	useEffect(() => {
-		const intervalId = setInterval(animateChartData, ANIMATION_INTERVAL);
+		if (isAnimating) {
+			const intervalId = setInterval(handleAnimateChart, ANIMATION_INTERVAL);
 
-		return (): void => {
-			clearInterval(intervalId);
-		};
-	}, [animateChartData]);
+			return (): void => {
+				clearInterval(intervalId);
+			};
+		}
+	}, [handleAnimateChart, isAnimating]);
 
 	useEffect(() => {
-		updateChartData();
-	}, [updateChartData]);
+		handleUpdateChartData(data);
+	}, [data, handleUpdateChartData]);
 
 	const renderChart = useCallback((canvas?: HTMLCanvasElement | null): void => {
 		if (!canvas) {
