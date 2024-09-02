@@ -1,1 +1,1 @@
-export { extraPointLabelsPlugin } from "./extra-point-labels.plugin.js";
+export { extraPointGraphicsPlugin } from "./extra-point-graphics.plugin.js";

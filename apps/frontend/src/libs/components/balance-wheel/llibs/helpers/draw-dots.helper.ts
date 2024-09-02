@@ -1,12 +1,9 @@
 import { type ChartMeta, type RadialLinearScale } from "chart.js";
 import { HALF_PI, TAU } from "chart.js/helpers";
 
-import {
-	DOT_RADIUS,
-	FALLBACK_BACKGROUND_COLOR,
-	START_ANGLE,
-} from "../constants/constants.js";
-import { WheelCenterDistance } from "../enums/enums.js";
+import { DOT_RADIUS, START_ANGLE } from "../constants/constants.js";
+import { ChartGraphicsColors, WheelCenterDistance } from "../enums/enums.js";
+import { type PolarAreaType } from "../types/polar-area.type.js";
 
 const drawDots = ({
 	context,
@@ -17,14 +14,14 @@ const drawDots = ({
 }: {
 	context: CanvasRenderingContext2D;
 	index: number;
-	meta: ChartMeta<"polarArea">;
+	meta: ChartMeta<PolarAreaType>;
 	middleAngle: number;
 	scale: RadialLinearScale;
 }): void => {
 	const segment = meta.data[index];
 	const segmentColor = segment
 		? (segment.options["backgroundColor"] as CanvasGradient)
-		: FALLBACK_BACKGROUND_COLOR;
+		: ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR;
 
 	const dotDistance = scale.getDistanceFromCenterForValue(
 		WheelCenterDistance.DOT,

@@ -1,8 +1,9 @@
 import { type ChartConfiguration } from "chart.js";
 
 import { POLAR_AREA } from "../constants/constants.js";
+import { ChartFont, ChartGraphicsColors } from "../enums/enums.js";
 import { generateGradientColor } from "../helpers/helpers.js";
-import { extraPointLabelsPlugin } from "../plugins/plugins.js";
+import { extraPointGraphicsPlugin } from "../plugins/plugins.js";
 import { type PolarAreaType } from "../types/types.js";
 
 const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
@@ -20,7 +21,7 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	options: {
 		animation: false,
 		layout: {
-			padding: 50,
+			padding: 17,
 		},
 		plugins: {
 			tooltip: { enabled: false },
@@ -29,17 +30,20 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 			r: {
 				grid: {
 					circular: true,
-					color: "#0084ff11",
+					color: ChartGraphicsColors.GRID_COLOR,
 					lineWidth: 1,
 					z: 1,
 				},
 				pointLabels: {
 					centerPointLabels: true,
+					color: ChartGraphicsColors.LABELS_COLOR,
 					display: true,
 					font: {
-						size: 18,
+						family: ChartFont.FAMILY,
+						size: ChartFont.LABEL_FONT_SIZE,
+						weight: ChartFont.WEIGHT,
 					},
-					padding: 40,
+					padding: 57,
 				},
 				ticks: {
 					display: false,
@@ -47,7 +51,7 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 			},
 		},
 	},
-	plugins: [extraPointLabelsPlugin],
+	plugins: [extraPointGraphicsPlugin],
 	type: POLAR_AREA,
 };
 

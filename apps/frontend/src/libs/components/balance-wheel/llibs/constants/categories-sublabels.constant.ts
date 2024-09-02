@@ -7,6 +7,6 @@ const CATEGORIES_SUBLABELS = [
 	"Free time",
 	"Spiritual",
 	"Mental",
-];
+] as const;
 
 export { CATEGORIES_SUBLABELS };

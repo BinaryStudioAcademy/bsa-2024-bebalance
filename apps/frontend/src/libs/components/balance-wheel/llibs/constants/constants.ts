@@ -1,6 +1,4 @@
-const DOT_RADIUS = 5;
-
-const FALLBACK_BACKGROUND_COLOR = "#ffffff";
+const DOT_RADIUS = 7;
 
 const FIRST_ELEMENT_INDEX = 0;
 
@@ -14,12 +12,11 @@ const POLAR_AREA = "polarArea";
 
 export {
 	DOT_RADIUS,
-	FALLBACK_BACKGROUND_COLOR,
 	FIRST_ELEMENT_INDEX,
 	MAX_SLICE_VALUE,
 	POLAR_AREA,
 	SINGLE_ELEMENT,
 	START_ANGLE,
 };
-export { CATEGORIES_SUBLABELS } from "./categories-sublabels.js";
-export { SLICE_COLORS } from "./slice-colors.js";
+export { CATEGORIES_SUBLABELS } from "./categories-sublabels.constant.js";
+export { SLICE_COLORS } from "./slice-colors.constant.js";

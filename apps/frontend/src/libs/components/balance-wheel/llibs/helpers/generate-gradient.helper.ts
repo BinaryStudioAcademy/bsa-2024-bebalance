@@ -1,11 +1,11 @@
 import { type ScriptableContext } from "chart.js";
 
 import {
-	FALLBACK_BACKGROUND_COLOR,
 	MAX_SLICE_VALUE,
 	SINGLE_ELEMENT,
 	SLICE_COLORS,
 } from "../constants/constants.js";
+import { ChartGraphicsColors } from "../enums/enums.js";
 
 const GradientParameters = {
 	CENTER_DIVISOR: 2,
@@ -24,9 +24,11 @@ const generateGradientColor = (
 		SINGLE_ELEMENT;
 
 	const colorStart =
-		SLICE_COLORS[sliceColorIndex]?.start ?? FALLBACK_BACKGROUND_COLOR;
+		SLICE_COLORS[sliceColorIndex]?.start ??
+		ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR;
 	const colorEnd =
-		SLICE_COLORS[sliceColorIndex]?.end ?? FALLBACK_BACKGROUND_COLOR;
+		SLICE_COLORS[sliceColorIndex]?.end ??
+		ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR;
 
 	const { chart } = context;
 	const { chartArea, ctx } = chart;

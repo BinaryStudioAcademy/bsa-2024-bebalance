@@ -3,7 +3,7 @@ import { AngleCoefficient } from "../enums/enums.js";
 const getBaseline = (
 	y: number,
 	chartArea: { bottom: number; top: number },
-): "bottom" | "middle" | "top" => {
+): CanvasTextBaseline => {
 	const centerTop =
 		chartArea.top +
 		(chartArea.bottom - chartArea.top) / AngleCoefficient.QUARTER;
