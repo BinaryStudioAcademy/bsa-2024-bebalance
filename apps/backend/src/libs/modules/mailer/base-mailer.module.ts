@@ -7,11 +7,11 @@ import { config } from "~/libs/modules/config/config.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 
 type Construtctor = {
-	appPassword: string;
-	host: string;
-	port: number;
-	service: string;
-	user: string;
+	ADDRESS: string;
+	APP_PASSWORD: string;
+	HOST: string;
+	PORT: number;
+	SERVICE: string;
 };
 
 class BaseMailer {
@@ -21,13 +21,13 @@ class BaseMailer {
 	constructor(inputs: Construtctor) {
 		this.transporter = NodeMailer.createTransport({
 			auth: {
-				pass: inputs.appPassword,
-				user: inputs.user,
+				pass: inputs.APP_PASSWORD,
+				user: inputs.ADDRESS,
 			},
-			host: inputs.host,
-			port: inputs.port,
+			host: inputs.HOST,
+			port: inputs.PORT,
 			secure: true,
-			service: inputs.service,
+			service: inputs.SERVICE,
 		});
 	}
 
