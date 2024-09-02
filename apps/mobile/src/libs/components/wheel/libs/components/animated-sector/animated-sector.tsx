@@ -20,7 +20,7 @@ type Properties = {
 	stroke: string;
 };
 
-const ZERO = 0;
+const INITIAL_ANIMATED_VALUE = 0;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedSector: React.FC<Properties> = ({
@@ -42,11 +42,11 @@ const AnimatedSector: React.FC<Properties> = ({
 			startPercent,
 		});
 
-	const animatedArrayDash = useSharedValue(ZERO);
-	const animatedArrayGap = useSharedValue(ZERO);
-	const animatedDashOffset = useSharedValue(ZERO);
-	const animatedRadius = useSharedValue(ZERO);
-	const animatedStrokeWidth = useSharedValue(ZERO);
+	const animatedArrayDash = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedArrayGap = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedDashOffset = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedRadius = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedStrokeWidth = useSharedValue(INITIAL_ANIMATED_VALUE);
 
 	useEffect(() => {
 		animatedRadius.value += radius;
@@ -76,7 +76,7 @@ const AnimatedSector: React.FC<Properties> = ({
 			cx={centerPoint}
 			cy={centerPoint}
 			fill="none"
-			origin={[ZERO, ZERO]}
+			origin={[INITIAL_ANIMATED_VALUE, INITIAL_ANIMATED_VALUE]}
 			stroke={stroke}
 		/>
 	);
