@@ -13,7 +13,6 @@ const quizApi = new QuizApi({
 export {
 	type QuizAnswerDto,
 	type QuizQuestionDto,
-	type QuizQuestionsGetAllReponseDto,
 } from "./libs/types/types.js";
 export { quizApi };
 export { actions, reducer } from "./slices/quiz.js";

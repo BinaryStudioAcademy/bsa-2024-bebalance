@@ -1,9 +1,9 @@
-import { getQuestions } from "./actions.js";
+import { getAllQuestions } from "./actions.js";
 import { actions } from "./quiz.slice.js";
 
 const allActions = {
 	...actions,
-	getQuestions,
+	getAllQuestions,
 };
 
 export { allActions as actions };

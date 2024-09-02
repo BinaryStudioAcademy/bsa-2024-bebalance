@@ -4,28 +4,28 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type QuizQuestionDto } from "~/modules/quiz/quiz.js";
 
-import { getQuestions } from "./actions.js";
+import { getAllQuestions } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	questions: QuizQuestionDto[];
+	questions: { items: QuizQuestionDto[][] };
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	questions: [],
+	questions: { items: [] },
 };
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(getQuestions.pending, (state) => {
+		builder.addCase(getAllQuestions.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(getQuestions.fulfilled, (state, action) => {
+		builder.addCase(getAllQuestions.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload.items;
+			state.questions = action.payload;
 		});
-		builder.addCase(getQuestions.rejected, (state) => {
+		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

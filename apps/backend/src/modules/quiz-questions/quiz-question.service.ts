@@ -65,14 +65,28 @@ class QuizQuestionService implements Service {
 			: null;
 	}
 
-	public async findAll(): Promise<{ items: QuizQuestionDto[] }> {
+	public async findAll(): Promise<{ items: QuizQuestionDto[][] }> {
 		const questions = await this.quizQuestionRepository.findAll();
 
 		const items = questions.map((questionEntity) => {
 			return this.convertQuestionEntityToDto(questionEntity);
 		});
 
-		return { items };
+		const groupedByCategory: Record<number, QuizQuestionDto[]> = {};
+
+		for (const question of items) {
+			const { categoryId } = question;
+
+			if (!groupedByCategory[categoryId]) {
+				groupedByCategory[categoryId] = [];
+			}
+
+			groupedByCategory[categoryId].push(question);
+		}
+
+		const result = Object.values(groupedByCategory);
+
+		return { items: result };
 	}
 
 	public async update(

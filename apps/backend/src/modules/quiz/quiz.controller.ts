@@ -11,6 +11,7 @@ import {
 	type QuizAnswerService,
 	type QuizAnswersRequestDto,
 } from "../quiz-answers/quiz-answers.js";
+import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { type UserDto } from "../users/users.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
 import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
@@ -58,10 +59,18 @@ import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/valid
 class QuizController extends BaseController {
 	private quizAnswerService: QuizAnswerService;
 
-	public constructor(logger: Logger, quizAnswerService: QuizAnswerService) {
+	private quizQuestionService: QuizQuestionService;
+
+	public constructor(
+		logger: Logger,
+		quizAnswerService: QuizAnswerService,
+		quizQuestionService: QuizQuestionService,
+	) {
 		super(logger, APIPath.QUIZ);
 
 		this.quizAnswerService = quizAnswerService;
+
+		this.quizQuestionService = quizQuestionService;
 
 		this.addRoute({
 			handler: (options) =>
@@ -76,6 +85,12 @@ class QuizController extends BaseController {
 			validation: {
 				body: quizUserAnswersValidationSchema,
 			},
+		});
+
+		this.addRoute({
+			handler: () => this.findAll(),
+			method: "GET",
+			path: QuizApiPath.QUESTION,
 		});
 	}
 
@@ -126,6 +141,13 @@ class QuizController extends BaseController {
 				userId: options.user.id,
 			}),
 			status: HTTPCode.CREATED,
+		};
+	}
+
+	private async findAll(): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.quizQuestionService.findAll(),
+			status: HTTPCode.OK,
 		};
 	}
 }
