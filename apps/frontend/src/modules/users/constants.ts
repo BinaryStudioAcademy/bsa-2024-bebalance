@@ -1,0 +1,3 @@
+const NO_ERROR_INPUT_FIELD = 0;
+
+export { NO_ERROR_INPUT_FIELD };

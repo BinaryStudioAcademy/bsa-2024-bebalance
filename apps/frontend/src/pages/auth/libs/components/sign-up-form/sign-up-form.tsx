@@ -1,7 +1,6 @@
-import { UserValidationRule } from "shared/src/modules/users/libs/enums/enums.js";
-
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
+import { NO_ERROR_INPUT_FIELD } from "~/modules/users/constants.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
@@ -98,7 +97,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				/>
 
 				<Button
-					isDisabled={Object.keys(errors).length > UserValidationRule.NO_ERROR}
+					isDisabled={Object.keys(errors).length > NO_ERROR_INPUT_FIELD}
 					label="CREATE AN ACCOUNT"
 					type="submit"
 				/>
