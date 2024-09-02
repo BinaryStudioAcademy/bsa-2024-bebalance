@@ -6,8 +6,8 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { colorToGradientColors } from "~/libs/components/planet/libs/maps/maps";
 import { AngleGradient } from "~/libs/enums/enums";
+import { colorToGradientColors } from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
