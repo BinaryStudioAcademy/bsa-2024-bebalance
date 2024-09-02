@@ -23,7 +23,7 @@ const ProgressBar: React.FC<Properties> = ({
 				const isUpcoming = index > currentQuestionIndex;
 
 				return (
-					<>
+					<div className={styles["progress-bar-container"]} key={index}>
 						<div
 							className={getValidClassNames(
 								styles["progress-step"],
@@ -31,11 +31,8 @@ const ProgressBar: React.FC<Properties> = ({
 								isCurrent && styles["current"],
 								isUpcoming && styles["upcoming"],
 							)}
-							key={`step${String(index)}`}
 						>
-							{isCompleted && (
-								<Icon key={`checked${String(index)}`} name="check" />
-							)}
+							{isCompleted && <Icon name="check" />}
 						</div>
 						{!isLastStep && (
 							<div
@@ -43,10 +40,9 @@ const ProgressBar: React.FC<Properties> = ({
 									styles["progress-line"],
 									isCompleted && styles["progress-line-completed"],
 								)}
-								key={`line${String(index)}`}
 							/>
 						)}
-					</>
+					</div>
 				);
 			})}
 		</div>
