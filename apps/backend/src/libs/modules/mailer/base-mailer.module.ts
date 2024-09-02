@@ -1,33 +1,32 @@
-import { type Transporter } from "nodemailer";
-import NodeMailer from "nodemailer";
+import { createTransport, type Transporter } from "nodemailer";
 
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { MailError } from "~/libs/exceptions/exceptions.js";
 import { config } from "~/libs/modules/config/config.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 
-type Construtctor = {
-	ADDRESS: string;
-	APP_PASSWORD: string;
-	HOST: string;
-	PORT: number;
-	SERVICE: string;
+type Constructor = {
+	address: string;
+	appPassword: string;
+	host: string;
+	port: number;
+	service: string;
 };
 
 class BaseMailer {
 	private sender = config.ENV.MAILER.ADDRESS;
 	private transporter: Transporter;
 
-	constructor(settings: Construtctor) {
-		this.transporter = NodeMailer.createTransport({
+	constructor(settings: Constructor) {
+		this.transporter = createTransport({
 			auth: {
-				pass: settings.APP_PASSWORD,
-				user: settings.ADDRESS,
+				pass: settings.appPassword,
+				user: settings.address,
 			},
-			host: settings.HOST,
-			port: settings.PORT,
+			host: settings.host,
+			port: settings.port,
 			secure: true,
-			service: settings.SERVICE,
+			service: settings.service,
 		});
 	}
 

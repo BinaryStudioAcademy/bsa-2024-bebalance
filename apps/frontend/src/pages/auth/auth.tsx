@@ -10,6 +10,7 @@ import {
 	useNavigate,
 	useQuery,
 } from "~/libs/hooks/hooks.js";
+import { type ValueOf } from "~/libs/types/types.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type EmailDto,
@@ -25,6 +26,7 @@ import {
 	SignUpForm,
 } from "./libs/components/components.js";
 import { authRouteToHeader } from "./libs/maps/maps.js";
+import { type RoutesWithHeader } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
@@ -112,7 +114,7 @@ const Auth: React.FC = () => {
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
-						{authRouteToHeader[pathname]}
+						{authRouteToHeader[pathname as ValueOf<RoutesWithHeader>]}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
 						{pathname === AppRoute.SIGN_IN ? (

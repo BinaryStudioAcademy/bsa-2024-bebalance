@@ -1,8 +1,13 @@
-const authRouteToHeader: Record<string, string> = {
-	"/forgot-password": "forgot password",
-	"/reset-password": "reset password",
-	"/sign-in": "sign in",
-	"/sign-up": "sign up",
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { type ValueOf } from "~/libs/types/types.js";
+
+import { type RoutesWithHeader } from "../types/routes-with-header.type.js";
+
+const authRouteToHeader: Record<ValueOf<RoutesWithHeader>, string> = {
+	[AppRoute.FORGOT_PASSWORD]: "forgot password",
+	[AppRoute.RESET_PASSWORD]: "reset password",
+	[AppRoute.SIGN_IN]: "sign in",
+	[AppRoute.SIGN_UP]: "sign up",
 };
 
 export { authRouteToHeader };

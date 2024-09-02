@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { NotificationMessage } from "~/libs/enums/enums.js";
-import { notification } from "~/libs/modules/notification/notification.js";
-import { storage, StorageKey } from "~/libs/modules/storage/storage.js";
+import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type EmailDto,
@@ -19,7 +18,7 @@ const signIn = createAsyncThunk<
 	UserSignInRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/sign-in`, async (signInPayload, { extra }) => {
-	const { authApi } = extra;
+	const { authApi, storage } = extra;
 
 	const { token, user } = await authApi.signIn(signInPayload);
 
@@ -33,7 +32,7 @@ const signUp = createAsyncThunk<
 	UserSignUpRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
-	const { authApi } = extra;
+	const { authApi, storage } = extra;
 	const { token, user } = await authApi.signUp(registerPayload);
 	void storage.set(StorageKey.TOKEN, token);
 
@@ -42,7 +41,8 @@ const signUp = createAsyncThunk<
 
 const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 	`${sliceName}/log-out`,
-	async () => {
+	async (_, { extra }) => {
+		const { storage } = extra;
 		await storage.drop(StorageKey.TOKEN);
 
 		return null;
@@ -54,7 +54,7 @@ const getAuthenticatedUser = createAsyncThunk<
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
-	const { authApi } = extra;
+	const { authApi, storage } = extra;
 
 	const token = await storage.get(StorageKey.TOKEN);
 	const hasToken = Boolean(token);
@@ -71,7 +71,7 @@ const requestResetPassword = createAsyncThunk<
 	EmailDto,
 	AsyncThunkConfig
 >(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
-	const { authApi } = extra;
+	const { authApi, notification } = extra;
 
 	notification.success(NotificationMessage.LINK_SENT);
 
@@ -83,7 +83,7 @@ const resetPassword = createAsyncThunk<
 	ResetPasswordDto,
 	AsyncThunkConfig
 >(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
-	const { authApi } = extra;
+	const { authApi, storage } = extra;
 
 	const { token, user } = await authApi.resetPassword(emailPayload);
 
