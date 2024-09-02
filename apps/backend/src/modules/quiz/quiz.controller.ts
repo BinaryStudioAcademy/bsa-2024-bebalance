@@ -8,18 +8,22 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import {
+	type CategoryService,
+	type QuizCategoryDto,
+	type QuizGetAllCategoriesResponseDto,
+} from "../categories/categories.js";
+import {
 	type QuizAnswerService,
 	type QuizAnswersRequestDto,
 } from "../quiz-answers/quiz-answers.js";
-import { type QuizCategoryService } from "../quiz-category/quiz-category.js";
 import { type UserDto } from "../users/users.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
 import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 type Constructor = {
+	categoryService: CategoryService;
 	logger: Logger;
 	quizAnswerService: QuizAnswerService;
-	quizCategoryService: QuizCategoryService;
 };
 
 /**
@@ -79,14 +83,14 @@ type Constructor = {
  *           format: int64
  */
 class QuizController extends BaseController {
+	private categoryService: CategoryService;
 	private quizAnswerService: QuizAnswerService;
-	private quizCategoryService: QuizCategoryService;
 
-	constructor({ logger, quizAnswerService, quizCategoryService }: Constructor) {
+	constructor({ categoryService, logger, quizAnswerService }: Constructor) {
 		super(logger, APIPath.QUIZ);
 
+		this.categoryService = categoryService;
 		this.quizAnswerService = quizAnswerService;
-		this.quizCategoryService = quizCategoryService;
 
 		this.addRoute({
 			handler: (options) =>
@@ -178,11 +182,18 @@ class QuizController extends BaseController {
 	 *                   items:
 	 *                     $ref: "#/components/schemas/QuizCategory"
 	 */
-	private async getCategories(): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.quizCategoryService.findAll(),
-			status: HTTPCode.OK,
-		};
+	private async getCategories(): Promise<
+		APIHandlerResponse<QuizGetAllCategoriesResponseDto>
+	> {
+		const categories = await this.categoryService.findAll();
+
+		const items: QuizCategoryDto[] = categories.items.map((category) => {
+			const { createdAt, id, name, updatedAt } = category;
+
+			return { createdAt, id, name, updatedAt };
+		});
+
+		return { payload: { items }, status: HTTPCode.OK };
 	}
 }
 

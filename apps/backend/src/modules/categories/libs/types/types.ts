@@ -4,5 +4,7 @@ export { type QuizScoreResponseDto } from "./quiz-score-response-dto.type.js";
 export {
 	type CategoryDto,
 	type CategoryRequestDto,
+	type QuizCategoryDto,
+	type QuizGetAllCategoriesResponseDto,
 	type QuizScoreDto,
 } from "shared";
