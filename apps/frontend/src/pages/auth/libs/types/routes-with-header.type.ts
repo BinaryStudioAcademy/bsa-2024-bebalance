@@ -1,4 +1,4 @@
-import { type AppRoute } from "~/libs/enums/app-route.enum.js";
+import { type AppRoute } from "~/libs/enums/enums.js";
 
 type RoutesWithHeader = Pick<
 	typeof AppRoute,
