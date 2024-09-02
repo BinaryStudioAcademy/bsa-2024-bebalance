@@ -9,8 +9,11 @@ import { CategoryModel } from "../categories/category.model.js";
 import { OnboardingAnswerModel } from "../onboarding/onboarding.js";
 import { QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
 import { UserDetailsModel } from "./user-details.model.js";
+import { UserTaskDaysModel } from "./user-task-days.model.js";
 
 class UserModel extends AbstractModel {
+	public allowNotifications!: boolean;
+
 	public email!: string;
 
 	public onboardingAnswers!: OnboardingAnswerModel[];
@@ -22,6 +25,8 @@ class UserModel extends AbstractModel {
 	public quizAnswers!: QuizAnswerModel[];
 
 	public userDetails!: UserDetailsModel;
+
+	public userTaskDays!: UserTaskDaysModel[];
 
 	static get relationMappings(): RelationMappings {
 		return {
@@ -69,6 +74,14 @@ class UserModel extends AbstractModel {
 				},
 				modelClass: UserDetailsModel,
 				relation: Model.HasOneRelation,
+			},
+			userTaskDays: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					to: `${DatabaseTableName.USER_TASK_DAYS}.userId`,
+				},
+				modelClass: UserTaskDaysModel,
+				relation: Model.HasManyRelation,
 			},
 		};
 	}
