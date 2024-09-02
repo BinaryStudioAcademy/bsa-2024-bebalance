@@ -31,7 +31,6 @@ class OnboardingAnswerEntity implements Entity {
 		this.label = label;
 		this.createdAt = createdAt;
 		this.id = id;
-		this.label = label;
 		this.questionId = questionId;
 		this.updatedAt = updatedAt;
 		this.userId = userId;
