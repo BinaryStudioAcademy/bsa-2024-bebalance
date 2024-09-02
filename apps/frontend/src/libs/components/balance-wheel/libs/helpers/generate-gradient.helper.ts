@@ -1,7 +1,7 @@
 import { type ScriptableContext } from "~/libs/types/types.js";
 
 import { FALLBACK_BACKGROUND_COLOR } from "../constants/constants.js";
-import { BACKGROUND_COLORS } from "../enums/enums.js";
+import { BALANCE_WHEEL_BACKGROUND_COLORS } from "../enums/enums.js";
 
 const CENTER_DIVISOR = 2;
 const INITIAL_RADIUS = 0;
@@ -13,9 +13,11 @@ const generateGradientColor = (
 ): CanvasGradient => {
 	const { dataIndex } = context;
 	const colorStart =
-		BACKGROUND_COLORS[dataIndex]?.start ?? FALLBACK_BACKGROUND_COLOR;
+		BALANCE_WHEEL_BACKGROUND_COLORS[dataIndex]?.start ??
+		FALLBACK_BACKGROUND_COLOR;
 	const colorEnd =
-		BACKGROUND_COLORS[dataIndex]?.end ?? FALLBACK_BACKGROUND_COLOR;
+		BALANCE_WHEEL_BACKGROUND_COLORS[dataIndex]?.end ??
+		FALLBACK_BACKGROUND_COLOR;
 
 	const { chart } = context;
 	const { chartArea, ctx } = chart;
