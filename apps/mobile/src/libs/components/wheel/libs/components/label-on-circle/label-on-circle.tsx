@@ -14,7 +14,7 @@ type Properties = {
 	wheelRadius: number;
 };
 
-const ZERO = 0;
+const SVG_INITIAL_COORDINATE = 0;
 
 const LabelOnCircle: React.FC<Properties> = ({
 	centerPoint,
@@ -55,7 +55,7 @@ const LabelOnCircle: React.FC<Properties> = ({
 				fontFamily="Nunito-Bold"
 				fontSize={wheelRadius * LabelCoefficient.TEXT_SIZE}
 				textAnchor="middle"
-				x={ZERO}
+				x={SVG_INITIAL_COORDINATE}
 				y={textVerticalShift}
 			>
 				{text}
@@ -67,8 +67,8 @@ const LabelOnCircle: React.FC<Properties> = ({
 				fontFamily="Nunito-Bold"
 				fontSize={wheelRadius * LabelCoefficient.SCORE_SIZE}
 				textAnchor="middle"
-				x={ZERO}
-				y={ZERO}
+				x={SVG_INITIAL_COORDINATE}
+				y={SVG_INITIAL_COORDINATE}
 			>
 				{score}
 			</SvgText>
