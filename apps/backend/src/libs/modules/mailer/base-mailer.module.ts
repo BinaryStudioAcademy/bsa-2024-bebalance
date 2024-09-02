@@ -18,16 +18,16 @@ class BaseMailer {
 	private sender = config.ENV.MAILER.ADDRESS;
 	private transporter: Transporter;
 
-	constructor(inputs: Construtctor) {
+	constructor(settings: Construtctor) {
 		this.transporter = NodeMailer.createTransport({
 			auth: {
-				pass: inputs.APP_PASSWORD,
-				user: inputs.ADDRESS,
+				pass: settings.APP_PASSWORD,
+				user: settings.ADDRESS,
 			},
-			host: inputs.HOST,
-			port: inputs.PORT,
+			host: settings.HOST,
+			port: settings.PORT,
 			secure: true,
-			service: inputs.SERVICE,
+			service: settings.SERVICE,
 		});
 	}
 
