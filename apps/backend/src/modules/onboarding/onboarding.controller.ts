@@ -42,6 +42,8 @@ class OnboardingController extends BaseController {
 	 * /onboarding/answer:
 	 *   post:
 	 *     description: Saves user answers for onboarding questions
+	 *     security:
+	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:

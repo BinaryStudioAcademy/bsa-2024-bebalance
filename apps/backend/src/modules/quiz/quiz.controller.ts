@@ -119,6 +119,8 @@ class QuizController extends BaseController {
 	 * /quiz/answer:
 	 *   post:
 	 *     description: Saves user answers for all quiz questions at once
+	 *     security:
+	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -127,7 +129,9 @@ class QuizController extends BaseController {
 	 *             type: object
 	 *             properties:
 	 *               answerIds:
-	 *                 type: number[]
+	 *                 type: array
+	 *                 items:
+	 *                   type: number
 	 *     responses:
 	 *       201:
 	 *         description: Successful operation
