@@ -1,6 +1,8 @@
 import { type Entity } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
+	private allowNotifications: boolean;
+
 	private createdAt: string;
 
 	private email: string;
@@ -15,7 +17,10 @@ class UserEntity implements Entity {
 
 	private updatedAt: string;
 
+	private userTaskDays: null | number[];
+
 	private constructor({
+		allowNotifications,
 		createdAt,
 		email,
 		id,
@@ -23,7 +28,9 @@ class UserEntity implements Entity {
 		passwordHash,
 		passwordSalt,
 		updatedAt,
+		userTaskDays,
 	}: {
+		allowNotifications: boolean;
 		createdAt: string;
 		email: string;
 		id: null | number;
@@ -31,7 +38,9 @@ class UserEntity implements Entity {
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
+		userTaskDays: null | number[];
 	}) {
+		this.allowNotifications = allowNotifications;
 		this.createdAt = createdAt;
 		this.id = id;
 		this.email = email;
@@ -39,9 +48,11 @@ class UserEntity implements Entity {
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
 		this.updatedAt = updatedAt;
+		this.userTaskDays = userTaskDays;
 	}
 
 	public static initialize({
+		allowNotifications,
 		createdAt,
 		email,
 		id,
@@ -49,7 +60,9 @@ class UserEntity implements Entity {
 		passwordHash,
 		passwordSalt,
 		updatedAt,
+		userTaskDays,
 	}: {
+		allowNotifications?: boolean;
 		createdAt: string;
 		email: string;
 		id: number;
@@ -57,8 +70,10 @@ class UserEntity implements Entity {
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
+		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
+			allowNotifications: allowNotifications ?? false,
 			createdAt,
 			email,
 			id,
@@ -66,6 +81,7 @@ class UserEntity implements Entity {
 			passwordHash,
 			passwordSalt,
 			updatedAt,
+			userTaskDays: userTaskDays ?? null,
 		});
 	}
 
@@ -81,6 +97,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			allowNotifications: false,
 			createdAt: "",
 			email,
 			id: null,
@@ -88,40 +105,49 @@ class UserEntity implements Entity {
 			passwordHash,
 			passwordSalt,
 			updatedAt: "",
+			userTaskDays: null,
 		});
 	}
 
 	public toNewObject(): {
+		allowNotifications: boolean;
 		createdAt: string;
 		email: string;
 		name: string;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
+		userTaskDays: number[];
 	} {
 		return {
+			allowNotifications: this.allowNotifications,
 			createdAt: this.createdAt,
 			email: this.email,
 			name: this.name,
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
 			updatedAt: this.updatedAt,
+			userTaskDays: this.userTaskDays ?? [],
 		};
 	}
 
 	public toObject(): {
+		allowNotifications: boolean;
 		createdAt: string;
 		email: string;
 		id: number;
 		name: string;
 		updatedAt: string;
+		userTaskDays: number[];
 	} {
 		return {
+			allowNotifications: this.allowNotifications,
 			createdAt: this.createdAt,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,
 			updatedAt: this.updatedAt,
+			userTaskDays: this.userTaskDays ?? [],
 		};
 	}
 }
