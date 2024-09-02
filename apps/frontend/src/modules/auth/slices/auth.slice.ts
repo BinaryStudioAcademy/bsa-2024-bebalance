@@ -6,6 +6,7 @@ import { type UserDto } from "~/modules/users/users.js";
 
 import {
 	getAuthenticatedUser,
+	logOut,
 	resetPassword,
 	signIn,
 	signUp,
@@ -65,6 +66,10 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(resetPassword.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(logOut.fulfilled, (state, action) => {
+			state.user = action.payload;
 		});
 	},
 	initialState,

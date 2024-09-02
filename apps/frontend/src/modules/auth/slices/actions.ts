@@ -40,6 +40,15 @@ const signUp = createAsyncThunk<
 	return user;
 });
 
+const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
+	`${sliceName}/log-out`,
+	async () => {
+		await storage.drop(StorageKey.TOKEN);
+
+		return null;
+	},
+);
+
 const getAuthenticatedUser = createAsyncThunk<
 	null | UserDto,
 	undefined,
@@ -85,6 +94,7 @@ const resetPassword = createAsyncThunk<
 
 export {
 	getAuthenticatedUser,
+	logOut,
 	requestResetPassword,
 	resetPassword,
 	signIn,
