@@ -1,9 +1,11 @@
 import { type Service } from "~/libs/types/types.js";
 
-import { type CategoryEntity } from "./category.entity.js";
+import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
 import {
 	type CategoryDto,
+	type CategoryRequestDto,
+	type QuizGetAllCategoriesResponseDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 } from "./libs/types/types.js";
@@ -37,8 +39,12 @@ class CategoryService implements Service {
 		};
 	}
 
-	public create(): Promise<unknown> {
-		return this.categoryRepository.create();
+	public async create(payload: CategoryRequestDto): Promise<CategoryDto> {
+		const categoryEntity = await this.categoryRepository.create(
+			CategoryEntity.initializeNew(payload),
+		);
+
+		return this.convertCategoryEntityToDto(categoryEntity);
 	}
 
 	public async createScore({
@@ -53,8 +59,8 @@ class CategoryService implements Service {
 		});
 	}
 
-	public delete(): Promise<boolean> {
-		return this.categoryRepository.delete();
+	public delete(id: number): Promise<boolean> {
+		return this.categoryRepository.delete(id);
 	}
 
 	public deleteUserScores(userId: number): Promise<number> {
@@ -79,8 +85,19 @@ class CategoryService implements Service {
 		return { items };
 	}
 
-	public update(): Promise<unknown> {
-		return this.categoryRepository.update();
+	public async findAllWithoutScores(): Promise<QuizGetAllCategoriesResponseDto> {
+		const items = await this.categoryRepository.findAllWithoutScores();
+
+		return { items };
+	}
+
+	public async update(
+		id: number,
+		payload: Partial<CategoryRequestDto>,
+	): Promise<CategoryDto> {
+		const categoryEntity = await this.categoryRepository.update(id, payload);
+
+		return this.convertCategoryEntityToDto(categoryEntity);
 	}
 }
 

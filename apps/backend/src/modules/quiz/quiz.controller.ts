@@ -7,11 +7,7 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
-import {
-	type CategoryService,
-	type QuizCategoryDto,
-	type QuizGetAllCategoriesResponseDto,
-} from "../categories/categories.js";
+import { type CategoryService } from "../categories/categories.js";
 import {
 	type QuizAnswerService,
 	type QuizAnswersRequestDto,
@@ -186,18 +182,11 @@ class QuizController extends BaseController {
 	 *                   items:
 	 *                     $ref: "#/components/schemas/QuizCategory"
 	 */
-	private async getCategories(): Promise<
-		APIHandlerResponse<QuizGetAllCategoriesResponseDto>
-	> {
-		const categories = await this.categoryService.findAll();
-
-		const items: QuizCategoryDto[] = categories.items.map((category) => {
-			const { createdAt, id, name, updatedAt } = category;
-
-			return { createdAt, id, name, updatedAt };
-		});
-
-		return { payload: { items }, status: HTTPCode.OK };
+	private async getCategories(): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.categoryService.findAllWithoutScores(),
+			status: HTTPCode.OK,
+		};
 	}
 }
 
