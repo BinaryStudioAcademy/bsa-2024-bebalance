@@ -24,7 +24,7 @@ const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 			<View style={[styles.dot, styles.dotPositionRightBottom]} />
 			<View style={[styles.dot, styles.dotPositionBottom]} />
 			<View style={[styles.dot, styles.dotPositionLeft]} />
-			<Planet color="green" size="sm" style={styles.topPlanet} />
+			<Planet color="lime" size="sm" style={styles.topPlanet} />
 			<Planet
 				color="blue"
 				gradientDirection="topToBottom"
