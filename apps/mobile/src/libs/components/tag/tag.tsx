@@ -6,8 +6,8 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { type colorToGradientColors } from "~/libs/components/planet/libs/maps/maps";
-import { AngleGradient, GradientColor } from "~/libs/enums/enums";
+import { colorToGradientColors } from "~/libs/components/planet/libs/maps/maps";
+import { AngleGradient } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
@@ -18,8 +18,6 @@ type Properties = {
 };
 
 const Tag: React.FC<Properties> = ({ color, label }) => {
-	const borderColor = [...GradientColor.BLUE];
-
 	return (
 		<LinearGradient
 			angle={AngleGradient.ANGLE}
@@ -27,9 +25,9 @@ const Tag: React.FC<Properties> = ({ color, label }) => {
 				x: AngleGradient.X_POINT,
 				y: AngleGradient.Y_POINT,
 			}}
-			colors={borderColor}
+			colors={colorToGradientColors[color]}
 			locations={[AngleGradient.FIRST_STOP, AngleGradient.SECOND_STOP]}
-			style={styles.gradientContainer}
+			style={[globalStyles.mt16, styles.gradientContainer]}
 			useAngle
 		>
 			<View
