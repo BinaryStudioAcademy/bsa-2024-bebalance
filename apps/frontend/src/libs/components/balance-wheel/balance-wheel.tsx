@@ -8,8 +8,10 @@ import {
 
 import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 
-import { WHEEL_CHART_CONFIG } from "./libs/configs/configs.js";
-import { ANIMATION_INTERVAL } from "./libs/constants/constants.js";
+import {
+	ANIMATION_INTERVAL,
+	WHEEL_CHART_CONFIG,
+} from "./libs/constants/constants.js";
 import { generateRandomData } from "./libs/helpers/helpers.js";
 import { type ChartDataType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
