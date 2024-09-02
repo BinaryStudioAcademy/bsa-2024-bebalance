@@ -7,6 +7,7 @@ type Preset =
 	| "heading"
 	| "subheading"
 	| "tabBarLabel"
+	| "tag"
 	| "uppercase";
 
 const BASE_STYLES = [sizeToStyleMap.md, fontWeightToFamilyMap.regular];
@@ -16,6 +17,7 @@ const presetToStyleMap: Record<Preset, StyleProp<TextStyle>> = {
 	heading: [sizeToStyleMap.xxl, fontWeightToFamilyMap.bold],
 	subheading: [sizeToStyleMap.lg, fontWeightToFamilyMap.semiBold],
 	tabBarLabel: [sizeToStyleMap.xxs, fontWeightToFamilyMap.bold],
+	tag: [sizeToStyleMap.xs, fontWeightToFamilyMap.semiBold],
 	uppercase: [...BASE_STYLES, { textTransform: "uppercase" }],
 };
 
