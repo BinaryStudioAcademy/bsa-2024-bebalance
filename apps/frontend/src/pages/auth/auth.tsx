@@ -24,7 +24,7 @@ import {
 	SignInForm,
 	SignUpForm,
 } from "./libs/components/components.js";
-import { getFormHeader } from "./libs/helpers/helpers.js";
+import { authRouteToHeader } from "./libs/maps/maps.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
@@ -34,7 +34,7 @@ const Auth: React.FC = () => {
 		user: auth.user,
 	}));
 
-	const token = useQuery().get("token");
+	const { token } = useQuery();
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -69,9 +69,8 @@ const Auth: React.FC = () => {
 					newPassword: payload.newPassword,
 				}),
 			);
-			navigate(AppRoute.SIGN_IN);
 		},
-		[dispatch, navigate, token],
+		[dispatch, token],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
@@ -113,7 +112,7 @@ const Auth: React.FC = () => {
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
-						{getFormHeader(pathname)}
+						{authRouteToHeader[pathname]}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
 						{pathname === AppRoute.SIGN_IN ? (
