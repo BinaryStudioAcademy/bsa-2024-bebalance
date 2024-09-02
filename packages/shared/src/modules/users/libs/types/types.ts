@@ -1,5 +1,7 @@
 export { type UserDto } from "./user-dto.type.js";
 export { type UserGetAllResponseDto } from "./user-get-all-response-dto.type.js";
+export { type UserPreferencesPayloadDto } from "./user-preferences-payload-dto.type.js";
+export { type UserPreferencesRequestDto } from "./user-preferences-request-dto.js";
 export { type UserSignInRequestDto } from "./user-sign-in-request-dto.type.js";
 export { type UserSignInResponseDto } from "./user-sign-in-response-dto.type.js";
 export { type UserSignUpFormDto } from "./user-sign-up-form-dto.type.js";

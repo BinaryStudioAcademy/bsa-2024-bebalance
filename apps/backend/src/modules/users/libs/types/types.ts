@@ -1,6 +1,8 @@
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
+	type UserPreferencesPayloadDto,
+	type UserPreferencesRequestDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
