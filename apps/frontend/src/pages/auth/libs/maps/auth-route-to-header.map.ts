@@ -1,4 +1,4 @@
-import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 import { type RoutesWithHeader } from "../types/routes-with-header.type.js";
