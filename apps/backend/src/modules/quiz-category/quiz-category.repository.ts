@@ -1,5 +1,7 @@
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
+import { CategoryError } from "./libs/exceptions/exceptions.js";
 import { QuizCategoryEntity } from "./quiz-category.entity.js";
 import { type QuizCategoryModel } from "./quiz-category.model.js";
 
@@ -11,11 +13,11 @@ class QuizCategoryRepository implements Repository {
 	}
 
 	create(): Promise<unknown> {
-		throw new Error("Method not implemented.");
+		throw new CategoryError({ message: ErrorMessage.READONLY_CATEGORY });
 	}
 
 	delete(): Promise<boolean> {
-		throw new Error("Method not implemented.");
+		throw new CategoryError({ message: ErrorMessage.READONLY_CATEGORY });
 	}
 
 	async find(id: number): Promise<null | QuizCategoryEntity> {
@@ -37,7 +39,7 @@ class QuizCategoryRepository implements Repository {
 	}
 
 	update(): Promise<unknown> {
-		throw new Error("Method not implemented.");
+		throw new CategoryError({ message: ErrorMessage.READONLY_CATEGORY });
 	}
 }
 
