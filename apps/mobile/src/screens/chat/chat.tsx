@@ -1,7 +1,7 @@
 import React from "react";
 
 import { LoaderWrapper, ScreenWrapper } from "~/libs/components/components";
-import { DataStatus } from "~/libs/enums/app/data-status.enum";
+import { DataStatus } from "~/libs/enums/enums";
 import { useAppSelector } from "~/libs/hooks/hooks";
 
 import { CategoriesForm } from "./components/categories-form";
