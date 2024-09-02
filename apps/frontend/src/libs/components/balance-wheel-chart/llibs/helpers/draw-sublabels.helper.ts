@@ -7,8 +7,8 @@ import {
 	SublabelOffset,
 	WheelCenterDistance,
 } from "../enums/enums.js";
-import { getAlignment, getBaseline } from "../helpers/helpers.js";
 import { type PolarAreaType } from "../types/types.js";
+import { getAlignment, getBaseline } from "./helpers.js";
 
 const drawSublabels = ({
 	chart,

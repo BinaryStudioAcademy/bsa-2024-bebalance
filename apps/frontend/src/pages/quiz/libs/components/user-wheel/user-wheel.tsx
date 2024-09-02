@@ -1,4 +1,4 @@
-import { BalanceWheel } from "~/libs/components/components.js";
+import { BalanceWheelChart } from "~/libs/components/components.js";
 import { useAppDispatch, useEffect } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
@@ -21,7 +21,7 @@ const UserWheel: React.FC = () => {
 
 	return (
 		<>
-			<BalanceWheel data={randomData} />
+			<BalanceWheelChart data={randomData} />
 		</>
 	);
 };
