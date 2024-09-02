@@ -20,6 +20,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
+			mode: "onChange",
 			validationSchema: userSignUpValidationSchema,
 		});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);

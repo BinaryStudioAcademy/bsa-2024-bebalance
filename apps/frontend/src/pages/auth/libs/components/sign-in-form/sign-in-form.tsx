@@ -15,6 +15,7 @@ type Properties = {
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
+		mode: "onChange",
 		validationSchema: userSignInValidationSchema,
 	});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -38,7 +39,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Email"
 					name="email"
-					placeholder="name@example.com"
+					placeholder="be@balance.com"
 					type="email"
 				/>
 
@@ -49,7 +50,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					label="Password"
 					name="password"
 					onIconClick={handleTogglePasswordVisibility}
-					placeholder="*******"
+					placeholder="••••••"
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
