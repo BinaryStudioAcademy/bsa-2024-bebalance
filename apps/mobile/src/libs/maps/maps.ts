@@ -1,1 +1,1 @@
-export { colorToGradientColors } from "./color-to-gradient-colors/color-to-gradient-colors";
+export { colorToGradientColors } from "./color-to-gradient-colors/color-to-gradient-colors.map";
