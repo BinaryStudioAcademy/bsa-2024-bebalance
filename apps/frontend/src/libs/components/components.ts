@@ -1,5 +1,5 @@
 export { App } from "./app/app.js";
-export { BalanceWheel } from "./balance-wheel/balance-wheel.js";
+export { BalanceWheelChart } from "./balance-wheel-chart/balance-wheel-chart.js";
 export { Button } from "./button/button.js";
 export { Header } from "./header/header.js";
 export { Icon } from "./icon/icon.js";

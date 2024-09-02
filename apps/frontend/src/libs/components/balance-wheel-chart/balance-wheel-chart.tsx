@@ -23,7 +23,7 @@ type Properties = {
 	isAnimating: boolean;
 };
 
-const BalanceWheel: React.FC<Properties> = ({
+const BalanceWheelChart: React.FC<Properties> = ({
 	data,
 	isAnimating,
 }: Properties) => {
@@ -103,4 +103,4 @@ const BalanceWheel: React.FC<Properties> = ({
 	);
 };
 
-export { BalanceWheel };
+export { BalanceWheelChart };

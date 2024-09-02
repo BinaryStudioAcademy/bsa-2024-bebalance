@@ -1,1 +1,1 @@
-export { balanceWheelData } from "./balance-wheel-data.constant.js";
+export { BALANCE_WHEEL_DATA } from "./balance-wheel-data.constant.js";

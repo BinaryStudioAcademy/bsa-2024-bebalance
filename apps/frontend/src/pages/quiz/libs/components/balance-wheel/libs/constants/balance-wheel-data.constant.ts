@@ -1,4 +1,4 @@
-const balanceWheelData = [
+const BALANCE_WHEEL_DATA = [
 	{ data: 9, label: "Physical" },
 	{ data: 8, label: "Work" },
 	{ data: 7, label: "Friends" },
@@ -9,4 +9,4 @@ const balanceWheelData = [
 	{ data: 7, label: "Mental" },
 ];
 
-export { balanceWheelData };
+export { BALANCE_WHEEL_DATA };
