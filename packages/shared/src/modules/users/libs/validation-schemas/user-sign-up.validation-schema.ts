@@ -24,9 +24,6 @@ const userSignUp = z
 		email: z
 			.string()
 			.trim()
-			.max(UserValidationRule.EMAIL_MAX_LENGTH, {
-				message: UserValidationMessage.EMAIL_MAX_LENGTH,
-			})
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
@@ -38,12 +35,6 @@ const userSignUp = z
 			})
 			.regex(UserValidationRegexRule.EMAIL_DOMAIN_PART_VALID_CHARS, {
 				message: UserValidationMessage.EMAIL_WRONG,
-			})
-			.regex(UserValidationRegexRule.EMAIL_LOCAL_PART_LENGTH, {
-				message: UserValidationMessage.EMAIL_LOCAL_PART_MAX_LENGTH,
-			})
-			.regex(UserValidationRegexRule.EMAIL_DOMAIN_PART_LENGTH, {
-				message: UserValidationMessage.EMAIL_DOMAIN_PART_MAX_LENGTH,
 			}),
 		name: z
 			.string()
