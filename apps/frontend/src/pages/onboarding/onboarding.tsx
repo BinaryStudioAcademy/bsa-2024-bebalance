@@ -7,7 +7,6 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
-import { notification } from "~/libs/modules/notification/notification.js";
 import {
 	actions as onboardingActions,
 	oneAnswerSelectedValidationSchema,
@@ -15,7 +14,6 @@ import {
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "~/pages/onboarding/libs/constants/constants.js";
 
 import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
-import { OnboardingValidationMessage } from "./libs/enums/emuns.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -70,13 +68,9 @@ const Onboarding: React.FC = () => {
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			if (!isValid) {
-				notification.error(OnboardingValidationMessage.ONE_ANSWER_REQUIRED);
-			}
-
 			void handleSubmit(handleNextStep)(event_);
 		},
-		[handleNextStep, handleSubmit, isValid],
+		[handleNextStep, handleSubmit],
 	);
 
 	return (
@@ -110,6 +104,7 @@ const Onboarding: React.FC = () => {
 										/>
 									)}
 									<Button
+										isPrimary={isValid}
 										label={isLastQuestion ? "ANALYZE" : "NEXT"}
 										onClick={handleFormSubmit}
 										type="button"
