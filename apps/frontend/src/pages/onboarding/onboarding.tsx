@@ -62,9 +62,16 @@ const Onboarding: React.FC = () => {
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			setAnswerIds((previousState) => ({
-				answerIds: [...previousState.answerIds, Number(data.answer)],
-			}));
+			setAnswerIds((previousState) => {
+				const newAnswerIds = new Set([
+					...previousState.answerIds,
+					Number(data.answer),
+				]);
+
+				return {
+					answerIds: [...newAnswerIds],
+				};
+			});
 
 			if (isLastQuestion) {
 				handleSaveAnswers(answerIds);
