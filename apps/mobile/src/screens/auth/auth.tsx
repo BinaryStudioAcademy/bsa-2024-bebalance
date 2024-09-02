@@ -25,7 +25,6 @@ import {
 	type UserSignUpRequestDto,
 } from "~/packages/users/users";
 import { actions as authActions } from "~/slices/auth/auth";
-import { actions as userActions } from "~/slices/users/users";
 
 import { SignInForm, SignUpForm } from "./components/components";
 import { styles } from "./styles";
@@ -37,14 +36,6 @@ const Auth: React.FC = () => {
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
-
-	const isSignUpScreen = name === RootScreenName.SIGN_UP;
-
-	useEffect(() => {
-		if (isSignUpScreen) {
-			void dispatch(userActions.loadAll());
-		}
-	}, [isSignUpScreen, dispatch]);
 
 	useEffect(() => {
 		if (!user) {
@@ -102,7 +93,6 @@ const Auth: React.FC = () => {
 							showsHorizontalScrollIndicator={false}
 							showsVerticalScrollIndicator={false}
 						>
-							<Text>state: {dataStatus}</Text>
 							<View
 								style={[
 									globalStyles.pv32,

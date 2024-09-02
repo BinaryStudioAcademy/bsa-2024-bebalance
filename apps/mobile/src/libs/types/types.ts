@@ -5,6 +5,7 @@ export {
 	type NavigationScreenProperties,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
+export { type WheelDataItem } from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type ImageSourcePropType,
