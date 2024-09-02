@@ -60,6 +60,28 @@ const BalanceWheel: React.FC<Properties> = ({
 		chartInstance.update();
 	}, []);
 
+	const handleRenderChart = useCallback(
+		(canvas?: HTMLCanvasElement | null): void => {
+			if (!canvas) {
+				return;
+			}
+
+			if (chartReference.current) {
+				chartReference.current.destroy();
+			}
+
+			const context = canvas.getContext("2d");
+
+			if (context) {
+				chartReference.current = new ChartJS<"polarArea">(
+					context,
+					WHEEL_CHART_CONFIG,
+				);
+			}
+		},
+		[],
+	);
+
 	useEffect(() => {
 		if (isAnimating) {
 			const intervalId = setInterval(handleAnimateChart, ANIMATION_INTERVAL);
@@ -74,28 +96,9 @@ const BalanceWheel: React.FC<Properties> = ({
 		handleUpdateChartData(data);
 	}, [data, handleUpdateChartData]);
 
-	const renderChart = useCallback((canvas?: HTMLCanvasElement | null): void => {
-		if (!canvas) {
-			return;
-		}
-
-		if (chartReference.current) {
-			chartReference.current.destroy();
-		}
-
-		const context = canvas.getContext("2d");
-
-		if (context) {
-			chartReference.current = new ChartJS<"polarArea">(
-				context,
-				WHEEL_CHART_CONFIG,
-			);
-		}
-	}, []);
-
 	return (
 		<div className={styles["container"]}>
-			<canvas ref={renderChart} />
+			<canvas ref={handleRenderChart} />
 		</div>
 	);
 };
