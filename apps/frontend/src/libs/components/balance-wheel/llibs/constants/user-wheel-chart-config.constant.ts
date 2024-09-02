@@ -1,10 +1,12 @@
 import { type ChartConfiguration } from "chart.js";
 
-import { POLAR_AREA } from "../constants/constants.js";
 import { ChartFont, ChartGraphicsColors } from "../enums/enums.js";
-import { generateGradientColor } from "../helpers/helpers.js";
-import { extraPointGraphicsPlugin } from "../plugins/plugins.js";
+import {
+	drawExtraPointGraphics,
+	generateGradientColor,
+} from "../helpers/helpers.js";
 import { type PolarAreaType } from "../types/types.js";
+import { POLAR_AREA } from "./constants.js";
 
 const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	data: {
@@ -51,8 +53,13 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 			},
 		},
 	},
-	plugins: [extraPointGraphicsPlugin],
+	plugins: [
+		{
+			afterDatasetsDraw: drawExtraPointGraphics,
+			id: "extraPointGraphics",
+		},
+	],
 	type: POLAR_AREA,
-};
+} as const;
 
 export { USER_WHEEL_CHART_CONFIG };

@@ -20,3 +20,4 @@ export {
 };
 export { CATEGORIES_SUBLABELS } from "./categories-sublabels.constant.js";
 export { SLICE_COLORS } from "./slice-colors.constant.js";
+export { USER_WHEEL_CHART_CONFIG } from "./user-wheel-chart-config.constant.js";
