@@ -13,11 +13,11 @@ type Constructor = {
 };
 
 class QuizApi extends BaseHTTPApi {
-	constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
-	async getQuizCategories(): Promise<QuizGetAllCategoriesResponseDto> {
+	public async getQuizCategories(): Promise<QuizGetAllCategoriesResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(QuizApiPath.CATEGORIES, {}),
 			{

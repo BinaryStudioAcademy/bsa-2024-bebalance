@@ -82,7 +82,11 @@ class QuizController extends BaseController {
 	private categoryService: CategoryService;
 	private quizAnswerService: QuizAnswerService;
 
-	constructor({ categoryService, logger, quizAnswerService }: Constructor) {
+	public constructor({
+		categoryService,
+		logger,
+		quizAnswerService,
+	}: Constructor) {
 		super(logger, APIPath.QUIZ);
 
 		this.categoryService = categoryService;
