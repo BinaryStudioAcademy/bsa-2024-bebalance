@@ -1,4 +1,4 @@
-import { type ScriptableContext } from "chart.js";
+import { type ScriptableContext } from "~/libs/types/types.js";
 
 import {
 	MAX_SLICE_VALUE,

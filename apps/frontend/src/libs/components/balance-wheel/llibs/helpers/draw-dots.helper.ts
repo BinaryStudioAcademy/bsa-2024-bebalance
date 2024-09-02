@@ -1,9 +1,10 @@
-import { type ChartMeta, type RadialLinearScale } from "chart.js";
 import { HALF_PI, TAU } from "chart.js/helpers";
+
+import { type ChartMeta, type RadialLinearScale } from "~/libs/types/types.js";
 
 import { DOT_RADIUS, START_ANGLE } from "../constants/constants.js";
 import { ChartGraphicsColors, WheelCenterDistance } from "../enums/enums.js";
-import { type PolarAreaType } from "../types/polar-area.type.js";
+import { type PolarAreaType } from "../types/types.js";
 
 const drawDots = ({
 	context,

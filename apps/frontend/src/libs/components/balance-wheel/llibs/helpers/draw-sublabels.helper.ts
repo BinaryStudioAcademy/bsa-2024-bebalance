@@ -1,5 +1,6 @@
-import { type Chart, type RadialLinearScale } from "chart.js";
 import { HALF_PI } from "chart.js/helpers";
+
+import { type Chart, type RadialLinearScale } from "~/libs/types/types.js";
 
 import {
 	ChartFont,
@@ -8,7 +9,7 @@ import {
 	WheelCenterDistance,
 } from "../enums/enums.js";
 import { getAlignment, getBaseline } from "../helpers/helpers.js";
-import { type PolarAreaType } from "../types/polar-area.type.js";
+import { type PolarAreaType } from "../types/types.js";
 
 const drawSublabels = ({
 	chart,

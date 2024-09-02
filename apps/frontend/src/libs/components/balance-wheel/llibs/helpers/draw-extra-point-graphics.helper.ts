@@ -1,5 +1,6 @@
-import { type Chart, type RadialLinearScale } from "chart.js";
 import { TAU } from "chart.js/helpers";
+
+import { type Chart, type RadialLinearScale } from "~/libs/types/types.js";
 
 import {
 	CATEGORIES_SUBLABELS,

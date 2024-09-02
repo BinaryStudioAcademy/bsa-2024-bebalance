@@ -1,4 +1,4 @@
-import { type ChartConfiguration } from "chart.js";
+import { type ChartConfiguration } from "~/libs/types/types.js";
 
 import { ChartFont, ChartGraphicsColors } from "../enums/enums.js";
 import {
