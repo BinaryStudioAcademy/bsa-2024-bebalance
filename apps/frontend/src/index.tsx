@@ -13,7 +13,6 @@ import { store } from "~/libs/modules/store/store.js";
 import { Auth } from "~/pages/auth/auth.jsx";
 import { NotFound } from "~/pages/not-found/not-found.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
-import { Root } from "~/pages/root/root.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -25,7 +24,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component={<Root />}
+										component="Root"
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
