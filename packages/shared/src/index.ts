@@ -60,6 +60,9 @@ export {
 export {
 	type UserDto,
 	type UserGetAllResponseDto,
+	type UserPreferencesPayloadDto,
+	type UserPreferencesRequestDto,
+	userPreferencesValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
