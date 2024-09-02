@@ -5,8 +5,10 @@ import {
 	type FieldErrors,
 	type FieldPath,
 	type FieldValues,
+	type IconName,
 } from "~/libs/types/types.js";
 
+import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
 
 type options = {
@@ -17,8 +19,10 @@ type options = {
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
+	iconName?: IconName;
 	label: string;
 	name: FieldPath<T>;
+	onIconClick?: () => void;
 	options?: options[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
@@ -27,8 +31,10 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	iconName,
 	label,
 	name,
+	onIconClick,
 	options,
 	placeholder = "",
 	type = "text",
@@ -73,12 +79,24 @@ const Input = <T extends FieldValues>({
 						))}
 					</div>
 				) : (
-					<input
-						className={getValidClassNames(styles["input-field"])}
-						{...field}
-						placeholder={placeholder}
-						type={type}
-					/>
+					<>
+						<input
+							className={getValidClassNames(styles["input-field"])}
+							{...field}
+							placeholder={placeholder}
+							type={type}
+						/>
+						{iconName && (
+							<Button
+								hasVisuallyHiddenLabel
+								iconName={iconName}
+								label="Icon"
+								onClick={onIconClick}
+								type="button"
+								variant="icon"
+							/>
+						)}
+					</>
 				)}
 			</div>
 

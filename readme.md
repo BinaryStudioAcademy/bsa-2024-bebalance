@@ -22,7 +22,100 @@ The product helps the users to maintain work-life balance, identify areas for im
 
 ## 4. Database Schema
 
-TODO: add database schema
+```mermaid
+
+erDiagram
+    users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar email
+        text password_hash
+        text password_salt
+    }
+
+    user_details ||--|| users : user_id
+    user_details {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar name
+        int user_id FK
+    }
+
+    categories {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        varchar name UK
+    }
+
+    quiz_questions }|--o| categories : category_id
+    quiz_questions {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label UK
+        int category_id FK
+    }
+
+    quiz_answers }|--o| quiz_questions : question_id
+    quiz_answers {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label
+        int value
+        int question_id FK
+    }
+
+    quiz_scores }o--|| categories : category_id
+    quiz_scores }o--|| users : user_id
+    quiz_scores {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int score
+        int category_id FK
+        int user_id FK
+    }
+
+    quiz_answers_to_users }o--|| quiz_answers : answer_id
+    quiz_answers_to_users }o--|| users : user_id
+    quiz_answers_to_users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int user_id FK
+        int answer_id FK
+    }
+
+    onboarding_questions {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label UK
+    }
+
+    onboarding_answers }|--o| onboarding_questions : question_id
+    onboarding_answers {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        text label
+        int question_id FK
+    }
+
+    onboarding_answers_to_users }o--|| onboarding_answers : answer_id
+    onboarding_answers_to_users }o--|| users : user_id
+    onboarding_answers_to_users {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int answer_id FK
+        int user_id FK
+    }
+```
 
 ## 5. Architecture
 

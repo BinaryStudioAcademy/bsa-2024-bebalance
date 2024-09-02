@@ -1,5 +1,117 @@
 # Changelog
 
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.27.0...v1.28.0) (2024-09-02)
+
+
+### Features
+
+* **frontend:** sign-out functionality bb-241 ([#264](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/264)) ([d6b5fff](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d6b5fff860ac41666d3cd00b17945415d859a6db))
+
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.26.0...v1.27.0) (2024-09-01)
+
+
+### Features
+
+* **backend/shared:** save quiz response to db bb-166 ([#208](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/208)) ([42b4cbb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/42b4cbb32ddbe609d3555d24b755199783429600))
+* **frontend:** sign up bb-9 ([#218](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/218)) ([917e652](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/917e6525945033ce33df1712dcaaf7c75b0b4bc3))
+* **mobile:** requirements for authorization pages bb-210 ([#259](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/259)) ([57bf893](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/57bf8934e7cc52094630d5a40afbd53e96cd3a16))
+
+
+### Bug Fixes
+
+* **frontend:** "You are unauthorized to access the requested resource." error message is shown on the Sign-In/ Sign-Up page bb-222 ([#248](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/248)) ([601cfa2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/601cfa2f41665dcc5448fc034fde6ed3d431b88b))
+* **mobile:** an error message appears after tap on "create an account" link bb-219 ([#262](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/262)) ([00c2296](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/00c22967cd8524b45d9469ffe9a03685e0edb972))
+
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.25.0...v1.26.0) (2024-08-31)
+
+
+### Features
+
+* **backend/shared:** save onboarding quiz answers to DB bb-167 ([#227](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/227)) ([6779d9d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6779d9d3310ed2e3fa1a48ca34ffe186a5eb2ca3))
+
+
+### Bug Fixes
+
+* **backend:** added another answer to onboarding answers bb-133 ([#212](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/212)) ([f99ec62](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f99ec6228d2300d1c191ef61d714b9344fb2f887))
+* **frontend:** fix problem with loading pages bb-246 ([#247](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/247)) ([36961a6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/36961a642e04eeedcf2f2dc58ab54053d281edd1))
+
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.24.0...v1.25.0) (2024-08-30)
+
+
+### Features
+
+* **frontend:** analyzing screen mobile responsiveness bb-136 ([#231](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/231)) ([3fa478c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3fa478c516bd16ea45cdc9aea3299d78af0966a9))
+* **mobile:** checkbox component bb-174 ([#221](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/221)) ([a5987ab](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a5987ab94f470c396c4c324ffc72c7720d3d0696))
+
+
+### Bug Fixes
+
+* **mobile:** quiz entry screen bb-80 ([#244](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/244)) ([12eb0c1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/12eb0c1940b4b775a30052757a67c8cbe3be55f2))
+
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.23.0...v1.24.0) (2024-08-29)
+
+
+### Features
+
+* **mobile:** added configuration to make apk builds bb-236 ([#238](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/238)) ([221867d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/221867d4338131e9b1b6632b677f71eddaf4750a))
+
+
+### Bug Fixes
+
+* **frontend:** wrap quiz component into protected route bb-234 ([#235](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/235)) ([b55f92f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b55f92f05bc2995e52f7b90d87f4dff110e80b4f))
+
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.22.0...v1.23.0) (2024-08-28)
+
+
+### Features
+
+* **mobile:** add  bottom tab navigator bb-128 ([#214](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/214)) ([0848203](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/084820386a667ea406bd8c93680ab687c8a6ab25))
+* **mobile:** sign in form bb-20 ([#228](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/228)) ([96ed037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/96ed037c7efec2b4058500c139d879030725d792))
+
+
+### Bug Fixes
+
+* **frontend:** fix passwords don't match error even when passwords the same bb-226 ([#229](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/229)) ([6db0f2a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6db0f2a295c002a51fcdcdebf799f64db613be2e))
+
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.21.0...v1.22.0) (2024-08-28)
+
+
+### Features
+
+* added db schema to readme file bb-156 ([#217](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/217)) ([20db5e4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/20db5e4cf9891bd005402576027b3cfc88f77880))
+* **frontend:** analyzing screen mobile responsiveness bb-136 ([#213](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/213)) ([1c8b8c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1c8b8c7ec3ed2ca563be922fd97c1d967c98218e))
+* **frontend:** Sidebar component mobile responsiveness bb-106 ([#192](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/192)) ([f9f0ba8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f9f0ba8aa4907fc557afdad0dcf5e34195dcc5fb))
+* **frontend:** Sign in bb-7 ([#223](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/223)) ([ce92bac](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ce92baccb5ed7337664322473c62c5f1b77f7257))
+* **mobile:** add sign up bb-21 ([#177](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/177)) ([51ebe65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/51ebe65e56f875d07501eef0c436bc442cf8b71f))
+* **mobile:** Welcome screen bb-183 ([#206](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/206)) ([fa8036d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fa8036d15831cadb3da9bdb6d9c82a81c5c7d8cb))
+
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.20.0...v1.21.0) (2024-08-27)
+
+
+### Features
+
+* **frontend:** get authenticated user saved on store bb-14 ([#195](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/195)) ([b1ab4d6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b1ab4d643e16bf829c371aa5420feb92c56d991c))
+
+
+### Bug Fixes
+
+* add toggle eye in password bb-145 ([#164](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/164)) ([bc4d9db](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bc4d9dba6e219a919deae52cf5d2cab7633ddcdb))
+
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.19.1...v1.20.0) (2024-08-26)
+
+
+### Features
+
+* **frontend:** create auth wrapper components bb-189 ([#201](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/201)) ([c9b5920](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c9b5920f60c034db581ddde155b08250452a47b8))
+
+## [1.19.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.19.0...v1.19.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* **frontend/shared:** add confirm password field on sign up page bb-144 ([#168](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/168)) ([30aee02](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/30aee027f0ad5e393f8de61f109cb613bc0cb92e))
+* update breakpoint on quiz introduction screen bb-199 ([#200](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/200)) ([c712c43](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c712c43fe2c60cb3b417b3644dbda779584d5b24))
+
 ## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.18.0...v1.19.0) (2024-08-26)
 
 

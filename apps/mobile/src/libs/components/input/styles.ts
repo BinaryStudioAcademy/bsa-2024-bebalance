@@ -1,13 +1,20 @@
 import { StyleSheet } from "react-native";
 
-import { GradientColor } from "~/libs/enums/enums";
+import { BaseColor } from "~/libs/enums/enums";
 
-const COLOR_INDEX = 0;
 const styles = StyleSheet.create({
 	input: {
-		borderColor: GradientColor.BLUE[COLOR_INDEX],
-		borderWidth: 1,
+		backgroundColor: BaseColor.BG_WHITE,
+		height: 40,
+		width: "100%",
+	},
+	rounded: {
+		borderRadius: 4,
+	},
+	text: {
+		color: BaseColor.BLACK,
 		fontFamily: "Nunito-Regular",
+		fontSize: 16,
 	},
 });
 

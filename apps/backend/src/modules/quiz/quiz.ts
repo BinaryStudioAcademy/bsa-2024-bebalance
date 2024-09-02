@@ -1,14 +1,9 @@
 import { logger } from "~/libs/modules/logger/logger.js";
+import { quizAnswerService } from "~/modules/quiz-answers/quiz-answers.js";
 
 import { QuizController } from "./quiz.controller.js";
-import { QuizQuestionsRepository } from "./quiz.repository.js";
-import { QuizQuestionsService } from "./quiz.service.js";
-import { QuizQuestionsModel } from "./quiz-questions.model.js";
 
-const quizQuestionsRepository = new QuizQuestionsRepository(QuizQuestionsModel);
-const quizService = new QuizQuestionsService(quizQuestionsRepository);
-const quizController = new QuizController(logger, quizService);
+const quizController = new QuizController(logger, quizAnswerService);
 
-export { QuizApiPath } from "./libs/enums/enums.js";
-export { type QuizQuestionDto } from "./libs/types/types.js";
+export { QuizError } from "./libs/exceptions/exceptions.js";
 export { quizController };

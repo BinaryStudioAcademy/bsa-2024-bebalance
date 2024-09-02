@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.8.0...backend-v1.9.0) (2024-09-01)
+
+
+### Features
+
+* **backend/shared:** save quiz response to db bb-166 ([#208](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/208)) ([42b4cbb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/42b4cbb32ddbe609d3555d24b755199783429600))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.7.1...backend-v1.8.0) (2024-08-31)
+
+
+### Features
+
+* **backend/shared:** save onboarding quiz answers to DB bb-167 ([#227](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/227)) ([6779d9d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6779d9d3310ed2e3fa1a48ca34ffe186a5eb2ca3))
+
+
+### Bug Fixes
+
+* **backend:** added another answer to onboarding answers bb-133 ([#212](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/212)) ([f99ec62](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f99ec6228d2300d1c191ef61d714b9344fb2f887))
+
 ## [1.7.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.7.0...backend-v1.7.1) (2024-08-25)
 
 

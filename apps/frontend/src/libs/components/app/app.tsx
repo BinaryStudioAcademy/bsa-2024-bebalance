@@ -1,9 +1,7 @@
 import {
-	Header,
 	Loader,
 	Notification,
 	RouterOutlet,
-	Sidebar,
 } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import {
@@ -13,6 +11,7 @@ import {
 	useLocation,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { Quiz } from "~/pages/quiz/quiz.js";
 
 const App: React.FC = () => {
 	const { pathname } = useLocation();
@@ -25,23 +24,25 @@ const App: React.FC = () => {
 	const isRoot = pathname === AppRoute.ROOT;
 
 	useEffect(() => {
-		if (isRoot) {
-			void dispatch(authActions.getAuthenticatedUser());
-		}
-	}, [isRoot, dispatch]);
+		void dispatch(authActions.getAuthenticatedUser());
+	}, [dispatch]);
 
-	const isLoading = dataStatus === DataStatus.PENDING;
+	const isLoading =
+		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	return (
 		<>
 			<div>
 				<RouterOutlet />
 			</div>
-			{isLoading && <Loader />}
-			{!isLoading && isRoot && (
+
+			{isRoot && (
 				<>
-					<Header />
-					<Sidebar />
+					<Quiz />
 				</>
 			)}
 			<Notification />
