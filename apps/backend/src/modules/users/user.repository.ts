@@ -4,18 +4,23 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
 import { type UserDetailsModel } from "./user-details.model.js";
+import { type UserTaskDaysModel } from "./user-task-days.model.js";
 
 class UserRepository implements Repository {
 	private userDetailsModel: typeof UserDetailsModel;
 
 	private userModel: typeof UserModel;
 
+	private userTaskDaysModel: typeof UserTaskDaysModel;
+
 	public constructor(
 		userModel: typeof UserModel,
 		userDetailsModel: typeof UserDetailsModel,
+		userTaskDaysModel: typeof UserTaskDaysModel,
 	) {
 		this.userModel = userModel;
 		this.userDetailsModel = userDetailsModel;
+		this.userTaskDaysModel = userTaskDaysModel;
 	}
 
 	public async create(entity: UserEntity): Promise<UserEntity> {
@@ -56,11 +61,16 @@ class UserRepository implements Repository {
 	public async find(id: number): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
+			.withGraphFetched("[userDetails, userTaskDays]")
+			// .withGraphFetched([
+			// 	RelationName.USER_DETAILS,
+			// 	RelationName.USER_TASK_DAYS,
+			// ])
 			.findById(id);
 
 		return user
 			? UserEntity.initialize({
+					allowNotifications: user.allowNotifications,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -68,6 +78,9 @@ class UserRepository implements Repository {
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
+					userTaskDays: user.userTaskDays.map(
+						(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
+					),
 				})
 			: null;
 	}
@@ -75,10 +88,16 @@ class UserRepository implements Repository {
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
-			.withGraphFetched(RelationName.USER_DETAILS);
+			.withGraphFetched("[userDetails, userTaskDays]");
+
+		// .withGraphFetched([
+		// 	RelationName.USER_DETAILS,
+		// 	RelationName.USER_TASK_DAYS,
+		// ]);
 
 		return users.map((user) =>
 			UserEntity.initialize({
+				allowNotifications: user.allowNotifications,
 				createdAt: user.createdAt,
 				email: user.email,
 				id: user.id,
@@ -86,6 +105,9 @@ class UserRepository implements Repository {
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays.map(
+					(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
+				),
 			}),
 		);
 	}
@@ -93,12 +115,13 @@ class UserRepository implements Repository {
 	public async findByEmail(email: string): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
 			.where({ email })
-			.first();
+			.first()
+			.withGraphFetched(RelationName.USER_DETAILS);
 
 		return user
 			? UserEntity.initialize({
+					allowNotifications: user.allowNotifications,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -110,8 +133,81 @@ class UserRepository implements Repository {
 			: null;
 	}
 
-	public update(): ReturnType<Repository["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: Partial<UserModel>,
+	): Promise<UserEntity> {
+		const user = await this.userModel
+			.query()
+			.patchAndFetchById(id, payload)
+			.withGraphFetched("[userDetails, userTaskDays]");
+
+		// .withGraphFetched([
+		// 	RelationName.USER_DETAILS,
+		// 	RelationName.USER_TASK_DAYS,
+		// ]);
+
+		return UserEntity.initialize({
+			allowNotifications: user.allowNotifications,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays.map(
+				(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
+			),
+		});
+	}
+
+	public async updateUserDetails(
+		id: number,
+		payload: Partial<UserDetailsModel>,
+	): Promise<null | UserEntity> {
+		await this.userDetailsModel.query().patch(payload).where({ userId: id });
+
+		const user = await this.userModel
+			.query()
+			.findById(id)
+			.withGraphFetched("[userDetails, userTaskDays]");
+
+		// .withGraphFetched([
+		// 	RelationName.USER_DETAILS,
+		// 	RelationName.USER_TASK_DAYS,
+		// ]);
+
+		if (!user) {
+			return null;
+		}
+
+		return UserEntity.initialize({
+			allowNotifications: user.userDetails.allowNotifications,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays.map(
+				(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
+			),
+		});
+	}
+
+	public async updateUserTaskDays(
+		id: number,
+		userTaskDays: number[],
+	): Promise<void> {
+		await this.userTaskDaysModel.query().delete().where({ userId: id });
+
+		await this.userTaskDaysModel.query().insert(
+			userTaskDays.map((day) => {
+				return { dayOfWeek: day, userId: id };
+			}),
+		);
 	}
 }
 
