@@ -63,6 +63,16 @@ class UserController extends BaseController {
 				),
 			method: "GET",
 			path: UsersApiPath.GET,
+			preHandlers: [
+				(options): void => {
+					this.checkAccessToUserData(
+						options as APIHandlerOptions<{
+							params: UserGetParametersDto;
+							user: UserDto;
+						}>,
+					);
+				},
+			],
 		});
 
 		this.addRoute({
@@ -77,7 +87,7 @@ class UserController extends BaseController {
 			path: UsersApiPath.PATCH,
 			preHandlers: [
 				(options): void => {
-					this.checkUserAccessToUpdate(
+					this.checkAccessToUserData(
 						options as APIHandlerOptions<{
 							params: UserUpdateParametersDto;
 							user: UserDto;
@@ -91,7 +101,7 @@ class UserController extends BaseController {
 		});
 	}
 
-	private checkUserAccessToUpdate(
+	private checkAccessToUserData(
 		options: APIHandlerOptions<{
 			params: UserUpdateParametersDto;
 			user: UserDto;
