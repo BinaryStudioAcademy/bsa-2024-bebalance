@@ -12,7 +12,13 @@ const QuizForm: React.FC = () => {
 
 	return (
 		<form>
-			<QuizQuestion control={control} />
+			<QuizQuestion
+				control={control}
+				label=""
+				name=""
+				options={[]}
+				type="radio"
+			/>
 		</form>
 	);
 };
