@@ -25,7 +25,7 @@ class AuthApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 
-	public async getAuthenticatedUser(): Promise<null | UserDto> {
+	public async getAuthenticatedUser(): Promise<UserDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.AUTHENTICATED_USER, {}),
 			{
@@ -35,7 +35,7 @@ class AuthApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<null | UserDto>();
+		return await response.json<UserDto>();
 	}
 
 	public async requestResetPassword(payload: EmailDto): Promise<boolean> {
