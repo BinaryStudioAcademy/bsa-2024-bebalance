@@ -1,4 +1,3 @@
-export { type CategoryDto } from "./category-dto.type.js";
 export { type CategoryRequestDto } from "./category-request-dto.type.js";
 export { type QuizAnswerDto } from "./quiz-answer-dto.type.js";
 export { type QuizAnswerRequestDto } from "./quiz-answer-request-dto.type.js";

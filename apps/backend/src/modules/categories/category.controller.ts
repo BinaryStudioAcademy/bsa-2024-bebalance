@@ -66,7 +66,7 @@ class CategoryController extends BaseController {
 	 */
 	private async getCategories(): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.categoryService.findAllWithoutScores(),
+			payload: await this.categoryService.findAll(),
 			status: HTTPCode.OK,
 		};
 	}

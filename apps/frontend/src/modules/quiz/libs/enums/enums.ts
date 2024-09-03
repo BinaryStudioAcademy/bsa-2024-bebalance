@@ -1,1 +1,0 @@
-export { QuizApiPath } from "shared";

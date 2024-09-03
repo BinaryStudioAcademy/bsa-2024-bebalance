@@ -3,8 +3,8 @@ import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
-import { QuizApiPath } from "./libs/enums/enums.js";
-import { type QuizGetAllCategoriesResponseDto } from "./libs/types/types.js";
+import { CategoriesApiPath } from "./libs/enums/enums.js";
+import { type GetCategoriesDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -12,14 +12,14 @@ type Constructor = {
 	storage: Storage;
 };
 
-class QuizApi extends BaseHTTPApi {
+class CategoriesApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ baseUrl, http, path: APIPath.QUIZ, storage });
+		super({ baseUrl, http, path: APIPath.CATEGORIES, storage });
 	}
 
-	public async getQuizCategories(): Promise<QuizGetAllCategoriesResponseDto> {
+	public async getCategories(): Promise<GetCategoriesDto> {
 		const response = await this.load(
-			this.getFullEndpoint(QuizApiPath.CATEGORIES, {}),
+			this.getFullEndpoint(CategoriesApiPath.ROOT, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -27,8 +27,8 @@ class QuizApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<QuizGetAllCategoriesResponseDto>();
+		return await response.json<GetCategoriesDto>();
 	}
 }
 
-export { QuizApi };
+export { CategoriesApi };

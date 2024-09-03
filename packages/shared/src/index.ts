@@ -36,7 +36,14 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
-export { CategoriesApiPath } from "./modules/categories/categories.js";
+export {
+	CategoriesApiPath,
+	type CategoryDto,
+	type CategoryWithScoresDto,
+	type CreateCategoryRequestDto,
+	type GetCategoriesDto,
+	type UpdateCategoryRequestDto,
+} from "./modules/categories/categories.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
@@ -46,7 +53,6 @@ export {
 	OnboardingApiPath,
 } from "./modules/onboarding/onboarding.js";
 export {
-	type CategoryDto,
 	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,

@@ -5,10 +5,9 @@ import { type Repository } from "~/libs/types/types.js";
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
 import {
-	type CategoryRequestDto,
 	type CategoryScoreModel,
-	type QuizCategoryDto,
 	type QuizScoreDto,
+	type UpdateCategoryRequestDto,
 } from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
@@ -118,22 +117,9 @@ class CategoryRepository implements Repository {
 		);
 	}
 
-	public async findAllWithoutScores(): Promise<QuizCategoryDto[]> {
-		const categories = await this.categoryModel.query().select("*");
-
-		const items: QuizCategoryDto[] = categories.map((category) => {
-			const { createdAt, id, name, updatedAt } =
-				CategoryEntity.initialize(category).toObject();
-
-			return { createdAt, id, name, updatedAt };
-		});
-
-		return items;
-	}
-
 	public async update(
 		id: number,
-		payload: Partial<CategoryRequestDto>,
+		payload: Partial<UpdateCategoryRequestDto>,
 	): Promise<CategoryEntity> {
 		const category = await this.categoryModel
 			.query()

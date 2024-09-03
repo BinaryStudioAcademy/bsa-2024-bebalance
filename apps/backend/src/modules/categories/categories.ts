@@ -11,8 +11,6 @@ const categoryController = new CategoryController(logger, categoryService);
 
 export { CategoryService } from "./category.service.js";
 export {
-	type QuizCategoryDto,
-	type QuizGetAllCategoriesResponseDto,
 	type QuizScoreDto,
 	type QuizScoreResponseDto,
 } from "./libs/types/types.js";
