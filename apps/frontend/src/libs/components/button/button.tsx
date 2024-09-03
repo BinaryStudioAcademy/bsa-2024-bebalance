@@ -11,9 +11,9 @@ type Properties = {
 	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
-	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant?: "icon";
+	variant?: "icon" | "secondary";
 };
 
 const Button: React.FC<Properties> = ({
