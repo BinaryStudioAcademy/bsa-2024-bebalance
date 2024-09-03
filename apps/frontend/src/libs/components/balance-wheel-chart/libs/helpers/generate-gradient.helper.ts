@@ -1,41 +1,52 @@
 import { type ScriptableContext } from "~/libs/types/types.js";
 
 import { FALLBACK_BACKGROUND_COLOR } from "../constants/constants.js";
-import { BALANCE_WHEEL_BACKGROUND_COLORS } from "../enums/enums.js";
+import { CHART_SLICE_COLORS } from "../enums/enums.js";
 
-const CENTER_DIVISOR = 2;
-const INITIAL_RADIUS = 0;
-const GRADIENT_STOP_START = 0.1;
-const GRADIENT_STOP_END = 1;
+const GRADIENT_SETTINGS = {
+	CENTER_DIVISOR: 2,
+	GRADIENT_STOP_END: 1,
+	GRADIENT_STOP_START: 0.1,
+	INITIAL_RADIUS: 0,
+} as const;
 
 const generateGradientColor = (
 	context: ScriptableContext<"doughnut">,
 ): CanvasGradient => {
-	const { dataIndex } = context;
-	const colorStart =
-		BALANCE_WHEEL_BACKGROUND_COLORS[dataIndex]?.start ??
-		FALLBACK_BACKGROUND_COLOR;
-	const colorEnd =
-		BALANCE_WHEEL_BACKGROUND_COLORS[dataIndex]?.end ??
-		FALLBACK_BACKGROUND_COLOR;
-
-	const { chart } = context;
+	const { chart, dataIndex } = context;
 	const { chartArea, ctx } = chart;
+	const { labels } = chart.data;
+
+	const label = labels?.[dataIndex] as string;
+
+	const colorStart =
+		label && label in CHART_SLICE_COLORS
+			? CHART_SLICE_COLORS[
+					label.toUpperCase() as keyof typeof CHART_SLICE_COLORS
+				].start
+			: FALLBACK_BACKGROUND_COLOR;
+
+	const colorEnd =
+		label && label in CHART_SLICE_COLORS
+			? CHART_SLICE_COLORS[
+					label.toUpperCase() as keyof typeof CHART_SLICE_COLORS
+				].end
+			: FALLBACK_BACKGROUND_COLOR;
 
 	const gradient = ctx.createRadialGradient(
-		(chartArea.left + chartArea.right) / CENTER_DIVISOR,
-		(chartArea.top + chartArea.bottom) / CENTER_DIVISOR,
-		INITIAL_RADIUS,
-		(chartArea.left + chartArea.right) / CENTER_DIVISOR,
-		(chartArea.top + chartArea.bottom) / CENTER_DIVISOR,
+		(chartArea.left + chartArea.right) / GRADIENT_SETTINGS.CENTER_DIVISOR,
+		(chartArea.top + chartArea.bottom) / GRADIENT_SETTINGS.CENTER_DIVISOR,
+		GRADIENT_SETTINGS.INITIAL_RADIUS,
+		(chartArea.left + chartArea.right) / GRADIENT_SETTINGS.CENTER_DIVISOR,
+		(chartArea.top + chartArea.bottom) / GRADIENT_SETTINGS.CENTER_DIVISOR,
 		Math.min(
 			chartArea.right - chartArea.left,
 			chartArea.bottom - chartArea.top,
-		) / CENTER_DIVISOR,
+		) / GRADIENT_SETTINGS.CENTER_DIVISOR,
 	);
 
-	gradient.addColorStop(GRADIENT_STOP_START, colorEnd);
-	gradient.addColorStop(GRADIENT_STOP_END, colorStart);
+	gradient.addColorStop(GRADIENT_SETTINGS.GRADIENT_STOP_START, colorEnd);
+	gradient.addColorStop(GRADIENT_SETTINGS.GRADIENT_STOP_END, colorStart);
 
 	return gradient;
 };

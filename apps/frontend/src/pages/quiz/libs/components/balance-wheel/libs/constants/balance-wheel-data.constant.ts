@@ -1,12 +1,12 @@
 const BALANCE_WHEEL_DATA = [
-	{ data: 9, label: "Physical" },
-	{ data: 8, label: "Work" },
-	{ data: 7, label: "Friends" },
-	{ data: 6, label: "Love" },
-	{ data: 5, label: "Money" },
-	{ data: 8, label: "Free time" },
-	{ data: 5, label: "Spiritual" },
-	{ data: 7, label: "Mental" },
+	{ data: 9, label: "PHYSICAL" },
+	{ data: 8, label: "WORK" },
+	{ data: 7, label: "FRIEND" },
+	{ data: 6, label: "LOVE" },
+	{ data: 5, label: "MONEY" },
+	{ data: 8, label: "FREE_TIME" },
+	{ data: 5, label: "SPRIRITUAL" },
+	{ data: 7, label: "MENTAL" },
 ];
 
 export { BALANCE_WHEEL_DATA };
