@@ -1,7 +1,7 @@
 export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
-export { CategoriesForm } from "~/libs/components/categories-form/categories-form";
+export { CategoriesForm } from "./categories-form/categories-form";
 export { Checkbox } from "./checkbox/checkbox";
 export { GradientTabIcon } from "./gradient-tab-icon/gradient-tab-icon";
 export { GradientText } from "./gradient-text/gradient-text";

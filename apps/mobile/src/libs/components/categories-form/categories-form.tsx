@@ -2,9 +2,7 @@ import React from "react";
 
 import { Button, Checkbox, Text, View } from "~/libs/components/components";
 import {
-	useAppDispatch,
 	useAppForm,
-	useAppSelector,
 	useCallback,
 	useEffect,
 	useFormController,
@@ -16,21 +14,12 @@ import {
 } from "~/libs/packages/toast-message/toast-message";
 import { globalStyles } from "~/libs/styles/styles";
 import { quizCategoriesValidationSchema } from "~/packages/quiz/quiz";
-import { actions as quizActions } from "~/slices/quiz/quiz";
 
-const CategoriesForm: React.FC = () => {
-	const dispatch = useAppDispatch();
-	const { categories } = useAppSelector((state) => state.quiz);
+type Properties = {
+	categories: { id: number; name: string }[];
+};
 
-	const ZERO_CATEGORIES = 0;
-	const hasCategories = Boolean(categories.length > ZERO_CATEGORIES);
-
-	useEffect(() => {
-		if (!hasCategories) {
-			void dispatch(quizActions.getQuizCategories());
-		}
-	}, [dispatch, hasCategories]);
-
+const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 	const [submittedCategories, setSubmittedCategories] = useState<null | string>(
 		null,
 	);
@@ -81,7 +70,7 @@ const CategoriesForm: React.FC = () => {
 				setSubmittedCategories(null);
 			}
 		},
-		[setValue],
+		[setValue, categories],
 	);
 
 	useEffect(() => {

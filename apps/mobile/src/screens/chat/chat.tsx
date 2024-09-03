@@ -6,17 +6,27 @@ import {
 	ScreenWrapper,
 } from "~/libs/components/components";
 import { DataStatus } from "~/libs/enums/enums";
-import { useAppSelector } from "~/libs/hooks/hooks";
+import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
+import { actions as quizActions } from "~/slices/quiz/quiz";
 
 const Chat: React.FC = () => {
-	const { dataStatus } = useAppSelector((state) => state.quiz);
+	const dispatch = useAppDispatch();
+	const { categories, dataStatus } = useAppSelector((state) => state.quiz);
+
+	const ZERO_CATEGORIES = 0;
+
+	useEffect(() => {
+		if (categories.length === ZERO_CATEGORIES) {
+			void dispatch(quizActions.getQuizCategories());
+		}
+	}, [dispatch, categories]);
 
 	return (
-		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-			<ScreenWrapper>
-				<CategoriesForm />
-			</ScreenWrapper>
-		</LoaderWrapper>
+		<ScreenWrapper>
+			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
+				<CategoriesForm categories={categories} />
+			</LoaderWrapper>
+		</ScreenWrapper>
 	);
 };
 
