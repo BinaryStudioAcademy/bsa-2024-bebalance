@@ -1,5 +1,6 @@
 const ErrorMessage = {
 	DUPLICATE_QUESTION_ANSWER: "There are multiple answers to the same question.",
+	FILE_DOES_NOT_EXIST: "This file does not exist.",
 	FILE_MISSING:
 		"A required file is missing. Please ensure that all necessary files are included and try again.",
 	INCORRECT_CREDENTIALS: "Incorrect credentials.",

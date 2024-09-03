@@ -6,11 +6,12 @@ import {
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
-import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
+import { UserError } from "./libs/exceptions/exceptions.js";
 import { type UserDto } from "./libs/types/types.js";
 
 /*** @swagger
@@ -161,7 +162,7 @@ class UserController extends BaseController {
 		}>,
 	): Promise<APIHandlerResponse> {
 		if (!options.file) {
-			throw new HTTPError({
+			throw new UserError({
 				message: ErrorMessage.FILE_MISSING,
 				status: HTTPCode.BAD_REQUEST,
 			});

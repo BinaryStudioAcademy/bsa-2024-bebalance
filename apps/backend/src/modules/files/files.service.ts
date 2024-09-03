@@ -1,10 +1,13 @@
 import { type S3Client } from "@aws-sdk/client-s3";
 
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { createCommand } from "~/libs/modules/bucket/bucket.js";
 import { config } from "~/libs/modules/config/config.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 
 import { FileEntity } from "./files.entity.js";
 import { type FileRepository } from "./files.repository.js";
+import { FileError } from "./libs/exceptions/exceptions.js";
 
 class FileService {
 	private fileRepository: FileRepository;
@@ -19,7 +22,10 @@ class FileService {
 		const fileEntity = await this.fileRepository.findByUrl(fileUrl);
 
 		if (!fileEntity) {
-			throw new Error("File not found");
+			throw new FileError({
+				message: ErrorMessage.FILE_DOES_NOT_EXIST,
+				status: HTTPCode.NOT_FOUND,
+			});
 		}
 
 		const deleteCommand = createCommand({

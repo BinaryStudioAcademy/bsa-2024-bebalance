@@ -4,7 +4,7 @@ import { type FileModel } from "~/modules/files/files.model.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { MINIAL_LENGTH } from "./libs/constants/constants.js";
+import { MINIMAL_LENGTH } from "./libs/constants/constants.js";
 import { type UserDto } from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 
@@ -172,7 +172,7 @@ class UserRepository implements Repository {
 
 		await this.userModel.query().patchAndFetchById(id, userUpdateData);
 
-		if (Object.keys(userDetailsUpdateData).length > MINIAL_LENGTH) {
+		if (Object.keys(userDetailsUpdateData).length > MINIMAL_LENGTH) {
 			await this.userDetailsModel
 				.query()
 				.patch(userDetailsUpdateData)

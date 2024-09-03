@@ -1,12 +1,15 @@
 import { type MultipartFile } from "@fastify/multipart";
 import { v4 as uuidV4 } from "uuid";
 
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import { FileEntity, type FileService } from "~/modules/files/files.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
+import { UserError } from "./libs/exceptions/exceptions.js";
 import {
 	type UserDto,
 	type UserGetAllResponseDto,
@@ -74,7 +77,10 @@ class UserService implements Service {
 		const user = await this.userRepository.find(userId);
 
 		if (!user) {
-			throw new Error("User not found");
+			throw new UserError({
+				message: ErrorMessage.UNAUTHORIZED,
+				status: HTTPCode.UNAUTHORIZED,
+			});
 		}
 
 		if (user.toObject().avatarUrl) {
