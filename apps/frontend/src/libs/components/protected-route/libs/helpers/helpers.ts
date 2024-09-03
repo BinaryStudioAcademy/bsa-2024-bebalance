@@ -1,1 +1,1 @@
-export { hasAuthWrapper } from "./has-auth-wrapper.helper.js";
+export { checkHasAuthWrapper } from "./check-has-auth-wrapper.helper.js";

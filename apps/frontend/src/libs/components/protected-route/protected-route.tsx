@@ -4,7 +4,7 @@ import { useAppSelector, useLocation } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
 import { AuthWrapper } from "../auth-wrapper/auth-wrapper.js";
-import { hasAuthWrapper } from "./libs/helpers/helpers.js";
+import { checkHasAuthWrapper } from "./libs/helpers/helpers.js";
 
 type Properties = {
 	component: React.ReactNode;
@@ -23,7 +23,7 @@ const ProtectedRoute: React.FC<Properties> = ({
 		return <Navigate replace to={redirectTo} />;
 	}
 
-	if (hasAuthWrapper(pathname as ValueOf<typeof AppRoute>)) {
+	if (checkHasAuthWrapper(pathname as ValueOf<typeof AppRoute>)) {
 		return <AuthWrapper>{component}</AuthWrapper>;
 	}
 
