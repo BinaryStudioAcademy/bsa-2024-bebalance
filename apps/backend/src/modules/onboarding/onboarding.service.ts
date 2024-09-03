@@ -7,9 +7,13 @@ import {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestDto,
 	type OnboardingAnswerResponseDto,
+	type OnboardingGetAllResponseDto,
+	type OnboardingQuestionRequestDto,
+	type OnboardingQuestionResponseDto,
 } from "./libs/types/types.js";
 import { type OnboardingRepository } from "./onboarding.repository.js";
 import { type OnboardingAnswerEntity } from "./onboarding-answer.entity.js";
+import { OnboardingQuestionEntity } from "./onboarding-question.entity.js";
 
 class OnboardingService implements Service {
 	private onboardingRepository: OnboardingRepository;
@@ -18,7 +22,27 @@ class OnboardingService implements Service {
 		this.onboardingRepository = onboardingRepository;
 	}
 
-	public async create({
+	public async create(
+		payload: OnboardingQuestionRequestDto,
+	): Promise<OnboardingQuestionResponseDto> {
+		const { answers, label } = payload;
+
+		const newQuestionEntity = OnboardingQuestionEntity.initializeNew({
+			answers: answers.map((answer) => {
+				return {
+					label: answer.label,
+				};
+			}),
+			label,
+		});
+
+		const savedQuestionEntity =
+			await this.onboardingRepository.create(newQuestionEntity);
+
+		return savedQuestionEntity.toObject();
+	}
+
+	public async createAnswer({
 		answerIds,
 		userId,
 	}: OnboardingAnswerRequestDto): Promise<OnboardingAnswerResponseDto> {
@@ -52,24 +76,44 @@ class OnboardingService implements Service {
 		};
 	}
 
-	public delete(id: number): Promise<boolean> {
-		return this.onboardingRepository.delete(id);
+	public async delete(id: number): Promise<boolean> {
+		return await this.onboardingRepository.delete(id);
 	}
 
-	public async find(id: number): Promise<null | OnboardingAnswerDto> {
-		const answer = await this.onboardingRepository.find(id);
-
-		return answer ? answer.toObject() : null;
+	public deleteAnswer(id: number): Promise<boolean> {
+		return this.onboardingRepository.deleteUsersAnswers(id);
 	}
 
-	public async findAll(): Promise<{ items: OnboardingAnswerDto[] }> {
-		const answers = await this.onboardingRepository.findAll();
+	public async find(id: number): Promise<null | OnboardingQuestionResponseDto> {
+		const onboardingQuestion = await this.onboardingRepository.find(id);
+
+		return onboardingQuestion ? onboardingQuestion.toObject() : null;
+	}
+
+	public async findAll(): Promise<OnboardingGetAllResponseDto> {
+		const items: OnboardingQuestionEntity[] =
+			await this.onboardingRepository.findAll();
+
+		return {
+			items: items.map((item) => {
+				return item.toObject();
+			}),
+		};
+	}
+
+	public async findAllAnswers(): Promise<{ items: OnboardingAnswerDto[] }> {
+		const answers = await this.onboardingRepository.findAllAnswers();
 
 		return {
 			items: answers.map((answer) => {
 				return answer.toObject();
 			}),
 		};
+	}
+	public async findAnswer(id: number): Promise<null | OnboardingAnswerDto> {
+		const answer = await this.onboardingRepository.findAnswerById(id);
+
+		return answer ? answer.toObject() : null;
 	}
 
 	public async findAnswersByIds(
@@ -80,11 +124,35 @@ class OnboardingService implements Service {
 
 	public async update(
 		id: number,
+		payload: OnboardingQuestionResponseDto,
+	): Promise<OnboardingQuestionRequestDto> {
+		const { answers, label } = payload;
+
+		const question = OnboardingQuestionEntity.initializeNew({
+			answers: answers.map((answer) => {
+				return {
+					label: answer.label,
+				};
+			}),
+			label,
+		});
+
+		const updatedQuestion = await this.onboardingRepository.update(
+			id,
+			question,
+		);
+
+		return updatedQuestion.toObject();
+	}
+
+	public async updateAnswer(
+		id: number,
 		payload: Partial<OnboardingAnswerDto>,
 	): Promise<OnboardingAnswerDto> {
-		const answer = await this.onboardingRepository.update(id, payload);
+		const answer = await this.onboardingRepository.updateAnswer(id, payload);
 
 		return answer.toObject();
 	}
 }
+
 export { OnboardingService };
