@@ -26,7 +26,6 @@ const UserValidationMessage = {
 	PASSWORD_MIN_LENGTH: `Password must be at least ${String(
 		UserValidationRule.PASSWORD_MIN_LENGTH,
 	)} characters long`,
-	PASSWORD_NOT_MATCH: "Passwords do not match. Please re-enter your password",
 	PASSWORD_REQUIRES_CHARACTER: `Your password must be between ${String(UserValidationRule.PASSWORD_MIN_LENGTH)} and ${String(UserValidationRule.PASSWORD_MAX_LENGTH)} characters, and include at least one letter and one number`,
 	PASSWORD_REQUIRES_LETTER_AND_NUMBER:
 		"Password must include at least one letter and one number",
