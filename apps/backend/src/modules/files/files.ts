@@ -20,3 +20,4 @@ const fileService = new FileService(s3Client, fileRepository);
 export { fileService };
 export { FileEntity } from "./files.entity.js";
 export { type FileService } from "./files.service.js";
+export { FileError } from "./libs/exceptions/exceptions.js";

@@ -7,9 +7,11 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
+	FileError,
 	HTTPError,
 	OnboardingError,
 	QuizError,
+	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
