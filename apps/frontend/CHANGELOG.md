@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.19.0...frontend-v1.20.0) (2024-09-03)
+
+
+### Features
+
+* **backend/frontend/shared:** forgot-password-functionality bb-188 ([#230](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/230)) ([3e24ec9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3e24ec928ad898c33eb0caa06d7f83692f322026))
+
+
+### Bug Fixes
+
+* evened out header with sidebar logo bb-252 ([#273](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/273)) ([7803eca](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7803eca09e47034effe8fd97b75f3800538271e3))
+
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.18.0...frontend-v1.19.0) (2024-09-02)
+
+
+### Features
+
+* **frontend:** sign-out functionality bb-241 ([#264](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/264)) ([d6b5fff](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d6b5fff860ac41666d3cd00b17945415d859a6db))
+
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.17.1...frontend-v1.18.0) (2024-09-01)
+
+
+### Features
+
+* **frontend:** sign up bb-9 ([#218](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/218)) ([917e652](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/917e6525945033ce33df1712dcaaf7c75b0b4bc3))
+
+
+### Bug Fixes
+
+* **frontend:** "You are unauthorized to access the requested resource." error message is shown on the Sign-In/ Sign-Up page bb-222 ([#248](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/248)) ([601cfa2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/601cfa2f41665dcc5448fc034fde6ed3d431b88b))
+
 ## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.17.0...frontend-v1.17.1) (2024-08-31)
 
 

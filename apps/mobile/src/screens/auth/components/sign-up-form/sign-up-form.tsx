@@ -75,14 +75,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				isAutoFocused
 				label="Name"
 				name="name"
-				placeholder="name"
+				placeholder="Name"
 			/>
 			<Input
 				control={control}
 				errors={errors}
 				label="Email"
 				name="email"
-				placeholder="name@example.com"
+				placeholder="be@balance.com"
 			/>
 			<Input
 				accessoryRight={

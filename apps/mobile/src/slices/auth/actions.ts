@@ -11,11 +11,16 @@ import {
 import { name as sliceName } from "./auth.slice";
 
 const getAuthenticatedUser = createAsyncThunk<
-	UserDto,
+	null | UserDto,
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
 	const { authApi } = extra;
+	const hasToken = await storage.has(StorageKey.TOKEN);
+
+	if (!hasToken) {
+		return null;
+	}
 
 	return await authApi.getAuthenticatedUser();
 });

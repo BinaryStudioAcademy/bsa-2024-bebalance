@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.9.0...backend-v1.10.0) (2024-09-03)
+
+
+### Features
+
+* **backend/frontend/shared:** forgot-password-functionality bb-188 ([#230](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/230)) ([3e24ec9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3e24ec928ad898c33eb0caa06d7f83692f322026))
+
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.8.0...backend-v1.9.0) (2024-09-01)
+
+
+### Features
+
+* **backend/shared:** save quiz response to db bb-166 ([#208](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/208)) ([42b4cbb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/42b4cbb32ddbe609d3555d24b755199783429600))
+
 ## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.7.1...backend-v1.8.0) (2024-08-31)
 
 

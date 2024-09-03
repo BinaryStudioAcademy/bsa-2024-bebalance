@@ -7,23 +7,39 @@ import {
 	useAppSelector,
 	useCallback,
 	useLocation,
+	useNavigate,
+	useQuery,
 } from "~/libs/hooks/hooks.js";
+import { type ValueOf } from "~/libs/types/types.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
+	type EmailDto,
+	type ResetPasswordDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
-import { SignInForm, SignUpForm } from "./libs/components/components.js";
+import {
+	ForgotPasswordForm,
+	ResetPasswordForm,
+	SignInForm,
+	SignUpForm,
+} from "./libs/components/components.js";
+import { authRouteToHeader } from "./libs/maps/maps.js";
+import { type RoutesWithHeader } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const Auth: React.FC = () => {
-	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 
 	const { user } = useAppSelector(({ auth }) => ({
 		user: auth.user,
 	}));
+
+	const { token } = useQuery();
+
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -39,6 +55,26 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleForgotPasswordSubmit = useCallback(
+		(payload: EmailDto): void => {
+			void dispatch(authActions.requestResetPassword(payload));
+			navigate(AppRoute.SIGN_IN);
+		},
+		[dispatch, navigate],
+	);
+
+	const handleResetPasswordSubmit = useCallback(
+		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
+			void dispatch(
+				authActions.resetPassword({
+					jwtToken: token as string,
+					newPassword: payload.newPassword,
+				}),
+			);
+		},
+		[dispatch, token],
+	);
+
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case AppRoute.SIGN_IN: {
@@ -48,9 +84,15 @@ const Auth: React.FC = () => {
 			case AppRoute.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
-		}
 
-		return null;
+			case AppRoute.FORGOT_PASSWORD: {
+				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
+			}
+
+			case AppRoute.RESET_PASSWORD: {
+				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
+			}
+		}
 	};
 
 	const hasUser = Boolean(user);
@@ -72,7 +114,7 @@ const Auth: React.FC = () => {
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
-						{pathname === AppRoute.SIGN_IN ? "sign in" : "sign up"}
+						{authRouteToHeader[pathname as ValueOf<RoutesWithHeader>]}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
 						{pathname === AppRoute.SIGN_IN ? (
@@ -83,7 +125,7 @@ const Auth: React.FC = () => {
 						) : (
 							<>
 								<span>Already have an account? Go to </span>
-								<Link to={AppRoute.SIGN_IN}>Sign in</Link>
+								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
 							</>
 						)}
 					</span>
