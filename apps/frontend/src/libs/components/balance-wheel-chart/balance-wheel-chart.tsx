@@ -32,13 +32,16 @@ const BalanceWheelChart: React.FC<Properties> = ({
 	const handleUpdateChartData = useCallback(
 		(chartData: ChartDataType[]): void => {
 			const chartInstance = chartReference.current;
-			const INDEX = 0;
+			const FIRST_ITEM_INDEX = 0;
 
-			if (!chartInstance || !chartInstance.data.datasets[INDEX]?.data) {
+			if (
+				!chartInstance ||
+				!chartInstance.data.datasets[FIRST_ITEM_INDEX]?.data
+			) {
 				return;
 			}
 
-			chartInstance.data.datasets[INDEX].data = chartData.map(
+			chartInstance.data.datasets[FIRST_ITEM_INDEX].data = chartData.map(
 				(entry) => entry.data,
 			);
 			chartInstance.data.labels = chartData.map((entry) => entry.label);
@@ -50,13 +53,16 @@ const BalanceWheelChart: React.FC<Properties> = ({
 
 	const handleAnimateChart = useCallback(() => {
 		const chartInstance = chartReference.current;
-		const INDEX = 0;
+		const FIRST_ITEM_INDEX = 0;
 
-		if (!chartInstance || !chartInstance.data.datasets[INDEX]?.data) {
+		if (
+			!chartInstance ||
+			!chartInstance.data.datasets[FIRST_ITEM_INDEX]?.data
+		) {
 			return;
 		}
 
-		chartInstance.data.datasets[INDEX].data = generateRandomData();
+		chartInstance.data.datasets[FIRST_ITEM_INDEX].data = generateRandomData();
 		chartInstance.update();
 	}, []);
 
