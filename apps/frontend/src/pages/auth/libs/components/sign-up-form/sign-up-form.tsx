@@ -7,7 +7,7 @@ import {
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants/constants.js";
 import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
@@ -42,7 +42,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				}
 			})(event_);
 		},
-		[handleSubmit, onSubmit, setError, getValues],
+		[onSubmit, handleSubmit, setError, getValues],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {

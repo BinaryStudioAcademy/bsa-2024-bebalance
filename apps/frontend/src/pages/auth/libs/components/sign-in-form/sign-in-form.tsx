@@ -1,4 +1,5 @@
-import { Button, Input } from "~/libs/components/components.js";
+import { Button, Input, Link } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import { NO_ERROR_INPUT_FIELD } from "~/modules/users/constants.js";
 import {
@@ -6,7 +7,7 @@ import {
 	userSignInValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -25,7 +26,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit(onSubmit)(event_);
 		},
-		[handleSubmit, onSubmit],
+		[onSubmit, handleSubmit],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {
@@ -56,6 +57,9 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				/>
 
 				<Button isDisabled={isInputError} label="SIGN IN" type="submit" />
+				<div className={styles["forgot-password-container"]}>
+					<Link to={AppRoute.FORGOT_PASSWORD}>Forgot password?</Link>
+				</div>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
