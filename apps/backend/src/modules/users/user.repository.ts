@@ -201,6 +201,31 @@ class UserRepository implements Repository {
 				})
 			: null;
 	}
+
+	public async updatePassword(
+		id: number,
+		passwordPayload: { passwordHash: string; passwordSalt: string },
+	): Promise<UserEntity> {
+		const user = await this.userModel
+			.query()
+			.withGraphFetched(RelationName.USER_DETAILS)
+			.patchAndFetchById(id, passwordPayload);
+
+		const avatar = await this.fileModel
+			.query()
+			.findById(user.userDetails.avatarFileId);
+
+		return UserEntity.initialize({
+			avatarUrl: avatar?.url as string,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
+	}
 }
 
 export { UserRepository };

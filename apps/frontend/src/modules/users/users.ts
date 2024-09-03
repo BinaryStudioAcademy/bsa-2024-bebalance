@@ -1,4 +1,7 @@
 export {
+	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,
@@ -8,6 +11,8 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 export {
+	userForgotPasswordVaidationSchema,
+	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
