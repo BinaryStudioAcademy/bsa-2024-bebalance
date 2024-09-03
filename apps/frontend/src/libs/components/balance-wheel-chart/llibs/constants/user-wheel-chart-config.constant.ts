@@ -6,7 +6,6 @@ import {
 	generateGradientColor,
 } from "../helpers/helpers.js";
 import { type PolarAreaType } from "../types/types.js";
-import { POLAR_AREA } from "./constants.js";
 
 const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	data: {
@@ -59,7 +58,7 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 			id: "extraPointGraphics",
 		},
 	],
-	type: POLAR_AREA,
+	type: "polarArea",
 } as const;
 
 export { USER_WHEEL_CHART_CONFIG };
