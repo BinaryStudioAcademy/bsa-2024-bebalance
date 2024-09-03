@@ -54,8 +54,14 @@ class UserRepository implements Repository {
 		});
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const rowsDeleted = await this.userModel.query().deleteById(id);
+
+		return Boolean(rowsDeleted);
+	}
+
+	public async deleteUserTaskDays(userId: number): Promise<void> {
+		await this.userTaskDaysModel.query().delete().where({ userId });
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
@@ -126,6 +132,9 @@ class UserRepository implements Repository {
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
+					userTaskDays: user.userTaskDays.map(
+						(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
+					),
 				})
 			: null;
 	}
@@ -192,7 +201,7 @@ class UserRepository implements Repository {
 		id: number,
 		userTaskDays: number[],
 	): Promise<void> {
-		await this.userTaskDaysModel.query().delete().where({ userId: id });
+		await this.deleteUserTaskDays(id);
 
 		await this.userTaskDaysModel.query().insert(
 			userTaskDays.map((day) => {
