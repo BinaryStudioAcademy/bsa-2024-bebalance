@@ -61,11 +61,9 @@ class UserRepository implements Repository {
 	public async find(id: number): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
-			.withGraphFetched("[userDetails, userTaskDays]")
-			// .withGraphFetched([
-			// 	RelationName.USER_DETAILS,
-			// 	RelationName.USER_TASK_DAYS,
-			// ])
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			)
 			.findById(id);
 
 		return user
@@ -88,12 +86,9 @@ class UserRepository implements Repository {
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
-			.withGraphFetched("[userDetails, userTaskDays]");
-
-		// .withGraphFetched([
-		// 	RelationName.USER_DETAILS,
-		// 	RelationName.USER_TASK_DAYS,
-		// ]);
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			);
 
 		return users.map((user) =>
 			UserEntity.initialize({
@@ -117,7 +112,9 @@ class UserRepository implements Repository {
 			.query()
 			.where({ email })
 			.first()
-			.withGraphFetched(RelationName.USER_DETAILS);
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			);
 
 		return user
 			? UserEntity.initialize({
@@ -140,12 +137,9 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.patchAndFetchById(id, payload)
-			.withGraphFetched("[userDetails, userTaskDays]");
-
-		// .withGraphFetched([
-		// 	RelationName.USER_DETAILS,
-		// 	RelationName.USER_TASK_DAYS,
-		// ]);
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			);
 
 		return UserEntity.initialize({
 			allowNotifications: user.allowNotifications,
@@ -171,12 +165,9 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.findById(id)
-			.withGraphFetched("[userDetails, userTaskDays]");
-
-		// .withGraphFetched([
-		// 	RelationName.USER_DETAILS,
-		// 	RelationName.USER_TASK_DAYS,
-		// ]);
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			);
 
 		if (!user) {
 			return null;
