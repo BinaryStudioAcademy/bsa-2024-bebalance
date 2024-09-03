@@ -6,15 +6,11 @@ import {
 	type FieldPath,
 	type FieldValues,
 	type IconName,
+	type OPTIONS,
 } from "~/libs/types/types.js";
 
 import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
-
-type options = {
-	label: string;
-	value: string;
-};
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
@@ -23,7 +19,7 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	onIconClick?: () => void;
-	options?: options[];
+	options?: OPTIONS[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
 };

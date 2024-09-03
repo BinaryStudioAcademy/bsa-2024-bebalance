@@ -1,4 +1,4 @@
-import CheckIcon from "~/assets/img/check-icon.svg?react";
+import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
 import styles from "./styles.module.css";
@@ -14,11 +14,11 @@ const ProgressBar: React.FC<Properties> = ({
 	currentStep,
 	steps,
 }: Properties) => {
-	const elementsArray = Array.from({ length: steps });
+	const progressSteps = Array.from({ length: steps });
 
 	return (
 		<div className={styles["progress-bar"]}>
-			{elementsArray.map((_, index) => {
+			{progressSteps.map((_, index) => {
 				const isPrevious = index < currentStep;
 				const isNext = index > currentStep;
 				const isCurrent = index === currentStep;
@@ -34,7 +34,13 @@ const ProgressBar: React.FC<Properties> = ({
 								isPrevious && styles["completed"],
 							)}
 						>
-							{isPrevious ? <CheckIcon className={styles["check-icon"]} /> : ""}
+							{isPrevious ? (
+								<div className={styles["check-icon"]}>
+									<Icon name="check" />
+								</div>
+							) : (
+								""
+							)}
 						</div>
 						{!isLastStep && (
 							<div
