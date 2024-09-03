@@ -1,40 +1,83 @@
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { DataStatus } from "~/libs/enums/enums.js";
+import {
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+	useCallback,
+	useEffect,
+} from "~/libs/hooks/hooks.js";
+import {
+	actions as categoriesActions,
+	type CategoryDto,
+} from "~/modules/categories/categories.js";
 
-import { Button } from "../components.js";
-import { useQuizCategories } from "./libs/hooks/hooks.js";
-import styles from "./styles.module.css";
+import { Button, Input } from "../components.js";
+
+const useQuizCategories = (): {
+	isLoading: boolean;
+	quizCategories: CategoryDto[];
+} => {
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		void dispatch(categoriesActions.getCategories());
+	}, [dispatch]);
+
+	return useAppSelector(({ categories }) => {
+		const { dataStatus, items } = categories;
+
+		return {
+			isLoading: dataStatus === DataStatus.PENDING,
+			quizCategories: items,
+		};
+	});
+};
 
 type FormFields = {
 	categoriesIds: string[];
+	isSelectAll: boolean;
 };
 
 type Properties = {
-	onSubmit?: (payload: FormFields) => void;
+	onSubmit?: (payload: Pick<FormFields, "categoriesIds">) => void;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({
 	onSubmit = (): void => {},
 }: Properties) => {
-	const { handleSubmit, register, setValue, watch } = useAppForm<FormFields>({
-		defaultValues: { categoriesIds: [] },
+	const { control, handleSubmit, setValue, watch } = useAppForm<FormFields>({
+		defaultValues: { categoriesIds: [], isSelectAll: false },
 	});
 
 	const { isLoading, quizCategories } = useQuizCategories();
-	const isAllInputsChecked =
-		watch("categoriesIds").length === quizCategories.length;
+	const { categoriesIds, isSelectAll } = watch();
 
-	const handleAllInputClick: () => void = useCallback(() => {
-		setValue(
-			"categoriesIds",
-			isAllInputsChecked
-				? []
-				: quizCategories.map((category) => category.id.toString()),
-		);
-	}, [isAllInputsChecked, quizCategories, setValue]);
+	useEffect(() => {
+		const isAllChecked = categoriesIds.length === quizCategories.length;
+
+		if (isAllChecked && !isSelectAll) {
+			setValue("isSelectAll", true);
+		} else if (!isAllChecked && isSelectAll) {
+			setValue("isSelectAll", false);
+		}
+	}, [categoriesIds.length, isSelectAll, quizCategories, setValue]);
+
+	const handleSelectAll = useCallback(() => {
+		if (isSelectAll) {
+			setValue("categoriesIds", []);
+		} else {
+			setValue(
+				"categoriesIds",
+				quizCategories.map((category) => category.id.toString()),
+			);
+		}
+	}, [isSelectAll, quizCategories, setValue]);
 
 	const handleFormSubmit = useCallback(
 		(event: React.BaseSyntheticEvent): void => {
-			void handleSubmit(onSubmit)(event);
+			void handleSubmit(({ categoriesIds }) => {
+				onSubmit({ categoriesIds });
+			})(event);
 		},
 		[handleSubmit, onSubmit],
 	);
@@ -45,30 +88,23 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 
 	return (
 		<section>
-			<label className={styles["input-container"]}>
-				<input
-					checked={isAllInputsChecked}
-					onClick={handleAllInputClick}
-					readOnly
+			<form onSubmit={handleFormSubmit}>
+				<Input
+					control={control}
+					label="All"
+					name="isSelectAll"
+					onClick={handleSelectAll}
 					type="checkbox"
 				/>
-				<span className={styles["input-checkmark"]} />
-				All
-			</label>
-			<form onSubmit={handleFormSubmit}>
-				{quizCategories.map(({ id, name }) => {
-					return (
-						<label className={styles["input-container"]} key={id}>
-							<input
-								type="checkbox"
-								{...register("categoriesIds")}
-								value={id}
-							/>
-							<span className={styles["input-checkmark"]} />
-							{name}
-						</label>
-					);
-				})}
+				<Input
+					control={control}
+					name="categoriesIds"
+					options={quizCategories.map((category) => ({
+						label: category.name,
+						value: category.id.toString(),
+					}))}
+					type="checkbox"
+				/>
 				<br />
 				<Button label="Retake Quiz" type="submit" />
 			</form>
