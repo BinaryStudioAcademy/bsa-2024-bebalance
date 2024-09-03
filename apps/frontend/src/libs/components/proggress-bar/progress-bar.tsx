@@ -5,22 +5,21 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	currentQuestionIndex: number;
-	totalQuestionsAmount: number;
+	currentItemIndex: number;
+	totalItemsAmount: number;
 };
 
 const ProgressBar: React.FC<Properties> = ({
-	currentQuestionIndex,
-	totalQuestionsAmount,
+	currentItemIndex,
+	totalItemsAmount,
 }: Properties) => {
 	return (
 		<div className={styles["progress-bar"]}>
-			{Array.from({ length: totalQuestionsAmount }).map((_, index) => {
-				const isLastStep =
-					index === totalQuestionsAmount - PREVIOUS_INDEX_OFFSET;
-				const isCompleted = index < currentQuestionIndex;
-				const isCurrent = index === currentQuestionIndex;
-				const isUpcoming = index > currentQuestionIndex;
+			{Array.from({ length: totalItemsAmount }).map((_, index) => {
+				const isLastStep = index === totalItemsAmount - PREVIOUS_INDEX_OFFSET;
+				const isCompleted = index < currentItemIndex;
+				const isCurrent = index === currentItemIndex;
+				const isUpcoming = index > currentItemIndex;
 
 				return (
 					<div className={styles["progress-bar-container"]} key={index}>
