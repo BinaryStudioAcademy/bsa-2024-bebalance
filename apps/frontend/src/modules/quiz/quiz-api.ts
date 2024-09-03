@@ -19,7 +19,7 @@ class QuizApi extends BaseHTTPApi {
 
 	public async getAllQuestions(): Promise<{ items: QuizQuestionDto[][] }> {
 		const response = await this.load(
-			this.getFullEndpoint(QuizApiPath.QUESTION, {}),
+			this.getFullEndpoint(QuizApiPath.QUESTIONS, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,

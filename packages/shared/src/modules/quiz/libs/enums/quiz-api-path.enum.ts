@@ -1,6 +1,6 @@
 const QuizApiPath = {
 	ANSWER: "/answer",
-	QUESTION: "/question",
+	QUESTIONS: "/questions",
 } as const;
 
 export { QuizApiPath };

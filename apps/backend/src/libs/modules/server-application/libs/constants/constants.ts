@@ -8,7 +8,7 @@ const WHITE_ROUTES: string[] = [
 	APIPath.AUTH,
 	`${APIPath.AUTH}${AuthApiPath.SIGN_IN}`,
 	`${APIPath.AUTH}${AuthApiPath.SIGN_UP}`,
-	`${APIPath.QUIZ}${QuizApiPath.QUESTION}`,
+	`${APIPath.QUIZ}${QuizApiPath.QUESTIONS}`,
 ];
 
 export { WHITE_ROUTES };

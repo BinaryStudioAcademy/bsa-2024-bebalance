@@ -90,7 +90,7 @@ class QuizController extends BaseController {
 		this.addRoute({
 			handler: () => this.findAll(),
 			method: "GET",
-			path: QuizApiPath.QUESTION,
+			path: QuizApiPath.QUESTIONS,
 		});
 	}
 
