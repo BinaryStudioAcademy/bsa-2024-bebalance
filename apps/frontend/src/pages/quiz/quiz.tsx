@@ -1,6 +1,7 @@
 import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
 import { Analyzing, Introduction } from "./libs/components/components.js";
+import { FinalQuestions } from "./libs/components/final-questions/final-questions.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
@@ -19,6 +20,10 @@ const Quiz: React.FC = () => {
 
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
+			}
+
+			case Step.FINAL_QUESTIONS: {
+				return <FinalQuestions />;
 			}
 
 			default: {
