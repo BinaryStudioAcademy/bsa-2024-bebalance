@@ -19,12 +19,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-			mode: "onChange",
 			validationSchema: userSignUpValidationSchema,
 		});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -97,7 +97,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				/>
 
 				<Button
-					isDisabled={Object.keys(errors).length > NO_ERROR_INPUT_FIELD}
+					isDisabled={isInputError}
 					label="CREATE AN ACCOUNT"
 					type="submit"
 				/>

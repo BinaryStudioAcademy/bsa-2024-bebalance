@@ -7,7 +7,6 @@ import {
 } from "../enums/enums.js";
 
 type UserSignUpRequestValidationDto = {
-	confirmPassword: z.ZodString;
 	email: z.ZodString;
 	name: z.ZodString;
 	password: z.ZodString;
@@ -15,12 +14,6 @@ type UserSignUpRequestValidationDto = {
 
 const userSignUp = z
 	.object<UserSignUpRequestValidationDto>({
-		confirmPassword: z
-			.string()
-			.trim()
-			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-				message: UserValidationMessage.FIELD_REQUIRED,
-			}),
 		email: z
 			.string()
 			.trim()
@@ -61,14 +54,5 @@ const userSignUp = z
 				message: UserValidationMessage.PASSWORD_INVALID_CHARACTERS,
 			}),
 	})
-	.required()
-	.superRefine(({ confirmPassword, password }, contex) => {
-		if (confirmPassword !== password) {
-			contex.addIssue({
-				code: "custom",
-				message: UserValidationMessage.PASSWORD_NOT_MATCH,
-				path: ["confirmPassword"],
-			});
-		}
-	});
+	.required();
 export { userSignUp };

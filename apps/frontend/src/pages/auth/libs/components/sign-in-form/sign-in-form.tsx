@@ -16,10 +16,10 @@ type Properties = {
 const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
-		mode: "onChange",
 		validationSchema: userSignInValidationSchema,
 	});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -55,11 +55,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button
-					isDisabled={Object.keys(errors).length > NO_ERROR_INPUT_FIELD}
-					label="SIGN IN"
-					type="submit"
-				/>
+				<Button isDisabled={isInputError} label="SIGN IN" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
