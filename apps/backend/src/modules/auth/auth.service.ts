@@ -1,7 +1,11 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
+import { mailer } from "~/libs/modules/mailer/mailer.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
+	type EmailDto,
+	type ResetPasswordDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -19,6 +23,59 @@ class AuthService {
 	public constructor(userService: UserService, encrypt: Encrypt) {
 		this.userService = userService;
 		this.encrypt = encrypt;
+	}
+
+	public async forgotPassword(payload: EmailDto): Promise<boolean> {
+		const { email: targetEmail } = payload;
+
+		const user = await this.userService.findByEmail(targetEmail);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		const userDetails = user.toObject();
+
+		const jwtToken = await token.createToken({
+			userId: userDetails.id,
+		});
+
+		mailer.sendEmail({
+			subject: "BeBalance: reset password",
+			text: `Here is a link to reset your password: ${config.ENV.BASE_URLS.RESET_PASSWORD_URL}?token=${jwtToken}`,
+			to: userDetails.email,
+		});
+
+		return true;
+	}
+
+	public async resetPassword(
+		payload: ResetPasswordDto,
+	): Promise<UserSignInResponseDto> {
+		const { jwtToken, newPassword } = payload;
+
+		const {
+			payload: { userId },
+		} = await token.decode(jwtToken);
+
+		const user = await this.userService.find(userId);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		await this.userService.changePassword(userId, newPassword);
+
+		return {
+			token: jwtToken,
+			user: user.toObject(),
+		};
 	}
 
 	public async signIn(
