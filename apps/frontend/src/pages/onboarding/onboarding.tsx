@@ -12,9 +12,9 @@ import {
 	actions as onboardingActions,
 	oneAnswerSelectedValidationSchema,
 } from "~/modules/onboarding/onboarding.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "~/pages/onboarding/libs/constants/constants.js";
 
-import { OnboardingAnswer } from "./libs/components/onboarding-answer/onboarding-answer.js";
+import { OnboardingAnswer } from "./libs/components/components.js";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
@@ -54,8 +54,7 @@ const Onboarding: React.FC = () => {
 
 	const handleSaveAnswers = useCallback(
 		(payload: OnboardingAnswerRequestBodyDto) => {
-			// void dispatch(onboardingActions.saveAnswers(payload));
-			return payload;
+			return payload; //TODO call api
 		},
 		[],
 	);
