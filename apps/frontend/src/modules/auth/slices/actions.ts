@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { jwtDecode } from "jwt-decode";
 
 import { NotificationMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
@@ -61,14 +60,6 @@ const getAuthenticatedUser = createAsyncThunk<
 	const hasToken = Boolean(token);
 
 	if (!hasToken) {
-		return null;
-	}
-
-	const { exp } = jwtDecode(token as string);
-
-	if ((exp as number) < Date.now()) {
-		await storage.drop(StorageKey.TOKEN);
-
 		return null;
 	}
 
