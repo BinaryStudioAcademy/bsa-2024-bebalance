@@ -4,14 +4,13 @@ import {
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
-import { type APIPreHandlerResponse } from "~/libs/modules/controller/libs/types/types.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { ForbiddenError } from "./libs/exceptions/exceptions.js";
+import { UserError } from "./libs/exceptions/exceptions.js";
 import {
 	type UserDto,
 	type UserGetParametersDto,
@@ -76,13 +75,16 @@ class UserController extends BaseController {
 				),
 			method: "PATCH",
 			path: UsersApiPath.PATCH,
-			preHandler: (options) =>
-				this.checkUserAccessToUpdate(
-					options as APIHandlerOptions<{
-						params: UserUpdateParametersDto;
-						user: UserDto;
-					}>,
-				),
+			preHandlers: [
+				(options): void => {
+					this.checkUserAccessToUpdate(
+						options as APIHandlerOptions<{
+							params: UserUpdateParametersDto;
+							user: UserDto;
+						}>,
+					);
+				},
+			],
 			validation: {
 				body: userUpdateValidationSchema,
 			},
@@ -94,11 +96,14 @@ class UserController extends BaseController {
 			params: UserUpdateParametersDto;
 			user: UserDto;
 		}>,
-	): APIPreHandlerResponse {
+	): void {
 		const { params, user } = options;
 
-		if (user.id !== params.id) {
-			return { error: new ForbiddenError({ message: ErrorMessage.FORBIDDEN }) };
+		if (user.id !== +params.id) {
+			throw new UserError({
+				message: ErrorMessage.FORBIDDEN,
+				status: HTTPCode.FORBIDDEN,
+			});
 		}
 	}
 

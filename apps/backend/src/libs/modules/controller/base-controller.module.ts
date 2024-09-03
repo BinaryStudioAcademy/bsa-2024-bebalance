@@ -4,9 +4,9 @@ import { type ServerApplicationRouteParameters } from "~/libs/modules/server-app
 import {
 	type APIHandler,
 	type APIHandlerOptions,
-	type APIPreHandler,
 	type Controller,
 	type ControllerRouteParameters,
+	type MapPreHandlerPayload,
 } from "./libs/types/types.js";
 
 class BaseController implements Controller {
@@ -30,30 +30,19 @@ class BaseController implements Controller {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
 		const handlerOptions = this.mapRequest(request);
-		const handlerResponse = await handler(handlerOptions);
+		const { payload, status } = await handler(handlerOptions);
 
-		if (handlerResponse) {
-			const { payload, status } = handlerResponse;
-
-			return await reply.status(status).send(payload);
-		}
+		return await reply.status(status).send(payload);
 	}
 
-	private async mapPreHandler(
-		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
-		reply: Parameters<ServerApplicationRouteParameters["handler"]>[1],
-		preHandler?: APIPreHandler,
-	): Promise<void> {
-		if (!preHandler) {
-			return;
-		}
-
+	private mapPreHandler({
+		done,
+		preHandler,
+		request,
+	}: MapPreHandlerPayload): void {
 		const handlerOptions = this.mapRequest(request);
-		const preHandlerResponse = await preHandler(handlerOptions);
-
-		if (preHandlerResponse) {
-			throw preHandlerResponse.error;
-		}
+		preHandler(handlerOptions);
+		done();
 	}
 
 	private mapRequest(
@@ -70,15 +59,19 @@ class BaseController implements Controller {
 	}
 
 	public addRoute(options: ControllerRouteParameters): void {
-		const { handler, path, preHandler } = options;
+		const { handler, path, preHandlers = [] } = options;
 		const fullPath = this.apiUrl + path;
 
 		this.routes.push({
 			...options,
 			handler: (request, reply) => this.mapHandler(handler, request, reply),
 			path: fullPath,
-			preHandler: (request, reply) =>
-				this.mapPreHandler(request, reply, preHandler),
+			preHandlers: preHandlers.map(
+				(preHandler) =>
+					(request, reply, done): void => {
+						this.mapPreHandler({ done, preHandler, reply, request });
+					},
+			),
 		});
 	}
 }

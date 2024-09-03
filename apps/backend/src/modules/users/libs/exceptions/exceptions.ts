@@ -1,1 +1,1 @@
-export { ForbiddenError } from "shared";
+export { UserError } from "shared";
