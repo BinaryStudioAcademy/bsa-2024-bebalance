@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.10.0...backend-v1.11.0) (2024-09-03)
+
+
+### Features
+
+* **frontend/backend/shared:** onboarding questions screen bb-134 ([#211](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/211)) ([3d5df65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3d5df65a6ec30be95b1db6cdf894e67c46eb4f1c))
+* **frontend:** added token expiration handling bb-279 ([#283](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/283)) ([68f833c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/68f833cce7d5ca6e40c21f6b37e625106545a660))
+
 ## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.9.0...backend-v1.10.0) (2024-09-03)
 
 

@@ -1,4 +1,8 @@
 export {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "./libs/constants/constant.js";
+export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
@@ -44,6 +48,11 @@ export {
 	type OnboardingAnswerResponseDto,
 	onboardingAnswersValidationSchema,
 	OnboardingApiPath,
+	type OnboardingGetAllResponseDto,
+	type OnboardingQuestionRequestDto,
+	type OnboardingQuestionResponseDto,
+	OnboardingValidationMessage,
+	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
 export {
 	type CategoryDto,
