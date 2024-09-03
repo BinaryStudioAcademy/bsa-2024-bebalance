@@ -40,8 +40,8 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 
 	const onSubmit = (): void => {
 		const selectedLabels = categories
-			.filter((cat) => selectedCategories.includes(cat.id))
-			.map((cat) => cat.name)
+			.filter((category) => selectedCategories.includes(category.id))
+			.map((category) => category.name)
 			.join(", ");
 
 		setSubmittedCategories(selectedLabels || null);
@@ -63,7 +63,9 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 
 	const handleAllChange = useCallback(
 		(value: boolean): void => {
-			const updatedCategories = value ? categories.map((cat) => cat.id) : [];
+			const updatedCategories = value
+				? categories.map((category) => category.id)
+				: [];
 			setValue("categories", updatedCategories);
 
 			if (!value) {
