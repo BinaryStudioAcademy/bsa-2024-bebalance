@@ -18,14 +18,17 @@ import styles from "./styles.module.css";
 
 const Profile: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
 	const { dataStatus, user } = useAppSelector(({ users }) => ({
 		dataStatus: users.dataStatus,
 		user: users.user,
 	}));
 
 	useEffect(() => {
-		void dispatch(usersActions.getUserFromAuth());
-	}, [dispatch]);
+		void dispatch(
+			usersActions.getById({ id: (authenticatedUser as UserDto).id }),
+		);
+	}, [dispatch, authenticatedUser]);
 
 	const handleUpdateSubmit = useCallback(
 		(payload: UserUpdateRequestDto): void => {
