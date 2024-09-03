@@ -64,8 +64,13 @@ export {
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	type UserDto,
+	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
+	userResetPasswordValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -75,4 +80,5 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 	UserValidationMessage,
+	UserValidationRule,
 } from "./modules/users/users.js";
