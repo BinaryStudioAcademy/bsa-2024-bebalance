@@ -1,13 +1,22 @@
-import { getAuthenticatedUser, logOut, signIn, signUp } from "./actions.js";
+import {
+	getAuthenticatedUser,
+	logOut,
+	requestResetPassword,
+	resetPassword,
+	signIn,
+	signUp,
+} from "./actions.js";
 import { actions } from "./auth.slice.js";
 
 const allActions = {
 	...actions,
 	getAuthenticatedUser,
 	logOut,
+	requestResetPassword,
+	resetPassword,
 	signIn,
 	signUp,
 };
 
-export { allActions as actions };
 export { reducer } from "./auth.slice.js";
+export { allActions as actions };

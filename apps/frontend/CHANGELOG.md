@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.19.0...frontend-v1.20.0) (2024-09-03)
+
+
+### Features
+
+* **backend/frontend/shared:** forgot-password-functionality bb-188 ([#230](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/230)) ([3e24ec9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3e24ec928ad898c33eb0caa06d7f83692f322026))
+
+
+### Bug Fixes
+
+* evened out header with sidebar logo bb-252 ([#273](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/273)) ([7803eca](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7803eca09e47034effe8fd97b75f3800538271e3))
+
 ## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.18.0...frontend-v1.19.0) (2024-09-02)
 
 
