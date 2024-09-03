@@ -14,7 +14,7 @@ type Properties = {
 	label: string;
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant?: "icon";
+	variant?: "icon" | "secondary";
 };
 
 const Button: React.FC<Properties> = ({
