@@ -7,7 +7,6 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
-	CategoryError,
 	HTTPError,
 	OnboardingError,
 	QuizError,
@@ -53,14 +52,11 @@ export {
 	OnboardingApiPath,
 } from "./modules/onboarding/onboarding.js";
 export {
-	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizApiPath,
-	type QuizCategoryDto,
-	type QuizGetAllCategoriesResponseDto,
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
