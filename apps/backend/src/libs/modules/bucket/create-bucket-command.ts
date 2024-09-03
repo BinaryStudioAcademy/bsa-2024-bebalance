@@ -4,10 +4,13 @@ import {
 	PutObjectCommand,
 } from "@aws-sdk/client-s3";
 
+import { type ValueOf } from "~/libs/types/types.js";
+
 import { config } from "../config/config.js";
+import { BucketCommands } from "./libs/enums/enums.js";
 
 type Options = {
-	commandType: "delete" | "get" | "put";
+	commandType: ValueOf<typeof BucketCommands>;
 	params: Parameters;
 };
 
@@ -17,24 +20,26 @@ type Parameters = {
 	Key: string;
 };
 
+type CommandParameters = { Bucket: string } & Parameters;
+
 const createCommand = (
 	options: Options,
 ): DeleteObjectCommand | GetObjectCommand | PutObjectCommand => {
-	const commandParameters: { Bucket: string } & Parameters = {
+	const commandParameters: CommandParameters = {
 		...options.params,
 		Bucket: config.ENV.S3_BUCKET.BUCKET_NAME,
 	};
 
 	switch (options.commandType) {
-		case "get": {
+		case BucketCommands.GET: {
 			return new GetObjectCommand(commandParameters);
 		}
 
-		case "put": {
+		case BucketCommands.PUT: {
 			return new PutObjectCommand(commandParameters);
 		}
 
-		case "delete": {
+		case BucketCommands.DELETE: {
 			return new DeleteObjectCommand(commandParameters);
 		}
 	}
