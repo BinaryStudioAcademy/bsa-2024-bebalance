@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 const OnboardingAnswer = <T extends FieldValues>({
 	control,
 	name,
-	options = [],
+	options,
 }: Properties<T>): JSX.Element => {
 	return (
 		<div className={styles["onboarding-answer"]}>

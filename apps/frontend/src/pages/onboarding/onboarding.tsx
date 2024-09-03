@@ -110,16 +110,20 @@ const Onboarding: React.FC = () => {
 						<h2 className={styles["question"]}>{question.label}</h2>
 						<div className={styles["answers"]}>
 							<form className={styles["answers"]} onSubmit={handleFormSubmit}>
-								{question.answers.map((answer) => (
-									<OnboardingAnswer
-										control={control}
-										key={answer.id}
-										name="answer"
-										options={[
-											{ label: answer.label, value: answer.id.toString() },
-										]}
-									/>
-								))}
+								{question.answers.map((answer) => {
+									const answerOptions = [
+										{ label: answer.label, value: answer.id.toString() },
+									];
+
+									return (
+										<OnboardingAnswer
+											control={control}
+											key={answer.id}
+											name="answer"
+											options={answerOptions}
+										/>
+									);
+								})}
 								<div className={styles["button-container"]}>
 									{!isLastQuestion && (
 										<Button
