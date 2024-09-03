@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.8.0...shared-v1.9.0) (2024-09-03)
+
+
+### Features
+
+* **backend/frontend/shared:** forgot-password-functionality bb-188 ([#230](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/230)) ([3e24ec9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3e24ec928ad898c33eb0caa06d7f83692f322026))
+
 ## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.7.0...shared-v1.8.0) (2024-09-01)
 
 
