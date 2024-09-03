@@ -8,7 +8,7 @@ export {
 } from "./form-field-properties.type.js";
 export { type IconName } from "./icon-name.type.js";
 export { type QueryParameters } from "./query-parameters.type.js";
-export { type RadioInputOption } from "./radio-input-options.type.js";
+export { type RadioInputOption } from "./radio-input-option.type.js";
 export { type SidebarItem } from "./sidebar-item.type.js";
 export {
 	type OnboardingQuestionResponseDto,
