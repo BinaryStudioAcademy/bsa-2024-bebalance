@@ -1,8 +1,6 @@
 import { type Knex } from "knex";
 
-const TableName = {
-	FILES: "files",
-} as const;
+const TABLE_NAME = "files";
 
 const ColumnName = {
 	CREATED_AT: "created_at",
@@ -13,7 +11,7 @@ const ColumnName = {
 } as const;
 
 function up(knex: Knex): Promise<void> {
-	return knex.schema.createTable(TableName.FILES, (table) => {
+	return knex.schema.createTable(TABLE_NAME, (table) => {
 		table.increments(ColumnName.ID).primary();
 		table.string(ColumnName.FILE_KEY).notNullable().unique();
 		table.string(ColumnName.URL).notNullable();
@@ -29,7 +27,7 @@ function up(knex: Knex): Promise<void> {
 }
 
 function down(knex: Knex): Promise<void> {
-	return knex.schema.dropTableIfExists(TableName.FILES);
+	return knex.schema.dropTableIfExists(TABLE_NAME);
 }
 
 export { down, up };
