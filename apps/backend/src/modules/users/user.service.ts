@@ -19,6 +19,20 @@ class UserService implements Service {
 		this.encrypt = encrypt;
 	}
 
+	public async changePassword(
+		id: number,
+		password: string,
+	): Promise<UserEntity> {
+		const { hash, salt } = await this.encrypt.encrypt(password);
+
+		const updates = {
+			passwordHash: hash,
+			passwordSalt: salt,
+		};
+
+		return await this.userRepository.updatePassword(id, updates);
+	}
+
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const { hash, salt } = await this.encrypt.encrypt(payload.password);
 

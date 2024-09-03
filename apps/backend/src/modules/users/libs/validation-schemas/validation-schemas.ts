@@ -1,4 +1,6 @@
 export {
+	userForgotPasswordVaidationSchema,
+	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 	userUpdateValidationSchema,
