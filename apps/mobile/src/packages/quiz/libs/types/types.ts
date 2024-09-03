@@ -1,4 +1,1 @@
-export {
-	type CategoryDto,
-	type GetCategoriesDto,
-} from "shared";
+export { type CategoryDto, type GetCategoriesDto } from "shared";

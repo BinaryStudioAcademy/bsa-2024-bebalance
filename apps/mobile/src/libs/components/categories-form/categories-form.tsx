@@ -1,29 +1,27 @@
 import React from "react";
 
-import { Button, Checkbox, Text, View } from "~/libs/components/components";
+import { Button, Checkbox, View } from "~/libs/components/components";
 import {
 	useAppForm,
 	useCallback,
 	useEffect,
 	useFormController,
-	useState,
 } from "~/libs/hooks/hooks";
 import {
 	DEFAULT_ERROR_MESSAGE,
 	toastMessage,
 } from "~/libs/packages/toast-message/toast-message";
 import { globalStyles } from "~/libs/styles/styles";
-import { quizCategoriesValidationSchema } from "~/packages/quiz/quiz";
+import {
+	type CategoryDto,
+	quizCategoriesValidationSchema,
+} from "~/packages/quiz/quiz";
 
 type Properties = {
-	categories: { id: number; name: string }[];
+	categories: CategoryDto[];
 };
 
 const CategoriesForm: React.FC<Properties> = ({ categories }) => {
-	const [submittedCategories, setSubmittedCategories] = useState<null | string>(
-		null,
-	);
-
 	const { control, errors, handleSubmit, setValue } = useAppForm({
 		defaultValues: {
 			categories: [] as number[],
@@ -44,7 +42,11 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 			.map((category) => category.name)
 			.join(", ");
 
-		setSubmittedCategories(selectedLabels || null);
+		const NO_CATEGORIES_SELECTED = 0;
+
+		if (selectedLabels.length > NO_CATEGORIES_SELECTED) {
+			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
+		}
 	};
 
 	const handlePress = (): void => {
@@ -67,10 +69,6 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 				? categories.map((category) => category.id)
 				: [];
 			setValue("categories", updatedCategories);
-
-			if (!value) {
-				setSubmittedCategories(null);
-			}
 		},
 		[setValue, categories],
 	);
@@ -84,7 +82,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 	}, [errors.categories]);
 
 	return (
-		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.ph12]}>
+		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p16]}>
 			<Checkbox
 				isChecked={selectedCategories.length === categories.length}
 				label="All"
@@ -99,9 +97,6 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 				/>
 			))}
 			<Button appearance="filled" label="Retake Quiz" onPress={handlePress} />
-			{submittedCategories && (
-				<Text>Selected Categories: {submittedCategories}</Text>
-			)}
 		</View>
 	);
 };

@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types";
-import { type QuizCategoryDto } from "~/packages/quiz/quiz";
+import { type CategoryDto } from "~/packages/quiz/quiz";
 
 import { name as sliceName } from "./quiz.slice";
 
 const getQuizCategories = createAsyncThunk<
-	QuizCategoryDto[],
+	CategoryDto[],
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get-quiz-categories`, async (_, { extra }) => {

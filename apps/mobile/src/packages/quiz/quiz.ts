@@ -12,8 +12,5 @@ const quizApi = new QuizApi({
 
 export { quizApi };
 export { APIPath } from "./libs/enums/enums";
-export {
-	type QuizCategoryDto,
-	type QuizGetAllCategoriesResponseDto,
-} from "./libs/types/types";
+export { type CategoryDto, type GetCategoriesDto } from "./libs/types/types";
 export { quizCategoriesValidationSchema } from "./libs/validation-schemas/validation-schemas";

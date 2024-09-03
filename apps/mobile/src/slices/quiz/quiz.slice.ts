@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
-import { type QuizCategoryDto } from "~/packages/quiz/quiz";
+import { type CategoryDto } from "~/packages/quiz/quiz";
 
 import { getQuizCategories } from "./actions";
 
 type State = {
-	categories: QuizCategoryDto[];
+	categories: CategoryDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
 };
 
