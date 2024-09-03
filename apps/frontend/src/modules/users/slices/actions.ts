@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { NotificationMessage } from "~/libs/enums/enums.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import { type UserDto, type UserUpdatePayload } from "~/modules/users/users.js";
 
@@ -15,10 +16,13 @@ const getUserFromAuth = createAsyncThunk<UserDto, undefined, AsyncThunkConfig>(
 const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 	`${sliceName}/update`,
 	async (payload, { extra }) => {
-		const { usersApi } = extra;
+		const { notification, usersApi } = extra;
 		const { data, id } = payload;
 
-		return await usersApi.update(id, data);
+		const response = await usersApi.update(id, data);
+		notification.success(NotificationMessage.PROFILE_UPDATED);
+
+		return response;
 	},
 );
 

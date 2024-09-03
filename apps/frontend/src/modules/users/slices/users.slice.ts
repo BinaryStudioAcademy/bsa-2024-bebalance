@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { DataStatus, NotificationMessage } from "~/libs/enums/enums.js";
-import { notification } from "~/libs/modules/notification/notification.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
@@ -36,7 +35,6 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(update.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.user = action.payload;
-			notification.success(NotificationMessage.PROFILE_UPDATED);
 		});
 		builder.addCase(update.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
