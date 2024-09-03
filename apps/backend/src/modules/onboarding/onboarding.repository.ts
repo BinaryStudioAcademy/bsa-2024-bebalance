@@ -195,7 +195,7 @@ class OnboardingRepository implements Repository {
 		);
 	}
 
-	public async findAllAnswers(): Promise<OnboardingAnswerEntity[]> {
+	public async findAllAnswer(): Promise<OnboardingAnswerEntity[]> {
 		const results = await this.onboardingAnswerModel.query();
 
 		return results.map((result) => {
@@ -210,7 +210,7 @@ class OnboardingRepository implements Repository {
 		});
 	}
 
-	public async findAnswersById(
+	public async findAnswerById(
 		id: number,
 	): Promise<null | OnboardingAnswerEntity> {
 		const result = await this.onboardingAnswerModel.query().findById(id);

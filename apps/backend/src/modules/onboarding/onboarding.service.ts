@@ -102,7 +102,7 @@ class OnboardingService implements Service {
 	}
 
 	public async findAllAnswers(): Promise<{ items: OnboardingAnswerDto[] }> {
-		const answers = await this.onboardingRepository.findAllAnswers();
+		const answers = await this.onboardingRepository.findAllAnswer();
 
 		return {
 			items: answers.map((answer) => {
@@ -111,7 +111,7 @@ class OnboardingService implements Service {
 		};
 	}
 	public async findAnswer(id: number): Promise<null | OnboardingAnswerDto> {
-		const answer = await this.onboardingRepository.findAnswersById(id);
+		const answer = await this.onboardingRepository.findAnswerById(id);
 
 		return answer ? answer.toObject() : null;
 	}
@@ -128,7 +128,7 @@ class OnboardingService implements Service {
 	): Promise<OnboardingQuestionRequestDto> {
 		const { answers, label } = payload;
 
-		const questionEntity = OnboardingQuestionEntity.initializeNew({
+		const question = OnboardingQuestionEntity.initializeNew({
 			answers: answers.map((answer) => {
 				return {
 					label: answer.label,
@@ -137,12 +137,12 @@ class OnboardingService implements Service {
 			label,
 		});
 
-		const updatedQuestionEntity = await this.onboardingRepository.update(
+		const updatedQuestion = await this.onboardingRepository.update(
 			id,
-			questionEntity,
+			question,
 		);
 
-		return updatedQuestionEntity.toObject();
+		return updatedQuestion.toObject();
 	}
 
 	public async updateAnswer(
