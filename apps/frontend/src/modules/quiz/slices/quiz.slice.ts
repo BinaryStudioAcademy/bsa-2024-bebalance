@@ -8,12 +8,12 @@ import { getAllQuestions } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	questions: { items: QuizQuestionDto[][] };
+	questions: QuizQuestionDto[][];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	questions: { items: [] },
+	questions: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -23,7 +23,7 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAllQuestions.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload;
+			state.questions = action.payload.items;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;

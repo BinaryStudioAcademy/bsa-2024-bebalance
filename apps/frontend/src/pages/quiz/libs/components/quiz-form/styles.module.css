@@ -31,17 +31,6 @@
 	justify-content: center;
 }
 
-.btn button,
-.btn-secondary button {
-	padding: 10px 35px;
-}
-
-.btn-secondary button {
-	color: black;
-	background-color: white;
-	border: 1px solid black;
-}
-
 .isHidden {
 	display: none;
 }

@@ -1,6 +1,6 @@
 export { type AsyncThunkConfig } from "./async-thunk-config.type.js";
 export { type IconName } from "./icon-name.type.js";
-export { type OPTIONS } from "./input-options.type.js";
+export { type Options } from "./input-options.type.js";
 export { type QueryParameters } from "./query-parameters.type.js";
 export { type SidebarItem } from "./sidebar-item.type.js";
 export {

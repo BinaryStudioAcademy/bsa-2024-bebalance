@@ -2,7 +2,7 @@ import {
 	type Control,
 	type FieldPath,
 	type FieldValues,
-	type OPTIONS,
+	type Options,
 } from "~/libs/types/types.js";
 
 import { Input } from "../input/input.js";
@@ -12,7 +12,7 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	label: string;
 	name: string;
-	options: OPTIONS[];
+	options: Options[];
 };
 
 const QuizQuestion = <T extends FieldValues>({

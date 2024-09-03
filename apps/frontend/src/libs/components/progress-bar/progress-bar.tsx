@@ -5,16 +5,16 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	currentStep: number;
-	steps: number;
+	numberOfSteps: number;
 };
 
 const LAST_INDEX_OFFSET = 1;
 
 const ProgressBar: React.FC<Properties> = ({
 	currentStep,
-	steps,
+	numberOfSteps,
 }: Properties) => {
-	const progressSteps = Array.from({ length: steps });
+	const progressSteps = Array.from({ length: numberOfSteps });
 
 	return (
 		<div className={styles["progress-bar"]}>
@@ -22,7 +22,7 @@ const ProgressBar: React.FC<Properties> = ({
 				const isPrevious = index < currentStep;
 				const isNext = index > currentStep;
 				const isCurrent = index === currentStep;
-				const isLastStep = index === steps - LAST_INDEX_OFFSET;
+				const isLastStep = index === numberOfSteps - LAST_INDEX_OFFSET;
 
 				return (
 					<div className={styles["progress"]} key={index}>

@@ -38,7 +38,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const { dataStatus, questions } = useAppSelector(({ quiz }) => ({
 		dataStatus: quiz.dataStatus,
-		questions: quiz.questions.items,
+		questions: quiz.questions,
 	}));
 
 	useEffect(() => {
@@ -49,7 +49,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		setIsLast(currentStep === questions.length - ONE_STEP_OFFSET);
 	}, [currentStep, questions]);
 
-	const handleBackStep = useCallback(() => {
+	const handlePreviousStep = useCallback(() => {
 		if (currentStep !== INITIAL_STEP) {
 			setCurrentStep(currentStep - ONE_STEP_OFFSET);
 		}
@@ -63,7 +63,10 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	return (
 		<div className={styles["quiz-container"]}>
 			<form className={styles["questions-form"]}>
-				<ProgressBar currentStep={currentStep} steps={questions.length} />
+				<ProgressBar
+					currentStep={currentStep}
+					numberOfSteps={questions.length}
+				/>
 				<h2 className={styles["quiz-header"]}>Wheel Quiz questions</h2>
 				<div className={styles["questions-wrapper"]}>
 					{isLoading ? (
@@ -71,37 +74,38 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 							<Loader />
 						</div>
 					) : (
-						questions[currentStep]?.map((question) => (
-							<QuizQuestion
-								control={control}
-								key={question.id}
-								label={`${question.id.toString()}. ${question.label}`}
-								name={question.label}
-								options={question.answers.map(({ label, value }) => ({
+						questions[currentStep]?.map((question) => {
+							const answerOptions = question.answers.map(
+								({ label, value }) => ({
 									label,
 									value: value.toString(),
-								}))}
-							/>
-						))
+								}),
+							);
+
+							return (
+								<QuizQuestion
+									control={control}
+									key={question.id}
+									label={`${question.id.toString()}. ${question.label}`}
+									name={question.label}
+									options={answerOptions}
+								/>
+							);
+						})
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
 					<div className={styles["btn-secondary"]}>
 						<Button
-							isPrimary
+							isPrimary={false}
 							label="BACK"
-							onClick={handleBackStep}
-							variant="icon"
+							onClick={handlePreviousStep}
 						/>
 					</div>
 					{isLast ? (
-						<div className={styles["btn"]}>
-							<Button label="CONTINUE" onClick={onNext} variant="icon" />
-						</div>
+						<Button label="CONTINUE" onClick={onNext} />
 					) : (
-						<div className={styles["btn"]}>
-							<Button label="NEXT" onClick={handleNextStep} variant="icon" />
-						</div>
+						<Button label="NEXT" onClick={handleNextStep} />
 					)}
 				</div>
 			</form>
