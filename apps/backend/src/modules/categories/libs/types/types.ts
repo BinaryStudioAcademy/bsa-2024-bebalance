@@ -4,5 +4,6 @@ export {
 	type CategoryDto,
 	type CategoryRequestDto,
 	type QuizScoreDto,
+	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 } from "shared";

@@ -7,5 +7,6 @@ export { type QuizAnswersResponseDto } from "./quiz-answers-response-dto.type.js
 export { type QuizQuestionDto } from "./quiz-question-dto.type.js";
 export { type QuizQuestionRequestDto } from "./quiz-question-request-dto.type.js";
 export { type QuizScoreDto } from "./quiz-score-dto.type.js";
+export { type QuizScoresGetAllResponseDto } from "./quiz-scores-get-all-response-dto.type.js";
 export { type QuizScoresResponseDto } from "./quiz-scores-response-dto.type.js";
 export { type QuizUserAnswerDto } from "./quiz-user-answer-dto.type.js";

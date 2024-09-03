@@ -118,25 +118,30 @@ class CategoryRepository implements Repository {
 	}
 
 	public async findUserScores(userId: number): Promise<CategoryEntity[]> {
-		const scoresModel = await this.categoryModel
-			.query()
-			.from(DatabaseTableName.QUIZ_SCORES)
-			.where({ userId })
-			.returning("*")
-			.castTo<CategoryScoreModel[]>();
+		const categories = await this.categoryModel.query().select("*");
 
-		return scoresModel.map((score) => {
-			return CategoryEntity.initialize({
-				categoryId: score.categoryId,
-				createdAt: score.createdAt,
-				id: score.id,
-				name: score.name,
-				score: score.score,
-				scores: [],
-				updatedAt: score.updatedAt,
-				userId: score.userId,
-			});
-		});
+		return await Promise.all(
+			categories.map(async (category) => {
+				const scoresModel = await this.categoryModel
+					.query()
+					.from(DatabaseTableName.QUIZ_SCORES)
+					.where({ categoryId: category.id, userId })
+					.returning("*")
+					.castTo<CategoryScoreModel[]>();
+
+				const scoreEntities = scoresModel.map((score) => {
+					return CategoryEntity.initialize(score);
+				});
+
+				return CategoryEntity.initialize({
+					createdAt: category.createdAt,
+					id: category.id,
+					name: category.name,
+					scores: scoreEntities,
+					updatedAt: category.updatedAt,
+				});
+			}),
+		);
 	}
 
 	public async update(
