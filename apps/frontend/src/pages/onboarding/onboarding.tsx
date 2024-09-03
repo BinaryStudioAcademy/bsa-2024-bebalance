@@ -109,7 +109,7 @@ const Onboarding: React.FC = () => {
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>
 						<div className={styles["answers"]}>
-							<form className={styles["answers"]}>
+							<form className={styles["answers"]} onSubmit={handleFormSubmit}>
 								{question.answers.map((answer) => (
 									<OnboardingAnswer
 										control={control}
@@ -126,13 +126,13 @@ const Onboarding: React.FC = () => {
 											label="BACK"
 											onClick={handlePreviousStep}
 											type="button"
+											variant="secondary"
 										/>
 									)}
 									<Button
 										isPrimary={isValid}
 										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										onClick={handleFormSubmit}
-										type="button"
+										type="submit"
 									/>
 								</div>
 							</form>
