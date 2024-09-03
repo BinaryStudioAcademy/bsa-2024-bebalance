@@ -11,14 +11,14 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserUpdateRequestDto) => void;
-	user?: UserDto;
+	user: UserDto;
 };
 
 const UpdateUserForm: React.FC<Properties> = ({
 	onSubmit,
 	user,
 }: Properties) => {
-	const { email, name } = user as UserDto;
+	const { email, name } = user;
 	const { control, errors, handleSubmit } = useAppForm<UserUpdateFormDto>({
 		defaultValues: { email, name },
 		validationSchema: userUpdateValidationSchema,

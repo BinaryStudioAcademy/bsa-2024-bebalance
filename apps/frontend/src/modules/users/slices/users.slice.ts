@@ -41,7 +41,7 @@ const { actions, name, reducer } = createSlice({
 		});
 	},
 	initialState,
-	name: "auth",
+	name: "users",
 	reducers: {},
 });
 
