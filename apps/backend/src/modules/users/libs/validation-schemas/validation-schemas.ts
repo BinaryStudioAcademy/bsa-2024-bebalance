@@ -1,1 +1,6 @@
-export { userSignInValidationSchema, userSignUpValidationSchema } from "shared";
+export {
+	userForgotPasswordVaidationSchema,
+	userResetPasswordValidationSchema,
+	userSignInValidationSchema,
+	userSignUpValidationSchema,
+} from "shared";

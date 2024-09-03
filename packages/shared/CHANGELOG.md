@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.8.0...shared-v1.9.0) (2024-09-03)
+
+
+### Features
+
+* **backend/frontend/shared:** forgot-password-functionality bb-188 ([#230](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/230)) ([3e24ec9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3e24ec928ad898c33eb0caa06d7f83692f322026))
+
+## [1.8.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.7.0...shared-v1.8.0) (2024-09-01)
+
+
+### Features
+
+* **backend/shared:** save quiz response to db bb-166 ([#208](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/208)) ([42b4cbb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/42b4cbb32ddbe609d3555d24b755199783429600))
+* **mobile:** requirements for authorization pages bb-210 ([#259](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/259)) ([57bf893](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/57bf8934e7cc52094630d5a40afbd53e96cd3a16))
+
 ## [1.7.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.6.1...shared-v1.7.0) (2024-08-31)
 
 

@@ -7,7 +7,11 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
+	type EmailDto,
+	type ResetPasswordDto,
 	type UserDto,
+	userForgotPasswordVaidationSchema,
+	userResetPasswordValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
@@ -63,6 +67,57 @@ class AuthController extends BaseController {
 				body: userSignInValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.forgotPassword(
+					options as APIHandlerOptions<{
+						body: EmailDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.FORGOT_PASSWORD,
+			validation: {
+				body: userForgotPasswordVaidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.resetPassword(
+					options as APIHandlerOptions<{
+						body: ResetPasswordDto;
+					}>,
+				),
+			method: "PATCH",
+			path: AuthApiPath.RESET_PASSWORD,
+			validation: {
+				body: userResetPasswordValidationSchema,
+			},
+		});
+	}
+
+	/**
+	 * @swagger
+	 * /auth/forgot-password:
+	 *   post:
+	 *     description: Return authenticated user
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 */
+
+	private async forgotPassword(
+		options: APIHandlerOptions<{
+			body: EmailDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.forgotPassword(options.body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
@@ -94,6 +149,29 @@ class AuthController extends BaseController {
 
 	/**
 	 * @swagger
+	 * /auth/reset-password:
+	 *   post:
+	 *     description: Return authenticated user
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 */
+
+	private async resetPassword(
+		options: APIHandlerOptions<{
+			body: ResetPasswordDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.resetPassword(options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
 	 * /auth/sign-in:
 	 *    post:
 	 *      description: Sign in user into the system
@@ -110,6 +188,7 @@ class AuthController extends BaseController {
 	 *                  format: email
 	 *                password:
 	 *                  type: string
+	 *                  example: s3cr3tpass
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
@@ -154,8 +233,10 @@ class AuthController extends BaseController {
 	 *                  format: email
 	 *                name:
 	 *                  type: string
+	 *                  example: username
 	 *                password:
 	 *                  type: string
+	 *                  example: s3cr3tpass
 	 *      responses:
 	 *        201:
 	 *          description: Successful operation

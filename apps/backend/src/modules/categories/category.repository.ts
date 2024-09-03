@@ -1,13 +1,13 @@
-import { ErrorMessage, RelationName } from "~/libs/enums/enums.js";
+import { RelationName } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
-import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoryScoreModel,
 	type QuizScoreDto,
+	type UpdateCategoryRequestDto,
 } from "./libs/types/types.js";
 
 class CategoryRepository implements Repository {
@@ -17,8 +17,22 @@ class CategoryRepository implements Repository {
 		this.categoryModel = categoryModel;
 	}
 
-	public create(): Promise<unknown> {
-		throw new CategoryError({ message: ErrorMessage.READONLY_CATEGORY });
+	public async create(entity: CategoryEntity): Promise<CategoryEntity> {
+		const { name } = entity.toNewObject();
+
+		const category = await this.categoryModel
+			.query()
+			.insert({ name })
+			.withGraphFetched(RelationName.SCORES)
+			.returning("*");
+
+		return CategoryEntity.initialize({
+			createdAt: category.createdAt,
+			id: category.id,
+			name: category.name,
+			scores: category.scores,
+			updatedAt: category.updatedAt,
+		});
 	}
 
 	public async createScore({
@@ -46,8 +60,10 @@ class CategoryRepository implements Repository {
 			.castTo<QuizScoreDto>();
 	}
 
-	public delete(): Promise<boolean> {
-		throw new CategoryError({ message: ErrorMessage.READONLY_CATEGORY });
+	public async delete(id: number): Promise<boolean> {
+		const deletedRowCount = await this.categoryModel.query().deleteById(id);
+
+		return Boolean(deletedRowCount);
 	}
 
 	public async deleteUserScores(userId: number): Promise<number> {
@@ -101,8 +117,22 @@ class CategoryRepository implements Repository {
 		);
 	}
 
-	public update(): Promise<unknown> {
-		throw new CategoryError({ message: ErrorMessage.READONLY_CATEGORY });
+	public async update(
+		id: number,
+		payload: Partial<UpdateCategoryRequestDto>,
+	): Promise<CategoryEntity> {
+		const category = await this.categoryModel
+			.query()
+			.patchAndFetchById(id, { ...payload })
+			.withGraphJoined(RelationName.SCORES);
+
+		return CategoryEntity.initialize({
+			createdAt: category.createdAt,
+			id: category.id,
+			name: category.name,
+			scores: category.scores,
+			updatedAt: category.updatedAt,
+		});
 	}
 }
 

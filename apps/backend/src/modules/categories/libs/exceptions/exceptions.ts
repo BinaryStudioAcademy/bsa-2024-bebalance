@@ -1,1 +1,0 @@
-export { CategoryError } from "shared";

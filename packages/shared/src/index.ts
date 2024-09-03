@@ -7,7 +7,6 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
-	CategoryError,
 	HTTPError,
 	OnboardingError,
 	QuizError,
@@ -37,6 +36,14 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
+	CategoriesApiPath,
+	type CategoryDto,
+	type CategoryWithScoresDto,
+	type CreateCategoryRequestDto,
+	type GetCategoriesDto,
+	type UpdateCategoryRequestDto,
+} from "./modules/categories/categories.js";
+export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingAnswerRequestDto,
@@ -45,16 +52,12 @@ export {
 	OnboardingApiPath,
 } from "./modules/onboarding/onboarding.js";
 export {
-	type CategoryDto,
-	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizApiPath,
 	quizCategoriesValidationSchema,
-	type QuizCategoryDto,
-	type QuizGetAllCategoriesResponseDto,
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
@@ -62,8 +65,13 @@ export {
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	type UserDto,
+	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
+	userResetPasswordValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -73,4 +81,5 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 	UserValidationMessage,
+	UserValidationRule,
 } from "./modules/users/users.js";
