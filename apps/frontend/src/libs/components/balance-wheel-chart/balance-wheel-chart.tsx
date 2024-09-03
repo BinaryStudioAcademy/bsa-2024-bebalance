@@ -11,8 +11,8 @@ import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 import {
 	FIRST_ELEMENT_INDEX,
 	USER_WHEEL_CHART_CONFIG,
-} from "./llibs/constants/constants.js";
-import { type ChartDataType, type PolarAreaType } from "./llibs/types/types.js";
+} from "./libs/constants/constants.js";
+import { type ChartDataType, type PolarAreaType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
@@ -58,7 +58,7 @@ const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
 			const context = canvas.getContext("2d");
 
 			if (context) {
-				chartReference.current = new ChartJS<"polarArea">(
+				chartReference.current = new ChartJS<PolarAreaType>(
 					context,
 					USER_WHEEL_CHART_CONFIG,
 				);
