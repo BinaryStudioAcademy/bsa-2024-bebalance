@@ -12,9 +12,7 @@ const Chat: React.FC = () => {
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 			<ScreenWrapper>
-				<ScreenWrapper>
-					<CategoriesForm />
-				</ScreenWrapper>
+				<CategoriesForm />
 			</ScreenWrapper>
 		</LoaderWrapper>
 	);
