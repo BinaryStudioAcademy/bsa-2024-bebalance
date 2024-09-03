@@ -16,7 +16,7 @@ class FileModel extends AbstractModel {
 			userDetails: {
 				join: {
 					from: `${DatabaseTableName.FILES}.id`,
-					to: `${DatabaseTableName.USER_DETAILS}.userId`,
+					to: `${DatabaseTableName.USER_DETAILS}.avatarFileId`,
 				},
 				modelClass: UserDetailsModel,
 				relation: Model.HasOneRelation,

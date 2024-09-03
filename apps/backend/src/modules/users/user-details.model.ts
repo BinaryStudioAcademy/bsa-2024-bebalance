@@ -19,7 +19,7 @@ class UserDetailsModel extends AbstractModel {
 		return {
 			avatarFile: {
 				join: {
-					from: `${DatabaseTableName.USER_DETAILS}.avatar`,
+					from: `${DatabaseTableName.USER_DETAILS}.avatarFileId`,
 					to: `${DatabaseTableName.FILES}.id`,
 				},
 				modelClass: FileModel,
