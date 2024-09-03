@@ -102,7 +102,7 @@ class OnboardingService implements Service {
 	}
 
 	public async findAllAnswers(): Promise<{ items: OnboardingAnswerDto[] }> {
-		const answers = await this.onboardingRepository.findAllAnswer();
+		const answers = await this.onboardingRepository.findAllAnswers();
 
 		return {
 			items: answers.map((answer) => {

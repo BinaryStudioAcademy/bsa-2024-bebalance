@@ -124,8 +124,7 @@ class OnboardingRepository implements Repository {
 		const deletedOnboardingQuestion = await this.onboardingQuestionModel
 			.query()
 			.delete()
-			.where({ id })
-			.withGraphFetched(RelationName.ONBOARDING_ANSWERS);
+			.where({ id });
 
 		return Boolean(deletedOnboardingQuestion);
 	}
@@ -195,7 +194,7 @@ class OnboardingRepository implements Repository {
 		);
 	}
 
-	public async findAllAnswer(): Promise<OnboardingAnswerEntity[]> {
+	public async findAllAnswers(): Promise<OnboardingAnswerEntity[]> {
 		const results = await this.onboardingAnswerModel.query();
 
 		return results.map((result) => {
