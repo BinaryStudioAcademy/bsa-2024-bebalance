@@ -47,7 +47,7 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.getAuthenticatedUser(
 					options as APIHandlerOptions<{
-						user: UserDto;
+						user: null | UserDto;
 					}>,
 				),
 			method: "GET",
@@ -138,7 +138,7 @@ class AuthController extends BaseController {
 	 */
 	private getAuthenticatedUser(
 		options: APIHandlerOptions<{
-			user: UserDto;
+			user: null | UserDto;
 		}>,
 	): APIHandlerResponse {
 		return {

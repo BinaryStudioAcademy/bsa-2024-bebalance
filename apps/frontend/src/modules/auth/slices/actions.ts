@@ -63,7 +63,13 @@ const getAuthenticatedUser = createAsyncThunk<
 		return null;
 	}
 
-	return await authApi.getAuthenticatedUser();
+	const authenticatedUser = await authApi.getAuthenticatedUser();
+
+	if (!authenticatedUser) {
+		await storage.drop(StorageKey.TOKEN);
+	}
+
+	return authenticatedUser;
 });
 
 const requestResetPassword = createAsyncThunk<
