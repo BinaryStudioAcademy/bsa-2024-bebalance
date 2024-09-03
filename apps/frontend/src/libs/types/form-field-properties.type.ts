@@ -4,12 +4,12 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
-import { type Options } from "./input-options.type.js";
+import { type RadioInputOption } from "./radio-input-options.type.js";
 
 type FormFieldProperties<T extends FieldValues> = {
 	control: Control<T, null>;
 	name: FieldPath<T>;
-	options: Options[];
+	options: RadioInputOption[];
 };
 
 export { type FormFieldProperties };
