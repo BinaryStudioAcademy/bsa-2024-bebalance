@@ -41,9 +41,9 @@ const App: React.FC = () => {
 			</div>
 
 			{isRoot && (
-				<>
+				<div style={{ display: "none" }}>
 					<QuizForm />
-				</>
+				</div>
 			)}
 			<Notification />
 		</>
