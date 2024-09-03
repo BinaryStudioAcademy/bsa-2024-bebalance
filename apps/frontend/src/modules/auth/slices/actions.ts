@@ -67,6 +67,8 @@ const getAuthenticatedUser = createAsyncThunk<
 	const { exp } = jwtDecode(token as string);
 
 	if ((exp as number) < Date.now()) {
+		await storage.drop(StorageKey.TOKEN);
+
 		return null;
 	}
 
