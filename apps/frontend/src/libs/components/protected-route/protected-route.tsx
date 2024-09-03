@@ -19,7 +19,7 @@ const ProtectedRoute: React.FC<Properties> = ({
 
 	const { pathname } = useLocation();
 
-	if (user && hasAuthWrapper(pathname)) {
+	if (user && hasAuthWrapper(pathname as ValueOf<typeof AppRoute>)) {
 		return <AuthWrapper>{component}</AuthWrapper>;
 	}
 
