@@ -36,8 +36,12 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 
 		try {
 			const {
-				payload: { userId },
+				payload: { exp, userId },
 			} = await token.decode(headerToken);
+
+			if ((exp as number) < Date.now()) {
+				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
+			}
 
 			const user = await userService.find(userId);
 
