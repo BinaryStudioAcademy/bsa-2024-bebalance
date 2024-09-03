@@ -125,13 +125,6 @@ class UserController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		const { allowNotifications, userId, userTaskDays } = options.body;
 
-		if (!userId) {
-			return {
-				payload: { message: "User ID is required" },
-				status: HTTPCode.BAD_REQUEST,
-			};
-		}
-
 		const updatedUserDto = await this.userService.setUserPreferences(userId, {
 			allowNotifications,
 			userTaskDays,
