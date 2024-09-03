@@ -1,1 +1,4 @@
-export { type QuizScoreDto, type QuizScoresResponseDto } from "shared";
+export {
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+} from "shared";

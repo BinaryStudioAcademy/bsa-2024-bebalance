@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
-import { type QuizScoreDto } from "../libs/types/types.js";
+import { type QuizScoresGetAllItemResponseDto } from "../libs/types/types.js";
 import { getScores } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	scores: null | QuizScoreDto[];
+	scores: null | QuizScoresGetAllItemResponseDto[];
 };
 
 const initialState: State = {

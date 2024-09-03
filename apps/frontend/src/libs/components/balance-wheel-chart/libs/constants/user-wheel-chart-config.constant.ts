@@ -35,6 +35,8 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 					lineWidth: 1,
 					z: 1,
 				},
+				max: 10,
+				min: 0,
 				pointLabels: {
 					centerPointLabels: true,
 					color: ChartGraphicsColors.LABELS_COLOR,

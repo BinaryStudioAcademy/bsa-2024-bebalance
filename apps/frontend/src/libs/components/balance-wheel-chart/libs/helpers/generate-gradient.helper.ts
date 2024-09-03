@@ -20,7 +20,7 @@ const generateGradientColor = (
 	const { raw } = context;
 	const sliceValue = raw as number;
 	const sliceColorIndex =
-		Math.round((sliceValue * SLICE_COLORS.length) / MAX_SLICE_VALUE) -
+		Math.ceil((sliceValue * SLICE_COLORS.length) / MAX_SLICE_VALUE) -
 		SINGLE_ELEMENT;
 
 	const colorStart =

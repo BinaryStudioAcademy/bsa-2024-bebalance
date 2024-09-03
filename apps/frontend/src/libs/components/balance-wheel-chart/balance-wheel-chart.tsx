@@ -9,6 +9,7 @@ import {
 import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 
 import {
+	CATEGORIES_SUBLABELS,
 	FIRST_ELEMENT_INDEX,
 	USER_WHEEL_CHART_CONFIG,
 } from "./libs/constants/constants.js";
@@ -20,6 +21,8 @@ ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
 type Properties = {
 	data: ChartDataType[];
 };
+
+type CategoryName = (typeof CATEGORIES_SUBLABELS)[number];
 
 const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
 	const chartReference = useRef<ChartJS<PolarAreaType> | null>(null);
@@ -35,10 +38,15 @@ const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
 				return;
 			}
 
-			chartInstance.data.datasets[FIRST_ELEMENT_INDEX].data = chartData.map(
-				(entry) => entry.data,
+			const sortedChartData = chartData.sort(
+				(a, b) =>
+					CATEGORIES_SUBLABELS.indexOf(a.categoryName as CategoryName) -
+					CATEGORIES_SUBLABELS.indexOf(b.categoryName as CategoryName),
 			);
-			chartInstance.data.labels = chartData.map((entry) => entry.label);
+
+			chartInstance.data.datasets[FIRST_ELEMENT_INDEX].data =
+				sortedChartData.map((entry) => entry.data);
+			chartInstance.data.labels = sortedChartData.map((entry) => entry.label);
 
 			chartInstance.update();
 		},

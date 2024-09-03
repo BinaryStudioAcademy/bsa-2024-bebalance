@@ -9,6 +9,7 @@ export {
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
+	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizUserAnswerDto,
