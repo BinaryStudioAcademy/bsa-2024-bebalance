@@ -33,7 +33,7 @@ class FileRepository implements Repository {
 	public async delete(id: number): Promise<boolean> {
 		const deletedRows = await this.fileModel.query().deleteById(id);
 
-		return !!deletedRows;
+		return Boolean(deletedRows);
 	}
 
 	public async find(id: number): Promise<FileEntity | null> {
