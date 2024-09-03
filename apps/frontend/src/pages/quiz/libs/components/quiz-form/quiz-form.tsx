@@ -2,12 +2,12 @@ import { QuizQuestion } from "~/libs/components/components.js";
 import { useAppForm } from "~/libs/hooks/hooks.js";
 
 type FormValues = {
-	answer: "";
+	[key: string]: number;
 };
 
 const QuizForm: React.FC = () => {
 	const { control } = useAppForm<FormValues>({
-		defaultValues: { answer: "" },
+		defaultValues: { answer: 0 },
 	});
 
 	return (
