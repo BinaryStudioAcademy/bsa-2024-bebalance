@@ -86,6 +86,14 @@ const Onboarding: React.FC = () => {
 	);
 
 	const handlePreviousStep = useCallback(() => {
+		setAnswerIds((previousState) => {
+			const newAnswerIds = [...previousState.answerIds];
+			newAnswerIds.pop();
+
+			return {
+				answerIds: newAnswerIds,
+			};
+		});
 		void dispatch(onboardingActions.previousQuestion());
 	}, [dispatch]);
 
