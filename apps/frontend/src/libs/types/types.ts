@@ -5,6 +5,8 @@ export {
 	type Chart,
 	type ChartConfiguration,
 	type ChartMeta,
+	type Element,
+	type Plugin,
 	type RadialLinearScale,
 	type ScriptableContext,
 } from "chart.js";

@@ -5,9 +5,12 @@ import {
 	drawExtraPointGraphics,
 	generateGradientColor,
 } from "../helpers/helpers.js";
-import { type PolarAreaType } from "../types/types.js";
+import { type CategorizedData, type PolarAreaType } from "../types/types.js";
 
-const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
+const USER_WHEEL_CHART_CONFIG: ChartConfiguration<
+	PolarAreaType,
+	CategorizedData[]
+> = {
 	data: {
 		datasets: [
 			{
@@ -23,6 +26,9 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 		animation: false,
 		layout: {
 			padding: 17,
+		},
+		parsing: {
+			key: "value",
 		},
 		plugins: {
 			tooltip: { enabled: false },
@@ -56,7 +62,7 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	},
 	plugins: [
 		{
-			afterDatasetsDraw: drawExtraPointGraphics,
+			afterDraw: drawExtraPointGraphics,
 			id: "extraPointGraphics",
 		},
 	],

@@ -10,5 +10,6 @@ const quizApi = new QuizApi({
 	storage,
 });
 
+export { type QuizScoresGetAllItemResponseDto } from "./libs/types/types.js";
 export { quizApi };
 export { actions, reducer } from "./slices/quiz.js";

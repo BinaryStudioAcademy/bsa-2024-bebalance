@@ -1,4 +1,4 @@
-const CATEGORIES_SUBLABELS = [
+const CATEGORIES_ORDER = [
 	"Physical",
 	"Work",
 	"Friends",
@@ -9,4 +9,4 @@ const CATEGORIES_SUBLABELS = [
 	"Mental",
 ] as const;
 
-export { CATEGORIES_SUBLABELS };
+export { CATEGORIES_ORDER };

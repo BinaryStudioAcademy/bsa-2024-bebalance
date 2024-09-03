@@ -6,6 +6,7 @@ import {
 	SLICE_COLORS,
 } from "../constants/constants.js";
 import { ChartGraphicsColors } from "../enums/enums.js";
+import { type CategorizedData } from "../types/categorized-data.type.js";
 
 const GradientParameters = {
 	CENTER_DIVISOR: 2,
@@ -18,7 +19,9 @@ const generateGradientColor = (
 	context: ScriptableContext<"doughnut">,
 ): CanvasGradient => {
 	const { raw } = context;
-	const sliceValue = raw as number;
+	const sliceData = raw as CategorizedData;
+	const sliceValue = sliceData.value;
+
 	const sliceColorIndex =
 		Math.ceil((sliceValue * SLICE_COLORS.length) / MAX_SLICE_VALUE) -
 		SINGLE_ELEMENT;
