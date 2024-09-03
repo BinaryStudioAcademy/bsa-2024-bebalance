@@ -11,7 +11,7 @@ const quizApi = new QuizApi({
 });
 
 export { quizApi };
-export { QuizApiPath } from "./libs/enums/enums";
+export { APIPath } from "./libs/enums/enums";
 export {
 	type QuizCategoryDto,
 	type QuizGetAllCategoriesResponseDto,

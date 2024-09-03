@@ -1,4 +1,4 @@
 export {
-	type QuizCategoryDto,
-	type QuizGetAllCategoriesResponseDto,
+	type CategoryDto,
+	type GetCategoriesDto,
 } from "shared";
