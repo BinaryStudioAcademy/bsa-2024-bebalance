@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.28.0...v1.29.0) (2024-09-03)
+
+
+### Features
+
+* **backend/frontend/shared:** forgot-password-functionality bb-188 ([#230](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/230)) ([3e24ec9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3e24ec928ad898c33eb0caa06d7f83692f322026))
+* **mobile:** balance wheel animated graph bb-196 ([#254](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/254)) ([a4a3d0f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a4a3d0f81843c5d4bc8bdcccf4d74a73df02d6d7))
+
+
+### Bug Fixes
+
+* evened out header with sidebar logo bb-252 ([#273](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/273)) ([7803eca](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7803eca09e47034effe8fd97b75f3800538271e3))
+
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.27.0...v1.28.0) (2024-09-02)
+
+
+### Features
+
+* **frontend:** sign-out functionality bb-241 ([#264](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/264)) ([d6b5fff](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d6b5fff860ac41666d3cd00b17945415d859a6db))
+
 ## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.26.0...v1.27.0) (2024-09-01)
 
 

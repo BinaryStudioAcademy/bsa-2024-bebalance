@@ -7,6 +7,8 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
+import { notification } from "~/libs/modules/notification/notification.js";
+import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import {
 	onboardingApi,
@@ -22,7 +24,9 @@ type RootReducer = {
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	notification: typeof notification;
 	onboardingApi: typeof onboardingApi;
+	storage: typeof storage;
 };
 
 class Store {
@@ -54,7 +58,9 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			notification,
 			onboardingApi,
+			storage,
 		};
 	}
 }

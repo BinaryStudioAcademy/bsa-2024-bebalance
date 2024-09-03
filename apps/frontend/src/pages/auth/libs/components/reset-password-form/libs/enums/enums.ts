@@ -1,0 +1,1 @@
+export { ConfirmPasswordCustomValidation } from "shared";

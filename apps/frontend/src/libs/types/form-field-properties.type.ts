@@ -12,6 +12,7 @@ type FormFieldProperties<T extends FieldValues> = {
 
 export { type FormFieldProperties };
 export {
+	type Control,
 	type FieldErrors,
 	type FieldPath,
 	type FieldValues,
