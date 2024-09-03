@@ -1,3 +1,3 @@
-const MINIAL_LENGTH = 0;
+const MINIMAL_LENGTH = 0;
 
-export { MINIAL_LENGTH };
+export { MINIMAL_LENGTH };
