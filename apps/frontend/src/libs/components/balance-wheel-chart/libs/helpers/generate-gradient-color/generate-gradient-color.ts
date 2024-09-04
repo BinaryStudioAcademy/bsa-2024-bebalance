@@ -1,7 +1,6 @@
 import { type ScriptableContext } from "~/libs/types/types.js";
 
-import { FALLBACK_BACKGROUND_COLOR } from "../constants/constants.js";
-import { ChartSliceColor } from "../enums/enums.js";
+import { labelToBackgroundColor } from "./libs/maps/maps.js";
 
 const GradientSetting = {
 	CENTER_DIVISOR: 2,
@@ -17,20 +16,8 @@ const generateGradientColor = (
 	const { chartArea, ctx } = chart;
 	const { labels } = chart.data;
 
-	const label = labels?.[dataIndex]
-		?.toString()
-		.toUpperCase()
-		.replaceAll(/\s+/g, "_");
-
-	const colorStart =
-		label && label in ChartSliceColor
-			? ChartSliceColor[label as keyof typeof ChartSliceColor].start
-			: FALLBACK_BACKGROUND_COLOR;
-
-	const colorEnd =
-		label && label in ChartSliceColor
-			? ChartSliceColor[label as keyof typeof ChartSliceColor].end
-			: FALLBACK_BACKGROUND_COLOR;
+	const label = labels?.[dataIndex]?.toString();
+	const { end: colorEnd, start: colorStart } = labelToBackgroundColor(label);
 
 	const gradient = ctx.createRadialGradient(
 		(chartArea.left + chartArea.right) / GradientSetting.CENTER_DIVISOR,
