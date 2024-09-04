@@ -9,11 +9,11 @@ import { DataStatus } from "~/libs/enums/enums";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
+const ZERO_CATEGORIES = 0;
+
 const Chat: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { categories, dataStatus } = useAppSelector((state) => state.quiz);
-
-	const ZERO_CATEGORIES = 0;
 
 	useEffect(() => {
 		if (categories.length === ZERO_CATEGORIES) {

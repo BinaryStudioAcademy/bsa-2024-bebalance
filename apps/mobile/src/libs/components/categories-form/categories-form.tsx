@@ -21,6 +21,8 @@ type Properties = {
 	categories: CategoryDto[];
 };
 
+const NO_CATEGORIES_SELECTED = 0;
+
 const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 	const { control, errors, handleSubmit, setValue } = useAppForm({
 		defaultValues: {
@@ -41,8 +43,6 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 			.filter((category) => selectedCategories.includes(category.id))
 			.map((category) => category.name)
 			.join(", ");
-
-		const NO_CATEGORIES_SELECTED = 0;
 
 		if (selectedLabels.length > NO_CATEGORIES_SELECTED) {
 			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
