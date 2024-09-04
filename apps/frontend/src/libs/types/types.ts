@@ -3,6 +3,7 @@ export { type IconName } from "./icon-name.type.js";
 export { type SidebarItem } from "./sidebar-item.type.js";
 export {
 	type Chart,
+	type ChartArea,
 	type ChartConfiguration,
 	type ChartMeta,
 	type Element,

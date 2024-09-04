@@ -4,6 +4,7 @@ import { ChartFont, ChartGraphicsColors } from "../enums/enums.js";
 import {
 	drawExtraPointGraphics,
 	generateGradientColor,
+	updateLabels,
 } from "../helpers/helpers.js";
 import { type CategorizedData, type PolarAreaType } from "../types/types.js";
 
@@ -24,6 +25,7 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<
 	},
 	options: {
 		animation: false,
+		events: [],
 		layout: {
 			padding: 17,
 		},
@@ -31,7 +33,9 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<
 			key: "value",
 		},
 		plugins: {
-			tooltip: { enabled: false },
+			tooltip: {
+				enabled: false,
+			},
 		},
 		scales: {
 			r: {
@@ -62,8 +66,12 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<
 	},
 	plugins: [
 		{
-			afterDraw: drawExtraPointGraphics,
+			afterDatasetDraw: drawExtraPointGraphics,
 			id: "extraPointGraphics",
+		},
+		{
+			afterDatasetsDraw: updateLabels,
+			id: "updateLabels",
 		},
 	],
 	type: "polarArea",

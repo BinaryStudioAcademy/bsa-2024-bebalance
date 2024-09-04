@@ -14,6 +14,8 @@ const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const { ctx: context } = chart;
 	const scale = chart.scales["r"] as RadialLinearScale;
 	const meta = chart.getDatasetMeta(FIRST_ELEMENT_INDEX);
+	const { chartArea } = chart;
+
 	const sublabels = meta.data.map((element) => {
 		const categorizedDataElement = element as {
 			$context: {
@@ -27,22 +29,20 @@ const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 
 	const angleStep = TAU / sublabels.length;
 
-	const { _pointLabelItems: pointLabelItems } = meta.rScale as {
-		_pointLabelItems: { textAlign: string; x: number; y: number }[];
-	} & RadialLinearScale;
-
-	for (const label of pointLabelItems) {
-		label.textAlign = "center";
-	}
-
 	for (const [index, label] of sublabels.entries()) {
 		const startAngle = index * angleStep;
 		const endAngle = (index + SINGLE_ELEMENT) * angleStep;
 		const middleAngle = (startAngle + endAngle) / AngleCoefficient.HALF;
 
-		drawSublabels({ chart, context, label, middleAngle, scale });
+		drawSublabels({
+			chartArea,
+			context,
+			label,
+			middleAngle,
+			scale,
+		});
 
-		drawDots({ context, index, meta, middleAngle, scale });
+		drawDots({ chartArea, context, index, meta, middleAngle, scale });
 	}
 };
 
