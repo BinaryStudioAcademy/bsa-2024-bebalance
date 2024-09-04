@@ -1,6 +1,6 @@
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
-import { NO_ERROR_INPUT_FIELD } from "~/modules/users/constants.js";
+import { NO_ERROR_INPUT_FIELD_AMOUNT } from "~/modules/users/constants.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
@@ -24,7 +24,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD;
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {

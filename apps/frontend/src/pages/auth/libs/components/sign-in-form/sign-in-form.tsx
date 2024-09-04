@@ -1,7 +1,7 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
-import { NO_ERROR_INPUT_FIELD } from "~/modules/users/constants.js";
+import { NO_ERROR_INPUT_FIELD_AMOUNT } from "~/modules/users/constants.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -20,7 +20,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		validationSchema: userSignInValidationSchema,
 	});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD;
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
