@@ -5,6 +5,7 @@ const RootScreenName = {
 	SIGN_IN: "Sign In",
 	SIGN_UP: "Sign Up",
 	WELCOME: "Welcome",
+	WHEEL_LOADING: "Wheel Loading",
 } as const;
 
 export { RootScreenName };
