@@ -13,7 +13,6 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: string;
 	options: InputOption[];
-	type: "checkbox" | "email" | "password" | "radio" | "text";
 };
 
 const QuizQuestion = <T extends FieldValues>({
@@ -21,7 +20,6 @@ const QuizQuestion = <T extends FieldValues>({
 	label,
 	name,
 	options,
-	type,
 }: Properties<T>): JSX.Element => {
 	return (
 		<div className={styles["quiz-question"]}>
@@ -30,7 +28,6 @@ const QuizQuestion = <T extends FieldValues>({
 				label={label}
 				name={name as FieldPath<T>}
 				options={options}
-				type={type}
 			/>
 		</div>
 	);

@@ -1,3 +1,6 @@
-type InputOption = { label: string; value: string };
+type InputOption = {
+	label: string;
+	value: string;
+};
 
 export { type InputOption };
