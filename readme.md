@@ -35,7 +35,7 @@ erDiagram
     }
 
     user_details ||--|| users : user_id
-    user_details ||--|| files : avatar_file_id
+    user_details ||--o| files : avatar_file_id
     user_details {
         int id PK
         dateTime created_at
