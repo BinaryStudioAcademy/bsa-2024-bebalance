@@ -6,7 +6,7 @@ import {
 	View,
 	Wheel as WheelChart,
 } from "~/libs/components/components";
-import { GradientColor } from "~/libs/enums/enums";
+import { AnimationName, GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
 const mockData = [
@@ -20,7 +20,6 @@ const mockData = [
 	{ colors: GradientColor.BLUE, label: "Mental", score: 7 },
 ];
 
-const MAX_SCORE = 10;
 const WHEEL_SIZE = 250;
 
 const Wheel: React.FC = () => {
@@ -28,9 +27,11 @@ const Wheel: React.FC = () => {
 		<ScreenWrapper>
 			<Text>My wheel results</Text>
 			<View style={globalStyles.alignItemsCenter}>
+				<WheelChart categoriesData={mockData} size={WHEEL_SIZE} />
 				<WheelChart
+					animation={AnimationName.PULSE}
 					categoriesData={mockData}
-					maxScore={MAX_SCORE}
+					isLabelShown={false}
 					size={WHEEL_SIZE}
 				/>
 			</View>
