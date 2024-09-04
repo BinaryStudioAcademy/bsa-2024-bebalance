@@ -10,6 +10,7 @@ import {
 import { getRandomValue, getSectorParameters } from "../../helpers/helpers";
 
 type Properties = {
+	animationRepetitions: number;
 	animationTime: number;
 	centerGap: number;
 	centerPoint: number;
@@ -24,12 +25,12 @@ type Properties = {
 	startPercentOuter: number;
 };
 
-const INITIAL_ANIMATED_VALUE = 0;
 const HALF_VALUE_COEFFICIENT = 0.5;
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedPulsingSector: React.FC<Properties> = ({
+	animationRepetitions,
 	animationTime,
 	centerGap,
 	centerPoint,
@@ -76,7 +77,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 	const animatedRadius = useSharedValue(radius);
 	const timingSettings = { duration: animationTime };
 
-	const updateSectorAnimatedParameters = (): void => {
+	useEffect(() => {
 		const nextHeight = getRandomValue({
 			max: maxHeight,
 			min: maxHeight * HALF_VALUE_COEFFICIENT,
@@ -112,19 +113,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		animatedOuterStrokeWidth.value = outerStrokeWidth;
 
 		animatedRadius.value = radius;
-	};
-
-	useEffect(() => {
-		updateSectorAnimatedParameters();
-
-		const interval = setInterval(() => {
-			updateSectorAnimatedParameters();
-		}, animationTime);
-
-		return (): void => {
-			clearInterval(interval);
-		};
-	}, []);
+	}, [animationRepetitions]);
 
 	const animatedInnerSectorProperties = useAnimatedProps(() => ({
 		r: withTiming(animatedRadius.value, timingSettings),
@@ -153,7 +142,6 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 				cx={centerPoint}
 				cy={centerPoint}
 				fill="none"
-				origin={[INITIAL_ANIMATED_VALUE, INITIAL_ANIMATED_VALUE]}
 				stroke={outlineColor}
 			/>
 			<AnimatedCircle
@@ -161,7 +149,6 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 				cx={centerPoint}
 				cy={centerPoint}
 				fill="none"
-				origin={[INITIAL_ANIMATED_VALUE, INITIAL_ANIMATED_VALUE]}
 				stroke={sectorColor}
 			/>
 		</>
