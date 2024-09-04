@@ -1,7 +1,8 @@
 export { drawDots } from "./draw-dots.helper.js";
 export { drawExtraPointGraphics } from "./draw-extra-point-graphics.helper.js";
 export { drawSublabels } from "./draw-sublabels.helper.js";
-export { generateGradientColor } from "./generate-gradient.helper.js";
+export { generateGradientColor } from "./generate-gradient-color/generate-gradient-color.helper.js";
+export { generateRandomData } from "./generate-random-data/generate-random-data.helper.js";
 export { getAbsoluteCenter } from "./get-absolute-center.helper.js";
 export { getBaseline } from "./get-baseline.helper.js";
 export { getCenters } from "./get-centers.helper.js";

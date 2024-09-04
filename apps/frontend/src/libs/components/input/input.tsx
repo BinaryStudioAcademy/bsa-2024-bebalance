@@ -16,6 +16,7 @@ type Properties<T extends FieldValues> = {
 	errors?: FieldErrors<T>;
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
+	isDisabled?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	onIconClick?: (() => void) | undefined;
@@ -29,6 +30,7 @@ const Input = <T extends FieldValues>({
 	errors,
 	hasVisuallyHiddenLabel,
 	iconName,
+	isDisabled = false,
 	label,
 	name,
 	onIconClick,
@@ -81,6 +83,7 @@ const Input = <T extends FieldValues>({
 						<input
 							className={getValidClassNames(styles["input-field"])}
 							{...field}
+							disabled={isDisabled}
 							placeholder={placeholder}
 							type={type}
 						/>

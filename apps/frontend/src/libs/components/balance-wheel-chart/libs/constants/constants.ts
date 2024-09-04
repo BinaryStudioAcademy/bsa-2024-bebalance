@@ -10,17 +10,16 @@ const NOT_FOUND_INDEX = -1;
 
 const SINGLE_ELEMENT = 1;
 
-const MAX_SLICE_VALUE = 10;
-
 export {
 	DEFAULT_GRAPHICS_OFFSET,
 	DOT_RADIUS,
 	FIRST_ELEMENT_INDEX,
-	MAX_SLICE_VALUE,
 	NOT_FOUND_INDEX,
 	SINGLE_ELEMENT,
 	START_ANGLE,
 };
+export { ANIMATION_INTERVAL } from "./animation-interval.constant.js";
 export { CATEGORIES_ORDER } from "./categories-order.constant.js";
-export { SLICE_COLORS } from "./slice-colors.constant.js";
+export { FALLBACK_BACKGROUND_COLOR } from "./fallback-background-color.constant.js";
 export { USER_WHEEL_CHART_CONFIG } from "./user-wheel-chart-config.constant.js";
+export { WHEEL_CHART_CONFIG } from "./wheel-chart-config.constant.js";

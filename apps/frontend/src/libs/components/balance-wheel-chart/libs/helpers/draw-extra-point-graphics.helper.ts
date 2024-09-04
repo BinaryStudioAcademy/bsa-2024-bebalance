@@ -1,13 +1,9 @@
 import { TAU } from "~/libs/constants/constants.js";
-import {
-	type Chart,
-	type Element,
-	type RadialLinearScale,
-} from "~/libs/types/types.js";
+import { type Chart, type RadialLinearScale } from "~/libs/types/types.js";
 
 import { FIRST_ELEMENT_INDEX, SINGLE_ELEMENT } from "../constants/constants.js";
 import { AngleCoefficient } from "../enums/enums.js";
-import { type CategorizedData, type PolarAreaType } from "../types/types.js";
+import { type PolarAreaType } from "../types/types.js";
 import { drawDots, drawSublabels } from "./helpers.js";
 
 const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
@@ -16,16 +12,7 @@ const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const meta = chart.getDatasetMeta(FIRST_ELEMENT_INDEX);
 	const { chartArea } = chart;
 
-	const sublabels = meta.data.map((element) => {
-		const categorizedDataElement = element as {
-			$context: {
-				raw: CategorizedData;
-			};
-		} & Element<PolarAreaType>;
-		const sublabel = categorizedDataElement.$context.raw.categoryName;
-
-		return String(sublabel);
-	});
+	const sublabels = chart.data.labels as string[];
 
 	const angleStep = TAU / sublabels.length;
 

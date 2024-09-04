@@ -6,12 +6,9 @@ import {
 	generateGradientColor,
 	updateLabels,
 } from "../helpers/helpers.js";
-import { type CategorizedData, type PolarAreaType } from "../types/types.js";
+import { type PolarAreaType } from "../types/types.js";
 
-const USER_WHEEL_CHART_CONFIG: ChartConfiguration<
-	PolarAreaType,
-	CategorizedData[]
-> = {
+const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	data: {
 		datasets: [
 			{

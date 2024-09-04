@@ -2,6 +2,7 @@ import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
 import {
 	Analyzing,
+	BalanceWheel,
 	Introduction,
 	UserWheel,
 } from "./libs/components/components.js";
@@ -27,6 +28,10 @@ const Quiz: React.FC = () => {
 
 			case Step.USER_WHEEL: {
 				return <UserWheel />;
+			}
+
+			case Step.BALANCE_WHEEL: {
+				return <BalanceWheel />;
 			}
 
 			default: {

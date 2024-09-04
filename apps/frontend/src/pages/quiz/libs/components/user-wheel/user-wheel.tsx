@@ -21,13 +21,13 @@ const UserWheel: React.FC = () => {
 					scores
 						? scores.map((score) => {
 								return {
-									categoryName: score.categoryName,
 									data: score.score,
-									label: String(score.score),
+									label: score.categoryName,
 								};
 							})
 						: []
 				}
+				isAnimating={false}
 			/>
 		</div>
 	);

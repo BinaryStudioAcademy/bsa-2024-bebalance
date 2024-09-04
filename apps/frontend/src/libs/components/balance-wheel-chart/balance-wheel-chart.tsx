@@ -9,31 +9,31 @@ import {
 import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 
 import {
+	ANIMATION_INTERVAL,
 	CATEGORIES_ORDER,
 	FIRST_ELEMENT_INDEX,
 	NOT_FOUND_INDEX,
 	USER_WHEEL_CHART_CONFIG,
+	WHEEL_CHART_CONFIG,
 } from "./libs/constants/constants.js";
-import { type ChartDataType } from "./libs/types/chart-data.type.js";
-import {
-	type CategorizedData,
-	type PolarAreaType,
-} from "./libs/types/types.js";
+import { generateRandomData } from "./libs/helpers/helpers.js";
+import { type ChartDataType, type PolarAreaType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
 
 type Properties = {
 	data: ChartDataType[];
+	isAnimating: boolean;
 };
 
 type CategoryName = (typeof CATEGORIES_ORDER)[number];
 
-const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
-	const chartReference = useRef<ChartJS<
-		PolarAreaType,
-		CategorizedData[]
-	> | null>(null);
+const BalanceWheelChart: React.FC<Properties> = ({
+	data,
+	isAnimating,
+}: Properties) => {
+	const chartReference = useRef<ChartJS<PolarAreaType> | null>(null);
 
 	const handleUpdateChartData = useCallback(
 		(chartData: ChartDataType[]): void => {
@@ -47,8 +47,8 @@ const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
 			}
 
 			const orderedChartData = chartData.sort((a, b) => {
-				const indexA = CATEGORIES_ORDER.indexOf(a.categoryName as CategoryName);
-				const indexB = CATEGORIES_ORDER.indexOf(b.categoryName as CategoryName);
+				const indexA = CATEGORIES_ORDER.indexOf(a.label as CategoryName);
+				const indexB = CATEGORIES_ORDER.indexOf(b.label as CategoryName);
 
 				const chartDataEnd = CATEGORIES_ORDER.length;
 
@@ -62,18 +62,30 @@ const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
 
 			chartInstance.data.datasets[FIRST_ELEMENT_INDEX].data =
 				orderedChartData.map((entry) => {
-					return {
-						categoryName: entry.categoryName,
-						value: entry.data,
-					};
+					return entry.data;
 				});
 
-			chartInstance.data.labels = chartData.map((entry) => entry.data);
+			chartInstance.data.labels = chartData.map((entry) => entry.label);
 
 			chartInstance.update();
 		},
 		[],
 	);
+
+	const handleAnimateChart = useCallback(() => {
+		const chartInstance = chartReference.current;
+		const FIRST_ITEM_INDEX = 0;
+
+		if (
+			!chartInstance ||
+			!chartInstance.data.datasets[FIRST_ITEM_INDEX]?.data
+		) {
+			return;
+		}
+
+		chartInstance.data.datasets[FIRST_ITEM_INDEX].data = generateRandomData();
+		chartInstance.update();
+	}, []);
 
 	const handleRenderChart = useCallback(
 		(canvas?: HTMLCanvasElement | null): void => {
@@ -88,21 +100,40 @@ const BalanceWheelChart: React.FC<Properties> = ({ data }: Properties) => {
 			const context = canvas.getContext("2d");
 
 			if (context) {
-				chartReference.current = new ChartJS<PolarAreaType, CategorizedData[]>(
+				const chartConfig = isAnimating
+					? WHEEL_CHART_CONFIG
+					: USER_WHEEL_CHART_CONFIG;
+				chartReference.current = new ChartJS<PolarAreaType>(
 					context,
-					USER_WHEEL_CHART_CONFIG,
+					chartConfig,
 				);
 			}
 		},
-		[],
+		[isAnimating],
 	);
+
+	useEffect(() => {
+		if (isAnimating) {
+			const intervalId = setInterval(handleAnimateChart, ANIMATION_INTERVAL);
+
+			return (): void => {
+				clearInterval(intervalId);
+			};
+		}
+	}, [handleAnimateChart, isAnimating]);
 
 	useEffect(() => {
 		handleUpdateChartData(data);
 	}, [data, handleUpdateChartData]);
 
 	return (
-		<div className={styles["container"]}>
+		<div
+			className={
+				isAnimating
+					? styles["container-animation"]
+					: styles["container-root-wheel"]
+			}
+		>
 			<canvas ref={handleRenderChart} />
 		</div>
 	);
