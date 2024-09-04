@@ -1,10 +1,14 @@
 import React from "react";
 
 import { Defs, Stop, Svg, SvgGradient } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
-import { type WheelDataItem } from "~/libs/types/types";
+import { AnimationName, BaseColor } from "~/libs/enums/enums";
+import { type ValueOf, type WheelDataItem } from "~/libs/types/types";
 
-import { AnimatedSector, LabelOnCircle } from "./libs/components/components";
+import {
+	AnimatedAppearingSector,
+	AnimatedPulsingSector,
+	LabelOnCircle,
+} from "./libs/components/components";
 import { WheelSetting } from "./libs/enums/enums";
 import {
 	getRadiansFromPercent,
@@ -12,19 +16,22 @@ import {
 } from "./libs/helpers/helpers";
 
 type Properties = {
+	animation?: ValueOf<typeof AnimationName>;
 	categoriesData: WheelDataItem[];
 	isLabelShown?: boolean;
-	maxScore: number;
+	maxScore?: number;
 	size: number;
 };
 
 const MINIFY_TWICE_COEFFICIENT = 0.5;
-const ANIMATION_TIME = 500;
+const MAX_SCORE = 10;
+const ANIMATION_TIME = 1000;
 
 const Wheel: React.FC<Properties> = ({
+	animation = AnimationName.APPEAR,
 	categoriesData,
 	isLabelShown = true,
-	maxScore,
+	maxScore = MAX_SCORE,
 	size,
 }: Properties) => {
 	const wheelRadius = size * MINIFY_TWICE_COEFFICIENT;
@@ -42,10 +49,9 @@ const Wheel: React.FC<Properties> = ({
 				height,
 				innerColor,
 				innerColorOffset,
-				innerSectorKey,
 				outerColor,
 				outerColorOffset,
-				outerSectorKey,
+				sectorKey,
 				startPercent,
 			} = getWheelCategoryParameters({
 				categoriesLength: array.length,
@@ -63,7 +69,7 @@ const Wheel: React.FC<Properties> = ({
 
 			const wheelCenterGapSize =
 				(size * WheelSetting.HOLE_SIZE_PERCENT) / WheelSetting.MAX_PERCENT;
-			const layerOsffsetInner =
+			const layerOffsetInner =
 				(size * WheelSetting.SPACING_SIZE_PERCENT) / WheelSetting.MAX_PERCENT;
 			const startPercentInner =
 				startPercent +
@@ -90,29 +96,39 @@ const Wheel: React.FC<Properties> = ({
 							wheelRadius={wheelRadius}
 						/>
 					)}
-
-					<AnimatedSector
-						animationTime={ANIMATION_TIME}
-						centerGap={wheelCenterGapSize}
-						centerPoint={centerPoint}
-						endPercent={endPercent}
-						height={height}
-						key={outerSectorKey}
-						layerOffset={WheelSetting.INITIAL_POSITION}
-						startPercent={startPercent}
-						stroke={BaseColor.BG_WHITE}
-					/>
-					<AnimatedSector
-						animationTime={ANIMATION_TIME}
-						centerGap={wheelCenterGapSize}
-						centerPoint={centerPoint}
-						endPercent={endPercentInner}
-						height={height}
-						key={innerSectorKey}
-						layerOffset={layerOsffsetInner}
-						startPercent={startPercentInner}
-						stroke={gradientUrl}
-					/>
+					{animation === AnimationName.PULSE && (
+						<AnimatedPulsingSector
+							animationTime={ANIMATION_TIME}
+							centerGap={wheelCenterGapSize}
+							centerPoint={centerPoint}
+							endPercentInner={endPercentInner}
+							endPercentOuter={endPercent}
+							height={height}
+							key={sectorKey}
+							layerOffset={layerOffsetInner}
+							maxHeight={wheelRadius}
+							outlineColor={BaseColor.BG_WHITE}
+							sectorColor={gradientUrl}
+							startPercentInner={startPercentInner}
+							startPercentOuter={startPercent}
+						/>
+					)}
+					{animation === AnimationName.APPEAR && (
+						<AnimatedAppearingSector
+							animationTime={ANIMATION_TIME}
+							centerGap={wheelCenterGapSize}
+							centerPoint={centerPoint}
+							endPercentInner={endPercentInner}
+							endPercentOuter={endPercent}
+							height={height}
+							key={sectorKey}
+							layerOffset={layerOffsetInner}
+							outlineColor={BaseColor.BG_WHITE}
+							sectorColor={gradientUrl}
+							startPercentInner={startPercentInner}
+							startPercentOuter={startPercent}
+						/>
+					)}
 				</React.Fragment>
 			);
 		},
