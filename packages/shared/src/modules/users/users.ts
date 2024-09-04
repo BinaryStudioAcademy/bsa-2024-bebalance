@@ -5,8 +5,8 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	type EmailDto,
-	type ResetPasswordDto,
-	type ResetPasswordFormDto,
+	type SavePasswordDto,
+	type SavePasswordFormDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignInRequestDto,

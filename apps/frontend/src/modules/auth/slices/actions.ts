@@ -5,7 +5,7 @@ import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type EmailDto,
-	type ResetPasswordDto,
+	type SavePasswordDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -84,7 +84,7 @@ const requestResetPassword = createAsyncThunk<
 
 const resetPassword = createAsyncThunk<
 	UserDto,
-	ResetPasswordDto,
+	SavePasswordDto,
 	AsyncThunkConfig
 >(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
 	const { authApi, storage } = extra;

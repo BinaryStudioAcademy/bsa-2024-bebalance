@@ -8,7 +8,7 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type EmailDto,
-	type ResetPasswordDto,
+	type SavePasswordDto,
 	type UserDto,
 	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
@@ -86,7 +86,7 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.resetPassword(
 					options as APIHandlerOptions<{
-						body: ResetPasswordDto;
+						body: SavePasswordDto;
 					}>,
 				),
 			method: "PATCH",
@@ -161,7 +161,7 @@ class AuthController extends BaseController {
 
 	private async resetPassword(
 		options: APIHandlerOptions<{
-			body: ResetPasswordDto;
+			body: SavePasswordDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {

@@ -5,7 +5,7 @@ import { mailer } from "~/libs/modules/mailer/mailer.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type EmailDto,
-	type ResetPasswordDto,
+	type SavePasswordDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -57,7 +57,7 @@ class AuthService {
 	}
 
 	public async resetPassword(
-		payload: ResetPasswordDto,
+		payload: SavePasswordDto,
 	): Promise<UserSignInResponseDto> {
 		const { jwtToken, newPassword } = payload;
 

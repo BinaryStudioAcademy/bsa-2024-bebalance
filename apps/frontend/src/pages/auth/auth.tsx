@@ -14,14 +14,14 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type EmailDto,
-	type ResetPasswordDto,
+	type SavePasswordDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/modules/users/users.js";
 
 import {
-	ForgotPasswordForm,
 	ResetPasswordForm,
+	SavePasswordForm,
 	SignInForm,
 	SignUpForm,
 } from "./libs/components/components.js";
@@ -64,7 +64,7 @@ const Auth: React.FC = () => {
 	);
 
 	const handleResetPasswordSubmit = useCallback(
-		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
+		(payload: Omit<SavePasswordDto, "jwtToken">): void => {
 			void dispatch(
 				authActions.resetPassword({
 					jwtToken: token as string,
@@ -86,11 +86,11 @@ const Auth: React.FC = () => {
 			}
 
 			case AppRoute.FORGOT_PASSWORD: {
-				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
+				return <ResetPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
 
 			case AppRoute.RESET_PASSWORD: {
-				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
+				return <SavePasswordForm onSubmit={handleResetPasswordSubmit} />;
 			}
 		}
 	};

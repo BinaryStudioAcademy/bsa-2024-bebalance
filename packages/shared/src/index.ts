@@ -68,8 +68,8 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
-	type ResetPasswordDto,
-	type ResetPasswordFormDto,
+	type SavePasswordDto,
+	type SavePasswordFormDto,
 	type UserDto,
 	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
@@ -83,5 +83,4 @@ export {
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
 	UserValidationMessage,
-	UserValidationRule,
 } from "./modules/users/users.js";

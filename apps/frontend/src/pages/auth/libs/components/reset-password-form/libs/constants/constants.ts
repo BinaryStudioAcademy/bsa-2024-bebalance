@@ -1,8 +1,7 @@
-import { type ResetPasswordFormDto } from "~/modules/users/users.js";
+import { type EmailDto } from "~/modules/users/users.js";
 
-const DEFAULT_RESET_PASSWORD_PAYLOAD: ResetPasswordFormDto = {
-	confirmPassword: "",
-	newPassword: "",
+const DEFAULT_RESET_PASSWORD_PAYLOAD: EmailDto = {
+	email: "",
 };
 
 export { DEFAULT_RESET_PASSWORD_PAYLOAD };
