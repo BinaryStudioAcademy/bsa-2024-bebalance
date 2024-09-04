@@ -1,6 +1,5 @@
 const UsersApiPath = {
-	GET: "/:id",
-	PATCH: "/:id",
+	$ID: "/:id",
 	ROOT: "/",
 } as const;
 

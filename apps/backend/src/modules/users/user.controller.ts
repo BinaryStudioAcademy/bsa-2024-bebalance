@@ -61,7 +61,7 @@ class UserController extends BaseController {
 					}>,
 				),
 			method: "GET",
-			path: UsersApiPath.GET,
+			path: UsersApiPath.$ID,
 			preHandlers: [checkAccessToUserData],
 		});
 
@@ -74,7 +74,7 @@ class UserController extends BaseController {
 					}>,
 				),
 			method: "PATCH",
-			path: UsersApiPath.PATCH,
+			path: UsersApiPath.$ID,
 			preHandlers: [checkAccessToUserData],
 			validation: {
 				body: userUpdateValidationSchema,
