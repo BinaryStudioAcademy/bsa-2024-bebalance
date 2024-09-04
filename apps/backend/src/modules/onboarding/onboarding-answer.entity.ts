@@ -28,9 +28,9 @@ class OnboardingAnswerEntity implements Entity {
 		updatedAt: string;
 		userId: null | number;
 	}) {
+		this.label = label;
 		this.createdAt = createdAt;
 		this.id = id;
-		this.label = label;
 		this.questionId = questionId;
 		this.updatedAt = updatedAt;
 		this.userId = userId;
@@ -91,6 +91,7 @@ class OnboardingAnswerEntity implements Entity {
 			updatedAt: this.updatedAt,
 		};
 	}
+
 	public toObject(): {
 		createdAt: string;
 		id: number;

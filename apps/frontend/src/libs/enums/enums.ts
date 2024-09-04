@@ -1,3 +1,10 @@
 export { AppRoute } from "./app-route.enum.js";
 export { DataStatus } from "./data-status.enum.js";
-export { APIPath, AppEnvironment, ContentType, ServerErrorType } from "shared";
+export { NotificationMessage } from "./notification-message.enum.js";
+export {
+	APIPath,
+	AppEnvironment,
+	ContentType,
+	ErrorMessage,
+	ServerErrorType,
+} from "shared";
