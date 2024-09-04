@@ -1,9 +1,11 @@
 type GetSectorParametersArguments = {
 	centerGap: number;
-	endPercent: number;
+	endPercentInner: number;
+	endPercentOuter: number;
 	height: number;
 	layerOffset: number;
-	startPercent: number;
+	startPercentInner: number;
+	startPercentOuter: number;
 };
 
 const QUATER_PERCENT = 25;
@@ -12,29 +14,53 @@ const MAX_PERCENT = 100;
 
 const getSectorParameters = ({
 	centerGap,
-	endPercent,
+	endPercentInner,
+	endPercentOuter,
 	height,
 	layerOffset,
-	startPercent,
+	startPercentInner,
+	startPercentOuter,
 }: GetSectorParametersArguments): {
-	dashArrayDash: number;
-	dashArrayGap: number;
-	dashOffset: number;
+	innerDashArrayDash: number;
+	innerDashArrayGap: number;
+	innerDashOffset: number;
+	innerStrokeWidth: number;
+	outerDashArrayDash: number;
+	outerDashArrayGap: number;
+	outerDashOffset: number;
+	outerStrokeWidth: number;
 	radius: number;
-	strokeWidth: number;
 } => {
-	const strokeWidth = height - layerOffset * TWO - centerGap;
+	const outerStrokeWidth = height - centerGap;
+	const innerStrokeWidth = height - layerOffset * TWO - centerGap;
 	const radius = (height + centerGap) / TWO;
-	const circumference = radius * TWO * Math.PI;
-	const dashArrayDash =
-		((endPercent - startPercent) * circumference) / MAX_PERCENT;
-	const dashArrayGap = circumference - dashArrayDash;
-	const dashOffset =
-		((circumference * (MAX_PERCENT + QUATER_PERCENT - startPercent)) /
+	const circumference = Math.round(radius * TWO * Math.PI);
+	const innerDashArrayDash =
+		((endPercentInner - startPercentInner) * circumference) / MAX_PERCENT;
+	const outerDashArrayDash =
+		((endPercentOuter - startPercentOuter) * circumference) / MAX_PERCENT;
+	const innerDashArrayGap = circumference - innerDashArrayDash;
+	const outerDashArrayGap = circumference - outerDashArrayDash;
+	const innerDashOffset =
+		((circumference * (MAX_PERCENT + QUATER_PERCENT - startPercentInner)) /
+			MAX_PERCENT) %
+		circumference;
+	const outerDashOffset =
+		((circumference * (MAX_PERCENT + QUATER_PERCENT - startPercentOuter)) /
 			MAX_PERCENT) %
 		circumference;
 
-	return { dashArrayDash, dashArrayGap, dashOffset, radius, strokeWidth };
+	return {
+		innerDashArrayDash,
+		innerDashArrayGap,
+		innerDashOffset,
+		innerStrokeWidth,
+		outerDashArrayDash,
+		outerDashArrayGap,
+		outerDashOffset,
+		outerStrokeWidth,
+		radius,
+	};
 };
 
 export { getSectorParameters };
