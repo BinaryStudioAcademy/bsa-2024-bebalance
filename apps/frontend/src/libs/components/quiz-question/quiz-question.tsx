@@ -1,19 +1,11 @@
 import {
-	type Control,
 	type FieldPath,
 	type FieldValues,
-	type Options,
+	type QuizQuestionPropeties as Properties,
 } from "~/libs/types/types.js";
 
 import { Input } from "../input/input.js";
 import styles from "./styles.module.css";
-
-type Properties<T extends FieldValues> = {
-	control: Control<T, null>;
-	label: string;
-	name: string;
-	options: Options[];
-};
 
 const QuizQuestion = <T extends FieldValues>({
 	control,

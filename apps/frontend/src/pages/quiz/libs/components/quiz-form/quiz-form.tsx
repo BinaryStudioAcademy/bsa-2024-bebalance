@@ -18,7 +18,7 @@ import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import styles from "./styles.module.css";
 
 type FormValues = {
-	value: string;
+	[key: string]: number;
 };
 
 type Properties = {
@@ -33,7 +33,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const [isLast, setIsLast] = useState<boolean>(false);
 	const [currentStep, setCurrentStep] = useState<number>(INITIAL_STEP);
 	const { control } = useAppForm<FormValues>({
-		defaultValues: { value: "" },
+		defaultValues: { answer: 0 },
 	});
 
 	const { dataStatus, questions } = useAppSelector(({ quiz }) => ({

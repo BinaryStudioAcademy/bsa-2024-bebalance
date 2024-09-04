@@ -25,9 +25,9 @@
 }
 
 .secondary {
-	color: black;
-	background-color: white;
-	border: 1px solid black;
+	color: var(--black);
+	background-color: var(--white);
+	border: 1px solid var(--black);
 }
 
 .icon-button {
