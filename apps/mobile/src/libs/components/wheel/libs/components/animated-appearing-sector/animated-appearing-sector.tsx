@@ -13,6 +13,7 @@ const INITIAL_ANIMATED_VALUE = 0;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 type Properties = {
+	animationRepetitions: number;
 	animationTime: number;
 	centerGap: number;
 	centerPoint: number;
@@ -27,6 +28,7 @@ type Properties = {
 };
 
 const AnimatedAppearingSector: React.FC<Properties> = ({
+	animationRepetitions,
 	animationTime,
 	centerGap,
 	centerPoint,
@@ -84,7 +86,7 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 		animatedOuterStrokeWidth.value = outerStrokeWidth;
 
 		animatedRadius.value = radius;
-	}, []);
+	}, [animationRepetitions]);
 
 	const animatedInnerSectorProperties = useAnimatedProps(() => ({
 		r: withTiming(animatedRadius.value, timingSettings),
