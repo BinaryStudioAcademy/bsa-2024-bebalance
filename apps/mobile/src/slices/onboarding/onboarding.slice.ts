@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
-import {type OnboardingQuestionResponseDto} from "~/packages/onboarding/onboarding";
-import { PREVIOUS_INDEX_OFFSET,ZERO_INDEX } from "~/libs/constants/constants";
+import { type OnboardingQuestionResponseDto } from "~/packages/onboarding/onboarding";
 
 import { getAll } from "./actions";
 
 type State = {
-	questions: OnboardingQuestionResponseDto[];
-	currentQuestion: OnboardingQuestionResponseDto | null;
+	currentQuestion: null | OnboardingQuestionResponseDto;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
+	questions: OnboardingQuestionResponseDto[];
 };
 
 const initialState: State = {
-		questions: [],
-		currentQuestion: null,
-		currentQuestionIndex: ZERO_INDEX,
-		dataStatus: DataStatus.IDLE,
+	currentQuestion: null,
+	currentQuestionIndex: ZERO_INDEX,
+	dataStatus: DataStatus.IDLE,
+	questions: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -29,7 +29,8 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAll.fulfilled, (state, action) => {
 			state.questions = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
-			state.currentQuestion = state.questions[state.currentQuestionIndex] || null;
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] || null;
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -38,18 +39,18 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "onboarding",
 	reducers: {
-		nextQuestion(state){
-			if (state.currentQuestionIndex < state.questions.length - 1) {
-				state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
-				state.currentQuestion = state.questions[state.currentQuestionIndex] || null;
+		nextQuestion(state) {
+			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] || null;
+		},
+		previousQuestion(state) {
+			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
+				state.currentQuestionIndex -= PREVIOUS_INDEX_OFFSET;
+				state.currentQuestion =
+					state.questions[state.currentQuestionIndex] || null;
 			}
 		},
-		previousQuestion(state){
-			if (state.currentQuestionIndex > 0) {
-				state.currentQuestionIndex -= PREVIOUS_INDEX_OFFSET;
-				state.currentQuestion = state.questions[state.currentQuestionIndex] || null;
-			}
-		}
 	},
 });
 

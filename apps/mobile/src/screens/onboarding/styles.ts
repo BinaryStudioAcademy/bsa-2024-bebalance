@@ -4,6 +4,9 @@ import { BaseColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
 const styles = StyleSheet.create({
+	buttonsContainer: {
+		gap: 15,
+	},
 	container: {
 		backgroundColor: BaseColor.BG_WHITE,
 		borderRadius: 30,
@@ -17,9 +20,6 @@ const styles = StyleSheet.create({
 	title: {
 		textAlign: "center",
 		...globalStyles.mv48,
-	},
-	buttonsContainer: {
-		gap: 15,
 	},
 });
 
