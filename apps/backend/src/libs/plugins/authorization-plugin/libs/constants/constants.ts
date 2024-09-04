@@ -1,1 +1,1 @@
-export { ONE_THOUSAND_MILISECONDS } from "./one-thousand-miliseconds.constant.js";
+export { ONE_THOUSAND_MILLISECONDS } from "./one-thousand-milliseconds.constant.js";
