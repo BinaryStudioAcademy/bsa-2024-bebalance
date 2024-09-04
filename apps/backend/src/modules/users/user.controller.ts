@@ -1,4 +1,4 @@
-import { APIPath, ErrorMessage } from "~/libs/enums/enums.js";
+import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
@@ -10,9 +10,8 @@ import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { UserError } from "./libs/exceptions/exceptions.js";
+import { checkAccessToUserData } from "./libs/pre-handlers/pre-handlers.js";
 import {
-	type UserDto,
 	type UserGetParametersDto,
 	type UserUpdateParametersDto,
 	type UserUpdateRequestDto,
@@ -63,16 +62,7 @@ class UserController extends BaseController {
 				),
 			method: "GET",
 			path: UsersApiPath.GET,
-			preHandlers: [
-				(options): void => {
-					this.checkAccessToUserData(
-						options as APIHandlerOptions<{
-							params: UserGetParametersDto;
-							user: UserDto;
-						}>,
-					);
-				},
-			],
+			preHandlers: [checkAccessToUserData],
 		});
 
 		this.addRoute({
@@ -85,36 +75,11 @@ class UserController extends BaseController {
 				),
 			method: "PATCH",
 			path: UsersApiPath.PATCH,
-			preHandlers: [
-				(options): void => {
-					this.checkAccessToUserData(
-						options as APIHandlerOptions<{
-							params: UserUpdateParametersDto;
-							user: UserDto;
-						}>,
-					);
-				},
-			],
+			preHandlers: [checkAccessToUserData],
 			validation: {
 				body: userUpdateValidationSchema,
 			},
 		});
-	}
-
-	private checkAccessToUserData(
-		options: APIHandlerOptions<{
-			params: UserUpdateParametersDto;
-			user: UserDto;
-		}>,
-	): void {
-		const { params, user } = options;
-
-		if (user.id !== +params.id) {
-			throw new UserError({
-				message: ErrorMessage.FORBIDDEN,
-				status: HTTPCode.FORBIDDEN,
-			});
-		}
 	}
 
 	/**

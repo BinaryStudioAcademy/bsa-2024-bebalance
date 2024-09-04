@@ -6,7 +6,6 @@ import {
 	type APIHandlerOptions,
 	type Controller,
 	type ControllerRouteParameters,
-	type MapPreHandlerPayload,
 } from "./libs/types/types.js";
 
 class BaseController implements Controller {
@@ -35,16 +34,6 @@ class BaseController implements Controller {
 		return await reply.status(status).send(payload);
 	}
 
-	private mapPreHandler({
-		done,
-		preHandler,
-		request,
-	}: MapPreHandlerPayload): void {
-		const handlerOptions = this.mapRequest(request);
-		preHandler(handlerOptions);
-		done();
-	}
-
 	private mapRequest(
 		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
 	): APIHandlerOptions {
@@ -66,12 +55,7 @@ class BaseController implements Controller {
 			...options,
 			handler: (request, reply) => this.mapHandler(handler, request, reply),
 			path: fullPath,
-			preHandlers: preHandlers.map(
-				(preHandler) =>
-					(request, reply, done): void => {
-						this.mapPreHandler({ done, preHandler, reply, request });
-					},
-			),
+			preHandlers,
 		});
 	}
 }
