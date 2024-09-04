@@ -15,13 +15,10 @@ const userUpdate = z
 		name: z
 			.string()
 			.trim()
-			.min(UserValidationRule.NAME_MINIMUM_LENGTH, {
-				message: UserValidationMessage.NAME_REQUIRE,
+			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+				message: UserValidationMessage.FIELD_REQUIRED,
 			})
-			.max(UserValidationRule.NAME_MAX_LENGTH, {
-				message: UserValidationMessage.NAME_MAX_LENGTH,
-			})
-			.regex(UserValidationRegexRule.NAME_VALID_CHARS, {
+			.regex(UserValidationRegexRule.NAME_VALID_CHARS_MIN_MAX, {
 				message: UserValidationMessage.NAME_INVALID_CHARACTERS,
 			}),
 	})
