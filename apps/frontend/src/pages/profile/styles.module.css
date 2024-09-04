@@ -1,0 +1,39 @@
+.page-container {
+	padding: 35px;
+}
+
+.content-container {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+.title {
+	margin-bottom: 24px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 25px;
+}
+
+.user-avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+.user-info {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 10px;
+	font-size: 16px;
+}
+
+.user-info-container {
+	display: flex;
+	flex-direction: column;
+	gap: 35px;
+}
+
+.label {
+	font-weight: bold;
+}
