@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.21.0...frontend-v1.22.0) (2024-09-04)
+
+
+### Features
+
+* **frontend:** Balance Wheel animation bb-204 ([#261](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/261)) ([d4dd69e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d4dd69e021fa1e33b294ff46e3de35821386a432))
+
 ## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.20.0...frontend-v1.21.0) (2024-09-03)
 
 
