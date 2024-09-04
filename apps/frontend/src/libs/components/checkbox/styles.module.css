@@ -1,0 +1,93 @@
+.input-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px 10px;
+}
+
+.question {
+	margin-bottom: 26px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.label {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	padding: 8px 10px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.4;
+	cursor: pointer;
+	border: 1px solid var(--light-gray);
+	border-radius: 5px;
+}
+
+.gradient-border-container {
+	position: relative;
+	display: inline-block;
+	min-width: 133px;
+	padding: 1px;
+	background: transparent;
+	border-radius: 5px;
+	transition: background 0.3s ease;
+}
+
+.gradient-border-container::before {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	content: "";
+	border-radius: 5px;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.gradient-border-container:has(input[type="checkbox"]:checked)::before {
+	background: linear-gradient(
+		to right,
+		var(--brand) 0%,
+		var(--light-brand) 130%
+	);
+	opacity: 1;
+}
+
+.gradient-border-container:has(input[type="checkbox"]:checked) .label {
+	border: none;
+}
+
+.gradient-border-content {
+	height: 100%;
+	background: var(--white);
+	border-radius: 5px;
+}
+
+.input {
+	position: relative;
+	width: 16px;
+	height: 16px;
+	appearance: none;
+	cursor: pointer;
+	border: 1px solid var(--light-gray);
+	border-radius: 4px;
+}
+
+.input:checked {
+	background: linear-gradient(
+		to bottom,
+		var(--brand) 0%,
+		var(--light-brand) 130%
+	);
+	border: none;
+}
+
+.input:checked::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 9px;
+	color: var(--white);
+	content: "✔";
+	transform: translate(-50%, -50%);
+}
