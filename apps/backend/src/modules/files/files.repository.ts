@@ -11,19 +11,17 @@ class FileRepository implements Repository {
 	}
 
 	public async create(entity: FileEntity): Promise<FileEntity> {
-		const { fileKey, url } = entity.toNewObject();
+		const { url } = entity.toNewObject();
 
 		const file = await this.fileModel
 			.query()
 			.insert({
-				fileKey,
 				url,
 			})
 			.returning("*");
 
 		return FileEntity.initialize({
 			createdAt: file.createdAt,
-			fileKey: file.fileKey,
 			id: file.id,
 			updatedAt: file.updatedAt,
 			url: file.url,
@@ -42,7 +40,6 @@ class FileRepository implements Repository {
 		return file
 			? FileEntity.initialize({
 					createdAt: file.createdAt,
-					fileKey: file.fileKey,
 					id: file.id,
 					updatedAt: file.updatedAt,
 					url: file.url,
@@ -56,7 +53,6 @@ class FileRepository implements Repository {
 		return files.map((file) =>
 			FileEntity.initialize({
 				createdAt: file.createdAt,
-				fileKey: file.fileKey,
 				id: file.id,
 				updatedAt: file.updatedAt,
 				url: file.url,
@@ -72,7 +68,6 @@ class FileRepository implements Repository {
 		return file
 			? FileEntity.initialize({
 					createdAt: file.createdAt,
-					fileKey: file.fileKey,
 					id: file.id,
 					updatedAt: file.updatedAt,
 					url: file.url,
@@ -88,7 +83,6 @@ class FileRepository implements Repository {
 
 		return FileEntity.initialize({
 			createdAt: file.createdAt,
-			fileKey: file.fileKey,
 			id: file.id,
 			updatedAt: file.updatedAt,
 			url: file.url,

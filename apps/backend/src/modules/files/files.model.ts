@@ -7,8 +7,6 @@ import {
 import { UserDetailsModel } from "~/modules/users/user-details.model.js";
 
 class FileModel extends AbstractModel {
-	public fileKey!: string;
-
 	public url!: string;
 
 	static get relationMappings(): RelationMappings {

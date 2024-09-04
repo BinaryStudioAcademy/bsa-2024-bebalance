@@ -4,7 +4,6 @@ const TABLE_NAME = "files";
 
 const ColumnName = {
 	CREATED_AT: "created_at",
-	FILE_KEY: "file_key",
 	ID: "id",
 	UPDATED_AT: "updated_at",
 	URL: "url",
@@ -13,7 +12,6 @@ const ColumnName = {
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TABLE_NAME, (table) => {
 		table.increments(ColumnName.ID).primary();
-		table.string(ColumnName.FILE_KEY).notNullable().unique();
 		table.string(ColumnName.URL).notNullable();
 		table
 			.dateTime(ColumnName.CREATED_AT)

@@ -110,7 +110,6 @@ class UserService implements Service {
 		const uploadedFile = await this.fileService.uploadFile(file);
 
 		const newFileEntity = FileEntity.initializeNew({
-			fileKey: uploadedFile.toObject().fileKey,
 			url: uploadedFile.toObject().url,
 		});
 

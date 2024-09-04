@@ -28,10 +28,12 @@ class FileService {
 			});
 		}
 
+		const fileKey = fileEntity.toObject().url.split("/").pop() as string;
+
 		const deleteCommand = createCommand({
 			commandType: "delete",
 			params: {
-				Key: fileEntity.toObject().fileKey,
+				Key: fileKey,
 			},
 		});
 
@@ -70,7 +72,6 @@ class FileService {
 
 		return await this.fileRepository.create(
 			FileEntity.initializeNew({
-				fileKey,
 				url: fileUrl,
 			}),
 		);
