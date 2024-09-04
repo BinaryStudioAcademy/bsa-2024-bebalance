@@ -1,19 +1,15 @@
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
-	type Control,
-	type FieldPath,
 	type FieldValues,
+	type FormFieldProperties,
 } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
-	control: Control<T, null>;
 	label: string;
-	name: FieldPath<T>;
 	onClick?: () => void;
-	options?: { label: string; value: string }[];
-};
+} & FormFieldProperties<T>;
 
 const Checkbox = <T extends FieldValues>({
 	control,
@@ -24,8 +20,6 @@ const Checkbox = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const fieldValue = field.value;
-
-	const isCheckboxes = options?.length;
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -43,7 +37,7 @@ const Checkbox = <T extends FieldValues>({
 		[fieldValue, field],
 	);
 
-	if (isCheckboxes) {
+	if (options?.length) {
 		return (
 			<>
 				{options.map(({ label, value }) => {

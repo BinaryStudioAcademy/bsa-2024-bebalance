@@ -2,6 +2,7 @@ import { Input } from "~/libs/components/components.js";
 import {
 	type FieldPath,
 	type FieldValues,
+	type InputOption,
 	type FormFieldProperties as Properties,
 } from "~/libs/types/types.js";
 
@@ -11,7 +12,10 @@ const OnboardingAnswer = <T extends FieldValues>({
 	control,
 	name,
 	options,
-}: Properties<T>): JSX.Element => {
+}: { options: InputOption[] } & Omit<
+	Properties<T>,
+	"options"
+>): JSX.Element => {
 	return (
 		<div className={styles["onboarding-answer"]}>
 			<Input

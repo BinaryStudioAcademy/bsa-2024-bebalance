@@ -1,6 +1,7 @@
 import {
 	type FieldPath,
 	type FieldValues,
+	type InputOption,
 	type FormFieldProperties as Properties,
 } from "~/libs/types/types.js";
 
@@ -11,7 +12,10 @@ const QuizQuestion = <T extends FieldValues>({
 	control,
 	name,
 	options,
-}: Properties<T>): JSX.Element => {
+}: { options: InputOption[] } & Omit<
+	Properties<T>,
+	"options"
+>): JSX.Element => {
 	return (
 		<div className={styles["quiz-question"]}>
 			<Input

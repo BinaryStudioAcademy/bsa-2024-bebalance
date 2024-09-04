@@ -1,10 +1,9 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
-	type Control,
 	type FieldErrors,
-	type FieldPath,
 	type FieldValues,
+	type FormFieldProperties,
 	type IconName,
 } from "~/libs/types/types.js";
 
@@ -12,17 +11,14 @@ import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
-	control: Control<T, null>;
 	errors?: FieldErrors<T>;
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	label: string;
-	name: FieldPath<T>;
 	onIconClick?: (() => void) | undefined;
-	options?: { label: string; value: string }[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
-};
+} & FormFieldProperties<T>;
 
 const Input = <T extends FieldValues>({
 	control,
@@ -40,7 +36,9 @@ const Input = <T extends FieldValues>({
 
 	const error = errors?.[name]?.message;
 	const hasError = Boolean(error);
-	const isRadioWithOptions = type === "radio" && options?.length;
+
+	const isRadio = type === "radio";
+	const isRadioWithOptions = isRadio && options?.length;
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +52,7 @@ const Input = <T extends FieldValues>({
 			<span
 				className={getValidClassNames(
 					styles["input-label"],
-					options && styles["radio-label"],
+					isRadio && styles["radio-label"],
 					hasVisuallyHiddenLabel && "visually-hidden",
 				)}
 			>
