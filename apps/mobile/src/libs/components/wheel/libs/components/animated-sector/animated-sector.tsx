@@ -1,3 +1,4 @@
+import React from "react";
 import { withTiming } from "react-native-reanimated";
 
 import { Animated, Circle } from "~/libs/components/components";
@@ -54,7 +55,18 @@ const AnimatedSector: React.FC<Properties> = ({
 		animatedArrayDash.value += dashArrayDash;
 		animatedDashOffset.value += dashOffset;
 		animatedStrokeWidth.value += strokeWidth;
-	}, []);
+	}, [
+		animatedArrayDash,
+		animatedArrayGap,
+		animatedDashOffset,
+		animatedRadius,
+		animatedStrokeWidth,
+		dashArrayDash,
+		dashArrayGap,
+		dashOffset,
+		radius,
+		strokeWidth,
+	]);
 
 	const animatedProperties = useAnimatedProps(() => ({
 		r: withTiming(animatedRadius.value, { duration: animationTime }),

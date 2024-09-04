@@ -2,7 +2,7 @@ import { type KnipConfig } from "knip";
 
 const config: KnipConfig = {
 	prettier: ["./prettier.config.ts"],
-	stylelint: ["./stylelint.config.ts"],
+	stylelint: ["./stylelint.config.js"],
 	workspaces: {
 		".": {
 			entry: ["./dangerfile.ts"],
