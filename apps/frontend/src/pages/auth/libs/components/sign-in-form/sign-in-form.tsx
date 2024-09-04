@@ -41,7 +41,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Email"
 					name="email"
-					placeholder="be@balance.com"
+					placeholder="name@example.com"
 					type="email"
 				/>
 
