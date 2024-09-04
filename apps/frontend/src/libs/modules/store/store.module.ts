@@ -20,7 +20,7 @@ import { handleErrorMiddleware } from "./handle-error.middleware.js";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
-  onboarding: ReturnType<typeof onboardingReducer>;
+	onboarding: ReturnType<typeof onboardingReducer>;
 	users: ReturnType<typeof usersReducer>;
 };
 
@@ -53,7 +53,7 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
-        onboarding: onboardingReducer,
+				onboarding: onboardingReducer,
 				users: usersReducer,
 			},
 		});
