@@ -1,4 +1,4 @@
-const CHART_SLICE_COLORS = {
+const ChartSliceColor = {
 	FREE_TIME: { end: "#fc72ff", start: "#ff5794" },
 	FRIEND: { end: "#cb00ff", start: "#7f21ce" },
 	LOVE: { end: "#ff9432", start: "#ff4040" },
@@ -9,4 +9,4 @@ const CHART_SLICE_COLORS = {
 	WORK: { end: "#c3ff19", start: "#69ff35" },
 } as const;
 
-export { CHART_SLICE_COLORS };
+export { ChartSliceColor };

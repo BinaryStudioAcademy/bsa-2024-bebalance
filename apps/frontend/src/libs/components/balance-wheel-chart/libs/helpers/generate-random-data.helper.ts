@@ -1,15 +1,15 @@
-import { BALANCE_WHEEL_CHART_DATA_CONFIG } from "../enums/enums.js";
+import { BalanceWheelChartDataConfig } from "../enums/enums.js";
 
 const generateRandomData = (): number[] => {
 	return Array.from(
-		{ length: BALANCE_WHEEL_CHART_DATA_CONFIG.SEGMENT_COUNT },
+		{ length: BalanceWheelChartDataConfig.SEGMENT_COUNT },
 		() =>
 			Math.floor(
 				Math.random() *
-					(BALANCE_WHEEL_CHART_DATA_CONFIG.MAXIMUM_DATA_VALUE -
-						BALANCE_WHEEL_CHART_DATA_CONFIG.MINIMUM_DATA_VALUE +
-						BALANCE_WHEEL_CHART_DATA_CONFIG.RANGE_OFFSET),
-			) + BALANCE_WHEEL_CHART_DATA_CONFIG.MINIMUM_DATA_VALUE,
+					(BalanceWheelChartDataConfig.MAXIMUM_DATA_VALUE -
+						BalanceWheelChartDataConfig.MINIMUM_DATA_VALUE +
+						BalanceWheelChartDataConfig.RANGE_OFFSET),
+			) + BalanceWheelChartDataConfig.MINIMUM_DATA_VALUE,
 	);
 };
 
