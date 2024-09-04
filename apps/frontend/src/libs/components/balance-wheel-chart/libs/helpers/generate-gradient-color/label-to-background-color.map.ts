@@ -1,5 +1,5 @@
-import { FALLBACK_BACKGROUND_COLOR } from "../../../../constants/constants.js";
-import { ChartSliceColor } from "../../../../enums/enums.js";
+import { FALLBACK_BACKGROUND_COLOR } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
+import { ChartSliceColor } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 
 const labelToBackgroundColor = (
 	label?: string,

@@ -1,6 +1,6 @@
 import { type ScriptableContext } from "~/libs/types/types.js";
 
-import { labelToBackgroundColor } from "./libs/maps/maps.js";
+import { labelToBackgroundColor } from "./label-to-background-color.map.js";
 
 const GradientSetting = {
 	CENTER_DIVISOR: 2,
