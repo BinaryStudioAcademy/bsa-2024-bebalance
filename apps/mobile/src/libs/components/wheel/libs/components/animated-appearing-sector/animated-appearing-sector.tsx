@@ -115,7 +115,6 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 				cx={centerPoint}
 				cy={centerPoint}
 				fill="none"
-				origin={[INITIAL_ANIMATED_VALUE, INITIAL_ANIMATED_VALUE]}
 				stroke={outlineColor}
 			/>
 			<AnimatedCircle
@@ -123,7 +122,6 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 				cx={centerPoint}
 				cy={centerPoint}
 				fill="none"
-				origin={[INITIAL_ANIMATED_VALUE, INITIAL_ANIMATED_VALUE]}
 				stroke={sectorColor}
 			/>
 		</>
