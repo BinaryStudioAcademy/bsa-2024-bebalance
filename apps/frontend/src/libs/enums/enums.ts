@@ -7,4 +7,5 @@ export {
 	ContentType,
 	ErrorMessage,
 	ServerErrorType,
+	UserValidationRule,
 } from "shared";

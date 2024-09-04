@@ -15,6 +15,7 @@ import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthError } from "./libs/exceptions/exceptions.js";
+import { createResetPasswordEmail } from "./libs/helpers/helpers.js";
 
 class AuthService {
 	private encrypt: Encrypt;
@@ -32,7 +33,7 @@ class AuthService {
 
 		if (!user) {
 			throw new AuthError({
-				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				message: ErrorMessage.EMAIL_NOT_FOUND,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
@@ -45,7 +46,10 @@ class AuthService {
 
 		mailer.sendEmail({
 			subject: "BeBalance: reset password",
-			text: `Here is a link to reset your password: ${config.ENV.BASE_URLS.RESET_PASSWORD_URL}?token=${jwtToken}`,
+			text: createResetPasswordEmail({
+				link: `${config.ENV.BASE_URLS.RESET_PASSWORD_URL}?token=${jwtToken}`,
+				username: userDetails.name,
+			}),
 			to: userDetails.email,
 		});
 

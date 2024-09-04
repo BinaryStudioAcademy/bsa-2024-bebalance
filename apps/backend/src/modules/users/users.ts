@@ -22,7 +22,7 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 export {
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,

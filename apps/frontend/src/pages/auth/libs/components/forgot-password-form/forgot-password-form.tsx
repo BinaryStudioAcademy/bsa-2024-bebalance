@@ -1,4 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
+import { UserValidationRule } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type EmailDto,
@@ -13,7 +14,7 @@ type Properties = {
 };
 
 const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit } = useAppForm<EmailDto>({
+	const { control, errors, handleSubmit, watch } = useAppForm<EmailDto>({
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
@@ -24,6 +25,8 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[onSubmit, handleSubmit],
 	);
+
+	const email = watch("email", "");
 
 	return (
 		<>
@@ -37,7 +40,11 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type="email"
 				/>
 
-				<Button label="RESET PASSWORD" type="submit" />
+				<Button
+					isDisabled={email.length < UserValidationRule.EMAIL_MINIMUM_LENGTH}
+					label="RESET PASSWORD"
+					type="submit"
+				/>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

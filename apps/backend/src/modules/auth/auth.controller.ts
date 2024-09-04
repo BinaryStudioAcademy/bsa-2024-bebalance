@@ -10,7 +10,7 @@ import {
 	type EmailDto,
 	type ResetPasswordDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -78,7 +78,7 @@ class AuthController extends BaseController {
 			method: "POST",
 			path: AuthApiPath.FORGOT_PASSWORD,
 			validation: {
-				body: userForgotPasswordVaidationSchema,
+				body: userForgotPasswordValidationSchema,
 			},
 		});
 

@@ -1,5 +1,5 @@
 const NotificationMessage = {
-	LINK_SENT: "Reset email sent",
+	LINK_SENT: "Link has been sent to your email",
 } as const;
 
 export { NotificationMessage };
