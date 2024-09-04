@@ -137,7 +137,7 @@ class BaseServerApplication implements ServerApplication {
 		this.app.route({
 			handler,
 			method,
-			preHandler: [...preHandlers],
+			preHandler: preHandlers,
 			schema: {
 				body: validation?.body,
 			},

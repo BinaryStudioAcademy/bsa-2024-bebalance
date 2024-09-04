@@ -10,7 +10,7 @@ import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { checkAccessToUserData } from "./libs/pre-handlers/pre-handlers.js";
+import { checkAccessToUserData } from "./libs/hooks/hooks.js";
 import {
 	type UserGetParametersDto,
 	type UserUpdateParametersDto,

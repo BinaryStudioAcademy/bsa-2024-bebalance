@@ -114,9 +114,23 @@ class UserRepository implements Repository {
 		id: number,
 		payload: Partial<UserDetailsModel>,
 	): Promise<null | UserEntity> {
-		await this.userDetailsModel.query().patch(payload).where({ userId: id });
+		const userDetails = await this.userDetailsModel
+			.query()
+			.patchAndFetch(payload)
+			.where({ userId: id });
+		const user = await this.userModel.query().findById(id);
 
-		return await this.find(id);
+		return user
+			? UserEntity.initialize({
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
 	}
 
 	public async updatePassword(
