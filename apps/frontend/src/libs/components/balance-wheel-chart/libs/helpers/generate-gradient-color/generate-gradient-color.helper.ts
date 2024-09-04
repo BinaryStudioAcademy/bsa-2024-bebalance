@@ -1,6 +1,6 @@
 import { type ScriptableContext } from "~/libs/types/types.js";
 
-import { labelToBackgroundColor } from "./label-to-background-color.map.js";
+import { getBackgroundColorFromLabel } from "../get-background-color-from-label/get-background-color-from-label.helper.js";
 
 const GradientSetting = {
 	CENTER_DIVISOR: 2,
@@ -17,7 +17,8 @@ const generateGradientColor = (
 	const { labels } = chart.data;
 
 	const label = labels?.[dataIndex]?.toString();
-	const { end: colorEnd, start: colorStart } = labelToBackgroundColor(label);
+	const { end: colorEnd, start: colorStart } =
+		getBackgroundColorFromLabel(label);
 
 	const gradient = ctx.createRadialGradient(
 		(chartArea.left + chartArea.right) / GradientSetting.CENTER_DIVISOR,

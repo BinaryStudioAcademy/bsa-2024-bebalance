@@ -1,4 +1,4 @@
-import { BalanceWheelChartDataConfig } from "../enums/enums.js";
+import { BalanceWheelChartDataConfig } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 
 const generateRandomData = (): number[] => {
 	return Array.from(

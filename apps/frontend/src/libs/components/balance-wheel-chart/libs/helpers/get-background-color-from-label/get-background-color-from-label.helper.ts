@@ -1,7 +1,7 @@
 import { FALLBACK_BACKGROUND_COLOR } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
 import { ChartSliceColor } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 
-const labelToBackgroundColor = (
+const getBackgroundColorFromLabel = (
 	label?: string,
 ): {
 	end: string;
@@ -31,4 +31,4 @@ const labelToBackgroundColor = (
 	};
 };
 
-export { labelToBackgroundColor };
+export { getBackgroundColorFromLabel };
