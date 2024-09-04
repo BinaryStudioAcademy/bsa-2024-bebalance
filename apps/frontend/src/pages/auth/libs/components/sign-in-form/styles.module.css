@@ -6,6 +6,10 @@
 	width: 350px;
 }
 
+.forgot-password-container {
+	align-self: center;
+}
+
 .circle-gradient1 {
 	position: absolute;
 	top: 5%;

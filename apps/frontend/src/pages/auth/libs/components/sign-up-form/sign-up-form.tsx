@@ -1,12 +1,13 @@
 import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
+import { NO_ERROR_INPUT_FIELD_AMOUNT } from "~/modules/users/libs/constants/constants.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants.js";
+import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants/constants.js";
 import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
@@ -23,6 +24,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -40,7 +42,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				}
 			})(event_);
 		},
-		[handleSubmit, onSubmit, setError, getValues],
+		[onSubmit, handleSubmit, setError, getValues],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {
@@ -59,7 +61,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Name"
 					name="name"
-					placeholder="name"
+					placeholder="Name"
 					type="text"
 				/>
 
@@ -79,7 +81,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					label="Password"
 					name="password"
 					onIconClick={handleTogglePasswordVisibility}
-					placeholder="*******"
+					placeholder="••••••"
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
@@ -90,11 +92,15 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					label="Confirm password"
 					name="confirmPassword"
 					onIconClick={handleToggleConfirmPasswordVisibility}
-					placeholder="*******"
+					placeholder="••••••"
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button label="CREATE AN ACCOUNT" type="submit" />
+				<Button
+					isDisabled={isInputError}
+					label="CREATE AN ACCOUNT"
+					type="submit"
+				/>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

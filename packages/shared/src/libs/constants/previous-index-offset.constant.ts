@@ -1,0 +1,3 @@
+const PREVIOUS_INDEX_OFFSET = 1;
+
+export { PREVIOUS_INDEX_OFFSET };
