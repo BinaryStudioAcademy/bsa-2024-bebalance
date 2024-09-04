@@ -1,3 +1,3 @@
-const NO_ERROR_INPUT_FIELD = 0;
+const NO_ERROR_INPUT_FIELD: number = 0;
 
 export { NO_ERROR_INPUT_FIELD };
