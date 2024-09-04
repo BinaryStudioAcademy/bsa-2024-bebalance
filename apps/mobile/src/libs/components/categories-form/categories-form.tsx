@@ -51,7 +51,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		}
 	};
 
-	const handleCheckboxChangeFactory = (categoryId: number) => (): void => {
+	const handleCheckboxChange = (categoryId: number) => (): void => {
 		const updatedCategories = selectedCategories.includes(categoryId)
 			? selectedCategories.filter((id) => id !== categoryId)
 			: [...selectedCategories, categoryId];
@@ -84,7 +84,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 					isChecked={selectedCategories.includes(category.id)}
 					key={category.id}
 					label={category.name}
-					onValueChange={handleCheckboxChangeFactory(category.id)}
+					onValueChange={handleCheckboxChange(category.id)}
 				/>
 			))}
 			<View style={globalStyles.pb8}>
