@@ -2,6 +2,7 @@ import React from "react";
 
 import { Defs, Stop, Svg, SvgGradient } from "~/libs/components/components";
 import { AnimationName, BaseColor } from "~/libs/enums/enums";
+import { useEffect, useState } from "~/libs/hooks/hooks";
 import { type ValueOf, type WheelDataItem } from "~/libs/types/types";
 
 import {
@@ -9,6 +10,13 @@ import {
 	AnimatedPulsingSector,
 	LabelOnCircle,
 } from "./libs/components/components";
+import {
+	ANIMATION_REPETITIONS,
+	ANIMATION_TIME,
+	MAX_SCORE,
+	MINIFY_TWICE_COEFFICIENT,
+	REPETITION_STEP,
+} from "./libs/constants";
 import { WheelSetting } from "./libs/enums/enums";
 import {
 	getRadiansFromPercent,
@@ -17,18 +25,18 @@ import {
 
 type Properties = {
 	animation?: ValueOf<typeof AnimationName>;
+	animationRepetitions?: number;
+	animationTime?: number;
 	categoriesData: WheelDataItem[];
 	isLabelShown?: boolean;
 	maxScore?: number;
 	size: number;
 };
 
-const MINIFY_TWICE_COEFFICIENT = 0.5;
-const MAX_SCORE = 10;
-const ANIMATION_TIME = 1000;
-
 const Wheel: React.FC<Properties> = ({
 	animation = AnimationName.APPEAR,
+	animationRepetitions = ANIMATION_REPETITIONS,
+	animationTime = ANIMATION_TIME,
 	categoriesData,
 	isLabelShown = true,
 	maxScore = MAX_SCORE,
@@ -39,6 +47,16 @@ const Wheel: React.FC<Properties> = ({
 		? (size * WheelSetting.OUTER_SIZE_PERCENT) / WheelSetting.MAX_PERCENT
 		: size;
 	const centerPoint = outerSize * MINIFY_TWICE_COEFFICIENT;
+
+	const [repetition, setRepetition] = useState<number>(ANIMATION_REPETITIONS);
+
+	useEffect(() => {
+		if (repetition < animationRepetitions) {
+			setTimeout(() => {
+				setRepetition(repetition + REPETITION_STEP);
+			}, animationTime);
+		}
+	}, [repetition]);
 
 	const Sectors = categoriesData.map(
 		({ colors, label, score }, index, array) => {
@@ -98,7 +116,8 @@ const Wheel: React.FC<Properties> = ({
 					)}
 					{animation === AnimationName.PULSE && (
 						<AnimatedPulsingSector
-							animationTime={ANIMATION_TIME}
+							animationRepetitions={repetition}
+							animationTime={animationTime}
 							centerGap={wheelCenterGapSize}
 							centerPoint={centerPoint}
 							endPercentInner={endPercentInner}
@@ -115,7 +134,8 @@ const Wheel: React.FC<Properties> = ({
 					)}
 					{animation === AnimationName.APPEAR && (
 						<AnimatedAppearingSector
-							animationTime={ANIMATION_TIME}
+							animationRepetitions={repetition}
+							animationTime={animationTime}
 							centerGap={wheelCenterGapSize}
 							centerPoint={centerPoint}
 							endPercentInner={endPercentInner}
