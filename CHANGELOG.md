@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.30.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.30.0...v1.30.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **backend:** incorrect time comparison when validating token bb-279 ([#291](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/291)) ([8629efe](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8629efe60d9817ff2d820023abbeb12c7ddd704a))
+
 ## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.29.0...v1.30.0) (2024-09-03)
 
 
