@@ -39,7 +39,9 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 				payload: { exp, userId },
 			} = await token.decode(headerToken);
 
-			if ((exp as number) < Date.now()) {
+			const currentTime = new Date();
+
+			if ((exp as number) < currentTime.getSeconds()) {
 				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 
