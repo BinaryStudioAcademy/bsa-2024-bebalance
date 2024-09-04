@@ -1,1 +1,1 @@
-export { APIPath } from "shared";
+export { APIPath, CategoriesApiPath } from "shared";

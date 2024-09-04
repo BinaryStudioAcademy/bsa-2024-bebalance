@@ -7,4 +7,10 @@ export {
 	ToastMessageType,
 } from "./app/app";
 export { BottomTabScreenName, RootScreenName } from "./navigation/navigation";
-export { APIPath, AppEnvironment, ContentType, ServerErrorType } from "shared";
+export {
+	APIPath,
+	AppEnvironment,
+	CategoriesApiPath,
+	ContentType,
+	ServerErrorType,
+} from "shared";
