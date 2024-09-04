@@ -17,6 +17,7 @@ type Properties<T extends FieldValues> = {
 	errors?: FieldErrors<T>;
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
+	isFullWidth?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	onIconClick?: (() => void) | undefined;
@@ -30,6 +31,7 @@ const Input = <T extends FieldValues>({
 	errors,
 	hasVisuallyHiddenLabel,
 	iconName,
+	isFullWidth = true,
 	label,
 	name,
 	onIconClick,
@@ -61,7 +63,12 @@ const Input = <T extends FieldValues>({
 			>
 				{label}
 			</span>
-			<div className={styles["input-container"]}>
+			<div
+				className={getValidClassNames(
+					styles["input-container"],
+					isFullWidth && styles["full-width"],
+				)}
+			>
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (

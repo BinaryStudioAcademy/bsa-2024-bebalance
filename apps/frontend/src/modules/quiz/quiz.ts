@@ -15,4 +15,5 @@ export {
 	type QuizQuestionDto,
 } from "./libs/types/types.js";
 export { quizApi };
+export { categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/quiz.js";

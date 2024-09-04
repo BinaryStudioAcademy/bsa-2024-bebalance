@@ -17,6 +17,7 @@ const QuizQuestion = <T extends FieldValues>({
 		<div className={styles["quiz-question"]}>
 			<Input
 				control={control}
+				isFullWidth={false}
 				label={label}
 				name={name as FieldPath<T>}
 				options={options}
