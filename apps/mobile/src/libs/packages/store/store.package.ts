@@ -41,7 +41,6 @@ class Store {
 			devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
 			middleware: (getDefaultMiddleware) => {
 				return getDefaultMiddleware({
-					serializableCheck: false,
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
