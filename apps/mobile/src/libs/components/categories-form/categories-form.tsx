@@ -96,7 +96,11 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 					onValueChange={handleCheckboxChange.bind(null, category.id)}
 				/>
 			))}
-			<Button appearance="filled" label="Retake Quiz" onPress={handlePress} />
+			<Button
+				appearance="filled"
+				label="Save Categories"
+				onPress={handlePress}
+			/>
 		</View>
 	);
 };
