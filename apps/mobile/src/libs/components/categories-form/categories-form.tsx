@@ -1,21 +1,15 @@
 import React from "react";
 
-import { Button, Checkbox, View } from "~/libs/components/components";
-import {
-	useAppForm,
-	useCallback,
-	useEffect,
-	useFormController,
-} from "~/libs/hooks/hooks";
-import {
-	DEFAULT_ERROR_MESSAGE,
-	toastMessage,
-} from "~/libs/packages/toast-message/toast-message";
+import { Button, Checkbox, Text, View } from "~/libs/components/components";
+import { useAppForm, useCallback, useFormController } from "~/libs/hooks/hooks";
+import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type CategoryDto,
 	quizCategoriesValidationSchema,
 } from "~/packages/quiz/quiz";
+
+import { styles } from "./styles";
 
 type Properties = {
 	categories: CategoryDto[];
@@ -24,7 +18,7 @@ type Properties = {
 const NO_CATEGORIES_SELECTED = 0;
 
 const CategoriesForm: React.FC<Properties> = ({ categories }) => {
-	const { control, errors, handleSubmit, setValue } = useAppForm({
+	const { control, errors, handleSubmit, trigger } = useAppForm({
 		defaultValues: {
 			categories: [] as number[],
 		},
@@ -36,7 +30,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		name: "categories",
 	});
 
-	const selectedCategories = field.value;
+	const { onChange, value: selectedCategories } = field;
 
 	const onSubmit = (): void => {
 		const selectedLabels = categories
@@ -49,37 +43,34 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		}
 	};
 
-	const handleFormSubmit = (): void => {
-		void handleSubmit(onSubmit)();
+	const handleFormSubmit = async (): Promise<void> => {
+		const isValid = await trigger("categories");
+
+		if (isValid) {
+			void handleSubmit(onSubmit)();
+		}
 	};
 
-	const handleCheckboxChange = useCallback(
-		(categoryId: number): void => {
-			const updatedCategories = selectedCategories.includes(categoryId)
-				? selectedCategories.filter((id) => id !== categoryId)
-				: [...selectedCategories, categoryId];
-			setValue("categories", updatedCategories);
-		},
-		[selectedCategories, setValue],
-	);
+	const handleCheckboxChangeFactory = (categoryId: number) => (): void => {
+		const updatedCategories = selectedCategories.includes(categoryId)
+			? selectedCategories.filter((id) => id !== categoryId)
+			: [...selectedCategories, categoryId];
+		onChange(updatedCategories);
+	};
 
 	const handleAllChange = useCallback(
-		(value: boolean): void => {
-			const updatedCategories = value
+		(isChecked: boolean): void => {
+			const updatedCategories = isChecked
 				? categories.map((category) => category.id)
 				: [];
-			setValue("categories", updatedCategories);
+			onChange(updatedCategories);
 		},
-		[setValue, categories],
+		[categories, onChange],
 	);
 
-	useEffect(() => {
-		if (errors.categories) {
-			toastMessage.error({
-				message: errors.categories.message || DEFAULT_ERROR_MESSAGE,
-			});
-		}
-	}, [errors.categories]);
+	const handleSaveCategories = useCallback((): void => {
+		void handleFormSubmit();
+	}, [handleFormSubmit]);
 
 	return (
 		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p16]}>
@@ -93,13 +84,19 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 					isChecked={selectedCategories.includes(category.id)}
 					key={category.id}
 					label={category.name}
-					onValueChange={handleCheckboxChange.bind(null, category.id)}
+					onValueChange={handleCheckboxChangeFactory(category.id)}
 				/>
 			))}
+			<View style={globalStyles.pb8}>
+				{errors.categories && (
+					<Text style={styles.errorText}>{errors.categories.message}</Text>
+				)}
+			</View>
+
 			<Button
 				appearance="filled"
 				label="Save Categories"
-				onPress={handleFormSubmit}
+				onPress={handleSaveCategories}
 			/>
 		</View>
 	);
