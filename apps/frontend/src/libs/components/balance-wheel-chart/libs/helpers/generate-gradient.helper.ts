@@ -17,20 +17,19 @@ const generateGradientColor = (
 	const { chartArea, ctx } = chart;
 	const { labels } = chart.data;
 
-	const label = labels?.[dataIndex] as string;
+	const label = labels?.[dataIndex]
+		?.toString()
+		.toUpperCase()
+		.replaceAll(/\s+/g, "_");
 
 	const colorStart =
 		label && label in CHART_SLICE_COLORS
-			? CHART_SLICE_COLORS[
-					label.toUpperCase() as keyof typeof CHART_SLICE_COLORS
-				].start
+			? CHART_SLICE_COLORS[label as keyof typeof CHART_SLICE_COLORS].start
 			: FALLBACK_BACKGROUND_COLOR;
 
 	const colorEnd =
 		label && label in CHART_SLICE_COLORS
-			? CHART_SLICE_COLORS[
-					label.toUpperCase() as keyof typeof CHART_SLICE_COLORS
-				].end
+			? CHART_SLICE_COLORS[label as keyof typeof CHART_SLICE_COLORS].end
 			: FALLBACK_BACKGROUND_COLOR;
 
 	const gradient = ctx.createRadialGradient(
