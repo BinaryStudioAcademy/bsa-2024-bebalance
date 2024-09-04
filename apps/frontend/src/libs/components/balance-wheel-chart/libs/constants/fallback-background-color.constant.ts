@@ -1,0 +1,3 @@
+const FALLBACK_BACKGROUND_COLOR = "#ffffff";
+
+export { FALLBACK_BACKGROUND_COLOR };
