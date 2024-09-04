@@ -5,7 +5,10 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type UserDto } from "~/libs/types/types.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { type UserPreferencesRequestDto } from "./libs/types/types.js";
+import {
+	type UserPreferencesRequestDto,
+	type UserUpdateRequestDto,
+} from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -18,6 +21,19 @@ class UsersApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 
+	public async getById(id: number): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "GET",
+			},
+		);
+
+		return await response.json<UserDto>();
+	}
+
 	public async saveUserPreferences(
 		payload: UserPreferencesRequestDto,
 	): Promise<UserDto> {
@@ -28,6 +44,23 @@ class UsersApi extends BaseHTTPApi {
 				hasAuth: true,
 				method: "POST",
 				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<UserDto>();
+	}
+
+	public async update(
+		id: number,
+		user: UserUpdateRequestDto,
+	): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "PATCH",
+				payload: JSON.stringify(user),
 			},
 		);
 

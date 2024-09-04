@@ -12,6 +12,8 @@ import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 import { Auth } from "~/pages/auth/auth.jsx";
 import { NotFound } from "~/pages/not-found/not-found.jsx";
+import { Onboarding } from "~/pages/onboarding/onboarding.jsx";
+import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
@@ -29,6 +31,15 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 									/>
 								),
 								path: AppRoute.ROOT,
+							},
+							{
+								element: (
+									<ProtectedRoute
+										component={<Profile />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
+								path: AppRoute.PROFILE,
 							},
 							{
 								element: <Auth />,
@@ -54,6 +65,15 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 									/>
 								),
 								path: AppRoute.QUIZ,
+							},
+							{
+								element: (
+									<ProtectedRoute
+										component={<Onboarding />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
+								path: AppRoute.ONBOARDING,
 							},
 						],
 						element: <App />,

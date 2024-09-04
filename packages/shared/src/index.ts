@@ -1,4 +1,8 @@
 export {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "./libs/constants/constant.js";
+export {
 	APIPath,
 	AppEnvironment,
 	ContentType,
@@ -10,6 +14,7 @@ export {
 	HTTPError,
 	OnboardingError,
 	QuizError,
+	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
@@ -42,6 +47,11 @@ export {
 	type OnboardingAnswerResponseDto,
 	onboardingAnswersValidationSchema,
 	OnboardingApiPath,
+	type OnboardingGetAllResponseDto,
+	type OnboardingQuestionRequestDto,
+	type OnboardingQuestionResponseDto,
+	OnboardingValidationMessage,
+	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
 export {
 	type CategoryDto,
@@ -64,6 +74,7 @@ export {
 	type UserDto,
 	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
+	type UserGetParametersDto,
 	type UserPreferencesPayloadDto,
 	type UserPreferencesRequestDto,
 	userPreferencesValidationSchema,
@@ -76,6 +87,10 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
+	type UserUpdateFormDto,
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";

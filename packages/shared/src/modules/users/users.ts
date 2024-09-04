@@ -9,6 +9,7 @@ export {
 	type ResetPasswordFormDto,
 	type UserDto,
 	type UserGetAllResponseDto,
+	type UserGetParametersDto,
 	type UserPreferencesPayloadDto,
 	type UserPreferencesRequestDto,
 	type UserSignInRequestDto,
@@ -16,6 +17,9 @@ export {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdateFormDto,
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
 	userForgotPassword as userForgotPasswordVaidationSchema,
@@ -23,4 +27,5 @@ export {
 	userResetPassword as userResetPasswordValidationSchema,
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
+	userUpdate as userUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

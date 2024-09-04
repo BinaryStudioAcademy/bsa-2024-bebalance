@@ -7,11 +7,16 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserService } from "~/modules/users/user.service.js";
+import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
+import { checkAccessToUserData } from "./libs/hooks/hooks.js";
 import {
 	type UserDto,
+	type UserGetParametersDto,
 	type UserPreferencesRequestDto,
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 import { userPreferencesValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
@@ -51,6 +56,7 @@ class UserController extends BaseController {
 			method: "GET",
 			path: UsersApiPath.ROOT,
 		});
+
 		this.addRoute({
 			handler: (options) =>
 				this.setUserPreferences(
@@ -63,6 +69,34 @@ class UserController extends BaseController {
 			path: UsersApiPath.FINAL_QUESTIONS,
 			validation: {
 				body: userPreferencesValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getById(
+					options as APIHandlerOptions<{
+						params: UserGetParametersDto;
+					}>,
+				),
+			method: "GET",
+			path: UsersApiPath.$ID,
+			preHandlers: [checkAccessToUserData],
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.update(
+					options as APIHandlerOptions<{
+						body: UserUpdateRequestDto;
+						params: UserUpdateParametersDto;
+					}>,
+				),
+			method: "PATCH",
+			path: UsersApiPath.$ID,
+			preHandlers: [checkAccessToUserData],
+			validation: {
+				body: userUpdateValidationSchema,
 			},
 		});
 	}
@@ -91,6 +125,33 @@ class UserController extends BaseController {
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /users/:id:
+	 *    get:
+	 *      description: Return user by id
+	 *      security:
+	 *        - bearerAuth: []
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                $ref: "#/components/schemas/User"
+	 */
+	private async getById(
+		options: APIHandlerOptions<{
+			params: UserGetParametersDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.userService.find(options.params.id),
 			status: HTTPCode.OK,
 		};
 	}
@@ -132,6 +193,42 @@ class UserController extends BaseController {
 
 		return {
 			payload: updatedUserDto,
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /users/:id:
+	 *    patch:
+	 *      description: Update user by id
+	 *      requestBody:
+	 *        description: Data to update
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                name:
+	 *                  type: string
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                $ref: "#/components/schemas/User"
+	 */
+	private async update(
+		options: APIHandlerOptions<{
+			body: UserUpdateRequestDto;
+			params: UserUpdateParametersDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.userService.update(options.params.id, options.body),
 			status: HTTPCode.OK,
 		};
 	}

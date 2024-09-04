@@ -3,10 +3,13 @@ export {
 	type ResetPasswordDto,
 	type UserDto,
 	type UserGetAllResponseDto,
+	type UserGetParametersDto,
 	type UserPreferencesPayloadDto,
 	type UserPreferencesRequestDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
 } from "shared";

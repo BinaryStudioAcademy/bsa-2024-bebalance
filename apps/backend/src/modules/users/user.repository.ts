@@ -141,28 +141,35 @@ class UserRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<UserModel>,
-	): Promise<UserEntity> {
-		const user = await this.userModel
+		payload: Partial<UserDetailsModel>,
+	): Promise<null | UserEntity> {
+		const userDetails = await this.userDetailsModel
 			.query()
-			.patchAndFetchById(id, payload)
+			.findOne({ userId: id });
+		const updatedUserDetails = await userDetails
+			?.$query()
+			.patchAndFetch(payload)
 			.withGraphFetched(
 				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
 			);
 
-		return UserEntity.initialize({
-			allowNotifications: user.allowNotifications,
-			createdAt: user.createdAt,
-			email: user.email,
-			id: user.id,
-			name: user.userDetails.name,
-			passwordHash: user.passwordHash,
-			passwordSalt: user.passwordSalt,
-			updatedAt: user.updatedAt,
-			userTaskDays: user.userTaskDays.map(
-				(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
-			),
-		});
+		const user = await this.userModel.query().findById(id);
+
+		return user && updatedUserDetails
+			? UserEntity.initialize({
+					allowNotifications: user.allowNotifications,
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+					userTaskDays: user.userTaskDays.map(
+						(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
+					),
+				})
+			: null;
 	}
 
 	public async updatePassword(

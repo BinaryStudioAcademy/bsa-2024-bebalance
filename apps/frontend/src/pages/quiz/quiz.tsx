@@ -6,6 +6,7 @@ import {
 
 import {
 	Analyzing,
+	BalanceWheel,
 	FinalQuestions,
 	Introduction,
 } from "./libs/components/components.js";
@@ -36,6 +37,10 @@ const Quiz: React.FC = () => {
 		switch (step) {
 			case Step.ANALYZING: {
 				return <Analyzing onNext={handleNextStep} />;
+			}
+
+			case Step.BALANCE_WHEEL: {
+				return <BalanceWheel />;
 			}
 
 			case Step.INTRODUCTION: {

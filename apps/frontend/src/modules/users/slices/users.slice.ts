@@ -4,7 +4,7 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
-import { saveUserPreferences } from "./actions.js";
+import { getById, saveUserPreferences, update } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -18,6 +18,16 @@ const initialState: State = {
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
+		builder.addCase(getById.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getById.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.user = action.payload;
+		});
+		builder.addCase(getById.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
 		builder.addCase(saveUserPreferences.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
@@ -26,6 +36,16 @@ const { actions, name, reducer } = createSlice({
 			state.user = action.payload;
 		});
 		builder.addCase(saveUserPreferences.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(update.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(update.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.user = action.payload;
+		});
+		builder.addCase(update.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
