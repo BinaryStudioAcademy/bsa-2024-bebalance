@@ -49,7 +49,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		}
 	};
 
-	const handlePress = (): void => {
+	const handleFormSubmit = (): void => {
 		void handleSubmit(onSubmit)();
 	};
 
@@ -99,7 +99,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 			<Button
 				appearance="filled"
 				label="Save Categories"
-				onPress={handlePress}
+				onPress={handleFormSubmit}
 			/>
 		</View>
 	);
