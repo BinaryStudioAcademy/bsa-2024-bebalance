@@ -19,22 +19,14 @@ class CategoryService implements Service {
 		this.categoryRepository = categoryRepository;
 	}
 
-	private parseEntityToCategoryDto(
-		categoryEntity: CategoryEntity,
-	): CategoryDto {
-		const { createdAt, id, name, updatedAt } = categoryEntity.toObject();
-
-		return { createdAt, id, name, updatedAt };
-	}
-
-	private parseEntityToCategoryWithScoresDto(
+	private parseEntityToScoresDto(
 		categoryEntity: CategoryEntity,
 	): CategoryWithScoresDto {
-		const category = categoryEntity.toObject();
+		const category = categoryEntity.toObjectWithScores();
 
 		const scores: QuizScoreDto[] = category.scores.map(
 			(scoreEntity: CategoryEntity) => {
-				const score = scoreEntity.toObject();
+				const score = scoreEntity.toObjectWithScores();
 
 				return {
 					...score,
@@ -54,7 +46,7 @@ class CategoryService implements Service {
 			CategoryEntity.initializeNew(payload),
 		);
 
-		return this.parseEntityToCategoryDto(categoryEntity);
+		return categoryEntity.toObject();
 	}
 
 	public async createScore({
@@ -80,16 +72,14 @@ class CategoryService implements Service {
 	public async find(id: number): Promise<CategoryDto | null> {
 		const categoryEntity = await this.categoryRepository.find(id);
 
-		return categoryEntity
-			? this.parseEntityToCategoryDto(categoryEntity)
-			: null;
+		return categoryEntity ? categoryEntity.toObject() : null;
 	}
 
 	public async findAll(): Promise<GetCategoriesDto> {
 		const entities = await this.categoryRepository.findAll();
 
 		return {
-			items: entities.map((entity) => this.parseEntityToCategoryDto(entity)),
+			items: entities.map((entity) => entity.toObject()),
 		};
 	}
 
@@ -99,7 +89,7 @@ class CategoryService implements Service {
 		const categories = await this.categoryRepository.findAll();
 
 		const items = categories.map((categoryEntity) => {
-			return this.parseEntityToCategoryWithScoresDto(categoryEntity);
+			return this.parseEntityToScoresDto(categoryEntity);
 		});
 
 		return { items };
@@ -111,7 +101,7 @@ class CategoryService implements Service {
 	): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.update(id, payload);
 
-		return this.parseEntityToCategoryDto(categoryEntity);
+		return categoryEntity.toObject();
 	}
 }
 
