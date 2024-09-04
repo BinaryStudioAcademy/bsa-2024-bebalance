@@ -1,0 +1,3 @@
+const DEFAULT_WIDTH_VALUE = 0.83;
+
+export { DEFAULT_WIDTH_VALUE };

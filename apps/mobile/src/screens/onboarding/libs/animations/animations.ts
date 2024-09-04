@@ -1,1 +1,1 @@
-export { pageInterpolatorSlide } from "./pageInterpolatorSlide";
+export { pageInterpolatorSlide } from "./page-interpolator-slide";

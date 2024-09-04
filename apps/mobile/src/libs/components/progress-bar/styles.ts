@@ -1,15 +1,25 @@
 import { StyleSheet } from "react-native";
+
 import { BaseColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
 const styles = StyleSheet.create({
+	backgroundBarStyle: {
+		backgroundColor: BaseColor.GRAY,
+		height: 1,
+	},
+	backgroundDotStyle: {
+		backgroundColor: BaseColor.GRAY,
+		height: 12,
+		width: 12,
+	},
 	bar: {
 		height: 1,
 		width: "100%",
 	},
-	dotContainer: {
-		height: 12,
-		width: 12,
+	container: {
+		alignItems: "center",
+		...globalStyles.mt12,
 	},
 	dotBorder: {
 		alignItems: "center",
@@ -24,16 +34,7 @@ const styles = StyleSheet.create({
 		height: 8,
 		width: 8,
 	},
-	container: {
-		alignItems: "center",
-		...globalStyles.mt12,
-	},
-	backgroundBarStyle: {
-		backgroundColor: BaseColor.GRAY,
-		height: 1,
-	},
-	backgroundDotStyle: {
-		backgroundColor: BaseColor.GRAY,
+	dotContainer: {
 		height: 12,
 		width: 12,
 	},
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 	},
 	filledDotStyle: {
 		backgroundColor: BaseColor.GRAY,
-	}
+	},
 });
 
 export { styles };

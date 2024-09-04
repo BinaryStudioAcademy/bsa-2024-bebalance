@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import { type OnboardingGetAllResponseDto } from "~/packages/onboarding/onboarding";
 
-import {name as sliceName} from "./onboarding.slice";
+import { name as sliceName } from "./onboarding.slice";
 
 const getAll = createAsyncThunk<
 	OnboardingGetAllResponseDto,

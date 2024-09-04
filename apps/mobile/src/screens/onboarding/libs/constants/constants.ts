@@ -1,2 +1,6 @@
-export { MULTIPLIER, ONE, ZERO } from "./anumation-default-values.constants";
-export { FORM_DEFAULT_VALUE } from "./form-default-values.constant";
+export {
+	MULTIPLIER,
+	ONE,
+	ZERO,
+} from "./onboarding-animation-default-values.constants";
+export { ONBOARDING_FORM_DEFAULT_VALUES } from "./onboarding-form-default-values.constant";

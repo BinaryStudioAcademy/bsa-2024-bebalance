@@ -27,7 +27,7 @@ type RadioGroupItemStyle = {
 
 type RadioGroupItem = {
 	label: string;
-	value: number;
+	value: string;
 };
 
 type Properties<T extends FieldValues> = {
@@ -58,10 +58,10 @@ const RadioGroup = <T extends FieldValues>({
 		circleSize = CIRCLE_SIZE,
 	} = itemContainerStyle;
 
-	const radioButtonsProperties: RadioButtonProps[] = options.map((option)=>{
+	const radioButtonsProperties: RadioButtonProps[] = options.map((option) => {
 		const radioButtonProperty = {
 			containerStyle: [styles.commonItemContainer, itemContainerStyle],
-			id: option.value.toString(),
+			id: option.value,
 			label: (
 				<Text
 					preset="default"
@@ -76,8 +76,6 @@ const RadioGroup = <T extends FieldValues>({
 		} as RadioButtonProps;
 
 		const isActive = radioButtonProperty.id === selectedId;
-
-		console.log(`selectedId`,selectedId)
 
 		if (isActive) {
 			radioButtonProperty.borderColor = circleBorderColorActive;
@@ -101,7 +99,7 @@ const RadioGroup = <T extends FieldValues>({
 				radioButtons={radioButtonsProperties}
 				selectedId={selectedId}
 			/>
-			<Text>{hasError && (error as string)}</Text>
+			{hasError && <Text color={BaseColor.RED}>{error as string}</Text>}
 		</View>
 	);
 };

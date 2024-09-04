@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
 import { Dimensions } from "react-native";
 import { default as RNProgressBar } from "react-native-progress-step-bar";
 
-import { LinearGradient,View } from "~/libs/components/components";
+import { LinearGradient, View } from "~/libs/components/components";
 import { GradientColor } from "~/libs/enums/enums";
+import { useMemo } from "~/libs/hooks/hooks";
 
+import { DEFAULT_WIDTH_VALUE } from "./constants/constants";
 import { styles } from "./styles";
 
 type Properties = {
@@ -60,7 +61,7 @@ const ProgressBar: React.FC<Properties> = ({
 				height={2}
 				steps={totalItemsAmount}
 				stepToStepAnimationDuration={1000}
-				width={screenWidth * 0.83}
+				width={screenWidth * DEFAULT_WIDTH_VALUE}
 				withDots={true}
 			/>
 		</View>

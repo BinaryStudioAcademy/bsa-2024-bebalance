@@ -1,6 +1,6 @@
 type RadioGroupValue = {
 	label: string;
-	value: number;
+	value: string;
 };
 
 export { type RadioGroupValue };

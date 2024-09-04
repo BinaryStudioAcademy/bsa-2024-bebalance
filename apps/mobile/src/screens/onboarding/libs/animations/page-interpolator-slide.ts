@@ -5,8 +5,8 @@ import { MULTIPLIER, ZERO } from "../constants/constants";
 
 const pageInterpolatorSlide = ({
 	focusAnim,
-	pageWidth,
 	pageBuffer,
+	pageWidth,
 }: PageInterpolatorParams): ReturnType<typeof useAnimatedStyle> => {
 	"worklet";
 
