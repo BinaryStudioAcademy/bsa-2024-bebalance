@@ -54,7 +54,7 @@ class UserController extends BaseController {
 			handler: (options) =>
 				this.updateAvatar(
 					options as APIHandlerOptions<{
-						file: MultipartFile;
+						uploadedFile: MultipartFile;
 						user: UserDto;
 					}>,
 				),
@@ -157,11 +157,11 @@ class UserController extends BaseController {
 	 */
 	private async updateAvatar(
 		options: APIHandlerOptions<{
-			file: MultipartFile;
+			uploadedFile: MultipartFile;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		if (!options.file) {
+		if (!options.uploadedFile) {
 			throw new UserError({
 				message: ErrorMessage.FILE_MISSING,
 				status: HTTPCode.BAD_REQUEST,
@@ -170,7 +170,7 @@ class UserController extends BaseController {
 
 		const user = await this.userService.updateAvatar(
 			options.user.id,
-			options.file,
+			options.uploadedFile,
 		);
 
 		return {

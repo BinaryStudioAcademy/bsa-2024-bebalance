@@ -1,5 +1,3 @@
-import { type MultipartFile } from "@fastify/multipart";
-
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type ServerApplicationRouteParameters } from "~/libs/modules/server-application/server-application.js";
 
@@ -32,10 +30,6 @@ class BaseController implements Controller {
 
 		const handlerOptions = this.mapRequest(request);
 
-		if (request.isMultipart()) {
-			handlerOptions.file = (await request.file()) as MultipartFile;
-		}
-
 		const { payload, status } = await handler(handlerOptions);
 
 		return await reply.status(status).send(payload);
@@ -44,12 +38,13 @@ class BaseController implements Controller {
 	private mapRequest(
 		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
 	): APIHandlerOptions {
-		const { body, params, query, user } = request;
+		const { body, params, query, uploadedFile, user } = request;
 
 		return {
 			body,
 			params,
 			query,
+			uploadedFile,
 			user,
 		};
 	}
