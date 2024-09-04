@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.9.0...shared-v1.10.0) (2024-09-03)
+
+
+### Features
+
+* **frontend/backend/shared:** onboarding questions screen bb-134 ([#211](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/211)) ([3d5df65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3d5df65a6ec30be95b1db6cdf894e67c46eb4f1c))
+
 ## [1.9.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.8.0...shared-v1.9.0) (2024-09-03)
 
 
