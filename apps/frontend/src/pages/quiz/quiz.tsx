@@ -1,16 +1,36 @@
-import { useCallback, useState } from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import {
+	actions as userActions,
+	type UserPreferencesPayloadDto,
+} from "~/modules/users/users.js";
 
-import { Analyzing, Introduction } from "./libs/components/components.js";
-import { FinalQuestions } from "./libs/components/final-questions/final-questions.js";
+import {
+	Analyzing,
+	FinalQuestions,
+	Introduction,
+} from "./libs/components/components.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const [step, setStep] = useState<number>(Step.ANALYZING);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
 	}, []);
+
+	const handleFinalQuestionsSubmit = useCallback(
+		(payload: UserPreferencesPayloadDto): void => {
+			void dispatch(
+				userActions.saveUserPreferences({
+					userId: 32,
+					...payload,
+				}),
+			);
+		},
+		[dispatch],
+	);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
@@ -23,7 +43,7 @@ const Quiz: React.FC = () => {
 			}
 
 			case Step.FINAL_QUESTIONS: {
-				return <FinalQuestions />;
+				return <FinalQuestions onSubmit={handleFinalQuestionsSubmit} />;
 			}
 
 			default: {
