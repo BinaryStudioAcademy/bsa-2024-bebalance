@@ -117,16 +117,22 @@ const Auth: React.FC = () => {
 						{authRouteToHeader[pathname as ValueOf<RoutesWithHeader>]}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
+						{pathname === AppRoute.FORGOT_PASSWORD && (
+							<div>
+								Enter your email address and we will send you a link to reset
+								your password.
+							</div>
+						)}
 						{pathname === AppRoute.SIGN_IN ? (
-							<>
+							<div>
 								<span>No account? Go to </span>
 								<Link to={AppRoute.SIGN_UP}>Create an account</Link>
-							</>
+							</div>
 						) : (
-							<>
+							<div>
 								<span>Already have an account? Go to </span>
 								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
-							</>
+							</div>
 						)}
 					</span>
 				</div>

@@ -71,7 +71,7 @@ export {
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
 	userResetPasswordValidationSchema,
 	UsersApiPath,
