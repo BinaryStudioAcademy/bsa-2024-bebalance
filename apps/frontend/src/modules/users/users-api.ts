@@ -20,7 +20,7 @@ class UsersApi extends BaseHTTPApi {
 
 	public async getById(id: number): Promise<UserDto> {
 		const response = await this.load(
-			this.getFullEndpoint(UsersApiPath.GET, { id: id.toString() }),
+			this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -36,7 +36,7 @@ class UsersApi extends BaseHTTPApi {
 		user: UserUpdateRequestDto,
 	): Promise<UserDto> {
 		const response = await this.load(
-			this.getFullEndpoint(UsersApiPath.PATCH, { id: id.toString() }),
+			this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
