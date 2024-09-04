@@ -8,6 +8,7 @@ import { AuthError } from "~/modules/auth/auth.js";
 import { type UserService } from "~/modules/users/users.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
+import { ONE_THOUSAND_MILISECONDS } from "./libs/constants/constants.js";
 import { checkIsWhiteRoute } from "./libs/helpers/helpers.js";
 
 type PluginOptions = {
@@ -39,7 +40,7 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 				payload: { exp, userId },
 			} = await token.decode(headerToken);
 
-			if ((exp as number) < new Date().getSeconds()) {
+			if ((exp as number) < Math.floor(Date.now() / ONE_THOUSAND_MILISECONDS)) {
 				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 
