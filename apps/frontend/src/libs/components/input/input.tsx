@@ -14,11 +14,12 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	errors?: FieldErrors<T>;
+	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	isDisabled?: boolean;
 	label: string;
 	name: FieldPath<T>;
-	onIconClick?: () => void;
+	onIconClick?: (() => void) | undefined;
 	options?: { label: string; value: string }[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
@@ -27,6 +28,7 @@ type Properties<T extends FieldValues> = {
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	hasVisuallyHiddenLabel,
 	iconName,
 	isDisabled = false,
 	label,
@@ -55,6 +57,7 @@ const Input = <T extends FieldValues>({
 				className={getValidClassNames(
 					styles["input-label"],
 					options && styles["radio-label"],
+					hasVisuallyHiddenLabel && "visually-hidden",
 				)}
 			>
 				{label}

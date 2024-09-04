@@ -14,8 +14,8 @@ const apiV1 = new BaseServerApplicationApi(
 	config,
 	...authController.routes,
 	...userController.routes,
-	...quizController.routes,
 	...onboardingController.routes,
+	...quizController.routes,
 );
 const serverApplication = new BaseServerApplication({
 	apis: [apiV1],
