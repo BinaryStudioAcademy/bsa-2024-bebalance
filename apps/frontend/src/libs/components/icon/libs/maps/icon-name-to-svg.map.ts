@@ -1,3 +1,4 @@
+import CheckIcon from "~/assets/img/check-icon.svg?react";
 import Close from "~/assets/img/close.svg?react";
 import CrossedEye from "~/assets/img/crossed-eye.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
@@ -11,6 +12,7 @@ const iconNameToSvg: Record<
 	IconName,
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
+	check: CheckIcon,
 	close: Close,
 	crossedEye: CrossedEye,
 	eye: Eye,
