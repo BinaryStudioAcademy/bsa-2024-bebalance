@@ -113,20 +113,6 @@ class CategoryEntity implements Entity {
 	}
 
 	public toObject(): {
-		createdAt: string;
-		id: number;
-		name: string;
-		updatedAt: string;
-	} {
-		return {
-			createdAt: this.createdAt,
-			id: this.id as number,
-			name: this.name,
-			updatedAt: this.updatedAt,
-		};
-	}
-
-	public toObjectWithScores(): {
 		categoryId: number;
 		createdAt: string;
 		id: number;
