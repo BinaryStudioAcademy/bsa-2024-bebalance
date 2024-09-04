@@ -116,16 +116,18 @@ class UserRepository implements Repository {
 	): Promise<null | UserEntity> {
 		const userDetails = await this.userDetailsModel
 			.query()
-			.patchAndFetch(payload)
-			.where({ userId: id });
+			.findOne({ userId: id });
+		const updatedUserDetails = await userDetails
+			?.$query()
+			.patchAndFetch(payload);
 		const user = await this.userModel.query().findById(id);
 
-		return user
+		return user && updatedUserDetails
 			? UserEntity.initialize({
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
-					name: userDetails.name,
+					name: updatedUserDetails.name,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
