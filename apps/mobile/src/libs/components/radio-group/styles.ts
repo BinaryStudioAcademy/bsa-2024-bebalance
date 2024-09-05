@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 import { BaseColor } from "~/libs/enums/enums";
-import { globalStyles } from "~/libs/styles/styles";
 
 const styles = StyleSheet.create({
 	commonItemContainer: {
@@ -9,7 +8,6 @@ const styles = StyleSheet.create({
 		borderColor: BaseColor.BG_BLUE,
 		borderRadius: 8,
 		borderWidth: 1,
-		...globalStyles.p12,
 		width: "100%",
 	},
 });

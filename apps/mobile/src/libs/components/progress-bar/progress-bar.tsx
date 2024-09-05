@@ -17,6 +17,8 @@ type Properties = {
 
 const SCREEN_WIDTH: number = Dimensions.get("window").width;
 const PROGRESS_BAR_WIDTH = SCREEN_WIDTH * SCREEN_WIDTH_MULTIPLIER;
+const ZERO = 0;
+const ONE = 1;
 
 const ProgressBar: React.FC<Properties> = ({
 	currentItemIndex,
@@ -26,8 +28,8 @@ const ProgressBar: React.FC<Properties> = ({
 		() => (
 			<LinearGradient
 				colors={[...GradientColor.BLUE]}
-				end={{ x: 1, y: 0 }}
-				start={{ x: 0, y: 0 }}
+				end={{ x: ONE, y: ZERO }}
+				start={{ x: ZERO, y: ZERO }}
 				style={styles.bar}
 			/>
 		),
@@ -39,8 +41,8 @@ const ProgressBar: React.FC<Properties> = ({
 			<View style={styles.dotContainer}>
 				<LinearGradient
 					colors={[...GradientColor.BLUE]}
-					end={{ x: 1, y: 0 }}
-					start={{ x: 0, y: 0 }}
+					end={{ x: ONE, y: ZERO }}
+					start={{ x: ZERO, y: ZERO }}
 					style={[
 						styles.dotBorder,
 						globalStyles.alignItemsCenter,

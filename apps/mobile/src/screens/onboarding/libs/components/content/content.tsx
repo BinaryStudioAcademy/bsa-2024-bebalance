@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 
 import { RadioGroup, Text } from "~/libs/components/components";
+import { globalStyles } from "~/libs/styles/global-styles/global-styles";
 
 import {
 	type OnboardingAnswerDto,
@@ -35,7 +36,7 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 
 	return (
 		<>
-			<Text preset="subheading" style={styles.title}>
+			<Text preset="subheading" style={[styles.title, globalStyles.mv48]}>
 				{question?.label}
 			</Text>
 			<RadioGroup

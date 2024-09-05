@@ -1,11 +1,10 @@
 import { type NativeStackNavigationProp } from "@react-navigation/native-stack";
-import InfinitePager, {
-	type InfinitePagerImperativeApi,
-} from "react-native-infinite-pager";
 
 import {
 	BackgroundWrapper,
 	Button,
+	InfinitePager,
+	type InfinitePagerImperativeApi,
 	LoaderWrapper,
 	ProgressBar,
 	ScreenWrapper,
@@ -19,20 +18,18 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useMemo,
 	useNavigation,
 	useRef,
-	useState,
 } from "~/libs/hooks/hooks";
+import { globalStyles } from "~/libs/styles/styles";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
 import { pageInterpolatorSlide } from "./libs/animations/animations";
 import { Content } from "./libs/components/components";
 import {
+	AnimationConfigValues,
 	ONBOARDING_FORM_DEFAULT_VALUES,
-	ONE,
-	ZERO,
 } from "./libs/constants/constants";
 import {
 	type OnboardingAnswerRequestBodyDto,
@@ -44,6 +41,8 @@ type RootStackParameterList = {
 	[RootScreenName.WELCOME]: undefined;
 };
 
+const ZERO = 0;
+
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const pagerReference = useRef<InfinitePagerImperativeApi | null>(null);
@@ -51,29 +50,26 @@ const Onboarding: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
-	const [answerIds, setAnswerIds] = useState<OnboardingAnswerRequestBodyDto>({
-		answerIds: [],
-	});
-
-	const currentQuestionIndex = useAppSelector(
-		({ onboarding }) => onboarding.currentQuestionIndex,
-	);
-	const questionsLength = useAppSelector(
-		({ onboarding }) => onboarding.questions.length,
-	);
-	const question = useAppSelector(
-		({ onboarding }) => onboarding.currentQuestion,
-	);
-	const dataStatus = useAppSelector(({ onboarding }) => onboarding.dataStatus);
-
-	const isLastQuestion = useMemo(() => {
-		return currentQuestionIndex === questionsLength - PREVIOUS_INDEX_OFFSET;
-	}, [currentQuestionIndex, questionsLength]);
-
-	const totalQuestionsAmount = useMemo(
-		() => questionsLength,
-		[questionsLength],
-	);
+	const {
+		allAnswers,
+		currentAnswer,
+		currentQuestionIndex,
+		dataStatus,
+		isLastQuestion,
+		question,
+		totalQuestionsAmount,
+	} = useAppSelector(({ onboarding }) => ({
+		allAnswers: onboarding.answersByQuestionIndex,
+		currentAnswer:
+			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] || "",
+		currentQuestionIndex: onboarding.currentQuestionIndex,
+		dataStatus: onboarding.dataStatus,
+		isLastQuestion:
+			onboarding.currentQuestionIndex ===
+			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
+		question: onboarding.currentQuestion,
+		totalQuestionsAmount: onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
+	}));
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
@@ -94,29 +90,20 @@ const Onboarding: React.FC = () => {
 	);
 
 	useEffect(() => {
-		const activeButtonIdString =
-			answerIds.answerIds[currentQuestionIndex]?.toString() || "";
-		reset({ answer: activeButtonIdString });
-	}, [currentQuestionIndex, answerIds]);
+		reset({ answer: currentAnswer.toString() });
+	}, [currentQuestionIndex, currentAnswer, reset]);
 
 	const handleNextClick = useCallback(
 		(payload: OnboardingFormValues) => {
-			setAnswerIds((previousState) => {
-				const newAnswerIds = [...previousState.answerIds];
-
-				if (newAnswerIds[currentQuestionIndex]) {
-					newAnswerIds[currentQuestionIndex] = Number(payload.answer);
-				} else {
-					newAnswerIds.push(Number(payload.answer));
-				}
-
-				return {
-					answerIds: [...newAnswerIds],
-				};
-			});
+			dispatch(
+				onboardingActions.setAnswersByQuestionIndex({
+					answerId: Number(payload.answer),
+					questionIndex: currentQuestionIndex,
+				}),
+			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers(answerIds);
+				handleSaveAnswers({ answerIds: allAnswers });
 
 				return;
 			}
@@ -131,10 +118,9 @@ const Onboarding: React.FC = () => {
 		[
 			isLastQuestion,
 			dispatch,
-			reset,
 			handleSaveAnswers,
-			answerIds,
 			currentQuestionIndex,
+			allAnswers,
 		],
 	);
 
@@ -150,9 +136,10 @@ const Onboarding: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 	}, [handleNextClick, handleSubmit]);
 
-	const handleAnalyzePress = useCallback(() => {
+	const handleAnalyzePress = useCallback((): void => {
+		void handleSubmit(handleNextClick)();
 		navigation.navigate(RootScreenName.WELCOME);
-	}, [navigation]);
+	}, [navigation, handleNextClick, handleSubmit]);
 
 	const renderPageComponent = useCallback(() => {
 		return <Content control={control} errors={errors} question={question} />;
@@ -162,7 +149,16 @@ const Onboarding: React.FC = () => {
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 			<BackgroundWrapper>
 				<ScreenWrapper>
-					<View style={styles.container}>
+					<View
+						style={[
+							styles.container,
+							globalStyles.flex1,
+							globalStyles.mb16,
+							globalStyles.mh12,
+							globalStyles.mt12,
+							globalStyles.p24,
+						]}
+					>
 						{question && (
 							<>
 								<ProgressBar
@@ -173,9 +169,13 @@ const Onboarding: React.FC = () => {
 									)}
 								/>
 								<InfinitePager
-									animationConfig={{ damping: 300, mass: 0.5, stiffness: 30 }}
+									animationConfig={{
+										damping: AnimationConfigValues.DAMPING,
+										mass: AnimationConfigValues.MASS,
+										stiffness: AnimationConfigValues.STIFFNESS,
+									}}
 									gesturesDisabled
-									pageBuffer={ONE}
+									pageBuffer={PREVIOUS_INDEX_OFFSET}
 									PageComponent={renderPageComponent}
 									pageInterpolator={pageInterpolatorSlide}
 									ref={pagerReference}
@@ -189,18 +189,19 @@ const Onboarding: React.FC = () => {
 								onPress={handleAnalyzePress}
 							/>
 						) : (
-							<View style={styles.buttonsContainer}>
+							<View style={globalStyles.gap12}>
 								<Button
 									isDisabled={!isValid}
 									label="NEXT"
 									onPress={handleFormSubmit}
 								/>
-								<Button
-									appearance="outlined"
-									isDisabled={currentQuestionIndex === ZERO}
-									label="BACK"
-									onPress={handlePreviousClick}
-								/>
+								{currentQuestionIndex !== ZERO && (
+									<Button
+										appearance="outlined"
+										label="BACK"
+										onPress={handlePreviousClick}
+									/>
+								)}
 							</View>
 						)}
 					</View>

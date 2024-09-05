@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
@@ -8,13 +8,20 @@ import { type OnboardingQuestionResponseDto } from "~/packages/onboarding/onboar
 import { getAll } from "./actions";
 
 type State = {
+	answersByQuestionIndex: number[];
 	currentQuestion: null | OnboardingQuestionResponseDto;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: OnboardingQuestionResponseDto[];
 };
 
+type Properties = {
+	answerId: number;
+	questionIndex: number;
+};
+
 const initialState: State = {
+	answersByQuestionIndex: [],
 	currentQuestion: null,
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
@@ -50,6 +57,10 @@ const { actions, name, reducer } = createSlice({
 				state.currentQuestion =
 					state.questions[state.currentQuestionIndex] || null;
 			}
+		},
+		setAnswersByQuestionIndex: (state, action: PayloadAction<Properties>) => {
+			const { answerId, questionIndex } = action.payload;
+			state.answersByQuestionIndex[questionIndex] = answerId;
 		},
 	},
 });

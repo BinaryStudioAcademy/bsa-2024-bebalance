@@ -60,7 +60,11 @@ const RadioGroup = <T extends FieldValues>({
 
 	const radioButtonsProperties: RadioButtonProps[] = options.map((option) => {
 		const radioButtonProperty = {
-			containerStyle: [styles.commonItemContainer, itemContainerStyle],
+			containerStyle: [
+				styles.commonItemContainer,
+				itemContainerStyle,
+				globalStyles.p12,
+			],
 			id: option.value,
 			label: (
 				<Text

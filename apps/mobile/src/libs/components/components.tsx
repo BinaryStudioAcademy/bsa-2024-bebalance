@@ -29,6 +29,10 @@ export {
 	TouchableOpacity,
 	View,
 } from "react-native";
+export {
+	default as InfinitePager,
+	type InfinitePagerImperativeApi,
+} from "react-native-infinite-pager";
 export { LinearGradient } from "react-native-linear-gradient";
 export { default as Animated } from "react-native-reanimated";
 export {
