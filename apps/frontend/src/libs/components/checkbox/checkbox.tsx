@@ -47,6 +47,7 @@ const Checkbox = <T extends FieldValues>({
 								checked={(fieldValue as string[]).includes(value)}
 								className={styles["input"]}
 								onChange={handleCheckboxesChange}
+								onClick={onClick}
 								type="checkbox"
 								value={value}
 							/>
