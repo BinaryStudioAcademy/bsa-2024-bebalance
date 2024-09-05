@@ -14,6 +14,7 @@ export {
 	HTTPError,
 	OnboardingError,
 	QuizError,
+	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
@@ -79,6 +80,7 @@ export {
 	type UserDto,
 	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
+	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,
@@ -88,6 +90,10 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
+	type UserUpdateFormDto,
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";
