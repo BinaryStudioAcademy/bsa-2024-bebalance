@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 	sliderContainer: {
 		borderRadius: 20,
 		position: "relative",
-		width: "90%",
+		width: "100%",
 	},
 });
 
