@@ -15,8 +15,7 @@ import { NotFound } from "~/pages/not-found/not-found.jsx";
 import { Onboarding } from "~/pages/onboarding/onboarding.jsx";
 import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
-
-import { Root } from "./pages/root/root.jsx";
+import { Root } from "~/pages/root/root.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
