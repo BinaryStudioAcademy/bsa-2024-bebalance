@@ -26,7 +26,7 @@ const saveUserPreferences = createAsyncThunk<
 	UserDto,
 	UserPreferencesRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/update`, async (payload, { extra }) => {
+>(`${sliceName}/saveUserPreferences`, async (payload, { extra }) => {
 	const { usersApi } = extra;
 
 	return await usersApi.saveUserPreferences(payload);
