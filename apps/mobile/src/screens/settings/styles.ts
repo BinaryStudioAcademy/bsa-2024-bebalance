@@ -4,9 +4,9 @@ import { globalStyles } from "~/libs/styles/styles";
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: "center",
-		flexDirection: "row",
-		gap: 10,
+		...globalStyles.alignItemsCenter,
+		...globalStyles.flexDirectionRow,
+		...globalStyles.gap12,
 		...globalStyles.mt24,
 	},
 });
