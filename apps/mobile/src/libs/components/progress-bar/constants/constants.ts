@@ -1,1 +1,1 @@
-export { DEFAULT_WIDTH_VALUE } from "./default-width.constant";
+export { SCREEN_WIDTH_MULTIPLIER } from "./default-width.constant";

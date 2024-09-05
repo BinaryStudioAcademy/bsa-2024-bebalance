@@ -4,12 +4,13 @@ import {
 	type FieldErrors,
 	type FieldValues,
 } from "react-hook-form";
-import { type OnboardingQuestionResponseDto } from "shared";
 
 import { RadioGroup, Text } from "~/libs/components/components";
 
 import {
+	type OnboardingAnswerDto,
 	type OnboardingFormValues,
+	type OnboardingQuestionResponseDto,
 	type RadioGroupValue,
 } from "../../types/types";
 import { styles } from "./styles";
@@ -25,14 +26,12 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 	errors,
 	question,
 }) => {
-	let mapData: RadioGroupValue[] = [];
-
-	if (question) {
-		mapData = question.answers.map((answer) => ({
-			label: answer.label,
-			value: answer.id.toString(),
-		}));
-	}
+	const mapData: RadioGroupValue[] = question?.answers
+		? question.answers.map((answer: OnboardingAnswerDto) => ({
+				label: answer.label,
+				value: answer.id.toString(),
+			}))
+		: [];
 
 	return (
 		<>

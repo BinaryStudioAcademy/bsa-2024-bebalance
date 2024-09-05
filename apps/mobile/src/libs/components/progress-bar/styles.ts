@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 import { BaseColor } from "~/libs/enums/enums";
-import { globalStyles } from "~/libs/styles/styles";
 
 const styles = StyleSheet.create({
 	backgroundBarStyle: {
@@ -17,15 +16,9 @@ const styles = StyleSheet.create({
 		height: 1,
 		width: "100%",
 	},
-	container: {
-		alignItems: "center",
-		...globalStyles.mt12,
-	},
 	dotBorder: {
-		alignItems: "center",
 		borderRadius: 12,
 		height: 12,
-		justifyContent: "center",
 		width: 12,
 	},
 	dotCenter: {

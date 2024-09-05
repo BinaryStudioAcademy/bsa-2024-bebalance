@@ -16,3 +16,4 @@ export {
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionResponseDto,
 } from "./libs/types/types";
+export { oneAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas";

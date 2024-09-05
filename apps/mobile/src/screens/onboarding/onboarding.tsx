@@ -2,10 +2,6 @@ import { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 import InfinitePager, {
 	type InfinitePagerImperativeApi,
 } from "react-native-infinite-pager";
-import {
-	type OnboardingAnswerRequestBodyDto,
-	oneAnswerSelectedValidationSchema,
-} from "shared";
 
 import {
 	BackgroundWrapper,
@@ -28,6 +24,7 @@ import {
 	useRef,
 	useState,
 } from "~/libs/hooks/hooks";
+import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
 import { pageInterpolatorSlide } from "./libs/animations/animations";
@@ -37,7 +34,10 @@ import {
 	ONE,
 	ZERO,
 } from "./libs/constants/constants";
-import { type OnboardingFormValues } from "./libs/types/types";
+import {
+	type OnboardingAnswerRequestBodyDto,
+	type OnboardingFormValues,
+} from "./libs/types/types";
 import { styles } from "./styles";
 
 type RootStackParameterList = {
