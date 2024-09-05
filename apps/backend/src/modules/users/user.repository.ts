@@ -148,16 +148,15 @@ class UserRepository implements Repository {
 			.findOne({ userId: id });
 		const updatedUserDetails = await userDetails
 			?.$query()
-			.patchAndFetch(payload)
-			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
-			);
-
-		const user = await this.userModel.query().findById(id);
+			.patchAndFetch(payload);
+		const user = await this.userModel
+			.query()
+			.findById(id)
+			.withGraphFetched(RelationName.USER_TASK_DAYS);
 
 		return user && updatedUserDetails
 			? UserEntity.initialize({
-					allowNotifications: user.allowNotifications,
+					allowNotifications: updatedUserDetails.allowNotifications,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
