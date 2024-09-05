@@ -1,6 +1,6 @@
 import { type ChartConfiguration } from "~/libs/types/types.js";
 
-import { ChartGraphicsColors } from "../enums/enums.js";
+import { ChartGraphicsColor } from "../enums/enums.js";
 import {
 	drawExtraPointGraphics,
 	generateGradientColor,
@@ -32,7 +32,7 @@ const ROOT_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 			r: {
 				grid: {
 					circular: true,
-					color: ChartGraphicsColors.GRID_COLOR,
+					color: ChartGraphicsColor.GRID_COLOR,
 					lineWidth: 1,
 					z: 1,
 				},

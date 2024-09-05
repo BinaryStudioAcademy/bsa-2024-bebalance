@@ -1,7 +1,7 @@
 export { AngleCoefficient } from "./angle-coefficient.enum.js";
 export { BalanceWheelChartDataConfig } from "./balance-wheel-data-config.enum.js";
 export { ChartFont } from "./chart-font.enum.js";
-export { ChartGraphicsColors } from "./chart-graphics-colors.enum.js";
+export { ChartGraphicsColor } from "./chart-graphics-color.enum.js";
 export { ChartSliceColor } from "./chart-slice-color.enum.js";
 export { DotOffsetX } from "./dot-offset-x.enum.js";
 export { DotOffsetY } from "./dot-offset-y.enum.js";

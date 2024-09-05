@@ -3,7 +3,7 @@ import {
 	START_ANGLE,
 } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
 import {
-	ChartGraphicsColors,
+	ChartGraphicsColor,
 	WheelCenterDistance,
 } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 import { type PolarAreaType } from "~/libs/components/balance-wheel-chart/libs/types/types.js";
@@ -34,7 +34,7 @@ const drawDots = ({
 	const segment = meta.data[index];
 	const segmentColor = segment
 		? (segment.options["backgroundColor"] as CanvasGradient)
-		: ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR;
+		: ChartGraphicsColor.FALLBACK_BACKGROUND_COLOR;
 
 	const dotDistance = scale.getDistanceFromCenterForValue(
 		WheelCenterDistance.DOT,

@@ -1,5 +1,5 @@
 import {
-	ChartGraphicsColors,
+	ChartGraphicsColor,
 	ChartSliceColor,
 } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 
@@ -11,8 +11,8 @@ const getBackgroundColorFromLabel = (
 } => {
 	if (!label) {
 		return {
-			end: ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR,
-			start: ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR,
+			end: ChartGraphicsColor.FALLBACK_BACKGROUND_COLOR,
+			start: ChartGraphicsColor.FALLBACK_BACKGROUND_COLOR,
 		};
 	}
 
@@ -28,8 +28,8 @@ const getBackgroundColorFromLabel = (
 	}
 
 	return {
-		end: ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR,
-		start: ChartGraphicsColors.FALLBACK_BACKGROUND_COLOR,
+		end: ChartGraphicsColor.FALLBACK_BACKGROUND_COLOR,
+		start: ChartGraphicsColor.FALLBACK_BACKGROUND_COLOR,
 	};
 };
 

@@ -1,6 +1,6 @@
 import {
 	ChartFont,
-	ChartGraphicsColors,
+	ChartGraphicsColor,
 	LabelDistacneOffset,
 	WheelCenterDistance,
 } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
@@ -44,7 +44,7 @@ const drawSublabels = ({
 	const { offsetX, offsetY } = getSublabelOffset(sublabelPosition, chartArea);
 
 	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.SUBLABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
-	context.fillStyle = ChartGraphicsColors.LABELS_COLOR;
+	context.fillStyle = ChartGraphicsColor.LABELS_COLOR;
 	context.fillText(
 		label,
 		sublabelPosition.x + offsetX,
