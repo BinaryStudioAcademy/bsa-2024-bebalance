@@ -44,11 +44,11 @@ export {
 export {
 	CategoriesApiPath,
 	categoriesValidationSchema,
+	type CategoriesGetAllResponseDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
-	type GetCategoriesDto,
 } from "./modules/categories/categories.js";
 export {
 	type OnboardingAnswerDto,
