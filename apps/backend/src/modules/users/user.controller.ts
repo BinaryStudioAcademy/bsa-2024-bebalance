@@ -59,7 +59,7 @@ class UserController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.setUserPreferences(
+				this.saveUserPreferences(
 					options as APIHandlerOptions<{
 						body: UserPreferencesRequestDto;
 						user: UserDto;
@@ -178,7 +178,7 @@ class UserController extends BaseController {
 	 *                $ref: "#/components/schemas/User"
 	 */
 
-	private async setUserPreferences(
+	private async saveUserPreferences(
 		options: APIHandlerOptions<{
 			body: UserPreferencesRequestDto;
 			user: UserDto;
@@ -186,7 +186,7 @@ class UserController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		const { allowNotifications, userId, userTaskDays } = options.body;
 
-		const updatedUserDto = await this.userService.setUserPreferences(userId, {
+		const updatedUserDto = await this.userService.saveUserPreferences(userId, {
 			allowNotifications,
 			userTaskDays,
 		});

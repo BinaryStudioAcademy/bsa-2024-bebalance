@@ -161,7 +161,7 @@ class UserRepository implements Repository {
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
-					name: user.userDetails.name,
+					name: updatedUserDetails.name,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,

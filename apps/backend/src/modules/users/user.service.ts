@@ -69,7 +69,7 @@ class UserService implements Service {
 		return this.userRepository.findByEmail(email);
 	}
 
-	public async setUserPreferences(
+	public async saveUserPreferences(
 		id: number,
 		payload: UserPreferencesPayloadDto,
 	): Promise<null | UserEntity> {
