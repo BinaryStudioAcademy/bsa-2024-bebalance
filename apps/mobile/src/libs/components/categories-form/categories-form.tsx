@@ -30,7 +30,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 
 	const { onChange, value: selectedCategories } = field;
 
-	const handleOnSubmit = (): void => {
+	const handleOnSubmit = useCallback((): void => {
 		const selectedLabels = categories
 			.filter((category) => selectedCategories.includes(category.id))
 			.map((category) => category.name)
@@ -39,7 +39,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		if (selectedLabels.length > NumericValues.ZERO) {
 			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
 		}
-	};
+	}, [categories, selectedCategories]);
 
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit(handleOnSubmit)();
