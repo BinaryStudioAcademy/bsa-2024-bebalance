@@ -1,10 +1,9 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
-	type Control,
 	type FieldErrors,
-	type FieldPath,
 	type FieldValues,
+	type FormFieldProperties,
 	type IconName,
 } from "~/libs/types/types.js";
 
@@ -12,54 +11,38 @@ import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
-	control: Control<T, null>;
 	errors?: FieldErrors<T>;
+	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
-	label?: string;
-	name: FieldPath<T>;
-	onClick?: () => void;
-	onIconClick?: () => void;
-	options?: { label: string; value: string }[];
+	isDisabled?: boolean;
+	isFullWidth?: boolean;
+	label: string;
+	onIconClick?: (() => void) | undefined;
 	placeholder?: string;
-	type?: "checkbox" | "email" | "password" | "radio" | "text";
-};
+	type?: "email" | "password" | "radio" | "text";
+} & FormFieldProperties<T>;
 
 const Input = <T extends FieldValues>({
 	control,
 	errors,
+	hasVisuallyHiddenLabel,
 	iconName,
+	isDisabled = false,
+	isFullWidth = true,
 	label,
 	name,
-	onClick,
 	onIconClick,
 	options,
 	placeholder = "",
 	type = "text",
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
-	const fieldValue = field.value;
 
 	const error = errors?.[name]?.message;
 	const hasError = Boolean(error);
-	const isRadioWithOptions = type === "radio" && options?.length;
-	const isCheckbox = type === "checkbox";
-	const isCheckboxWithOptions = isCheckbox && options?.length;
 
-	const handleCheckboxChange = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>): void => {
-			const isChecked = event.target.checked;
-			const inputValue = event.target.value;
-
-			if (isChecked) {
-				field.onChange([...fieldValue, inputValue]);
-			} else {
-				field.onChange(
-					(fieldValue as string[]).filter((value) => value !== inputValue),
-				);
-			}
-		},
-		[fieldValue, field],
-	);
+	const isRadio = type === "radio";
+	const isRadioWithOptions = isRadio && options?.length;
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,53 +51,23 @@ const Input = <T extends FieldValues>({
 		[field],
 	);
 
-	if (isCheckboxWithOptions) {
-		return (
-			<>
-				{options.map((option) => {
-					return (
-						<label className={styles["checkbox-container"]} key={option.value}>
-							<input
-								checked={(fieldValue as string[]).includes(option.value)}
-								onChange={handleCheckboxChange}
-								type={type}
-								value={option.value}
-							/>
-							<span className={styles["checkbox-checkmark"]} />
-							{option.label}
-						</label>
-					);
-				})}
-			</>
-		);
-	}
-
-	if (isCheckbox) {
-		return (
-			<label className={styles["checkbox-container"]}>
-				<input
-					{...field}
-					checked={Boolean(fieldValue)}
-					onClick={onClick}
-					type="checkbox"
-				/>
-				<span className={styles["checkbox-checkmark"]} />
-				{label}
-			</label>
-		);
-	}
-
 	return (
 		<label className={styles["input-wrapper"]}>
 			<span
 				className={getValidClassNames(
 					styles["input-label"],
-					options && styles["radio-label"],
+					isRadio && styles["radio-label"],
+					hasVisuallyHiddenLabel && "visually-hidden",
 				)}
 			>
 				{label}
 			</span>
-			<div className={styles["input-container"]}>
+			<div
+				className={getValidClassNames(
+					styles["input-container"],
+					isFullWidth && styles["full-width"],
+				)}
+			>
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (
@@ -135,6 +88,7 @@ const Input = <T extends FieldValues>({
 						<input
 							className={getValidClassNames(styles["input-field"])}
 							{...field}
+							disabled={isDisabled}
 							placeholder={placeholder}
 							type={type}
 						/>

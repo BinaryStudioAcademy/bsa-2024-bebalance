@@ -6,37 +6,12 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
-import {
-	actions as categoriesActions,
-	type CategoryDto,
-} from "~/modules/categories/categories.js";
+import { type InputOption } from "~/libs/types/types.js";
+import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
-import { Button, Input } from "../components.js";
-
-const useQuizCategories = (): {
-	isLoading: boolean;
-	quizCategories: CategoryDto[];
-} => {
-	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		void dispatch(categoriesActions.getCategories());
-	}, [dispatch]);
-
-	return useAppSelector(({ categories }) => {
-		const { dataStatus, items } = categories;
-
-		return {
-			isLoading: dataStatus === DataStatus.PENDING,
-			quizCategories: items,
-		};
-	});
-};
-
-type FormFields = {
-	categoriesIds: string[];
-	isSelectAll: boolean;
-};
+import { Button, Checkbox, Loader } from "../components.js";
+import { FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import { type FormFields } from "./libs/types/types.js";
 
 type Properties = {
 	onSubmit?: (payload: Pick<FormFields, "categoriesIds">) => void;
@@ -46,11 +21,29 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	onSubmit = (): void => {},
 }: Properties) => {
 	const { control, handleSubmit, setValue, watch } = useAppForm<FormFields>({
-		defaultValues: { categoriesIds: [], isSelectAll: false },
+		defaultValues: FORM_DEFAULT_VALUES,
 	});
 
-	const { isLoading, quizCategories } = useQuizCategories();
+	const { isLoading, quizCategories } = useAppSelector(({ categories }) => {
+		const { dataStatus, items } = categories;
+
+		return {
+			isLoading: dataStatus === DataStatus.PENDING,
+			quizCategories: items,
+		};
+	});
+	const categoryInputOptions: InputOption[] = quizCategories.map(
+		(category) => ({
+			label: category.name,
+			value: category.id.toString(),
+		}),
+	);
 	const { categoriesIds, isSelectAll } = watch();
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		void dispatch(categoriesActions.getCategories());
+	}, [dispatch]);
 
 	useEffect(() => {
 		const isAllChecked = categoriesIds.length === quizCategories.length;
@@ -83,27 +76,23 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	);
 
 	if (isLoading) {
-		return <p>Loading quiz categories...</p>;
+		return <Loader />;
 	}
 
 	return (
 		<section>
 			<form onSubmit={handleFormSubmit}>
-				<Input
+				<Checkbox
 					control={control}
 					label="All"
 					name="isSelectAll"
 					onClick={handleSelectAll}
-					type="checkbox"
 				/>
-				<Input
+				<Checkbox
 					control={control}
+					label="Categories"
 					name="categoriesIds"
-					options={quizCategories.map((category) => ({
-						label: category.name,
-						value: category.id.toString(),
-					}))}
-					type="checkbox"
+					options={categoryInputOptions}
 				/>
 				<br />
 				<Button label="Retake Quiz" type="submit" />

@@ -1,5 +1,59 @@
 # Changelog
 
+## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.33.0...v1.34.0) (2024-09-05)
+
+
+### Features
+
+* **frontend:** make onboarding screen mobile responsive bb-289 ([#301](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/301)) ([7e55cd8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7e55cd865b7caccd8dfdb53d7a16c5643a00712e))
+
+
+### Bug Fixes
+
+* **frontend:** solve unclickable radio buttons bb-89 ([#304](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/304)) ([469c037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/469c037e4608fe48d42617e6f906c509a67a4d46))
+
+## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.32.0...v1.33.0) (2024-09-05)
+
+
+### Features
+
+* **backend/frontend/shared:** user profile screen bb-187 ([#260](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/260)) ([1fc8691](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1fc8691561cdad1070bb7ce51397d372827f4223))
+* **frontend/backend:** quiz functionality bb-89 ([#263](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/263)) ([1bf5519](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1bf55198b8e843c2e298ccc343d844e08680c06a))
+
+## [1.32.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.31.0...v1.32.0) (2024-09-04)
+
+
+### Features
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#275](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/275)) ([df345ac](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/df345acc74b09cb6eee579c4ce778f4968c4e550))
+
+## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.30.1...v1.31.0) (2024-09-04)
+
+
+### Features
+
+* **frontend:** Balance Wheel animation bb-204 ([#261](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/261)) ([d4dd69e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d4dd69e021fa1e33b294ff46e3de35821386a432))
+
+## [1.30.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.30.0...v1.30.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **backend:** incorrect time comparison when validating token bb-279 ([#291](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/291)) ([8629efe](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8629efe60d9817ff2d820023abbeb12c7ddd704a))
+
+## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.29.0...v1.30.0) (2024-09-03)
+
+
+### Features
+
+* **frontend/backend/shared:** onboarding questions screen bb-134 ([#211](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/211)) ([3d5df65](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3d5df65a6ec30be95b1db6cdf894e67c46eb4f1c))
+* **frontend:** added token expiration handling bb-279 ([#283](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/283)) ([68f833c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/68f833cce7d5ca6e40c21f6b37e625106545a660))
+
+
+### Bug Fixes
+
+* **frontend:** moved AuthWrapper from protected route into Root component bb-258 ([#274](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/274)) ([e29c1de](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e29c1de56ef67e98ad076fce77dadd9fe184147f))
+
 ## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.28.0...v1.29.0) (2024-09-03)
 
 

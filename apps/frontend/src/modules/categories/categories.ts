@@ -10,6 +10,5 @@ const categoriesApi = new CategoriesApi({
 	storage,
 });
 
-export { type CategoryDto } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/categories.js";
 export { categoriesApi };
