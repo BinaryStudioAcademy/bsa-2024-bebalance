@@ -43,7 +43,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 	sectorColor,
 	startPercentInner,
 	startPercentOuter,
-}) => {
+}: Properties) => {
 	const {
 		innerDashArrayDash,
 		innerDashArrayGap,

@@ -40,7 +40,7 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 	sectorColor,
 	startPercentInner,
 	startPercentOuter,
-}) => {
+}: Properties) => {
 	const animatedInnerArrayDash = useSharedValue(INITIAL_ANIMATED_VALUE);
 	const animatedInnerArrayGap = useSharedValue(INITIAL_ANIMATED_VALUE);
 	const animatedInnerDashOffset = useSharedValue(INITIAL_ANIMATED_VALUE);
