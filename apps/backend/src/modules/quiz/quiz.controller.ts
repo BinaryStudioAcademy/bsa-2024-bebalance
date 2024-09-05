@@ -17,6 +17,13 @@ import { type UserDto } from "../users/users.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
 import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
+type Constructor = {
+	categoryService: CategoryService;
+	logger: Logger;
+	quizAnswerService: QuizAnswerService;
+	quizQuestionService: QuizQuestionService;
+};
+
 /*** @swagger
  * components:
  *    schemas:
@@ -64,14 +71,12 @@ class QuizController extends BaseController {
 
 	private quizQuestionService: QuizQuestionService;
 
-	public constructor(options: {
-		categoryService: CategoryService;
-		logger: Logger;
-		quizAnswerService: QuizAnswerService;
-		quizQuestionService: QuizQuestionService;
-	}) {
-		const { categoryService, logger, quizAnswerService, quizQuestionService } =
-			options;
+	public constructor({
+		categoryService,
+		logger,
+		quizAnswerService,
+		quizQuestionService,
+	}: Constructor) {
 		super(logger, APIPath.QUIZ);
 
 		this.categoryService = categoryService;
