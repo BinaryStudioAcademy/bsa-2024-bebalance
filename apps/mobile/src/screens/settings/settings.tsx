@@ -6,9 +6,8 @@ import {
 } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks";
+import { globalStyles } from "~/libs/styles/styles";
 import { actions as authActions } from "~/slices/auth/auth";
-
-import { styles } from "./styles";
 
 const iconSize = 40;
 
@@ -24,7 +23,15 @@ const Settings: React.FC = () => {
 		<ScreenWrapper>
 			<Text>Settings!</Text>
 
-			<Pressable onPress={handleSignOut} style={styles.container}>
+			<Pressable
+				onPress={handleSignOut}
+				style={[
+					globalStyles.alignItemsCenter,
+					globalStyles.flexDirectionRow,
+					globalStyles.gap12,
+					globalStyles.mt24,
+				]}
+			>
 				<Icon color={BaseColor.BLACK} name="exit-to-app" size={iconSize} />
 				<Text preset="subheading">SIGN OUT</Text>
 			</Pressable>
