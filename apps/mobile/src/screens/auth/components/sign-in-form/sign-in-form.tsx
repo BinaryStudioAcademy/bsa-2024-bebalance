@@ -26,9 +26,9 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
 	const INPUT_ICON_SIZE = 20;
 
-	const handlePasswordIconPress = (): void => {
+	const handlePasswordIconPress = useCallback((): void => {
 		setIsPasswordHidden(!isPasswordHidden);
-	};
+	}, [isPasswordHidden]);
 
 	const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
 		defaultValues: USER_SIGN_IN_DEFAULT_VALUES,

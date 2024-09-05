@@ -13,7 +13,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
-import { useFormController, useState } from "~/libs/hooks/hooks";
+import { useCallback, useFormController, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
@@ -55,13 +55,13 @@ const Input = <T extends FieldValues>({
 		? [BaseColor.RED, BaseColor.RED]
 		: borderColors;
 
-	const handleInputBlur = (): void => {
+	const handleInputBlur = useCallback((): void => {
 		setIsFocused(false);
-	};
+	}, []);
 
-	const handleInputFocus = (): void => {
+	const handleInputFocus = useCallback((): void => {
 		setIsFocused(true);
-	};
+	}, []);
 
 	return (
 		<View>

@@ -1,14 +1,14 @@
 {
 	"name": "frontend",
 	"private": true,
-	"version": "1.22.0",
+	"version": "1.23.0",
 	"type": "module",
 	"engines": {
 		"node": "20.x.x",
 		"npm": "10.x.x"
 	},
 	"scripts": {
-		"lint:css": "npx stylelint \"src/**/*.css\"",
+		"lint:css": "npx stylelint \"src/**/*.css\" --config ../../stylelint.config.js",
 		"lint:js": "npx eslint . --max-warnings=0",
 		"lint:type": "npx tsc --noEmit",
 		"lint": "concurrently \"npm:lint:*\"",

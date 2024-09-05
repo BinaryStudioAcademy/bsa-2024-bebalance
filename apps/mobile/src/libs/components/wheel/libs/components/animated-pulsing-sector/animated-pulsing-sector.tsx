@@ -113,7 +113,26 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		animatedOuterStrokeWidth.value = outerStrokeWidth;
 
 		animatedRadius.value = radius;
-	}, [animationRepetitions]);
+	}, [
+		animationRepetitions,
+		animatedInnerArrayGap,
+		animatedInnerDashOffset,
+		animatedInnerArrayDash,
+		animatedInnerStrokeWidth,
+		animatedOuterArrayDash,
+		animatedOuterArrayGap,
+		animatedOuterDashOffset,
+		animatedOuterStrokeWidth,
+		animatedRadius,
+		centerGap,
+		endPercentInner,
+		endPercentOuter,
+		height,
+		maxHeight,
+		layerOffset,
+		startPercentInner,
+		startPercentOuter,
+	]);
 
 	const animatedInnerSectorProperties = useAnimatedProps(() => ({
 		r: withTiming(animatedRadius.value, timingSettings),
