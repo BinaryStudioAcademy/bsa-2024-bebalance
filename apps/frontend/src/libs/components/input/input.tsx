@@ -74,7 +74,13 @@ const Input = <T extends FieldValues>({
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (
-							<label className={styles["radio-option"]} key={option.value}>
+							<label
+								className={getValidClassNames(
+									styles["radio-option"],
+									isFullWidth && styles["full-width"],
+								)}
+								key={option.value}
+							>
 								<input
 									checked={field.value === option.value}
 									className={styles["radio-field"]}
