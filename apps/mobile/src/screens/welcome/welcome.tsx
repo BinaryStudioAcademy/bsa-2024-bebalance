@@ -23,7 +23,7 @@ const Welcome: React.FC = () => {
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 	const handleContinuePress = useCallback((): void => {
 		navigation.navigate(RootScreenName.QUIZ_ENTRY);
-	}, []);
+	}, [navigation]);
 
 	return (
 		<BackgroundWrapper>
@@ -45,7 +45,7 @@ const Welcome: React.FC = () => {
 						style={[globalStyles.mb12, styles.header]}
 						weight="bold"
 					>
-						We're Analyzing{"\n"}Your Journey!
+						We&apos;re Analyzing{"\n"}Your Journey!
 					</Text>
 					<View
 						style={[
