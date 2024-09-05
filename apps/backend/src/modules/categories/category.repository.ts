@@ -92,10 +92,7 @@ class CategoryRepository implements Repository {
 	}
 
 	public async findAll(): Promise<CategoryEntity[]> {
-		const categories = await this.categoryModel
-			.query()
-			.select("*")
-			.withGraphJoined(RelationName.SCORES);
+		const categories = await this.categoryModel.query().select("*");
 
 		return await Promise.all(
 			categories.map(async (category) => {

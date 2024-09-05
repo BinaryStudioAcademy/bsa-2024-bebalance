@@ -7,6 +7,7 @@ import {
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
+	type GetCategoriesDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 } from "./libs/types/types.js";
@@ -80,7 +81,20 @@ class CategoryService implements Service {
 		return { createdAt, id, name, updatedAt };
 	}
 
-	public async findAll(): Promise<{
+	public async findAll(): Promise<GetCategoriesDto> {
+		const categories = await this.categoryRepository.findAll();
+
+		const items = categories.map((categoryEntity) => {
+			const { createdAt, id, name, updatedAt } =
+				this.convertCategoryEntityToDto(categoryEntity);
+
+			return { createdAt, id, name, updatedAt };
+		});
+
+		return { items };
+	}
+
+	public async findAllWithScores(): Promise<{
 		items: CategoryWithScoresDto[];
 	}> {
 		const categories = await this.categoryRepository.findAll();
