@@ -150,6 +150,14 @@ const Onboarding: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 	}, [handleNextClick, handleSubmit]);
 
+	const handleAnalyzePress = useCallback(() => {
+		navigation.navigate(RootScreenName.WELCOME);
+	}, [navigation]);
+
+	const renderPageComponent = useCallback(() => {
+		return <Content control={control} errors={errors} question={question} />;
+	}, [control, errors, question]);
+
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 			<BackgroundWrapper>
@@ -166,15 +174,9 @@ const Onboarding: React.FC = () => {
 								/>
 								<InfinitePager
 									animationConfig={{ damping: 300, mass: 0.5, stiffness: 30 }}
-									gesturesDisabled={true}
+									gesturesDisabled
 									pageBuffer={ONE}
-									PageComponent={() => (
-										<Content
-											control={control}
-											errors={errors}
-											question={question}
-										/>
-									)}
+									PageComponent={renderPageComponent}
 									pageInterpolator={pageInterpolatorSlide}
 									ref={pagerReference}
 								/>
@@ -184,9 +186,7 @@ const Onboarding: React.FC = () => {
 							<Button
 								isDisabled={!isValid}
 								label="ANALYZE"
-								onPress={() => {
-									navigation.navigate(RootScreenName.WELCOME);
-								}}
+								onPress={handleAnalyzePress}
 							/>
 						) : (
 							<View style={styles.buttonsContainer}>
@@ -196,7 +196,7 @@ const Onboarding: React.FC = () => {
 									onPress={handleFormSubmit}
 								/>
 								<Button
-									appearance={"outlined"}
+									appearance="outlined"
 									isDisabled={currentQuestionIndex === ZERO}
 									label="BACK"
 									onPress={handlePreviousClick}

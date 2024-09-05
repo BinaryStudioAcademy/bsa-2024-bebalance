@@ -1,3 +1,4 @@
+import React from "react";
 import { Dimensions } from "react-native";
 import { default as RNProgressBar } from "react-native-progress-step-bar";
 
@@ -26,7 +27,7 @@ const ProgressBar: React.FC<Properties> = ({
 				end={{ x: 1, y: 0 }}
 				start={{ x: 0, y: 0 }}
 				style={styles.bar}
-			></LinearGradient>
+			/>
 		),
 		[],
 	);
@@ -40,7 +41,7 @@ const ProgressBar: React.FC<Properties> = ({
 					start={{ x: 0, y: 0 }}
 					style={styles.dotBorder}
 				>
-					<View style={styles.dotCenter}></View>
+					<View style={styles.dotCenter} />
 				</LinearGradient>
 			</View>
 		),
@@ -62,7 +63,7 @@ const ProgressBar: React.FC<Properties> = ({
 				steps={totalItemsAmount}
 				stepToStepAnimationDuration={1000}
 				width={screenWidth * DEFAULT_WIDTH_VALUE}
-				withDots={true}
+				withDots
 			/>
 		</View>
 	);

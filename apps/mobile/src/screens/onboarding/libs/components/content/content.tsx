@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	type Control,
 	type FieldErrors,
@@ -41,7 +42,7 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 			<RadioGroup
 				control={control}
 				errors={errors}
-				name={"answer"}
+				name="answer"
 				options={mapData}
 			/>
 		</>
