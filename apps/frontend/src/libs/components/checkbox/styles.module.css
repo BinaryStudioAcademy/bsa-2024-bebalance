@@ -37,7 +37,7 @@
 .gradient-border-container::before {
 	position: absolute;
 	inset: 0;
-	z-index: -1;
+	z-index: var(--z-index-low);
 	content: "";
 	border-radius: 5px;
 	opacity: 0;
@@ -58,6 +58,8 @@
 }
 
 .gradient-border-content {
+	position: relative;
+	z-index: var(--z-index-medium);
 	height: 100%;
 	background: var(--white);
 	border-radius: 5px;
