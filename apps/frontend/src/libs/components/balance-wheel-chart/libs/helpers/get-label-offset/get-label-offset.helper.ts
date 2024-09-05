@@ -1,7 +1,7 @@
+import { DEFAULT_GRAPHICS_OFFSET } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
 import { type ChartArea } from "~/libs/types/types.js";
 
-import { DEFAULT_GRAPHICS_OFFSET } from "../constants/constants.js";
-import { getCenters } from "./helpers.js";
+import { getCenters } from "../get-centers/get-centers.helper.js";
 
 const LabelOffsetX = {
 	BOTTOM_RIGHT: -28,

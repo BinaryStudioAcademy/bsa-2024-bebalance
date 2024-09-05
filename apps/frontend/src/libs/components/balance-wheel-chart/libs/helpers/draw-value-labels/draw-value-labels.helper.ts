@@ -1,15 +1,16 @@
-import { HALF_PI } from "~/libs/constants/constants.js";
-import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
-
 import {
 	ChartFont,
 	ChartGraphicsColors,
 	LabelDistacneOffset,
 	WheelCenterDistance,
-} from "../enums/enums.js";
-import { getBaseline, getSublabelOffset } from "./helpers.js";
+} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
+import { HALF_PI } from "~/libs/constants/constants.js";
+import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
 
-const drawSublabels = ({
+import { getBaseline } from "../get-baseline/get-baseline.helper.js";
+import { getLabelOffset } from "../get-label-offset/get-label-offset.helper.js";
+
+const drawValueLabels = ({
 	chartArea,
 	context,
 	label,
@@ -23,7 +24,7 @@ const drawSublabels = ({
 	scale: RadialLinearScale;
 }): void => {
 	const sublabelDistance = scale.getDistanceFromCenterForValue(
-		WheelCenterDistance.SUBLABEL,
+		WheelCenterDistance.VALUE_LABEL,
 	);
 
 	const sublabelPosition = {
@@ -40,9 +41,9 @@ const drawSublabels = ({
 	context.textAlign = "center";
 	context.textBaseline = getBaseline(sublabelPosition.y, chartArea);
 
-	const { offsetX, offsetY } = getSublabelOffset(sublabelPosition, chartArea);
+	const { offsetX, offsetY } = getLabelOffset(sublabelPosition, chartArea);
 
-	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.SUBLABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
+	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.LABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
 	context.fillStyle = ChartGraphicsColors.LABELS_COLOR;
 	context.fillText(
 		label,
@@ -51,4 +52,4 @@ const drawSublabels = ({
 	);
 };
 
-export { drawSublabels };
+export { drawValueLabels };

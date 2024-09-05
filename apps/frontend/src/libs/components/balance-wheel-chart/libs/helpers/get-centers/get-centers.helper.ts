@@ -1,10 +1,8 @@
 import { type ChartArea } from "~/libs/types/types.js";
 
-import {
-	getAbsoluteCenter,
-	getFirstPartCenter,
-	getSecondPartCenter,
-} from "./helpers.js";
+import { getAbsoluteCenter } from "../get-absolute-center/get-absolute-center.helper.js";
+import { getFirstPartCenter } from "../get-first-part-center/get-first-part-center.helper.js";
+import { getSecondPartCenter } from "../get-second-part-center/get-second-part-center.helper.js";
 
 const getCenters = (
 	chartArea: ChartArea,

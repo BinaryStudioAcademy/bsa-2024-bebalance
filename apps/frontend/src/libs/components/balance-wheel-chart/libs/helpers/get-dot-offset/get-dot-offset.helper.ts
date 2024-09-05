@@ -1,8 +1,11 @@
+import { DEFAULT_GRAPHICS_OFFSET } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
+import {
+	DotOffsetX,
+	DotOffsetY,
+} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 import { type ChartArea } from "~/libs/types/types.js";
 
-import { DEFAULT_GRAPHICS_OFFSET } from "../constants/constants.js";
-import { DotOffsetX, DotOffsetY } from "../enums/enums.js";
-import { getCenters } from "./helpers.js";
+import { getCenters } from "../get-centers/get-centers.helper.js";
 
 const getDotOffset = (
 	dotPosition: { x: number; y: number },

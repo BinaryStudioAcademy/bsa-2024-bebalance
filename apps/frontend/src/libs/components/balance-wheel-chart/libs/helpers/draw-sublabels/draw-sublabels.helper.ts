@@ -6,10 +6,11 @@ import {
 	ChartGraphicsColors,
 	LabelDistacneOffset,
 	WheelCenterDistance,
-} from "../enums/enums.js";
-import { getBaseline, getLabelOffset } from "./helpers.js";
+} from "../../enums/enums.js";
+import { getBaseline } from "../get-baseline/get-baseline.helper.js";
+import { getSublabelOffset } from "../get-sublabel-offset/get-sublabel-offset.helper.js";
 
-const drawValueLabels = ({
+const drawSublabels = ({
 	chartArea,
 	context,
 	label,
@@ -23,7 +24,7 @@ const drawValueLabels = ({
 	scale: RadialLinearScale;
 }): void => {
 	const sublabelDistance = scale.getDistanceFromCenterForValue(
-		WheelCenterDistance.VALUE_LABEL,
+		WheelCenterDistance.SUBLABEL,
 	);
 
 	const sublabelPosition = {
@@ -40,9 +41,9 @@ const drawValueLabels = ({
 	context.textAlign = "center";
 	context.textBaseline = getBaseline(sublabelPosition.y, chartArea);
 
-	const { offsetX, offsetY } = getLabelOffset(sublabelPosition, chartArea);
+	const { offsetX, offsetY } = getSublabelOffset(sublabelPosition, chartArea);
 
-	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.LABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
+	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.SUBLABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
 	context.fillStyle = ChartGraphicsColors.LABELS_COLOR;
 	context.fillText(
 		label,
@@ -51,4 +52,4 @@ const drawValueLabels = ({
 	);
 };
 
-export { drawValueLabels };
+export { drawSublabels };

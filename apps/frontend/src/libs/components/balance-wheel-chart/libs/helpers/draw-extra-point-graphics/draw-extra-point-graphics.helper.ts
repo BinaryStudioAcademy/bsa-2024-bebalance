@@ -1,3 +1,9 @@
+import {
+	FIRST_ELEMENT_INDEX,
+	SINGLE_ELEMENT,
+} from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
+import { AngleCoefficient } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
+import { type PolarAreaType } from "~/libs/components/balance-wheel-chart/libs/types/types.js";
 import { TAU } from "~/libs/constants/constants.js";
 import {
 	type Chart,
@@ -5,10 +11,9 @@ import {
 	type RadialLinearScale,
 } from "~/libs/types/types.js";
 
-import { FIRST_ELEMENT_INDEX, SINGLE_ELEMENT } from "../constants/constants.js";
-import { AngleCoefficient } from "../enums/enums.js";
-import { type PolarAreaType } from "../types/types.js";
-import { drawDots, drawSublabels, drawValueLabels } from "./helpers.js";
+import { drawDots } from "../draw-dots/draw-dots.helper.js";
+import { drawSublabels } from "../draw-sublabels/draw-sublabels.helper.js";
+import { drawValueLabels } from "../draw-value-labels/draw-value-labels.helper.js";
 
 const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const { ctx: context } = chart;
