@@ -170,6 +170,40 @@ class QuizController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /quiz/score:
+	 *   get:
+	 *     description: Returns all user scores
+	 *
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 payload:
+	 *                   type: array
+	 *                   items:
+	 *                     type: object
+	 *                     properties:
+	 *                       categoryName:
+	 *                         type: string
+	 *                       categoryId:
+	 *                         type: number
+	 *                       createdAt:
+	 *                         type: string
+	 *                       id:
+	 *                         type: number
+	 *                       score:
+	 *                         type: number
+	 *                       updatedAt:
+	 *                         type: string
+	 *                       userId:
+	 *                         type: number
+	 */
 	private async findUserScores(
 		options: APIHandlerOptions<{
 			user: UserDto;
