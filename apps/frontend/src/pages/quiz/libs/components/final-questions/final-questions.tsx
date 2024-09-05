@@ -6,8 +6,8 @@ import {
 	ALLOW_NOTIFICATIONS_OPTIONS,
 	FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
 	TASK_DAYS_OPTIONS,
-} from "../../constants/constants.js";
-import { type FinalQuestionsFormValues } from "../../types/types.js";
+} from "./libs/constants/constants.js";
+import { type FinalQuestionsFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -44,6 +44,7 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					/>
 					<Input
 						control={control}
+						isFullWidth
 						label="How would you like to receive motivational follow-ups?"
 						name="allowNotifications"
 						options={ALLOW_NOTIFICATIONS_OPTIONS}
