@@ -27,17 +27,13 @@ class CategoryService implements Service {
 			(scoreEntity: CategoryEntity) => {
 				const score = scoreEntity.toObject();
 
-				return {
-					...score,
-					categoryId: category.id,
-				};
+				return { ...score, categoryId: category.id };
 			},
 		);
 
-		return {
-			...category,
-			scores,
-		};
+		const { createdAt, id, name, updatedAt } = category;
+
+		return { createdAt, id, name, scores, updatedAt };
 	}
 
 	public async create(payload: CategoryCreateRequestDto): Promise<CategoryDto> {
