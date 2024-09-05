@@ -1,1 +1,1 @@
-export { type QuizCategoriesFormFields } from "./form-fields.type.js";
+export { type QuizCategoriesFormFields } from "./quiz-categories-form-fields.type.js";
