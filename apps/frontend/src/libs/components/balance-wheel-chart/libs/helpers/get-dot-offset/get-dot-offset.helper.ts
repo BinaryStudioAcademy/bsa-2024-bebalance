@@ -37,7 +37,7 @@ const getDotOffset = (
 
 				case dotPosition.y > secondPartCenterY &&
 					dotPosition.x < absoluteCenterX: {
-					return DotOffsetX.LEFT_LOWER;
+					return DotOffsetX.LEFT_BOTTOM;
 				}
 
 				case dotPosition.x < firstPartCenterX: {

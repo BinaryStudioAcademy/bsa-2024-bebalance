@@ -8,4 +8,6 @@ export { DotOffsetY } from "./dot-offset-y.enum.js";
 export { LabelDistacneOffset } from "./label-distance-offset.enum.js";
 export { SublabelOffsetX } from "./sublabel-offset-x.enum.js";
 export { SublabelOffsetY } from "./sublabel-offset-y.enum.js";
+export { ValueLabelOffsetX } from "./value-label-offset-x.enum.js";
+export { ValueLabelOffsetY } from "./value-label-offset-y.enum.js";
 export { WheelCenterDistance } from "./wheel-center-distance.enum.js";

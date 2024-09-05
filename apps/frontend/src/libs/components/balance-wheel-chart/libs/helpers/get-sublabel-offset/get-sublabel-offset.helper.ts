@@ -23,6 +23,11 @@ const getSublabelOffset = (
 	return {
 		offsetX: ((): number => {
 			switch (true) {
+				case sublabelPosition.x > absoluteCenterX &&
+					sublabelPosition.y < firstPartCenterY: {
+					return SublabelOffsetX.UPPER_CENTER_RIGHT;
+				}
+
 				case sublabelPosition.x < firstPartCenterX: {
 					return SublabelOffsetX.LEFTMOST;
 				}
@@ -39,7 +44,7 @@ const getSublabelOffset = (
 
 				case sublabelPosition.y > absoluteCenterY &&
 					sublabelPosition.x > secondPartCenterX: {
-					return SublabelOffsetX.BOTTOM_RIGHT;
+					return SublabelOffsetX.RIGHT_BOTTOM;
 				}
 
 				default: {

@@ -1,21 +1,11 @@
 import { DEFAULT_GRAPHICS_OFFSET } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
+import {
+	ValueLabelOffsetX,
+	ValueLabelOffsetY,
+} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 import { type ChartArea } from "~/libs/types/types.js";
 
 import { getCenters } from "../get-centers/get-centers.helper.js";
-
-const LabelOffsetX = {
-	BOTTOM_RIGHT: -28,
-	LEFT_CENTER: 14,
-	LEFTMOST: 5,
-	RIGHTMOST: -16,
-	UPPER_RIGHT: -10,
-} as const;
-
-const LabelOffsetY = {
-	BOTTOM_CENTER: -42,
-	BOTTOMMOST: 6,
-	TOP_CENTER: -12,
-} as const;
 
 const getLabelOffset = (
 	labelPosition: { x: number; y: number },
@@ -33,26 +23,26 @@ const getLabelOffset = (
 		offsetX: ((): number => {
 			switch (true) {
 				case labelPosition.x < firstPartCenterX: {
-					return LabelOffsetX.LEFTMOST;
+					return ValueLabelOffsetX.LEFTMOST;
 				}
 
 				case labelPosition.x > firstPartCenterX &&
 					labelPosition.x < absoluteCenterX: {
-					return LabelOffsetX.LEFT_CENTER;
+					return ValueLabelOffsetX.LEFT_CENTER;
 				}
 
 				case labelPosition.x > secondPartCenterY: {
-					return LabelOffsetX.RIGHTMOST;
+					return ValueLabelOffsetX.RIGHTMOST;
 				}
 
 				case labelPosition.y > secondPartCenterY &&
 					labelPosition.x > absoluteCenterX: {
-					return LabelOffsetX.BOTTOM_RIGHT;
+					return ValueLabelOffsetX.RIGHT_BOTTOM;
 				}
 
 				case labelPosition.y < firstPartCenterY &&
 					labelPosition.x > absoluteCenterX: {
-					return LabelOffsetX.UPPER_RIGHT;
+					return ValueLabelOffsetX.RIGHT_UPPER;
 				}
 
 				default: {
@@ -64,16 +54,16 @@ const getLabelOffset = (
 			switch (true) {
 				case labelPosition.y > absoluteCenterY &&
 					labelPosition.y < secondPartCenterY: {
-					return LabelOffsetY.BOTTOM_CENTER;
+					return ValueLabelOffsetY.BOTTOM_CENTER;
 				}
 
 				case labelPosition.y > firstPartCenterY &&
 					labelPosition.y < absoluteCenterY: {
-					return LabelOffsetY.TOP_CENTER;
+					return ValueLabelOffsetY.UPPER_CENTER;
 				}
 
 				case labelPosition.y > secondPartCenterY: {
-					return LabelOffsetY.BOTTOMMOST;
+					return ValueLabelOffsetY.BOTTOMMOST;
 				}
 
 				default: {

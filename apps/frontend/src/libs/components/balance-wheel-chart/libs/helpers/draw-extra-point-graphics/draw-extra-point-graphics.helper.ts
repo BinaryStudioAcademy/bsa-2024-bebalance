@@ -1,8 +1,4 @@
-import {
-	FIRST_ELEMENT_INDEX,
-	SINGLE_ELEMENT,
-} from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
-import { AngleCoefficient } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
+import { FIRST_ELEMENT_INDEX } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
 import { type PolarAreaType } from "~/libs/components/balance-wheel-chart/libs/types/types.js";
 import { TAU } from "~/libs/constants/constants.js";
 import {
@@ -14,6 +10,7 @@ import {
 import { drawDots } from "../draw-dots/draw-dots.helper.js";
 import { drawSublabels } from "../draw-sublabels/draw-sublabels.helper.js";
 import { drawValueLabels } from "../draw-value-labels/draw-value-labels.helper.js";
+import { getMiddleAngle } from "../get-middle-angle/get-middle-angle.helper.js";
 
 const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const { ctx: context } = chart;
@@ -23,7 +20,7 @@ const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 
 	const sublabels = chart.data.labels as string[];
 	const dataset = chart.data.datasets[FIRST_ELEMENT_INDEX] as ChartDataset<
-		"polarArea",
+		PolarAreaType,
 		number[]
 	>;
 	const values = dataset.data;
@@ -31,9 +28,7 @@ const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const angleStep = TAU / sublabels.length;
 
 	for (const [index, value] of values.entries()) {
-		const startAngle = index * angleStep;
-		const endAngle = (index + SINGLE_ELEMENT) * angleStep;
-		const middleAngle = (startAngle + endAngle) / AngleCoefficient.HALF;
+		const middleAngle = getMiddleAngle(index, angleStep);
 		const label = String(value);
 
 		drawValueLabels({
@@ -46,9 +41,7 @@ const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	}
 
 	for (const [index, label] of sublabels.entries()) {
-		const startAngle = index * angleStep;
-		const endAngle = (index + SINGLE_ELEMENT) * angleStep;
-		const middleAngle = (startAngle + endAngle) / AngleCoefficient.HALF;
+		const middleAngle = getMiddleAngle(index, angleStep);
 
 		drawSublabels({
 			chartArea,

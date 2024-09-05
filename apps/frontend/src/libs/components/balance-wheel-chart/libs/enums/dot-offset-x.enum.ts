@@ -1,5 +1,5 @@
 const DotOffsetX = {
-	LEFT_LOWER: 7,
+	LEFT_BOTTOM: 7,
 	LEFT_UPPER: 14,
 	LEFTMOST: 2,
 	RIGHTMOST: 14,
