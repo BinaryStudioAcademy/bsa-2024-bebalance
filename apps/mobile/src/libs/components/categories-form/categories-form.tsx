@@ -19,7 +19,7 @@ type Properties = {
 const NO_CATEGORIES_SELECTED = 0;
 
 const CategoriesForm: React.FC<Properties> = ({ categories }) => {
-	const { control, errors, handleSubmit, trigger } = useAppForm({
+	const { control, errors, handleSubmit } = useAppForm({
 		defaultValues: defaultCategoriesFormValue,
 		validationSchema: quizCategoriesValidationSchema,
 	});
@@ -42,13 +42,9 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		}
 	};
 
-	const handleFormSubmit = async (): Promise<void> => {
-		const isValid = await trigger("categories");
-
-		if (isValid) {
-			void handleSubmit(handleOnSubmit)();
-		}
-	};
+	const handleFormSubmit = useCallback((): void => {
+		void handleSubmit(handleOnSubmit)();
+	}, [handleSubmit, handleOnSubmit]);
 
 	const handleCheckboxChange = (categoryId: number) => (): void => {
 		const updatedCategories = selectedCategories.includes(categoryId)
@@ -66,10 +62,6 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		},
 		[categories, onChange],
 	);
-
-	const handleSaveCategories = useCallback((): void => {
-		void handleFormSubmit();
-	}, [handleFormSubmit]);
 
 	return (
 		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p16]}>
@@ -95,7 +87,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 			<Button
 				appearance="filled"
 				label="Save Categories"
-				onPress={handleSaveCategories}
+				onPress={handleFormSubmit}
 			/>
 		</View>
 	);
