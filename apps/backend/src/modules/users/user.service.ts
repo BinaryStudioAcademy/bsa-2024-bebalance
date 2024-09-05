@@ -7,6 +7,7 @@ import {
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
+	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class UserService implements Service {
@@ -67,8 +68,13 @@ class UserService implements Service {
 		return this.userRepository.findByEmail(email);
 	}
 
-	public update(): ReturnType<Service["update"]> {
-		return Promise.resolve(null);
+	public async update(
+		id: number,
+		payload: UserUpdateRequestDto,
+	): Promise<null | UserDto> {
+		const user = await this.userRepository.update(id, payload);
+
+		return user ? user.toObject() : null;
 	}
 }
 
