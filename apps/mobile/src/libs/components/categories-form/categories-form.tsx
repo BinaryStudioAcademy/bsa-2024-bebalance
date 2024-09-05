@@ -1,9 +1,7 @@
 import React from "react";
 
 import { Button, Checkbox, Text, View } from "~/libs/components/components";
-import { NumberValue } from "~/libs/enums/enums";
 import { useAppForm, useCallback, useFormController } from "~/libs/hooks/hooks";
-import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type CategoryDto,
@@ -15,9 +13,10 @@ import { styles } from "./styles";
 
 type Properties = {
 	categories: CategoryDto[];
+	onSubmit: (selectedCategories: string[]) => void;
 };
 
-const CategoriesForm: React.FC<Properties> = ({ categories }) => {
+const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 	const { control, errors, handleSubmit } = useAppForm({
 		defaultValues: CATEGORIES_FORM_DEFAULT_VALUE,
 		validationSchema: quizCategoriesValidationSchema,
@@ -33,13 +32,9 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 	const handleOnSubmit = useCallback((): void => {
 		const selectedLabels = categories
 			.filter((category) => selectedCategories.includes(category.id))
-			.map((category) => category.name)
-			.join(", ");
-
-		if (selectedLabels.length > NumberValue.ZERO) {
-			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
-		}
-	}, [categories, selectedCategories]);
+			.map((category) => category.name);
+		onSubmit(selectedLabels);
+	}, [categories, selectedCategories, onSubmit]);
 
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit(handleOnSubmit)();
