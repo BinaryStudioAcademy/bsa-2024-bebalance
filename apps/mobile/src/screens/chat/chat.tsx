@@ -5,18 +5,16 @@ import {
 	LoaderWrapper,
 	ScreenWrapper,
 } from "~/libs/components/components";
-import { DataStatus } from "~/libs/enums/enums";
+import { DataStatus, NumericValues } from "~/libs/enums/enums";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { actions as quizActions } from "~/slices/quiz/quiz";
-
-const ZERO_CATEGORIES = 0;
 
 const Chat: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { categories, dataStatus } = useAppSelector((state) => state.quiz);
 
 	useEffect(() => {
-		if (categories.length === ZERO_CATEGORIES) {
+		if (categories.length === NumericValues.ZERO) {
 			void dispatch(quizActions.getQuizCategories());
 		}
 	}, [dispatch, categories]);
@@ -24,7 +22,9 @@ const Chat: React.FC = () => {
 	return (
 		<ScreenWrapper>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-				<CategoriesForm categories={categories} />
+				{categories.length > NumericValues.ZERO && (
+					<CategoriesForm categories={categories} />
+				)}
 			</LoaderWrapper>
 		</ScreenWrapper>
 	);

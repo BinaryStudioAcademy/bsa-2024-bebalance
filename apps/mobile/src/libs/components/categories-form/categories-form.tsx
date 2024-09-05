@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Button, Checkbox, Text, View } from "~/libs/components/components";
+import { NumericValues } from "~/libs/enums/enums";
 import { useAppForm, useCallback, useFormController } from "~/libs/hooks/hooks";
 import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { globalStyles } from "~/libs/styles/styles";
@@ -15,8 +16,6 @@ import { styles } from "./styles";
 type Properties = {
 	categories: CategoryDto[];
 };
-
-const NO_CATEGORIES_SELECTED = 0;
 
 const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 	const { control, errors, handleSubmit } = useAppForm({
@@ -37,7 +36,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 			.map((category) => category.name)
 			.join(", ");
 
-		if (selectedLabels.length > NO_CATEGORIES_SELECTED) {
+		if (selectedLabels.length > NumericValues.ZERO) {
 			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
 		}
 	};

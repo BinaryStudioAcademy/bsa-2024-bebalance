@@ -12,5 +12,6 @@ export {
 	AppEnvironment,
 	CategoriesApiPath,
 	ContentType,
+	NumericValues,
 	ServerErrorType,
 } from "shared";
