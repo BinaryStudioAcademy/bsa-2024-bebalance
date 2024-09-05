@@ -5,6 +5,7 @@ export {
 	type FieldPath,
 	type FieldValues,
 	type FormFieldProperties,
+	type QuizQuestionPropeties,
 } from "./form-field-properties.type.js";
 export { type IconName } from "./icon-name.type.js";
 export { type InputOption } from "./input-option.type.js";

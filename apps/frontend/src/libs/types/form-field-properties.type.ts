@@ -12,7 +12,15 @@ type FormFieldProperties<T extends FieldValues> = {
 	options?: InputOption[];
 };
 
+type QuizQuestionPropeties<T extends FieldValues> = {
+	control: Control<T, null>;
+	label: string;
+	name: FieldPath<T>;
+	options: InputOption[];
+};
+
 export { type FormFieldProperties };
+export { type QuizQuestionPropeties };
 export {
 	type Control,
 	type FieldErrors,

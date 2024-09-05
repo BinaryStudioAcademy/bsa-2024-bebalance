@@ -18,6 +18,7 @@ import {
 	onboardingApi,
 	reducer as onboardingReducer,
 } from "~/modules/onboarding/onboarding.js";
+import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
 import { usersApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import { handleErrorMiddleware } from "./handle-error.middleware.js";
@@ -26,6 +27,7 @@ type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
 	categories: ReturnType<typeof categoriesReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
+	quiz: ReturnType<typeof quizReducer>;
 	users: ReturnType<typeof usersReducer>;
 };
 
@@ -34,6 +36,7 @@ type ExtraArguments = {
 	categoriesApi: typeof categoriesApi;
 	notification: typeof notification;
 	onboardingApi: typeof onboardingApi;
+	quizApi: typeof quizApi;
 	storage: typeof storage;
 	usersApi: typeof usersApi;
 };
@@ -61,6 +64,7 @@ class Store {
 				auth: authReducer,
 				categories: categoriesReducer,
 				onboarding: onboardingReducer,
+				quiz: quizReducer,
 				users: usersReducer,
 			},
 		});
@@ -72,6 +76,7 @@ class Store {
 			categoriesApi,
 			notification,
 			onboardingApi,
+			quizApi,
 			storage,
 			usersApi,
 		};

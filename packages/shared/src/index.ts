@@ -62,6 +62,7 @@ export {
 	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
 export {
+	categoryAnswerSelectedValidationSchema,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
