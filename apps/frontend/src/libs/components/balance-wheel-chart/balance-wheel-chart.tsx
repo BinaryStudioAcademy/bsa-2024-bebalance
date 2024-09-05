@@ -17,7 +17,11 @@ import {
 	WHEEL_CHART_CONFIG,
 } from "./libs/constants/constants.js";
 import { generateRandomData } from "./libs/helpers/helpers.js";
-import { type ChartDataType, type PolarAreaType } from "./libs/types/types.js";
+import {
+	type CategoryName,
+	type ChartDataType,
+	type PolarAreaType,
+} from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
@@ -26,8 +30,6 @@ type Properties = {
 	data: ChartDataType[];
 	isAnimating: boolean;
 };
-
-type CategoryName = (typeof CATEGORIES_ORDER)[number];
 
 const BalanceWheelChart: React.FC<Properties> = ({
 	data,

@@ -1,5 +1,5 @@
 const AngleCoefficient = {
-	FIFTH_PART: 5,
+	FIFTH: 5,
 	HALF: 2,
 } as const;
 

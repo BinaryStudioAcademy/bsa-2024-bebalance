@@ -23,9 +23,6 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 		layout: {
 			padding: 89,
 		},
-		parsing: {
-			key: "value",
-		},
 		plugins: {
 			tooltip: {
 				enabled: false,

@@ -5,11 +5,10 @@ const getBaseline = (
 	chartArea: { bottom: number; top: number },
 ): CanvasTextBaseline => {
 	const centerTop =
-		chartArea.top +
-		(chartArea.bottom - chartArea.top) / AngleCoefficient.FIFTH_PART;
+		chartArea.top + (chartArea.bottom - chartArea.top) / AngleCoefficient.FIFTH;
 	const centerBottom =
 		chartArea.bottom -
-		(chartArea.bottom - chartArea.top) / AngleCoefficient.FIFTH_PART;
+		(chartArea.bottom - chartArea.top) / AngleCoefficient.FIFTH;
 
 	if (y > centerTop && y < centerBottom) {
 		return "middle";
