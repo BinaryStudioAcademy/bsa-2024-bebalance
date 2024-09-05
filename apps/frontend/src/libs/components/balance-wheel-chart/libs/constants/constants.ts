@@ -22,5 +22,5 @@ export {
 	START_ANGLE,
 };
 export { CATEGORIES_ORDER } from "./categories-order.constant.js";
-export { USER_WHEEL_CHART_CONFIG } from "./user-wheel-chart-config.constant.js";
+export { ROOT_WHEEL_CHART_CONFIG } from "./root-wheel-chart-config.constant.js";
 export { WHEEL_CHART_CONFIG } from "./wheel-chart-config.constant.js";

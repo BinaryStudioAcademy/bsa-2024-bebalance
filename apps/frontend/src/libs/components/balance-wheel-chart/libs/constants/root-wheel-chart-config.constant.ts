@@ -7,7 +7,7 @@ import {
 } from "../helpers/helpers.js";
 import { type PolarAreaType } from "../types/types.js";
 
-const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
+const ROOT_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	data: {
 		datasets: [
 			{
@@ -57,4 +57,4 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	type: "polarArea",
 } as const;
 
-export { USER_WHEEL_CHART_CONFIG };
+export { ROOT_WHEEL_CHART_CONFIG };

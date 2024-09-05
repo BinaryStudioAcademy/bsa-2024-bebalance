@@ -13,7 +13,7 @@ import {
 	CATEGORIES_ORDER,
 	FIRST_ELEMENT_INDEX,
 	NOT_FOUND_INDEX,
-	USER_WHEEL_CHART_CONFIG,
+	ROOT_WHEEL_CHART_CONFIG,
 	WHEEL_CHART_CONFIG,
 } from "./libs/constants/constants.js";
 import { generateRandomData } from "./libs/helpers/helpers.js";
@@ -104,7 +104,7 @@ const BalanceWheelChart: React.FC<Properties> = ({
 			if (context) {
 				const chartConfig = isAnimating
 					? WHEEL_CHART_CONFIG
-					: USER_WHEEL_CHART_CONFIG;
+					: ROOT_WHEEL_CHART_CONFIG;
 				chartReference.current = new ChartJS<PolarAreaType>(
 					context,
 					chartConfig,
