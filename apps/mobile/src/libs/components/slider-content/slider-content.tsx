@@ -14,8 +14,15 @@ const minSliderValue: number = 0;
 
 const SliderContent: React.FC<Properties> = ({ color, label }) => {
 	return (
-		<View style={[globalStyles.flex1, globalStyles.justifyContentCenter]}>
-			<Text children={label} preset="regular"></Text>
+		<View
+			style={[
+				globalStyles.flex1,
+				globalStyles.justifyContentCenter,
+				globalStyles.mt48,
+				globalStyles.mh32,
+			]}
+		>
+			<Text children={label} preset="tag" style={globalStyles.mb48} />
 			<GradientSlider
 				gradientColors={color}
 				max={maxSliderValue}
