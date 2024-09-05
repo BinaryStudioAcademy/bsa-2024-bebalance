@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Button, Checkbox, Text, View } from "~/libs/components/components";
-import { NumericValues } from "~/libs/enums/enums";
+import { NumberValue } from "~/libs/enums/enums";
 import { useAppForm, useCallback, useFormController } from "~/libs/hooks/hooks";
 import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { globalStyles } from "~/libs/styles/styles";
@@ -36,7 +36,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 			.map((category) => category.name)
 			.join(", ");
 
-		if (selectedLabels.length > NumericValues.ZERO) {
+		if (selectedLabels.length > NumberValue.ZERO) {
 			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
 		}
 	}, [categories, selectedCategories]);

@@ -7,7 +7,7 @@ export {
 	AppEnvironment,
 	ContentType,
 	ErrorMessage,
-	NumericValues,
+	NumberValue,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
