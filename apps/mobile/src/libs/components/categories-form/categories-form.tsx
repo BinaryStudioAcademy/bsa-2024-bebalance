@@ -31,7 +31,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 
 	const { onChange, value: selectedCategories } = field;
 
-	const onSubmit = (): void => {
+	const handleOnSubmit = (): void => {
 		const selectedLabels = categories
 			.filter((category) => selectedCategories.includes(category.id))
 			.map((category) => category.name)
@@ -46,7 +46,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 		const isValid = await trigger("categories");
 
 		if (isValid) {
-			void handleSubmit(onSubmit)();
+			void handleSubmit(handleOnSubmit)();
 		}
 	};
 
