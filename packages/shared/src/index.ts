@@ -70,8 +70,8 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
-	type SavePasswordDto,
-	type SavePasswordFormDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	type UserDto,
 	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,

@@ -13,8 +13,8 @@ const usersApi = new UsersApi({
 export { usersApi };
 export {
 	type EmailDto,
-	type SavePasswordDto,
-	type SavePasswordFormDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
