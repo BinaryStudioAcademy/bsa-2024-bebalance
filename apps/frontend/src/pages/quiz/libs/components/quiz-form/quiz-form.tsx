@@ -102,7 +102,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 									control={control}
 									key={question.id}
 									label={question.label}
-									name={question.label}
+									name={question.id.toString()}
 									options={answerOptions}
 								/>
 							);
