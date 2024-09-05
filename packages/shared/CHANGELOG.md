@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.11.0...shared-v1.12.0) (2024-09-05)
+
+
+### Features
+
+* **backend/frontend/shared:** user profile screen bb-187 ([#260](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/260)) ([1fc8691](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1fc8691561cdad1070bb7ce51397d372827f4223))
+* **frontend/backend:** quiz functionality bb-89 ([#263](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/263)) ([1bf5519](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1bf55198b8e843c2e298ccc343d844e08680c06a))
+
 ## [1.11.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.10.0...shared-v1.11.0) (2024-09-04)
 
 
