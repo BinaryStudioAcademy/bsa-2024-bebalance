@@ -19,7 +19,7 @@ class CategoryService implements Service {
 		this.categoryRepository = categoryRepository;
 	}
 
-	private mapEntityScores(
+	private convertCategoryEntityToDto(
 		categoryEntity: CategoryEntity,
 	): CategoryWithScoresDto {
 		const category = categoryEntity.toObject();
@@ -41,18 +41,15 @@ class CategoryService implements Service {
 		};
 	}
 
-	private parseEntityToDto(categoryEntity: CategoryEntity): CategoryDto {
-		const { createdAt, id, name, updatedAt } = categoryEntity.toObject();
-
-		return { createdAt, id, name, updatedAt };
-	}
-
 	public async create(payload: CreateCategoryRequestDto): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.create(
 			CategoryEntity.initializeNew(payload),
 		);
 
-		return this.parseEntityToDto(categoryEntity);
+		const { createdAt, id, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
 	public async createScore({
@@ -78,14 +75,26 @@ class CategoryService implements Service {
 	public async find(id: number): Promise<CategoryDto | null> {
 		const categoryEntity = await this.categoryRepository.find(id);
 
-		return categoryEntity ? this.parseEntityToDto(categoryEntity) : null;
+		if (!categoryEntity) {
+			return null;
+		}
+
+		const { createdAt, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
 	public async findAll(): Promise<GetCategoriesDto> {
 		const entities = await this.categoryRepository.findAll();
 
 		return {
-			items: entities.map((entity) => this.parseEntityToDto(entity)),
+			items: entities.map((entity) => {
+				const { createdAt, id, name, updatedAt } =
+					this.convertCategoryEntityToDto(entity);
+
+				return { createdAt, id, name, updatedAt };
+			}),
 		};
 	}
 
@@ -95,7 +104,7 @@ class CategoryService implements Service {
 		const categories = await this.categoryRepository.findAll();
 
 		const items = categories.map((categoryEntity) => {
-			return this.mapEntityScores(categoryEntity);
+			return this.convertCategoryEntityToDto(categoryEntity);
 		});
 
 		return { items };
@@ -107,7 +116,10 @@ class CategoryService implements Service {
 	): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.update(id, payload);
 
-		return this.parseEntityToDto(categoryEntity);
+		const { createdAt, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 }
 
