@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.25.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.25.0...frontend-v1.25.1) (2024-09-05)
+
+
+### Bug Fixes
+
+* **frontend:** fix skipping category on next button event bb-89 ([#307](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/307)) ([8331add](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8331addc2460876740e1b614f587f8adfbcc9766))
+
 ## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.24.0...frontend-v1.25.0) (2024-09-05)
 
 
