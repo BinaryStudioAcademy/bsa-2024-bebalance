@@ -6,12 +6,12 @@ import {
 	Tooltip,
 } from "chart.js";
 
+import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { useCallback, useEffect, useRef } from "~/libs/hooks/hooks.js";
 
 import {
 	ANIMATION_INTERVAL,
 	CATEGORIES_ORDER,
-	FIRST_ELEMENT_INDEX,
 	NOT_FOUND_INDEX,
 	ROOT_WHEEL_CHART_CONFIG,
 	WHEEL_CHART_CONFIG,
@@ -41,10 +41,7 @@ const BalanceWheelChart: React.FC<Properties> = ({
 		(chartData: ChartDataType[]): void => {
 			const chartInstance = chartReference.current;
 
-			if (
-				!chartInstance ||
-				!chartInstance.data.datasets[FIRST_ELEMENT_INDEX]?.data
-			) {
+			if (!chartInstance || !chartInstance.data.datasets[ZERO_INDEX]?.data) {
 				return;
 			}
 
@@ -62,10 +59,11 @@ const BalanceWheelChart: React.FC<Properties> = ({
 				return adjustedIndexA - adjustedIndexB;
 			});
 
-			chartInstance.data.datasets[FIRST_ELEMENT_INDEX].data =
-				orderedChartData.map((entry) => {
+			chartInstance.data.datasets[ZERO_INDEX].data = orderedChartData.map(
+				(entry) => {
 					return entry.data;
-				});
+				},
+			);
 
 			chartInstance.data.labels = chartData.map((entry) => entry.label);
 

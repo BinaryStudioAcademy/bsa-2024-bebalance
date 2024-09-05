@@ -1,6 +1,5 @@
-import { FIRST_ELEMENT_INDEX } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
 import { type PolarAreaType } from "~/libs/components/balance-wheel-chart/libs/types/types.js";
-import { TAU } from "~/libs/constants/constants.js";
+import { TAU, ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
 	type Chart,
 	type ChartDataset,
@@ -15,11 +14,11 @@ import { getMiddleAngle } from "../get-middle-angle/get-middle-angle.helper.js";
 const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const { ctx: context } = chart;
 	const scale = chart.scales["r"] as RadialLinearScale;
-	const meta = chart.getDatasetMeta(FIRST_ELEMENT_INDEX);
+	const meta = chart.getDatasetMeta(ZERO_INDEX);
 	const { chartArea } = chart;
 
 	const sublabels = chart.data.labels as string[];
-	const dataset = chart.data.datasets[FIRST_ELEMENT_INDEX] as ChartDataset<
+	const dataset = chart.data.datasets[ZERO_INDEX] as ChartDataset<
 		PolarAreaType,
 		number[]
 	>;
