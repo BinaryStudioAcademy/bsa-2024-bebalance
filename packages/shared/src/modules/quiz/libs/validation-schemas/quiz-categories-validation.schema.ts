@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { QuizCategoriesValidationMessage } from "../enums/quiz-categories-validation-message.enum.js";
+import { QuizCategoriesValidationMessage } from "../enums/enums.js";
 
 const MIN_CATEGORIES_SELECTED = 1;
 
