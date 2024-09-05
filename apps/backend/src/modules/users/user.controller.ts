@@ -41,6 +41,17 @@ import { userPreferencesValidationSchema } from "./libs/validation-schemas/valid
  *          updatedAt:
  *            type: string
  *            format: date-time
+ *      FinalQuestionsRequest:
+ *        type: object
+ *        properties:
+ *          allowNotifications:
+ *            type: boolean
+ *          userTaskDays:
+ *            type: array
+ *            items:
+ *              type: number
+ *          userId:
+ *            type: number
  */
 
 class UserController extends BaseController {
