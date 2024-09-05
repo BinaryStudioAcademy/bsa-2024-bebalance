@@ -1,5 +1,6 @@
 import { Button, Checkbox, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { Numeric } from "~/libs/enums/enums.js";
+import { useAppForm, useCallback, useMemo } from "~/libs/hooks/hooks.js";
 import { type UserPreferencesPayloadDto } from "~/modules/users/users.js";
 
 import {
@@ -15,9 +16,20 @@ type Properties = {
 };
 
 const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, handleSubmit } = useAppForm<FinalQuestionsFormValues>({
-		defaultValues: FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
-	});
+	const { control, handleSubmit, watch } = useAppForm<FinalQuestionsFormValues>(
+		{
+			defaultValues: FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
+		},
+	);
+
+	const [userTaskDays, allowNotifications] = watch([
+		"userTaskDays",
+		"allowNotifications",
+	]);
+
+	const isButtonDisabled = useMemo(() => {
+		return userTaskDays.length === Numeric.ZERO || !allowNotifications;
+	}, [userTaskDays, allowNotifications]);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -51,7 +63,7 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						type="radio"
 					/>
 					<div className={styles["button-container"]}>
-						<Button label="Next" type="submit" />
+						<Button isDisabled={isButtonDisabled} label="Next" type="submit" />
 					</div>
 				</form>
 			</div>
