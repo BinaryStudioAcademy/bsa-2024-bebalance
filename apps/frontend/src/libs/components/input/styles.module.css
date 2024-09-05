@@ -1,6 +1,7 @@
 .input-wrapper {
 	display: flex;
 	flex-direction: column;
+	gap: 24px;
 }
 
 .input-label {
@@ -43,7 +44,6 @@
 .radio-option {
 	display: flex;
 	gap: 8px;
-	width: 100%;
 	padding: 8px 10px;
 	font-size: 16px;
 	font-weight: 500;
@@ -51,6 +51,10 @@
 	cursor: pointer;
 	border: 1px solid var(--light-gray);
 	border-radius: 5px;
+}
+
+.full-width {
+	width: 100%;
 }
 
 .radio-option:has(input[type="radio"]:checked) {
