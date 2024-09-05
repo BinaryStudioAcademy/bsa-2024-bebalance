@@ -9,6 +9,7 @@ import {
 	BalanceWheel,
 	FinalQuestions,
 	Introduction,
+	QuizForm,
 } from "./libs/components/components.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
@@ -49,6 +50,10 @@ const Quiz: React.FC = () => {
 
 			case Step.FINAL_QUESTIONS: {
 				return <FinalQuestions onSubmit={handleFinalQuestionsSubmit} />;
+			}
+
+			case Step.QUIZ: {
+				return <QuizForm onNext={handleNextStep} />;
 			}
 
 			default: {

@@ -6,3 +6,4 @@ export {
 	TASK_DAYS_OPTIONS,
 } from "./final-questions-options.constant.js";
 export { STEP_INCREMENT };
+export { QUIZ_FORM_DEFAULT_VALUES } from "./quiz-form-default-values.constant.js";
