@@ -1,1 +1,0 @@
-export { quizCategoriesValidationSchema } from "shared";

@@ -6,3 +6,4 @@ export {
 	type CategoryWithScoresDto,
 	type GetCategoriesDto,
 } from "./libs/types/types.js";
+export { categoriesValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

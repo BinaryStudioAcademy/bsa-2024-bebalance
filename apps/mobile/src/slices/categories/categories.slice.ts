@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
-import { type CategoryDto } from "~/packages/quiz/quiz";
+import { type CategoryDto } from "~/packages/categories/categories";
 
 import { getQuizCategories } from "./actions";
 
@@ -30,7 +30,7 @@ const { actions, name, reducer } = createSlice({
 		});
 	},
 	initialState,
-	name: "quiz",
+	name: "categories",
 	reducers: {},
 });
 

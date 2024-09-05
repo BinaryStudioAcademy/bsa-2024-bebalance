@@ -7,10 +7,10 @@ import {
 
 import { AppEnvironment } from "~/libs/enums/enums";
 import { authApi } from "~/packages/auth/auth";
-import { quizApi } from "~/packages/quiz/quiz";
+import { categoriesApi } from "~/packages/categories/categories";
 import { userApi } from "~/packages/users/users";
 import { reducer as authReducer } from "~/slices/auth/auth";
-import { reducer as quizReducer } from "~/slices/quiz/quiz";
+import { reducer as categoriesReducer } from "~/slices/categories/categories";
 import { reducer as usersReducer } from "~/slices/users/users";
 
 import { type Config } from "../config/config";
@@ -18,12 +18,12 @@ import { handleErrorMiddleware } from "./middleware/handle-error.middleware";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
-	quiz: ReturnType<typeof quizReducer>;
+	categories: ReturnType<typeof categoriesReducer>;
 };
 
 type ExtraArguments = {
 	authApi: typeof authApi;
-	quizApi: typeof quizApi;
+	categoriesApi: typeof categoriesApi;
 	userApi: typeof userApi;
 };
 
@@ -48,7 +48,7 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
-				quiz: quizReducer,
+				categories: categoriesReducer,
 				users: usersReducer,
 			},
 		});
@@ -57,7 +57,7 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
-			quizApi,
+			categoriesApi,
 			userApi,
 		};
 	}

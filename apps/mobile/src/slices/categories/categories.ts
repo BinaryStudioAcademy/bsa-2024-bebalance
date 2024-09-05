@@ -1,5 +1,5 @@
 import { getQuizCategories } from "./actions";
-import { actions } from "./quiz.slice";
+import { actions } from "./categories.slice";
 
 const allActions = {
 	...actions,
@@ -7,4 +7,4 @@ const allActions = {
 };
 
 export { allActions as actions };
-export { reducer } from "./quiz.slice";
+export { reducer } from "./categories.slice";

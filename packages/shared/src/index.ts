@@ -43,6 +43,7 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	CategoriesApiPath,
+	categoriesValidationSchema,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
@@ -69,7 +70,6 @@ export {
 	type QuizAnswersRequestDto,
 	type QuizAnswersResponseDto,
 	QuizApiPath,
-	quizCategoriesValidationSchema,
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,

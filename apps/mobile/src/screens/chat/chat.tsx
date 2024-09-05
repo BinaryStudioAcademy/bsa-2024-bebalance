@@ -13,15 +13,17 @@ import {
 	useEffect,
 } from "~/libs/hooks/hooks";
 import { toastMessage } from "~/libs/packages/toast-message/toast-message";
-import { actions as quizActions } from "~/slices/quiz/quiz";
+import { actions as categoriesActions } from "~/slices/categories/categories";
 
 const Chat: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { categories, dataStatus } = useAppSelector((state) => state.quiz);
+	const { categories, dataStatus } = useAppSelector(
+		(state) => state.categories,
+	);
 
 	useEffect(() => {
 		if (categories.length === NumberValue.ZERO) {
-			void dispatch(quizActions.getQuizCategories());
+			void dispatch(categoriesActions.getQuizCategories());
 		}
 	}, [dispatch, categories]);
 

@@ -10,7 +10,4 @@ export {
 	type QuizUserAnswerDto,
 } from "./libs/types/types.js";
 export { oneAnswerSelected as categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
-export {
-	quizCategoriesValidationSchema,
-	quizUserAnswers as quizUserAnswersValidationSchema,
-} from "./libs/validation-schemas/validation-schemas.js";
+export { quizUserAnswers as quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
