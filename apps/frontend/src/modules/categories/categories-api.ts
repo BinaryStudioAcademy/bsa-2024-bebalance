@@ -4,7 +4,7 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { CategoriesApiPath } from "./libs/enums/enums.js";
-import { type GetCategoriesDto } from "./libs/types/types.js";
+import { type CategoriesGetAllResponseDto } from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -17,7 +17,7 @@ class CategoriesApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.CATEGORIES, storage });
 	}
 
-	public async getCategories(): Promise<GetCategoriesDto> {
+	public async getCategories(): Promise<CategoriesGetAllResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(CategoriesApiPath.ROOT, {}),
 			{
@@ -27,7 +27,7 @@ class CategoriesApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<GetCategoriesDto>();
+		return await response.json<CategoriesGetAllResponseDto>();
 	}
 }
 

@@ -3,11 +3,11 @@ import { type Service } from "~/libs/types/types.js";
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
 import {
+	type CategoriesGetAllResponseDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
-	type GetCategoriesDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 } from "./libs/types/types.js";
@@ -81,7 +81,7 @@ class CategoryService implements Service {
 		return { createdAt, id, name, updatedAt };
 	}
 
-	public async findAll(): Promise<GetCategoriesDto> {
+	public async findAll(): Promise<CategoriesGetAllResponseDto> {
 		const categories = await this.categoryRepository.findAll();
 
 		const items = categories.map((categoryEntity) => {
