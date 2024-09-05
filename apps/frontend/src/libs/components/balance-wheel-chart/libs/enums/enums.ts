@@ -5,7 +5,7 @@ export { ChartGraphicsColors } from "./chart-graphics-colors.enum.js";
 export { ChartSliceColor } from "./chart-slice-color.enum.js";
 export { DotOffsetX } from "./dot-offset-x.enum.js";
 export { DotOffsetY } from "./dot-offset-y.enum.js";
-export { SublabelOffset } from "./sublabel-offset.enum.js";
+export { LabelDistacneOffset } from "./label-distance-offset.enum.js";
 export { SublabelOffsetX } from "./sublabel-offset-x.enum.js";
 export { SublabelOffsetY } from "./sublabel-offset-y.enum.js";
 export { WheelCenterDistance } from "./wheel-center-distance.enum.js";

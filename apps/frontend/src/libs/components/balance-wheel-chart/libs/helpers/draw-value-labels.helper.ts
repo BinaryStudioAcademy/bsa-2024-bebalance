@@ -4,7 +4,7 @@ import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
 import {
 	ChartFont,
 	ChartGraphicsColors,
-	SublabelOffset,
+	LabelDistacneOffset,
 	WheelCenterDistance,
 } from "../enums/enums.js";
 import { getBaseline, getLabelOffset } from "./helpers.js";
@@ -29,10 +29,12 @@ const drawValueLabels = ({
 	const sublabelPosition = {
 		x:
 			scale.xCenter +
-			Math.cos(middleAngle - HALF_PI) * (sublabelDistance + SublabelOffset.x),
+			Math.cos(middleAngle - HALF_PI) *
+				(sublabelDistance + LabelDistacneOffset.x),
 		y:
 			scale.yCenter +
-			Math.sin(middleAngle - HALF_PI) * (sublabelDistance + SublabelOffset.y),
+			Math.sin(middleAngle - HALF_PI) *
+				(sublabelDistance + LabelDistacneOffset.y),
 	};
 
 	context.textAlign = "center";
