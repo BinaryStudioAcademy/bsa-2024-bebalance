@@ -9,6 +9,7 @@ import {
 	quizCategoriesValidationSchema,
 } from "~/packages/quiz/quiz";
 
+import { defaultCategoriesFormValue } from "./libs/values/values";
 import { styles } from "./styles";
 
 type Properties = {
@@ -19,9 +20,7 @@ const NO_CATEGORIES_SELECTED = 0;
 
 const CategoriesForm: React.FC<Properties> = ({ categories }) => {
 	const { control, errors, handleSubmit, trigger } = useAppForm({
-		defaultValues: {
-			categories: [] as number[],
-		},
+		defaultValues: defaultCategoriesFormValue,
 		validationSchema: quizCategoriesValidationSchema,
 	});
 
