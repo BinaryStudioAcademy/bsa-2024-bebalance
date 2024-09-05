@@ -12,5 +12,8 @@ const categoriesApi = new CategoriesApi({
 
 export { categoriesApi };
 export { APIPath } from "./libs/enums/enums";
-export { type CategoryDto, type GetCategoriesDto } from "./libs/types/types";
+export {
+	type CategoriesGetAllResponseDto,
+	type CategoryDto,
+} from "./libs/types/types";
 export { categoriesValidationSchema } from "./libs/validation-schemas/validation-schemas";

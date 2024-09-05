@@ -43,8 +43,8 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	CategoriesApiPath,
-	categoriesValidationSchema,
 	type CategoriesGetAllResponseDto,
+	categoriesValidationSchema,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,

@@ -4,7 +4,7 @@ import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type CategoryDto } from "~/packages/categories/categories";
 
-import { getQuizCategories } from "./actions";
+import { getCategories } from "./actions";
 
 type State = {
 	categories: CategoryDto[];
@@ -18,14 +18,14 @@ const initialState: State = {
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(getQuizCategories.pending, (state) => {
+		builder.addCase(getCategories.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(getQuizCategories.fulfilled, (state, action) => {
+		builder.addCase(getCategories.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.categories = action.payload;
 		});
-		builder.addCase(getQuizCategories.rejected, (state) => {
+		builder.addCase(getCategories.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

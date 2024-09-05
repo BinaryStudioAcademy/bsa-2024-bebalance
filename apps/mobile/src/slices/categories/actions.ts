@@ -5,16 +5,16 @@ import { type CategoryDto } from "~/packages/categories/categories";
 
 import { name as sliceName } from "./categories.slice";
 
-const getQuizCategories = createAsyncThunk<
+const getCategories = createAsyncThunk<
 	CategoryDto[],
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get-quiz-categories`, async (_, { extra }) => {
 	const { categoriesApi } = extra;
 
-	const { items } = await categoriesApi.getQuizCategories();
+	const { items } = await categoriesApi.getCategories();
 
 	return items;
 });
 
-export { getQuizCategories };
+export { getCategories };

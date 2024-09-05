@@ -2,7 +2,7 @@ import { APIPath, CategoriesApiPath, ContentType } from "~/libs/enums/enums";
 import { BaseHttpApi } from "~/libs/packages/api/api";
 import { type HTTP } from "~/libs/packages/http/http";
 import { type Storage } from "~/libs/packages/storage/storage";
-import { type GetCategoriesDto } from "~/packages/categories/categories";
+import { type CategoriesGetAllResponseDto } from "~/packages/categories/categories";
 
 type Constructor = {
 	baseUrl: string;
@@ -15,7 +15,7 @@ class CategoriesApi extends BaseHttpApi {
 		super({ baseUrl, http, path: APIPath.CATEGORIES, storage });
 	}
 
-	public async getQuizCategories(): Promise<GetCategoriesDto> {
+	public async getCategories(): Promise<CategoriesGetAllResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(CategoriesApiPath.ROOT, {}),
 			{
@@ -25,7 +25,7 @@ class CategoriesApi extends BaseHttpApi {
 			},
 		);
 
-		return await response.json<GetCategoriesDto>();
+		return await response.json<CategoriesGetAllResponseDto>();
 	}
 }
 
