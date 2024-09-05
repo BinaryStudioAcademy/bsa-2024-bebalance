@@ -24,7 +24,7 @@
 	background-color: var(--black);
 }
 
-.secondary-button {
+.secondary {
 	color: var(--black);
 	background-color: var(--white);
 	border: 1px solid var(--black);

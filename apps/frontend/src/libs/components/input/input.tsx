@@ -6,6 +6,7 @@ import {
 	type FieldPath,
 	type FieldValues,
 	type IconName,
+	type RadioInputOption,
 } from "~/libs/types/types.js";
 
 import { Button } from "../button/button.js";
@@ -17,10 +18,11 @@ type Properties<T extends FieldValues> = {
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	isDisabled?: boolean;
+	isFullWidth?: boolean;
 	label: string;
 	name: FieldPath<T>;
 	onIconClick?: (() => void) | undefined;
-	options?: { label: string; value: string }[];
+	options?: RadioInputOption[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
 };
@@ -31,6 +33,7 @@ const Input = <T extends FieldValues>({
 	hasVisuallyHiddenLabel,
 	iconName,
 	isDisabled = false,
+	isFullWidth = true,
 	label,
 	name,
 	onIconClick,
@@ -62,7 +65,12 @@ const Input = <T extends FieldValues>({
 			>
 				{label}
 			</span>
-			<div className={styles["input-container"]}>
+			<div
+				className={getValidClassNames(
+					styles["input-container"],
+					isFullWidth && styles["full-width"],
+				)}
+			>
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (
