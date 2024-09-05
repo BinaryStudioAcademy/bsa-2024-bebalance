@@ -8,7 +8,7 @@ import { HALF_PI } from "~/libs/constants/constants.js";
 import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
 
 import { getBaseline } from "../get-baseline/get-baseline.helper.js";
-import { getLabelOffset } from "../get-label-offset/get-label-offset.helper.js";
+import { getValueLabelOffset } from "../get-label-offset/get-value-label-offset.helper.js";
 
 const drawValueLabels = ({
 	chartArea,
@@ -41,7 +41,7 @@ const drawValueLabels = ({
 	context.textAlign = "center";
 	context.textBaseline = getBaseline(sublabelPosition.y, chartArea);
 
-	const { offsetX, offsetY } = getLabelOffset(sublabelPosition, chartArea);
+	const { offsetX, offsetY } = getValueLabelOffset(sublabelPosition, chartArea);
 
 	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.LABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
 	context.fillStyle = ChartGraphicsColors.LABELS_COLOR;

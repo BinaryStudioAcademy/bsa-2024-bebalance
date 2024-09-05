@@ -7,7 +7,7 @@ import { type ChartArea } from "~/libs/types/types.js";
 
 import { getCenters } from "../get-centers/get-centers.helper.js";
 
-const getLabelOffset = (
+const getValueLabelOffset = (
 	labelPosition: { x: number; y: number },
 	chartArea: ChartArea,
 ): { offsetX: number; offsetY: number } => {
@@ -74,4 +74,4 @@ const getLabelOffset = (
 	};
 };
 
-export { getLabelOffset };
+export { getValueLabelOffset };
