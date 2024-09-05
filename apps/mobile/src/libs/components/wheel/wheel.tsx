@@ -56,7 +56,7 @@ const Wheel: React.FC<Properties> = ({
 				setRepetition(repetition + REPETITION_STEP);
 			}, animationTime);
 		}
-	}, [repetition]);
+	}, [animationRepetitions, animationTime, repetition]);
 
 	const Sectors = categoriesData.map(
 		({ colors, label, score }, index, array) => {
