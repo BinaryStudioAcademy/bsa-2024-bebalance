@@ -9,7 +9,7 @@ import { useAppDispatch, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { actions as authActions } from "~/slices/auth/auth";
 
-const iconSize = 40;
+const SIGN_OUT_ICON_SIZE = 40;
 
 const Settings: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -32,7 +32,11 @@ const Settings: React.FC = () => {
 					globalStyles.mt24,
 				]}
 			>
-				<Icon color={BaseColor.BLACK} name="exit-to-app" size={iconSize} />
+				<Icon
+					color={BaseColor.BLACK}
+					name="exit-to-app"
+					size={SIGN_OUT_ICON_SIZE}
+				/>
 				<Text preset="subheading">SIGN OUT</Text>
 			</Pressable>
 		</ScreenWrapper>
