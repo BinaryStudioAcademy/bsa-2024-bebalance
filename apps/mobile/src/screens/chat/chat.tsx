@@ -27,7 +27,7 @@ const Chat: React.FC = () => {
 		}
 	}, [dispatch, categories]);
 
-	const handleSubmitCategories = useCallback(
+	const handleFormSubmit = useCallback(
 		(selectedCategoriesIds: number[]): void => {
 			const selectedLabels = categories
 				.filter((category) => selectedCategoriesIds.includes(category.id))
@@ -43,10 +43,7 @@ const Chat: React.FC = () => {
 		<ScreenWrapper>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 				{categories.length > NumberValue.ZERO && (
-					<CategoriesForm
-						categories={categories}
-						onSubmit={handleSubmitCategories}
-					/>
+					<CategoriesForm categories={categories} onSubmit={handleFormSubmit} />
 				)}
 			</LoaderWrapper>
 		</ScreenWrapper>
