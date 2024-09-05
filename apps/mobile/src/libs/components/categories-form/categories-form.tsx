@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { Button, Checkbox, Text, View } from "~/libs/components/components";
-import { useAppForm, useCallback, useFormController } from "~/libs/hooks/hooks";
+import { useAppForm, useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	categoriesValidationSchema,
@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 type Properties = {
 	categories: CategoryDto[];
-	onSubmit: (selectedCategories: string[]) => void;
+	onSubmit: (selectedCategoryIds: number[]) => void; // Пропс для передачі ID вибраних категорій
 };
 
 const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
@@ -29,16 +29,9 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 
 	const { onChange, value: selectedCategories } = field;
 
-	const handleOnSubmit = useCallback((): void => {
-		const selectedLabels = categories
-			.filter((category) => selectedCategories.includes(category.id))
-			.map((category) => category.name);
-		onSubmit(selectedLabels);
-	}, [categories, selectedCategories, onSubmit]);
-
 	const handleFormSubmit = useCallback((): void => {
-		void handleSubmit(handleOnSubmit)();
-	}, [handleSubmit, handleOnSubmit]);
+		onSubmit(selectedCategories);
+	}, [selectedCategories, onSubmit]);
 
 	const handleCheckboxChange = (categoryId: number) => (): void => {
 		const updatedCategories = selectedCategories.includes(categoryId)
@@ -56,6 +49,10 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 		},
 		[categories, onChange],
 	);
+
+	const handleSaveCategories = useCallback((): void => {
+		void handleSubmit(handleFormSubmit)();
+	}, [handleSubmit, handleFormSubmit]);
 
 	return (
 		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p16]}>
@@ -81,7 +78,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 			<Button
 				appearance="filled"
 				label="Save Categories"
-				onPress={handleFormSubmit}
+				onPress={handleSaveCategories}
 			/>
 		</View>
 	);

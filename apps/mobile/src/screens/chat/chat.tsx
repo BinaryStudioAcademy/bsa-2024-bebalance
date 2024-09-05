@@ -28,11 +28,15 @@ const Chat: React.FC = () => {
 	}, [dispatch, categories]);
 
 	const handleSubmitCategories = useCallback(
-		(selectedCategories: string[]): void => {
-			const selectedLabels = selectedCategories.join(", ");
+		(selectedCategoriesIds: number[]): void => {
+			const selectedLabels = categories
+				.filter((category) => selectedCategoriesIds.includes(category.id))
+				.map((category) => category.name)
+				.join(", ");
+
 			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
 		},
-		[],
+		[categories],
 	);
 
 	return (
