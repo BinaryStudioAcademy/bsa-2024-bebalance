@@ -6,6 +6,7 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -96,7 +97,18 @@ const resetPassword = createAsyncThunk<
 	return user;
 });
 
+const checkResetPasswordLinkExpiration = createAsyncThunk<
+	boolean,
+	ResetPasswordLinkDto,
+	AsyncThunkConfig
+>(`${sliceName}/check-reset-password-link`, async (payload, { extra }) => {
+	const { authApi } = extra;
+
+	return await authApi.checkResetPasswordLinkExpiration(payload);
+});
+
 export {
+	checkResetPasswordLinkExpiration,
 	getAuthenticatedUser,
 	logOut,
 	requestResetPassword,

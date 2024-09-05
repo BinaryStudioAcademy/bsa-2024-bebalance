@@ -1,3 +1,4 @@
+import { ONE_THOUSAND_MILLISECONDS } from "~/libs/constants/constants.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
@@ -5,7 +6,8 @@ import { mailer } from "~/libs/modules/mailer/mailer.js";
 import { token } from "~/libs/modules/token/token.js";
 import {
 	type EmailDto,
-	type SavePasswordDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -26,6 +28,22 @@ class AuthService {
 		this.encrypt = encrypt;
 	}
 
+	public async checkLinkExpiration(
+		body: ResetPasswordLinkDto,
+	): Promise<boolean> {
+		const {
+			payload: { exp },
+		} = await token.decode(body.link);
+
+		if ((exp as number) < Math.floor(Date.now() / ONE_THOUSAND_MILLISECONDS)) {
+			throw new AuthError({
+				message: ErrorMessage.RESET_PASSWORD_LINK_EXPIRED,
+			});
+		}
+
+		return true;
+	}
+
 	public async forgotPassword(payload: EmailDto): Promise<boolean> {
 		const { email: targetEmail } = payload;
 
@@ -41,7 +59,8 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			userId: userDetails.id,
+			expirationTime: "30mins",
+			payload: { userId: userDetails.id },
 		});
 
 		mailer.sendEmail({
@@ -57,7 +76,7 @@ class AuthService {
 	}
 
 	public async resetPassword(
-		payload: SavePasswordDto,
+		payload: ResetPasswordDto,
 	): Promise<UserSignInResponseDto> {
 		const { jwtToken, newPassword } = payload;
 
@@ -98,7 +117,10 @@ class AuthService {
 
 		const userDetails = user.toObject();
 
-		const jwtToken = await token.createToken({ userId: userDetails.id });
+		const jwtToken = await token.createToken({
+			expirationTime: "24hr",
+			payload: { userId: userDetails.id },
+		});
 
 		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
@@ -132,7 +154,10 @@ class AuthService {
 
 		const user = await this.userService.create(userRequestDto);
 
-		const jwtToken = await token.createToken({ userId: user.id });
+		const jwtToken = await token.createToken({
+			expirationTime: "24hr",
+			payload: { userId: user.id },
+		});
 
 		return { token: jwtToken, user };
 	}

@@ -1,6 +1,7 @@
 export {
 	type EmailDto,
-	type SavePasswordDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,

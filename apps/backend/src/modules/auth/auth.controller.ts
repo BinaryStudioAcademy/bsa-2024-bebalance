@@ -8,7 +8,8 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type EmailDto,
-	type SavePasswordDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
@@ -86,7 +87,7 @@ class AuthController extends BaseController {
 			handler: (options) =>
 				this.resetPassword(
 					options as APIHandlerOptions<{
-						body: SavePasswordDto;
+						body: ResetPasswordDto;
 					}>,
 				),
 			method: "PATCH",
@@ -95,6 +96,28 @@ class AuthController extends BaseController {
 				body: userResetPasswordValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.checkLinkExpiration(
+					options as APIHandlerOptions<{
+						body: ResetPasswordLinkDto;
+					}>,
+				),
+			method: "POST",
+			path: AuthApiPath.CHECK_LINK_EXPIRATION,
+		});
+	}
+
+	private async checkLinkExpiration(
+		options: APIHandlerOptions<{
+			body: ResetPasswordLinkDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.checkLinkExpiration(options.body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**
@@ -161,7 +184,7 @@ class AuthController extends BaseController {
 
 	private async resetPassword(
 		options: APIHandlerOptions<{
-			body: SavePasswordDto;
+			body: ResetPasswordDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {

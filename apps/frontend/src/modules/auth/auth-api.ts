@@ -5,6 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -23,6 +24,22 @@ type Constructor = {
 class AuthApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
+	}
+
+	public async checkResetPasswordLinkExpiration(
+		payload: ResetPasswordLinkDto,
+	): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.CHECK_LINK_EXPIRATION, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<boolean>();
 	}
 
 	public async getAuthenticatedUser(): Promise<UserDto> {

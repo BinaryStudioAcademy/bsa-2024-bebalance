@@ -1,5 +1,6 @@
 import fp from "fastify-plugin";
 
+import { ONE_THOUSAND_MILLISECONDS } from "~/libs/constants/constants.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPHeader } from "~/libs/modules/http/http.js";
 import { type BaseToken } from "~/libs/modules/token/token.js";
@@ -8,7 +9,6 @@ import { AuthError } from "~/modules/auth/auth.js";
 import { type UserService } from "~/modules/users/users.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
-import { ONE_THOUSAND_MILLISECONDS } from "./libs/constants/constants.js";
 import { checkIsWhiteRoute } from "./libs/helpers/helpers.js";
 
 type PluginOptions = {

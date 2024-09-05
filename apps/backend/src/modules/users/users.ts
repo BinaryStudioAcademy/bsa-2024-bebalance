@@ -14,7 +14,8 @@ const userController = new UserController(logger, userService);
 export { UserValidationMessage } from "./libs/enums/enums.js";
 export {
 	type EmailDto,
-	type SavePasswordDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,

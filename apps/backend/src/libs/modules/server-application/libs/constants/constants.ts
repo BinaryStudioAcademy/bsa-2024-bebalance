@@ -9,6 +9,7 @@ const WHITE_ROUTES: string[] = [
 	`${APIPath.AUTH}${AuthApiPath.SIGN_UP}`,
 	`${APIPath.AUTH}${AuthApiPath.FORGOT_PASSWORD}`,
 	`${APIPath.AUTH}${AuthApiPath.RESET_PASSWORD}`,
+	`${APIPath.AUTH}${AuthApiPath.CHECK_LINK_EXPIRATION}`,
 ];
 
 export { WHITE_ROUTES };

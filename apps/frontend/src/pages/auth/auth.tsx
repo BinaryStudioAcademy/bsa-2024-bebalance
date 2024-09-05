@@ -36,8 +36,6 @@ const Auth: React.FC = () => {
 		user: auth.user,
 	}));
 
-	const { token } = useQuery();
-
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -62,6 +60,8 @@ const Auth: React.FC = () => {
 		},
 		[dispatch, navigate],
 	);
+
+	const { token } = useQuery();
 
 	const handleResetPasswordSubmit = useCallback(
 		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
@@ -90,7 +90,12 @@ const Auth: React.FC = () => {
 			}
 
 			case AppRoute.RESET_PASSWORD: {
-				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
+				return (
+					<ResetPasswordForm
+						onSubmit={handleResetPasswordSubmit}
+						token={token as string}
+					/>
+				);
 			}
 		}
 	};

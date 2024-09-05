@@ -18,7 +18,6 @@ type EnvironmentSchema = {
 	};
 	JWT: {
 		ALGORITHM: string;
-		EXPIRATION_TIME: string;
 		SECRET: string;
 	};
 	MAILER: {
