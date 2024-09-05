@@ -4,13 +4,13 @@ scripts:
     script: cd ../.. && npm install
   - &set_android_sdk
     name: Set Android SDK location
-    script: echo "sdk.dir=$ANDROID_SDK_ROOT" > "$FCI_BUILD_DIR/apps/mobile/android/local.properties"
+    script: echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/apps/mobile/android/local.properties"
   - &set_up_keys
     name: Set up keystore
     script: |
-      echo $FCI_BUILD_DIR
-      echo $CM_KEYSTORE | base64 --decode > "$FCI_BUILD_DIR/apps/mobile/android/app/$CM_KEYSTORE_PATH"
-      cat >> "$FCI_BUILD_DIR/apps/mobile/android/keystore.properties" << EOF
+      echo $CM_BUILD_DIR
+      echo $CM_KEYSTORE | base64 --decode > "$CM_BUILD_DIR/apps/mobile/android/app/$CM_KEYSTORE_PATH"
+      cat >> "$CM_BUILD_DIR/apps/mobile/android/keystore.properties" << EOF
       storePassword=$CM_KEYSTORE_PASSWORD
       keyPassword=$CM_KEY_ALIAS_PASSWORD
       keyAlias=$CM_KEY_ALIAS
@@ -34,8 +34,8 @@ scripts:
         UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
       fi
 
-      echo $UPDATED_BUILD_NUMBER > "$FCI_BUILD_DIR/apps/mobile/android/app/versionCode"
-      VERSION_NAME_PATH=$FCI_BUILD_DIR/apps/mobile/android/app/versionName
+      echo $UPDATED_BUILD_NUMBER > "$CM_BUILD_DIR/apps/mobile/android/app/versionCode"
+      VERSION_NAME_PATH=$CM_BUILD_DIR/apps/mobile/android/app/versionName
       UPDATED_VERSION_NAME=$(cat $VERSION_NAME_PATH | awk -F. -v PATCH_NUMBER=$UPDATED_BUILD_NUMBER -v OFS=. '{$NF = PATCH_NUMBER ; print}')
       echo $UPDATED_VERSION_NAME > $VERSION_NAME_PATH
 workflows:
