@@ -20,6 +20,5 @@ export {
 };
 export { ANIMATION_INTERVAL } from "./animation-interval.constant.js";
 export { CATEGORIES_ORDER } from "./categories-order.constant.js";
-export { FALLBACK_BACKGROUND_COLOR } from "./fallback-background-color.constant.js";
 export { USER_WHEEL_CHART_CONFIG } from "./user-wheel-chart-config.constant.js";
 export { WHEEL_CHART_CONFIG } from "./wheel-chart-config.constant.js";

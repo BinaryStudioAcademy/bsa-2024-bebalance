@@ -1,6 +1,6 @@
 const AngleCoefficient = {
+	FIFTH_PART: 5,
 	HALF: 2,
-	QUARTER: 4,
 } as const;
 
 export { AngleCoefficient };

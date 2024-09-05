@@ -1,8 +1,9 @@
 const DotOffsetX = {
-	LEFT_LOWER: 3,
-	LEFT_UPPER: 12,
-	RIGHT_LOWER: -3,
-	RIGHTMOST: 9,
+	LEFT_LOWER: 7,
+	LEFT_UPPER: 14,
+	LEFTMOST: 2,
+	RIGHTMOST: 14,
+	UPPER_CENTER: 5,
 } as const;
 
 export { DotOffsetX };

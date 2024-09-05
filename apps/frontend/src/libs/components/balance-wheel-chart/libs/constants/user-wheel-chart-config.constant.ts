@@ -1,10 +1,9 @@
 import { type ChartConfiguration } from "~/libs/types/types.js";
 
-import { ChartFont, ChartGraphicsColors } from "../enums/enums.js";
+import { ChartGraphicsColors } from "../enums/enums.js";
 import {
 	drawExtraPointGraphics,
 	generateGradientColor,
-	updateLabels,
 } from "../helpers/helpers.js";
 import { type PolarAreaType } from "../types/types.js";
 
@@ -21,10 +20,8 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 		labels: [],
 	},
 	options: {
-		animation: false,
-		events: [],
 		layout: {
-			padding: 17,
+			padding: 89,
 		},
 		parsing: {
 			key: "value",
@@ -46,14 +43,7 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 				min: 0,
 				pointLabels: {
 					centerPointLabels: true,
-					color: ChartGraphicsColors.LABELS_COLOR,
-					display: true,
-					font: {
-						family: ChartFont.FAMILY,
-						size: ChartFont.LABEL_FONT_SIZE,
-						weight: ChartFont.WEIGHT,
-					},
-					padding: 57,
+					display: false,
 				},
 				ticks: {
 					display: false,
@@ -65,10 +55,6 @@ const USER_WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 		{
 			afterDatasetDraw: drawExtraPointGraphics,
 			id: "extraPointGraphics",
-		},
-		{
-			afterDatasetsDraw: updateLabels,
-			id: "updateLabels",
 		},
 	],
 	type: "polarArea",

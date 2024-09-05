@@ -10,6 +10,7 @@ const getDotOffset = (
 ): { offsetX: number; offsetY: number } => {
 	const {
 		absoluteCenterX,
+		firstPartCenterX,
 		firstPartCenterY,
 		secondPartCenterX,
 		secondPartCenterY,
@@ -27,14 +28,17 @@ const getDotOffset = (
 					return DotOffsetX.LEFT_UPPER;
 				}
 
-				case dotPosition.y > secondPartCenterY &&
-					dotPosition.x > absoluteCenterX: {
-					return DotOffsetX.RIGHT_LOWER;
+				case dotPosition.y < firstPartCenterY: {
+					return DotOffsetX.UPPER_CENTER;
 				}
 
 				case dotPosition.y > secondPartCenterY &&
 					dotPosition.x < absoluteCenterX: {
 					return DotOffsetX.LEFT_LOWER;
+				}
+
+				case dotPosition.x < firstPartCenterX: {
+					return DotOffsetX.LEFTMOST;
 				}
 
 				default: {
@@ -48,9 +52,8 @@ const getDotOffset = (
 					return DotOffsetY.RIGHTMOST;
 				}
 
-				case dotPosition.y > secondPartCenterY &&
-					dotPosition.x > absoluteCenterX: {
-					return DotOffsetY.RIGHT_LOWER;
+				case dotPosition.y > secondPartCenterY: {
+					return DotOffsetY.BOTTOM_CENTER;
 				}
 
 				default: {

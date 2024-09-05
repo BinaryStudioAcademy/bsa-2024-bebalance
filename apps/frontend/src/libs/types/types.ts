@@ -14,6 +14,7 @@ export {
 	type Chart,
 	type ChartArea,
 	type ChartConfiguration,
+	type ChartDataset,
 	type ChartMeta,
 	type Element,
 	type Plugin,
