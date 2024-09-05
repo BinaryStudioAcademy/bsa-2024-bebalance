@@ -56,3 +56,9 @@
 		transform: scale(1.3);
 	}
 }
+
+@media (width <= 640px) {
+	.progress-line {
+		width: 40px;
+	}
+}

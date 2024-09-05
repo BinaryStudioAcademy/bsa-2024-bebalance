@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.33.0...v1.34.0) (2024-09-05)
+
+
+### Features
+
+* **frontend:** make onboarding screen mobile responsive bb-289 ([#301](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/301)) ([7e55cd8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7e55cd865b7caccd8dfdb53d7a16c5643a00712e))
+
+
+### Bug Fixes
+
+* **frontend:** solve unclickable radio buttons bb-89 ([#304](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/304)) ([469c037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/469c037e4608fe48d42617e6f906c509a67a4d46))
+
 ## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.32.0...v1.33.0) (2024-09-05)
 
 
