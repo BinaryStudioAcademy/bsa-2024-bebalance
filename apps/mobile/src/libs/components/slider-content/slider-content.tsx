@@ -22,7 +22,9 @@ const SliderContent: React.FC<Properties> = ({ color, label }) => {
 				globalStyles.mh32,
 			]}
 		>
-			<Text children={label} preset="tag" style={globalStyles.mb48} />
+			<Text preset="tag" style={globalStyles.mb48}>
+				{label}
+			</Text>
 			<GradientSlider
 				gradientColors={color}
 				max={maxSliderValue}

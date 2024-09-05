@@ -1,5 +1,5 @@
 import Slider from "@react-native-community/slider";
-import React, { useState } from "react";
+import React from "react";
 import { type LayoutChangeEvent } from "react-native";
 
 import {
@@ -14,6 +14,7 @@ import {
 	generateGradientColors,
 	generateGradientLocations,
 } from "~/libs/helpers/helpers";
+import { useCallback, useState } from "~/libs/hooks/hooks";
 import { type colorToGradientColors } from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
 
@@ -36,10 +37,18 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 	const initialColors = generateGradientColors(min, gradientColors, max);
 	const [color, setColor] = useState<string[]>(initialColors);
 
-	const handleLayout = (event: LayoutChangeEvent): void => {
+	const handleLayout = useCallback((event: LayoutChangeEvent): void => {
 		const { width } = event.nativeEvent.layout;
 		setSliderWidth(width);
-	};
+	}, []);
+
+	const handleValueChange = useCallback(
+		(sliderValue: number) => {
+			setValue(sliderValue);
+			setColor(generateGradientColors(sliderValue, gradientColors, max));
+		},
+		[gradientColors, max],
+	);
 
 	const pixelsPerPercent = sliderWidth / MAX_PERCENT;
 	const translateXBase = (value / max) * MAX_PERCENT * pixelsPerPercent;
@@ -92,10 +101,7 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 					maximumValue={max}
 					minimumTrackTintColor="transparent"
 					minimumValue={min}
-					onValueChange={(value) => {
-						setValue(value);
-						setColor(generateGradientColors(value, gradientColors, max));
-					}}
+					onValueChange={handleValueChange}
 					step={1}
 					style={styles.slider}
 					thumbTintColor="transparent"
