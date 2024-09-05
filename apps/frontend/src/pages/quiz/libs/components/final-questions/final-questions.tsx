@@ -2,7 +2,11 @@ import { Button, Checkbox, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import { type UserPreferencesPayloadDto } from "~/modules/users/users.js";
 
-import { FINAL_QUESTIONS_FORM_DEFAULT_VALUES } from "../../constants/final-questions-form-default-values.constant.js";
+import {
+	ALLOW_NOTIFICATIONS_OPTIONS,
+	FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
+	TASK_DAYS_OPTIONS,
+} from "../../constants/constants.js";
 import { type FinalQuestionsFormValues } from "../../types/types.js";
 import styles from "./styles.module.css";
 
@@ -28,39 +32,29 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 
 	return (
-		<>
-			<h1 className={styles["title"]}>And the last step</h1>
-			<form className={styles["form"]} onSubmit={handleFormSubmit}>
-				<Checkbox
-					control={control}
-					label="Which days would you like to receive tasks"
-					name="userTaskDays"
-					options={[
-						{ label: "Monday", value: "1" },
-						{ label: "Tuesday", value: "2" },
-						{ label: "Wednesday", value: "3" },
-						{ label: "Thursday", value: "4" },
-						{ label: "Friday", value: "5" },
-						{ label: "Saturday", value: "6" },
-						{ label: "Sunday", value: "7" },
-					]}
-				/>
-				<Input
-					control={control}
-					label="How would you like to receive motivational follow-ups?"
-					name="allowNotifications"
-					options={[
-						{ label: "Yes, I’d love daily motivation!", value: "true" },
-						{
-							label: "No, I prefer not to receive motivational follow-ups",
-							value: "false",
-						},
-					]}
-					type="radio"
-				/>
-				<Button label="Next" type="submit" />
-			</form>
-		</>
+		<div className={styles["container"]}>
+			<div className={styles["final-questions"]}>
+				<h1 className={styles["title"]}>And the last step</h1>
+				<form className={styles["form"]} onSubmit={handleFormSubmit}>
+					<Checkbox
+						control={control}
+						label="Which days would you like to receive tasks"
+						name="userTaskDays"
+						options={TASK_DAYS_OPTIONS}
+					/>
+					<Input
+						control={control}
+						label="How would you like to receive motivational follow-ups?"
+						name="allowNotifications"
+						options={ALLOW_NOTIFICATIONS_OPTIONS}
+						type="radio"
+					/>
+					<div className={styles["button-container"]}>
+						<Button label="Next" type="submit" />
+					</div>
+				</form>
+			</div>
+		</div>
 	);
 };
 
