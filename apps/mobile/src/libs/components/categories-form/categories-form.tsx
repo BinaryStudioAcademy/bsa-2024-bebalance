@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 type Properties = {
 	categories: CategoryDto[];
-	onSubmit: (selectedCategoryIds: number[]) => void; // Пропс для передачі ID вибраних категорій
+	onSubmit: (selectedCategoryIds: number[]) => void;
 };
 
 const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
@@ -29,7 +29,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 
 	const { onChange, value: selectedCategories } = field;
 
-	const handleFormSubmit = useCallback((): void => {
+	const handleSaveCategories = useCallback((): void => {
 		onSubmit(selectedCategories);
 	}, [selectedCategories, onSubmit]);
 
@@ -50,9 +50,9 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 		[categories, onChange],
 	);
 
-	const handleSaveCategories = useCallback((): void => {
-		void handleSubmit(handleFormSubmit)();
-	}, [handleSubmit, handleFormSubmit]);
+	const handleFormSubmit = useCallback((): void => {
+		void handleSubmit(handleSaveCategories)();
+	}, [handleSubmit, handleSaveCategories]);
 
 	return (
 		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p16]}>
@@ -78,7 +78,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 			<Button
 				appearance="filled"
 				label="Save Categories"
-				onPress={handleSaveCategories}
+				onPress={handleFormSubmit}
 			/>
 		</View>
 	);
