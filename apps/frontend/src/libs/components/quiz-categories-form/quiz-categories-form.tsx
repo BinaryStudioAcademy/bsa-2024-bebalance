@@ -10,8 +10,8 @@ import { type InputOption } from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
 import { Button, Checkbox, Loader } from "../components.js";
-import { FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
-import { type FormFields } from "./libs/types/types.js";
+import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES as FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import { type QuizCategoriesFormFields as FormFields } from "./libs/types/types.js";
 
 type Properties = {
 	onSubmit?: (payload: Pick<FormFields, "categoriesIds">) => void;

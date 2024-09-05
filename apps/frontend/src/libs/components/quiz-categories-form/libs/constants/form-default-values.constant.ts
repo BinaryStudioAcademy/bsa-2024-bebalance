@@ -1,8 +1,8 @@
-import { type FormFields } from "../types/types.js";
+import { type QuizCategoriesFormFields } from "../types/types.js";
 
-const FORM_DEFAULT_VALUES: FormFields = {
+const QUIZ_CATEGORIES_FORM_DEFAULT_VALUES: QuizCategoriesFormFields = {
 	categoriesIds: [],
 	isSelectAll: false,
 };
 
-export { FORM_DEFAULT_VALUES };
+export { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES };
