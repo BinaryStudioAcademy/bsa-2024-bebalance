@@ -42,11 +42,11 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	CategoriesApiPath,
+	type CategoryCreateRequestDto,
 	type CategoryDto,
+	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
-	type CreateCategoryRequestDto,
 	type GetCategoriesDto,
-	type UpdateCategoryRequestDto,
 } from "./modules/categories/categories.js";
 export {
 	type OnboardingAnswerDto,

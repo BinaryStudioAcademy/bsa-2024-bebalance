@@ -3,13 +3,12 @@ import { type Service } from "~/libs/types/types.js";
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
 import {
+	type CategoryCreateRequestDto,
 	type CategoryDto,
+	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
-	type CreateCategoryRequestDto,
-	type GetCategoriesDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
-	type UpdateCategoryRequestDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -41,7 +40,7 @@ class CategoryService implements Service {
 		};
 	}
 
-	public async create(payload: CreateCategoryRequestDto): Promise<CategoryDto> {
+	public async create(payload: CategoryCreateRequestDto): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.create(
 			CategoryEntity.initializeNew(payload),
 		);
@@ -85,20 +84,7 @@ class CategoryService implements Service {
 		return { createdAt, id, name, updatedAt };
 	}
 
-	public async findAll(): Promise<GetCategoriesDto> {
-		const entities = await this.categoryRepository.findAll();
-
-		return {
-			items: entities.map((entity) => {
-				const { createdAt, id, name, updatedAt } =
-					this.convertCategoryEntityToDto(entity);
-
-				return { createdAt, id, name, updatedAt };
-			}),
-		};
-	}
-
-	public async findAllWithScores(): Promise<{
+	public async findAll(): Promise<{
 		items: CategoryWithScoresDto[];
 	}> {
 		const categories = await this.categoryRepository.findAll();
@@ -112,7 +98,7 @@ class CategoryService implements Service {
 
 	public async update(
 		id: number,
-		payload: UpdateCategoryRequestDto,
+		payload: CategoryUpdateRequestDto,
 	): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.update(id, payload);
 
