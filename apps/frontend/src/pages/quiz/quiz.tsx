@@ -1,6 +1,12 @@
-import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+	useState,
+} from "~/libs/hooks/hooks.js";
 import {
 	actions as userActions,
+	type UserDto,
 	type UserPreferencesPayloadDto,
 } from "~/modules/users/users.js";
 
@@ -17,6 +23,7 @@ import { Step } from "./libs/enums/enums.js";
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [step, setStep] = useState<number>(Step.ANALYZING);
+	const user: UserDto = useAppSelector(({ auth }) => auth.user as UserDto);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -26,12 +33,12 @@ const Quiz: React.FC = () => {
 		(payload: UserPreferencesPayloadDto): void => {
 			void dispatch(
 				userActions.saveUserPreferences({
-					userId: 32,
+					userId: user.id,
 					...payload,
 				}),
 			);
 		},
-		[dispatch],
+		[dispatch, user.id],
 	);
 
 	const getScreen = (step: number): React.ReactNode => {
