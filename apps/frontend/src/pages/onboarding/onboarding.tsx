@@ -111,8 +111,8 @@ const Onboarding: React.FC = () => {
 					<>
 						<div className={styles["progress-bar"]}>
 							<ProgressBar
-								currentItemIndex={currentQuestionIndex}
-								totalItemsAmount={totalQuestionsAmount}
+								currentStep={currentQuestionIndex}
+								numberOfSteps={totalQuestionsAmount}
 							/>
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>

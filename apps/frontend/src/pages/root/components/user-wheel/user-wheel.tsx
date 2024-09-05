@@ -19,7 +19,7 @@ const UserWheel: React.FC = () => {
 
 	return (
 		<div className={styles["container"]}>
-			{scores && scores.length > scoreCountZero && (
+			{scores.length > scoreCountZero && (
 				<BalanceWheelChart
 					data={scores.map((score) => ({
 						data: score.score,

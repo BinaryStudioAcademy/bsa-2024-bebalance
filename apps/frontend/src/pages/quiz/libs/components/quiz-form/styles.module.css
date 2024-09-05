@@ -1,0 +1,40 @@
+.quiz-container {
+	display: flex;
+	min-height: 100vh;
+	padding: 34px;
+	background-color: var(--background);
+}
+
+.questions-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 41px;
+	background-color: white;
+	border-radius: 30px;
+}
+
+.quiz-header {
+	font-size: 32px;
+}
+
+.questions-wrapper {
+	max-width: 603px;
+}
+
+.form-footer {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+	justify-content: center;
+}
+
+.isHidden {
+	display: none;
+}
+
+.isVisible {
+	display: block;
+}
