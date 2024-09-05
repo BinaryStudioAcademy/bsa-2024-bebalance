@@ -16,6 +16,8 @@ import { Onboarding } from "~/pages/onboarding/onboarding.jsx";
 import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
 
+import { Root } from "./pages/root/root.jsx";
+
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
 		<StoreProvider store={store.instance}>
@@ -26,7 +28,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component="Root"
+										component={<Root />}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),

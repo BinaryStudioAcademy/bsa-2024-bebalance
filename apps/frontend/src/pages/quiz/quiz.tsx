@@ -4,7 +4,6 @@ import {
 	Analyzing,
 	BalanceWheel,
 	Introduction,
-	UserWheel,
 } from "./libs/components/components.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
@@ -24,10 +23,6 @@ const Quiz: React.FC = () => {
 
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
-			}
-
-			case Step.USER_WHEEL: {
-				return <UserWheel />;
 			}
 
 			case Step.BALANCE_WHEEL: {

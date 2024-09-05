@@ -6,6 +6,8 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
+import styles from "./styles.module.css";
+
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const scores = useAppSelector((state) => state.quiz.scores);
@@ -15,7 +17,7 @@ const UserWheel: React.FC = () => {
 	}, [dispatch]);
 
 	return (
-		<div>
+		<div className={styles["container"]}>
 			<BalanceWheelChart
 				data={
 					scores
