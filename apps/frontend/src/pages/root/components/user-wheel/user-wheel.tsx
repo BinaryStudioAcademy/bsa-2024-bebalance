@@ -11,6 +11,7 @@ import styles from "./styles.module.css";
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const scores = useAppSelector((state) => state.quiz.scores);
+	const scoreCountZero = 0;
 
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
@@ -18,19 +19,15 @@ const UserWheel: React.FC = () => {
 
 	return (
 		<div className={styles["container"]}>
-			<BalanceWheelChart
-				data={
-					scores
-						? scores.map((score) => {
-								return {
-									data: score.score,
-									label: score.categoryName,
-								};
-							})
-						: []
-				}
-				isAnimating={false}
-			/>
+			{scores && scores.length > scoreCountZero && (
+				<BalanceWheelChart
+					data={scores.map((score) => ({
+						data: score.score,
+						label: score.categoryName,
+					}))}
+					isAnimating={false}
+				/>
+			)}
 		</div>
 	);
 };
