@@ -1,5 +1,6 @@
-import { type UserDto } from "./user-dto.type.js";
-
-type UserUpdateRequestDto = UserDto;
+type UserUpdateRequestDto = {
+	avatarUrl: string;
+	name: string;
+};
 
 export { type UserUpdateRequestDto };

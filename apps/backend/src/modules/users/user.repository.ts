@@ -148,9 +148,9 @@ class UserRepository implements Repository {
 
 	public async update(
 		id: number,
-		updateData: Partial<UserDto>,
+		payload: Partial<UserDto>,
 	): Promise<null | UserEntity> {
-		const { avatarUrl, email, name } = updateData;
+		const { avatarUrl, email, name } = payload;
 
 		const userUpdateData = {
 			...(email && { email }),

@@ -1,11 +1,16 @@
 import { useCallback, useState } from "~/libs/hooks/hooks.js";
 
-import { Analyzing, Introduction } from "./libs/components/components.js";
+import {
+	Analyzing,
+	BalanceWheel,
+	Introduction,
+	QuizForm,
+} from "./libs/components/components.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	const [step, setStep] = useState<number>(Step.ANALYZING);
+	const [step, setStep] = useState<number>(Step.INTRODUCTION);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -19,6 +24,14 @@ const Quiz: React.FC = () => {
 
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
+			}
+
+			case Step.QUIZ: {
+				return <QuizForm onNext={handleNextStep} />;
+			}
+
+			case Step.BALANCE_WHEEL: {
+				return <BalanceWheel />;
 			}
 
 			default: {

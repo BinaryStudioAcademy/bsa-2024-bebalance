@@ -11,7 +11,7 @@ const userForgotPassword = z
 		email: z
 			.string()
 			.trim()
-			.min(UserValidationRule.EMAIL_MINIMUM_LENGTH, {
+			.min(UserValidationRule.EMAIL_MIN_LENGTH, {
 				message: UserValidationMessage.EMAIL_REQUIRE,
 			})
 			.email({

@@ -3,6 +3,7 @@ const ErrorMessage = {
 	FILE_DOES_NOT_EXIST: "This file does not exist.",
 	FILE_MISSING:
 		"A required file is missing. Please ensure that all necessary files are included and try again.",
+	FORBIDDEN: "Access to the requested resource is denied.",
 	INCORRECT_CREDENTIALS: "Incorrect credentials.",
 	INSUFFICIENT_ANSWERS: "You must provide answers for all questions.",
 	MAIL_ERROR: "An error occured when sending an email.",

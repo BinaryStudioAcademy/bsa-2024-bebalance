@@ -3,7 +3,7 @@
 	align-items: center;
 }
 
-.progress-bar-container {
+.progress {
 	display: flex;
 	align-items: center;
 }
@@ -16,7 +16,7 @@
 	transition: background-color 1s ease;
 }
 
-.progress-line-completed {
+.progress-line.completed {
 	background-color: var(--mental-start);
 }
 
@@ -54,5 +54,11 @@
 
 	50% {
 		transform: scale(1.3);
+	}
+}
+
+@media (width <= 640px) {
+	.progress-line {
+		width: 40px;
 	}
 }
