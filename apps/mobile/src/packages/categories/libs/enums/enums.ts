@@ -1,1 +1,1 @@
-export { APIPath, CategoriesApiPath } from "shared";
+export { APIPath, CategoriesApiPath } from "~/libs/enums/enums";

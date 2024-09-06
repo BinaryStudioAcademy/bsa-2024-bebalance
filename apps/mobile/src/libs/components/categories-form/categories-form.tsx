@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import { Button, Checkbox, Text, View } from "~/libs/components/components";
-import { useAppForm, useFormController } from "~/libs/hooks/hooks";
+import { useAppForm, useCallback, useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	categoriesSavingValidationSchema,
@@ -24,7 +24,7 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 
 	const { field } = useFormController({
 		control,
-		name: "categories",
+		name: "categoriesIds",
 	});
 
 	const { onChange, value: selectedCategories } = field;
@@ -70,8 +70,8 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 				/>
 			))}
 			<View style={globalStyles.pb8}>
-				{errors.categories && (
-					<Text style={styles.errorText}>{errors.categories.message}</Text>
+				{errors.categoriesIds && (
+					<Text style={styles.errorText}>{errors.categoriesIds.message}</Text>
 				)}
 			</View>
 
