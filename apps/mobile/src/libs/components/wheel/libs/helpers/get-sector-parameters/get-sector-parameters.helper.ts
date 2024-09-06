@@ -1,12 +1,7 @@
-type GetSectorParametersArguments = {
-	centerGap: number;
-	endPercentInner: number;
-	endPercentOuter: number;
-	height: number;
-	layerOffset: number;
-	startPercentInner: number;
-	startPercentOuter: number;
-};
+import {
+	type SectorParameters,
+	type SectorParametersCalculationData,
+} from "~/libs/types/types";
 
 const QUATER_PERCENT = 25;
 const TWO = 2;
@@ -20,17 +15,7 @@ const getSectorParameters = ({
 	layerOffset,
 	startPercentInner,
 	startPercentOuter,
-}: GetSectorParametersArguments): {
-	innerDashArrayDash: number;
-	innerDashArrayGap: number;
-	innerDashOffset: number;
-	innerStrokeWidth: number;
-	outerDashArrayDash: number;
-	outerDashArrayGap: number;
-	outerDashOffset: number;
-	outerStrokeWidth: number;
-	radius: number;
-} => {
+}: SectorParametersCalculationData): SectorParameters => {
 	const outerStrokeWidth = height - centerGap;
 	const innerStrokeWidth = height - layerOffset * TWO - centerGap;
 	const radius = (height + centerGap) / TWO;
