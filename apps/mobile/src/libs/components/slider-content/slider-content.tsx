@@ -9,8 +9,8 @@ type Properties = {
 	label: string;
 };
 
-const maxSliderValue: number = 10;
-const minSliderValue: number = 0;
+const MAX_SLIDER_VALUE: number = 10;
+const MIN_SLIDER_VALUE: number = 0;
 
 const SliderContent: React.FC<Properties> = ({ color, label }) => {
 	return (
@@ -27,8 +27,8 @@ const SliderContent: React.FC<Properties> = ({ color, label }) => {
 			</Text>
 			<GradientSlider
 				gradientColors={color}
-				max={maxSliderValue}
-				min={minSliderValue}
+				max={MAX_SLIDER_VALUE}
+				min={MIN_SLIDER_VALUE}
 			/>
 		</View>
 	);
