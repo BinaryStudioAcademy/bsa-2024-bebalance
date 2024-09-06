@@ -10,6 +10,13 @@ const BalanceWheel: React.FC = () => {
 				data={BALANCE_WHEEL_ANIMATED_INITIAL_DATA}
 				isAnimating
 			/>
+
+			<div className={styles["white-dot"]} />
+			<div className={styles["white-dot"]} />
+			<div className={styles["white-dot"]} />
+			<div className={styles["white-dot"]} />
+			<div className={styles["white-dot"]} />
+			<div className={styles["white-dot"]} />
 		</div>
 	);
 };
