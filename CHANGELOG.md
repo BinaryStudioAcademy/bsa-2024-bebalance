@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.36.0...v1.37.0) (2024-09-06)
+
+
+### Features
+
+* **frontend:** add new text for a loader component bb-243 ([#325](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/325)) ([c075692](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c075692c2bae658fda08d9eca206d77a71a9d5a2))
+
 ## [1.36.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.35.0...v1.36.0) (2024-09-06)
 
 
