@@ -87,7 +87,7 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 					]}
 				>
 					<Icon color={BaseColor.BLACK} name="place" size={MARKER_ICON_SIZE} />
-					<Text preset="regular" style={[globalStyles.mt8, styles.labelText]}>
+					<Text preset="regular" style={[globalStyles.mt12, styles.labelText]}>
 						{value}
 					</Text>
 				</View>
