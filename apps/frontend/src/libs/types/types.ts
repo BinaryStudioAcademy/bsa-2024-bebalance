@@ -1,4 +1,5 @@
 export { type AsyncThunkConfig } from "./async-thunk-config.type.js";
+export { type CheckboxInputOption } from "./checkbox-input-option.type.js";
 export {
 	type Control,
 	type FieldErrors,
@@ -8,7 +9,6 @@ export {
 	type QuizQuestionPropeties,
 } from "./form-field-properties.type.js";
 export { type IconName } from "./icon-name.type.js";
-export { type InputOption } from "./input-option.type.js";
 export { type QueryParameters } from "./query-parameters.type.js";
 export { type RadioInputOption } from "./radio-input-option.type.js";
 export { type SidebarItem } from "./sidebar-item.type.js";
