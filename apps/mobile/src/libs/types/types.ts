@@ -10,6 +10,7 @@ export { type WheelDataItem } from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type ImageSourcePropType,
+	type LayoutChangeEvent,
 	type StyleProp,
 	type TextStyle,
 	type ViewStyle,

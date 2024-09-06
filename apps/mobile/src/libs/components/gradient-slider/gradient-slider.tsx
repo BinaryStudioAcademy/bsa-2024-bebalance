@@ -1,6 +1,5 @@
 import Slider from "@react-native-community/slider";
 import React from "react";
-import { type LayoutChangeEvent } from "react-native";
 
 import {
 	Icon,
@@ -20,6 +19,7 @@ import {
 	directionToGradient,
 } from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
+import { type LayoutChangeEvent } from "~/libs/types/types";
 
 import { styles } from "./styles";
 

@@ -9,8 +9,8 @@ type Properties = {
 	label: string;
 };
 
-const MAX_SLIDER_VALUE: number = 10;
-const MIN_SLIDER_VALUE: number = 0;
+const MAX_SLIDER_VALUE = 10;
+const MIN_SLIDER_VALUE = 0;
 
 const SliderContent: React.FC<Properties> = ({ color, label }) => {
 	return (
