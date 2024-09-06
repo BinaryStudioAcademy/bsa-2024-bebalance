@@ -3,6 +3,9 @@
 	top: 50%;
 	left: 50%;
 	z-index: var(--z-index-huge);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	transform: translate(-50%, -50%);
 }
 
