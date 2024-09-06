@@ -1,5 +1,5 @@
 type FinalAnswersPayloadDto = {
-	allowNotifications: boolean;
+	allowNotifications: string;
 	userTaskDays: number[];
 };
 

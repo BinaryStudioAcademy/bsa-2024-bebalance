@@ -12,7 +12,7 @@ import { UserDetailsModel } from "./user-details.model.js";
 import { UserTaskDaysModel } from "./user-task-days.model.js";
 
 class UserModel extends AbstractModel {
-	public allowNotifications!: boolean;
+	public allowNotifications!: string;
 
 	public email!: string;
 

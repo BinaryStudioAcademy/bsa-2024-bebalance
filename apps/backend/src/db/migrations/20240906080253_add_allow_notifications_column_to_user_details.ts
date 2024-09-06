@@ -11,9 +11,9 @@ const ColumnName = {
 function up(knex: Knex): Promise<void> {
 	return knex.schema.alterTable(TableName.USER_DETAILS, (table) => {
 		table
-			.boolean(ColumnName.ALLOW_NOTIFICATIONS)
+			.string(ColumnName.ALLOW_NOTIFICATIONS)
 			.notNullable()
-			.defaultTo(false);
+			.defaultTo("false");
 	});
 }
 

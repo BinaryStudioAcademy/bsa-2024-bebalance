@@ -28,8 +28,8 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit(({ allowNotifications, userTaskDays }) => {
 				onSubmit({
-					allowNotifications: allowNotifications === "true",
-					userTaskDays: userTaskDays.map(Number),
+					allowNotifications,
+					userTaskDays,
 				});
 			})(event_);
 		},

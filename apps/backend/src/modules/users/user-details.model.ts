@@ -8,7 +8,7 @@ import {
 import { UserModel } from "./user.model.js";
 
 class UserDetailsModel extends AbstractModel {
-	public allowNotifications!: boolean;
+	public allowNotifications!: string;
 
 	public name!: string;
 

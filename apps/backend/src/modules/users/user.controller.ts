@@ -45,7 +45,7 @@ import { finalAnswersValidationSchema } from "./libs/validation-schemas/validati
  *        type: object
  *        properties:
  *          allowNotifications:
- *            type: boolean
+ *            type: string
  *          userTaskDays:
  *            type: array
  *            items:

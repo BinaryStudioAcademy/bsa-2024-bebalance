@@ -1,7 +1,7 @@
 import { type Entity } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
-	private allowNotifications: boolean;
+	private allowNotifications: string;
 
 	private createdAt: string;
 
@@ -30,7 +30,7 @@ class UserEntity implements Entity {
 		updatedAt,
 		userTaskDays,
 	}: {
-		allowNotifications: boolean;
+		allowNotifications: string;
 		createdAt: string;
 		email: string;
 		id: null | number;
@@ -62,7 +62,7 @@ class UserEntity implements Entity {
 		updatedAt,
 		userTaskDays,
 	}: {
-		allowNotifications?: boolean;
+		allowNotifications?: string;
 		createdAt: string;
 		email: string;
 		id: number;
@@ -73,7 +73,7 @@ class UserEntity implements Entity {
 		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
-			allowNotifications: allowNotifications ?? false,
+			allowNotifications: allowNotifications ?? "false",
 			createdAt,
 			email,
 			id,
@@ -97,7 +97,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			allowNotifications: false,
+			allowNotifications: "false",
 			createdAt: "",
 			email,
 			id: null,
@@ -110,7 +110,7 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
-		allowNotifications: boolean;
+		allowNotifications: string;
 		createdAt: string;
 		email: string;
 		name: string;
@@ -132,7 +132,7 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
-		allowNotifications: boolean;
+		allowNotifications: string;
 		createdAt: string;
 		email: string;
 		id: number;
