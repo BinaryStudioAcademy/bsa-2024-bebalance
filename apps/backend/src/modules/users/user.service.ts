@@ -5,7 +5,11 @@ import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
-import { FileEntity, type FileService } from "~/modules/files/files.js";
+import {
+	FileEntity,
+	FileError,
+	type FileService,
+} from "~/modules/files/files.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
@@ -92,7 +96,7 @@ class UserService implements Service {
 
 	public async updateAvatar(
 		userId: number,
-		newAvatarFile: MultipartFile,
+		avatarFile: MultipartFile,
 	): Promise<null | UserEntity> {
 		const user = await this.userRepository.find(userId);
 
@@ -103,21 +107,39 @@ class UserService implements Service {
 			});
 		}
 
-		if (user.toObject().avatarUrl) {
-			await this.fileService.deleteFile(user.toObject().avatarUrl);
-		}
-
 		const file = {
-			contentType: newAvatarFile.mimetype,
-			fileBuffer: await newAvatarFile.toBuffer(),
+			contentType: avatarFile.mimetype,
+			fileBuffer: await avatarFile.toBuffer(),
 			fileName: uuidV4(),
 		};
 
-		const uploadedFile = await this.fileService.uploadFile(file);
+		const { avatarUrl } = user.toObject();
+		let newFileEntity: FileEntity;
 
-		const newFileEntity = FileEntity.initializeNew({
-			url: uploadedFile.toObject().url,
-		});
+		if (avatarUrl) {
+			const fileByUrl = await this.fileService.findByUrl(avatarUrl);
+
+			if (!fileByUrl) {
+				throw new FileError({
+					message: ErrorMessage.FILE_DOES_NOT_EXIST,
+				});
+			}
+
+			const newAvatar = await this.fileService.update({
+				fileId: fileByUrl.toObject().id,
+				...file,
+			});
+
+			newFileEntity = FileEntity.initializeNew({
+				url: newAvatar?.toObject().url as string,
+			});
+		} else {
+			const uploadedFile = await this.fileService.upload(file);
+
+			newFileEntity = FileEntity.initializeNew({
+				url: uploadedFile.toObject().url,
+			});
+		}
 
 		return await this.userRepository.update(userId, {
 			avatarUrl: newFileEntity.toObject().url,

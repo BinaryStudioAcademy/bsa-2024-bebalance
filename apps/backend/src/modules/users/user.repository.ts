@@ -5,7 +5,7 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
 import { MINIMAL_LENGTH } from "./libs/constants/constants.js";
-import { type UserDto } from "./libs/types/types.js";
+import { type UserUpdateRequestDto } from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 
 class UserRepository implements Repository {
@@ -148,13 +148,9 @@ class UserRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<UserDto>,
+		payload: Partial<UserUpdateRequestDto>,
 	): Promise<null | UserEntity> {
-		const { avatarUrl, email, name } = payload;
-
-		const userUpdateData = {
-			...(email && { email }),
-		};
+		const { avatarUrl, name } = payload;
 
 		const userDetailsUpdateData: Partial<UserDetailsModel> = {
 			...(name && { name }),
@@ -169,8 +165,6 @@ class UserRepository implements Repository {
 				userDetailsUpdateData.avatarFileId = avatarFile.id;
 			}
 		}
-
-		await this.userModel.query().patchAndFetchById(id, userUpdateData);
 
 		if (Object.keys(userDetailsUpdateData).length > MINIMAL_LENGTH) {
 			await this.userDetailsModel
