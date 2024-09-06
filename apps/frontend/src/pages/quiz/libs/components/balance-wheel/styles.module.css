@@ -5,4 +5,12 @@
 	height: 100vh;
 	padding: 35px;
 	background-color: var(--background);
+	background-image: url("../../../../../assets/img/balance-wheel-ripple-effect-bg1.svg"),
+		url("../../../../../assets/img/balance-wheel-ripple-effect-bg2.svg"),
+		url("../../../../../assets/img/balance-wheel-ripple-effect-bg3.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-position:
+		left 0 top 30%,
+		left 50% top 0,
+		right -10% bottom 0;
 }
