@@ -96,4 +96,13 @@
 		font-weight: 700;
 		line-height: 25px;
 	}
+
+	.radio-field {
+		display: none;
+	}
+
+	.radio-option {
+		justify-content: center;
+		width: 100%;
+	}
 }
