@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.34.0...v1.35.0) (2024-09-05)
+
+
+### Features
+
+* **mobile:** sign-out functionality bb-267 ([#297](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/297)) ([9a14179](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9a141794b514191801aa323a31bccd7986640eae))
+
+
+### Bug Fixes
+
+* **frontend:** fix skipping category on next button event bb-89 ([#307](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/307)) ([8331add](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8331addc2460876740e1b614f587f8adfbcc9766))
+
+## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.33.0...v1.34.0) (2024-09-05)
+
+
+### Features
+
+* **frontend:** make onboarding screen mobile responsive bb-289 ([#301](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/301)) ([7e55cd8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7e55cd865b7caccd8dfdb53d7a16c5643a00712e))
+
+
+### Bug Fixes
+
+* **frontend:** solve unclickable radio buttons bb-89 ([#304](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/304)) ([469c037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/469c037e4608fe48d42617e6f906c509a67a4d46))
+
+## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.32.0...v1.33.0) (2024-09-05)
+
+
+### Features
+
+* **backend/frontend/shared:** user profile screen bb-187 ([#260](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/260)) ([1fc8691](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1fc8691561cdad1070bb7ce51397d372827f4223))
+* **frontend/backend:** quiz functionality bb-89 ([#263](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/263)) ([1bf5519](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1bf55198b8e843c2e298ccc343d844e08680c06a))
+
+## [1.32.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.31.0...v1.32.0) (2024-09-04)
+
+
+### Features
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#275](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/275)) ([df345ac](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/df345acc74b09cb6eee579c4ce778f4968c4e550))
+
 ## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.30.1...v1.31.0) (2024-09-04)
 
 

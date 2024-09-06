@@ -41,7 +41,7 @@ const Auth: React.FC = () => {
 		if (!user) {
 			void dispatch(authActions.getAuthenticatedUser());
 		}
-	}, [user]);
+	}, [dispatch, user]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
