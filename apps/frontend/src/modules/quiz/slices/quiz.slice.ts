@@ -18,7 +18,7 @@ type State = {
 	currentCategoryIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: QuizQuestionDto[][];
-	scores: [] | QuizScoresGetAllItemResponseDto[];
+	scores: QuizScoresGetAllItemResponseDto[];
 };
 
 const initialState: State = {
