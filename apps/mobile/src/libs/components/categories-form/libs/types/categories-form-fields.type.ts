@@ -1,5 +1,5 @@
 type CategoriesFormFields = {
-	categoriesIds: number[];
+	categories: number[];
 };
 
 export { type CategoriesFormFields };

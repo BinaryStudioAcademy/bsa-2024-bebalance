@@ -24,14 +24,16 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 
 	const { field } = useFormController({
 		control,
-		name: "categoriesIds",
+		name: "categories",
 	});
 
 	const { onChange, value: selectedCategories } = field;
 
-	const handleSaveCategories = useCallback((): void => {
-		onSubmit(selectedCategories);
-	}, [selectedCategories, onSubmit]);
+	const handleFormSubmit = useCallback((): void => {
+		void handleSubmit(() => {
+			onSubmit(selectedCategories);
+		})();
+	}, [handleSubmit, onSubmit, selectedCategories]);
 
 	const handleCheckboxChange = (categoryId: number) => (): void => {
 		const updatedCategories = selectedCategories.includes(categoryId)
@@ -50,10 +52,6 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 		[categories, onChange],
 	);
 
-	const handleFormSubmit = useCallback((): void => {
-		void handleSubmit(handleSaveCategories)();
-	}, [handleSubmit, handleSaveCategories]);
-
 	return (
 		<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p16]}>
 			<Checkbox
@@ -70,8 +68,8 @@ const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 				/>
 			))}
 			<View style={globalStyles.pb8}>
-				{errors.categoriesIds && (
-					<Text style={styles.errorText}>{errors.categoriesIds.message}</Text>
+				{errors.categories && (
+					<Text style={styles.errorText}>{errors.categories.message}</Text>
 				)}
 			</View>
 
