@@ -17,31 +17,27 @@ const getSublabelOffsetX: GetGraphicsCoordinateOffset = (
 		secondPartCenterY,
 	} = centers;
 
-	switch (true) {
-		case x > absoluteCenterX && y < firstPartCenterY: {
-			return SublabelOffsetX.UPPER_CENTER_RIGHT;
-		}
-
-		case x < firstPartCenterX: {
-			return SublabelOffsetX.LEFTMOST;
-		}
-
-		case x > absoluteCenterX && x < secondPartCenterX: {
-			return SublabelOffsetX.RIGHT_CENTER;
-		}
-
-		case y > secondPartCenterY && x < absoluteCenterX: {
-			return SublabelOffsetX.LEFT_CENTER;
-		}
-
-		case y > absoluteCenterY && x > secondPartCenterX: {
-			return SublabelOffsetX.RIGHT_BOTTOM;
-		}
-
-		default: {
-			return DEFAULT_GRAPHICS_OFFSET;
-		}
+	if (x > absoluteCenterX && y < firstPartCenterY) {
+		return SublabelOffsetX.UPPER_CENTER_RIGHT;
 	}
+
+	if (x < firstPartCenterX) {
+		return SublabelOffsetX.LEFTMOST;
+	}
+
+	if (x > absoluteCenterX && x < secondPartCenterX) {
+		return SublabelOffsetX.RIGHT_CENTER;
+	}
+
+	if (y > secondPartCenterY && x < absoluteCenterX) {
+		return SublabelOffsetX.LEFT_CENTER;
+	}
+
+	if (y > absoluteCenterY && x > secondPartCenterX) {
+		return SublabelOffsetX.RIGHT_BOTTOM;
+	}
+
+	return DEFAULT_GRAPHICS_OFFSET;
 };
 
 export { getSublabelOffsetX };

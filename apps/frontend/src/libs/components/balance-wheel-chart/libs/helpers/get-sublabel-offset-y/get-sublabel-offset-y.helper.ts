@@ -10,19 +10,15 @@ const getSublabelOffsetY: GetGraphicsCoordinateOffset = (
 
 	const { absoluteCenterY, firstPartCenterY, secondPartCenterY } = centers;
 
-	switch (true) {
-		case y > firstPartCenterY && y < absoluteCenterY: {
-			return SublabelOffsetY.UPPER_CENTER;
-		}
-
-		case y > absoluteCenterY && y < secondPartCenterY: {
-			return SublabelOffsetY.BOTTOM_CENTER;
-		}
-
-		default: {
-			return DEFAULT_GRAPHICS_OFFSET;
-		}
+	if (y > firstPartCenterY && y < absoluteCenterY) {
+		return SublabelOffsetY.UPPER_CENTER;
 	}
+
+	if (y > absoluteCenterY && y < secondPartCenterY) {
+		return SublabelOffsetY.BOTTOM_CENTER;
+	}
+
+	return DEFAULT_GRAPHICS_OFFSET;
 };
 
 export { getSublabelOffsetY };

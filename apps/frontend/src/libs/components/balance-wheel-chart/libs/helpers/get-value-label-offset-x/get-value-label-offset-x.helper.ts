@@ -15,31 +15,27 @@ const getValueLabelOffsetX: GetGraphicsCoordinateOffset = (
 		secondPartCenterY,
 	} = centers;
 
-	switch (true) {
-		case x < firstPartCenterX: {
-			return ValueLabelOffsetX.LEFTMOST;
-		}
-
-		case x > firstPartCenterX && x < absoluteCenterX: {
-			return ValueLabelOffsetX.LEFT_CENTER;
-		}
-
-		case x > secondPartCenterY: {
-			return ValueLabelOffsetX.RIGHTMOST;
-		}
-
-		case y > secondPartCenterY && x > absoluteCenterX: {
-			return ValueLabelOffsetX.RIGHT_BOTTOM;
-		}
-
-		case y < firstPartCenterY && x > absoluteCenterX: {
-			return ValueLabelOffsetX.RIGHT_UPPER;
-		}
-
-		default: {
-			return DEFAULT_GRAPHICS_OFFSET;
-		}
+	if (x < firstPartCenterX) {
+		return ValueLabelOffsetX.LEFTMOST;
 	}
+
+	if (x > firstPartCenterX && x < absoluteCenterX) {
+		return ValueLabelOffsetX.LEFT_CENTER;
+	}
+
+	if (x > secondPartCenterY) {
+		return ValueLabelOffsetX.RIGHTMOST;
+	}
+
+	if (y > secondPartCenterY && x > absoluteCenterX) {
+		return ValueLabelOffsetX.RIGHT_BOTTOM;
+	}
+
+	if (y < firstPartCenterY && x > absoluteCenterX) {
+		return ValueLabelOffsetX.RIGHT_UPPER;
+	}
+
+	return DEFAULT_GRAPHICS_OFFSET;
 };
 
 export { getValueLabelOffsetX };

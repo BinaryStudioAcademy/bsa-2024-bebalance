@@ -16,31 +16,27 @@ const getDotOffsetX: GetGraphicsCoordinateOffset = (
 		secondPartCenterY,
 	} = centers;
 
-	switch (true) {
-		case x > secondPartCenterX: {
-			return DotOffsetX.RIGHTMOST;
-		}
-
-		case y < firstPartCenterY && x > absoluteCenterX: {
-			return DotOffsetX.LEFT_UPPER;
-		}
-
-		case y < firstPartCenterY: {
-			return DotOffsetX.UPPER_CENTER;
-		}
-
-		case y > secondPartCenterY && x < absoluteCenterX: {
-			return DotOffsetX.LEFT_BOTTOM;
-		}
-
-		case x < firstPartCenterX: {
-			return DotOffsetX.LEFTMOST;
-		}
-
-		default: {
-			return DEFAULT_GRAPHICS_OFFSET;
-		}
+	if (x > secondPartCenterX) {
+		return DotOffsetX.RIGHTMOST;
 	}
+
+	if (y < firstPartCenterY && x > absoluteCenterX) {
+		return DotOffsetX.LEFT_UPPER;
+	}
+
+	if (y < firstPartCenterY) {
+		return DotOffsetX.UPPER_CENTER;
+	}
+
+	if (y > secondPartCenterY && x < absoluteCenterX) {
+		return DotOffsetX.LEFT_BOTTOM;
+	}
+
+	if (x < firstPartCenterX) {
+		return DotOffsetX.LEFTMOST;
+	}
+
+	return DEFAULT_GRAPHICS_OFFSET;
 };
 
 export { getDotOffsetX };
