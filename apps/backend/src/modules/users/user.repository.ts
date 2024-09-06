@@ -191,38 +191,6 @@ class UserRepository implements Repository {
 		});
 	}
 
-	public async updateUserDetails(
-		id: number,
-		payload: Partial<UserDetailsModel>,
-	): Promise<null | UserEntity> {
-		await this.userDetailsModel.query().patch(payload).where({ userId: id });
-
-		const user = await this.userModel
-			.query()
-			.findById(id)
-			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
-			);
-
-		if (!user) {
-			return null;
-		}
-
-		return UserEntity.initialize({
-			allowNotifications: user.userDetails.allowNotifications,
-			createdAt: user.createdAt,
-			email: user.email,
-			id: user.id,
-			name: user.userDetails.name,
-			passwordHash: user.passwordHash,
-			passwordSalt: user.passwordSalt,
-			updatedAt: user.updatedAt,
-			userTaskDays: user.userTaskDays.map(
-				(taskDay: { dayOfWeek: number }) => taskDay.dayOfWeek,
-			),
-		});
-	}
-
 	public async updateUserTaskDays(
 		id: number,
 		userTaskDays: number[],

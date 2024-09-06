@@ -75,7 +75,7 @@ class UserService implements Service {
 	): Promise<null | UserEntity> {
 		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
 
-		return await this.userRepository.updateUserDetails(id, {
+		return await this.userRepository.update(id, {
 			allowNotifications: payload.allowNotifications,
 		});
 	}
