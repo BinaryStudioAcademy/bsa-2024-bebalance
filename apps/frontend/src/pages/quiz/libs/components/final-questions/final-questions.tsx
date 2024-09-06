@@ -26,11 +26,8 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(({ allowNotifications, userTaskDays }) => {
-				onSubmit({
-					allowNotifications,
-					userTaskDays,
-				});
+			void handleSubmit((payload) => {
+				onSubmit(payload);
 			})(event_);
 		},
 		[onSubmit, handleSubmit],
