@@ -8,15 +8,15 @@
 	height: 100vh;
 	padding: 35px;
 	background-color: var(--background);
-	background-image: url("../../../../../assets/img/balance-wheel-ripple-effect-bg1.svg"),
-		url("../../../../../assets/img/balance-wheel-ripple-effect-bg2.svg"),
-		url("../../../../../assets/img/balance-wheel-ripple-effect-bg3.svg");
+	background-image: url("../../../../../assets/img/ripple-effect-bg3.svg"),
+		url("../../../../../assets/img/ripple-effect-bg.svg"),
+		url("../../../../../assets/img/ripple-effect-bg2.svg");
 	background-repeat: no-repeat, no-repeat, no-repeat;
 	background-attachment: fixed, fixed, fixed;
 	background-position:
 		left 0 top 30%,
-		left 70% top 0,
-		right 0 bottom 0;
+		left 70% top -15%,
+		right 0 bottom -100%;
 	background-size: 38%, 30%, 38%;
 }
 

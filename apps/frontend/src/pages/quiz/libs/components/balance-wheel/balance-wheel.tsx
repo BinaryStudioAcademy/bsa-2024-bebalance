@@ -20,10 +20,8 @@ const BalanceWheel: React.FC = () => {
 				return previousPercentage;
 			}
 
-			const randomIncrease =
-				Math.floor(Math.random() * PercentageConfig.MAX_INCREMENT) +
-				PercentageConfig.MIN_INCREMENT;
-			const newPercentage = previousPercentage + randomIncrease;
+			const newPercentage =
+				previousPercentage + PercentageConfig.INCREMENT_VALUE;
 
 			return newPercentage > PercentageConfig.MAX_VALUE
 				? PercentageConfig.MAX_VALUE
