@@ -134,12 +134,10 @@ const Onboarding: React.FC = () => {
 
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit(handleNextClick)();
+		if (isLastQuestion) {
+			navigation.navigate(RootScreenName.WELCOME);
+		}
 	}, [handleNextClick, handleSubmit]);
-
-	const handleAnalyzePress = useCallback((): void => {
-		void handleSubmit(handleNextClick)();
-		navigation.navigate(RootScreenName.WELCOME);
-	}, [navigation, handleNextClick, handleSubmit]);
 
 	const renderPageComponent = useCallback(() => {
 		return <Content control={control} errors={errors} question={question} />;
@@ -181,11 +179,9 @@ const Onboarding: React.FC = () => {
 									<Button
 										isDisabled={!isValid}
 										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										onPress={
-											isLastQuestion ? handleAnalyzePress : handleFormSubmit
-										}
+										onPress={handleFormSubmit}
 									/>
-									{(isLastQuestion || currentQuestionIndex !== ZERO) && (
+									{currentQuestionIndex !== ZERO && (
 										<Button
 											appearance="outlined"
 											label="BACK"
