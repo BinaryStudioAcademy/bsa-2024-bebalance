@@ -38,7 +38,7 @@
 .radio-label {
 	font-size: 20px;
 	font-weight: 700;
-	line-height: 1.4;
+	line-height: 28px;
 }
 
 .radio-option {
@@ -88,4 +88,21 @@
 	background-color: var(--white);
 	border-radius: 50%;
 	transform: translate(-50%, -50%);
+}
+
+@media (width <= 768px) {
+	.radio-label {
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 25px;
+	}
+
+	.radio-field {
+		display: none;
+	}
+
+	.radio-option {
+		justify-content: center;
+		width: 100%;
+	}
 }
