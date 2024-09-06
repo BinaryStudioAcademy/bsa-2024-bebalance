@@ -1,17 +1,18 @@
 import React from "react";
-import {
-	type Control,
-	type FieldErrors,
-	type FieldPath,
-	type FieldValues,
-} from "react-hook-form";
 import { RadioGroup as RNRadioGroup } from "react-native-radio-buttons-group";
 
 import { Text, View } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
 import { useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type RadioButtonProps, type ViewStyle } from "~/libs/types/types";
+import {
+	type Control,
+	type FieldErrors,
+	type FieldPath,
+	type FieldValues,
+	type RadioButtonProps,
+	type ViewStyle,
+} from "~/libs/types/types";
 
 import { CIRCLE_SIZE } from "./libs/constants/constants";
 import { BorderSize } from "./libs/enums/enums";

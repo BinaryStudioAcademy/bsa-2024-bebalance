@@ -8,6 +8,12 @@ export {
 export { type WheelDataItem } from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
+	type Control,
+	type FieldErrors,
+	type FieldPath,
+	type FieldValues,
+} from "react-hook-form";
+export {
 	type ImageSourcePropType,
 	type StyleProp,
 	type TextStyle,

@@ -163,10 +163,7 @@ const Onboarding: React.FC = () => {
 							<>
 								<ProgressBar
 									currentItemIndex={currentQuestionIndex}
-									totalItemsAmount={Math.max(
-										totalQuestionsAmount,
-										PREVIOUS_INDEX_OFFSET,
-									)}
+									totalItemsAmount={totalQuestionsAmount}
 								/>
 								<InfinitePager
 									animationConfig={{
@@ -180,22 +177,24 @@ const Onboarding: React.FC = () => {
 									pageInterpolator={pageInterpolatorSlide}
 									ref={pagerReference}
 								/>
+								<View style={globalStyles.gap12}>
+									<Button
+										isDisabled={!isValid}
+										label={isLastQuestion ? "ANALYZE" : "NEXT"}
+										onPress={
+											isLastQuestion ? handleAnalyzePress : handleFormSubmit
+										}
+									/>
+									{(isLastQuestion || currentQuestionIndex !== ZERO) && (
+										<Button
+											appearance="outlined"
+											label="BACK"
+											onPress={handlePreviousClick}
+										/>
+									)}
+								</View>
 							</>
 						)}
-						<View style={globalStyles.gap12}>
-							<Button
-								isDisabled={!isValid}
-								label={isLastQuestion ? "ANALYZE" : "NEXT"}
-								onPress={isLastQuestion ? handleAnalyzePress : handleFormSubmit}
-							/>
-							{(isLastQuestion || currentQuestionIndex !== ZERO) && (
-								<Button
-									appearance="outlined"
-									label="BACK"
-									onPress={handlePreviousClick}
-								/>
-							)}
-						</View>
 					</View>
 				</ScreenWrapper>
 			</BackgroundWrapper>

@@ -23,6 +23,9 @@ const DOT_DIAMETER = 12;
 const BAR_HEIGHT = 2;
 const STEP_ANIMATION_DURATION = 1000;
 
+const gradientStartCoordinates = { x: ZERO, y: ZERO };
+const gradientEndCoordinates = { x: ONE, y: ZERO };
+
 const ProgressBar: React.FC<Properties> = ({
 	currentItemIndex,
 	totalItemsAmount,
@@ -31,8 +34,8 @@ const ProgressBar: React.FC<Properties> = ({
 		() => (
 			<LinearGradient
 				colors={[...GradientColor.BLUE]}
-				end={{ x: ONE, y: ZERO }}
-				start={{ x: ZERO, y: ZERO }}
+				end={gradientEndCoordinates}
+				start={gradientStartCoordinates}
 				style={styles.bar}
 			/>
 		),
@@ -44,8 +47,8 @@ const ProgressBar: React.FC<Properties> = ({
 			<View style={styles.dotContainer}>
 				<LinearGradient
 					colors={[...GradientColor.BLUE]}
-					end={{ x: ONE, y: ZERO }}
-					start={{ x: ZERO, y: ZERO }}
+					end={gradientEndCoordinates}
+					start={gradientStartCoordinates}
 					style={[
 						styles.dotBorder,
 						globalStyles.alignItemsCenter,
