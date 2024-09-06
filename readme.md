@@ -117,7 +117,7 @@ erDiagram
         int user_id FK
     }
 
-    user_task_days ||--|| users : user_id
+    user_task_days }o--|| users : user_id
     user_task_days {
         int id PK
         dateTime created_at
