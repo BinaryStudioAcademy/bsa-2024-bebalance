@@ -5,6 +5,7 @@ import {
 	type RadialLinearScale,
 } from "~/libs/types/types.js";
 
+import { RADIAL_AXIS_SCALE } from "../../constants/constants.js";
 import { type PolarAreaType } from "../../types/types.js";
 import { drawDots } from "../draw-dots/draw-dots.helper.js";
 import { drawSublabels } from "../draw-sublabels/draw-sublabels.helper.js";
@@ -13,7 +14,7 @@ import { getMiddleAngle } from "../get-middle-angle/get-middle-angle.helper.js";
 
 const drawExtraPointGraphics = (chart: Chart<PolarAreaType>): void => {
 	const { ctx: context } = chart;
-	const scale = chart.scales["r"] as RadialLinearScale;
+	const scale = chart.scales[RADIAL_AXIS_SCALE] as RadialLinearScale;
 	const meta = chart.getDatasetMeta(ZERO_INDEX);
 	const { chartArea } = chart;
 
