@@ -37,10 +37,10 @@ const Checkbox = <T extends FieldValues>({
 		[fieldValue, field],
 	);
 
-	if (options?.length) {
-		return (
-			<>
-				{options.map(({ label, value }) => {
+	return (
+		<section>
+			{options?.length &&
+				options.map(({ label, value }) => {
 					return (
 						<label className={styles["container"]} key={value}>
 							<input
@@ -56,22 +56,20 @@ const Checkbox = <T extends FieldValues>({
 						</label>
 					);
 				})}
-			</>
-		);
-	}
-
-	return (
-		<label className={styles["container"]}>
-			<input
-				{...field}
-				checked={Boolean(fieldValue)}
-				className={styles["input"]}
-				onClick={onClick}
-				type="checkbox"
-			/>
-			<span className={styles["input-checkmark"]} />
-			{label}
-		</label>
+			{!options?.length && (
+				<label className={styles["container"]}>
+					<input
+						{...field}
+						checked={Boolean(fieldValue)}
+						className={styles["input"]}
+						onClick={onClick}
+						type="checkbox"
+					/>
+					<span className={styles["input-checkmark"]} />
+					{label}
+				</label>
+			)}
+		</section>
 	);
 };
 
