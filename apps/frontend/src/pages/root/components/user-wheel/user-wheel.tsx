@@ -17,16 +17,15 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
+	const chartData = scores.map((score) => ({
+		data: score.score,
+		label: score.categoryName,
+	}));
+
 	return (
 		<div className={styles["container"]}>
 			{scores.length > scoreCountZero && (
-				<BalanceWheelChart
-					data={scores.map((score) => ({
-						data: score.score,
-						label: score.categoryName,
-					}))}
-					isAnimating={false}
-				/>
+				<BalanceWheelChart data={chartData} isAnimating={false} />
 			)}
 		</div>
 	);
