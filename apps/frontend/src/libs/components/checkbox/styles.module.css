@@ -44,7 +44,7 @@
 	transition: opacity 0.3s ease;
 }
 
-.gradient-border-container:has(input[type="checkbox"]:checked)::before {
+.gradient-border-container:has(.input:checked)::before {
 	background: linear-gradient(
 		to right,
 		var(--brand) 0%,
@@ -53,7 +53,7 @@
 	opacity: 1;
 }
 
-.gradient-border-container:has(input[type="checkbox"]:checked) .label {
+.gradient-border-container:has(.input:checked) .label {
 	border: none;
 }
 
