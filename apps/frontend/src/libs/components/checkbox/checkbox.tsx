@@ -8,14 +8,14 @@ import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	label: string;
-	onClick?: () => void;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & FormFieldProperties<T>;
 
 const Checkbox = <T extends FieldValues>({
 	control,
 	label,
 	name,
-	onClick,
+	onChange,
 	options,
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
@@ -33,8 +33,18 @@ const Checkbox = <T extends FieldValues>({
 					(fieldValue as string[]).filter((value) => value !== inputValue),
 				);
 			}
+
+			onChange?.(event);
 		},
-		[fieldValue, field],
+		[onChange, field, fieldValue],
+	);
+
+	const handleSingleCheckboxChange = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>): void => {
+			field.onChange(event);
+			onChange?.(event);
+		},
+		[field, onChange],
 	);
 
 	return (
@@ -47,7 +57,6 @@ const Checkbox = <T extends FieldValues>({
 								checked={(fieldValue as string[]).includes(value)}
 								className={styles["input"]}
 								onChange={handleCheckboxesChange}
-								onClick={onClick}
 								type="checkbox"
 								value={value}
 							/>
@@ -62,7 +71,7 @@ const Checkbox = <T extends FieldValues>({
 						{...field}
 						checked={Boolean(fieldValue)}
 						className={styles["input"]}
-						onClick={onClick}
+						onChange={handleSingleCheckboxChange}
 						type="checkbox"
 					/>
 					<span className={styles["input-checkmark"]} />
