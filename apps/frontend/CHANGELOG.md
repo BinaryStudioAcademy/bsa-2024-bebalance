@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.25.1...frontend-v1.26.0) (2024-09-06)
+
+
+### Features
+
+* **frontend:** change the text on not found page bb-278 ([#322](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/322)) ([bde2de0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bde2de05fa5cbb8de7cccf3c76ba5800ca77b0da))
+* **frontend:** quiz question screen mobile responsiveness bb-290 ([#316](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/316)) ([90a64c9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/90a64c9241518c60bb695f9835a71dbca8ab5e4a))
+
+
+### Bug Fixes
+
+* **frontend:** fix extra spaces between label and field bb-312 ([#317](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/317)) ([b910578](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b9105785c58f562279e6da2e617076252476cb50))
+
+## [1.25.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.25.0...frontend-v1.25.1) (2024-09-05)
+
+
+### Bug Fixes
+
+* **frontend:** fix skipping category on next button event bb-89 ([#307](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/307)) ([8331add](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8331addc2460876740e1b614f587f8adfbcc9766))
+
 ## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.24.0...frontend-v1.25.0) (2024-09-05)
 
 
