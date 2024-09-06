@@ -19,6 +19,9 @@ const SCREEN_WIDTH: number = Dimensions.get("window").width;
 const PROGRESS_BAR_WIDTH = SCREEN_WIDTH * SCREEN_WIDTH_MULTIPLIER;
 const ZERO = 0;
 const ONE = 1;
+const DOT_DIAMETER = 12;
+const BAR_HEIGHT = 2;
+const STEP_ANIMATION_DURATION = 1000;
 
 const ProgressBar: React.FC<Properties> = ({
 	currentItemIndex,
@@ -64,12 +67,12 @@ const ProgressBar: React.FC<Properties> = ({
 				currentStep={currentItemIndex}
 				CustomizableDot={Dot}
 				CustomizedFilledBar={FilledBar}
-				dotDiameter={12}
+				dotDiameter={DOT_DIAMETER}
 				filledBarStyle={styles.filledBarStyle}
 				filledDotStyle={styles.filledDotStyle}
-				height={2}
+				height={BAR_HEIGHT}
 				steps={totalItemsAmount}
-				stepToStepAnimationDuration={1000}
+				stepToStepAnimationDuration={STEP_ANIMATION_DURATION}
 				width={PROGRESS_BAR_WIDTH}
 				withDots
 			/>

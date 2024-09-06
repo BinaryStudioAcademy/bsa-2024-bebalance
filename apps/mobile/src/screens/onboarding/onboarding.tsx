@@ -151,12 +151,12 @@ const Onboarding: React.FC = () => {
 				<ScreenWrapper>
 					<View
 						style={[
-							styles.container,
 							globalStyles.flex1,
 							globalStyles.mb16,
 							globalStyles.mh12,
 							globalStyles.mt12,
 							globalStyles.p24,
+							styles.container,
 						]}
 					>
 						{question && (

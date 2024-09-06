@@ -36,7 +36,7 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 
 	return (
 		<>
-			<Text preset="subheading" style={[styles.title, globalStyles.mv48]}>
+			<Text preset="subheading" style={[globalStyles.mv48, styles.title]}>
 				{question?.label}
 			</Text>
 			<RadioGroup
