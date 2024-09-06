@@ -12,7 +12,6 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks";
-import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { actions as categoriesActions } from "~/slices/categories/categories";
 
 const Chat: React.FC = () => {
@@ -27,17 +26,9 @@ const Chat: React.FC = () => {
 		}
 	}, [dispatch, categories]);
 
-	const handleFormSubmit = useCallback(
-		(selectedCategoriesIds: number[]): void => {
-			const selectedLabels = categories
-				.filter((category) => selectedCategoriesIds.includes(category.id))
-				.map((category) => category.name)
-				.join(", ");
-
-			toastMessage.info({ message: `Selected Categories: ${selectedLabels}` });
-		},
-		[categories],
-	);
+	const handleFormSubmit = useCallback((): void => {
+		// TODO: Save to DB
+	}, []);
 
 	return (
 		<ScreenWrapper>
