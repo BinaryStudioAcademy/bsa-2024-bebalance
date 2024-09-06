@@ -29,7 +29,7 @@ function up(knex: Knex): Promise<void> {
 		table
 			.integer(ColumnName.DAY_OF_WEEK)
 			.notNullable()
-			.checkBetween([[MIN_DAY_OF_WEEK, MAX_DAY_OF_WEEK]]);
+			.checkBetween([MIN_DAY_OF_WEEK, MAX_DAY_OF_WEEK]);
 		table.timestamp(ColumnName.CREATED_AT).defaultTo(knex.fn.now());
 		table.timestamp(ColumnName.UPDATED_AT).defaultTo(knex.fn.now());
 	});
