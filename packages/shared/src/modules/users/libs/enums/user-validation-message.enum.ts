@@ -2,7 +2,7 @@ import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
 	ALLOW_NOTIFICATIONS_STRING_REQUIRED:
-		"Allow notifications must be a string value ('true' or 'false')",
+		"Allow notifications must be a string value",
 	DAYS_BETWEEN_1_AND_7: "Each day must be between 1 and 7",
 	EMAIL_REQUIRE: "Email is required",
 	EMAIL_TAKEN: "This email is already registered. Please use a different email",
