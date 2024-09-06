@@ -28,12 +28,12 @@ ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
 
 type Properties = {
 	data: ChartDataType[];
-	isAnimating: boolean;
+	isAnimating?: boolean;
 };
 
 const BalanceWheelChart: React.FC<Properties> = ({
 	data,
-	isAnimating,
+	isAnimating = false,
 }: Properties) => {
 	const chartReference = useRef<ChartJS<PolarAreaType> | null>(null);
 

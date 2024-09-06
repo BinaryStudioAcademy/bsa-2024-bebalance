@@ -25,7 +25,7 @@ const UserWheel: React.FC = () => {
 	return (
 		<div className={styles["container"]}>
 			{scores.length > NO_SCORES_COUNT && (
-				<BalanceWheelChart data={chartData} isAnimating={false} />
+				<BalanceWheelChart data={chartData} />
 			)}
 		</div>
 	);
