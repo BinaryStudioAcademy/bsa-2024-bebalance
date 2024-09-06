@@ -9,9 +9,6 @@ import {
 
 import { getSectorParameters } from "../../helpers/helpers";
 
-const INITIAL_ANIMATED_VALUE = 0;
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-
 type Properties = {
 	animationRepetitions: number;
 	animationTime: number;
@@ -26,6 +23,9 @@ type Properties = {
 	startPercentInner: number;
 	startPercentOuter: number;
 };
+
+const INITIAL_ANIMATED_VALUE = 0;
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedAppearingSector: React.FC<Properties> = ({
 	animationRepetitions,
