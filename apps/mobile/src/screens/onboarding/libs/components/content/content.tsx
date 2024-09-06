@@ -1,12 +1,12 @@
 import React from "react";
+
+import { RadioGroup, Text } from "~/libs/components/components";
+import { globalStyles } from "~/libs/styles/styles";
 import {
 	type Control,
 	type FieldErrors,
 	type FieldValues,
-} from "react-hook-form";
-
-import { RadioGroup, Text } from "~/libs/components/components";
-import { globalStyles } from "~/libs/styles/global-styles/global-styles";
+} from "~/libs/types/types";
 
 import {
 	type OnboardingAnswerDto,

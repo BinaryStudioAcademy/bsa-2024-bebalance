@@ -1,5 +1,3 @@
-import { type NativeStackNavigationProp } from "@react-navigation/native-stack";
-
 import {
 	BackgroundWrapper,
 	Button,
@@ -22,6 +20,7 @@ import {
 	useRef,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import { type NativeStackNavigationProp } from "~/libs/types/types";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
@@ -61,7 +60,7 @@ const Onboarding: React.FC = () => {
 	} = useAppSelector(({ onboarding }) => ({
 		allAnswers: onboarding.answersByQuestionIndex,
 		currentAnswer:
-			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] || "",
+			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] ?? "",
 		currentQuestionIndex: onboarding.currentQuestionIndex,
 		dataStatus: onboarding.dataStatus,
 		isLastQuestion:

@@ -7,7 +7,13 @@ import { GradientColor } from "~/libs/enums/enums";
 import { useMemo } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
-import { SCREEN_WIDTH_MULTIPLIER } from "./constants/constants";
+import {
+	BAR_HEIGHT,
+	DOT_DIAMETER,
+	SCREEN_WIDTH_MULTIPLIER,
+	STEP_ANIMATION_DURATION,
+} from "./constants/constants";
+import { GradientCoordinates } from "./enums/enums";
 import { styles } from "./styles";
 
 type Properties = {
@@ -17,14 +23,6 @@ type Properties = {
 
 const SCREEN_WIDTH: number = Dimensions.get("window").width;
 const PROGRESS_BAR_WIDTH = SCREEN_WIDTH * SCREEN_WIDTH_MULTIPLIER;
-const ZERO = 0;
-const ONE = 1;
-const DOT_DIAMETER = 12;
-const BAR_HEIGHT = 2;
-const STEP_ANIMATION_DURATION = 1000;
-
-const gradientStartCoordinates = { x: ZERO, y: ZERO };
-const gradientEndCoordinates = { x: ONE, y: ZERO };
 
 const ProgressBar: React.FC<Properties> = ({
 	currentItemIndex,
@@ -34,8 +32,8 @@ const ProgressBar: React.FC<Properties> = ({
 		() => (
 			<LinearGradient
 				colors={[...GradientColor.BLUE]}
-				end={gradientEndCoordinates}
-				start={gradientStartCoordinates}
+				end={GradientCoordinates.END}
+				start={GradientCoordinates.START}
 				style={styles.bar}
 			/>
 		),
@@ -47,8 +45,8 @@ const ProgressBar: React.FC<Properties> = ({
 			<View style={styles.dotContainer}>
 				<LinearGradient
 					colors={[...GradientColor.BLUE]}
-					end={gradientEndCoordinates}
-					start={gradientStartCoordinates}
+					end={GradientCoordinates.END}
+					start={GradientCoordinates.START}
 					style={[
 						styles.dotBorder,
 						globalStyles.alignItemsCenter,
