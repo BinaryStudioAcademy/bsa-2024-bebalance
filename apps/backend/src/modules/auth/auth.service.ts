@@ -61,7 +61,7 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			expirationTime: "30mins",
+			expirationTime: config.ENV.DURATIONS.PASSWORD_RESET_LINK,
 			payload: { userId: userDetails.id },
 		});
 
@@ -115,7 +115,7 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			expirationTime: "24hr",
+			expirationTime: config.ENV.DURATIONS.SESSION,
 			payload: { userId: userDetails.id },
 		});
 

@@ -84,6 +84,20 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			DURATIONS: {
+				PASSWORD_RESET_LINK: {
+					default: null,
+					doc: "Time during which reset password link is valid",
+					env: "DURATION_RESET_PASSWORD_LINK",
+					format: String,
+				},
+				SESSION: {
+					default: null,
+					doc: "Time during which user's session is active",
+					env: "DURATION_SESSION",
+					format: String,
+				},
+			},
 			JWT: {
 				ALGORITHM: {
 					default: null,

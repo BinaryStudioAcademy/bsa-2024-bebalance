@@ -23,7 +23,7 @@ class BaseToken<T extends JWTPayload> {
 		expirationTime,
 		payload,
 	}: {
-		expirationTime: "24hr" | "30mins";
+		expirationTime: string;
 		payload: T;
 	}): Promise<string> {
 		return await new SignJWT(payload)
