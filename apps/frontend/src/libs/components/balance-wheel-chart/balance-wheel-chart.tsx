@@ -51,12 +51,10 @@ const BalanceWheelChart: React.FC<Properties> = ({
 
 				const chartDataEnd = CATEGORIES_ORDER.length;
 
-				const adjustedIndexA =
-					indexA === NOT_FOUND_INDEX ? chartDataEnd : indexA;
-				const adjustedIndexB =
-					indexB === NOT_FOUND_INDEX ? chartDataEnd : indexB;
+				const boundIndexA = indexA === NOT_FOUND_INDEX ? chartDataEnd : indexA;
+				const boundIndexB = indexB === NOT_FOUND_INDEX ? chartDataEnd : indexB;
 
-				return adjustedIndexA - adjustedIndexB;
+				return boundIndexA - boundIndexB;
 			});
 
 			chartInstance.data.datasets[ZERO_INDEX].data = orderedChartData.map(
