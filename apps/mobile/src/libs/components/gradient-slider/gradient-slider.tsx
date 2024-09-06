@@ -15,7 +15,10 @@ import {
 	generateGradientLocations,
 } from "~/libs/helpers/helpers";
 import { useCallback, useState } from "~/libs/hooks/hooks";
-import { type colorToGradientColors } from "~/libs/maps/maps";
+import {
+	type colorToGradientColors,
+	directionToGradient,
+} from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
@@ -30,6 +33,8 @@ const INITIAL_SLIDER_WIDTH = 0;
 const MAX_PERCENT = 100;
 const PLANET_TRANSLATE_OFFSET = 3;
 const ICON_TRANSLATE_OFFSET = 20;
+const MARKER_ICON_SIZE = 50;
+const SLIDER_STEP = 1;
 
 const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 	const [value, setValue] = useState<number>(min);
@@ -56,6 +61,8 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 	const translateXForPlanet = translateXBase - PLANET_TRANSLATE_OFFSET;
 	const translateXForIcon = translateXBase - ICON_TRANSLATE_OFFSET;
 
+	const { end, start } = directionToGradient.leftToRight;
+
 	return (
 		<View style={[globalStyles.alignItemsCenter, globalStyles.flex1]}>
 			<View
@@ -64,9 +71,9 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 			>
 				<LinearGradient
 					colors={color}
-					end={{ x: 1, y: 0 }}
+					end={end}
 					locations={generateGradientLocations(max)}
-					start={{ x: 0, y: 0 }}
+					start={start}
 					style={styles.gradient}
 				/>
 				<View
@@ -79,7 +86,7 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 						},
 					]}
 				>
-					<Icon color={BaseColor.BLACK} name="place" size={50} />
+					<Icon color={BaseColor.BLACK} name="place" size={MARKER_ICON_SIZE} />
 					<Text preset="regular" style={[globalStyles.mt8, styles.labelText]}>
 						{value}
 					</Text>
@@ -102,7 +109,7 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 					minimumTrackTintColor="transparent"
 					minimumValue={min}
 					onValueChange={handleValueChange}
-					step={1}
+					step={SLIDER_STEP}
 					style={styles.slider}
 					thumbTintColor="transparent"
 					value={value}
