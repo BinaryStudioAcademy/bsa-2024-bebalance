@@ -27,6 +27,7 @@ type Properties = {
 	gradientColors: keyof typeof colorToGradientColors;
 	max: number;
 	min: number;
+	onValueChange?: (value: number) => void;
 };
 
 const INITIAL_SLIDER_WIDTH = 0;
@@ -36,7 +37,12 @@ const ICON_TRANSLATE_OFFSET = 20;
 const MARKER_ICON_SIZE = 50;
 const SLIDER_STEP = 1;
 
-const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
+const GradientSlider: React.FC<Properties> = ({
+	gradientColors,
+	max,
+	min,
+	onValueChange,
+}) => {
 	const [value, setValue] = useState<number>(min);
 	const [sliderWidth, setSliderWidth] = useState<number>(INITIAL_SLIDER_WIDTH);
 	const initialColors = generateSliderGradientColors(min, gradientColors, max);
@@ -51,8 +57,12 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 		(sliderValue: number) => {
 			setValue(sliderValue);
 			setColor(generateSliderGradientColors(sliderValue, gradientColors, max));
+
+			if (onValueChange) {
+				onValueChange(sliderValue);
+			}
 		},
-		[gradientColors, max],
+		[gradientColors, max, onValueChange],
 	);
 
 	const pixelsPerPercent = sliderWidth / MAX_PERCENT;
