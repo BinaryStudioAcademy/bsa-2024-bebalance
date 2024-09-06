@@ -182,28 +182,20 @@ const Onboarding: React.FC = () => {
 								/>
 							</>
 						)}
-						{isLastQuestion ? (
+						<View style={globalStyles.gap12}>
 							<Button
 								isDisabled={!isValid}
-								label="ANALYZE"
-								onPress={handleAnalyzePress}
+								label={isLastQuestion ? "ANALYZE" : "NEXT"}
+								onPress={isLastQuestion ? handleAnalyzePress : handleFormSubmit}
 							/>
-						) : (
-							<View style={globalStyles.gap12}>
+							{(isLastQuestion || currentQuestionIndex !== ZERO) && (
 								<Button
-									isDisabled={!isValid}
-									label="NEXT"
-									onPress={handleFormSubmit}
+									appearance="outlined"
+									label="BACK"
+									onPress={handlePreviousClick}
 								/>
-								{currentQuestionIndex !== ZERO && (
-									<Button
-										appearance="outlined"
-										label="BACK"
-										onPress={handlePreviousClick}
-									/>
-								)}
-							</View>
-						)}
+							)}
+						</View>
 					</View>
 				</ScreenWrapper>
 			</BackgroundWrapper>
