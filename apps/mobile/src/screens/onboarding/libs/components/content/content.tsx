@@ -27,7 +27,7 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 	errors,
 	question,
 }) => {
-	const mapData: RadioGroupValue[] = question?.answers
+	const mappedAnswersToRadioOptions: RadioGroupValue[] = question?.answers
 		? question.answers.map((answer: OnboardingAnswerDto) => ({
 				label: answer.label,
 				value: answer.id.toString(),
@@ -43,7 +43,7 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 				control={control}
 				errors={errors}
 				name="answer"
-				options={mapData}
+				options={mappedAnswersToRadioOptions}
 			/>
 		</>
 	);
