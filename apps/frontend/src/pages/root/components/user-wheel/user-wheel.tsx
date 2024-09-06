@@ -9,9 +9,9 @@ import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
+	const NO_SCORES_COUNT = 0;
 	const dispatch = useAppDispatch();
 	const scores = useAppSelector((state) => state.quiz.scores);
-	const scoreCountZero = 0;
 
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
@@ -24,7 +24,7 @@ const UserWheel: React.FC = () => {
 
 	return (
 		<div className={styles["container"]}>
-			{scores.length > scoreCountZero && (
+			{scores.length > NO_SCORES_COUNT && (
 				<BalanceWheelChart data={chartData} isAnimating={false} />
 			)}
 		</div>
