@@ -138,7 +138,7 @@ const Onboarding: React.FC = () => {
 		if (isLastQuestion) {
 			navigation.navigate(RootScreenName.WELCOME);
 		}
-	}, [handleNextClick, handleSubmit, isLastQuestion]);
+	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
 	const renderPageComponent = useCallback(() => {
 		return <Content control={control} errors={errors} question={question} />;
