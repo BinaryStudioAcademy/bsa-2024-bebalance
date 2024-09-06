@@ -22,7 +22,7 @@ const Checkbox = <T extends FieldValues>({
 	options = [],
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
-	const fieldValue = field.value;
+	const { onChange, value } = field;
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -30,43 +30,42 @@ const Checkbox = <T extends FieldValues>({
 			const inputValue = Number(event.target.value);
 
 			if (isChecked) {
-				field.onChange([...fieldValue, inputValue]);
+				onChange([...value, inputValue]);
 			} else {
-				field.onChange(
-					(fieldValue as number[]).filter((value) => value !== inputValue),
-				);
+				onChange((value as number[]).filter((value) => value !== inputValue));
 			}
 		},
-		[fieldValue, field],
+		[onChange, value],
 	);
 
 	return (
-		<>
-			<label className={styles["input-wrapper"]}>
-				<p className={styles["question"]}>{label}</p>
-				<div className={styles["input-container"]}>
-					{options.map(({ label, value }) => {
-						return (
-							<div className={styles["gradient-border-container"]} key={value}>
-								<div className={styles["gradient-border-content"]}>
-									<label className={styles["label"]} key={value}>
-										<input
-											checked={(fieldValue as number[]).includes(value)}
-											className={styles["input"]}
-											onChange={handleCheckboxesChange}
-											type="checkbox"
-											value={value}
-										/>
-										<span className={styles["input-checkmark"]} />
-										{label}
-									</label>
-								</div>
+		<label className={styles["input-wrapper"]}>
+			<p className={styles["question"]}>{label}</p>
+			<div className={styles["input-container"]}>
+				{options.map((option) => {
+					return (
+						<div
+							className={styles["gradient-border-container"]}
+							key={option.value}
+						>
+							<div className={styles["gradient-border-content"]}>
+								<label className={styles["label"]} key={option.value}>
+									<input
+										checked={(value as number[]).includes(option.value)}
+										className={styles["input"]}
+										onChange={handleCheckboxesChange}
+										type="checkbox"
+										value={option.value}
+									/>
+									<span className={styles["input-checkmark"]} />
+									{option.label}
+								</label>
 							</div>
-						);
-					})}
-				</div>
-			</label>
-		</>
+						</div>
+					);
+				})}
+			</div>
+		</label>
 	);
 };
 
