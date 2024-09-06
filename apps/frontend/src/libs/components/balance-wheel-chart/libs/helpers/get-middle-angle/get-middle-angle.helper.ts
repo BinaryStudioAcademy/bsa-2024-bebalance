@@ -1,5 +1,5 @@
-import { SINGLE_ELEMENT } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
-import { AngleCoefficient } from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
+import { SINGLE_ELEMENT } from "../../constants/constants.js";
+import { AngleCoefficient } from "../../enums/enums.js";
 
 const getMiddleAngle = (index: number, angleStep: number): number => {
 	const startAngle = index * angleStep;

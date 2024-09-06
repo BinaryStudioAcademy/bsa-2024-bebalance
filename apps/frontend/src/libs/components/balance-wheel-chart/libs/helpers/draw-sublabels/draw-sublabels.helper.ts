@@ -1,12 +1,12 @@
+import { HALF_PI } from "~/libs/constants/constants.js";
+import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
+
 import {
 	ChartFont,
 	ChartGraphicsColor,
 	LabelDistacneOffset,
 	WheelCenterDistance,
-} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
-import { HALF_PI } from "~/libs/constants/constants.js";
-import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
-
+} from "../../enums/enums.js";
 import { getBaseline } from "../get-baseline/get-baseline.helper.js";
 import { getSublabelOffset } from "../get-sublabel-offset/get-sublabel-offset.helper.js";
 

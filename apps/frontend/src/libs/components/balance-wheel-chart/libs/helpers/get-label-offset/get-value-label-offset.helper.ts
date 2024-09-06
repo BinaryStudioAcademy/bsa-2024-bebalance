@@ -1,10 +1,7 @@
-import { DEFAULT_GRAPHICS_OFFSET } from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
-import {
-	ValueLabelOffsetX,
-	ValueLabelOffsetY,
-} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
 import { type ChartArea } from "~/libs/types/types.js";
 
+import { DEFAULT_GRAPHICS_OFFSET } from "../../constants/constants.js";
+import { ValueLabelOffsetX, ValueLabelOffsetY } from "../../enums/enums.js";
 import { getCenters } from "../get-centers/get-centers.helper.js";
 
 const getValueLabelOffset = (

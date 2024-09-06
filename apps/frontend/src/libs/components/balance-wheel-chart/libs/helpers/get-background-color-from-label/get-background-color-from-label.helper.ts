@@ -1,7 +1,4 @@
-import {
-	ChartGraphicsColor,
-	ChartSliceColor,
-} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
+import { ChartGraphicsColor, ChartSliceColor } from "../../enums/enums.js";
 
 const getBackgroundColorFromLabel = (
 	label?: string,

@@ -1,12 +1,3 @@
-import {
-	DOT_RADIUS,
-	START_ANGLE,
-} from "~/libs/components/balance-wheel-chart/libs/constants/constants.js";
-import {
-	ChartGraphicsColor,
-	WheelCenterDistance,
-} from "~/libs/components/balance-wheel-chart/libs/enums/enums.js";
-import { type PolarAreaType } from "~/libs/components/balance-wheel-chart/libs/types/types.js";
 import { HALF_PI, TAU } from "~/libs/constants/constants.js";
 import {
 	type ChartArea,
@@ -14,6 +5,9 @@ import {
 	type RadialLinearScale,
 } from "~/libs/types/types.js";
 
+import { DOT_RADIUS, START_ANGLE } from "../../constants/constants.js";
+import { ChartGraphicsColor, WheelCenterDistance } from "../../enums/enums.js";
+import { type PolarAreaType } from "../../types/types.js";
 import { getDotOffset } from "../get-dot-offset/get-dot-offset.helper.js";
 
 const drawDots = ({

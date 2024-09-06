@@ -1,4 +1,3 @@
-import { type PolarAreaType } from "~/libs/components/balance-wheel-chart/libs/types/types.js";
 import { TAU, ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
 	type Chart,
@@ -6,6 +5,7 @@ import {
 	type RadialLinearScale,
 } from "~/libs/types/types.js";
 
+import { type PolarAreaType } from "../../types/types.js";
 import { drawDots } from "../draw-dots/draw-dots.helper.js";
 import { drawSublabels } from "../draw-sublabels/draw-sublabels.helper.js";
 import { drawValueLabels } from "../draw-value-labels/draw-value-labels.helper.js";
