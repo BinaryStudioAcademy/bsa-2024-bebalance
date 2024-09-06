@@ -5,8 +5,8 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	type EmailDto,
-	type FinalAnswersPayloadDto,
-	type FinalAnswersRequestDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,
@@ -22,7 +22,7 @@ export {
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
-	finalAnswers as finalAnswersValidationSchema,
+	notificationAnswers as notificationAnswersValidationSchema,
 	userForgotPassword as userForgotPasswordVaidationSchema,
 	userResetPassword as userResetPasswordValidationSchema,
 	userSignIn as userSignInValidationSchema,

@@ -5,7 +5,7 @@
 	background-color: var(--background);
 }
 
-.final-questions {
+.notification-questions {
 	display: flex;
 	flex-direction: column;
 	align-items: center;

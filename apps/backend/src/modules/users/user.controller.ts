@@ -12,13 +12,14 @@ import { userUpdateValidationSchema } from "~/modules/users/users.js";
 import { UsersApiPath } from "./libs/enums/enums.js";
 import { checkAccessToUserData } from "./libs/hooks/hooks.js";
 import {
-	type FinalAnswersRequestDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
 	type UserDto,
 	type UserGetParametersDto,
 	type UserUpdateParametersDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
-import { finalAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+import { notificationAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 /*** @swagger
  * components:
@@ -41,7 +42,7 @@ import { finalAnswersValidationSchema } from "./libs/validation-schemas/validati
  *          updatedAt:
  *            type: string
  *            format: date-time
- *      FinalQuestionsRequest:
+ *      NotificationQuestionsRequest:
  *        type: object
  *        properties:
  *          allowNotifications:
@@ -70,16 +71,16 @@ class UserController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.saveFinalAnswers(
+				this.saveNotificationAnswers(
 					options as APIHandlerOptions<{
-						body: FinalAnswersRequestDto;
+						body: NotificationAnswersRequestDto;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: UsersApiPath.FINAL_QUESTIONS,
+			path: UsersApiPath.NOTIFICATION_QUESTIONS,
 			validation: {
-				body: finalAnswersValidationSchema,
+				body: notificationAnswersValidationSchema,
 			},
 		});
 
@@ -169,9 +170,9 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /users/final-questions:
+	 * /users/notification-questions:
 	 *    post:
-	 *      description: Save user preferences based on final questions form
+	 *      description: Save user preferences based on notification questions form
 	 *      security:
 	 *        - bearerAuth: []
 	 *      requestBody:
@@ -179,7 +180,7 @@ class UserController extends BaseController {
 	 *        content:
 	 *          application/json:
 	 *            schema:
-	 *              $ref: "#/components/schemas/FinalQuestionsRequest"
+	 *              $ref: "#/components/schemas/NotificationQuestionsRequest"
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
@@ -189,18 +190,18 @@ class UserController extends BaseController {
 	 *                $ref: "#/components/schemas/User"
 	 */
 
-	private async saveFinalAnswers(
+	private async saveNotificationAnswers(
 		options: APIHandlerOptions<{
-			body: FinalAnswersRequestDto;
+			body: NotificationAnswersPayloadDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { allowNotifications, userId, userTaskDays } = options.body;
+		const { allowNotifications, userTaskDays } = options.body;
 
-		const updatedUserDto = await this.userService.saveFinalAnswers(userId, {
-			allowNotifications,
-			userTaskDays,
-		});
+		const updatedUserDto = await this.userService.saveNotificationAnswers(
+			options.user.id,
+			{ allowNotifications, userTaskDays },
+		);
 
 		return {
 			payload: updatedUserDto,

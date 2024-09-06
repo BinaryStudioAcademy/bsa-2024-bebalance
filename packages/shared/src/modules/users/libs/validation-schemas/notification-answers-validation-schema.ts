@@ -1,14 +1,14 @@
 import { z } from "zod";
 
 import {
-	FinalAnswersValidationRule,
+	NotificationAnswersValidationRule,
 	UserValidationMessage,
 } from "../enums/enums.js";
 
-const finalAnswers = z.object({
+const notificationAnswers = z.object({
 	allowNotifications: z
 		.string()
-		.min(FinalAnswersValidationRule.ALLOW_NOTIFICATIONS_MIN_LENGTH, {
+		.min(NotificationAnswersValidationRule.ALLOW_NOTIFICATIONS_MIN_LENGTH, {
 			message: UserValidationMessage.ALLOW_NOTIFICATIONS_STRING_REQUIRED,
 		}),
 	userTaskDays: z
@@ -24,8 +24,8 @@ const finalAnswers = z.object({
 			(days) =>
 				days.every(
 					(day) =>
-						day >= FinalAnswersValidationRule.TASK_DAY_MIN &&
-						day <= FinalAnswersValidationRule.TASK_DAY_MAX,
+						day >= NotificationAnswersValidationRule.TASK_DAY_MIN &&
+						day <= NotificationAnswersValidationRule.TASK_DAY_MAX,
 				),
 			{
 				message: UserValidationMessage.DAYS_BETWEEN_1_AND_7,
@@ -33,4 +33,4 @@ const finalAnswers = z.object({
 		),
 });
 
-export { finalAnswers };
+export { notificationAnswers };

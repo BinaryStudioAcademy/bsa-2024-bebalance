@@ -8,7 +8,7 @@ import {
 	type UserUpdatePayload,
 } from "~/modules/users/users.js";
 
-import { type FinalAnswersRequestDto } from "../libs/types/types.js";
+import { type NotificationAnswersRequestDto } from "../libs/types/types.js";
 import { name as sliceName } from "./users.slice.js";
 
 const getById = createAsyncThunk<
@@ -22,14 +22,14 @@ const getById = createAsyncThunk<
 	return await usersApi.getById(id);
 });
 
-const saveFinalAnswers = createAsyncThunk<
+const saveNotificationAnswers = createAsyncThunk<
 	UserDto,
-	FinalAnswersRequestDto,
+	NotificationAnswersRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/saveFinalAnswers`, async (payload, { extra }) => {
+>(`${sliceName}/saveNotificationAnswers`, async (payload, { extra }) => {
 	const { usersApi } = extra;
 
-	return await usersApi.saveFinalAnswers(payload);
+	return await usersApi.saveNotificationAnswers(payload);
 });
 
 const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
@@ -45,4 +45,4 @@ const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 	},
 );
 
-export { getById, saveFinalAnswers, update };
+export { getById, saveNotificationAnswers, update };

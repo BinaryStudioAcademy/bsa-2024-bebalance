@@ -1,7 +1,7 @@
 export {
 	type EmailDto,
-	type FinalAnswersPayloadDto,
-	type FinalAnswersRequestDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
 	type ResetPasswordDto,
 	type UserDto,
 	type UserGetAllResponseDto,

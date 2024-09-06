@@ -1,6 +1,6 @@
 const UsersApiPath = {
 	$ID: "/:id",
-	FINAL_QUESTIONS: "/final-questions",
+	NOTIFICATION_QUESTIONS: "/notification-questions",
 	ROOT: "/",
 } as const;
 

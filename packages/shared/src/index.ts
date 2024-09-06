@@ -70,9 +70,9 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
-	type FinalAnswersPayloadDto,
-	type FinalAnswersRequestDto,
-	finalAnswersValidationSchema,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	notificationAnswersValidationSchema,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,

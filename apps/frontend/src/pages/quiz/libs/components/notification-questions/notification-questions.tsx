@@ -1,27 +1,29 @@
 import { Button, Checkbox, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
-	type FinalAnswersPayloadDto,
-	finalAnswersValidationSchema,
+	type NotificationAnswersPayloadDto,
+	notificationAnswersValidationSchema,
 } from "~/modules/users/users.js";
 
 import {
 	ALLOW_NOTIFICATIONS_OPTIONS,
-	FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
+	NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES,
 	TASK_DAYS_OPTIONS,
 } from "./libs/constants/constants.js";
-import { type FinalQuestionsFormValues } from "./libs/types/types.js";
+import { type NotificationQuestionsFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: FinalAnswersPayloadDto) => void;
+	onSubmit: (payload: NotificationAnswersPayloadDto) => void;
 };
 
-const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const NotificationQuestions: React.FC<Properties> = ({
+	onSubmit,
+}: Properties) => {
 	const { control, handleSubmit, isValid } =
-		useAppForm<FinalQuestionsFormValues>({
-			defaultValues: FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
-			validationSchema: finalAnswersValidationSchema,
+		useAppForm<NotificationQuestionsFormValues>({
+			defaultValues: NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES,
+			validationSchema: notificationAnswersValidationSchema,
 		});
 
 	const handleFormSubmit = useCallback(
@@ -35,7 +37,7 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<div className={styles["container"]}>
-			<div className={styles["final-questions"]}>
+			<div className={styles["notification-questions"]}>
 				<h1 className={styles["title"]}>And the last step</h1>
 				<form className={styles["form"]} onSubmit={handleFormSubmit}>
 					<Checkbox
@@ -61,4 +63,4 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	);
 };
 
-export { FinalQuestions };
+export { NotificationQuestions };

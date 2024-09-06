@@ -5,7 +5,7 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import {
-	type FinalAnswersPayloadDto,
+	type NotificationAnswersPayloadDto,
 	actions as userActions,
 	type UserDto,
 } from "~/modules/users/users.js";
@@ -13,8 +13,8 @@ import {
 import {
 	Analyzing,
 	BalanceWheel,
-	FinalQuestions,
 	Introduction,
+	NotificationQuestions,
 	QuizForm,
 } from "./libs/components/components.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
@@ -29,10 +29,10 @@ const Quiz: React.FC = () => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
 	}, []);
 
-	const handleFinalQuestionsSubmit = useCallback(
-		(payload: FinalAnswersPayloadDto): void => {
+	const handleNotificationQuestionsSubmit = useCallback(
+		(payload: NotificationAnswersPayloadDto): void => {
 			void dispatch(
-				userActions.saveFinalAnswers({
+				userActions.saveNotificationAnswers({
 					userId: user.id,
 					...payload,
 				}),
@@ -55,8 +55,10 @@ const Quiz: React.FC = () => {
 				return <Introduction onNext={handleNextStep} />;
 			}
 
-			case Step.FINAL_QUESTIONS: {
-				return <FinalQuestions onSubmit={handleFinalQuestionsSubmit} />;
+			case Step.NOTIFICATION_QUESTIONS: {
+				return (
+					<NotificationQuestions onSubmit={handleNotificationQuestionsSubmit} />
+				);
 			}
 
 			case Step.QUIZ: {
