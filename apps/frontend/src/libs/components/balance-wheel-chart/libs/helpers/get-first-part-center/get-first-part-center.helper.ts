@@ -1,7 +1,7 @@
 import { AngleCoefficient } from "../../enums/enums.js";
 
-const getFirstPartCenter = (start: number, end: number): number => {
-	return start + (end - start) / AngleCoefficient.FIFTH;
+const getFirstPartCenter = (lowerBound: number, upperBound: number): number => {
+	return lowerBound + (upperBound - lowerBound) / AngleCoefficient.FIFTH;
 };
 
 export { getFirstPartCenter };
