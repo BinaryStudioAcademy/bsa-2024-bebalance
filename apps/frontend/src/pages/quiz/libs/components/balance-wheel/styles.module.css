@@ -18,40 +18,25 @@
 	background-size: 38%, 30%, 38%;
 }
 
-.white-dot {
+.white-dots {
 	position: absolute;
-	width: 5px;
-	height: 5px;
-	background-color: white;
-	border-radius: 100%;
-}
-
-.white-dot:nth-child(2) {
-	bottom: 25%;
-	left: 10%;
-}
-
-.white-dot:nth-child(3) {
-	top: 45%;
-	left: 30%;
-}
-
-.white-dot:nth-child(4) {
-	top: 30%;
-	right: 43%;
-}
-
-.white-dot:nth-child(5) {
-	top: 35%;
-	right: 25%;
-}
-
-.white-dot:nth-child(6) {
-	top: 50%;
-	right: 20%;
-}
-
-.white-dot:nth-child(7) {
-	top: 10%;
-	right: 5%;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+		no-repeat;
+	background-position:
+		bottom 30% left 10%,
+		bottom 55% left 30%,
+		top 30% right 43%,
+		top 35% right 25%,
+		top 50% right 20%,
+		top 10% right 5%;
 }

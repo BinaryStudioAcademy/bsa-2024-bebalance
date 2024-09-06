@@ -11,12 +11,7 @@ const BalanceWheel: React.FC = () => {
 				isAnimating
 			/>
 
-			<div className={styles["white-dot"]} />
-			<div className={styles["white-dot"]} />
-			<div className={styles["white-dot"]} />
-			<div className={styles["white-dot"]} />
-			<div className={styles["white-dot"]} />
-			<div className={styles["white-dot"]} />
+			<div className={styles["white-dots"]} />
 		</div>
 	);
 };
