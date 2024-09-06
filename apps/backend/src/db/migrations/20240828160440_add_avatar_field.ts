@@ -10,7 +10,7 @@ const ColumnName = {
 	ID: "id",
 } as const;
 
-const CASCADE = "CASCADE";
+const DELETE_STRATEGY = "CASCADE";
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.alterTable(TableName.USER_DETAILS, (table) => {
@@ -19,7 +19,7 @@ function up(knex: Knex): Promise<void> {
 			.unique()
 			.references(ColumnName.ID)
 			.inTable(TableName.FILES)
-			.onDelete(CASCADE);
+			.onDelete(DELETE_STRATEGY);
 	});
 }
 
