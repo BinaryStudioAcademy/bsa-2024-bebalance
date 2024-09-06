@@ -3,7 +3,7 @@ const ADJUSTMENT_FACTOR = 0.99;
 const START_INDEX = 0;
 const FULL_SEGMENT = 1;
 
-const generateGradientLocations = (segments: number): number[] => {
+const generateSliderGradientLocations = (segments: number): number[] => {
 	return Array.from({ length: segments * SEGMENT_PAIR_LENGTH }, (_, index) => {
 		const step = FULL_SEGMENT / segments;
 		const positionIndex = Math.floor(index / SEGMENT_PAIR_LENGTH);
@@ -15,4 +15,4 @@ const generateGradientLocations = (segments: number): number[] => {
 	});
 };
 
-export { generateGradientLocations };
+export { generateSliderGradientLocations };

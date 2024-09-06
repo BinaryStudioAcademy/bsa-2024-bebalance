@@ -5,7 +5,7 @@ const SEGMENT_PAIR_LENGTH = 2;
 const FIRST_COLOR_INDEX = 0;
 const SECOND_COLOR_INDEX = 1;
 
-const generateGradientColors = (
+const generateSliderGradientColors = (
 	activeSegments: number,
 	gradientColor: keyof typeof colorToGradientColors,
 	totalSegments: number,
@@ -27,4 +27,4 @@ const generateGradientColors = (
 	return gradientColors;
 };
 
-export { generateGradientColors };
+export { generateSliderGradientColors };

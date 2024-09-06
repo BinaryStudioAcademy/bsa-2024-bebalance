@@ -11,8 +11,8 @@ import {
 } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
 import {
-	generateGradientColors,
-	generateGradientLocations,
+	generateSliderGradientColors,
+	generateSliderGradientLocations,
 } from "~/libs/helpers/helpers";
 import { useCallback, useState } from "~/libs/hooks/hooks";
 import {
@@ -39,7 +39,7 @@ const SLIDER_STEP = 1;
 const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 	const [value, setValue] = useState<number>(min);
 	const [sliderWidth, setSliderWidth] = useState<number>(INITIAL_SLIDER_WIDTH);
-	const initialColors = generateGradientColors(min, gradientColors, max);
+	const initialColors = generateSliderGradientColors(min, gradientColors, max);
 	const [color, setColor] = useState<string[]>(initialColors);
 
 	const handleLayout = useCallback((event: LayoutChangeEvent): void => {
@@ -50,7 +50,7 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 	const handleValueChange = useCallback(
 		(sliderValue: number) => {
 			setValue(sliderValue);
-			setColor(generateGradientColors(sliderValue, gradientColors, max));
+			setColor(generateSliderGradientColors(sliderValue, gradientColors, max));
 		},
 		[gradientColors, max],
 	);
@@ -72,7 +72,7 @@ const GradientSlider: React.FC<Properties> = ({ gradientColors, max, min }) => {
 				<LinearGradient
 					colors={color}
 					end={end}
-					locations={generateGradientLocations(max)}
+					locations={generateSliderGradientLocations(max)}
 					start={start}
 					style={styles.gradient}
 				/>
