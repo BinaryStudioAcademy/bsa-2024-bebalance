@@ -7,13 +7,10 @@ import {
 	Text,
 } from "~/libs/components/components";
 import { useAppDispatch, useEffect } from "~/libs/hooks/hooks";
-import { type colorToGradientColors } from "~/libs/maps/maps";
+import { type SliderData } from "~/libs/types/types";
 import { actions as userActions } from "~/slices/users/users";
 
-const sliderData: {
-	color: keyof typeof colorToGradientColors;
-	label: string;
-}[] = [{ color: "red", label: "Love" }];
+const sliderData: SliderData[] = [{ color: "red", label: "Love" }];
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();

@@ -5,6 +5,7 @@ export {
 	type NavigationScreenProperties,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
+export { type SliderData } from "./slider/slider";
 export { type WheelDataItem } from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
