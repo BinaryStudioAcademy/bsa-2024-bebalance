@@ -8,7 +8,7 @@ type Properties = {
 	size: number;
 };
 
-const mockData = [
+const gradientSectorsData = [
 	{ colors: GradientColor.YELLOW, label: "Physical", score: 8 },
 	{ colors: GradientColor.LIME, label: "Work", score: 5 },
 	{ colors: GradientColor.VIOLET, label: "Friends", score: 6 },
@@ -28,7 +28,7 @@ const WheelLoader: React.FC<Properties> = ({
 			animation={AnimationName.PULSE}
 			animationRepetitions={Infinity}
 			animationTime={animationDuration}
-			categoriesData={mockData}
+			categoriesData={gradientSectorsData}
 			isLabelShown={false}
 			size={size}
 		/>

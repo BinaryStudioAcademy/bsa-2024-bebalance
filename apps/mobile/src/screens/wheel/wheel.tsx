@@ -9,7 +9,7 @@ import {
 import { GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 
-const mockData = [
+const gradientSectorsData = [
 	{ colors: GradientColor.YELLOW, label: "Physical", score: 9 },
 	{ colors: GradientColor.LIME, label: "Work", score: 8 },
 	{ colors: GradientColor.VIOLET, label: "Friends", score: 7 },
@@ -27,7 +27,7 @@ const Wheel: React.FC = () => {
 		<ScreenWrapper>
 			<Text>My wheel results</Text>
 			<View style={globalStyles.alignItemsCenter}>
-				<WheelChart categoriesData={mockData} size={WHEEL_SIZE} />
+				<WheelChart categoriesData={gradientSectorsData} size={WHEEL_SIZE} />
 			</View>
 		</ScreenWrapper>
 	);
