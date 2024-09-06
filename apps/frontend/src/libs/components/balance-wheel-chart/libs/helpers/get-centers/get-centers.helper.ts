@@ -1,6 +1,6 @@
 import { type ChartArea } from "~/libs/types/types.js";
 
-import { type CentersCoordinates } from "../../types/center-coordinates.type.js";
+import { type CentersCoordinates } from "../../types/types.js";
 import { getAbsoluteCenter } from "../get-absolute-center/get-absolute-center.helper.js";
 import { getFirstPartCenter } from "../get-first-part-center/get-first-part-center.helper.js";
 import { getSecondPartCenter } from "../get-second-part-center/get-second-part-center.helper.js";
