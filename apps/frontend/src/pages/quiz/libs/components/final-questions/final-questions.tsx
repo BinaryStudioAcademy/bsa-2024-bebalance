@@ -1,7 +1,9 @@
 import { Button, Checkbox, Input } from "~/libs/components/components.js";
-import { Numeric } from "~/libs/enums/enums.js";
-import { useAppForm, useCallback, useMemo } from "~/libs/hooks/hooks.js";
-import { type UserPreferencesPayloadDto } from "~/modules/users/users.js";
+import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import {
+	type FinalAnswersPayloadDto,
+	finalAnswersValidationSchema,
+} from "~/modules/users/users.js";
 
 import {
 	ALLOW_NOTIFICATIONS_OPTIONS,
@@ -12,24 +14,15 @@ import { type FinalQuestionsFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: UserPreferencesPayloadDto) => void;
+	onSubmit: (payload: FinalAnswersPayloadDto) => void;
 };
 
 const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, handleSubmit, watch } = useAppForm<FinalQuestionsFormValues>(
-		{
+	const { control, handleSubmit, isValid } =
+		useAppForm<FinalQuestionsFormValues>({
 			defaultValues: FINAL_QUESTIONS_FORM_DEFAULT_VALUES,
-		},
-	);
-
-	const [userTaskDays, allowNotifications] = watch([
-		"userTaskDays",
-		"allowNotifications",
-	]);
-
-	const isButtonDisabled = useMemo(() => {
-		return userTaskDays.length === Numeric.ZERO || !allowNotifications;
-	}, [userTaskDays, allowNotifications]);
+			validationSchema: finalAnswersValidationSchema,
+		});
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -63,7 +56,7 @@ const FinalQuestions: React.FC<Properties> = ({ onSubmit }: Properties) => {
 						type="radio"
 					/>
 					<div className={styles["button-container"]}>
-						<Button isDisabled={isButtonDisabled} label="Next" type="submit" />
+						<Button isDisabled={!isValid} label="Next" type="submit" />
 					</div>
 				</form>
 			</div>

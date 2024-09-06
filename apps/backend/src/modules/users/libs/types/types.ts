@@ -1,11 +1,11 @@
 export {
 	type EmailDto,
+	type FinalAnswersPayloadDto,
+	type FinalAnswersRequestDto,
 	type ResetPasswordDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
-	type UserPreferencesPayloadDto,
-	type UserPreferencesRequestDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,

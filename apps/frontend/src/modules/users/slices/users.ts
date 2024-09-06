@@ -1,10 +1,10 @@
-import { getById, saveUserPreferences, update } from "./actions.js";
+import { getById, saveFinalAnswers, update } from "./actions.js";
 import { actions } from "./users.slice.js";
 
 const allActions = {
 	...actions,
 	getById,
-	saveUserPreferences,
+	saveFinalAnswers,
 	update,
 };
 

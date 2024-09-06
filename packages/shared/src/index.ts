@@ -71,15 +71,15 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
+	type FinalAnswersPayloadDto,
+	type FinalAnswersRequestDto,
+	finalAnswersValidationSchema,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,
 	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
-	type UserPreferencesPayloadDto,
-	type UserPreferencesRequestDto,
-	userPreferencesValidationSchema,
 	userResetPasswordValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,

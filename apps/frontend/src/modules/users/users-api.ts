@@ -6,7 +6,7 @@ import { type UserDto } from "~/libs/types/types.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
 import {
-	type UserPreferencesRequestDto,
+	type FinalAnswersRequestDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
@@ -34,8 +34,8 @@ class UsersApi extends BaseHTTPApi {
 		return await response.json<UserDto>();
 	}
 
-	public async saveUserPreferences(
-		payload: UserPreferencesRequestDto,
+	public async saveFinalAnswers(
+		payload: FinalAnswersRequestDto,
 	): Promise<UserDto> {
 		const response = await this.load(
 			this.getFullEndpoint(UsersApiPath.FINAL_QUESTIONS, {}),

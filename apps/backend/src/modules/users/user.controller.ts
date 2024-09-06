@@ -12,13 +12,13 @@ import { userUpdateValidationSchema } from "~/modules/users/users.js";
 import { UsersApiPath } from "./libs/enums/enums.js";
 import { checkAccessToUserData } from "./libs/hooks/hooks.js";
 import {
+	type FinalAnswersRequestDto,
 	type UserDto,
 	type UserGetParametersDto,
-	type UserPreferencesRequestDto,
 	type UserUpdateParametersDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
-import { userPreferencesValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+import { finalAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
 /*** @swagger
  * components:
@@ -70,16 +70,16 @@ class UserController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.saveUserPreferences(
+				this.saveFinalAnswers(
 					options as APIHandlerOptions<{
-						body: UserPreferencesRequestDto;
+						body: FinalAnswersRequestDto;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
 			path: UsersApiPath.FINAL_QUESTIONS,
 			validation: {
-				body: userPreferencesValidationSchema,
+				body: finalAnswersValidationSchema,
 			},
 		});
 
@@ -189,15 +189,15 @@ class UserController extends BaseController {
 	 *                $ref: "#/components/schemas/User"
 	 */
 
-	private async saveUserPreferences(
+	private async saveFinalAnswers(
 		options: APIHandlerOptions<{
-			body: UserPreferencesRequestDto;
+			body: FinalAnswersRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		const { allowNotifications, userId, userTaskDays } = options.body;
 
-		const updatedUserDto = await this.userService.saveUserPreferences(userId, {
+		const updatedUserDto = await this.userService.saveFinalAnswers(userId, {
 			allowNotifications,
 			userTaskDays,
 		});

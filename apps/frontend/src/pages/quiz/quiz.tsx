@@ -5,9 +5,9 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import {
+	type FinalAnswersPayloadDto,
 	actions as userActions,
 	type UserDto,
-	type UserPreferencesPayloadDto,
 } from "~/modules/users/users.js";
 
 import {
@@ -30,9 +30,9 @@ const Quiz: React.FC = () => {
 	}, []);
 
 	const handleFinalQuestionsSubmit = useCallback(
-		(payload: UserPreferencesPayloadDto): void => {
+		(payload: FinalAnswersPayloadDto): void => {
 			void dispatch(
-				userActions.saveUserPreferences({
+				userActions.saveFinalAnswers({
 					userId: user.id,
 					...payload,
 				}),
