@@ -1,1 +1,1 @@
-export { categoriesValidationSchema } from "shared";
+export { categoriesSavingValidationSchema } from "shared";

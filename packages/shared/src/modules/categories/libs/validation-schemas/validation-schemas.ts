@@ -1,1 +1,1 @@
-export { categoriesValidationSchema } from "./categories.validation-schema.js";
+export { categoriesSavingValidationSchema } from "./categories-saving-validation.schema.js";

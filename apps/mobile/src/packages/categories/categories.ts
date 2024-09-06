@@ -16,4 +16,4 @@ export {
 	type CategoriesGetAllResponseDto,
 	type CategoryDto,
 } from "./libs/types/types";
-export { categoriesValidationSchema } from "./libs/validation-schemas/validation-schemas";
+export { categoriesSavingValidationSchema } from "./libs/validation-schemas/validation-schemas";

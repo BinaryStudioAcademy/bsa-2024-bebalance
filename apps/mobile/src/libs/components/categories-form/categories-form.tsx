@@ -4,7 +4,7 @@ import { Button, Checkbox, Text, View } from "~/libs/components/components";
 import { useAppForm, useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
-	categoriesValidationSchema,
+	categoriesSavingValidationSchema,
 	type CategoryDto,
 } from "~/packages/categories/categories";
 
@@ -19,7 +19,7 @@ type Properties = {
 const CategoriesForm: React.FC<Properties> = ({ categories, onSubmit }) => {
 	const { control, errors, handleSubmit } = useAppForm({
 		defaultValues: CATEGORIES_FORM_DEFAULT_VALUE,
-		validationSchema: categoriesValidationSchema,
+		validationSchema: categoriesSavingValidationSchema,
 	});
 
 	const { field } = useFormController({
