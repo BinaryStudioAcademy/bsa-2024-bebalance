@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.34.0...v1.35.0) (2024-09-05)
+
+
+### Features
+
+* **mobile:** sign-out functionality bb-267 ([#297](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/297)) ([9a14179](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9a141794b514191801aa323a31bccd7986640eae))
+
+
+### Bug Fixes
+
+* **frontend:** fix skipping category on next button event bb-89 ([#307](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/307)) ([8331add](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8331addc2460876740e1b614f587f8adfbcc9766))
+
 ## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.33.0...v1.34.0) (2024-09-05)
 
 
