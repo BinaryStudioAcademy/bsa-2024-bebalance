@@ -8,7 +8,9 @@ import {
 	WheelCenterDistance,
 } from "../../enums/enums.js";
 import { getBaseline } from "../get-baseline/get-baseline.helper.js";
-import { getSublabelOffset } from "../get-sublabel-offset/get-sublabel-offset.helper.js";
+import { getGraphicsOffset } from "../get-graphics-offset/get-graphics-offset.js";
+import { getSublabelOffsetX } from "../get-sublabel-offset-x/get-sublabel-offset-x.helper.js";
+import { getSublabelOffsetY } from "../get-sublabel-offset-y/get-sublabel-offset-y.helper.js";
 
 const drawSublabels = ({
 	chartArea,
@@ -41,7 +43,12 @@ const drawSublabels = ({
 	context.textAlign = "center";
 	context.textBaseline = getBaseline(sublabelPosition.y, chartArea);
 
-	const { offsetX, offsetY } = getSublabelOffset(sublabelPosition, chartArea);
+	const { offsetX, offsetY } = getGraphicsOffset({
+		chartArea,
+		getOffsetX: getSublabelOffsetX,
+		getOffsetY: getSublabelOffsetY,
+		graphicsPosition: sublabelPosition,
+	});
 
 	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.SUBLABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
 	context.fillStyle = ChartGraphicsColor.LABELS_COLOR;

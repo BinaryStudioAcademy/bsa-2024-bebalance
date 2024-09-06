@@ -8,7 +8,9 @@ import {
 import { DOT_RADIUS, START_ANGLE } from "../../constants/constants.js";
 import { ChartGraphicsColor, WheelCenterDistance } from "../../enums/enums.js";
 import { type PolarAreaType } from "../../types/types.js";
-import { getDotOffset } from "../get-dot-offset/get-dot-offset.helper.js";
+import { getDotOffsetX } from "../get-dot-offset-x/get-dot-offset-x.helper.js";
+import { getDotOffsetY } from "../get-dot-offset-y/get-dot-offset-y.helper.js";
+import { getGraphicsOffset } from "../get-graphics-offset/get-graphics-offset.js";
 
 const drawDots = ({
 	chartArea,
@@ -38,7 +40,12 @@ const drawDots = ({
 		y: scale.yCenter + Math.sin(middleAngle - HALF_PI) * dotDistance,
 	};
 
-	const { offsetX, offsetY } = getDotOffset(dotPosition, chartArea);
+	const { offsetX, offsetY } = getGraphicsOffset({
+		chartArea,
+		getOffsetX: getDotOffsetX,
+		getOffsetY: getDotOffsetY,
+		graphicsPosition: dotPosition,
+	});
 
 	context.beginPath();
 	context.arc(

@@ -8,7 +8,9 @@ import {
 	WheelCenterDistance,
 } from "../../enums/enums.js";
 import { getBaseline } from "../get-baseline/get-baseline.helper.js";
-import { getValueLabelOffset } from "../get-label-offset/get-value-label-offset.helper.js";
+import { getGraphicsOffset } from "../get-graphics-offset/get-graphics-offset.js";
+import { getValueLabelOffsetX } from "../get-value-label-offset-x/get-value-label-offset-x.helper.js";
+import { getValueLabelOffsetY } from "../get-value-label-offset-y/get-value-label-offset-y.helper.js";
 
 const drawValueLabels = ({
 	chartArea,
@@ -27,7 +29,7 @@ const drawValueLabels = ({
 		WheelCenterDistance.VALUE_LABEL,
 	);
 
-	const sublabelPosition = {
+	const valueLabelPosition = {
 		x:
 			scale.xCenter +
 			Math.cos(middleAngle - HALF_PI) *
@@ -39,16 +41,21 @@ const drawValueLabels = ({
 	};
 
 	context.textAlign = "center";
-	context.textBaseline = getBaseline(sublabelPosition.y, chartArea);
+	context.textBaseline = getBaseline(valueLabelPosition.y, chartArea);
 
-	const { offsetX, offsetY } = getValueLabelOffset(sublabelPosition, chartArea);
+	const { offsetX, offsetY } = getGraphicsOffset({
+		chartArea,
+		getOffsetX: getValueLabelOffsetX,
+		getOffsetY: getValueLabelOffsetY,
+		graphicsPosition: valueLabelPosition,
+	});
 
 	context.font = `${String(ChartFont.WEIGHT)} ${String(ChartFont.LABEL_FONT_SIZE)}px ${ChartFont.FAMILY}`;
 	context.fillStyle = ChartGraphicsColor.LABELS_COLOR;
 	context.fillText(
 		label,
-		sublabelPosition.x + offsetX,
-		sublabelPosition.y + offsetY,
+		valueLabelPosition.x + offsetX,
+		valueLabelPosition.y + offsetY,
 	);
 };
 
