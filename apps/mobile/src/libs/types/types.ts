@@ -5,7 +5,11 @@ export {
 	type NavigationScreenProperties,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
-export { type WheelDataItem } from "./wheel/wheel";
+export {
+	type SectorParameters,
+	type SectorParametersCalculationData,
+	type WheelDataItem,
+} from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type ImageSourcePropType,
@@ -14,6 +18,7 @@ export {
 	type ViewStyle,
 } from "react-native";
 export { type LinearGradientProps } from "react-native-linear-gradient";
+export { type SharedValue } from "react-native-reanimated";
 export {
 	type ServerErrorDetail,
 	type ServerErrorResponse,
