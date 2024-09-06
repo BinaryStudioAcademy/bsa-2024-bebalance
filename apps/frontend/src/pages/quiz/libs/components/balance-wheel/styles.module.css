@@ -18,6 +18,14 @@
 	background-size: 38%, 30%, 38%;
 }
 
+.border-container {
+	position: absolute;
+	width: 97%;
+	height: 95%;
+	border: 1px solid var(--white);
+	border-radius: 20px;
+}
+
 .white-dots {
 	position: absolute;
 	top: 0;
@@ -39,4 +47,45 @@
 		top 35% right 25%,
 		top 50% right 20%,
 		top 10% right 5%;
+}
+
+.circle-gradient {
+	position: absolute;
+	border-radius: 100%;
+}
+
+.circle-1 {
+	top: 10%;
+	left: 20%;
+	width: 100px;
+	height: 100px;
+	background: linear-gradient(
+		to bottom,
+		var(--physical-start) 0%,
+		var(--physical-end) 100%
+	);
+}
+
+.circle-2 {
+	bottom: 10%;
+	left: 30%;
+	width: 30px;
+	height: 30px;
+	background: linear-gradient(
+		to right,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
+}
+
+.circle-3 {
+	right: 5%;
+	bottom: 10%;
+	width: 80px;
+	height: 80px;
+	background: linear-gradient(
+		to right,
+		var(--work-start) 0%,
+		var(--work-end) 100%
+	);
 }
