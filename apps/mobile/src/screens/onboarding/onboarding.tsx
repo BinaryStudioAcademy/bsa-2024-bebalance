@@ -134,10 +134,11 @@ const Onboarding: React.FC = () => {
 
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit(handleNextClick)();
+
 		if (isLastQuestion) {
 			navigation.navigate(RootScreenName.WELCOME);
 		}
-	}, [handleNextClick, handleSubmit]);
+	}, [handleNextClick, handleSubmit, isLastQuestion]);
 
 	const renderPageComponent = useCallback(() => {
 		return <Content control={control} errors={errors} question={question} />;
