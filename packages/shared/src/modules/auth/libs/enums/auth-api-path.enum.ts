@@ -1,6 +1,6 @@
 const AuthApiPath = {
 	AUTHENTICATED_USER: "/authenticated-user",
-	CHECK_LINK_EXPIRATION: "/check-link-expiration",
+	CHECK_RESET_PASSWORD_EXP: "/check-reset-password-exp",
 	FORGOT_PASSWORD: "/forgot-password",
 	RESET_PASSWORD: "/reset-password",
 	ROOT: "/",

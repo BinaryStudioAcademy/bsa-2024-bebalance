@@ -26,11 +26,11 @@ class AuthApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 
-	public async checkResetPasswordLinkExpiration(
+	public async checkResetPasswordExp(
 		payload: ResetPasswordLinkDto,
 	): Promise<boolean> {
 		const response = await this.load(
-			this.getFullEndpoint(AuthApiPath.CHECK_LINK_EXPIRATION, {}),
+			this.getFullEndpoint(AuthApiPath.CHECK_RESET_PASSWORD_EXP, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
@@ -69,9 +69,7 @@ class AuthApi extends BaseHTTPApi {
 		return await response.json<boolean>();
 	}
 
-	public async resetPassword(
-		payload: ResetPasswordDto,
-	): Promise<UserSignInResponseDto> {
+	public async resetPassword(payload: ResetPasswordDto): Promise<boolean> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}),
 			{
@@ -82,7 +80,7 @@ class AuthApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<UserSignInResponseDto>();
+		return await response.json<boolean>();
 	}
 
 	public async signIn(

@@ -1,13 +1,15 @@
-import { Button, Input, Loader } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/enums.js";
+import { Button, Input } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useNavigate,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as appActions } from "~/modules/app/app.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type ResetPasswordDto,
@@ -28,7 +30,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 	onSubmit,
 	token,
 }: Properties) => {
-	const dataStatus = useAppSelector((state) => state.auth.dataStatus);
+	const redirectLink = useAppSelector((state) => state.app.redirectLink);
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
@@ -41,18 +43,6 @@ const ResetPasswordForm: React.FC<Properties> = ({
 
 	const newPasswordValue = watch("newPassword", "");
 	const confirmPasswordValue = watch("confirmPassword", "");
-
-	const dispatch = useAppDispatch();
-
-	const handleResetPasswordLinkValidityCheck = useCallback((): void => {
-		void dispatch(
-			authActions.checkResetPasswordLinkExpiration({ link: token }),
-		);
-	}, [dispatch, token]);
-
-	useEffect(() => {
-		handleResetPasswordLinkValidityCheck();
-	}, [handleResetPasswordLinkValidityCheck]);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -83,8 +73,16 @@ const ResetPasswordForm: React.FC<Properties> = ({
 		setIsConfirmPasswordVisible((previousState) => !previousState);
 	}, []);
 
-	if (dataStatus === DataStatus.PENDING) {
-		return <Loader />;
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		void dispatch(authActions.checkResetPasswordExp({ link: token }));
+	}, [dispatch, token]);
+
+	if (redirectLink === AppRoute.SIGN_IN) {
+		navigate(redirectLink);
+		dispatch(appActions.changeLink(null));
 	}
 
 	return (
@@ -112,7 +110,9 @@ const ResetPasswordForm: React.FC<Properties> = ({
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 				<Button
-					isDisabled={!isValid || newPasswordValue !== confirmPasswordValue}
+					isDisabled={
+						!isValid || newPasswordValue.length !== confirmPasswordValue.length
+					}
 					label="SAVE PASSWORD"
 					type="submit"
 				/>

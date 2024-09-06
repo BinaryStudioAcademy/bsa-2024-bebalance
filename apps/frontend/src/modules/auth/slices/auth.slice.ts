@@ -5,7 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import {
-	checkResetPasswordLinkExpiration,
+	checkResetPasswordExp,
 	getAuthenticatedUser,
 	logOut,
 	resetPassword,
@@ -61,8 +61,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(resetPassword.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(resetPassword.fulfilled, (state, action) => {
-			state.user = action.payload;
+		builder.addCase(resetPassword.fulfilled, (state) => {
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(resetPassword.rejected, (state) => {
@@ -73,13 +72,13 @@ const { actions, name, reducer } = createSlice({
 			state.user = action.payload;
 		});
 
-		builder.addCase(checkResetPasswordLinkExpiration.pending, (state) => {
+		builder.addCase(checkResetPasswordExp.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(checkResetPasswordLinkExpiration.fulfilled, (state) => {
+		builder.addCase(checkResetPasswordExp.fulfilled, (state) => {
 			state.dataStatus = DataStatus.FULFILLED;
 		});
-		builder.addCase(checkResetPasswordLinkExpiration.rejected, (state) => {
+		builder.addCase(checkResetPasswordExp.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

@@ -1,5 +1,5 @@
 import {
-	checkResetPasswordLinkExpiration,
+	checkResetPasswordExp,
 	getAuthenticatedUser,
 	logOut,
 	requestResetPassword,
@@ -11,7 +11,7 @@ import { actions } from "./auth.slice.js";
 
 const allActions = {
 	...actions,
-	checkResetPasswordLinkExpiration,
+	checkResetPasswordExp,
 	getAuthenticatedUser,
 	logOut,
 	requestResetPassword,

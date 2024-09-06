@@ -84,31 +84,33 @@ const requestResetPassword = createAsyncThunk<
 });
 
 const resetPassword = createAsyncThunk<
-	UserDto,
+	boolean,
 	ResetPasswordDto,
 	AsyncThunkConfig
 >(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
-	const { authApi, storage } = extra;
+	const { authApi, notification } = extra;
 
-	const { token, user } = await authApi.resetPassword(emailPayload);
+	const isSuccessful = await authApi.resetPassword(emailPayload);
 
-	void storage.set(StorageKey.TOKEN, token);
+	if (isSuccessful) {
+		notification.success(NotificationMessage.PASSWORD_UPDATED);
+	}
 
-	return user;
+	return isSuccessful;
 });
 
-const checkResetPasswordLinkExpiration = createAsyncThunk<
+const checkResetPasswordExp = createAsyncThunk<
 	boolean,
 	ResetPasswordLinkDto,
 	AsyncThunkConfig
 >(`${sliceName}/check-reset-password-link`, async (payload, { extra }) => {
 	const { authApi } = extra;
 
-	return await authApi.checkResetPasswordLinkExpiration(payload);
+	return await authApi.checkResetPasswordExp(payload);
 });
 
 export {
-	checkResetPasswordLinkExpiration,
+	checkResetPasswordExp,
 	getAuthenticatedUser,
 	logOut,
 	requestResetPassword,

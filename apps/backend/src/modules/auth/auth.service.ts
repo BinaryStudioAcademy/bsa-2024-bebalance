@@ -1,5 +1,5 @@
-import { ONE_THOUSAND_MILLISECONDS } from "~/libs/constants/constants.js";
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { JWTExpired } from "~/libs/exceptions/exceptions.js";
 import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { mailer } from "~/libs/modules/mailer/mailer.js";
@@ -28,20 +28,22 @@ class AuthService {
 		this.encrypt = encrypt;
 	}
 
-	public async checkLinkExpiration(
+	public async checkResetPasswordExp(
 		body: ResetPasswordLinkDto,
 	): Promise<boolean> {
-		const {
-			payload: { exp },
-		} = await token.decode(body.link);
+		try {
+			await token.decode(body.link);
 
-		if ((exp as number) < Math.floor(Date.now() / ONE_THOUSAND_MILLISECONDS)) {
-			throw new AuthError({
-				message: ErrorMessage.RESET_PASSWORD_LINK_EXPIRED,
-			});
+			return true;
+		} catch (error) {
+			if (error instanceof JWTExpired) {
+				throw new AuthError({
+					message: ErrorMessage.RESET_PASSWORD_LINK_EXPIRED,
+				});
+			}
+
+			throw error;
 		}
-
-		return true;
 	}
 
 	public async forgotPassword(payload: EmailDto): Promise<boolean> {
@@ -75,9 +77,7 @@ class AuthService {
 		return true;
 	}
 
-	public async resetPassword(
-		payload: ResetPasswordDto,
-	): Promise<UserSignInResponseDto> {
+	public async resetPassword(payload: ResetPasswordDto): Promise<boolean> {
 		const { jwtToken, newPassword } = payload;
 
 		const {
@@ -95,10 +95,7 @@ class AuthService {
 
 		await this.userService.changePassword(userId, newPassword);
 
-		return {
-			token: jwtToken,
-			user: user.toObject(),
-		};
+		return true;
 	}
 
 	public async signIn(
