@@ -1,13 +1,7 @@
-import { withTiming } from "react-native-reanimated";
-
 import { Animated, Circle } from "~/libs/components/components";
-import {
-	useAnimatedProps,
-	useEffect,
-	useSharedValue,
-} from "~/libs/hooks/hooks";
+import { useSharedValue } from "~/libs/hooks/hooks";
 
-import { getSectorParameters } from "../../helpers/helpers";
+import { useWheelAnimation } from "../../hooks/hooks";
 
 type Properties = {
 	animationRepetitions: number;
@@ -52,91 +46,44 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 	const animatedOuterStrokeWidth = useSharedValue(INITIAL_ANIMATED_VALUE);
 
 	const animatedRadius = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const timingSettings = { duration: animationTime };
 
-	useEffect(() => {
-		const {
-			innerDashArrayDash,
-			innerDashArrayGap,
-			innerDashOffset,
-			innerStrokeWidth,
-			outerDashArrayDash,
-			outerDashArrayGap,
-			outerDashOffset,
-			outerStrokeWidth,
-			radius,
-		} = getSectorParameters({
-			centerGap,
-			endPercentInner,
-			endPercentOuter,
-			height,
-			layerOffset,
-			startPercentInner,
-			startPercentOuter,
+	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
+		useWheelAnimation({
+			animationDuration: animationTime,
+			animationRepetitions,
+			sectorCalculationData: {
+				centerGap,
+				endPercentInner,
+				endPercentOuter,
+				height,
+				layerOffset,
+				startPercentInner,
+				startPercentOuter,
+			},
+			sectorSharedValues: {
+				animatedInnerArrayDash,
+				animatedInnerArrayGap,
+				animatedInnerDashOffset,
+				animatedInnerStrokeWidth,
+				animatedOuterArrayDash,
+				animatedOuterArrayGap,
+				animatedOuterDashOffset,
+				animatedOuterStrokeWidth,
+				animatedRadius,
+			},
 		});
-
-		animatedInnerArrayGap.value = innerDashArrayGap;
-		animatedInnerArrayDash.value = innerDashArrayDash;
-		animatedInnerDashOffset.value = innerDashOffset;
-		animatedInnerStrokeWidth.value = innerStrokeWidth;
-
-		animatedOuterArrayGap.value = outerDashArrayGap;
-		animatedOuterArrayDash.value = outerDashArrayDash;
-		animatedOuterDashOffset.value = outerDashOffset;
-		animatedOuterStrokeWidth.value = outerStrokeWidth;
-
-		animatedRadius.value = radius;
-	}, [
-		animationRepetitions,
-		animatedInnerArrayGap,
-		animatedInnerDashOffset,
-		animatedInnerArrayDash,
-		animatedInnerStrokeWidth,
-		animatedOuterArrayDash,
-		animatedOuterArrayGap,
-		animatedOuterDashOffset,
-		animatedOuterStrokeWidth,
-		animatedRadius,
-		centerGap,
-		endPercentInner,
-		endPercentOuter,
-		height,
-		layerOffset,
-		startPercentInner,
-		startPercentOuter,
-	]);
-
-	const animatedInnerSectorProperties = useAnimatedProps(() => ({
-		r: withTiming(animatedRadius.value, timingSettings),
-		strokeDasharray: [
-			withTiming(animatedInnerArrayDash.value, timingSettings),
-			withTiming(animatedInnerArrayGap.value, timingSettings),
-		],
-		strokeDashoffset: withTiming(animatedInnerDashOffset.value, timingSettings),
-		strokeWidth: withTiming(animatedInnerStrokeWidth.value, timingSettings),
-	}));
-
-	const animatedOuterSectorProperties = useAnimatedProps(() => ({
-		r: withTiming(animatedRadius.value, timingSettings),
-		strokeDasharray: [
-			withTiming(animatedOuterArrayDash.value, timingSettings),
-			withTiming(animatedOuterArrayGap.value, timingSettings),
-		],
-		strokeDashoffset: withTiming(animatedOuterDashOffset.value, timingSettings),
-		strokeWidth: withTiming(animatedOuterStrokeWidth.value, timingSettings),
-	}));
 
 	return (
 		<>
 			<AnimatedCircle
-				animatedProps={animatedOuterSectorProperties}
+				animatedProps={outerSectorAnimatedProperties}
 				cx={centerPoint}
 				cy={centerPoint}
 				fill="none"
 				stroke={outlineColor}
 			/>
 			<AnimatedCircle
-				animatedProps={animatedInnerSectorProperties}
+				animatedProps={innerSectorAnimatedProperties}
 				cx={centerPoint}
 				cy={centerPoint}
 				fill="none"
