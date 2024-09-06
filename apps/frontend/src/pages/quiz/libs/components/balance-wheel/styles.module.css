@@ -1,6 +1,8 @@
 .container {
 	position: relative;
 	display: flex;
+	flex-direction: column;
+	gap: 20px;
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
@@ -24,6 +26,11 @@
 	height: 95%;
 	border: 1px solid var(--white);
 	border-radius: 20px;
+}
+
+.text {
+	font-size: 20px;
+	color: var(--white);
 }
 
 .white-dots {
