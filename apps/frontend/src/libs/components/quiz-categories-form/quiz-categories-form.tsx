@@ -14,12 +14,10 @@ import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
 type Properties = {
-	onSubmit?: (payload: { categoryIds: number[] }) => void;
+	onSubmit: (payload: { categoryIds: number[] }) => void;
 };
 
-const QuizCategoriesForm: React.FC<Properties> = ({
-	onSubmit = (): void => {},
-}: Properties) => {
+const QuizCategoriesForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, getValues, handleSubmit, setValue } =
 		useAppForm<QuizCategoriesFormFields>({
 			defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES,
