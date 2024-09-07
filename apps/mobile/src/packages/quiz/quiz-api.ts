@@ -14,7 +14,7 @@ type Constructor = {
 
 class QuizApi extends BaseHttpApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
-		super({ baseUrl, http, path: APIPath.ONBOARDING, storage });
+		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
 	public async getAllQuestions(): Promise<{ items: QuizQuestionDto[][] }> {
