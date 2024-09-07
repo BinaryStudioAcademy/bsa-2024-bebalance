@@ -1,1 +1,6 @@
-export { type QuizAnswerDto, type QuizQuestionDto } from "shared";
+export {
+	type QuizAnswerDto,
+	type QuizQuestionDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+} from "shared";

@@ -1,4 +1,8 @@
-.container {
+.animation-container {
 	z-index: var(--z-index-low);
 	width: 250px;
+}
+
+.root-wheel-container {
+	width: 649px;
 }
