@@ -19,7 +19,7 @@ const Checkbox = <T extends FieldValues>({
 	options,
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
-	const fieldValue = field.value;
+	const { onChange: onFieldChange, value } = field;
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -27,38 +27,38 @@ const Checkbox = <T extends FieldValues>({
 			const inputValue = event.target.value;
 
 			if (isChecked) {
-				field.onChange([...fieldValue, inputValue]);
+				onFieldChange([...value, inputValue]);
 			} else {
-				field.onChange(
-					(fieldValue as string[]).filter((value) => value !== inputValue),
+				onFieldChange(
+					(value as string[]).filter((value) => value !== inputValue),
 				);
 			}
 
 			onChange?.(event);
 		},
-		[onChange, field, fieldValue],
+		[onChange, onFieldChange, value],
 	);
 
 	const handleSingleCheckboxChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
-			field.onChange(event);
+			onFieldChange(event);
 			onChange?.(event);
 		},
-		[field, onChange],
+		[onChange, onFieldChange],
 	);
 
 	return (
 		<section>
 			{options?.length &&
-				options.map(({ label, value }) => {
+				options.map(({ label, value: optionValue }) => {
 					return (
-						<label className={styles["container"]} key={value}>
+						<label className={styles["container"]} key={optionValue}>
 							<input
-								checked={(fieldValue as string[]).includes(value)}
+								checked={(value as string[]).includes(optionValue)}
 								className={styles["checkbox"]}
 								onChange={handleCheckboxesChange}
 								type="checkbox"
-								value={value}
+								value={optionValue}
 							/>
 							<span className={styles["checkmark"]} />
 							{label}
@@ -69,7 +69,7 @@ const Checkbox = <T extends FieldValues>({
 				<label className={styles["container"]}>
 					<input
 						{...field}
-						checked={Boolean(fieldValue)}
+						checked={Boolean(value)}
 						className={styles["checkbox"]}
 						onChange={handleSingleCheckboxChange}
 						type="checkbox"
