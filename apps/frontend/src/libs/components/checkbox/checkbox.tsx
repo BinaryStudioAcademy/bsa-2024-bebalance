@@ -55,12 +55,12 @@ const Checkbox = <T extends FieldValues>({
 						<label className={styles["container"]} key={value}>
 							<input
 								checked={(fieldValue as string[]).includes(value)}
-								className={styles["input"]}
+								className={styles["checkbox"]}
 								onChange={handleCheckboxesChange}
 								type="checkbox"
 								value={value}
 							/>
-							<span className={styles["input-checkmark"]} />
+							<span className={styles["checkmark"]} />
 							{label}
 						</label>
 					);
@@ -70,11 +70,11 @@ const Checkbox = <T extends FieldValues>({
 					<input
 						{...field}
 						checked={Boolean(fieldValue)}
-						className={styles["input"]}
+						className={styles["checkbox"]}
 						onChange={handleSingleCheckboxChange}
 						type="checkbox"
 					/>
-					<span className={styles["input-checkmark"]} />
+					<span className={styles["checkmark"]} />
 					{label}
 				</label>
 			)}
