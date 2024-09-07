@@ -117,6 +117,33 @@ class CategoryRepository implements Repository {
 		);
 	}
 
+	public async findUserScores(userId: number): Promise<CategoryEntity[]> {
+		const categories = await this.categoryModel.query().select("*");
+
+		return await Promise.all(
+			categories.map(async (category) => {
+				const scoresModel = await this.categoryModel
+					.query()
+					.from(DatabaseTableName.QUIZ_SCORES)
+					.where({ categoryId: category.id, userId })
+					.returning("*")
+					.castTo<CategoryScoreModel[]>();
+
+				const scoreEntities = scoresModel.map((score) => {
+					return CategoryEntity.initialize(score);
+				});
+
+				return CategoryEntity.initialize({
+					createdAt: category.createdAt,
+					id: category.id,
+					name: category.name,
+					scores: scoreEntities,
+					updatedAt: category.updatedAt,
+				});
+			}),
+		);
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<CategoryRequestDto>,
