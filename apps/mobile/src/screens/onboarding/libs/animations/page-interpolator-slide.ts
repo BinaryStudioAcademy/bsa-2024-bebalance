@@ -1,7 +1,7 @@
 import { type PageInterpolatorParams } from "react-native-infinite-pager";
 import { interpolate, type useAnimatedStyle } from "react-native-reanimated";
 
-import { NumericValues } from "../../../../libs/enums/enums";
+import { NumericalValue } from "../../../../libs/enums/enums";
 import { ANIMATION_SCALE_FACTOR } from "../constants/constants";
 
 const pageInterpolatorSlide = ({
@@ -13,24 +13,24 @@ const pageInterpolatorSlide = ({
 
 	const translateX = interpolate(
 		focusAnim.value,
-		[-pageBuffer, NumericValues.ZERO, pageBuffer],
+		[-pageBuffer, NumericalValue.ZERO, pageBuffer],
 		[
 			-pageWidth.value * ANIMATION_SCALE_FACTOR,
-			NumericValues.ZERO,
+			NumericalValue.ZERO,
 			pageWidth.value * ANIMATION_SCALE_FACTOR,
 		],
 	);
 
 	const opacity = interpolate(
 		focusAnim.value,
-		[-pageBuffer, NumericValues.ZERO, pageBuffer],
-		[NumericValues.ZERO, pageBuffer, NumericValues.ZERO],
+		[-pageBuffer, NumericalValue.ZERO, pageBuffer],
+		[NumericalValue.ZERO, pageBuffer, NumericalValue.ZERO],
 	);
 
 	const scale = interpolate(
 		focusAnim.value,
-		[-pageBuffer, NumericValues.ZERO, pageBuffer],
-		[NumericValues.ZERO, pageBuffer, NumericValues.ZERO],
+		[-pageBuffer, NumericalValue.ZERO, pageBuffer],
+		[NumericalValue.ZERO, pageBuffer, NumericalValue.ZERO],
 	);
 
 	return {
