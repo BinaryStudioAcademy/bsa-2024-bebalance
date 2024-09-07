@@ -52,7 +52,12 @@ const Input = <T extends FieldValues>({
 	);
 
 	return (
-		<label className={styles["input-wrapper"]}>
+		<label
+			className={getValidClassNames(
+				styles["input-wrapper"],
+				isRadioWithOptions && styles["radio-wrapper"],
+			)}
+		>
 			<span
 				className={getValidClassNames(
 					styles["input-label"],
