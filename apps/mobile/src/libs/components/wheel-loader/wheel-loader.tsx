@@ -1,23 +1,13 @@
 import React from "react";
 
 import { Wheel } from "~/libs/components/components";
-import { AnimationName, GradientColor } from "~/libs/enums/enums";
+import { GRADIENT_SECTORS_DATA } from "~/libs/constants/gradient-sectors-data.constant";
+import { AnimationName } from "~/libs/enums/enums";
 
 type Properties = {
 	animationDuration: number;
 	size: number;
 };
-
-const gradientSectorsData = [
-	{ colors: GradientColor.YELLOW, label: "Physical", score: 8 },
-	{ colors: GradientColor.LIME, label: "Work", score: 5 },
-	{ colors: GradientColor.VIOLET, label: "Friends", score: 6 },
-	{ colors: GradientColor.RED, label: "Love", score: 4 },
-	{ colors: GradientColor.GREEN, label: "Money", score: 10 },
-	{ colors: GradientColor.ROSE, label: "Free time", score: 9 },
-	{ colors: GradientColor.ORANGE, label: "Spiritual", score: 6 },
-	{ colors: GradientColor.BLUE, label: "Mental", score: 7 },
-];
 
 const WheelLoader: React.FC<Properties> = ({
 	animationDuration,
@@ -28,7 +18,7 @@ const WheelLoader: React.FC<Properties> = ({
 			animation={AnimationName.PULSE}
 			animationRepetitions={Infinity}
 			animationTime={animationDuration}
-			categoriesData={gradientSectorsData}
+			categoriesData={GRADIENT_SECTORS_DATA}
 			isLabelShown={false}
 			size={size}
 		/>
