@@ -1,0 +1,9 @@
+.onboarding-answer {
+	width: 342px;
+}
+
+@media (width <= 640px) {
+	.onboarding-answer {
+		width: 250px;
+	}
+}
