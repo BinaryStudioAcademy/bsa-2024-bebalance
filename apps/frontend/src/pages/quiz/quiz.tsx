@@ -1,13 +1,7 @@
-import {
-	useAppDispatch,
-	useAppSelector,
-	useCallback,
-	useState,
-} from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationAnswersPayloadDto,
 	actions as userActions,
-	type UserDto,
 } from "~/modules/users/users.js";
 
 import {
@@ -23,7 +17,6 @@ import { Step } from "./libs/enums/enums.js";
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [step, setStep] = useState<number>(Step.ANALYZING);
-	const user: UserDto = useAppSelector(({ auth }) => auth.user as UserDto);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -31,14 +24,9 @@ const Quiz: React.FC = () => {
 
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
-			void dispatch(
-				userActions.saveNotificationAnswers({
-					userId: user.id,
-					...payload,
-				}),
-			);
+			void dispatch(userActions.saveNotificationAnswers(payload));
 		},
-		[dispatch, user.id],
+		[dispatch],
 	);
 
 	const getScreen = (step: number): React.ReactNode => {
