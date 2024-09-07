@@ -12,14 +12,14 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	label: string;
 	name: FieldPath<T>;
-	options?: InputOption[];
+	options: InputOption[];
 };
 
 const Checkbox = <T extends FieldValues>({
 	control,
 	label,
 	name,
-	options = [],
+	options,
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange, value } = field;
