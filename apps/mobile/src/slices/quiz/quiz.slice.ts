@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
+// import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type QuizQuestionDto } from "~/packages/quiz/quiz";
@@ -16,7 +16,7 @@ type State = {
 
 const initialState: State = {
 	currentCategory: null,
-	currentCategoryIndex: ZERO_INDEX,
+	currentCategoryIndex: 0,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
 };
@@ -40,13 +40,13 @@ const { actions, name, reducer } = createSlice({
 	name: "quiz",
 	reducers: {
 		nextQuestion(state) {
-			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
+			state.currentCategoryIndex += 1;
 			state.currentCategory =
 				state.questions[state.currentCategoryIndex] || null;
 		},
 		previousQuestion(state) {
 			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {
-				state.currentCategoryIndex -= PREVIOUS_INDEX_OFFSET;
+				state.currentCategoryIndex -= 1;
 				state.currentCategory =
 					state.questions[state.currentCategoryIndex] || null;
 			}
