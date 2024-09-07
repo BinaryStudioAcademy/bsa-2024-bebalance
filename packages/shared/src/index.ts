@@ -73,7 +73,7 @@ export {
 	type NotificationAnswersPayloadDto,
 	type NotificationAnswersRequestDto,
 	notificationAnswersValidationSchema,
-	NotificationPreference,
+	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,
