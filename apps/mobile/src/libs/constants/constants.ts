@@ -1,1 +1,1 @@
-export { GRADIENT_SECTORS_DATA } from "./gradient-sectors-data.constant";
+export { GRADIENT_SECTORS_INITIAL_DATA } from "./gradient-sectors-initial-data.constant";

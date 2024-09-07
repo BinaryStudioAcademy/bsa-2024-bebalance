@@ -1,7 +1,7 @@
 import { GradientColor } from "../enums/enums";
 import { type WheelDataItem } from "../types/types";
 
-const GRADIENT_SECTORS_DATA: WheelDataItem[] = [
+const GRADIENT_SECTORS_INITIAL_DATA: WheelDataItem[] = [
 	{ colors: GradientColor.YELLOW, label: "Physical", score: 9 },
 	{ colors: GradientColor.LIME, label: "Work", score: 8 },
 	{ colors: GradientColor.VIOLET, label: "Friends", score: 7 },
@@ -12,4 +12,4 @@ const GRADIENT_SECTORS_DATA: WheelDataItem[] = [
 	{ colors: GradientColor.BLUE, label: "Mental", score: 7 },
 ];
 
-export { GRADIENT_SECTORS_DATA };
+export { GRADIENT_SECTORS_INITIAL_DATA };
