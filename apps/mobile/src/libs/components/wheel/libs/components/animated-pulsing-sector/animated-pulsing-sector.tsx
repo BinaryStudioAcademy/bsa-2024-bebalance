@@ -1,4 +1,5 @@
 import { Animated, Circle } from "~/libs/components/components";
+import { type SectorInitialSharedValues } from "~/libs/types/types";
 
 import { getRandomValue, getSectorParameters } from "../../helpers/helpers";
 import { useWheelAnimation } from "../../hooks/hooks";
@@ -58,7 +59,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		startPercentOuter,
 	});
 
-	const initialSharedValues = {
+	const initialSharedValues: SectorInitialSharedValues = {
 		animatedInnerArrayDash: innerDashArrayDash,
 		animatedInnerArrayGap: innerDashArrayGap,
 		animatedInnerDashOffset: innerDashOffset,

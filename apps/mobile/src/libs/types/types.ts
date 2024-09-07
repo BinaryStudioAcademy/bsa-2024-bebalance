@@ -6,6 +6,7 @@ export {
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
 export {
+	type SectorInitialSharedValues,
 	type SectorParameters,
 	type SectorParametersCalculationData,
 	type WheelDataItem,

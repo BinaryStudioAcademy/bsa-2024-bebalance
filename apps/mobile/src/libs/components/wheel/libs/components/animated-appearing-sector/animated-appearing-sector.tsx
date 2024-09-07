@@ -1,4 +1,5 @@
 import { Animated, Circle } from "~/libs/components/components";
+import { type SectorInitialSharedValues } from "~/libs/types/types";
 
 import { useWheelAnimation } from "../../hooks/hooks";
 
@@ -34,7 +35,7 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 	startPercentInner,
 	startPercentOuter,
 }: Properties) => {
-	const initialSharedValues = {
+	const initialSharedValues: SectorInitialSharedValues = {
 		animatedInnerArrayDash: INITIAL_ANIMATED_VALUE,
 		animatedInnerArrayGap: INITIAL_ANIMATED_VALUE,
 		animatedInnerDashOffset: INITIAL_ANIMATED_VALUE,

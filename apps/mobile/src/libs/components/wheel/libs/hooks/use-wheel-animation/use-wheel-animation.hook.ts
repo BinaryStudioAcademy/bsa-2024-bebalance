@@ -5,26 +5,17 @@ import {
 	useEffect,
 	useSharedValue,
 } from "~/libs/hooks/hooks";
-import { type SectorParametersCalculationData } from "~/libs/types/types";
+import {
+	type SectorInitialSharedValues,
+	type SectorParametersCalculationData,
+} from "~/libs/types/types";
 
 import { getSectorParameters } from "../../helpers/helpers";
-
-type InitialSharedValues = {
-	animatedInnerArrayDash: number;
-	animatedInnerArrayGap: number;
-	animatedInnerDashOffset: number;
-	animatedInnerStrokeWidth: number;
-	animatedOuterArrayDash: number;
-	animatedOuterArrayGap: number;
-	animatedOuterDashOffset: number;
-	animatedOuterStrokeWidth: number;
-	animatedRadius: number;
-};
 
 type WheelAnimationProperties = {
 	animationDuration: number;
 	animationRepetitions: number;
-	initialSharedValues: InitialSharedValues;
+	initialSharedValues: SectorInitialSharedValues;
 	sectorCalculationData: SectorParametersCalculationData;
 };
 
