@@ -48,6 +48,21 @@ class OnboardingService implements Service {
 	}: OnboardingAnswerRequestDto): Promise<OnboardingAnswerResponseDto> {
 		const answers = await this.findAnswersByIds(answerIds);
 
+		const questionAnswered = new Set<number>();
+
+		for (const answer of answers) {
+			const { questionId } = answer.toObject();
+
+			if (questionAnswered.has(questionId)) {
+				throw new OnboardingError({
+					message: ErrorMessage.DUPLICATE_QUESTION_ANSWER,
+					status: HTTPCode.BAD_REQUEST,
+				});
+			}
+
+			questionAnswered.add(questionId);
+		}
+
 		if (answers.length !== answerIds.length) {
 			throw new OnboardingError({
 				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
