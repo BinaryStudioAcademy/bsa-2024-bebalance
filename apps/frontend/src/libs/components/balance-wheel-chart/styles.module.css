@@ -1,5 +1,6 @@
 .container-animation {
-	width: 350px;
+	z-index: var(--z-index-low);
+	width: 250px;
 }
 
 .container-root-wheel {
