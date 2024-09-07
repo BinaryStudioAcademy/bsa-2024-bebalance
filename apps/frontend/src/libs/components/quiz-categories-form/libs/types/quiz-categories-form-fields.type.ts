@@ -1,6 +1,6 @@
 type QuizCategoriesFormFields = {
-	categoriesIds: string[];
-	isSelectAll: boolean;
+	categoryIds: string[];
+	hasSelectedAll: boolean;
 };
 
 export { type QuizCategoriesFormFields };

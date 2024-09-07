@@ -14,7 +14,7 @@ import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
 type Properties = {
-	onSubmit?: (payload: Pick<QuizCategoriesFormFields, "categoriesIds">) => void;
+	onSubmit?: (payload: { categoryIds: number[] }) => void;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({
@@ -47,34 +47,34 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	}, [dispatch]);
 
 	const handleSelectAll = useCallback(() => {
-		const { isSelectAll } = getValues();
+		const { hasSelectedAll } = getValues();
 
-		if (isSelectAll) {
+		if (hasSelectedAll) {
 			setValue(
-				"categoriesIds",
+				"categoryIds",
 				quizCategories.map((category) => category.id.toString()),
 			);
 		} else {
-			setValue("categoriesIds", []);
+			setValue("categoryIds", []);
 		}
 	}, [getValues, quizCategories, setValue]);
 
 	const handleInputSelect = useCallback(() => {
-		const { categoriesIds } = getValues();
+		const { categoryIds } = getValues();
 
-		const isAllChecked = categoriesIds.length === quizCategories.length;
+		const isAllChecked = categoryIds.length === quizCategories.length;
 
 		if (isAllChecked) {
-			setValue("isSelectAll", true);
+			setValue("hasSelectedAll", true);
 		} else {
-			setValue("isSelectAll", false);
+			setValue("hasSelectedAll", false);
 		}
 	}, [getValues, quizCategories.length, setValue]);
 
 	const handleFormSubmit = useCallback(
 		(event: React.BaseSyntheticEvent): void => {
-			void handleSubmit(({ categoriesIds }) => {
-				onSubmit({ categoriesIds });
+			void handleSubmit(({ categoryIds }) => {
+				onSubmit({ categoryIds: categoryIds.map(Number) });
 			})(event);
 		},
 		[handleSubmit, onSubmit],
@@ -90,13 +90,13 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 				<Checkbox
 					control={control}
 					label="All"
-					name="isSelectAll"
+					name="hasSelectedAll"
 					onChange={handleSelectAll}
 				/>
 				<Checkbox
 					control={control}
 					label="Categories"
-					name="categoriesIds"
+					name="categoryIds"
 					onChange={handleInputSelect}
 					options={categoryInputOptions}
 				/>
