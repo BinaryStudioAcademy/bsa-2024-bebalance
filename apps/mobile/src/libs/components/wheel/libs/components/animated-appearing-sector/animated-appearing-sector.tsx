@@ -1,6 +1,6 @@
 import { Animated, Circle } from "~/libs/components/components";
-import { type SectorInitialSharedValues } from "~/libs/types/types";
 
+import { INITIAL_SHARED_DATA } from "../../constants/constants";
 import { useWheelAnimation } from "../../hooks/hooks";
 
 type Properties = {
@@ -18,7 +18,6 @@ type Properties = {
 	startPercentOuter: number;
 };
 
-const INITIAL_ANIMATED_VALUE = 0;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedAppearingSector: React.FC<Properties> = ({
@@ -35,23 +34,11 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 	startPercentInner,
 	startPercentOuter,
 }: Properties) => {
-	const initialSharedValues: SectorInitialSharedValues = {
-		animatedInnerArrayDash: INITIAL_ANIMATED_VALUE,
-		animatedInnerArrayGap: INITIAL_ANIMATED_VALUE,
-		animatedInnerDashOffset: INITIAL_ANIMATED_VALUE,
-		animatedInnerStrokeWidth: INITIAL_ANIMATED_VALUE,
-		animatedOuterArrayDash: INITIAL_ANIMATED_VALUE,
-		animatedOuterArrayGap: INITIAL_ANIMATED_VALUE,
-		animatedOuterDashOffset: INITIAL_ANIMATED_VALUE,
-		animatedOuterStrokeWidth: INITIAL_ANIMATED_VALUE,
-		animatedRadius: INITIAL_ANIMATED_VALUE,
-	};
-
 	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
 		useWheelAnimation({
 			animationDuration,
 			animationRepetitions,
-			initialSharedValues,
+			initialSharedValues: INITIAL_SHARED_DATA,
 			sectorCalculationData: {
 				centerGap,
 				endPercentInner,
