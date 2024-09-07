@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.38.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.1...v1.38.2) (2024-09-07)
+
+
+### Bug Fixes
+
+* **backend:** saved user answers for onboarding questions bb-284 ([#337](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/337)) ([841c3c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/841c3c7750520335683de56efbf934fb64616791))
+
 ## [1.38.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.0...v1.38.1) (2024-09-07)
 
 
