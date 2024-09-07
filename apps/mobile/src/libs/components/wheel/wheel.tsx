@@ -12,13 +12,10 @@ import {
 	LabelOnCircle,
 } from "./libs/components/components";
 import {
-	ANIMATION_REPETITIONS,
-	ANIMATION_TIME,
 	MAX_SCORE,
 	MINIFY_TWICE_COEFFICIENT,
-	REPETITION_STEP,
-} from "./libs/constants";
-import { WheelSetting } from "./libs/enums/enums";
+} from "./libs/constants/constants";
+import { AnimationDefaultSetting, WheelSetting } from "./libs/enums/enums";
 import {
 	getRadiansFromPercent,
 	getWheelCategoryParameters,
@@ -36,8 +33,8 @@ type Properties = {
 
 const Wheel: React.FC<Properties> = ({
 	animation = AnimationName.APPEAR,
-	animationRepetitions = ANIMATION_REPETITIONS,
-	animationTime = ANIMATION_TIME,
+	animationRepetitions = AnimationDefaultSetting.REPETITIONS,
+	animationTime = AnimationDefaultSetting.DURATION,
 	categoriesData = GRADIENT_SECTORS_INITIAL_DATA,
 	isLabelShown = true,
 	maxScore = MAX_SCORE,
@@ -49,12 +46,14 @@ const Wheel: React.FC<Properties> = ({
 		: size;
 	const centerPoint = outerSize * MINIFY_TWICE_COEFFICIENT;
 
-	const [repetition, setRepetition] = useState<number>(ANIMATION_REPETITIONS);
+	const [repetition, setRepetition] = useState<number>(
+		AnimationDefaultSetting.REPETITIONS,
+	);
 
 	useEffect(() => {
 		if (repetition < animationRepetitions) {
 			setTimeout(() => {
-				setRepetition(repetition + REPETITION_STEP);
+				setRepetition(repetition + AnimationDefaultSetting.REPETITION_STEP);
 			}, animationTime);
 		}
 	}, [animationRepetitions, animationTime, repetition]);
