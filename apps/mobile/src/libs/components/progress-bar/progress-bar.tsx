@@ -1,9 +1,9 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { default as RNProgressBar } from "react-native-progress-step-bar";
 
 import { LinearGradient, View } from "~/libs/components/components";
 import { GradientColor } from "~/libs/enums/enums";
+import { getScreenWidth } from "~/libs/helpers/helpers";
 import { useMemo } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
@@ -13,7 +13,7 @@ import {
 	SCREEN_WIDTH_MULTIPLIER,
 	STEP_ANIMATION_DURATION,
 } from "./constants/constants";
-import { GradientCoordinates } from "./enums/enums";
+import { GradientCoordinate } from "./enums/enums";
 import { styles } from "./styles";
 
 type Properties = {
@@ -21,8 +21,7 @@ type Properties = {
 	totalItemsAmount: number;
 };
 
-const SCREEN_WIDTH: number = Dimensions.get("window").width;
-const PROGRESS_BAR_WIDTH = SCREEN_WIDTH * SCREEN_WIDTH_MULTIPLIER;
+const PROGRESS_BAR_WIDTH = getScreenWidth * SCREEN_WIDTH_MULTIPLIER;
 
 const ProgressBar: React.FC<Properties> = ({
 	currentItemIndex,
@@ -32,8 +31,8 @@ const ProgressBar: React.FC<Properties> = ({
 		() => (
 			<LinearGradient
 				colors={[...GradientColor.BLUE]}
-				end={GradientCoordinates.END}
-				start={GradientCoordinates.START}
+				end={GradientCoordinate.END}
+				start={GradientCoordinate.START}
 				style={styles.bar}
 			/>
 		),
@@ -45,8 +44,8 @@ const ProgressBar: React.FC<Properties> = ({
 			<View style={styles.dotContainer}>
 				<LinearGradient
 					colors={[...GradientColor.BLUE]}
-					end={GradientCoordinates.END}
-					start={GradientCoordinates.START}
+					end={GradientCoordinate.END}
+					start={GradientCoordinate.START}
 					style={[
 						styles.dotBorder,
 						globalStyles.alignItemsCenter,

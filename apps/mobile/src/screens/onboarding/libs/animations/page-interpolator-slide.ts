@@ -1,7 +1,8 @@
 import { type PageInterpolatorParams } from "react-native-infinite-pager";
 import { interpolate, type useAnimatedStyle } from "react-native-reanimated";
 
-import { AnimationDefaultValues } from "../constants/constants";
+import { ANIMATION_SCALE_FACTOR } from "../constants/constants";
+import { AnimationDefaultValues } from "../enums/enums";
 
 const pageInterpolatorSlide = ({
 	focusAnim,
@@ -14,9 +15,9 @@ const pageInterpolatorSlide = ({
 		focusAnim.value,
 		[-pageBuffer, AnimationDefaultValues.ZERO, pageBuffer],
 		[
-			-pageWidth.value * AnimationDefaultValues.MULTIPLIER,
+			-pageWidth.value * ANIMATION_SCALE_FACTOR,
 			AnimationDefaultValues.ZERO,
-			pageWidth.value * AnimationDefaultValues.MULTIPLIER,
+			pageWidth.value * ANIMATION_SCALE_FACTOR,
 		],
 	);
 

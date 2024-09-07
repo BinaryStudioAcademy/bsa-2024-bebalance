@@ -21,6 +21,7 @@ export { Wheel } from "./wheel/wheel";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
 export {
 	ActivityIndicator,
+	Dimensions,
 	Image,
 	KeyboardAvoidingView,
 	Pressable,

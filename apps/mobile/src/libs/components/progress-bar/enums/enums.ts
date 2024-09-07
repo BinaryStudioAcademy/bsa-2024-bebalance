@@ -1,1 +1,1 @@
-export { GradientCoordinates } from "./gradient-coordinates.enum";
+export { GradientCoordinate } from "./gradient-coordinate.enum";
