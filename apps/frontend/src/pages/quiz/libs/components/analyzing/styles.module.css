@@ -2,14 +2,23 @@
 	height: 100vh;
 	padding: 35px;
 	background-color: var(--background);
-	background-image: url("../../../../../assets/img/circle-group-large.svg"),
-		url("../../../../../assets/img/circle-group-medium.svg"),
-		url("../../../../../assets/img/circle-group-small.svg");
-	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-image: url("../../../../../assets/img/blue-circle.svg"),
+		url("../../../../../assets/img/pink-circle.svg"),
+		url("../../../../../assets/img/green-circle.svg"),
+		url("../../src/assets/img/ripple-effect-bg.svg"),
+		url("../../src/assets/img/ripple-effect-bg2.svg"),
+		url("../../src/assets/img/ripple-effect-bg4.svg"),
+		url("../../src/assets/img/elipses-not-found.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+		no-repeat, no-repeat;
 	background-position:
-		left -600px top 50%,
-		right -30% bottom -500px,
-		right 20% top -270px;
+		right 40% bottom 15%,
+		left 15% top 45%,
+		right 10% top 20%,
+		left 600px top -15%,
+		right -150px bottom -300px,
+		left -500px bottom -100px,
+		top 100px right 100px;
 }
 
 .border-container {
