@@ -4,8 +4,9 @@ import {
 	generateGradientColor,
 	generateRandomData,
 } from "../helpers/helpers.js";
+import { type PolarAreaType } from "../types/types.js";
 
-const WHEEL_CHART_CONFIG: ChartConfiguration<"polarArea"> = {
+const WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 	data: {
 		datasets: [
 			{
