@@ -3,6 +3,7 @@ import { RadioGroup as RNRadioGroup } from "react-native-radio-buttons-group";
 
 import { Text, View } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
+import { createRadioButtonProperties } from "~/libs/helpers/helpers";
 import { useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
@@ -11,29 +12,19 @@ import {
 	type FieldPath,
 	type FieldValues,
 	type RadioButtonProps,
-	type RadioGroupValue,
-	type ViewStyle,
+	type RadioGroupItemStyle,
+	type RadioGroupOption,
 } from "~/libs/types/types";
 
-import { CIRCLE_SIZE } from "./libs/constants/constants";
-import { BorderSize } from "./libs/enums/enums";
 import { styles } from "./styles";
-
-type RadioGroupItemStyle = {
-	circleBorderColorActive?: string;
-	circleBorderSize?: number;
-	circleBorderSizeActive?: number;
-	circleColorActive?: string;
-	circleSize?: number;
-} & ViewStyle;
 
 type Properties<T extends FieldValues> = {
 	control: Control<T>;
 	errors: FieldErrors<T>;
 	itemContainerStyle?: RadioGroupItemStyle;
 	name: FieldPath<T>;
-	onChange?: (value: RadioGroupValue) => void;
-	options: RadioGroupValue[];
+	onChange?: (value: RadioGroupOption) => void;
+	options: RadioGroupOption[];
 };
 
 const RadioGroup = <T extends FieldValues>({
@@ -47,22 +38,10 @@ const RadioGroup = <T extends FieldValues>({
 
 	const { onChange: onFieldChange, value: selectedId } = field;
 
-	const {
-		circleBorderColorActive = BaseColor.BG_BLUE,
-		circleBorderSize = BorderSize.DEFAULT,
-		circleBorderSizeActive = BorderSize.ACTIVE,
-		circleColorActive = BaseColor.BG_WHITE,
-		circleSize = CIRCLE_SIZE,
-	} = itemContainerStyle;
-
 	const radioButtonsProperties: RadioButtonProps[] = options.map((option) => {
-		const radioButtonProperty = {
-			containerStyle: [
-				globalStyles.p12,
-				styles.commonItemContainer,
-				itemContainerStyle,
-			],
-			id: option.value,
+		return createRadioButtonProperties({
+			commonStyles: styles.commonItemContainer,
+			itemContainerStyle,
 			label: (
 				<Text
 					preset="default"
@@ -73,20 +52,9 @@ const RadioGroup = <T extends FieldValues>({
 					{option.label}
 				</Text>
 			),
-			size: circleSize,
-		} as RadioButtonProps;
-
-		const isActive = radioButtonProperty.id === selectedId;
-
-		if (isActive) {
-			radioButtonProperty.borderColor = circleBorderColorActive;
-			radioButtonProperty.borderSize = circleBorderSizeActive;
-			radioButtonProperty.color = circleColorActive;
-		} else {
-			radioButtonProperty.borderSize = circleBorderSize;
-		}
-
-		return radioButtonProperty;
+			option,
+			selectedId,
+		});
 	});
 
 	const error = errors[name]?.message;

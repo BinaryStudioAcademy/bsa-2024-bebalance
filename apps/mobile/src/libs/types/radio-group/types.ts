@@ -1,1 +1,2 @@
-export { type RadioGroupValue } from "./radio-group-value.type";
+export { type RadioGroupItemStyle } from "./radio-group-item-style.type";
+export { type RadioGroupOption } from "./radio-group-option.type";

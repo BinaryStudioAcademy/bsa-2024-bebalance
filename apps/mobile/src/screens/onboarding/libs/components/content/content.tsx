@@ -6,7 +6,7 @@ import {
 	type Control,
 	type FieldErrors,
 	type FieldValues,
-	type RadioGroupValue,
+	type RadioGroupOption,
 } from "~/libs/types/types";
 
 import {
@@ -27,11 +27,13 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 	errors,
 	question,
 }) => {
-	const mappedAnswersToRadioOptions: RadioGroupValue[] = question?.answers
-		? question.answers.map((answer: OnboardingAnswerDto) => ({
-				label: answer.label,
-				value: answer.id.toString(),
-			}))
+	const mappedAnswersToRadioOptions: RadioGroupOption[] = question?.answers
+		? question.answers.map((answer: OnboardingAnswerDto) => {
+				return {
+					label: answer.label,
+					value: answer.id.toString(),
+				};
+			})
 		: [];
 
 	return (

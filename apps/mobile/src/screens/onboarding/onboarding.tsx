@@ -33,18 +33,15 @@ import {
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
+	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
-
-type RootStackParameterList = {
-	[RootScreenName.WELCOME]: undefined;
-};
 
 const ZERO = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const pagerReference = useRef<InfinitePagerImperativeApi | null>(null);
+	const infinitePager = useRef<InfinitePagerImperativeApi | null>(null);
 
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
@@ -107,8 +104,8 @@ const Onboarding: React.FC = () => {
 				return;
 			}
 
-			if (pagerReference.current) {
-				pagerReference.current.incrementPage({ animated: true });
+			if (infinitePager.current) {
+				infinitePager.current.incrementPage({ animated: true });
 			}
 
 			void dispatch(onboardingActions.nextQuestion());
@@ -126,8 +123,8 @@ const Onboarding: React.FC = () => {
 	const handlePreviousClick = useCallback(() => {
 		void dispatch(onboardingActions.previousQuestion());
 
-		if (pagerReference.current) {
-			pagerReference.current.decrementPage({ animated: true });
+		if (infinitePager.current) {
+			infinitePager.current.decrementPage({ animated: true });
 		}
 	}, [dispatch]);
 
@@ -169,7 +166,7 @@ const Onboarding: React.FC = () => {
 									pageBuffer={PREVIOUS_INDEX_OFFSET}
 									PageComponent={renderPageComponent}
 									pageInterpolator={pageInterpolatorSlide}
-									ref={pagerReference}
+									ref={infinitePager}
 								/>
 								<View style={globalStyles.gap12}>
 									<Button

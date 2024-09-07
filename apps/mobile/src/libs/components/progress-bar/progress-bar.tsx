@@ -20,8 +20,8 @@ type Properties = {
 	currentItemIndex: number;
 	totalItemsAmount: number;
 };
-
-const PROGRESS_BAR_WIDTH = getScreenWidth * SCREEN_WIDTH_MULTIPLIER;
+const SCREEN_WIDTH = getScreenWidth();
+const PROGRESS_BAR_WIDTH = SCREEN_WIDTH * SCREEN_WIDTH_MULTIPLIER;
 
 const ProgressBar: React.FC<Properties> = ({
 	currentItemIndex,
