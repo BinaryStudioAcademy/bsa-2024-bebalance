@@ -1,3 +1,5 @@
+import { NotificationFrequency } from "~/modules/users/users.js";
+
 const TASK_DAYS_OPTIONS = [
 	{ label: "Monday", value: 1 },
 	{ label: "Tuesday", value: 2 },
@@ -9,10 +11,13 @@ const TASK_DAYS_OPTIONS = [
 ];
 
 const NOTIFICATION_FREQUENCY_OPTIONS = [
-	{ label: "Yes, I’d love daily motivation!", value: "true" },
+	{
+		label: "Yes, I’d love daily motivation!",
+		value: NotificationFrequency.ALL,
+	},
 	{
 		label: "No, I prefer not to receive motivational follow-ups",
-		value: "false",
+		value: NotificationFrequency.NONE,
 	},
 ];
 

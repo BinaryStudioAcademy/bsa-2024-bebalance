@@ -1,9 +1,12 @@
+import { type ValueOf } from "../../../../libs/types/types.js";
+import { type NotificationFrequency } from "../enums/notification-frequency.enum.js";
+
 type UserDto = {
 	createdAt: string;
 	email: string;
 	id: number;
 	name: string;
-	notificationFrequency?: string;
+	notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 	updatedAt: string;
 	userTaskDays?: number[];
 };
