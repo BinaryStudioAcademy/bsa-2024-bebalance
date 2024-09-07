@@ -88,7 +88,7 @@ class BaseConfig implements Config {
 				PASSWORD_RESET_LINK: {
 					default: null,
 					doc: "Time during which reset password link is valid",
-					env: "DURATION_RESET_PASSWORD_LINK",
+					env: "DURATION_PASSWORD_RESET_LINK",
 					format: String,
 				},
 				SESSION: {
