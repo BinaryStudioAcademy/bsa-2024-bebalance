@@ -1,5 +1,4 @@
 import { Animated, Circle } from "~/libs/components/components";
-import { useSharedValue } from "~/libs/hooks/hooks";
 
 import { useWheelAnimation } from "../../hooks/hooks";
 
@@ -35,32 +34,23 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 	startPercentInner,
 	startPercentOuter,
 }: Properties) => {
-	const animatedInnerArrayDash = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const animatedInnerArrayGap = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const animatedInnerDashOffset = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const animatedInnerStrokeWidth = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedInnerArrayDash = INITIAL_ANIMATED_VALUE;
+	const animatedInnerArrayGap = INITIAL_ANIMATED_VALUE;
+	const animatedInnerDashOffset = INITIAL_ANIMATED_VALUE;
+	const animatedInnerStrokeWidth = INITIAL_ANIMATED_VALUE;
 
-	const animatedOuterArrayDash = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const animatedOuterArrayGap = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const animatedOuterDashOffset = useSharedValue(INITIAL_ANIMATED_VALUE);
-	const animatedOuterStrokeWidth = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedOuterArrayDash = INITIAL_ANIMATED_VALUE;
+	const animatedOuterArrayGap = INITIAL_ANIMATED_VALUE;
+	const animatedOuterDashOffset = INITIAL_ANIMATED_VALUE;
+	const animatedOuterStrokeWidth = INITIAL_ANIMATED_VALUE;
 
-	const animatedRadius = useSharedValue(INITIAL_ANIMATED_VALUE);
+	const animatedRadius = INITIAL_ANIMATED_VALUE;
 
 	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
 		useWheelAnimation({
 			animationDuration: animationTime,
 			animationRepetitions,
-			sectorCalculationData: {
-				centerGap,
-				endPercentInner,
-				endPercentOuter,
-				height,
-				layerOffset,
-				startPercentInner,
-				startPercentOuter,
-			},
-			sectorSharedValues: {
+			initialSharedValues: {
 				animatedInnerArrayDash,
 				animatedInnerArrayGap,
 				animatedInnerDashOffset,
@@ -70,6 +60,15 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 				animatedOuterDashOffset,
 				animatedOuterStrokeWidth,
 				animatedRadius,
+			},
+			sectorCalculationData: {
+				centerGap,
+				endPercentInner,
+				endPercentOuter,
+				height,
+				layerOffset,
+				startPercentInner,
+				startPercentOuter,
 			},
 		});
 

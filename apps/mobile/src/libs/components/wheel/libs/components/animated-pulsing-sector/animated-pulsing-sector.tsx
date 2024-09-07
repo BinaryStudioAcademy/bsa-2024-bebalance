@@ -1,5 +1,4 @@
 import { Animated, Circle } from "~/libs/components/components";
-import { useSharedValue } from "~/libs/hooks/hooks";
 
 import { getRandomValue, getSectorParameters } from "../../helpers/helpers";
 import { useWheelAnimation } from "../../hooks/hooks";
@@ -59,17 +58,17 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		startPercentOuter,
 	});
 
-	const animatedInnerArrayDash = useSharedValue(innerDashArrayDash);
-	const animatedInnerArrayGap = useSharedValue(innerDashArrayGap);
-	const animatedInnerDashOffset = useSharedValue(innerDashOffset);
-	const animatedInnerStrokeWidth = useSharedValue(innerStrokeWidth);
+	const animatedInnerArrayDash = innerDashArrayDash;
+	const animatedInnerArrayGap = innerDashArrayGap;
+	const animatedInnerDashOffset = innerDashOffset;
+	const animatedInnerStrokeWidth = innerStrokeWidth;
 
-	const animatedOuterArrayDash = useSharedValue(outerDashArrayDash);
-	const animatedOuterArrayGap = useSharedValue(outerDashArrayGap);
-	const animatedOuterDashOffset = useSharedValue(outerDashOffset);
-	const animatedOuterStrokeWidth = useSharedValue(outerStrokeWidth);
+	const animatedOuterArrayDash = outerDashArrayDash;
+	const animatedOuterArrayGap = outerDashArrayGap;
+	const animatedOuterDashOffset = outerDashOffset;
+	const animatedOuterStrokeWidth = outerStrokeWidth;
 
-	const animatedRadius = useSharedValue(radius);
+	const animatedRadius = radius;
 
 	const randomHeight = getRandomValue({
 		max: maxHeight,
@@ -80,16 +79,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		useWheelAnimation({
 			animationDuration: animationTime,
 			animationRepetitions,
-			sectorCalculationData: {
-				centerGap,
-				endPercentInner,
-				endPercentOuter,
-				height: randomHeight,
-				layerOffset,
-				startPercentInner,
-				startPercentOuter,
-			},
-			sectorSharedValues: {
+			initialSharedValues: {
 				animatedInnerArrayDash,
 				animatedInnerArrayGap,
 				animatedInnerDashOffset,
@@ -99,6 +89,15 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 				animatedOuterDashOffset,
 				animatedOuterStrokeWidth,
 				animatedRadius,
+			},
+			sectorCalculationData: {
+				centerGap,
+				endPercentInner,
+				endPercentOuter,
+				height: randomHeight,
+				layerOffset,
+				startPercentInner,
+				startPercentOuter,
 			},
 		});
 

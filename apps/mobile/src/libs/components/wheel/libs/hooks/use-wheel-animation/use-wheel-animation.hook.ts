@@ -1,30 +1,31 @@
 import { withTiming } from "react-native-reanimated";
 
-import { useAnimatedProps, useEffect } from "~/libs/hooks/hooks";
 import {
-	type SectorParametersCalculationData,
-	type SharedValue,
-} from "~/libs/types/types";
+	useAnimatedProps,
+	useEffect,
+	useSharedValue,
+} from "~/libs/hooks/hooks";
+import { type SectorParametersCalculationData } from "~/libs/types/types";
 
 import { getSectorParameters } from "../../helpers/helpers";
 
-type SectorSharedValues = {
-	animatedInnerArrayDash: SharedValue<number>;
-	animatedInnerArrayGap: SharedValue<number>;
-	animatedInnerDashOffset: SharedValue<number>;
-	animatedInnerStrokeWidth: SharedValue<number>;
-	animatedOuterArrayDash: SharedValue<number>;
-	animatedOuterArrayGap: SharedValue<number>;
-	animatedOuterDashOffset: SharedValue<number>;
-	animatedOuterStrokeWidth: SharedValue<number>;
-	animatedRadius: SharedValue<number>;
+type InitialSharedValues = {
+	animatedInnerArrayDash: number;
+	animatedInnerArrayGap: number;
+	animatedInnerDashOffset: number;
+	animatedInnerStrokeWidth: number;
+	animatedOuterArrayDash: number;
+	animatedOuterArrayGap: number;
+	animatedOuterDashOffset: number;
+	animatedOuterStrokeWidth: number;
+	animatedRadius: number;
 };
 
 type WheelAnimationProperties = {
 	animationDuration: number;
 	animationRepetitions: number;
+	initialSharedValues: InitialSharedValues;
 	sectorCalculationData: SectorParametersCalculationData;
-	sectorSharedValues: SectorSharedValues;
 };
 
 type CircleAnimatedProperties = {
@@ -42,21 +43,9 @@ type SectorAnimatedProperties = {
 const useWheelAnimation = ({
 	animationDuration,
 	animationRepetitions,
+	initialSharedValues,
 	sectorCalculationData,
-	sectorSharedValues,
 }: WheelAnimationProperties): SectorAnimatedProperties => {
-	const {
-		animatedInnerArrayDash,
-		animatedInnerArrayGap,
-		animatedInnerDashOffset,
-		animatedInnerStrokeWidth,
-		animatedOuterArrayDash,
-		animatedOuterArrayGap,
-		animatedOuterDashOffset,
-		animatedOuterStrokeWidth,
-		animatedRadius,
-	} = sectorSharedValues;
-
 	const {
 		centerGap,
 		endPercentInner,
@@ -66,6 +55,32 @@ const useWheelAnimation = ({
 		startPercentInner,
 		startPercentOuter,
 	} = sectorCalculationData;
+
+	const animatedInnerArrayDash = useSharedValue(
+		initialSharedValues.animatedInnerArrayGap,
+	);
+	const animatedInnerArrayGap = useSharedValue(
+		initialSharedValues.animatedInnerArrayGap,
+	);
+	const animatedInnerDashOffset = useSharedValue(
+		initialSharedValues.animatedOuterDashOffset,
+	);
+	const animatedInnerStrokeWidth = useSharedValue(
+		initialSharedValues.animatedInnerStrokeWidth,
+	);
+	const animatedOuterArrayDash = useSharedValue(
+		initialSharedValues.animatedOuterArrayGap,
+	);
+	const animatedOuterArrayGap = useSharedValue(
+		initialSharedValues.animatedOuterArrayGap,
+	);
+	const animatedOuterDashOffset = useSharedValue(
+		initialSharedValues.animatedOuterDashOffset,
+	);
+	const animatedOuterStrokeWidth = useSharedValue(
+		initialSharedValues.animatedOuterStrokeWidth,
+	);
+	const animatedRadius = useSharedValue(initialSharedValues.animatedRadius);
 
 	useEffect(() => {
 		const {
