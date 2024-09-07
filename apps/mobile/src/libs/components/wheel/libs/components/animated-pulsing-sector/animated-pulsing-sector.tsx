@@ -58,17 +58,17 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		startPercentOuter,
 	});
 
-	const animatedInnerArrayDash = innerDashArrayDash;
-	const animatedInnerArrayGap = innerDashArrayGap;
-	const animatedInnerDashOffset = innerDashOffset;
-	const animatedInnerStrokeWidth = innerStrokeWidth;
-
-	const animatedOuterArrayDash = outerDashArrayDash;
-	const animatedOuterArrayGap = outerDashArrayGap;
-	const animatedOuterDashOffset = outerDashOffset;
-	const animatedOuterStrokeWidth = outerStrokeWidth;
-
-	const animatedRadius = radius;
+	const initialSharedValues = {
+		animatedInnerArrayDash: innerDashArrayDash,
+		animatedInnerArrayGap: innerDashArrayGap,
+		animatedInnerDashOffset: innerDashOffset,
+		animatedInnerStrokeWidth: innerStrokeWidth,
+		animatedOuterArrayDash: outerDashArrayDash,
+		animatedOuterArrayGap: outerDashArrayGap,
+		animatedOuterDashOffset: outerDashOffset,
+		animatedOuterStrokeWidth: outerStrokeWidth,
+		animatedRadius: radius,
+	};
 
 	const randomHeight = getRandomValue({
 		max: maxHeight,
@@ -79,17 +79,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		useWheelAnimation({
 			animationDuration: animationTime,
 			animationRepetitions,
-			initialSharedValues: {
-				animatedInnerArrayDash,
-				animatedInnerArrayGap,
-				animatedInnerDashOffset,
-				animatedInnerStrokeWidth,
-				animatedOuterArrayDash,
-				animatedOuterArrayGap,
-				animatedOuterDashOffset,
-				animatedOuterStrokeWidth,
-				animatedRadius,
-			},
+			initialSharedValues,
 			sectorCalculationData: {
 				centerGap,
 				endPercentInner,

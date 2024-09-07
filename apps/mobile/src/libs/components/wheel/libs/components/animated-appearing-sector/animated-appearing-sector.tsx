@@ -34,33 +34,23 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 	startPercentInner,
 	startPercentOuter,
 }: Properties) => {
-	const animatedInnerArrayDash = INITIAL_ANIMATED_VALUE;
-	const animatedInnerArrayGap = INITIAL_ANIMATED_VALUE;
-	const animatedInnerDashOffset = INITIAL_ANIMATED_VALUE;
-	const animatedInnerStrokeWidth = INITIAL_ANIMATED_VALUE;
-
-	const animatedOuterArrayDash = INITIAL_ANIMATED_VALUE;
-	const animatedOuterArrayGap = INITIAL_ANIMATED_VALUE;
-	const animatedOuterDashOffset = INITIAL_ANIMATED_VALUE;
-	const animatedOuterStrokeWidth = INITIAL_ANIMATED_VALUE;
-
-	const animatedRadius = INITIAL_ANIMATED_VALUE;
+	const initialSharedValues = {
+		animatedInnerArrayDash: INITIAL_ANIMATED_VALUE,
+		animatedInnerArrayGap: INITIAL_ANIMATED_VALUE,
+		animatedInnerDashOffset: INITIAL_ANIMATED_VALUE,
+		animatedInnerStrokeWidth: INITIAL_ANIMATED_VALUE,
+		animatedOuterArrayDash: INITIAL_ANIMATED_VALUE,
+		animatedOuterArrayGap: INITIAL_ANIMATED_VALUE,
+		animatedOuterDashOffset: INITIAL_ANIMATED_VALUE,
+		animatedOuterStrokeWidth: INITIAL_ANIMATED_VALUE,
+		animatedRadius: INITIAL_ANIMATED_VALUE,
+	};
 
 	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
 		useWheelAnimation({
 			animationDuration: animationTime,
 			animationRepetitions,
-			initialSharedValues: {
-				animatedInnerArrayDash,
-				animatedInnerArrayGap,
-				animatedInnerDashOffset,
-				animatedInnerStrokeWidth,
-				animatedOuterArrayDash,
-				animatedOuterArrayGap,
-				animatedOuterDashOffset,
-				animatedOuterStrokeWidth,
-				animatedRadius,
-			},
+			initialSharedValues,
 			sectorCalculationData: {
 				centerGap,
 				endPercentInner,
