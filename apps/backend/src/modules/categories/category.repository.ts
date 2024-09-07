@@ -117,6 +117,29 @@ class CategoryRepository implements Repository {
 		);
 	}
 
+	public async findScoreByUser(userId: number): Promise<CategoryEntity | null> {
+		const scoreModel = await this.categoryModel
+			.query()
+			.from(DatabaseTableName.QUIZ_SCORES)
+			.findOne({ userId });
+
+		if (!scoreModel) {
+			return null;
+		}
+
+		const userScoreModel = scoreModel as CategoryScoreModel;
+
+		return CategoryEntity.initialize({
+			createdAt: userScoreModel.createdAt,
+			id: userScoreModel.id,
+			name: userScoreModel.name,
+			score: userScoreModel.score,
+			scores: [],
+			updatedAt: userScoreModel.updatedAt,
+			userId: userScoreModel.userId,
+		});
+	}
+
 	public async findUserScores(userId: number): Promise<CategoryEntity[]> {
 		const categories = await this.categoryModel.query().select("*");
 
@@ -159,6 +182,42 @@ class CategoryRepository implements Repository {
 			name: category.name,
 			scores: category.scores,
 			updatedAt: category.updatedAt,
+		});
+	}
+
+	public async updateScore({
+		categoryId,
+		score,
+		userId,
+	}: {
+		categoryId: number;
+		score: number;
+		userId: number;
+	}): Promise<CategoryEntity> {
+		const categoryModel = await this.categoryModel
+			.query()
+			.findById(categoryId)
+			.castTo<CategoryModel>();
+
+		await categoryModel
+			.$relatedQuery<CategoryScoreModel>(RelationName.SCORES)
+			.for(userId)
+			.patch({ score });
+
+		const scoreModel = await this.categoryModel
+			.query()
+			.from(DatabaseTableName.QUIZ_SCORES)
+			.findOne({ categoryId, userId })
+			.castTo<CategoryScoreModel>();
+
+		return CategoryEntity.initialize({
+			createdAt: scoreModel.createdAt,
+			id: scoreModel.id,
+			name: categoryModel.name,
+			score: scoreModel.score,
+			scores: [],
+			updatedAt: scoreModel.updatedAt,
+			userId: scoreModel.userId,
 		});
 	}
 }
