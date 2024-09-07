@@ -2,10 +2,7 @@ import { BalanceWheelChart } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
-import {
-	BALANCE_WHEEL_ANIMATED_INITIAL_DATA,
-	PERCENTAGE_INCREASE_INTERVAL,
-} from "./libs/constants/constants.js";
+import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
@@ -32,7 +29,7 @@ const BalanceWheel: React.FC = () => {
 	useEffect(() => {
 		const intervalId = setInterval(
 			handleUpdatePercentage,
-			PERCENTAGE_INCREASE_INTERVAL,
+			PercentageConfig.PERCENTAGE_INCREASE_INTERVAL,
 		);
 
 		return (): void => {
