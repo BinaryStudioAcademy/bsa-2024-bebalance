@@ -23,8 +23,8 @@ import {
 
 type Properties = {
 	animation?: ValueOf<typeof AnimationName>;
+	animationDuration?: number;
 	animationRepetitions?: number;
-	animationTime?: number;
 	categoriesData?: WheelDataItem[];
 	isLabelShown?: boolean;
 	maxScore?: number;
@@ -33,8 +33,8 @@ type Properties = {
 
 const Wheel: React.FC<Properties> = ({
 	animation = AnimationName.APPEAR,
+	animationDuration = AnimationDefaultSetting.DURATION,
 	animationRepetitions = AnimationDefaultSetting.REPETITIONS,
-	animationTime = AnimationDefaultSetting.DURATION,
 	categoriesData = GRADIENT_SECTORS_INITIAL_DATA,
 	isLabelShown = true,
 	maxScore = MAX_SCORE,
@@ -54,9 +54,9 @@ const Wheel: React.FC<Properties> = ({
 		if (repetition < animationRepetitions) {
 			setTimeout(() => {
 				setRepetition(repetition + AnimationDefaultSetting.REPETITION_STEP);
-			}, animationTime);
+			}, animationDuration);
 		}
-	}, [animationRepetitions, animationTime, repetition]);
+	}, [animationRepetitions, animationDuration, repetition]);
 
 	const Sectors = categoriesData.map(
 		({ colors, label, score }, index, array) => {
@@ -116,8 +116,8 @@ const Wheel: React.FC<Properties> = ({
 					)}
 					{animation === AnimationName.PULSE && (
 						<AnimatedPulsingSector
+							animationDuration={animationDuration}
 							animationRepetitions={repetition}
-							animationTime={animationTime}
 							centerGap={wheelCenterGapSize}
 							centerPoint={centerPoint}
 							endPercentInner={endPercentInner}
@@ -134,8 +134,8 @@ const Wheel: React.FC<Properties> = ({
 					)}
 					{animation === AnimationName.APPEAR && (
 						<AnimatedAppearingSector
+							animationDuration={animationDuration}
 							animationRepetitions={repetition}
-							animationTime={animationTime}
 							centerGap={wheelCenterGapSize}
 							centerPoint={centerPoint}
 							endPercentInner={endPercentInner}

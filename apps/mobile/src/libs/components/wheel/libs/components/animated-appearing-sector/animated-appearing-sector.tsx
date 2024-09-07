@@ -4,8 +4,8 @@ import { type SectorInitialSharedValues } from "~/libs/types/types";
 import { useWheelAnimation } from "../../hooks/hooks";
 
 type Properties = {
+	animationDuration: number;
 	animationRepetitions: number;
-	animationTime: number;
 	centerGap: number;
 	centerPoint: number;
 	endPercentInner: number;
@@ -22,8 +22,8 @@ const INITIAL_ANIMATED_VALUE = 0;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedAppearingSector: React.FC<Properties> = ({
+	animationDuration,
 	animationRepetitions,
-	animationTime,
 	centerGap,
 	centerPoint,
 	endPercentInner,
@@ -49,7 +49,7 @@ const AnimatedAppearingSector: React.FC<Properties> = ({
 
 	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
 		useWheelAnimation({
-			animationDuration: animationTime,
+			animationDuration,
 			animationRepetitions,
 			initialSharedValues,
 			sectorCalculationData: {

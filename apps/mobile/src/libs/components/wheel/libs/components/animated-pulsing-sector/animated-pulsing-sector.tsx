@@ -5,8 +5,8 @@ import { getRandomValue, getSectorParameters } from "../../helpers/helpers";
 import { useWheelAnimation } from "../../hooks/hooks";
 
 type Properties = {
+	animationDuration: number;
 	animationRepetitions: number;
-	animationTime: number;
 	centerGap: number;
 	centerPoint: number;
 	endPercentInner: number;
@@ -25,8 +25,8 @@ const HALF_VALUE_COEFFICIENT = 0.5;
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const AnimatedPulsingSector: React.FC<Properties> = ({
+	animationDuration,
 	animationRepetitions,
-	animationTime,
 	centerGap,
 	centerPoint,
 	endPercentInner,
@@ -78,7 +78,7 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 
 	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
 		useWheelAnimation({
-			animationDuration: animationTime,
+			animationDuration,
 			animationRepetitions,
 			initialSharedValues,
 			sectorCalculationData: {

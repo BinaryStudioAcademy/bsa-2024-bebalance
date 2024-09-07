@@ -15,8 +15,8 @@ const WheelLoader: React.FC<Properties> = ({
 	return (
 		<Wheel
 			animation={AnimationName.PULSE}
+			animationDuration={animationDuration}
 			animationRepetitions={Infinity}
-			animationTime={animationDuration}
 			isLabelShown={false}
 			size={size}
 		/>
