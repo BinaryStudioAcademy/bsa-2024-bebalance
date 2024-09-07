@@ -1,9 +1,9 @@
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
-	type CheckboxInputOption,
 	type Control,
 	type FieldPath,
 	type FieldValues,
+	type InputOption,
 } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
@@ -12,7 +12,7 @@ type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
 	label: string;
 	name: FieldPath<T>;
-	options?: CheckboxInputOption[];
+	options?: InputOption[];
 };
 
 const Checkbox = <T extends FieldValues>({
@@ -51,7 +51,7 @@ const Checkbox = <T extends FieldValues>({
 							<div className={styles["gradient-border-content"]}>
 								<label className={styles["label"]} key={option.value}>
 									<input
-										checked={(value as number[]).includes(option.value)}
+										checked={(value as number[]).includes(Number(option.value))}
 										className={styles["checkbox"]}
 										onChange={handleCheckboxesChange}
 										type="checkbox"

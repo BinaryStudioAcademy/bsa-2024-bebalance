@@ -6,7 +6,7 @@ import {
 	type FieldPath,
 	type FieldValues,
 	type IconName,
-	type RadioInputOption,
+	type InputOption,
 } from "~/libs/types/types.js";
 
 import { Button } from "../button/button.js";
@@ -22,7 +22,7 @@ type Properties<T extends FieldValues> = {
 	label: string;
 	name: FieldPath<T>;
 	onIconClick?: (() => void) | undefined;
-	options?: RadioInputOption[];
+	options?: InputOption[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
 };
