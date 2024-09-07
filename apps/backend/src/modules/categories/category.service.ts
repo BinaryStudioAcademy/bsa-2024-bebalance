@@ -1,13 +1,19 @@
+import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
+import { EMPTY_ARRAY_LENGTH } from "./libs/constants/constants.js";
+import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoryDto,
 	type CategoryRequestDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -117,6 +123,69 @@ class CategoryService implements Service {
 		const categoryEntity = await this.categoryRepository.update(id, payload);
 
 		return this.convertCategoryEntityToDto(categoryEntity);
+	}
+
+	public async updateScores(
+		payload: QuizScoresUpdateRequestDto,
+		userId: number,
+	): Promise<QuizScoresResponseDto> {
+		const { items: scoresData } = payload;
+
+		const userScore = await this.categoryRepository.findScoreByUser(userId);
+
+		if (!userScore) {
+			throw new CategoryError({
+				message: ErrorMessage.SCORES_UPDATE_UNAVAILABLE,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const allCategories = await this.categoryRepository.findAll();
+		const allCategoryIds = new Set(
+			allCategories.map((category) => category.toObject().id),
+		);
+
+		const payloadCategoryIds = scoresData.map(
+			(payloadScore) => payloadScore.categoryId,
+		);
+
+		const missingCategoryIds = payloadCategoryIds.filter(
+			(categoryId) => !allCategoryIds.has(categoryId),
+		);
+
+		if (missingCategoryIds.length > EMPTY_ARRAY_LENGTH) {
+			throw new CategoryError({
+				message: ErrorMessage.INVALID_CATEGORY,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const scores = await Promise.all(
+			scoresData.map(async (payloadScore) => {
+				const { categoryId, score } = payloadScore;
+
+				const scoreEntity = await this.categoryRepository.updateScore({
+					categoryId,
+					score,
+					userId,
+				});
+
+				return scoreEntity.toObject();
+			}),
+		);
+
+		const items = scores.map((score) => {
+			return {
+				categoryId: score.id,
+				createdAt: score.createdAt,
+				id: score.id,
+				score: score.score,
+				updatedAt: score.updatedAt,
+				userId: score.userId,
+			};
+		});
+
+		return { items };
 	}
 }
 
