@@ -12,6 +12,15 @@ import { getDotOffsetX } from "../get-dot-offset-x/get-dot-offset-x.helper.js";
 import { getDotOffsetY } from "../get-dot-offset-y/get-dot-offset-y.helper.js";
 import { getGraphicsOffset } from "../get-graphics-offset/get-graphics-offset.js";
 
+type ChartDotsData = {
+	chartArea: ChartArea;
+	context: CanvasRenderingContext2D;
+	index: number;
+	meta: ChartMeta<PolarAreaType>;
+	middleAngle: number;
+	scale: RadialLinearScale;
+};
+
 const drawDots = ({
 	chartArea,
 	context,
@@ -19,14 +28,7 @@ const drawDots = ({
 	meta,
 	middleAngle,
 	scale,
-}: {
-	chartArea: ChartArea;
-	context: CanvasRenderingContext2D;
-	index: number;
-	meta: ChartMeta<PolarAreaType>;
-	middleAngle: number;
-	scale: RadialLinearScale;
-}): void => {
+}: ChartDotsData): void => {
 	const segment = meta.data[index];
 	const segmentColor = segment
 		? (segment.options["backgroundColor"] as CanvasGradient)

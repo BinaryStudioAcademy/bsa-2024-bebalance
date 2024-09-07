@@ -1,5 +1,4 @@
 import { HALF_PI } from "~/libs/constants/constants.js";
-import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
 
 import {
 	ChartFont,
@@ -7,6 +6,7 @@ import {
 	LabelDistacneOffset,
 	WheelCenterDistance,
 } from "../../enums/enums.js";
+import { type ChartLabelsData } from "../../types/types.js";
 import { getBaseline } from "../get-baseline/get-baseline.helper.js";
 import { getGraphicsOffset } from "../get-graphics-offset/get-graphics-offset.js";
 import { getValueLabelOffsetX } from "../get-value-label-offset-x/get-value-label-offset-x.helper.js";
@@ -18,26 +18,18 @@ const drawValueLabels = ({
 	label,
 	middleAngle,
 	scale,
-}: {
-	chartArea: ChartArea;
-	context: CanvasRenderingContext2D;
-	label: string;
-	middleAngle: number;
-	scale: RadialLinearScale;
-}): void => {
-	const sublabelDistance = scale.getDistanceFromCenterForValue(
+}: ChartLabelsData): void => {
+	const labelDistance = scale.getDistanceFromCenterForValue(
 		WheelCenterDistance.VALUE_LABEL,
 	);
 
 	const valueLabelPosition = {
 		x:
 			scale.xCenter +
-			Math.cos(middleAngle - HALF_PI) *
-				(sublabelDistance + LabelDistacneOffset.x),
+			Math.cos(middleAngle - HALF_PI) * (labelDistance + LabelDistacneOffset.x),
 		y:
 			scale.yCenter +
-			Math.sin(middleAngle - HALF_PI) *
-				(sublabelDistance + LabelDistacneOffset.y),
+			Math.sin(middleAngle - HALF_PI) * (labelDistance + LabelDistacneOffset.y),
 	};
 
 	context.textAlign = "center";

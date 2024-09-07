@@ -1,5 +1,4 @@
 import { HALF_PI } from "~/libs/constants/constants.js";
-import { type ChartArea, type RadialLinearScale } from "~/libs/types/types.js";
 
 import {
 	ChartFont,
@@ -7,6 +6,7 @@ import {
 	LabelDistacneOffset,
 	WheelCenterDistance,
 } from "../../enums/enums.js";
+import { type ChartLabelsData } from "../../types/types.js";
 import { getBaseline } from "../get-baseline/get-baseline.helper.js";
 import { getGraphicsOffset } from "../get-graphics-offset/get-graphics-offset.js";
 import { getSublabelOffsetX } from "../get-sublabel-offset-x/get-sublabel-offset-x.helper.js";
@@ -18,13 +18,7 @@ const drawSublabels = ({
 	label,
 	middleAngle,
 	scale,
-}: {
-	chartArea: ChartArea;
-	context: CanvasRenderingContext2D;
-	label: string;
-	middleAngle: number;
-	scale: RadialLinearScale;
-}): void => {
+}: ChartLabelsData): void => {
 	const sublabelDistance = scale.getDistanceFromCenterForValue(
 		WheelCenterDistance.SUBLABEL,
 	);
