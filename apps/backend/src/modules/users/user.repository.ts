@@ -60,8 +60,13 @@ class UserRepository implements Repository {
 		return Boolean(rowsDeleted);
 	}
 
-	public async deleteUserTaskDays(userId: number): Promise<void> {
-		await this.userTaskDaysModel.query().delete().where({ userId });
+	public async deleteUserTaskDays(userId: number): Promise<boolean> {
+		const rowsDeleted = await this.userTaskDaysModel
+			.query()
+			.delete()
+			.where({ userId });
+
+		return Boolean(rowsDeleted);
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
