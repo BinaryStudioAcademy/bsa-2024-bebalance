@@ -43,6 +43,8 @@ const Checkbox = <T extends FieldValues>({
 			<p className={styles["question"]}>{label}</p>
 			<div className={styles["input-container"]}>
 				{options.map((option) => {
+					const isChecked = (value as number[]).includes(Number(option.value));
+
 					return (
 						<div
 							className={styles["gradient-border-container"]}
@@ -51,7 +53,7 @@ const Checkbox = <T extends FieldValues>({
 							<div className={styles["gradient-border-content"]}>
 								<label className={styles["label"]} key={option.value}>
 									<input
-										checked={(value as number[]).includes(Number(option.value))}
+										checked={isChecked}
 										className={styles["checkbox"]}
 										onChange={handleCheckboxesChange}
 										type="checkbox"

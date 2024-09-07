@@ -1,3 +1,4 @@
+export { type UserTaskDay } from "./user-task-day.type.js";
 export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,
