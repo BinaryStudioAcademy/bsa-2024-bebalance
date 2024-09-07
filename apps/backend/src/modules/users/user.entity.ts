@@ -1,5 +1,7 @@
 import { type Entity } from "~/libs/types/types.js";
 
+import { NotificationPreference } from "./libs/enums/enums.js";
+
 class UserEntity implements Entity {
 	private allowNotifications: string;
 
@@ -73,7 +75,7 @@ class UserEntity implements Entity {
 		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
-			allowNotifications: allowNotifications ?? "false",
+			allowNotifications: allowNotifications ?? NotificationPreference.NONE,
 			createdAt,
 			email,
 			id,
@@ -97,7 +99,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			allowNotifications: "false",
+			allowNotifications: NotificationPreference.NONE,
 			createdAt: "",
 			email,
 			id: null,

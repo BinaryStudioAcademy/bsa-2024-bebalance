@@ -1,4 +1,5 @@
 export {
+	NotificationPreference,
 	UsersApiPath,
 	UserValidationMessage,
 	UserValidationRule,

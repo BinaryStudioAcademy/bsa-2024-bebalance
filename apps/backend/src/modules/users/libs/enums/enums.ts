@@ -1,1 +1,5 @@
-export { UsersApiPath, UserValidationMessage } from "shared";
+export {
+	NotificationPreference,
+	UsersApiPath,
+	UserValidationMessage,
+} from "shared";
