@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Wheel } from "~/libs/components/components";
-import { GRADIENT_SECTORS_DATA } from "~/libs/constants/gradient-sectors-data.constant";
 import { AnimationName } from "~/libs/enums/enums";
 
 type Properties = {
@@ -18,7 +17,6 @@ const WheelLoader: React.FC<Properties> = ({
 			animation={AnimationName.PULSE}
 			animationRepetitions={Infinity}
 			animationTime={animationDuration}
-			categoriesData={GRADIENT_SECTORS_DATA}
 			isLabelShown={false}
 			size={size}
 		/>
