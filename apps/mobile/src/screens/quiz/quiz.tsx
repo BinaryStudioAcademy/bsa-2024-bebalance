@@ -5,12 +5,21 @@ import {
 	LoaderWrapper,
 	ScreenWrapper,
 } from "~/libs/components/components";
+import { RadioGroup } from "~/libs/components/radio-group/radio-group";
 import { DataStatus } from "~/libs/enums/app/data-status.enum";
-import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
+import {
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+	useEffect,
+} from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import { categoryAnswerSelectedValidationSchema } from "~/packages/quiz/quiz";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { Counter } from "./libs/components/components";
+import { QUIZ_FORM_DEFAULT_VALUES } from "./libs/constants/costants";
+import { type QuizFormValues } from "./libs/types/types";
 import { styles } from "./styles";
 
 const Quiz: React.FC = () => {
@@ -28,6 +37,23 @@ const Quiz: React.FC = () => {
 		void dispatch(quizActions.getAllQuestions());
 	}, [dispatch]);
 
+	const { control, errors, handleSubmit } = useAppForm<QuizFormValues>({
+		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
+		validationSchema: categoryAnswerSelectedValidationSchema,
+	});
+
+	console.log(`QUESTIONS`, questions);
+
+	// const mappedAnswersToRadioOptions: {
+	// 	label: string;
+	// 	value: string;
+	// }[] = questions?.answers
+	// 	? question.answers.map((answer: OnboardingAnswerDto) => ({
+	// 			label: answer.label,
+	// 			value: answer.id.toString(),
+	// 		}))
+	// 	: [];
+
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 			<BackgroundWrapper>
@@ -44,6 +70,12 @@ const Quiz: React.FC = () => {
 						]}
 					>
 						<Counter currentStep={1} totalSteps={24} />
+						{/*<RadioGroup*/}
+						{/*	control={control}*/}
+						{/*	errors={errors}*/}
+						{/*	options={}*/}
+						{/*	name="answer"*/}
+						{/*/>*/}
 					</View>
 				</ScreenWrapper>
 			</BackgroundWrapper>
