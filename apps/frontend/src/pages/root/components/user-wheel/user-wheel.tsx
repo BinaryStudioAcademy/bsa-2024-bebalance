@@ -17,10 +17,12 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
-	const chartData = scores.map((score) => ({
-		data: score.score,
-		label: score.categoryName,
-	}));
+	const chartData = scores.map((score) => {
+		return {
+			data: score.score,
+			label: score.categoryName,
+		};
+	});
 
 	return (
 		<div className={styles["container"]}>
