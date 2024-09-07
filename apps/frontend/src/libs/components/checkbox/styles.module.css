@@ -44,7 +44,7 @@
 	transition: opacity 0.3s ease;
 }
 
-.gradient-border-container:has(.input:checked)::before {
+.gradient-border-container:has(.checkbox:checked)::before {
 	background: linear-gradient(
 		to right,
 		var(--brand) 0%,
@@ -53,7 +53,7 @@
 	opacity: 1;
 }
 
-.gradient-border-container:has(.input:checked) .label {
+.gradient-border-container:has(.checkbox:checked) .label {
 	border: none;
 }
 
@@ -65,7 +65,7 @@
 	border-radius: 5px;
 }
 
-.input {
+.checkbox {
 	position: relative;
 	width: 16px;
 	height: 16px;
@@ -75,7 +75,7 @@
 	border-radius: 4px;
 }
 
-.input:checked {
+.checkbox:checked {
 	background: linear-gradient(
 		to bottom,
 		var(--brand) 0%,
@@ -84,7 +84,7 @@
 	border: none;
 }
 
-.input:checked::after {
+.checkbox:checked::after {
 	position: absolute;
 	top: 50%;
 	left: 50%;

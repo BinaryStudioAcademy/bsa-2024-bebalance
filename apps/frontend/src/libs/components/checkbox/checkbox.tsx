@@ -52,7 +52,7 @@ const Checkbox = <T extends FieldValues>({
 								<label className={styles["label"]} key={option.value}>
 									<input
 										checked={(value as number[]).includes(option.value)}
-										className={styles["input"]}
+										className={styles["checkbox"]}
 										onChange={handleCheckboxesChange}
 										type="checkbox"
 										value={option.value}
