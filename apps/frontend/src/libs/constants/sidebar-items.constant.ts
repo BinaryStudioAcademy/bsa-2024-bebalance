@@ -10,14 +10,6 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 		},
 		label: "My Wheel",
 	},
-	{
-		href: AppRoute.QUIZ,
-		icon: {
-			active: "wheelActive",
-			inactive: "wheelInactive",
-		},
-		label: "My Wheel",
-	},
 ];
 
 export { SIDEBAR_ITEMS };

@@ -36,18 +36,8 @@
 	transition: background-color 200ms ease-in;
 }
 
-.navLink:hover {
-	background-color: #ece8fc;
-	transition: background-color 200ms ease-in;
-}
-
 .navLink-active {
 	background-color: var(--white);
-}
-
-.navLink-active:hover {
-	background-color: white;
-	transition: background-color 200ms ease-in;
 }
 
 .navLink:visited {
