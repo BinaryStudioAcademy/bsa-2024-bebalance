@@ -5,6 +5,8 @@ type IconName =
 	| "eye"
 	| "menu"
 	| "signOut"
+	| "tasksActive"
+	| "tasksInactive"
 	| "wheelActive"
 	| "wheelInactive";
 
