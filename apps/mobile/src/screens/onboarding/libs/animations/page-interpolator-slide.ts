@@ -1,7 +1,8 @@
 import { type PageInterpolatorParams } from "react-native-infinite-pager";
 import { interpolate, type useAnimatedStyle } from "react-native-reanimated";
 
-import { NumericalValue } from "../../../../libs/enums/enums";
+import { NumericalValue } from "~/libs/enums/enums";
+
 import { ANIMATION_SCALE_FACTOR } from "../constants/constants";
 
 const pageInterpolatorSlide = ({

@@ -27,7 +27,7 @@ import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 import { pageInterpolatorSlide } from "./libs/animations/animations";
 import { Content } from "./libs/components/components";
 import {
-	ANIMATION_CONFIG_VALUES,
+	ANIMATION_CONFIG,
 	ONBOARDING_FORM_DEFAULT_VALUES,
 } from "./libs/constants/constants";
 import {
@@ -164,7 +164,7 @@ const Onboarding: React.FC = () => {
 									totalItemsAmount={totalQuestionsAmount}
 								/>
 								<InfinitePager
-									animationConfig={ANIMATION_CONFIG_VALUES}
+									animationConfig={ANIMATION_CONFIG}
 									gesturesDisabled
 									pageBuffer={PREVIOUS_INDEX_OFFSET}
 									PageComponent={renderPageComponent}

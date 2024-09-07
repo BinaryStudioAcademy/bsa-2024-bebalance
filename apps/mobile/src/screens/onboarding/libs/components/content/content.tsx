@@ -6,13 +6,13 @@ import {
 	type Control,
 	type FieldErrors,
 	type FieldValues,
+	type RadioGroupValue,
 } from "~/libs/types/types";
 
 import {
 	type OnboardingAnswerDto,
 	type OnboardingFormValues,
 	type OnboardingQuestionResponseDto,
-	type RadioGroupValue,
 } from "../../types/types";
 import { styles } from "./styles";
 

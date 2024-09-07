@@ -11,6 +11,7 @@ import {
 	type FieldPath,
 	type FieldValues,
 	type RadioButtonProps,
+	type RadioGroupValue,
 	type ViewStyle,
 } from "~/libs/types/types";
 
@@ -26,18 +27,13 @@ type RadioGroupItemStyle = {
 	circleSize?: number;
 } & ViewStyle;
 
-type RadioGroupItem = {
-	label: string;
-	value: string;
-};
-
 type Properties<T extends FieldValues> = {
 	control: Control<T>;
 	errors: FieldErrors<T>;
 	itemContainerStyle?: RadioGroupItemStyle;
 	name: FieldPath<T>;
-	onChange?: (value: RadioGroupItem) => void;
-	options: RadioGroupItem[];
+	onChange?: (value: RadioGroupValue) => void;
+	options: RadioGroupValue[];
 };
 
 const RadioGroup = <T extends FieldValues>({

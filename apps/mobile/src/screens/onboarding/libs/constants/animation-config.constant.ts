@@ -4,10 +4,10 @@ type AnimationConfig = {
 	stiffness: number;
 };
 
-const ANIMATION_CONFIG_VALUES: AnimationConfig = {
+const ANIMATION_CONFIG: AnimationConfig = {
 	damping: 300,
 	mass: 0.5,
 	stiffness: 30,
 };
 
-export { ANIMATION_CONFIG_VALUES };
+export { ANIMATION_CONFIG };

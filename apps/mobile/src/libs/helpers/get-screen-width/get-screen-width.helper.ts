@@ -1,4 +1,4 @@
-import { Dimensions } from "~/libs/components/components";
+import { Dimensions } from "react-native";
 
 const getScreenWidth: number = Dimensions.get("window").width;
 
