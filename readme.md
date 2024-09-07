@@ -41,7 +41,7 @@ erDiagram
         dateTime updated_at
         varchar name
         int user_id FK
-        string allow_notifications
+        string notification_frequency
     }
 
     categories {

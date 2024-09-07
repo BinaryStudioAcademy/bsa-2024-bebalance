@@ -6,7 +6,7 @@ import {
 } from "~/modules/users/users.js";
 
 import {
-	ALLOW_NOTIFICATIONS_OPTIONS,
+	NOTIFICATION_FREQUENCY_OPTIONS,
 	NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES,
 	TASK_DAYS_OPTIONS,
 } from "./libs/constants/constants.js";
@@ -50,8 +50,8 @@ const NotificationQuestions: React.FC<Properties> = ({
 						control={control}
 						isFullWidth
 						label="How would you like to receive motivational follow-ups?"
-						name="allowNotifications"
-						options={ALLOW_NOTIFICATIONS_OPTIONS}
+						name="notificationFrequency"
+						options={NOTIFICATION_FREQUENCY_OPTIONS}
 						type="radio"
 					/>
 					<div className={styles["button-container"]}>

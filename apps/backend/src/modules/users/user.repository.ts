@@ -79,11 +79,11 @@ class UserRepository implements Repository {
 
 		return user
 			? UserEntity.initialize({
-					allowNotifications: user.allowNotifications,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
+					notificationFrequency: user.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
@@ -103,11 +103,11 @@ class UserRepository implements Repository {
 
 		return users.map((user) =>
 			UserEntity.initialize({
-				allowNotifications: user.allowNotifications,
 				createdAt: user.createdAt,
 				email: user.email,
 				id: user.id,
 				name: user.userDetails.name,
+				notificationFrequency: user.notificationFrequency,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
@@ -129,11 +129,11 @@ class UserRepository implements Repository {
 
 		return user
 			? UserEntity.initialize({
-					allowNotifications: user.allowNotifications,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
+					notificationFrequency: user.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
@@ -161,11 +161,11 @@ class UserRepository implements Repository {
 
 		return user && updatedUserDetails
 			? UserEntity.initialize({
-					allowNotifications: updatedUserDetails.allowNotifications,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
 					name: updatedUserDetails.name,
+					notificationFrequency: updatedUserDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,

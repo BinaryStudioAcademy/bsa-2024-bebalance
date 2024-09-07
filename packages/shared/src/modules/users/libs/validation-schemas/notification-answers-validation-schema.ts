@@ -6,10 +6,10 @@ import {
 } from "../enums/enums.js";
 
 const notificationAnswers = z.object({
-	allowNotifications: z
+	notificationFrequency: z
 		.string()
-		.min(NotificationAnswersValidationRule.ALLOW_NOTIFICATIONS_MIN_LENGTH, {
-			message: UserValidationMessage.ALLOW_NOTIFICATIONS_STRING_REQUIRED,
+		.min(NotificationAnswersValidationRule.NOTIFICATION_FREQUENCY_MIN_LENGTH, {
+			message: UserValidationMessage.NOTIFICATION_FREQUENCY_STRING_REQUIRED,
 		}),
 	userTaskDays: z
 		.array(

@@ -8,9 +8,9 @@ import {
 import { UserModel } from "./user.model.js";
 
 class UserDetailsModel extends AbstractModel {
-	public allowNotifications!: string;
-
 	public name!: string;
+
+	public notificationFrequency!: string;
 
 	public userId!: number;
 

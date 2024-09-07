@@ -1,5 +1,5 @@
 type NotificationQuestionsFormValues = {
-	allowNotifications: string;
+	notificationFrequency: string;
 	userTaskDays: number[];
 };
 

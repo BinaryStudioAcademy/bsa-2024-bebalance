@@ -1,14 +1,14 @@
 import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationMessage = {
-	ALLOW_NOTIFICATIONS_STRING_REQUIRED:
-		"Allow notifications must be a string value",
 	DAYS_BETWEEN_1_AND_7: "Each day must be between 1 and 7",
 	EMAIL_REQUIRE: "Email is required",
 	EMAIL_TAKEN: "This email is already registered. Please use a different email",
 	EMAIL_WRONG: "Please enter a valid email address",
 	FIELD_REQUIRED: "This field is required",
 	NAME_INVALID_CHARACTERS: `Please enter a valid name. Your name must be between ${String(UserValidationRule.NAME_MIN_LENGTH)} and ${String(UserValidationRule.NAME_MAX_LENGTH)} characters. Only Latin letters, numbers, hyphens, and underscores are allowed`,
+	NOTIFICATION_FREQUENCY_STRING_REQUIRED:
+		"Notification frequency must be a string value",
 	PASSWORD_INVALID_CHARACTERS:
 		"Your password contains invalid characters. Only letters, numbers, and ! @ # $ symbols are allowed",
 	PASSWORD_MAX_LENGTH: `Password must be at most ${String(

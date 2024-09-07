@@ -1,5 +1,5 @@
 type NotificationAnswersPayloadDto = {
-	allowNotifications: string;
+	notificationFrequency: string;
 	userTaskDays: number[];
 };
 

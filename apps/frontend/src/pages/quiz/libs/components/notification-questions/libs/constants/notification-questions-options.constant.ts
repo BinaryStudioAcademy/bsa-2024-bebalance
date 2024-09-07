@@ -8,7 +8,7 @@ const TASK_DAYS_OPTIONS = [
 	{ label: "Sunday", value: 7 },
 ];
 
-const ALLOW_NOTIFICATIONS_OPTIONS = [
+const NOTIFICATION_FREQUENCY_OPTIONS = [
 	{ label: "Yes, I’d love daily motivation!", value: "true" },
 	{
 		label: "No, I prefer not to receive motivational follow-ups",
@@ -16,4 +16,4 @@ const ALLOW_NOTIFICATIONS_OPTIONS = [
 	},
 ];
 
-export { ALLOW_NOTIFICATIONS_OPTIONS, TASK_DAYS_OPTIONS };
+export { NOTIFICATION_FREQUENCY_OPTIONS, TASK_DAYS_OPTIONS };

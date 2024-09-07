@@ -76,7 +76,7 @@ class UserService implements Service {
 		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
 
 		return await this.userRepository.update(id, {
-			allowNotifications: payload.allowNotifications,
+			notificationFrequency: payload.notificationFrequency,
 		});
 	}
 

@@ -3,8 +3,6 @@ import { type Entity } from "~/libs/types/types.js";
 import { NotificationFrequency } from "./libs/enums/enums.js";
 
 class UserEntity implements Entity {
-	private allowNotifications: string;
-
 	private createdAt: string;
 
 	private email: string;
@@ -12,6 +10,8 @@ class UserEntity implements Entity {
 	private id: null | number;
 
 	private name: string;
+
+	private notificationFrequency: string;
 
 	private passwordHash: string;
 
@@ -22,31 +22,31 @@ class UserEntity implements Entity {
 	private userTaskDays: null | number[];
 
 	private constructor({
-		allowNotifications,
 		createdAt,
 		email,
 		id,
 		name,
+		notificationFrequency,
 		passwordHash,
 		passwordSalt,
 		updatedAt,
 		userTaskDays,
 	}: {
-		allowNotifications: string;
 		createdAt: string;
 		email: string;
 		id: null | number;
 		name: string;
+		notificationFrequency: string;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
-		this.allowNotifications = allowNotifications;
 		this.createdAt = createdAt;
-		this.id = id;
 		this.email = email;
+		this.id = id;
 		this.name = name;
+		this.notificationFrequency = notificationFrequency;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
 		this.updatedAt = updatedAt;
@@ -54,32 +54,33 @@ class UserEntity implements Entity {
 	}
 
 	public static initialize({
-		allowNotifications,
 		createdAt,
 		email,
 		id,
 		name,
+		notificationFrequency,
 		passwordHash,
 		passwordSalt,
 		updatedAt,
 		userTaskDays,
 	}: {
-		allowNotifications?: string;
 		createdAt: string;
 		email: string;
 		id: number;
 		name: string;
+		notificationFrequency?: string;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
 		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
-			allowNotifications: allowNotifications ?? NotificationFrequency.NONE,
 			createdAt,
 			email,
 			id,
 			name,
+			notificationFrequency:
+				notificationFrequency ?? NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
 			updatedAt,
@@ -99,11 +100,11 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			allowNotifications: NotificationFrequency.NONE,
 			createdAt: "",
 			email,
 			id: null,
 			name,
+			notificationFrequency: NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
 			updatedAt: "",
@@ -112,20 +113,20 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
-		allowNotifications: string;
 		createdAt: string;
 		email: string;
 		name: string;
+		notificationFrequency: string;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
 		return {
-			allowNotifications: this.allowNotifications,
 			createdAt: this.createdAt,
 			email: this.email,
 			name: this.name,
+			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
 			updatedAt: this.updatedAt,
@@ -134,20 +135,20 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
-		allowNotifications: string;
 		createdAt: string;
 		email: string;
 		id: number;
 		name: string;
+		notificationFrequency: string;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
 		return {
-			allowNotifications: this.allowNotifications,
 			createdAt: this.createdAt,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,
+			notificationFrequency: this.notificationFrequency,
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};

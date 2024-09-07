@@ -2,7 +2,7 @@ import { type Knex } from "knex";
 
 const TABLE_NAME = "user_details";
 
-const COLUMN_NAME = "allow_notifications";
+const COLUMN_NAME = "notification_frequency";
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.alterTable(TABLE_NAME, (table) => {

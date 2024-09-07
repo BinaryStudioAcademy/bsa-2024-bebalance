@@ -45,7 +45,7 @@ import { notificationAnswersValidationSchema } from "./libs/validation-schemas/v
  *      NotificationQuestionsRequest:
  *        type: object
  *        properties:
- *          allowNotifications:
+ *          notificationFrequency:
  *            type: string
  *          userTaskDays:
  *            type: array
@@ -196,11 +196,11 @@ class UserController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { allowNotifications, userTaskDays } = options.body;
+		const { notificationFrequency, userTaskDays } = options.body;
 
 		const updatedUserDto = await this.userService.saveNotificationAnswers(
 			options.user.id,
-			{ allowNotifications, userTaskDays },
+			{ notificationFrequency, userTaskDays },
 		);
 
 		return {
