@@ -48,19 +48,19 @@ const useWheelAnimation = ({
 	} = sectorCalculationData;
 
 	const animatedInnerArrayDash = useSharedValue(
-		initialSharedValues.animatedInnerArrayGap,
+		initialSharedValues.animatedInnerArrayDash,
 	);
 	const animatedInnerArrayGap = useSharedValue(
 		initialSharedValues.animatedInnerArrayGap,
 	);
 	const animatedInnerDashOffset = useSharedValue(
-		initialSharedValues.animatedOuterDashOffset,
+		initialSharedValues.animatedInnerDashOffset,
 	);
 	const animatedInnerStrokeWidth = useSharedValue(
 		initialSharedValues.animatedInnerStrokeWidth,
 	);
 	const animatedOuterArrayDash = useSharedValue(
-		initialSharedValues.animatedOuterArrayGap,
+		initialSharedValues.animatedOuterArrayDash,
 	);
 	const animatedOuterArrayGap = useSharedValue(
 		initialSharedValues.animatedOuterArrayGap,
