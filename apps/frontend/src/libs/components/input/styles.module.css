@@ -1,6 +1,9 @@
 .input-wrapper {
 	display: flex;
 	flex-direction: column;
+}
+
+.radio-wrapper {
 	gap: 24px;
 }
 
