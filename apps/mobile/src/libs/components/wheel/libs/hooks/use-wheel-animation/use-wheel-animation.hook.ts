@@ -27,8 +27,8 @@ type CircleAnimatedProperties = {
 };
 
 type SectorAnimatedProperties = {
-	innerSectorAnimatedProperties: CircleAnimatedProperties;
-	outerSectorAnimatedProperties: CircleAnimatedProperties;
+	innerSectorAnimatedProperties: Partial<CircleAnimatedProperties>;
+	outerSectorAnimatedProperties: Partial<CircleAnimatedProperties>;
 };
 
 const useWheelAnimation = ({
@@ -127,25 +127,33 @@ const useWheelAnimation = ({
 
 	const timingSettings = { duration: animationDuration };
 
-	const innerSectorAnimatedProperties = useAnimatedProps(() => ({
-		r: withTiming(animatedRadius.value, timingSettings),
-		strokeDasharray: [
-			withTiming(animatedInnerArrayDash.value, timingSettings),
-			withTiming(animatedInnerArrayGap.value, timingSettings),
-		],
-		strokeDashoffset: withTiming(animatedInnerDashOffset.value, timingSettings),
-		strokeWidth: withTiming(animatedInnerStrokeWidth.value, timingSettings),
-	})) as CircleAnimatedProperties;
+	const innerSectorAnimatedProperties: Partial<CircleAnimatedProperties> =
+		useAnimatedProps(() => ({
+			r: withTiming(animatedRadius.value, timingSettings),
+			strokeDasharray: [
+				withTiming(animatedInnerArrayDash.value, timingSettings),
+				withTiming(animatedInnerArrayGap.value, timingSettings),
+			],
+			strokeDashoffset: withTiming(
+				animatedInnerDashOffset.value,
+				timingSettings,
+			),
+			strokeWidth: withTiming(animatedInnerStrokeWidth.value, timingSettings),
+		}));
 
-	const outerSectorAnimatedProperties = useAnimatedProps(() => ({
-		r: withTiming(animatedRadius.value, timingSettings),
-		strokeDasharray: [
-			withTiming(animatedOuterArrayDash.value, timingSettings),
-			withTiming(animatedOuterArrayGap.value, timingSettings),
-		],
-		strokeDashoffset: withTiming(animatedOuterDashOffset.value, timingSettings),
-		strokeWidth: withTiming(animatedOuterStrokeWidth.value, timingSettings),
-	})) as CircleAnimatedProperties;
+	const outerSectorAnimatedProperties: Partial<CircleAnimatedProperties> =
+		useAnimatedProps(() => ({
+			r: withTiming(animatedRadius.value, timingSettings),
+			strokeDasharray: [
+				withTiming(animatedOuterArrayDash.value, timingSettings),
+				withTiming(animatedOuterArrayGap.value, timingSettings),
+			],
+			strokeDashoffset: withTiming(
+				animatedOuterDashOffset.value,
+				timingSettings,
+			),
+			strokeWidth: withTiming(animatedOuterStrokeWidth.value, timingSettings),
+		}));
 
 	return {
 		innerSectorAnimatedProperties,
