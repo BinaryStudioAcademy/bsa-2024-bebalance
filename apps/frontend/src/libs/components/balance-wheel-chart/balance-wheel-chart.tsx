@@ -128,8 +128,8 @@ const BalanceWheelChart: React.FC<Properties> = ({
 		<div
 			className={
 				isAnimating
-					? styles["container-animation"]
-					: styles["container-root-wheel"]
+					? styles["animation-container"]
+					: styles["root-wheel-container"]
 			}
 		>
 			<canvas ref={handleRenderChart} />
