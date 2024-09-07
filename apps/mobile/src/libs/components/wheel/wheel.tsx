@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Defs, Stop, Svg, SvgGradient } from "~/libs/components/components";
+import { GRADIENT_SECTORS_DATA } from "~/libs/constants/constants";
 import { AnimationName, BaseColor } from "~/libs/enums/enums";
 import { useEffect, useState } from "~/libs/hooks/hooks";
 import { type ValueOf, type WheelDataItem } from "~/libs/types/types";
@@ -27,7 +28,7 @@ type Properties = {
 	animation?: ValueOf<typeof AnimationName>;
 	animationRepetitions?: number;
 	animationTime?: number;
-	categoriesData: WheelDataItem[];
+	categoriesData?: WheelDataItem[];
 	isLabelShown?: boolean;
 	maxScore?: number;
 	size: number;
@@ -37,7 +38,7 @@ const Wheel: React.FC<Properties> = ({
 	animation = AnimationName.APPEAR,
 	animationRepetitions = ANIMATION_REPETITIONS,
 	animationTime = ANIMATION_TIME,
-	categoriesData,
+	categoriesData = GRADIENT_SECTORS_DATA,
 	isLabelShown = true,
 	maxScore = MAX_SCORE,
 	size,
