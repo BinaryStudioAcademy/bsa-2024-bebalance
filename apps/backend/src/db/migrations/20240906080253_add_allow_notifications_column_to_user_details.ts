@@ -1,25 +1,18 @@
 import { type Knex } from "knex";
 
-const TableName = {
-	USER_DETAILS: "user_details",
-} as const;
+const TABLE_NAME = "user_details";
 
-const ColumnName = {
-	ALLOW_NOTIFICATIONS: "allow_notifications",
-} as const;
+const COLUMN_NAME = "allow_notifications";
 
 function up(knex: Knex): Promise<void> {
-	return knex.schema.alterTable(TableName.USER_DETAILS, (table) => {
-		table
-			.string(ColumnName.ALLOW_NOTIFICATIONS)
-			.notNullable()
-			.defaultTo("false");
+	return knex.schema.alterTable(TABLE_NAME, (table) => {
+		table.string(COLUMN_NAME).notNullable().defaultTo("false");
 	});
 }
 
 function down(knex: Knex): Promise<void> {
-	return knex.schema.alterTable(TableName.USER_DETAILS, (table) => {
-		table.dropColumn(ColumnName.ALLOW_NOTIFICATIONS);
+	return knex.schema.alterTable(TABLE_NAME, (table) => {
+		table.dropColumn(COLUMN_NAME);
 	});
 }
 
