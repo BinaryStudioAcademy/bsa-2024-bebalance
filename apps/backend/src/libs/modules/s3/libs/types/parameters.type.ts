@@ -1,7 +1,7 @@
-type Parameters = {
+type FileParameters = {
 	Body?: Buffer;
 	ContentType?: string;
 	Key: string;
 };
 
-export { type Parameters };
+export { type FileParameters };

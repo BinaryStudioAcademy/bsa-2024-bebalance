@@ -1,6 +1,6 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { bucket } from "~/libs/modules/bucket/bucket.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
+import { type BaseS3 } from "~/libs/modules/s3/base-s3.module.js";
 
 import { FileEntity } from "./files.entity.js";
 import { type FileRepository } from "./files.repository.js";
@@ -13,9 +13,11 @@ import {
 
 class FileService {
 	private fileRepository: FileRepository;
+	private s3: BaseS3;
 
-	public constructor(fileRepository: FileRepository) {
+	public constructor(fileRepository: FileRepository, s3: BaseS3) {
 		this.fileRepository = fileRepository;
+		this.s3 = s3;
 	}
 
 	public async delete(fileUrl: string): Promise<boolean> {
@@ -30,7 +32,7 @@ class FileService {
 
 		const fileKey = getFileKey(fileEntity.toObject().url);
 
-		await bucket.deleteFile({
+		await this.s3.deleteFile({
 			Key: fileKey,
 		});
 
@@ -66,13 +68,13 @@ class FileService {
 
 		const oldFileKey = getFileKey(fileToUpdate.toObject().url);
 
-		await bucket.deleteFile({
+		await this.s3.deleteFile({
 			Key: oldFileKey,
 		});
 
 		const fileKey = createFileKey(fileName);
 
-		await bucket.uploadFile({
+		await this.s3.uploadFile({
 			Body: fileBuffer,
 			ContentType: contentType,
 			Key: fileKey,
@@ -94,7 +96,7 @@ class FileService {
 	}): Promise<FileEntity> {
 		const fileKey = createFileKey(fileName);
 
-		await bucket.uploadFile({
+		await this.s3.uploadFile({
 			Body: fileBuffer,
 			ContentType: contentType,
 			Key: fileKey,
