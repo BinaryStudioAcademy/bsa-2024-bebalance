@@ -1,7 +1,7 @@
 const DEFAULT_MIN_VALUE = 0;
 const CORRECTION_VALUE = 1;
 
-const getRandomValue = ({
+const getSectorRandomValue = ({
 	max,
 	min = DEFAULT_MIN_VALUE,
 }: {
@@ -11,4 +11,4 @@ const getRandomValue = ({
 	return Math.floor(Math.random() * (max + CORRECTION_VALUE - min)) + min;
 };
 
-export { getRandomValue };
+export { getSectorRandomValue };
