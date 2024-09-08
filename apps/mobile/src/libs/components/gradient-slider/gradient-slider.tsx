@@ -32,7 +32,7 @@ type Properties = {
 
 const INITIAL_SLIDER_WIDTH = 0;
 const MAX_PERCENT = 100;
-const PLANET_TRANSLATE_OFFSET = 3;
+const SLIDER_SECTION_TRANSLATE_OFFSET = 3;
 const ICON_TRANSLATE_OFFSET = 20;
 const MARKER_ICON_SIZE = 50;
 const SLIDER_STEP = 1;
@@ -68,7 +68,8 @@ const GradientSlider: React.FC<Properties> = ({
 	const pixelsPerPercent = sliderWidth / MAX_PERCENT;
 	const translateXBase = (value / max) * MAX_PERCENT * pixelsPerPercent;
 
-	const translateXForPlanet = translateXBase - PLANET_TRANSLATE_OFFSET;
+	const translateXForSliderSection =
+		translateXBase - SLIDER_SECTION_TRANSLATE_OFFSET;
 	const translateXForIcon = translateXBase - ICON_TRANSLATE_OFFSET;
 
 	const { end, start } = directionToGradient.leftToRight;
@@ -105,9 +106,9 @@ const GradientSlider: React.FC<Properties> = ({
 				<SliderSection
 					color={gradientColors}
 					style={[
-						styles.planet,
+						styles.sliderSection,
 						{
-							transform: [{ translateX: translateXForPlanet }],
+							transform: [{ translateX: translateXForSliderSection }],
 						},
 					]}
 				/>

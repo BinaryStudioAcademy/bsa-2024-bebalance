@@ -18,9 +18,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 1,
 		position: "absolute",
 	},
-	planet: {
-		position: "absolute",
-	},
 	slider: {
 		padding: 0,
 		position: "absolute",
@@ -30,6 +27,9 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		position: "relative",
 		width: "100%",
+	},
+	sliderSection: {
+		position: "absolute",
 	},
 });
 
