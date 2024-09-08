@@ -32,8 +32,8 @@ const Tasks: React.FC = () => {
 			<Tag color="orange" label="Spiritual" />
 			<Tag color="blue" label="Mental" />
 
-			{sliderData.map((item, index) => (
-				<SliderContent color={item.color} key={index} label={item.label} />
+			{sliderData.map((item) => (
+				<SliderContent color={item.color} key={item.label} label={item.label} />
 			))}
 		</ScreenWrapper>
 	);
