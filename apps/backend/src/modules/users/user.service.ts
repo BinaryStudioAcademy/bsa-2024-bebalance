@@ -4,6 +4,7 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
 import {
+	type NotificationAnswersPayloadDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserSignUpRequestDto,
@@ -66,6 +67,17 @@ class UserService implements Service {
 
 	public findByEmail(email: string): Promise<null | UserEntity> {
 		return this.userRepository.findByEmail(email);
+	}
+
+	public async saveNotificationAnswers(
+		id: number,
+		payload: NotificationAnswersPayloadDto,
+	): Promise<null | UserEntity> {
+		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
+
+		return await this.userRepository.update(id, {
+			notificationFrequency: payload.notificationFrequency,
+		});
 	}
 
 	public async update(
