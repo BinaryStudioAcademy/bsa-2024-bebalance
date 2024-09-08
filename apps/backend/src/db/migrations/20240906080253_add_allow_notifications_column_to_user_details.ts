@@ -6,7 +6,7 @@ const COLUMN_NAME = "notification_frequency";
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.alterTable(TABLE_NAME, (table) => {
-		table.string(COLUMN_NAME).notNullable().defaultTo("false");
+		table.string(COLUMN_NAME).notNullable().defaultTo("none");
 	});
 }
 
