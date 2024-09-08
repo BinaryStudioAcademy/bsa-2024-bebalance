@@ -14,6 +14,7 @@ export {
 	HTTPError,
 	OnboardingError,
 	QuizError,
+	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
@@ -53,6 +54,7 @@ export {
 	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
 export {
+	categoryAnswerSelectedValidationSchema,
 	type CategoryDto,
 	type CategoryRequestDto,
 	type QuizAnswerDto,
@@ -63,16 +65,24 @@ export {
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	notificationAnswersValidationSchema,
+	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,
 	userForgotPasswordVaidationSchema,
 	type UserGetAllResponseDto,
+	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
 	UsersApiPath,
 	type UserSignInRequestDto,
@@ -82,6 +92,10 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	userSignUpValidationSchema,
+	type UserUpdateFormDto,
+	type UserUpdateParametersDto,
+	type UserUpdateRequestDto,
+	userUpdateValidationSchema,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./modules/users/users.js";

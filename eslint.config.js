@@ -224,7 +224,7 @@ const overridesConfigs = [
 		files: [
 			"commitlint.config.ts",
 			"prettier.config.ts",
-			"stylelint.config.ts",
+			"stylelint.config.js",
 			"knip.config.ts",
 			"packages.d.ts",
 			"lint-staged.config.js",

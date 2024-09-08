@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.13.0...backend-v1.13.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **backend:** saved user answers for onboarding questions bb-284 ([#337](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/337)) ([841c3c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/841c3c7750520335683de56efbf934fb64616791))
+
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.12.0...backend-v1.13.0) (2024-09-07)
+
+
+### Features
+
+* **backend/frontend/shared:** balance wheel bb-216 ([#302](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/302)) ([8388e20](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8388e204fbbd8747d23149732702444911ae4453))
+
+## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.11.1...backend-v1.12.0) (2024-09-05)
+
+
+### Features
+
+* **backend/frontend/shared:** user profile screen bb-187 ([#260](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/260)) ([1fc8691](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1fc8691561cdad1070bb7ce51397d372827f4223))
+* **frontend/backend:** quiz functionality bb-89 ([#263](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/263)) ([1bf5519](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1bf55198b8e843c2e298ccc343d844e08680c06a))
+
 ## [1.11.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.11.0...backend-v1.11.1) (2024-09-04)
 
 

@@ -5,9 +5,9 @@ import styles from "./styles.module.css";
 
 const NotFound: React.FC = () => (
 	<div className={styles["pageContainer"]}>
-		<h1 className={styles["title"]}>404 - Page Not Found</h1>
+		<h1 className={styles["title"]}>Looks like we rolled off course.</h1>
 		<p className={styles["text"]}>
-			The page you are looking for does not exist.
+			Spin back to the homepage and regain your balance!
 		</p>
 		<Link to={AppRoute.ROOT} type="button">
 			Go to Homepage

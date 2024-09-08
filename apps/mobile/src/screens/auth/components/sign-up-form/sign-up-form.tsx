@@ -30,13 +30,13 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 		useState<boolean>(true);
 	const INPUT_ICON_SIZE = 20;
 
-	const handlePasswordIconPress = (): void => {
+	const handlePasswordIconPress = useCallback((): void => {
 		setIsPasswordHidden(!isPasswordHidden);
-	};
+	}, [isPasswordHidden]);
 
-	const handleConfirmPasswordIconPress = (): void => {
+	const handleConfirmPasswordIconPress = useCallback((): void => {
 		setIsConfirmPasswordHidden(!isConfirmPasswordHidden);
-	};
+	}, [isConfirmPasswordHidden]);
 
 	const { control, errors, handleSubmit, setError, watch } =
 		useAppForm<UserSignUpFormDto>({
@@ -58,7 +58,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				});
 			}
 		})();
-	}, [handleSubmit, onSubmit, setError]);
+	}, [handleSubmit, onSubmit, setError, watch]);
 
 	return (
 		<>
@@ -82,7 +82,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				errors={errors}
 				label="Email"
 				name="email"
-				placeholder="be@balance.com"
+				placeholder="name@example.com"
 			/>
 			<Input
 				accessoryRight={

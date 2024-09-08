@@ -24,10 +24,19 @@
 	background-color: var(--black);
 }
 
-.secondary-button {
+.primary:hover {
+	background-color: var(--brand);
+}
+
+.secondary {
 	color: var(--black);
 	background-color: var(--white);
 	border: 1px solid var(--black);
+}
+
+.secondary:hover {
+	color: var(--brand);
+	border-color: var(--brand);
 }
 
 .icon-button {

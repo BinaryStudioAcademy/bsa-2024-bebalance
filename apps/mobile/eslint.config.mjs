@@ -1,3 +1,5 @@
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 
 import baseConfig from "../../eslint.config.js";
@@ -15,6 +17,31 @@ const mainConfig = {
 			React: true,
 		},
 	},
+};
+
+/** @type {Config} */
+const reactConfig = {
+	files: ["**/*.tsx"],
+	plugins: {
+		react,
+	},
+	rules: {
+		...react.configs["jsx-runtime"].rules,
+		...react.configs["recommended"].rules,
+		"react/jsx-boolean-value": ["error"],
+		"react/jsx-curly-brace-presence": ["error"],
+		"react/jsx-no-bind": ["error", { ignoreRefs: true }],
+		"react/self-closing-comp": ["error"],
+	},
+};
+
+/** @type {Config} */
+const reactHooksConfig = {
+	files: ["**/*.tsx"],
+	plugins: {
+		"react-hooks": reactHooks,
+	},
+	rules: reactHooks.configs.recommended.rules,
 };
 
 /** @type {Config} */
@@ -55,6 +82,8 @@ const overridesConfigs = [
 export default [
 	...baseConfig,
 	mainConfig,
+	reactConfig,
+	reactHooksConfig,
 	explicitGenericsConfig,
 	...overridesConfigs,
 ];

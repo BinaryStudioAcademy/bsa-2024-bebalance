@@ -4,15 +4,23 @@ import {
 	type FieldValues,
 } from "react-hook-form";
 
-import { type RadioInputOption } from "./radio-input-option.type.js";
+import { type InputOption } from "./input-option.type.js";
 
 type FormFieldProperties<T extends FieldValues> = {
 	control: Control<T, null>;
 	name: FieldPath<T>;
-	options: RadioInputOption[];
+	options: InputOption[];
+};
+
+type QuizQuestionPropeties<T extends FieldValues> = {
+	control: Control<T, null>;
+	label: string;
+	name: FieldPath<T>;
+	options: InputOption[];
 };
 
 export { type FormFieldProperties };
+export { type QuizQuestionPropeties };
 export {
 	type Control,
 	type FieldErrors,
