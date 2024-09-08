@@ -5,7 +5,10 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import { type UserDto } from "~/libs/types/types.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { type UserUpdateRequestDto } from "./libs/types/types.js";
+import {
+	type NotificationAnswersPayloadDto,
+	type UserUpdateRequestDto,
+} from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -25,6 +28,22 @@ class UsersApi extends BaseHTTPApi {
 				contentType: ContentType.JSON,
 				hasAuth: true,
 				method: "GET",
+			},
+		);
+
+		return await response.json<UserDto>();
+	}
+
+	public async saveNotificationAnswers(
+		payload: NotificationAnswersPayloadDto,
+	): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.NOTIFICATION_QUESTIONS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
 			},
 		);
 

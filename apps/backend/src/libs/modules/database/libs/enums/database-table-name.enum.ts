@@ -9,6 +9,7 @@ const DatabaseTableName = {
 	QUIZ_QUESTIONS: "quiz_questions",
 	QUIZ_SCORES: "quiz_scores",
 	USER_DETAILS: "user_details",
+	USER_TASK_DAYS: "user_task_days",
 	USERS: "users",
 } as const;
 
