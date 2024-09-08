@@ -39,6 +39,10 @@
 	justify-content: center;
 }
 
+.button-container {
+	width: 122px;
+}
+
 .isHidden {
 	display: none;
 }
@@ -63,6 +67,16 @@
 
 	.quiz-header {
 		font-size: 20px;
+	}
+
+	.form-footer {
+		flex-direction: column;
+		width: 100%;
+		max-width: 309px;
+	}
+
+	.button-container {
+		width: 100%;
 	}
 
 	.ripple-effect__background1,
