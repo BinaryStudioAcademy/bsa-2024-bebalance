@@ -15,10 +15,7 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import {
-	categoryAnswerSelectedValidationSchema,
-	actions as quizActions,
-} from "~/modules/quiz/quiz.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import { QUIZ_FORM_DEFAULT_VALUES } from "../../constants/constants.js";
 import { type QuizFormValues } from "../../types/types.js";
@@ -28,23 +25,27 @@ type Properties = {
 	onNext: () => void;
 };
 
+type FormToSave = {
+	[key: string]: string;
+};
+
 const ONE_STEP_OFFSET = 1;
 
 const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [isLast, setIsLast] = useState<boolean>(false);
 
-	const { control, handleSubmit, reset } = useAppForm<QuizFormValues>({
+	const { control, handleSubmit } = useAppForm<QuizFormValues>({
 		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
-		validationSchema: categoryAnswerSelectedValidationSchema,
 	});
 
-	const { category, currentCategoryIndex, dataStatus, questions } =
-		useAppSelector(({ quiz }) => ({
+	const { category, currentCategoryIndex, dataStatus, questions, userId } =
+		useAppSelector(({ auth, quiz }) => ({
 			category: quiz.currentCategory,
 			currentCategoryIndex: quiz.currentCategoryIndex,
 			dataStatus: quiz.dataStatus,
 			questions: quiz.questions,
+			userId: auth.user?.id,
 		}));
 
 	useEffect(() => {
@@ -59,14 +60,52 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		void dispatch(quizActions.previousQuestion());
 	}, [dispatch]);
 
-	const handleNextStep = useCallback(() => {
-		if (isLast) {
-			return;
-		}
+	const isValueUndefined = useCallback(
+		(formData: FormToSave, keysToCheck: string[]): boolean => {
+			return keysToCheck.some((key) => formData[key] === undefined);
+		},
+		[],
+	);
 
-		void dispatch(quizActions.nextQuestion());
-		reset();
-	}, [dispatch, isLast, reset]);
+	const getAnswerIds = useCallback((formData: FormToSave) => {
+		return Object.values(formData).map(Number);
+	}, []);
+
+	const handleNextStep = useCallback(
+		(data: QuizFormValues) => {
+			if (category) {
+				const ids = category.map(
+					(categoryItem) => `answer${categoryItem.id.toString()}`,
+				);
+				const hasUndefined = isValueUndefined(data, ids);
+
+				if (!hasUndefined) {
+					const newObject = Object.fromEntries(
+						Object.entries(data).filter(([key]) => key !== "answer0"),
+					);
+
+					if (isLast && userId) {
+						const answerIds = getAnswerIds(newObject);
+
+						void dispatch(quizActions.createUserAnswers({ answerIds, userId }));
+
+						onNext();
+					}
+
+					void dispatch(quizActions.nextQuestion());
+				}
+			}
+		},
+		[
+			category,
+			dispatch,
+			getAnswerIds,
+			isLast,
+			isValueUndefined,
+			onNext,
+			userId,
+		],
+	);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -94,19 +133,17 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 						</div>
 					) : (
 						category?.map((question) => {
-							const answerOptions = question.answers.map(
-								({ label, value }) => ({
-									label,
-									value: value.toString(),
-								}),
-							);
+							const answerOptions = question.answers.map(({ id, label }) => ({
+								label,
+								value: id.toString(),
+							}));
 
 							return (
 								<QuizQuestion
 									control={control}
 									key={question.id}
 									label={question.label}
-									name={question.id.toString()}
+									name={`answer${question.id.toString()}`}
 									options={answerOptions}
 								/>
 							);
@@ -122,9 +159,9 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 						/>
 					</div>
 					{isLast ? (
-						<Button label="CONTINUE" onClick={onNext} type="submit" />
+						<Button label="CONTINUE" type="submit" />
 					) : (
-						<Button label="NEXT" onClick={handleNextStep} type="submit" />
+						<Button label="NEXT" type="submit" />
 					)}
 				</div>
 			</form>

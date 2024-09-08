@@ -16,6 +16,8 @@ export {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizUserAnswerDto,
+	type UserAnswersRequestDto,
 } from "./libs/types/types.js";
 export { categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/quiz.js";

@@ -9,9 +9,10 @@ import { type ValueOf } from "~/libs/types/types.js";
 import {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
+	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
-import { getAllQuestions, getScores } from "./actions.js";
+import { createUserAnswers, getAllQuestions, getScores } from "./actions.js";
 
 type State = {
 	currentCategory: null | QuizQuestionDto[];
@@ -19,6 +20,7 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
+	userAnswers: QuizUserAnswerDto[];
 };
 
 const initialState: State = {
@@ -27,6 +29,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	questions: [],
 	scores: [],
+	userAnswers: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -52,6 +55,16 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(createUserAnswers.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(createUserAnswers.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.userAnswers = action.payload;
+		});
+		builder.addCase(createUserAnswers.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
 		});
 	},
 	initialState,
