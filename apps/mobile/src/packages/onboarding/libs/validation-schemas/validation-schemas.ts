@@ -1,0 +1,1 @@
+export { oneAnswerSelectedValidationSchema } from "shared";
