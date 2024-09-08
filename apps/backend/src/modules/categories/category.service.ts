@@ -176,7 +176,7 @@ class CategoryService implements Service {
 
 		const items = scores.map((score) => {
 			return {
-				categoryId: score.id,
+				categoryId: score.categoryId,
 				createdAt: score.createdAt,
 				id: score.id,
 				score: score.score,

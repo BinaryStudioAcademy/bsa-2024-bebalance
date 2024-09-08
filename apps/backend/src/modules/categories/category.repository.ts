@@ -201,7 +201,7 @@ class CategoryRepository implements Repository {
 
 		await categoryModel
 			.$relatedQuery<CategoryScoreModel>(RelationName.SCORES)
-			.for(userId)
+			.where({ userId })
 			.patch({ score });
 
 		const scoreModel = await this.categoryModel
@@ -211,6 +211,7 @@ class CategoryRepository implements Repository {
 			.castTo<CategoryScoreModel>();
 
 		return CategoryEntity.initialize({
+			categoryId: categoryModel.id,
 			createdAt: scoreModel.createdAt,
 			id: scoreModel.id,
 			name: categoryModel.name,
