@@ -235,6 +235,25 @@ class QuizController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /quiz/score:
+	 *   patch:
+	 *     description: Updates multiple or single user scores
+	 *
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/UserScore"
+	 */
 	private async updateUserScores(
 		options: APIHandlerOptions<{
 			body: QuizScoresUpdateRequestDto;
