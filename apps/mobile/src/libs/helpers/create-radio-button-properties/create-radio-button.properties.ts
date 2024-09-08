@@ -23,7 +23,7 @@ const BorderSize = {
 	DEFAULT: 0,
 } as const;
 
-const createRadioButtonPropertiesHelper = ({
+const createRadioButtonProperties = ({
 	commonStyles,
 	itemContainerStyle = {},
 	label,
@@ -58,4 +58,4 @@ const createRadioButtonPropertiesHelper = ({
 	return radioButtonProperty;
 };
 
-export { createRadioButtonPropertiesHelper };
+export { createRadioButtonProperties };

@@ -5,7 +5,7 @@ import { NumericalValue } from "~/libs/enums/enums";
 
 import { ANIMATION_SCALE_FACTOR } from "../constants/constants";
 
-const pageInterpolatorSlide = ({
+const getPageInterpolatorSlide = ({
 	focusAnim,
 	pageBuffer,
 	pageWidth,
@@ -40,4 +40,4 @@ const pageInterpolatorSlide = ({
 	};
 };
 
-export { pageInterpolatorSlide };
+export { getPageInterpolatorSlide };

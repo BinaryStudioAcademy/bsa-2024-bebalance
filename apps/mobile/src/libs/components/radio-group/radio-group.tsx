@@ -3,7 +3,7 @@ import { RadioGroup as RNRadioGroup } from "react-native-radio-buttons-group";
 
 import { Text, View } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
-import { createRadioButtonPropertiesHelper } from "~/libs/helpers/helpers";
+import { createRadioButtonProperties } from "~/libs/helpers/helpers";
 import { useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
@@ -39,7 +39,7 @@ const RadioGroup = <T extends FieldValues>({
 	const { onChange: onFieldChange, value: selectedId } = field;
 
 	const radioButtonsProperties: RadioButtonProps[] = options.map((option) => {
-		return createRadioButtonPropertiesHelper({
+		return createRadioButtonProperties({
 			commonStyles: styles.commonItemContainer,
 			itemContainerStyle,
 			label: (

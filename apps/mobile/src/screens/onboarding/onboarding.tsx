@@ -24,7 +24,7 @@ import { type NativeStackNavigationProp } from "~/libs/types/types";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
-import { pageInterpolatorSlide } from "./libs/animations/animations";
+import { getPageInterpolatorSlide } from "./libs/animations/animations";
 import { Content } from "./libs/components/components";
 import {
 	ANIMATION_CONFIG,
@@ -165,7 +165,7 @@ const Onboarding: React.FC = () => {
 									gesturesDisabled
 									pageBuffer={PREVIOUS_INDEX_OFFSET}
 									PageComponent={renderPageComponent}
-									pageInterpolator={pageInterpolatorSlide}
+									pageInterpolator={getPageInterpolatorSlide}
 									ref={infinitePager}
 								/>
 								<View style={globalStyles.gap12}>
