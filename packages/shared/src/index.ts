@@ -72,6 +72,7 @@ export {
 	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
+	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,

@@ -12,3 +12,4 @@ export {
 	type QuizScoresUpdateRequestDto,
 } from "./libs/types/types.js";
 export { categoryService };
+export { updateScoresValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

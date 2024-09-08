@@ -10,6 +10,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type CategoryService,
 	type QuizScoresUpdateRequestDto,
+	updateScoresValidationSchema,
 } from "../categories/categories.js";
 import {
 	type QuizAnswerService,
@@ -130,6 +131,9 @@ class QuizController extends BaseController {
 				),
 			method: "PATCH",
 			path: QuizApiPath.SCORE,
+			validation: {
+				body: updateScoresValidationSchema,
+			},
 		});
 	}
 
