@@ -42,16 +42,6 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
-	CategoriesApiPath,
-	type CategoryDto,
-	type CategoryRequestDto,
-	type QuizScoreDto,
-	type QuizScoresGetAllItemResponseDto,
-	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
-	type QuizScoresUpdateRequestDto,
-} from "./modules/categories/categories.js";
-export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingAnswerRequestDto,
@@ -66,6 +56,8 @@ export {
 } from "./modules/onboarding/onboarding.js";
 export {
 	categoryAnswerSelectedValidationSchema,
+	type CategoryDto,
+	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
@@ -73,6 +65,11 @@ export {
 	QuizApiPath,
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
+	type QuizScoreDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";

@@ -7,7 +7,10 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
-import { type CategoryService } from "../categories/categories.js";
+import {
+	type CategoryService,
+	type QuizScoresUpdateRequestDto,
+} from "../categories/categories.js";
 import {
 	type QuizAnswerService,
 	type QuizAnswersRequestDto,
@@ -116,6 +119,18 @@ class QuizController extends BaseController {
 			method: "GET",
 			path: QuizApiPath.SCORE,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.updateScores(
+					options as APIHandlerOptions<{
+						body: QuizScoresUpdateRequestDto;
+						user: UserDto;
+					}>,
+				),
+			method: "PATCH",
+			path: QuizApiPath.SCORE,
+		});
 	}
 
 	/**
@@ -216,6 +231,21 @@ class QuizController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.categoryService.findUserScores(options.user.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async updateScores(
+		options: APIHandlerOptions<{
+			body: QuizScoresUpdateRequestDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.categoryService.updateScores(
+				options.body,
+				options.user.id,
+			),
 			status: HTTPCode.OK,
 		};
 	}

@@ -1,5 +1,4 @@
-import { type QuizScoreDto } from "shared";
-
+import { type QuizScoreDto } from "./quiz-score-dto.type.js";
 import { type QuizUserAnswerDto } from "./quiz-user-answer-dto.type.js";
 
 type QuizAnswersResponseDto = {
