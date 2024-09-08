@@ -122,7 +122,7 @@ class QuizController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.updateScores(
+				this.updateUserScores(
 					options as APIHandlerOptions<{
 						body: QuizScoresUpdateRequestDto;
 						user: UserDto;
@@ -235,14 +235,14 @@ class QuizController extends BaseController {
 		};
 	}
 
-	private async updateScores(
+	private async updateUserScores(
 		options: APIHandlerOptions<{
 			body: QuizScoresUpdateRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.categoryService.updateScores(
+			payload: await this.categoryService.updateUserScores(
 				options.body,
 				options.user.id,
 			),

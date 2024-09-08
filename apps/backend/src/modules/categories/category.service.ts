@@ -125,7 +125,7 @@ class CategoryService implements Service {
 		return this.convertCategoryEntityToDto(categoryEntity);
 	}
 
-	public async updateScores(
+	public async updateUserScores(
 		payload: QuizScoresUpdateRequestDto,
 		userId: number,
 	): Promise<QuizScoresResponseDto> {
