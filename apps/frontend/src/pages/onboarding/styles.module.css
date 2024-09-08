@@ -42,6 +42,10 @@
 	margin-bottom: auto;
 }
 
+.answers label {
+	text-align: center;
+}
+
 .button-container {
 	display: flex;
 	gap: 15px;
@@ -66,5 +70,11 @@
 	.button-container {
 		flex-direction: column;
 		max-width: 250px;
+	}
+}
+
+@media (width <= 640px) {
+	.answers {
+		width: 100%;
 	}
 }
