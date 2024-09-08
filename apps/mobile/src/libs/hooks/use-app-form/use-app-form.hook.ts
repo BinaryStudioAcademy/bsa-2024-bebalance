@@ -6,6 +6,7 @@ import {
 	type FieldValues,
 	useForm,
 	type UseFormHandleSubmit,
+	type UseFormReset,
 	type UseFormSetError,
 	type UseFormWatch,
 	type ValidationMode,
@@ -23,6 +24,8 @@ type Results<T extends FieldValues = FieldValues> = {
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
 	handleSubmit: UseFormHandleSubmit<T>;
+	isValid: boolean;
+	reset: UseFormReset<T>;
 	setError: UseFormSetError<T>;
 	watch: UseFormWatch<T>;
 };
@@ -34,8 +37,9 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 }: Arguments<T>): Results<T> => {
 	const {
 		control,
-		formState: { errors },
+		formState: { errors, isValid },
 		handleSubmit,
+		reset,
 		setError,
 		watch,
 	} = useForm<T>({
@@ -48,6 +52,8 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 		control,
 		errors,
 		handleSubmit,
+		isValid,
+		reset,
 		setError,
 		watch,
 	};
