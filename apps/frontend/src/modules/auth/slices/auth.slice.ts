@@ -5,7 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import {
-	checkResetPasswordExp,
+	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
 	logOut,
 	resetPassword,
@@ -72,13 +72,13 @@ const { actions, name, reducer } = createSlice({
 			state.user = action.payload;
 		});
 
-		builder.addCase(checkResetPasswordExp.pending, (state) => {
+		builder.addCase(checkIsResetPasswordExpired.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(checkResetPasswordExp.fulfilled, (state) => {
+		builder.addCase(checkIsResetPasswordExpired.fulfilled, (state) => {
 			state.dataStatus = DataStatus.FULFILLED;
 		});
-		builder.addCase(checkResetPasswordExp.rejected, (state) => {
+		builder.addCase(checkIsResetPasswordExpired.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

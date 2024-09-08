@@ -9,7 +9,7 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { notification } from "~/libs/modules/notification/notification.js";
 import { storage } from "~/libs/modules/storage/storage.js";
-import { reducer as AppReducer } from "~/modules/app/app.js";
+import { reducer as appReducer } from "~/modules/app/app.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
 import {
 	onboardingApi,
@@ -24,7 +24,7 @@ import {
 } from "./libs/middlewares/middlewares.js";
 
 type RootReducer = {
-	app: ReturnType<typeof AppReducer>;
+	app: ReturnType<typeof appReducer>;
 	auth: ReturnType<typeof authReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
@@ -60,7 +60,7 @@ class Store {
 				}).prepend([handleErrorMiddleware, handleRedirectMiddleware]);
 			},
 			reducer: {
-				app: AppReducer,
+				app: appReducer,
 				auth: authReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,

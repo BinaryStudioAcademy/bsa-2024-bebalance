@@ -28,11 +28,11 @@ class AuthService {
 		this.encrypt = encrypt;
 	}
 
-	public async checkResetPasswordExp(
-		body: ResetPasswordLinkDto,
+	public async checkIsResetPasswordExpired(
+		query: ResetPasswordLinkDto,
 	): Promise<boolean> {
 		try {
-			await token.decode(body.link);
+			await token.decode(query.token);
 
 			return true;
 		} catch (error) {

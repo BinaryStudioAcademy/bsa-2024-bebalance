@@ -10,7 +10,7 @@ const handleRedirectMiddleware: Middleware = () => {
 		if (
 			isAction(action) &&
 			(action.type === authActions.resetPassword.fulfilled.type ||
-				action.type === authActions.checkResetPasswordExp.rejected.type)
+				action.type === authActions.checkIsResetPasswordExpired.rejected.type)
 		) {
 			store.instance.dispatch(appActions.changeLink(AppRoute.SIGN_IN));
 		}

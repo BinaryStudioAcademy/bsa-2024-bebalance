@@ -1,5 +1,5 @@
 type ResetPasswordLinkDto = {
-	link: string;
+	token: string;
 };
 
 export { type ResetPasswordLinkDto };

@@ -77,7 +77,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		void dispatch(authActions.checkResetPasswordExp({ link: token }));
+		void dispatch(authActions.checkIsResetPasswordExpired({ token }));
 	}, [dispatch, token]);
 
 	if (redirectLink === AppRoute.SIGN_IN) {

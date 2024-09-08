@@ -99,23 +99,25 @@ class AuthController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.checkResetPasswordExp(
+				this.checkIsResetPasswordExpired(
 					options as APIHandlerOptions<{
-						body: ResetPasswordLinkDto;
+						query: ResetPasswordLinkDto;
 					}>,
 				),
-			method: "POST",
+			method: "GET",
 			path: AuthApiPath.CHECK_RESET_PASSWORD_EXP,
 		});
 	}
 
-	private async checkResetPasswordExp(
+	private async checkIsResetPasswordExpired(
 		options: APIHandlerOptions<{
-			body: ResetPasswordLinkDto;
+			query: ResetPasswordLinkDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.authService.checkResetPasswordExp(options.body),
+			payload: await this.authService.checkIsResetPasswordExpired(
+				options.query,
+			),
 			status: HTTPCode.OK,
 		};
 	}

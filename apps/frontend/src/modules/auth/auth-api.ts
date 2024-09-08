@@ -26,16 +26,18 @@ class AuthApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 
-	public async checkResetPasswordExp(
+	public async checkIsResetPasswordExpired(
 		payload: ResetPasswordLinkDto,
 	): Promise<boolean> {
 		const response = await this.load(
-			this.getFullEndpoint(AuthApiPath.CHECK_RESET_PASSWORD_EXP, {}),
+			this.getFullEndpoint(
+				`${AuthApiPath.CHECK_RESET_PASSWORD_EXP}?token=${payload.token}`,
+				{},
+			),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: false,
-				method: "POST",
-				payload: JSON.stringify(payload),
+				method: "GET",
 			},
 		);
 

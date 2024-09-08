@@ -99,18 +99,18 @@ const resetPassword = createAsyncThunk<
 	return isSuccessful;
 });
 
-const checkResetPasswordExp = createAsyncThunk<
+const checkIsResetPasswordExpired = createAsyncThunk<
 	boolean,
 	ResetPasswordLinkDto,
 	AsyncThunkConfig
 >(`${sliceName}/check-reset-password-link`, async (payload, { extra }) => {
 	const { authApi } = extra;
 
-	return await authApi.checkResetPasswordExp(payload);
+	return await authApi.checkIsResetPasswordExpired(payload);
 });
 
 export {
-	checkResetPasswordExp,
+	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
 	logOut,
 	requestResetPassword,
