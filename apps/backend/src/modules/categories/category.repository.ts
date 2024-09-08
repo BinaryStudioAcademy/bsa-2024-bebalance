@@ -118,25 +118,25 @@ class CategoryRepository implements Repository {
 	}
 
 	public async findScoreByUser(userId: number): Promise<CategoryEntity | null> {
-		const scoreModel = await this.categoryModel
+		const model = await this.categoryModel
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
 			.findOne({ userId });
 
-		if (!scoreModel) {
+		if (!model) {
 			return null;
 		}
 
-		const userScoreModel = scoreModel as CategoryScoreModel;
+		const scoreModel = model as CategoryScoreModel;
 
 		return CategoryEntity.initialize({
-			createdAt: userScoreModel.createdAt,
-			id: userScoreModel.id,
-			name: userScoreModel.name,
-			score: userScoreModel.score,
+			createdAt: scoreModel.createdAt,
+			id: scoreModel.id,
+			name: scoreModel.name,
+			score: scoreModel.score,
 			scores: [],
-			updatedAt: userScoreModel.updatedAt,
-			userId: userScoreModel.userId,
+			updatedAt: scoreModel.updatedAt,
+			userId: scoreModel.userId,
 		});
 	}
 
