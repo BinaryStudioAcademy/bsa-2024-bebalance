@@ -21,7 +21,7 @@ import {
 import { globalStyles } from "~/libs/styles/styles";
 import { type LayoutChangeEvent } from "~/libs/types/types";
 
-import { SliderConfig, SliderStyles } from "./libs/enums/enums";
+import { SliderConfig, SliderStyle } from "./libs/enums/enums";
 import { styles } from "./styles";
 
 type Properties = {
@@ -66,9 +66,9 @@ const GradientSlider: React.FC<Properties> = ({
 		(value / max) * SliderConfig.SLIDER_MAX_PERCENT * pixelsPerPercent;
 
 	const translateXForSliderSection =
-		translateXBase - SliderStyles.SLIDER_SECTION_TRANSLATE_OFFSET;
+		translateXBase - SliderStyle.SLIDER_SECTION_TRANSLATE_OFFSET;
 	const translateXForIcon =
-		translateXBase - SliderStyles.SLIDER_ICON_TRANSLATE_OFFSET;
+		translateXBase - SliderStyle.SLIDER_ICON_TRANSLATE_OFFSET;
 
 	const { end, start } = directionToGradient.leftToRight;
 
@@ -98,7 +98,7 @@ const GradientSlider: React.FC<Properties> = ({
 					<Icon
 						color={BaseColor.BLACK}
 						name="place"
-						size={SliderStyles.SLIDER_MARKER_ICON_SIZE}
+						size={SliderStyle.SLIDER_MARKER_ICON_SIZE}
 					/>
 					<Text preset="regular" style={[globalStyles.mt12, styles.labelText]}>
 						{value}

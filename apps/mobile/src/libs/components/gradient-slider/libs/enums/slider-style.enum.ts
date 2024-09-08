@@ -1,7 +1,7 @@
-const SliderStyles = {
+const SliderStyle = {
 	SLIDER_ICON_TRANSLATE_OFFSET: 20,
 	SLIDER_MARKER_ICON_SIZE: 50,
 	SLIDER_SECTION_TRANSLATE_OFFSET: 3,
 } as const;
 
-export { SliderStyles };
+export { SliderStyle };
