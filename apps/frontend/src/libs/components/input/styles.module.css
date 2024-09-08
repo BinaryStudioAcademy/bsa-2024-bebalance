@@ -1,6 +1,9 @@
 .input-wrapper {
 	display: flex;
 	flex-direction: column;
+}
+
+.radio-wrapper {
 	gap: 24px;
 }
 
@@ -32,7 +35,7 @@
 .radio-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 12px;
 }
 
 .radio-label {
@@ -44,6 +47,7 @@
 .radio-option {
 	display: flex;
 	gap: 8px;
+	align-items: center;
 	padding: 8px 10px;
 	font-size: 16px;
 	font-weight: 500;

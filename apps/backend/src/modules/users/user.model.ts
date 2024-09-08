@@ -4,14 +4,19 @@ import {
 	AbstractModel,
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
 import { CategoryModel } from "../categories/category.model.js";
 import { OnboardingAnswerModel } from "../onboarding/onboarding.js";
 import { QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
+import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { UserDetailsModel } from "./user-details.model.js";
+import { UserTaskDaysModel } from "./user-task-days.model.js";
 
 class UserModel extends AbstractModel {
 	public email!: string;
+
+	public notificationFrequency!: ValueOf<typeof NotificationFrequency>;
 
 	public onboardingAnswers!: OnboardingAnswerModel[];
 
@@ -22,6 +27,8 @@ class UserModel extends AbstractModel {
 	public quizAnswers!: QuizAnswerModel[];
 
 	public userDetails!: UserDetailsModel;
+
+	public userTaskDays!: UserTaskDaysModel[];
 
 	static get relationMappings(): RelationMappings {
 		return {
@@ -69,6 +76,14 @@ class UserModel extends AbstractModel {
 				},
 				modelClass: UserDetailsModel,
 				relation: Model.HasOneRelation,
+			},
+			userTaskDays: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					to: `${DatabaseTableName.USER_TASK_DAYS}.userId`,
+				},
+				modelClass: UserTaskDaysModel,
+				relation: Model.HasManyRelation,
 			},
 		};
 	}

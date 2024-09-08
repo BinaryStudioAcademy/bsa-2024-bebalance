@@ -65,11 +65,18 @@ export {
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	notificationAnswersValidationSchema,
+	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.12.0...shared-v1.13.0) (2024-09-07)
+
+
+### Features
+
+* **backend/frontend/shared:** balance wheel bb-216 ([#302](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/302)) ([8388e20](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8388e204fbbd8747d23149732702444911ae4453))
+
 ## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.11.0...shared-v1.12.0) (2024-09-05)
 
 
