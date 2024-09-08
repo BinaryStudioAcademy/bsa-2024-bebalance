@@ -55,7 +55,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<>
-			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+			<form className={styles["form"]} noValidate onSubmit={handleFormSubmit}>
 				<Input
 					control={control}
 					errors={errors}

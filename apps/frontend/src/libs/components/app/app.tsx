@@ -26,7 +26,12 @@ const App: React.FC = () => {
 		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
 
 	if (isLoading) {
-		return <Loader />;
+		return (
+			<>
+				<Loader />
+				<Notification />
+			</>
+		);
 	}
 
 	return (
