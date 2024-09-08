@@ -46,26 +46,25 @@ const Onboarding: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
+	const allAnswers = useAppSelector(
+		(state) => state.onboarding.answersByQuestionIndex,
+	);
+	const currentAnswer = useAppSelector(
+		(state) => state.onboarding.answersByQuestionIndex,
+	);
 	const {
-		allAnswers,
-		currentAnswer,
+		currentQuestion: question,
 		currentQuestionIndex,
 		dataStatus,
-		isLastQuestion,
-		question,
-		totalQuestionsAmount,
-	} = useAppSelector(({ onboarding }) => ({
-		allAnswers: onboarding.answersByQuestionIndex,
-		currentAnswer:
-			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] ?? "",
-		currentQuestionIndex: onboarding.currentQuestionIndex,
-		dataStatus: onboarding.dataStatus,
-		isLastQuestion:
-			onboarding.currentQuestionIndex ===
-			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-		question: onboarding.currentQuestion,
-		totalQuestionsAmount: onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-	}));
+	} = useAppSelector((state) => state.onboarding);
+	const isLastQuestion = useAppSelector(
+		(state) =>
+			state.onboarding.currentQuestionIndex ===
+			state.onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
+	);
+	const totalQuestionsAmount = useAppSelector(
+		(state) => state.onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
+	);
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
