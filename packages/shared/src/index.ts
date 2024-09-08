@@ -65,6 +65,9 @@ export {
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
