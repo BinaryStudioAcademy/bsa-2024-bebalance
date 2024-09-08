@@ -19,13 +19,29 @@ import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthError } from "./libs/exceptions/exceptions.js";
 import { createResetPasswordEmail } from "./libs/helpers/helpers.js";
 
+type Constructor = {
+	encrypt: Encrypt;
+	resetPasswordLinkDuration: string;
+	sessionDuration: string;
+	userService: UserService;
+};
+
 class AuthService {
 	private encrypt: Encrypt;
+	private resetPasswordLinkDuration: string;
+	private sessionDuration: string;
 	private userService: UserService;
 
-	public constructor(userService: UserService, encrypt: Encrypt) {
+	public constructor({
+		encrypt,
+		resetPasswordLinkDuration,
+		sessionDuration,
+		userService,
+	}: Constructor) {
 		this.userService = userService;
 		this.encrypt = encrypt;
+		this.sessionDuration = sessionDuration;
+		this.resetPasswordLinkDuration = resetPasswordLinkDuration;
 	}
 
 	public async checkIsResetPasswordExpired(
@@ -61,7 +77,7 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			expirationTime: config.ENV.DURATIONS.PASSWORD_RESET_LINK,
+			expirationTime: this.resetPasswordLinkDuration,
 			payload: { userId: userDetails.id },
 		});
 
@@ -115,7 +131,7 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			expirationTime: config.ENV.DURATIONS.SESSION,
+			expirationTime: this.sessionDuration,
 			payload: { userId: userDetails.id },
 		});
 
@@ -152,7 +168,7 @@ class AuthService {
 		const user = await this.userService.create(userRequestDto);
 
 		const jwtToken = await token.createToken({
-			expirationTime: "24hr",
+			expirationTime: this.sessionDuration,
 			payload: { userId: user.id },
 		});
 
