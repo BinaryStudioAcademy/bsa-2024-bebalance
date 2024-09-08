@@ -1,7 +1,11 @@
 import { Animated, Circle } from "~/libs/components/components";
 import { type SectorInitialSharedValues } from "~/libs/types/types";
 
-import { getRandomValue, getSectorParameters } from "../../helpers/helpers";
+import { MINIFY_TWICE_COEFFICIENT } from "../../constants/constants";
+import {
+	getSectorParameters,
+	getSectorRandomValue,
+} from "../../helpers/helpers";
 import { useWheelAnimation } from "../../hooks/hooks";
 
 type Properties = {
@@ -19,8 +23,6 @@ type Properties = {
 	startPercentInner: number;
 	startPercentOuter: number;
 };
-
-const HALF_VALUE_COEFFICIENT = 0.5;
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -71,9 +73,9 @@ const AnimatedPulsingSector: React.FC<Properties> = ({
 		animatedRadius: radius,
 	};
 
-	const randomHeight = getRandomValue({
+	const randomHeight = getSectorRandomValue({
 		max: maxHeight,
-		min: maxHeight * HALF_VALUE_COEFFICIENT,
+		min: maxHeight * MINIFY_TWICE_COEFFICIENT,
 	});
 
 	const { innerSectorAnimatedProperties, outerSectorAnimatedProperties } =
