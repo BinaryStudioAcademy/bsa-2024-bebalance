@@ -4,15 +4,11 @@ import {
 	AbstractModel,
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
-import { type ValueOf } from "~/libs/types/types.js";
 
-import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { UserModel } from "./user.model.js";
 
-class UserDetailsModel extends AbstractModel {
-	public name!: string;
-
-	public notificationFrequency!: ValueOf<typeof NotificationFrequency>;
+class UserTaskDaysModel extends AbstractModel {
+	public dayOfWeek!: number;
 
 	public userId!: number;
 
@@ -20,7 +16,7 @@ class UserDetailsModel extends AbstractModel {
 		return {
 			user: {
 				join: {
-					from: `${DatabaseTableName.USER_DETAILS}.userId`,
+					from: `${DatabaseTableName.USER_TASK_DAYS}.userId`,
 					to: `${DatabaseTableName.USERS}.id`,
 				},
 				modelClass: UserModel,
@@ -30,8 +26,8 @@ class UserDetailsModel extends AbstractModel {
 	}
 
 	public static override get tableName(): string {
-		return DatabaseTableName.USER_DETAILS;
+		return DatabaseTableName.USER_TASK_DAYS;
 	}
 }
 
-export { UserDetailsModel };
+export { UserTaskDaysModel };
