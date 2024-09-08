@@ -9,19 +9,18 @@ import {
 import { type InputOption } from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
-import { Button, Checkbox, Loader } from "../components.js";
+import { Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
 type Properties = {
-	onSubmit: (payload: { categoryIds: number[] }) => void;
+	onChange: (payload: { categoryIds: number[] }) => void;
 };
 
-const QuizCategoriesForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, getValues, handleSubmit, setValue } =
-		useAppForm<QuizCategoriesFormFields>({
-			defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES,
-		});
+const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
+	const { control, getValues, setValue } = useAppForm<QuizCategoriesFormFields>(
+		{ defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES },
+	);
 
 	const { isLoading, quizCategories } = useAppSelector(({ categories }) => {
 		const { dataStatus, items } = categories;
@@ -69,14 +68,11 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		}
 	}, [getValues, quizCategories.length, setValue]);
 
-	const handleFormSubmit = useCallback(
-		(event: React.BaseSyntheticEvent): void => {
-			void handleSubmit(({ categoryIds }) => {
-				onSubmit({ categoryIds: categoryIds.map(Number) });
-			})(event);
-		},
-		[handleSubmit, onSubmit],
-	);
+	const handleFormChange = useCallback((): void => {
+		const { categoryIds } = getValues();
+
+		onChange({ categoryIds: categoryIds.map(Number) });
+	}, [getValues, onChange]);
 
 	if (isLoading) {
 		return <Loader />;
@@ -84,7 +80,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<section>
-			<form onSubmit={handleFormSubmit}>
+			<form onChange={handleFormChange}>
 				<Checkbox
 					control={control}
 					label="All"
@@ -99,7 +95,6 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					options={categoryInputOptions}
 				/>
 				<br />
-				<Button label="Retake Quiz" type="submit" />
 			</form>
 		</section>
 	);
