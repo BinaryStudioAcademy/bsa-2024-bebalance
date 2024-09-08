@@ -11,6 +11,8 @@ export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { Planet } from "./planet/planet";
+export { ProgressBar } from "./progress-bar/progress-bar";
+export { RadioGroup } from "./radio-group/radio-group";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { Tag } from "./tag/tag";
 export { Text } from "./text/text";
@@ -27,6 +29,10 @@ export {
 	TouchableOpacity,
 	View,
 } from "react-native";
+export {
+	default as InfinitePager,
+	type InfinitePagerImperativeApi,
+} from "react-native-infinite-pager";
 export { LinearGradient } from "react-native-linear-gradient";
 export { default as Animated } from "react-native-reanimated";
 export {
