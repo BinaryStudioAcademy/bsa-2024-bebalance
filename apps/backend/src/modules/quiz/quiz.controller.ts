@@ -244,6 +244,22 @@ class QuizController extends BaseController {
 	 * /quiz/score:
 	 *   patch:
 	 *     description: Updates multiple or single user scores
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               items:
+	 *                 type: array
+	 *                 items:
+	 *                   type: object
+	 *                   properties:
+	 *                     categoryId:
+	 *                       type: number
+	 *                     score:
+	 *                       type: number
 	 *
 	 *     responses:
 	 *       200:
