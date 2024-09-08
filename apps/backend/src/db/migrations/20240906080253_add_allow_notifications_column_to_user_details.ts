@@ -12,7 +12,7 @@ const NotificationFrequency = {
 function up(knex: Knex): Promise<void> {
 	return knex.schema.alterTable(TABLE_NAME, (table) => {
 		table
-			.enum(COLUMN_NAME, Object.values(NotificationFrequency), {
+			.enu(COLUMN_NAME, Object.values(NotificationFrequency), {
 				enumName: `${COLUMN_NAME}_enum`,
 				useNative: true,
 			})
