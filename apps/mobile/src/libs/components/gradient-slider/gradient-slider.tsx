@@ -4,7 +4,7 @@ import React from "react";
 import {
 	Icon,
 	LinearGradient,
-	Planet,
+	SliderSection,
 	Text,
 	View,
 } from "~/libs/components/components";
@@ -102,9 +102,8 @@ const GradientSlider: React.FC<Properties> = ({
 					</Text>
 				</View>
 
-				<Planet
+				<SliderSection
 					color={gradientColors}
-					size="slider"
 					style={[
 						styles.planet,
 						{

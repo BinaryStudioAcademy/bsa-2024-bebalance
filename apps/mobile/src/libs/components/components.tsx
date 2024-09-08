@@ -14,6 +14,7 @@ export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { Planet } from "./planet/planet";
 export { ScreenWrapper } from "./screen-wrapper/screen-wrapper";
 export { SliderContent } from "./slider-content/slider-content";
+export { SliderSection } from "./slider-section/slider-section";
 export { Tag } from "./tag/tag";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
