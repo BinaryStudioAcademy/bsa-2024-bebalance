@@ -21,6 +21,16 @@ import {
 import { globalStyles } from "~/libs/styles/styles";
 import { type LayoutChangeEvent } from "~/libs/types/types";
 
+import {
+	SLIDER_INITIAL_WIDTH,
+	SLIDER_MAX_PERCENT,
+	SLIDER_STEP_VALUE,
+} from "./libs/constants/slider-config";
+import {
+	SLIDER_ICON_TRANSLATE_OFFSET,
+	SLIDER_MARKER_ICON_SIZE,
+	SLIDER_SECTION_TRANSLATE_OFFSET,
+} from "./libs/constants/slider-styles";
 import { styles } from "./styles";
 
 type Properties = {
@@ -30,13 +40,6 @@ type Properties = {
 	onValueChange?: (value: number) => void;
 };
 
-const INITIAL_SLIDER_WIDTH = 0;
-const MAX_PERCENT = 100;
-const SLIDER_SECTION_TRANSLATE_OFFSET = 3;
-const ICON_TRANSLATE_OFFSET = 20;
-const MARKER_ICON_SIZE = 50;
-const SLIDER_STEP = 1;
-
 const GradientSlider: React.FC<Properties> = ({
 	gradientColors,
 	max,
@@ -44,7 +47,7 @@ const GradientSlider: React.FC<Properties> = ({
 	onValueChange,
 }) => {
 	const [value, setValue] = useState<number>(min);
-	const [sliderWidth, setSliderWidth] = useState<number>(INITIAL_SLIDER_WIDTH);
+	const [sliderWidth, setSliderWidth] = useState<number>(SLIDER_INITIAL_WIDTH);
 	const initialColors = generateSliderGradientColors(min, gradientColors, max);
 	const [color, setColor] = useState<string[]>(initialColors);
 
@@ -65,12 +68,12 @@ const GradientSlider: React.FC<Properties> = ({
 		[gradientColors, max, onValueChange],
 	);
 
-	const pixelsPerPercent = sliderWidth / MAX_PERCENT;
-	const translateXBase = (value / max) * MAX_PERCENT * pixelsPerPercent;
+	const pixelsPerPercent = sliderWidth / SLIDER_MAX_PERCENT;
+	const translateXBase = (value / max) * SLIDER_MAX_PERCENT * pixelsPerPercent;
 
 	const translateXForSliderSection =
 		translateXBase - SLIDER_SECTION_TRANSLATE_OFFSET;
-	const translateXForIcon = translateXBase - ICON_TRANSLATE_OFFSET;
+	const translateXForIcon = translateXBase - SLIDER_ICON_TRANSLATE_OFFSET;
 
 	const { end, start } = directionToGradient.leftToRight;
 
@@ -97,7 +100,11 @@ const GradientSlider: React.FC<Properties> = ({
 						},
 					]}
 				>
-					<Icon color={BaseColor.BLACK} name="place" size={MARKER_ICON_SIZE} />
+					<Icon
+						color={BaseColor.BLACK}
+						name="place"
+						size={SLIDER_MARKER_ICON_SIZE}
+					/>
 					<Text preset="regular" style={[globalStyles.mt12, styles.labelText]}>
 						{value}
 					</Text>
@@ -119,7 +126,7 @@ const GradientSlider: React.FC<Properties> = ({
 					minimumTrackTintColor="transparent"
 					minimumValue={min}
 					onValueChange={handleValueChange}
-					step={SLIDER_STEP}
+					step={SLIDER_STEP_VALUE}
 					style={styles.slider}
 					thumbTintColor="transparent"
 					value={value}
