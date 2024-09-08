@@ -6,7 +6,10 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
-import { type InputOption } from "~/libs/types/types.js";
+import {
+	type CategoriesFormChangeDto,
+	type InputOption,
+} from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
 import { Checkbox, Loader } from "../components.js";
@@ -14,7 +17,7 @@ import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
 type Properties = {
-	onChange: (payload: { categoryIds: number[] }) => void;
+	onChange: CategoriesFormChangeDto;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
@@ -30,12 +33,11 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
 			quizCategories: items,
 		};
 	});
-	const categoryInputOptions: InputOption[] = quizCategories.map(
-		(category) => ({
-			label: category.name,
-			value: category.id.toString(),
-		}),
-	);
+	const categoryInputOptions: InputOption[] = quizCategories.map((category) => {
+		const { id, name } = category;
+
+		return { label: name, value: id.toString() };
+	});
 
 	const dispatch = useAppDispatch();
 
