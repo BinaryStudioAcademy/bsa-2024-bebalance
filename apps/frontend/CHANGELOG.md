@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.28.0...frontend-v1.28.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **frontend:** add font-size property to forgot password link bb-331 ([#333](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/333)) ([3a6acfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3a6acfc06ae851cf900e391fc98dfc270042189e))
+
 ## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.27.0...frontend-v1.28.0) (2024-09-07)
 
 
