@@ -10,10 +10,10 @@ export {
 	type RadioGroupOption,
 } from "./radio-group/types";
 export {
-  type SectorInitialSharedValues,
+	type SectorInitialSharedValues,
 	type SectorParameters,
 	type SectorParametersCalculationData,
-  type WheelDataItem
+	type WheelDataItem,
 } from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
