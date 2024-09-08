@@ -96,8 +96,15 @@ class UserService implements Service {
 
 	public async updateAvatar(
 		userId: number,
-		avatarFile: MultipartFile,
+		avatarFile?: MultipartFile,
 	): Promise<null | UserEntity> {
+		if (!avatarFile) {
+			throw new UserError({
+				message: ErrorMessage.FILE_MISSING,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
 		const user = await this.userRepository.find(userId);
 
 		if (!user) {

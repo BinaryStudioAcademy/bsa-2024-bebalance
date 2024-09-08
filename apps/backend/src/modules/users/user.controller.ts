@@ -1,6 +1,6 @@
 import { type MultipartFile } from "@fastify/multipart";
 
-import { APIPath, ErrorMessage } from "~/libs/enums/enums.js";
+import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
 	type APIHandlerResponse,
@@ -12,7 +12,6 @@ import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
-import { UserError } from "./libs/exceptions/exceptions.js";
 import { checkAccessToUserData } from "./libs/hooks/hooks.js";
 import {
 	type UserDto,
@@ -21,7 +20,8 @@ import {
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
-/*** @swagger
+/**
+ * @swagger
  * components:
  *    schemas:
  *      User:
@@ -171,11 +171,11 @@ class UserController extends BaseController {
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
-	 *         content:
-	 *           application/json:
-	 *             schema:
-	 *               type: object
-	 *               $ref: "#/components/schemas/User"
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                $ref: "#/components/schemas/User"
 	 */
 	private async update(
 		options: APIHandlerOptions<{
@@ -259,13 +259,6 @@ class UserController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		if (!options.uploadedFile) {
-			throw new UserError({
-				message: ErrorMessage.FILE_MISSING,
-				status: HTTPCode.BAD_REQUEST,
-			});
-		}
-
 		const user = await this.userService.updateAvatar(
 			options.user.id,
 			options.uploadedFile,
