@@ -4,7 +4,6 @@ import { type Service } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
-import { EMPTY_ARRAY_LENGTH } from "./libs/constants/constants.js";
 import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoryDto,
@@ -149,11 +148,11 @@ class CategoryService implements Service {
 			(payloadScore) => payloadScore.categoryId,
 		);
 
-		const missingCategoryIds = payloadCategoryIds.filter(
+		const hasMissingCategoryIds = payloadCategoryIds.some(
 			(categoryId) => !allCategoryIds.has(categoryId),
 		);
 
-		if (missingCategoryIds.length > EMPTY_ARRAY_LENGTH) {
+		if (hasMissingCategoryIds) {
 			throw new CategoryError({
 				message: ErrorMessage.INVALID_CATEGORY,
 				status: HTTPCode.BAD_REQUEST,
