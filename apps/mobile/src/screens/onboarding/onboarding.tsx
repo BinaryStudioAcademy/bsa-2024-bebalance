@@ -52,11 +52,11 @@ const Onboarding: React.FC = () => {
 	const currentAnswer = useAppSelector(
 		(state) => state.onboarding.answersByQuestionIndex,
 	);
-	const {
-		currentQuestion: question,
-		currentQuestionIndex,
-		dataStatus,
-	} = useAppSelector((state) => state.onboarding);
+	const question = useAppSelector((state) => state.onboarding.currentQuestion);
+	const currentQuestionIndex = useAppSelector(
+		(state) => state.onboarding.currentQuestionIndex,
+	);
+	const dataStatus = useAppSelector((state) => state.onboarding.dataStatus);
 	const isLastQuestion = useAppSelector(
 		(state) =>
 			state.onboarding.currentQuestionIndex ===
