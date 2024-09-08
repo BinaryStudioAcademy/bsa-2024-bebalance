@@ -1,7 +1,6 @@
 import {
 	BackgroundWrapper,
 	Button,
-	InfinitePager,
 	type InfinitePagerImperativeApi,
 	LoaderWrapper,
 	ProgressBar,
@@ -24,12 +23,9 @@ import { type NativeStackNavigationProp } from "~/libs/types/types";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
-import { getPageInterpolatorSlide } from "./libs/animations/animations";
+import { InfinitePager } from "./../../libs/components/infinite-pager/infinite-pager";
 import { Content } from "./libs/components/components";
-import {
-	ANIMATION_CONFIG,
-	ONBOARDING_FORM_DEFAULT_VALUES,
-} from "./libs/constants/constants";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants";
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
@@ -127,6 +123,8 @@ const Onboarding: React.FC = () => {
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
+	console.log(`ONE QUESTION ONBOARDING`, question);
+
 	const renderPageComponent = useCallback(() => {
 		return (
 			<Content control={control} errors={errors} question={currentQuestion} />
@@ -154,12 +152,8 @@ const Onboarding: React.FC = () => {
 									totalItemsAmount={totalQuestionsAmount}
 								/>
 								<InfinitePager
-									animationConfig={ANIMATION_CONFIG}
-									gesturesDisabled
-									pageBuffer={PREVIOUS_INDEX_OFFSET}
-									PageComponent={renderPageComponent}
-									pageInterpolator={getPageInterpolatorSlide}
-									ref={infinitePager}
+									infinitePagerReference={infinitePager}
+									renderPageComponent={renderPageComponent}
 								/>
 								<View style={globalStyles.gap12}>
 									<Button

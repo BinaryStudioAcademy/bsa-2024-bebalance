@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
+import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type QuizQuestionDto } from "~/packages/quiz/quiz";
@@ -8,15 +8,15 @@ import { type QuizQuestionDto } from "~/packages/quiz/quiz";
 import { getAllQuestions } from "./actions";
 
 type State = {
-	currentCategory: null | QuizQuestionDto[];
-	currentCategoryIndex: number;
+	currentQuestion: null | QuizQuestionDto;
+	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
-	questions: QuizQuestionDto[][];
+	questions: QuizQuestionDto[];
 };
 
 const initialState: State = {
-	currentCategory: null,
-	currentCategoryIndex: 0,
+	currentQuestion: null,
+	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
 };
@@ -28,9 +28,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAllQuestions.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload.items;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+			state.questions = action.payload.items.flat();
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] || null;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -40,15 +40,15 @@ const { actions, name, reducer } = createSlice({
 	name: "quiz",
 	reducers: {
 		nextQuestion(state) {
-			state.currentCategoryIndex += 1;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] || null;
 		},
 		previousQuestion(state) {
-			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {
-				state.currentCategoryIndex -= 1;
-				state.currentCategory =
-					state.questions[state.currentCategoryIndex] || null;
+			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
+				state.currentQuestionIndex -= PREVIOUS_INDEX_OFFSET;
+				state.currentQuestion =
+					state.questions[state.currentQuestionIndex] || null;
 			}
 		},
 		// setAnswersByQuestionIndex: (state, action: PayloadAction<Properties>) => {
