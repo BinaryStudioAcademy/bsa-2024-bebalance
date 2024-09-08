@@ -89,12 +89,12 @@ const Wheel: React.FC<Properties> = ({
 				(size * WheelSetting.HOLE_SIZE_PERCENT) / WheelSetting.MAX_PERCENT;
 			const layerOffsetInner =
 				(size * WheelSetting.SPACING_SIZE_PERCENT) / WheelSetting.MAX_PERCENT;
-			const startPercentInner =
-				startPercent +
+			const wheelPercentAdjustment =
 				WheelSetting.SPACING_SIZE_PERCENT * MINIFY_TWICE_COEFFICIENT;
-			const endPercentInner =
-				endPercent -
-				WheelSetting.SPACING_SIZE_PERCENT * MINIFY_TWICE_COEFFICIENT;
+			const startPercentOuter = startPercent - wheelPercentAdjustment;
+			const endPercentOuter = endPercent + wheelPercentAdjustment;
+			const startPercentInner = startPercent + wheelPercentAdjustment;
+			const endPercentInner = endPercent - wheelPercentAdjustment;
 
 			return (
 				<React.Fragment key={index}>
@@ -121,7 +121,7 @@ const Wheel: React.FC<Properties> = ({
 							centerGap={wheelCenterGapSize}
 							centerPoint={centerPoint}
 							endPercentInner={endPercentInner}
-							endPercentOuter={endPercent}
+							endPercentOuter={endPercentOuter}
 							height={height}
 							key={sectorKey}
 							layerOffset={layerOffsetInner}
@@ -129,7 +129,7 @@ const Wheel: React.FC<Properties> = ({
 							outlineColor={BaseColor.BG_WHITE}
 							sectorColor={gradientUrl}
 							startPercentInner={startPercentInner}
-							startPercentOuter={startPercent}
+							startPercentOuter={startPercentOuter}
 						/>
 					)}
 					{animation === AnimationName.APPEAR && (
@@ -139,14 +139,14 @@ const Wheel: React.FC<Properties> = ({
 							centerGap={wheelCenterGapSize}
 							centerPoint={centerPoint}
 							endPercentInner={endPercentInner}
-							endPercentOuter={endPercent}
+							endPercentOuter={endPercentOuter}
 							height={height}
 							key={sectorKey}
 							layerOffset={layerOffsetInner}
 							outlineColor={BaseColor.BG_WHITE}
 							sectorColor={gradientUrl}
 							startPercentInner={startPercentInner}
-							startPercentOuter={startPercent}
+							startPercentOuter={startPercentOuter}
 						/>
 					)}
 				</React.Fragment>
