@@ -39,7 +39,7 @@ const GradientSlider: React.FC<Properties> = ({
 }) => {
 	const [value, setValue] = useState<number>(min);
 	const [sliderWidth, setSliderWidth] = useState<number>(
-		SliderConfig.SLIDER_INITIAL_WIDTH,
+		SliderConfig.INITIAL_WIDTH,
 	);
 	const initialColors = generateSliderGradientColors(min, gradientColors, max);
 	const [color, setColor] = useState<string[]>(initialColors);
@@ -54,21 +54,18 @@ const GradientSlider: React.FC<Properties> = ({
 			setValue(sliderValue);
 			setColor(generateSliderGradientColors(sliderValue, gradientColors, max));
 
-			if (onValueChange) {
-				onValueChange(sliderValue);
-			}
+			onValueChange?.(sliderValue);
 		},
 		[gradientColors, max, onValueChange],
 	);
 
-	const pixelsPerPercent = sliderWidth / SliderConfig.SLIDER_MAX_PERCENT;
+	const pixelsPerPercent = sliderWidth / SliderConfig.MAX_PERCENT;
 	const translateXBase =
-		(value / max) * SliderConfig.SLIDER_MAX_PERCENT * pixelsPerPercent;
+		(value / max) * SliderConfig.MAX_PERCENT * pixelsPerPercent;
 
 	const translateXForSliderSection =
-		translateXBase - SliderStyle.SLIDER_SECTION_TRANSLATE_OFFSET;
-	const translateXForIcon =
-		translateXBase - SliderStyle.SLIDER_ICON_TRANSLATE_OFFSET;
+		translateXBase - SliderStyle.SECTION_TRANSLATE_OFFSET;
+	const translateXForIcon = translateXBase - SliderStyle.ICON_TRANSLATE_OFFSET;
 
 	const { end, start } = directionToGradient.leftToRight;
 
@@ -98,7 +95,7 @@ const GradientSlider: React.FC<Properties> = ({
 					<Icon
 						color={BaseColor.BLACK}
 						name="place"
-						size={SliderStyle.SLIDER_MARKER_ICON_SIZE}
+						size={SliderStyle.MARKER_ICON_SIZE}
 					/>
 					<Text preset="regular" style={[globalStyles.mt12, styles.labelText]}>
 						{value}
@@ -121,7 +118,7 @@ const GradientSlider: React.FC<Properties> = ({
 					minimumTrackTintColor="transparent"
 					minimumValue={min}
 					onValueChange={handleValueChange}
-					step={SliderConfig.SLIDER_STEP_VALUE}
+					step={SliderConfig.STEP_VALUE}
 					style={styles.slider}
 					thumbTintColor="transparent"
 					value={value}
