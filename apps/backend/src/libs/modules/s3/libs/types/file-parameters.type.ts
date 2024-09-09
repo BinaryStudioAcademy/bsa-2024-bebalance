@@ -1,7 +1,7 @@
 type FileParameters = {
-	Body?: Buffer;
-	ContentType?: string;
-	Key: string;
+	body?: Buffer;
+	contentType?: string;
+	key: string;
 };
 
 export { type FileParameters };

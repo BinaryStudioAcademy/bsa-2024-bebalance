@@ -31,12 +31,13 @@ class BaseS3 {
 		parameters: FileParameters,
 	): Promise<DeleteObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
-			Bucket: this.settings.bucketName,
+			bucket: this.settings.bucketName,
 			...parameters,
 		};
 
 		const command = new DeleteObjectCommand({
-			...commandParameters,
+			Bucket: commandParameters.bucket,
+			Key: commandParameters.key,
 		});
 
 		return await this.s3Client.send(command);
@@ -46,12 +47,15 @@ class BaseS3 {
 		parameters: FileParameters,
 	): Promise<PutObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
-			Bucket: this.settings.bucketName,
+			bucket: this.settings.bucketName,
 			...parameters,
 		};
 
 		const command = new PutObjectCommand({
-			...commandParameters,
+			Body: commandParameters.body as Buffer,
+			Bucket: commandParameters.bucket,
+			ContentType: commandParameters.contentType as string,
+			Key: commandParameters.key,
 		});
 
 		return await this.s3Client.send(command);

@@ -33,7 +33,7 @@ class FileService {
 		const fileKey = getFileKey(fileEntity.toObject().url);
 
 		await this.s3.deleteFile({
-			Key: fileKey,
+			key: fileKey,
 		});
 
 		return await this.fileRepository.delete(fileEntity.toObject().id);
@@ -69,15 +69,15 @@ class FileService {
 		const oldFileKey = getFileKey(fileToUpdate.toObject().url);
 
 		await this.s3.deleteFile({
-			Key: oldFileKey,
+			key: oldFileKey,
 		});
 
 		const fileKey = createFileKey(fileName);
 
 		await this.s3.uploadFile({
-			Body: fileBuffer,
-			ContentType: contentType,
-			Key: fileKey,
+			body: fileBuffer,
+			contentType,
+			key: fileKey,
 		});
 
 		const fileUrl = createFileUrl(fileKey);
@@ -97,9 +97,9 @@ class FileService {
 		const fileKey = createFileKey(fileName);
 
 		await this.s3.uploadFile({
-			Body: fileBuffer,
-			ContentType: contentType,
-			Key: fileKey,
+			body: fileBuffer,
+			contentType,
+			key: fileKey,
 		});
 
 		const fileUrl = createFileUrl(fileKey);
