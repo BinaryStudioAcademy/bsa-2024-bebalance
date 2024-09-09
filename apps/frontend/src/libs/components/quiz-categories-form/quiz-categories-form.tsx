@@ -66,7 +66,7 @@ const QuizCategoriesForm: React.FC = () => {
 
 	return (
 		<section>
-			<form id="quiz-categories-form">
+			<form>
 				<Checkbox
 					control={control}
 					label="All"

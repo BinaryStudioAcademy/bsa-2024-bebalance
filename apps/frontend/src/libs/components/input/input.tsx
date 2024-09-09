@@ -45,7 +45,7 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 
 	const isRadio = type === "radio";
-	const isRadioWithOptions = isRadio && options;
+	const isRadioWithOptions = isRadio && options?.length;
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
