@@ -53,8 +53,8 @@ class Store {
 			reducer: {
 				auth: authReducer,
 				onboarding: onboardingReducer,
-				users: usersReducer,
 				quiz: quizReducer,
+				users: usersReducer,
 			},
 		});
 	}
