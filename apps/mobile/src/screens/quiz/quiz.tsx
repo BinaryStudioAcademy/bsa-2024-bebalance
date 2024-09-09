@@ -78,9 +78,7 @@ const Quiz: React.FC = () => {
 				}),
 			);
 
-			if (infinitePagerReference.current) {
-				infinitePagerReference.current.incrementPage({ animated: true });
-			}
+			infinitePagerReference.current?.incrementPage({ animated: true });
 
 			void dispatch(quizActions.nextQuestion());
 		},
@@ -91,9 +89,7 @@ const Quiz: React.FC = () => {
 	const handlePreviousClick = useCallback(() => {
 		void dispatch(quizActions.previousQuestion());
 
-		if (infinitePagerReference.current) {
-			infinitePagerReference.current.decrementPage({ animated: true });
-		}
+		infinitePagerReference.current?.decrementPage({ animated: true });
 	}, [dispatch]);
 
 	const handleFormSubmit = useCallback((): void => {
@@ -140,7 +136,7 @@ const Quiz: React.FC = () => {
 								/>
 								<InfinitePager
 									infinitePagerReference={infinitePagerReference}
-									renderPageComponent={renderPageComponent}
+									onPageRender={renderPageComponent}
 								/>
 								<View style={globalStyles.gap12}>
 									<Button
