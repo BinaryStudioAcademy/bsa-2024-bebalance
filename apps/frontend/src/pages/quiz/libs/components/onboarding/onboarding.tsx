@@ -54,22 +54,24 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			if (question && data[`answer${question.id.toString()}`] !== undefined) {
-				const newObject = Object.fromEntries(
-					Object.entries(data).filter(([key]) => key !== "answer0"),
-				);
+			if (question) {
+				const hasAnswer = data[`answer${question.id.toString()}`] !== undefined;
 
-				if (isLastQuestion && userId) {
-					const answerIds = getAnswerIds(newObject);
-
-					void dispatch(
-						onboardingActions.createUserAnswers({ answerIds, userId }),
+				if (hasAnswer) {
+					const newObject = Object.fromEntries(
+						Object.entries(data).filter(([key]) => key !== "answer0"),
 					);
 
-					onNext();
-				}
+					if (isLastQuestion && userId) {
+						const answerIds = getAnswerIds(newObject);
 
-				void dispatch(onboardingActions.nextQuestion());
+						void dispatch(onboardingActions.saveAnswers({ answerIds, userId }));
+
+						onNext();
+					}
+
+					void dispatch(onboardingActions.nextQuestion());
+				}
 			}
 		},
 

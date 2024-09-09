@@ -12,7 +12,7 @@ import {
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
-import { createUserAnswers, getAllQuestions, getScores } from "./actions.js";
+import { getAllQuestions, getScores, saveAnswers } from "./actions.js";
 
 type State = {
 	currentCategory: null | QuizQuestionDto[];
@@ -56,14 +56,14 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(createUserAnswers.rejected, (state) => {
+		builder.addCase(saveAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(createUserAnswers.fulfilled, (state, action) => {
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.userAnswers = action.payload;
 		});
-		builder.addCase(createUserAnswers.pending, (state) => {
+		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
 	},

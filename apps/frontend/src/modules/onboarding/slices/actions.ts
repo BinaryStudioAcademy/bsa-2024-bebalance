@@ -9,14 +9,14 @@ import {
 
 import { name as sliceName } from "./onboarding.slice.js";
 
-const createUserAnswers = createAsyncThunk<
+const saveAnswers = createAsyncThunk<
 	OnboardingUserAnswerDto[],
 	OnboardingAnswerRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/create-user`, async (createAnswerPayload, { extra }) => {
 	const { onboardingApi } = extra;
 
-	return await onboardingApi.createUserAnswers(createAnswerPayload);
+	return await onboardingApi.saveAnswers(createAnswerPayload);
 });
 
 const getAll = createAsyncThunk<
@@ -29,4 +29,4 @@ const getAll = createAsyncThunk<
 	return onboardingApi.getAll();
 });
 
-export { createUserAnswers, getAll };
+export { getAll, saveAnswers };

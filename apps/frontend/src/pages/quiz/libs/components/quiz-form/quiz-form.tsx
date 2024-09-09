@@ -87,7 +87,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					if (isLast && userId) {
 						const answerIds = getAnswerIds(newObject);
 
-						void dispatch(quizActions.createUserAnswers({ answerIds, userId }));
+						void dispatch(quizActions.saveAnswers({ answerIds, userId }));
 
 						onNext();
 					}
