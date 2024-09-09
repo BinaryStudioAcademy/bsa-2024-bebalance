@@ -31,7 +31,7 @@ class AuthApi extends BaseHTTPApi {
 	): Promise<boolean> {
 		const response = await this.load(
 			this.getFullEndpoint(
-				`${AuthApiPath.CHECK_RESET_PASSWORD_EXP}?token=${payload.token}`,
+				`${AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION}?token=${payload.token}`,
 				{},
 			),
 			{
