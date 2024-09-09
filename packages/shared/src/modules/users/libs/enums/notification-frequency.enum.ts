@@ -1,6 +1,6 @@
 const NotificationFrequency = {
-	ALL: "true",
-	NONE: "false",
+	ALL: "all",
+	NONE: "none",
 } as const;
 
 export { NotificationFrequency };

@@ -2,15 +2,15 @@ import { z } from "zod";
 
 import {
 	NotificationAnswersValidationRule,
+	NotificationFrequency,
 	UserValidationMessage,
 } from "../enums/enums.js";
 
 const notificationAnswers = z.object({
-	notificationFrequency: z
-		.string()
-		.min(NotificationAnswersValidationRule.NOTIFICATION_FREQUENCY_MIN_LENGTH, {
-			message: UserValidationMessage.NOTIFICATION_FREQUENCY_STRING_REQUIRED,
-		}),
+	notificationFrequency: z.nativeEnum(NotificationFrequency, {
+		required_error:
+			UserValidationMessage.NOTIFICATION_FREQUENCY_STRING_REQUIRED,
+	}),
 	userTaskDays: z
 		.array(
 			z.number({

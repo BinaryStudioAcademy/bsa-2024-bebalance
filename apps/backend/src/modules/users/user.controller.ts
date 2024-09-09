@@ -196,11 +196,9 @@ class UserController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { notificationFrequency, userTaskDays } = options.body;
-
 		const updatedUserDto = await this.userService.saveNotificationAnswers(
 			options.user.id,
-			{ notificationFrequency, userTaskDays },
+			options.body,
 		);
 
 		return {

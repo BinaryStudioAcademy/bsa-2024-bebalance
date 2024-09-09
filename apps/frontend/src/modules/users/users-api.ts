@@ -6,7 +6,7 @@ import { type UserDto } from "~/libs/types/types.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
 import {
-	type NotificationAnswersRequestDto,
+	type NotificationAnswersPayloadDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
@@ -35,7 +35,7 @@ class UsersApi extends BaseHTTPApi {
 	}
 
 	public async saveNotificationAnswers(
-		payload: NotificationAnswersRequestDto,
+		payload: NotificationAnswersPayloadDto,
 	): Promise<UserDto> {
 		const response = await this.load(
 			this.getFullEndpoint(UsersApiPath.NOTIFICATION_QUESTIONS, {}),

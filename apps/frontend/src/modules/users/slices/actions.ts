@@ -8,7 +8,7 @@ import {
 	type UserUpdatePayload,
 } from "~/modules/users/users.js";
 
-import { type NotificationAnswersRequestDto } from "../libs/types/types.js";
+import { type NotificationAnswersPayloadDto } from "../libs/types/types.js";
 import { name as sliceName } from "./users.slice.js";
 
 const getById = createAsyncThunk<
@@ -24,7 +24,7 @@ const getById = createAsyncThunk<
 
 const saveNotificationAnswers = createAsyncThunk<
 	UserDto,
-	NotificationAnswersRequestDto,
+	NotificationAnswersPayloadDto,
 	AsyncThunkConfig
 >(`${sliceName}/saveNotificationAnswers`, async (payload, { extra }) => {
 	const { usersApi } = extra;

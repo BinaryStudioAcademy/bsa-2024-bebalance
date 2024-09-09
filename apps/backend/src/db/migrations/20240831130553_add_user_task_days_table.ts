@@ -13,9 +13,12 @@ const ColumnName = {
 	USER_ID: "user_id",
 } as const;
 
+const DayOfWeekBoundary = {
+	MAX_DAY_OF_WEEK: 7,
+	MIN_DAY_OF_WEEK: 1,
+} as const;
+
 const DELETE_STRATEGY = "CASCADE";
-const MIN_DAY_OF_WEEK = 1;
-const MAX_DAY_OF_WEEK = 7;
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TableName.USER_TASK_DAYS, (table) => {
@@ -29,7 +32,10 @@ function up(knex: Knex): Promise<void> {
 		table
 			.integer(ColumnName.DAY_OF_WEEK)
 			.notNullable()
-			.checkBetween([MIN_DAY_OF_WEEK, MAX_DAY_OF_WEEK]);
+			.checkBetween([
+				DayOfWeekBoundary.MIN_DAY_OF_WEEK,
+				DayOfWeekBoundary.MAX_DAY_OF_WEEK,
+			]);
 		table.timestamp(ColumnName.CREATED_AT).defaultTo(knex.fn.now());
 		table.timestamp(ColumnName.UPDATED_AT).defaultTo(knex.fn.now());
 	});

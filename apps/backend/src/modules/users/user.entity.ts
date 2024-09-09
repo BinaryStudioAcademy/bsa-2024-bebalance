@@ -1,4 +1,4 @@
-import { type Entity } from "~/libs/types/types.js";
+import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
 import { NotificationFrequency } from "./libs/enums/enums.js";
 
@@ -11,7 +11,7 @@ class UserEntity implements Entity {
 
 	private name: string;
 
-	private notificationFrequency: string;
+	private notificationFrequency: ValueOf<typeof NotificationFrequency>;
 
 	private passwordHash: string;
 
@@ -36,7 +36,7 @@ class UserEntity implements Entity {
 		email: string;
 		id: null | number;
 		name: string;
-		notificationFrequency: string;
+		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
@@ -68,7 +68,7 @@ class UserEntity implements Entity {
 		email: string;
 		id: number;
 		name: string;
-		notificationFrequency?: string;
+		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
@@ -116,7 +116,7 @@ class UserEntity implements Entity {
 		createdAt: string;
 		email: string;
 		name: string;
-		notificationFrequency: string;
+		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
@@ -139,7 +139,7 @@ class UserEntity implements Entity {
 		email: string;
 		id: number;
 		name: string;
-		notificationFrequency: string;
+		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {

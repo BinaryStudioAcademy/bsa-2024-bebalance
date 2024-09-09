@@ -21,7 +21,6 @@ const UserValidationMessage = {
 	PASSWORD_REQUIRES_LETTER_AND_NUMBER:
 		"Password must include at least one letter and one number",
 	TASK_DAY_REQUIRED: "Task day must be a number",
-	USER_ID_REQUIRED: "User ID is required",
 } as const;
 
 export { UserValidationMessage };

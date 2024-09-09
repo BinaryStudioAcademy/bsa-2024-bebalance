@@ -4,13 +4,15 @@ import {
 	AbstractModel,
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
+import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { UserModel } from "./user.model.js";
 
 class UserDetailsModel extends AbstractModel {
 	public name!: string;
 
-	public notificationFrequency!: string;
+	public notificationFrequency!: ValueOf<typeof NotificationFrequency>;
 
 	public userId!: number;
 
