@@ -28,6 +28,10 @@ type EnvironmentSchema = {
 		PORT: number;
 		SERVICE: string;
 	};
+	OPEN_AI: {
+		API_KEY: string;
+		MODEL: string;
+	};
 };
 
 export { type EnvironmentSchema };
