@@ -45,7 +45,7 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
 			</div>
-			<div className={styles["chart-wrapper"]}>
+			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
 					<BalanceWheelChart data={chartData} />
 				)}

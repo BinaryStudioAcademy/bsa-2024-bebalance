@@ -19,7 +19,7 @@
 	text-transform: capitalize;
 }
 
-.chart-wrapper {
+.content-wrapper {
 	display: flex;
 	gap: 45px;
 	justify-content: center;
