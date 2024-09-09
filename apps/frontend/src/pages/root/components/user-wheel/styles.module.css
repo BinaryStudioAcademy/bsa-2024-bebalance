@@ -21,10 +21,12 @@
 
 .chart-wrapper {
 	display: flex;
+	gap: 45px;
 	justify-content: center;
+	height: fit-content;
 	margin-bottom: 36px;
 }
 
-.container button {
+.container > button {
 	width: 306px;
 }

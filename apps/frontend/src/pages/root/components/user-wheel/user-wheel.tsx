@@ -1,4 +1,8 @@
-import { BalanceWheelChart, Button } from "~/libs/components/components.js";
+import {
+	BalanceWheelChart,
+	Button,
+	ScoresEditModal,
+} from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -32,7 +36,9 @@ const UserWheel: React.FC = () => {
 		};
 	});
 
-	const headerText = isEditingModalOpen ? "Edit my wheel" : "My wheel results";
+	const headerText = isEditingModalOpen
+		? "Edit my wheel results"
+		: "My wheel results";
 
 	return (
 		<div className={styles["container"]}>
@@ -42,6 +48,9 @@ const UserWheel: React.FC = () => {
 			<div className={styles["chart-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
 					<BalanceWheelChart data={chartData} />
+				)}
+				{isEditingModalOpen && (
+					<ScoresEditModal data={scores} setClose={setIsEditingModalOpen} />
 				)}
 			</div>
 			{isEditingModalOpen || (
