@@ -3,7 +3,7 @@ import {
 	type SectorParametersCalculationData,
 } from "~/libs/types/types";
 
-const QUOTER_PERCENT = 25;
+const QUARTER_PERCENT = 25;
 const TWO = 2;
 const MAX_PERCENT = 100;
 
@@ -27,11 +27,11 @@ const getSectorParameters = ({
 	const innerDashArrayGap = circumference - innerDashArrayDash;
 	const outerDashArrayGap = circumference - outerDashArrayDash;
 	const innerDashOffset =
-		((circumference * (MAX_PERCENT + QUOTER_PERCENT - startPercentInner)) /
+		((circumference * (MAX_PERCENT + QUARTER_PERCENT - startPercentInner)) /
 			MAX_PERCENT) %
 		circumference;
 	const outerDashOffset =
-		((circumference * (MAX_PERCENT + QUOTER_PERCENT - startPercentOuter)) /
+		((circumference * (MAX_PERCENT + QUARTER_PERCENT - startPercentOuter)) /
 			MAX_PERCENT) %
 		circumference;
 
