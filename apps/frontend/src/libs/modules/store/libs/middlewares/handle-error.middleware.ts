@@ -14,7 +14,7 @@ type Properties = {
 	next: (action: unknown) => unknown;
 };
 
-const handleErrorMiddlewareLogic = async ({
+const handleErrorMiddlewareExecution = async ({
 	action,
 	extra: { notification, storage },
 	next,
@@ -53,7 +53,7 @@ const handleErrorMiddleware = (extra: ExtraArguments): Middleware => {
 	return () => {
 		return (next) => {
 			return async (action) => {
-				await handleErrorMiddlewareLogic({ action, extra, next });
+				await handleErrorMiddlewareExecution({ action, extra, next });
 			};
 		};
 	};
