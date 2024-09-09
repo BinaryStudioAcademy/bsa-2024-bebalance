@@ -11,12 +11,3 @@
 	background-image: url("../../assets/img/board-background.svg");
 	background-repeat: repeat;
 }
-
-.card {
-	width: 356px;
-	height: 251px;
-	padding: 20px;
-	background-color: var(--white);
-	border: 1px solid var(--background-gray);
-	border-radius: 20px;
-}

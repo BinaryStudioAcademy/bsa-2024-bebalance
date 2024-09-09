@@ -1,4 +1,4 @@
-import { Category } from "./libs/components/components.js";
+import { TaskCard } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -6,9 +6,7 @@ const Tasks: React.FC = () => {
 		<>
 			<h4 className={styles["title"]}>My Tasks</h4>
 			<div className={styles["board"]}>
-				<div className={styles["card"]}>
-					<Category />
-				</div>
+				<TaskCard />
 			</div>
 		</>
 	);
