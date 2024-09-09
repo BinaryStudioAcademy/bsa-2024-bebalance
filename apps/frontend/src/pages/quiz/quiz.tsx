@@ -1,4 +1,12 @@
-import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import { DataStatus } from "~/libs/enums/enums.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import {
 	type NotificationAnswersPayloadDto,
 	actions as userActions,
@@ -15,9 +23,27 @@ import {
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
+const ZERO = 0;
+
 const Quiz: React.FC = () => {
 	const [step, setStep] = useState<number>(Step.ONBOARDING);
 	const dispatch = useAppDispatch();
+
+	const { dataStatus, scores } = useAppSelector(({ quiz }) => ({
+		dataStatus: quiz.dataStatus,
+		scores: quiz.scores,
+	}));
+
+	useEffect(() => {
+		void dispatch(quizActions.getScores());
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (dataStatus === DataStatus.FULFILLED && scores.length > ZERO) {
+			setStep(Step.QUIZ);
+		}
+	}, [dataStatus, scores]);
+
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
 	}, []);
