@@ -45,7 +45,7 @@ const NotificationQuestions: React.FC<Properties> = ({
 						label="Which days would you like to receive tasks"
 						name="userTaskDays"
 						options={TASK_DAYS_OPTIONS}
-						variant="gradient"
+						variant="general"
 					/>
 					<Input
 						control={control}

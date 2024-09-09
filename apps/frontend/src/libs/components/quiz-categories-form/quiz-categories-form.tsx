@@ -6,23 +6,18 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
-import {
-	type CategoriesFormChangeDto,
-	type InputOption,
-} from "~/libs/types/types.js";
+import { type InputOption } from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
 import { Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
-type Properties = {
-	onChange: CategoriesFormChangeDto;
-};
-
-const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
+const QuizCategoriesForm: React.FC = () => {
 	const { control, getValues, setValue } = useAppForm<QuizCategoriesFormFields>(
-		{ defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES },
+		{
+			defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES,
+		},
 	);
 
 	const { isLoading, quizCategories } = useAppSelector(({ categories }) => {
@@ -45,36 +40,25 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
 		void dispatch(categoriesActions.getCategories());
 	}, [dispatch]);
 
-	// const handleSelectAll = useCallback(() => {
-	// 	const { hasSelectedAll } = getValues();
+	const handleSelectAll = useCallback(() => {
+		const { hasSelectedAll } = getValues();
 
-	// 	if (hasSelectedAll) {
-	// 		setValue(
-	// 			"categoryIds",
-	// 			quizCategories.map((category) => category.id.toString()),
-	// 		);
-	// 	} else {
-	// 		setValue("categoryIds", []);
-	// 	}
-	// }, [getValues, quizCategories, setValue]);
+		if (hasSelectedAll) {
+			setValue(
+				"categoryIds",
+				quizCategories.map((category) => category.id.toString()),
+			);
+		} else {
+			setValue("categoryIds", []);
+		}
+	}, [getValues, quizCategories, setValue]);
 
 	const handleInputSelect = useCallback(() => {
 		const { categoryIds } = getValues();
-
 		const isAllChecked = categoryIds.length === quizCategories.length;
 
-		if (isAllChecked) {
-			setValue("hasSelectedAll", true);
-		} else {
-			setValue("hasSelectedAll", false);
-		}
+		setValue("hasSelectedAll", isAllChecked);
 	}, [getValues, quizCategories.length, setValue]);
-
-	const handleFormChange = useCallback((): void => {
-		const { categoryIds } = getValues();
-
-		onChange({ categoryIds: categoryIds.map(Number) });
-	}, [getValues, onChange]);
 
 	if (isLoading) {
 		return <Loader />;
@@ -82,21 +66,22 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
 
 	return (
 		<section>
-			<form onChange={handleFormChange}>
-				{/* <Checkbox
-					variant="oval"
+			<form id="quiz-categories-form">
+				<Checkbox
 					control={control}
 					label="All"
 					name="hasSelectedAll"
 					onChange={handleSelectAll}
-				/> */}
+					options={[]}
+					variant="rounded"
+				/>
 				<Checkbox
 					control={control}
 					label="Categories"
 					name="categoryIds"
 					onChange={handleInputSelect}
 					options={categoryInputOptions}
-					variant="oval"
+					variant="rounded"
 				/>
 				<br />
 			</form>
