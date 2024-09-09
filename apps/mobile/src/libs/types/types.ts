@@ -9,6 +9,7 @@ export {
 	type RadioGroupItemStyle,
 	type RadioGroupOption,
 } from "./radio-group/types";
+export { type SliderData } from "./slider/slider";
 export {
 	type SectorInitialSharedValues,
 	type SectorParameters,
@@ -24,6 +25,7 @@ export {
 } from "react-hook-form";
 export {
 	type ImageSourcePropType,
+	type LayoutChangeEvent,
 	type StyleProp,
 	type TextStyle,
 	type ViewStyle,
