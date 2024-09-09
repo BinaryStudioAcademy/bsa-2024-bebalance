@@ -12,7 +12,7 @@ const getById = createAsyncThunk<
 	UserDto,
 	UserGetParametersDto,
 	AsyncThunkConfig
->(`${sliceName}/get`, (payload, { extra }) => {
+>(`${sliceName}/get-by-id`, (payload, { extra }) => {
 	const { userApi } = extra;
 	const { id } = payload;
 
