@@ -153,7 +153,7 @@ const Onboarding: React.FC = () => {
 								/>
 								<InfinitePager
 									infinitePagerReference={infinitePager}
-									renderPageComponent={renderPageComponent}
+									onPageRender={renderPageComponent}
 								/>
 								<View style={globalStyles.gap12}>
 									<Button
