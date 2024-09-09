@@ -47,25 +47,16 @@ const Onboarding: React.FC = () => {
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
 	const {
-		allAnswers,
-		currentAnswer,
+		answersByQuestionIndex,
+		currentQuestion,
 		currentQuestionIndex,
 		dataStatus,
-		isLastQuestion,
-		question,
-		totalQuestionsAmount,
-	} = useAppSelector(({ onboarding }) => ({
-		allAnswers: onboarding.answersByQuestionIndex,
-		currentAnswer:
-			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] ?? "",
-		currentQuestionIndex: onboarding.currentQuestionIndex,
-		dataStatus: onboarding.dataStatus,
-		isLastQuestion:
-			onboarding.currentQuestionIndex ===
-			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-		question: onboarding.currentQuestion,
-		totalQuestionsAmount: onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-	}));
+		questions,
+	} = useAppSelector((state) => state.onboarding);
+
+	const currentAnswer = answersByQuestionIndex[currentQuestionIndex] ?? "";
+	const totalQuestionsAmount = questions.length - PREVIOUS_INDEX_OFFSET;
+	const isLastQuestion = currentQuestionIndex === totalQuestionsAmount;
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
@@ -99,7 +90,7 @@ const Onboarding: React.FC = () => {
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: allAnswers });
+				handleSaveAnswers({ answerIds: answersByQuestionIndex });
 
 				return;
 			}
@@ -116,7 +107,7 @@ const Onboarding: React.FC = () => {
 			dispatch,
 			handleSaveAnswers,
 			currentQuestionIndex,
-			allAnswers,
+			answersByQuestionIndex,
 		],
 	);
 
@@ -137,8 +128,10 @@ const Onboarding: React.FC = () => {
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
 	const renderPageComponent = useCallback(() => {
-		return <Content control={control} errors={errors} question={question} />;
-	}, [control, errors, question]);
+		return (
+			<Content control={control} errors={errors} question={currentQuestion} />
+		);
+	}, [control, errors, currentQuestion]);
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
@@ -154,7 +147,7 @@ const Onboarding: React.FC = () => {
 							styles.container,
 						]}
 					>
-						{question && (
+						{currentQuestion && (
 							<>
 								<ProgressBar
 									currentItemIndex={currentQuestionIndex}

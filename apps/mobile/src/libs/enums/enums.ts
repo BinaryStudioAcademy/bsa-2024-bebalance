@@ -1,5 +1,6 @@
 export {
 	AngleGradient,
+	AnimationName,
 	BaseColor,
 	DataStatus,
 	GradientColor,
