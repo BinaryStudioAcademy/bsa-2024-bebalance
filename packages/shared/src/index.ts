@@ -13,6 +13,7 @@ export {
 	AuthError,
 	HTTPError,
 	OnboardingError,
+	OpenAIError,
 	QuizError,
 	UserError,
 	ValidationError,
@@ -40,6 +41,14 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
+export {
+	addMessageToThreadValidationSchema,
+	AiAssistantApiPath,
+	type AiAssistantMessageResponseDto,
+	AiAssistantMessageValidationSchema,
+	type BalanceWheelAnalysisResponseDto,
+	type ThreadMessageCreateDto,
+} from "./modules/ia-assistant/ai-assistant.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
@@ -71,6 +80,7 @@ export {
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
+export { type TaskDto, type TaskStatus } from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
