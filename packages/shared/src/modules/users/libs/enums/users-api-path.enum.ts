@@ -1,7 +1,7 @@
 const UsersApiPath = {
 	$ID: "/:id",
+	AVATAR: "/avatar",
 	ROOT: "/",
-	UPLOAD_AVATAR: "/avatar",
 } as const;
 
 export { UsersApiPath };
