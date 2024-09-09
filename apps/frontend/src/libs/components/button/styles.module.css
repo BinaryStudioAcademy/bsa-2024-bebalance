@@ -24,7 +24,7 @@
 	background-color: var(--brand);
 }
 
-.secondary {
+.secondary-button {
 	line-height: 22px;
 	color: var(--black);
 	background-color: var(--white);

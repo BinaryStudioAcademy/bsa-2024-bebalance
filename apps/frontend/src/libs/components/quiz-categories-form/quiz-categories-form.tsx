@@ -9,16 +9,23 @@ import {
 import { type InputOption } from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
-import { Checkbox, Loader } from "../components.js";
+import { Button, Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
-const QuizCategoriesForm: React.FC = () => {
-	const { control, getValues, setValue } = useAppForm<QuizCategoriesFormFields>(
-		{
+type Properties = {
+	buttonLabel: string;
+	onSubmit: (payload: QuizCategoriesFormFields) => void;
+};
+
+const QuizCategoriesForm: React.FC<Properties> = ({
+	buttonLabel,
+	onSubmit,
+}: Properties) => {
+	const { control, getValues, handleSubmit, setValue } =
+		useAppForm<QuizCategoriesFormFields>({
 			defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES,
-		},
-	);
+		});
 
 	const { isLoading, quizCategories } = useAppSelector(({ categories }) => {
 		const { dataStatus, items } = categories;
@@ -60,13 +67,22 @@ const QuizCategoriesForm: React.FC = () => {
 		setValue("hasSelectedAll", isAllChecked);
 	}, [getValues, quizCategories.length, setValue]);
 
+	const handleFormSubmit = useCallback(
+		(event_: React.BaseSyntheticEvent): void => {
+			void handleSubmit((payload) => {
+				onSubmit(payload);
+			})(event_);
+		},
+		[onSubmit, handleSubmit],
+	);
+
 	if (isLoading) {
 		return <Loader />;
 	}
 
 	return (
 		<section>
-			<form>
+			<form onSubmit={handleFormSubmit}>
 				<Checkbox
 					control={control}
 					label="All"
@@ -84,6 +100,7 @@ const QuizCategoriesForm: React.FC = () => {
 					variant="rounded"
 				/>
 				<br />
+				<Button label={buttonLabel} type="submit" variant="secondary" />
 			</form>
 		</section>
 	);
