@@ -1,7 +1,7 @@
 import "fastify";
 
-import { type AvatarFile } from "~/libs/plugins/plugins.js";
 import { type UserDto } from "~/libs/types/types.js";
+import { type AvatarFile } from "~/modules/files/files.js";
 
 declare module "fastify" {
 	interface FastifyRequest {

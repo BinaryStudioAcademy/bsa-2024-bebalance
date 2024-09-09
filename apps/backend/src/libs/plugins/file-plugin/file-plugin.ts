@@ -3,12 +3,11 @@ import fp from "fastify-plugin";
 
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { FileError } from "~/modules/files/files.js";
+import { type AvatarFile, FileError } from "~/modules/files/files.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
 import { FILE_SIZE_LIMIT } from "./libs/constants/constants.js";
 import { ImageMimetype } from "./libs/enums/enums.js";
-import { type AvatarFile } from "./libs/types/types.js";
 
 const filePlugin = fp((app, _, done) => {
 	app.register(fastifyMultipart);

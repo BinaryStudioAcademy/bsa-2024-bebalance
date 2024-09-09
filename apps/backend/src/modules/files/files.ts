@@ -11,3 +11,4 @@ export { fileService };
 export { FileEntity } from "./files.entity.js";
 export { type FileService } from "./files.service.js";
 export { FileError } from "./libs/exceptions/exceptions.js";
+export { type AvatarFile } from "./libs/types/types.js";

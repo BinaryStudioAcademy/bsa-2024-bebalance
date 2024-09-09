@@ -6,7 +6,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { type AvatarFile } from "~/libs/plugins/plugins.js";
+import { type AvatarFile } from "~/modules/files/files.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 

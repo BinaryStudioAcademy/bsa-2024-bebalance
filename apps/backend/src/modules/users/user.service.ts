@@ -1,9 +1,9 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { type AvatarFile } from "~/libs/plugins/plugins.js";
 import { type Service } from "~/libs/types/types.js";
 import {
+	type AvatarFile,
 	FileEntity,
 	FileError,
 	type FileService,
