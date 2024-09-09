@@ -6,7 +6,7 @@ import {
 } from "~/libs/modules/database/database.js";
 
 import { QuizQuestionModel } from "../quiz-questions/quiz-question.model.js";
-import { UserModel } from "../users/user.model.js";
+import { UserModel } from "../users/users.js";
 import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
 
 class QuizAnswerModel extends AbstractModel {
