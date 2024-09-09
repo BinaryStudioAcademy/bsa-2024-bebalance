@@ -133,20 +133,24 @@ const Onboarding: React.FC = () => {
 							})}
 							<div className={styles["button-container"]}>
 								{!isLastQuestion && (
+									<div className={styles["button-wrapper"]}>
+										<Button
+											isFluid
+											label="BACK"
+											onClick={handlePreviousStep}
+											type="button"
+											variant="secondary"
+										/>
+									</div>
+								)}
+								<div className={styles["button-wrapper"]}>
 									<Button
 										isFluid
-										label="BACK"
-										onClick={handlePreviousStep}
-										type="button"
-										variant="secondary"
+										isPrimary={isValid}
+										label={isLastQuestion ? "ANALYZE" : "NEXT"}
+										type="submit"
 									/>
-								)}
-								<Button
-									isFluid
-									isPrimary={isValid}
-									label={isLastQuestion ? "ANALYZE" : "NEXT"}
-									type="submit"
-								/>
+								</div>
 							</div>
 						</form>
 					</>

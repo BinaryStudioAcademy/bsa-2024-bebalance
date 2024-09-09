@@ -40,9 +40,6 @@
 	justify-content: center;
 	width: 342px;
 	margin-bottom: auto;
-}
-
-.answers label {
 	text-align: center;
 }
 
@@ -55,7 +52,7 @@
 	margin-top: 76px;
 }
 
-.button-container button {
+.button-container .button-wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: center;
