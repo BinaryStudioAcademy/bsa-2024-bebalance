@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.13.1...backend-v1.14.0) (2024-09-09)
+
+
+### Features
+
+* **frontend/backend/shared:** final questions screen bb-243 ([#314](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/314)) ([2fe7663](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2fe76632a9a64d7fdd0d047522b10109dc8c9d06))
+
+
+### Bug Fixes
+
+* **backend:** drop type on down bb-243 ([#353](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/353)) ([95bb4ad](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/95bb4ad3b1c4f13e3e081df22c0ea400b234fe85))
+
+## [1.13.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.13.0...backend-v1.13.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **backend:** saved user answers for onboarding questions bb-284 ([#337](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/337)) ([841c3c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/841c3c7750520335683de56efbf934fb64616791))
+
+## [1.13.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.12.0...backend-v1.13.0) (2024-09-07)
+
+
+### Features
+
+* **backend/frontend/shared:** balance wheel bb-216 ([#302](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/302)) ([8388e20](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8388e204fbbd8747d23149732702444911ae4453))
+
 ## [1.12.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.11.1...backend-v1.12.0) (2024-09-05)
 
 

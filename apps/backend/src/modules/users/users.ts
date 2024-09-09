@@ -8,12 +8,14 @@ import { UserModel } from "./user.model.js";
 import { UserRepository } from "./user.repository.js";
 import { UserService } from "./user.service.js";
 import { UserDetailsModel } from "./user-details.model.js";
+import { UserTaskDaysModel } from "./user-task-days.model.js";
 
-const userRepository = new UserRepository(
-	UserModel,
-	UserDetailsModel,
-	FileModel,
-);
+const userRepository = new UserRepository({
+	fileModel: FileModel,
+	userDetailsModel: UserDetailsModel,
+	userModel: UserModel,
+	userTaskDaysModel: UserTaskDaysModel,
+});
 const userService = new UserService(userRepository, encrypt, fileService);
 const userController = new UserController(logger, userService);
 
@@ -29,6 +31,7 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types.js";
 export {
+	notificationAnswersValidationSchema,
 	userForgotPasswordVaidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
