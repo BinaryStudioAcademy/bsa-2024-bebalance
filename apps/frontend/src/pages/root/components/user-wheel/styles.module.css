@@ -24,9 +24,9 @@
 	gap: 45px;
 	justify-content: center;
 	height: fit-content;
-	margin-bottom: 36px;
 }
 
 .container > button {
 	width: 306px;
+	margin-top: 36px;
 }
