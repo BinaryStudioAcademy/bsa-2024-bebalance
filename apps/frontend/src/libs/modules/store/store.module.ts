@@ -20,7 +20,7 @@ import { usersApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import {
 	createHandleErrorMiddleware,
-	handleRedirectMiddleware,
+	createHandleRedirectMiddleware,
 } from "./libs/middlewares/middlewares.js";
 
 type RootReducer = {
@@ -58,8 +58,8 @@ class Store {
 						extraArgument: this.extraArguments,
 					},
 				}).prepend([
-					createHandleErrorMiddleware({ notification, storage }),
-					handleRedirectMiddleware,
+					createHandleErrorMiddleware(this.extraArguments),
+					createHandleRedirectMiddleware(),
 				]);
 			},
 			reducer: {
@@ -84,4 +84,4 @@ class Store {
 	}
 }
 
-export { Store };
+export { type ExtraArguments, Store };

@@ -5,18 +5,33 @@ import { store } from "~/libs/modules/store/store.js";
 import { actions as appActions } from "~/modules/app/app.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
-const handleRedirectMiddleware: Middleware = () => {
-	return (next) => (action) => {
-		if (
-			isAction(action) &&
-			(action.type === authActions.resetPassword.fulfilled.type ||
-				action.type === authActions.checkIsResetPasswordExpired.rejected.type)
-		) {
-			store.instance.dispatch(appActions.changeLink(AppRoute.SIGN_IN));
-		}
+type Properties = {
+	action: unknown;
+	next: (action: unknown) => unknown;
+};
+
+const handleErrorMiddleware = ({ action, next }: Properties): unknown => {
+	if (
+		isAction(action) &&
+		(action.type === authActions.resetPassword.fulfilled.type ||
+			action.type === authActions.checkIsResetPasswordExpired.rejected.type)
+	) {
+		store.instance.dispatch(appActions.changeLink(AppRoute.SIGN_IN));
 
 		return next(action);
+	}
+
+	return next(action);
+};
+
+const createHandleRedirectMiddleware = (): Middleware => {
+	return () => {
+		return (next) => {
+			return (action) => {
+				handleErrorMiddleware({ action, next });
+			};
+		};
 	};
 };
 
-export { handleRedirectMiddleware };
+export { createHandleRedirectMiddleware };
