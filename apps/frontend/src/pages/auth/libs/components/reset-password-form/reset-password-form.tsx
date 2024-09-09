@@ -1,15 +1,11 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
-	useAppSelector,
 	useCallback,
 	useEffect,
-	useNavigate,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { actions as appActions } from "~/modules/app/app.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type ResetPasswordDto,
@@ -30,19 +26,15 @@ const ResetPasswordForm: React.FC<Properties> = ({
 	onSubmit,
 	token,
 }: Properties) => {
-	const redirectLink = useAppSelector((state) => state.app.redirectLink);
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
 
-	const { control, errors, getValues, handleSubmit, isValid, setError, watch } =
+	const { control, errors, getValues, handleSubmit, isValid, setError } =
 		useAppForm<ResetPasswordFormDto>({
 			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
 			validationSchema: userResetPasswordValidationSchema,
 		});
-
-	const newPasswordValue = watch("newPassword", "");
-	const confirmPasswordValue = watch("confirmPassword", "");
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -74,16 +66,10 @@ const ResetPasswordForm: React.FC<Properties> = ({
 	}, []);
 
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		void dispatch(authActions.checkIsResetPasswordExpired({ token }));
 	}, [dispatch, token]);
-
-	if (redirectLink === AppRoute.SIGN_IN) {
-		navigate(redirectLink);
-		dispatch(appActions.changeLink(null));
-	}
 
 	return (
 		<>
@@ -109,13 +95,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 					placeholder="*******"
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
-				<Button
-					isDisabled={
-						!isValid || newPasswordValue.length !== confirmPasswordValue.length
-					}
-					label="SAVE PASSWORD"
-					type="submit"
-				/>
+				<Button isDisabled={!isValid} label="SAVE PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

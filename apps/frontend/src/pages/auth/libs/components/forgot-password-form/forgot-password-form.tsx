@@ -13,7 +13,7 @@ type Properties = {
 };
 
 const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit, watch } = useAppForm<EmailDto>({
+	const { control, errors, getValues, handleSubmit } = useAppForm<EmailDto>({
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
@@ -25,7 +25,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		[onSubmit, handleSubmit],
 	);
 
-	const email = watch("email", "");
+	const email = getValues("email");
 
 	return (
 		<>
