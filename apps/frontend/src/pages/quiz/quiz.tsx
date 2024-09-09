@@ -40,7 +40,7 @@ const Quiz: React.FC = () => {
 
 	useEffect(() => {
 		if (dataStatus === DataStatus.FULFILLED && scores.length > ZERO) {
-			setStep(Step.QUIZ);
+			setStep(Step.INTRODUCTION);
 		}
 	}, [dataStatus, scores]);
 
