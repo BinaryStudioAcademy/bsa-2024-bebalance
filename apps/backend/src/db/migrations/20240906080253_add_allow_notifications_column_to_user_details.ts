@@ -21,10 +21,12 @@ function up(knex: Knex): Promise<void> {
 	});
 }
 
-function down(knex: Knex): Promise<void> {
-	return knex.schema.alterTable(TABLE_NAME, (table) => {
+async function down(knex: Knex): Promise<void> {
+	await knex.schema.alterTable(TABLE_NAME, (table) => {
 		table.dropColumn(COLUMN_NAME);
 	});
+
+	await knex.raw(`DROP TYPE IF EXISTS ${COLUMN_NAME}_enum;`);
 }
 
 export { down, up };
