@@ -6,7 +6,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { type AvatarFile } from "~/modules/files/files.js";
+import { type File } from "~/modules/files/files.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
@@ -75,7 +75,7 @@ class UserController extends BaseController {
 			handler: (options) =>
 				this.updateAvatar(
 					options as APIHandlerOptions<{
-						uploadedFile: AvatarFile;
+						uploadedFile: File;
 						user: UserDto;
 					}>,
 				),
@@ -323,7 +323,7 @@ class UserController extends BaseController {
 	 */
 	private async updateAvatar(
 		options: APIHandlerOptions<{
-			uploadedFile: AvatarFile;
+			uploadedFile: File;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {

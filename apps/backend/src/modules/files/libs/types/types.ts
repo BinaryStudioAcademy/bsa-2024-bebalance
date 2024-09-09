@@ -1,1 +1,1 @@
-export { type AvatarFile } from "./avatar-file.type.js";
+export { type File } from "./file.type.js";

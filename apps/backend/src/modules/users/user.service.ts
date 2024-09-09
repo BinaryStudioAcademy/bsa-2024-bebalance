@@ -3,7 +3,7 @@ import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import {
-	type AvatarFile,
+	type File,
 	FileEntity,
 	FileError,
 	type FileService,
@@ -106,7 +106,7 @@ class UserService implements Service {
 
 	public async updateAvatar(
 		userId: number,
-		avatarFile?: AvatarFile,
+		avatarFile?: File,
 	): Promise<null | UserEntity> {
 		if (!avatarFile) {
 			throw new UserError({

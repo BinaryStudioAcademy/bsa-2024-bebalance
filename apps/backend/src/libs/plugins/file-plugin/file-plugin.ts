@@ -1,13 +1,12 @@
 import fastifyMultipart, { type MultipartFile } from "@fastify/multipart";
 import fp from "fastify-plugin";
 
-import { ErrorMessage } from "~/libs/enums/enums.js";
+import { ContentType, ErrorMessage } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type AvatarFile, FileError } from "~/modules/files/files.js";
+import { type File, FileError } from "~/modules/files/files.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
 import { FILE_SIZE_LIMIT } from "./libs/constants/constants.js";
-import { ImageMimetype } from "./libs/enums/enums.js";
 
 const filePlugin = fp((app, _, done) => {
 	app.register(fastifyMultipart);
@@ -24,18 +23,17 @@ const filePlugin = fp((app, _, done) => {
 				})) as MultipartFile;
 
 				if (
-					!Object.values(ImageMimetype).includes(
-						file.mimetype as ValueOf<typeof ImageMimetype>,
-					)
+					file.mimetype === ContentType.JPEG ||
+					file.mimetype === ContentType.PNG
 				) {
 					throw new FileError({
 						message: ErrorMessage.UNSUPPORTED_FILE_TYPE,
 					});
 				}
 
-				const avatarFile: AvatarFile = {
+				const avatarFile: File = {
 					buffer: await file.toBuffer(),
-					contentType: file.mimetype as ValueOf<typeof ImageMimetype>,
+					contentType: file.mimetype as ValueOf<typeof ContentType>,
 					key: file.filename,
 				};
 
