@@ -124,12 +124,6 @@ class UserService implements Service {
 			});
 		}
 
-		const file = {
-			contentType: avatarFile.contentType,
-			fileBuffer: avatarFile.buffer,
-			fileName: avatarFile.key,
-		};
-
 		const { avatarFileId } = user.toObject();
 		let newFileEntity: FileEntity;
 
@@ -144,14 +138,14 @@ class UserService implements Service {
 
 			const newAvatar = await this.fileService.update({
 				fileId: userAvatar.toObject().id,
-				...file,
+				...avatarFile,
 			});
 
 			newFileEntity = FileEntity.initializeNew({
 				url: newAvatar?.toObject().url as string,
 			});
 		} else {
-			const uploadedFile = await this.fileService.upload(file);
+			const uploadedFile = await this.fileService.upload(avatarFile);
 
 			newFileEntity = FileEntity.initializeNew({
 				url: uploadedFile.toObject().url,

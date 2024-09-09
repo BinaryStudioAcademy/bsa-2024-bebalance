@@ -61,7 +61,7 @@ class FileRepository implements Repository {
 	}
 
 	public async findByUrl(fileUrl: string): Promise<FileEntity | null> {
-		const [file] = await this.fileModel.query().where({
+		const file = await this.fileModel.query().findOne({
 			url: fileUrl,
 		});
 

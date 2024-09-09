@@ -8,4 +8,5 @@ const s3 = new BaseS3({
 	secretAccessKey: config.ENV.S3_BUCKET.SECRET_ACCESS_KEY,
 });
 
+export { type BaseS3 } from "./base-s3.module.js";
 export { s3 };

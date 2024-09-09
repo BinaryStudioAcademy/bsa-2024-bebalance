@@ -1,6 +1,6 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { type BaseS3 } from "~/libs/modules/s3/base-s3.module.js";
+import { type BaseS3 } from "~/libs/modules/s3/s3.js";
 
 import { FileEntity } from "./files.entity.js";
 import { type FileRepository } from "./files.repository.js";
@@ -48,15 +48,15 @@ class FileService {
 	}
 
 	public async update({
+		buffer,
 		contentType,
-		fileBuffer,
 		fileId,
-		fileName,
+		key,
 	}: {
+		buffer: Buffer;
 		contentType: string;
-		fileBuffer: Buffer;
 		fileId: number;
-		fileName: string;
+		key: string;
 	}): Promise<FileEntity | null> {
 		const fileToUpdate = await this.fileRepository.find(fileId);
 
@@ -72,12 +72,12 @@ class FileService {
 			key: oldFileKey,
 		});
 
-		const fileKey = createFileKey(fileName);
+		const fileKey = createFileKey(key);
 
 		await this.s3.uploadFile({
-			body: fileBuffer,
+			body: buffer,
 			contentType,
-			key: fileKey,
+			key,
 		});
 
 		const fileUrl = createFileUrl(fileKey);
@@ -86,18 +86,18 @@ class FileService {
 	}
 
 	public async upload({
+		buffer,
 		contentType,
-		fileBuffer,
-		fileName,
+		key,
 	}: {
+		buffer: Buffer;
 		contentType: string;
-		fileBuffer: Buffer;
-		fileName: string;
+		key: string;
 	}): Promise<FileEntity> {
-		const fileKey = createFileKey(fileName);
+		const fileKey = createFileKey(key);
 
 		await this.s3.uploadFile({
-			body: fileBuffer,
+			body: buffer,
 			contentType,
 			key: fileKey,
 		});
