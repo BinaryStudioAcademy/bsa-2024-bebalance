@@ -155,7 +155,7 @@ class UserController extends BaseController {
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
-	 *         content:
+	 *          content:
 	 *           application/json:
 	 *             schema:
 	 *               type: object
