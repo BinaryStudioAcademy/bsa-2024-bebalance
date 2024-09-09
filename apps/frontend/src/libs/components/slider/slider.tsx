@@ -16,6 +16,7 @@ type Properties = {
 const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 	const MAX = 10;
 	const MIN = 0;
+	const MIN_SCORE_VALUE = 1;
 
 	const initialStep = 0;
 	const [sliderValue, setSliderValue] = useState<number>(value);
@@ -23,9 +24,30 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 	const rangeReference = useRef<HTMLInputElement>(null);
 	const bubbleLabelReference = useRef<HTMLLabelElement>(null);
 
+	const handleSliderBackgroundUpdate = useCallback((): void => {
+		if (!rangeReference.current) {
+			return;
+		}
+
+		const FULL_PROGRESS = 100;
+
+		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
+		const remainingProgress = FULL_PROGRESS - currentProgress;
+		const gradientStrip = FULL_PROGRESS / sliderValue;
+
+		// TODO: add gradient based on the category name
+		rangeReference.current.style.background = `
+		repeating-linear-gradient(to right, #cb00ff, #7f21ce ${String(gradientStrip)}%)
+		0% 0% / ${String(currentProgress)}% 100% no-repeat,
+		#d9d9d9 ${String(currentProgress)}%
+		0% / ${String(remainingProgress)}% 100%`;
+	}, [sliderValue, MIN, MAX]);
+
 	const handleValueChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			setSliderValue(Number(event.target.value));
+			const value = Number(event.target.value);
+
+			setSliderValue(value < MIN_SCORE_VALUE ? MIN_SCORE_VALUE : value);
 		},
 		[],
 	);
@@ -48,8 +70,9 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 			return;
 		}
 
+		handleSliderBackgroundUpdate();
 		bubbleLabelReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
-	}, [sliderValue, step]);
+	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
 	return (
 		<div className={styles["container"]}>

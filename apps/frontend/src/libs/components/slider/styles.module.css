@@ -27,7 +27,7 @@
 	right: 40px;
 	left: 5px;
 	width: 20px;
-	height: 30px;
+	height: 36px;
 	font-size: 20px;
 	color: var(--white);
 	text-align: center;
@@ -46,7 +46,6 @@
 	appearance: none;
 	background: #d9d9d9;
 	border-radius: 4px;
-	transition: 0.2s;
 	transition: opacity 0.2s;
 }
 
@@ -55,7 +54,7 @@
 	height: 16.38px;
 	appearance: none;
 	cursor: pointer;
-	background: var(--brand);
+	background: linear-gradient(302deg, #7f21ce 0%, #cb00ff 98.18%);
 	border-radius: 50%;
 }
 
@@ -64,6 +63,6 @@
 	height: 16px;
 	appearance: none;
 	cursor: pointer;
-	background: var(--brand);
+	background: linear-gradient(302deg, #7f21ce 0%, #cb00ff 98.18%);
 	border-radius: 50%;
 }
