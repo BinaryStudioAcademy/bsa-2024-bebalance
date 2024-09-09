@@ -19,7 +19,7 @@ import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
 import { usersApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import {
-	handleErrorMiddleware,
+	createHandleErrorMiddleware,
 	handleRedirectMiddleware,
 } from "./libs/middlewares/middlewares.js";
 
@@ -57,7 +57,10 @@ class Store {
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
-				}).prepend([handleErrorMiddleware, handleRedirectMiddleware]);
+				}).prepend([
+					createHandleErrorMiddleware({ notification, storage }),
+					handleRedirectMiddleware,
+				]);
 			},
 			reducer: {
 				app: appReducer,
