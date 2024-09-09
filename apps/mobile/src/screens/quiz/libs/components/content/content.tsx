@@ -38,7 +38,10 @@ const Content: React.FC<Properties<QuizFormValues>> = ({
 
 	return (
 		<>
-			<Text preset="subheading" style={[globalStyles.mv48, styles.title]}>
+			<Text
+				preset="subheading"
+				style={[globalStyles.mb32, globalStyles.mt12, styles.title]}
+			>
 				{question?.label}
 			</Text>
 			<RadioGroup

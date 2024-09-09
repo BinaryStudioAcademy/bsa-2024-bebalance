@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
 		borderRadius: 30,
 		zIndex: 1,
 	},
+	title: {
+		textAlign: "center",
+	},
 });
 
 export { styles };

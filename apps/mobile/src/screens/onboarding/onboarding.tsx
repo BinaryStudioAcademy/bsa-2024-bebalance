@@ -1,7 +1,7 @@
 import {
 	BackgroundWrapper,
 	Button,
-	type InfinitePagerImperativeApi,
+	InfinitePager,
 	LoaderWrapper,
 	ProgressBar,
 	ScreenWrapper,
@@ -19,11 +19,13 @@ import {
 	useRef,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type NativeStackNavigationProp } from "~/libs/types/types";
+import {
+	type InfinitePagerImperativeApi,
+	type NativeStackNavigationProp,
+} from "~/libs/types/types";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
-import { InfinitePager } from "./../../libs/components/infinite-pager/infinite-pager";
 import { Content } from "./libs/components/components";
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants";
 import {
@@ -122,8 +124,6 @@ const Onboarding: React.FC = () => {
 			navigation.navigate(RootScreenName.WELCOME);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
-
-	console.log(`ONE QUESTION ONBOARDING`, question);
 
 	const renderPageComponent = useCallback(() => {
 		return (

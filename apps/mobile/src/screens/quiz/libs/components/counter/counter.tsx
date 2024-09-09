@@ -14,8 +14,6 @@ const Counter: React.FC<Properties> = ({ currentStep, totalSteps }) => {
 	return (
 		<View
 			style={[
-				globalStyles.alignItemsCenter,
-				globalStyles.justifyContentCenter,
 				globalStyles.ph16,
 				globalStyles.pv4,
 				globalStyles.flexDirectionRow,

@@ -1,5 +1,6 @@
 export { type AsyncThunkConfig } from "./app/app";
 export { type IconName } from "./icon/icon";
+export { type InfinitePagerImperativeApi } from "./infinite-pager/types";
 export {
 	type BottomTabNavigationParameterList,
 	type NavigationScreenProperties,

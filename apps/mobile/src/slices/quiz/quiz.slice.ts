@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
@@ -8,13 +8,20 @@ import { type QuizQuestionDto } from "~/packages/quiz/quiz";
 import { getAllQuestions } from "./actions";
 
 type State = {
+	answersByQuestionIndex: number[];
 	currentQuestion: null | QuizQuestionDto;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: QuizQuestionDto[];
 };
 
+type Properties = {
+	answerId: number;
+	questionIndex: number;
+};
+
 const initialState: State = {
+	answersByQuestionIndex: [],
 	currentQuestion: null,
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
@@ -30,7 +37,7 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.questions = action.payload.items.flat();
 			state.currentQuestion =
-				state.questions[state.currentQuestionIndex] || null;
+				state.questions[state.currentQuestionIndex] ?? null;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -42,19 +49,19 @@ const { actions, name, reducer } = createSlice({
 		nextQuestion(state) {
 			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentQuestion =
-				state.questions[state.currentQuestionIndex] || null;
+				state.questions[state.currentQuestionIndex] ?? null;
 		},
 		previousQuestion(state) {
 			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
 				state.currentQuestionIndex -= PREVIOUS_INDEX_OFFSET;
 				state.currentQuestion =
-					state.questions[state.currentQuestionIndex] || null;
+					state.questions[state.currentQuestionIndex] ?? null;
 			}
 		},
-		// setAnswersByQuestionIndex: (state, action: PayloadAction<Properties>) => {
-		// 	const { answerId, questionIndex } = action.payload;
-		// 	state.answersByQuestionIndex[questionIndex] = answerId;
-		// },
+		setAnswersByQuestionIndex: (state, action: PayloadAction<Properties>) => {
+			const { answerId, questionIndex } = action.payload;
+			state.answersByQuestionIndex[questionIndex] = answerId;
+		},
 	},
 });
 

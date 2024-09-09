@@ -1,12 +1,10 @@
 import React from "react";
-import {
-	type InfinitePagerImperativeApi,
-	default as RNInfinitePager,
-} from "react-native-infinite-pager";
+import { default as RNInfinitePager } from "react-native-infinite-pager";
 
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
+import { type InfinitePagerImperativeApi } from "~/libs/types/types";
 
-import { getPageInterpolatorSlide } from "./libs/animations/get-page-interpolator-slide";
+import { getPageInterpolatorSlide } from "./libs/animations/animations";
 import { ANIMATION_CONFIG } from "./libs/constants/constants";
 
 type Properties = {
