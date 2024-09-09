@@ -46,25 +46,26 @@ const Onboarding: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
-	const allAnswers = useAppSelector(
-		(state) => state.onboarding.answersByQuestionIndex,
-	);
-	const currentAnswer = useAppSelector(
-		(state) => state.onboarding.answersByQuestionIndex,
-	);
-	const question = useAppSelector((state) => state.onboarding.currentQuestion);
-	const currentQuestionIndex = useAppSelector(
-		(state) => state.onboarding.currentQuestionIndex,
-	);
-	const dataStatus = useAppSelector((state) => state.onboarding.dataStatus);
-	const isLastQuestion = useAppSelector(
-		(state) =>
-			state.onboarding.currentQuestionIndex ===
-			state.onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-	);
-	const totalQuestionsAmount = useAppSelector(
-		(state) => state.onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-	);
+	const {
+		allAnswers,
+		currentAnswer,
+		currentQuestionIndex,
+		dataStatus,
+		isLastQuestion,
+		question,
+		totalQuestionsAmount,
+	} = useAppSelector(({ onboarding }) => ({
+		allAnswers: onboarding.answersByQuestionIndex,
+		currentAnswer:
+			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] ?? "",
+		currentQuestionIndex: onboarding.currentQuestionIndex,
+		dataStatus: onboarding.dataStatus,
+		isLastQuestion:
+			onboarding.currentQuestionIndex ===
+			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
+		question: onboarding.currentQuestion,
+		totalQuestionsAmount: onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
+	}));
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
