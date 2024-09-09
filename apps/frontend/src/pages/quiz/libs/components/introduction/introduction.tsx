@@ -22,7 +22,7 @@ const Introduction: React.FC<Properties> = ({ onNext }: Properties) => {
 					outstanding and which areas you are missing out on
 				</p>
 				<div className={styles["btn"]}>
-					<Button isFluid label="CONTINUE" onClick={onNext} type="button" />
+					<Button label="CONTINUE" onClick={onNext} type="button" />
 				</div>
 			</div>
 			<RippleEffectBg className={styles["ripple-effect__background1"]} />

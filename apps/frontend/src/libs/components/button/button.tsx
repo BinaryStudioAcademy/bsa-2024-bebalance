@@ -9,7 +9,6 @@ type Properties = {
 	iconName?: IconName;
 	iconPosition?: "center" | "left" | "right";
 	isDisabled?: boolean;
-	isFluid?: boolean;
 	isPrimary?: boolean;
 	label: string;
 	onClick?: (() => void) | undefined;
@@ -22,7 +21,6 @@ const Button: React.FC<Properties> = ({
 	iconName,
 	iconPosition = "right",
 	isDisabled = false,
-	isFluid = false,
 	isPrimary = true,
 	label,
 	onClick,
@@ -33,7 +31,6 @@ const Button: React.FC<Properties> = ({
 		className={getValidClassNames(
 			styles["btn"],
 			variant === "icon" && styles[`position-${iconPosition}`],
-			isFluid && styles["fluid"],
 			isPrimary && styles["primary"],
 			!isPrimary && styles["secondary"],
 			variant && styles[`${variant}-button`],

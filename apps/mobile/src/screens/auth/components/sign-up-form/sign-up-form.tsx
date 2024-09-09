@@ -82,7 +82,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				errors={errors}
 				label="Email"
 				name="email"
-				placeholder="be@balance.com"
+				placeholder="name@example.com"
 			/>
 			<Input
 				accessoryRight={

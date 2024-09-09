@@ -1,6 +1,9 @@
 .input-wrapper {
 	display: flex;
 	flex-direction: column;
+}
+
+.radio-wrapper {
 	gap: 24px;
 }
 
@@ -32,22 +35,23 @@
 .radio-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 12px;
 }
 
 .radio-label {
 	font-size: 20px;
 	font-weight: 700;
-	line-height: 1.4;
+	line-height: 28px;
 }
 
 .radio-option {
 	display: flex;
 	gap: 8px;
-	padding: 8px 10px;
+	align-items: center;
+	padding: 10px;
 	font-size: 16px;
 	font-weight: 500;
-	line-height: 1.4;
+	line-height: 22px;
 	cursor: pointer;
 	border: 1px solid var(--light-gray);
 	border-radius: 5px;
@@ -88,4 +92,27 @@
 	background-color: var(--white);
 	border-radius: 50%;
 	transform: translate(-50%, -50%);
+}
+
+@media (width <= 768px) {
+	.radio-label {
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 25px;
+		text-align: center;
+	}
+
+	.radio-field {
+		display: none;
+	}
+
+	.radio-container {
+		justify-content: center;
+	}
+
+	.radio-option {
+		justify-content: center;
+		width: 100%;
+		max-width: 312px;
+	}
 }

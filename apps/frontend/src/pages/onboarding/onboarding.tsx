@@ -116,39 +116,37 @@ const Onboarding: React.FC = () => {
 							/>
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>
-						<div className={styles["answers"]}>
-							<form className={styles["answers"]} onSubmit={handleFormSubmit}>
-								{question.answers.map((answer) => {
-									const answerOptions = [
-										{ label: answer.label, value: answer.id.toString() },
-									];
+						<form className={styles["answers"]} onSubmit={handleFormSubmit}>
+							{question.answers.map((answer) => {
+								const answerOptions = [
+									{ label: answer.label, value: answer.id.toString() },
+								];
 
-									return (
-										<OnboardingAnswer
-											control={control}
-											key={answer.id}
-											name="answer"
-											options={answerOptions}
-										/>
-									);
-								})}
-								<div className={styles["button-container"]}>
-									{!isLastQuestion && (
-										<Button
-											label="BACK"
-											onClick={handlePreviousStep}
-											type="button"
-											variant="secondary"
-										/>
-									)}
-									<Button
-										isPrimary={isValid}
-										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										type="submit"
+								return (
+									<OnboardingAnswer
+										control={control}
+										key={answer.id}
+										name="answer"
+										options={answerOptions}
 									/>
-								</div>
-							</form>
-						</div>
+								);
+							})}
+							<div className={styles["button-container"]}>
+								{!isLastQuestion && (
+									<Button
+										label="BACK"
+										onClick={handlePreviousStep}
+										type="button"
+										variant="secondary"
+									/>
+								)}
+								<Button
+									isPrimary={isValid}
+									label={isLastQuestion ? "ANALYZE" : "NEXT"}
+									type="submit"
+								/>
+							</div>
+						</form>
 					</>
 				) : (
 					<div className={styles["loader"]}>

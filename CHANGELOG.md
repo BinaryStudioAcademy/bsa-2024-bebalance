@@ -1,5 +1,88 @@
 # Changelog
 
+## [1.39.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.2...v1.39.0) (2024-09-09)
+
+
+### Features
+
+* **frontend/backend/shared:** final questions screen bb-243 ([#314](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/314)) ([2fe7663](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2fe76632a9a64d7fdd0d047522b10109dc8c9d06))
+* **mobile:** balance wheel animated loader bb-265 ([#300](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/300)) ([af9c2f4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/af9c2f4c13864ec0c81911361b8767e1a6ad89bd))
+* **mobile:** onboarding screen bb-127 ([#295](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/295)) ([8070f84](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8070f8444886464090fee948483eef8a6699da19))
+* **mobile:** slider component bb-197 ([#315](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/315)) ([5b559a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b559a8dd00202b8d6414984d19b15c283aaa068))
+
+
+### Bug Fixes
+
+* **backend:** drop type on down bb-243 ([#353](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/353)) ([95bb4ad](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/95bb4ad3b1c4f13e3e081df22c0ea400b234fe85))
+
+## [1.38.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.1...v1.38.2) (2024-09-07)
+
+
+### Bug Fixes
+
+* **backend:** saved user answers for onboarding questions bb-284 ([#337](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/337)) ([841c3c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/841c3c7750520335683de56efbf934fb64616791))
+
+## [1.38.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.0...v1.38.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **frontend:** add font-size property to forgot password link bb-331 ([#333](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/333)) ([3a6acfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3a6acfc06ae851cf900e391fc98dfc270042189e))
+
+## [1.38.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.37.0...v1.38.0) (2024-09-07)
+
+
+### Features
+
+* **backend/frontend/shared:** balance wheel bb-216 ([#302](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/302)) ([8388e20](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8388e204fbbd8747d23149732702444911ae4453))
+* Balance Wheel animation bb-204 ([#318](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/318)) ([071044d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/071044d06edad2eaea448b7c8c46b9c38ae6cbdc))
+* **frontend:** implement hover state for buttons bb-310 ([#328](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/328)) ([1e5f54a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1e5f54af8f2d7d7399bcab458de927e7ad8e79f4))
+
+## [1.37.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.36.0...v1.37.0) (2024-09-06)
+
+
+### Features
+
+* **frontend:** add new text for a loader component bb-243 ([#325](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/325)) ([c075692](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c075692c2bae658fda08d9eca206d77a71a9d5a2))
+
+## [1.36.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.35.0...v1.36.0) (2024-09-06)
+
+
+### Features
+
+* **frontend:** change the text on not found page bb-278 ([#322](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/322)) ([bde2de0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bde2de05fa5cbb8de7cccf3c76ba5800ca77b0da))
+* **frontend:** quiz question screen mobile responsiveness bb-290 ([#316](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/316)) ([90a64c9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/90a64c9241518c60bb695f9835a71dbca8ab5e4a))
+
+
+### Bug Fixes
+
+* **frontend:** fix extra spaces between label and field bb-312 ([#317](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/317)) ([b910578](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b9105785c58f562279e6da2e617076252476cb50))
+* rename placeholder for email bb-197 ([#320](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/320)) ([a3c737c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a3c737c5ee45820d40e375be76c6f5c585d67a08))
+
+## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.34.0...v1.35.0) (2024-09-05)
+
+
+### Features
+
+* **mobile:** sign-out functionality bb-267 ([#297](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/297)) ([9a14179](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9a141794b514191801aa323a31bccd7986640eae))
+
+
+### Bug Fixes
+
+* **frontend:** fix skipping category on next button event bb-89 ([#307](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/307)) ([8331add](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8331addc2460876740e1b614f587f8adfbcc9766))
+
+## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.33.0...v1.34.0) (2024-09-05)
+
+
+### Features
+
+* **frontend:** make onboarding screen mobile responsive bb-289 ([#301](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/301)) ([7e55cd8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7e55cd865b7caccd8dfdb53d7a16c5643a00712e))
+
+
+### Bug Fixes
+
+* **frontend:** solve unclickable radio buttons bb-89 ([#304](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/304)) ([469c037](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/469c037e4608fe48d42617e6f906c509a67a4d46))
+
 ## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.32.0...v1.33.0) (2024-09-05)
 
 

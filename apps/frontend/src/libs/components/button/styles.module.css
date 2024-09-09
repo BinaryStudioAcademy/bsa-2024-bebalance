@@ -2,11 +2,10 @@
 	display: inline-block;
 	width: 100%;
 	min-height: 16px;
-	padding: 12px 24px;
+	padding: 10px 0;
 	margin: 0;
 	font-size: 16px;
 	font-weight: 700;
-	line-height: 24px;
 	text-align: center;
 	text-transform: uppercase;
 	cursor: pointer;
@@ -15,19 +14,26 @@
 	outline: 0;
 }
 
-.fluid {
-	width: 100%;
-}
-
 .primary {
+	line-height: 24px;
 	color: var(--white);
 	background-color: var(--black);
 }
 
+.primary:hover {
+	background-color: var(--brand);
+}
+
 .secondary {
+	line-height: 22px;
 	color: var(--black);
 	background-color: var(--white);
 	border: 1px solid var(--black);
+}
+
+.secondary:hover {
+	color: var(--brand);
+	border-color: var(--brand);
 }
 
 .icon-button {

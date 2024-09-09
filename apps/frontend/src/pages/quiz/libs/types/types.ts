@@ -1,5 +1,1 @@
-type QuizFormValues = {
-	[key: string]: number;
-};
-
-export { type QuizFormValues };
+export { type QuizFormValues } from "./quiz-form-values.types.js";

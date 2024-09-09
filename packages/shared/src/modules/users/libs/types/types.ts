@@ -1,4 +1,6 @@
 export { type EmailDto } from "./email-dto.type.js";
+export { type NotificationAnswersPayloadDto } from "./notification-answers-payload-dto.type.js";
+export { type NotificationAnswersRequestDto } from "./notification-answers-request-dto.type.js";
 export { type ResetPasswordDto } from "./reset-password-dto.type.js";
 export { type ResetPasswordFormDto } from "./reset-password-form-dto.type.js";
 export { type ResetPasswordLinkDto } from "./reset-password-link-dto.type.js";

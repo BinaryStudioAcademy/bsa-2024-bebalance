@@ -8,14 +8,23 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { useCallback } from "~/libs/hooks/hooks";
+import { RootScreenName } from "~/libs/enums/enums";
+import { useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type ImageSourcePropType } from "~/libs/types/types";
+import {
+	type ImageSourcePropType,
+	type NativeStackNavigationProp,
+	type RootNavigationParameterList,
+} from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 const QuizEntry: React.FC = () => {
-	const handleStartPress = useCallback((): void => {}, []);
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
+	const handleStartPress = useCallback((): void => {
+		navigation.navigate(RootScreenName.WHEEL_LOADING);
+	}, [navigation]);
 
 	return (
 		<BackgroundWrapper>
