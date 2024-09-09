@@ -29,7 +29,6 @@ const Root: React.FC = () => {
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
 				<NativeStack.Group>
-					<NativeStack.Screen component={Quiz} name={RootScreenName.QUIZ} />
 					<NativeStack.Screen
 						component={Onboarding}
 						name={RootScreenName.ONBOARDING}
@@ -42,6 +41,7 @@ const Root: React.FC = () => {
 						component={QuizEntry}
 						name={RootScreenName.QUIZ_ENTRY}
 					/>
+					<NativeStack.Screen component={Quiz} name={RootScreenName.QUIZ} />
 					<NativeStack.Screen
 						component={WheelLoading}
 						name={RootScreenName.WHEEL_LOADING}

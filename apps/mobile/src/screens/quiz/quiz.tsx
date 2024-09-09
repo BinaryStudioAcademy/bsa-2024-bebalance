@@ -44,22 +44,16 @@ const Quiz: React.FC = () => {
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
 	const {
-		currentAnswer,
+		answersByQuestionIndex,
+		currentQuestion,
 		currentQuestionIndex,
 		dataStatus,
-		isLastQuestion,
-		question,
-		totalQuestionsAmount,
-	} = useAppSelector(({ quiz }) => ({
-		currentAnswer: quiz.answersByQuestionIndex[quiz.currentQuestionIndex] ?? "",
-		currentQuestionIndex: quiz.currentQuestionIndex,
-		dataStatus: quiz.dataStatus,
-		isLastQuestion:
-			quiz.currentQuestionIndex ===
-			quiz.questions.length - PREVIOUS_INDEX_OFFSET,
-		question: quiz.currentQuestion,
-		totalQuestionsAmount: quiz.questions.length,
-	}));
+		questions,
+	} = useAppSelector((state) => state.quiz);
+
+	const currentAnswer = answersByQuestionIndex[currentQuestionIndex] ?? "";
+	const totalQuestionsAmount = questions.length - PREVIOUS_INDEX_OFFSET;
+	const isLastQuestion = currentQuestionIndex === totalQuestionsAmount;
 
 	useEffect(() => {
 		void dispatch(quizActions.getAllQuestions());
@@ -91,7 +85,7 @@ const Quiz: React.FC = () => {
 			void dispatch(quizActions.nextQuestion());
 		},
 
-		[isLastQuestion, dispatch, currentQuestionIndex],
+		[dispatch, currentQuestionIndex],
 	);
 
 	const handlePreviousClick = useCallback(() => {
@@ -106,13 +100,15 @@ const Quiz: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WELCOME);
+			navigation.navigate(RootScreenName.WHEEL_LOADING);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
 	const renderPageComponent = useCallback(() => {
-		return <Content control={control} errors={errors} question={question} />;
-	}, [control, errors, question]);
+		return (
+			<Content control={control} errors={errors} question={currentQuestion} />
+		);
+	}, [control, errors, currentQuestion]);
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
@@ -129,7 +125,7 @@ const Quiz: React.FC = () => {
 							styles.container,
 						]}
 					>
-						{question && (
+						{currentQuestion && (
 							<>
 								<Text
 									preset="subheading"
