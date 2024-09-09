@@ -13,7 +13,7 @@
 	font-weight: bold;
 }
 
-label[for="range"] {
+.slider-bubble {
 	position: relative;
 	right: 5px;
 	bottom: 37px;
@@ -22,7 +22,7 @@ label[for="range"] {
 	width: fit-content;
 }
 
-label[for="range"] span {
+.bubble-value {
 	position: absolute;
 	right: 40px;
 	left: 5px;
@@ -34,7 +34,7 @@ label[for="range"] span {
 	pointer-events: none;
 }
 
-label[for="range"] svg {
+.bubble-icon-wrapper {
 	position: absolute;
 	z-index: -1;
 	pointer-events: none;

@@ -64,9 +64,15 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 				type="range"
 				value={sliderValue}
 			/>
-			<label htmlFor="range" ref={bubbleLabelReference}>
-				<span>{sliderValue}</span>
-				<Icon name="valueBubble" />
+			<label
+				className={styles["slider-bubble"]}
+				htmlFor="range"
+				ref={bubbleLabelReference}
+			>
+				<p className={styles["bubble-value"]}>{sliderValue}</p>
+				<span className={styles["bubble-icon-wrapper"]}>
+					<Icon name="valueBubble" />
+				</span>
 			</label>
 		</div>
 	);
