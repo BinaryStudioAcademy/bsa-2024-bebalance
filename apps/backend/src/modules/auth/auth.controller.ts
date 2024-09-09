@@ -105,7 +105,7 @@ class AuthController extends BaseController {
 					}>,
 				),
 			method: "GET",
-			path: AuthApiPath.CHECK_RESET_PASSWORD_EXP,
+			path: AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION,
 		});
 	}
 
