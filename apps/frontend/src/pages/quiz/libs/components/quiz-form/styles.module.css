@@ -57,6 +57,10 @@
 }
 
 @media (width <= 768px) {
+	.questions-form {
+		gap: 20px;
+	}
+
 	.quiz-container {
 		padding: 50px 15px 25px;
 	}
@@ -73,6 +77,7 @@
 		flex-direction: column;
 		width: 100%;
 		max-width: 309px;
+		margin-top: 20px;
 	}
 
 	.button-container {
