@@ -53,8 +53,10 @@ const UserWheel: React.FC = () => {
 					<ScoresEditModal data={scores} setClose={setIsEditingModalOpen} />
 				)}
 			</div>
-			{isEditingModalOpen || (
-				<Button label="edit my wheel results" onClick={handleEditing} />
+			{!isEditingModalOpen && (
+				<div className={styles["button-wrapper"]}>
+					<Button label="edit my wheel results" onClick={handleEditing} />
+				</div>
 			)}
 		</div>
 	);
