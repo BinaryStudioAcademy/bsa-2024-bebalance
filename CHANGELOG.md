@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.38.2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.1...v1.38.2) (2024-09-07)
+
+
+### Bug Fixes
+
+* **backend:** saved user answers for onboarding questions bb-284 ([#337](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/337)) ([841c3c7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/841c3c7750520335683de56efbf934fb64616791))
+
+## [1.38.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.0...v1.38.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **frontend:** add font-size property to forgot password link bb-331 ([#333](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/333)) ([3a6acfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3a6acfc06ae851cf900e391fc98dfc270042189e))
+
+## [1.38.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.37.0...v1.38.0) (2024-09-07)
+
+
+### Features
+
+* **backend/frontend/shared:** balance wheel bb-216 ([#302](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/302)) ([8388e20](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8388e204fbbd8747d23149732702444911ae4453))
+* Balance Wheel animation bb-204 ([#318](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/318)) ([071044d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/071044d06edad2eaea448b7c8c46b9c38ae6cbdc))
+* **frontend:** implement hover state for buttons bb-310 ([#328](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/328)) ([1e5f54a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1e5f54af8f2d7d7399bcab458de927e7ad8e79f4))
+
 ## [1.37.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.36.0...v1.37.0) (2024-09-06)
 
 
