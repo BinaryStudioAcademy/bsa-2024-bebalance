@@ -73,7 +73,7 @@
 	}
 }
 
-@media (width <= 640px) {
+@media (width <= 480px) {
 	.answers {
 		width: 100%;
 	}
