@@ -9,7 +9,12 @@ export {
 	type RadioGroupItemStyle,
 	type RadioGroupOption,
 } from "./radio-group/types";
-export { type WheelDataItem } from "./wheel/wheel";
+export {
+	type SectorInitialSharedValues,
+	type SectorParameters,
+	type SectorParametersCalculationData,
+	type WheelDataItem,
+} from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type Control,
@@ -25,6 +30,7 @@ export {
 } from "react-native";
 export { type LinearGradientProps } from "react-native-linear-gradient";
 export { type RadioButtonProps } from "react-native-radio-buttons-group";
+export { type SharedValue } from "react-native-reanimated";
 export {
 	type OnboardingQuestionResponseDto,
 	type ServerErrorDetail,

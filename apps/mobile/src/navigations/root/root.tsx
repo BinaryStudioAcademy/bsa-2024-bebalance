@@ -12,6 +12,7 @@ import { Auth } from "~/screens/auth/auth";
 import { Onboarding } from "~/screens/onboarding/onboarding";
 import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
 import { Welcome } from "~/screens/welcome/welcome";
+import { WheelLoading } from "~/screens/wheel-loading/wheel-loading";
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -38,6 +39,10 @@ const Root: React.FC = () => {
 					<NativeStack.Screen
 						component={QuizEntry}
 						name={RootScreenName.QUIZ_ENTRY}
+					/>
+					<NativeStack.Screen
+						component={WheelLoading}
+						name={RootScreenName.WHEEL_LOADING}
 					/>
 					<NativeStack.Screen
 						component={BottomTabsNavigator}
