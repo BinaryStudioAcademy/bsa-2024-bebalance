@@ -1,9 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
-import { type OnboardingGetAllResponseDto } from "~/modules/onboarding/onboarding.js";
+import {
+	type OnboardingAnswerRequestDto,
+	type OnboardingGetAllResponseDto,
+	type OnboardingUserAnswerDto,
+} from "~/modules/onboarding/onboarding.js";
 
 import { name as sliceName } from "./onboarding.slice.js";
+
+const createUserAnswers = createAsyncThunk<
+	OnboardingUserAnswerDto[],
+	OnboardingAnswerRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/create-user`, async (createAnswerPayload, { extra }) => {
+	const { onboardingApi } = extra;
+
+	return await onboardingApi.createUserAnswers(createAnswerPayload);
+});
 
 const getAll = createAsyncThunk<
 	OnboardingGetAllResponseDto,
@@ -15,4 +29,4 @@ const getAll = createAsyncThunk<
 	return onboardingApi.getAll();
 });
 
-export { getAll };
+export { createUserAnswers, getAll };

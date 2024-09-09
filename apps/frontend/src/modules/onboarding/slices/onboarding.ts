@@ -1,8 +1,9 @@
-import { getAll } from "./actions.js";
+import { createUserAnswers, getAll } from "./actions.js";
 import { actions } from "./onboarding.slice.js";
 
 const allActions = {
 	...actions,
+	createUserAnswers,
 	getAll,
 };
 

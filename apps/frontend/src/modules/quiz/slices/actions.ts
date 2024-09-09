@@ -29,6 +29,7 @@ const createUserAnswers = createAsyncThunk<
 
 	return await quizApi.createUserAnswers(createAnswerPayload);
 });
+
 const getScores = createAsyncThunk<
 	QuizScoresGetAllResponseDto,
 	undefined,

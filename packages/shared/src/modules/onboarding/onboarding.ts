@@ -8,6 +8,7 @@ export {
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionRequestDto,
 	type OnboardingQuestionResponseDto,
+	type OnboardingUserAnswerDto,
 } from "./libs/types/types.js";
 export { oneAnswerSelected as oneAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { onboardingAnswers as onboardingAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

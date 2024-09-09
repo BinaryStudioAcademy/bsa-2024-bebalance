@@ -1,5 +1,5 @@
 type OnboardingFormValues = {
-	answer: string;
+	[key: string]: string;
 };
 
 export { type OnboardingFormValues };

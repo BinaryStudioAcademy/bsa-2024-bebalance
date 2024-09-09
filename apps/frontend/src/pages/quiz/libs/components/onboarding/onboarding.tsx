@@ -6,98 +6,77 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useState,
 } from "~/libs/hooks/hooks.js";
-import {
-	actions as onboardingActions,
-	oneAnswerSelectedValidationSchema,
-} from "~/modules/onboarding/onboarding.js";
+import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/components.js";
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
-import {
-	type OnboardingAnswerRequestBodyDto,
-	type OnboardingFormValues,
-} from "./libs/types/types.js";
+import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	onNext: () => void;
 };
 
+type FormToSave = {
+	[key: string]: string;
+};
+
 const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
-
-	const [answerIds, setAnswerIds] = useState<OnboardingAnswerRequestBodyDto>({
-		answerIds: [],
-	});
-
 	const {
 		currentQuestionIndex,
 		isLastQuestion,
 		question,
 		totalQuestionsAmount,
-	} = useAppSelector(({ onboarding }) => ({
+		userId,
+	} = useAppSelector(({ auth, onboarding }) => ({
 		currentQuestionIndex: onboarding.currentQuestionIndex,
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
 			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
 		question: onboarding.currentQuestion,
 		totalQuestionsAmount: onboarding.questions.length,
+		userId: auth.user?.id,
 	}));
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
 	}, [dispatch]);
 
-	const { control, handleSubmit, isValid, reset } =
-		useAppForm<OnboardingFormValues>({
-			defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
-			validationSchema: oneAnswerSelectedValidationSchema,
-		});
+	const { control, handleSubmit, isValid } = useAppForm<OnboardingFormValues>({
+		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
+	});
 
-	const handleSaveAnswers = useCallback(
-		(payload: OnboardingAnswerRequestBodyDto) => {
-			return payload; //TODO call api
-		},
-		[],
-	);
+	const getAnswerIds = useCallback((formData: FormToSave) => {
+		return Object.values(formData).map(Number);
+	}, []);
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			setAnswerIds((previousState) => {
-				const newAnswerIds = new Set([
-					...previousState.answerIds,
-					Number(data.answer),
-				]);
+			if (question && data[`answer${question.id.toString()}`] !== undefined) {
+				const newObject = Object.fromEntries(
+					Object.entries(data).filter(([key]) => key !== "answer0"),
+				);
 
-				return {
-					answerIds: [...newAnswerIds],
-				};
-			});
+				if (isLastQuestion && userId) {
+					const answerIds = getAnswerIds(newObject);
 
-			if (isLastQuestion) {
-				handleSaveAnswers(answerIds);
+					void dispatch(
+						onboardingActions.createUserAnswers({ answerIds, userId }),
+					);
 
-				return;
+					onNext();
+				}
+
+				void dispatch(onboardingActions.nextQuestion());
 			}
-
-			void dispatch(onboardingActions.nextQuestion());
-			reset();
 		},
 
-		[answerIds, dispatch, handleSaveAnswers, isLastQuestion, reset],
+		[dispatch, getAnswerIds, isLastQuestion, onNext, question, userId],
 	);
 
 	const handlePreviousStep = useCallback(() => {
-		setAnswerIds((previousState) => {
-			const newAnswerIds = [...previousState.answerIds];
-			newAnswerIds.pop();
-
-			return {
-				answerIds: newAnswerIds,
-			};
-		});
 		void dispatch(onboardingActions.previousQuestion());
 	}, [dispatch]);
 
@@ -130,7 +109,7 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 									<OnboardingAnswer
 										control={control}
 										key={answer.id}
-										name="answer"
+										name={`answer${question.id.toString()}`}
 										options={answerOptions}
 									/>
 								);
@@ -145,22 +124,13 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 										variant="secondary"
 									/>
 								)}
-								{isLastQuestion ? (
-									<Button
-										isFluid
-										isPrimary={isValid}
-										label="ANALYZE"
-										onClick={onNext}
-										type="submit"
-									/>
-								) : (
-									<Button
-										isFluid
-										isPrimary={isValid}
-										label="NEXT"
-										type="submit"
-									/>
-								)}
+
+								<Button
+									isFluid
+									isPrimary={isValid}
+									label={isLastQuestion ? "ANALYZE" : "NEXT"}
+									type="submit"
+								/>
 							</div>
 						</form>
 					</>
