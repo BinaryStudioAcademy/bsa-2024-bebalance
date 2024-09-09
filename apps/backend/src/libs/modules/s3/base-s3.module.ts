@@ -9,14 +9,20 @@ import {
 import {
 	type CommandParameters,
 	type FileParameters,
-	type S3Settings,
 } from "./libs/types/types.js";
+
+type Constructor = {
+	accessKeyId: string;
+	bucketName: string;
+	region: string;
+	secretAccessKey: string;
+};
 
 class BaseS3 {
 	private s3Client: S3Client;
-	private settings: S3Settings;
+	private settings: Constructor;
 
-	public constructor(settings: S3Settings) {
+	public constructor(settings: Constructor) {
 		this.s3Client = new S3Client({
 			credentials: {
 				accessKeyId: settings.accessKeyId,
