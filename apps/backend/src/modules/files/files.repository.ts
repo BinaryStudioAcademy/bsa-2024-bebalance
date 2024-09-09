@@ -50,14 +50,14 @@ class FileRepository implements Repository {
 	public async findAll(): Promise<FileEntity[]> {
 		const files = await this.fileModel.query();
 
-		return files.map((file) =>
-			FileEntity.initialize({
+		return files.map((file) => {
+			return FileEntity.initialize({
 				createdAt: file.createdAt,
 				id: file.id,
 				updatedAt: file.updatedAt,
 				url: file.url,
-			}),
-		);
+			});
+		});
 	}
 
 	public async findByUrl(fileUrl: string): Promise<FileEntity | null> {

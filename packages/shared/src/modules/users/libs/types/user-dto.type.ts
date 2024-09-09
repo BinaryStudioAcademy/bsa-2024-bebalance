@@ -1,5 +1,5 @@
 type UserDto = {
-	avatarUrl: string;
+	avatarUrl: null | string;
 	createdAt: string;
 	email: string;
 	id: number;

@@ -1,7 +1,9 @@
 import { type Entity } from "~/libs/types/types.js";
 
 class UserEntity implements Entity {
-	private avatarUrl: string;
+	private avatarFileId: null | number;
+
+	private avatarUrl: null | string;
 
 	private createdAt: string;
 
@@ -18,6 +20,7 @@ class UserEntity implements Entity {
 	private updatedAt: string;
 
 	private constructor({
+		avatarFileId,
 		avatarUrl,
 		createdAt,
 		email,
@@ -27,7 +30,8 @@ class UserEntity implements Entity {
 		passwordSalt,
 		updatedAt,
 	}: {
-		avatarUrl: string;
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		id: null | number;
@@ -36,6 +40,7 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 		updatedAt: string;
 	}) {
+		this.avatarFileId = avatarFileId;
 		this.avatarUrl = avatarUrl;
 		this.createdAt = createdAt;
 		this.id = id;
@@ -47,6 +52,7 @@ class UserEntity implements Entity {
 	}
 
 	public static initialize({
+		avatarFileId,
 		avatarUrl,
 		createdAt,
 		email,
@@ -56,7 +62,8 @@ class UserEntity implements Entity {
 		passwordSalt,
 		updatedAt,
 	}: {
-		avatarUrl: string;
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		id: null | number;
@@ -66,6 +73,7 @@ class UserEntity implements Entity {
 		updatedAt: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarFileId,
 			avatarUrl,
 			createdAt,
 			email,
@@ -89,7 +97,8 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
-			avatarUrl: "",
+			avatarFileId: null,
+			avatarUrl: null,
 			createdAt: "",
 			email,
 			id: null,
@@ -101,7 +110,8 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
-		avatarUrl: string;
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		name: string;
@@ -110,6 +120,7 @@ class UserEntity implements Entity {
 		updatedAt: string;
 	} {
 		return {
+			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
@@ -121,7 +132,8 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
-		avatarUrl: string;
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		id: number;
@@ -129,6 +141,7 @@ class UserEntity implements Entity {
 		updatedAt: string;
 	} {
 		return {
+			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,

@@ -51,7 +51,8 @@ class UserRepository implements Repository {
 			.execute();
 
 		return UserEntity.initialize({
-			avatarUrl: avatar?.url || "",
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
@@ -82,7 +83,8 @@ class UserRepository implements Repository {
 
 		return user
 			? UserEntity.initialize({
-					avatarUrl: avatar?.url || "",
+					avatarFileId: avatar?.id ?? null,
+					avatarUrl: avatar?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -106,7 +108,8 @@ class UserRepository implements Repository {
 					: null;
 
 				return UserEntity.initialize({
-					avatarUrl: avatar?.url || "",
+					avatarFileId: avatar?.id ?? null,
+					avatarUrl: avatar?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -135,7 +138,8 @@ class UserRepository implements Repository {
 			: null;
 
 		return UserEntity.initialize({
-			avatarUrl: avatar?.url as string,
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
@@ -150,21 +154,11 @@ class UserRepository implements Repository {
 		id: number,
 		payload: Partial<UserUpdateRequestDto>,
 	): Promise<null | UserEntity> {
-		const { avatarUrl, name } = payload;
+		const { name } = payload;
 
 		const userDetailsUpdateData: Partial<UserDetailsModel> = {
 			...(name && { name }),
 		};
-
-		if (avatarUrl) {
-			const avatarFile = await this.fileModel
-				.query()
-				.findOne({ url: avatarUrl });
-
-			if (avatarFile) {
-				userDetailsUpdateData.avatarFileId = avatarFile.id;
-			}
-		}
 
 		if (Object.keys(userDetailsUpdateData).length > MINIMAL_LENGTH) {
 			await this.userDetailsModel
@@ -184,7 +178,45 @@ class UserRepository implements Repository {
 
 		return user
 			? UserEntity.initialize({
-					avatarUrl: avatar?.url || "",
+					avatarFileId: avatar?.id ?? null,
+					avatarUrl: avatar?.url ?? null,
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+				})
+			: null;
+	}
+
+	public async updateAvatar(
+		id: number,
+		payload: Partial<FileModel>,
+	): Promise<null | UserEntity> {
+		const avatarFile = await this.fileModel
+			.query()
+			.findOne({ url: payload.url });
+
+		await this.userDetailsModel
+			.query()
+			.patch({ avatarFileId: avatarFile?.id as number })
+			.where({ userId: id });
+
+		const user = await this.userModel
+			.query()
+			.findById(id)
+			.withGraphFetched(RelationName.USER_DETAILS);
+
+		const avatar = user?.userDetails.avatarFileId
+			? await this.fileModel.query().findById(user.userDetails.avatarFileId)
+			: null;
+
+		return user
+			? UserEntity.initialize({
+					avatarFileId: avatar?.id ?? null,
+					avatarUrl: avatar?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -210,7 +242,8 @@ class UserRepository implements Repository {
 			.findById(user.userDetails.avatarFileId);
 
 		return UserEntity.initialize({
-			avatarUrl: avatar?.url as string,
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,

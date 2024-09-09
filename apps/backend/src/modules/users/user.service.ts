@@ -1,9 +1,7 @@
-import { type MultipartFile } from "@fastify/multipart";
-import { v4 as uuidV4 } from "uuid";
-
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
+import { type AvatarFile } from "~/libs/plugins/plugins.js";
 import { type Service } from "~/libs/types/types.js";
 import {
 	FileEntity,
@@ -96,7 +94,7 @@ class UserService implements Service {
 
 	public async updateAvatar(
 		userId: number,
-		avatarFile?: MultipartFile,
+		avatarFile?: AvatarFile,
 	): Promise<null | UserEntity> {
 		if (!avatarFile) {
 			throw new UserError({
@@ -115,25 +113,25 @@ class UserService implements Service {
 		}
 
 		const file = {
-			contentType: avatarFile.mimetype,
-			fileBuffer: await avatarFile.toBuffer(),
-			fileName: uuidV4(),
+			contentType: avatarFile.contentType,
+			fileBuffer: avatarFile.buffer,
+			fileName: avatarFile.key,
 		};
 
-		const { avatarUrl } = user.toObject();
+		const { avatarFileId } = user.toObject();
 		let newFileEntity: FileEntity;
 
-		if (avatarUrl) {
-			const fileByUrl = await this.fileService.findByUrl(avatarUrl);
+		if (avatarFileId) {
+			const userAvatar = await this.fileService.find(avatarFileId);
 
-			if (!fileByUrl) {
+			if (!userAvatar) {
 				throw new FileError({
 					message: ErrorMessage.FILE_DOES_NOT_EXIST,
 				});
 			}
 
 			const newAvatar = await this.fileService.update({
-				fileId: fileByUrl.toObject().id,
+				fileId: userAvatar.toObject().id,
 				...file,
 			});
 
@@ -148,8 +146,8 @@ class UserService implements Service {
 			});
 		}
 
-		return await this.userRepository.update(userId, {
-			avatarUrl: newFileEntity.toObject().url,
+		return await this.userRepository.updateAvatar(userId, {
+			url: newFileEntity.toObject().url,
 		});
 	}
 }

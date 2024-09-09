@@ -1,5 +1,4 @@
 type UserUpdateRequestDto = {
-	avatarUrl: string;
 	name: string;
 };
 

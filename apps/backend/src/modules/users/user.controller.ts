@@ -1,5 +1,3 @@
-import { type MultipartFile } from "@fastify/multipart";
-
 import { APIPath } from "~/libs/enums/enums.js";
 import {
 	type APIHandlerOptions,
@@ -8,6 +6,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { type AvatarFile } from "~/libs/plugins/plugins.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
@@ -61,12 +60,12 @@ class UserController extends BaseController {
 			handler: (options) =>
 				this.updateAvatar(
 					options as APIHandlerOptions<{
-						uploadedFile: MultipartFile;
+						uploadedFile: AvatarFile;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: UsersApiPath.UPLOAD_AVATAR,
+			path: UsersApiPath.AVATAR,
 		});
 
 		this.addRoute({
@@ -255,7 +254,7 @@ class UserController extends BaseController {
 	 */
 	private async updateAvatar(
 		options: APIHandlerOptions<{
-			uploadedFile: MultipartFile;
+			uploadedFile: AvatarFile;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
