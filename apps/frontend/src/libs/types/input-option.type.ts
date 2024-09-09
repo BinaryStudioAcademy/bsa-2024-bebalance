@@ -1,6 +1,6 @@
 type InputOption = {
 	label: string;
-	value: string;
+	value: number | string;
 };
 
 export { type InputOption };

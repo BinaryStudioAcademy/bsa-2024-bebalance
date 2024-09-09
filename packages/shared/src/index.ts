@@ -80,6 +80,10 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	notificationAnswersValidationSchema,
+	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type UserDto,

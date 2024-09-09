@@ -1,3 +1,4 @@
+// import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
@@ -5,6 +6,7 @@ import {
 	type FieldValues,
 	type FormFieldProperties,
 	type IconName,
+	type InputOption,
 } from "~/libs/types/types.js";
 
 import { Button } from "../button/button.js";
@@ -18,6 +20,7 @@ type Properties<T extends FieldValues> = {
 	isFullWidth?: boolean;
 	label: string;
 	onIconClick?: (() => void) | undefined;
+	options?: InputOption[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
 } & FormFieldProperties<T>;
@@ -42,7 +45,7 @@ const Input = <T extends FieldValues>({
 	const hasError = Boolean(error);
 
 	const isRadio = type === "radio";
-	const isRadioWithOptions = isRadio && options?.length;
+	const isRadioWithOptions = isRadio && options;
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +79,13 @@ const Input = <T extends FieldValues>({
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (
-							<label className={styles["radio-option"]} key={option.value}>
+							<label
+								className={getValidClassNames(
+									styles["radio-option"],
+									isFullWidth && styles["full-width"],
+								)}
+								key={option.value}
+							>
 								<input
 									checked={field.value === option.value}
 									className={styles["radio-field"]}

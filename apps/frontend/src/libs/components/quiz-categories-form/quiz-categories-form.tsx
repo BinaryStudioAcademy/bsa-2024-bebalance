@@ -45,18 +45,18 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
 		void dispatch(categoriesActions.getCategories());
 	}, [dispatch]);
 
-	const handleSelectAll = useCallback(() => {
-		const { hasSelectedAll } = getValues();
+	// const handleSelectAll = useCallback(() => {
+	// 	const { hasSelectedAll } = getValues();
 
-		if (hasSelectedAll) {
-			setValue(
-				"categoryIds",
-				quizCategories.map((category) => category.id.toString()),
-			);
-		} else {
-			setValue("categoryIds", []);
-		}
-	}, [getValues, quizCategories, setValue]);
+	// 	if (hasSelectedAll) {
+	// 		setValue(
+	// 			"categoryIds",
+	// 			quizCategories.map((category) => category.id.toString()),
+	// 		);
+	// 	} else {
+	// 		setValue("categoryIds", []);
+	// 	}
+	// }, [getValues, quizCategories, setValue]);
 
 	const handleInputSelect = useCallback(() => {
 		const { categoryIds } = getValues();
@@ -83,18 +83,20 @@ const QuizCategoriesForm: React.FC<Properties> = ({ onChange }: Properties) => {
 	return (
 		<section>
 			<form onChange={handleFormChange}>
-				<Checkbox
+				{/* <Checkbox
+					variant="oval"
 					control={control}
 					label="All"
 					name="hasSelectedAll"
 					onChange={handleSelectAll}
-				/>
+				/> */}
 				<Checkbox
 					control={control}
 					label="Categories"
 					name="categoryIds"
 					onChange={handleInputSelect}
 					options={categoryInputOptions}
+					variant="oval"
 				/>
 				<br />
 			</form>

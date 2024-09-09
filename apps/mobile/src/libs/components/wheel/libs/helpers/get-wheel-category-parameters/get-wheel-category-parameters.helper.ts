@@ -15,10 +15,9 @@ type GetWheelCategoryParameters = (data: {
 	height: number;
 	innerColor: string;
 	innerColorOffset: number;
-	innerSectorKey: string;
 	outerColor: string;
 	outerColorOffset: number;
-	outerSectorKey: string;
+	sectorKey: string;
 	startPercent: number;
 };
 
@@ -35,12 +34,9 @@ const getWheelCategoryParameters: GetWheelCategoryParameters = ({
 	wheelRadius,
 }) => {
 	const uniqueIndex = index.toString();
-	const innerSectorKey = uniqueIndex + "-inner";
-	const outerSectorKey = uniqueIndex + "-outer";
 	const gradientId = uniqueIndex + "-gradient";
 	const gradientUrl = "url(#" + gradientId + ")";
 	const [innerColor, outerColor] = colors;
-
 	const sectorArcLengthPercent = MAX_PERCENT / categoriesLength;
 	const startPercent = sectorArcLengthPercent * index;
 	const endPercent = startPercent + sectorArcLengthPercent;
@@ -53,10 +49,9 @@ const getWheelCategoryParameters: GetWheelCategoryParameters = ({
 		height,
 		innerColor,
 		innerColorOffset: INNER_COLOR_OFFSET,
-		innerSectorKey,
 		outerColor,
 		outerColorOffset: OUTER_COLOR_OFFSET,
-		outerSectorKey,
+		sectorKey: uniqueIndex,
 		startPercent,
 	};
 };
