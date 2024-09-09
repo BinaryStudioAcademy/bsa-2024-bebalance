@@ -19,12 +19,12 @@ const filePlugin = fp((app, _, done) => {
 						files: 1,
 						fileSize: FILE_SIZE_LIMIT,
 					},
-					throwFileSizeLimit: true,
+					throwFileSizeLimit: false,
 				})) as MultipartFile;
 
 				if (
-					file.mimetype === ContentType.JPEG ||
-					file.mimetype === ContentType.PNG
+					file.mimetype !== ContentType.JPEG &&
+					file.mimetype !== ContentType.PNG
 				) {
 					throw new FileError({
 						message: ErrorMessage.UNSUPPORTED_FILE_TYPE,
@@ -37,15 +37,15 @@ const filePlugin = fp((app, _, done) => {
 					key: file.filename,
 				};
 
+				if (file.file.truncated) {
+					throw new FileError({
+						message: ErrorMessage.LARGE_FILE_SIZE,
+					});
+				}
+
 				request.uploadedFile = avatarFile;
 			}
 		} catch (error) {
-			if ((error as Error).message.includes("file too large")) {
-				throw new FileError({
-					message: ErrorMessage.LARGE_FILE_SIZE,
-				});
-			}
-
 			if (error instanceof FileError) {
 				throw error;
 			}
