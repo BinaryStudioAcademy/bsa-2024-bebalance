@@ -41,6 +41,7 @@ erDiagram
         dateTime updated_at
         varchar name
         int user_id FK
+        string notification_frequency
     }
 
     categories {
@@ -115,6 +116,16 @@ erDiagram
         int answer_id FK
         int user_id FK
     }
+
+    user_task_days }o--|| users : user_id
+    user_task_days {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int day_of_week
+        int user_id FK
+    }
+
 ```
 
 ## 5. Architecture
