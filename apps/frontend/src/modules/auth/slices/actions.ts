@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { NotificationMessage } from "~/libs/enums/enums.js";
+import { AppRoute, NotificationMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
+import { store } from "~/libs/modules/store/store.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
+import { actions as appActions } from "~/modules/app/app.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
@@ -94,6 +96,7 @@ const resetPassword = createAsyncThunk<
 
 	if (isSuccessful) {
 		notification.success(NotificationMessage.PASSWORD_UPDATED);
+		store.instance.dispatch(appActions.changeLink(AppRoute.SIGN_IN));
 	}
 
 	return isSuccessful;
