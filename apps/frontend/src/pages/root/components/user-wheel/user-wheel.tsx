@@ -1,4 +1,4 @@
-import { BalanceWheelChart } from "~/libs/components/components.js";
+import { BalanceWheelChart, Button } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -26,9 +26,15 @@ const UserWheel: React.FC = () => {
 
 	return (
 		<div className={styles["container"]}>
-			{scores.length > NO_SCORES_COUNT && (
-				<BalanceWheelChart data={chartData} />
-			)}
+			<div className={styles["header"]}>
+				<h4 className={styles["header-text"]}>My wheel results</h4>
+			</div>
+			<div className={styles["chart-wrapper"]}>
+				{scores.length > NO_SCORES_COUNT && (
+					<BalanceWheelChart data={chartData} />
+				)}
+			</div>
+			<Button label="edit my wheel results" />
 		</div>
 	);
 };
