@@ -1,6 +1,6 @@
 const ErrorMessage = {
 	DUPLICATE_QUESTION_ANSWER: "There are multiple answers to the same question.",
-	EMAIL_NOT_FOUND: "Email does not exist",
+	EMAIL_NOT_FOUND: "Email does not exist.",
 	FORBIDDEN: "Access to the requested resource is denied.",
 	INCORRECT_CREDENTIALS: "Incorrect credentials.",
 	INSUFFICIENT_ANSWERS: "You must provide answers for all questions.",
