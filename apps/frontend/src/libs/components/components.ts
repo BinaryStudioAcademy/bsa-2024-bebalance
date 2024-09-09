@@ -14,5 +14,6 @@ export { QuizQuestion } from "./quiz-question/quiz-question.js";
 export { RouterProvider } from "./router-provider/router-provider.js";
 export { ScoresEditModal } from "./scores-edit-modal/scores-edit-modal.js";
 export { Sidebar } from "./sidebar/sidebar.js";
+export { Slider } from "./slider/slider.js";
 export { Provider as StoreProvider } from "react-redux";
 export { Navigate, Outlet as RouterOutlet } from "react-router-dom";
