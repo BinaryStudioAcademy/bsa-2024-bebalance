@@ -26,6 +26,7 @@ import { styles } from "./styles";
 
 type Properties = {
 	gradientColors: keyof typeof colorToGradientColors;
+	initValue: number;
 	max: number;
 	min: number;
 	onValueChange?: (value: number) => void;
@@ -33,15 +34,20 @@ type Properties = {
 
 const GradientSlider: React.FC<Properties> = ({
 	gradientColors,
+	initValue,
 	max,
 	min,
 	onValueChange,
 }) => {
-	const [value, setValue] = useState<number>(min);
+	const [value, setValue] = useState<number>(initValue);
 	const [sliderWidth, setSliderWidth] = useState<number>(
 		SliderConfig.INITIAL_WIDTH,
 	);
-	const initialColors = generateSliderGradientColors(min, gradientColors, max);
+	const initialColors = generateSliderGradientColors(
+		initValue,
+		gradientColors,
+		max,
+	);
 	const [color, setColor] = useState<string[]>(initialColors);
 
 	const handleLayout = useCallback((event: LayoutChangeEvent): void => {
@@ -94,10 +100,14 @@ const GradientSlider: React.FC<Properties> = ({
 				>
 					<Icon
 						color={BaseColor.BLACK}
-						name="place"
+						name="fmd-good"
 						size={SliderStyle.MARKER_ICON_SIZE}
 					/>
-					<Text preset="regular" style={[globalStyles.mt12, styles.labelText]}>
+					<Text
+						size="sm"
+						style={[globalStyles.mt8, styles.labelText]}
+						weight="bold"
+					>
 						{value}
 					</Text>
 				</View>
