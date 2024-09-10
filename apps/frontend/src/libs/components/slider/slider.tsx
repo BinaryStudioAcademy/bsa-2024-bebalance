@@ -121,9 +121,7 @@ const Slider: React.FC<Properties> = ({
 				ref={bubbleLabelReference}
 			>
 				<p className={styles["bubble-value"]}>{sliderValue}</p>
-				<span className={styles["bubble-icon-wrapper"]}>
-					<ValueBubble />
-				</span>
+				<ValueBubble className={styles["bubble-icon"]} />
 			</label>
 			<div className={styles["gradient-boxes-container"]}>
 				{Array.from({ length: 10 }).map((_, index) => (
