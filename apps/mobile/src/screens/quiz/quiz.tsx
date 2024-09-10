@@ -52,7 +52,7 @@ const Quiz: React.FC = () => {
 	} = useAppSelector((state) => state.quiz);
 
 	const currentAnswer = answersByQuestionIndex[currentQuestionIndex] ?? "";
-	const totalQuestionsAmount = questions.length - PREVIOUS_INDEX_OFFSET;
+	const totalQuestionsAmount = questions.length;
 	const isLastQuestion = currentQuestionIndex === totalQuestionsAmount;
 
 	useEffect(() => {
