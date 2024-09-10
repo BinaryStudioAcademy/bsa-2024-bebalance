@@ -54,25 +54,28 @@ const Settings: React.FC = () => {
 	);
 
 	return (
-		<form className={styles["container"]} onSubmit={handleFormSubmit}>
-			<div className={styles["form-header"]}>
-				<h1>Settings</h1>
+		<div>
+			<h1 className={styles["header"]}>Settings</h1>
+			<form className={styles["container"]} onSubmit={handleFormSubmit}>
+				<div className={styles["inputs"]}>
+					<Checkbox
+						control={control}
+						label="Day to receive tasks"
+						name="userTaskDays"
+						options={TASK_DAYS_OPTIONS}
+					/>
+					<hr className={styles["breakline"]} />
+					<Input
+						control={control}
+						label="Notification frequency"
+						name="notificationFrequency"
+						options={NOTIFICATION_FREQUENCY_OPTIONS}
+						type="radio"
+					/>
+				</div>
 				<Button label="save changes" type="submit" />
-			</div>
-			<Checkbox
-				control={control}
-				label="Day to receive tasks"
-				name="userTaskDays"
-				options={TASK_DAYS_OPTIONS}
-			/>
-			<Input
-				control={control}
-				label="Notification frequency"
-				name="notificationFrequency"
-				options={NOTIFICATION_FREQUENCY_OPTIONS}
-				type="radio"
-			/>
-		</form>
+			</form>
+		</div>
 	);
 };
 
