@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import "~/assets/css/styles.css";
 import {
 	App,
+	Notification,
 	ProtectedRoute,
 	RouterProvider,
 	StoreProvider,
@@ -21,6 +22,7 @@ import { Settings } from "~/pages/settings/settings.jsx";
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
 		<StoreProvider store={store.instance}>
+			<Notification />
 			<RouterProvider
 				routes={[
 					{

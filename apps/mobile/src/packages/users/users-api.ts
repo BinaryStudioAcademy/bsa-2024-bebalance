@@ -4,7 +4,7 @@ import { type HTTP } from "~/libs/packages/http/http";
 import { type Storage } from "~/libs/packages/storage/storage";
 
 import { UsersApiPath } from "./libs/enums/enums";
-import { type UserGetAllResponseDto } from "./libs/types/types";
+import { type UserDto } from "./libs/types/types";
 
 type Constructor = {
 	baseUrl: string;
@@ -17,17 +17,17 @@ class UserApi extends BaseHttpApi {
 		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 
-	public async getAll(): Promise<UserGetAllResponseDto> {
+	public async getById(id: number): Promise<UserDto> {
 		const response = await this.load(
-			this.getFullEndpoint(UsersApiPath.ROOT, {}),
+			this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
+				hasAuth: true,
 				method: "GET",
 			},
 		);
 
-		return await response.json<UserGetAllResponseDto>();
+		return await response.json<UserDto>();
 	}
 }
 
