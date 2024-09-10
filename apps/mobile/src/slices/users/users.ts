@@ -1,9 +1,9 @@
-import { loadAll } from "./actions";
+import { getById } from "./actions";
 import { actions } from "./users.slice";
 
 const allActions = {
 	...actions,
-	loadAll,
+	getById,
 };
 
 export { allActions as actions };
