@@ -22,6 +22,7 @@ export { UserError } from "./libs/exceptions/exceptions.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -30,7 +31,7 @@ export {
 } from "./libs/types/types.js";
 export {
 	notificationAnswersValidationSchema,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,

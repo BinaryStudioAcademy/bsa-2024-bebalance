@@ -1,33 +1,25 @@
 import { APIPath, ContentType } from "~/libs/enums/enums";
-import { BaseHttpApi } from "~/libs/packages/api/api";
-import { type HTTP } from "~/libs/packages/http/http";
-import { type Storage } from "~/libs/packages/storage/storage";
+import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { UsersApiPath } from "./libs/enums/enums";
-import { type UserGetAllResponseDto } from "./libs/types/types";
-
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
+import { type UserDto } from "./libs/types/types";
 
 class UserApi extends BaseHttpApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 
-	public async getAll(): Promise<UserGetAllResponseDto> {
+	public async getById(id: number): Promise<UserDto> {
 		const response = await this.load(
-			this.getFullEndpoint(UsersApiPath.ROOT, {}),
+			this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
 			{
 				contentType: ContentType.JSON,
-				hasAuth: false,
+				hasAuth: true,
 				method: "GET",
 			},
 		);
 
-		return await response.json<UserGetAllResponseDto>();
+		return await response.json<UserDto>();
 	}
 }
 

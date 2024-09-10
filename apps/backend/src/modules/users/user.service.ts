@@ -292,7 +292,7 @@ class UserService implements Service {
 	public async saveNotificationAnswers(
 		id: number,
 		payload: NotificationAnswersPayloadDto,
-	): Promise<null | UserEntity> {
+	): Promise<null | UserDto> {
 		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
 
 		const user = await this.userRepository.update(id, {
@@ -321,7 +321,7 @@ class UserService implements Service {
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
 				userTaskDays: user.userTaskDays,
-			});
+			}).toObject();
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -342,7 +342,7 @@ class UserService implements Service {
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
 			userTaskDays: user.userTaskDays,
-		});
+		}).toObject();
 	}
 
 	public async update(
