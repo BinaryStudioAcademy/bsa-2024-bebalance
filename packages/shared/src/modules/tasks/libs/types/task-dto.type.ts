@@ -5,6 +5,7 @@ type TaskDto = {
 	categoryId: number;
 	createdAt: string;
 	description: string;
+	dueDate: string;
 	id: number;
 	label: string;
 	status: ValueOf<typeof TaskStatus>;
