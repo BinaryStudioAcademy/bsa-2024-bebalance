@@ -138,7 +138,7 @@ const Onboarding: React.FC = () => {
 								);
 							})}
 							<div className={styles["button-container"]}>
-								{!isLastQuestion && !isFirstQuestion && (
+								{!isFirstQuestion && (
 									<div className={styles["button-wrapper"]}>
 										<Button
 											label={ButtonLabel.BACK}
