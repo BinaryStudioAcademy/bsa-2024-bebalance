@@ -42,7 +42,6 @@ export {
 } from "./modules/auth/auth.js";
 export {
 	CategoriesApiPath,
-	type CategoriesFormSubmitCallback,
 	type CategoriesGetAllResponseDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,

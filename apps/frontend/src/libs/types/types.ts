@@ -23,7 +23,6 @@ export {
 	type ScriptableContext,
 } from "chart.js";
 export {
-	type CategoriesFormSubmitCallback,
 	type OnboardingQuestionResponseDto,
 	type ServerErrorDetail,
 	type ServerErrorResponse,

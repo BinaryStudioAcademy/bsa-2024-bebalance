@@ -1,4 +1,3 @@
-export { type CategoriesFormSubmitCallback } from "./categories-form-submit-callback.type.js";
 export { type CategoriesGetAllResponseDto } from "./categories-get-all-response-dto.type.js";
 export { type CategoryCreateRequestDto } from "./category-create-request-dto.type.js";
 export { type CategoryDto } from "./category-dto.type.js";

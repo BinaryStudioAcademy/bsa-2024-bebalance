@@ -1,6 +1,5 @@
 export { CategoriesApiPath } from "./libs/enums/enums.js";
 export {
-	type CategoriesFormSubmitCallback,
 	type CategoriesGetAllResponseDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
