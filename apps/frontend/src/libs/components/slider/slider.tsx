@@ -6,7 +6,10 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 
-import { getGradientFromLabel } from "./libs/helpers/helpers.js";
+import {
+	formatToKebabCase,
+	getGradientFromLabel,
+} from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -34,9 +37,7 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 
 		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
 		const remainingProgress = FULL_PROGRESS - currentProgress;
-		const stepSize = 34;
-
-		// TODO: slider thumb color should depend on gradient color
+		const stepSize = 26;
 
 		const { degree, end, start } = getGradientFromLabel(label);
 
@@ -78,11 +79,13 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 		bubbleLabelReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
+	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
+
 	return (
 		<div className={styles["container"]}>
 			<p className={styles["label"]}>{label}</p>
 			<input
-				className={styles["slider"]}
+				className={`${String(styles["slider"])} ${String(styles[categorizedSliderClass])}`}
 				id="range"
 				max={MAX}
 				min={MIN}
