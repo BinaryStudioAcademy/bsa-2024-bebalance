@@ -13,7 +13,7 @@ type Properties = {
 };
 
 const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, getValues, handleSubmit } = useAppForm<EmailDto>({
+	const { control, errors, handleSubmit } = useAppForm<EmailDto>({
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
@@ -24,8 +24,6 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		},
 		[onSubmit, handleSubmit],
 	);
-
-	const email = getValues("email");
 
 	return (
 		<>
@@ -39,11 +37,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type="email"
 				/>
 
-				<Button
-					isDisabled={email === ""}
-					label="RESET PASSWORD"
-					type="submit"
-				/>
+				<Button label="RESET PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
