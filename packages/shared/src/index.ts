@@ -44,9 +44,9 @@ export {
 export {
 	addMessageToThreadValidationSchema,
 	AiAssistantApiPath,
-	type AiAssistantMessageResponseDto,
 	AiAssistantMessageValidationSchema,
 	type BalanceWheelAnalysisResponseDto,
+	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./modules/ia-assistant/ai-assistant.js";
 export {
@@ -80,7 +80,12 @@ export {
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
-export { type TaskDto, type TaskStatus } from "./modules/tasks/tasks.js";
+export {
+	type TaskDto,
+	type TaskGetAllResponseDto,
+	TasksApiPath,
+	TaskStatus,
+} from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
