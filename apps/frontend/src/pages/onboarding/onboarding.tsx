@@ -15,6 +15,7 @@ import {
 
 import { OnboardingAnswer } from "./libs/components/components.js";
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import { ButtonLabel } from "./libs/enums/enums.js";
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
@@ -135,7 +136,7 @@ const Onboarding: React.FC = () => {
 								{!isLastQuestion && (
 									<div className={styles["button-wrapper"]}>
 										<Button
-											label="BACK"
+											label={ButtonLabel.BACK}
 											onClick={handlePreviousStep}
 											type="button"
 											variant="secondary"
@@ -145,7 +146,9 @@ const Onboarding: React.FC = () => {
 								<div className={styles["button-wrapper"]}>
 									<Button
 										isPrimary={isValid}
-										label={isLastQuestion ? "ANALYZE" : "NEXT"}
+										label={
+											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
+										}
 										type="submit"
 									/>
 								</div>
