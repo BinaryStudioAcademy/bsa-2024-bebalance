@@ -5,8 +5,9 @@ import { CategoryService } from "./category.service.js";
 const categoryRepository = new CategoryRepository(CategoryModel);
 const categoryService = new CategoryService(categoryRepository);
 
-export { CategoryService } from "./category.service.js";
+export { CategoryModel } from "./category.model.js";
 export { categoryService };
+export { CategoryService } from "./category.service.js";
 export {
 	type QuizScoreDto,
 	type QuizScoresGetAllResponseDto,
