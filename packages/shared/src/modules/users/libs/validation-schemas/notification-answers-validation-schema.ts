@@ -20,6 +20,9 @@ const notificationAnswers = z.object({
 		.nonempty({
 			message: UserValidationMessage.DAYS_BETWEEN_1_AND_7,
 		})
+		.max(NotificationAnswersValidationRule.TASK_DAY_MAX, {
+			message: UserValidationMessage.MAX_7_DAYS,
+		})
 		.refine(
 			(days) =>
 				days.every(
@@ -30,7 +33,10 @@ const notificationAnswers = z.object({
 			{
 				message: UserValidationMessage.DAYS_BETWEEN_1_AND_7,
 			},
-		),
+		)
+		.refine((days) => new Set(days).size === days.length, {
+			message: UserValidationMessage.DAYS_UNIQUE,
+		}),
 });
 
 export { notificationAnswers };
