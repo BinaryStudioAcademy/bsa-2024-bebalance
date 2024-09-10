@@ -28,7 +28,7 @@ const saveNotificationAnswers = createAsyncThunk<
 	NotificationAnswersPayloadDto,
 	AsyncThunkConfig
 >(
-	`${sliceName}/saveNotificationAnswers`,
+	`${sliceName}/save-notification-answers`,
 	async (payload, { dispatch, extra }) => {
 		const { usersApi } = extra;
 
