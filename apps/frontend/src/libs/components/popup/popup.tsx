@@ -27,7 +27,7 @@ const Popup: React.FC<Properties> = ({
 				<div className={styles["contents-container"]}>
 					{icon && (
 						<div className={styles["icon"]}>
-							<img alt={icon} src={icon} />
+							<img alt={icon} className={styles["img"]} src={icon} />
 						</div>
 					)}
 					<div className={styles["contents"]}>
