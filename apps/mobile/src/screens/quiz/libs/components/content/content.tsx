@@ -40,13 +40,15 @@ const Content: React.FC<Properties<QuizFormValues>> = ({
 		<>
 			<Text
 				preset="subheading"
-				style={[globalStyles.mb32, globalStyles.mt12, styles.title]}
+				style={[globalStyles.mb48, globalStyles.mt12, styles.title]}
+				weight="bold"
 			>
 				{question?.label}
 			</Text>
 			<RadioGroup
 				control={control}
 				errors={errors}
+				itemContainerStyle={globalStyles.mb16}
 				name="answer"
 				options={mappedAnswersToRadioOptions}
 			/>

@@ -7,7 +7,6 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
 import { DataStatus, NumericalValue, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
@@ -52,8 +51,9 @@ const Quiz: React.FC = () => {
 	} = useAppSelector((state) => state.quiz);
 
 	const currentAnswer = answersByQuestionIndex[currentQuestionIndex] ?? "";
-	const totalQuestionsAmount = questions.length - PREVIOUS_INDEX_OFFSET;
-	const isLastQuestion = currentQuestionIndex === totalQuestionsAmount;
+	const totalQuestionsAmount = questions.length;
+	const isLastQuestion =
+		currentQuestionIndex + NumericalValue.ONE === totalQuestionsAmount;
 
 	useEffect(() => {
 		void dispatch(quizActions.getAllQuestions());
@@ -116,15 +116,14 @@ const Quiz: React.FC = () => {
 							globalStyles.mb16,
 							globalStyles.mh12,
 							globalStyles.mt32,
-							globalStyles.ph12,
-							globalStyles.pt48,
+							globalStyles.ph16,
 							styles.container,
 						]}
 					>
 						{currentQuestion && (
 							<>
 								<Text
-									preset="subheading"
+									size="xl"
 									style={[globalStyles.mb24, styles.title]}
 									weight="bold"
 								>
@@ -132,13 +131,13 @@ const Quiz: React.FC = () => {
 								</Text>
 								<Counter
 									currentStep={currentQuestionIndex + NumericalValue.ONE}
-									totalSteps={totalQuestionsAmount + NumericalValue.ONE}
+									totalSteps={totalQuestionsAmount}
 								/>
 								<InfinitePager
 									infinitePagerReference={infinitePagerReference}
 									onPageRender={handleRenderPageComponent}
 								/>
-								<View style={globalStyles.gap12}>
+								<View style={[globalStyles.gap16, styles.buttonContainer]}>
 									<Button
 										isDisabled={!isValid}
 										label={isLastQuestion ? "ANALYZE" : "NEXT"}
