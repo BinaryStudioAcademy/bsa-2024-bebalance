@@ -141,7 +141,9 @@ const Onboarding: React.FC = () => {
 							globalStyles.mb16,
 							globalStyles.mh12,
 							globalStyles.mt12,
-							globalStyles.p24,
+							globalStyles.pt24,
+							globalStyles.ph16,
+							globalStyles.pb16,
 							styles.container,
 						]}
 					>
@@ -151,23 +153,30 @@ const Onboarding: React.FC = () => {
 									currentItemIndex={currentQuestionIndex}
 									totalItemsAmount={totalQuestionsAmount}
 								/>
-								<InfinitePager
-									infinitePagerReference={infinitePager}
-									onPageRender={renderPageComponent}
-								/>
-								<View style={globalStyles.gap12}>
-									<Button
-										isDisabled={!isValid}
-										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										onPress={handleFormSubmit}
+								<View
+									style={[
+										globalStyles.flex1,
+										globalStyles.justifyContentSpaceBetween,
+									]}
+								>
+									<InfinitePager
+										infinitePagerReference={infinitePager}
+										onPageRender={renderPageComponent}
 									/>
-									{currentQuestionIndex !== ZERO && (
+									<View style={globalStyles.gap16}>
 										<Button
-											appearance="outlined"
-											label="BACK"
-											onPress={handlePreviousClick}
+											isDisabled={!isValid}
+											label={isLastQuestion ? "ANALYZE" : "NEXT"}
+											onPress={handleFormSubmit}
 										/>
-									)}
+										{currentQuestionIndex !== ZERO && (
+											<Button
+												appearance="outlined"
+												label="BACK"
+												onPress={handlePreviousClick}
+											/>
+										)}
+									</View>
 								</View>
 							</>
 						)}

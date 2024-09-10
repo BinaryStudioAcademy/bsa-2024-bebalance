@@ -46,7 +46,7 @@ const RadioGroup = <T extends FieldValues>({
 				<Text
 					preset="default"
 					size="md"
-					style={globalStyles.ml8}
+					style={[globalStyles.ml8, globalStyles.pr8]}
 					weight="semiBold"
 				>
 					{option.label}
@@ -63,7 +63,6 @@ const RadioGroup = <T extends FieldValues>({
 	return (
 		<View>
 			<RNRadioGroup
-				containerStyle={globalStyles.mb48}
 				onPress={onFieldChange}
 				radioButtons={radioButtonsProperties}
 				selectedId={selectedId}
