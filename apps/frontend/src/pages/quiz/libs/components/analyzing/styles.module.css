@@ -5,9 +5,9 @@
 	background-image: url("../../../../../assets/img/blue-circle.svg"),
 		url("../../../../../assets/img/pink-circle.svg"),
 		url("../../../../../assets/img/green-circle.svg"),
-		url("../../../../../src/assets/img/ripple-effect-bg.svg"),
-		url("../../../../../src/assets/img/ripple-effect-bg2.svg"),
-		url("../../../../../src/assets/img/ripple-effect-bg4.svg");
+		url("../../../../../assets/img/ripple-effect-bg.svg"),
+		url("../../../../../assets/img/ripple-effect-bg2.svg"),
+		url("../../../../../assets/img/ripple-effect-bg4.svg");
 	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 	background-position:
 		right 40% bottom 15%,
@@ -39,6 +39,8 @@
 }
 
 .border-container {
+	position: relative;
+	z-index: var(--z-index-low);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
