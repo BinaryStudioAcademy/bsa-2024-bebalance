@@ -14,7 +14,6 @@ export { userApi };
 export { UserValidationMessage } from "./libs/enums/enums";
 export {
 	type UserDto,
-	type UserGetAllResponseDto,
 	type UserGetParametersDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
