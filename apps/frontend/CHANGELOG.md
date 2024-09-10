@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.30.0...frontend-v1.31.0) (2024-09-10)
+
+
+### Features
+
+* **frontend/backend:** forgot password functionality requirements bb-285 ([#329](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/329)) ([6e80423](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6e8042368c4f56ae8702a708b2b7e3da36c644f1))
+* Onboarding questions screen mobile responsiveness bb-289 ([#345](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/345)) ([7a0c849](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7a0c84979f68605a130e59d68e4f197b74f2525d))
+
+
+### Bug Fixes
+
+* **frontend:** remade backgrounds for quiz and not-found pages bb-327 ([#336](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/336)) ([812ce87](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/812ce87f22e7f92b1e4c27b804694af9c5430d93))
+
 ## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.29.0...frontend-v1.30.0) (2024-09-10)
 
 
