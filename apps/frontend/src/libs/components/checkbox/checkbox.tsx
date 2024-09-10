@@ -1,73 +1,136 @@
+import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
-	type Control,
-	type FieldPath,
 	type FieldValues,
+	type FormFieldProperties,
 	type InputOption,
 } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
-	control: Control<T, null>;
+	hasVisuallyHiddenLabel?: boolean;
 	label: string;
-	name: FieldPath<T>;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	options: InputOption[];
-};
+	variant: "general" | "rounded";
+} & FormFieldProperties<T>;
 
 const Checkbox = <T extends FieldValues>({
 	control,
+	hasVisuallyHiddenLabel = false,
 	label,
 	name,
+	onChange,
 	options,
+	variant,
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
-	const { onChange, value } = field;
+	const { onChange: onFieldChange, value } = field;
+	const isGeneralCheckbox = variant === "general";
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			const isChecked = event.target.checked;
-			const inputValue = Number(event.target.value);
+			const inputValue = isGeneralCheckbox
+				? Number(event.target.value)
+				: event.target.value;
 
 			if (isChecked) {
-				onChange([...value, inputValue]);
+				onFieldChange([...value, inputValue]);
 			} else {
-				onChange((value as number[]).filter((value) => value !== inputValue));
+				onFieldChange(
+					(value as (number | string)[]).filter(
+						(value) => value !== inputValue,
+					),
+				);
 			}
+
+			onChange?.(event);
 		},
-		[onChange, value],
+		[isGeneralCheckbox, onFieldChange, onChange, value],
+	);
+
+	const handleSingleCheckboxChange = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>): void => {
+			onFieldChange(event);
+			onChange?.(event);
+		},
+		[onFieldChange, onChange],
 	);
 
 	return (
-		<label className={styles["input-wrapper"]}>
-			<p className={styles["question"]}>{label}</p>
-			<div className={styles["input-container"]}>
-				{options.map((option) => {
-					const isChecked = (value as number[]).includes(Number(option.value));
+		<>
+			<label className={styles["input-wrapper"]}>
+				<p
+					className={getValidClassNames(
+						styles["question"],
+						hasVisuallyHiddenLabel && "visually-hidden",
+					)}
+				>
+					{label}
+				</p>
+				<div
+					className={getValidClassNames(
+						styles["input-container"],
+						variant === "rounded" && styles["rounded-input-container"],
+					)}
+				>
+					{options.map((option) => {
+						const isChecked = isGeneralCheckbox
+							? (value as number[]).includes(Number(option.value))
+							: (value as string[]).includes(String(option.value));
 
-					return (
-						<div
-							className={styles["gradient-border-container"]}
-							key={option.value}
-						>
-							<div className={styles["gradient-border-content"]}>
-								<label className={styles["label"]} key={option.value}>
-									<input
-										checked={isChecked}
-										className={styles["checkbox"]}
-										onChange={handleCheckboxesChange}
-										type="checkbox"
-										value={option.value}
-									/>
-									<span className={styles["input-checkmark"]} />
-									{option.label}
-								</label>
+						return isGeneralCheckbox ? (
+							<div
+								className={styles["gradient-border-container"]}
+								key={option.value}
+							>
+								<div className={styles["gradient-border-content"]}>
+									<label className={styles["label"]} key={option.value}>
+										<input
+											checked={isChecked}
+											className={styles["checkbox"]}
+											onChange={handleCheckboxesChange}
+											type="checkbox"
+											value={option.value}
+										/>
+										<span className={styles["input-checkmark"]} />
+										{option.label}
+									</label>
+								</div>
 							</div>
-						</div>
-					);
-				})}
-			</div>
-		</label>
+						) : (
+							<label className={styles["rounded-label"]} key={option.value}>
+								<input
+									checked={isChecked}
+									className={styles["checkbox"]}
+									onChange={handleCheckboxesChange}
+									type="checkbox"
+									value={option.value}
+								/>
+								<span className={styles["checkmark"]} />
+								{option.label}
+							</label>
+						);
+					})}
+				</div>
+			</label>
+			{options.length === ZERO_INDEX && (
+				<label className={styles["rounded-label"]}>
+					<input
+						{...field}
+						checked={Boolean(value)}
+						className={styles["checkbox"]}
+						onChange={handleSingleCheckboxChange}
+						type="checkbox"
+					/>
+					<span className={styles["checkmark"]} />
+					{label}
+				</label>
+			)}
+		</>
 	);
 };
 

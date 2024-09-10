@@ -188,6 +188,7 @@ class AuthController extends BaseController {
 	 *                  format: email
 	 *                password:
 	 *                  type: string
+	 *                  example: s3cr3tpass
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
@@ -232,8 +233,10 @@ class AuthController extends BaseController {
 	 *                  format: email
 	 *                name:
 	 *                  type: string
+	 *                  example: username
 	 *                password:
 	 *                  type: string
+	 *                  example: s3cr3tpass
 	 *      responses:
 	 *        201:
 	 *          description: Successful operation
