@@ -35,11 +35,13 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 			quizCategories: items,
 		};
 	});
-	const categoryInputOptions: InputOption[] = quizCategories.map((category) => {
-		const { id, name } = category;
+	const categoryInputOptions: InputOption<number>[] = quizCategories.map(
+		(category) => {
+			const { id, name } = category;
 
-		return { label: name, value: id };
-	});
+			return { label: name, value: id };
+		},
+	);
 
 	const dispatch = useAppDispatch();
 

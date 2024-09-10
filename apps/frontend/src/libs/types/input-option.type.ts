@@ -1,6 +1,6 @@
-type InputOption = {
+type InputOption<T extends number | string = string> = {
 	label: string;
-	value: number | string;
+	value: T;
 };
 
 export { type InputOption };

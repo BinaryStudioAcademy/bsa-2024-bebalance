@@ -101,6 +101,7 @@
 .rounded-label {
 	display: flex;
 	gap: 5px;
+	align-items: center;
 	min-width: 280px;
 	padding: 16px;
 	padding-left: 20%;

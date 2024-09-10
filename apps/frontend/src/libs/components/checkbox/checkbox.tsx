@@ -13,7 +13,7 @@ type Properties<T extends FieldValues> = {
 	hasVisuallyHiddenLabel?: boolean;
 	label: string;
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	options: InputOption[];
+	options: InputOption<number>[];
 	variant: "general" | "rounded";
 } & FormFieldProperties<T>;
 
@@ -28,20 +28,19 @@ const Checkbox = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange: onFieldChange, value } = field;
-	const isGeneralCheckbox = variant === "general";
+	const isRounded = variant === "rounded";
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			const isChecked = event.target.checked;
-			const rawInputValue = event.target.value;
-			const inputValue = Number.isNaN(rawInputValue)
-				? rawInputValue
-				: Number(rawInputValue);
+			const inputValue = Number(event.target.value);
 
 			if (isChecked) {
 				onFieldChange([...value, inputValue]);
 			} else {
-				onFieldChange((value as []).filter((value) => value !== inputValue));
+				onFieldChange(
+					(value as number[]).filter((value) => value !== inputValue),
+				);
 			}
 
 			onChange?.(event);
@@ -75,9 +74,21 @@ const Checkbox = <T extends FieldValues>({
 					)}
 				>
 					{options.map((option) => {
-						const isChecked = (value as unknown[]).includes(option.value);
+						const isChecked = (value as number[]).includes(option.value);
 
-						return isGeneralCheckbox ? (
+						return isRounded ? (
+							<label className={styles["rounded-label"]} key={option.value}>
+								<input
+									checked={isChecked}
+									className={styles["checkbox"]}
+									onChange={handleCheckboxesChange}
+									type="checkbox"
+									value={option.value}
+								/>
+								<span className={styles["checkmark"]} />
+								{option.label}
+							</label>
+						) : (
 							<div
 								className={styles["gradient-border-container"]}
 								key={option.value}
@@ -96,18 +107,6 @@ const Checkbox = <T extends FieldValues>({
 									</label>
 								</div>
 							</div>
-						) : (
-							<label className={styles["rounded-label"]} key={option.value}>
-								<input
-									checked={isChecked}
-									className={styles["checkbox"]}
-									onChange={handleCheckboxesChange}
-									type="checkbox"
-									value={option.value}
-								/>
-								<span className={styles["checkmark"]} />
-								{option.label}
-							</label>
 						);
 					})}
 				</div>
