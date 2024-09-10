@@ -1,7 +1,7 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { type Service } from "~/libs/types/types.js";
+import { type Service, type ValueOf } from "~/libs/types/types.js";
 import {
 	type File,
 	FileEntity,
@@ -11,6 +11,7 @@ import {
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
+import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { UserError } from "./libs/exceptions/exceptions.js";
 import {
 	type NotificationAnswersPayloadDto,
@@ -56,9 +57,13 @@ class UserService implements Service {
 				email: user.email,
 				id: user.id,
 				name: user.name,
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays,
 			});
 		}
 
@@ -73,9 +78,13 @@ class UserService implements Service {
 			email: user.email,
 			id: user.id,
 			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		});
 	}
 
@@ -99,9 +108,13 @@ class UserService implements Service {
 				email: user.email,
 				id: user.id,
 				name: user.name,
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays,
 			}).toObject();
 		}
 
@@ -116,9 +129,13 @@ class UserService implements Service {
 			email: user.email,
 			id: user.id,
 			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		}).toObject();
 	}
 
@@ -144,9 +161,13 @@ class UserService implements Service {
 				email: user.email,
 				id: user.id,
 				name: user.name,
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays,
 			});
 		}
 
@@ -161,9 +182,13 @@ class UserService implements Service {
 			email: user.email,
 			id: user.id,
 			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		});
 	}
 
@@ -181,9 +206,13 @@ class UserService implements Service {
 							email: item.email,
 							id: item.id,
 							name: item.name,
+							notificationFrequency: item.notificationFrequency as ValueOf<
+								typeof NotificationFrequency
+							>,
 							passwordHash: item.passwordHash,
 							passwordSalt: item.passwordSalt,
 							updatedAt: item.updatedAt,
+							userTaskDays: item.userTaskDays,
 						}).toObject();
 					}
 
@@ -198,9 +227,13 @@ class UserService implements Service {
 						email: item.email,
 						id: item.id,
 						name: item.name,
+						notificationFrequency: item.notificationFrequency as ValueOf<
+							typeof NotificationFrequency
+						>,
 						passwordHash: item.passwordHash,
 						passwordSalt: item.passwordSalt,
 						updatedAt: item.updatedAt,
+						userTaskDays: item.userTaskDays,
 					}).toObject();
 				}),
 			),
@@ -225,9 +258,13 @@ class UserService implements Service {
 				email: user.email,
 				id: user.id,
 				name: user.name,
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays,
 			});
 		}
 
@@ -242,9 +279,13 @@ class UserService implements Service {
 			email: user.email,
 			id: user.id,
 			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		});
 	}
 
@@ -273,9 +314,13 @@ class UserService implements Service {
 				email: user.email,
 				id: user.id,
 				name: user.name,
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays,
 			});
 		}
 
@@ -290,9 +335,13 @@ class UserService implements Service {
 			email: user.email,
 			id: user.id,
 			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		});
 	}
 
@@ -314,9 +363,13 @@ class UserService implements Service {
 				email: user.email,
 				id: user.id,
 				name: user.name,
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
 				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays,
 			}).toObject();
 		}
 
@@ -331,9 +384,13 @@ class UserService implements Service {
 			email: user.email,
 			id: user.id,
 			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		}).toObject();
 	}
 
@@ -412,13 +469,17 @@ class UserService implements Service {
 		return UserEntity.initialize({
 			avatarFileId: avatar?.id ?? null,
 			avatarUrl: avatar?.url ?? null,
-			createdAt: updatedUser.createdAt,
-			email: updatedUser.email,
-			id: updatedUser.id,
-			name: updatedUser.name,
-			passwordHash: updatedUser.passwordHash,
-			passwordSalt: updatedUser.passwordSalt,
-			updatedAt: updatedUser.updatedAt,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			notificationFrequency: user.notificationFrequency as ValueOf<
+				typeof NotificationFrequency
+			>,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays,
 		}).toObject();
 	}
 }

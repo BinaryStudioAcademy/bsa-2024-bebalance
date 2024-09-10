@@ -100,7 +100,7 @@ class UserRepository implements Repository {
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
-					notificationFrequency: user.notificationFrequency,
+					notificationFrequency: user.userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
@@ -126,7 +126,7 @@ class UserRepository implements Repository {
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
-					notificationFrequency: user.notificationFrequency,
+					notificationFrequency: user.userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
@@ -157,7 +157,7 @@ class UserRepository implements Repository {
 			email: user.email,
 			id: user.id,
 			name: user.userDetails.name,
-			notificationFrequency: user.notificationFrequency,
+			notificationFrequency: user.userDetails.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -244,7 +244,9 @@ class UserRepository implements Repository {
 	): Promise<UserWithoutAvatar> {
 		const user = await this.userModel
 			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			)
 			.patchAndFetchById(id, passwordPayload);
 
 		return {
