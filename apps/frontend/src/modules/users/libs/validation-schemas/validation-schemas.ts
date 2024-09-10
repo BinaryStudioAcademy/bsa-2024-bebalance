@@ -1,6 +1,6 @@
 export {
 	notificationAnswersValidationSchema,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,

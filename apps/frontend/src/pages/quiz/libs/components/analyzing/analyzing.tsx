@@ -9,6 +9,7 @@ type Properties = {
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	return (
 		<div className={styles["page-container"]}>
+			<div className={styles["white-dots"]} />
 			<div className={styles["border-container"]}>
 				<div className={styles["content-container"]}>
 					<h1 className={styles["title"]}>We’re Analyzing Your Journey!</h1>
