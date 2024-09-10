@@ -1,6 +1,7 @@
 import {
 	BalanceWheelChart,
 	Button,
+	Loader,
 	ScoresEditModal,
 } from "~/libs/components/components.js";
 import {
@@ -18,8 +19,10 @@ const UserWheel: React.FC = () => {
 	const NO_SCORES_COUNT = 0;
 
 	const dispatch = useAppDispatch();
-	const scores = useAppSelector((state) => state.quiz.scores);
+	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
+
+	const isLoading = dataStatus === "pending";
 
 	const chartData = scores.map((score) => {
 		return {
@@ -59,9 +62,14 @@ const UserWheel: React.FC = () => {
 			</div>
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
-					<Button label="edit my wheel results" onClick={handleEditing} />
+					<Button
+						isDisabled={isLoading}
+						label="edit my wheel results"
+						onClick={handleEditing}
+					/>
 				</div>
 			)}
+			{isLoading && <Loader />}
 		</div>
 	);
 };
