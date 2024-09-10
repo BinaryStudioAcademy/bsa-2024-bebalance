@@ -1,15 +1,27 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
+import { convertToCssClassName } from "../../helpers/helpers.js";
 import styles from "./styles.module.css";
 
-const Category: React.FC = () => {
+type Properties = {
+	categoryName: string;
+};
+
+const Category: React.FC<Properties> = ({ categoryName }: Properties) => {
+	const className = convertToCssClassName(categoryName);
+
 	return (
 		<div
-			className={getValidClassNames(styles["border-container"], styles["love"])}
+			className={getValidClassNames(
+				styles["border-container"],
+				styles[className],
+			)}
 		>
 			<div className={styles["content-container"]}>
-				<div className={getValidClassNames(styles["circle"], styles["love"])} />
-				<div className={styles["content"]}>Love</div>
+				<div
+					className={getValidClassNames(styles["circle"], styles[className])}
+				/>
+				<div className={styles["content"]}>{categoryName}</div>
 			</div>
 		</div>
 	);
