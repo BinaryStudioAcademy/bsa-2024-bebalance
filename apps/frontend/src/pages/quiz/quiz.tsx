@@ -1,4 +1,5 @@
-import { DataStatus } from "~/libs/enums/enums.js";
+import { Navigate } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -13,11 +14,9 @@ import {
 } from "~/modules/users/users.js";
 
 import {
-	Analyzing,
 	BalanceWheel,
 	Introduction,
 	NotificationQuestions,
-	Onboarding,
 	QuizForm,
 } from "./libs/components/components.js";
 import { STEP_INCREMENT } from "./libs/constants/constants.js";
@@ -26,23 +25,16 @@ import { Step } from "./libs/enums/enums.js";
 const ZERO = 0;
 
 const Quiz: React.FC = () => {
-	const [step, setStep] = useState<number>(Step.ONBOARDING);
+	const [step, setStep] = useState<number>(Step.INTRODUCTION);
 	const dispatch = useAppDispatch();
 
-	const { dataStatus, scores } = useAppSelector(({ quiz }) => ({
-		dataStatus: quiz.dataStatus,
-		scores: quiz.scores,
+	const { userAnswers } = useAppSelector(({ onboarding }) => ({
+		userAnswers: onboarding.userAnswers,
 	}));
 
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
-
-	useEffect(() => {
-		if (dataStatus === DataStatus.FULFILLED && scores.length > ZERO) {
-			setStep(Step.INTRODUCTION);
-		}
-	}, [dataStatus, scores]);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -55,20 +47,14 @@ const Quiz: React.FC = () => {
 		[dispatch],
 	);
 
+	const hasOnboardingAnswers = userAnswers.length > ZERO;
+
+	if (!hasOnboardingAnswers) {
+		return <Navigate replace to={AppRoute.ONBOARDING} />;
+	}
+
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
-			case Step.ANALYZING_ONBOARDING: {
-				return <Analyzing onNext={handleNextStep} />;
-			}
-
-			case Step.ANALYZING_QUIZ: {
-				return <Analyzing onNext={handleNextStep} />;
-			}
-
-			case Step.ONBOARDING: {
-				return <Onboarding onNext={handleNextStep} />;
-			}
-
 			case Step.BALANCE_WHEEL: {
 				return <BalanceWheel />;
 			}

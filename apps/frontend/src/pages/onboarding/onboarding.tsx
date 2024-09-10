@@ -1,161 +1,40 @@
-import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
-import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants.js";
-import {
-	useAppDispatch,
-	useAppForm,
-	useAppSelector,
-	useCallback,
-	useEffect,
-	useState,
-} from "~/libs/hooks/hooks.js";
-import {
-	actions as onboardingActions,
-	oneAnswerSelectedValidationSchema,
-} from "~/modules/onboarding/onboarding.js";
+import { Analyzing } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/enums.js";
+import { useCallback, useNavigate, useState } from "~/libs/hooks/hooks.js";
 
-import { OnboardingAnswer } from "./libs/components/components.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
-import {
-	type OnboardingAnswerRequestBodyDto,
-	type OnboardingFormValues,
-} from "./libs/types/types.js";
-import styles from "./styles.module.css";
+import { OnboardingForm } from "./libs/components/components.js";
+import { NO_MAGIC, Step } from "./libs/enums/enums.js";
 
 const Onboarding: React.FC = () => {
-	const dispatch = useAppDispatch();
+	const [step, setStep] = useState<number>(Step.ONBOARDING);
 
-	const [answerIds, setAnswerIds] = useState<OnboardingAnswerRequestBodyDto>({
-		answerIds: [],
-	});
+	const navigate = useNavigate();
 
-	const {
-		currentQuestionIndex,
-		isLastQuestion,
-		question,
-		totalQuestionsAmount,
-	} = useAppSelector(({ onboarding }) => ({
-		currentQuestionIndex: onboarding.currentQuestionIndex,
-		isLastQuestion:
-			onboarding.currentQuestionIndex ===
-			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-		question: onboarding.currentQuestion,
-		totalQuestionsAmount: onboarding.questions.length,
-	}));
+	const handleNextStep = useCallback((): void => {
+		setStep((previousStep) => previousStep + NO_MAGIC.ONE);
+	}, []);
 
-	useEffect(() => {
-		void dispatch(onboardingActions.getAll());
-	}, [dispatch]);
+	const handleAfterAnalyze = useCallback((): void => {
+		navigate(AppRoute.QUIZ);
+	}, [navigate]);
 
-	const { control, handleSubmit, isValid, reset } =
-		useAppForm<OnboardingFormValues>({
-			defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
-			validationSchema: oneAnswerSelectedValidationSchema,
-		});
-
-	const handleSaveAnswers = useCallback(
-		(payload: OnboardingAnswerRequestBodyDto) => {
-			return payload; //TODO call api
-		},
-		[],
-	);
-
-	const handleNextStep = useCallback(
-		(data: OnboardingFormValues) => {
-			setAnswerIds((previousState) => {
-				const newAnswerIds = new Set([
-					...previousState.answerIds,
-					Number(data.answer),
-				]);
-
-				return {
-					answerIds: [...newAnswerIds],
-				};
-			});
-
-			if (isLastQuestion) {
-				handleSaveAnswers(answerIds);
-
-				return;
+	const getScreen = (step: number): React.ReactNode => {
+		switch (step) {
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleAfterAnalyze} />;
 			}
 
-			void dispatch(onboardingActions.nextQuestion());
-			reset();
-		},
+			case Step.ONBOARDING: {
+				return <OnboardingForm onNext={handleNextStep} />;
+			}
 
-		[answerIds, dispatch, handleSaveAnswers, isLastQuestion, reset],
-	);
+			default: {
+				return null;
+			}
+		}
+	};
 
-	const handlePreviousStep = useCallback(() => {
-		setAnswerIds((previousState) => {
-			const newAnswerIds = [...previousState.answerIds];
-			newAnswerIds.pop();
-
-			return {
-				answerIds: newAnswerIds,
-			};
-		});
-		void dispatch(onboardingActions.previousQuestion());
-	}, [dispatch]);
-
-	const handleFormSubmit = useCallback(
-		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(handleNextStep)(event_);
-		},
-		[handleNextStep, handleSubmit],
-	);
-
-	return (
-		<div className={styles["container"]}>
-			<div className={styles["onboarding"]}>
-				{question ? (
-					<>
-						<div className={styles["progress-bar"]}>
-							<ProgressBar
-								currentStep={currentQuestionIndex}
-								numberOfSteps={totalQuestionsAmount}
-							/>
-						</div>
-						<h2 className={styles["question"]}>{question.label}</h2>
-						<form className={styles["answers"]} onSubmit={handleFormSubmit}>
-							{question.answers.map((answer) => {
-								const answerOptions = [
-									{ label: answer.label, value: answer.id.toString() },
-								];
-
-								return (
-									<OnboardingAnswer
-										control={control}
-										key={answer.id}
-										name="answer"
-										options={answerOptions}
-									/>
-								);
-							})}
-							<div className={styles["button-container"]}>
-								{!isLastQuestion && (
-									<Button
-										label="BACK"
-										onClick={handlePreviousStep}
-										type="button"
-										variant="secondary"
-									/>
-								)}
-								<Button
-									isPrimary={isValid}
-									label={isLastQuestion ? "ANALYZE" : "NEXT"}
-									type="submit"
-								/>
-							</div>
-						</form>
-					</>
-				) : (
-					<div className={styles["loader"]}>
-						<Loader />
-					</div>
-				)}
-			</div>
-		</div>
-	);
+	return <>{getScreen(step)}</>;
 };
 
 export { Onboarding };

@@ -7,6 +7,7 @@ type UserDto = {
 	id: number;
 	name: string;
 	notificationFrequency?: ValueOf<typeof NotificationFrequency>;
+	onBoardingAnswers?: number[];
 	updatedAt: string;
 	userTaskDays?: number[];
 };

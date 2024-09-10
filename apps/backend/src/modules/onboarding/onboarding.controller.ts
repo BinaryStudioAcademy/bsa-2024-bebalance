@@ -9,7 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { OnboardingApiPath } from "./libs/enums/enums.js";
-import { type OnboardingAnswerRequestBodyDto } from "./libs/types/types.js";
+import { type OnboardingAnswerRequestDto } from "./libs/types/types.js";
 import { onboardingAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type OnboardingService } from "./onboarding.service.js";
 
@@ -86,7 +86,7 @@ class OnboardingController extends BaseController {
 			handler: (options) =>
 				this.saveOnboardingAnswers(
 					options as APIHandlerOptions<{
-						body: OnboardingAnswerRequestBodyDto;
+						body: OnboardingAnswerRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -189,7 +189,7 @@ class OnboardingController extends BaseController {
 
 	private async saveOnboardingAnswers(
 		options: APIHandlerOptions<{
-			body: OnboardingAnswerRequestBodyDto;
+			body: OnboardingAnswerRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {

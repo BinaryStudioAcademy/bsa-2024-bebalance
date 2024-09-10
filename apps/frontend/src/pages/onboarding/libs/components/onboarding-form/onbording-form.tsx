@@ -9,9 +9,9 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
-import { OnboardingAnswer } from "./libs/components/components.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
-import { type OnboardingFormValues } from "./libs/types/types.js";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "../../constants/constants.js";
+import { type OnboardingFormValues } from "../../types/types.js";
+import { OnboardingAnswer } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -19,25 +19,25 @@ type Properties = {
 };
 
 type FormToSave = {
-	[key: string]: string;
+	[key: string]: string[];
 };
 
-const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
+const ZERO = 0;
+
+const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const {
 		currentQuestionIndex,
 		isLastQuestion,
 		question,
 		totalQuestionsAmount,
-		userId,
-	} = useAppSelector(({ auth, onboarding }) => ({
+	} = useAppSelector(({ onboarding }) => ({
 		currentQuestionIndex: onboarding.currentQuestionIndex,
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
 			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
 		question: onboarding.currentQuestion,
 		totalQuestionsAmount: onboarding.questions.length,
-		userId: auth.user?.id,
 	}));
 
 	useEffect(() => {
@@ -62,10 +62,10 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 						Object.entries(data).filter(([key]) => key !== "answer0"),
 					);
 
-					if (isLastQuestion && userId) {
+					if (isLastQuestion) {
 						const answerIds = getAnswerIds(newObject);
 
-						void dispatch(onboardingActions.saveAnswers({ answerIds, userId }));
+						void dispatch(onboardingActions.saveAnswers({ answerIds }));
 
 						onNext();
 					}
@@ -75,7 +75,7 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 			}
 		},
 
-		[dispatch, getAnswerIds, isLastQuestion, onNext, question, userId],
+		[dispatch, getAnswerIds, isLastQuestion, onNext, question],
 	);
 
 	const handlePreviousStep = useCallback(() => {
@@ -117,7 +117,7 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 								);
 							})}
 							<div className={styles["button-container"]}>
-								{!isLastQuestion && (
+								{currentQuestionIndex !== ZERO && (
 									<Button
 										label="BACK"
 										onClick={handlePreviousStep}
@@ -144,4 +144,4 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 	);
 };
 
-export { Onboarding };
+export { OnboardingForm };

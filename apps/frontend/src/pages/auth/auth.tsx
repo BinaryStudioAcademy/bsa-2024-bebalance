@@ -51,8 +51,9 @@ const Auth: React.FC = () => {
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
 			void dispatch(authActions.signUp(payload));
+			navigate(AppRoute.ONBOARDING);
 		},
-		[dispatch],
+		[dispatch, navigate],
 	);
 
 	const handleForgotPasswordSubmit = useCallback(

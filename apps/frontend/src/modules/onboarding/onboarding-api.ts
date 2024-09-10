@@ -5,7 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { OnboardingApiPath } from "./libs/enums/enums.js";
 import {
-	type OnboardingAnswerRequestDto,
+	type OnboardingAnswerRequestBodyDto,
 	type OnboardingGetAllResponseDto,
 	type OnboardingUserAnswerDto,
 } from "./libs/types/types.js";
@@ -35,7 +35,7 @@ class OnboardingApi extends BaseHTTPApi {
 	}
 
 	public async saveAnswers(
-		payload: OnboardingAnswerRequestDto,
+		payload: OnboardingAnswerRequestBodyDto,
 	): Promise<OnboardingUserAnswerDto[]> {
 		const response = await this.load(
 			this.getFullEndpoint(OnboardingApiPath.ANSWER, {}),

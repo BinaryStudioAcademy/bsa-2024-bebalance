@@ -1,6 +1,6 @@
 export {
 	type OnboardingAnswerDto,
-	type OnboardingAnswerRequestDto,
+	type OnboardingAnswerRequestBodyDto,
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionResponseDto,
 	type OnboardingUserAnswerDto,

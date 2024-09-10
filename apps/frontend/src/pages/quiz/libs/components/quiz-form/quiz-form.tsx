@@ -26,10 +26,11 @@ type Properties = {
 };
 
 type FormToSave = {
-	[key: string]: string;
+	[key: string]: string[];
 };
 
 const ONE_STEP_OFFSET = 1;
+const ZERO = 0;
 
 const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
@@ -39,13 +40,12 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
 	});
 
-	const { category, currentCategoryIndex, dataStatus, questions, userId } =
-		useAppSelector(({ auth, quiz }) => ({
+	const { category, currentCategoryIndex, dataStatus, questions } =
+		useAppSelector(({ quiz }) => ({
 			category: quiz.currentCategory,
 			currentCategoryIndex: quiz.currentCategoryIndex,
 			dataStatus: quiz.dataStatus,
 			questions: quiz.questions,
-			userId: auth.user?.id,
 		}));
 
 	useEffect(() => {
@@ -84,10 +84,10 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 						Object.entries(data).filter(([key]) => key !== "answer0"),
 					);
 
-					if (isLast && userId) {
+					if (isLast) {
 						const answerIds = getAnswerIds(newObject);
 
-						void dispatch(quizActions.saveAnswers({ answerIds, userId }));
+						void dispatch(quizActions.saveAnswers({ answerIds }));
 
 						onNext();
 					}
@@ -96,15 +96,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				}
 			}
 		},
-		[
-			category,
-			dispatch,
-			getAnswerIds,
-			isLast,
-			isValueUndefined,
-			onNext,
-			userId,
-		],
+		[category, dispatch, getAnswerIds, isLast, isValueUndefined, onNext],
 	);
 
 	const handleFormSubmit = useCallback(
@@ -151,15 +143,22 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
+					{currentCategoryIndex !== ZERO && (
+						<div className={styles["button-container"]}>
+							<Button
+								label="BACK"
+								onClick={handlePreviousStep}
+								variant="secondary"
+							/>
+						</div>
+					)}
 					<div className={styles["button-container"]}>
 						<Button
-							isPrimary={false}
-							label="BACK"
-							onClick={handlePreviousStep}
+							isPrimary
+							label={isLast ? "CONTINUE" : "NEXT"}
+							type="submit"
 						/>
 					</div>
-
-					<Button label={isLast ? "CONTINUE" : "NEXT"} type="submit" />
 				</div>
 			</form>
 			<RippleEffectBg className={styles["ripple-effect__background1"]} />

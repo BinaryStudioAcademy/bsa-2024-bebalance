@@ -2,10 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizUserAnswerDto,
-	type UserAnswersRequestDto,
 } from "~/modules/quiz/quiz.js";
 
 import { name as sliceName } from "./quiz.slice.js";
@@ -22,9 +22,9 @@ const getAllQuestions = createAsyncThunk<
 
 const saveAnswers = createAsyncThunk<
 	QuizUserAnswerDto[],
-	UserAnswersRequestDto,
+	QuizAnswersRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/create-user`, async (createAnswerPayload, { extra }) => {
+>(`${sliceName}/save-answers`, async (createAnswerPayload, { extra }) => {
 	const { quizApi } = extra;
 
 	return await quizApi.saveAnswers(createAnswerPayload);

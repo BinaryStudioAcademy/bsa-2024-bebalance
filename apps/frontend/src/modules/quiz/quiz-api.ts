@@ -3,10 +3,10 @@ import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
+	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizUserAnswerDto,
-	type UserAnswersRequestDto,
 } from "~/modules/quiz/quiz.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
@@ -49,7 +49,7 @@ class QuizApi extends BaseHTTPApi {
 	}
 
 	public async saveAnswers(
-		payload: UserAnswersRequestDto,
+		payload: QuizAnswersRequestDto,
 	): Promise<QuizUserAnswerDto[]> {
 		const response = await this.load(
 			this.getFullEndpoint(QuizApiPath.ANSWER, {}),

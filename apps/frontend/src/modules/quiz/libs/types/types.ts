@@ -1,4 +1,3 @@
-export { type UserAnswersRequestDto } from "./user-answers-request-dto.type.js";
 export {
 	type QuizAnswerDto,
 	type QuizAnswersRequestDto,
