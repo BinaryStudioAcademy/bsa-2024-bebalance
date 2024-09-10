@@ -11,6 +11,8 @@ import { UserModel } from "../users/users.js";
 import { type TaskStatus } from "./libs/enums/enums.js";
 
 class TaskModel extends AbstractModel {
+	public category!: CategoryModel;
+
 	public categoryId!: number;
 
 	public description!: string;

@@ -1,7 +1,9 @@
-import { type ValueOf } from "../../../../libs/types/types.js";
+import { type ValueOf } from "src/libs/types/types.js";
+
 import { type TaskStatus } from "../enums/enums.js";
 
 type TaskDto = {
+	category: string;
 	categoryId: number;
 	createdAt: string;
 	description: string;

@@ -1,3 +1,4 @@
+import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { type Repository } from "~/libs/types/types.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 
@@ -27,10 +28,14 @@ class TaskRepository implements Repository {
 	}
 
 	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
-		const tasks = await this.taskModel.query().where({ userId });
+		const tasks = await this.taskModel
+			.query()
+			.withGraphFetched(`[${RelationName.CATEGORY}]`)
+			.where({ userId });
 
 		return tasks.map((task) =>
 			TaskEntity.initialize({
+				category: task.category.name,
 				categoryId: task.categoryId,
 				createdAt: task.createdAt,
 				description: task.description,
