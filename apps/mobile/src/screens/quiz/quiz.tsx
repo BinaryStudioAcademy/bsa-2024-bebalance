@@ -132,7 +132,7 @@ const Quiz: React.FC = () => {
 								</Text>
 								<Counter
 									currentStep={currentQuestionIndex + NumericalValue.ONE}
-									totalSteps={totalQuestionsAmount}
+									totalSteps={totalQuestionsAmount + NumericalValue.ONE}
 								/>
 								<InfinitePager
 									infinitePagerReference={infinitePagerReference}
