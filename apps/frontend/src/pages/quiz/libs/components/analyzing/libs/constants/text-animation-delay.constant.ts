@@ -1,3 +1,0 @@
-const TEXT_ANIMATION_DELAY = 0.05;
-
-export { TEXT_ANIMATION_DELAY };

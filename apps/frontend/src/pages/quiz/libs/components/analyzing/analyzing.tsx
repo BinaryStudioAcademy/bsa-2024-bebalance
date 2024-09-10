@@ -1,8 +1,8 @@
 import { Button } from "~/libs/components/components.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
-import { TEXT_ANIMATION_DELAY } from "./libs/constants/constants.js";
-import { AnalyzingText } from "./libs/enums/enums.js";
+import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
+import { createAnimatedSpans } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -21,36 +21,12 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	});
 
 	const handleAnimateText = useCallback(() => {
-		const firstParagraphArray = AnalyzingText.firstParagraph.split(" ");
-		const secondParagraphArray = AnalyzingText.secondParagraph.split(" ");
-
-		const firstParagraph = firstParagraphArray.map((word, index) => (
-			<span
-				className={styles["letter"]}
-				key={`${word}-${index.toString()}`}
-				style={{
-					animationDelay: `${(index * TEXT_ANIMATION_DELAY).toString()}s`,
-				}}
-			>
-				{index === firstParagraphArray.length ? word : `${word} \u00A0`}
-			</span>
-		));
-
-		const secondParagraph = secondParagraphArray.map((word, index) => {
-			const animationDelay =
-				firstParagraphArray.length * TEXT_ANIMATION_DELAY +
-				index * TEXT_ANIMATION_DELAY;
-
-			return (
-				<span
-					className={styles["letter"]}
-					key={`${word}-${index.toString()}`}
-					style={{ animationDelay: `${animationDelay.toString()}s` }}
-				>
-					{index === secondParagraphArray.length ? word : `${word} \u00A0`}
-				</span>
-			);
-		});
+		const firstParagraph = createAnimatedSpans(AnalyzingText.firstParagraph);
+		const secondParagraph = createAnimatedSpans(
+			AnalyzingText.secondParagraph,
+			AnalyzingText.firstParagraph.split(" ").length *
+				TextAnimationDelay.DELAY_MULTIPLIER,
+		);
 
 		setText({ firstParagraph, secondParagraph });
 	}, []);
