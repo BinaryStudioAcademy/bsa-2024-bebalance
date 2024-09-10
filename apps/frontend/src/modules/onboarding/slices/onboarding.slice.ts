@@ -11,7 +11,7 @@ import {
 	type OnboardingUserAnswerDto,
 } from "~/modules/onboarding/onboarding.js";
 
-import { createUserAnswers, getAll } from "./actions.js";
+import { getAll, saveAnswers } from "./actions.js";
 
 type State = {
 	currentQuestion: null | OnboardingQuestionResponseDto;
@@ -43,14 +43,14 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(createUserAnswers.rejected, (state) => {
+		builder.addCase(saveAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(createUserAnswers.fulfilled, (state, action) => {
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.userAnswers = action.payload;
 		});
-		builder.addCase(createUserAnswers.pending, (state) => {
+		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
 	},

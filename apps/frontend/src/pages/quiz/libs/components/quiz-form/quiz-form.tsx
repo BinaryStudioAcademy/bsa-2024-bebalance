@@ -87,7 +87,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					if (isLast && userId) {
 						const answerIds = getAnswerIds(newObject);
 
-						void dispatch(quizActions.createUserAnswers({ answerIds, userId }));
+						void dispatch(quizActions.saveAnswers({ answerIds, userId }));
 
 						onNext();
 					}
@@ -151,18 +151,15 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
-					<div className={styles["btn-secondary"]}>
+					<div className={styles["button-container"]}>
 						<Button
 							isPrimary={false}
 							label="BACK"
 							onClick={handlePreviousStep}
 						/>
 					</div>
-					{isLast ? (
-						<Button label="CONTINUE" type="submit" />
-					) : (
-						<Button label="NEXT" type="submit" />
-					)}
+
+					<Button label={isLast ? "CONTINUE" : "NEXT"} type="submit" />
 				</div>
 			</form>
 			<RippleEffectBg className={styles["ripple-effect__background1"]} />

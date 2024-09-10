@@ -21,7 +21,20 @@ class OnboardingApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.ONBOARDING, storage });
 	}
 
-	public async createUserAnswers(
+	public async getAll(): Promise<OnboardingGetAllResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(OnboardingApiPath.ROOT, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "GET",
+			},
+		);
+
+		return await response.json<OnboardingGetAllResponseDto>();
+	}
+
+	public async saveAnswers(
 		payload: OnboardingAnswerRequestDto,
 	): Promise<OnboardingUserAnswerDto[]> {
 		const response = await this.load(
@@ -35,19 +48,6 @@ class OnboardingApi extends BaseHTTPApi {
 		);
 
 		return await response.json<OnboardingUserAnswerDto[]>();
-	}
-
-	public async getAll(): Promise<OnboardingGetAllResponseDto> {
-		const response = await this.load(
-			this.getFullEndpoint(OnboardingApiPath.ROOT, {}),
-			{
-				contentType: ContentType.JSON,
-				hasAuth: true,
-				method: "GET",
-			},
-		);
-
-		return await response.json<OnboardingGetAllResponseDto>();
 	}
 }
 

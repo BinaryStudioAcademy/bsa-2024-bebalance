@@ -20,14 +20,14 @@ const getAllQuestions = createAsyncThunk<
 	return await quizApi.getAllQuestions();
 });
 
-const createUserAnswers = createAsyncThunk<
+const saveAnswers = createAsyncThunk<
 	QuizUserAnswerDto[],
 	UserAnswersRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/create-user`, async (createAnswerPayload, { extra }) => {
 	const { quizApi } = extra;
 
-	return await quizApi.createUserAnswers(createAnswerPayload);
+	return await quizApi.saveAnswers(createAnswerPayload);
 });
 
 const getScores = createAsyncThunk<
@@ -40,4 +40,4 @@ const getScores = createAsyncThunk<
 	return await quizApi.getScores();
 });
 
-export { createUserAnswers, getAllQuestions, getScores };
+export { getAllQuestions, getScores, saveAnswers };

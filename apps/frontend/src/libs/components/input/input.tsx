@@ -70,7 +70,7 @@ const Input = <T extends FieldValues>({
 			>
 				{label}
 			</span>
-			<div className={getValidClassNames(styles["input-container"])}>
+			<div className={styles["input-container"]}>
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (

@@ -22,22 +22,6 @@ class QuizApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
-	public async createUserAnswers(
-		payload: UserAnswersRequestDto,
-	): Promise<QuizUserAnswerDto[]> {
-		const response = await this.load(
-			this.getFullEndpoint(QuizApiPath.ANSWER, {}),
-			{
-				contentType: ContentType.JSON,
-				hasAuth: true,
-				method: "POST",
-				payload: JSON.stringify(payload),
-			},
-		);
-
-		return await response.json<QuizUserAnswerDto[]>();
-	}
-
 	public async getAllQuestions(): Promise<{ items: QuizQuestionDto[][] }> {
 		const response = await this.load(
 			this.getFullEndpoint(QuizApiPath.QUESTIONS, {}),
@@ -62,6 +46,22 @@ class QuizApi extends BaseHTTPApi {
 		);
 
 		return await response.json<QuizScoresGetAllResponseDto>();
+	}
+
+	public async saveAnswers(
+		payload: UserAnswersRequestDto,
+	): Promise<QuizUserAnswerDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(QuizApiPath.ANSWER, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<QuizUserAnswerDto[]>();
 	}
 }
 
