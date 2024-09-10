@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
 	BackgroundWrapper,
@@ -9,13 +9,15 @@ import {
 	View,
 } from "~/libs/components/components";
 import { BaseColor, RootScreenName } from "~/libs/enums/enums";
-import { useCallback, useNavigation } from "~/libs/hooks/hooks";
+import { createAnimatedText } from "~/libs/helpers/helpers";
+import { useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type NativeStackNavigationProp,
 	type RootNavigationParameterList,
 } from "~/libs/types/types";
 
+import { AnalyzingText } from "./libs/constants/constants";
 import { styles } from "./styles";
 
 const Welcome: React.FC = () => {
@@ -24,6 +26,18 @@ const Welcome: React.FC = () => {
 	const handleContinuePress = useCallback((): void => {
 		navigation.navigate(RootScreenName.QUIZ_ENTRY);
 	}, [navigation]);
+
+	const [animatedText, setAnimatedText] = useState<React.ReactNode>([]);
+
+	const handleAnimateText = useCallback(() => {
+		setAnimatedText([]);
+		const animatedWords = createAnimatedText(AnalyzingText);
+		setAnimatedText(animatedWords);
+	}, []);
+
+	useEffect(() => {
+		handleAnimateText();
+	}, [handleAnimateText]);
 
 	return (
 		<BackgroundWrapper>
@@ -49,29 +63,18 @@ const Welcome: React.FC = () => {
 					</Text>
 					<View
 						style={[
+							globalStyles.flexDirectionRow,
 							globalStyles.pt24,
 							globalStyles.pr24,
 							globalStyles.pb48,
 							globalStyles.pl32,
 							globalStyles.mb32,
-							globalStyles.gap16,
 							styles.text,
 						]}
 					>
-						<Text color={BaseColor.BG_WHITE} size="sm" weight="regular">
-							Thank you for sharing your insights! We’re currently processing
-							your responses to create a personalized path just for you. This is
-							where the magic begins—we’re using your input to tailor the
-							experience, offering you the guidance and motivation you need to
-							achieve a balanced, fulfilling life.
-						</Text>
-						<Text color={BaseColor.BG_WHITE} size="sm" weight="regular">
-							Hang tight while we set things up! In just a moment, you’ll dive
-							into the areas that matter most to you, and together, we’ll start
-							making progress toward your goals. Your journey to a better life
-							starts now!
-						</Text>
+						{animatedText}
 					</View>
+
 					<Button label="Let's Continue" onPress={handleContinuePress} />
 					<Link
 						label="Go to the Wheel"

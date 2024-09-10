@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 	text: {
 		backgroundColor: BaseColor.DARK_BLUE,
 		borderRadius: 14,
+		flexWrap: "wrap",
 	},
 });
 
