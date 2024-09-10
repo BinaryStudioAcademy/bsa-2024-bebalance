@@ -6,6 +6,7 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 
+import { getGradientFromLabel } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -33,15 +34,18 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 
 		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
 		const remainingProgress = FULL_PROGRESS - currentProgress;
-		const gradientStrip = FULL_PROGRESS / sliderValue;
+		const stepSize = 34;
 
-		// TODO: add gradient based on the category name
+		// TODO: slider thumb color should depend on gradient color
+
+		const { degree, end, start } = getGradientFromLabel(label);
+
 		rangeReference.current.style.background = `
-		repeating-linear-gradient(to right, #cb00ff, #7f21ce ${String(gradientStrip)}%)
+		repeating-linear-gradient(${degree}, ${end}, ${start} ${String(stepSize)}px)
 		0% 0% / ${String(currentProgress)}% 100% no-repeat,
 		#d9d9d9 ${String(currentProgress)}%
 		0% / ${String(remainingProgress)}% 100%`;
-	}, [sliderValue, MIN, MAX]);
+	}, [sliderValue, label, MIN, MAX]);
 
 	const handleValueChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
