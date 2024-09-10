@@ -117,6 +117,7 @@ const Quiz: React.FC = () => {
 							globalStyles.mh12,
 							globalStyles.mt32,
 							globalStyles.ph16,
+							globalStyles.pb16,
 							styles.container,
 						]}
 					>
@@ -133,23 +134,30 @@ const Quiz: React.FC = () => {
 									currentStep={currentQuestionIndex + NumericalValue.ONE}
 									totalSteps={totalQuestionsAmount}
 								/>
-								<InfinitePager
-									infinitePagerReference={infinitePagerReference}
-									onPageRender={handleRenderPageComponent}
-								/>
-								<View style={[globalStyles.gap16, styles.buttonContainer]}>
-									<Button
-										isDisabled={!isValid}
-										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										onPress={handleFormSubmit}
+								<View
+									style={[
+										globalStyles.flex1,
+										globalStyles.justifyContentSpaceBetween,
+									]}
+								>
+									<InfinitePager
+										infinitePagerReference={infinitePagerReference}
+										onPageRender={handleRenderPageComponent}
 									/>
-									{currentQuestionIndex !== NumericalValue.ZERO && (
+									<View style={globalStyles.gap16}>
 										<Button
-											appearance="outlined"
-											label="BACK"
-											onPress={handlePreviousClick}
+											isDisabled={!isValid}
+											label={isLastQuestion ? "ANALYZE" : "NEXT"}
+											onPress={handleFormSubmit}
 										/>
-									)}
+										{currentQuestionIndex !== NumericalValue.ZERO && (
+											<Button
+												appearance="outlined"
+												label="BACK"
+												onPress={handlePreviousClick}
+											/>
+										)}
+									</View>
 								</View>
 							</>
 						)}
