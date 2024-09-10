@@ -14,7 +14,10 @@ import {
 } from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/components.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import {
+	FIRST_QUESTION_INDEX,
+	ONBOARDING_FORM_DEFAULT_VALUES,
+} from "./libs/constants/constants.js";
 import { ButtonLabel } from "./libs/enums/enums.js";
 import {
 	type OnboardingAnswerRequestBodyDto,
@@ -31,11 +34,13 @@ const Onboarding: React.FC = () => {
 
 	const {
 		currentQuestionIndex,
+		isFirstQuestion,
 		isLastQuestion,
 		question,
 		totalQuestionsAmount,
 	} = useAppSelector(({ onboarding }) => ({
 		currentQuestionIndex: onboarding.currentQuestionIndex,
+		isFirstQuestion: onboarding.currentQuestionIndex === FIRST_QUESTION_INDEX,
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
 			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
@@ -133,7 +138,7 @@ const Onboarding: React.FC = () => {
 								);
 							})}
 							<div className={styles["button-container"]}>
-								{!isLastQuestion && (
+								{!isLastQuestion && !isFirstQuestion && (
 									<div className={styles["button-wrapper"]}>
 										<Button
 											label={ButtonLabel.BACK}
