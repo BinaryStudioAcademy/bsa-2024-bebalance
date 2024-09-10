@@ -73,7 +73,9 @@ const Settings: React.FC = () => {
 						type="radio"
 					/>
 				</div>
-				<Button label="save changes" type="submit" />
+				<div className="button-container">
+					<Button label="save changes" type="submit" />
+				</div>
 			</form>
 		</div>
 	);

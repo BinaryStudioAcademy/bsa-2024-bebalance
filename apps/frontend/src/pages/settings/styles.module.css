@@ -27,3 +27,8 @@
 	gap: 30px;
 	align-self: stretch;
 }
+
+.button-container {
+	display: flex;
+	align-self: flex-end;
+}

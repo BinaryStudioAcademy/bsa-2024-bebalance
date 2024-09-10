@@ -27,12 +27,7 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 							starts now!
 						</p>
 					</div>
-					<Button
-						isFluid
-						label="Let’s continue"
-						onClick={onNext}
-						type="button"
-					/>
+					<Button label="Let’s continue" onClick={onNext} type="button" />
 				</div>
 			</div>
 		</div>

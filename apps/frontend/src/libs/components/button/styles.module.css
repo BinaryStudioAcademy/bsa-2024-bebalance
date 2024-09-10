@@ -15,10 +15,6 @@
 	outline: 0;
 }
 
-.fluid {
-	width: 100%;
-}
-
 .primary {
 	color: var(--white);
 	background-color: var(--black);
