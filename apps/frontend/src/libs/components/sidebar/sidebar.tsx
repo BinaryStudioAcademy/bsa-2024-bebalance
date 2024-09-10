@@ -27,7 +27,7 @@ const Sidebar: React.FC<Properties> = ({
 
 	const dispatch = useAppDispatch();
 
-	const [isLogout, setIsLogout] = useState<boolean>(true);
+	const [isLogout, setIsLogout] = useState<boolean>(false);
 
 	const handleSignOut = useCallback(() => {
 		setIsLogout((previousState) => !previousState);
