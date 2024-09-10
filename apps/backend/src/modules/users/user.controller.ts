@@ -333,7 +333,7 @@ class UserController extends BaseController {
 		);
 
 		return {
-			payload: user?.toObject(),
+			payload: user,
 			status: HTTPCode.OK,
 		};
 	}

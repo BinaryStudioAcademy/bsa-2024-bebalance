@@ -46,7 +46,37 @@ class UserService implements Service {
 			passwordSalt: salt,
 		};
 
-		return await this.userRepository.updatePassword(id, updates);
+		const user = await this.userRepository.updatePassword(id, updates);
+
+		if (!user.avatarFileId) {
+			return UserEntity.initialize({
+				avatarFileId: null,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+			});
+		}
+
+		const avatarEntity = await this.fileService.find(user.avatarFileId);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
 	}
 
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
@@ -61,7 +91,35 @@ class UserService implements Service {
 			}),
 		);
 
-		return user.toObject();
+		if (!user.avatarFileId) {
+			return UserEntity.initialize({
+				avatarFileId: null,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+			}).toObject();
+		}
+
+		const avatarEntity = await this.fileService.find(user.avatarFileId);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		}).toObject();
 	}
 
 	public delete(): ReturnType<Service["delete"]> {
@@ -69,19 +127,125 @@ class UserService implements Service {
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
-		return await this.userRepository.find(id);
+		const user = await this.userRepository.find(id);
+
+		if (!user) {
+			throw new UserError({
+				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		if (!user.avatarFileId) {
+			return UserEntity.initialize({
+				avatarFileId: null,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+			});
+		}
+
+		const avatarEntity = await this.fileService.find(user.avatarFileId);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {
 		const items = await this.userRepository.findAll();
 
 		return {
-			items: items.map((item) => item.toObject()),
+			items: await Promise.all(
+				items.map(async (item) => {
+					if (!item.avatarFileId) {
+						return UserEntity.initialize({
+							avatarFileId: null,
+							avatarUrl: null,
+							createdAt: item.createdAt,
+							email: item.email,
+							id: item.id,
+							name: item.name,
+							passwordHash: item.passwordHash,
+							passwordSalt: item.passwordSalt,
+							updatedAt: item.updatedAt,
+						}).toObject();
+					}
+
+					const avatarEntity = await this.fileService.find(item.avatarFileId);
+
+					const avatar = avatarEntity?.toObject();
+
+					return UserEntity.initialize({
+						avatarFileId: avatar?.id ?? null,
+						avatarUrl: avatar?.url ?? null,
+						createdAt: item.createdAt,
+						email: item.email,
+						id: item.id,
+						name: item.name,
+						passwordHash: item.passwordHash,
+						passwordSalt: item.passwordSalt,
+						updatedAt: item.updatedAt,
+					}).toObject();
+				}),
+			),
 		};
 	}
 
-	public findByEmail(email: string): Promise<null | UserEntity> {
-		return this.userRepository.findByEmail(email);
+	public async findByEmail(email: string): Promise<null | UserEntity> {
+		const user = await this.userRepository.findByEmail(email);
+
+		if (!user) {
+			throw new UserError({
+				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		if (!user.avatarFileId) {
+			return UserEntity.initialize({
+				avatarFileId: null,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+			});
+		}
+
+		const avatarEntity = await this.fileService.find(user.avatarFileId);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		});
 	}
 
 	public async saveNotificationAnswers(
@@ -90,8 +254,45 @@ class UserService implements Service {
 	): Promise<null | UserEntity> {
 		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
 
-		return await this.userRepository.update(id, {
+		const user = await this.userRepository.update(id, {
 			notificationFrequency: payload.notificationFrequency,
+		});
+
+		if (!user) {
+			throw new UserError({
+				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		if (!user.avatarFileId) {
+			return UserEntity.initialize({
+				avatarFileId: null,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+			});
+		}
+
+		const avatarEntity = await this.fileService.find(user.avatarFileId);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
 		});
 	}
 
@@ -101,13 +302,45 @@ class UserService implements Service {
 	): Promise<null | UserDto> {
 		const user = await this.userRepository.update(id, payload);
 
-		return user ? user.toObject() : null;
+		if (!user) {
+			return null;
+		}
+
+		if (!user.avatarFileId) {
+			return UserEntity.initialize({
+				avatarFileId: null,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.name,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+			}).toObject();
+		}
+
+		const avatarEntity = await this.fileService.find(user.avatarFileId);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.name,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+		}).toObject();
 	}
 
 	public async updateAvatar(
 		userId: number,
 		avatarFile?: File,
-	): Promise<null | UserEntity> {
+	): Promise<null | UserDto> {
 		if (!avatarFile) {
 			throw new UserError({
 				message: ErrorMessage.FILE_MISSING,
@@ -124,37 +357,69 @@ class UserService implements Service {
 			});
 		}
 
-		const { avatarFileId } = user.toObject();
-		let newFileEntity: FileEntity;
+		let newAvatar: FileEntity;
 
-		if (avatarFileId) {
-			const userAvatar = await this.fileService.find(avatarFileId);
+		if (user.avatarFileId) {
+			const existingAvatar = await this.fileService.find(user.avatarFileId);
 
-			if (!userAvatar) {
+			if (!existingAvatar) {
 				throw new FileError({
 					message: ErrorMessage.FILE_DOES_NOT_EXIST,
 				});
 			}
 
-			const newAvatar = await this.fileService.update({
-				fileId: userAvatar.toObject().id,
+			const avatarEntity = await this.fileService.update({
+				fileId: existingAvatar.toObject().id,
 				...avatarFile,
 			});
 
-			newFileEntity = FileEntity.initializeNew({
-				url: newAvatar?.toObject().url as string,
+			const updatedAvatar = avatarEntity?.toObject();
+
+			newAvatar = FileEntity.initialize({
+				createdAt: updatedAvatar?.createdAt as string,
+				id: updatedAvatar?.id as number,
+				updatedAt: updatedAvatar?.updatedAt as string,
+				url: updatedAvatar?.url as string,
 			});
 		} else {
-			const uploadedFile = await this.fileService.upload(avatarFile);
+			const avatarEntity = await this.fileService.upload(avatarFile);
 
-			newFileEntity = FileEntity.initializeNew({
-				url: uploadedFile.toObject().url,
+			const uploadedAvatar = avatarEntity.toObject();
+
+			newAvatar = FileEntity.initialize({
+				createdAt: uploadedAvatar.createdAt,
+				id: uploadedAvatar.id,
+				updatedAt: uploadedAvatar.updatedAt,
+				url: uploadedAvatar.url,
 			});
 		}
 
-		return await this.userRepository.updateAvatar(userId, {
-			url: newFileEntity.toObject().url,
-		});
+		const updatedUser = await this.userRepository.updateAvatar(
+			userId,
+			newAvatar.toObject().id,
+		);
+
+		if (!updatedUser) {
+			return null;
+		}
+
+		const avatarEntity = await this.fileService.find(
+			user.avatarFileId as number,
+		);
+
+		const avatar = avatarEntity?.toObject();
+
+		return UserEntity.initialize({
+			avatarFileId: avatar?.id ?? null,
+			avatarUrl: avatar?.url ?? null,
+			createdAt: updatedUser.createdAt,
+			email: updatedUser.email,
+			id: updatedUser.id,
+			name: updatedUser.name,
+			passwordHash: updatedUser.passwordHash,
+			passwordSalt: updatedUser.passwordSalt,
+			updatedAt: updatedUser.updatedAt,
+		}).toObject();
 	}
 }
 

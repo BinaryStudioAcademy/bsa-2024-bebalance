@@ -1,7 +1,6 @@
 import { encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 import { fileService } from "~/modules/files/files.js";
-import { FileModel } from "~/modules/files/files.model.js";
 
 import { UserController } from "./user.controller.js";
 import { UserModel } from "./user.model.js";
@@ -10,12 +9,11 @@ import { UserService } from "./user.service.js";
 import { UserDetailsModel } from "./user-details.model.js";
 import { UserTaskDaysModel } from "./user-task-days.model.js";
 
-const userRepository = new UserRepository({
-	fileModel: FileModel,
-	userDetailsModel: UserDetailsModel,
-	userModel: UserModel,
-	userTaskDaysModel: UserTaskDaysModel,
-});
+const userRepository = new UserRepository(
+	UserDetailsModel,
+	UserModel,
+	UserTaskDaysModel,
+);
 const userService = new UserService(userRepository, encrypt, fileService);
 const userController = new UserController(logger, userService);
 
