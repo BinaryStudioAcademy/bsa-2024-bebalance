@@ -1,2 +1,2 @@
 export { BaseHttpApi } from "./base-http-api";
-export { type ApiConfiguration } from "shared";
+export { type APIConfiguration } from "shared";

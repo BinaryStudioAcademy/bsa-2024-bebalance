@@ -1,11 +1,11 @@
 import { APIPath, ContentType } from "~/libs/enums/enums";
-import { type ApiConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
+import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { UsersApiPath } from "./libs/enums/enums";
 import { type UserDto } from "./libs/types/types";
 
 class UserApi extends BaseHttpApi {
-	public constructor({ baseUrl, http, storage }: ApiConfiguration) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 

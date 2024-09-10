@@ -100,7 +100,7 @@ const Quiz: React.FC = () => {
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
-	const renderPageComponent = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return (
 			<Content control={control} errors={errors} question={currentQuestion} />
 		);
@@ -136,7 +136,7 @@ const Quiz: React.FC = () => {
 								/>
 								<InfinitePager
 									infinitePagerReference={infinitePagerReference}
-									onPageRender={renderPageComponent}
+									onPageRender={handleRenderPageComponent}
 								/>
 								<View style={globalStyles.gap12}>
 									<Button
