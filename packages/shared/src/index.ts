@@ -18,6 +18,7 @@ export {
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
+export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -79,8 +80,9 @@ export {
 	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
@@ -97,5 +99,4 @@ export {
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,
-	UserValidationRule,
 } from "./modules/users/users.js";

@@ -2,7 +2,6 @@ import {
 	BackgroundWrapper,
 	Button,
 	InfinitePager,
-	type InfinitePagerImperativeApi,
 	LoaderWrapper,
 	ProgressBar,
 	ScreenWrapper,
@@ -20,16 +19,15 @@ import {
 	useRef,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type NativeStackNavigationProp } from "~/libs/types/types";
+import {
+	type InfinitePagerImperativeApi,
+	type NativeStackNavigationProp,
+} from "~/libs/types/types";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
-import { getPageInterpolatorSlide } from "./libs/animations/animations";
 import { Content } from "./libs/components/components";
-import {
-	ANIMATION_CONFIG,
-	ONBOARDING_FORM_DEFAULT_VALUES,
-} from "./libs/constants/constants";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants";
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
@@ -47,25 +45,16 @@ const Onboarding: React.FC = () => {
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
 	const {
-		allAnswers,
-		currentAnswer,
+		answersByQuestionIndex,
+		currentQuestion,
 		currentQuestionIndex,
 		dataStatus,
-		isLastQuestion,
-		question,
-		totalQuestionsAmount,
-	} = useAppSelector(({ onboarding }) => ({
-		allAnswers: onboarding.answersByQuestionIndex,
-		currentAnswer:
-			onboarding.answersByQuestionIndex[onboarding.currentQuestionIndex] ?? "",
-		currentQuestionIndex: onboarding.currentQuestionIndex,
-		dataStatus: onboarding.dataStatus,
-		isLastQuestion:
-			onboarding.currentQuestionIndex ===
-			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-		question: onboarding.currentQuestion,
-		totalQuestionsAmount: onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-	}));
+		questions,
+	} = useAppSelector((state) => state.onboarding);
+
+	const currentAnswer = answersByQuestionIndex[currentQuestionIndex] ?? "";
+	const totalQuestionsAmount = questions.length - PREVIOUS_INDEX_OFFSET;
+	const isLastQuestion = currentQuestionIndex === totalQuestionsAmount;
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
@@ -99,7 +88,7 @@ const Onboarding: React.FC = () => {
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: allAnswers });
+				handleSaveAnswers({ answerIds: answersByQuestionIndex });
 
 				return;
 			}
@@ -116,7 +105,7 @@ const Onboarding: React.FC = () => {
 			dispatch,
 			handleSaveAnswers,
 			currentQuestionIndex,
-			allAnswers,
+			answersByQuestionIndex,
 		],
 	);
 
@@ -137,8 +126,10 @@ const Onboarding: React.FC = () => {
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
 	const renderPageComponent = useCallback(() => {
-		return <Content control={control} errors={errors} question={question} />;
-	}, [control, errors, question]);
+		return (
+			<Content control={control} errors={errors} question={currentQuestion} />
+		);
+	}, [control, errors, currentQuestion]);
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
@@ -150,37 +141,42 @@ const Onboarding: React.FC = () => {
 							globalStyles.mb16,
 							globalStyles.mh12,
 							globalStyles.mt12,
-							globalStyles.p24,
+							globalStyles.pt24,
+							globalStyles.ph16,
+							globalStyles.pb16,
 							styles.container,
 						]}
 					>
-						{question && (
+						{currentQuestion && (
 							<>
 								<ProgressBar
 									currentItemIndex={currentQuestionIndex}
 									totalItemsAmount={totalQuestionsAmount}
 								/>
-								<InfinitePager
-									animationConfig={ANIMATION_CONFIG}
-									gesturesDisabled
-									pageBuffer={PREVIOUS_INDEX_OFFSET}
-									PageComponent={renderPageComponent}
-									pageInterpolator={getPageInterpolatorSlide}
-									ref={infinitePager}
-								/>
-								<View style={globalStyles.gap12}>
-									<Button
-										isDisabled={!isValid}
-										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										onPress={handleFormSubmit}
+								<View
+									style={[
+										globalStyles.flex1,
+										globalStyles.justifyContentSpaceBetween,
+									]}
+								>
+									<InfinitePager
+										infinitePagerReference={infinitePager}
+										onPageRender={renderPageComponent}
 									/>
-									{currentQuestionIndex !== ZERO && (
+									<View style={globalStyles.gap16}>
 										<Button
-											appearance="outlined"
-											label="BACK"
-											onPress={handlePreviousClick}
+											isDisabled={!isValid}
+											label={isLastQuestion ? "ANALYZE" : "NEXT"}
+											onPress={handleFormSubmit}
 										/>
-									)}
+										{currentQuestionIndex !== ZERO && (
+											<Button
+												appearance="outlined"
+												label="BACK"
+												onPress={handlePreviousClick}
+											/>
+										)}
+									</View>
 								</View>
 							</>
 						)}

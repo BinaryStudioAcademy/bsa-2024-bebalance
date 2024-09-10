@@ -72,12 +72,14 @@ class UserService implements Service {
 	public async saveNotificationAnswers(
 		id: number,
 		payload: NotificationAnswersPayloadDto,
-	): Promise<null | UserEntity> {
+	): Promise<null | UserDto> {
 		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
 
-		return await this.userRepository.update(id, {
+		const user = await this.userRepository.update(id, {
 			notificationFrequency: payload.notificationFrequency,
 		});
+
+		return user ? user.toObject() : null;
 	}
 
 	public async update(
