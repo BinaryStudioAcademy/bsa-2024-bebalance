@@ -8,17 +8,17 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	data: ModalData[];
-	setClose: React.Dispatch<React.SetStateAction<boolean>>;
+	onSaveChanges: () => void;
 };
 
 const ScoresEditModal: React.FC<Properties> = ({
 	data,
-	setClose,
+	onSaveChanges,
 }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [scores, setScores] = useState<ModalData[]>(data);
 
-	const handleClose = useCallback(() => {
+	const handleSaveChanges = useCallback(() => {
 		const originalScores = new Map(data.map((item) => [item.categoryId, item]));
 
 		const changedScores = scores.filter((score) => {
@@ -31,8 +31,8 @@ const ScoresEditModal: React.FC<Properties> = ({
 			void dispatch(quizActions.editScores({ items: changedScores }));
 		}
 
-		setClose(false);
-	}, [setClose, dispatch, scores, data]);
+		onSaveChanges();
+	}, [onSaveChanges, dispatch, scores, data]);
 
 	const handleSliderChange = useCallback(
 		(categoryId: number, value: number) => {
@@ -61,7 +61,7 @@ const ScoresEditModal: React.FC<Properties> = ({
 					/>
 				))}
 			</div>
-			<Button label="Save changes" onClick={handleClose} />
+			<Button label="Save changes" onClick={handleSaveChanges} />
 		</div>
 	);
 };

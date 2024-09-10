@@ -16,18 +16,10 @@ import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
 	const NO_SCORES_COUNT = 0;
+
 	const dispatch = useAppDispatch();
 	const scores = useAppSelector((state) => state.quiz.scores);
-
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-
-	const handleEditing = useCallback(() => {
-		setIsEditingModalOpen(true);
-	}, []);
-
-	useEffect(() => {
-		void dispatch(quizActions.getScores());
-	}, [dispatch]);
 
 	const chartData = scores.map((score) => {
 		return {
@@ -40,6 +32,18 @@ const UserWheel: React.FC = () => {
 		? "Edit my wheel results"
 		: "My wheel results";
 
+	const handleEditing = useCallback(() => {
+		setIsEditingModalOpen(true);
+	}, []);
+
+	const handleFinishEditing = useCallback(() => {
+		setIsEditingModalOpen(false);
+	}, []);
+
+	useEffect(() => {
+		void dispatch(quizActions.getScores());
+	}, [dispatch]);
+
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
@@ -50,7 +54,7 @@ const UserWheel: React.FC = () => {
 					<BalanceWheelChart data={chartData} />
 				)}
 				{isEditingModalOpen && (
-					<ScoresEditModal data={scores} setClose={setIsEditingModalOpen} />
+					<ScoresEditModal data={scores} onSaveChanges={handleFinishEditing} />
 				)}
 			</div>
 			{!isEditingModalOpen && (
