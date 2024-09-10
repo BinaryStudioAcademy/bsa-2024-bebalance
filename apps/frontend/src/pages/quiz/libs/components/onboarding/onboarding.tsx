@@ -119,7 +119,6 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 							<div className={styles["button-container"]}>
 								{!isLastQuestion && (
 									<Button
-										isFluid
 										label="BACK"
 										onClick={handlePreviousStep}
 										type="button"
@@ -128,7 +127,6 @@ const Onboarding: React.FC<Properties> = ({ onNext }: Properties) => {
 								)}
 
 								<Button
-									isFluid
 									isPrimary={isValid}
 									label={isLastQuestion ? "ANALYZE" : "NEXT"}
 									type="submit"

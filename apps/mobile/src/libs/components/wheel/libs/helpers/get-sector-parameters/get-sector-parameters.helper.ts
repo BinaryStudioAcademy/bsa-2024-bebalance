@@ -1,40 +1,51 @@
-type GetSectorParametersArguments = {
-	centerGap: number;
-	endPercent: number;
-	height: number;
-	layerOffset: number;
-	startPercent: number;
-};
+import {
+	type SectorParameters,
+	type SectorParametersCalculationData,
+} from "~/libs/types/types";
 
-const QUATER_PERCENT = 25;
+const QUARTER_PERCENT = 25;
 const TWO = 2;
 const MAX_PERCENT = 100;
 
 const getSectorParameters = ({
 	centerGap,
-	endPercent,
+	endPercentInner,
+	endPercentOuter,
 	height,
 	layerOffset,
-	startPercent,
-}: GetSectorParametersArguments): {
-	dashArrayDash: number;
-	dashArrayGap: number;
-	dashOffset: number;
-	radius: number;
-	strokeWidth: number;
-} => {
-	const strokeWidth = height - layerOffset * TWO - centerGap;
+	startPercentInner,
+	startPercentOuter,
+}: SectorParametersCalculationData): SectorParameters => {
+	const outerStrokeWidth = height + layerOffset * TWO - centerGap;
+	const innerStrokeWidth = height - layerOffset * TWO - centerGap;
 	const radius = (height + centerGap) / TWO;
-	const circumference = radius * TWO * Math.PI;
-	const dashArrayDash =
-		((endPercent - startPercent) * circumference) / MAX_PERCENT;
-	const dashArrayGap = circumference - dashArrayDash;
-	const dashOffset =
-		((circumference * (MAX_PERCENT + QUATER_PERCENT - startPercent)) /
+	const circumference = Math.round(radius * TWO * Math.PI);
+	const innerDashArrayDash =
+		((endPercentInner - startPercentInner) * circumference) / MAX_PERCENT;
+	const outerDashArrayDash =
+		((endPercentOuter - startPercentOuter) * circumference) / MAX_PERCENT;
+	const innerDashArrayGap = circumference - innerDashArrayDash;
+	const outerDashArrayGap = circumference - outerDashArrayDash;
+	const innerDashOffset =
+		((circumference * (MAX_PERCENT + QUARTER_PERCENT - startPercentInner)) /
+			MAX_PERCENT) %
+		circumference;
+	const outerDashOffset =
+		((circumference * (MAX_PERCENT + QUARTER_PERCENT - startPercentOuter)) /
 			MAX_PERCENT) %
 		circumference;
 
-	return { dashArrayDash, dashArrayGap, dashOffset, radius, strokeWidth };
+	return {
+		innerDashArrayDash,
+		innerDashArrayGap,
+		innerDashOffset,
+		innerStrokeWidth,
+		outerDashArrayDash,
+		outerDashArrayGap,
+		outerDashOffset,
+		outerStrokeWidth,
+		radius,
+	};
 };
 
 export { getSectorParameters };

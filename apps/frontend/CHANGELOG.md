@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.28.1...frontend-v1.29.0) (2024-09-09)
+
+
+### Features
+
+* **frontend/backend/shared:** final questions screen bb-243 ([#314](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/314)) ([2fe7663](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2fe76632a9a64d7fdd0d047522b10109dc8c9d06))
+
 ## [1.28.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.28.0...frontend-v1.28.1) (2024-09-07)
 
 
