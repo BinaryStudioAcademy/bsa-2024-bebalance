@@ -47,7 +47,7 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 		[],
 	);
 
-	useEffect(() => {
+	const updateSliderDimensions = useCallback(() => {
 		if (!rangeReference.current) {
 			return;
 		}
@@ -55,10 +55,26 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 		const sliderThumbCenterOffset = 17;
 		const sliderThumbTrackWidth = rangeReference.current.offsetWidth;
 
-		const step =
+		const newStep =
 			(sliderThumbTrackWidth - sliderThumbCenterOffset) / (MAX - MIN);
-		setStep(step);
-	}, []);
+		setStep(newStep);
+	}, [MAX, MIN]);
+
+	useEffect(() => {
+		const RESIZE = "resize";
+
+		updateSliderDimensions();
+
+		const handleResize = (): void => {
+			updateSliderDimensions();
+		};
+
+		window.addEventListener(RESIZE, handleResize);
+
+		return (): void => {
+			window.removeEventListener(RESIZE, handleResize);
+		};
+	}, [updateSliderDimensions]);
 
 	useEffect(() => {
 		if (!bubbleLabelReference.current) {
@@ -67,7 +83,7 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 
 		handleSliderBackgroundUpdate();
 		bubbleLabelReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
-	}, [sliderValue, step, handleSliderBackgroundUpdate]);
+	}, [sliderValue, step, handleSliderBackgroundUpdate, MIN]);
 
 	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
 	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
