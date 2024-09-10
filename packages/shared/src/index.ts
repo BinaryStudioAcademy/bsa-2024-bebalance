@@ -80,8 +80,9 @@ export {
 	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
@@ -98,5 +99,4 @@ export {
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,
-	UserValidationRule,
 } from "./modules/users/users.js";

@@ -1,4 +1,5 @@
 const APIPath = {
+	APP: "/app",
 	AUTH: "/auth",
 	ONBOARDING: "/onboarding",
 	QUIZ: "/quiz",
