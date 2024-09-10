@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.14.1...shared-v1.15.0) (2024-09-10)
+
+
+### Features
+
+* **frontend/backend:** forgot password functionality requirements bb-285 ([#329](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/329)) ([6e80423](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6e8042368c4f56ae8702a708b2b7e3da36c644f1))
+* **mobile:** quiz screen bb-245 ([#352](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/352)) ([2caeeea](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2caeeea30d26f2921786f89f10028537ab717fd4))
+
+
+### Bug Fixes
+
+* **shared:** notification questions validation bb-243 ([#364](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/364)) ([e032708](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e0327083cc777a9431f4c28523b1da8e5af42793))
+
 ## [1.14.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.14.0...shared-v1.14.1) (2024-09-10)
 
 
