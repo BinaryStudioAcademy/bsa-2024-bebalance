@@ -1,9 +1,10 @@
 .onboarding-answer {
-	width: 342px;
+	width: 100%;
+	max-width: 342px;
 }
 
-@media (width <= 640px) {
+@media (width <= 768px) {
 	.onboarding-answer {
-		width: 250px;
+		max-width: 312px;
 	}
 }

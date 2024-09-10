@@ -1,32 +1,26 @@
-import {
-	Loader,
-	Notification,
-	RouterOutlet,
-} from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/enums.js";
+import { RouterOutlet } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useEffect,
+	useNavigate,
 } from "~/libs/hooks/hooks.js";
+import { actions as appActions } from "~/modules/app/app.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
-	const { dataStatus } = useAppSelector(({ auth }) => ({
-		dataStatus: auth.dataStatus,
-	}));
+	const redirectLink = useAppSelector((state) => state.app.redirectLink);
 
 	useEffect(() => {
 		void dispatch(authActions.getAuthenticatedUser());
 	}, [dispatch]);
 
-	const isLoading =
-		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
-
-	if (isLoading) {
-		return <Loader />;
+	if (redirectLink) {
+		navigate(redirectLink);
+		dispatch(appActions.changeLink(null));
 	}
 
 	return (
@@ -34,7 +28,6 @@ const App: React.FC = () => {
 			<div>
 				<RouterOutlet />
 			</div>
-			<Notification />
 		</>
 	);
 };

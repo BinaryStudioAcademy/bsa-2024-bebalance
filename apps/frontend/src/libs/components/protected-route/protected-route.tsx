@@ -1,5 +1,5 @@
-import { Navigate } from "~/libs/components/components.js";
-import { type AppRoute } from "~/libs/enums/enums.js";
+import { Loader, Navigate } from "~/libs/components/components.js";
+import { type AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import { useAppSelector, useLocation } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
@@ -15,9 +15,16 @@ const ProtectedRoute: React.FC<Properties> = ({
 	component,
 	redirectTo,
 }: Properties) => {
-	const user = useAppSelector(({ auth }) => auth.user);
+	const { dataStatus, user } = useAppSelector(({ auth }) => auth);
+
+	const isLoading =
+		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
 
 	const { pathname } = useLocation();
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	if (!user) {
 		return <Navigate replace to={redirectTo} />;
