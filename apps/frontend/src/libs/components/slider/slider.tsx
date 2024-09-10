@@ -1,4 +1,5 @@
 import { Icon } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useCallback,
 	useEffect,
@@ -26,10 +27,10 @@ const Slider: React.FC<Properties> = ({
 	const MAX = 10;
 	const MIN = 0;
 	const MIN_SCORE_VALUE = 1;
+	const INITIAL_STEP = value;
 
-	const initialStep = 0;
 	const [sliderValue, setSliderValue] = useState<number>(value);
-	const [step, setStep] = useState<number>(initialStep);
+	const [step, setStep] = useState<number>(INITIAL_STEP);
 	const rangeReference = useRef<HTMLInputElement>(null);
 	const bubbleLabelReference = useRef<HTMLLabelElement>(null);
 
@@ -102,7 +103,10 @@ const Slider: React.FC<Properties> = ({
 		<div className={styles["container"]}>
 			<p className={styles["label"]}>{label}</p>
 			<input
-				className={`${String(styles["slider"])} ${String(styles[categorizedSliderClass])}`}
+				className={getValidClassNames(
+					styles["slider"],
+					styles[categorizedSliderClass],
+				)}
 				id="range"
 				max={MAX}
 				min={MIN}
@@ -124,7 +128,10 @@ const Slider: React.FC<Properties> = ({
 			<div className={styles["gradient-boxes-container"]}>
 				{Array.from({ length: 10 }).map((_, index) => (
 					<div
-						className={`${String(styles["gradient-box"])} ${String(styles[categorizedGradientBoxClass])}`}
+						className={getValidClassNames(
+							styles["gradient-box"],
+							styles[categorizedGradientBoxClass],
+						)}
 						key={index}
 					/>
 				))}
