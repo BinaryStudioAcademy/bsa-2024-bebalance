@@ -10,6 +10,7 @@ import {
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
+	hasVisuallyHiddenLabel?: boolean;
 	label: string;
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	options: InputOption[];
@@ -18,6 +19,7 @@ type Properties<T extends FieldValues> = {
 
 const Checkbox = <T extends FieldValues>({
 	control,
+	hasVisuallyHiddenLabel = false,
 	label,
 	name,
 	onChange,
@@ -61,7 +63,14 @@ const Checkbox = <T extends FieldValues>({
 	return (
 		<>
 			<label className={styles["input-wrapper"]}>
-				{isGeneralCheckbox && <p className={styles["question"]}>{label}</p>}
+				<p
+					className={getValidClassNames(
+						styles["question"],
+						hasVisuallyHiddenLabel && "visually-hidden",
+					)}
+				>
+					{label}
+				</p>
 				<div
 					className={getValidClassNames(
 						styles["input-container"],

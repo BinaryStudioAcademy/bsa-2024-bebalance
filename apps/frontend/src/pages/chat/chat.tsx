@@ -11,7 +11,10 @@ const Chat: React.FC = () => {
 	return (
 		<main className={styles["page-container"]}>
 			<section className={styles["quiz-form-container"]}>
-				<QuizCategoriesForm buttonLabel="" onSubmit={handleCategoriesSubmit} />
+				<QuizCategoriesForm
+					buttonLabel="Select"
+					onSubmit={handleCategoriesSubmit}
+				/>
 			</section>
 		</main>
 	);

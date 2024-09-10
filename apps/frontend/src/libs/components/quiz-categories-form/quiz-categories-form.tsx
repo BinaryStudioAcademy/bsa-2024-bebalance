@@ -85,6 +85,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 			<form onSubmit={handleFormSubmit}>
 				<Checkbox
 					control={control}
+					hasVisuallyHiddenLabel
 					label="All"
 					name="hasSelectedAll"
 					onChange={handleSelectAll}
@@ -93,6 +94,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 				/>
 				<Checkbox
 					control={control}
+					hasVisuallyHiddenLabel
 					label="Categories"
 					name="categoryIds"
 					onChange={handleInputSelect}
