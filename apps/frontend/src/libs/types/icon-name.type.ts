@@ -5,7 +5,6 @@ type IconName =
 	| "eye"
 	| "menu"
 	| "signOut"
-	| "valueBubble"
 	| "wheelActive"
 	| "wheelInactive";
 

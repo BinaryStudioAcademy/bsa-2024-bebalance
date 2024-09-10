@@ -1,4 +1,4 @@
-import { Icon } from "~/libs/components/components.js";
+import ValueBubble from "~/assets/img/value-bubble.svg?react";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useCallback,
@@ -122,7 +122,7 @@ const Slider: React.FC<Properties> = ({
 			>
 				<p className={styles["bubble-value"]}>{sliderValue}</p>
 				<span className={styles["bubble-icon-wrapper"]}>
-					<Icon name="valueBubble" />
+					<ValueBubble />
 				</span>
 			</label>
 			<div className={styles["gradient-boxes-container"]}>
