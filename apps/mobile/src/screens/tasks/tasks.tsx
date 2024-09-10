@@ -6,8 +6,9 @@ import {
 	Tag,
 	Text,
 } from "~/libs/components/components";
-import { useAppDispatch, useEffect } from "~/libs/hooks/hooks";
+import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type SliderData } from "~/libs/types/types";
+import { type UserDto } from "~/packages/users/users";
 import { actions as userActions } from "~/slices/users/users";
 
 const sliderData: SliderData[] = [{ color: "red", label: "Love" }];
@@ -15,9 +16,13 @@ const sliderData: SliderData[] = [{ color: "red", label: "Love" }];
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
 
+	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
+
 	useEffect(() => {
-		void dispatch(userActions.loadAll());
-	}, [dispatch]);
+		void dispatch(
+			userActions.getById({ id: (authenticatedUser as UserDto).id }),
+		);
+	}, [dispatch, authenticatedUser]);
 
 	return (
 		<ScreenWrapper>
