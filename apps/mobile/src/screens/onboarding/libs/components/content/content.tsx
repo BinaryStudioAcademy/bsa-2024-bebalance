@@ -1,7 +1,7 @@
 import React from "react";
 
 import { RadioGroup, Text } from "~/libs/components/components";
-import { globalStyles } from "~/libs/styles/global-styles/global-styles";
+import { globalStyles } from "~/libs/styles/styles";
 import {
 	type Control,
 	type FieldErrors,
