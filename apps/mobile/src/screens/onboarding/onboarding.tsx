@@ -155,7 +155,7 @@ const Onboarding: React.FC = () => {
 									infinitePagerReference={infinitePager}
 									onPageRender={renderPageComponent}
 								/>
-								<View style={globalStyles.gap12}>
+								<View style={[globalStyles.gap16, styles.buttonContainer]}>
 									<Button
 										isDisabled={!isValid}
 										label={isLastQuestion ? "ANALYZE" : "NEXT"}

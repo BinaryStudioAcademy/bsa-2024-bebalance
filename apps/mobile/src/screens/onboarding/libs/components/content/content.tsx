@@ -1,7 +1,7 @@
 import React from "react";
 
 import { RadioGroup, Text } from "~/libs/components/components";
-import { globalStyles } from "~/libs/styles/styles";
+import { globalStyles } from "~/libs/styles/global-styles/global-styles";
 import {
 	type Control,
 	type FieldErrors,
@@ -38,12 +38,13 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 
 	return (
 		<>
-			<Text preset="subheading" style={[globalStyles.mv48, styles.title]}>
+			<Text size="xl" style={styles.title} weight="bold">
 				{question?.label}
 			</Text>
 			<RadioGroup
 				control={control}
 				errors={errors}
+				itemContainerStyle={globalStyles.mb16}
 				name="answer"
 				options={mappedAnswersToRadioOptions}
 			/>
