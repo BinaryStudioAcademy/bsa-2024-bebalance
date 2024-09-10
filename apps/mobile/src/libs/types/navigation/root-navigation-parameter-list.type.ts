@@ -4,6 +4,7 @@ type RootNavigationParameterList = {
 	[RootScreenName.BOTTOM_TABS_NAVIGATOR]: undefined;
 	[RootScreenName.CHAT]: undefined;
 	[RootScreenName.ONBOARDING]: undefined;
+	[RootScreenName.QUIZ]: undefined;
 	[RootScreenName.QUIZ_ENTRY]: undefined;
 	[RootScreenName.SIGN_IN]: undefined;
 	[RootScreenName.SIGN_UP]: undefined;

@@ -4,6 +4,7 @@ export {
 	type NotificationAnswersPayloadDto,
 	type NotificationAnswersRequestDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,

@@ -23,7 +23,7 @@ const QuizEntry: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 	const handleStartPress = useCallback((): void => {
-		navigation.navigate(RootScreenName.WHEEL_LOADING);
+		navigation.navigate(RootScreenName.QUIZ);
 	}, [navigation]);
 
 	return (

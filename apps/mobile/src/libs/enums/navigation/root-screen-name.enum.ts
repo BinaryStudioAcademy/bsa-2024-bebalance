@@ -2,6 +2,7 @@ const RootScreenName = {
 	BOTTOM_TABS_NAVIGATOR: "BottomTabsNavigator",
 	CHAT: "Chat",
 	ONBOARDING: "Onboarding",
+	QUIZ: "Quiz",
 	QUIZ_ENTRY: "Quiz Entry",
 	SIGN_IN: "Sign In",
 	SIGN_UP: "Sign Up",
