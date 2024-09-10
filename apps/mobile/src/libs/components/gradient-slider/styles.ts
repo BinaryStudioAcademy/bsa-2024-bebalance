@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
 	labelText: {
 		backgroundColor: BaseColor.BLACK,
 		color: BaseColor.BG_WHITE,
-		paddingHorizontal: 1,
 		position: "absolute",
 	},
 	slider: {
-		padding: 0,
+		marginLeft: -10,
+		marginRight: -10,
 		position: "absolute",
-		width: "105%",
+		width: "110%",
 	},
 	sliderContainer: {
 		borderRadius: 20,
