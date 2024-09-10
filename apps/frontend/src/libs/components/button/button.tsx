@@ -5,6 +5,7 @@ import { Icon } from "../icon/icon.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	form?: string;
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	iconPosition?: "center" | "left" | "right";
@@ -17,6 +18,7 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({
+	form,
 	hasVisuallyHiddenLabel = false,
 	iconName,
 	iconPosition = "right",
@@ -37,6 +39,7 @@ const Button: React.FC<Properties> = ({
 			isDisabled && styles["disabled-button"],
 		)}
 		disabled={isDisabled}
+		form={form}
 		onClick={onClick}
 		type={type}
 	>

@@ -6,20 +6,23 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
-import { type InputOption } from "~/libs/types/types.js";
+import {
+	type CategoriesFormSubmitCallback,
+	type InputOption,
+} from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
 
-import { Button, Checkbox, Loader } from "../components.js";
+import { Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
 
 type Properties = {
-	buttonLabel: string;
-	onSubmit: (payload: QuizCategoriesFormFields) => void;
+	formId: string;
+	onSubmit: CategoriesFormSubmitCallback;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({
-	buttonLabel,
+	formId,
 	onSubmit,
 }: Properties) => {
 	const { control, getValues, handleSubmit, setValue } =
@@ -69,8 +72,8 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit((payload) => {
-				onSubmit(payload);
+			void handleSubmit(({ categoryIds }) => {
+				onSubmit({ categoryIds: categoryIds.map(Number) });
 			})(event_);
 		},
 		[onSubmit, handleSubmit],
@@ -82,7 +85,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 
 	return (
 		<section>
-			<form onSubmit={handleFormSubmit}>
+			<form id={formId} onSubmit={handleFormSubmit}>
 				<Checkbox
 					control={control}
 					label="All"
@@ -99,8 +102,6 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 					options={categoryInputOptions}
 					variant="rounded"
 				/>
-				<br />
-				<Button label={buttonLabel} type="submit" variant="secondary" />
 			</form>
 		</section>
 	);
