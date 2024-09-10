@@ -19,9 +19,6 @@ const userSignIn = z
 			.min(UserValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: UserValidationMessage.FIELD_REQUIRED,
 			})
-			.email({
-				message: UserValidationMessage.EMAIL_WRONG,
-			})
 			.regex(UserValidationRegexRule.EMAIL_LOCAL_PART_VALID_CHARS, {
 				message: UserValidationMessage.EMAIL_WRONG,
 			})
