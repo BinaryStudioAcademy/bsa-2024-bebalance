@@ -1,10 +1,13 @@
-import { Button } from "~/libs/components/components.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Popup } from "~/libs/components/components.js";
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
+import { PopupMessage } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useCallback,
 	useLocation,
+	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
@@ -24,10 +27,15 @@ const Sidebar: React.FC<Properties> = ({
 
 	const dispatch = useAppDispatch();
 
-	const handleSignOut = useCallback(
-		() => void dispatch(authActions.logOut()),
-		[dispatch],
-	);
+	const [isLogout, setIsLogout] = useState<boolean>(false);
+
+	const handleSignOut = useCallback(() => {
+		setIsLogout((previousState) => !previousState);
+	}, [setIsLogout]);
+
+	const handleConfirmLogout = useCallback(() => {
+		void dispatch(authActions.logOut());
+	}, [dispatch]);
 
 	return (
 		<div
@@ -66,6 +74,17 @@ const Sidebar: React.FC<Properties> = ({
 				</div>
 				<Button label="Sign out" onClick={handleSignOut} />
 			</div>
+
+			{isLogout && (
+				<Popup
+					closeText="No"
+					confirmText="Yes"
+					icon={runImg}
+					onClose={handleSignOut}
+					onConfirm={handleConfirmLogout}
+					title={PopupMessage.LOGOUT_CONFIRM}
+				/>
+			)}
 		</div>
 	);
 };
