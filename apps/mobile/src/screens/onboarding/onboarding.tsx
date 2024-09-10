@@ -141,7 +141,9 @@ const Onboarding: React.FC = () => {
 							globalStyles.mb16,
 							globalStyles.mh12,
 							globalStyles.mt12,
-							globalStyles.p24,
+							globalStyles.pt24,
+							globalStyles.ph16,
+							globalStyles.pb16,
 							styles.container,
 						]}
 					>

@@ -4,10 +4,10 @@ import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
 	buttonContainer: {
-		bottom: 24,
-		left: 24,
+		bottom: 16,
+		left: 16,
 		position: "absolute",
-		right: 24,
+		right: 16,
 	},
 	container: {
 		backgroundColor: BaseColor.BG_WHITE,
