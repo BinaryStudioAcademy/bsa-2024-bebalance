@@ -10,18 +10,34 @@
 		url("../../assets/img/green-circle.svg"),
 		url("../../src/assets/img/ripple-effect-bg.svg"),
 		url("../../src/assets/img/ripple-effect-bg2.svg"),
-		url("../../src/assets/img/ripple-effect-bg4.svg"),
-		url("../../src/assets/img/elipses.svg");
+		url("../../src/assets/img/ripple-effect-bg4.svg");
 	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
-		no-repeat, no-repeat;
+		no-repeat;
 	background-position:
 		right 40% bottom 15%,
 		left 15% top 45%,
 		right 10% top 20%,
 		left 600px top -15%,
 		right -150px bottom -300px,
-		left -500px bottom -100px,
-		top 100px right 100px;
+		left -500px bottom -100px;
+}
+
+.white-dots {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("../../assets/img/ellipse.svg"),
+		url("../../assets/img/ellipse.svg"), url("../../assets/img/ellipse.svg"),
+		url("../../assets/img/ellipse.svg"), url("../../assets/img/ellipse.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+	background-position:
+		top 100px right 120px,
+		top 400px right 100px,
+		bottom 100px right 400px,
+		top 270px right 400px,
+		bottom 170px right 620px;
 }
 
 .title {

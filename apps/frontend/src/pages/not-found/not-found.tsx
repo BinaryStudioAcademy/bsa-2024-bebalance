@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 
 const NotFound: React.FC = () => (
 	<div className={styles["pageContainer"]}>
+		<div className={styles["white-dots"]} />
 		<h1 className={styles["title"]}>Looks like we rolled off course.</h1>
 		<p className={styles["text"]}>
 			Spin back to the homepage and regain your balance!
