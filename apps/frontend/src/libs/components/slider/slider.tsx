@@ -32,7 +32,10 @@ const Slider: React.FC<Properties> = ({
 	const [sliderValue, setSliderValue] = useState<number>(value);
 	const [step, setStep] = useState<number>(INITIAL_STEP);
 	const rangeReference = useRef<HTMLInputElement>(null);
-	const bubbleLabelReference = useRef<HTMLLabelElement>(null);
+	const bubbleReference = useRef<HTMLDivElement>(null);
+
+	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
+	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
 
 	const handleSliderBackgroundUpdate = useCallback((): void => {
 		if (!rangeReference.current) {
@@ -74,11 +77,11 @@ const Slider: React.FC<Properties> = ({
 	useEffect(() => {
 		const RESIZE = "resize";
 
-		updateSliderDimensions();
-
 		const handleResize = (): void => {
 			updateSliderDimensions();
 		};
+
+		updateSliderDimensions();
 
 		window.addEventListener(RESIZE, handleResize);
 
@@ -88,26 +91,25 @@ const Slider: React.FC<Properties> = ({
 	}, [updateSliderDimensions]);
 
 	useEffect(() => {
-		if (!bubbleLabelReference.current) {
+		if (!bubbleReference.current) {
 			return;
 		}
 
 		handleSliderBackgroundUpdate();
-		bubbleLabelReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
+		bubbleReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
-
-	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
-	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
 
 	return (
 		<div className={styles["container"]}>
-			<p className={styles["label"]}>{label}</p>
+			<label className={styles["label"]} htmlFor="slider">
+				{label}
+			</label>
 			<input
 				className={getValidClassNames(
 					styles["slider"],
 					styles[categorizedSliderClass],
 				)}
-				id="range"
+				id="slider"
 				max={MAX}
 				min={MIN}
 				onChange={handleValueChange}
@@ -115,14 +117,10 @@ const Slider: React.FC<Properties> = ({
 				type="range"
 				value={sliderValue}
 			/>
-			<label
-				className={styles["slider-bubble"]}
-				htmlFor="range"
-				ref={bubbleLabelReference}
-			>
+			<div className={styles["slider-bubble"]} ref={bubbleReference}>
 				<p className={styles["bubble-value"]}>{sliderValue}</p>
 				<ValueBubble className={styles["bubble-icon"]} />
-			</label>
+			</div>
 			<div className={styles["gradient-boxes-container"]}>
 				{Array.from({ length: 10 }).map((_, index) => (
 					<div
