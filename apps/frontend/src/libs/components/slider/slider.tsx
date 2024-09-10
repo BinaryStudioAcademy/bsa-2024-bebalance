@@ -6,10 +6,8 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 
-import {
-	formatToKebabCase,
-	getGradientFromLabel,
-} from "./libs/helpers/helpers.js";
+import { SLIDER_BACKGROUND_COLOR } from "./libs/constants/constants.js";
+import { formatToKebabCase } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -36,17 +34,9 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 		const FULL_PROGRESS = 100;
 
 		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
-		const remainingProgress = FULL_PROGRESS - currentProgress;
-		const stepSize = 26;
 
-		const { degree, end, start } = getGradientFromLabel(label);
-
-		rangeReference.current.style.background = `
-		repeating-linear-gradient(${degree}, ${end}, ${start} ${String(stepSize)}px)
-		0% 0% / ${String(currentProgress)}% 100% no-repeat,
-		#d9d9d9 ${String(currentProgress)}%
-		0% / ${String(remainingProgress)}% 100%`;
-	}, [sliderValue, label, MIN, MAX]);
+		rangeReference.current.style.background = `linear-gradient(to right, transparent ${String(currentProgress)}%, ${SLIDER_BACKGROUND_COLOR} ${String(currentProgress)}%)`;
+	}, [sliderValue, MIN, MAX]);
 
 	const handleValueChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +70,7 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
 	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
+	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
 
 	return (
 		<div className={styles["container"]}>
@@ -104,6 +95,14 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 					<Icon name="valueBubble" />
 				</span>
 			</label>
+			<div className={styles["gradient-boxes-container"]}>
+				{Array.from({ length: 10 }).map((_, index) => (
+					<div
+						className={`${String(styles["gradient-box"])} ${String(styles[categorizedGradientBoxClass])}`}
+						key={index}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };
