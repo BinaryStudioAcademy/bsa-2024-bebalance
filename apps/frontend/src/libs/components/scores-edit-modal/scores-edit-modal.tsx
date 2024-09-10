@@ -1,6 +1,8 @@
-import { useCallback } from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import { Button, Slider } from "../components.js";
+import { NO_SCORES_COUNT } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -13,10 +15,35 @@ const ScoresEditModal: React.FC<Properties> = ({
 	data,
 	setClose,
 }: Properties) => {
+	const dispatch = useAppDispatch();
+	const [scores, setScores] = useState<ModalData[]>(data);
+
 	const handleClose = useCallback(() => {
-		// TODO: Save changes
+		const originalScores = new Map(data.map((item) => [item.categoryId, item]));
+
+		const changedScores = scores.filter((score) => {
+			const originalScore = originalScores.get(score.categoryId);
+
+			return originalScore && score.score !== originalScore.score;
+		});
+
+		if (changedScores.length > NO_SCORES_COUNT) {
+			void dispatch(quizActions.editScores({ items: changedScores }));
+		}
+
 		setClose(false);
-	}, [setClose]);
+	}, [setClose, dispatch, scores, data]);
+
+	const handleSliderChange = useCallback(
+		(categoryId: number, value: number) => {
+			setScores(
+				scores.map((item) =>
+					item.categoryId === categoryId ? { ...item, score: value } : item,
+				),
+			);
+		},
+		[scores],
+	);
 
 	return (
 		<div className={styles["container"]}>
@@ -24,10 +51,12 @@ const ScoresEditModal: React.FC<Properties> = ({
 				Do you feel any changes in anything? Estimate the fields from 1 to 10
 			</p>
 			<div className={styles["scores-container"]}>
-				{data.map((item) => (
+				{data.map((item, index) => (
 					<Slider
-						key={item.categoryId}
+						id={item.categoryId}
+						key={index}
 						label={item.categoryName}
+						onValueChange={handleSliderChange}
 						value={item.score}
 					/>
 				))}

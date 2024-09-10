@@ -11,11 +11,18 @@ import { formatToKebabCase } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	id: number;
 	label: string;
+	onValueChange: (categoryId: number, value: number) => void;
 	value: number;
 };
 
-const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
+const Slider: React.FC<Properties> = ({
+	id,
+	label,
+	onValueChange,
+	value,
+}: Properties) => {
 	const MAX = 10;
 	const MIN = 0;
 	const MIN_SCORE_VALUE = 1;
@@ -36,15 +43,18 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
 
 		rangeReference.current.style.background = `linear-gradient(to right, transparent ${String(currentProgress)}%, ${SLIDER_BACKGROUND_COLOR} ${String(currentProgress)}%)`;
-	}, [sliderValue, MIN, MAX]);
+	}, [sliderValue]);
 
 	const handleValueChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = Number(event.target.value);
+			const sliderValue = Number(event.target.value);
+			const boundedValue =
+				sliderValue < MIN_SCORE_VALUE ? MIN_SCORE_VALUE : sliderValue;
+			setSliderValue(boundedValue);
 
-			setSliderValue(value < MIN_SCORE_VALUE ? MIN_SCORE_VALUE : value);
+			onValueChange(id, boundedValue);
 		},
-		[],
+		[onValueChange, id],
 	);
 
 	const updateSliderDimensions = useCallback(() => {
@@ -58,7 +68,7 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 		const newStep =
 			(sliderThumbTrackWidth - sliderThumbCenterOffset) / (MAX - MIN);
 		setStep(newStep);
-	}, [MAX, MIN]);
+	}, []);
 
 	useEffect(() => {
 		const RESIZE = "resize";
@@ -83,7 +93,7 @@ const Slider: React.FC<Properties> = ({ label, value }: Properties) => {
 
 		handleSliderBackgroundUpdate();
 		bubbleLabelReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
-	}, [sliderValue, step, handleSliderBackgroundUpdate, MIN]);
+	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
 	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
 	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
