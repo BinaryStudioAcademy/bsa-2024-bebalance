@@ -1,5 +1,5 @@
 type QuizCategoriesFormFields = {
-	categoryIds: string[];
+	categoryIds: number[];
 	hasSelectedAll: boolean;
 };
 

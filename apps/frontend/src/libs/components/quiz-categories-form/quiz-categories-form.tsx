@@ -38,7 +38,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	const categoryInputOptions: InputOption[] = quizCategories.map((category) => {
 		const { id, name } = category;
 
-		return { label: name, value: id.toString() };
+		return { label: name, value: id };
 	});
 
 	const dispatch = useAppDispatch();
@@ -53,7 +53,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 		if (hasSelectedAll) {
 			setValue(
 				"categoryIds",
-				quizCategories.map((category) => category.id.toString()),
+				quizCategories.map((category) => category.id),
 			);
 		} else {
 			setValue("categoryIds", []);
@@ -68,10 +68,10 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	}, [getValues, quizCategories.length, setValue]);
 
 	const handleFormSubmit = useCallback(
-		(event_: React.BaseSyntheticEvent): void => {
+		(event: React.BaseSyntheticEvent): void => {
 			void handleSubmit(({ categoryIds }) => {
-				onSubmit({ categoryIds: categoryIds.map(Number) });
-			})(event_);
+				onSubmit({ categoryIds });
+			})(event);
 		},
 		[onSubmit, handleSubmit],
 	);

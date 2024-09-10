@@ -33,23 +33,20 @@ const Checkbox = <T extends FieldValues>({
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			const isChecked = event.target.checked;
-			const inputValue = isGeneralCheckbox
-				? Number(event.target.value)
-				: event.target.value;
+			const rawInputValue = event.target.value;
+			const inputValue = Number.isNaN(rawInputValue)
+				? rawInputValue
+				: Number(rawInputValue);
 
 			if (isChecked) {
 				onFieldChange([...value, inputValue]);
 			} else {
-				onFieldChange(
-					(value as (number | string)[]).filter(
-						(value) => value !== inputValue,
-					),
-				);
+				onFieldChange((value as []).filter((value) => value !== inputValue));
 			}
 
 			onChange?.(event);
 		},
-		[isGeneralCheckbox, onFieldChange, onChange, value],
+		[onFieldChange, onChange, value],
 	);
 
 	const handleSingleCheckboxChange = useCallback(
@@ -78,9 +75,7 @@ const Checkbox = <T extends FieldValues>({
 					)}
 				>
 					{options.map((option) => {
-						const isChecked = isGeneralCheckbox
-							? (value as number[]).includes(Number(option.value))
-							: (value as string[]).includes(String(option.value));
+						const isChecked = (value as unknown[]).includes(option.value);
 
 						return isGeneralCheckbox ? (
 							<div
