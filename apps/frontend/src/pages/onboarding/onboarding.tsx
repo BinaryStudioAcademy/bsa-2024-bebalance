@@ -14,7 +14,11 @@ import {
 } from "~/modules/onboarding/onboarding.js";
 
 import { OnboardingAnswer } from "./libs/components/components.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import {
+	FIRST_QUESTION_INDEX,
+	ONBOARDING_FORM_DEFAULT_VALUES,
+} from "./libs/constants/constants.js";
+import { ButtonLabel } from "./libs/enums/enums.js";
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
@@ -30,11 +34,13 @@ const Onboarding: React.FC = () => {
 
 	const {
 		currentQuestionIndex,
+		isFirstQuestion,
 		isLastQuestion,
 		question,
 		totalQuestionsAmount,
 	} = useAppSelector(({ onboarding }) => ({
 		currentQuestionIndex: onboarding.currentQuestionIndex,
+		isFirstQuestion: onboarding.currentQuestionIndex === FIRST_QUESTION_INDEX,
 		isLastQuestion:
 			onboarding.currentQuestionIndex ===
 			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
@@ -132,19 +138,25 @@ const Onboarding: React.FC = () => {
 								);
 							})}
 							<div className={styles["button-container"]}>
-								{!isLastQuestion && (
-									<Button
-										label="BACK"
-										onClick={handlePreviousStep}
-										type="button"
-										variant="secondary"
-									/>
+								{!isFirstQuestion && (
+									<div className={styles["button-wrapper"]}>
+										<Button
+											label={ButtonLabel.BACK}
+											onClick={handlePreviousStep}
+											type="button"
+											variant="secondary"
+										/>
+									</div>
 								)}
-								<Button
-									isPrimary={isValid}
-									label={isLastQuestion ? "ANALYZE" : "NEXT"}
-									type="submit"
-								/>
+								<div className={styles["button-wrapper"]}>
+									<Button
+										isPrimary={isValid}
+										label={
+											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
+										}
+										type="submit"
+									/>
+								</div>
 							</div>
 						</form>
 					</>
