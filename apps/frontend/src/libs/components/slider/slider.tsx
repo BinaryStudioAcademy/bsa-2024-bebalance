@@ -61,7 +61,7 @@ const Slider: React.FC<Properties> = ({
 		[onValueChange, id],
 	);
 
-	const updateSliderDimensions = useCallback(() => {
+	const handleSliderDimensionsUpdate = useCallback(() => {
 		if (!rangeReference.current) {
 			return;
 		}
@@ -78,17 +78,17 @@ const Slider: React.FC<Properties> = ({
 		const RESIZE = "resize";
 
 		const handleResize = (): void => {
-			updateSliderDimensions();
+			handleSliderDimensionsUpdate();
 		};
 
-		updateSliderDimensions();
+		handleSliderDimensionsUpdate();
 
 		window.addEventListener(RESIZE, handleResize);
 
 		return (): void => {
 			window.removeEventListener(RESIZE, handleResize);
 		};
-	}, [updateSliderDimensions]);
+	}, [handleSliderDimensionsUpdate]);
 
 	useEffect(() => {
 		if (!bubbleReference.current) {
