@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.40.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.39.0...v1.40.0) (2024-09-10)
+
+
+### Features
+
+* **frontend:** quiz question screen mobile responsiveness bb-290 ([#346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/346)) ([9e9809c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9e9809c13c017c8b037c6f4ca910824212e267fa))
+
+
+### Bug Fixes
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#356](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/356)) ([2256493](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2256493a3efbd62a54ce0f9a8293198a44d813cc))
+* **frontend:** checkbox border bb-243 ([#363](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/363)) ([711e80a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/711e80a9a5ef5f0c123f44b83a1cc146907064e0))
+* **mobile:** error message appear authorized user tap on "Tasks" bb-350 ([#355](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/355)) ([ddb3a3c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ddb3a3c9fa2d7631c6b9552a3bc60fb841ced468))
+
 ## [1.39.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.38.2...v1.39.0) (2024-09-09)
 
 

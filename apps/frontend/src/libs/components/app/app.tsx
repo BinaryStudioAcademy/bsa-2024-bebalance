@@ -1,4 +1,4 @@
-import { Notification, RouterOutlet } from "~/libs/components/components.js";
+import { RouterOutlet } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -28,7 +28,6 @@ const App: React.FC = () => {
 			<div>
 				<RouterOutlet />
 			</div>
-			<Notification />
 		</>
 	);
 };
