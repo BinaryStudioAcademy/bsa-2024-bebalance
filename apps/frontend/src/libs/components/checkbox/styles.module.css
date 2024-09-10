@@ -105,10 +105,14 @@
 	justify-content: center;
 	min-width: 280px;
 	padding: 16px;
-	margin: 8px;
+	margin: 12px 0;
 	border: 2px solid var(--light-gray);
 	border-radius: 31px;
 	box-shadow: 0 0 8px var(--light-blue);
+}
+
+.input-wrapper .rounded-label {
+	margin: 2px 0;
 }
 
 .rounded-label:has(.checkbox:checked) {
