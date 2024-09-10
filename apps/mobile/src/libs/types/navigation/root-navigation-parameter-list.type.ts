@@ -8,6 +8,7 @@ type RootNavigationParameterList = {
 	[RootScreenName.SIGN_IN]: undefined;
 	[RootScreenName.SIGN_UP]: undefined;
 	[RootScreenName.WELCOME]: undefined;
+	[RootScreenName.WHEEL_LOADING]: undefined;
 };
 
 export { type RootNavigationParameterList };
