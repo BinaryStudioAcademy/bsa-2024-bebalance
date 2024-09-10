@@ -27,7 +27,7 @@ const Sidebar: React.FC<Properties> = ({
 
 	const dispatch = useAppDispatch();
 
-	const [isLogout, setIsLogout] = useState<boolean>(false);
+	const [isLogout, setIsLogout] = useState<boolean>(true);
 
 	const handleSignOut = useCallback(() => {
 		setIsLogout((previousState) => !previousState);
@@ -75,16 +75,15 @@ const Sidebar: React.FC<Properties> = ({
 				<Button label="Sign out" onClick={handleSignOut} />
 			</div>
 
-			{isLogout && (
-				<Popup
-					closeText="No"
-					confirmText="Yes"
-					icon={runImg}
-					onClose={handleSignOut}
-					onConfirm={handleConfirmLogout}
-					title={PopupMessage.LOGOUT_CONFIRM}
-				/>
-			)}
+			<Popup
+				closeText="No"
+				confirmText="Yes"
+				icon={runImg}
+				isOpen={isLogout}
+				onClose={handleSignOut}
+				onConfirm={handleConfirmLogout}
+				title={PopupMessage.LOGOUT_CONFIRM}
+			/>
 		</div>
 	);
 };
