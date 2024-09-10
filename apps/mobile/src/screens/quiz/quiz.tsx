@@ -52,7 +52,7 @@ const Quiz: React.FC = () => {
 	} = useAppSelector((state) => state.quiz);
 
 	const currentAnswer = answersByQuestionIndex[currentQuestionIndex] ?? "";
-	const totalQuestionsAmount = questions.length - PREVIOUS_INDEX_OFFSET;
+	const totalQuestionsAmount = questions.length;
 	const isLastQuestion = currentQuestionIndex === totalQuestionsAmount;
 
 	useEffect(() => {
@@ -132,7 +132,7 @@ const Quiz: React.FC = () => {
 								</Text>
 								<Counter
 									currentStep={currentQuestionIndex + NumericalValue.ONE}
-									totalSteps={totalQuestionsAmount + NumericalValue.ONE}
+									totalSteps={totalQuestionsAmount}
 								/>
 								<InfinitePager
 									infinitePagerReference={infinitePagerReference}
