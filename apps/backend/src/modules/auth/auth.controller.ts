@@ -9,8 +9,9 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -78,7 +79,7 @@ class AuthController extends BaseController {
 			method: "POST",
 			path: AuthApiPath.FORGOT_PASSWORD,
 			validation: {
-				body: userForgotPasswordVaidationSchema,
+				body: userForgotPasswordValidationSchema,
 			},
 		});
 
@@ -95,6 +96,30 @@ class AuthController extends BaseController {
 				body: userResetPasswordValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.checkIsResetPasswordExpired(
+					options as APIHandlerOptions<{
+						query: ResetPasswordLinkDto;
+					}>,
+				),
+			method: "GET",
+			path: AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION,
+		});
+	}
+
+	private async checkIsResetPasswordExpired(
+		options: APIHandlerOptions<{
+			query: ResetPasswordLinkDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.checkIsResetPasswordExpired(
+				options.query,
+			),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**

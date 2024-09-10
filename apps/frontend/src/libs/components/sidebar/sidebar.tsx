@@ -49,21 +49,19 @@ const Sidebar: React.FC<Properties> = ({
 
 			<div className={styles["logo-container"]}>Logo</div>
 			<div className={styles["buttons-container"]}>
-				<div className={styles["navlinks-container"]}>
-					{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
-						const { active, inactive } = icon;
+				{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
+					const { active, inactive } = icon;
 
-						return (
-							<SidebarLink
-								iconName={href === pathname ? active : inactive}
-								key={label}
-								label={label}
-								pathname={pathname}
-								to={href}
-							/>
-						);
-					})}
-				</div>
+					return (
+						<SidebarLink
+							iconName={href === pathname ? active : inactive}
+							key={label}
+							label={label}
+							pathname={pathname}
+							to={href}
+						/>
+					);
+				})}
 				<Button label="Sign out" onClick={handleSignOut} />
 			</div>
 		</div>
