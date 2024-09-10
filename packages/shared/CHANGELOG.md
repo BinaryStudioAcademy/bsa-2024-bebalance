@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.14.0...shared-v1.14.1) (2024-09-10)
+
+
+### Bug Fixes
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#356](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/356)) ([2256493](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2256493a3efbd62a54ce0f9a8293198a44d813cc))
+
 ## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.13.0...shared-v1.14.0) (2024-09-09)
 
 
