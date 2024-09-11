@@ -9,6 +9,10 @@ import {
 
 import {
 	FULL_PROGRESS,
+	MAX,
+	MIN,
+	MIN_SCORE_VALUE,
+	RESIZE_EVENT,
 	SLIDER_BACKGROUND_COLOR,
 } from "./libs/constants/constants.js";
 import { formatToKebabCase } from "./libs/helpers/helpers.js";
@@ -27,9 +31,6 @@ const Slider: React.FC<Properties> = ({
 	onValueChange,
 	value,
 }: Properties) => {
-	const MAX = 10;
-	const MIN = 0;
-	const MIN_SCORE_VALUE = 1;
 	const INITIAL_STEP = value;
 
 	const [sliderValue, setSliderValue] = useState<number>(value);
@@ -76,18 +77,16 @@ const Slider: React.FC<Properties> = ({
 	}, []);
 
 	useEffect(() => {
-		const RESIZE = "resize";
-
 		const handleResize = (): void => {
 			handleSliderDimensionsUpdate();
 		};
 
 		handleSliderDimensionsUpdate();
 
-		window.addEventListener(RESIZE, handleResize);
+		window.addEventListener(RESIZE_EVENT, handleResize);
 
 		return (): void => {
-			window.removeEventListener(RESIZE, handleResize);
+			window.removeEventListener(RESIZE_EVENT, handleResize);
 		};
 	}, [handleSliderDimensionsUpdate]);
 
