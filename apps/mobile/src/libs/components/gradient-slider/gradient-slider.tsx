@@ -26,25 +26,27 @@ import { styles } from "./styles";
 
 type Properties = {
 	gradientColors: keyof typeof colorToGradientColors;
-	initValue: number;
+	id: number;
 	max: number;
 	min: number;
-	onValueChange?: (value: number) => void;
+	onValueChange?: (categoryId: number, value: number) => void;
+	value: number;
 };
 
 const GradientSlider: React.FC<Properties> = ({
 	gradientColors,
-	initValue,
+	id,
 	max,
 	min,
 	onValueChange,
+	value,
 }) => {
-	const [value, setValue] = useState<number>(initValue);
+	const [sliderValue, setSliderValue] = useState<number>(value);
 	const [sliderWidth, setSliderWidth] = useState<number>(
 		SliderConfig.INITIAL_WIDTH,
 	);
 	const initialColors = generateSliderGradientColors(
-		initValue,
+		value,
 		gradientColors,
 		max,
 	);
@@ -57,17 +59,17 @@ const GradientSlider: React.FC<Properties> = ({
 
 	const handleValueChange = useCallback(
 		(sliderValue: number) => {
-			setValue(sliderValue);
+			setSliderValue(sliderValue);
 			setColor(generateSliderGradientColors(sliderValue, gradientColors, max));
 
-			onValueChange?.(sliderValue);
+			onValueChange?.(id, sliderValue);
 		},
-		[gradientColors, max, onValueChange],
+		[gradientColors, id, max, onValueChange],
 	);
 
 	const pixelsPerPercent = sliderWidth / SliderConfig.MAX_PERCENT;
 	const translateXBase =
-		(value / max) * SliderConfig.MAX_PERCENT * pixelsPerPercent;
+		(sliderValue / max) * SliderConfig.MAX_PERCENT * pixelsPerPercent;
 
 	const translateXForSliderSection =
 		translateXBase - SliderStyle.SECTION_TRANSLATE_OFFSET;
@@ -108,7 +110,7 @@ const GradientSlider: React.FC<Properties> = ({
 						style={[globalStyles.mt8, styles.labelText]}
 						weight="bold"
 					>
-						{value}
+						{sliderValue}
 					</Text>
 				</View>
 
@@ -131,7 +133,7 @@ const GradientSlider: React.FC<Properties> = ({
 					step={SliderConfig.STEP_VALUE}
 					style={styles.slider}
 					thumbTintColor="transparent"
-					value={value}
+					value={sliderValue}
 				/>
 			</View>
 		</View>
