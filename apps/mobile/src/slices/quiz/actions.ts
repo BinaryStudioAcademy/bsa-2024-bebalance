@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types";
-import { type QuizQuestionDto } from "~/packages/quiz/quiz";
+import {
+	type QuizQuestionDto,
+	type QuizScoresGetAllResponseDto,
+} from "~/packages/quiz/quiz";
 
 import { name as sliceName } from "./quiz.slice";
 
@@ -15,4 +18,14 @@ const getAllQuestions = createAsyncThunk<
 	return await quizApi.getAllQuestions();
 });
 
-export { getAllQuestions };
+const getScores = createAsyncThunk<
+	QuizScoresGetAllResponseDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/score`, async (_, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.getScores();
+});
+
+export { getAllQuestions, getScores };
