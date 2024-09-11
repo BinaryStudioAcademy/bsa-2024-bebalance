@@ -7,6 +7,7 @@ const AppRoute = {
 	QUIZ: "/quiz",
 	RESET_PASSWORD: "/reset-password",
 	ROOT: "/",
+	SETTINGS: "/settings",
 	SIGN_IN: "/sign-in",
 	SIGN_UP: "/sign-up",
 } as const;
