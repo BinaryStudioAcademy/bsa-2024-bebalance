@@ -1,11 +1,49 @@
 import { RelationName } from "~/libs/enums/enums.js";
-import { type Repository } from "~/libs/types/types.js";
+import { type Repository, type ValueOf } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
+import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { type UserTaskDay } from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 import { type UserTaskDaysModel } from "./user-task-days.model.js";
+
+type AvatarFile = {
+	createdAt: string;
+	id: number;
+	updatedAt: string;
+	url: string;
+};
+
+type UserDetailsWithAvatarFile = {
+	avatarFile?: AvatarFile;
+	avatarFileId: number;
+	createdAt: string;
+	id: number;
+	name: string;
+	notificationFrequency: ValueOf<typeof NotificationFrequency>;
+	updatedAt: string;
+	userId: number;
+};
+
+type UserTaskDays = {
+	createdAt: string;
+	dayOfWeek: number;
+	id: number;
+	updatedAt: string;
+	userId: number;
+};
+
+type UserWithAvatarFile = {
+	createdAt: string;
+	email: string;
+	id: number;
+	passwordHash: string;
+	passwordSalt: string;
+	updatedAt: string;
+	userDetails: UserDetailsWithAvatarFile;
+	userTaskDays: UserTaskDays[];
+};
 
 class UserRepository implements Repository {
 	private userDetailsModel: typeof UserDetailsModel;
@@ -78,40 +116,42 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
-			.findById(id);
+			.findById(id)
+			.castTo<UserWithAvatarFile>()
+			.execute();
 
-		return user
-			? UserEntity.initialize({
-					avatarFileId: user.userDetails.avatarFileId,
-					avatarUrl: null,
-					createdAt: user.createdAt,
-					email: user.email,
-					id: user.id,
-					name: user.userDetails.name,
-					notificationFrequency: user.userDetails.notificationFrequency,
-					passwordHash: user.passwordHash,
-					passwordSalt: user.passwordSalt,
-					updatedAt: user.updatedAt,
-					userTaskDays: user.userTaskDays.map(
-						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
-					),
-				})
-			: null;
+		return UserEntity.initialize({
+			avatarFileId: user.userDetails.avatarFileId,
+			avatarUrl: user.userDetails.avatarFile?.url ?? null,
+			createdAt: user.createdAt,
+			email: user.email,
+			id: user.id,
+			name: user.userDetails.name,
+			notificationFrequency: user.userDetails.notificationFrequency,
+			passwordHash: user.passwordHash,
+			passwordSalt: user.passwordSalt,
+			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays.map(
+				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
+			),
+		});
 	}
 
 	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
-			);
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+			)
+			.castTo<UserWithAvatarFile[]>()
+			.execute();
 
 		return users.map((user) => {
 			return UserEntity.initialize({
 				avatarFileId: user.userDetails.avatarFileId,
-				avatarUrl: null,
+				avatarUrl: user.userDetails.avatarFile?.url ?? null,
 				createdAt: user.createdAt,
 				email: user.email,
 				id: user.id,
@@ -133,16 +173,14 @@ class UserRepository implements Repository {
 			.where({ email })
 			.first()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
-			);
-
-		if (!user) {
-			return null;
-		}
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+			)
+			.castTo<UserWithAvatarFile>()
+			.execute();
 
 		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
-			avatarUrl: null,
+			avatarUrl: user.userDetails.avatarFile?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
@@ -166,7 +204,10 @@ class UserRepository implements Repository {
 			.findOne({ userId: id });
 		const updatedUserDetails = await userDetails
 			?.$query()
-			.patchAndFetch(payload);
+			.patchAndFetch(payload)
+			.withGraphFetched(RelationName.AVATAR)
+			.castTo<UserDetailsWithAvatarFile>()
+			.execute();
 		const user = await this.userModel
 			.query()
 			.findById(id)
@@ -175,7 +216,7 @@ class UserRepository implements Repository {
 		return user && updatedUserDetails
 			? UserEntity.initialize({
 					avatarFileId: userDetails?.avatarFileId ?? null,
-					avatarUrl: null,
+					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -200,9 +241,12 @@ class UserRepository implements Repository {
 			.patch({ avatarFileId: fileId })
 			.findOne({ userId: id });
 
-		const userDetails = (await this.userDetailsModel
+		const userDetails = await this.userDetailsModel
 			.query()
-			.findOne({ userId: id })) as UserDetailsModel;
+			.findOne({ userId: id })
+			.withGraphFetched(RelationName.AVATAR)
+			.castTo<UserDetailsWithAvatarFile>()
+			.execute();
 
 		const user = await this.userModel
 			.query()
@@ -214,7 +258,7 @@ class UserRepository implements Repository {
 		return user
 			? UserEntity.initialize({
 					avatarFileId: userDetails.avatarFileId,
-					avatarUrl: null,
+					avatarUrl: userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -237,13 +281,15 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
-			.patchAndFetchById(id, passwordPayload);
+			.patchAndFetchById(id, passwordPayload)
+			.castTo<UserWithAvatarFile>()
+			.execute();
 
 		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
-			avatarUrl: null,
+			avatarUrl: user.userDetails.avatarFile?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
