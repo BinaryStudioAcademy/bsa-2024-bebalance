@@ -12,7 +12,10 @@ const WheelStack =
 const WheelStackNavigator: React.FC = () => {
 	return (
 		<WheelStack.Navigator screenOptions={{ headerShown: false }}>
-			<WheelStack.Screen component={Wheel} name={BottomTabScreenName.WHEEL} />
+			<WheelStack.Screen
+				component={Wheel}
+				name={BottomTabScreenName.WHEEL_SCREEN}
+			/>
 			<WheelStack.Screen
 				component={EditWheelResults}
 				name={BottomTabScreenName.EDIT_WHEEL_RESULTS}
