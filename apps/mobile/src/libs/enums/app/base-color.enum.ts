@@ -7,6 +7,7 @@ const BaseColor = {
 	CHECKBOX_BLUE: "rgba(24, 160, 251, 1)",
 	DARK_BLUE: "rgba(99, 160, 231, 1)",
 	DARK_GRAY: "rgba(124, 124, 124, 1)",
+	EXTRA_LIGHT_GRAY: "rgba(224, 224, 224, 0.3)",
 	GRAY: "rgba(176, 176, 178, 1)",
 	GREEN: "rgba(194, 234, 205, 1)",
 	LIGHT_GRAY: "rgba(224, 224, 224, 1)",

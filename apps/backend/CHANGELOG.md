@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.15.0...backend-v1.16.0) (2024-09-11)
+
+
+### Features
+
+* **frontend/backend/shared:** Quiz categories form bb-220 ([#266](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/266)) ([03f6e6c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03f6e6cd6ebd9a6e2babcf4e1b18467ce91b313f))
+
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.14.0...backend-v1.15.0) (2024-09-10)
+
+
+### Features
+
+* **frontend/backend:** forgot password functionality requirements bb-285 ([#329](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/329)) ([6e80423](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6e8042368c4f56ae8702a708b2b7e3da36c644f1))
+
+
+### Bug Fixes
+
+* **backend:** return UserDto on saveNotificationAnswers bb-243 ([#367](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/367)) ([0c40e60](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0c40e60f55a28d26bfb8fbedeb0c9164fd364dda))
+
 ## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.13.1...backend-v1.14.0) (2024-09-09)
 
 

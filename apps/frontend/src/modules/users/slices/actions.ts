@@ -33,7 +33,7 @@ const saveNotificationAnswers = createAsyncThunk<
 		const { usersApi } = extra;
 
 		const updatedUser = await usersApi.saveNotificationAnswers(payload);
-		dispatch(authActions.setUpdatedAuthUser(updatedUser));
+		dispatch(authActions.updateAuthUser(updatedUser));
 
 		return updatedUser;
 	},
@@ -41,11 +41,12 @@ const saveNotificationAnswers = createAsyncThunk<
 
 const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 	`${sliceName}/update`,
-	async (payload, { extra }) => {
+	async (payload, { dispatch, extra }) => {
 		const { notification, usersApi } = extra;
 		const { data, id } = payload;
 
 		const response = await usersApi.update(id, data);
+		dispatch(authActions.updateAuthUser(response));
 		notification.success(NotificationMessage.PROFILE_UPDATED);
 
 		return response;

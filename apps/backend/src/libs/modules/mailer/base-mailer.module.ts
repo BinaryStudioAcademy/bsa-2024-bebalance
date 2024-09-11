@@ -42,8 +42,8 @@ class BaseMailer {
 		this.transporter.sendMail(
 			{
 				from: this.sender,
+				html: text,
 				subject,
-				text,
 				to,
 			},
 			(error) => {
