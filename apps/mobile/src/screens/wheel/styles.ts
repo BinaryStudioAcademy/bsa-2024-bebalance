@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 	date: {
 		backgroundColor: BaseColor.EXTRA_LIGHT_GRAY,
 		borderRadius: 22,
-		width: "60%",
+		width: "50%",
 	},
 });
 
