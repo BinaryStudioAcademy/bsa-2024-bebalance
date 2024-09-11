@@ -1,87 +1,152 @@
-import { Checkbox, View } from "~/libs/components/components";
-import { useCallback } from "~/libs/hooks/hooks";
+import {
+	Button,
+	Checkbox,
+	LoaderWrapper,
+	Text,
+	View,
+} from "~/libs/components/components";
+import { BaseColor, DataStatus } from "~/libs/enums/enums";
+import {
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useFormController,
+	useState,
+} from "~/libs/hooks/hooks";
+import { globalStyles } from "~/libs/styles/styles";
+import { categoriesSelectedValidationSchema } from "~/packages/categories/categories";
+import { actions as categoriesActions } from "~/slices/quiz/quiz";
 
-type CategoryIds = number[];
-type CategoryName =
-	| "free time"
-	| "friends"
-	| "love"
-	| "mental"
-	| "money"
-	| "physical"
-	| "spiritual"
-	| "work";
-type Category = {
-	id: number;
-	name: CategoryName;
-	score: number;
-};
+import {
+	CATEGORIES_FIELD_NAME,
+	CATEGORIES_FORM_DEFAULT_VALUES,
+	CHECK_ALL_CATEGORIES_NAME,
+	EMPTY_ARRAY_LENGTH,
+} from "./libs/constants/constants";
+import {
+	getAllCategoryIds,
+	getCategoriesSortedByScore,
+	getSelectedCategoryIds,
+} from "./libs/helpers/helpers";
+import { type SelectedCategoryIds } from "./libs/types/types";
 
 type Properties = {
-	onSubmit?: (payload: CategoryIds) => void;
+	onSubmit?: (payload: { categoryIds: SelectedCategoryIds }) => void;
+	submitButtonName: string;
 };
 
-const CHECKBOX_CATEGORIES_DATA: Category[] = [
-	{ id: 1, name: "free time", score: 7 },
-	{ id: 2, name: "friends", score: 7 },
-	{ id: 3, name: "love", score: 7 },
-	{ id: 4, name: "mental", score: 7 },
-	{ id: 5, name: "money", score: 7 },
-	{ id: 6, name: "physical", score: 7 },
-	{ id: 7, name: "spiritual", score: 7 },
-	{ id: 8, name: "work", score: 7 },
-];
+const CheckboxCategoriesForm: React.FC<Properties> = ({
+	submitButtonName,
+}: Properties): JSX.Element => {
+	const [submittedCategoryIds, setSubmittedCategoryIds] =
+		useState<SelectedCategoryIds>(CATEGORIES_FORM_DEFAULT_VALUES);
 
-const PLACE_AFTER_VALUE = 1;
-const PLACE_BEFORE_VALUE = -1;
-const STAY_IN_PLACE_VALUE = 0;
-const FIRST_INDEX = 0;
-const LOWEST_SCORE_CATEGORIES_QUANTITY = 3;
+	const dispatch = useAppDispatch();
+	const { categories, dataStatus } = useAppSelector((state) => state.quiz);
 
-const getCategoriesSortedByScore = (categoriesData: Category[]): Category[] => {
-	return categoriesData
-		.map((categoryItem) => ({ ...categoryItem }))
-		.sort((a, b) => {
-			if (a.score < b.score) {
-				return PLACE_BEFORE_VALUE;
-			}
+	const { control, errors, handleSubmit, reset, setValue } = useAppForm<{
+		[CATEGORIES_FIELD_NAME]: SelectedCategoryIds;
+	}>({
+		defaultValues: {
+			[CATEGORIES_FIELD_NAME]: CATEGORIES_FORM_DEFAULT_VALUES,
+		},
+		validationSchema: categoriesSelectedValidationSchema,
+	});
 
-			if (a.score > b.score) {
-				return PLACE_AFTER_VALUE;
-			}
+	const { field } = useFormController({ control, name: CATEGORIES_FIELD_NAME });
+	const { value } = field;
 
-			return STAY_IN_PLACE_VALUE;
+	const isFormLoading = dataStatus === DataStatus.PENDING;
+	const isAllChecked = value.length === categories.length;
+	const areCategoriesExist = categories.length > EMPTY_ARRAY_LENGTH;
+
+	useEffect(() => {
+		void dispatch(categoriesActions.getScores());
+	}, [dispatch]);
+
+	useEffect(() => {
+		reset({
+			categoryIds: getSelectedCategoryIds(
+				getCategoriesSortedByScore(categories),
+			),
 		});
-};
+	}, [reset, categories]);
 
-const getCheckedCategoriesIds = (sortedCategories: Category[]): CategoryIds => {
-	return sortedCategories
-		.slice(FIRST_INDEX, LOWEST_SCORE_CATEGORIES_QUANTITY)
-		.map(({ id }) => id);
-};
+	const handleFormSubmit = useCallback((): void => {
+		void handleSubmit(
+			(selectedCategoriesSubmissionData: {
+				categoryIds: SelectedCategoryIds;
+			}) => {
+				setSubmittedCategoryIds(selectedCategoriesSubmissionData.categoryIds);
+				// TODO: send selectedCategoriesSubmissionData to backend
+			},
+		)();
+	}, [handleSubmit]);
 
-const CheckboxCategoriesForm: React.FC<Properties> = (): JSX.Element => {
-	const categoriesIdsInitialValues = getCheckedCategoriesIds(
-		getCategoriesSortedByScore(CHECKBOX_CATEGORIES_DATA),
+	const handleAllValueChange = useCallback((): void => {
+		const nextCategoryIds = getAllCategoryIds(categories);
+
+		if (isAllChecked) {
+			setValue(CATEGORIES_FIELD_NAME, CATEGORIES_FORM_DEFAULT_VALUES);
+		} else {
+			setValue(CATEGORIES_FIELD_NAME, nextCategoryIds);
+		}
+	}, [isAllChecked, setValue, categories]);
+
+	const handleCategoryValueChange = useCallback(
+		({ id, isChecked }: { id: number; isChecked: boolean }) =>
+			(): void => {
+				const previousCategoryIds = value;
+
+				if (isChecked) {
+					setValue(
+						CATEGORIES_FIELD_NAME,
+						previousCategoryIds.filter((categoryId) => categoryId !== id),
+					);
+				} else {
+					setValue(CATEGORIES_FIELD_NAME, [...previousCategoryIds, id]);
+				}
+			},
+		[setValue, value],
 	);
 
-	const handleValueChange = useCallback((): void => {}, []);
-
 	return (
-		<View>
-			{CHECKBOX_CATEGORIES_DATA.map(({ id, name }) => {
-				const isChecked = categoriesIdsInitialValues.includes(id);
-
-				return (
+		<LoaderWrapper isLoading={isFormLoading}>
+			{areCategoriesExist && (
+				<View style={[globalStyles.gap8, globalStyles.mb24]}>
 					<Checkbox
-						isChecked={isChecked}
-						key={id}
-						label={name}
-						onValueChange={handleValueChange}
+						isChecked={isAllChecked}
+						label={CHECK_ALL_CATEGORIES_NAME}
+						onValueChange={handleAllValueChange}
 					/>
-				);
-			})}
-		</View>
+					{categories.map(({ categoryName, id }) => {
+						const isChecked = value.includes(id);
+
+						return (
+							<Checkbox
+								isChecked={isChecked}
+								key={id}
+								label={categoryName}
+								onValueChange={handleCategoryValueChange({ id, isChecked })}
+							/>
+						);
+					})}
+					<View style={globalStyles.alignItemsCenter}>
+						<Text color={BaseColor.RED}>
+							{errors[CATEGORIES_FIELD_NAME]?.message}
+						</Text>
+					</View>
+					<Button label={submitButtonName} onPress={handleFormSubmit} />
+					<View style={globalStyles.alignItemsCenter}>
+						<Text color={BaseColor.BLACK}>
+							{submittedCategoryIds.join(", ")}
+						</Text>
+					</View>
+				</View>
+			)}
+		</LoaderWrapper>
 	);
 };
 
