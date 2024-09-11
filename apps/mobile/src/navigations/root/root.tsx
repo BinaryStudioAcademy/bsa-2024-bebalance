@@ -10,6 +10,7 @@ import { type RootNavigationParameterList } from "~/libs/types/types";
 import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
 import { Onboarding } from "~/screens/onboarding/onboarding";
+import { Quiz } from "~/screens/quiz/quiz";
 import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
 import { Welcome } from "~/screens/welcome/welcome";
 import { WheelLoading } from "~/screens/wheel-loading/wheel-loading";
@@ -40,6 +41,7 @@ const Root: React.FC = () => {
 						component={QuizEntry}
 						name={RootScreenName.QUIZ_ENTRY}
 					/>
+					<NativeStack.Screen component={Quiz} name={RootScreenName.QUIZ} />
 					<NativeStack.Screen
 						component={WheelLoading}
 						name={RootScreenName.WHEEL_LOADING}

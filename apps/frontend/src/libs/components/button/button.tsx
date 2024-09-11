@@ -34,7 +34,7 @@ const Button: React.FC<Properties> = ({
 			isPrimary && styles["primary"],
 			!isPrimary && styles["secondary"],
 			variant && styles[`${variant}-button`],
-			isDisabled && styles["disabled-button"],
+			isDisabled && styles["disabled"],
 		)}
 		disabled={isDisabled}
 		onClick={onClick}

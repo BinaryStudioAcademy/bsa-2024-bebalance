@@ -11,6 +11,7 @@ import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js
 
 import { OnboardingAnswer } from "./libs/components/components.js";
 import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import { ButtonLabel } from "./libs/enums/enums.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -122,19 +123,24 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 							})}
 							<div className={styles["button-container"]}>
 								{currentQuestionIndex !== ZERO && (
-									<Button
-										label="BACK"
-										onClick={handlePreviousStep}
-										type="button"
-										variant="secondary"
-									/>
+									<div className={styles["button-wrapper"]}>
+										<Button
+											label={ButtonLabel.BACK}
+											onClick={handlePreviousStep}
+											type="button"
+											variant="secondary"
+										/>
+									</div>
 								)}
-
-								<Button
-									isPrimary={isValid}
-									label={isLastQuestion ? "ANALYZE" : "NEXT"}
-									type="submit"
-								/>
+								<div className={styles["button-wrapper"]}>
+									<Button
+										isPrimary={isValid}
+										label={
+											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
+										}
+										type="submit"
+									/>
+								</div>
 							</div>
 						</form>
 					</>

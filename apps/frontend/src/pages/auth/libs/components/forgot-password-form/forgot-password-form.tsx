@@ -2,7 +2,7 @@ import { Button, Input } from "~/libs/components/components.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type EmailDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
 import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
@@ -15,7 +15,7 @@ type Properties = {
 const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<EmailDto>({
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
-		validationSchema: userForgotPasswordVaidationSchema,
+		validationSchema: userForgotPasswordValidationSchema,
 	});
 
 	const handleFormSubmit = useCallback(
@@ -37,7 +37,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type="email"
 				/>
 
-				<Button label="SEND LINK" type="submit" />
+				<Button label="RESET PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

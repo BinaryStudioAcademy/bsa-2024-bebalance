@@ -10,17 +10,22 @@ type EnvironmentSchema = {
 	BASE_URLS: {
 		RESET_PASSWORD_URL: string;
 	};
+
 	DB: {
 		CONNECTION_STRING: string;
 		DIALECT: string;
 		POOL_MAX: number;
 		POOL_MIN: number;
 	};
+	DURATIONS: {
+		PASSWORD_RESET_LINK: string;
+		SESSION: string;
+	};
 	JWT: {
 		ALGORITHM: string;
-		EXPIRATION_TIME: string;
 		SECRET: string;
 	};
+
 	MAILER: {
 		ADDRESS: string;
 		APP_PASSWORD: string;
