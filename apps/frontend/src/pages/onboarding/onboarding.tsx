@@ -141,10 +141,10 @@ const Onboarding: React.FC = () => {
 								{!isFirstQuestion && (
 									<div className={styles["button-wrapper"]}>
 										<Button
-											isPrimary={false}
 											label={ButtonLabel.BACK}
 											onClick={handlePreviousStep}
 											type="button"
+											variant="secondary"
 										/>
 									</div>
 								)}

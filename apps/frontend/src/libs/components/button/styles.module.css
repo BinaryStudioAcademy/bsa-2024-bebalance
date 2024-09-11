@@ -14,24 +14,24 @@
 	outline: 0;
 }
 
-.primary {
+.primary-button {
 	line-height: 24px;
 	color: var(--white);
 	background-color: var(--black);
 }
 
-.primary:hover {
+.primary-button:hover {
 	background-color: var(--brand);
 }
 
-.secondary {
+.secondary-button {
 	line-height: 22px;
 	color: var(--black);
 	background-color: var(--white);
 	border: 1px solid var(--black);
 }
 
-.secondary:hover {
+.secondary-button:hover {
 	color: var(--brand);
 	border-color: var(--brand);
 }
