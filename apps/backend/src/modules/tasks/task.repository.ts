@@ -2,6 +2,7 @@ import { RelationName } from "~/libs/enums/relation-name.enum.js";
 import { type Repository } from "~/libs/types/types.js";
 import { TaskEntity } from "~/modules/tasks/task.entity.js";
 
+import { TaskStatus } from "./libs/enums/enums.js";
 import { type TaskModel } from "./task.model.js";
 
 class TaskRepository implements Repository {
@@ -27,11 +28,11 @@ class TaskRepository implements Repository {
 		return Promise.resolve([]);
 	}
 
-	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
+	async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
 		const tasks = await this.taskModel
 			.query()
 			.withGraphFetched(`[${RelationName.CATEGORY}]`)
-			.where({ userId });
+			.where({ status: TaskStatus.CURRENT, userId });
 
 		return tasks.map((task) =>
 			TaskEntity.initialize({

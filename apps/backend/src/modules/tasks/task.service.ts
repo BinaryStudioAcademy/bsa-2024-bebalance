@@ -28,8 +28,8 @@ class TaskService implements Service {
 		});
 	}
 
-	async findAllByUserId(userId: number): Promise<TaskDto[]> {
-		const tasks = await this.taskRepository.findAllByUserId(userId);
+	async findCurrentByUserId(userId: number): Promise<TaskDto[]> {
+		const tasks = await this.taskRepository.findCurrentByUserId(userId);
 
 		return tasks.map((task) => task.toObject());
 	}

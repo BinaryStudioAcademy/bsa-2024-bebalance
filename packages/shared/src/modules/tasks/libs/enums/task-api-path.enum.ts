@@ -1,5 +1,5 @@
 const TasksApiPath = {
-	ROOT: "/",
+	CURRENT: "/current",
 } as const;
 
 export { TasksApiPath };

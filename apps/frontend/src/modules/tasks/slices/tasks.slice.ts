@@ -4,7 +4,7 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { getAllUsersTasks } from "./actions.js";
+import { getCurrentUsersTasks } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -18,14 +18,14 @@ const initialState: State = {
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
-		builder.addCase(getAllUsersTasks.pending, (state) => {
+		builder.addCase(getCurrentUsersTasks.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(getAllUsersTasks.fulfilled, (state, action) => {
+		builder.addCase(getCurrentUsersTasks.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.tasks = action.payload;
 		});
-		builder.addCase(getAllUsersTasks.rejected, (state) => {
+		builder.addCase(getCurrentUsersTasks.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
