@@ -19,8 +19,8 @@ type Constructor = {
 };
 
 class BaseS3 {
+	private bucketName: string;
 	private s3Client: S3Client;
-	private settings: Constructor;
 
 	public constructor(settings: Constructor) {
 		this.s3Client = new S3Client({
@@ -30,14 +30,14 @@ class BaseS3 {
 			},
 			region: settings.region,
 		});
-		this.settings = settings;
+		this.bucketName = settings.bucketName;
 	}
 
 	public async deleteFile(
 		parameters: FileParameters,
 	): Promise<DeleteObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
-			bucket: this.settings.bucketName,
+			bucket: this.bucketName,
 			...parameters,
 		};
 
@@ -53,7 +53,7 @@ class BaseS3 {
 		parameters: FileParameters,
 	): Promise<PutObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
-			bucket: this.settings.bucketName,
+			bucket: this.bucketName,
 			...parameters,
 		};
 
