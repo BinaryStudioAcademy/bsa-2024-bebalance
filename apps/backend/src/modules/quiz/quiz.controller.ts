@@ -7,7 +7,11 @@ import {
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
-import { type CategoryService } from "../categories/categories.js";
+import {
+	type CategoryService,
+	type QuizScoresUpdateRequestDto,
+	updateScoresValidationSchema,
+} from "../categories/categories.js";
 import {
 	type QuizAnswerService,
 	type QuizAnswersRequestDto,
@@ -117,6 +121,21 @@ class QuizController extends BaseController {
 			method: "GET",
 			path: QuizApiPath.SCORE,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.updateUserScores(
+					options as APIHandlerOptions<{
+						body: QuizScoresUpdateRequestDto;
+						user: UserDto;
+					}>,
+				),
+			method: "PATCH",
+			path: QuizApiPath.SCORE,
+			validation: {
+				body: updateScoresValidationSchema,
+			},
+		});
 	}
 
 	/**
@@ -219,6 +238,56 @@ class QuizController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.categoryService.findUserScores(options.user.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /quiz/score:
+	 *   patch:
+	 *     description: Updates multiple or single user scores
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               items:
+	 *                 type: array
+	 *                 items:
+	 *                   type: object
+	 *                   properties:
+	 *                     categoryId:
+	 *                       type: number
+	 *                     score:
+	 *                       type: number
+	 *
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/UserScore"
+	 */
+	private async updateUserScores(
+		options: APIHandlerOptions<{
+			body: QuizScoresUpdateRequestDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.categoryService.updateUserScores(
+				options.body,
+				options.user.id,
+			),
 			status: HTTPCode.OK,
 		};
 	}
