@@ -3,19 +3,15 @@ import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
 import { createAnimatedSpans } from "./libs/helpers/helpers.js";
+import { type TextElementType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	onNext: () => void;
 };
 
-type TextElement = {
-	firstParagraph: JSX.Element[];
-	secondParagraph: JSX.Element[];
-};
-
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
-	const [text, setText] = useState<TextElement>({
+	const [text, setText] = useState<TextElementType>({
 		firstParagraph: [],
 		secondParagraph: [],
 	});
