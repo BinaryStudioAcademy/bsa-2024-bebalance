@@ -9,6 +9,7 @@ export { GradientText } from "./gradient-text/gradient-text";
 export { GradientIcon } from "./icon/gradient-icon";
 export { Icon } from "./icon/icon";
 export { IconButton } from "./icon-button/icon-button";
+export { InfinitePager } from "./infinite-pager/infinite-pager";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
@@ -34,10 +35,6 @@ export {
 	TouchableOpacity,
 	View,
 } from "react-native";
-export {
-	default as InfinitePager,
-	type InfinitePagerImperativeApi,
-} from "react-native-infinite-pager";
 export { LinearGradient } from "react-native-linear-gradient";
 export { default as Animated } from "react-native-reanimated";
 export {

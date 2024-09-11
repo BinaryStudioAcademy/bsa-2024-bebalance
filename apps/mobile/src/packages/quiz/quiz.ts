@@ -12,6 +12,9 @@ const quizApi = new QuizApi({
 
 export { quizApi };
 export {
+	type QuizAnswerDto,
+	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
 } from "./libs/types/types";
+export { categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas";

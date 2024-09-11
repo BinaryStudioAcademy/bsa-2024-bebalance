@@ -1,4 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
+import { JWTExpired } from "~/libs/exceptions/exceptions.js";
 import { config } from "~/libs/modules/config/config.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { mailer } from "~/libs/modules/mailer/mailer.js";
@@ -6,6 +7,7 @@ import { token } from "~/libs/modules/token/token.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
@@ -15,14 +17,49 @@ import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthError } from "./libs/exceptions/exceptions.js";
+import { createResetPasswordEmail } from "./libs/helpers/helpers.js";
+
+type Constructor = {
+	encrypt: Encrypt;
+	resetPasswordLinkDuration: string;
+	sessionDuration: string;
+	userService: UserService;
+};
 
 class AuthService {
 	private encrypt: Encrypt;
+	private resetPasswordLinkDuration: string;
+	private sessionDuration: string;
 	private userService: UserService;
 
-	public constructor(userService: UserService, encrypt: Encrypt) {
+	public constructor({
+		encrypt,
+		resetPasswordLinkDuration,
+		sessionDuration,
+		userService,
+	}: Constructor) {
 		this.userService = userService;
 		this.encrypt = encrypt;
+		this.sessionDuration = sessionDuration;
+		this.resetPasswordLinkDuration = resetPasswordLinkDuration;
+	}
+
+	public async checkIsResetPasswordExpired(
+		query: ResetPasswordLinkDto,
+	): Promise<boolean> {
+		try {
+			await token.decode(query.token);
+
+			return true;
+		} catch (error) {
+			if (error instanceof JWTExpired) {
+				throw new AuthError({
+					message: ErrorMessage.RESET_PASSWORD_LINK_EXPIRED,
+				});
+			}
+
+			throw error;
+		}
 	}
 
 	public async forgotPassword(payload: EmailDto): Promise<boolean> {
@@ -32,7 +69,7 @@ class AuthService {
 
 		if (!user) {
 			throw new AuthError({
-				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				message: ErrorMessage.EMAIL_NOT_FOUND,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
@@ -40,21 +77,23 @@ class AuthService {
 		const userDetails = user.toObject();
 
 		const jwtToken = await token.createToken({
-			userId: userDetails.id,
+			expirationTime: this.resetPasswordLinkDuration,
+			payload: { userId: userDetails.id },
 		});
 
 		mailer.sendEmail({
 			subject: "BeBalance: reset password",
-			text: `Here is a link to reset your password: ${config.ENV.BASE_URLS.RESET_PASSWORD_URL}?token=${jwtToken}`,
+			text: createResetPasswordEmail({
+				link: `${config.ENV.BASE_URLS.RESET_PASSWORD_URL}?token=${jwtToken}`,
+				username: userDetails.name,
+			}),
 			to: userDetails.email,
 		});
 
 		return true;
 	}
 
-	public async resetPassword(
-		payload: ResetPasswordDto,
-	): Promise<UserSignInResponseDto> {
+	public async resetPassword(payload: ResetPasswordDto): Promise<boolean> {
 		const { jwtToken, newPassword } = payload;
 
 		const {
@@ -72,10 +111,7 @@ class AuthService {
 
 		await this.userService.changePassword(userId, newPassword);
 
-		return {
-			token: jwtToken,
-			user: user.toObject(),
-		};
+		return true;
 	}
 
 	public async signIn(
@@ -94,7 +130,10 @@ class AuthService {
 
 		const userDetails = user.toObject();
 
-		const jwtToken = await token.createToken({ userId: userDetails.id });
+		const jwtToken = await token.createToken({
+			expirationTime: this.sessionDuration,
+			payload: { userId: userDetails.id },
+		});
 
 		const { passwordHash, passwordSalt } = user.toNewObject();
 		const isPasswordValid = await this.encrypt.compare(
@@ -128,7 +167,10 @@ class AuthService {
 
 		const user = await this.userService.create(userRequestDto);
 
-		const jwtToken = await token.createToken({ userId: user.id });
+		const jwtToken = await token.createToken({
+			expirationTime: this.sessionDuration,
+			payload: { userId: user.id },
+		});
 
 		return { token: jwtToken, user };
 	}

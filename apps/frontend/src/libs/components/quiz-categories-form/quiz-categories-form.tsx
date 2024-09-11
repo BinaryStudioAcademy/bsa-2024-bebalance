@@ -12,6 +12,7 @@ import { actions as categoriesActions } from "~/modules/categories/categories.js
 import { Button, Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
+import styles from "./styles.module.css";
 
 type Properties = {
 	buttonLabel: string;
@@ -35,11 +36,13 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 			quizCategories: items,
 		};
 	});
-	const categoryInputOptions: InputOption[] = quizCategories.map((category) => {
-		const { id, name } = category;
+	const categoryInputOptions: InputOption<number>[] = quizCategories.map(
+		(category) => {
+			const { id, name } = category;
 
-		return { label: name, value: id.toString() };
-	});
+			return { label: name, value: id };
+		},
+	);
 
 	const dispatch = useAppDispatch();
 
@@ -53,7 +56,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 		if (hasSelectedAll) {
 			setValue(
 				"categoryIds",
-				quizCategories.map((category) => category.id.toString()),
+				quizCategories.map((category) => category.id),
 			);
 		} else {
 			setValue("categoryIds", []);
@@ -68,10 +71,10 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	}, [getValues, quizCategories.length, setValue]);
 
 	const handleFormSubmit = useCallback(
-		(event_: React.BaseSyntheticEvent): void => {
+		(event: React.BaseSyntheticEvent): void => {
 			void handleSubmit(({ categoryIds }) => {
-				onSubmit({ categoryIds: categoryIds.map(Number) });
-			})(event_);
+				onSubmit({ categoryIds });
+			})(event);
 		},
 		[onSubmit, handleSubmit],
 	);
@@ -86,20 +89,23 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 				<Checkbox
 					control={control}
 					hasVisuallyHiddenLabel
+					isRounded
 					label="All"
+					layout="column"
 					name="hasSelectedAll"
 					onChange={handleSelectAll}
 					options={[]}
-					variant="rounded"
 				/>
+				<div className={styles["checkbox-divider"]} />
 				<Checkbox
 					control={control}
 					hasVisuallyHiddenLabel
+					isRounded
 					label="Categories"
+					layout="column"
 					name="categoryIds"
 					onChange={handleInputSelect}
 					options={categoryInputOptions}
-					variant="rounded"
 				/>
 				<br />
 				<Button label={buttonLabel} type="submit" variant="secondary" />

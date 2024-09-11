@@ -9,31 +9,39 @@ import {
 
 import styles from "./styles.module.css";
 
-type Properties<T extends FieldValues> = {
+type Properties<T extends FieldValues, OptionValueT extends number | string> = {
 	hasVisuallyHiddenLabel?: boolean;
+	isRounded?: boolean;
 	label: string;
+	layout?: "column" | "wrap";
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	options: InputOption[];
-	variant: "general" | "rounded";
+	options: InputOption<OptionValueT>[];
 } & FormFieldProperties<T>;
 
-const Checkbox = <T extends FieldValues>({
+const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 	control,
 	hasVisuallyHiddenLabel = false,
+	isRounded = false,
 	label,
+	layout = "wrap",
 	name,
 	onChange,
 	options,
-	variant,
-}: Properties<T>): JSX.Element => {
+}: Properties<T, OptionValueT>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange: onFieldChange, value } = field;
-	const isGeneralCheckbox = variant === "general";
+
+	const layoutStyle = styles[`${layout}-layout`];
+	const variantStyle = isRounded
+		? styles["rounded-checkbox"]
+		: styles["rectangular-checkbox"];
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			const isChecked = event.target.checked;
-			const inputValue = isGeneralCheckbox
+			const inputValue = (value as unknown[]).every(
+				(value) => typeof value === "number",
+			)
 				? Number(event.target.value)
 				: event.target.value;
 
@@ -41,15 +49,13 @@ const Checkbox = <T extends FieldValues>({
 				onFieldChange([...value, inputValue]);
 			} else {
 				onFieldChange(
-					(value as (number | string)[]).filter(
-						(value) => value !== inputValue,
-					),
+					(value as number[]).filter((value) => value !== inputValue),
 				);
 			}
 
 			onChange?.(event);
 		},
-		[isGeneralCheckbox, onFieldChange, onChange, value],
+		[onFieldChange, onChange, value],
 	);
 
 	const handleSingleCheckboxChange = useCallback(
@@ -61,76 +67,76 @@ const Checkbox = <T extends FieldValues>({
 	);
 
 	return (
-		<>
-			<label className={styles["input-wrapper"]}>
-				<p
-					className={getValidClassNames(
-						styles["question"],
-						hasVisuallyHiddenLabel && "visually-hidden",
-					)}
-				>
-					{label}
-				</p>
-				<div
-					className={getValidClassNames(
-						styles["input-container"],
-						variant === "rounded" && styles["rounded-input-container"],
-					)}
-				>
-					{options.map((option) => {
-						const isChecked = isGeneralCheckbox
-							? (value as number[]).includes(Number(option.value))
-							: (value as string[]).includes(String(option.value));
+		<section className={styles["container"]}>
+			<p
+				className={getValidClassNames(
+					styles["main-label"],
+					hasVisuallyHiddenLabel && "visually-hidden",
+				)}
+			>
+				{label}
+			</p>
+			<section
+				className={getValidClassNames(styles["options-container"], layoutStyle)}
+			>
+				{options.length > ZERO_INDEX &&
+					options.map((option) => {
+						const isChecked = (value as unknown[]).includes(option.value);
 
-						return isGeneralCheckbox ? (
+						return (
 							<div
-								className={styles["gradient-border-container"]}
+								className={getValidClassNames(
+									styles["checkbox-gradient-border"],
+									variantStyle,
+								)}
 								key={option.value}
 							>
-								<div className={styles["gradient-border-content"]}>
-									<label className={styles["label"]} key={option.value}>
-										<input
-											checked={isChecked}
-											className={styles["checkbox"]}
-											onChange={handleCheckboxesChange}
-											type="checkbox"
-											value={option.value}
-										/>
-										<span className={styles["input-checkmark"]} />
-										{option.label}
-									</label>
-								</div>
+								<label
+									className={getValidClassNames(
+										styles["checkbox-container"],
+										variantStyle,
+									)}
+								>
+									<input
+										checked={isChecked}
+										className={styles["checkbox"]}
+										onChange={handleCheckboxesChange}
+										type="checkbox"
+										value={option.value}
+									/>
+									<span className={styles["checkmark"]} />
+									{option.label}
+								</label>
 							</div>
-						) : (
-							<label className={styles["rounded-label"]} key={option.value}>
-								<input
-									checked={isChecked}
-									className={styles["checkbox"]}
-									onChange={handleCheckboxesChange}
-									type="checkbox"
-									value={option.value}
-								/>
-								<span className={styles["checkmark"]} />
-								{option.label}
-							</label>
 						);
 					})}
-				</div>
-			</label>
-			{options.length === ZERO_INDEX && (
-				<label className={styles["rounded-label"]}>
-					<input
-						{...field}
-						checked={Boolean(value)}
-						className={styles["checkbox"]}
-						onChange={handleSingleCheckboxChange}
-						type="checkbox"
-					/>
-					<span className={styles["checkmark"]} />
-					{label}
-				</label>
-			)}
-		</>
+				{options.length === ZERO_INDEX && (
+					<div
+						className={getValidClassNames(
+							styles["checkbox-gradient-border"],
+							variantStyle,
+						)}
+					>
+						<label
+							className={getValidClassNames(
+								styles["checkbox-container"],
+								variantStyle,
+							)}
+						>
+							<input
+								checked={Boolean(value)}
+								className={styles["checkbox"]}
+								onChange={handleSingleCheckboxChange}
+								type="checkbox"
+								value={value}
+							/>
+							<span className={styles["checkmark"]} />
+							{label}
+						</label>
+					</div>
+				)}
+			</section>
+		</section>
 	);
 };
 
