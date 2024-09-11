@@ -4,6 +4,7 @@ const BottomTabScreenName = {
 	SETTINGS: "Settings",
 	TASKS: "Tasks",
 	WHEEL: "Wheel",
+	WHEEL_SCREEN: "Wheel Screen",
 } as const;
 
 export { BottomTabScreenName };

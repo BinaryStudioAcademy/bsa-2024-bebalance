@@ -6,6 +6,7 @@ type BottomTabNavigationParameterList = {
 	[BottomTabScreenName.SETTINGS]: undefined;
 	[BottomTabScreenName.TASKS]: undefined;
 	[BottomTabScreenName.WHEEL]: undefined;
+	[BottomTabScreenName.WHEEL_SCREEN]: undefined;
 };
 
 export { type BottomTabNavigationParameterList };
