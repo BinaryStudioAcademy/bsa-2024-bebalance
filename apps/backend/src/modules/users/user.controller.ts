@@ -21,7 +21,8 @@ import {
 } from "./libs/types/types.js";
 import { notificationAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
-/*** @swagger
+/**
+ * @swagger
  * components:
  *    schemas:
  *      User:
@@ -133,7 +134,6 @@ class UserController extends BaseController {
 	 *                    items:
 	 *                      $ref: "#/components/schemas/User"
 	 */
-
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),

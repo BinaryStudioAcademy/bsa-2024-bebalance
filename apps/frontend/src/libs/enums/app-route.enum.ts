@@ -1,5 +1,6 @@
 const AppRoute = {
 	ANY: "*",
+	CHAT: "/chat",
 	FORGOT_PASSWORD: "/forgot-password",
 	ONBOARDING: "/onboarding",
 	PROFILE: "/profile",
