@@ -6,27 +6,45 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import {
+	useAppDispatch,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type SliderData } from "~/libs/types/types";
+import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { styles } from "./styles";
 
 type Properties = {
-	handleSaveChanges: () => void;
+	data: SliderData[];
 };
 
-const mockData: SliderData[] = [
-	{ color: "yellow", initValue: 3, label: "Physical" },
-	{ color: "lime", initValue: 6, label: "Work" },
-	{ color: "violet", initValue: 6, label: "Friends" },
-	{ color: "red", initValue: 6, label: "Love" },
-	{ color: "green", initValue: 6, label: "Money" },
-	{ color: "pink", initValue: 6, label: "Free time" },
-	{ color: "orange", initValue: 6, label: "Spiritual" },
-	{ color: "blue", initValue: 6, label: "Mental" },
-];
+const ScoresEditForm: React.FC<Properties> = ({ data }) => {
+	const dispatch = useAppDispatch();
+	const [scores, setScores] = useState<SliderData[]>(data);
 
-const ScoresEditForm: React.FC<Properties> = ({ handleSaveChanges }) => {
+	useEffect(() => {
+		void dispatch(quizActions.getScores());
+	}, [dispatch]);
+
+	const handleSaveChange = useCallback(() => {
+		//Todo implement edit scores
+	}, []);
+
+	const handleSliderChange = useCallback(
+		(categoryId: number, value: number) => {
+			setScores(
+				scores.map((item) =>
+					item.categoryId === categoryId ? { ...item, score: value } : item,
+				),
+			);
+		},
+		[scores],
+	);
+
 	return (
 		<View
 			style={[
@@ -40,16 +58,17 @@ const ScoresEditForm: React.FC<Properties> = ({ handleSaveChanges }) => {
 				<Text weight="bold">Do you feel any changes in anything?</Text>
 				<Text weight="bold">Estimate the fields from 1 to 10</Text>
 			</View>
-			{mockData.map((item) => (
+			{data.map((item) => (
 				<SliderContent
-					color={item.color}
-					initValue={item.initValue}
-					key={item.label}
-					label={item.label}
+					id={item.categoryId}
+					key={item.categoryId}
+					label={item.categoryName}
+					onValueChange={handleSliderChange}
+					value={item.score}
 				/>
 			))}
 			<View style={[globalStyles.mh32, globalStyles.pt24]}>
-				<Button label="SAVE CHANGES" onPress={handleSaveChanges} />
+				<Button label="SAVE CHANGES" onPress={handleSaveChange} />
 			</View>
 		</View>
 	);
