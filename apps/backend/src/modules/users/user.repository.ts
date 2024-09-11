@@ -1,23 +1,11 @@
 import { RelationName } from "~/libs/enums/enums.js";
-import {
-	type Repository,
-	type UserDto,
-	type ValueOf,
-} from "~/libs/types/types.js";
-import { type UserEntity } from "~/modules/users/user.entity.js";
+import { type Repository } from "~/libs/types/types.js";
+import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { type UserTaskDay } from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 import { type UserTaskDaysModel } from "./user-task-days.model.js";
-
-type UserWithoutAvatar = {
-	notificationFrequency?: ValueOf<typeof NotificationFrequency>;
-	passwordHash: string;
-	passwordSalt: string;
-	userTaskDays: null | number[];
-} & Omit<UserDto, "avatarUrl">;
 
 class UserRepository implements Repository {
 	private userDetailsModel: typeof UserDetailsModel;
@@ -36,7 +24,7 @@ class UserRepository implements Repository {
 		this.userTaskDaysModel = userTaskDaysModel;
 	}
 
-	public async create(entity: UserEntity): Promise<UserWithoutAvatar> {
+	public async create(entity: UserEntity): Promise<UserEntity> {
 		const { email, name, passwordHash, passwordSalt } = entity.toNewObject();
 
 		const user = await this.userModel
@@ -56,8 +44,9 @@ class UserRepository implements Repository {
 			})
 			.returning("*");
 
-		return {
+		return UserEntity.initialize({
 			avatarFileId: userDetails.avatarFileId,
+			avatarUrl: null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
@@ -67,7 +56,7 @@ class UserRepository implements Repository {
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
 			userTaskDays: [],
-		};
+		});
 	}
 
 	public async delete(id: number): Promise<boolean> {
@@ -85,7 +74,7 @@ class UserRepository implements Repository {
 		return Boolean(rowsDeleted);
 	}
 
-	public async find(id: number): Promise<null | UserWithoutAvatar> {
+	public async find(id: number): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
@@ -94,8 +83,9 @@ class UserRepository implements Repository {
 			.findById(id);
 
 		return user
-			? {
+			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
+					avatarUrl: null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -107,38 +97,37 @@ class UserRepository implements Repository {
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
 					),
-				}
+				})
 			: null;
 	}
 
-	public async findAll(): Promise<UserWithoutAvatar[]> {
+	public async findAll(): Promise<UserEntity[]> {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
 				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
 			);
 
-		return await Promise.all(
-			users.map((user) => {
-				return {
-					avatarFileId: user.userDetails.avatarFileId,
-					createdAt: user.createdAt,
-					email: user.email,
-					id: user.id,
-					name: user.userDetails.name,
-					notificationFrequency: user.userDetails.notificationFrequency,
-					passwordHash: user.passwordHash,
-					passwordSalt: user.passwordSalt,
-					updatedAt: user.updatedAt,
-					userTaskDays: user.userTaskDays.map(
-						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
-					),
-				};
-			}),
-		);
+		return users.map((user) => {
+			return UserEntity.initialize({
+				avatarFileId: user.userDetails.avatarFileId,
+				avatarUrl: null,
+				createdAt: user.createdAt,
+				email: user.email,
+				id: user.id,
+				name: user.userDetails.name,
+				notificationFrequency: user.userDetails.notificationFrequency,
+				passwordHash: user.passwordHash,
+				passwordSalt: user.passwordSalt,
+				updatedAt: user.updatedAt,
+				userTaskDays: user.userTaskDays.map(
+					(taskDay: UserTaskDay) => taskDay.dayOfWeek,
+				),
+			});
+		});
 	}
 
-	public async findByEmail(email: string): Promise<null | UserWithoutAvatar> {
+	public async findByEmail(email: string): Promise<null | UserEntity> {
 		const user = await this.userModel
 			.query()
 			.where({ email })
@@ -151,8 +140,9 @@ class UserRepository implements Repository {
 			return null;
 		}
 
-		return {
+		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
+			avatarUrl: null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
@@ -164,13 +154,13 @@ class UserRepository implements Repository {
 			userTaskDays: user.userTaskDays.map(
 				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
 			),
-		};
+		});
 	}
 
 	public async update(
 		id: number,
 		payload: Partial<UserDetailsModel>,
-	): Promise<null | UserWithoutAvatar> {
+	): Promise<null | UserEntity> {
 		const userDetails = await this.userDetailsModel
 			.query()
 			.findOne({ userId: id });
@@ -183,8 +173,9 @@ class UserRepository implements Repository {
 			.withGraphFetched(RelationName.USER_TASK_DAYS);
 
 		return user && updatedUserDetails
-			? {
+			? UserEntity.initialize({
 					avatarFileId: userDetails?.avatarFileId ?? null,
+					avatarUrl: null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -196,14 +187,14 @@ class UserRepository implements Repository {
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
 					),
-				}
+				})
 			: null;
 	}
 
 	public async updateAvatar(
 		id: number,
 		fileId: number,
-	): Promise<null | UserWithoutAvatar> {
+	): Promise<null | UserEntity> {
 		await this.userDetailsModel
 			.query()
 			.patch({ avatarFileId: fileId })
@@ -221,8 +212,9 @@ class UserRepository implements Repository {
 			);
 
 		return user
-			? {
+			? UserEntity.initialize({
 					avatarFileId: userDetails.avatarFileId,
+					avatarUrl: null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -234,14 +226,14 @@ class UserRepository implements Repository {
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
 					),
-				}
+				})
 			: null;
 	}
 
 	public async updatePassword(
 		id: number,
 		passwordPayload: { passwordHash: string; passwordSalt: string },
-	): Promise<UserWithoutAvatar> {
+	): Promise<UserEntity> {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
@@ -249,8 +241,9 @@ class UserRepository implements Repository {
 			)
 			.patchAndFetchById(id, passwordPayload);
 
-		return {
+		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
+			avatarUrl: null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
@@ -262,7 +255,7 @@ class UserRepository implements Repository {
 			userTaskDays: user.userTaskDays.map(
 				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
 			),
-		};
+		});
 	}
 
 	public async updateUserTaskDays(

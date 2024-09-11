@@ -176,8 +176,10 @@ class UserController extends BaseController {
 			params: UserGetParametersDto;
 		}>,
 	): Promise<APIHandlerResponse> {
+		const user = await this.userService.find(options.params.id);
+
 		return {
-			payload: await this.userService.find(options.params.id),
+			payload: user?.toObject(),
 			status: HTTPCode.OK,
 		};
 	}

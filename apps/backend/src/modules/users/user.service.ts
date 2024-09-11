@@ -1,7 +1,7 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
 import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
-import { type Service, type ValueOf } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 import {
 	type File,
 	FileEntity,
@@ -11,7 +11,6 @@ import {
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
 
-import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { UserError } from "./libs/exceptions/exceptions.js";
 import {
 	type NotificationAnswersPayloadDto,
@@ -47,24 +46,12 @@ class UserService implements Service {
 			passwordSalt: salt,
 		};
 
-		const user = await this.userRepository.updatePassword(id, updates);
+		const userEntity = await this.userRepository.updatePassword(id, updates);
+
+		const user = userEntity.toNewObject();
 
 		if (!user.avatarFileId) {
-			return UserEntity.initialize({
-				avatarFileId: null,
-				avatarUrl: null,
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.name,
-				notificationFrequency: user.notificationFrequency as ValueOf<
-					typeof NotificationFrequency
-				>,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-				userTaskDays: user.userTaskDays,
-			});
+			return userEntity;
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -76,11 +63,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -91,7 +76,7 @@ class UserService implements Service {
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
 		const { hash, salt } = await this.encrypt.encrypt(payload.password);
 
-		const user = await this.userRepository.create(
+		const userEntity = await this.userRepository.create(
 			UserEntity.initializeNew({
 				email: payload.email,
 				name: payload.name,
@@ -100,22 +85,10 @@ class UserService implements Service {
 			}),
 		);
 
+		const user = userEntity.toNewObject();
+
 		if (!user.avatarFileId) {
-			return UserEntity.initialize({
-				avatarFileId: null,
-				avatarUrl: null,
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.name,
-				notificationFrequency: user.notificationFrequency as ValueOf<
-					typeof NotificationFrequency
-				>,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-				userTaskDays: user.userTaskDays,
-			}).toObject();
+			return userEntity.toObject();
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -127,11 +100,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -144,31 +115,19 @@ class UserService implements Service {
 	}
 
 	public async find(id: number): Promise<null | UserEntity> {
-		const user = await this.userRepository.find(id);
+		const userEntity = await this.userRepository.find(id);
 
-		if (!user) {
+		if (!userEntity) {
 			throw new UserError({
 				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
 				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
+		const user = userEntity.toNewObject();
+
 		if (!user.avatarFileId) {
-			return UserEntity.initialize({
-				avatarFileId: null,
-				avatarUrl: null,
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.name,
-				notificationFrequency: user.notificationFrequency as ValueOf<
-					typeof NotificationFrequency
-				>,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-				userTaskDays: user.userTaskDays,
-			});
+			return userEntity;
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -180,11 +139,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -197,23 +154,11 @@ class UserService implements Service {
 
 		return {
 			items: await Promise.all(
-				items.map(async (item) => {
+				items.map(async (itemEntity) => {
+					const item = itemEntity.toNewObject();
+
 					if (!item.avatarFileId) {
-						return UserEntity.initialize({
-							avatarFileId: null,
-							avatarUrl: null,
-							createdAt: item.createdAt,
-							email: item.email,
-							id: item.id,
-							name: item.name,
-							notificationFrequency: item.notificationFrequency as ValueOf<
-								typeof NotificationFrequency
-							>,
-							passwordHash: item.passwordHash,
-							passwordSalt: item.passwordSalt,
-							updatedAt: item.updatedAt,
-							userTaskDays: item.userTaskDays,
-						}).toObject();
+						return itemEntity.toObject();
 					}
 
 					const avatarEntity = await this.fileService.find(item.avatarFileId);
@@ -225,11 +170,9 @@ class UserService implements Service {
 						avatarUrl: avatar?.url ?? null,
 						createdAt: item.createdAt,
 						email: item.email,
-						id: item.id,
+						id: itemEntity.toObject().id,
 						name: item.name,
-						notificationFrequency: item.notificationFrequency as ValueOf<
-							typeof NotificationFrequency
-						>,
+						notificationFrequency: item.notificationFrequency,
 						passwordHash: item.passwordHash,
 						passwordSalt: item.passwordSalt,
 						updatedAt: item.updatedAt,
@@ -241,31 +184,19 @@ class UserService implements Service {
 	}
 
 	public async findByEmail(email: string): Promise<null | UserEntity> {
-		const user = await this.userRepository.findByEmail(email);
+		const userEntity = await this.userRepository.findByEmail(email);
 
-		if (!user) {
+		if (!userEntity) {
 			throw new UserError({
 				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
 				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
+		const user = userEntity.toNewObject();
+
 		if (!user.avatarFileId) {
-			return UserEntity.initialize({
-				avatarFileId: null,
-				avatarUrl: null,
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.name,
-				notificationFrequency: user.notificationFrequency as ValueOf<
-					typeof NotificationFrequency
-				>,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-				userTaskDays: user.userTaskDays,
-			});
+			return userEntity;
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -277,11 +208,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -295,33 +224,21 @@ class UserService implements Service {
 	): Promise<null | UserDto> {
 		await this.userRepository.updateUserTaskDays(id, payload.userTaskDays);
 
-		const user = await this.userRepository.update(id, {
+		const userEntity = await this.userRepository.update(id, {
 			notificationFrequency: payload.notificationFrequency,
 		});
 
-		if (!user) {
+		if (!userEntity) {
 			throw new UserError({
 				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
 				status: HTTPCode.BAD_REQUEST,
 			});
 		}
 
+		const user = userEntity.toNewObject();
+
 		if (!user.avatarFileId) {
-			return UserEntity.initialize({
-				avatarFileId: null,
-				avatarUrl: null,
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.name,
-				notificationFrequency: user.notificationFrequency as ValueOf<
-					typeof NotificationFrequency
-				>,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-				userTaskDays: user.userTaskDays,
-			}).toObject();
+			return userEntity.toObject();
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -333,11 +250,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -349,28 +264,16 @@ class UserService implements Service {
 		id: number,
 		payload: UserUpdateRequestDto,
 	): Promise<null | UserDto> {
-		const user = await this.userRepository.update(id, payload);
+		const userEntity = await this.userRepository.update(id, payload);
 
-		if (!user) {
+		if (!userEntity) {
 			return null;
 		}
 
+		const user = userEntity.toNewObject();
+
 		if (!user.avatarFileId) {
-			return UserEntity.initialize({
-				avatarFileId: null,
-				avatarUrl: null,
-				createdAt: user.createdAt,
-				email: user.email,
-				id: user.id,
-				name: user.name,
-				notificationFrequency: user.notificationFrequency as ValueOf<
-					typeof NotificationFrequency
-				>,
-				passwordHash: user.passwordHash,
-				passwordSalt: user.passwordSalt,
-				updatedAt: user.updatedAt,
-				userTaskDays: user.userTaskDays,
-			}).toObject();
+			return userEntity.toObject();
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -382,11 +285,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
@@ -405,15 +306,16 @@ class UserService implements Service {
 			});
 		}
 
-		const user = await this.userRepository.find(userId);
+		const userEntity = await this.userRepository.find(userId);
 
-		if (!user) {
+		if (!userEntity) {
 			throw new UserError({
 				message: ErrorMessage.UNAUTHORIZED,
 				status: HTTPCode.UNAUTHORIZED,
 			});
 		}
 
+		const user = userEntity.toNewObject();
 		let newAvatar: FileEntity;
 
 		if (user.avatarFileId) {
@@ -471,11 +373,9 @@ class UserService implements Service {
 			avatarUrl: avatar?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
-			id: user.id,
+			id: userEntity.toObject().id,
 			name: user.name,
-			notificationFrequency: user.notificationFrequency as ValueOf<
-				typeof NotificationFrequency
-			>,
+			notificationFrequency: user.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
