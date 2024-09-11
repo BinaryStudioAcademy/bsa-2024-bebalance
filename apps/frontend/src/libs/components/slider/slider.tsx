@@ -7,7 +7,10 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 
-import { SLIDER_BACKGROUND_COLOR } from "./libs/constants/constants.js";
+import {
+	FULL_PROGRESS,
+	SLIDER_BACKGROUND_COLOR,
+} from "./libs/constants/constants.js";
 import { formatToKebabCase } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -41,8 +44,6 @@ const Slider: React.FC<Properties> = ({
 		if (!rangeReference.current) {
 			return;
 		}
-
-		const FULL_PROGRESS = 100;
 
 		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
 
