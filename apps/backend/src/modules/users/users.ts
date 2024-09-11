@@ -20,6 +20,7 @@ export { UserValidationMessage } from "./libs/enums/enums.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -28,7 +29,7 @@ export {
 } from "./libs/types/types.js";
 export {
 	notificationAnswersValidationSchema,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,

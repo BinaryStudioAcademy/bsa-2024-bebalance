@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.30.0...frontend-v1.31.0) (2024-09-10)
+
+
+### Features
+
+* **frontend/backend:** forgot password functionality requirements bb-285 ([#329](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/329)) ([6e80423](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6e8042368c4f56ae8702a708b2b7e3da36c644f1))
+* Onboarding questions screen mobile responsiveness bb-289 ([#345](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/345)) ([7a0c849](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7a0c84979f68605a130e59d68e4f197b74f2525d))
+
+
+### Bug Fixes
+
+* **frontend:** remade backgrounds for quiz and not-found pages bb-327 ([#336](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/336)) ([812ce87](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/812ce87f22e7f92b1e4c27b804694af9c5430d93))
+
+## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.29.0...frontend-v1.30.0) (2024-09-10)
+
+
+### Features
+
+* **frontend:** quiz question screen mobile responsiveness bb-290 ([#346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/346)) ([9e9809c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9e9809c13c017c8b037c6f4ca910824212e267fa))
+
+
+### Bug Fixes
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#356](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/356)) ([2256493](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2256493a3efbd62a54ce0f9a8293198a44d813cc))
+* **frontend:** checkbox border bb-243 ([#363](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/363)) ([711e80a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/711e80a9a5ef5f0c123f44b83a1cc146907064e0))
+
 ## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.28.1...frontend-v1.29.0) (2024-09-09)
 
 

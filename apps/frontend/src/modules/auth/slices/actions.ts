@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { NotificationMessage } from "~/libs/enums/enums.js";
+import { AppRoute, NotificationMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
+import { actions as appActions } from "~/modules/app/app.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -83,20 +85,34 @@ const requestResetPassword = createAsyncThunk<
 });
 
 const resetPassword = createAsyncThunk<
-	UserDto,
+	boolean,
 	ResetPasswordDto,
 	AsyncThunkConfig
->(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
-	const { authApi, storage } = extra;
+>(`${sliceName}/reset-password`, async (emailPayload, { dispatch, extra }) => {
+	const { authApi, notification } = extra;
 
-	const { token, user } = await authApi.resetPassword(emailPayload);
+	const isSuccessful = await authApi.resetPassword(emailPayload);
 
-	void storage.set(StorageKey.TOKEN, token);
+	if (isSuccessful) {
+		notification.success(NotificationMessage.PASSWORD_UPDATED);
+		dispatch(appActions.changeLink(AppRoute.SIGN_IN));
+	}
 
-	return user;
+	return isSuccessful;
+});
+
+const checkIsResetPasswordExpired = createAsyncThunk<
+	boolean,
+	ResetPasswordLinkDto,
+	AsyncThunkConfig
+>(`${sliceName}/check-reset-password-link`, async (payload, { extra }) => {
+	const { authApi } = extra;
+
+	return await authApi.checkIsResetPasswordExpired(payload);
 });
 
 export {
+	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
 	logOut,
 	requestResetPassword,
