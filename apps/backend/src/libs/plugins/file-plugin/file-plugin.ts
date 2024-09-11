@@ -6,7 +6,10 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { type File, FileError } from "~/modules/files/files.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
-import { FILE_SIZE_LIMIT_IN_BYTES } from "./libs/constants/constants.js";
+import {
+	FILE_SIZE_LIMIT_IN_BYTES,
+	FILES_NUMBER_IN_REQUEST,
+} from "./libs/constants/constants.js";
 
 const filePlugin = fp((app, _, done) => {
 	app.register(fastifyMultipart);
@@ -19,7 +22,7 @@ const filePlugin = fp((app, _, done) => {
 
 			const file = (await request.file({
 				limits: {
-					files: 1,
+					files: FILES_NUMBER_IN_REQUEST,
 					fileSize: FILE_SIZE_LIMIT_IN_BYTES,
 				},
 				throwFileSizeLimit: false,

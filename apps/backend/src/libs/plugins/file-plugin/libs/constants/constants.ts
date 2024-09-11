@@ -1,3 +1,2 @@
-const FILE_SIZE_LIMIT_IN_BYTES = 1_048_576;
-
-export { FILE_SIZE_LIMIT_IN_BYTES };
+export { FILE_SIZE_LIMIT_IN_BYTES } from "./file-size-limit.constant.js";
+export { FILES_NUMBER_IN_REQUEST } from "./files-number.constant.js";

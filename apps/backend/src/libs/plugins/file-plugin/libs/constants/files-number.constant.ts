@@ -1,0 +1,3 @@
+const FILES_NUMBER_IN_REQUEST = 1;
+
+export { FILES_NUMBER_IN_REQUEST };
