@@ -1,10 +1,10 @@
-import { AppRoute } from "~/libs/enums/enums.js";
+import { Navigate } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useNavigate,
 	useState,
 } from "~/libs/hooks/hooks.js";
 import {
@@ -13,27 +13,25 @@ import {
 } from "~/modules/users/users.js";
 
 import {
+	Analyzing,
 	BalanceWheel,
 	Introduction,
 	NotificationQuestions,
+	OnboardingForm,
 	QuizForm,
 } from "./libs/components/components.js";
-import { STEP_INCREMENT } from "./libs/constants/constants.js";
-import { Step } from "./libs/enums/enums.js";
-
-const ZERO = 0;
+import { NumberValue, Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	const [step, setStep] = useState<number>(Step.INTRODUCTION);
+	const [step, setStep] = useState<number>(Step.ONBOARDING);
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 
 	const { onboardingAnswers } = useAppSelector(({ auth }) => ({
 		onboardingAnswers: auth.user?.onboardingAnswers,
 	}));
 
 	const handleNextStep = useCallback((): void => {
-		setStep((previousStep) => previousStep + STEP_INCREMENT);
+		setStep((previousStep) => previousStep + NumberValue.ONE_INDEX);
 	}, []);
 
 	const handleNotificationQuestionsSubmit = useCallback(
@@ -46,12 +44,12 @@ const Quiz: React.FC = () => {
 
 	useEffect(() => {
 		const hasOnboardingAnswers =
-			onboardingAnswers && onboardingAnswers.length > ZERO;
+			onboardingAnswers && onboardingAnswers.length > NumberValue.ZERO_INDEX;
 
-		if (!hasOnboardingAnswers) {
-			navigate(AppRoute.ONBOARDING);
+		if (hasOnboardingAnswers) {
+			setStep(Step.INTRODUCTION);
 		}
-	}, [navigate, onboardingAnswers]);
+	}, [onboardingAnswers]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
@@ -61,6 +59,18 @@ const Quiz: React.FC = () => {
 
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
+			}
+
+			case Step.ROOT: {
+				return <Navigate replace to={AppRoute.ROOT} />;
+			}
+
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
+			}
+
+			case Step.ONBOARDING: {
+				return <OnboardingForm onNext={handleNextStep} />;
 			}
 
 			case Step.NOTIFICATION_QUESTIONS: {

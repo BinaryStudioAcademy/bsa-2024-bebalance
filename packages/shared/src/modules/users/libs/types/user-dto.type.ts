@@ -8,6 +8,7 @@ type UserDto = {
 	name: string;
 	notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 	onboardingAnswers?: number[];
+	quizAnswers?: number[];
 	updatedAt: string;
 	userTaskDays?: number[];
 };

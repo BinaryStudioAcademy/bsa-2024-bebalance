@@ -4,6 +4,7 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
 import { type OnboardingAnswerModel } from "../onboarding/onboarding.js";
+import { type QuizAnswerModel } from "../quiz-answers/quiz-answers.js";
 import { type UserTaskDay } from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 import { type UserTaskDaysModel } from "./user-task-days.model.js";
@@ -75,7 +76,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			)
 			.findById(id);
 
@@ -91,6 +92,9 @@ class UserRepository implements Repository {
 					),
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					quizAnswers: user.quizAnswers.map(
+						(quizAnswers: QuizAnswerModel) => quizAnswers.id,
+					),
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -103,7 +107,7 @@ class UserRepository implements Repository {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			);
 
 		return users.map((user) =>
@@ -118,6 +122,9 @@ class UserRepository implements Repository {
 				),
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
+				quizAnswers: user.quizAnswers.map(
+					(quizAnswers: QuizAnswerModel) => quizAnswers.id,
+				),
 				updatedAt: user.updatedAt,
 				userTaskDays: user.userTaskDays.map(
 					(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -132,7 +139,7 @@ class UserRepository implements Repository {
 			.where({ email })
 			.first()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			);
 
 		return user
@@ -142,8 +149,14 @@ class UserRepository implements Repository {
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: user.notificationFrequency,
+					onboardingAnswers: user.onboardingAnswers.map(
+						(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
+					),
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					quizAnswers: user.quizAnswers.map(
+						(quizAnswers: QuizAnswerModel) => quizAnswers.id,
+					),
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,

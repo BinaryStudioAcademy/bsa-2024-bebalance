@@ -1,16 +1,9 @@
 import { Button } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/app-route.enum.js";
-import { useCallback, useNavigate } from "~/libs/hooks/hooks.js";
 
+import { type Properties } from "../../types/types.js";
 import styles from "./styles.module.css";
 
-const Analyzing: React.FC = () => {
-	const navigate = useNavigate();
-
-	const handleQuizPart = useCallback((): void => {
-		navigate(AppRoute.QUIZ);
-	}, [navigate]);
-
+const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	return (
 		<div className={styles["page-container"]}>
 			<div className={styles["border-container"]}>
@@ -31,11 +24,7 @@ const Analyzing: React.FC = () => {
 							starts now!
 						</p>
 					</div>
-					<Button
-						label="Let’s continue"
-						onClick={handleQuizPart}
-						type="button"
-					/>
+					<Button label="Let’s continue" onClick={onNext} type="button" />
 				</div>
 			</div>
 		</div>

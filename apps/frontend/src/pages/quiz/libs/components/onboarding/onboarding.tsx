@@ -9,9 +9,9 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "../../constants/constants.js";
-import { type OnboardingFormValues } from "../../types/types.js";
-import { OnboardingAnswer } from "../components.js";
+import { OnboardingAnswer } from "./libs/components/components.js";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
+import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {

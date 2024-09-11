@@ -1,22 +1,22 @@
-import { Navigate } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
-import { useAppSelector } from "~/libs/hooks/hooks.js";
+import { AppRoute, NumberValue } from "~/libs/enums/enums.js";
+import { useAppSelector, useEffect, useNavigate } from "~/libs/hooks/hooks.js";
 
 import { UserWheel } from "./components/components.js";
 
-const ZERO = 0;
-
 const Root: React.FC = () => {
-	const { onboardingAnswers } = useAppSelector(({ auth }) => ({
-		onboardingAnswers: auth.user?.onboardingAnswers,
+	const navigate = useNavigate();
+	const { quizAnswers } = useAppSelector(({ auth }) => ({
+		quizAnswers: auth.user?.quizAnswers,
 	}));
 
-	const hasOnboardingAnswers =
-		onboardingAnswers && onboardingAnswers.length > ZERO;
+	const hasQuizAnswers =
+		quizAnswers && quizAnswers.length > NumberValue.ZERO_INDEX;
 
-	if (!hasOnboardingAnswers) {
-		return <Navigate replace to={AppRoute.QUIZ} />;
-	}
+	useEffect(() => {
+		if (!hasQuizAnswers) {
+			navigate(AppRoute.QUIZ);
+		}
+	}, [hasQuizAnswers, navigate]);
 
 	return <UserWheel />;
 };

@@ -19,6 +19,8 @@ class UserEntity implements Entity {
 
 	private passwordSalt: string;
 
+	private quizAnswers: null | number[];
+
 	private updatedAt: string;
 
 	private userTaskDays: null | number[];
@@ -32,6 +34,7 @@ class UserEntity implements Entity {
 		onboardingAnswers,
 		passwordHash,
 		passwordSalt,
+		quizAnswers,
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -43,6 +46,7 @@ class UserEntity implements Entity {
 		onboardingAnswers: null | number[];
 		passwordHash: string;
 		passwordSalt: string;
+		quizAnswers: null | number[];
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
@@ -54,6 +58,7 @@ class UserEntity implements Entity {
 		this.onboardingAnswers = onboardingAnswers;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
+		this.quizAnswers = quizAnswers;
 		this.updatedAt = updatedAt;
 		this.userTaskDays = userTaskDays;
 	}
@@ -67,6 +72,7 @@ class UserEntity implements Entity {
 		onboardingAnswers,
 		passwordHash,
 		passwordSalt,
+		quizAnswers,
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -78,6 +84,7 @@ class UserEntity implements Entity {
 		onboardingAnswers?: number[];
 		passwordHash: string;
 		passwordSalt: string;
+		quizAnswers?: number[];
 		updatedAt: string;
 		userTaskDays?: number[];
 	}): UserEntity {
@@ -91,6 +98,7 @@ class UserEntity implements Entity {
 			onboardingAnswers: onboardingAnswers ?? null,
 			passwordHash,
 			passwordSalt,
+			quizAnswers: quizAnswers ?? null,
 			updatedAt,
 			userTaskDays: userTaskDays ?? null,
 		});
@@ -116,6 +124,7 @@ class UserEntity implements Entity {
 			onboardingAnswers: null,
 			passwordHash,
 			passwordSalt,
+			quizAnswers: null,
 			updatedAt: "",
 			userTaskDays: null,
 		});
@@ -129,6 +138,7 @@ class UserEntity implements Entity {
 		onboardingAnswers: number[];
 		passwordHash: string;
 		passwordSalt: string;
+		quizAnswers: number[];
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
@@ -140,6 +150,7 @@ class UserEntity implements Entity {
 			onboardingAnswers: this.onboardingAnswers ?? [],
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
+			quizAnswers: this.quizAnswers ?? [],
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
@@ -152,6 +163,7 @@ class UserEntity implements Entity {
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		onboardingAnswers: number[];
+		quizAnswers: number[];
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
@@ -162,6 +174,7 @@ class UserEntity implements Entity {
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
 			onboardingAnswers: this.onboardingAnswers ?? [],
+			quizAnswers: this.quizAnswers ?? [],
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
