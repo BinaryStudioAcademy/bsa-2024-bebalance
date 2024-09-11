@@ -1,3 +1,3 @@
-const FILE_SIZE_LIMIT = 1_048_576; // 1 MB
+const FILE_SIZE_LIMIT_IN_BYTES = 1_048_576;
 
-export { FILE_SIZE_LIMIT };
+export { FILE_SIZE_LIMIT_IN_BYTES };
