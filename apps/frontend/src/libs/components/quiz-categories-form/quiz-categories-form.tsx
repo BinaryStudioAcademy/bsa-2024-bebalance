@@ -89,23 +89,23 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 				<Checkbox
 					control={control}
 					hasVisuallyHiddenLabel
+					isRounded
 					label="All"
 					layout="column"
 					name="hasSelectedAll"
 					onChange={handleSelectAll}
 					options={[]}
-					variant="rounded"
 				/>
 				<div className={styles["checkbox-divider"]} />
 				<Checkbox
 					control={control}
 					hasVisuallyHiddenLabel
+					isRounded
 					label="Categories"
 					layout="column"
 					name="categoryIds"
 					onChange={handleInputSelect}
 					options={categoryInputOptions}
-					variant="rounded"
 				/>
 				<br />
 				<Button label={buttonLabel} type="submit" variant="secondary" />

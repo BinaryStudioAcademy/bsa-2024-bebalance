@@ -61,7 +61,7 @@
 	box-shadow: 0 0 8px var(--light-blue);
 }
 
-.rounded-checkbox .rounded-checkbox {
+.checkbox-container > .rounded-checkbox {
 	padding: 16px;
 	padding-left: 20%;
 }

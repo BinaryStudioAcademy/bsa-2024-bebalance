@@ -11,33 +11,30 @@ import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
 	hasVisuallyHiddenLabel?: boolean;
+	isRounded?: boolean;
 	label: string;
 	layout?: "column" | "wrap";
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	options: InputOption<number>[];
-	variant?: "rectangular" | "rounded";
 } & FormFieldProperties<T>;
 
 const Checkbox = <T extends FieldValues>({
 	control,
 	hasVisuallyHiddenLabel = false,
+	isRounded = false,
 	label,
 	layout = "wrap",
 	name,
 	onChange,
 	options,
-	variant = "rectangular",
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange: onFieldChange, value } = field;
 
-	const layoutStyle =
-		layout === "wrap" ? styles["wrap-layout"] : styles["column-layout"];
-
-	const variantStyle =
-		variant === "rectangular"
-			? styles["rectangular-checkbox"]
-			: styles["rounded-checkbox"];
+	const layoutStyle = styles[`${layout}-layout`];
+	const variantStyle = isRounded
+		? styles["rounded-checkbox"]
+		: styles["rectangular-checkbox"];
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
