@@ -1,9 +1,10 @@
 import { isRejected, type Middleware } from "@reduxjs/toolkit";
 
-import { ErrorMessage } from "~/libs/enums/enums.js";
+import { AppRoute, ErrorMessage } from "~/libs/enums/enums.js";
 import { StorageKey } from "~/libs/modules/storage/storage.js";
+import { type ExtraArguments, store } from "~/libs/modules/store/store.js";
+import { actions as appActions } from "~/modules/app/app.js";
 
-import { type ExtraArguments } from "../../store.js";
 import { type MiddlewareError } from "../types/types.js";
 
 const handleErrorMiddleware = ({
@@ -23,6 +24,7 @@ const handleErrorMiddleware = ({
 
 						case ErrorMessage.RESET_PASSWORD_LINK_EXPIRED: {
 							notification.error(ErrorMessage.RESET_PASSWORD_LINK_EXPIRED);
+							store.instance.dispatch(appActions.changeLink(AppRoute.SIGN_IN));
 
 							return next(action);
 						}
