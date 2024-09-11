@@ -12,7 +12,7 @@
 }
 
 .options-container {
-	gap: 8px;
+	gap: 10px 8px;
 }
 
 .wrap-layout {
@@ -43,6 +43,7 @@
 .checkbox-container {
 	display: flex;
 	gap: 8px;
+	min-width: 133px;
 	padding: 8px;
 	background: white;
 	border: 2px solid var(--light-gray);
@@ -61,7 +62,7 @@
 	box-shadow: 0 0 8px var(--light-blue);
 }
 
-.checkbox-container > .rounded-checkbox {
+.checkbox-gradient-border > .rounded-checkbox {
 	padding: 16px;
 	padding-left: 20%;
 }

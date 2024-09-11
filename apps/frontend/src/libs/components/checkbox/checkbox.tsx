@@ -9,16 +9,16 @@ import {
 
 import styles from "./styles.module.css";
 
-type Properties<T extends FieldValues> = {
+type Properties<T extends FieldValues, OptionValueT extends number | string> = {
 	hasVisuallyHiddenLabel?: boolean;
 	isRounded?: boolean;
 	label: string;
 	layout?: "column" | "wrap";
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	options: InputOption<number>[];
+	options: InputOption<OptionValueT>[];
 } & FormFieldProperties<T>;
 
-const Checkbox = <T extends FieldValues>({
+const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 	control,
 	hasVisuallyHiddenLabel = false,
 	isRounded = false,
@@ -27,7 +27,7 @@ const Checkbox = <T extends FieldValues>({
 	name,
 	onChange,
 	options,
-}: Properties<T>): JSX.Element => {
+}: Properties<T, OptionValueT>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange: onFieldChange, value } = field;
 
@@ -39,7 +39,11 @@ const Checkbox = <T extends FieldValues>({
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			const isChecked = event.target.checked;
-			const inputValue = Number(event.target.value);
+			const inputValue = (value as unknown[]).every(
+				(value) => typeof value === "number",
+			)
+				? Number(event.target.value)
+				: event.target.value;
 
 			if (isChecked) {
 				onFieldChange([...value, inputValue]);
@@ -77,7 +81,7 @@ const Checkbox = <T extends FieldValues>({
 			>
 				{options.length > ZERO_INDEX &&
 					options.map((option) => {
-						const isChecked = (value as number[]).includes(option.value);
+						const isChecked = (value as unknown[]).includes(option.value);
 
 						return (
 							<div
