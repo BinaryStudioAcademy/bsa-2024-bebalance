@@ -1,4 +1,7 @@
+export { type AvatarFile } from "./avatar-file.type.js";
+export { type UserDetailsWithAvatarFile } from "./user-details-with-avatar-file.type.js";
 export { type UserTaskDay } from "./user-task-day.type.js";
+export { type UserWithAvatarFile } from "./user-with-avatar-file.type.js";
 export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,

@@ -1,49 +1,15 @@
 import { RelationName } from "~/libs/enums/enums.js";
-import { type Repository, type ValueOf } from "~/libs/types/types.js";
+import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { type NotificationFrequency } from "./libs/enums/enums.js";
-import { type UserTaskDay } from "./libs/types/types.js";
+import {
+	type UserDetailsWithAvatarFile,
+	type UserTaskDay,
+	type UserWithAvatarFile,
+} from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 import { type UserTaskDaysModel } from "./user-task-days.model.js";
-
-type AvatarFile = {
-	createdAt: string;
-	id: number;
-	updatedAt: string;
-	url: string;
-};
-
-type UserDetailsWithAvatarFile = {
-	avatarFile?: AvatarFile;
-	avatarFileId: number;
-	createdAt: string;
-	id: number;
-	name: string;
-	notificationFrequency: ValueOf<typeof NotificationFrequency>;
-	updatedAt: string;
-	userId: number;
-};
-
-type UserTaskDays = {
-	createdAt: string;
-	dayOfWeek: number;
-	id: number;
-	updatedAt: string;
-	userId: number;
-};
-
-type UserWithAvatarFile = {
-	createdAt: string;
-	email: string;
-	id: number;
-	passwordHash: string;
-	passwordSalt: string;
-	updatedAt: string;
-	userDetails: UserDetailsWithAvatarFile;
-	userTaskDays: UserTaskDays[];
-};
 
 class UserRepository implements Repository {
 	private userDetailsModel: typeof UserDetailsModel;
