@@ -38,6 +38,7 @@ const Popup: React.FC<Properties> = ({
 								isPrimary={false}
 								label={confirmButtonLabel}
 								onClick={onConfirm}
+								variant="secondary"
 							/>
 						</div>
 					</div>
