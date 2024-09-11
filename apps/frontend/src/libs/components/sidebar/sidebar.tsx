@@ -27,11 +27,11 @@ const Sidebar: React.FC<Properties> = ({
 
 	const dispatch = useAppDispatch();
 
-	const [isLogout, setIsLogout] = useState<boolean>(false);
+	const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState<boolean>(false);
 
 	const handleSignOut = useCallback(() => {
-		setIsLogout((previousState) => !previousState);
-	}, [setIsLogout]);
+		setIsLogoutPopupOpen((previousState) => !previousState);
+	}, [setIsLogoutPopupOpen]);
 
 	const handleConfirmLogout = useCallback(() => {
 		void dispatch(authActions.logOut());
@@ -74,10 +74,10 @@ const Sidebar: React.FC<Properties> = ({
 			</div>
 
 			<Popup
-				closeText="No"
-				confirmText="Yes"
+				closeButtonLabel="No"
+				confirmButtonLabel="Yes"
 				icon={runImg}
-				isOpen={isLogout}
+				isOpen={isLogoutPopupOpen}
 				onClose={handleSignOut}
 				onConfirm={handleConfirmLogout}
 				title={PopupMessage.LOGOUT_CONFIRM}

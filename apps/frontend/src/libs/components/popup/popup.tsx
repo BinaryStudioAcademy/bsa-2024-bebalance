@@ -3,8 +3,8 @@ import { Button } from "~/libs/components/components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	closeText: string;
-	confirmText: string;
+	closeButtonLabel: string;
+	confirmButtonLabel: string;
 	icon: string;
 	isOpen: boolean;
 	onClose: () => void;
@@ -13,8 +13,8 @@ type Properties = {
 };
 
 const Popup: React.FC<Properties> = ({
-	closeText,
-	confirmText,
+	closeButtonLabel,
+	confirmButtonLabel,
 	icon,
 	isOpen = false,
 	onClose,
@@ -33,10 +33,10 @@ const Popup: React.FC<Properties> = ({
 					<div className={styles["contents"]}>
 						<h1 className={styles["title"]}>{title}</h1>
 						<div className={styles["buttons-content"]}>
-							<Button label={closeText} onClick={onClose} />
+							<Button label={closeButtonLabel} onClick={onClose} />
 							<Button
 								isPrimary={false}
-								label={confirmText}
+								label={confirmButtonLabel}
 								onClick={onConfirm}
 							/>
 						</div>
