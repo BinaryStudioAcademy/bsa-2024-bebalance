@@ -119,24 +119,25 @@ class UserRepository implements Repository {
 				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
 			.findById(id)
-			.castTo<UserWithAvatarFile>()
-			.execute();
+			.castTo<null | UserWithAvatarFile>();
 
-		return UserEntity.initialize({
-			avatarFileId: user.userDetails.avatarFileId,
-			avatarUrl: user.userDetails.avatarFile?.url ?? null,
-			createdAt: user.createdAt,
-			email: user.email,
-			id: user.id,
-			name: user.userDetails.name,
-			notificationFrequency: user.userDetails.notificationFrequency,
-			passwordHash: user.passwordHash,
-			passwordSalt: user.passwordSalt,
-			updatedAt: user.updatedAt,
-			userTaskDays: user.userTaskDays.map(
-				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
-			),
-		});
+		return user
+			? UserEntity.initialize({
+					avatarFileId: user.userDetails.avatarFileId,
+					avatarUrl: user.userDetails.avatarFile?.url ?? null,
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					notificationFrequency: user.userDetails.notificationFrequency,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+					userTaskDays: user.userTaskDays.map(
+						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
+					),
+				})
+			: null;
 	}
 
 	public async findAll(): Promise<UserEntity[]> {
@@ -145,8 +146,7 @@ class UserRepository implements Repository {
 			.withGraphFetched(
 				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
-			.castTo<UserWithAvatarFile[]>()
-			.execute();
+			.castTo<UserWithAvatarFile[]>();
 
 		return users.map((user) => {
 			return UserEntity.initialize({
@@ -175,24 +175,25 @@ class UserRepository implements Repository {
 			.withGraphFetched(
 				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
-			.castTo<UserWithAvatarFile>()
-			.execute();
+			.castTo<null | UserWithAvatarFile>();
 
-		return UserEntity.initialize({
-			avatarFileId: user.userDetails.avatarFileId,
-			avatarUrl: user.userDetails.avatarFile?.url ?? null,
-			createdAt: user.createdAt,
-			email: user.email,
-			id: user.id,
-			name: user.userDetails.name,
-			notificationFrequency: user.userDetails.notificationFrequency,
-			passwordHash: user.passwordHash,
-			passwordSalt: user.passwordSalt,
-			updatedAt: user.updatedAt,
-			userTaskDays: user.userTaskDays.map(
-				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
-			),
-		});
+		return user
+			? UserEntity.initialize({
+					avatarFileId: user.userDetails.avatarFileId,
+					avatarUrl: user.userDetails.avatarFile?.url ?? null,
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					notificationFrequency: user.userDetails.notificationFrequency,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+					userTaskDays: user.userTaskDays.map(
+						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
+					),
+				})
+			: null;
 	}
 
 	public async update(
@@ -206,7 +207,7 @@ class UserRepository implements Repository {
 			?.$query()
 			.patchAndFetch(payload)
 			.withGraphFetched(RelationName.AVATAR)
-			.castTo<UserDetailsWithAvatarFile>()
+			.castTo<null | UserDetailsWithAvatarFile>()
 			.execute();
 		const user = await this.userModel
 			.query()
@@ -245,7 +246,7 @@ class UserRepository implements Repository {
 			.query()
 			.findOne({ userId: id })
 			.withGraphFetched(RelationName.AVATAR)
-			.castTo<UserDetailsWithAvatarFile>()
+			.castTo<null | UserDetailsWithAvatarFile>()
 			.execute();
 
 		const user = await this.userModel
@@ -255,7 +256,7 @@ class UserRepository implements Repository {
 				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
 			);
 
-		return user
+		return user && userDetails
 			? UserEntity.initialize({
 					avatarFileId: userDetails.avatarFileId,
 					avatarUrl: userDetails.avatarFile?.url ?? null,

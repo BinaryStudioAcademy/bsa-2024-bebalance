@@ -11,6 +11,7 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
+	CategoryError,
 	FileError,
 	HTTPError,
 	OnboardingError,
@@ -76,8 +77,10 @@ export {
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
+	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,

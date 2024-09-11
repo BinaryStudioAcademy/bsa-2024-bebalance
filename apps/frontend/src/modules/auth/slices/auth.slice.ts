@@ -85,7 +85,7 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "auth",
 	reducers: {
-		udpateAuthUser(state, action: PayloadAction<UserDto>) {
+		updateAuthUser(state, action: PayloadAction<UserDto>) {
 			state.user = action.payload;
 		},
 	},
