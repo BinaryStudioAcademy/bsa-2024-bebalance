@@ -5,8 +5,8 @@ import { type Repository } from "~/libs/types/types.js";
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
 import {
-	type CategoryRequestDto,
 	type CategoryScoreModel,
+	type CategoryUpdateRequestDto,
 	type QuizScoreDto,
 } from "./libs/types/types.js";
 
@@ -146,7 +146,7 @@ class CategoryRepository implements Repository {
 
 	public async update(
 		id: number,
-		payload: Partial<CategoryRequestDto>,
+		payload: CategoryUpdateRequestDto,
 	): Promise<CategoryEntity> {
 		const category = await this.categoryModel
 			.query()
