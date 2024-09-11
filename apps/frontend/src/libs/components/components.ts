@@ -8,6 +8,7 @@ export { Input } from "./input/input.js";
 export { Link } from "./link/link.js";
 export { Loader } from "./loader/loader.js";
 export { Notification } from "./notification/notification.js";
+export { Popup } from "./popup/popup.js";
 export { ProgressBar } from "./progress-bar/progress-bar.js";
 export { ProtectedRoute } from "./protected-route/protected-route.js";
 export { QuizCategoriesForm } from "./quiz-categories-form/quiz-categories-form.js";
