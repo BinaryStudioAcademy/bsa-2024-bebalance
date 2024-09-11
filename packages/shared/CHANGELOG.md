@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.15.0...shared-v1.16.0) (2024-09-11)
+
+
+### Features
+
+* **frontend/backend/shared:** Quiz categories form bb-220 ([#266](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/266)) ([03f6e6c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03f6e6cd6ebd9a6e2babcf4e1b18467ce91b313f))
+
 ## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.14.1...shared-v1.15.0) (2024-09-10)
 
 
