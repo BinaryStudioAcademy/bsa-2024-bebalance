@@ -7,7 +7,6 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserDto,
 	actions as usersActions,
@@ -35,13 +34,7 @@ const Profile: React.FC = () => {
 		(payload: UserUpdateRequestDto): void => {
 			void dispatch(
 				usersActions.update({ data: payload, id: (user as UserDto).id }),
-			).then((result) => {
-				const { meta, payload } = result;
-
-				if (meta.requestStatus === DataStatus.FULFILLED) {
-					void dispatch(authActions.udpateAuthUser(payload as UserDto));
-				}
-			});
+			);
 		},
 		[dispatch, user],
 	);
