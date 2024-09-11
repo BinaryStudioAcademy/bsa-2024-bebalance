@@ -73,7 +73,9 @@ const requestResetPassword = createAsyncThunk<
 	EmailDto,
 	AsyncThunkConfig
 >(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
-	const { authApi, notification } = extra;
+	const { authApi, notification, storage } = extra;
+
+	await storage.drop(StorageKey.TOKEN);
 
 	const isSuccessful = await authApi.requestResetPassword(emailPayload);
 
