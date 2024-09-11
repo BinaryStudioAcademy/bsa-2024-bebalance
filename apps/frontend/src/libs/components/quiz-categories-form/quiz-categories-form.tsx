@@ -108,7 +108,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 					options={categoryInputOptions}
 				/>
 				<br />
-				<Button label={buttonLabel} type="submit" variant="secondary" />
+				<Button isPrimary={false} label={buttonLabel} type="submit" />
 			</form>
 		</section>
 	);
