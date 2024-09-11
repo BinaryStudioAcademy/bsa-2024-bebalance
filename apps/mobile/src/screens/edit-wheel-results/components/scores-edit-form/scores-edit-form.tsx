@@ -6,6 +6,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import { ZERO_INDEX } from "~/libs/constants/constants";
 import {
 	useAppDispatch,
 	useCallback,
@@ -31,8 +32,17 @@ const ScoresEditForm: React.FC<Properties> = ({ data }) => {
 	}, [dispatch]);
 
 	const handleSaveChange = useCallback(() => {
-		//Todo implement edit scores
-	}, []);
+		const initScores = new Map(data.map((item) => [item.categoryId, item]));
+		const changedScores = scores.filter((score) => {
+			const originalScore = initScores.get(score.categoryId);
+
+			return originalScore && score.score !== originalScore.score;
+		});
+
+		if (changedScores.length > ZERO_INDEX) {
+			void dispatch(quizActions.editScores({ items: changedScores }));
+		}
+	}, [dispatch, scores, data]);
 
 	const handleSliderChange = useCallback(
 		(categoryId: number, value: number) => {
