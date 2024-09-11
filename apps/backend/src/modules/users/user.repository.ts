@@ -119,7 +119,7 @@ class UserRepository implements Repository {
 				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
 			.findById(id)
-			.castTo<null | UserWithAvatarFile>();
+			.castTo<undefined | UserWithAvatarFile>();
 
 		return user
 			? UserEntity.initialize({
@@ -175,7 +175,7 @@ class UserRepository implements Repository {
 			.withGraphFetched(
 				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
 			)
-			.castTo<null | UserWithAvatarFile>();
+			.castTo<undefined | UserWithAvatarFile>();
 
 		return user
 			? UserEntity.initialize({
@@ -207,7 +207,7 @@ class UserRepository implements Repository {
 			?.$query()
 			.patchAndFetch(payload)
 			.withGraphFetched(RelationName.AVATAR)
-			.castTo<null | UserDetailsWithAvatarFile>()
+			.castTo<undefined | UserDetailsWithAvatarFile>()
 			.execute();
 		const user = await this.userModel
 			.query()
@@ -246,7 +246,7 @@ class UserRepository implements Repository {
 			.query()
 			.findOne({ userId: id })
 			.withGraphFetched(RelationName.AVATAR)
-			.castTo<null | UserDetailsWithAvatarFile>()
+			.castTo<undefined | UserDetailsWithAvatarFile>()
 			.execute();
 
 		const user = await this.userModel

@@ -21,8 +21,10 @@ class FileService implements Service {
 		this.s3 = s3;
 	}
 
-	public create(): ReturnType<Service["create"]> {
-		return Promise.resolve(null);
+	public async create(payload: FileEntity): ReturnType<Service["create"]> {
+		const file = await this.fileRepository.create(payload);
+
+		return file.toObject();
 	}
 
 	public async delete(id: number): Promise<boolean> {
