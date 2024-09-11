@@ -1,0 +1,1 @@
+export { updateScoresValidationSchema } from "shared";

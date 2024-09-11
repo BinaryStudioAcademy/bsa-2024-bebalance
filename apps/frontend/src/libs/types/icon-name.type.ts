@@ -4,7 +4,8 @@ type IconName =
 	| "crossedEye"
 	| "eye"
 	| "menu"
-	| "signOut"
+	| "settingsActive"
+	| "settingsInactive"
 	| "wheelActive"
 	| "wheelInactive";
 

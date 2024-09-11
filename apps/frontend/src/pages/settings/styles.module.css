@@ -1,0 +1,60 @@
+.header {
+	padding-top: 10px;
+	padding-left: 30px;
+	font-size: 32px;
+}
+
+.breakline {
+	width: 100%;
+	height: 4px;
+	background-color: var(--background-gray);
+	border: none;
+	border-radius: 2px;
+}
+
+.container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 30px;
+	align-items: flex-end;
+	padding: 30px;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	align-items: center;
+	align-self: stretch;
+}
+
+.notification-days-input {
+	width: 60%;
+}
+
+.notification-frequency-input {
+	width: 60%;
+}
+
+.width-limit {
+	display: flex;
+	max-width: 570px;
+}
+
+.button-container {
+	display: flex;
+	align-self: flex-end;
+}
+
+@media (width <= 1024px) {
+	.notification-days-input,
+	.notification-frequency-input {
+		width: 100%;
+	}
+
+	.width-limit {
+		display: block;
+		max-width: 100%;
+	}
+}
