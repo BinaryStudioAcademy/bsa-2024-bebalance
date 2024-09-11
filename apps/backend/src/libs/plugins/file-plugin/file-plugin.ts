@@ -7,8 +7,8 @@ import { type File, FileError } from "~/modules/files/files.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
 import {
+	ALLOWED_NUMBER_OF_FILES,
 	FILE_SIZE_LIMIT_IN_BYTES,
-	FILES_NUMBER_IN_REQUEST,
 } from "./libs/constants/constants.js";
 
 const filePlugin = fp((app, _, done) => {
@@ -22,7 +22,7 @@ const filePlugin = fp((app, _, done) => {
 
 			const file = (await request.file({
 				limits: {
-					files: FILES_NUMBER_IN_REQUEST,
+					files: ALLOWED_NUMBER_OF_FILES,
 					fileSize: FILE_SIZE_LIMIT_IN_BYTES,
 				},
 				throwFileSizeLimit: false,
