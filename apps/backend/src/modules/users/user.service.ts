@@ -120,14 +120,7 @@ class UserService implements Service {
 
 		const user = await this.userRepository.find(userId);
 
-		if (!user) {
-			throw new UserError({
-				message: ErrorMessage.UNAUTHORIZED,
-				status: HTTPCode.UNAUTHORIZED,
-			});
-		}
-
-		const { avatarFileId } = user.toObject();
+		const { avatarFileId } = user?.toObject() as UserDto;
 		let newAvatar: FileEntity;
 
 		if (avatarFileId) {
