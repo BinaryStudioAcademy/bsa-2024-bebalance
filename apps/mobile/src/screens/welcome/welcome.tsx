@@ -26,7 +26,7 @@ const Welcome: React.FC = () => {
 	}, [navigation]);
 
 	return (
-		<BackgroundWrapper planetProperties="welcome">
+		<BackgroundWrapper planetLayout="welcome">
 			<ScreenWrapper>
 				<View
 					style={[

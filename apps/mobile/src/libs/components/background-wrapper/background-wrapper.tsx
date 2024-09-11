@@ -9,12 +9,12 @@ import { styles } from "./styles";
 
 type Properties = {
 	children: React.ReactNode;
-	planetProperties?: keyof typeof presetToPlanetPositionMap;
+	planetLayout?: keyof typeof presetToPlanetPositionMap;
 };
 
 const BackgroundWrapper: React.FC<Properties> = ({
 	children,
-	planetProperties = "default",
+	planetLayout = "default",
 }: Properties) => {
 	return (
 		<View style={[globalStyles.flex1, styles.container]}>
@@ -29,7 +29,7 @@ const BackgroundWrapper: React.FC<Properties> = ({
 			<View style={[styles.dot, styles.dotPositionRightBottom]} />
 			<View style={[styles.dot, styles.dotPositionBottom]} />
 			<View style={[styles.dot, styles.dotPositionLeft]} />
-			{presetToPlanetPositionMap[planetProperties].map((properties, index) => (
+			{presetToPlanetPositionMap[planetLayout].map((properties, index) => (
 				<Planet key={index} {...properties} />
 			))}
 

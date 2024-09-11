@@ -90,7 +90,7 @@ const presetToPlanetPositionMap: Record<Preset, Properties[]> = {
 		{
 			absolutePosition: { right: "16%", top: "7%" },
 			color: "lime",
-			size: "xs",
+			size: "xxs",
 		},
 		{
 			absolutePosition: {
@@ -98,7 +98,7 @@ const presetToPlanetPositionMap: Record<Preset, Properties[]> = {
 				right: "7%",
 			},
 			color: "pink",
-			size: "s",
+			size: "xs",
 		},
 	],
 };
