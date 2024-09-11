@@ -1,5 +1,8 @@
 import { Button, Checkbox, Input } from "~/libs/components/components.js";
-import { TASK_DAYS_OPTIONS } from "~/libs/constants/constants.js";
+import {
+	NOTIFICATION_FREQUENCY_OPTIONS,
+	TASK_DAYS_OPTIONS,
+} from "~/libs/constants/constants.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -18,7 +21,6 @@ import {
 	type UserDto,
 } from "~/modules/users/users.js";
 
-import { SETTINGS_NOTIFICATION_FREQUENCY_OPTIONS } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 const Settings: React.FC = () => {
@@ -68,13 +70,15 @@ const Settings: React.FC = () => {
 					</div>
 					<hr className={styles["breakline"]} />
 					<div className={styles["notification-frequency-input"]}>
-						<Input
-							control={control}
-							label="Notification frequency"
-							name="notificationFrequency"
-							options={SETTINGS_NOTIFICATION_FREQUENCY_OPTIONS}
-							type="radio"
-						/>
+						<div className={styles["width-limit"]}>
+							<Input
+								control={control}
+								label="Notification frequency"
+								name="notificationFrequency"
+								options={NOTIFICATION_FREQUENCY_OPTIONS}
+								type="radio"
+							/>
+						</div>
 					</div>
 				</div>
 				<div className="button-container">
