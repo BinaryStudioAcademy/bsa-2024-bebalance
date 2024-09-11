@@ -73,7 +73,9 @@ const Auth: React.FC = () => {
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-			<BackgroundWrapper>
+			<BackgroundWrapper
+				planetProperties={RootScreenName.SIGN_IN === name ? "signIn" : "signUp"}
+			>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
 						behavior={checkIfAndroid() ? "height" : "padding"}
