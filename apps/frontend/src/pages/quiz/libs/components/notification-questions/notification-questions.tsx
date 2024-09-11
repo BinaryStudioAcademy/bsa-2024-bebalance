@@ -1,16 +1,16 @@
 import { Button, Checkbox, Input } from "~/libs/components/components.js";
+import {
+	NOTIFICATION_FREQUENCY_OPTIONS,
+	TASK_DAYS_OPTIONS,
+} from "~/libs/constants/constants.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { type NotificationQuestionsFormValues } from "~/libs/types/types.js";
 import {
 	type NotificationAnswersPayloadDto,
 	notificationAnswersValidationSchema,
 } from "~/modules/users/users.js";
 
-import {
-	NOTIFICATION_FREQUENCY_OPTIONS,
-	NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES,
-	TASK_DAYS_OPTIONS,
-} from "./libs/constants/constants.js";
-import { type NotificationQuestionsFormValues } from "./libs/types/types.js";
+import { NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
