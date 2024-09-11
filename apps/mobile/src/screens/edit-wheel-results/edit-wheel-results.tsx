@@ -13,31 +13,15 @@ import { globalStyles } from "~/libs/styles/styles";
 import {
 	type NativeStackNavigationProp,
 	type RootNavigationParameterList,
-	type SliderData,
 } from "~/libs/types/types";
 import { ScoresEditForm } from "~/screens/edit-wheel-results/components/scores-edit-form/scores-edit-form";
 
 import { styles } from "./styles";
 
-const ZERO_LENGTH = 0;
-
-const mockData: SliderData[] = [
-	{ categoryId: 1, categoryName: "Physical", score: 3 },
-	{ categoryId: 2, categoryName: "Work", score: 6 },
-	{ categoryId: 3, categoryName: "Friends", score: 6 },
-	{ categoryId: 4, categoryName: "Love", score: 6 },
-	{ categoryId: 5, categoryName: "Money", score: 6 },
-	{ categoryId: 6, categoryName: "Free time", score: 6 },
-	{ categoryId: 7, categoryName: "Spiritual", score: 6 },
-	{ categoryId: 8, categoryName: "Mental", score: 6 },
-];
-
 const EditWheelResults: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 	const scores = useAppSelector((state) => state.quiz.scores);
-
-	const displayData = scores.length > ZERO_LENGTH ? scores : mockData;
 
 	const handleStartPress = useCallback((): void => {
 		navigation.navigate(RootScreenName.QUIZ);
@@ -60,7 +44,7 @@ const EditWheelResults: React.FC = () => {
 				>
 					Edit My Wheel Results
 				</Text>
-				<ScoresEditForm data={displayData} />
+				<ScoresEditForm data={scores} />
 				<View
 					style={[
 						globalStyles.mv24,
