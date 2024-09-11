@@ -8,7 +8,7 @@ const ErrorMessage = {
 	INCORRECT_CREDENTIALS: "Invalid email or password.",
 	INSUFFICIENT_ANSWERS: "You must provide answers for all questions.",
 	INVALID_CATEGORY: "Provided category does not exist.",
-	LARGE_FILE_SIZE: "File is too large.",
+	LARGE_FILE_SIZE: "File should not be larger than 1 MB.",
 	MAIL_ERROR: "An error occured when sending an email.",
 	REQUESTED_ENTITY_NOT_FOUND: "The requested entity was not found.",
 	RESET_PASSWORD_LINK_EXPIRED:
