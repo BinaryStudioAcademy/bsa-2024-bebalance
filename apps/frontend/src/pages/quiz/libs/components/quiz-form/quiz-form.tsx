@@ -34,7 +34,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [isLast, setIsLast] = useState<boolean>(false);
 
-	const { control, handleSubmit, isValid, reset } = useAppForm<QuizFormValues>({
+	const { control, handleSubmit, reset } = useAppForm<QuizFormValues>({
 		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
 		validationSchema: categoryAnswerSelectedValidationSchema,
 	});
@@ -123,19 +123,9 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					</div>
 					<div className={styles["button-container"]}>
 						{isLast ? (
-							<Button
-								isDisabled={!isValid}
-								label="CONTINUE"
-								onClick={onNext}
-								type="submit"
-							/>
+							<Button label="CONTINUE" onClick={onNext} type="submit" />
 						) : (
-							<Button
-								isDisabled={!isValid}
-								label="NEXT"
-								onClick={handleNextStep}
-								type="submit"
-							/>
+							<Button label="NEXT" onClick={handleNextStep} type="submit" />
 						)}
 					</div>
 				</div>
