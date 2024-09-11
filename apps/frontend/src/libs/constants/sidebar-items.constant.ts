@@ -10,6 +10,14 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 		},
 		label: "My Wheel",
 	},
+	{
+		href: AppRoute.SETTINGS,
+		icon: {
+			active: "settingsActive",
+			inactive: "settingsInactive",
+		},
+		label: "Settings",
+	},
 ];
 
 export { SIDEBAR_ITEMS };
