@@ -1,10 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import {
-	CHECKBOX_CATEGORIES_INITIAL_DATA,
-	PREVIOUS_INDEX_OFFSET,
-	ZERO_INDEX,
-} from "~/libs/constants/constants";
+import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import {
@@ -30,7 +26,7 @@ type State = {
 
 const initialState: State = {
 	answersByQuestionIndex: [],
-	categories: CHECKBOX_CATEGORIES_INITIAL_DATA,
+	categories: [],
 	currentQuestion: null,
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
