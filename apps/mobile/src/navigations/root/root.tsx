@@ -30,10 +30,10 @@ const Root: React.FC = () => {
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
 				<NativeStack.Group>
-					<NativeStack.Screen
-						component={Onboarding}
-						name={RootScreenName.ONBOARDING}
-					/>
+					{/*<NativeStack.Screen*/}
+					{/*	component={Onboarding}*/}
+					{/*	name={RootScreenName.ONBOARDING}*/}
+					{/*/>*/}
 					<NativeStack.Screen
 						component={Welcome}
 						name={RootScreenName.WELCOME}

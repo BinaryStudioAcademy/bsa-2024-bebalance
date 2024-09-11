@@ -6,9 +6,8 @@ import {
 	ScrollView,
 	Text,
 	View,
-	WhiteBackgroundWrapper,
 } from "~/libs/components/components";
-import { RootScreenName } from "~/libs/enums/enums";
+import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { useAppSelector, useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
@@ -45,42 +44,43 @@ const EditWheelResults: React.FC = () => {
 	}, [navigation]);
 
 	return (
-		<WhiteBackgroundWrapper>
-			<ScreenWrapper edges={["top", "left", "right"]}>
-				<ScrollView
-					showsHorizontalScrollIndicator={false}
-					showsVerticalScrollIndicator={false}
-					style={[globalStyles.mh12, styles.container]}
+		<ScreenWrapper
+			edges={["top", "left", "right"]}
+			style={{ backgroundColor: BaseColor.BG_WHITE }}
+		>
+			<ScrollView
+				showsHorizontalScrollIndicator={false}
+				showsVerticalScrollIndicator={false}
+				style={[globalStyles.mh12, styles.container]}
+			>
+				<Text
+					preset="subheading"
+					style={[globalStyles.ph4, globalStyles.pv4]}
+					weight="bold"
 				>
-					<Text
-						preset="subheading"
-						style={[globalStyles.ph4, globalStyles.pv4]}
-						weight="bold"
-					>
-						Edit My Wheel Results
-					</Text>
-					<ScoresEditForm data={displayData} />
-					<View
-						style={[
-							globalStyles.mv24,
-							globalStyles.pv16,
-							globalStyles.flex1,
-							globalStyles.justifyContentCenter,
-							styles.checkboxForm,
-						]}
-					>
-						<View style={[globalStyles.flex1, globalStyles.alignItemsCenter]}>
-							<Text weight="bold">Do you feel any changes in anything?</Text>
-							<Text weight="bold">Estimate the fields from 1 to 10</Text>
-						</View>
-						<Text>CheckBox Form</Text>
-						<View style={[globalStyles.mh32, globalStyles.pt24]}>
-							<Button label="RETAKE QUIZ" onPress={handleStartPress} />
-						</View>
+					Edit My Wheel Results
+				</Text>
+				<ScoresEditForm data={displayData} />
+				<View
+					style={[
+						globalStyles.mv24,
+						globalStyles.pv16,
+						globalStyles.flex1,
+						globalStyles.justifyContentCenter,
+						styles.checkboxForm,
+					]}
+				>
+					<View style={[globalStyles.flex1, globalStyles.alignItemsCenter]}>
+						<Text weight="bold">Do you feel any changes in anything?</Text>
+						<Text weight="bold">Estimate the fields from 1 to 10</Text>
 					</View>
-				</ScrollView>
-			</ScreenWrapper>
-		</WhiteBackgroundWrapper>
+					<Text>CheckBox Form</Text>
+					<View style={[globalStyles.mh32, globalStyles.pt24]}>
+						<Button label="RETAKE QUIZ" onPress={handleStartPress} />
+					</View>
+				</View>
+			</ScrollView>
+		</ScreenWrapper>
 	);
 };
 

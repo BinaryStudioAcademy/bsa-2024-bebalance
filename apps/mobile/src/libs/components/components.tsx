@@ -26,7 +26,6 @@ export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
 export { Wheel } from "./wheel/wheel";
 export { WheelLoader } from "./wheel-loader/wheel-loader";
-export { WhiteBackgroundWrapper } from "./white-background-wrapper/white-background-wrapper";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
 export {
 	ActivityIndicator,
