@@ -4,12 +4,12 @@ import { Image, Planet, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 
-import { presetToPlanetPositionMap } from "./libs/maps/maps";
+import { presetToPlanetPosition } from "./libs/maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
 	children: React.ReactNode;
-	planetLayout?: keyof typeof presetToPlanetPositionMap;
+	planetLayout?: keyof typeof presetToPlanetPosition;
 };
 
 const BackgroundWrapper: React.FC<Properties> = ({
@@ -29,7 +29,7 @@ const BackgroundWrapper: React.FC<Properties> = ({
 			<View style={[styles.dot, styles.dotPositionRightBottom]} />
 			<View style={[styles.dot, styles.dotPositionBottom]} />
 			<View style={[styles.dot, styles.dotPositionLeft]} />
-			{presetToPlanetPositionMap[planetLayout].map((properties, index) => (
+			{presetToPlanetPosition[planetLayout].map((properties, index) => (
 				<Planet key={index} {...properties} />
 			))}
 

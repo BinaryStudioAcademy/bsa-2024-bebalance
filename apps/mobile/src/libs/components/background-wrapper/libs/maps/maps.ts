@@ -1,1 +1,1 @@
-export { presetToPlanetPositionMap } from "./preset-to-planet-position.map";
+export { presetToPlanetPosition } from "./preset-to-planet-position.map";

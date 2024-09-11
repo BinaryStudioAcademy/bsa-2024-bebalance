@@ -15,7 +15,7 @@ type Properties = {
 	size: keyof typeof sizeToStyles;
 };
 
-const presetToPlanetPositionMap: Record<Preset, Properties[]> = {
+const presetToPlanetPosition: Record<Preset, Properties[]> = {
 	default: [
 		{
 			absolutePosition: { bottom: "92%", right: "25%" },
@@ -103,4 +103,4 @@ const presetToPlanetPositionMap: Record<Preset, Properties[]> = {
 	],
 };
 
-export { presetToPlanetPositionMap };
+export { presetToPlanetPosition };

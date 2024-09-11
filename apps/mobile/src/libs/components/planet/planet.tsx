@@ -37,7 +37,7 @@ const Planet: React.FC<Properties> = ({
 			style={[
 				styles.bubble,
 				sizeToStyles[size],
-				shouldOverlapChildren ? { zIndex: 10 } : {},
+				shouldOverlapChildren && styles.overlap,
 				absolutePosition,
 				style,
 			]}
