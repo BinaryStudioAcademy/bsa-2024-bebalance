@@ -35,10 +35,7 @@ class UserService implements Service {
 		this.fileService = fileService;
 	}
 
-	public async changePassword(
-		id: number,
-		password: string,
-	): Promise<UserEntity> {
+	public async changePassword(id: number, password: string): Promise<UserDto> {
 		const { hash, salt } = await this.encrypt.encrypt(password);
 
 		const updates = {
@@ -51,7 +48,7 @@ class UserService implements Service {
 		const user = userEntity.toNewObject();
 
 		if (!user.avatarFileId) {
-			return userEntity;
+			return userEntity.toObject();
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -70,7 +67,7 @@ class UserService implements Service {
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
 			userTaskDays: user.userTaskDays,
-		});
+		}).toObject();
 	}
 
 	public async create(payload: UserSignUpRequestDto): Promise<UserDto> {
@@ -114,7 +111,7 @@ class UserService implements Service {
 		return Promise.resolve(true);
 	}
 
-	public async find(id: number): Promise<null | UserEntity> {
+	public async find(id: number): Promise<null | UserDto> {
 		const userEntity = await this.userRepository.find(id);
 
 		if (!userEntity) {
@@ -127,7 +124,7 @@ class UserService implements Service {
 		const user = userEntity.toNewObject();
 
 		if (!user.avatarFileId) {
-			return userEntity;
+			return userEntity.toObject();
 		}
 
 		const avatarEntity = await this.fileService.find(user.avatarFileId);
@@ -146,7 +143,7 @@ class UserService implements Service {
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
 			userTaskDays: user.userTaskDays,
-		});
+		}).toObject();
 	}
 
 	public async findAll(): Promise<UserGetAllResponseDto> {

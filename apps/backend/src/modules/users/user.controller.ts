@@ -178,7 +178,7 @@ class UserController extends BaseController {
 		const user = await this.userService.find(options.params.id);
 
 		return {
-			payload: user?.toObject(),
+			payload: user,
 			status: HTTPCode.OK,
 		};
 	}
