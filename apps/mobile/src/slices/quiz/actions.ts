@@ -8,16 +8,6 @@ import {
 
 import { name as sliceName } from "./quiz.slice";
 
-const getScores = createAsyncThunk<
-	QuizScoresGetAllResponseDto,
-	undefined,
-	AsyncThunkConfig
->(`${sliceName}/score`, async (_, { extra }) => {
-	const { quizApi } = extra;
-
-	return await quizApi.getScores();
-});
-
 const getAllQuestions = createAsyncThunk<
 	{ items: QuizQuestionDto[][] },
 	undefined,
@@ -26,6 +16,16 @@ const getAllQuestions = createAsyncThunk<
 	const { quizApi } = extra;
 
 	return await quizApi.getAllQuestions();
+});
+
+const getScores = createAsyncThunk<
+	QuizScoresGetAllResponseDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/score`, async (_, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.getScores();
 });
 
 export { getAllQuestions, getScores };
