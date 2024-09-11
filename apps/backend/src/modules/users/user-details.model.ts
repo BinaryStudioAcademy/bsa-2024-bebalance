@@ -5,7 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { FileModel } from "~/modules/files/files.model.js";
+import { FileModel } from "~/modules/files/file.model.js";
 
 import { type NotificationFrequency } from "./libs/enums/enums.js";
 import { UserModel } from "./user.model.js";

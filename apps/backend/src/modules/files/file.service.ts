@@ -3,8 +3,8 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type BaseS3 } from "~/libs/modules/s3/s3.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
-import { FileEntity } from "./files.entity.js";
-import { type FileRepository } from "./files.repository.js";
+import { FileEntity } from "./file.entity.js";
+import { type FileRepository } from "./file.repository.js";
 import { FileError } from "./libs/exceptions/exceptions.js";
 import {
 	createFileKey,

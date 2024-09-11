@@ -1,7 +1,7 @@
 import { type Repository } from "~/libs/types/types.js";
 
-import { FileEntity } from "./files.entity.js";
-import { type FileModel } from "./files.model.js";
+import { FileEntity } from "./file.entity.js";
+import { type FileModel } from "./file.model.js";
 
 class FileRepository implements Repository {
 	private fileModel: typeof FileModel;
