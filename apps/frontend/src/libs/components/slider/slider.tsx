@@ -9,9 +9,9 @@ import {
 
 import {
 	FULL_PROGRESS,
-	MAX,
-	MIN,
+	MAX_VALUE,
 	MIN_SCORE_VALUE,
+	MIN_VALUE,
 	RESIZE_EVENT,
 	SLIDER_BACKGROUND_COLOR,
 } from "./libs/constants/constants.js";
@@ -46,7 +46,8 @@ const Slider: React.FC<Properties> = ({
 			return;
 		}
 
-		const currentProgress = ((sliderValue - MIN) / (MAX - MIN)) * FULL_PROGRESS;
+		const currentProgress =
+			((sliderValue - MIN_VALUE) / (MAX_VALUE - MIN_VALUE)) * FULL_PROGRESS;
 
 		rangeReference.current.style.background = `linear-gradient(to right, transparent ${String(currentProgress)}%, ${SLIDER_BACKGROUND_COLOR} ${String(currentProgress)}%)`;
 	}, [sliderValue]);
@@ -72,7 +73,8 @@ const Slider: React.FC<Properties> = ({
 		const sliderThumbTrackWidth = rangeReference.current.offsetWidth;
 
 		const newStep =
-			(sliderThumbTrackWidth - sliderThumbCenterOffset) / (MAX - MIN);
+			(sliderThumbTrackWidth - sliderThumbCenterOffset) /
+			(MAX_VALUE - MIN_VALUE);
 		setStep(newStep);
 	}, []);
 
@@ -96,7 +98,7 @@ const Slider: React.FC<Properties> = ({
 		}
 
 		handleSliderBackgroundUpdate();
-		bubbleReference.current.style.transform = `translateX(${String((sliderValue - MIN) * step)}px)`;
+		bubbleReference.current.style.transform = `translateX(${String((sliderValue - MIN_VALUE) * step)}px)`;
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
 	return (
@@ -110,8 +112,8 @@ const Slider: React.FC<Properties> = ({
 					styles[categorizedSliderClass],
 				)}
 				id="slider"
-				max={MAX}
-				min={MIN}
+				max={MAX_VALUE}
+				min={MIN_VALUE}
 				onChange={handleValueChange}
 				ref={rangeReference}
 				type="range"
