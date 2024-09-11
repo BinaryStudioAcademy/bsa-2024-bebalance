@@ -33,8 +33,8 @@ const Slider: React.FC<Properties> = ({
 }: Properties) => {
 	const [sliderValue, setSliderValue] = useState<number>(value);
 	const [step, setStep] = useState<number>(value);
-	const rangeReference = useRef<HTMLInputElement>(null);
-	const bubbleReference = useRef<HTMLDivElement>(null);
+	const rangeReference = useRef<HTMLInputElement | null>(null);
+	const bubbleReference = useRef<HTMLDivElement | null>(null);
 
 	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
 	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
