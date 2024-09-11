@@ -29,6 +29,12 @@
 	padding: 14px 12px;
 }
 
+.navlinks-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
 .signOut-btn {
 	display: flex;
 	gap: 10px;
