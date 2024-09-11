@@ -116,9 +116,9 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				<div className={styles["form-footer"]}>
 					<div className={styles["button-container"]}>
 						<Button
-							isPrimary={false}
 							label="BACK"
 							onClick={handlePreviousStep}
+							variant="secondary"
 						/>
 					</div>
 					<div className={styles["button-container"]}>
