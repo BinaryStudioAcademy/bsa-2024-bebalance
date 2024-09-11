@@ -142,6 +142,8 @@ class OnboardingController extends BaseController {
 	 *     tags:
 	 *       - Onboarding
 	 *     description: Saves user answers for onboarding questions
+	 *     security:
+	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -186,7 +188,6 @@ class OnboardingController extends BaseController {
 	 *                         type: string
 	 *                         format: date-time
 	 */
-
 	private async saveOnboardingAnswers(
 		options: APIHandlerOptions<{
 			body: OnboardingAnswerRequestBodyDto;

@@ -9,7 +9,6 @@ import { type InputOption } from "./input-option.type.js";
 type FormFieldProperties<T extends FieldValues> = {
 	control: Control<T, null>;
 	name: FieldPath<T>;
-	options: InputOption[];
 };
 
 type QuizQuestionPropeties<T extends FieldValues> = {

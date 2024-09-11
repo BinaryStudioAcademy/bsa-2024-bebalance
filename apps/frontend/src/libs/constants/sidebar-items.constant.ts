@@ -18,6 +18,14 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 		},
 		label: "My Tasks",
 	},
+	{
+		href: AppRoute.SETTINGS,
+		icon: {
+			active: "settingsActive",
+			inactive: "settingsInactive",
+		},
+		label: "Settings",
+	},
 ];
 
 export { SIDEBAR_ITEMS };

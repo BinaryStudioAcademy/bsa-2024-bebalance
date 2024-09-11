@@ -3,7 +3,8 @@ import Close from "~/assets/img/close.svg?react";
 import CrossedEye from "~/assets/img/crossed-eye.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
 import Menu from "~/assets/img/menu.svg?react";
-import SignOut from "~/assets/img/sign-out.svg?react";
+import SettingsActive from "~/assets/img/settings-active.svg?react";
+import SettingsInactive from "~/assets/img/settings-inactive.svg?react";
 import TasksActive from "~/assets/img/tasks-active.svg?react";
 import TasksInactive from "~/assets/img/tasks-inactive.svg?react";
 import WheelOfBalanceActive from "~/assets/img/wheel-of-balance-active.svg?react";
@@ -19,7 +20,8 @@ const iconNameToSvg: Record<
 	crossedEye: CrossedEye,
 	eye: Eye,
 	menu: Menu,
-	signOut: SignOut,
+	settingsActive: SettingsActive,
+	settingsInactive: SettingsInactive,
 	tasksActive: TasksActive,
 	tasksInactive: TasksInactive,
 	wheelActive: WheelOfBalanceActive,
