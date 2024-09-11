@@ -31,10 +31,8 @@ const Slider: React.FC<Properties> = ({
 	onValueChange,
 	value,
 }: Properties) => {
-	const INITIAL_STEP = value;
-
 	const [sliderValue, setSliderValue] = useState<number>(value);
-	const [step, setStep] = useState<number>(INITIAL_STEP);
+	const [step, setStep] = useState<number>(value);
 	const rangeReference = useRef<HTMLInputElement>(null);
 	const bubbleReference = useRef<HTMLDivElement>(null);
 
@@ -69,11 +67,11 @@ const Slider: React.FC<Properties> = ({
 			return;
 		}
 
-		const sliderThumbCenterOffset = 17;
+		const SLIDER_THUMB_CENTER_OFFSET = 17;
 		const sliderThumbTrackWidth = rangeReference.current.offsetWidth;
 
 		const newStep =
-			(sliderThumbTrackWidth - sliderThumbCenterOffset) /
+			(sliderThumbTrackWidth - SLIDER_THUMB_CENTER_OFFSET) /
 			(MAX_VALUE - MIN_VALUE);
 		setStep(newStep);
 	}, []);
