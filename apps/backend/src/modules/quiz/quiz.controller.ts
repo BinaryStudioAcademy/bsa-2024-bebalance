@@ -28,45 +28,46 @@ type Constructor = {
 	quizQuestionService: QuizQuestionService;
 };
 
-/*** @swagger
+/**
+ * @swagger
  * components:
- *    schemas:
- *      UserScore:
- *        type: object
- *        properties:
- *          categoryId:
- *            type: number
- *            format: int64
- *          createdAt:
- *            type: string
- *            format: date-time
- *          score:
- *            type: number
- *            format: float
- *          updatedAt:
- *            type: string
- *            format: date-time
- *          userId:
- *            type: number
- *            format: int64
- *      UserAnswer:
- *        type: object
- *        properties:
- *          answerId:
- *            type: number
- *            format: int64
- *          createdAt:
- *            type: string
- *            format: date-time
- *          id:
- *            type: number
- *            format: int64
- *          updatedAt:
- *            type: string
- *            format: date-time
- *          userId:
- *            type: number
- *            format: int64
+ *   schemas:
+ *     UserScore:
+ *       type: object
+ *       properties:
+ *         categoryId:
+ *           type: number
+ *           format: int64
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         score:
+ *           type: number
+ *           format: float
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *         userId:
+ *           type: number
+ *           format: int64
+ *     UserAnswer:
+ *       type: object
+ *       properties:
+ *         answerId:
+ *           type: number
+ *           format: int64
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         id:
+ *           type: number
+ *           format: int64
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *         userId:
+ *           type: number
+ *           format: int64
  */
 class QuizController extends BaseController {
 	private categoryService: CategoryService;
@@ -142,6 +143,8 @@ class QuizController extends BaseController {
 	 * /quiz/answer:
 	 *   post:
 	 *     description: Saves user answers for all quiz questions at once
+	 *     security:
+	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -150,9 +153,9 @@ class QuizController extends BaseController {
 	 *             type: object
 	 *             properties:
 	 *               answerIds:
-	 *                 type: number[]
-	 *
-	 *
+	 *                 type: array
+	 *                 items:
+	 *                   type: number
 	 *     responses:
 	 *       201:
 	 *         description: Successful operation

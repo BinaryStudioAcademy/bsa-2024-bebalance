@@ -2,7 +2,7 @@
 	display: inline-block;
 	width: 100%;
 	min-height: 16px;
-	padding: 10px 0;
+	padding: 10px 30px;
 	margin: 0;
 	font-size: 16px;
 	font-weight: 700;
@@ -24,7 +24,7 @@
 	background-color: var(--brand);
 }
 
-.secondary {
+.secondary-button {
 	line-height: 22px;
 	color: var(--black);
 	background-color: var(--white);

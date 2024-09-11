@@ -1,11 +1,18 @@
 import { Input } from "~/libs/components/components.js";
 import {
+	type Control,
 	type FieldPath,
 	type FieldValues,
-	type FormFieldProperties as Properties,
+	type InputOption,
 } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
+
+type Properties<T extends FieldValues> = {
+	control: Control<T, null>;
+	name: FieldPath<T>;
+	options: InputOption[];
+};
 
 const OnboardingAnswer = <T extends FieldValues>({
 	control,

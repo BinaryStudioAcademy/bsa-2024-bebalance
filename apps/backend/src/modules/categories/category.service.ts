@@ -6,8 +6,11 @@ import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
 import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
+	type CategoriesGetAllResponseDto,
+	type CategoryCreateRequestDto,
 	type CategoryDto,
-	type CategoryRequestDto,
+	type CategoryUpdateRequestDto,
+	type CategoryWithScoresDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 	type QuizScoresGetAllResponseDto,
@@ -22,34 +25,33 @@ class CategoryService implements Service {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public convertCategoryEntityToDto(
+	private convertCategoryEntityToDto(
 		categoryEntity: CategoryEntity,
-	): CategoryDto {
+	): CategoryWithScoresDto {
 		const category = categoryEntity.toObject();
 
 		const scores: QuizScoreDto[] = category.scores.map(
 			(scoreEntity: CategoryEntity) => {
 				const score = scoreEntity.toObject();
 
-				return {
-					...score,
-					categoryId: category.id,
-				};
+				return { ...score, categoryId: category.id };
 			},
 		);
 
-		return {
-			...category,
-			scores,
-		};
+		const { createdAt, id, name, updatedAt } = category;
+
+		return { createdAt, id, name, scores, updatedAt };
 	}
 
-	public async create(payload: CategoryRequestDto): Promise<CategoryDto> {
+	public async create(payload: CategoryCreateRequestDto): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.create(
 			CategoryEntity.initializeNew(payload),
 		);
 
-		return this.convertCategoryEntityToDto(categoryEntity);
+		const { createdAt, id, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
 	public async createScore({
@@ -75,12 +77,32 @@ class CategoryService implements Service {
 	public async find(id: number): Promise<CategoryDto | null> {
 		const categoryEntity = await this.categoryRepository.find(id);
 
-		return categoryEntity
-			? this.convertCategoryEntityToDto(categoryEntity)
-			: null;
+		if (!categoryEntity) {
+			return null;
+		}
+
+		const { createdAt, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
-	public async findAll(): Promise<{ items: CategoryDto[] }> {
+	public async findAll(): Promise<CategoriesGetAllResponseDto> {
+		const categories = await this.categoryRepository.findAll();
+
+		const items = categories.map((categoryEntity) => {
+			const { createdAt, id, name, updatedAt } =
+				this.convertCategoryEntityToDto(categoryEntity);
+
+			return { createdAt, id, name, updatedAt };
+		});
+
+		return { items };
+	}
+
+	public async findAllWithScores(): Promise<{
+		items: CategoryWithScoresDto[];
+	}> {
 		const categories = await this.categoryRepository.findAll();
 
 		const items = categories.map((categoryEntity) => {
@@ -117,11 +139,14 @@ class CategoryService implements Service {
 
 	public async update(
 		id: number,
-		payload: Partial<CategoryRequestDto>,
+		payload: CategoryUpdateRequestDto,
 	): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.update(id, payload);
 
-		return this.convertCategoryEntityToDto(categoryEntity);
+		const { createdAt, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
 	public async updateUserScores(

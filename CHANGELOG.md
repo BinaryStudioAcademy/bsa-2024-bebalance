@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.42.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.41.0...v1.42.0) (2024-09-11)
+
+
+### Features
+
+* **frontend/backend/shared:** Quiz categories form bb-220 ([#266](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/266)) ([03f6e6c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03f6e6cd6ebd9a6e2babcf4e1b18467ce91b313f))
+* **frontend:** add logout confirmation bb-365 ([#382](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/382)) ([23ccc2f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/23ccc2f7f7a317d9ba5b6442ec702a24082972fa))
+* **frontend:** implement hover state for active buttons based on design specs bb-310 ([#384](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/384)) ([aec40ac](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/aec40ac2cb0817efc0ab84f3a31dff100a94b13f))
+
+
+### Bug Fixes
+
+* **frontend:** User name is not updated after changing it in profile bb-375 ([#383](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/383)) ([8feacbd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8feacbd1db875913155cbfc9b9bcbff186a75041))
+
 ## [1.41.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.40.0...v1.41.0) (2024-09-10)
 
 
