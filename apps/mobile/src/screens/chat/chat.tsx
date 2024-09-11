@@ -11,7 +11,7 @@ const Chat: React.FC = () => {
 	return (
 		<ScreenWrapper>
 			<View style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}>
-				<CheckboxCategoriesForm />
+				<CheckboxCategoriesForm submitButtonName="Retake Quiz" />
 			</View>
 		</ScreenWrapper>
 	);
