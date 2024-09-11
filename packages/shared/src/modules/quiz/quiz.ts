@@ -10,7 +10,11 @@ export {
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 } from "./libs/types/types.js";
-export { oneAnswerSelected as categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
-export { quizUserAnswers as quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export {
+	oneAnswerSelected as categoryAnswerSelectedValidationSchema,
+	quizUserAnswers as quizUserAnswersValidationSchema,
+	updateScores as updateScoresValidationSchema,
+} from "./libs/validation-schemas/validation-schemas.js";
