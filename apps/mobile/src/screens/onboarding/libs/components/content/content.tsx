@@ -38,12 +38,13 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 
 	return (
 		<>
-			<Text preset="subheading" style={[globalStyles.mv48, styles.title]}>
+			<Text size="xl" style={styles.title} weight="bold">
 				{question?.label}
 			</Text>
 			<RadioGroup
 				control={control}
 				errors={errors}
+				itemContainerStyle={globalStyles.mb16}
 				name="answer"
 				options={mappedAnswersToRadioOptions}
 			/>
