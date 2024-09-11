@@ -1,8 +1,5 @@
 import { Button, Checkbox, Input } from "~/libs/components/components.js";
-import {
-	NOTIFICATION_FREQUENCY_OPTIONS,
-	TASK_DAYS_OPTIONS,
-} from "~/libs/constants/constants.js";
+import { TASK_DAYS_OPTIONS } from "~/libs/constants/constants.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -21,6 +18,7 @@ import {
 	type UserDto,
 } from "~/modules/users/users.js";
 
+import { SETTINGS_NOTIFICATION_FREQUENCY_OPTIONS } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 const Settings: React.FC = () => {
@@ -60,20 +58,24 @@ const Settings: React.FC = () => {
 			<h1 className={styles["header"]}>Settings</h1>
 			<form className={styles["container"]} onSubmit={handleFormSubmit}>
 				<div className={styles["inputs"]}>
-					<Checkbox
-						control={control}
-						label="Day to receive tasks"
-						name="userTaskDays"
-						options={TASK_DAYS_OPTIONS}
-					/>
+					<div className={styles["notification-days-input"]}>
+						<Checkbox
+							control={control}
+							label="Day to receive tasks"
+							name="userTaskDays"
+							options={TASK_DAYS_OPTIONS}
+						/>
+					</div>
 					<hr className={styles["breakline"]} />
-					<Input
-						control={control}
-						label="Notification frequency"
-						name="notificationFrequency"
-						options={NOTIFICATION_FREQUENCY_OPTIONS}
-						type="radio"
-					/>
+					<div className={styles["notification-frequency-input"]}>
+						<Input
+							control={control}
+							label="Notification frequency"
+							name="notificationFrequency"
+							options={SETTINGS_NOTIFICATION_FREQUENCY_OPTIONS}
+							type="radio"
+						/>
+					</div>
 				</div>
 				<div className="button-container">
 					<Button label="save changes" type="submit" />

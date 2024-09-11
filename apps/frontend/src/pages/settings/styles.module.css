@@ -28,7 +28,22 @@
 	align-self: stretch;
 }
 
+.notification-days-input {
+	width: 60%;
+}
+
+.notification-frequency-input {
+	width: 40%;
+}
+
 .button-container {
 	display: flex;
 	align-self: flex-end;
+}
+
+@media (width <= 1024px) {
+	.notification-days-input,
+	.notification-frequency-input {
+		width: 100%;
+	}
 }
