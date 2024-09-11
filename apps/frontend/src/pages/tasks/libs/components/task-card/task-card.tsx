@@ -1,22 +1,21 @@
+import { type TaskDto } from "~/modules/tasks/tasks.js";
+
 import { Category } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	categoryName: string;
+	task: TaskDto;
 };
 
-const TaskCard: React.FC<Properties> = ({ categoryName }: Properties) => {
+const TaskCard: React.FC<Properties> = ({ task }: Properties) => {
 	return (
 		<div className={styles["card"]}>
 			<div className={styles["card-header"]}>
-				<Category categoryName={categoryName} />
+				<Category categoryName={task.category} />
 			</div>
 			<div className={styles["card-body"]}>
-				<h4 className={styles["title"]}>Meet person in the cafe</h4>
-				<div className={styles["text"]}>
-					Meet a person in the cafe Meet a person in the cafeMeet a person in
-					the cafeMeet a person in the cafe
-				</div>
+				<h4 className={styles["title"]}>{task.label}</h4>
+				<div className={styles["text"]}>{task.description}</div>
 			</div>
 		</div>
 	);
