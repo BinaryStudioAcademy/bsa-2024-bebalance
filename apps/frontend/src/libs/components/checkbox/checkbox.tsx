@@ -12,23 +12,32 @@ import styles from "./styles.module.css";
 type Properties<T extends FieldValues> = {
 	hasVisuallyHiddenLabel?: boolean;
 	label: string;
+	layout?: "column" | "wrap";
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	options: InputOption<number>[];
-	variant: "general" | "rounded";
+	variant?: "rectangular" | "rounded";
 } & FormFieldProperties<T>;
 
 const Checkbox = <T extends FieldValues>({
 	control,
 	hasVisuallyHiddenLabel = false,
 	label,
+	layout = "wrap",
 	name,
 	onChange,
 	options,
-	variant,
+	variant = "rectangular",
 }: Properties<T>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange: onFieldChange, value } = field;
-	const isRounded = variant === "rounded";
+
+	const layoutStyle =
+		layout === "wrap" ? styles["wrap-layout"] : styles["column-layout"];
+
+	const variantStyle =
+		variant === "rectangular"
+			? styles["rectangular-checkbox"]
+			: styles["rounded-checkbox"];
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -57,74 +66,76 @@ const Checkbox = <T extends FieldValues>({
 	);
 
 	return (
-		<>
-			<label className={styles["input-wrapper"]}>
-				<p
-					className={getValidClassNames(
-						styles["question"],
-						hasVisuallyHiddenLabel && "visually-hidden",
-					)}
-				>
-					{label}
-				</p>
-				<div
-					className={getValidClassNames(
-						styles["input-container"],
-						variant === "rounded" && styles["rounded-input-container"],
-					)}
-				>
-					{options.map((option) => {
+		<section className={styles["container"]}>
+			<p
+				className={getValidClassNames(
+					styles["main-label"],
+					hasVisuallyHiddenLabel && "visually-hidden",
+				)}
+			>
+				{label}
+			</p>
+			<section
+				className={getValidClassNames(styles["options-container"], layoutStyle)}
+			>
+				{options.length > ZERO_INDEX &&
+					options.map((option) => {
 						const isChecked = (value as number[]).includes(option.value);
 
-						return isRounded ? (
-							<label className={styles["rounded-label"]} key={option.value}>
-								<input
-									checked={isChecked}
-									className={styles["checkbox"]}
-									onChange={handleCheckboxesChange}
-									type="checkbox"
-									value={option.value}
-								/>
-								<span className={styles["checkmark"]} />
-								{option.label}
-							</label>
-						) : (
+						return (
 							<div
-								className={styles["gradient-border-container"]}
+								className={getValidClassNames(
+									styles["checkbox-gradient-border"],
+									variantStyle,
+								)}
 								key={option.value}
 							>
-								<div className={styles["gradient-border-content"]}>
-									<label className={styles["label"]} key={option.value}>
-										<input
-											checked={isChecked}
-											className={styles["checkbox"]}
-											onChange={handleCheckboxesChange}
-											type="checkbox"
-											value={option.value}
-										/>
-										<span className={styles["input-checkmark"]} />
-										{option.label}
-									</label>
-								</div>
+								<label
+									className={getValidClassNames(
+										styles["checkbox-container"],
+										variantStyle,
+									)}
+								>
+									<input
+										checked={isChecked}
+										className={styles["checkbox"]}
+										onChange={handleCheckboxesChange}
+										type="checkbox"
+										value={option.value}
+									/>
+									<span className={styles["checkmark"]} />
+									{option.label}
+								</label>
 							</div>
 						);
 					})}
-				</div>
-			</label>
-			{options.length === ZERO_INDEX && (
-				<label className={styles["rounded-label"]}>
-					<input
-						{...field}
-						checked={Boolean(value)}
-						className={styles["checkbox"]}
-						onChange={handleSingleCheckboxChange}
-						type="checkbox"
-					/>
-					<span className={styles["checkmark"]} />
-					{label}
-				</label>
-			)}
-		</>
+				{options.length === ZERO_INDEX && (
+					<div
+						className={getValidClassNames(
+							styles["checkbox-gradient-border"],
+							variantStyle,
+						)}
+					>
+						<label
+							className={getValidClassNames(
+								styles["checkbox-container"],
+								variantStyle,
+							)}
+						>
+							<input
+								checked={Boolean(value)}
+								className={styles["checkbox"]}
+								onChange={handleSingleCheckboxChange}
+								type="checkbox"
+								value={value}
+							/>
+							<span className={styles["checkmark"]} />
+							{label}
+						</label>
+					</div>
+				)}
+			</section>
+		</section>
 	);
 };
 

@@ -12,6 +12,7 @@ import { actions as categoriesActions } from "~/modules/categories/categories.js
 import { Button, Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { type QuizCategoriesFormFields } from "./libs/types/types.js";
+import styles from "./styles.module.css";
 
 type Properties = {
 	buttonLabel: string;
@@ -89,15 +90,18 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 					control={control}
 					hasVisuallyHiddenLabel
 					label="All"
+					layout="column"
 					name="hasSelectedAll"
 					onChange={handleSelectAll}
 					options={[]}
 					variant="rounded"
 				/>
+				<div className={styles["checkbox-divider"]} />
 				<Checkbox
 					control={control}
 					hasVisuallyHiddenLabel
 					label="Categories"
+					layout="column"
 					name="categoryIds"
 					onChange={handleInputSelect}
 					options={categoryInputOptions}
