@@ -3,15 +3,15 @@ import { StyleSheet } from "react-native";
 import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
-	checkboxForm: {
-		borderColor: BaseColor.LIGHT_GRAY,
-		borderRadius: 14,
-		borderWidth: 1,
-		height: 500,
-	},
 	container: {
-		marginBottom: 0,
-		paddingBottom: 20,
+		display: "flex",
+		height: "100%",
+		justifyContent: "space-evenly",
+	},
+	date: {
+		backgroundColor: BaseColor.EXTRA_LIGHT_GRAY,
+		borderRadius: 22,
+		width: "60%",
 	},
 });
 
