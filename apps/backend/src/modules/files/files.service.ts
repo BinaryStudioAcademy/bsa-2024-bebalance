@@ -1,6 +1,7 @@
-import { ErrorMessage } from "~/libs/enums/enums.js";
+import { type ContentType, ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type BaseS3 } from "~/libs/modules/s3/s3.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
 import { FileEntity } from "./files.entity.js";
 import { type FileRepository } from "./files.repository.js";
@@ -54,7 +55,7 @@ class FileService {
 		key,
 	}: {
 		buffer: Buffer;
-		contentType: string;
+		contentType: ValueOf<typeof ContentType>;
 		fileId: number;
 		key: string;
 	}): Promise<FileEntity | null> {
@@ -75,7 +76,7 @@ class FileService {
 		const fileKey = createFileKey(key);
 
 		await this.s3.uploadFile({
-			body: buffer,
+			buffer,
 			contentType,
 			key,
 		});
@@ -91,13 +92,13 @@ class FileService {
 		key,
 	}: {
 		buffer: Buffer;
-		contentType: string;
+		contentType: ValueOf<typeof ContentType>;
 		key: string;
 	}): Promise<FileEntity> {
 		const fileKey = createFileKey(key);
 
 		await this.s3.uploadFile({
-			body: buffer,
+			buffer,
 			contentType,
 			key: fileKey,
 		});

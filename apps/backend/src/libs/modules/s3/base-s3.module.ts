@@ -6,10 +6,9 @@ import {
 	S3Client,
 } from "@aws-sdk/client-s3";
 
-import {
-	type CommandParameters,
-	type FileParameters,
-} from "./libs/types/types.js";
+import { type File } from "~/modules/files/files.js";
+
+import { type CommandParameters } from "./libs/types/types.js";
 
 type Constructor = {
 	accessKeyId: string;
@@ -34,7 +33,7 @@ class BaseS3 {
 	}
 
 	public async deleteFile(
-		parameters: FileParameters,
+		parameters: Pick<File, "key">,
 	): Promise<DeleteObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
 			bucket: this.bucketName,
@@ -49,16 +48,14 @@ class BaseS3 {
 		return await this.s3Client.send(command);
 	}
 
-	public async uploadFile(
-		parameters: FileParameters,
-	): Promise<PutObjectCommandOutput> {
+	public async uploadFile(parameters: File): Promise<PutObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
 			bucket: this.bucketName,
 			...parameters,
 		};
 
 		const command = new PutObjectCommand({
-			Body: commandParameters.body as Buffer,
+			Body: commandParameters.buffer as Buffer,
 			Bucket: commandParameters.bucket,
 			ContentType: commandParameters.contentType as string,
 			Key: commandParameters.key,

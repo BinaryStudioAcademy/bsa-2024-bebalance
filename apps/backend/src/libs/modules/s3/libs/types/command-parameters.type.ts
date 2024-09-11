@@ -1,5 +1,5 @@
-import { type FileParameters } from "./file-parameters.type.js";
+import { type File } from "~/modules/files/files.js";
 
-type CommandParameters = { bucket: string } & FileParameters;
+type CommandParameters = { bucket: string } & Partial<File>;
 
 export { type CommandParameters };
