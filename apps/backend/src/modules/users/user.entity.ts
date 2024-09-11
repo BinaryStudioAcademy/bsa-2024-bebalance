@@ -13,6 +13,8 @@ class UserEntity implements Entity {
 
 	private notificationFrequency: ValueOf<typeof NotificationFrequency>;
 
+	private onboardingAnswers: null | number[];
+
 	private passwordHash: string;
 
 	private passwordSalt: string;
@@ -27,6 +29,7 @@ class UserEntity implements Entity {
 		id,
 		name,
 		notificationFrequency,
+		onboardingAnswers,
 		passwordHash,
 		passwordSalt,
 		updatedAt,
@@ -37,6 +40,7 @@ class UserEntity implements Entity {
 		id: null | number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
+		onboardingAnswers: null | number[];
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
@@ -47,6 +51,7 @@ class UserEntity implements Entity {
 		this.id = id;
 		this.name = name;
 		this.notificationFrequency = notificationFrequency;
+		this.onboardingAnswers = onboardingAnswers;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
 		this.updatedAt = updatedAt;
@@ -59,6 +64,7 @@ class UserEntity implements Entity {
 		id,
 		name,
 		notificationFrequency,
+		onboardingAnswers,
 		passwordHash,
 		passwordSalt,
 		updatedAt,
@@ -69,6 +75,7 @@ class UserEntity implements Entity {
 		id: number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
+		onboardingAnswers?: number[];
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
@@ -81,6 +88,7 @@ class UserEntity implements Entity {
 			name,
 			notificationFrequency:
 				notificationFrequency ?? NotificationFrequency.NONE,
+			onboardingAnswers: onboardingAnswers ?? null,
 			passwordHash,
 			passwordSalt,
 			updatedAt,
@@ -105,6 +113,7 @@ class UserEntity implements Entity {
 			id: null,
 			name,
 			notificationFrequency: NotificationFrequency.NONE,
+			onboardingAnswers: null,
 			passwordHash,
 			passwordSalt,
 			updatedAt: "",
@@ -117,6 +126,7 @@ class UserEntity implements Entity {
 		email: string;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
+		onboardingAnswers: number[];
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
@@ -127,6 +137,7 @@ class UserEntity implements Entity {
 			email: this.email,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
+			onboardingAnswers: this.onboardingAnswers ?? [],
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
 			updatedAt: this.updatedAt,
@@ -140,6 +151,7 @@ class UserEntity implements Entity {
 		id: number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
+		onboardingAnswers: number[];
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
@@ -149,6 +161,7 @@ class UserEntity implements Entity {
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
+			onboardingAnswers: this.onboardingAnswers ?? [],
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};

@@ -1,13 +1,12 @@
-import { Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useNavigate,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import {
 	type NotificationAnswersPayloadDto,
 	actions as userActions,
@@ -27,14 +26,11 @@ const ZERO = 0;
 const Quiz: React.FC = () => {
 	const [step, setStep] = useState<number>(Step.INTRODUCTION);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
-	const { userAnswers } = useAppSelector(({ onboarding }) => ({
-		userAnswers: onboarding.userAnswers,
+	const { onboardingAnswers } = useAppSelector(({ auth }) => ({
+		onboardingAnswers: auth.user?.onboardingAnswers,
 	}));
-
-	useEffect(() => {
-		void dispatch(quizActions.getScores());
-	}, [dispatch]);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -43,15 +39,19 @@ const Quiz: React.FC = () => {
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
 			void dispatch(userActions.saveNotificationAnswers(payload));
+			handleNextStep();
 		},
-		[dispatch],
+		[dispatch, handleNextStep],
 	);
 
-	const hasOnboardingAnswers = userAnswers.length > ZERO;
+	useEffect(() => {
+		const hasOnboardingAnswers =
+			onboardingAnswers && onboardingAnswers.length > ZERO;
 
-	if (!hasOnboardingAnswers) {
-		return <Navigate replace to={AppRoute.ONBOARDING} />;
-	}
+		if (!hasOnboardingAnswers) {
+			navigate(AppRoute.ONBOARDING);
+		}
+	}, [navigate, onboardingAnswers]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {

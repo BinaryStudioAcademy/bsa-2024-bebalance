@@ -1,12 +1,19 @@
 import { BalanceWheelChart } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
+import {
+	useCallback,
+	useEffect,
+	useNavigate,
+	useState,
+} from "~/libs/hooks/hooks.js";
 
 import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const BalanceWheel: React.FC = () => {
+	const navigate = useNavigate();
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
@@ -14,6 +21,8 @@ const BalanceWheel: React.FC = () => {
 	const handleUpdatePercentage = useCallback(() => {
 		setPercentage((previousPercentage) => {
 			if (previousPercentage >= PercentageConfig.MAX_VALUE) {
+				navigate(AppRoute.ROOT);
+
 				return previousPercentage;
 			}
 
@@ -24,7 +33,7 @@ const BalanceWheel: React.FC = () => {
 				? PercentageConfig.MAX_VALUE
 				: newPercentage;
 		});
-	}, []);
+	}, [navigate]);
 
 	useEffect(() => {
 		const intervalId = setInterval(
@@ -35,7 +44,7 @@ const BalanceWheel: React.FC = () => {
 		return (): void => {
 			clearInterval(intervalId);
 		};
-	}, [handleUpdatePercentage]);
+	}, [handleUpdatePercentage, navigate]);
 
 	return (
 		<div className={styles["container"]}>

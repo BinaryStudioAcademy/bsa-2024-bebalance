@@ -1,6 +1,7 @@
 const RelationName = {
 	ONBOARDING_ANSWERS: "answers",
 	ONBOARDING_QUESTION: "question",
+	ONBOARDING_USER_ANSWERS: "onboardingAnswers",
 	QUIZ_ANSWERS: "answers",
 	QUIZ_QUESTION: "question",
 	SCORES: "scores",

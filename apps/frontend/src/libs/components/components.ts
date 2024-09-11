@@ -1,4 +1,3 @@
-export { Analyzing } from "./analyzing/analyzing.js";
 export { App } from "./app/app.js";
 export { BalanceWheelChart } from "./balance-wheel-chart/balance-wheel-chart.js";
 export { Button } from "./button/button.js";

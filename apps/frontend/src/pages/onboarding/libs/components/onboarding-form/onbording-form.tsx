@@ -1,11 +1,11 @@
 import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
-import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants.js";
 import {
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
@@ -23,26 +23,32 @@ type FormToSave = {
 };
 
 const ZERO = 0;
+const ONE = 1;
 
 const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
-	const {
-		currentQuestionIndex,
-		isLastQuestion,
-		question,
-		totalQuestionsAmount,
-	} = useAppSelector(({ onboarding }) => ({
-		currentQuestionIndex: onboarding.currentQuestionIndex,
-		isLastQuestion:
-			onboarding.currentQuestionIndex ===
-			onboarding.questions.length - PREVIOUS_INDEX_OFFSET,
-		question: onboarding.currentQuestion,
-		totalQuestionsAmount: onboarding.questions.length,
-	}));
+	const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
+
+	const { currentQuestionIndex, dataStatus, question, questions } =
+		useAppSelector(({ onboarding }) => ({
+			currentQuestionIndex: onboarding.currentQuestionIndex,
+			dataStatus: onboarding.dataStatus,
+			question: onboarding.currentQuestion,
+			questions: onboarding.questions,
+		}));
 
 	useEffect(() => {
 		void dispatch(onboardingActions.getAll());
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (
+			dataStatus === "fulfilled" &&
+			currentQuestionIndex === questions.length - ONE
+		) {
+			setIsLastQuestion(true);
+		}
+	}, [currentQuestionIndex, dataStatus, questions]);
 
 	const { control, handleSubmit, isValid } = useAppForm<OnboardingFormValues>({
 		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
@@ -64,9 +70,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 					if (isLastQuestion) {
 						const answerIds = getAnswerIds(newObject);
-
 						void dispatch(onboardingActions.saveAnswers({ answerIds }));
-
 						onNext();
 					}
 
@@ -97,7 +101,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 						<div className={styles["progress-bar"]}>
 							<ProgressBar
 								currentStep={currentQuestionIndex}
-								numberOfSteps={totalQuestionsAmount}
+								numberOfSteps={questions.length}
 							/>
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>

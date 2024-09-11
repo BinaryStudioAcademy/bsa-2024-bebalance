@@ -7,11 +7,12 @@ import { UserWheel } from "./components/components.js";
 const ZERO = 0;
 
 const Root: React.FC = () => {
-	const { userAnswers } = useAppSelector(({ onboarding }) => ({
-		userAnswers: onboarding.userAnswers,
+	const { onboardingAnswers } = useAppSelector(({ auth }) => ({
+		onboardingAnswers: auth.user?.onboardingAnswers,
 	}));
 
-	const hasOnboardingAnswers = userAnswers.length > ZERO;
+	const hasOnboardingAnswers =
+		onboardingAnswers && onboardingAnswers.length > ZERO;
 
 	if (!hasOnboardingAnswers) {
 		return <Navigate replace to={AppRoute.QUIZ} />;
