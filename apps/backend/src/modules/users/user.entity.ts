@@ -1,4 +1,6 @@
-import { type Entity } from "~/libs/types/types.js";
+import { type Entity, type ValueOf } from "~/libs/types/types.js";
+
+import { NotificationFrequency } from "./libs/enums/enums.js";
 
 class UserEntity implements Entity {
 	private createdAt: string;
@@ -9,36 +11,46 @@ class UserEntity implements Entity {
 
 	private name: string;
 
+	private notificationFrequency: ValueOf<typeof NotificationFrequency>;
+
 	private passwordHash: string;
 
 	private passwordSalt: string;
 
 	private updatedAt: string;
 
+	private userTaskDays: null | number[];
+
 	private constructor({
 		createdAt,
 		email,
 		id,
 		name,
+		notificationFrequency,
 		passwordHash,
 		passwordSalt,
 		updatedAt,
+		userTaskDays,
 	}: {
 		createdAt: string;
 		email: string;
 		id: null | number;
 		name: string;
+		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
+		userTaskDays: null | number[];
 	}) {
 		this.createdAt = createdAt;
-		this.id = id;
 		this.email = email;
+		this.id = id;
 		this.name = name;
+		this.notificationFrequency = notificationFrequency;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
 		this.updatedAt = updatedAt;
+		this.userTaskDays = userTaskDays;
 	}
 
 	public static initialize({
@@ -46,26 +58,33 @@ class UserEntity implements Entity {
 		email,
 		id,
 		name,
+		notificationFrequency,
 		passwordHash,
 		passwordSalt,
 		updatedAt,
+		userTaskDays,
 	}: {
 		createdAt: string;
 		email: string;
 		id: number;
 		name: string;
+		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
+		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
 			createdAt,
 			email,
 			id,
 			name,
+			notificationFrequency:
+				notificationFrequency ?? NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
 			updatedAt,
+			userTaskDays: userTaskDays ?? null,
 		});
 	}
 
@@ -85,9 +104,11 @@ class UserEntity implements Entity {
 			email,
 			id: null,
 			name,
+			notificationFrequency: NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
 			updatedAt: "",
+			userTaskDays: null,
 		});
 	}
 
@@ -95,17 +116,21 @@ class UserEntity implements Entity {
 		createdAt: string;
 		email: string;
 		name: string;
+		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
 		updatedAt: string;
+		userTaskDays: number[];
 	} {
 		return {
 			createdAt: this.createdAt,
 			email: this.email,
 			name: this.name,
+			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
 			updatedAt: this.updatedAt,
+			userTaskDays: this.userTaskDays ?? [],
 		};
 	}
 
@@ -114,14 +139,18 @@ class UserEntity implements Entity {
 		email: string;
 		id: number;
 		name: string;
+		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		updatedAt: string;
+		userTaskDays: number[];
 	} {
 		return {
 			createdAt: this.createdAt,
 			email: this.email,
 			id: this.id as number,
 			name: this.name,
+			notificationFrequency: this.notificationFrequency,
 			updatedAt: this.updatedAt,
+			userTaskDays: this.userTaskDays ?? [],
 		};
 	}
 }

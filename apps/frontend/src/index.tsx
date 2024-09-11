@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import "~/assets/css/styles.css";
 import {
 	App,
+	Notification,
 	ProtectedRoute,
 	RouterProvider,
 	StoreProvider,
@@ -15,10 +16,12 @@ import { NotFound } from "~/pages/not-found/not-found.jsx";
 import { Onboarding } from "~/pages/onboarding/onboarding.jsx";
 import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
+import { Root } from "~/pages/root/root.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
 		<StoreProvider store={store.instance}>
+			<Notification />
 			<RouterProvider
 				routes={[
 					{
@@ -26,7 +29,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component="Root"
+										component={<Root />}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),
