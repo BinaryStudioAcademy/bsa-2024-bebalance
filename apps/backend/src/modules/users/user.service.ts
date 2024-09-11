@@ -132,10 +132,10 @@ class UserService implements Service {
 				});
 			}
 
-			const avatarEntity = await this.fileService.update({
-				fileId: existingAvatar.toObject().id,
-				...avatarFile,
-			});
+			const avatarEntity = await this.fileService.update(
+				existingAvatar.toObject().id,
+				avatarFile,
+			);
 
 			const updatedAvatar = avatarEntity?.toObject();
 

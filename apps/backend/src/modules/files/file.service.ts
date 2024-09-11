@@ -1,7 +1,7 @@
 import { type ContentType, ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type BaseS3 } from "~/libs/modules/s3/s3.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { type Service, type ValueOf } from "~/libs/types/types.js";
 
 import { FileEntity } from "./file.entity.js";
 import { type FileRepository } from "./file.repository.js";
@@ -12,7 +12,7 @@ import {
 	getFileKey,
 } from "./libs/helpers/helpers.js";
 
-class FileService {
+class FileService implements Service {
 	private fileRepository: FileRepository;
 	private s3: BaseS3;
 
@@ -21,8 +21,12 @@ class FileService {
 		this.s3 = s3;
 	}
 
-	public async delete(fileUrl: string): Promise<boolean> {
-		const fileEntity = await this.fileRepository.findByUrl(fileUrl);
+	public create(): ReturnType<Service["create"]> {
+		return Promise.resolve(null);
+	}
+
+	public async delete(id: number): Promise<boolean> {
+		const fileEntity = await this.fileRepository.find(id);
 
 		if (!fileEntity) {
 			throw new FileError({
@@ -44,21 +48,30 @@ class FileService {
 		return await this.fileRepository.find(fileId);
 	}
 
+	public async findAll(): ReturnType<Service["findAll"]> {
+		const items = await this.fileRepository.findAll();
+
+		return {
+			items: items.map((item) => item.toObject()),
+		};
+	}
+
 	public async findByUrl(url: string): Promise<FileEntity | null> {
 		return await this.fileRepository.findByUrl(url);
 	}
 
-	public async update({
-		buffer,
-		contentType,
-		fileId,
-		key,
-	}: {
-		buffer: Buffer;
-		contentType: ValueOf<typeof ContentType>;
-		fileId: number;
-		key: string;
-	}): Promise<FileEntity | null> {
+	public async update(
+		fileId: number,
+		{
+			buffer,
+			contentType,
+			key,
+		}: {
+			buffer: Buffer;
+			contentType: ValueOf<typeof ContentType>;
+			key: string;
+		},
+	): Promise<FileEntity | null> {
 		const fileToUpdate = await this.fileRepository.find(fileId);
 
 		if (!fileToUpdate) {
