@@ -1,12 +1,44 @@
 .container {
-	--gradient-physical: linear-gradient(180deg, #ffe307 0%, #fff8b5 100%);
-	--gradient-work: linear-gradient(236deg, #c3ff19 0%, #69ff35 100%);
-	--gradient-friends: linear-gradient(302deg, #7f21ce 0%, #cb00ff 100%);
-	--gradient-love: linear-gradient(332deg, #ff4040 0%, #ff9432 100%);
-	--gradient-money: linear-gradient(30deg, #20b82f 0%, #00f4d6 100%);
-	--gradient-free-time: linear-gradient(59deg, #ff5794 0%, #fc72ff 100%);
-	--gradient-spiritual: linear-gradient(123deg, #ff7a00 0%, #ffe200 100%);
-	--gradient-mental: linear-gradient(323deg, #00f0ff 0%, #0085ff 100%);
+	--gradient-physical: linear-gradient(
+		180deg,
+		var(--physical-start) 0%,
+		var(--physical-end) 100%
+	);
+	--gradient-work: linear-gradient(
+		56deg,
+		var(--work-start) 0%,
+		var(--work-end) 100%
+	);
+	--gradient-friends: linear-gradient(
+		302deg,
+		var(--friend-start) 0%,
+		var(--friend-end) 100%
+	);
+	--gradient-love: linear-gradient(
+		332deg,
+		var(--love-start) 0%,
+		var(--love-end) 100%
+	);
+	--gradient-money: linear-gradient(
+		30deg,
+		var(--money-start) 0%,
+		var(--money-end) 100%
+	);
+	--gradient-free-time: linear-gradient(
+		59deg,
+		var(--free-time-start) 0%,
+		var(--free-time-end) 100%
+	);
+	--gradient-spiritual: linear-gradient(
+		123deg,
+		var(--spiritual-start) 0%,
+		var(--spiritual-end) 100%
+	);
+	--gradient-mental: linear-gradient(
+		143deg,
+		var(--mental-start) 0%,
+		var(--mental-end) 100%
+	);
 
 	position: relative;
 	display: flex;
