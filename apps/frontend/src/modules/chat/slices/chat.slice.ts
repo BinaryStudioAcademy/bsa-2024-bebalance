@@ -8,15 +8,15 @@ import { initConversation } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	messages: string[];
 	selectedCategories: SimplifiedQuizScoreDto[];
-	text: string[];
 	threadId: null | string;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	messages: [],
 	selectedCategories: [],
-	text: [],
 	threadId: null,
 };
 
@@ -29,7 +29,7 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.fulfilled, (state, action) => {
 				state.selectedCategories = action.payload.lowestCategories;
 				state.threadId = action.payload.threadId;
-				state.text.push(action.payload.text);
+				state.messages.push(action.payload.text);
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {
