@@ -3,6 +3,7 @@ export {
 	AnimationName,
 	BaseColor,
 	DataStatus,
+	Direction,
 	GradientColor,
 	NumericalValue,
 	ToastMessageTitle,
