@@ -1,3 +1,5 @@
+import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
+import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
 import {
 	Button,
 	Loader,
@@ -78,10 +80,12 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	return (
 		<div className={styles["quiz-container"]}>
 			<form className={styles["questions-form"]} onSubmit={handleFormSubmit}>
-				<ProgressBar
-					currentStep={currentCategoryIndex}
-					numberOfSteps={questions.length}
-				/>
+				<div className={styles["progress-bar-container"]}>
+					<ProgressBar
+						currentStep={currentCategoryIndex}
+						numberOfSteps={questions.length}
+					/>
+				</div>
 				<h2 className={styles["quiz-header"]}>Wheel Quiz questions</h2>
 				<div className={styles["questions-wrapper"]}>
 					{isLoading ? (
@@ -110,20 +114,26 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
-					<div className={styles["btn-secondary"]}>
+					<div className={styles["button-container"]}>
 						<Button
-							isPrimary={false}
 							label="BACK"
 							onClick={handlePreviousStep}
+							variant="secondary"
 						/>
 					</div>
-					{isLast ? (
-						<Button label="CONTINUE" onClick={onNext} type="submit" />
-					) : (
-						<Button label="NEXT" onClick={handleNextStep} type="submit" />
-					)}
+					<div className={styles["button-container"]}>
+						{isLast ? (
+							<Button label="CONTINUE" onClick={onNext} type="submit" />
+						) : (
+							<Button label="NEXT" onClick={handleNextStep} type="submit" />
+						)}
+					</div>
 				</div>
 			</form>
+			<RippleEffectBg className={styles["ripple-effect__background1"]} />
+			<RippleEffectBg2 className={styles["ripple-effect__background2"]} />
+			<div className={styles["circle-gradient1"]} />
+			<div className={styles["circle-gradient2"]} />
 		</div>
 	);
 };

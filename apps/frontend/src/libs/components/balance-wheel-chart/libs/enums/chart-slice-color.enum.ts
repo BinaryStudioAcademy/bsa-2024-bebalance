@@ -1,6 +1,6 @@
 const ChartSliceColor = {
 	FREE_TIME: { end: "#fc72ff", start: "#ff5794" },
-	FRIEND: { end: "#cb00ff", start: "#7f21ce" },
+	FRIENDS: { end: "#cb00ff", start: "#7f21ce" },
 	LOVE: { end: "#ff9432", start: "#ff4040" },
 	MENTAL: { end: "#00f0ff", start: "#0085ff" },
 	MONEY: { end: "#00f4d6", start: "#20b82f" },

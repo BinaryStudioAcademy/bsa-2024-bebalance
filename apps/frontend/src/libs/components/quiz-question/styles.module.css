@@ -3,8 +3,8 @@
 }
 
 .quiz-question:not(:last-of-type) {
-	padding-bottom: 40px;
-	margin-bottom: 40px;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .quiz-question:not(:last-of-type)::after {

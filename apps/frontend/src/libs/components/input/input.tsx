@@ -1,31 +1,28 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
 import {
-	type Control,
 	type FieldErrors,
-	type FieldPath,
 	type FieldValues,
+	type FormFieldProperties,
 	type IconName,
-	type RadioInputOption,
+	type InputOption,
 } from "~/libs/types/types.js";
 
 import { Button } from "../button/button.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues> = {
-	control: Control<T, null>;
 	errors?: FieldErrors<T>;
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	isDisabled?: boolean;
 	isFullWidth?: boolean;
 	label: string;
-	name: FieldPath<T>;
 	onIconClick?: (() => void) | undefined;
-	options?: RadioInputOption[];
+	options?: InputOption[];
 	placeholder?: string;
 	type?: "email" | "password" | "radio" | "text";
-};
+} & FormFieldProperties<T>;
 
 const Input = <T extends FieldValues>({
 	control,
@@ -45,7 +42,9 @@ const Input = <T extends FieldValues>({
 
 	const error = errors?.[name]?.message;
 	const hasError = Boolean(error);
-	const isRadioWithOptions = type === "radio" && options?.length;
+
+	const isRadio = type === "radio";
+	const isRadioWithOptions = isRadio && options?.length;
 
 	const handleRadioChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,11 +54,16 @@ const Input = <T extends FieldValues>({
 	);
 
 	return (
-		<label className={styles["input-wrapper"]}>
+		<label
+			className={getValidClassNames(
+				styles["input-wrapper"],
+				isRadioWithOptions && styles["radio-wrapper"],
+			)}
+		>
 			<span
 				className={getValidClassNames(
 					styles["input-label"],
-					options && styles["radio-label"],
+					isRadio && styles["radio-label"],
 					hasVisuallyHiddenLabel && "visually-hidden",
 				)}
 			>
@@ -74,7 +78,13 @@ const Input = <T extends FieldValues>({
 				{isRadioWithOptions ? (
 					<div className={styles["radio-container"]}>
 						{options.map((option) => (
-							<label className={styles["radio-option"]} key={option.value}>
+							<label
+								className={getValidClassNames(
+									styles["radio-option"],
+									isFullWidth && styles["full-width"],
+								)}
+								key={option.value}
+							>
 								<input
 									checked={field.value === option.value}
 									className={styles["radio-field"]}

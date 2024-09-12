@@ -1,8 +1,10 @@
 export {
 	AngleGradient,
+	AnimationName,
 	BaseColor,
 	DataStatus,
 	GradientColor,
+	NumericalValue,
 	ToastMessageTitle,
 	ToastMessageType,
 } from "./app/app";

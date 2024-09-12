@@ -11,6 +11,7 @@ export {
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
+	CategoryError,
 	HTTPError,
 	OnboardingError,
 	QuizError,
@@ -18,6 +19,7 @@ export {
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
+export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -41,6 +43,14 @@ export {
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
 export {
+	CategoriesApiPath,
+	type CategoriesGetAllResponseDto,
+	type CategoryCreateRequestDto,
+	type CategoryDto,
+	type CategoryUpdateRequestDto,
+	type CategoryWithScoresDto,
+} from "./modules/categories/categories.js";
+export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingAnswerRequestDto,
@@ -55,8 +65,6 @@ export {
 } from "./modules/onboarding/onboarding.js";
 export {
 	categoryAnswerSelectedValidationSchema,
-	type CategoryDto,
-	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
@@ -65,15 +73,25 @@ export {
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 	type QuizScoreDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
+	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	notificationAnswersValidationSchema,
+	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
@@ -90,5 +108,4 @@ export {
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,
-	UserValidationRule,
 } from "./modules/users/users.js";

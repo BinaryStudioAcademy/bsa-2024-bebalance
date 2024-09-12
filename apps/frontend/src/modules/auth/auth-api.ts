@@ -5,6 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -23,6 +24,24 @@ type Constructor = {
 class AuthApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
+	}
+
+	public async checkIsResetPasswordExpired(
+		payload: ResetPasswordLinkDto,
+	): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(
+				`${AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION}?token=${payload.token}`,
+				{},
+			),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "GET",
+			},
+		);
+
+		return await response.json<boolean>();
 	}
 
 	public async getAuthenticatedUser(): Promise<UserDto> {
@@ -52,9 +71,7 @@ class AuthApi extends BaseHTTPApi {
 		return await response.json<boolean>();
 	}
 
-	public async resetPassword(
-		payload: ResetPasswordDto,
-	): Promise<UserSignInResponseDto> {
+	public async resetPassword(payload: ResetPasswordDto): Promise<boolean> {
 		const response = await this.load(
 			this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}),
 			{
@@ -65,7 +82,7 @@ class AuthApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<UserSignInResponseDto>();
+		return await response.json<boolean>();
 	}
 
 	public async signIn(
