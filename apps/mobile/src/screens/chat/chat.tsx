@@ -40,38 +40,36 @@ const Chat: React.FC = () => {
 	);
 
 	return (
-		<View style={[globalStyles.flex1, styles.container]}>
-			<ScreenWrapper>
-				<ScrollView
-					style={[
-						globalStyles.flex1,
-						globalStyles.pl24,
-						globalStyles.pt24,
-						globalStyles.pr16,
-						globalStyles.pb12,
-					]}
+		<ScreenWrapper style={[globalStyles.flex1, styles.container]}>
+			<ScrollView
+				style={[
+					globalStyles.flex1,
+					globalStyles.pl24,
+					globalStyles.pt24,
+					globalStyles.pr16,
+					globalStyles.pb12,
+				]}
+			>
+				<View
+					style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}
 				>
-					<View
-						style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}
-					>
-						<ChatBox style={[globalStyles.p16, globalStyles.gap8]}>
-							<Text>
-								Do you want to work on 3 fields, with the lowest score, or you
-								want to choose the fields yourself to work on?
-							</Text>
-							<CheckboxCategoriesForm
-								categories={categories}
-								onSubmit={handleRetakeQuizSubmit}
-								submitButtonName="Update fields"
-							/>
-						</ChatBox>
-						<Text color={BaseColor.BLACK}>
-							{submittedCategoryIds?.join(", ")}
+					<ChatBox style={[globalStyles.p16, globalStyles.gap8]}>
+						<Text>
+							Do you want to work on 3 fields, with the lowest score, or you
+							want to choose the fields yourself to work on?
 						</Text>
-					</View>
-				</ScrollView>
-			</ScreenWrapper>
-		</View>
+						<CheckboxCategoriesForm
+							categories={categories}
+							onSubmit={handleRetakeQuizSubmit}
+							submitButtonName="Update fields"
+						/>
+					</ChatBox>
+					<Text color={BaseColor.BLACK}>
+						{submittedCategoryIds?.join(", ")}
+					</Text>
+				</View>
+			</ScrollView>
+		</ScreenWrapper>
 	);
 };
 
