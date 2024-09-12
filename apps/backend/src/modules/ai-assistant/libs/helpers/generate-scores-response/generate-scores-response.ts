@@ -36,7 +36,7 @@ const generateScoresResponse = (
 				score: category.score,
 			})),
 			text: balanceData.answer,
-			threadId: message.id,
+			threadId: message.thread_id,
 		};
 	}
 
