@@ -122,9 +122,12 @@ class UserService implements Service {
 
 		const { avatarFileId } = user?.toObject() as UserDto;
 		let newAvatar: FileEntity;
+		const hasAvatar = Boolean(avatarFileId);
 
-		if (avatarFileId) {
-			const existingAvatar = await this.fileService.find(avatarFileId);
+		if (hasAvatar) {
+			const existingAvatar = await this.fileService.find(
+				avatarFileId as number,
+			);
 
 			if (!existingAvatar) {
 				throw new FileError({
