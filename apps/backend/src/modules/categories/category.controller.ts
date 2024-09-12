@@ -83,6 +83,34 @@ class CategoryController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /categories/get-by-id:
+	 *   get:
+	 *     description: Returns an array of quiz categories
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: query
+	 *         name: categoryIds
+	 *         required: true
+	 *         description: Stringified array of category ids.
+	 *         schema:
+	 *           type: string
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/Category"
+	 */
+
 	private async getCategoriesById(
 		options: APIHandlerOptions<{
 			query: CategoriesGetByIdRequestDto;
