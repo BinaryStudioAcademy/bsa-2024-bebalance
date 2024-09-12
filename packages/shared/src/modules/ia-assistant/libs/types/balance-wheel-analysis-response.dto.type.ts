@@ -11,4 +11,4 @@ type BalanceWheelAnalysisResponseDto = {
 	threadId: string;
 };
 
-export { type BalanceWheelAnalysisResponseDto };
+export { type BalanceWheelAnalysisResponseDto, type SimplifiedQuizScoreDto };

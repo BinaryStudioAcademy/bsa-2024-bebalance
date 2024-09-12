@@ -46,6 +46,7 @@ export {
 	AiAssistantApiPath,
 	AiAssistantMessageValidationSchema,
 	type BalanceWheelAnalysisResponseDto,
+	type SimplifiedQuizScoreDto,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./modules/ia-assistant/ai-assistant.js";

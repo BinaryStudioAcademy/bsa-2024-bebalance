@@ -10,6 +10,7 @@ import { type Config } from "~/libs/modules/config/config.js";
 import { notification } from "~/libs/modules/notification/notification.js";
 import { storage } from "~/libs/modules/storage/storage.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
+import { chatApi, reducer as chatReducer } from "~/modules/chat/chat.js";
 import {
 	onboardingApi,
 	reducer as onboardingReducer,
@@ -21,6 +22,7 @@ import { handleErrorMiddleware } from "./handle-error.middleware.js";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	chat: ReturnType<typeof chatReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
 	users: ReturnType<typeof usersReducer>;
@@ -28,6 +30,7 @@ type RootReducer = {
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	chatApi: typeof chatApi;
 	notification: typeof notification;
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
@@ -56,6 +59,7 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
+				chat: chatReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
 				users: usersReducer,
@@ -66,6 +70,7 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			chatApi,
 			notification,
 			onboardingApi,
 			quizApi,

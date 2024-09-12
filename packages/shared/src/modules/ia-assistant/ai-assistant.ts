@@ -1,6 +1,7 @@
 export { AiAssistantApiPath } from "./libs/enums/enums.js";
 export {
 	type BalanceWheelAnalysisResponseDto,
+	type SimplifiedQuizScoreDto,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
