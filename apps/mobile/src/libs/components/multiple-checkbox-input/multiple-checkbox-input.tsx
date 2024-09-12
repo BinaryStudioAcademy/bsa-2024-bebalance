@@ -1,15 +1,14 @@
-import {
-	type Control,
-	type FieldErrors,
-	type FieldPath,
-	type FieldValues,
-} from "react-hook-form";
-
 import { Checkbox, Text, View } from "~/libs/components/components";
 import { ZERO_INDEX } from "~/libs/constants/constants";
 import { BaseColor, NumericalValue } from "~/libs/enums/enums";
 import { useCallback, useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type Control,
+	type FieldErrors,
+	type FieldPath,
+	type FieldValues,
+} from "~/libs/types/types";
 
 type Properties<T extends FieldValues> = {
 	checkAllLabel?: string;
