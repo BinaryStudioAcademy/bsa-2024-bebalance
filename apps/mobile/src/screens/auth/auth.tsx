@@ -73,7 +73,9 @@ const Auth: React.FC = () => {
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-			<BackgroundWrapper>
+			<BackgroundWrapper
+				planetLayout={name === RootScreenName.SIGN_IN ? "signIn" : "signUp"}
+			>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
 						behavior={checkIfAndroid() ? "height" : "padding"}
@@ -108,7 +110,7 @@ const Auth: React.FC = () => {
 										globalStyles.mb32,
 									]}
 								>
-									<Planet color="pink" size="xs" />
+									<Planet color="pink" size="xxs" />
 									<Text
 										preset="uppercase"
 										size="xl"
