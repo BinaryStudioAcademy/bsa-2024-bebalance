@@ -16,5 +16,6 @@ export {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
 } from "./libs/types/types";
 export { categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas";

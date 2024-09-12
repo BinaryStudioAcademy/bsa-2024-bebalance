@@ -42,10 +42,12 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 		validationSchema: categoriesSelectedValidationSchema,
 	});
 
-	const checkboxGroupOptions = categories.map(({ categoryName, id }) => ({
-		id,
-		label: categoryName,
-	}));
+	const checkboxGroupOptions = categories.map(
+		({ categoryId, categoryName }) => ({
+			id: categoryId,
+			label: categoryName,
+		}),
+	);
 
 	useEffect(() => {
 		reset({
@@ -64,7 +66,9 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 	}
 
 	return (
-		<View style={[globalStyles.gap8, globalStyles.mb24]}>
+		<View
+			style={[globalStyles.gap8, globalStyles.mb24, globalStyles.flexGrow1]}
+		>
 			<MultipleCheckboxInput
 				checkAllLabel={CHECK_ALL_CATEGORIES_NAME}
 				control={control}

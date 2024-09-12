@@ -10,27 +10,27 @@ import {
 
 import { getAllQuestions, getScores } from "./actions";
 
+type State = {
+	answersByQuestionIndex: number[];
+	currentQuestion: null | QuizQuestionDto;
+	currentQuestionIndex: number;
+	dataStatus: ValueOf<typeof DataStatus>;
+	questions: QuizQuestionDto[];
+	scores: QuizScoresGetAllItemResponseDto[];
+};
+
 type Properties = {
 	answerId: number;
 	questionIndex: number;
 };
 
-type State = {
-	answersByQuestionIndex: number[];
-	categories: QuizScoresGetAllItemResponseDto[];
-	currentQuestion: null | QuizQuestionDto;
-	currentQuestionIndex: number;
-	dataStatus: ValueOf<typeof DataStatus>;
-	questions: QuizQuestionDto[];
-};
-
 const initialState: State = {
 	answersByQuestionIndex: [],
-	categories: [],
 	currentQuestion: null,
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
+	scores: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -40,7 +40,7 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getScores.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.categories = action.payload.items;
+			state.scores = action.payload.items;
 		});
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;

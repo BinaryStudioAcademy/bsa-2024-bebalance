@@ -25,7 +25,7 @@ const Chat: React.FC = () => {
 		null | number[]
 	>(null);
 	const dispatch = useAppDispatch();
-	const categories = useAppSelector((state) => state.quiz.categories);
+	const scores = useAppSelector((state) => state.quiz.scores);
 
 	useEffect(() => {
 		void dispatch(categoriesActions.getScores());
@@ -56,7 +56,7 @@ const Chat: React.FC = () => {
 					>
 						<ChatBox>
 							<CheckboxCategoriesForm
-								categories={categories}
+								categories={scores}
 								onSubmit={handleRetakeQuizSubmit}
 								submitButtonName="Retake Quiz"
 							/>

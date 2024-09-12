@@ -1,8 +1,7 @@
-import { type colorToGradientColors } from "~/libs/maps/maps";
-
 type SliderData = {
-	color: keyof typeof colorToGradientColors;
-	label: string;
+	categoryId: number;
+	categoryName: string;
+	score: number;
 };
 
 export { type SliderData };
