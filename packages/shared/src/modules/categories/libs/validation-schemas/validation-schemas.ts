@@ -1,1 +1,1 @@
-export { threeCategoriesSelected } from "./three-lowest-categories-selected.validation-schema.js";
+export { oneCategorySelected } from "./one-category-selected.validation-schema.js";

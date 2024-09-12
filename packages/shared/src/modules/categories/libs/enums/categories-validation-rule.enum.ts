@@ -1,5 +1,5 @@
 const CategoriesValidationRule = {
-	REQUIRE_THREE_CATEGORIES: 3,
+	REQUIRE_ONE_CATEGORY: 1,
 } as const;
 
 export { CategoriesValidationRule };

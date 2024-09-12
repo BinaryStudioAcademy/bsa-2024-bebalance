@@ -14,6 +14,7 @@ import { categoriesSelectedValidationSchema } from "~/packages/categories/catego
 
 import {
 	CATEGORIES_FIELD_NAME,
+	CATEGORIES_FORM_DEFAULT_VALUES,
 	CHECK_ALL_CATEGORIES_NAME,
 } from "./libs/constants/constants";
 import {
@@ -32,14 +33,11 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 	onSubmit,
 	submitButtonName,
 }: Properties): JSX.Element | null => {
-	const { control, errors, handleSubmit, reset } = useAppForm<{
-		[CATEGORIES_FIELD_NAME]: number[];
-	}>({
-		defaultValues: {
-			[CATEGORIES_FIELD_NAME]: [],
-		},
-		validationSchema: categoriesSelectedValidationSchema,
-	});
+	const { control, errors, handleSubmit, reset } =
+		useAppForm<CategoriesSelectedRequestDto>({
+			defaultValues: CATEGORIES_FORM_DEFAULT_VALUES,
+			validationSchema: categoriesSelectedValidationSchema,
+		});
 
 	const checkboxGroupOptions = categories.map(
 		({ categoryId, categoryName }) => ({
