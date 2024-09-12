@@ -7,6 +7,7 @@ const RelationName = {
 	SCORES: "scores",
 	TASKS: "tasks",
 	USER_DETAILS: "userDetails",
+	USER_TASK_DAYS: "userTaskDays",
 	USERS: "users",
 } as const;
 

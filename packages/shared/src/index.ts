@@ -7,10 +7,12 @@ export {
 	AppEnvironment,
 	ContentType,
 	ErrorMessage,
+	NumericalValue,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
+	CategoryError,
 	HTTPError,
 	OnboardingError,
 	OpenAIError,
@@ -19,6 +21,7 @@ export {
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
 export { configureString } from "./libs/helpers/helpers.js";
+export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -41,6 +44,14 @@ export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
+export {
+	CategoriesApiPath,
+	type CategoriesGetAllResponseDto,
+	type CategoryCreateRequestDto,
+	type CategoryDto,
+	type CategoryUpdateRequestDto,
+	type CategoryWithScoresDto,
+} from "./modules/categories/categories.js";
 export {
 	addMessageToThreadValidationSchema,
 	AiAssistantApiPath,
@@ -65,8 +76,6 @@ export {
 } from "./modules/onboarding/onboarding.js";
 export {
 	categoryAnswerSelectedValidationSchema,
-	type CategoryDto,
-	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
@@ -78,8 +87,10 @@ export {
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
+	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
 	type TaskDto,
@@ -89,10 +100,15 @@ export {
 } from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	notificationAnswersValidationSchema,
+	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
@@ -109,5 +125,4 @@ export {
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,
-	UserValidationRule,
 } from "./modules/users/users.js";

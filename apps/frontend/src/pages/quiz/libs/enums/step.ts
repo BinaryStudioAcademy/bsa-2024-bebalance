@@ -1,8 +1,10 @@
 const Step = {
-	ANALYZING: 3,
-	BALANCE_WHEEL: 4,
-	INTRODUCTION: 1,
-	QUIZ: 2,
+	ANALYZING: 1,
+	BALANCE_WHEEL: 6,
+	INTRODUCTION: 3,
+	MOTIVATION: 2,
+	NOTIFICATION_QUESTIONS: 5,
+	QUIZ: 4,
 } as const;
 
 export { Step };

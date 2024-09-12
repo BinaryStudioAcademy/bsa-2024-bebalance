@@ -84,17 +84,25 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			DURATIONS: {
+				PASSWORD_RESET_LINK: {
+					default: null,
+					doc: "Time during which reset password link is valid",
+					env: "PASSWORD_RESET_LINK_DURATION",
+					format: String,
+				},
+				SESSION: {
+					default: null,
+					doc: "Time during which user's session is active",
+					env: "SESSION_DURATION",
+					format: String,
+				},
+			},
 			JWT: {
 				ALGORITHM: {
 					default: null,
 					doc: "Token encryption algorithm",
 					env: "JWT_ALGORITHM",
-					format: String,
-				},
-				EXPIRATION_TIME: {
-					default: null,
-					doc: "Token expiration time",
-					env: "JWT_EXPIRATION_TIME",
 					format: String,
 				},
 				SECRET: {

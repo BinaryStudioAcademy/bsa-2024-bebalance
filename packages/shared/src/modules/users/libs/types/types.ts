@@ -1,6 +1,9 @@
 export { type EmailDto } from "./email-dto.type.js";
+export { type NotificationAnswersPayloadDto } from "./notification-answers-payload-dto.type.js";
+export { type NotificationAnswersRequestDto } from "./notification-answers-request-dto.type.js";
 export { type ResetPasswordDto } from "./reset-password-dto.type.js";
 export { type ResetPasswordFormDto } from "./reset-password-form-dto.type.js";
+export { type ResetPasswordLinkDto } from "./reset-password-link-dto.type.js";
 export { type UserDto } from "./user-dto.type.js";
 export { type UserGetAllResponseDto } from "./user-get-all-response-dto.type.js";
 export { type UserGetParametersDto } from "./user-get-parameters-dto.type.js";

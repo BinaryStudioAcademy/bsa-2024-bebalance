@@ -12,12 +12,17 @@ import { userUpdateValidationSchema } from "~/modules/users/users.js";
 import { UsersApiPath } from "./libs/enums/enums.js";
 import { checkAccessToUserData } from "./libs/hooks/hooks.js";
 import {
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
+	type UserDto,
 	type UserGetParametersDto,
 	type UserUpdateParametersDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
+import { notificationAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
-/*** @swagger
+/**
+ * @swagger
  * components:
  *    schemas:
  *      User:
@@ -38,7 +43,19 @@ import {
  *          updatedAt:
  *            type: string
  *            format: date-time
+ *      NotificationQuestionsRequest:
+ *        type: object
+ *        properties:
+ *          notificationFrequency:
+ *            type: string
+ *          userTaskDays:
+ *            type: array
+ *            items:
+ *              type: number
+ *          userId:
+ *            type: number
  */
+
 class UserController extends BaseController {
 	private userService: UserService;
 
@@ -51,6 +68,21 @@ class UserController extends BaseController {
 			handler: () => this.findAll(),
 			method: "GET",
 			path: UsersApiPath.ROOT,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.saveNotificationAnswers(
+					options as APIHandlerOptions<{
+						body: NotificationAnswersRequestDto;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: UsersApiPath.NOTIFICATION_QUESTIONS,
+			validation: {
+				body: notificationAnswersValidationSchema,
+			},
 		});
 
 		this.addRoute({
@@ -102,7 +134,6 @@ class UserController extends BaseController {
 	 *                    items:
 	 *                      $ref: "#/components/schemas/User"
 	 */
-
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),
@@ -119,7 +150,7 @@ class UserController extends BaseController {
 	 *        - bearerAuth: []
 	 *      responses:
 	 *        200:
-	 *          description: Successfull operation
+	 *          description: Successful operation
 	 *          content:
 	 *            application/json:
 	 *              schema:
@@ -133,6 +164,45 @@ class UserController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.find(options.params.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /users/notification-questions:
+	 *    post:
+	 *      description: Save user preferences based on notification questions form
+	 *      security:
+	 *        - bearerAuth: []
+	 *      requestBody:
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              $ref: "#/components/schemas/NotificationQuestionsRequest"
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                $ref: "#/components/schemas/User"
+	 */
+
+	private async saveNotificationAnswers(
+		options: APIHandlerOptions<{
+			body: NotificationAnswersPayloadDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const updatedUserDto = await this.userService.saveNotificationAnswers(
+			options.user.id,
+			options.body,
+		);
+
+		return {
+			payload: updatedUserDto,
 			status: HTTPCode.OK,
 		};
 	}
@@ -156,10 +226,10 @@ class UserController extends BaseController {
 	 *        200:
 	 *          description: Successful operation
 	 *          content:
-	 *           application/json:
-	 *             schema:
-	 *               type: object
-	 *               $ref: "#/components/schemas/User"
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                $ref: "#/components/schemas/User"
 	 */
 	private async update(
 		options: APIHandlerOptions<{

@@ -1,6 +1,8 @@
+import { QuizCategoriesForm } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	// useAppSelector,
+	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
@@ -52,23 +54,34 @@ const ChatComponent: React.FC = () => {
 		void dispatch(chatActions.initConversation());
 	}, [dispatch]);
 
+	const handleCategoriesSubmit = useCallback(() => {
+		// TODO: Add a request to Backend
+	}, []);
+
 	return (
-		<div>
-			<ul className={styles["container"]}>
-				{messages.map((mesage) => (
-					<li className={styles["message-container"]} key={mesage.text}>
-						{mesage.text}
-						{mesage.type === "wheelAnalys" && <UserWheel />}
-						{mesage.type === "suggestionButtons" &&
-							mesage.buttonLabels &&
-							mesage.buttonLabels.map((button: string) => (
-								<button key={button}>{button}</button>
-							))}
-						{/* {mesage.type === "categoryInputs" && <QuizCategoriesForm />} */}
-					</li>
-				))}
-			</ul>
-		</div>
+		<main className={styles["page-container"]}>
+			<div>
+				<ul className={styles["container"]}>
+					{messages.map((mesage) => (
+						<li className={styles["message-container"]} key={mesage.text}>
+							{mesage.text}
+							{mesage.type === "wheelAnalys" && <UserWheel />}
+							{mesage.type === "suggestionButtons" &&
+								mesage.buttonLabels &&
+								mesage.buttonLabels.map((button: string) => (
+									<button key={button}>{button}</button>
+								))}
+							{mesage.type === "categoryInputs" && (
+								<QuizCategoriesForm
+									buttonLabel="Select"
+									onSubmit={handleCategoriesSubmit}
+								/>
+							)}
+						</li>
+					))}
+				</ul>
+			</div>
+		</main>
 	);
 };
 

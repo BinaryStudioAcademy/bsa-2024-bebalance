@@ -57,7 +57,7 @@
 	}
 }
 
-@media (width <= 640px) {
+@media (width <= 480px) {
 	.progress-line {
 		width: 40px;
 	}

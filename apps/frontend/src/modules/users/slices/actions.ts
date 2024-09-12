@@ -2,12 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { NotificationMessage } from "~/libs/enums/enums.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserDto,
 	type UserGetParametersDto,
 	type UserUpdatePayload,
 } from "~/modules/users/users.js";
 
+import { type NotificationAnswersPayloadDto } from "../libs/types/types.js";
 import { name as sliceName } from "./users.slice.js";
 
 const getById = createAsyncThunk<
@@ -21,17 +23,34 @@ const getById = createAsyncThunk<
 	return await usersApi.getById(id);
 });
 
+const saveNotificationAnswers = createAsyncThunk<
+	UserDto,
+	NotificationAnswersPayloadDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/save-notification-answers`,
+	async (payload, { dispatch, extra }) => {
+		const { usersApi } = extra;
+
+		const updatedUser = await usersApi.saveNotificationAnswers(payload);
+		dispatch(authActions.updateAuthUser(updatedUser));
+
+		return updatedUser;
+	},
+);
+
 const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 	`${sliceName}/update`,
-	async (payload, { extra }) => {
+	async (payload, { dispatch, extra }) => {
 		const { notification, usersApi } = extra;
 		const { data, id } = payload;
 
 		const response = await usersApi.update(id, data);
+		dispatch(authActions.updateAuthUser(response));
 		notification.success(NotificationMessage.PROFILE_UPDATED);
 
 		return response;
 	},
 );
 
-export { getById, update };
+export { getById, saveNotificationAnswers, update };
