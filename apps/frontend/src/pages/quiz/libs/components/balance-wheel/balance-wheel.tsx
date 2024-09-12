@@ -1,4 +1,4 @@
-import { BalanceWheelChart } from "~/libs/components/components.js";
+import { BalanceWheelChart, Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
@@ -40,10 +40,13 @@ const BalanceWheel: React.FC = () => {
 		);
 
 		return (): void => {
-			navigate(AppRoute.ROOT);
 			clearInterval(intervalId);
 		};
 	}, [handleUpdatePercentage, navigate]);
+
+	if (percentage >= PercentageConfig.MAX_VALUE) {
+		return <Navigate replace to={AppRoute.ROOT} />;
+	}
 
 	return (
 		<div className={styles["container"]}>

@@ -90,6 +90,7 @@ class UserEntity implements Entity {
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions?: boolean;
+		hasAnsweredQuizQuestions?: boolean;
 		id: number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
@@ -199,9 +200,7 @@ class UserEntity implements Entity {
 					? true
 					: false,
 			hasAnsweredQuizQuestions:
-				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX
-					? true
-					: false,
+				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX ? true : false,
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
