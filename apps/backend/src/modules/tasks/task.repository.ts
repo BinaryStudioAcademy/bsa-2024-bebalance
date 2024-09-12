@@ -1,8 +1,8 @@
-import { RelationName } from "~/libs/enums/relation-name.enum.js";
+import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
-import { TaskEntity } from "~/modules/tasks/task.entity.js";
 
 import { TaskStatus } from "./libs/enums/enums.js";
+import { TaskEntity } from "./task.entity.js";
 import { type TaskModel } from "./task.model.js";
 
 class TaskRepository implements Repository {
