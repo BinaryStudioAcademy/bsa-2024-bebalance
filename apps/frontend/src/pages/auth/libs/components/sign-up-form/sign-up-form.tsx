@@ -1,4 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserSignUpFormDto,
@@ -6,7 +7,6 @@ import {
 	userSignUpValidationSchema,
 } from "~/modules/users/users.js";
 
-import { NO_ERROR_INPUT_FIELD_AMOUNT } from "../../constants/constants.js";
 import { DEFAULT_SIGN_UP_PAYLOAD } from "./libs/constants/constants.js";
 import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
@@ -24,7 +24,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
+	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {

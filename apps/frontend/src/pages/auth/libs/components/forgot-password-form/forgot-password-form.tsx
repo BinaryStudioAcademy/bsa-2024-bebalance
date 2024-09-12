@@ -1,11 +1,11 @@
 import { Button, Input } from "~/libs/components/components.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type EmailDto,
 	userForgotPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
-import { NO_ERROR_INPUT_FIELD_AMOUNT } from "../../constants/constants.js";
 import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
@@ -18,7 +18,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
+	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {

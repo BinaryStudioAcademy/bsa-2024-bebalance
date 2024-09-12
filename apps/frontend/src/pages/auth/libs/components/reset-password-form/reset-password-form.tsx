@@ -1,4 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -13,7 +14,6 @@ import {
 	userResetPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
-import { NO_ERROR_INPUT_FIELD_AMOUNT } from "../../constants/constants.js";
 import { DEFAULT_RESET_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
@@ -36,7 +36,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
 			validationSchema: userResetPasswordValidationSchema,
 		});
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
+	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
