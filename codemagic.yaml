@@ -9,6 +9,8 @@ scripts:
     name: Set up keystore
     script: |
       echo $CM_BUILD_DIR
+      echo $CM_KEYSTORE_PATH
+      echo "$CM_BUILD_DIR/apps/mobile/android/app/$CM_KEYSTORE_PATH"
       echo $CM_KEYSTORE | base64 --decode > "$CM_BUILD_DIR/apps/mobile/android/app/$CM_KEYSTORE_PATH"
       cat >> "$CM_BUILD_DIR/apps/mobile/android/keystore.properties" << EOF
       storePassword=$CM_KEYSTORE_PASSWORD
@@ -48,6 +50,7 @@ workflows:
       node: 20.17.0
       npm: 10.8.2
       groups:
+        - keystore_credentials
         - env_vars
         - google_play
       vars:
