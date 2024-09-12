@@ -3,10 +3,10 @@ import { type Encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 import {
-	type File,
 	FileEntity,
 	FileError,
 	type FileService,
+	type S3File,
 } from "~/modules/files/files.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -109,7 +109,7 @@ class UserService implements Service {
 
 	public async updateAvatar(
 		userId: number,
-		avatarFile?: File,
+		avatarFile?: S3File,
 	): Promise<null | UserDto> {
 		if (!avatarFile) {
 			throw new UserError({
@@ -146,7 +146,7 @@ class UserService implements Service {
 				url: updatedAvatar?.url as string,
 			});
 		} else {
-			const avatarEntity = await this.fileService.upload(avatarFile);
+			const avatarEntity = await this.fileService.create(avatarFile);
 
 			const uploadedAvatar = avatarEntity.toObject();
 

@@ -9,7 +9,7 @@ import { FileError } from "./libs/exceptions/exceptions.js";
 import {
 	createFileKey,
 	createFileUrl,
-	getFileKey,
+	getFileKeyByUrl,
 } from "./libs/helpers/helpers.js";
 
 class FileService implements Service {
@@ -21,10 +21,30 @@ class FileService implements Service {
 		this.s3 = s3;
 	}
 
-	public async create(payload: FileEntity): ReturnType<Service["create"]> {
-		const file = await this.fileRepository.create(payload);
+	public async create({
+		buffer,
+		contentType,
+		key,
+	}: {
+		buffer: Buffer;
+		contentType: ValueOf<typeof ContentType>;
+		key: string;
+	}): Promise<FileEntity> {
+		const fileKey = createFileKey(key);
 
-		return file.toObject();
+		await this.s3.uploadFile({
+			buffer,
+			contentType,
+			key: fileKey,
+		});
+
+		const fileUrl = createFileUrl(fileKey);
+
+		return await this.fileRepository.create(
+			FileEntity.initializeNew({
+				url: fileUrl,
+			}),
+		);
 	}
 
 	public async delete(id: number): Promise<boolean> {
@@ -37,7 +57,7 @@ class FileService implements Service {
 			});
 		}
 
-		const fileKey = getFileKey(fileEntity.toObject().url);
+		const fileKey = getFileKeyByUrl(fileEntity.toObject().url);
 
 		await this.s3.deleteFile({
 			key: fileKey,
@@ -82,7 +102,7 @@ class FileService implements Service {
 			});
 		}
 
-		const oldFileKey = getFileKey(fileToUpdate.toObject().url);
+		const oldFileKey = getFileKeyByUrl(fileToUpdate.toObject().url);
 
 		await this.s3.deleteFile({
 			key: oldFileKey,
@@ -99,32 +119,6 @@ class FileService implements Service {
 		const fileUrl = createFileUrl(fileKey);
 
 		return await this.fileRepository.update(fileId, { url: fileUrl });
-	}
-
-	public async upload({
-		buffer,
-		contentType,
-		key,
-	}: {
-		buffer: Buffer;
-		contentType: ValueOf<typeof ContentType>;
-		key: string;
-	}): Promise<FileEntity> {
-		const fileKey = createFileKey(key);
-
-		await this.s3.uploadFile({
-			buffer,
-			contentType,
-			key: fileKey,
-		});
-
-		const fileUrl = createFileUrl(fileKey);
-
-		return await this.fileRepository.create(
-			FileEntity.initializeNew({
-				url: fileUrl,
-			}),
-		);
 	}
 }
 

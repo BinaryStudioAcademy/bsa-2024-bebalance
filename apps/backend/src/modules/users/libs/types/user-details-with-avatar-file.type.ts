@@ -1,8 +1,9 @@
+import { type File } from "~/modules/files/files.js";
+
 import { type UserDetailsModel } from "../../user-details.model.js";
-import { type AvatarFile } from "./avatar-file.type.js";
 
 type UserDetailsWithAvatarFile = {
-	avatarFile?: AvatarFile;
+	avatarFile?: File;
 } & UserDetailsModel;
 
 export { type UserDetailsWithAvatarFile };
