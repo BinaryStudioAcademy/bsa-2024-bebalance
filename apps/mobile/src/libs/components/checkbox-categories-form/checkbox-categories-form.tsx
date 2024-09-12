@@ -42,10 +42,12 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 		validationSchema: categoriesSelectedValidationSchema,
 	});
 
-	const checkboxGroupOptions = categories.map(({ categoryName, id }) => ({
-		id,
-		label: categoryName,
-	}));
+	const checkboxGroupOptions = categories.map(
+		({ categoryId, categoryName }) => ({
+			id: categoryId,
+			label: categoryName,
+		}),
+	);
 
 	useEffect(() => {
 		reset({

@@ -8,7 +8,7 @@ const getSelectedCategoryIds = (
 ): number[] => {
 	return sortedCategories
 		.slice(ZERO_INDEX, LOWEST_SCORE_CATEGORIES_QUANTITY)
-		.map(({ id }) => id);
+		.map(({ categoryId }) => categoryId);
 };
 
 export { getSelectedCategoryIds };
