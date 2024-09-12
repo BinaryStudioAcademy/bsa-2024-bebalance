@@ -1,5 +1,6 @@
 import { APIPath } from "~/libs/enums/enums.js";
 import {
+	type APIHandlerOptions,
 	type APIHandlerResponse,
 	BaseController,
 } from "~/libs/modules/controller/controller.js";
@@ -8,7 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { type CategoryService } from "./category.service.js";
 import { CategoriesApiPath } from "./libs/enums/enums.js";
-
+import { type CategoriesGetByIdRequestDto } from "./libs/types/types.js";
 /**
  * @swagger
  * components:
@@ -42,6 +43,17 @@ class CategoryController extends BaseController {
 			method: "GET",
 			path: CategoriesApiPath.ROOT,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getCategoriesById(
+					options as APIHandlerOptions<{
+						query: CategoriesGetByIdRequestDto;
+					}>,
+				),
+			method: "GET",
+			path: CategoriesApiPath.GET_BY_ID,
+		});
 	}
 
 	/**
@@ -67,6 +79,17 @@ class CategoryController extends BaseController {
 	private async getCategories(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.categoryService.findAll(),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async getCategoriesById(
+		options: APIHandlerOptions<{
+			query: CategoriesGetByIdRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.categoryService.findById(options.query),
 			status: HTTPCode.OK,
 		};
 	}
