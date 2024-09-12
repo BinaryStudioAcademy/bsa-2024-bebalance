@@ -6,7 +6,7 @@ import {
 	S3Client,
 } from "@aws-sdk/client-s3";
 
-import { type S3File } from "~/modules/files/files.js";
+import { type UploadedFile } from "~/modules/files/files.js";
 
 import { type CommandParameters } from "./libs/types/types.js";
 
@@ -33,7 +33,7 @@ class BaseS3 {
 	}
 
 	public async deleteFile(
-		parameters: Pick<S3File, "key">,
+		parameters: Pick<UploadedFile, "key">,
 	): Promise<DeleteObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
 			bucket: this.bucketName,
@@ -48,7 +48,9 @@ class BaseS3 {
 		return await this.s3Client.send(command);
 	}
 
-	public async uploadFile(parameters: S3File): Promise<PutObjectCommandOutput> {
+	public async uploadFile(
+		parameters: UploadedFile,
+	): Promise<PutObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
 			bucket: this.bucketName,
 			...parameters,

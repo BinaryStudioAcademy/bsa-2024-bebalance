@@ -6,7 +6,7 @@ import {
 	FileEntity,
 	FileError,
 	type FileService,
-	type S3File,
+	type UploadedFile,
 } from "~/modules/files/files.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserRepository } from "~/modules/users/user.repository.js";
@@ -109,7 +109,7 @@ class UserService implements Service {
 
 	public async updateAvatar(
 		userId: number,
-		avatarFile?: S3File,
+		avatarFile?: UploadedFile,
 	): Promise<null | UserDto> {
 		if (!avatarFile) {
 			throw new UserError({

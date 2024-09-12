@@ -66,8 +66,8 @@ class FileService implements Service {
 		return await this.fileRepository.delete(fileEntity.toObject().id);
 	}
 
-	public async find(fileId: number): Promise<FileEntity | null> {
-		return await this.fileRepository.find(fileId);
+	public async find(id: number): Promise<FileEntity | null> {
+		return await this.fileRepository.find(id);
 	}
 
 	public async findAll(): ReturnType<Service["findAll"]> {

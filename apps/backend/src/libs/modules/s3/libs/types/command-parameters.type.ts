@@ -1,5 +1,5 @@
-import { type S3File } from "~/modules/files/files.js";
+import { type UploadedFile } from "~/modules/files/files.js";
 
-type CommandParameters = { bucket: string } & Partial<S3File>;
+type CommandParameters = { bucket: string } & Partial<UploadedFile>;
 
 export { type CommandParameters };

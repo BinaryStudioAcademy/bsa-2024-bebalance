@@ -3,7 +3,7 @@ import fp from "fastify-plugin";
 
 import { ContentType, ErrorMessage } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { FileError, type S3File } from "~/modules/files/files.js";
+import { FileError, type UploadedFile } from "~/modules/files/files.js";
 
 import { ServerHooks } from "../libs/enums/enums.js";
 import {
@@ -37,7 +37,7 @@ const filePlugin = fp((app, _, done) => {
 				});
 			}
 
-			const avatarFile: S3File = {
+			const avatarFile: UploadedFile = {
 				buffer: await file.toBuffer(),
 				contentType: file.mimetype as ValueOf<typeof ContentType>,
 				key: file.filename,

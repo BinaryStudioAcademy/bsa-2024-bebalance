@@ -11,4 +11,4 @@ export { fileService };
 export { FileEntity } from "./file.entity.js";
 export { type FileService } from "./file.service.js";
 export { FileError } from "./libs/exceptions/exceptions.js";
-export { type File, type S3File } from "./libs/types/types.js";
+export { type File, type UploadedFile } from "./libs/types/types.js";
