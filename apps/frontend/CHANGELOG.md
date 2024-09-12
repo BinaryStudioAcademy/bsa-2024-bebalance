@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.32.0...frontend-v1.33.0) (2024-09-11)
+
+
+### Features
+
+* **backend/frontend/shared:** edit wheel manually bb-309 ([#343](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/343)) ([ec28e98](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ec28e9872bc2091798693dcd42f695d9c647249c))
+* **frontend:** add logout confirmation bb-365 ([#395](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/395)) ([87629f4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/87629f4d8587da3619b46506cdece58b4feb2352))
+* **frontend:** settings screen bb-334 ([#376](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/376)) ([780a87e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/780a87e080e753500d61e449df4cdb32d6350608))
+
+
+### Bug Fixes
+
+* **frontend:** buttons color doesn't match design bb-396 ([#399](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/399)) ([a304e03](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a304e03a3880a94d89c8c9ebcef0ac9297dce345))
+* **frontend:** checkbox size on checked bb-243 ([#393](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/393)) ([f3399c2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f3399c289aaa80c680e6b8e8214f4d85aa43ef91))
+* **frontend:** redirect on expired link forgot password requirements bb-285 ([#386](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/386)) ([fa6e1eb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fa6e1ebb94a46ebbaff2cac7ed4b7ff58ac5d623))
+* **frontend:** settings screen button padding bb-334 ([#398](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/398)) ([2bad704](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2bad704c4bc8b7b2dbcbffd0b56413a9222e766a))
+
 ## [1.32.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.31.0...frontend-v1.32.0) (2024-09-11)
 
 
