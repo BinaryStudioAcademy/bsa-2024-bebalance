@@ -13,5 +13,7 @@ export { CategoryService } from "./category.service.js";
 export {
 	type QuizScoreDto,
 	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 } from "./libs/types/types.js";
 export { categoryController, categoryService };
+export { updateScoresValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

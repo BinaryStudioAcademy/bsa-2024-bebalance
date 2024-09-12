@@ -1,10 +1,13 @@
-import { Button } from "~/libs/components/components.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Popup } from "~/libs/components/components.js";
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
+import { PopupMessage } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useCallback,
 	useLocation,
+	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
@@ -24,10 +27,15 @@ const Sidebar: React.FC<Properties> = ({
 
 	const dispatch = useAppDispatch();
 
-	const handleSignOut = useCallback(
-		() => void dispatch(authActions.logOut()),
-		[dispatch],
-	);
+	const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState<boolean>(false);
+
+	const handleSignOut = useCallback(() => {
+		setIsLogoutPopupOpen((previousState) => !previousState);
+	}, [setIsLogoutPopupOpen]);
+
+	const handleConfirmLogout = useCallback(() => {
+		void dispatch(authActions.logOut());
+	}, [dispatch]);
 
 	return (
 		<div
@@ -49,21 +57,33 @@ const Sidebar: React.FC<Properties> = ({
 
 			<div className={styles["logo-container"]}>Logo</div>
 			<div className={styles["buttons-container"]}>
-				{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
-					const { active, inactive } = icon;
+				<div className={styles["navlinks-container"]}>
+					{SIDEBAR_ITEMS.map(({ href, icon, label }) => {
+						const { active, inactive } = icon;
 
-					return (
-						<SidebarLink
-							iconName={href === pathname ? active : inactive}
-							key={label}
-							label={label}
-							pathname={pathname}
-							to={href}
-						/>
-					);
-				})}
+						return (
+							<SidebarLink
+								iconName={href === pathname ? active : inactive}
+								key={label}
+								label={label}
+								pathname={pathname}
+								to={href}
+							/>
+						);
+					})}
+				</div>
 				<Button label="Sign out" onClick={handleSignOut} />
 			</div>
+
+			<Popup
+				closeButtonLabel="No"
+				confirmButtonLabel="Yes"
+				icon={runImg}
+				isOpen={isLogoutPopupOpen}
+				onClose={handleSignOut}
+				onConfirm={handleConfirmLogout}
+				title={PopupMessage.LOGOUT_CONFIRM}
+			/>
 		</div>
 	);
 };
