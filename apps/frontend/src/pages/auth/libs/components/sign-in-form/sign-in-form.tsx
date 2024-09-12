@@ -1,12 +1,12 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
-import { NO_ERROR_INPUT_FIELD_AMOUNT } from "~/modules/users/libs/constants/constants.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
 } from "~/modules/users/users.js";
 
+import { NO_ERROR_INPUT_FIELD_AMOUNT } from "../../constants/constants.js";
 import { DEFAULT_SIGN_IN_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 

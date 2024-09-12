@@ -5,6 +5,7 @@ import {
 	userForgotPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
+import { NO_ERROR_INPUT_FIELD_AMOUNT } from "../../constants/constants.js";
 import { DEFAULT_FORGOT_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
@@ -17,6 +18,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -37,7 +39,11 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type="email"
 				/>
 
-				<Button label="RESET PASSWORD" type="submit" />
+				<Button
+					isDisabled={isInputError}
+					label="RESET PASSWORD"
+					type="submit"
+				/>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

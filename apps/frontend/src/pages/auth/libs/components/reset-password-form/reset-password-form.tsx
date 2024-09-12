@@ -13,6 +13,7 @@ import {
 	userResetPasswordValidationSchema,
 } from "~/modules/users/users.js";
 
+import { NO_ERROR_INPUT_FIELD_AMOUNT } from "../../constants/constants.js";
 import { DEFAULT_RESET_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
@@ -30,11 +31,12 @@ const ResetPasswordForm: React.FC<Properties> = ({
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
 
-	const { control, errors, getValues, handleSubmit, isValid, setError } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<ResetPasswordFormDto>({
 			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
 			validationSchema: userResetPasswordValidationSchema,
 		});
+	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -95,7 +97,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 					placeholder="*******"
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
-				<Button isDisabled={!isValid} label="SAVE PASSWORD" type="submit" />
+				<Button isDisabled={isInputError} label="SAVE PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
