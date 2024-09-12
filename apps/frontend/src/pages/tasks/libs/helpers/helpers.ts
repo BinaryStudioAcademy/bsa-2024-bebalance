@@ -1,1 +1,1 @@
-export { convertToCssClassName } from "./convert-to-css-class-name/convert-to-css-class-name.js";
+export { convertCategyNameToCssClassName } from "./convert-category-name-to-css-class-name/convert-category-name-to-css-class-name.helper.js";
