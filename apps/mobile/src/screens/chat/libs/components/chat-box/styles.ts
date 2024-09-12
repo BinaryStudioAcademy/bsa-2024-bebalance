@@ -9,8 +9,6 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 10,
 		borderTopLeftRadius: 0,
 		borderTopRightRadius: 10,
-		gap: 8,
-		padding: 16,
 	},
 });
 

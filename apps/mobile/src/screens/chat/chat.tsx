@@ -54,7 +54,7 @@ const Chat: React.FC = () => {
 					<View
 						style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}
 					>
-						<ChatBox>
+						<ChatBox style={[globalStyles.p16, globalStyles.gap8]}>
 							<Text>
 								Do you want to work on 3 fields, with the lowest score, or you
 								want to choose the fields yourself to work on?
