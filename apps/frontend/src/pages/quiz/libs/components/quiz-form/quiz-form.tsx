@@ -154,9 +154,9 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 					<div className={styles["button-container"]}>
 						<Button
-							isPrimary
-							label={isLast ? "CONTINUE" : "NEXT"}
-							type="submit"
+							label="BACK"
+							onClick={handlePreviousStep}
+							variant="secondary"
 						/>
 					</div>
 				</div>

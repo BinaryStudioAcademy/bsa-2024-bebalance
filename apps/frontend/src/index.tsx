@@ -17,6 +17,7 @@ import { NotFound } from "~/pages/not-found/not-found.jsx";
 import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
 import { Root } from "~/pages/root/root.jsx";
+import { Settings } from "~/pages/settings/settings.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -45,22 +46,6 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 								path: AppRoute.PROFILE,
 							},
 							{
-								element: <Auth />,
-								path: AppRoute.SIGN_IN,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.SIGN_UP,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.FORGOT_PASSWORD,
-							},
-							{
-								element: <Auth />,
-								path: AppRoute.RESET_PASSWORD,
-							},
-							{
 								element: (
 									<ProtectedRoute
 										component={<Quiz />}
@@ -77,6 +62,31 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 									/>
 								),
 								path: AppRoute.CHAT,
+							},
+							{
+								element: (
+									<ProtectedRoute
+										component={<Settings />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
+								path: AppRoute.SETTINGS,
+							},
+							{
+								element: <Auth />,
+								path: AppRoute.SIGN_IN,
+							},
+							{
+								element: <Auth />,
+								path: AppRoute.SIGN_UP,
+							},
+							{
+								element: <Auth />,
+								path: AppRoute.FORGOT_PASSWORD,
+							},
+							{
+								element: <Auth />,
+								path: AppRoute.RESET_PASSWORD,
 							},
 						],
 						element: <App />,

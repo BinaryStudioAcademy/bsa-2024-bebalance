@@ -5,10 +5,22 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
 import { name as sliceName } from "./quiz.slice.js";
+
+const editScores = createAsyncThunk<
+	QuizScoresResponseDto,
+	QuizScoresUpdateRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/edit-scores`, async (editScoresPayload, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.editScores(editScoresPayload);
+});
 
 const getAllQuestions = createAsyncThunk<
 	{ items: QuizQuestionDto[][] },
@@ -40,4 +52,4 @@ const getScores = createAsyncThunk<
 	return await quizApi.getScores();
 });
 
-export { getAllQuestions, getScores, saveAnswers };
+export { editScores, getAllQuestions, getScores, saveAnswers };

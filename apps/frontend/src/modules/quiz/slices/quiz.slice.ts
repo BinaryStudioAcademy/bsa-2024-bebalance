@@ -12,7 +12,12 @@ import {
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
-import { getAllQuestions, getScores, saveAnswers } from "./actions.js";
+import {
+	editScores,
+	getAllQuestions,
+	getScores,
+	saveAnswers,
+} from "./actions.js";
 
 type State = {
 	currentCategory: null | QuizQuestionDto[];
@@ -64,6 +69,31 @@ const { actions, name, reducer } = createSlice({
 			state.userAnswers = action.payload;
 		});
 		builder.addCase(saveAnswers.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(editScores.fulfilled, (state, action) => {
+			const updatedScores = new Map(
+				action.payload.items.map((score) => [score.id, score]),
+			);
+
+			state.scores = state.scores.map((stateScore) => {
+				const updatedScore = updatedScores.get(stateScore.id);
+
+				return updatedScore
+					? {
+							...stateScore,
+							score: updatedScore.score,
+							updatedAt: updatedScore.updatedAt,
+						}
+					: stateScore;
+			});
+
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(editScores.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(editScores.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
 	},

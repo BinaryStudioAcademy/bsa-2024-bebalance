@@ -125,7 +125,6 @@ erDiagram
         int day_of_week
         int user_id FK
     }
-
 ```
 
 ## 5. Architecture

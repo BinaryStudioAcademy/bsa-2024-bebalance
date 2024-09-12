@@ -1,8 +1,14 @@
-import { getAllQuestions, getScores, saveAnswers } from "./actions.js";
+import {
+	editScores,
+	getAllQuestions,
+	getScores,
+	saveAnswers,
+} from "./actions.js";
 import { actions } from "./quiz.slice.js";
 
 const allActions = {
 	...actions,
+	editScores,
 	getAllQuestions,
 	getScores,
 	saveAnswers,

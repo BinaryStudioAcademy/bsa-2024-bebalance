@@ -86,7 +86,7 @@ class UserRepository implements Repository {
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
-					notificationFrequency: user.notificationFrequency,
+					notificationFrequency: user.userDetails.notificationFrequency,
 					onboardingAnswers: user.onboardingAnswers.map(
 						(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
 					),
@@ -116,7 +116,7 @@ class UserRepository implements Repository {
 				email: user.email,
 				id: user.id,
 				name: user.userDetails.name,
-				notificationFrequency: user.notificationFrequency,
+				notificationFrequency: user.userDetails.notificationFrequency,
 				onboardingAnswers: user.onboardingAnswers.map(
 					(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
 				),
@@ -148,7 +148,7 @@ class UserRepository implements Repository {
 					email: user.email,
 					id: user.id,
 					name: user.userDetails.name,
-					notificationFrequency: user.notificationFrequency,
+					notificationFrequency: user.userDetails.notificationFrequency,
 					onboardingAnswers: user.onboardingAnswers.map(
 						(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
 					),

@@ -134,7 +134,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 								)}
 								<div className={styles["button-wrapper"]}>
 									<Button
-										isPrimary={isValid}
+										isDisabled={!isValid}
 										label={
 											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
 										}

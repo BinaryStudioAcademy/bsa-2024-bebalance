@@ -6,6 +6,8 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
@@ -20,6 +22,22 @@ type Constructor = {
 class QuizApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
+	}
+
+	public async editScores(
+		payload: QuizScoresUpdateRequestDto,
+	): Promise<QuizScoresResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(QuizApiPath.SCORE, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "PATCH",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<QuizScoresResponseDto>();
 	}
 
 	public async getAllQuestions(): Promise<{ items: QuizQuestionDto[][] }> {

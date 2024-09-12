@@ -53,8 +53,8 @@ const Quiz: React.FC = () => {
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
-			case Step.BALANCE_WHEEL: {
-				return <BalanceWheel />;
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {
@@ -65,12 +65,12 @@ const Quiz: React.FC = () => {
 				return <Navigate replace to={AppRoute.ROOT} />;
 			}
 
-			case Step.ANALYZING: {
-				return <Analyzing onNext={handleNextStep} />;
-			}
-
 			case Step.ONBOARDING: {
 				return <OnboardingForm onNext={handleNextStep} />;
+			}
+
+			case Step.QUIZ: {
+				return <QuizForm onNext={handleNextStep} />;
 			}
 
 			case Step.NOTIFICATION_QUESTIONS: {
@@ -79,8 +79,8 @@ const Quiz: React.FC = () => {
 				);
 			}
 
-			case Step.QUIZ: {
-				return <QuizForm onNext={handleNextStep} />;
+			case Step.BALANCE_WHEEL: {
+				return <BalanceWheel />;
 			}
 
 			default: {

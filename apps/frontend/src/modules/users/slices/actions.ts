@@ -27,11 +27,17 @@ const saveNotificationAnswers = createAsyncThunk<
 	UserDto,
 	NotificationAnswersPayloadDto,
 	AsyncThunkConfig
->(`${sliceName}/saveNotificationAnswers`, async (payload, { extra }) => {
-	const { usersApi } = extra;
+>(
+	`${sliceName}/save-notification-answers`,
+	async (payload, { dispatch, extra }) => {
+		const { usersApi } = extra;
 
-	return await usersApi.saveNotificationAnswers(payload);
-});
+		const updatedUser = await usersApi.saveNotificationAnswers(payload);
+		dispatch(authActions.updateAuthUser(updatedUser));
+
+		return updatedUser;
+	},
+);
 
 const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 	`${sliceName}/update`,
@@ -40,7 +46,7 @@ const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 		const { data, id } = payload;
 
 		const response = await usersApi.update(id, data);
-		dispatch(authActions.udpateAuthUser(response));
+		dispatch(authActions.updateAuthUser(response));
 		notification.success(NotificationMessage.PROFILE_UPDATED);
 
 		return response;
