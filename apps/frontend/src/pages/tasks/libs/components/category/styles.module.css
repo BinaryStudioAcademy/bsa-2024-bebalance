@@ -42,7 +42,7 @@
 	background: linear-gradient(to top, var(--work-start), var(--work-end));
 }
 
-.friend {
+.friends {
 	background: linear-gradient(to top, var(--friend-start), var(--friend-end));
 }
 
