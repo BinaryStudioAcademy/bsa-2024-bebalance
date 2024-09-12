@@ -27,12 +27,11 @@
 
 .checkbox-gradient-border {
 	z-index: var(--z-index-low);
-	padding: 0;
+	padding: 1px;
 	background: transparent;
 }
 
 .checkbox-gradient-border:has(.checkbox:checked) {
-	padding: 2px;
 	background: linear-gradient(
 		to right,
 		var(--brand) 0%,
@@ -46,11 +45,11 @@
 	min-width: 133px;
 	padding: 8px;
 	background: white;
-	border: 2px solid var(--light-gray);
+	border: 1px solid var(--light-gray);
 }
 
 .checkbox-container:has(.checkbox:checked) {
-	border: none;
+	border-color: transparent;
 }
 
 .rectangular-checkbox {

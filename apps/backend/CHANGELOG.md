@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.16.0...backend-v1.17.0) (2024-09-11)
+
+
+### Features
+
+* **backend/frontend/shared:** edit wheel manually bb-309 ([#343](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/343)) ([ec28e98](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ec28e9872bc2091798693dcd42f695d9c647249c))
+* **frontend:** settings screen bb-334 ([#376](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/376)) ([780a87e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/780a87e080e753500d61e449df4cdb32d6350608))
+
 ## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.15.0...backend-v1.16.0) (2024-09-11)
 
 

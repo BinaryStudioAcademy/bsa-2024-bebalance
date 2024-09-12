@@ -35,12 +35,12 @@ const Quiz: React.FC = () => {
 				return <Analyzing onNext={handleNextStep} />;
 			}
 
-			case Step.BALANCE_WHEEL: {
-				return <BalanceWheel />;
-			}
-
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
+			}
+
+			case Step.QUIZ: {
+				return <QuizForm onNext={handleNextStep} />;
 			}
 
 			case Step.NOTIFICATION_QUESTIONS: {
@@ -49,8 +49,8 @@ const Quiz: React.FC = () => {
 				);
 			}
 
-			case Step.QUIZ: {
-				return <QuizForm onNext={handleNextStep} />;
+			case Step.BALANCE_WHEEL: {
+				return <BalanceWheel />;
 			}
 
 			default: {
