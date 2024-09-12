@@ -55,10 +55,14 @@ const Chat: React.FC = () => {
 						style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}
 					>
 						<ChatBox>
+							<Text>
+								Do you want to work on 3 fields, with the lowest score, or you
+								want to choose the fields yourself to work on?
+							</Text>
 							<CheckboxCategoriesForm
 								categories={categories}
 								onSubmit={handleRetakeQuizSubmit}
-								submitButtonName="Retake Quiz"
+								submitButtonName="Update fields"
 							/>
 						</ChatBox>
 						<Text color={BaseColor.BLACK}>
