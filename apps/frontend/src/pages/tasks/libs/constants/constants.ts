@@ -1,0 +1,3 @@
+const ZERO_ARRAY_LENGTH = 0;
+
+export { ZERO_ARRAY_LENGTH };

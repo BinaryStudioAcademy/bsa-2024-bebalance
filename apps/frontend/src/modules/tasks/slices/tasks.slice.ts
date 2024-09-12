@@ -8,12 +8,12 @@ import { getCurrentTasks } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	tasks: null | TaskDto[];
+	tasks: TaskDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
-	tasks: null,
+	tasks: [],
 };
 
 const { actions, name, reducer } = createSlice({

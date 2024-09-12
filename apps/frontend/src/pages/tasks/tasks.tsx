@@ -8,6 +8,7 @@ import {
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { TaskCard } from "./libs/components/components.js";
+import { ZERO_ARRAY_LENGTH } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -22,6 +23,7 @@ const Tasks: React.FC = () => {
 	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
+	const isTasksEmpty = tasks.length === ZERO_ARRAY_LENGTH;
 
 	return (
 		<>
@@ -30,7 +32,8 @@ const Tasks: React.FC = () => {
 				{isLoading ? (
 					<Loader />
 				) : (
-					tasks?.map((task) => <TaskCard key={task.id} task={task} />)
+					!isTasksEmpty &&
+					tasks.map((task) => <TaskCard key={task.id} task={task} />)
 				)}
 			</div>
 		</>
