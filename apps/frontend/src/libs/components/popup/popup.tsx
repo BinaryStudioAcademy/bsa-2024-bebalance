@@ -35,7 +35,6 @@ const Popup: React.FC<Properties> = ({
 						<div className={styles["buttons-content"]}>
 							<Button label={closeButtonLabel} onClick={onClose} />
 							<Button
-								isPrimary={false}
 								label={confirmButtonLabel}
 								onClick={onConfirm}
 								variant="secondary"
