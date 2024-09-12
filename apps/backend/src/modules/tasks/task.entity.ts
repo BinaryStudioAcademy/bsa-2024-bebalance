@@ -3,7 +3,7 @@ import { type Entity, type ValueOf } from "~/libs/types/types.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 
 class TaskEntity implements Entity {
-	private category: string;
+	private category: null | string;
 
 	private categoryId: number;
 
@@ -35,7 +35,7 @@ class TaskEntity implements Entity {
 		updatedAt,
 		userId,
 	}: {
-		category: string;
+		category: null | string;
 		categoryId: number;
 		createdAt: string;
 		description: string;
@@ -70,7 +70,7 @@ class TaskEntity implements Entity {
 		updatedAt,
 		userId,
 	}: {
-		category: string;
+		category: null | string;
 		categoryId: number;
 		createdAt: string;
 		description: string;
@@ -96,14 +96,12 @@ class TaskEntity implements Entity {
 	}
 
 	public static initializeNew({
-		category,
 		categoryId,
 		description,
 		dueDate,
 		label,
 		userId,
 	}: {
-		category: string;
 		categoryId: number;
 		description: string;
 		dueDate: string;
@@ -111,7 +109,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	}): TaskEntity {
 		return new TaskEntity({
-			category,
+			category: null,
 			categoryId,
 			createdAt: "",
 			description,
@@ -136,7 +134,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	} {
 		return {
-			category: this.category,
+			category: this.category as string,
 			categoryId: this.categoryId,
 			createdAt: this.createdAt,
 			description: this.description,
@@ -161,7 +159,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	} {
 		return {
-			category: this.category,
+			category: this.category as string,
 			categoryId: this.categoryId,
 			createdAt: this.createdAt,
 			description: this.description,

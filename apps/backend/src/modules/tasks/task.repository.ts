@@ -12,20 +12,84 @@ class TaskRepository implements Repository {
 		this.taskModel = taskModel;
 	}
 
-	public create(): Promise<unknown> {
-		return Promise.resolve();
+	public async create(entity: TaskEntity): Promise<TaskEntity> {
+		const { categoryId, description, dueDate, label, status, userId } =
+			entity.toNewObject();
+
+		const task = await this.taskModel
+			.query()
+			.insert({
+				categoryId,
+				description,
+				dueDate,
+				label,
+				status,
+				userId,
+			})
+			.returning("*")
+			.withGraphFetched(`[${RelationName.CATEGORY}]`);
+
+		return TaskEntity.initialize({
+			category: task.category.name,
+			categoryId: task.categoryId,
+			createdAt: task.createdAt,
+			description: task.description,
+			dueDate: task.dueDate,
+			id: task.id,
+			label: task.label,
+			status: task.status,
+			updatedAt: task.updatedAt,
+			userId: task.userId,
+		});
 	}
 
-	public delete(): ReturnType<Repository["delete"]> {
-		return Promise.resolve(true);
+	public async delete(id: number): Promise<boolean> {
+		const rowsDeleted = await this.taskModel.query().deleteById(id);
+
+		return Boolean(rowsDeleted);
 	}
 
-	public find(): Promise<unknown> {
-		return Promise.resolve();
+	public async find(id: number): Promise<null | TaskEntity> {
+		const task = await this.taskModel
+			.query()
+			.withGraphFetched(`[${RelationName.CATEGORY}]`)
+			.findById(id);
+
+		return task
+			? TaskEntity.initialize({
+					category: task.category.name,
+					categoryId: task.categoryId,
+					createdAt: task.createdAt,
+					description: task.description,
+					dueDate: task.dueDate,
+					id: task.id,
+					label: task.label,
+					status: task.status,
+					updatedAt: task.updatedAt,
+					userId: task.userId,
+				})
+			: null;
 	}
 
-	public findAll(): Promise<unknown[]> {
-		return Promise.resolve([]);
+	public async findAll(): Promise<TaskEntity[]> {
+		const tasks = await this.taskModel
+			.query()
+			.withGraphFetched(`[${RelationName.CATEGORY}]`);
+
+		return tasks.map((task) =>
+			TaskEntity.initialize({
+				category: task.category.name,
+				categoryId: task.categoryId,
+				createdAt: task.createdAt,
+				description: task.description,
+				dueDate: task.dueDate,
+				id: task.id,
+				label: task.label,
+				status: task.status,
+				updatedAt: task.updatedAt,
+				userId: task.userId,
+			}),
+		);
 	}
 
 	public async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
@@ -50,8 +114,27 @@ class TaskRepository implements Repository {
 		);
 	}
 
-	public update(): Promise<unknown> {
-		return Promise.resolve();
+	public async update(
+		id: number,
+		payload: Partial<TaskModel>,
+	): Promise<TaskEntity> {
+		const task = await this.taskModel
+			.query()
+			.patchAndFetchById(id, payload)
+			.withGraphFetched(`[${RelationName.CATEGORY}]`);
+
+		return TaskEntity.initialize({
+			category: task.category.name,
+			categoryId: task.categoryId,
+			createdAt: task.createdAt,
+			description: task.description,
+			dueDate: task.dueDate,
+			id: task.id,
+			label: task.label,
+			status: task.status,
+			updatedAt: task.updatedAt,
+			userId: task.userId,
+		});
 	}
 }
 

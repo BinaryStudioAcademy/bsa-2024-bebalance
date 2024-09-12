@@ -79,6 +79,7 @@ export {
 	quizUserAnswersValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type TaskCreateDto,
 	type TaskDto,
 	TasksApiPath,
 	TaskStatus,
