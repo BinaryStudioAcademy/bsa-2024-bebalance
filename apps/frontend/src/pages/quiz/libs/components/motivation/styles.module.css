@@ -141,6 +141,10 @@
 		border: none;
 	}
 
+	.text {
+		font-size: 18px;
+	}
+
 	.title {
 		margin-bottom: 32px;
 		text-align: center;
