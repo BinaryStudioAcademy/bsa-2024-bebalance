@@ -9,7 +9,7 @@ import { FileError } from "./libs/exceptions/exceptions.js";
 import {
 	createFileKey,
 	createFileUrl,
-	getFileKeyByUrl,
+	getFileKeyFromUrl,
 } from "./libs/helpers/helpers.js";
 
 class FileService implements Service {
@@ -57,7 +57,7 @@ class FileService implements Service {
 			});
 		}
 
-		const fileKey = getFileKeyByUrl(fileEntity.toObject().url);
+		const fileKey = getFileKeyFromUrl(fileEntity.toObject().url);
 
 		await this.s3.deleteFile({
 			key: fileKey,
@@ -102,7 +102,7 @@ class FileService implements Service {
 			});
 		}
 
-		const oldFileKey = getFileKeyByUrl(fileToUpdate.toObject().url);
+		const oldFileKey = getFileKeyFromUrl(fileToUpdate.toObject().url);
 
 		await this.s3.deleteFile({
 			key: oldFileKey,

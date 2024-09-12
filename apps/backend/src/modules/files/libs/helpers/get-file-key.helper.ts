@@ -1,5 +1,5 @@
-const getFileKeyByUrl = (url: string): string => {
+const getFileKeyFromUrl = (url: string): string => {
 	return url.split("/").pop() as string;
 };
 
-export { getFileKeyByUrl };
+export { getFileKeyFromUrl };
