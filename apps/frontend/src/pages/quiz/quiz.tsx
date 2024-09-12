@@ -8,6 +8,7 @@ import {
 	Analyzing,
 	BalanceWheel,
 	Introduction,
+	Motivation,
 	NotificationQuestions,
 	QuizForm,
 } from "./libs/components/components.js";
@@ -36,7 +37,7 @@ const Quiz: React.FC = () => {
 			}
 
 			case Step.MOTIVATION: {
-				return "hello world";
+				return <Motivation onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {
