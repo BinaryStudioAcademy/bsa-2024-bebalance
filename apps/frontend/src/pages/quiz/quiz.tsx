@@ -18,18 +18,15 @@ import {
 	OnboardingForm,
 	QuizForm,
 } from "./libs/components/components.js";
-import {
-	PREVIOUS_INDEX_OFFSET,
-	ZERO_INDEX,
-} from "./libs/constants/constants.js";
+import { PREVIOUS_INDEX_OFFSET } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const [step, setStep] = useState<number>(Step.ONBOARDING);
 	const dispatch = useAppDispatch();
 
-	const { onboardingAnswers } = useAppSelector(({ auth }) => ({
-		onboardingAnswers: auth.user?.onboardingAnswers,
+	const { hasAnsweredOnboardingQuestions } = useAppSelector(({ auth }) => ({
+		hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
 	}));
 
 	const handleNextStep = useCallback((): void => {
@@ -45,13 +42,10 @@ const Quiz: React.FC = () => {
 	);
 
 	useEffect(() => {
-		const hasOnboardingAnswers =
-			onboardingAnswers && onboardingAnswers.length > ZERO_INDEX;
-
-		if (hasOnboardingAnswers) {
+		if (hasAnsweredOnboardingQuestions) {
 			setStep(Step.INTRODUCTION);
 		}
-	}, [onboardingAnswers]);
+	}, [hasAnsweredOnboardingQuestions]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {

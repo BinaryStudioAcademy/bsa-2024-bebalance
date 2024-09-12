@@ -1,3 +1,4 @@
+import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
 import { NotificationFrequency } from "./libs/enums/enums.js";
@@ -6,6 +7,10 @@ class UserEntity implements Entity {
 	private createdAt: string;
 
 	private email: string;
+
+	private hasAnsweredOnboardingQuestions: boolean;
+
+	private hasAnsweredQuizQuestions: boolean;
 
 	private id: null | number;
 
@@ -28,6 +33,8 @@ class UserEntity implements Entity {
 	private constructor({
 		createdAt,
 		email,
+		hasAnsweredOnboardingQuestions,
+		hasAnsweredQuizQuestions,
 		id,
 		name,
 		notificationFrequency,
@@ -40,6 +47,8 @@ class UserEntity implements Entity {
 	}: {
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		id: null | number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
@@ -51,6 +60,8 @@ class UserEntity implements Entity {
 		userTaskDays: null | number[];
 	}) {
 		this.createdAt = createdAt;
+		this.hasAnsweredOnboardingQuestions = hasAnsweredOnboardingQuestions;
+		this.hasAnsweredQuizQuestions = hasAnsweredQuizQuestions;
 		this.email = email;
 		this.id = id;
 		this.name = name;
@@ -78,6 +89,7 @@ class UserEntity implements Entity {
 	}: {
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions?: boolean;
 		id: number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
@@ -91,6 +103,12 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			createdAt,
 			email,
+			hasAnsweredOnboardingQuestions:
+				onboardingAnswers && onboardingAnswers.length > ZERO_INDEX
+					? true
+					: false,
+			hasAnsweredQuizQuestions:
+				quizAnswers && quizAnswers.length > ZERO_INDEX ? true : false,
 			id,
 			name,
 			notificationFrequency:
@@ -118,6 +136,8 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			createdAt: "",
 			email,
+			hasAnsweredOnboardingQuestions: false,
+			hasAnsweredQuizQuestions: false,
 			id: null,
 			name,
 			notificationFrequency: NotificationFrequency.NONE,
@@ -133,24 +153,28 @@ class UserEntity implements Entity {
 	public toNewObject(): {
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
-		onboardingAnswers: number[];
 		passwordHash: string;
 		passwordSalt: string;
-		quizAnswers: number[];
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
 		return {
 			createdAt: this.createdAt,
 			email: this.email,
+			hasAnsweredOnboardingQuestions:
+				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX
+					? true
+					: false,
+			hasAnsweredQuizQuestions:
+				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX ? true : false,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
-			onboardingAnswers: this.onboardingAnswers ?? [],
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
-			quizAnswers: this.quizAnswers ?? [],
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
@@ -159,22 +183,28 @@ class UserEntity implements Entity {
 	public toObject(): {
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		id: number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
-		onboardingAnswers: number[];
-		quizAnswers: number[];
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
 		return {
 			createdAt: this.createdAt,
 			email: this.email,
+			hasAnsweredOnboardingQuestions:
+				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX
+					? true
+					: false,
+			hasAnsweredQuizQuestions:
+				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX
+					? true
+					: false,
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
-			onboardingAnswers: this.onboardingAnswers ?? [],
-			quizAnswers: this.quizAnswers ?? [],
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
