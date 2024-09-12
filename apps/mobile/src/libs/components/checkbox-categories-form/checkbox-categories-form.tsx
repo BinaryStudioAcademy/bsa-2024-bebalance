@@ -1,11 +1,10 @@
-import { Button, Checkbox, Text, View } from "~/libs/components/components";
-import { BaseColor, NumericalValue } from "~/libs/enums/enums";
 import {
-	useAppForm,
-	useCallback,
-	useEffect,
-	useFormController,
-} from "~/libs/hooks/hooks";
+	Button,
+	MultipleCheckboxInput,
+	View,
+} from "~/libs/components/components";
+import { NumericalValue } from "~/libs/enums/enums";
+import { useAppForm, useCallback, useEffect } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type CategoriesSelectedRequestDto,
@@ -19,7 +18,6 @@ import {
 	CHECK_ALL_CATEGORIES_NAME,
 } from "./libs/constants/constants";
 import {
-	getAllCategoryIds,
 	getCategoriesSortedByScore,
 	getSelectedCategoryIds,
 } from "./libs/helpers/helpers";
@@ -35,7 +33,7 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 	onSubmit,
 	submitButtonName,
 }: Properties): JSX.Element | null => {
-	const { control, errors, handleSubmit, reset, setValue } = useAppForm<{
+	const { control, errors, handleSubmit, reset } = useAppForm<{
 		[CATEGORIES_FIELD_NAME]: number[];
 	}>({
 		defaultValues: {
@@ -43,6 +41,11 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 		},
 		validationSchema: categoriesSelectedValidationSchema,
 	});
+
+	const checkboxGroupOptions = categories.map(({ categoryName, id }) => ({
+		id,
+		label: categoryName,
+	}));
 
 	useEffect(() => {
 		reset({
@@ -52,41 +55,9 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 		});
 	}, [reset, categories]);
 
-	const { field } = useFormController({ control, name: CATEGORIES_FIELD_NAME });
-	const { value } = field;
-
-	const isAllChecked = value.length === categories.length;
-
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit(onSubmit)();
 	}, [handleSubmit, onSubmit]);
-
-	const handleAllValueChange = useCallback((): void => {
-		const nextCategoryIds = getAllCategoryIds(categories);
-
-		if (isAllChecked) {
-			setValue(CATEGORIES_FIELD_NAME, CATEGORIES_FORM_DEFAULT_VALUES);
-		} else {
-			setValue(CATEGORIES_FIELD_NAME, nextCategoryIds);
-		}
-	}, [isAllChecked, setValue, categories]);
-
-	const handleCategoryValueChange = useCallback(
-		({ id, isChecked }: { id: number; isChecked: boolean }) =>
-			(): void => {
-				const previousCategoryIds = value;
-
-				if (isChecked) {
-					setValue(
-						CATEGORIES_FIELD_NAME,
-						previousCategoryIds.filter((categoryId) => categoryId !== id),
-					);
-				} else {
-					setValue(CATEGORIES_FIELD_NAME, [...previousCategoryIds, id]);
-				}
-			},
-		[setValue, value],
-	);
 
 	if (categories.length === NumericalValue.ZERO) {
 		return null;
@@ -94,28 +65,13 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 
 	return (
 		<View style={[globalStyles.gap8, globalStyles.mb24]}>
-			<Checkbox
-				isChecked={isAllChecked}
-				label={CHECK_ALL_CATEGORIES_NAME}
-				onValueChange={handleAllValueChange}
+			<MultipleCheckboxInput
+				checkAllLabel={CHECK_ALL_CATEGORIES_NAME}
+				control={control}
+				errors={errors}
+				fieldName={CATEGORIES_FIELD_NAME}
+				options={checkboxGroupOptions}
 			/>
-			{categories.map(({ categoryName, id }) => {
-				const isChecked = value.includes(id);
-
-				return (
-					<Checkbox
-						isChecked={isChecked}
-						key={id}
-						label={categoryName}
-						onValueChange={handleCategoryValueChange({ id, isChecked })}
-					/>
-				);
-			})}
-			<View style={globalStyles.alignItemsCenter}>
-				<Text color={BaseColor.RED}>
-					{errors[CATEGORIES_FIELD_NAME]?.message}
-				</Text>
-			</View>
 			<Button label={submitButtonName} onPress={handleFormSubmit} />
 		</View>
 	);

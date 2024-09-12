@@ -13,6 +13,7 @@ export { InfinitePager } from "./infinite-pager/infinite-pager";
 export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
+export { MultipleCheckboxInput } from "./multiple-checkbox-input/multiple-checkbox-input";
 export { Planet } from "./planet/planet";
 export { ProgressBar } from "./progress-bar/progress-bar";
 export { RadioGroup } from "./radio-group/radio-group";
