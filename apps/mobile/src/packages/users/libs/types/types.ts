@@ -6,4 +6,5 @@ export {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type NotificationAnswersPayloadDto
 } from "shared";
