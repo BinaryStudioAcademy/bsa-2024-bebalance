@@ -14,7 +14,6 @@ import { categoriesSelectedValidationSchema } from "~/packages/categories/catego
 
 import {
 	CATEGORIES_FIELD_NAME,
-	CATEGORIES_FORM_DEFAULT_VALUES,
 	CHECK_ALL_CATEGORIES_NAME,
 } from "./libs/constants/constants";
 import {
@@ -37,7 +36,7 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 		[CATEGORIES_FIELD_NAME]: number[];
 	}>({
 		defaultValues: {
-			[CATEGORIES_FIELD_NAME]: CATEGORIES_FORM_DEFAULT_VALUES,
+			[CATEGORIES_FIELD_NAME]: [],
 		},
 		validationSchema: categoriesSelectedValidationSchema,
 	});

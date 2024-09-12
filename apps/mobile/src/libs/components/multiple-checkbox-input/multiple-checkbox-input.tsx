@@ -1,5 +1,4 @@
 import { Checkbox, Text, View } from "~/libs/components/components";
-import { ZERO_INDEX } from "~/libs/constants/constants";
 import { BaseColor, NumericalValue } from "~/libs/enums/enums";
 import { useCallback, useFormController } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
@@ -57,7 +56,7 @@ const MultipleCheckboxInput = <T extends FieldValues>({
 
 	return (
 		<>
-			{checkAllLabel.length > ZERO_INDEX && (
+			{checkAllLabel.length > NumericalValue.ZERO && (
 				<Checkbox
 					isChecked={isAllChecked}
 					label={checkAllLabel}
