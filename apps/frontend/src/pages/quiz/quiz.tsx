@@ -18,7 +18,11 @@ import {
 	OnboardingForm,
 	QuizForm,
 } from "./libs/components/components.js";
-import { NumberValue, Step } from "./libs/enums/enums.js";
+import {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "./libs/constants/constants.js";
+import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const [step, setStep] = useState<number>(Step.ONBOARDING);
@@ -29,7 +33,7 @@ const Quiz: React.FC = () => {
 	}));
 
 	const handleNextStep = useCallback((): void => {
-		setStep((previousStep) => previousStep + NumberValue.ONE_INDEX);
+		setStep((previousStep) => previousStep + PREVIOUS_INDEX_OFFSET);
 	}, []);
 
 	const handleNotificationQuestionsSubmit = useCallback(
@@ -42,7 +46,7 @@ const Quiz: React.FC = () => {
 
 	useEffect(() => {
 		const hasOnboardingAnswers =
-			onboardingAnswers && onboardingAnswers.length > NumberValue.ZERO_INDEX;
+			onboardingAnswers && onboardingAnswers.length > ZERO_INDEX;
 
 		if (hasOnboardingAnswers) {
 			setStep(Step.INTRODUCTION);
