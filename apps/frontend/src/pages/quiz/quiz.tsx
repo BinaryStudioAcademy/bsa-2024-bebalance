@@ -16,7 +16,7 @@ import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const [step, setStep] = useState<number>(Step.ANALYZING);
+	const [step, setStep] = useState<number>(Step.MOTIVATION);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -33,6 +33,10 @@ const Quiz: React.FC = () => {
 		switch (step) {
 			case Step.ANALYZING: {
 				return <Analyzing onNext={handleNextStep} />;
+			}
+
+			case Step.MOTIVATION: {
+				return "hello world";
 			}
 
 			case Step.INTRODUCTION: {
