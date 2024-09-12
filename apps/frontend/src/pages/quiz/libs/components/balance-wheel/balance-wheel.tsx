@@ -21,8 +21,6 @@ const BalanceWheel: React.FC = () => {
 	const handleUpdatePercentage = useCallback(() => {
 		setPercentage((previousPercentage) => {
 			if (previousPercentage >= PercentageConfig.MAX_VALUE) {
-				navigate(AppRoute.ROOT);
-
 				return previousPercentage;
 			}
 
@@ -33,7 +31,7 @@ const BalanceWheel: React.FC = () => {
 				? PercentageConfig.MAX_VALUE
 				: newPercentage;
 		});
-	}, [navigate]);
+	}, []);
 
 	useEffect(() => {
 		const intervalId = setInterval(
@@ -42,6 +40,7 @@ const BalanceWheel: React.FC = () => {
 		);
 
 		return (): void => {
+			navigate(AppRoute.QUIZ);
 			clearInterval(intervalId);
 		};
 	}, [handleUpdatePercentage, navigate]);

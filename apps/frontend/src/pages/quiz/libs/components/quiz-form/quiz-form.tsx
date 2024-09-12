@@ -81,7 +81,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 				if (!hasUndefined) {
 					const newObject = Object.fromEntries(
-						Object.entries(data).filter(([key]) => key !== "answer0"),
+						Object.entries(data).filter(([key]) => key !== "answers"),
 					);
 
 					if (isLast) {
