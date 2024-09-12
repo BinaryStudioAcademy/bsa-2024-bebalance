@@ -42,6 +42,7 @@ const ChatComponent: React.FC = () => {
 				"Give me more info",
 				"I don't like this tasks",
 			],
+			taskList: [{}, {}, {}],
 			text: "Here is your task list",
 			type: "taskList",
 		},
