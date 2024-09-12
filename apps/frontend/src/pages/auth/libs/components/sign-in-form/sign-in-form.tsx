@@ -19,7 +19,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		validationSchema: userSignInValidationSchema,
 	});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -55,7 +55,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button isDisabled={isInputError} label="SIGN IN" type="submit" />
+				<Button isDisabled={hasError} label="SIGN IN" type="submit" />
 				<div className={styles["forgot-password-container"]}>
 					<Link to={AppRoute.FORGOT_PASSWORD}>Forgot password?</Link>
 				</div>

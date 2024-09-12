@@ -24,7 +24,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -96,11 +96,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button
-					isDisabled={isInputError}
-					label="CREATE AN ACCOUNT"
-					type="submit"
-				/>
+				<Button isDisabled={hasError} label="CREATE AN ACCOUNT" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

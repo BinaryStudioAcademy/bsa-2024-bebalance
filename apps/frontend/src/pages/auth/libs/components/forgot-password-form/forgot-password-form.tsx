@@ -18,7 +18,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		defaultValues: DEFAULT_FORGOT_PASSWORD_PAYLOAD,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
-	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -39,11 +39,7 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type="email"
 				/>
 
-				<Button
-					isDisabled={isInputError}
-					label="RESET PASSWORD"
-					type="submit"
-				/>
+				<Button isDisabled={hasError} label="RESET PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

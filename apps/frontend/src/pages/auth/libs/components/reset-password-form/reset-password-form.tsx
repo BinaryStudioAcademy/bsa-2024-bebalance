@@ -36,7 +36,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
 			validationSchema: userResetPasswordValidationSchema,
 		});
-	const isInputError = Object.keys(errors).length > NumericalValue.ZERO;
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -97,7 +97,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 					placeholder="*******"
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
-				<Button isDisabled={isInputError} label="SAVE PASSWORD" type="submit" />
+				<Button isDisabled={hasError} label="SAVE PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
