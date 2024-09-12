@@ -21,6 +21,7 @@ scripts:
       keyAlias=$CM_KEY_ALIAS
       storeFile=$CM_KEYSTORE_PATH
       EOF
+      cat "$CM_BUILD_DIR/apps/mobile/android/keystore.properties"
   - &set-env-vars
     name: Create .env file and set variables
     script: |
