@@ -2,6 +2,9 @@ scripts:
   - &install_npm_dependencies
     name: Install npm dependencies
     script: cd ../.. && npm install
+  - &build_shared_package
+    name: Build shared package
+    script: cd ../.. && npm run build:shared
   - &set_android_sdk
     name: Set Android SDK location
     script: echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/apps/mobile/android/local.properties"
@@ -69,6 +72,7 @@ workflows:
           - "apps/mobile/"
     scripts:
       - *install_npm_dependencies
+      - *build_shared_package
       - *set_android_sdk
       - *set_up_keys
       - *set-env-vars
