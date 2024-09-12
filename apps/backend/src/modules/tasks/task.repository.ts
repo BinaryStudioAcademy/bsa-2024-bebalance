@@ -12,7 +12,7 @@ class TaskRepository implements Repository {
 		this.taskModel = taskModel;
 	}
 
-	create(): Promise<unknown> {
+	public create(): Promise<unknown> {
 		return Promise.resolve();
 	}
 
@@ -20,15 +20,15 @@ class TaskRepository implements Repository {
 		return Promise.resolve(true);
 	}
 
-	find(): Promise<unknown> {
+	public find(): Promise<unknown> {
 		return Promise.resolve();
 	}
 
-	findAll(): Promise<unknown[]> {
+	public findAll(): Promise<unknown[]> {
 		return Promise.resolve([]);
 	}
 
-	async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
+	public async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
 		const tasks = await this.taskModel
 			.query()
 			.withGraphFetched(`[${RelationName.CATEGORY}]`)
@@ -50,7 +50,7 @@ class TaskRepository implements Repository {
 		);
 	}
 
-	update(): Promise<unknown> {
+	public update(): Promise<unknown> {
 		return Promise.resolve();
 	}
 }

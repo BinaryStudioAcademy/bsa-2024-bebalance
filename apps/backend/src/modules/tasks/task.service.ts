@@ -10,7 +10,7 @@ class TaskService implements Service {
 		this.taskRepository = taskRepository;
 	}
 
-	create(): Promise<unknown> {
+	public create(): Promise<unknown> {
 		return Promise.resolve();
 	}
 
@@ -18,23 +18,23 @@ class TaskService implements Service {
 		return Promise.resolve(true);
 	}
 
-	find(): Promise<unknown> {
+	public find(): Promise<unknown> {
 		return Promise.resolve();
 	}
 
-	findAll(): Promise<{ items: unknown[] }> {
+	public findAll(): Promise<{ items: unknown[] }> {
 		return Promise.resolve({
 			items: [],
 		});
 	}
 
-	async findCurrentByUserId(userId: number): Promise<TaskDto[]> {
+	public async findCurrentByUserId(userId: number): Promise<TaskDto[]> {
 		const tasks = await this.taskRepository.findCurrentByUserId(userId);
 
 		return tasks.map((task) => task.toObject());
 	}
 
-	update(): Promise<unknown> {
+	public update(): Promise<unknown> {
 		return Promise.resolve();
 	}
 }
