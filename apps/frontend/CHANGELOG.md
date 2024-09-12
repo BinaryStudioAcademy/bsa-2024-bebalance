@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.33.0...frontend-v1.34.0) (2024-09-12)
+
+
+### Features
+
+* **frontend:** intro motivation bb-377 ([#408](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/408)) ([541c305](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/541c3054802836f11243754fccde20ad2ad54c22))
+
+
+### Bug Fixes
+
+* **frontend:** fix flex direction and width for onboarding buttons bb-400 ([#401](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/401)) ([a52b988](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a52b9883ce1e0504cd2bdd6143e2574de8b77ead))
+* **frontend:** forgot-password reset-password forms validation bb-285 ([#405](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/405)) ([0e132a9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0e132a9de36425fb0c54443571cb8c3061d005f2))
+
 ## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.32.0...frontend-v1.33.0) (2024-09-11)
 
 

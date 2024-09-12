@@ -42,7 +42,7 @@ const WheelLoading: React.FC = () => {
 	}, [navigation, percentLoading]);
 
 	return (
-		<BackgroundWrapper>
+		<BackgroundWrapper planetLayout="wheelLoading">
 			<ScreenWrapper>
 				<View
 					style={[
