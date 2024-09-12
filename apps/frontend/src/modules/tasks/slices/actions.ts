@@ -5,14 +5,14 @@ import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { name as sliceName } from "./tasks.slice.js";
 
-const getCurrentUsersTasks = createAsyncThunk<
+const getCurrentTasks = createAsyncThunk<
 	TaskDto[],
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/get`, async (_, { extra }) => {
+>(`${sliceName}/get-current-tasks`, async (_, { extra }) => {
 	const { tasksApi } = extra;
 
-	return await tasksApi.getCurrentUsersTasks();
+	return await tasksApi.getCurrentTasks();
 });
 
-export { getCurrentUsersTasks };
+export { getCurrentTasks };

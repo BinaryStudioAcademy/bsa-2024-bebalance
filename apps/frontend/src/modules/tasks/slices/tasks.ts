@@ -1,9 +1,9 @@
-import { getCurrentUsersTasks } from "./actions.js";
+import { getCurrentTasks } from "./actions.js";
 import { actions } from "./tasks.slice.js";
 
 const allActions = {
 	...actions,
-	getCurrentUsersTasks,
+	getCurrentTasks,
 };
 
 export { allActions as actions };

@@ -17,7 +17,7 @@ class TasksApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.TASKS, storage });
 	}
 
-	public async getCurrentUsersTasks(): Promise<TaskDto[]> {
+	public async getCurrentTasks(): Promise<TaskDto[]> {
 		const response = await this.load(
 			this.getFullEndpoint(TasksApiPath.CURRENT, {}),
 			{

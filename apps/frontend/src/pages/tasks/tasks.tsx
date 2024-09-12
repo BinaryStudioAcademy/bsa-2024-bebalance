@@ -18,7 +18,7 @@ const Tasks: React.FC = () => {
 	}));
 
 	useEffect(() => {
-		void dispatch(taskActions.getCurrentUsersTasks());
+		void dispatch(taskActions.getCurrentTasks());
 	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
