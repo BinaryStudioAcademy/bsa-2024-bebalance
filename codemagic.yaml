@@ -59,7 +59,7 @@ workflows:
       vars:
         PACKAGE_NAME: "com.bebalance"
       android_signing:
-        - KEYSTORE_FILE
+        - $KEYSTORE_FILE
     triggering:
       events:
         - push
