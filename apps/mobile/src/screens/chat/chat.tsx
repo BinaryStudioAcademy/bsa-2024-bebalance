@@ -25,7 +25,7 @@ const Chat: React.FC = () => {
 		null | number[]
 	>(null);
 	const dispatch = useAppDispatch();
-	const categories = useAppSelector((state) => state.quiz.categories);
+	const categories = useAppSelector((state) => state.quiz.scores);
 
 	useEffect(() => {
 		void dispatch(categoriesActions.getScores());
