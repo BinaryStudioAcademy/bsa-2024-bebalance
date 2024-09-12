@@ -1,5 +1,5 @@
 import { BalanceWheelChart } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/app-route.enum.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useCallback,
@@ -40,7 +40,7 @@ const BalanceWheel: React.FC = () => {
 		);
 
 		return (): void => {
-			navigate(AppRoute.QUIZ);
+			navigate(AppRoute.ROOT);
 			clearInterval(intervalId);
 		};
 	}, [handleUpdatePercentage, navigate]);

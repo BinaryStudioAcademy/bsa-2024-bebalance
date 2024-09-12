@@ -60,7 +60,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		void dispatch(quizActions.previousQuestion());
 	}, [dispatch]);
 
-	const isValueUndefined = useCallback(
+	const checkIfValueIsUndefined = useCallback(
 		(formData: FormToSave, keysToCheck: string[]): boolean => {
 			return keysToCheck.some((key) => formData[key] === undefined);
 		},
@@ -77,7 +77,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				const ids = category.map(
 					(categoryItem) => `answer${categoryItem.id.toString()}`,
 				);
-				const hasUndefined = isValueUndefined(data, ids);
+				const hasUndefined = checkIfValueIsUndefined(data, ids);
 
 				if (!hasUndefined) {
 					const newObject = Object.fromEntries(
@@ -96,7 +96,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				}
 			}
 		},
-		[category, dispatch, getAnswerIds, isLast, isValueUndefined, onNext],
+		[category, dispatch, getAnswerIds, isLast, checkIfValueIsUndefined, onNext],
 	);
 
 	const handleFormSubmit = useCallback(
@@ -153,11 +153,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 						</div>
 					)}
 					<div className={styles["button-container"]}>
-						<Button
-							label="BACK"
-							onClick={handlePreviousStep}
-							variant="secondary"
-						/>
+						<Button label="NEXT" type="submit" variant="primary" />
 					</div>
 				</div>
 			</form>

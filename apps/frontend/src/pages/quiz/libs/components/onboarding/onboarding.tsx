@@ -66,7 +66,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 				if (hasAnswer) {
 					const newObject = Object.fromEntries(
-						Object.entries(data).filter(([key]) => key !== "answer0"),
+						Object.entries(data).filter(([key]) => key !== "answers"),
 					);
 
 					if (isLastQuestion) {

@@ -1,7 +1,10 @@
 import { Button } from "~/libs/components/components.js";
 
-import { type Properties } from "../../types/types.js";
 import styles from "./styles.module.css";
+
+type Properties = {
+	onNext: () => void;
+};
 
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	return (

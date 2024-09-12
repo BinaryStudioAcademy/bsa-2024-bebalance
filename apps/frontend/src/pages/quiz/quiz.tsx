@@ -1,5 +1,3 @@
-import { Navigate } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/app-route.enum.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -59,10 +57,6 @@ const Quiz: React.FC = () => {
 
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
-			}
-
-			case Step.ROOT: {
-				return <Navigate replace to={AppRoute.ROOT} />;
 			}
 
 			case Step.ONBOARDING: {

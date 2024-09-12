@@ -5,7 +5,6 @@ const Step = {
 	NOTIFICATION_QUESTIONS: 5,
 	ONBOARDING: 1,
 	QUIZ: 4,
-	ROOT: 7,
 } as const;
 
 export { Step };
