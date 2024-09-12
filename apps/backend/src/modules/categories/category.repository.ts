@@ -117,7 +117,7 @@ class CategoryRepository implements Repository {
 		);
 	}
 
-	public async findById(categoryIds: number[]): Promise<CategoryEntity[]> {
+	public async findByIds(categoryIds: number[]): Promise<CategoryEntity[]> {
 		const categories = await this.categoryModel
 			.query()
 			.whereIn("id", categoryIds)

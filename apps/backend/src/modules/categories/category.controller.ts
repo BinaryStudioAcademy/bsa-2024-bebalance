@@ -9,7 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { type CategoryService } from "./category.service.js";
 import { CategoriesApiPath } from "./libs/enums/enums.js";
-import { type CategoriesGetByIdRequestDto } from "./libs/types/types.js";
+import { type CategoriesGetByIdsRequestDto } from "./libs/types/types.js";
 /**
  * @swagger
  * components:
@@ -46,41 +46,14 @@ class CategoryController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.getCategoriesById(
+				this.findByIds(
 					options as APIHandlerOptions<{
-						query: CategoriesGetByIdRequestDto;
+						query: CategoriesGetByIdsRequestDto;
 					}>,
 				),
 			method: "GET",
 			path: CategoriesApiPath.GET_BY_ID,
 		});
-	}
-
-	/**
-	 * @swagger
-	 * /categories:
-	 *   get:
-	 *     description: Returns an array of quiz categories
-	 *     security:
-	 *       - bearerAuth: []
-	 *     responses:
-	 *       200:
-	 *         description: Successful operation
-	 *         content:
-	 *           application/json:
-	 *             schema:
-	 *               type: object
-	 *               properties:
-	 *                 items:
-	 *                   type: array
-	 *                   items:
-	 *                     $ref: "#/components/schemas/Category"
-	 */
-	private async getCategories(): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.categoryService.findAll(),
-			status: HTTPCode.OK,
-		};
 	}
 
 	/**
@@ -111,13 +84,40 @@ class CategoryController extends BaseController {
 	 *                     $ref: "#/components/schemas/Category"
 	 */
 
-	private async getCategoriesById(
+	private async findByIds(
 		options: APIHandlerOptions<{
-			query: CategoriesGetByIdRequestDto;
+			query: CategoriesGetByIdsRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.categoryService.findById(options.query),
+			payload: await this.categoryService.findByIds(options.query),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /categories:
+	 *   get:
+	 *     description: Returns an array of quiz categories
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/Category"
+	 */
+	private async getCategories(): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.categoryService.findAll(),
 			status: HTTPCode.OK,
 		};
 	}
