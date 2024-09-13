@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.34.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.34.0...frontend-v1.34.1) (2024-09-13)
+
+
+### Bug Fixes
+
+* **frontend:** add color to navlink bb-406 ([#411](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/411)) ([ffb2f05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ffb2f05e9948e32d6ae749488acff2d01338ecaa))
+
 ## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.33.0...frontend-v1.34.0) (2024-09-12)
 
 
