@@ -9,7 +9,10 @@ import {
 } from "./libs/constants/constants.js";
 import { Sunday } from "./libs/enums/enums.js";
 import { TaskError } from "./libs/exceptions/exceptions.js";
-import { type TaskDto, type UsersTaskCreateDto } from "./libs/types/types.js";
+import {
+	type TaskDto,
+	type UsersTaskCreateRequestDto,
+} from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
 import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
@@ -49,7 +52,7 @@ class TaskService implements Service {
 		this.taskRepository = taskRepository;
 	}
 
-	public async create(payload: UsersTaskCreateDto): Promise<TaskDto> {
+	public async create(payload: UsersTaskCreateRequestDto): Promise<TaskDto> {
 		const { userTaskDays } = payload.user;
 
 		if (!userTaskDays || userTaskDays.length === NO_USER_TASK_DAYS) {

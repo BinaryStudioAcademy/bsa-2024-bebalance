@@ -1,10 +1,10 @@
 import { type UserDto } from "~/modules/users/users.js";
 
-type UsersTaskCreateDto = {
+type UsersTaskCreateRequestDto = {
 	categoryId: number;
 	description: string;
 	label: string;
 	user: UserDto;
 };
 
-export { type UsersTaskCreateDto };
+export { type UsersTaskCreateRequestDto };
