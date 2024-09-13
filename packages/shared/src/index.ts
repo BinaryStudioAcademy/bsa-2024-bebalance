@@ -13,6 +13,7 @@ export {
 export {
 	AuthError,
 	CategoryError,
+	FileError,
 	HTTPError,
 	OnboardingError,
 	QuizError,
