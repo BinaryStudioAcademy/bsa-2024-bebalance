@@ -38,17 +38,19 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	addMessageToThreadValidationSchema,
+	AiAssistantApiPath,
+	type BalanceWheelAnalysisResponseDto,
+	type SelectedCategories,
+	type TaskSuggestionRequestDto,
+	TaskSuggestionRequestValidationSchema,
+	type TaskSuggestionsResponseDto,
+	type ThreadMessageCreateDto,
+} from "./modules/ai-assistant/ai-assistant.js";
+export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
-export {
-	addMessageToThreadValidationSchema,
-	AiAssistantApiPath,
-	AiAssistantMessageValidationSchema,
-	type BalanceWheelAnalysisResponseDto,
-	type TaskSuggestionsResponseDto,
-	type ThreadMessageCreateDto,
-} from "./modules/ia-assistant/ai-assistant.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
