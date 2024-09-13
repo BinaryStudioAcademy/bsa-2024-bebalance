@@ -78,13 +78,13 @@ const ChatComponent: React.FC = () => {
 						<ChatMessage
 							buttonLabels={message.buttonLabels ?? []}
 							contentData={chartData}
-							key={message.text}
+							key={message.messages.comments}
 							onSubmit={
 								message.type === "categoryInputs"
 									? handleCategoriesSubmit
 									: undefined
 							}
-							text={message.text}
+							text={message.messages.greeting}
 							type={message.type}
 						/>
 					))}

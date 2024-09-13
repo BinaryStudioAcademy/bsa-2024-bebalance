@@ -7,7 +7,10 @@ type SimplifiedQuizScoreDto = Omit<
 
 type BalanceWheelAnalysisResponseDto = {
 	lowestCategories: SimplifiedQuizScoreDto[];
-	text: string;
+	messages: {
+		comments: string;
+		greeting: string;
+	};
 	threadId: string;
 };
 

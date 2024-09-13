@@ -1,3 +1,9 @@
-export { generateInitPrompt } from "./generate-init-promt/generate-init-promt.js";
-export { generateUserScoresPrompt } from "./generate-scores-promt/generate-scores-promt.js";
-export { generateScoresResponse } from "./generate-scores-response/generate-scores-response.js";
+export {
+	generateQuestionsAnswersPrompt,
+	generateScoresResponse,
+	runInitialThreadOptions,
+} from "./initial-chat/initial-chat.js";
+export {
+	generateTaskSuggestionsResponse,
+	runTaskByCategoryOptions,
+} from "./suggest-task-by-category/suggest-task-by-category.js";

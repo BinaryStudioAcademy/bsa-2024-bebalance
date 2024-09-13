@@ -9,8 +9,11 @@ type Message = {
 		categoryName: string;
 		score: number;
 	}>;
+	messages: {
+		comments: string;
+		greeting: string;
+	};
 	taskList?: TaskDto[];
-	text: string;
 	threadId?: string;
 	type: "categoryInputs" | "suggestionButtons" | "taskList" | "wheelAnalysis";
 };

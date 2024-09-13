@@ -1,9 +1,10 @@
 import {
-	OpenAiPromptTemplates,
 	type OpenAiRequestMessage,
 	OpenAiRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
+
+import { OpenAiInitialPromptTemplates } from "./generate-init-promt-message.enum.js";
 
 function generateUserScoresPrompt(
 	userScores: QuizScoresGetAllResponseDto,
@@ -16,10 +17,10 @@ function generateUserScoresPrompt(
 		score,
 	}));
 
+	/* eslint-disable perfectionist/sort-objects */
 	const promptContent = {
+		context: OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_CONTEXT,
 		categories,
-		context: OpenAiPromptTemplates.WHEEL_OF_BALANCE_CONTEXT,
-		instructions: OpenAiPromptTemplates.WHEEL_OF_BALANCE_INSTRUCTIONS,
 	};
 
 	return {

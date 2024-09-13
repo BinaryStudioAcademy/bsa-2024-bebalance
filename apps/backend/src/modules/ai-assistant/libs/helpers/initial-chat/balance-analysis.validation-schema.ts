@@ -6,9 +6,14 @@ const Category = z.object({
 	score: z.number(),
 });
 
+const Messages = z.object({
+	comments: z.string(),
+	greeting: z.string(),
+});
+
 const BalanceAnalysis = z.object({
-	answer: z.string(),
 	lowestCategories: z.array(Category),
+	messages: Messages,
 });
 
 export { BalanceAnalysis };

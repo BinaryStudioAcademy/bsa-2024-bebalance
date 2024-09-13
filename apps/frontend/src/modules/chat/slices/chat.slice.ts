@@ -30,10 +30,7 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.fulfilled, (state, action) => {
 				state.selectedCategories = action.payload.lowestCategories;
 				state.threadId = action.payload.threadId;
-				state.messages.push({
-					...action.payload,
-					type: "wheelAnalysis",
-				});
+				state.messages.push();
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {

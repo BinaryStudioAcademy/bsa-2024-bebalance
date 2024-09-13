@@ -19,7 +19,7 @@ class ChatApi extends BaseHTTPApi {
 
 	public async initiateConversation(): Promise<BalanceWheelAnalysisResponseDto> {
 		const response = await this.load(
-			this.getFullEndpoint(AiAssistantApiPath.INITIATE_THREAD, {}),
+			this.getFullEndpoint(AiAssistantApiPath.INIT_NEW_CHAT, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,

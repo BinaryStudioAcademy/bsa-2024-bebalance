@@ -1,4 +1,4 @@
-const AnalyzeBalanceScores = {
+const AnalyzeBalanceScoresTool = {
 	function: {
 		description:
 			"Analyzes user's life balance scores and identifies the three lowest categories with suggestions for improvement.",
@@ -50,8 +50,49 @@ const AnalyzeBalanceScores = {
 					required: ["task", "action"],
 					type: "object",
 				},
+				response_structure: {
+					additionalProperties: false,
+					properties: {
+						comments: {
+							description:
+								"A summary of the balance analysis and the identified areas for improvement.",
+							type: "string",
+						},
+						greeting: {
+							description:
+								"A personalized greeting for the user based on their name, e.g., 'Hello, John!'",
+							type: "string",
+						},
+						lowestCategories: {
+							description:
+								"An array of the three categories where the user scored the lowest, including category ID, name, and score.",
+							items: {
+								additionalProperties: false,
+								properties: {
+									categoryId: {
+										description: "Unique identifier for the category",
+										type: "string",
+									},
+									categoryName: {
+										description: "The name of the category",
+										type: "string",
+									},
+									score: {
+										description: "User's score for the category, from 1 to 10",
+										type: "number",
+									},
+								},
+								required: ["categoryId", "categoryName", "score"],
+								type: "object",
+							},
+							type: "array",
+						},
+					},
+					required: ["greeting", "comments", "lowestCategories"],
+					type: "object",
+				},
 			},
-			required: ["context", "categories", "instructions"],
+			required: ["context", "categories", "instructions", "response_structure"],
 			type: "object",
 		},
 		strict: true,
@@ -59,4 +100,4 @@ const AnalyzeBalanceScores = {
 	type: "function",
 } as const;
 
-export { AnalyzeBalanceScores };
+export { AnalyzeBalanceScoresTool };
