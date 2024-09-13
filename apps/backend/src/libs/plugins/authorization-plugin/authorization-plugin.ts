@@ -45,7 +45,7 @@ const authorizationPlugin = fp<PluginOptions>((app, options, done) => {
 				throw new AuthError({ message: ErrorMessage.UNAUTHORIZED });
 			}
 
-			request.user = user.toObject();
+			request.user = user;
 		} catch (error) {
 			if (error instanceof AuthError) {
 				throw error;
