@@ -30,7 +30,21 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.fulfilled, (state, action) => {
 				state.selectedCategories = action.payload.lowestCategories;
 				state.threadId = action.payload.threadId;
-				state.messages.push();
+				state.messages.push(
+					{
+						text: action.payload.messages.greeting,
+						type: "text",
+					},
+					{
+						text: action.payload.messages.comments,
+						type: "wheelAnalysis",
+					},
+					{
+						buttonLabels: ["✅ Yes, 3 lowest", "🚫 No smth else"],
+						text: action.payload.messages.question,
+						type: "suggestionButtons",
+					},
+				);
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {
