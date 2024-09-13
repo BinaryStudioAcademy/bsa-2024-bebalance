@@ -3,12 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
+import { type Message } from "../libs/types/message.type.js";
 import { type SimplifiedQuizScoreDto } from "../libs/types/types.js";
 import { initConversation } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
-	messages: string[];
+	messages: Message[];
 	selectedCategories: SimplifiedQuizScoreDto[];
 	threadId: null | string;
 };
@@ -29,7 +30,10 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.fulfilled, (state, action) => {
 				state.selectedCategories = action.payload.lowestCategories;
 				state.threadId = action.payload.threadId;
-				state.messages.push(action.payload.text);
+				state.messages.push({
+					...action.payload,
+					type: "wheelAnalysis",
+				});
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {
