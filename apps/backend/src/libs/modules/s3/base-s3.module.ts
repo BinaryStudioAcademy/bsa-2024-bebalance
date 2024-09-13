@@ -32,12 +32,10 @@ class BaseS3 {
 		this.bucketName = settings.bucketName;
 	}
 
-	public async deleteFile(
-		parameters: Pick<UploadedFile, "key">,
-	): Promise<DeleteObjectCommandOutput> {
+	public async deleteFile(key: string): Promise<DeleteObjectCommandOutput> {
 		const commandParameters: CommandParameters = {
 			bucket: this.bucketName,
-			...parameters,
+			key,
 		};
 
 		const command = new DeleteObjectCommand({

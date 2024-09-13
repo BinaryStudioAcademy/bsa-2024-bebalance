@@ -1,7 +1,7 @@
-import { type ContentType, ErrorMessage } from "~/libs/enums/enums.js";
+import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type BaseS3 } from "~/libs/modules/s3/s3.js";
-import { type Service, type ValueOf } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 
 import { FileEntity } from "./file.entity.js";
 import { type FileRepository } from "./file.repository.js";
@@ -11,6 +11,7 @@ import {
 	createFileUrl,
 	getFileKeyFromUrl,
 } from "./libs/helpers/helpers.js";
+import { type UploadedFile } from "./libs/types/types.js";
 
 class FileService implements Service {
 	private fileRepository: FileRepository;
@@ -25,11 +26,7 @@ class FileService implements Service {
 		buffer,
 		contentType,
 		key,
-	}: {
-		buffer: Buffer;
-		contentType: ValueOf<typeof ContentType>;
-		key: string;
-	}): Promise<FileEntity> {
+	}: UploadedFile): Promise<FileEntity> {
 		const fileKey = createFileKey(key);
 
 		await this.s3.uploadFile({
@@ -59,9 +56,7 @@ class FileService implements Service {
 
 		const fileKey = getFileKeyFromUrl(fileEntity.toObject().url);
 
-		await this.s3.deleteFile({
-			key: fileKey,
-		});
+		await this.s3.deleteFile(fileKey);
 
 		return await this.fileRepository.delete(fileEntity.toObject().id);
 	}
@@ -84,15 +79,7 @@ class FileService implements Service {
 
 	public async update(
 		fileId: number,
-		{
-			buffer,
-			contentType,
-			key,
-		}: {
-			buffer: Buffer;
-			contentType: ValueOf<typeof ContentType>;
-			key: string;
-		},
+		{ buffer, contentType, key }: UploadedFile,
 	): Promise<FileEntity | null> {
 		const fileToUpdate = await this.fileRepository.find(fileId);
 
@@ -104,9 +91,7 @@ class FileService implements Service {
 
 		const oldFileKey = getFileKeyFromUrl(fileToUpdate.toObject().url);
 
-		await this.s3.deleteFile({
-			key: oldFileKey,
-		});
+		await this.s3.deleteFile(oldFileKey);
 
 		const fileKey = createFileKey(key);
 
