@@ -50,20 +50,20 @@ const Quiz: React.FC = () => {
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
-			case Step.ANALYZING: {
-				return <Analyzing onNext={handleNextStep} />;
-			}
-
 			case Step.MOTIVATION: {
 				return <Motivation onNext={handleNextStep} />;
 			}
 
-			case Step.INTRODUCTION: {
-				return <Introduction onNext={handleNextStep} />;
-			}
-
 			case Step.ONBOARDING: {
 				return <OnboardingForm onNext={handleNextStep} />;
+			}
+
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
+			}
+
+			case Step.INTRODUCTION: {
+				return <Introduction onNext={handleNextStep} />;
 			}
 
 			case Step.QUIZ: {
