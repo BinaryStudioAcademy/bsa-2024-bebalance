@@ -19,7 +19,7 @@ import {
 } from "./libs/constants/constants";
 import {
 	getCategoriesSortedByScore,
-	getSelectedCategoryIds,
+	getInitialSelectedCategoryIds,
 } from "./libs/helpers/helpers";
 
 type Properties = {
@@ -48,7 +48,7 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 
 	useEffect(() => {
 		reset({
-			categoryIds: getSelectedCategoryIds(
+			categoryIds: getInitialSelectedCategoryIds(
 				getCategoriesSortedByScore(categories),
 			),
 		});
@@ -68,7 +68,7 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 				checkAllLabel={CHECK_ALL_CATEGORIES_NAME}
 				control={control}
 				errors={errors}
-				fieldName={CATEGORIES_FIELD_NAME}
+				name={CATEGORIES_FIELD_NAME}
 				options={checkboxGroupOptions}
 			/>
 			<Button label={submitButtonName} onPress={handleFormSubmit} />

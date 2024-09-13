@@ -15,7 +15,7 @@ type Properties<T extends FieldValues> = {
 	checkAllLabel?: string;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
-	fieldName: FieldPath<T>;
+	name: FieldPath<T>;
 	options: InputOption[];
 };
 
@@ -23,12 +23,12 @@ const MultipleCheckboxInput = <T extends FieldValues>({
 	checkAllLabel = "",
 	control,
 	errors,
-	fieldName,
+	name,
 	options,
 }: Properties<T>): JSX.Element | null => {
-	const { field } = useFormController({ control, name: fieldName });
+	const { field } = useFormController({ control, name });
 	const { onChange, value } = field;
-	const error = errors[fieldName]?.message;
+	const error = errors[name]?.message;
 	const hasError = Boolean(error);
 
 	const isAllChecked = value.length === options.length;
@@ -58,7 +58,7 @@ const MultipleCheckboxInput = <T extends FieldValues>({
 
 	return (
 		<>
-			{checkAllLabel.length > NumericalValue.ZERO && (
+			{Boolean(checkAllLabel) && (
 				<Checkbox
 					isChecked={isAllChecked}
 					label={checkAllLabel}
