@@ -6,7 +6,7 @@
 
 	--unchecked-color: var(--light-gray);
 	--checked-gradient-color: linear-gradient(
-		to right,
+		to bottom right,
 		var(--brand) 0%,
 		var(--light-brand) 130%
 	);
