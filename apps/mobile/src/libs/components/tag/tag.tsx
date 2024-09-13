@@ -40,7 +40,7 @@ const Tag: React.FC<Properties> = ({ color, label }) => {
 					styles.innerContainer,
 				]}
 			>
-				<Planet color={color} size="xxs" style={styles.tagPlanet} />
+				<Planet color={color} size="xxxs" style={styles.tagPlanet} />
 				<Text preset="tag" style={globalStyles.pl8}>
 					{label}
 				</Text>

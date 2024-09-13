@@ -1,4 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -30,11 +31,12 @@ const ResetPasswordForm: React.FC<Properties> = ({
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
 
-	const { control, errors, getValues, handleSubmit, isValid, setError } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<ResetPasswordFormDto>({
 			defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
 			validationSchema: userResetPasswordValidationSchema,
 		});
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -95,7 +97,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 					placeholder="*******"
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
-				<Button isDisabled={!isValid} label="SAVE PASSWORD" type="submit" />
+				<Button isDisabled={hasError} label="SAVE PASSWORD" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
