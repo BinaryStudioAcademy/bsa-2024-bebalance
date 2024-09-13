@@ -33,7 +33,7 @@ const NotificationTaskDays: React.FC<
 			>
 				Which days would you like to receive tasks?
 			</Text>
-			<View style={[globalStyles.gap8, globalStyles.mb24]}>
+			<View style={[globalStyles.gap16, globalStyles.mb24]}>
 				<MultipleCheckboxInput
 					control={control}
 					errors={errors}

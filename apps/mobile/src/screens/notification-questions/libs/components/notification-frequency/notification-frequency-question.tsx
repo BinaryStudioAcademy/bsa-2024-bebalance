@@ -32,6 +32,7 @@ const NotificationFrequencyQuestion: React.FC<
 			<RadioGroup
 				control={control}
 				errors={errors}
+				itemContainerStyle={globalStyles.mb16}
 				name="notificationFrequency"
 				options={NOTIFICATION_FREQUENCY_OPTIONS}
 			/>
