@@ -1,9 +1,6 @@
-import React from "react";
-
 import {
 	BackgroundWrapper,
 	Button,
-	Link,
 	ScreenWrapper,
 	Text,
 	View,
@@ -26,7 +23,7 @@ const Welcome: React.FC = () => {
 	}, [navigation]);
 
 	return (
-		<BackgroundWrapper>
+		<BackgroundWrapper planetLayout="welcome">
 			<ScreenWrapper>
 				<View
 					style={[
@@ -73,10 +70,6 @@ const Welcome: React.FC = () => {
 						</Text>
 					</View>
 					<Button label="Let's Continue" onPress={handleContinuePress} />
-					<Link
-						label="Go to the Wheel"
-						to={`/${RootScreenName.BOTTOM_TABS_NAVIGATOR}`}
-					/>
 				</View>
 			</ScreenWrapper>
 		</BackgroundWrapper>
