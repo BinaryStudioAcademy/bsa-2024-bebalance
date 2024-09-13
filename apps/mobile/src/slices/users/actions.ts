@@ -27,7 +27,7 @@ const saveNotificationAnswers = createAsyncThunk<
 >(`${sliceName}/saveNotificationAnswers`, async (payload, { extra }) => {
 	const { userApi } = extra;
 
-	return await usersApi.saveNotificationAnswers(payload);
+	return await userApi.saveNotificationAnswers(payload);
 });
 
 export { getById, saveNotificationAnswers };

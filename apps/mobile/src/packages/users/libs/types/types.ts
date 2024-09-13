@@ -1,4 +1,5 @@
 export {
+	type NotificationAnswersPayloadDto,
 	type UserDto,
 	type UserGetParametersDto,
 	type UserSignInRequestDto,
@@ -6,5 +7,4 @@ export {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
-	type NotificationAnswersPayloadDto
 } from "shared";
