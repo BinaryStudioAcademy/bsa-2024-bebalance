@@ -9,4 +9,5 @@ export {
 	type QuizScoreDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 } from "shared";

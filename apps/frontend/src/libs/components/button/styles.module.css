@@ -2,7 +2,7 @@
 	display: inline-block;
 	width: 100%;
 	min-height: 16px;
-	padding: 10px 30px;
+	padding: 10px 20px;
 	margin: 0;
 	font-size: 16px;
 	font-weight: 700;
@@ -14,13 +14,13 @@
 	outline: 0;
 }
 
-.primary {
+.primary-button {
 	line-height: 24px;
 	color: var(--white);
 	background-color: var(--black);
 }
 
-.primary:hover {
+.primary-button:hover {
 	background-color: var(--brand);
 }
 
@@ -31,7 +31,7 @@
 	border: 1px solid var(--black);
 }
 
-.secondary:hover {
+.secondary-button:hover {
 	color: var(--brand);
 	border-color: var(--brand);
 }
