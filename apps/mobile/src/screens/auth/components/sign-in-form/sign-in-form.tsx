@@ -6,6 +6,7 @@ import {
 	Input,
 	Link,
 	Text,
+	View,
 } from "~/libs/components/components";
 import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { getSecurityInputIconName } from "~/libs/helpers/helpers";
@@ -44,7 +45,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Text preset="uppercase" size="xl" weight="bold">
 				SIGN IN
 			</Text>
-			<Text style={[globalStyles.mb16]}>
+			<Text style={[globalStyles.mb16]} weight="semiBold">
 				No account? Go to{" "}
 				<Link label="Create an account" to={`/${RootScreenName.SIGN_UP}`} />
 			</Text>
@@ -72,6 +73,9 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 				placeholder="********"
 			/>
 			<Button label="SIGN IN" onPress={handleFormSubmit} />
+			<View style={globalStyles.alignItemsCenter}>
+				<Link label="Forgot password?" to={`/${RootScreenName.SIGN_UP}`} />
+			</View>
 		</>
 	);
 };
