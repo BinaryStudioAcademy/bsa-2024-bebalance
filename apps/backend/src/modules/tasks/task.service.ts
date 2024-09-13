@@ -1,5 +1,4 @@
 import { type Service } from "~/libs/types/types.js";
-import { type UserDto } from "~/modules/users/users.js";
 
 import {
 	FULL_WEEK,
@@ -7,7 +6,7 @@ import {
 	NO_USER_TASK_DAYS,
 } from "./libs/constants/constants.js";
 import { Sunday } from "./libs/enums/enums.js";
-import { type TaskDto } from "./libs/types/types.js";
+import { type TaskDto, type UsersTaskCreateDto } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
 import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
@@ -19,15 +18,8 @@ class TaskService implements Service {
 		this.taskRepository = taskRepository;
 	}
 
-	public async create(payload: {
-		// TODO: Create a type for this payload
-		categoryId: number;
-		description: string;
-		label: string;
-		user: UserDto;
-	}): Promise<TaskDto> {
+	public async create(payload: UsersTaskCreateDto): Promise<TaskDto> {
 		const createdAt = new Date();
-
 		const createdAtDayOfWeek = createdAt.getDay();
 
 		const { userTaskDays } = payload.user;

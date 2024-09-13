@@ -82,7 +82,6 @@ export {
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
-	type TaskCreateDto,
 	type TaskDto,
 	TasksApiPath,
 	TaskStatus,
