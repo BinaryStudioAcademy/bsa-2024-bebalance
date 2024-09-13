@@ -15,24 +15,9 @@ import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
 
 class TaskService implements Service {
-	private taskRepository: TaskRepository;
-
-	public constructor(taskRepository: TaskRepository) {
-		this.taskRepository = taskRepository;
-	}
-
-	public async create(payload: UsersTaskCreateDto): Promise<TaskDto> {
+	private calculateDeadline = (userTaskDays: number[]): string => {
 		const createdAt = new Date();
 		const createdAtDayOfWeek = createdAt.getDay();
-
-		const { userTaskDays } = payload.user;
-
-		if (!userTaskDays || userTaskDays.length === NO_USER_TASK_DAYS) {
-			throw new TaskError({
-				message: ErrorMessage.TASK_DAYS_NOT_DEFINED,
-				status: HTTPCode.BAD_REQUEST,
-			});
-		}
 
 		const normalizeTaskDays = userTaskDays.map((day) =>
 			day === Sunday.USER_TASK ? Sunday.NORMALIZED : day,
@@ -55,11 +40,32 @@ class TaskService implements Service {
 		const deadlineDate = new Date(createdAt);
 		deadlineDate.setDate(createdAt.getDate() + daysIntervalUntilNextTask);
 
+		return deadlineDate.toISOString();
+	};
+
+	private taskRepository: TaskRepository;
+
+	public constructor(taskRepository: TaskRepository) {
+		this.taskRepository = taskRepository;
+	}
+
+	public async create(payload: UsersTaskCreateDto): Promise<TaskDto> {
+		const { userTaskDays } = payload.user;
+
+		if (!userTaskDays || userTaskDays.length === NO_USER_TASK_DAYS) {
+			throw new TaskError({
+				message: ErrorMessage.TASK_DAYS_NOT_DEFINED,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const deadline = this.calculateDeadline(userTaskDays);
+
 		const task = await this.taskRepository.create(
 			TaskEntity.initializeNew({
 				categoryId: payload.categoryId,
 				description: payload.description,
-				dueDate: deadlineDate.toISOString(),
+				dueDate: deadline,
 				label: payload.label,
 				userId: payload.user.id,
 			}),
