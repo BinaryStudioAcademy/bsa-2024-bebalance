@@ -65,7 +65,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			<Text preset="uppercase" size="xl" weight="bold">
 				CREATE AN ACCOUNT
 			</Text>
-			<Text style={globalStyles.mb16}>
+			<Text style={globalStyles.mb16} weight="semiBold">
 				Already have an account? Go to{" "}
 				<Link label="Sign In" to={`/${RootScreenName.SIGN_IN}`} />
 			</Text>
