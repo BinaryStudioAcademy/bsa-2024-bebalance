@@ -9,7 +9,12 @@ import { AppEnvironment } from "~/libs/enums/enums.js";
 import { type Config } from "~/libs/modules/config/config.js";
 import { notification } from "~/libs/modules/notification/notification.js";
 import { storage } from "~/libs/modules/storage/storage.js";
+import { reducer as appReducer } from "~/modules/app/app.js";
 import { authApi, reducer as authReducer } from "~/modules/auth/auth.js";
+import {
+	categoriesApi,
+	reducer as categoriesReducer,
+} from "~/modules/categories/categories.js";
 import {
 	onboardingApi,
 	reducer as onboardingReducer,
@@ -17,10 +22,12 @@ import {
 import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
 import { usersApi, reducer as usersReducer } from "~/modules/users/users.js";
 
-import { handleErrorMiddleware } from "./handle-error.middleware.js";
+import { handleErrorMiddleware } from "./libs/middlewares/middlewares.js";
 
 type RootReducer = {
+	app: ReturnType<typeof appReducer>;
 	auth: ReturnType<typeof authReducer>;
+	categories: ReturnType<typeof categoriesReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
 	users: ReturnType<typeof usersReducer>;
@@ -28,6 +35,7 @@ type RootReducer = {
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	categoriesApi: typeof categoriesApi;
 	notification: typeof notification;
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
@@ -52,10 +60,12 @@ class Store {
 					thunk: {
 						extraArgument: this.extraArguments,
 					},
-				}).prepend([handleErrorMiddleware]);
+				}).prepend([handleErrorMiddleware(this.extraArguments)]);
 			},
 			reducer: {
+				app: appReducer,
 				auth: authReducer,
+				categories: categoriesReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
 				users: usersReducer,
@@ -66,6 +76,7 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			categoriesApi,
 			notification,
 			onboardingApi,
 			quizApi,
@@ -75,4 +86,4 @@ class Store {
 	}
 }
 
-export { Store };
+export { type ExtraArguments, Store };

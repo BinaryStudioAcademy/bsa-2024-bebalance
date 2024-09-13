@@ -84,17 +84,25 @@ class BaseConfig implements Config {
 					format: Number,
 				},
 			},
+			DURATIONS: {
+				PASSWORD_RESET_LINK: {
+					default: null,
+					doc: "Time during which reset password link is valid",
+					env: "PASSWORD_RESET_LINK_DURATION",
+					format: String,
+				},
+				SESSION: {
+					default: null,
+					doc: "Time during which user's session is active",
+					env: "SESSION_DURATION",
+					format: String,
+				},
+			},
 			JWT: {
 				ALGORITHM: {
 					default: null,
 					doc: "Token encryption algorithm",
 					env: "JWT_ALGORITHM",
-					format: String,
-				},
-				EXPIRATION_TIME: {
-					default: null,
-					doc: "Token expiration time",
-					env: "JWT_EXPIRATION_TIME",
 					format: String,
 				},
 				SECRET: {
@@ -147,6 +155,32 @@ class BaseConfig implements Config {
 					default: null,
 					doc: "OpenAI model",
 					env: "OPENAI_MODEL",
+					format: String,
+				},
+			},
+			S3_BUCKET: {
+				BUCKET_ACCESS_KEY: {
+					default: null,
+					doc: "Access Key ID of the AWS S3 bucket",
+					env: "BUCKET_ACCESS_KEY",
+					format: String,
+				},
+				BUCKET_NAME: {
+					default: null,
+					doc: "Name of the AWS S3 bucket",
+					env: "BUCKET_NAME",
+					format: String,
+				},
+				BUCKET_REGION: {
+					default: null,
+					doc: "Region of the AWS S3 bucket",
+					env: "BUCKET_REGION",
+					format: String,
+				},
+				SECRET_ACCESS_KEY: {
+					default: null,
+					doc: "Secret Access Key of the AWS S3 bucket",
+					env: "SECRET_ACCESS_KEY",
 					format: String,
 				},
 			},

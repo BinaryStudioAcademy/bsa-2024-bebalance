@@ -35,7 +35,7 @@
 .radio-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 12px;
 }
 
 .radio-label {
@@ -47,10 +47,11 @@
 .radio-option {
 	display: flex;
 	gap: 8px;
-	padding: 8px 10px;
+	align-items: center;
+	padding: 10px;
 	font-size: 16px;
 	font-weight: 500;
-	line-height: 1.4;
+	line-height: 22px;
 	cursor: pointer;
 	border: 1px solid var(--light-gray);
 	border-radius: 5px;
@@ -98,14 +99,20 @@
 		font-size: 16px;
 		font-weight: 700;
 		line-height: 25px;
+		text-align: center;
 	}
 
 	.radio-field {
 		display: none;
 	}
 
+	.radio-container {
+		justify-content: center;
+	}
+
 	.radio-option {
 		justify-content: center;
 		width: 100%;
+		max-width: 312px;
 	}
 }

@@ -1,8 +1,11 @@
 export { type UserUpdatePayload } from "./user-update-payload.type.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,

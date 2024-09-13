@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import {
+	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
 	logOut,
 	resetPassword,
@@ -60,8 +61,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(resetPassword.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(resetPassword.fulfilled, (state, action) => {
-			state.user = action.payload;
+		builder.addCase(resetPassword.fulfilled, (state) => {
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(resetPassword.rejected, (state) => {
@@ -71,10 +71,24 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(logOut.fulfilled, (state, action) => {
 			state.user = action.payload;
 		});
+
+		builder.addCase(checkIsResetPasswordExpired.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(checkIsResetPasswordExpired.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(checkIsResetPasswordExpired.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
 	},
 	initialState,
 	name: "auth",
-	reducers: {},
+	reducers: {
+		updateAuthUser(state, action: PayloadAction<UserDto>) {
+			state.user = action.payload;
+		},
+	},
 });
 
 export { actions, name, reducer };

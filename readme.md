@@ -35,12 +35,23 @@ erDiagram
     }
 
     user_details ||--|| users : user_id
+    user_details ||--o| files : avatar_file_id
     user_details {
         int id PK
         dateTime created_at
         dateTime updated_at
         varchar name
         int user_id FK
+        string notification_frequency
+        int avatar_file_id FK
+    }
+
+    files {
+        int id PK
+        varchar file_key UK
+        varchar url
+        dateTime created_at
+        dateTime updated_at
     }
 
     categories {
@@ -113,6 +124,15 @@ erDiagram
         dateTime created_at
         dateTime updated_at
         int answer_id FK
+        int user_id FK
+    }
+
+    user_task_days }o--|| users : user_id
+    user_task_days {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int day_of_week
         int user_id FK
     }
 ```

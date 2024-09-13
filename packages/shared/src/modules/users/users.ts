@@ -1,12 +1,16 @@
 export {
+	NotificationFrequency,
 	UsersApiPath,
 	UserValidationMessage,
 	UserValidationRule,
 } from "./libs/enums/enums.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
+	type NotificationAnswersRequestDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
@@ -20,7 +24,8 @@ export {
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
-	userForgotPassword as userForgotPasswordVaidationSchema,
+	notificationAnswers as notificationAnswersValidationSchema,
+	userForgotPassword as userForgotPasswordValidationSchema,
 	userResetPassword as userResetPasswordValidationSchema,
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
