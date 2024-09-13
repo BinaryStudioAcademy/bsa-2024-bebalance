@@ -38,12 +38,12 @@
 
 .secondary-button:hover {
 	color: var(--brand);
-	cursor: not-allowed;
 	border-color: var(--brand);
 }
 
 .secondary-button:disabled {
 	color: var(--light-gray);
+	cursor: not-allowed;
 	border-color: var(--light-gray);
 }
 
