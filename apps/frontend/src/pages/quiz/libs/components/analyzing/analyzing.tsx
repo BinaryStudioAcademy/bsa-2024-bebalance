@@ -1,9 +1,7 @@
 import { Button } from "~/libs/components/components.js";
-import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
-import { createAnimatedSpans } from "./libs/helpers/helpers.js";
-import { type TextElementType } from "./libs/types/types.js";
+import { useAnimatedSpans } from "./libs/hoook/hooks.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -11,25 +9,15 @@ type Properties = {
 };
 
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
-	const [text, setText] = useState<TextElementType>({
-		firstParagraph: [],
-		secondParagraph: [],
-	});
+	const secondParagraphDelay =
+		AnalyzingText.firstParagraph.split(" ").length *
+		TextAnimationDelay.DELAY_MULTIPLIER;
 
-	const handleAnimateText = useCallback(() => {
-		const firstParagraph = createAnimatedSpans(AnalyzingText.firstParagraph);
-		const secondParagraph = createAnimatedSpans(
-			AnalyzingText.secondParagraph,
-			AnalyzingText.firstParagraph.split(" ").length *
-				TextAnimationDelay.DELAY_MULTIPLIER,
-		);
-
-		setText({ firstParagraph, secondParagraph });
-	}, []);
-
-	useEffect(() => {
-		handleAnimateText();
-	}, [handleAnimateText]);
+	const firstParagraph = useAnimatedSpans(AnalyzingText.firstParagraph);
+	const secondParagraph = useAnimatedSpans(
+		AnalyzingText.secondParagraph,
+		secondParagraphDelay,
+	);
 
 	return (
 		<div className={styles["page-container"]}>
@@ -38,8 +26,8 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 				<div className={styles["content-container"]}>
 					<h1 className={styles["title"]}>We’re Analyzing Your Journey!</h1>
 					<div className={styles["text"]}>
-						<p>{text.firstParagraph}</p>
-						<p>{text.secondParagraph}</p>
+						<p>{firstParagraph}</p>
+						<p>{secondParagraph}</p>
 					</div>
 					<Button label="Let’s continue" onClick={onNext} type="button" />
 				</div>
