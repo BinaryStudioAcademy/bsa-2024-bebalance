@@ -11,14 +11,15 @@ const openAi = new OpenAi({
 await openAi.initializeAssistant();
 
 export { openAi };
-export { OpenAiPromptTemplates, OpenAiRoleKey } from "./libs/enums/enums.js";
+export {
+	OpenAiFunctionName,
+	OpenAiPromptTemplates,
+	OpenAiRoleKey,
+} from "./libs/enums/enums.js";
 export {
 	type OpenAiRequestMessage,
 	type OpenAiResponseMessage,
+	type OpenAiRunThreadRequestDto,
 } from "./libs/types/types.js";
-export {
-	addMessageToThreadValidationSchema,
-	AiAssistantMessageValidationSchema,
-	BalanceAnalysis,
-} from "./libs/validation-schemas/validation-schemas.js";
+export { AiAssistantMessageValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { type OpenAi } from "./open-ai.module.js";
