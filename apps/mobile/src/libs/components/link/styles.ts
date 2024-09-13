@@ -5,6 +5,7 @@ import { BaseColor } from "~/libs/enums/enums";
 const styles = StyleSheet.create({
 	link: {
 		color: BaseColor.BLUE,
+		fontSize: 16,
 	},
 });
 
