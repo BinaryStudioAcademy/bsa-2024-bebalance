@@ -7,7 +7,7 @@ import { type CategoryRepository } from "./category.repository.js";
 import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoriesGetAllResponseDto,
-	type CategoriesGetByIdsRequestDto,
+	type CategoriesGetRequestQueryDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
@@ -113,21 +113,25 @@ class CategoryService implements Service {
 		return { items };
 	}
 
-	public async findByIds(
-		query: CategoriesGetByIdsRequestDto,
+	public async findCategories(
+		query: CategoriesGetRequestQueryDto,
 	): Promise<CategoriesGetAllResponseDto> {
-		const categories = await this.categoryRepository.findByIds(
-			JSON.parse(query.categoryIds) as number[],
-		);
+		if (query.categoryIds) {
+			const categories = await this.categoryRepository.findByIds(
+				JSON.parse(query.categoryIds) as number[],
+			);
 
-		const items = categories.map((categoryEntity) => {
-			const { createdAt, id, name, updatedAt } =
-				this.convertCategoryEntityToDto(categoryEntity);
+			const items = categories.map((categoryEntity) => {
+				const { createdAt, id, name, updatedAt } =
+					this.convertCategoryEntityToDto(categoryEntity);
 
-			return { createdAt, id, name, updatedAt };
-		});
+				return { createdAt, id, name, updatedAt };
+			});
 
-		return { items };
+			return { items };
+		}
+
+		return await this.findAll();
 	}
 
 	public async findUserScores(

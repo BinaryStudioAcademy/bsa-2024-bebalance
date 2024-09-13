@@ -9,7 +9,8 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import { type CategoryService } from "./category.service.js";
 import { CategoriesApiPath } from "./libs/enums/enums.js";
-import { type CategoriesGetByIdsRequestDto } from "./libs/types/types.js";
+import { type CategoriesGetRequestQueryDto } from "./libs/types/types.js";
+import { categoryIdsValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 /**
  * @swagger
  * components:
@@ -39,69 +40,45 @@ class CategoryController extends BaseController {
 		this.categoryService = categoryService;
 
 		this.addRoute({
-			handler: () => this.getCategories(),
-			method: "GET",
-			path: CategoriesApiPath.ROOT,
-		});
-
-		this.addRoute({
 			handler: (options) =>
-				this.findByIds(
+				this.getCategories(
 					options as APIHandlerOptions<{
-						query: CategoriesGetByIdsRequestDto;
+						query: CategoriesGetRequestQueryDto;
 					}>,
 				),
 			method: "GET",
-			path: CategoriesApiPath.GET_BY_ID,
+			path: CategoriesApiPath.ROOT,
+			validation: {
+				query: categoryIdsValidationSchema,
+			},
 		});
 	}
 
 	/**
 	 * @swagger
-	 * /categories/get-by-id:
-	 *   get:
-	 *     description: Returns an array of quiz categories
-	 *     security:
-	 *       - bearerAuth: []
-	 *     parameters:
-	 *       - in: query
-	 *         name: categoryIds
-	 *         required: true
-	 *         description: Stringified array of category ids.
-	 *         schema:
-	 *           type: string
-	 *     responses:
-	 *       200:
-	 *         description: Successful operation
-	 *         content:
-	 *           application/json:
-	 *             schema:
-	 *               type: object
-	 *               properties:
-	 *                 items:
-	 *                   type: array
-	 *                   items:
-	 *                     $ref: "#/components/schemas/Category"
+	 * tags:
+	 *   - name: Categories
+	 *     description: Endpoints related to categories
 	 */
-
-	private async findByIds(
-		options: APIHandlerOptions<{
-			query: CategoriesGetByIdsRequestDto;
-		}>,
-	): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.categoryService.findByIds(options.query),
-			status: HTTPCode.OK,
-		};
-	}
 
 	/**
 	 * @swagger
 	 * /categories:
 	 *   get:
-	 *     description: Returns an array of quiz categories
+	 *     tags:
+	 *       - Categories
+	 *     summary: Returns Categories
+	 *     description: Returns an array of quiz categories. If provided with a query, returns categories with IDs specified in the query; otherwise, returns all categories.
 	 *     security:
 	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: query
+	 *         name: categoryIds
+	 *         required: false
+	 *         description: Stringified array of category IDs.
+	 *         schema:
+	 *           type: string
+	 *           example: "[1,2,3]"
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -115,9 +92,14 @@ class CategoryController extends BaseController {
 	 *                   items:
 	 *                     $ref: "#/components/schemas/Category"
 	 */
-	private async getCategories(): Promise<APIHandlerResponse> {
+
+	private async getCategories(
+		options: APIHandlerOptions<{
+			query: CategoriesGetRequestQueryDto;
+		}>,
+	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.categoryService.findAll(),
+			payload: await this.categoryService.findCategories(options.query),
 			status: HTTPCode.OK,
 		};
 	}

@@ -46,9 +46,10 @@ export {
 export {
 	CategoriesApiPath,
 	type CategoriesGetAllResponseDto,
-	type CategoriesGetByIdsRequestDto,
+	type CategoriesGetRequestQueryDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
+	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
 } from "./modules/categories/categories.js";

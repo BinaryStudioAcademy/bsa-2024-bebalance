@@ -140,6 +140,7 @@ class BaseServerApplication implements ServerApplication {
 			preHandler: preHandlers,
 			schema: {
 				body: validation?.body,
+				query: validation?.query,
 			},
 			url: path,
 		});
