@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.message-container {
+	max-width: 620px;
+	padding: 13px;
+	background-color: #f6f5fa;
+
+	/* border-radius: 0px 10px 10px; */
+}
