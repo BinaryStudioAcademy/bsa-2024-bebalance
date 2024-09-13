@@ -5,7 +5,7 @@ import {
 	CategoriesValidationRule,
 } from "../enums/enums.js";
 
-const oneCategorySelected = z.object({
+const categoriesSelected = z.object({
 	categoryIds: z
 		.number()
 		.array()
@@ -15,4 +15,4 @@ const oneCategorySelected = z.object({
 		),
 });
 
-export { oneCategorySelected };
+export { categoriesSelected };

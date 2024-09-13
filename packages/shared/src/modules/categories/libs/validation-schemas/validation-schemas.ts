@@ -1,1 +1,1 @@
-export { oneCategorySelected } from "./one-category-selected.validation-schema.js";
+export { categoriesSelected } from "./categories-selected.validation-schema.js";

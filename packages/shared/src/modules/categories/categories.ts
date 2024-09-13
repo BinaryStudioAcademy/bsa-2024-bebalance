@@ -7,4 +7,4 @@ export {
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
 } from "./libs/types/types.js";
-export { oneCategorySelected as categoriesSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { categoriesSelected as categoriesSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
