@@ -67,7 +67,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 			</Text>
 			<Text style={globalStyles.mb16} weight="semiBold">
 				Already have an account? Go to{" "}
-				<Link label="Sign In" to={`/${RootScreenName.SIGN_IN}`} />
+				<Link
+					color={BaseColor.BLUE}
+					label="Sign In"
+					to={`/${RootScreenName.SIGN_UP}`}
+					weight="semiBold"
+				/>
 			</Text>
 			<Input
 				control={control}
