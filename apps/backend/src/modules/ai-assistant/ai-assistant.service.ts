@@ -4,12 +4,16 @@ import { type CategoryService } from "~/modules/categories/categories.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 
 import {
-	generateInitPrompt,
+	generateQuestionsAnswersPrompt,
 	generateScoresResponse,
-	generateUserScoresPrompt,
+	generateTaskSuggestionsResponse,
+	runInitialThreadOptions,
+	runTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
 	type BalanceWheelAnalysisResponseDto,
+	type TaskSuggestionRequestDto,
+	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 
@@ -48,29 +52,39 @@ class AiAssistantService {
 		return await this.openAi.addMessageToThread(threadId, prompt);
 	}
 
-	public async initNewThread(
+	public async initNewChat(
 		user: UserDto,
 	): Promise<BalanceWheelAnalysisResponseDto | null> {
-		const userAnswersWithQuestions =
+		const userQuestionsWithAnswers =
 			await this.onboardingRepository.findUserAnswersWithQuestions(user.id);
 
 		const userWheelBalanceScores = await this.categoryService.findUserScores(
 			user.id,
 		);
 
-		const [initPrompt, userScoresPrompt] = [
-			generateInitPrompt(userAnswersWithQuestions, user.name),
-			generateUserScoresPrompt(userWheelBalanceScores),
-		];
+		const initPrompt = generateQuestionsAnswersPrompt(userQuestionsWithAnswers);
+		const threadId = await this.openAi.createThread([initPrompt]);
 
-		const theadId = await this.openAi.createThread([initPrompt]);
-
-		const result = await this.openAi.generateBalanceAnalysis(
-			theadId,
-			userScoresPrompt,
+		const runThreadOptions = runInitialThreadOptions(
+			user.name,
+			userWheelBalanceScores,
 		);
 
+		const result = await this.openAi.runThread(threadId, runThreadOptions);
+
 		return generateScoresResponse(result);
+	}
+
+	public async suggestTasksForCategories(
+		body: TaskSuggestionRequestDto,
+	): Promise<null | TaskSuggestionsResponseDto> {
+		const { categories, threadId } = body;
+
+		const runThreadOptions = runTaskByCategoryOptions(categories);
+
+		const result = await this.openAi.runThread(threadId, runThreadOptions);
+
+		return generateTaskSuggestionsResponse(result);
 	}
 }
 
