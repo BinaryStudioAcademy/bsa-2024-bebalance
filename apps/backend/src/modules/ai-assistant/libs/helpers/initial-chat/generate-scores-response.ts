@@ -38,6 +38,7 @@ const generateScoresResponse = (
 			messages: {
 				comments: balanceData.messages.comments,
 				greeting: balanceData.messages.greeting,
+				question: balanceData.messages.question,
 			},
 			threadId: message.thread_id,
 		};

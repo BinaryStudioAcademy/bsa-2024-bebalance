@@ -87,8 +87,12 @@ const AnalyzeBalanceScoresTool = {
 							},
 							type: "array",
 						},
+						question: {
+							description: "Question about lowest areas for improvement",
+							type: "string",
+						},
 					},
-					required: ["greeting", "comments", "lowestCategories"],
+					required: ["greeting", "comments", "question", "lowestCategories"],
 					type: "object",
 				},
 			},

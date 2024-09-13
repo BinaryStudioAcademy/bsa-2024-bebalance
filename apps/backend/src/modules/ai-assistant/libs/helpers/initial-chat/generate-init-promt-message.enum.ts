@@ -48,9 +48,11 @@ seek the most improvement.
 
 response_structure:
 {
-	messages: {              // A section containing the greeting and comments
+	messages: {              // A section containing the greeting, question and comments
 		greeting: string,      // A friendly and motivational greeting that uses the user's name.
 		comments: string       // A summary of the analysis and a motivational question for the user.
+		question: string       // A question about lowest categories.
+
 	},
 	lowestCategories: [      // An array containing the three categories with the lowest scores.
 		{
@@ -71,13 +73,16 @@ Place the greeting in the \`greeting\` field of the response.
 has identified the three areas where the user scored the lowest, which represent areas for potential improvement.
 
 Keep the explanation concise but clear, avoiding unnecessary details.
-At the end of your response, include the following question:
+
+Place this explanation  in the \`comments\` field of the response.
+
+3. Your third task is create following question:
 'Would you like to focus on improving the three areas with the lowest scores in your Wheel of Balance,
 or would you prefer to choose the areas yourself to work on?'
 
-Place this explanation and question in the \`comments\` field of the response.
+Place this question in the \`question\` field of the response.
 
-3.Your third task is to identify the three categories with the lowest scores in the user's Wheel of Balance analysis.
+4.Your fourth task is to identify the three categories with the lowest scores in the user's Wheel of Balance analysis.
 Select these categories and provide them in a structured format, listing the category ID, category name, and score.
 
 Ensure this data is placed in the \`lowestCategories\` field of the response.

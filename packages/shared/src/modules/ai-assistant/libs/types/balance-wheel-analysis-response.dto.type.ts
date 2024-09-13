@@ -10,6 +10,7 @@ type BalanceWheelAnalysisResponseDto = {
 	messages: {
 		comments: string;
 		greeting: string;
+		question: string;
 	};
 	threadId: string;
 };
