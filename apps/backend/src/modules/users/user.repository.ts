@@ -5,7 +5,11 @@ import { type UserModel } from "~/modules/users/user.model.js";
 
 import { type OnboardingAnswerModel } from "../onboarding/onboarding.js";
 import { type QuizAnswerModel } from "../quiz-answers/quiz-answers.js";
-import { type UserTaskDay } from "./libs/types/types.js";
+import {
+	type UserDetailsWithAvatarFile,
+	type UserTaskDay,
+	type UserWithAvatarFile,
+} from "./libs/types/types.js";
 import { type UserDetailsModel } from "./user-details.model.js";
 import { type UserTaskDaysModel } from "./user-task-days.model.js";
 
@@ -17,8 +21,8 @@ class UserRepository implements Repository {
 	private userTaskDaysModel: typeof UserTaskDaysModel;
 
 	public constructor(
-		userModel: typeof UserModel,
 		userDetailsModel: typeof UserDetailsModel,
+		userModel: typeof UserModel,
 		userTaskDaysModel: typeof UserTaskDaysModel,
 	) {
 		this.userModel = userModel;
@@ -47,13 +51,17 @@ class UserRepository implements Repository {
 			.returning("*");
 
 		return UserEntity.initialize({
+			avatarFileId: userDetails.avatarFileId,
+			avatarUrl: null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
 			name: userDetails.name,
+			notificationFrequency: "all",
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: [],
 		});
 	}
 
@@ -76,12 +84,15 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			)
-			.findById(id);
+			.findById(id)
+			.castTo<undefined | UserWithAvatarFile>();
 
 		return user
 			? UserEntity.initialize({
+					avatarFileId: user.userDetails.avatarFileId,
+					avatarUrl: user.userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -107,11 +118,14 @@ class UserRepository implements Repository {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
-			);
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+			)
+			.castTo<UserWithAvatarFile[]>();
 
-		return users.map((user) =>
-			UserEntity.initialize({
+		return users.map((user) => {
+			return UserEntity.initialize({
+				avatarFileId: user.userDetails.avatarFileId,
+				avatarUrl: user.userDetails.avatarFile?.url ?? null,
 				createdAt: user.createdAt,
 				email: user.email,
 				id: user.id,
@@ -129,8 +143,8 @@ class UserRepository implements Repository {
 				userTaskDays: user.userTaskDays.map(
 					(taskDay: UserTaskDay) => taskDay.dayOfWeek,
 				),
-			}),
-		);
+			});
+		});
 	}
 
 	public async findByEmail(email: string): Promise<null | UserEntity> {
@@ -139,11 +153,14 @@ class UserRepository implements Repository {
 			.where({ email })
 			.first()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
-			);
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+			)
+			.castTo<undefined | UserWithAvatarFile>();
 
 		return user
 			? UserEntity.initialize({
+					avatarFileId: user.userDetails.avatarFileId,
+					avatarUrl: user.userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
@@ -174,7 +191,10 @@ class UserRepository implements Repository {
 			.findOne({ userId: id });
 		const updatedUserDetails = await userDetails
 			?.$query()
-			.patchAndFetch(payload);
+			.patchAndFetch(payload)
+			.withGraphFetched(RelationName.AVATAR)
+			.castTo<undefined | UserDetailsWithAvatarFile>()
+			.execute();
 		const user = await this.userModel
 			.query()
 			.findById(id)
@@ -182,11 +202,55 @@ class UserRepository implements Repository {
 
 		return user && updatedUserDetails
 			? UserEntity.initialize({
+					avatarFileId: userDetails?.avatarFileId ?? null,
+					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
 					id: user.id,
 					name: updatedUserDetails.name,
 					notificationFrequency: updatedUserDetails.notificationFrequency,
+					passwordHash: user.passwordHash,
+					passwordSalt: user.passwordSalt,
+					updatedAt: user.updatedAt,
+					userTaskDays: user.userTaskDays.map(
+						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
+					),
+				})
+			: null;
+	}
+
+	public async updateAvatar(
+		id: number,
+		fileId: number,
+	): Promise<null | UserEntity> {
+		await this.userDetailsModel
+			.query()
+			.patch({ avatarFileId: fileId })
+			.findOne({ userId: id });
+
+		const userDetails = await this.userDetailsModel
+			.query()
+			.findOne({ userId: id })
+			.withGraphFetched(RelationName.AVATAR)
+			.castTo<undefined | UserDetailsWithAvatarFile>()
+			.execute();
+
+		const user = await this.userModel
+			.query()
+			.findById(id)
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+			);
+
+		return user && userDetails
+			? UserEntity.initialize({
+					avatarFileId: userDetails.avatarFileId,
+					avatarUrl: userDetails.avatarFile?.url ?? null,
+					createdAt: user.createdAt,
+					email: user.email,
+					id: user.id,
+					name: user.userDetails.name,
+					notificationFrequency: userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
 					updatedAt: user.updatedAt,
@@ -203,17 +267,27 @@ class UserRepository implements Repository {
 	): Promise<UserEntity> {
 		const user = await this.userModel
 			.query()
-			.withGraphFetched(RelationName.USER_DETAILS)
-			.patchAndFetchById(id, passwordPayload);
+			.withGraphFetched(
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+			)
+			.patchAndFetchById(id, passwordPayload)
+			.castTo<UserWithAvatarFile>()
+			.execute();
 
 		return UserEntity.initialize({
+			avatarFileId: user.userDetails.avatarFileId,
+			avatarUrl: user.userDetails.avatarFile?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
 			id: user.id,
 			name: user.userDetails.name,
+			notificationFrequency: user.userDetails.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
 			updatedAt: user.updatedAt,
+			userTaskDays: user.userTaskDays.map(
+				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
+			),
 		});
 	}
 

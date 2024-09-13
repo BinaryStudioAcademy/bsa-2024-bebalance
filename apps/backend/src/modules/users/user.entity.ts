@@ -4,6 +4,10 @@ import { type Entity, type ValueOf } from "~/libs/types/types.js";
 import { NotificationFrequency } from "./libs/enums/enums.js";
 
 class UserEntity implements Entity {
+	private avatarFileId: null | number;
+
+	private avatarUrl: null | string;
+
 	private createdAt: string;
 
 	private email: string;
@@ -31,6 +35,8 @@ class UserEntity implements Entity {
 	private userTaskDays: null | number[];
 
 	private constructor({
+		avatarFileId,
+		avatarUrl,
 		createdAt,
 		email,
 		hasAnsweredOnboardingQuestions,
@@ -45,6 +51,8 @@ class UserEntity implements Entity {
 		updatedAt,
 		userTaskDays,
 	}: {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -59,6 +67,8 @@ class UserEntity implements Entity {
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
+		this.avatarFileId = avatarFileId;
+		this.avatarUrl = avatarUrl;
 		this.createdAt = createdAt;
 		this.hasAnsweredOnboardingQuestions = hasAnsweredOnboardingQuestions;
 		this.hasAnsweredQuizQuestions = hasAnsweredQuizQuestions;
@@ -75,6 +85,8 @@ class UserEntity implements Entity {
 	}
 
 	public static initialize({
+		avatarFileId,
+		avatarUrl,
 		createdAt,
 		email,
 		id,
@@ -87,11 +99,13 @@ class UserEntity implements Entity {
 		updatedAt,
 		userTaskDays,
 	}: {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions?: boolean;
 		hasAnsweredQuizQuestions?: boolean;
-		id: number;
+		id: null | number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		onboardingAnswers?: number[];
@@ -102,6 +116,8 @@ class UserEntity implements Entity {
 		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
+			avatarFileId,
+			avatarUrl,
 			createdAt,
 			email,
 			hasAnsweredOnboardingQuestions: Boolean(
@@ -135,6 +151,8 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarFileId: null,
+			avatarUrl: null,
 			createdAt: "",
 			email,
 			hasAnsweredOnboardingQuestions: false,
@@ -152,6 +170,8 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -164,6 +184,8 @@ class UserEntity implements Entity {
 		userTaskDays: number[];
 	} {
 		return {
+			avatarFileId: this.avatarFileId,
+			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: Boolean(
@@ -182,6 +204,8 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -193,6 +217,8 @@ class UserEntity implements Entity {
 		userTaskDays: number[];
 	} {
 		return {
+			avatarFileId: this.avatarFileId,
+			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: Boolean(

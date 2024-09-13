@@ -14,6 +14,7 @@ import {
 	Analyzing,
 	BalanceWheel,
 	Introduction,
+	Motivation,
 	NotificationQuestions,
 	OnboardingForm,
 	QuizForm,
@@ -22,7 +23,7 @@ import { PREVIOUS_INDEX_OFFSET } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	const [step, setStep] = useState<number>(Step.ONBOARDING);
+	const [step, setStep] = useState<number>(Step.MOTIVATION);
 	const dispatch = useAppDispatch();
 
 	const { hasAnsweredOnboardingQuestions } = useAppSelector(({ auth }) => ({
@@ -51,6 +52,10 @@ const Quiz: React.FC = () => {
 		switch (step) {
 			case Step.ANALYZING: {
 				return <Analyzing onNext={handleNextStep} />;
+			}
+
+			case Step.MOTIVATION: {
+				return <Motivation onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {

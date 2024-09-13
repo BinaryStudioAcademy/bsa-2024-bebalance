@@ -45,9 +45,9 @@
 
 .button-container {
 	display: flex;
-	flex-direction: column;
 	gap: 15px;
 	align-items: center;
+	justify-content: center;
 	width: 100%;
 	margin-top: 76px;
 }
@@ -56,12 +56,20 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
+	width: 122px;
 	max-width: 309px;
 	height: 42px;
 }
 
 @media (width <= 768px) {
+	.button-container {
+		flex-direction: column;
+	}
+
+	.button-container .button-wrapper {
+		width: 100%;
+	}
+
 	.container {
 		padding: 20px;
 	}
