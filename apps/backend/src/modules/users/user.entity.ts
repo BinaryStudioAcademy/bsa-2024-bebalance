@@ -3,6 +3,10 @@ import { type Entity, type ValueOf } from "~/libs/types/types.js";
 import { NotificationFrequency } from "./libs/enums/enums.js";
 
 class UserEntity implements Entity {
+	private avatarFileId: null | number;
+
+	private avatarUrl: null | string;
+
 	private createdAt: string;
 
 	private email: string;
@@ -22,6 +26,8 @@ class UserEntity implements Entity {
 	private userTaskDays: null | number[];
 
 	private constructor({
+		avatarFileId,
+		avatarUrl,
 		createdAt,
 		email,
 		id,
@@ -32,6 +38,8 @@ class UserEntity implements Entity {
 		updatedAt,
 		userTaskDays,
 	}: {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		id: null | number;
@@ -42,6 +50,8 @@ class UserEntity implements Entity {
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
+		this.avatarFileId = avatarFileId;
+		this.avatarUrl = avatarUrl;
 		this.createdAt = createdAt;
 		this.email = email;
 		this.id = id;
@@ -54,6 +64,8 @@ class UserEntity implements Entity {
 	}
 
 	public static initialize({
+		avatarFileId,
+		avatarUrl,
 		createdAt,
 		email,
 		id,
@@ -64,9 +76,11 @@ class UserEntity implements Entity {
 		updatedAt,
 		userTaskDays,
 	}: {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
-		id: number;
+		id: null | number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
@@ -75,6 +89,8 @@ class UserEntity implements Entity {
 		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
+			avatarFileId,
+			avatarUrl,
 			createdAt,
 			email,
 			id,
@@ -100,6 +116,8 @@ class UserEntity implements Entity {
 		passwordSalt: string;
 	}): UserEntity {
 		return new UserEntity({
+			avatarFileId: null,
+			avatarUrl: null,
 			createdAt: "",
 			email,
 			id: null,
@@ -113,6 +131,8 @@ class UserEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		name: string;
@@ -123,6 +143,8 @@ class UserEntity implements Entity {
 		userTaskDays: number[];
 	} {
 		return {
+			avatarFileId: this.avatarFileId,
+			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
 			name: this.name,
@@ -135,6 +157,8 @@ class UserEntity implements Entity {
 	}
 
 	public toObject(): {
+		avatarFileId: null | number;
+		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
 		id: number;
@@ -144,6 +168,8 @@ class UserEntity implements Entity {
 		userTaskDays: number[];
 	} {
 		return {
+			avatarFileId: this.avatarFileId,
+			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
 			id: this.id as number,
