@@ -74,20 +74,22 @@ const ChatComponent: React.FC = () => {
 		<main className={styles["page-container"]}>
 			<div>
 				<ul className={styles["container"]}>
-					{messages.map((message) => (
-						<ChatMessage
-							buttonLabels={message.buttonLabels ?? []}
-							contentData={chartData}
-							key={message.messages.comments}
-							onSubmit={
-								message.type === "categoryInputs"
-									? handleCategoriesSubmit
-									: undefined
-							}
-							text={message.messages.greeting}
-							type={message.type}
-						/>
-					))}
+					{messages.map((message) => {
+						return (
+							<ChatMessage
+								buttonLabels={message.buttonLabels ?? []}
+								contentData={chartData}
+								key={message.text}
+								onSubmit={
+									message.type === "categoryInputs"
+										? handleCategoriesSubmit
+										: undefined
+								}
+								text={message.text}
+								type={message.type}
+							/>
+						);
+					})}
 				</ul>
 			</div>
 		</main>
