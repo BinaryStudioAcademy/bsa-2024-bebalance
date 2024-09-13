@@ -6,12 +6,18 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
-import { addMessageToThreadValidationSchema } from "~/libs/modules/open-ai/open-ai.js";
-import { type UserDto } from "~/libs/types/types.js";
+import { type UserDto } from "~/modules/users/users.js";
 
 import { type AiAssistantService } from "./ai-assistant.service.js";
 import { AiAssistantApiPath } from "./libs/enums/enums.js";
-import { type ThreadMessageCreateDto } from "./libs/types/types.js";
+import {
+	type TaskSuggestionRequestDto,
+	type ThreadMessageCreateDto,
+} from "./libs/types/types.js";
+import {
+	addMessageToThreadValidationSchema,
+	TaskSuggestionRequestValidationSchema,
+} from "./libs/validation-schemas/validation-schemas.js";
 
 class AiAssistantController extends BaseController {
 	private openAiService: AiAssistantService;
@@ -23,13 +29,13 @@ class AiAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.initConversation(
+				this.initNewChat(
 					options as APIHandlerOptions<{
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.INITIATE_THREAD,
+			path: AiAssistantApiPath.INIT_NEW_CHAT,
 		});
 
 		this.addRoute({
@@ -43,6 +49,21 @@ class AiAssistantController extends BaseController {
 			path: AiAssistantApiPath.ADD_MESSAGE,
 			validation: {
 				body: addMessageToThreadValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.suggestTasksForCategories(
+					options as APIHandlerOptions<{
+						body: TaskSuggestionRequestDto;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: AiAssistantApiPath.SUGGEST_TASKS,
+			validation: {
+				body: TaskSuggestionRequestValidationSchema,
 			},
 		});
 	}
@@ -60,7 +81,7 @@ class AiAssistantController extends BaseController {
 		};
 	}
 
-	private async initConversation(
+	private async initNewChat(
 		options: APIHandlerOptions<{
 			user: UserDto;
 		}>,
@@ -68,7 +89,20 @@ class AiAssistantController extends BaseController {
 		const { user } = options;
 
 		return {
-			payload: await this.openAiService.initNewThread(user),
+			payload: await this.openAiService.initNewChat(user),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async suggestTasksForCategories(
+		options: APIHandlerOptions<{
+			body: TaskSuggestionRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { body } = options;
+
+		return {
+			payload: await this.openAiService.suggestTasksForCategories(body),
 			status: HTTPCode.OK,
 		};
 	}
