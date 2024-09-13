@@ -132,7 +132,9 @@ class CategoryRepository implements Repository {
 					.castTo<CategoryModel[]>();
 
 				const scoreEntities = scoresModel.map((score) => {
-					return CategoryEntity.initializeNew(score);
+					return CategoryEntity.initializeNew({
+						name: score.name,
+					});
 				});
 
 				return CategoryEntity.initialize({
