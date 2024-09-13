@@ -12,7 +12,7 @@ import { type Database } from "~/libs/modules/database/database.js";
 import { HTTPCode, HTTPError } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { token } from "~/libs/modules/token/token.js";
-import { authorizationPlugin } from "~/libs/plugins/plugins.js";
+import { authorizationPlugin, filePlugin } from "~/libs/plugins/plugins.js";
 import {
 	type ServerCommonErrorResponse,
 	type ServerValidationErrorResponse,
@@ -216,6 +216,8 @@ class BaseServerApplication implements ServerApplication {
 					userService,
 					whiteRoutes: WHITE_ROUTES,
 				});
+
+				await this.app.register(filePlugin);
 			}),
 		);
 	}
