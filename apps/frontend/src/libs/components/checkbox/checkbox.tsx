@@ -1,3 +1,4 @@
+import Checkmark from "~/assets/img/checkmark.svg?react";
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
@@ -104,7 +105,9 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 										type="checkbox"
 										value={option.value}
 									/>
-									<span className={styles["checkmark"]} />
+									<span className={styles["checkmark-container"]}>
+										<Checkmark className={styles["checkmark"]} />
+									</span>
 									{option.label}
 								</label>
 							</div>
@@ -130,7 +133,9 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 								type="checkbox"
 								value={value}
 							/>
-							<span className={styles["checkmark"]} />
+							<span className={styles["checkmark-container"]}>
+								<Checkmark className={styles["checkmark"]} />
+							</span>
 							{label}
 						</label>
 					</div>
