@@ -1,3 +1,5 @@
+import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 
 import {
@@ -6,6 +8,7 @@ import {
 	NO_USER_TASK_DAYS,
 } from "./libs/constants/constants.js";
 import { Sunday } from "./libs/enums/enums.js";
+import { TaskError } from "./libs/exceptions/exceptions.js";
 import { type TaskDto, type UsersTaskCreateDto } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
 import { type TaskModel } from "./task.model.js";
@@ -25,8 +28,10 @@ class TaskService implements Service {
 		const { userTaskDays } = payload.user;
 
 		if (!userTaskDays || userTaskDays.length === NO_USER_TASK_DAYS) {
-			// TODO: Add proper error handling
-			throw new Error("User task days are not defined");
+			throw new TaskError({
+				message: ErrorMessage.TASK_DAYS_NOT_DEFINED,
+				status: HTTPCode.BAD_REQUEST,
+			});
 		}
 
 		const normalizeTaskDays = userTaskDays.map((day) =>

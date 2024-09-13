@@ -11,6 +11,8 @@ const ErrorMessage = {
 		"This link has expired. Please initiate the password reset process again.",
 	SCORES_UPDATE_UNAVAILABLE:
 		"Scores cannot be updated before the quiz is taken.",
+	TASK_DAYS_NOT_DEFINED:
+		"You must define the days for tasks before creating tasks.",
 	UNAUTHORIZED: "You are unauthorized to access the requested resource.",
 } as const;
 
