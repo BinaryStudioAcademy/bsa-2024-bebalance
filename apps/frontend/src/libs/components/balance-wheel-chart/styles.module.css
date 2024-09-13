@@ -4,5 +4,5 @@
 }
 
 .root-wheel-container {
-	width: 649px;
+	max-width: 649px;
 }
