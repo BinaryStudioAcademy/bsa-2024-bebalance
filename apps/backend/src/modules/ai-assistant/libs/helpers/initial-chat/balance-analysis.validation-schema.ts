@@ -9,6 +9,7 @@ const Category = z.object({
 const Messages = z.object({
 	comments: z.string(),
 	greeting: z.string(),
+	question: z.string(),
 });
 
 const BalanceAnalysis = z.object({

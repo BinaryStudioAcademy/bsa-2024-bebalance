@@ -51,6 +51,7 @@ response_structure:
 	messages: {              // A section containing the greeting and comments
 		greeting: string,      // A friendly and motivational greeting that uses the user's name.
 		comments: string       // A summary of the analysis and a motivational question for the user.
+		question: string        // A follow-up question for the user to guide further action.
 	},
 	lowestCategories: [      // An array containing the three categories with the lowest scores.
 		{
@@ -69,15 +70,16 @@ Place the greeting in the \`greeting\` field of the response.
 
 2.Your second task is to provide a brief summary of the user's Wheel of Balance analysis. Highlight that the analysis
 has identified the three areas where the user scored the lowest, which represent areas for potential improvement.
-
 Keep the explanation concise but clear, avoiding unnecessary details.
-At the end of your response, include the following question:
-'Would you like to focus on improving the three areas with the lowest scores in your Wheel of Balance,
-or would you prefer to choose the areas yourself to work on?'
+Place this explanation n in the \`comments\` field of the response.
 
-Place this explanation and question in the \`comments\` field of the response.
+3. Your third task is to respond with a follow-up question for the user. The question should guide the user to either
+focus on improving the three areas with the lowest scores, or to decide whether they would prefer to choose the areas
+themselves for further improvement. You must craft the question in a way that encourages thoughtful reflection and
+engagement from the user. The question should be specific, clear, and include the user's name, {{userName}}.
+Place this question in the \`question\` field of the response.
 
-3.Your third task is to identify the three categories with the lowest scores in the user's Wheel of Balance analysis.
+4.Your forth task is to identify the three categories with the lowest scores in the user's Wheel of Balance analysis.
 Select these categories and provide them in a structured format, listing the category ID, category name, and score.
 
 Ensure this data is placed in the \`lowestCategories\` field of the response.
