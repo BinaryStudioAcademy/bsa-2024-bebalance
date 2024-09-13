@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.45.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.44.0...v1.45.0) (2024-09-13)
+
+
+### Features
+
+* **backend:** update profile picture bb-173 ([#276](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/276)) ([9917ccf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9917ccfd70fdb371fd9be7ad475c833161ce17f1))
+
+
+### Bug Fixes
+
+* **frontend:** add color to navlink bb-406 ([#411](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/411)) ([ffb2f05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ffb2f05e9948e32d6ae749488acff2d01338ecaa))
+* **mobile:** Remove link "Go to the Wheel" from the Welcome screen bb-369 ([#407](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/407)) ([99723b9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/99723b990fe1afc885b173619db9fb938b9518bc))
+
 ## [1.44.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.43.0...v1.44.0) (2024-09-12)
 
 
