@@ -150,7 +150,7 @@ const Onboarding: React.FC = () => {
 								)}
 								<div className={styles["button-wrapper"]}>
 									<Button
-										isPrimary={isValid}
+										isDisabled={!isValid}
 										label={
 											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
 										}

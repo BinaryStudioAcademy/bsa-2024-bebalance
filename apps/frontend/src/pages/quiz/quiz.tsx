@@ -8,6 +8,7 @@ import {
 	Analyzing,
 	BalanceWheel,
 	Introduction,
+	Motivation,
 	NotificationQuestions,
 	QuizForm,
 } from "./libs/components/components.js";
@@ -16,7 +17,7 @@ import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const [step, setStep] = useState<number>(Step.ANALYZING);
+	const [step, setStep] = useState<number>(Step.MOTIVATION);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
@@ -35,12 +36,16 @@ const Quiz: React.FC = () => {
 				return <Analyzing onNext={handleNextStep} />;
 			}
 
-			case Step.BALANCE_WHEEL: {
-				return <BalanceWheel />;
+			case Step.MOTIVATION: {
+				return <Motivation onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {
 				return <Introduction onNext={handleNextStep} />;
+			}
+
+			case Step.QUIZ: {
+				return <QuizForm onNext={handleNextStep} />;
 			}
 
 			case Step.NOTIFICATION_QUESTIONS: {
@@ -49,8 +54,8 @@ const Quiz: React.FC = () => {
 				);
 			}
 
-			case Step.QUIZ: {
-				return <QuizForm onNext={handleNextStep} />;
+			case Step.BALANCE_WHEEL: {
+				return <BalanceWheel />;
 			}
 
 			default: {
