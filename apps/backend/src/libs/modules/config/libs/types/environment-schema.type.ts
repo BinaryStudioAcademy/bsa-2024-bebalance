@@ -37,6 +37,12 @@ type EnvironmentSchema = {
 		API_KEY: string;
 		MODEL: string;
 	};
+	S3_BUCKET: {
+		BUCKET_ACCESS_KEY: string;
+		BUCKET_NAME: string;
+		BUCKET_REGION: string;
+		SECRET_ACCESS_KEY: string;
+	};
 };
 
 export { type EnvironmentSchema };

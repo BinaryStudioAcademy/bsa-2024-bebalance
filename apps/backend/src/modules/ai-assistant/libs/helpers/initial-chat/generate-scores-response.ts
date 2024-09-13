@@ -25,20 +25,20 @@ const generateScoresResponse = (
 	if (parsedResult.success) {
 		const contentText: string =
 			parsedResult.data.content[ZERO_INDEX].text.value;
-		const balanceData: BalanceAnalysisData = JSON.parse(
+		const resultData: BalanceAnalysisData = JSON.parse(
 			contentText,
 		) as BalanceAnalysisData;
 
 		return {
-			lowestCategories: balanceData.lowestCategories.map((category) => ({
+			lowestCategories: resultData.lowestCategories.map((category) => ({
 				categoryId: Number(category.categoryId),
 				categoryName: category.categoryName,
 				score: category.score,
 			})),
 			messages: {
-				comments: balanceData.messages.comments,
-				greeting: balanceData.messages.greeting,
-				question: balanceData.messages.question,
+				comments: resultData.messages.comments,
+				greeting: resultData.messages.greeting,
+				question: resultData.messages.question,
 			},
 			threadId: message.thread_id,
 		};

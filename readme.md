@@ -34,7 +34,8 @@ erDiagram
         text password_salt
     }
 
-    user_details ||--|| users : user_id
+    user_details ||--|| users: user_id
+    user_details ||--o| files: avatar_file_id
     user_details {
         int id PK
         dateTime created_at
@@ -42,6 +43,30 @@ erDiagram
         varchar name
         int user_id FK
         string notification_frequency
+        int avatar_file_id FK
+    }
+
+    tasks {
+        int id PK
+        varchar label
+        varchar description
+        varchar status
+        int user_id FK
+        int category_id FK
+        dateTime due_date
+        dateTime created_at
+        dateTime updated_at
+    }
+
+    users }|--o| tasks: user_id
+    categories }|--o| tasks: category_id
+
+    files {
+        int id PK
+        varchar file_key UK
+        varchar url
+        dateTime created_at
+        dateTime updated_at
     }
 
     categories {
@@ -51,7 +76,7 @@ erDiagram
         varchar name UK
     }
 
-    quiz_questions }|--o| categories : category_id
+    quiz_questions }|--o| categories: category_id
     quiz_questions {
         int id PK
         dateTime created_at
@@ -60,7 +85,7 @@ erDiagram
         int category_id FK
     }
 
-    quiz_answers }|--o| quiz_questions : question_id
+    quiz_answers }|--o| quiz_questions: question_id
     quiz_answers {
         int id PK
         dateTime created_at
@@ -70,8 +95,8 @@ erDiagram
         int question_id FK
     }
 
-    quiz_scores }o--|| categories : category_id
-    quiz_scores }o--|| users : user_id
+    quiz_scores }o--|| categories: category_id
+    quiz_scores }o--|| users: user_id
     quiz_scores {
         int id PK
         dateTime created_at
@@ -81,8 +106,8 @@ erDiagram
         int user_id FK
     }
 
-    quiz_answers_to_users }o--|| quiz_answers : answer_id
-    quiz_answers_to_users }o--|| users : user_id
+    quiz_answers_to_users }o--|| quiz_answers: answer_id
+    quiz_answers_to_users }o--|| users: user_id
     quiz_answers_to_users {
         int id PK
         dateTime created_at
@@ -98,7 +123,7 @@ erDiagram
         text label UK
     }
 
-    onboarding_answers }|--o| onboarding_questions : question_id
+    onboarding_answers }|--o| onboarding_questions: question_id
     onboarding_answers {
         int id PK
         dateTime created_at
@@ -107,8 +132,8 @@ erDiagram
         int question_id FK
     }
 
-    onboarding_answers_to_users }o--|| onboarding_answers : answer_id
-    onboarding_answers_to_users }o--|| users : user_id
+    onboarding_answers_to_users }o--|| onboarding_answers: answer_id
+    onboarding_answers_to_users }o--|| users: user_id
     onboarding_answers_to_users {
         int id PK
         dateTime created_at
@@ -117,7 +142,7 @@ erDiagram
         int user_id FK
     }
 
-    user_task_days }o--|| users : user_id
+    user_task_days }o--|| users: user_id
     user_task_days {
         int id PK
         dateTime created_at

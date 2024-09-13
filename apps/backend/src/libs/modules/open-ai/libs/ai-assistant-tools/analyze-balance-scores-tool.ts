@@ -88,11 +88,12 @@ const AnalyzeBalanceScoresTool = {
 							type: "array",
 						},
 						question: {
-							description: "Question about lowest areas for improvement",
+							description:
+								"A follow-up question that guides the user to either focus on improving the three areas with the lowest scores or allows them to choose the areas for further improvement. The question should be crafted to encourage thoughtful reflection and engagement, and it must include the user's name.",
 							type: "string",
 						},
 					},
-					required: ["greeting", "comments", "question", "lowestCategories"],
+					required: ["greeting", "comments", "lowestCategories", "question"],
 					type: "object",
 				},
 			},

@@ -92,8 +92,8 @@ android {
         applicationId "com.bebalance"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode getMyAppVersionCode()
+        versionName getMyAppVersionName()
     }
     signingConfigs {
         debug {
@@ -103,9 +103,9 @@ android {
             keyPassword 'android'
         }
         release {
+			storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
 			keyAlias keystoreProperties['keyAlias']
 			keyPassword keystoreProperties['keyPassword']
-			storeFile file(keystoreProperties['storeFile'])
 			storePassword keystoreProperties['storePassword']
 		}
     }
@@ -132,6 +132,14 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+}
+
+def getMyAppVersionName() {
+    return new File('./app/versionName').getText().trim()
+}
+
+int getMyAppVersionCode() {
+    return new File('./app/versionCode').getText().trim().toInteger()
 }
 
 apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

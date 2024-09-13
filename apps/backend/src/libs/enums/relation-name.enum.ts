@@ -1,4 +1,5 @@
 const RelationName = {
+	AVATAR: "avatarFile",
 	CATEGORIES: "categories",
 	ONBOARDING_ANSWERS: "answers",
 	ONBOARDING_QUESTION: "question",
