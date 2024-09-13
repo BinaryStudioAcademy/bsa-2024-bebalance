@@ -1,0 +1,5 @@
+const OpenAiFunctionName = {
+	ANALYZE_BALANCE_SCORES: "analyze_balance_scores",
+	GENERATE_TASK_BY_CATEGORY: "generate_task_by_category",
+} as const;
+export { OpenAiFunctionName };
