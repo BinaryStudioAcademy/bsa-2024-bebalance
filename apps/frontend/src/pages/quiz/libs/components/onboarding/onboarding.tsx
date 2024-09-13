@@ -51,7 +51,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		}
 	}, [currentQuestionIndex, dataStatus, questions]);
 
-	const { control, handleSubmit, isValid } = useAppForm<OnboardingFormValues>({
+	const { control, handleSubmit } = useAppForm<OnboardingFormValues>({
 		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
 	});
 
@@ -134,11 +134,11 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 								)}
 								<div className={styles["button-wrapper"]}>
 									<Button
-										isDisabled={!isValid}
 										label={
 											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
 										}
 										type="submit"
+										variant="primary"
 									/>
 								</div>
 							</div>

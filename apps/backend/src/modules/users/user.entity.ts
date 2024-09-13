@@ -104,12 +104,12 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			createdAt,
 			email,
-			hasAnsweredOnboardingQuestions:
-				onboardingAnswers && onboardingAnswers.length > ZERO_INDEX
-					? true
-					: false,
-			hasAnsweredQuizQuestions:
-				quizAnswers && quizAnswers.length > ZERO_INDEX ? true : false,
+			hasAnsweredOnboardingQuestions: Boolean(
+				onboardingAnswers && onboardingAnswers.length > ZERO_INDEX,
+			),
+			hasAnsweredQuizQuestions: Boolean(
+				quizAnswers && quizAnswers.length > ZERO_INDEX,
+			),
 			id,
 			name,
 			notificationFrequency:
@@ -166,12 +166,12 @@ class UserEntity implements Entity {
 		return {
 			createdAt: this.createdAt,
 			email: this.email,
-			hasAnsweredOnboardingQuestions:
-				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX
-					? true
-					: false,
-			hasAnsweredQuizQuestions:
-				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX ? true : false,
+			hasAnsweredOnboardingQuestions: Boolean(
+				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX,
+			),
+			hasAnsweredQuizQuestions: Boolean(
+				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX,
+			),
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
@@ -195,12 +195,12 @@ class UserEntity implements Entity {
 		return {
 			createdAt: this.createdAt,
 			email: this.email,
-			hasAnsweredOnboardingQuestions:
-				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX
-					? true
-					: false,
-			hasAnsweredQuizQuestions:
-				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX ? true : false,
+			hasAnsweredOnboardingQuestions: Boolean(
+				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX,
+			),
+			hasAnsweredQuizQuestions: Boolean(
+				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX,
+			),
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
