@@ -12,11 +12,7 @@ import {
 } from "~/libs/types/types";
 import { categoriesSelectedValidationSchema } from "~/packages/categories/categories";
 
-import {
-	CATEGORIES_FIELD_NAME,
-	CATEGORIES_FORM_DEFAULT_VALUES,
-	CHECK_ALL_CATEGORIES_NAME,
-} from "./libs/constants/constants";
+import { CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants";
 import {
 	getCategoriesSortedByScore,
 	getInitialSelectedCategoryIds,
@@ -40,10 +36,12 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 		});
 
 	const checkboxGroupOptions = categories.map(
-		({ categoryId, categoryName }) => ({
-			id: categoryId,
-			label: categoryName,
-		}),
+		({ categoryId, categoryName }) => {
+			return {
+				id: categoryId,
+				label: categoryName,
+			};
+		},
 	);
 
 	useEffect(() => {
@@ -65,10 +63,10 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 	return (
 		<View style={[globalStyles.gap8, globalStyles.mb24]}>
 			<MultipleCheckboxInput
-				checkAllLabel={CHECK_ALL_CATEGORIES_NAME}
+				checkAllLabel="All"
 				control={control}
 				errors={errors}
-				name={CATEGORIES_FIELD_NAME}
+				name="categoryIds"
 				options={checkboxGroupOptions}
 			/>
 			<Button label={submitButtonName} onPress={handleFormSubmit} />

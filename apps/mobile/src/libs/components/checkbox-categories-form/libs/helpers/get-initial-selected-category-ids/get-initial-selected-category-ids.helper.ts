@@ -3,7 +3,7 @@ import { type QuizScoresGetAllItemResponseDto } from "~/libs/types/types";
 
 const LOWEST_SCORE_CATEGORIES_QUANTITY = 3;
 
-const getSelectedCategoryIds = (
+const getInitialSelectedCategoryIds = (
 	sortedCategories: QuizScoresGetAllItemResponseDto[],
 ): number[] => {
 	return sortedCategories
@@ -11,4 +11,4 @@ const getSelectedCategoryIds = (
 		.map(({ categoryId }) => categoryId);
 };
 
-export { getSelectedCategoryIds };
+export { getInitialSelectedCategoryIds };

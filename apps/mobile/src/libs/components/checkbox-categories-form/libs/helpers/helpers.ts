@@ -1,2 +1,2 @@
 export { getCategoriesSortedByScore } from "./get-categories-sorted-by-score/get-categories-sorted-by-score.helper";
-export { getSelectedCategoryIds } from "./get-selected-category-ids/get-selected-category-ids.helper";
+export { getInitialSelectedCategoryIds } from "./get-initial-selected-category-ids/get-initial-selected-category-ids.helper";
