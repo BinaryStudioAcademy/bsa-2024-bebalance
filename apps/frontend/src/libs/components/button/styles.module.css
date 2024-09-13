@@ -24,6 +24,11 @@
 	background-color: var(--brand);
 }
 
+.primary-button:disabled {
+	cursor: not-allowed;
+	background-color: var(--light-gray);
+}
+
 .secondary-button {
 	line-height: 22px;
 	color: var(--black);
@@ -33,7 +38,13 @@
 
 .secondary-button:hover {
 	color: var(--brand);
+	cursor: not-allowed;
 	border-color: var(--brand);
+}
+
+.secondary-button:disabled {
+	color: var(--light-gray);
+	border-color: var(--light-gray);
 }
 
 .icon-button {
@@ -45,11 +56,6 @@
 	color: var(--gray);
 	background-color: transparent;
 	transform: translateY(-50%);
-}
-
-.disabled {
-	cursor: not-allowed;
-	opacity: 0.5;
 }
 
 .position-right {
