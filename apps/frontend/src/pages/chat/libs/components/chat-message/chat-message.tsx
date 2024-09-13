@@ -33,7 +33,9 @@ const ChatMessage: React.FC<Properties> = ({
 				return (
 					<>
 						{buttonLabels.map((button: string) => (
-							<button key={button}>{button}</button>
+							<div className={styles["button-container"]} key={button}>
+								<button className={styles["button"]}>{button}</button>
+							</div>
 						))}
 					</>
 				);
