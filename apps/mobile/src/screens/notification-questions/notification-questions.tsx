@@ -3,6 +3,7 @@ import React from "react";
 import {
 	BackgroundWrapper,
 	Button,
+	InfinitePager,
 	ScreenWrapper,
 	Text,
 	View,
@@ -13,10 +14,14 @@ import {
 	useAppForm,
 	useCallback,
 	useNavigation,
+	useRef,
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type NativeStackNavigationProp } from "~/libs/types/types";
+import {
+	type InfinitePagerImperativeApi,
+	type NativeStackNavigationProp,
+} from "~/libs/types/types";
 import {
 	type NotificationAnswersPayloadDto,
 	notificationAnswersValidationSchema,
@@ -36,6 +41,9 @@ import { styles } from "./styles";
 
 const NotificationQuestions: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const infinitePagerReference = useRef<InfinitePagerImperativeApi | null>(
+		null,
+	);
 	const [currentStep, setCurrentStep] = useState<number>(NumericalValue.ZERO);
 
 	const navigation =
@@ -51,6 +59,9 @@ const NotificationQuestions: React.FC = () => {
 		setCurrentStep(
 			direction === "next" ? NumericalValue.ONE : NumericalValue.ZERO,
 		);
+		infinitePagerReference.current?.[
+			direction === "next" ? "incrementPage" : "decrementPage"
+		]({ animated: true });
 	}, []);
 
 	const handleBackPress = useCallback((): void => {
@@ -81,6 +92,14 @@ const NotificationQuestions: React.FC = () => {
 		handleStepChange,
 	]);
 
+	const onPageRender = useCallback(() => {
+		return currentStep === NumericalValue.ZERO ? (
+			<NotificationTaskDays control={control} errors={errors} />
+		) : (
+			<NotificationFrequencyQuestion control={control} errors={errors} />
+		);
+	}, [currentStep, control, errors]);
+
 	return (
 		<BackgroundWrapper>
 			<ScreenWrapper>
@@ -110,14 +129,10 @@ const NotificationQuestions: React.FC = () => {
 							>
 								And the last step
 							</Text>
-							{currentStep === NumericalValue.ZERO ? (
-								<NotificationTaskDays control={control} errors={errors} />
-							) : (
-								<NotificationFrequencyQuestion
-									control={control}
-									errors={errors}
-								/>
-							)}
+							<InfinitePager
+								infinitePagerReference={infinitePagerReference}
+								onPageRender={onPageRender}
+							/>
 						</View>
 
 						<View style={globalStyles.gap16}>
