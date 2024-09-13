@@ -1,9 +1,11 @@
 import { type Edge, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { View } from "~/libs/components/components";
-import { Direction, NumericalValue } from "~/libs/enums/enums";
+import { NumericalValue } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
+
+import { EdgeDirection } from "./libs/enums/enums";
 
 type Properties = {
 	children: React.ReactNode;
@@ -12,10 +14,10 @@ type Properties = {
 };
 
 const DEFAULT_SAFE_AREA_EDGES: Edge[] = [
-	Direction.TOP,
-	Direction.BOTTOM,
-	Direction.LEFT,
-	Direction.TOP,
+	EdgeDirection.TOP,
+	EdgeDirection.BOTTOM,
+	EdgeDirection.LEFT,
+	EdgeDirection.TOP,
 ];
 
 const ScreenWrapper: React.FC<Properties> = ({
@@ -26,16 +28,16 @@ const ScreenWrapper: React.FC<Properties> = ({
 	const insets = useSafeAreaInsets();
 
 	const paddingStyle = {
-		paddingBottom: edges.includes(Direction.BOTTOM)
+		paddingBottom: edges.includes(EdgeDirection.BOTTOM)
 			? insets.bottom
 			: NumericalValue.ZERO,
-		paddingLeft: edges.includes(Direction.LEFT)
+		paddingLeft: edges.includes(EdgeDirection.LEFT)
 			? insets.left
 			: NumericalValue.ZERO,
-		paddingRight: edges.includes(Direction.RIGHT)
+		paddingRight: edges.includes(EdgeDirection.RIGHT)
 			? insets.right
 			: NumericalValue.ZERO,
-		paddingTop: edges.includes(Direction.TOP)
+		paddingTop: edges.includes(EdgeDirection.TOP)
 			? insets.top
 			: NumericalValue.ZERO,
 	};
