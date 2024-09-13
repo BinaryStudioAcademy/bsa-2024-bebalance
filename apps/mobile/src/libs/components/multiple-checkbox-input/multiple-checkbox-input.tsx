@@ -9,12 +9,14 @@ import {
 	type FieldValues,
 } from "~/libs/types/types";
 
+import { type InputOption } from "./libs/types/types";
+
 type Properties<T extends FieldValues> = {
 	checkAllLabel?: string;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
 	fieldName: FieldPath<T>;
-	options: { id: number; label: string }[];
+	options: InputOption[];
 };
 
 const MultipleCheckboxInput = <T extends FieldValues>({
