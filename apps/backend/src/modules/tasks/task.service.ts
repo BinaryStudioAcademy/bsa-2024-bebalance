@@ -37,10 +37,10 @@ class TaskService implements Service {
 				? daysDifference + FULL_WEEK
 				: daysDifference;
 
-		const deadlineDate = new Date(createdAt);
-		deadlineDate.setDate(createdAt.getDate() + daysIntervalUntilNextTask);
+		const deadline = new Date(createdAt);
+		deadline.setDate(createdAt.getDate() + daysIntervalUntilNextTask);
 
-		return deadlineDate.toISOString();
+		return deadline.toISOString();
 	};
 
 	private taskRepository: TaskRepository;
