@@ -1,4 +1,8 @@
 export {
+	generateChangeTaskSuggestionsResponse,
+	runChangeTaskByCategoryOptions,
+} from "./change-task/change-task.js";
+export {
 	generateQuestionsAnswersPrompt,
 	generateScoresResponse,
 	runInitialThreadOptions,
