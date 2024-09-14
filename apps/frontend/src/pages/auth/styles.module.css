@@ -84,11 +84,11 @@
 
 .ripple-effect__background2 {
 	position: absolute;
-	bottom: -35%;
+	bottom: -40%;
 	left: 42%;
 	width: 60%;
 	height: auto;
-	max-height: 500px;
+	max-height: 440px;
 	transform: translateY(-50%);
 }
 
