@@ -9,3 +9,7 @@
 	font-weight: bold;
 	user-select: none;
 }
+
+.expired {
+	color: #ff2928;
+}
