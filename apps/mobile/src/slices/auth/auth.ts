@@ -1,9 +1,16 @@
-import { getAuthenticatedUser, signIn, signOut, signUp } from "./actions";
+import {
+	getAuthenticatedUser,
+	requestResetPassword,
+	signIn,
+	signOut,
+	signUp,
+} from "./actions";
 import { actions } from "./auth.slice";
 
 const allActions = {
 	...actions,
 	getAuthenticatedUser,
+	requestResetPassword,
 	signIn,
 	signOut,
 	signUp,

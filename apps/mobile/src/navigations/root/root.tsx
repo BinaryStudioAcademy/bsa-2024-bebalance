@@ -30,6 +30,10 @@ const Root: React.FC = () => {
 			{hasUser ? (
 				<NativeStack.Group>
 					<NativeStack.Screen
+						component={BottomTabsNavigator}
+						name={RootScreenName.BOTTOM_TABS_NAVIGATOR}
+					/>
+					<NativeStack.Screen
 						component={Onboarding}
 						name={RootScreenName.ONBOARDING}
 					/>
@@ -45,10 +49,6 @@ const Root: React.FC = () => {
 					<NativeStack.Screen
 						component={WheelLoading}
 						name={RootScreenName.WHEEL_LOADING}
-					/>
-					<NativeStack.Screen
-						component={BottomTabsNavigator}
-						name={RootScreenName.BOTTOM_TABS_NAVIGATOR}
 					/>
 				</NativeStack.Group>
 			) : (

@@ -18,7 +18,6 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
@@ -39,8 +38,6 @@ const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
-	const [forgotPasswordSubmisdionData, setForgtPasswordSubmissionData] =
-		useState<string>("");
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
@@ -65,9 +62,12 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
-	const handleForgotPasswordSubmit = useCallback((payload: EmailDto): void => {
-		setForgtPasswordSubmissionData(payload.email);
-	}, []);
+	const handleForgotPasswordSubmit = useCallback(
+		(payload: EmailDto): void => {
+			void dispatch(authActions.requestResetPassword(payload));
+		},
+		[dispatch],
+	);
 
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
@@ -137,7 +137,6 @@ const Auth: React.FC = () => {
 									</Text>
 								</View>
 								<View style={globalStyles.gap24}>{getScreen(name)}</View>
-								<Text>{forgotPasswordSubmisdionData}</Text>
 							</View>
 						</ScrollView>
 					</KeyboardAvoidingView>
