@@ -4,14 +4,17 @@ import { type CategoryService } from "~/modules/categories/categories.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 
 import {
+	generateChangeTaskSuggestionsResponse,
 	generateQuestionsAnswersPrompt,
 	generateScoresResponse,
 	generateTaskSuggestionsResponse,
+	runChangeTaskByCategoryOptions,
 	runInitialThreadOptions,
 	runTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
 	type BalanceWheelAnalysisResponseDto,
+	type ChangeTaskSuggestionRequestDto,
 	type TaskSuggestionRequestDto,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
@@ -50,6 +53,18 @@ class AiAssistantService {
 		};
 
 		return await this.openAi.addMessageToThread(threadId, prompt);
+	}
+
+	public async changeTaskSuggestion(
+		body: ChangeTaskSuggestionRequestDto,
+	): Promise<null | TaskSuggestionsResponseDto> {
+		const { task, threadId } = body;
+
+		const runThreadOptions = runChangeTaskByCategoryOptions(task);
+
+		const result = await this.openAi.runThread(threadId, runThreadOptions);
+
+		return generateChangeTaskSuggestionsResponse(result);
 	}
 
 	public async initNewChat(
