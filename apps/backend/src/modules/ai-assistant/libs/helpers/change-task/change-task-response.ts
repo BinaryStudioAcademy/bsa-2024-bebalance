@@ -33,11 +33,11 @@ const generateChangeTaskSuggestionsResponse = (
 			message: resultData.message,
 			tasks: [
 				{
-					categoryId: Number(resultData.task.categoryId),
-					categoryName: resultData.task.categoryName,
-					description: resultData.task.description,
-					dueDate: resultData.task.dueDate,
-					label: resultData.task.label,
+					categoryId: Number(resultData.tasks.categoryId),
+					categoryName: resultData.tasks.categoryName,
+					description: resultData.tasks.description,
+					dueDate: resultData.tasks.dueDate,
+					label: resultData.tasks.label,
 				},
 			],
 		};

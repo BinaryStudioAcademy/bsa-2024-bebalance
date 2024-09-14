@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const ChangeTaskByCategory = z.object({
 	message: z.string(),
-	task: z.object({
+	tasks: z.object({
 		categoryId: z.number(),
 		categoryName: z.string(),
 		description: z.string(),

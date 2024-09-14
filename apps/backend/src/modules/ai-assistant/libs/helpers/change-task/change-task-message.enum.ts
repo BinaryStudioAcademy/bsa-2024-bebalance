@@ -35,7 +35,7 @@ and focused on gradual and meaningful progress in line with their priorities.
 
 3. Provide a clear description for the new task, assign a due date, and include a meaningful label.
 
-4. Place the structured new task in the \`task\` field, and provide a summary or confirmation in the \`message\` field.
+4. Place the structured new task in the \`tasks\` field, and provide a summary or confirmation in the \`message\` field.
 `,
 } as const;
 
