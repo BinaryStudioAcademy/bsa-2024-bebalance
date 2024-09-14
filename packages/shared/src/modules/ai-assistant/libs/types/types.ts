@@ -1,4 +1,5 @@
 export { type BalanceWheelAnalysisResponseDto } from "./balance-wheel-analysis-response.dto.type.js";
+export { type ChangeTaskSuggestionRequestDto } from "./change-task-suggestion-request-dto.type.js";
 export {
 	type SelectedCategories,
 	type TaskSuggestionRequestDto,
