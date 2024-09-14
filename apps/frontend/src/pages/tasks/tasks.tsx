@@ -8,22 +8,24 @@ import {
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { TaskCard } from "./libs/components/components.js";
-import { ZERO_ARRAY_LENGTH } from "./libs/constants/constants.js";
+import { NumericalValue } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus, tasks } = useAppSelector(({ tasks }) => ({
-		dataStatus: tasks.dataStatus,
-		tasks: tasks.tasks,
-	}));
+	const { dataStatus, tasks } = useAppSelector(({ tasks }) => {
+		return {
+			dataStatus: tasks.dataStatus,
+			tasks: tasks.tasks,
+		};
+	});
 
 	useEffect(() => {
 		void dispatch(taskActions.getCurrentTasks());
 	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
-	const isTasksEmpty = tasks.length === ZERO_ARRAY_LENGTH;
+	const isTasksEmpty = tasks.length === NumericalValue.ZERO;
 
 	return (
 		<>

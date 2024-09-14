@@ -1,0 +1,1 @@
+export { NumericalValue } from "shared";

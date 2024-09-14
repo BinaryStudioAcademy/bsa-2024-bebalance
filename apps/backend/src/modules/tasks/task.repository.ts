@@ -76,8 +76,8 @@ class TaskRepository implements Repository {
 			.query()
 			.withGraphFetched(`[${RelationName.CATEGORY}]`);
 
-		return tasks.map((task) =>
-			TaskEntity.initialize({
+		return tasks.map((task) => {
+			return TaskEntity.initialize({
 				category: task.category.name,
 				categoryId: task.categoryId,
 				createdAt: task.createdAt,
@@ -88,8 +88,8 @@ class TaskRepository implements Repository {
 				status: task.status,
 				updatedAt: task.updatedAt,
 				userId: task.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
@@ -98,8 +98,8 @@ class TaskRepository implements Repository {
 			.withGraphFetched(`[${RelationName.CATEGORY}]`)
 			.where({ status: TaskStatus.CURRENT, userId });
 
-		return tasks.map((task) =>
-			TaskEntity.initialize({
+		return tasks.map((task) => {
+			return TaskEntity.initialize({
 				category: task.category.name,
 				categoryId: task.categoryId,
 				createdAt: task.createdAt,
@@ -110,8 +110,8 @@ class TaskRepository implements Repository {
 				status: task.status,
 				updatedAt: task.updatedAt,
 				userId: task.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async update(

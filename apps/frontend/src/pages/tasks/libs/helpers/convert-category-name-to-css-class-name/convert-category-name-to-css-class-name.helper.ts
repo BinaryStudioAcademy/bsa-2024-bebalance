@@ -1,5 +1,5 @@
-const convertCategyNameToCssClassName = (categoryName: string): string => {
+const convertCategoryNameToCssClassName = (categoryName: string): string => {
 	return categoryName.toLowerCase().replaceAll(/\s+/g, "-");
 };
 
-export { convertCategyNameToCssClassName };
+export { convertCategoryNameToCssClassName };

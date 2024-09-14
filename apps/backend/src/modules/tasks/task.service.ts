@@ -1,7 +1,6 @@
 import { type Service } from "~/libs/types/types.js";
 
-import { type TaskDto } from "./libs/types/types.js";
-import { type UsersTaskCreateDto } from "./libs/types/users-task-create-dto.js";
+import { type TaskDto, type UsersTaskCreateDto } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
 import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
