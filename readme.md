@@ -35,6 +35,7 @@ erDiagram
     }
 
     user_details ||--|| users : user_id
+    user_details ||--o| files : avatar_file_id
     user_details {
         int id PK
         dateTime created_at
@@ -42,6 +43,15 @@ erDiagram
         varchar name
         int user_id FK
         string notification_frequency
+        int avatar_file_id FK
+    }
+
+    files {
+        int id PK
+        varchar file_key UK
+        varchar url
+        dateTime created_at
+        dateTime updated_at
     }
 
     categories {

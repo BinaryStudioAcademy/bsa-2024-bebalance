@@ -7,12 +7,9 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 	},
-	bottomPlanet: {
-		bottom: "3%",
-		right: "0%",
-	},
 	container: {
 		backgroundColor: BaseColor.BG_BLUE,
+		position: "relative",
 	},
 	dot: {
 		backgroundColor: BaseColor.BG_WHITE,
@@ -22,39 +19,31 @@ const styles = StyleSheet.create({
 		width: 5,
 	},
 	dotPositionBottom: {
-		bottom: "20%",
-		left: "50%",
+		bottom: "22%",
+		left: "35%",
 	},
 	dotPositionLeft: {
-		bottom: "45%",
 		left: "10%",
+		top: "66%",
 	},
 	dotPositionRight: {
-		right: "10%",
-		top: "35%",
+		right: "8%",
+		top: "45%",
 	},
 	dotPositionRightBottom: {
-		right: "30%",
-		top: "65%",
+		right: "28%",
+		top: "70%",
 	},
 	dotPositionTop: {
-		left: "25%",
-		top: "25%",
+		left: "20%",
+		top: "15%",
 	},
 	image: {
 		position: "absolute",
 	},
-	leftPlanet: {
-		left: "10%",
-		top: "50%",
-	},
 	topImage: {
 		right: 0,
 		top: 0,
-	},
-	topPlanet: {
-		right: "20%",
-		top: "10%",
 	},
 });
 

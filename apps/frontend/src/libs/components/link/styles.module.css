@@ -19,7 +19,11 @@
 }
 
 .button:hover {
-	background-color: var(--brand);
+	background: linear-gradient(
+		to bottom right,
+		var(--brand),
+		var(--light-brand)
+	);
 }
 
 .navLink {
@@ -30,6 +34,7 @@
 	height: 60px;
 	padding: 18px;
 	font-size: 18px;
+	color: var(--black);
 	border-radius: 30px;
 }
 
