@@ -15,10 +15,7 @@
 }
 
 .logo-container {
-	padding: 17px 0 17px 40px;
-	font-size: 28px;
-	font-weight: 800;
-	border-bottom: 1px solid var(--white);
+	padding: 40px 0 17px 40px;
 }
 
 .buttons-container {
