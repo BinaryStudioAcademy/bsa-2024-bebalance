@@ -12,18 +12,20 @@ const EditModeSwitch: React.FC<Properties> = ({
 	currentMode,
 	handleModeToggle,
 }: Properties) => {
+	const isManualMode = currentMode === "manual";
+
 	return (
 		<div className={styles["container"]}>
 			<Button
-				isDisabled={currentMode === "manual"}
-				isSelected={currentMode === "manual"}
+				isDisabled={isManualMode}
+				isSelected={isManualMode}
 				label="Edit manually"
 				onClick={handleModeToggle}
 				variant="switch"
 			/>
 			<Button
-				isDisabled={currentMode === "retake_quiz"}
-				isSelected={currentMode === "retake_quiz"}
+				isDisabled={!isManualMode}
+				isSelected={!isManualMode}
 				label="Retake quiz"
 				onClick={handleModeToggle}
 				variant="switch"
