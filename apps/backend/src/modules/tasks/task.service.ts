@@ -1,6 +1,9 @@
 import { type Service } from "~/libs/types/types.js";
 
-import { type TaskDto, type UsersTaskCreateDto } from "./libs/types/types.js";
+import {
+	type TaskDto,
+	type UsersTaskCreateRequestDto,
+} from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
 import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
@@ -12,7 +15,7 @@ class TaskService implements Service {
 		this.taskRepository = taskRepository;
 	}
 
-	public async create(payload: UsersTaskCreateDto): Promise<TaskDto> {
+	public async create(payload: UsersTaskCreateRequestDto): Promise<TaskDto> {
 		const task = await this.taskRepository.create(
 			TaskEntity.initializeNew({
 				categoryId: payload.categoryId,

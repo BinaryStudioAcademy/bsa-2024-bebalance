@@ -8,7 +8,6 @@ import {
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { TaskCard } from "./libs/components/components.js";
-import { NumericalValue } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -25,7 +24,6 @@ const Tasks: React.FC = () => {
 	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
-	const isTasksEmpty = tasks.length === NumericalValue.ZERO;
 
 	return (
 		<>
@@ -34,7 +32,6 @@ const Tasks: React.FC = () => {
 				{isLoading ? (
 					<Loader />
 				) : (
-					!isTasksEmpty &&
 					tasks.map((task) => <TaskCard key={task.id} task={task} />)
 				)}
 			</div>
