@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.17.0...backend-v1.18.0) (2024-09-13)
+
+
+### Features
+
+* **backend:** update profile picture bb-173 ([#276](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/276)) ([9917ccf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9917ccfd70fdb371fd9be7ad475c833161ce17f1))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.16.0...backend-v1.17.0) (2024-09-11)
 
 
