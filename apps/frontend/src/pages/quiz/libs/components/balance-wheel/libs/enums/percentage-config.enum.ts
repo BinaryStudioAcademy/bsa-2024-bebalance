@@ -1,18 +1,8 @@
-const PERCENTAGE_13 = 13;
-const PERCENTAGE_38 = 38;
-const PERCENTAGE_63 = 63;
-const PERCENTAGE_88 = 88;
-
 const PercentageConfig = {
 	DEFAULT_VALUE: 0,
+	INCREMENT_VALUE: 12.5,
 	MAX_VALUE: 100,
 	PERCENTAGE_INCREASE_INTERVAL: 1000,
-	PERCENTAGE_VALUES: [
-		PERCENTAGE_13,
-		PERCENTAGE_38,
-		PERCENTAGE_63,
-		PERCENTAGE_88,
-	],
 } as const;
 
 export { PercentageConfig };

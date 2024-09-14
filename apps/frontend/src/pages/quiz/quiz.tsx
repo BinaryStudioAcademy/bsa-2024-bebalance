@@ -17,7 +17,7 @@ import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const [step, setStep] = useState<number>(Step.MOTIVATION);
+	const [step, setStep] = useState<number>(Step.BALANCE_WHEEL);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);

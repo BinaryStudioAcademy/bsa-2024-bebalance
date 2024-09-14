@@ -2,10 +2,7 @@ import { BalanceWheelChart } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
-import {
-	BALANCE_WHEEL_ANIMATED_INITIAL_DATA,
-	INDEX_NOT_FOUND,
-} from "./libs/constants/constants.js";
+import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
@@ -20,18 +17,12 @@ const BalanceWheel: React.FC = () => {
 				return previousPercentage;
 			}
 
-			const nextIndex = PercentageConfig.PERCENTAGE_VALUES.findIndex(
-				(value) => value > previousPercentage,
-			);
+			const newPercentage =
+				previousPercentage + PercentageConfig.INCREMENT_VALUE;
 
-			if (nextIndex === INDEX_NOT_FOUND) {
-				return PercentageConfig.MAX_VALUE;
-			}
-
-			return (
-				PercentageConfig.PERCENTAGE_VALUES[nextIndex] ||
-				PercentageConfig.MAX_VALUE
-			);
+			return newPercentage > PercentageConfig.MAX_VALUE
+				? PercentageConfig.MAX_VALUE
+				: newPercentage;
 		});
 	}, []);
 
@@ -45,6 +36,8 @@ const BalanceWheel: React.FC = () => {
 			clearInterval(intervalId);
 		};
 	}, [handleUpdatePercentage]);
+
+	const roundedPercentage = Math.ceil(percentage);
 
 	return (
 		<div className={styles["container"]}>
@@ -73,7 +66,7 @@ const BalanceWheel: React.FC = () => {
 				data={BALANCE_WHEEL_ANIMATED_INITIAL_DATA}
 				isAnimating
 			/>
-			<span className={styles["text"]}>Analyzing {percentage}%</span>
+			<span className={styles["text"]}>Analyzing {roundedPercentage}%</span>
 		</div>
 	);
 };
