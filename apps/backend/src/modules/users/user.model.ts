@@ -14,13 +14,13 @@ import { UserTaskDaysModel } from "./user-task-days.model.js";
 class UserModel extends AbstractModel {
 	public email!: string;
 
-	public onboardingAnswers!: OnboardingAnswerModel[];
+	public onboardingAnswers!: [] | OnboardingAnswerModel[];
 
 	public passwordHash!: string;
 
 	public passwordSalt!: string;
 
-	public quizAnswers!: QuizAnswerModel[];
+	public quizAnswers!: [] | QuizAnswerModel[];
 
 	public userDetails!: UserDetailsModel;
 

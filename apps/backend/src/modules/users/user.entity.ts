@@ -43,7 +43,6 @@ class UserEntity implements Entity {
 		notificationFrequency,
 		passwordHash,
 		passwordSalt,
-
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -58,7 +57,6 @@ class UserEntity implements Entity {
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
-
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
@@ -73,7 +71,6 @@ class UserEntity implements Entity {
 		this.notificationFrequency = notificationFrequency;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
-
 		this.updatedAt = updatedAt;
 		this.userTaskDays = userTaskDays;
 	}
@@ -104,7 +101,6 @@ class UserEntity implements Entity {
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
-		quizAnswers?: number[];
 		updatedAt: string;
 		userTaskDays?: number[];
 	}): UserEntity {
@@ -113,7 +109,7 @@ class UserEntity implements Entity {
 			avatarUrl,
 			createdAt,
 			email,
-			hasAnsweredOnboardingQuestions: Boolean(hasAnsweredOnboardingQuestions),
+			hasAnsweredOnboardingQuestions,
 			hasAnsweredQuizQuestions: Boolean(hasAnsweredQuizQuestions),
 			id,
 			name,
@@ -173,9 +169,7 @@ class UserEntity implements Entity {
 			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
-			hasAnsweredOnboardingQuestions: Boolean(
-				this.hasAnsweredOnboardingQuestions,
-			),
+			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
 			hasAnsweredQuizQuestions: Boolean(this.hasAnsweredQuizQuestions),
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
@@ -204,9 +198,7 @@ class UserEntity implements Entity {
 			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
-			hasAnsweredOnboardingQuestions: Boolean(
-				this.hasAnsweredOnboardingQuestions,
-			),
+			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
 			hasAnsweredQuizQuestions: Boolean(this.hasAnsweredQuizQuestions),
 			id: this.id as number,
 			name: this.name,
