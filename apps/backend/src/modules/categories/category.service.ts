@@ -116,22 +116,22 @@ class CategoryService implements Service {
 	public async findCategories(
 		query: CategoriesGetRequestQueryDto,
 	): Promise<CategoriesGetAllResponseDto> {
-		if (query.categoryIds) {
-			const categories = await this.categoryRepository.findByIds(
-				JSON.parse(query.categoryIds) as number[],
-			);
-
-			const items = categories.map((categoryEntity) => {
-				const { createdAt, id, name, updatedAt } =
-					this.convertCategoryEntityToDto(categoryEntity);
-
-				return { createdAt, id, name, updatedAt };
-			});
-
-			return { items };
+		if (!query.categoryIds) {
+			return await this.findAll();
 		}
 
-		return await this.findAll();
+		const categories = await this.categoryRepository.findByIds(
+			JSON.parse(query.categoryIds) as number[],
+		);
+
+		const items = categories.map((categoryEntity) => {
+			const { createdAt, id, name, updatedAt } =
+				this.convertCategoryEntityToDto(categoryEntity);
+
+			return { createdAt, id, name, updatedAt };
+		});
+
+		return { items };
 	}
 
 	public async findUserScores(
