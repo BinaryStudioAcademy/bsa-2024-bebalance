@@ -2,6 +2,7 @@ import { type OpenAi, OpenAiRoleKey } from "~/libs/modules/open-ai/open-ai.js";
 import { type UserDto } from "~/libs/types/types.js";
 import { type CategoryService } from "~/modules/categories/categories.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
+import { TaskEntity, type TaskRepository } from "~/modules/tasks/tasks.js";
 
 import {
 	generateChangeTaskSuggestionsResponse,
@@ -15,6 +16,7 @@ import {
 import {
 	type BalanceWheelAnalysisResponseDto,
 	type ChangeTaskSuggestionRequestDto,
+	type TaskDto,
 	type TaskSuggestionRequestDto,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
@@ -24,21 +26,50 @@ type Constructor = {
 	categoryService: CategoryService;
 	onboardingRepository: OnboardingRepository;
 	openAi: OpenAi;
+	taskRepository: TaskRepository;
 };
 
 class AiAssistantService {
 	private categoryService: CategoryService;
 	private onboardingRepository: OnboardingRepository;
 	private openAi: OpenAi;
+	private taskRepository: TaskRepository;
 
 	public constructor({
 		categoryService,
 		onboardingRepository,
 		openAi,
+		taskRepository,
 	}: Constructor) {
 		this.openAi = openAi;
 		this.categoryService = categoryService;
 		this.onboardingRepository = onboardingRepository;
+		this.taskRepository = taskRepository;
+	}
+
+	public async acceptTask(
+		user: UserDto,
+		body: ChangeTaskSuggestionRequestDto,
+	): Promise<TaskDto> {
+		const { task, threadId } = body;
+
+		const newTask = await this.taskRepository.create(
+			TaskEntity.initializeNew({
+				categoryId: task.categoryId,
+				description: task.description,
+				dueDate: task.dueDate,
+				label: task.label,
+				userId: user.id,
+			}),
+		);
+		const chatMessage = {
+			content: `User has accepted this task: ${JSON.stringify(newTask)}`,
+			role: OpenAiRoleKey.USER,
+		};
+
+		await this.openAi.addMessageToThread(threadId, chatMessage);
+
+		return newTask.toObject();
 	}
 
 	public async addMessageToThread(
@@ -48,7 +79,6 @@ class AiAssistantService {
 
 		const prompt = {
 			content: text,
-			metadata: {},
 			role: OpenAiRoleKey.USER,
 		};
 
