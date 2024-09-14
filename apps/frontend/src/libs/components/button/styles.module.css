@@ -14,6 +14,11 @@
 	outline: 0;
 }
 
+.btn:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
 .primary-button {
 	line-height: 24px;
 	color: var(--white);
@@ -63,9 +68,9 @@
 	transition: all 200ms ease-in;
 }
 
-.disabled {
+.switch-button-selected:disabled {
 	cursor: not-allowed;
-	opacity: 0.5;
+	opacity: 1;
 }
 
 .position-right {

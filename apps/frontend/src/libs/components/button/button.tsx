@@ -33,7 +33,6 @@ const Button: React.FC<Properties> = ({
 			variant === "icon" && styles[`position-${iconPosition}`],
 			styles[`${variant}-button`],
 			isSelected && styles[`${variant}-button-selected`],
-			isDisabled && styles["disabled"],
 		)}
 		disabled={isDisabled}
 		onClick={onClick}
