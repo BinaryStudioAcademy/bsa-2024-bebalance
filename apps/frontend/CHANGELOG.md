@@ -1,5 +1,105 @@
 # Changelog
 
+## [1.34.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.34.0...frontend-v1.34.1) (2024-09-13)
+
+
+### Bug Fixes
+
+* **frontend:** add color to navlink bb-406 ([#411](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/411)) ([ffb2f05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ffb2f05e9948e32d6ae749488acff2d01338ecaa))
+
+## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.33.0...frontend-v1.34.0) (2024-09-12)
+
+
+### Features
+
+* **frontend:** intro motivation bb-377 ([#408](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/408)) ([541c305](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/541c3054802836f11243754fccde20ad2ad54c22))
+
+
+### Bug Fixes
+
+* **frontend:** fix flex direction and width for onboarding buttons bb-400 ([#401](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/401)) ([a52b988](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a52b9883ce1e0504cd2bdd6143e2574de8b77ead))
+* **frontend:** forgot-password reset-password forms validation bb-285 ([#405](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/405)) ([0e132a9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0e132a9de36425fb0c54443571cb8c3061d005f2))
+
+## [1.33.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.32.0...frontend-v1.33.0) (2024-09-11)
+
+
+### Features
+
+* **backend/frontend/shared:** edit wheel manually bb-309 ([#343](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/343)) ([ec28e98](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ec28e9872bc2091798693dcd42f695d9c647249c))
+* **frontend:** add logout confirmation bb-365 ([#395](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/395)) ([87629f4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/87629f4d8587da3619b46506cdece58b4feb2352))
+* **frontend:** settings screen bb-334 ([#376](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/376)) ([780a87e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/780a87e080e753500d61e449df4cdb32d6350608))
+
+
+### Bug Fixes
+
+* **frontend:** buttons color doesn't match design bb-396 ([#399](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/399)) ([a304e03](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a304e03a3880a94d89c8c9ebcef0ac9297dce345))
+* **frontend:** checkbox size on checked bb-243 ([#393](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/393)) ([f3399c2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f3399c289aaa80c680e6b8e8214f4d85aa43ef91))
+* **frontend:** redirect on expired link forgot password requirements bb-285 ([#386](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/386)) ([fa6e1eb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fa6e1ebb94a46ebbaff2cac7ed4b7ff58ac5d623))
+* **frontend:** settings screen button padding bb-334 ([#398](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/398)) ([2bad704](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2bad704c4bc8b7b2dbcbffd0b56413a9222e766a))
+
+## [1.32.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.31.0...frontend-v1.32.0) (2024-09-11)
+
+
+### Features
+
+* **frontend/backend/shared:** Quiz categories form bb-220 ([#266](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/266)) ([03f6e6c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03f6e6cd6ebd9a6e2babcf4e1b18467ce91b313f))
+* **frontend:** add logout confirmation bb-365 ([#382](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/382)) ([23ccc2f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/23ccc2f7f7a317d9ba5b6442ec702a24082972fa))
+* **frontend:** implement hover state for active buttons based on design specs bb-310 ([#384](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/384)) ([aec40ac](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/aec40ac2cb0817efc0ab84f3a31dff100a94b13f))
+
+
+### Bug Fixes
+
+* **frontend:** User name is not updated after changing it in profile bb-375 ([#383](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/383)) ([8feacbd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8feacbd1db875913155cbfc9b9bcbff186a75041))
+
+## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.30.0...frontend-v1.31.0) (2024-09-10)
+
+
+### Features
+
+* **frontend/backend:** forgot password functionality requirements bb-285 ([#329](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/329)) ([6e80423](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6e8042368c4f56ae8702a708b2b7e3da36c644f1))
+* Onboarding questions screen mobile responsiveness bb-289 ([#345](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/345)) ([7a0c849](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7a0c84979f68605a130e59d68e4f197b74f2525d))
+
+
+### Bug Fixes
+
+* **frontend:** remade backgrounds for quiz and not-found pages bb-327 ([#336](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/336)) ([812ce87](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/812ce87f22e7f92b1e4c27b804694af9c5430d93))
+
+## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.29.0...frontend-v1.30.0) (2024-09-10)
+
+
+### Features
+
+* **frontend:** quiz question screen mobile responsiveness bb-290 ([#346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/346)) ([9e9809c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9e9809c13c017c8b037c6f4ca910824212e267fa))
+
+
+### Bug Fixes
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#356](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/356)) ([2256493](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2256493a3efbd62a54ce0f9a8293198a44d813cc))
+* **frontend:** checkbox border bb-243 ([#363](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/363)) ([711e80a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/711e80a9a5ef5f0c123f44b83a1cc146907064e0))
+
+## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.28.1...frontend-v1.29.0) (2024-09-09)
+
+
+### Features
+
+* **frontend/backend/shared:** final questions screen bb-243 ([#314](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/314)) ([2fe7663](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2fe76632a9a64d7fdd0d047522b10109dc8c9d06))
+
+## [1.28.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.28.0...frontend-v1.28.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* **frontend:** add font-size property to forgot password link bb-331 ([#333](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/333)) ([3a6acfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3a6acfc06ae851cf900e391fc98dfc270042189e))
+
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.27.0...frontend-v1.28.0) (2024-09-07)
+
+
+### Features
+
+* **backend/frontend/shared:** balance wheel bb-216 ([#302](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/302)) ([8388e20](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8388e204fbbd8747d23149732702444911ae4453))
+* Balance Wheel animation bb-204 ([#318](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/318)) ([071044d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/071044d06edad2eaea448b7c8c46b9c38ae6cbdc))
+* **frontend:** implement hover state for buttons bb-310 ([#328](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/328)) ([1e5f54a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1e5f54af8f2d7d7399bcab458de927e7ad8e79f4))
+
 ## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.26.0...frontend-v1.27.0) (2024-09-06)
 
 

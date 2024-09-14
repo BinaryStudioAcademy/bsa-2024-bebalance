@@ -8,10 +8,21 @@ export {
 	type QuizQuestionPropeties,
 } from "./form-field-properties.type.js";
 export { type IconName } from "./icon-name.type.js";
+export { type InputOption } from "./input-option.type.js";
+export { type NotificationQuestionsFormValues } from "./notification-questions-form-values.type.js";
 export { type QueryParameters } from "./query-parameters.type.js";
-export { type RadioInputOption } from "./radio-input-option.type.js";
 export { type SidebarItem } from "./sidebar-item.type.js";
-export { type ChartConfiguration, type ScriptableContext } from "chart.js";
+export {
+	type Chart,
+	type ChartArea,
+	type ChartConfiguration,
+	type ChartDataset,
+	type ChartMeta,
+	type Element,
+	type Plugin,
+	type RadialLinearScale,
+	type ScriptableContext,
+} from "chart.js";
 export {
 	type OnboardingQuestionResponseDto,
 	type ServerErrorDetail,

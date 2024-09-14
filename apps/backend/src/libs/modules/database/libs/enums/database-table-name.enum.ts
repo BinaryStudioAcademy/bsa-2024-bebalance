@@ -1,5 +1,6 @@
 const DatabaseTableName = {
 	CATEGORIES: "categories",
+	FILES: "files",
 	MIGRATIONS: "migrations",
 	ONBOARDING_ANSWERS: "onboarding_answers",
 	ONBOARDING_ANSWERS_TO_USERS: "onboarding_answers_to_users",
@@ -9,6 +10,7 @@ const DatabaseTableName = {
 	QUIZ_QUESTIONS: "quiz_questions",
 	QUIZ_SCORES: "quiz_scores",
 	USER_DETAILS: "user_details",
+	USER_TASK_DAYS: "user_task_days",
 	USERS: "users",
 } as const;
 

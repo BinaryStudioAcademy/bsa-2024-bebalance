@@ -114,18 +114,20 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
-					<div className={styles["btn-secondary"]}>
+					<div className={styles["button-container"]}>
 						<Button
-							isPrimary={false}
 							label="BACK"
 							onClick={handlePreviousStep}
+							variant="secondary"
 						/>
 					</div>
-					{isLast ? (
-						<Button label="CONTINUE" onClick={onNext} type="submit" />
-					) : (
-						<Button label="NEXT" onClick={handleNextStep} type="submit" />
-					)}
+					<div className={styles["button-container"]}>
+						{isLast ? (
+							<Button label="CONTINUE" onClick={onNext} type="submit" />
+						) : (
+							<Button label="NEXT" onClick={handleNextStep} type="submit" />
+						)}
+					</div>
 				</div>
 			</form>
 			<RippleEffectBg className={styles["ripple-effect__background1"]} />

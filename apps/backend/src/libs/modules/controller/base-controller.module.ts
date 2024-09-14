@@ -29,6 +29,7 @@ class BaseController implements Controller {
 		this.logger.info(`${request.method.toUpperCase()} on ${request.url}`);
 
 		const handlerOptions = this.mapRequest(request);
+
 		const { payload, status } = await handler(handlerOptions);
 
 		return await reply.status(status).send(payload);
@@ -37,12 +38,13 @@ class BaseController implements Controller {
 	private mapRequest(
 		request: Parameters<ServerApplicationRouteParameters["handler"]>[0],
 	): APIHandlerOptions {
-		const { body, params, query, user } = request;
+		const { body, params, query, uploadedFile, user } = request;
 
 		return {
 			body,
 			params,
 			query,
+			uploadedFile,
 			user,
 		};
 	}

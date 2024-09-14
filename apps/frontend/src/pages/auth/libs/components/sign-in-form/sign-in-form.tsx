@@ -1,7 +1,6 @@
 import { Button, Input, Link } from "~/libs/components/components.js";
-import { AppRoute } from "~/libs/enums/enums.js";
+import { AppRoute, NumericalValue } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
-import { NO_ERROR_INPUT_FIELD_AMOUNT } from "~/modules/users/libs/constants/constants.js";
 import {
 	type UserSignInRequestDto,
 	userSignInValidationSchema,
@@ -20,7 +19,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		validationSchema: userSignInValidationSchema,
 	});
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -35,13 +34,13 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<>
-			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+			<form className={styles["form"]} noValidate onSubmit={handleFormSubmit}>
 				<Input
 					control={control}
 					errors={errors}
 					label="Email"
 					name="email"
-					placeholder="name@example.com"
+					placeholder="email@example.com"
 					type="email"
 				/>
 
@@ -56,7 +55,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button isDisabled={isInputError} label="SIGN IN" type="submit" />
+				<Button isDisabled={hasError} label="SIGN IN" type="submit" />
 				<div className={styles["forgot-password-container"]}>
 					<Link to={AppRoute.FORGOT_PASSWORD}>Forgot password?</Link>
 				</div>

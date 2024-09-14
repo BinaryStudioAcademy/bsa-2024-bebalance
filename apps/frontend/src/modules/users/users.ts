@@ -11,10 +11,13 @@ const usersApi = new UsersApi({
 });
 
 export { usersApi };
+export { NotificationFrequency } from "./libs/enums/enums.js";
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
@@ -28,7 +31,8 @@ export {
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
-	userForgotPasswordVaidationSchema,
+	notificationAnswersValidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,

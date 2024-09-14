@@ -1,6 +1,6 @@
 import { Button, Input } from "~/libs/components/components.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
-import { NO_ERROR_INPUT_FIELD_AMOUNT } from "~/modules/users/libs/constants/constants.js";
 import {
 	type UserSignUpFormDto,
 	type UserSignUpRequestDto,
@@ -24,7 +24,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
 		useState<boolean>(false);
-	const isInputError = Object.keys(errors).length > NO_ERROR_INPUT_FIELD_AMOUNT;
+	const hasError = Object.keys(errors).length > NumericalValue.ZERO;
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -55,7 +55,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	return (
 		<>
-			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+			<form className={styles["form"]} noValidate onSubmit={handleFormSubmit}>
 				<Input
 					control={control}
 					errors={errors}
@@ -70,7 +70,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					errors={errors}
 					label="Email"
 					name="email"
-					placeholder="name@example.com"
+					placeholder="email@example.com"
 					type="email"
 				/>
 
@@ -96,11 +96,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 
-				<Button
-					isDisabled={isInputError}
-					label="CREATE AN ACCOUNT"
-					type="submit"
-				/>
+				<Button isDisabled={hasError} label="CREATE AN ACCOUNT" type="submit" />
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

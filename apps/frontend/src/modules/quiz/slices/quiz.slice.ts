@@ -6,15 +6,19 @@ import {
 } from "~/libs/constants/constants.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type QuizQuestionDto } from "~/modules/quiz/quiz.js";
+import {
+	type QuizQuestionDto,
+	type QuizScoresGetAllItemResponseDto,
+} from "~/modules/quiz/quiz.js";
 
-import { getAllQuestions } from "./actions.js";
+import { editScores, getAllQuestions, getScores } from "./actions.js";
 
 type State = {
 	currentCategory: null | QuizQuestionDto[];
 	currentCategoryIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: QuizQuestionDto[][];
+	scores: QuizScoresGetAllItemResponseDto[];
 };
 
 const initialState: State = {
@@ -22,6 +26,7 @@ const initialState: State = {
 	currentCategoryIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
+	scores: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -37,6 +42,41 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(getScores.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getScores.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.scores = action.payload.items;
+		});
+		builder.addCase(getScores.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(editScores.fulfilled, (state, action) => {
+			const updatedScores = new Map(
+				action.payload.items.map((score) => [score.id, score]),
+			);
+
+			state.scores = state.scores.map((stateScore) => {
+				const updatedScore = updatedScores.get(stateScore.id);
+
+				return updatedScore
+					? {
+							...stateScore,
+							score: updatedScore.score,
+							updatedAt: updatedScore.updatedAt,
+						}
+					: stateScore;
+			});
+
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(editScores.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(editScores.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
 		});
 	},
 	initialState,

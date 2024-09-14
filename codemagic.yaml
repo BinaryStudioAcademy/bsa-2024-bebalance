@@ -1,0 +1,88 @@
+scripts:
+  - &install_npm_dependencies
+    name: Install npm dependencies
+    script: cd ../.. && npm install
+  - &build_shared_package
+    name: Build shared package
+    script: cd ../.. && npm run build:shared
+  - &set_android_sdk
+    name: Set Android SDK location
+    script: echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/apps/mobile/android/local.properties"
+  - &set_up_keys
+    name: Set up keystore
+    script: |
+      echo $CM_BUILD_DIR
+      cat >> "$CM_BUILD_DIR/apps/mobile/android/key.properties" << EOF
+      storePassword=$CM_KEYSTORE_PASSWORD
+      keyPassword=$CM_KEY_PASSWORD
+      keyAlias=$CM_KEY_ALIAS
+      storeFile=$CM_KEYSTORE_PATH
+      EOF
+  - &set-env-vars
+    name: Create .env file and set variables
+    script: |
+      cat >> .env << EOF
+      API_URL = $API_URL
+      APP_HOST = $APP_HOST
+      APP_SCHEME = $APP_SCHEME
+      EOF
+  - &set_up_android_updated_versions
+    name: Set up updated build number and provide correct versioning
+    script: |
+      LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal)
+      if [ -z LATEST_BUILD_NUMBER ]; then
+        UPDATED_BUILD_NUMBER=$BUILD_NUMBER
+      else
+        UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
+      fi
+
+      echo $UPDATED_BUILD_NUMBER > "$CM_BUILD_DIR/apps/mobile/android/app/versionCode"
+      VERSION_NAME_PATH=$CM_BUILD_DIR/apps/mobile/android/app/versionName
+      UPDATED_VERSION_NAME=$(cat $VERSION_NAME_PATH | awk -F. -v PATCH_NUMBER=$UPDATED_BUILD_NUMBER -v OFS=. '{$NF = PATCH_NUMBER ; print}')
+      echo $UPDATED_VERSION_NAME > $VERSION_NAME_PATH
+workflows:
+  react-native-android:
+    name: React Native Android App
+    working_directory: apps/mobile
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      node: 20.17.0
+      npm: 10.8.2
+      groups:
+        - keystore_credentials
+        - env_vars
+        - google_play
+      vars:
+        PACKAGE_NAME: "com.bebalance"
+      android_signing:
+        - KEYSTORE_FILE
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+      cancel_previous_builds: true
+    when:
+      changeset:
+        includes:
+          - "apps/mobile/"
+    scripts:
+      - *install_npm_dependencies
+      - *build_shared_package
+      - *set_android_sdk
+      - *set_up_keys
+      - *set-env-vars
+      - *set_up_android_updated_versions
+      - name: Build Android release
+        script: |
+          cd android && ./gradlew clean bundleRelease
+    artifacts:
+      - android/app/build/outputs/**/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true

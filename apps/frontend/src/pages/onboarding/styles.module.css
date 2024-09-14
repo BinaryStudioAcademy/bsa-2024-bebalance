@@ -40,6 +40,7 @@
 	justify-content: center;
 	width: 342px;
 	margin-bottom: auto;
+	text-align: center;
 }
 
 .button-container {
@@ -48,23 +49,38 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	max-width: 300px;
 	margin-top: 76px;
 }
 
+.button-container .button-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 122px;
+	max-width: 309px;
+	height: 42px;
+}
+
 @media (width <= 768px) {
+	.button-container {
+		flex-direction: column;
+	}
+
+	.button-container .button-wrapper {
+		width: 100%;
+	}
+
 	.container {
 		padding: 20px;
 	}
 
 	.question {
 		width: 100%;
-		font-size: 28px;
-		line-height: 30px;
+		font-size: 25px;
+		line-height: 25px;
 	}
 
-	.button-container {
-		flex-direction: column;
-		max-width: 250px;
+	.answers {
+		width: 100%;
 	}
 }
