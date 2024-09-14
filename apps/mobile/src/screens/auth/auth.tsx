@@ -9,6 +9,7 @@ import {
 	ScrollView,
 	Text,
 	View,
+	Image,
 } from "~/libs/components/components";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
@@ -28,6 +29,7 @@ import { actions as authActions } from "~/slices/auth/auth";
 
 import { SignInForm, SignUpForm } from "./components/components";
 import { styles } from "./styles";
+import { type ImageSourcePropType } from "~/libs/types/types";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
@@ -104,20 +106,19 @@ const Auth: React.FC = () => {
 							>
 								<View
 									style={[
-										globalStyles.gap8,
+										globalStyles.gap12,
 										globalStyles.alignItemsCenter,
 										globalStyles.flexDirectionRow,
 										globalStyles.mb32,
 									]}
 								>
-									<Planet color="pink" size="xxs" />
-									<Text
-										preset="uppercase"
-										size="xl"
-										style={globalStyles.ml48}
-										weight="bold"
-									>
-										Logo
+									<Image
+										source={
+											require("~/assets/images/logo.png") as ImageSourcePropType
+										}
+									/>
+									<Text preset="subheading" size="xl" weight="bold">
+										BeBalance
 									</Text>
 								</View>
 								<View style={globalStyles.gap24}>{getScreen(name)}</View>
