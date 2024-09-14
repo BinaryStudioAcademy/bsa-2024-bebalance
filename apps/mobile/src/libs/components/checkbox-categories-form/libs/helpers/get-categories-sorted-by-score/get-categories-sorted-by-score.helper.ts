@@ -1,11 +1,19 @@
 import { type QuizScoresGetAllItemResponseDto } from "~/libs/types/types";
 
-const getCategoriesSortedByScore = (
-	categoriesData: QuizScoresGetAllItemResponseDto[],
-): QuizScoresGetAllItemResponseDto[] => {
-	return categoriesData
+type GetCategoriesSortedByScoreArguments = {
+	categories: QuizScoresGetAllItemResponseDto[];
+	useDescendingOrder?: boolean;
+};
+
+const getCategoriesSortedByScore = ({
+	categories,
+	useDescendingOrder = false,
+}: GetCategoriesSortedByScoreArguments): QuizScoresGetAllItemResponseDto[] => {
+	return categories
 		.map((categoryItem) => ({ ...categoryItem }))
-		.sort((a, b) => a.score - b.score);
+		.sort((a, b) => {
+			return useDescendingOrder ? b.score - a.score : a.score - b.score;
+		});
 };
 
 export { getCategoriesSortedByScore };

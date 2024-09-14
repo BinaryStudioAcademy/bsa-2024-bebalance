@@ -47,7 +47,7 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 	useEffect(() => {
 		reset({
 			categoryIds: getInitialSelectedCategoryIds(
-				getCategoriesSortedByScore(categories),
+				getCategoriesSortedByScore({ categories }),
 			),
 		});
 	}, [reset, categories]);
