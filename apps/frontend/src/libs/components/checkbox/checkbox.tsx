@@ -1,4 +1,3 @@
-import Checkmark from "~/assets/img/checkmark.svg?react";
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useFormController } from "~/libs/hooks/hooks.js";
@@ -8,6 +7,7 @@ import {
 	type InputOption,
 } from "~/libs/types/types.js";
 
+import { Icon } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues, OptionValueT extends number | string> = {
@@ -106,7 +106,7 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 										value={option.value}
 									/>
 									<span className={styles["checkmark-container"]}>
-										<Checkmark className={styles["checkmark"]} />
+										<Icon name="roundedCheck" />
 									</span>
 									{option.label}
 								</label>
@@ -134,7 +134,7 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 								value={value}
 							/>
 							<span className={styles["checkmark-container"]}>
-								<Checkmark className={styles["checkmark"]} />
+								<Icon name="roundedCheck" />
 							</span>
 							{label}
 						</label>
