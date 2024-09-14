@@ -53,6 +53,8 @@ const BalanceWheel: React.FC = () => {
 		return <Navigate replace to={AppRoute.ROOT} />;
 	}
 
+	const roundedPercentage = Math.ceil(percentage);
+
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["border-container"]} />
@@ -80,7 +82,7 @@ const BalanceWheel: React.FC = () => {
 				data={BALANCE_WHEEL_ANIMATED_INITIAL_DATA}
 				isAnimating
 			/>
-			<span className={styles["text"]}>Analyzing {percentage}%</span>
+			<span className={styles["text"]}>Analyzing {roundedPercentage}%</span>
 		</div>
 	);
 };
