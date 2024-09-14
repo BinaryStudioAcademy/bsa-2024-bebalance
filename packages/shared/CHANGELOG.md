@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.17.1...shared-v1.18.0) (2024-09-13)
+
+
+### Features
+
+* **backend:** update profile picture bb-173 ([#276](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/276)) ([9917ccf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9917ccfd70fdb371fd9be7ad475c833161ce17f1))
+
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.17.0...shared-v1.17.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* **frontend:** forgot-password reset-password forms validation bb-285 ([#405](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/405)) ([0e132a9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0e132a9de36425fb0c54443571cb8c3061d005f2))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.16.0...shared-v1.17.0) (2024-09-11)
 
 

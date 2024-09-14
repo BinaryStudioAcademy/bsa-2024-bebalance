@@ -3,6 +3,7 @@ import Close from "~/assets/img/close.svg?react";
 import CrossedEye from "~/assets/img/crossed-eye.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
 import Menu from "~/assets/img/menu.svg?react";
+import RoundedCheck from "~/assets/img/rounded-check.svg?react";
 import SettingsActive from "~/assets/img/settings-active.svg?react";
 import SettingsInactive from "~/assets/img/settings-inactive.svg?react";
 import TasksActive from "~/assets/img/tasks-active.svg?react";
@@ -20,6 +21,7 @@ const iconNameToSvg: Record<
 	crossedEye: CrossedEye,
 	eye: Eye,
 	menu: Menu,
+	roundedCheck: RoundedCheck,
 	settingsActive: SettingsActive,
 	settingsInactive: SettingsInactive,
 	tasksActive: TasksActive,

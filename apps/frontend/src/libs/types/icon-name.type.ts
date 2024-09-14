@@ -4,6 +4,7 @@ type IconName =
 	| "crossedEye"
 	| "eye"
 	| "menu"
+	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
 	| "tasksActive"

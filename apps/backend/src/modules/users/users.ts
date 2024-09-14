@@ -1,5 +1,6 @@
 import { encrypt } from "~/libs/modules/encrypt/encrypt.js";
 import { logger } from "~/libs/modules/logger/logger.js";
+import { fileService } from "~/modules/files/files.js";
 
 import { UserController } from "./user.controller.js";
 import { UserModel } from "./user.model.js";
@@ -9,14 +10,15 @@ import { UserDetailsModel } from "./user-details.model.js";
 import { UserTaskDaysModel } from "./user-task-days.model.js";
 
 const userRepository = new UserRepository(
-	UserModel,
 	UserDetailsModel,
+	UserModel,
 	UserTaskDaysModel,
 );
-const userService = new UserService(userRepository, encrypt);
+const userService = new UserService(userRepository, encrypt, fileService);
 const userController = new UserController(logger, userService);
 
 export { UserValidationMessage } from "./libs/enums/enums.js";
+export { UserError } from "./libs/exceptions/exceptions.js";
 export {
 	type EmailDto,
 	type ResetPasswordDto,
