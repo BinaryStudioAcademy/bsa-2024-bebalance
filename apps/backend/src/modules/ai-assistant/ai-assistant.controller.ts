@@ -82,6 +82,35 @@ class AiAssistantController extends BaseController {
 				body: TaskSuggestionRequestValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.acceptTask(
+					options as APIHandlerOptions<{
+						body: ChangeTaskSuggestionRequestDto;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: AiAssistantApiPath.ACCEPT_TASK,
+			validation: {
+				body: ChangeTaskSuggestionRequestValidationSchema,
+			},
+		});
+	}
+
+	private async acceptTask(
+		options: APIHandlerOptions<{
+			body: ChangeTaskSuggestionRequestDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { body, user } = options;
+
+		return {
+			payload: await this.openAiService.acceptTask(user, body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	private async addMessageToConversation(
