@@ -26,19 +26,50 @@
 }
 
 .primary-button:hover {
-	background-color: var(--brand);
+	background: linear-gradient(
+		to bottom right,
+		var(--brand),
+		var(--light-brand)
+	);
+}
+
+.primary-button:disabled {
+	cursor: not-allowed;
+	background: var(--light-gray);
 }
 
 .secondary-button {
 	line-height: 22px;
 	color: var(--black);
-	background-color: var(--white);
+	background:
+		linear-gradient(var(--white), var(--white)) padding-box,
+		linear-gradient(to bottom right, var(--brand), var(--light-brand))
+			border-box;
 	border: 1px solid var(--black);
 }
 
 .secondary-button:hover {
-	color: var(--brand);
-	border-color: var(--brand);
+	border: 1px solid transparent;
+}
+
+.secondary-label {
+	background-clip: text;
+}
+
+.secondary-button:hover .secondary-label {
+	color: transparent;
+	background: linear-gradient(
+		to bottom right,
+		var(--brand),
+		var(--light-brand)
+	);
+	background-clip: text;
+}
+
+.secondary-button:disabled {
+	color: var(--light-gray);
+	cursor: not-allowed;
+	border-color: var(--light-gray);
 }
 
 .icon-button {

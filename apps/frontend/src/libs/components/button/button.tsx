@@ -41,6 +41,7 @@ const Button: React.FC<Properties> = ({
 		<span
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
+				variant === "secondary" && styles["secondary-label"],
 			)}
 		>
 			{label}
