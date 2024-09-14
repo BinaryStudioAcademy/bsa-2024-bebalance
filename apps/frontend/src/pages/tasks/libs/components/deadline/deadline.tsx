@@ -25,7 +25,7 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 		isExpired && styles["expired"],
 	);
 
-	const calculateDaysUntilDeadline = useCallback(() => {
+	const calculateDaysUntilDeadline = useCallback((): boolean => {
 		const deadlineTime = new Date(deadline).getTime();
 		const currentTime = Date.now();
 		const timeToDeadline = deadlineTime - currentTime;
@@ -34,7 +34,7 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 			setCountdown(COUNTDOWN_EXPIRED);
 			setIsExpired(true);
 
-			return;
+			return true;
 		}
 
 		const days = Math.floor(timeToDeadline / MillisecondsPerUnit.DAY);
@@ -52,12 +52,19 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 		);
 
 		setCountdown(`${String(days)}:${formattedHours}:${formattedMinutes}`);
+
+		return false;
 	}, [deadline]);
 
 	useEffect(() => {
 		const countdownInterval = setInterval(() => {
-			calculateDaysUntilDeadline();
+			const isExpired = calculateDaysUntilDeadline();
+
+			if (isExpired) {
+				clearInterval(countdownInterval);
+			}
 		}, ONE_MINUTE);
+
 		calculateDaysUntilDeadline();
 
 		return (): void => {
