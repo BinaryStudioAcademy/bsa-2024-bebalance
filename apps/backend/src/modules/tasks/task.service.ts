@@ -22,13 +22,12 @@ class TaskService implements Service {
 		const createdAt = new Date();
 		const createdAtDayOfWeek = createdAt.getDay();
 
-		const normalizeTaskDays = userTaskDays.map((day) =>
-			day === Sunday.USER_TASK ? Sunday.NORMALIZED : day,
-		);
-		const daysAfterCreatedAt = normalizeTaskDays.filter(
-			(day) => day > createdAtDayOfWeek,
-		);
-
+		const normalizeTaskDays = userTaskDays.map((day) => {
+			return day === Sunday.USER_TASK ? Sunday.NORMALIZED : day;
+		});
+		const daysAfterCreatedAt = normalizeTaskDays.filter((day) => {
+			return day > createdAtDayOfWeek;
+		});
 		const nextDayOfTheWeek =
 			daysAfterCreatedAt.length > NO_DAYS_THIS_WEEK
 				? Math.min(...daysAfterCreatedAt)
