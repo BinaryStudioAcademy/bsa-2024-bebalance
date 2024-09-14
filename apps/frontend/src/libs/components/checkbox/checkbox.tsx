@@ -7,7 +7,7 @@ import {
 	type InputOption,
 } from "~/libs/types/types.js";
 
-import { Icon } from "../components.js";
+import { Icon } from "../icon/icon.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues, OptionValueT extends number | string> = {

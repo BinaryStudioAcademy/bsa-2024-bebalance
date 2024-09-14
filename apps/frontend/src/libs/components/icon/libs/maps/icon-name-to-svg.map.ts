@@ -3,7 +3,7 @@ import Close from "~/assets/img/close.svg?react";
 import CrossedEye from "~/assets/img/crossed-eye.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
 import Menu from "~/assets/img/menu.svg?react";
-import RoundedCheckIcon from "~/assets/img/rounded-check-icon.svg?react";
+import RoundedCheck from "~/assets/img/rounded-check.svg?react";
 import SettingsActive from "~/assets/img/settings-active.svg?react";
 import SettingsInactive from "~/assets/img/settings-inactive.svg?react";
 import WheelOfBalanceActive from "~/assets/img/wheel-of-balance-active.svg?react";
@@ -19,7 +19,7 @@ const iconNameToSvg: Record<
 	crossedEye: CrossedEye,
 	eye: Eye,
 	menu: Menu,
-	roundedCheck: RoundedCheckIcon,
+	roundedCheck: RoundedCheck,
 	settingsActive: SettingsActive,
 	settingsInactive: SettingsInactive,
 	wheelActive: WheelOfBalanceActive,
