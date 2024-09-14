@@ -1,4 +1,5 @@
 const AiAssistantApiPath = {
+	ACCEPT_TASK: "/chat/accept-task",
 	ADD_MESSAGE: "/chat/add-message",
 	CONTINUE_CHAT: "/chat/continue",
 	DELETE_CHAT: "/chat/remove",
