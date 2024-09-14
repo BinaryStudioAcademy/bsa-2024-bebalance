@@ -11,5 +11,5 @@
 }
 
 .expired {
-	color: #ff2928;
+	color: var(--error);
 }
