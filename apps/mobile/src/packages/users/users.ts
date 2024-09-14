@@ -13,6 +13,7 @@ const userApi = new UserApi({
 export { userApi };
 export { UserValidationMessage } from "./libs/enums/enums";
 export {
+	type EmailDto,
 	type UserDto,
 	type UserGetParametersDto,
 	type UserSignInRequestDto,
@@ -22,6 +23,7 @@ export {
 	type UserSignUpResponseDto,
 } from "./libs/types/types";
 export {
+	userForgotPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 } from "./libs/validation-schemas/validation-schemas";

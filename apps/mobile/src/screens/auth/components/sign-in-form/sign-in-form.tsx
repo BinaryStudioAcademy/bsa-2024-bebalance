@@ -82,7 +82,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 				<Link
 					color={BaseColor.BLUE}
 					label="Forgot password?"
-					to={`/${RootScreenName.SIGN_UP}`}
+					to={`/${RootScreenName.FORGOT_PASSWORD}`}
 					weight="semiBold"
 				/>
 			</View>

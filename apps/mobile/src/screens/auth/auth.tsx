@@ -18,21 +18,29 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
+	type EmailDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/packages/users/users";
 import { actions as authActions } from "~/slices/auth/auth";
 
-import { SignInForm, SignUpForm } from "./components/components";
+import {
+	ForgotPasswordForm,
+	SignInForm,
+	SignUpForm,
+} from "./components/components";
 import { styles } from "./styles";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
+	const [forgotPasswordSubmisdionData, setForgtPasswordSubmissionData] =
+		useState<string>("");
 	const { name } = useAppRoute();
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
@@ -57,6 +65,10 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleForgotPasswordSubmit = useCallback((payload: EmailDto): void => {
+		setForgtPasswordSubmissionData(payload.email);
+	}, []);
+
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case RootScreenName.SIGN_IN: {
@@ -65,6 +77,10 @@ const Auth: React.FC = () => {
 
 			case RootScreenName.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+			}
+
+			case RootScreenName.FORGOT_PASSWORD: {
+				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
 			}
 		}
 
@@ -121,6 +137,7 @@ const Auth: React.FC = () => {
 									</Text>
 								</View>
 								<View style={globalStyles.gap24}>{getScreen(name)}</View>
+								<Text>{forgotPasswordSubmisdionData}</Text>
 							</View>
 						</ScrollView>
 					</KeyboardAvoidingView>
