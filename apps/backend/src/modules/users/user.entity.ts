@@ -1,4 +1,3 @@
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
 import { NotificationFrequency } from "./libs/enums/enums.js";
@@ -22,13 +21,11 @@ class UserEntity implements Entity {
 
 	private notificationFrequency: ValueOf<typeof NotificationFrequency>;
 
-	private onboardingAnswers: null | number[];
-
 	private passwordHash: string;
 
 	private passwordSalt: string;
 
-	private quizAnswers: null | number[];
+	// private quizAnswers: null | number[];
 
 	private updatedAt: string;
 
@@ -44,10 +41,9 @@ class UserEntity implements Entity {
 		id,
 		name,
 		notificationFrequency,
-		onboardingAnswers,
 		passwordHash,
 		passwordSalt,
-		quizAnswers,
+
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -60,10 +56,9 @@ class UserEntity implements Entity {
 		id: null | number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
-		onboardingAnswers: null | number[];
 		passwordHash: string;
 		passwordSalt: string;
-		quizAnswers: null | number[];
+
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
@@ -76,10 +71,9 @@ class UserEntity implements Entity {
 		this.id = id;
 		this.name = name;
 		this.notificationFrequency = notificationFrequency;
-		this.onboardingAnswers = onboardingAnswers;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
-		this.quizAnswers = quizAnswers;
+
 		this.updatedAt = updatedAt;
 		this.userTaskDays = userTaskDays;
 	}
@@ -89,13 +83,13 @@ class UserEntity implements Entity {
 		avatarUrl,
 		createdAt,
 		email,
+		hasAnsweredOnboardingQuestions,
+		hasAnsweredQuizQuestions,
 		id,
 		name,
 		notificationFrequency,
-		onboardingAnswers,
 		passwordHash,
 		passwordSalt,
-		quizAnswers,
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -103,12 +97,11 @@ class UserEntity implements Entity {
 		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
-		hasAnsweredOnboardingQuestions?: boolean;
-		hasAnsweredQuizQuestions?: boolean;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		id: null | number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
-		onboardingAnswers?: number[];
 		passwordHash: string;
 		passwordSalt: string;
 		quizAnswers?: number[];
@@ -120,20 +113,14 @@ class UserEntity implements Entity {
 			avatarUrl,
 			createdAt,
 			email,
-			hasAnsweredOnboardingQuestions: Boolean(
-				onboardingAnswers && onboardingAnswers.length > ZERO_INDEX,
-			),
-			hasAnsweredQuizQuestions: Boolean(
-				quizAnswers && quizAnswers.length > ZERO_INDEX,
-			),
+			hasAnsweredOnboardingQuestions: Boolean(hasAnsweredOnboardingQuestions),
+			hasAnsweredQuizQuestions: Boolean(hasAnsweredQuizQuestions),
 			id,
 			name,
 			notificationFrequency:
 				notificationFrequency ?? NotificationFrequency.NONE,
-			onboardingAnswers: onboardingAnswers ?? null,
 			passwordHash,
 			passwordSalt,
-			quizAnswers: quizAnswers ?? null,
 			updatedAt,
 			userTaskDays: userTaskDays ?? null,
 		});
@@ -160,10 +147,8 @@ class UserEntity implements Entity {
 			id: null,
 			name,
 			notificationFrequency: NotificationFrequency.NONE,
-			onboardingAnswers: null,
 			passwordHash,
 			passwordSalt,
-			quizAnswers: null,
 			updatedAt: "",
 			userTaskDays: null,
 		});
@@ -189,11 +174,9 @@ class UserEntity implements Entity {
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: Boolean(
-				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX,
+				this.hasAnsweredOnboardingQuestions,
 			),
-			hasAnsweredQuizQuestions: Boolean(
-				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX,
-			),
+			hasAnsweredQuizQuestions: Boolean(this.hasAnsweredQuizQuestions),
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
@@ -222,11 +205,9 @@ class UserEntity implements Entity {
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: Boolean(
-				this.onboardingAnswers && this.onboardingAnswers.length > ZERO_INDEX,
+				this.hasAnsweredOnboardingQuestions,
 			),
-			hasAnsweredQuizQuestions: Boolean(
-				this.quizAnswers && this.quizAnswers.length > ZERO_INDEX,
-			),
+			hasAnsweredQuizQuestions: Boolean(this.hasAnsweredQuizQuestions),
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,

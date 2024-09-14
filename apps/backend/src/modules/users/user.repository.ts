@@ -3,8 +3,7 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { type OnboardingAnswerModel } from "../onboarding/onboarding.js";
-import { type QuizAnswerModel } from "../quiz-answers/quiz-answers.js";
+import { ZERO_INDEX } from "./libs/constants/constants.js";
 import {
 	type UserDetailsWithAvatarFile,
 	type UserTaskDay,
@@ -55,6 +54,9 @@ class UserRepository implements Repository {
 			avatarUrl: null,
 			createdAt: user.createdAt,
 			email: user.email,
+			hasAnsweredOnboardingQuestions:
+				user.onboardingAnswers.length > ZERO_INDEX,
+			hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 			id: user.id,
 			name: userDetails.name,
 			notificationFrequency: "all",
@@ -95,17 +97,14 @@ class UserRepository implements Repository {
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: user.userDetails.notificationFrequency,
-					onboardingAnswers: user.onboardingAnswers.map(
-						(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
-					),
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					quizAnswers: user.quizAnswers.map(
-						(quizAnswers: QuizAnswerModel) => quizAnswers.id,
-					),
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -128,17 +127,14 @@ class UserRepository implements Repository {
 				avatarUrl: user.userDetails.avatarFile?.url ?? null,
 				createdAt: user.createdAt,
 				email: user.email,
+				hasAnsweredOnboardingQuestions:
+					user.onboardingAnswers.length > ZERO_INDEX,
+				hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 				id: user.id,
 				name: user.userDetails.name,
 				notificationFrequency: user.userDetails.notificationFrequency,
-				onboardingAnswers: user.onboardingAnswers.map(
-					(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
-				),
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
-				quizAnswers: user.quizAnswers.map(
-					(quizAnswers: QuizAnswerModel) => quizAnswers.id,
-				),
 				updatedAt: user.updatedAt,
 				userTaskDays: user.userTaskDays.map(
 					(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -163,17 +159,14 @@ class UserRepository implements Repository {
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: user.userDetails.notificationFrequency,
-					onboardingAnswers: user.onboardingAnswers.map(
-						(onboardingAnswer: OnboardingAnswerModel) => onboardingAnswer.id,
-					),
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					quizAnswers: user.quizAnswers.map(
-						(quizAnswers: QuizAnswerModel) => quizAnswers.id,
-					),
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -206,6 +199,9 @@ class UserRepository implements Repository {
 					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: updatedUserDetails.name,
 					notificationFrequency: updatedUserDetails.notificationFrequency,
@@ -248,6 +244,9 @@ class UserRepository implements Repository {
 					avatarUrl: userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: userDetails.notificationFrequency,
@@ -279,6 +278,9 @@ class UserRepository implements Repository {
 			avatarUrl: user.userDetails.avatarFile?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
+			hasAnsweredOnboardingQuestions:
+				user.onboardingAnswers.length > ZERO_INDEX,
+			hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 			id: user.id,
 			name: user.userDetails.name,
 			notificationFrequency: user.userDetails.notificationFrequency,
