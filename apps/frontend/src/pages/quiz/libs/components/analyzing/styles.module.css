@@ -66,11 +66,10 @@
 .text {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 20px;
 	padding: 30px;
 	margin-bottom: 30px;
 	font-size: 14px;
-	line-height: 1.4;
 	color: var(--white);
 	background-color: var(--text-background);
 	border-radius: 14px;
