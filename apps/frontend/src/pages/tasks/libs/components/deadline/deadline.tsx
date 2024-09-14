@@ -1,4 +1,5 @@
 import { Icon } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import {
@@ -16,6 +17,13 @@ type Properties = {
 
 const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 	const [countdown, setCountdown] = useState<string>(COUNTDOWN_EXPIRED);
+	const [isExpired, setIsExpired] = useState<boolean>(false);
+
+	const clockIconName = isExpired ? "clockInactive" : "clockActive";
+	const countdonTimeStyleClass = getValidClassNames(
+		styles["countdown-time"],
+		isExpired && styles["expired"],
+	);
 
 	const calculateDaysUntilDeadline = useCallback(() => {
 		const deadlineTime = new Date(deadline).getTime();
@@ -24,6 +32,7 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 
 		if (timeToDeadline < DEADLINE_OVER) {
 			setCountdown(COUNTDOWN_EXPIRED);
+			setIsExpired(true);
 
 			return;
 		}
@@ -58,8 +67,8 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 
 	return (
 		<div className={styles["container"]}>
-			<Icon name="clockActive" />
-			<p className={styles["countdown-time"]}>{countdown}</p>
+			<Icon name={clockIconName} />
+			<p className={countdonTimeStyleClass}>{countdown}</p>
 		</div>
 	);
 };
