@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.34.1...frontend-v1.35.0) (2024-09-14)
+
+
+### Features
+
+* Balance Wheel animation bb-204 ([#425](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/425)) ([9c04ae5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9c04ae55b66e7473205cf88033258ad0153bef02))
+* **frontend:** Text under the title "We’re Analyzing Your Journey!" must be dynamic bb-303 ([#359](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/359)) ([5b10823](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b108239c34d7de79bd231d30b3f3a3b68b17340))
+
+
+### Bug Fixes
+
+* **frontend:** add "?" to question bb-243 ([#421](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/421)) ([52ff4ec](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/52ff4ecef4489264594831f10d566756d397a747))
+
 ## [1.34.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.34.0...frontend-v1.34.1) (2024-09-13)
 
 
