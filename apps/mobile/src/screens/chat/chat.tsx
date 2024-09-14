@@ -61,7 +61,7 @@ const Chat: React.FC = () => {
 						<CheckboxCategoriesForm
 							categories={categories}
 							onSubmit={handleRetakeQuizSubmit}
-							submitButtonName="Update fields"
+							submitButtonLabel="Update fields"
 						/>
 					</ChatBox>
 					<Text color={BaseColor.BLACK}>

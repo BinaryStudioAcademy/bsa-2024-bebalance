@@ -21,13 +21,13 @@ import {
 type Properties = {
 	categories: QuizScoresGetAllItemResponseDto[];
 	onSubmit: (payload: CategoriesSelectedRequestDto) => void;
-	submitButtonName: string;
+	submitButtonLabel: string;
 };
 
 const CheckboxCategoriesForm: React.FC<Properties> = ({
 	categories,
 	onSubmit,
-	submitButtonName,
+	submitButtonLabel,
 }: Properties): JSX.Element | null => {
 	const { control, errors, handleSubmit, reset } =
 		useAppForm<CategoriesSelectedRequestDto>({
@@ -69,7 +69,7 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 				name="categoryIds"
 				options={checkboxGroupOptions}
 			/>
-			<Button label={submitButtonName} onPress={handleFormSubmit} />
+			<Button label={submitButtonLabel} onPress={handleFormSubmit} />
 		</View>
 	);
 };
