@@ -95,22 +95,12 @@ class CategoryRepository implements Repository {
 		const categories = await this.categoryModel.query().select("*");
 
 		return await Promise.all(
-			categories.map(async (category) => {
-				const scoresModel = await this.categoryModel
-					.query()
-					.from(DatabaseTableName.QUIZ_SCORES)
-					.where({ categoryId: category.id })
-					.castTo<CategoryModel[]>();
-
-				const scoreEntities = scoresModel.map((score) => {
-					return CategoryEntity.initializeNew(score);
-				});
-
+			categories.map((category) => {
 				return CategoryEntity.initialize({
 					createdAt: category.createdAt,
 					id: category.id,
 					name: category.name,
-					scores: scoreEntities,
+					scores: [],
 					updatedAt: category.updatedAt,
 				});
 			}),
@@ -124,24 +114,12 @@ class CategoryRepository implements Repository {
 			.select("*");
 
 		return await Promise.all(
-			categories.map(async (category) => {
-				const scoresModel = await this.categoryModel
-					.query()
-					.from(DatabaseTableName.QUIZ_SCORES)
-					.where({ categoryId: category.id })
-					.castTo<CategoryModel[]>();
-
-				const scoreEntities = scoresModel.map((score) => {
-					return CategoryEntity.initializeNew({
-						name: score.name,
-					});
-				});
-
+			categories.map((category) => {
 				return CategoryEntity.initialize({
 					createdAt: category.createdAt,
 					id: category.id,
 					name: category.name,
-					scores: scoreEntities,
+					scores: [],
 					updatedAt: category.updatedAt,
 				});
 			}),

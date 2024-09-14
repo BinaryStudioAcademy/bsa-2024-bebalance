@@ -83,7 +83,7 @@ const UserWheel: React.FC = () => {
 				{isEditingModalOpen && (
 					<EditModeSwitch
 						currentMode={editMode}
-						handleModeToggle={handleModeToggle}
+						onModeToggle={handleModeToggle}
 					/>
 				)}
 			</div>

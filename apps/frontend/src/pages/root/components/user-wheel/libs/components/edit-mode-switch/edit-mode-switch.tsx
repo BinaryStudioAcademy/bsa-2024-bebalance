@@ -5,12 +5,12 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	currentMode: EditMode;
-	handleModeToggle: () => void;
+	onModeToggle: () => void;
 };
 
 const EditModeSwitch: React.FC<Properties> = ({
 	currentMode,
-	handleModeToggle,
+	onModeToggle,
 }: Properties) => {
 	const isManualMode = currentMode === "manual";
 
@@ -20,14 +20,14 @@ const EditModeSwitch: React.FC<Properties> = ({
 				isDisabled={isManualMode}
 				isSelected={isManualMode}
 				label="Edit manually"
-				onClick={handleModeToggle}
+				onClick={onModeToggle}
 				variant="switch"
 			/>
 			<Button
 				isDisabled={!isManualMode}
 				isSelected={!isManualMode}
 				label="Retake quiz"
-				onClick={handleModeToggle}
+				onClick={onModeToggle}
 				variant="switch"
 			/>
 		</div>
