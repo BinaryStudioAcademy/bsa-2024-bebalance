@@ -10,7 +10,7 @@ import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	const [step, setStep] = useState<number>(Step.INTRODUCTION);
+	const [step, setStep] = useState<number>(Step.ANALYZING);
 
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + STEP_INCREMENT);
