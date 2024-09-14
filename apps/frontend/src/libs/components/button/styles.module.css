@@ -47,6 +47,22 @@
 	transform: translateY(-50%);
 }
 
+.switch-button {
+	padding: 0 10px;
+	font-size: 10px;
+	color: var(--switch-disable);
+	background: none;
+	border-radius: 20px;
+	transition: all 200ms ease-in;
+}
+
+.switch-button:hover,
+.switch-button-selected {
+	color: var(--black);
+	background-color: var(--white);
+	transition: all 200ms ease-in;
+}
+
 .disabled {
 	cursor: not-allowed;
 	opacity: 0.5;

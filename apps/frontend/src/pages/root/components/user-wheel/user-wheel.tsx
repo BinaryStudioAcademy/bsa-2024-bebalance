@@ -13,6 +13,8 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
+import { EditModeSwitch } from "./libs/components/components.js";
+import { type EditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
@@ -21,7 +23,7 @@ const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-
+	const [editMode, setEditMode] = useState<EditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
 	const chartData = scores.map((score) => {
@@ -43,6 +45,12 @@ const UserWheel: React.FC = () => {
 		setIsEditingModalOpen(false);
 	}, []);
 
+	const handleModeToggle = useCallback(() => {
+		setEditMode((previousState) => {
+			return previousState === "manual" ? "retake_quiz" : "manual";
+		});
+	}, []);
+
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
@@ -51,6 +59,12 @@ const UserWheel: React.FC = () => {
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
+				{isEditingModalOpen && (
+					<EditModeSwitch
+						currentMode={editMode}
+						handleModeToggle={handleModeToggle}
+					/>
+				)}
 			</div>
 			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
