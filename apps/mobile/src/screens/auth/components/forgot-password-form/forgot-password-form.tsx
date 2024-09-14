@@ -1,4 +1,4 @@
-import { Button, Input, Link, Text } from "~/libs/components/components";
+import { Button, Input, Link, Text, View } from "~/libs/components/components";
 import { BaseColor, RootScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
@@ -28,17 +28,9 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 			<Text preset="uppercase" size="xl" weight="bold">
 				FORGOT PASSWORD
 			</Text>
-			{/* <Text style={globalStyles.mb16} weight="semiBold">
-				Enter your email address and we will send you a link to reset your password.
-			</Text> */}
 			<Text style={globalStyles.mb16} weight="semiBold">
-				Already have an account? Go to{" "}
-				<Link
-					color={BaseColor.BLUE}
-					label="Sign in"
-					to={`/${RootScreenName.SIGN_IN}`}
-					weight="semiBold"
-				/>
+				Enter your email address and we will send you a link to reset your
+				password.
 			</Text>
 			<Input
 				control={control}
@@ -48,6 +40,17 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				placeholder="name@example.com"
 			/>
 			<Button label="RESET PASSWORD" onPress={handleFormSubmit} />
+			<View style={globalStyles.alignItemsCenter}>
+				<Text style={globalStyles.mb16} weight="semiBold">
+					Back to{" "}
+					<Link
+						color={BaseColor.BLUE}
+						label="Sign in"
+						to={`/${RootScreenName.SIGN_IN}`}
+						weight="semiBold"
+					/>
+				</Text>
+			</View>
 		</>
 	);
 };
