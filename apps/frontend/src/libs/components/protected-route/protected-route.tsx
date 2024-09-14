@@ -15,10 +15,10 @@ const ProtectedRoute: React.FC<Properties> = ({
 	component,
 	redirectTo,
 }: Properties) => {
-	const { dataStatus, hasAnsweredOnboardingQuestions, user } = useAppSelector(
+	const { dataStatus, hasAnsweredQuizQuestions, user } = useAppSelector(
 		({ auth }) => ({
 			dataStatus: auth.dataStatus,
-			hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: auth.user?.hasAnsweredQuizQuestions,
 			user: auth.user,
 		}),
 	);
@@ -36,7 +36,7 @@ const ProtectedRoute: React.FC<Properties> = ({
 		return <Navigate replace to={redirectTo} />;
 	}
 
-	if (!hasAnsweredOnboardingQuestions && pathname !== AppRoute.QUIZ) {
+	if (!hasAnsweredQuizQuestions && pathname !== AppRoute.QUIZ) {
 		return <Navigate replace to={AppRoute.QUIZ} />;
 	}
 

@@ -2,13 +2,12 @@ import { BalanceWheelChart, Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
-	useAppDispatch,
+	useAppSelector,
 	useCallback,
 	useEffect,
 	useNavigate,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
 
 import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
@@ -16,10 +15,15 @@ import styles from "./styles.module.css";
 
 const BalanceWheel: React.FC = () => {
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
+
+	const { hasAnsweredOnboardingQuestions, hasAnsweredQuizQuestions } =
+		useAppSelector(({ auth }) => ({
+			hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: auth.user?.hasAnsweredQuizQuestions,
+		}));
 
 	const handleUpdatePercentage = useCallback(() => {
 		setPercentage((previousPercentage) => {
@@ -47,9 +51,12 @@ const BalanceWheel: React.FC = () => {
 		};
 	}, [handleUpdatePercentage, navigate]);
 
-	if (percentage >= PercentageConfig.MAX_VALUE) {
-		void dispatch(authActions.getAuthenticatedUser());
+	const isDone =
+		percentage >= PercentageConfig.MAX_VALUE &&
+		hasAnsweredQuizQuestions &&
+		hasAnsweredOnboardingQuestions;
 
+	if (isDone) {
 		return <Navigate replace to={AppRoute.ROOT} />;
 	}
 
