@@ -21,9 +21,9 @@ import { ChatBox } from "./libs/components/components";
 import { styles } from "./styles";
 
 const Chat: React.FC = () => {
-	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<
-		null | number[]
-	>(null);
+	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<number[]>(
+		[],
+	);
 	const dispatch = useAppDispatch();
 	const categories = useAppSelector((state) => state.quiz.scores);
 
@@ -64,9 +64,7 @@ const Chat: React.FC = () => {
 							submitButtonLabel="Update fields"
 						/>
 					</ChatBox>
-					<Text color={BaseColor.BLACK}>
-						{submittedCategoryIds?.join(", ")}
-					</Text>
+					<Text color={BaseColor.BLACK}>{submittedCategoryIds.join(", ")}</Text>
 				</View>
 			</ScrollView>
 		</ScreenWrapper>

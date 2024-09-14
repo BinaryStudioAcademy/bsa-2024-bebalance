@@ -2,17 +2,19 @@ import { type QuizScoresGetAllItemResponseDto } from "~/libs/types/types";
 
 type GetCategoriesSortedByScoreArguments = {
 	categories: QuizScoresGetAllItemResponseDto[];
-	useDescendingOrder?: boolean;
+	order?: "ASC" | "DESC";
 };
 
 const getCategoriesSortedByScore = ({
 	categories,
-	useDescendingOrder = false,
+	order = "ASC",
 }: GetCategoriesSortedByScoreArguments): QuizScoresGetAllItemResponseDto[] => {
+	const isAscendingOrder = order === "ASC";
+
 	return categories
 		.map((categoryItem) => ({ ...categoryItem }))
 		.sort((a, b) => {
-			return useDescendingOrder ? b.score - a.score : a.score - b.score;
+			return isAscendingOrder ? a.score - b.score : b.score - a.score;
 		});
 };
 
