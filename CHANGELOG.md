@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.46.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.45.0...v1.46.0) (2024-09-14)
+
+
+### Features
+
+* Balance Wheel animation bb-204 ([#425](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/425)) ([9c04ae5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9c04ae55b66e7473205cf88033258ad0153bef02))
+* **frontend:** Text under the title "We’re Analyzing Your Journey!" must be dynamic bb-303 ([#359](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/359)) ([5b10823](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b108239c34d7de79bd231d30b3f3a3b68b17340))
+
+
+### Bug Fixes
+
+* **frontend:** add "?" to question bb-243 ([#421](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/421)) ([52ff4ec](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/52ff4ecef4489264594831f10d566756d397a747))
+
+## [1.45.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.44.0...v1.45.0) (2024-09-13)
+
+
+### Features
+
+* **backend:** update profile picture bb-173 ([#276](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/276)) ([9917ccf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9917ccfd70fdb371fd9be7ad475c833161ce17f1))
+
+
+### Bug Fixes
+
+* **frontend:** add color to navlink bb-406 ([#411](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/411)) ([ffb2f05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ffb2f05e9948e32d6ae749488acff2d01338ecaa))
+* **mobile:** Remove link "Go to the Wheel" from the Welcome screen bb-369 ([#407](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/407)) ([99723b9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/99723b990fe1afc885b173619db9fb938b9518bc))
+
+## [1.44.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.43.0...v1.44.0) (2024-09-12)
+
+
+### Features
+
+* **frontend:** intro motivation bb-377 ([#408](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/408)) ([541c305](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/541c3054802836f11243754fccde20ad2ad54c22))
+* **mobile:** background component bb-154 ([#392](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/392)) ([fdaba88](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fdaba8866db9c1a7a5cf442bc85cdf3ad88f7255))
+
+
+### Bug Fixes
+
+* **frontend:** fix flex direction and width for onboarding buttons bb-400 ([#401](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/401)) ([a52b988](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a52b9883ce1e0504cd2bdd6143e2574de8b77ead))
+* **frontend:** forgot-password reset-password forms validation bb-285 ([#405](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/405)) ([0e132a9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0e132a9de36425fb0c54443571cb8c3061d005f2))
+
 ## [1.43.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.42.0...v1.43.0) (2024-09-11)
 
 

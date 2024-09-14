@@ -7,11 +7,13 @@ export {
 	AppEnvironment,
 	ContentType,
 	ErrorMessage,
+	NumericalValue,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
 	CategoryError,
+	FileError,
 	HTTPError,
 	OnboardingError,
 	QuizError,
