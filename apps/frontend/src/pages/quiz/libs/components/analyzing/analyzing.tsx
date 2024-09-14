@@ -1,7 +1,7 @@
 import { Button } from "~/libs/components/components.js";
 
 import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
-import { useAnimatedSpans } from "./libs/hoook/hooks.js";
+import { useAnimatedSpans } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
 type Properties = {
