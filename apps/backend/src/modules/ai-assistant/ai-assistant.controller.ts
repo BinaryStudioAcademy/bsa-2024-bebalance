@@ -11,11 +11,13 @@ import { type UserDto } from "~/modules/users/users.js";
 import { type AiAssistantService } from "./ai-assistant.service.js";
 import { AiAssistantApiPath } from "./libs/enums/enums.js";
 import {
+	type ChangeTaskSuggestionRequestDto,
 	type TaskSuggestionRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 import {
 	addMessageToThreadValidationSchema,
+	ChangeTaskSuggestionRequestValidationSchema,
 	TaskSuggestionRequestValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 
@@ -54,6 +56,20 @@ class AiAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.changeTaskSuggestion(
+					options as APIHandlerOptions<{
+						body: ChangeTaskSuggestionRequestDto;
+					}>,
+				),
+			method: "POST",
+			path: AiAssistantApiPath.GENERATE_ALTERNATIVE_TASK,
+			validation: {
+				body: ChangeTaskSuggestionRequestValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.suggestTasksForCategories(
 					options as APIHandlerOptions<{
 						body: TaskSuggestionRequestDto;
@@ -77,6 +93,19 @@ class AiAssistantController extends BaseController {
 
 		return {
 			payload: await this.openAiService.addMessageToThread(body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async changeTaskSuggestion(
+		options: APIHandlerOptions<{
+			body: ChangeTaskSuggestionRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { body } = options;
+
+		return {
+			payload: await this.openAiService.changeTaskSuggestion(body),
 			status: HTTPCode.OK,
 		};
 	}
