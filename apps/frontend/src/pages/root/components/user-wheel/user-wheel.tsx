@@ -13,7 +13,10 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { EditModeSwitch } from "./libs/components/components.js";
+import {
+	EditModeSwitch,
+	RetakeQuizModal,
+} from "./libs/components/components.js";
 import { type EditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -55,6 +58,24 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
+	function getModal(mode: EditMode): React.ReactNode {
+		switch (mode) {
+			case "manual": {
+				return (
+					<ScoresEditModal data={scores} onSaveChanges={handleFinishEditing} />
+				);
+			}
+
+			case "retake_quiz": {
+				return <RetakeQuizModal />;
+			}
+
+			default: {
+				return;
+			}
+		}
+	}
+
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
@@ -70,9 +91,7 @@ const UserWheel: React.FC = () => {
 				{scores.length > NO_SCORES_COUNT && (
 					<BalanceWheelChart data={chartData} />
 				)}
-				{isEditingModalOpen && (
-					<ScoresEditModal data={scores} onSaveChanges={handleFinishEditing} />
-				)}
+				{isEditingModalOpen && getModal(editMode)}
 			</div>
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
