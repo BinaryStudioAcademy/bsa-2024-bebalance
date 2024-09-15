@@ -22,22 +22,22 @@ import {
 } from "./actions.js";
 
 type State = {
-	currentCategory: null | QuizQuestionDto[];
 	currentCategoryIndex: number;
+	currentCategoryQuestions: null | QuizQuestionDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
 	isRetakingQuiz: boolean;
-	questions: QuizQuestionDto[][];
+	questionsByCategories: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
 	step: ValueOf<typeof Step>;
 	userAnswers: QuizUserAnswerDto[];
 };
 
 const initialState: State = {
-	currentCategory: null,
 	currentCategoryIndex: ZERO_INDEX,
+	currentCategoryQuestions: null,
 	dataStatus: DataStatus.IDLE,
 	isRetakingQuiz: false,
-	questions: [],
+	questionsByCategories: [],
 	scores: [],
 	step: Step.MOTIVATION,
 	userAnswers: [],
@@ -50,9 +50,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAllQuestions.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload.items;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+			state.questionsByCategories = action.payload.items;
+			state.currentCategoryQuestions =
+				state.questionsByCategories[state.currentCategoryIndex] || null;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -64,9 +64,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getQuestionsByCategoryIds.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload.items;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+			state.questionsByCategories = action.payload.items;
+			state.currentCategoryQuestions =
+				state.questionsByCategories[state.currentCategoryIndex] || null;
 		});
 		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -126,8 +126,8 @@ const { actions, name, reducer } = createSlice({
 	reducers: {
 		nextQuestion(state) {
 			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+			state.currentCategoryQuestions =
+				state.questionsByCategories[state.currentCategoryIndex] || null;
 		},
 		nextStep(state) {
 			state.step++;
@@ -135,8 +135,8 @@ const { actions, name, reducer } = createSlice({
 		previousQuestion(state) {
 			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {
 				state.currentCategoryIndex -= PREVIOUS_INDEX_OFFSET;
-				state.currentCategory =
-					state.questions[state.currentCategoryIndex] || null;
+				state.currentCategoryQuestions =
+					state.questionsByCategories[state.currentCategoryIndex] || null;
 			}
 		},
 		setStep(state, action: PayloadAction<ValueOf<typeof Step>>) {
