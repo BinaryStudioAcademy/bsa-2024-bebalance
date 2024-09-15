@@ -88,7 +88,7 @@ class QuizQuestionRepository implements Repository {
 					.castTo<QuizAnswerModel[]>();
 
 				const answerEntities = answersModel.map((answer) => {
-					return QuizAnswerEntity.initializeNew(answer);
+					return QuizAnswerEntity.initialize(answer);
 				});
 
 				return QuizQuestionEntity.initialize({
@@ -118,7 +118,7 @@ class QuizQuestionRepository implements Repository {
 					.castTo<QuizAnswerModel[]>();
 
 				const answerEntities = answersModel.map((answer) => {
-					return QuizAnswerEntity.initializeNew(answer);
+					return QuizAnswerEntity.initialize(answer);
 				});
 
 				return QuizQuestionEntity.initialize({

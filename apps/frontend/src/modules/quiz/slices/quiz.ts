@@ -3,6 +3,7 @@ import {
 	getAllQuestions,
 	getQuestionsByCategoryIds,
 	getScores,
+	saveAnswers,
 } from "./actions.js";
 import { actions } from "./quiz.slice.js";
 
@@ -12,6 +13,7 @@ const allActions = {
 	getAllQuestions,
 	getQuestionsByCategoryIds,
 	getScores,
+	saveAnswers,
 };
 
 export { allActions as actions };

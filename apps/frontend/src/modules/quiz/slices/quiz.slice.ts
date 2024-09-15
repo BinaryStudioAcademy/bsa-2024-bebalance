@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import {
 	PREVIOUS_INDEX_OFFSET,
@@ -9,6 +9,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
+	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 import { Step } from "~/pages/quiz/libs/enums/step.js";
 
@@ -17,6 +18,7 @@ import {
 	getAllQuestions,
 	getQuestionsByCategoryIds,
 	getScores,
+	saveAnswers,
 } from "./actions.js";
 
 type State = {
@@ -27,6 +29,7 @@ type State = {
 	questions: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
 	step: ValueOf<typeof Step>;
+	userAnswers: QuizUserAnswerDto[];
 };
 
 const initialState: State = {
@@ -37,6 +40,7 @@ const initialState: State = {
 	questions: [],
 	scores: [],
 	step: Step.MOTIVATION,
+	userAnswers: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -63,12 +67,10 @@ const { actions, name, reducer } = createSlice({
 			state.questions = action.payload.items;
 			state.currentCategory =
 				state.questions[state.currentCategoryIndex] || null;
-			state.step = Step.QUIZ;
 		});
 		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 			state.isRetakingQuiz = false;
-			state.step = Step.MOTIVATION;
 		});
 
 		builder.addCase(getScores.pending, (state) => {
@@ -80,6 +82,17 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(saveAnswers.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.userAnswers = action.payload;
+		});
+		builder.addCase(saveAnswers.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
 		});
 
 		builder.addCase(editScores.fulfilled, (state, action) => {
@@ -125,6 +138,9 @@ const { actions, name, reducer } = createSlice({
 				state.currentCategory =
 					state.questions[state.currentCategoryIndex] || null;
 			}
+		},
+		setStep(state, action: PayloadAction<ValueOf<typeof Step>>) {
+			state.step = action.payload;
 		},
 	},
 });

@@ -2,6 +2,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
+	useEffect,
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import {
@@ -15,6 +16,7 @@ import {
 	Introduction,
 	Motivation,
 	NotificationQuestions,
+	OnboardingForm,
 	QuizForm,
 } from "./libs/components/components.js";
 import { Step } from "./libs/enums/enums.js";
@@ -27,21 +29,36 @@ const Quiz: React.FC = () => {
 		dispatch(quizActions.nextStep());
 	}, [dispatch]);
 
+	const { hasAnsweredOnboardingQuestions } = useAppSelector(({ auth }) => ({
+		hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+	}));
+
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
 			void dispatch(userActions.saveNotificationAnswers(payload));
+			handleNextStep();
 		},
-		[dispatch],
+		[dispatch, handleNextStep],
 	);
+
+	useEffect(() => {
+		if (hasAnsweredOnboardingQuestions) {
+			dispatch(quizActions.setStep(Step.INTRODUCTION));
+		}
+	}, [dispatch, hasAnsweredOnboardingQuestions]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
-			case Step.ANALYZING: {
-				return <Analyzing onNext={handleNextStep} />;
-			}
-
 			case Step.MOTIVATION: {
 				return <Motivation onNext={handleNextStep} />;
+			}
+
+			case Step.ONBOARDING: {
+				return <OnboardingForm onNext={handleNextStep} />;
+			}
+
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {
