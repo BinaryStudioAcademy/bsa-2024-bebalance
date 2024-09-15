@@ -1,0 +1,17 @@
+.title {
+	padding: 20px 30px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 25px;
+}
+
+.board {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	height: fit-content;
+	min-height: calc(100vh - 77px - 65px);
+	padding: 30px;
+	background-image: url("../../assets/img/board-background.svg");
+	background-repeat: repeat;
+}

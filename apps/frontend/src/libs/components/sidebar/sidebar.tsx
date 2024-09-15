@@ -1,3 +1,4 @@
+import ColorfullLogo from "~/assets/img/colorfull-logo.svg?react";
 import runImg from "~/assets/img/run.svg";
 import { Button, Popup } from "~/libs/components/components.js";
 import { SIDEBAR_ITEMS } from "~/libs/constants/constants.js";
@@ -55,7 +56,9 @@ const Sidebar: React.FC<Properties> = ({
 				/>
 			</div>
 
-			<div className={styles["logo-container"]}>Logo</div>
+			<div className={styles["logo-container"]}>
+				<ColorfullLogo />
+			</div>
 			<div className={styles["buttons-container"]}>
 				<div className={styles["navlinks-container"]}>
 					{SIDEBAR_ITEMS.map(({ href, icon, label }) => {

@@ -1,5 +1,7 @@
+import ColorfullLogo from "~/assets/img/colorfull-logo.svg?react";
 import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
 import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
+import WhiteLogo from "~/assets/img/white-logo.svg?react";
 import { Link, Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
@@ -114,8 +116,7 @@ const Auth: React.FC = () => {
 			<div className={styles["form-container"]}>
 				<div className={styles["form-header"]}>
 					<div className={styles["form-header__logo-container"]}>
-						<div className={styles["form-header__logo"]} />
-						<span className={styles["form-header__logo-text"]}>logo</span>
+						<ColorfullLogo />
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
@@ -143,8 +144,8 @@ const Auth: React.FC = () => {
 				</div>
 				{getScreen(pathname)}
 			</div>
-			<div className={styles["title-container"]}>
-				<h1 className={styles["title"]}>Logo</h1>
+			<div className={styles["logo-container"]}>
+				<WhiteLogo />
 			</div>
 		</div>
 	);

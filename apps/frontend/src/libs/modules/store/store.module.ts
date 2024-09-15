@@ -21,6 +21,7 @@ import {
 	reducer as onboardingReducer,
 } from "~/modules/onboarding/onboarding.js";
 import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
+import { tasksApi, reducer as tasksReducer } from "~/modules/tasks/tasks.js";
 import { usersApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import { handleErrorMiddleware } from "./libs/middlewares/middlewares.js";
@@ -32,6 +33,7 @@ type RootReducer = {
 	chat: ReturnType<typeof chatReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
+	tasks: ReturnType<typeof tasksReducer>;
 	users: ReturnType<typeof usersReducer>;
 };
 
@@ -43,6 +45,7 @@ type ExtraArguments = {
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
 	storage: typeof storage;
+	tasksApi: typeof tasksApi;
 	usersApi: typeof usersApi;
 };
 
@@ -72,6 +75,7 @@ class Store {
 				chat: chatReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
+				tasks: tasksReducer,
 				users: usersReducer,
 			},
 		});
@@ -86,6 +90,7 @@ class Store {
 			onboardingApi,
 			quizApi,
 			storage,
+			tasksApi,
 			usersApi,
 		};
 	}

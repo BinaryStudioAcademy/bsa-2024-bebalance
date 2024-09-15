@@ -40,7 +40,7 @@ const Checkbox: React.FC<Properties> = ({
 				style={[
 					globalStyles.alignItemsCenter,
 					globalStyles.flexDirectionRow,
-					globalStyles.pv8,
+					globalStyles.pv4,
 					styles.innerContainer,
 				]}
 			>

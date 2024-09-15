@@ -19,6 +19,7 @@ import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
 import { Root } from "~/pages/root/root.jsx";
 import { Settings } from "~/pages/settings/settings.jsx";
+import { Tasks } from "~/pages/tasks/tasks.jsx";
 
 createRoot(document.querySelector("#root") as HTMLElement).render(
 	<StrictMode>
@@ -97,6 +98,15 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: <Auth />,
 								path: AppRoute.RESET_PASSWORD,
+							},
+							{
+								element: (
+									<ProtectedRoute
+										component={<Tasks />}
+										redirectTo={AppRoute.SIGN_IN}
+									/>
+								),
+								path: AppRoute.TASKS,
 							},
 						],
 						element: <App />,
