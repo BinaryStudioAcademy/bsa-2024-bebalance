@@ -48,6 +48,8 @@ export {
 export {
 	CategoriesApiPath,
 	type CategoriesGetAllResponseDto,
+	type CategoriesSelectedRequestDto,
+	categoriesSelectedValidationSchema,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,

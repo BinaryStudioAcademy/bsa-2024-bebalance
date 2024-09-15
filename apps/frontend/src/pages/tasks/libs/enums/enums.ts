@@ -1,1 +1,0 @@
-export { NumericalValue } from "shared";

@@ -1,6 +1,6 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
-import { convertCategoryNameToCssClassName } from "../../helpers/helpers.js";
+import { convertCategoryNameToKebabCase } from "../../helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -8,7 +8,7 @@ type Properties = {
 };
 
 const Category: React.FC<Properties> = ({ categoryName }: Properties) => {
-	const className = convertCategoryNameToCssClassName(categoryName);
+	const className = convertCategoryNameToKebabCase(categoryName);
 
 	return (
 		<div
