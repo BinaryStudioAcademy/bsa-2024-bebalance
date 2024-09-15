@@ -1,0 +1,1 @@
+export { categoriesSelectedValidationSchema } from "shared";
