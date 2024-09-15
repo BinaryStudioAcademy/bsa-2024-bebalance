@@ -11,7 +11,12 @@ import {
 	type QuizScoresGetAllItemResponseDto,
 } from "~/modules/quiz/quiz.js";
 
-import { editScores, getAllQuestions, getScores } from "./actions.js";
+import {
+	editScores,
+	getAllQuestions,
+	getQuestionsByCategoryIds,
+	getScores,
+} from "./actions.js";
 
 type State = {
 	currentCategory: null | QuizQuestionDto[];
@@ -43,6 +48,14 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
+
+		builder.addCase(getQuestionsByCategoryIds.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
 		builder.addCase(getScores.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
@@ -53,6 +66,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
+
 		builder.addCase(editScores.fulfilled, (state, action) => {
 			const updatedScores = new Map(
 				action.payload.items.map((score) => [score.id, score]),

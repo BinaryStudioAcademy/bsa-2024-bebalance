@@ -1,4 +1,5 @@
 export {
+	type CategoriesGetRequestQueryDto,
 	type QuizAnswerDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,

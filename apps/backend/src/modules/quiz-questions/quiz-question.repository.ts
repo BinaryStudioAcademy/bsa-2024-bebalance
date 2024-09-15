@@ -103,6 +103,36 @@ class QuizQuestionRepository implements Repository {
 		);
 	}
 
+	public async findByIds(categoryIds: number[]): Promise<QuizQuestionEntity[]> {
+		const questions = await this.quizQuestionModel
+			.query()
+			.whereIn("categoryId", categoryIds)
+			.select("*");
+
+		return await Promise.all(
+			questions.map(async (question) => {
+				const answersModel = await this.quizQuestionModel
+					.relatedQuery(RelationName.QUIZ_ANSWERS)
+					.for(question.id)
+					.select("*")
+					.castTo<QuizAnswerModel[]>();
+
+				const answerEntities = answersModel.map((answer) => {
+					return QuizAnswerEntity.initializeNew(answer);
+				});
+
+				return QuizQuestionEntity.initialize({
+					answers: answerEntities,
+					categoryId: question.categoryId,
+					createdAt: question.createdAt,
+					id: question.id,
+					label: question.label,
+					updatedAt: question.updatedAt,
+				});
+			}),
+		);
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<QuizQuestionRequestDto>,

@@ -5,6 +5,7 @@ import {
 	type QuizAnswerEntity,
 } from "../quiz-answers/quiz-answers.js";
 import {
+	type CategoriesGetRequestQueryDto,
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 } from "./libs/types/types.js";
@@ -67,6 +68,38 @@ class QuizQuestionService implements Service {
 
 	public async findAll(): Promise<{ items: QuizQuestionDto[][] }> {
 		const questions = await this.quizQuestionRepository.findAll();
+
+		const items = questions.map((questionEntity) => {
+			return this.convertQuestionEntityToDto(questionEntity);
+		});
+
+		const groupedByCategory: Record<number, QuizQuestionDto[]> = {};
+
+		for (const question of items) {
+			const { categoryId } = question;
+
+			if (!groupedByCategory[categoryId]) {
+				groupedByCategory[categoryId] = [];
+			}
+
+			groupedByCategory[categoryId].push(question);
+		}
+
+		const result = Object.values(groupedByCategory);
+
+		return { items: result };
+	}
+
+	public async findQuestions(
+		query: CategoriesGetRequestQueryDto,
+	): Promise<{ items: QuizQuestionDto[][] }> {
+		if (!query.categoryIds) {
+			return await this.findAll();
+		}
+
+		const questions = await this.quizQuestionRepository.findByIds(
+			JSON.parse(query.categoryIds) as number[],
+		);
 
 		const items = questions.map((questionEntity) => {
 			return this.convertQuestionEntityToDto(questionEntity);

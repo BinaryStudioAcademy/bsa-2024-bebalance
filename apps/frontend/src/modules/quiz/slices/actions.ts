@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type CategoriesGetRequestQueryDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
@@ -30,6 +31,16 @@ const getAllQuestions = createAsyncThunk<
 	return await quizApi.getAllQuestions();
 });
 
+const getQuestionsByCategoryIds = createAsyncThunk<
+	{ items: QuizQuestionDto[][] },
+	CategoriesGetRequestQueryDto,
+	AsyncThunkConfig
+>(`${sliceName}/get-questions-by-category-ids`, async (payload, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.getQuestionsByCategoryIds(payload.categoryIds);
+});
+
 const getScores = createAsyncThunk<
 	QuizScoresGetAllResponseDto,
 	undefined,
@@ -40,4 +51,4 @@ const getScores = createAsyncThunk<
 	return await quizApi.getScores();
 });
 
-export { editScores, getAllQuestions, getScores };
+export { editScores, getAllQuestions, getQuestionsByCategoryIds, getScores };
