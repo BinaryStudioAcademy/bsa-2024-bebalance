@@ -1,4 +1,5 @@
 import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
+import { DataStatus } from "~/libs/enums/data-status.enum.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -44,7 +45,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	useEffect(() => {
 		if (
-			dataStatus === "fulfilled" &&
+			dataStatus === DataStatus.FULFILLED &&
 			currentQuestionIndex === questions.length - ONE
 		) {
 			setIsLastQuestion(true);
@@ -61,22 +62,24 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			if (question) {
-				const hasAnswer = data[`answer${question.id.toString()}`] !== undefined;
+			if (!question) {
+				return;
+			}
 
-				if (hasAnswer) {
-					const newObject = Object.fromEntries(
-						Object.entries(data).filter(([key]) => key !== "answers"),
-					);
+			const hasAnswer = data[`answer${question.id.toString()}`] !== undefined;
 
-					if (isLastQuestion) {
-						const answerIds = getAnswerIds(newObject);
-						void dispatch(onboardingActions.saveAnswers({ answerIds }));
-						onNext();
-					}
+			if (hasAnswer) {
+				const newObject = Object.fromEntries(
+					Object.entries(data).filter(([key]) => key !== "answers"),
+				);
 
-					void dispatch(onboardingActions.nextQuestion());
+				if (isLastQuestion) {
+					const answerIds = getAnswerIds(newObject);
+					void dispatch(onboardingActions.saveAnswers({ answerIds }));
+					onNext();
 				}
+
+				void dispatch(onboardingActions.nextQuestion());
 			}
 		},
 
@@ -116,7 +119,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 									<OnboardingAnswer
 										control={control}
 										key={answer.id}
-										name={`answer${question.id.toString()}`}
+										name={`question${question.id.toString()}`}
 										options={answerOptions}
 									/>
 								);

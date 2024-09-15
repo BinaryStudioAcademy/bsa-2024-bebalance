@@ -1,5 +1,5 @@
 type QuizFormValues = {
-	[key: string]: string[];
+	[key: string]: string;
 };
 
 export { type QuizFormValues };

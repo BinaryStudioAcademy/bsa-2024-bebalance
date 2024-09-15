@@ -26,7 +26,7 @@ type Properties = {
 };
 
 type FormToSave = {
-	[key: string]: string[];
+	[key: string]: string;
 };
 
 const ONE_STEP_OFFSET = 1;
@@ -73,27 +73,29 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: QuizFormValues) => {
-			if (category) {
-				const ids = category.map(
-					(categoryItem) => `answer${categoryItem.id.toString()}`,
+			if (!category) {
+				return;
+			}
+
+			const ids = category.map(
+				(categoryItem) => `answer${categoryItem.id.toString()}`,
+			);
+			const hasUndefinedAnswers = checkIfValueIsUndefined(data, ids);
+
+			if (!hasUndefinedAnswers) {
+				const questionFormAnswers = Object.fromEntries(
+					Object.entries(data).filter(([key]) => key !== "answers"),
 				);
-				const hasUndefined = checkIfValueIsUndefined(data, ids);
 
-				if (!hasUndefined) {
-					const newObject = Object.fromEntries(
-						Object.entries(data).filter(([key]) => key !== "answers"),
-					);
+				if (isLast) {
+					const answerIds = getAnswerIds(questionFormAnswers);
 
-					if (isLast) {
-						const answerIds = getAnswerIds(newObject);
+					void dispatch(quizActions.saveAnswers({ answerIds }));
 
-						void dispatch(quizActions.saveAnswers({ answerIds }));
-
-						onNext();
-					}
-
-					void dispatch(quizActions.nextQuestion());
+					onNext();
 				}
+
+				void dispatch(quizActions.nextQuestion());
 			}
 		},
 		[category, dispatch, getAnswerIds, isLast, checkIfValueIsUndefined, onNext],
@@ -135,7 +137,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 									control={control}
 									key={question.id}
 									label={question.label}
-									name={`answer${question.id.toString()}`}
+									name={`question${question.id.toString()}`}
 									options={answerOptions}
 								/>
 							);

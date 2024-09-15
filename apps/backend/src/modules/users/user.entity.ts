@@ -25,8 +25,6 @@ class UserEntity implements Entity {
 
 	private passwordSalt: string;
 
-	// private quizAnswers: null | number[];
-
 	private updatedAt: string;
 
 	private userTaskDays: null | number[];
