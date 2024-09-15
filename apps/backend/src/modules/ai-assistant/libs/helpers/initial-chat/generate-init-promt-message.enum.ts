@@ -57,7 +57,6 @@ response_structure:
 		{
 			categoryId: string,   // Unique identifier of the category.
 			categoryName: string, // Name of the category.
-			score: number         // The user's score for the category.
 		}
 	]
 }

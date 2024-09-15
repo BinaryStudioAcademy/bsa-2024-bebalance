@@ -11,10 +11,9 @@ function generateUserScoresPrompt(
 ): OpenAiRequestMessage {
 	const { items } = userScores;
 
-	const categories = items.map(({ categoryId, categoryName, score }) => ({
+	const categories = items.map(({ categoryId, categoryName }) => ({
 		categoryId,
 		categoryName,
-		score,
 	}));
 
 	/* eslint-disable perfectionist/sort-objects */

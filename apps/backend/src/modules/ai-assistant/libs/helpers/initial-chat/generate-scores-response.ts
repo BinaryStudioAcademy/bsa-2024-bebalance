@@ -33,7 +33,6 @@ const generateScoresResponse = (
 			lowestCategories: resultData.lowestCategories.map((category) => ({
 				categoryId: Number(category.categoryId),
 				categoryName: category.categoryName,
-				score: category.score,
 			})),
 			messages: {
 				comments: resultData.messages.comments,
