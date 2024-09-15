@@ -2,47 +2,82 @@ import {
 	BalanceWheelChart,
 	QuizCategoriesForm,
 } from "~/libs/components/components.js";
+import { INDEX_ONE, ZERO_INDEX } from "~/libs/enums/enums.js";
+import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 
+import { handleButtonAction } from "../../helpers/handle-button-action.helper.js";
+import { ConfirmationButtons } from "../confirmation-buttons/confirmation-buttons.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	buttonLabels?: string[];
-	contentData: { data: number; label: string }[];
-	onSubmit?: (() => void) | undefined;
+	contentData: {
+		chartData: { data: number; label: string }[];
+		selectedCategories: {
+			categories: { categoryId: string; name: string }[];
+			// categories: { categoryId: string; categoryName: string }[];
+			threadId: string;
+		};
+	};
+	onFormSubmit?: (payload: { categoryIds: number[] }) => void;
 	text: string;
-	type: string;
-	// type: "wheelAnalysis" | "suggestionButtons" | "categoryInputs" | "taskList";
+	type:
+		| "categoryForm"
+		| "confirmationButtons"
+		| "taskList"
+		| "text"
+		| "wheelAnalysis";
 };
 
 const ChatMessage: React.FC<Properties> = ({
 	buttonLabels = [],
 	contentData,
-	onSubmit,
+	onFormSubmit,
 	text,
 	type,
 }: Properties) => {
+	const dispatch = useAppDispatch();
+
+	const handleNo = useCallback(() => {
+		void handleButtonAction(dispatch, "getCategoryForm");
+	}, [dispatch]);
+
+	const handleYes = useCallback(() => {
+		void handleButtonAction(
+			dispatch,
+			"getTasks",
+			contentData.selectedCategories,
+		);
+	}, [dispatch, contentData.selectedCategories]);
+
 	const renderContent = (): JSX.Element | null => {
 		switch (type) {
-			case "categoryInputs": {
-				return onSubmit ? (
-					<QuizCategoriesForm buttonLabel="Select" onSubmit={onSubmit} />
+			case "categoryForm": {
+				return onFormSubmit ? (
+					<QuizCategoriesForm
+						buttonLabel={buttonLabels[ZERO_INDEX] ?? ""}
+						onSubmit={onFormSubmit}
+					/>
 				) : null;
 			}
 
-			case "suggestionButtons": {
+			case "confirmationButtons": {
 				return (
-					<>
-						{buttonLabels.map((button: string) => (
-							<div className={styles["button-container"]} key={button}>
-								<button className={styles["button"]}>{button}</button>
-							</div>
-						))}
-					</>
+					<ConfirmationButtons
+						handleNo={handleNo}
+						handleYes={handleYes}
+						noButtonLabel={buttonLabels[INDEX_ONE] || "No"}
+						yesButtonLabel={buttonLabels[ZERO_INDEX] || "Yes"}
+					/>
 				);
 			}
 
 			case "wheelAnalysis": {
-				return <BalanceWheelChart data={contentData} />;
+				return <BalanceWheelChart data={contentData.chartData} />;
+			}
+
+			case "taskList": {
+				return <div>Task list</div>;
 			}
 
 			default: {
