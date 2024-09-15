@@ -10,8 +10,31 @@ class TaskRepository implements Repository {
 		this.taskModel = taskModel;
 	}
 
-	create(): Promise<unknown> {
-		return Promise.resolve();
+	async create(entity: TaskEntity): Promise<TaskEntity> {
+		const { categoryId, description, dueDate, label, userId } =
+			entity.toNewObject();
+		const task = await this.taskModel
+			.query()
+			.insert({
+				categoryId,
+				description,
+				dueDate,
+				label,
+				userId,
+			})
+			.returning("*");
+
+		return TaskEntity.initialize({
+			categoryId: task.categoryId,
+			createdAt: task.createdAt,
+			description: task.description,
+			dueDate: task.dueDate,
+			id: task.id,
+			label: task.label,
+			status: task.status,
+			updatedAt: task.updatedAt,
+			userId: task.userId,
+		});
 	}
 
 	public delete(): ReturnType<Repository["delete"]> {

@@ -1,7 +1,7 @@
 export {
 	type BalanceWheelAnalysisResponseDto,
 	type SimplifiedQuizScoreDto,
-	type SimplifiedTaskDto,
+	type TaskCreateDto,
 	type TaskDto,
 	type TaskSuggestionRequestDto,
 	type TaskSuggestionsResponseDto,

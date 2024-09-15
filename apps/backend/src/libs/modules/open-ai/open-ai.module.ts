@@ -109,11 +109,11 @@ class OpenAi {
 		functionName: string,
 	): Promise<OpenAiResponseMessage> {
 		if (run.status === "completed") {
-			return await this.getAllMessagesBy(threadId);
+			return await this.getAllMessages(threadId);
 		} else if (run.status === "requires_action") {
 			await this.handleRequiresAction(run, functionName);
 
-			return await this.getAllMessagesBy(threadId);
+			return await this.getAllMessages(threadId);
 		} else {
 			this.logger.error(`AI Assistant run failed: ${run.status}`);
 
@@ -171,7 +171,7 @@ class OpenAi {
 		return result.deleted;
 	}
 
-	public async getAllMessagesBy(
+	public async getAllMessages(
 		threadId: string,
 	): Promise<OpenAiResponseMessage> {
 		return await this.openAi.beta.threads.messages.list(threadId);
@@ -185,6 +185,16 @@ class OpenAi {
 		threadId: string,
 		runOptions: OpenAiRunThreadRequestDto,
 	): Promise<OpenAiResponseMessage> {
+		const runs = await this.openAi.beta.threads.runs.list(threadId);
+
+		const pendingRuns = runs.data.filter(
+			(run) => run.status === "in_progress" || run.status === "queued",
+		);
+
+		for (const run of pendingRuns) {
+			await this.openAi.beta.threads.runs.poll(threadId, run.id);
+		}
+
 		const run = await this.openAi.beta.threads.runs.createAndPoll(threadId, {
 			additional_instructions: runOptions.additional_instructions,
 			additional_messages: runOptions.messages,

@@ -1,13 +1,8 @@
-import { type TaskDto } from "../../../tasks/libs/types/types.js";
-
-type SimplifiedTaskDto = Omit<
-	TaskDto,
-	"createdAt" | "id" | "status" | "updatedAt" | "userId"
->;
+import { type TaskCreateDto } from "../../../tasks/libs/types/types.js";
 
 type TaskSuggestionsResponseDto = {
 	message: string;
-	tasks: SimplifiedTaskDto[];
+	tasks: TaskCreateDto[];
 };
 
-export { type SimplifiedTaskDto, type TaskSuggestionsResponseDto };
+export { type TaskSuggestionsResponseDto };

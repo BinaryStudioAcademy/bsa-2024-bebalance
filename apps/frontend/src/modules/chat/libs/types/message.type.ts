@@ -1,4 +1,4 @@
-import { type SimplifiedTaskDto } from "./types.js";
+import { type TaskCreateDto } from "./types.js";
 
 type ButtonLabels = string[];
 
@@ -8,7 +8,7 @@ type Message = {
 		categoryId: number;
 		categoryName: string;
 	}>;
-	taskList?: SimplifiedTaskDto[];
+	taskList?: TaskCreateDto[];
 	text: string;
 	threadId?: string;
 	type:

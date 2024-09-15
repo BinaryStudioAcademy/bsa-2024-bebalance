@@ -46,9 +46,10 @@ export {
 	addMessageToThreadValidationSchema,
 	AiAssistantApiPath,
 	type BalanceWheelAnalysisResponseDto,
+	type ChangeTaskSuggestionRequestDto,
+	ChangeTaskSuggestionRequestValidationSchema,
 	type SelectedCategories,
 	type SimplifiedQuizScoreDto,
-	type SimplifiedTaskDto,
 	type TaskSuggestionRequestDto,
 	TaskSuggestionRequestValidationSchema,
 	type TaskSuggestionsResponseDto,
@@ -98,6 +99,7 @@ export {
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type TaskCreateDto,
 	type TaskDto,
 	type TaskGetAllResponseDto,
 	TasksApiPath,

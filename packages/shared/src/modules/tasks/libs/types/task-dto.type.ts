@@ -3,7 +3,7 @@ import { type TaskStatus } from "../enums/enums.js";
 
 type TaskDto = {
 	categoryId: number;
-	categoryName: string;
+	categoryName?: string;
 	createdAt: string;
 	description: string;
 	dueDate: string;
