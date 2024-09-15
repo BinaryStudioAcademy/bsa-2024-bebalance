@@ -1,4 +1,4 @@
-import { type TaskDto } from "shared";
+import { type SimplifiedTaskDto } from "./types.js";
 
 type ButtonLabels = string[];
 
@@ -9,12 +9,12 @@ type Message = {
 		categoryName: string;
 		score: number;
 	}>;
-	taskList?: TaskDto[];
+	taskList?: SimplifiedTaskDto[];
 	text: string;
 	threadId?: string;
 	type:
-		| "categoryInputs"
-		| "suggestionButtons"
+		| "categoryForm"
+		| "confirmationButtons"
 		| "taskList"
 		| "text"
 		| "wheelAnalysis";
