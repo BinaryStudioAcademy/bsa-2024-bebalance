@@ -9,6 +9,7 @@ import {
 	TIME_PAD_FILL,
 } from "./libs/constants/constants.js";
 import { MillisecondsPerUnit, TimePad } from "./libs/enums/enums.js";
+import { type Countdown } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -16,12 +17,12 @@ type Properties = {
 };
 
 const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
-	const [countdown, setCountdown] = useState<string>(COUNTDOWN_EXPIRED);
+	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 	const [isExpired, setIsExpired] = useState<boolean>(false);
 
 	const clockIconName = isExpired ? "clockInactive" : "clockActive";
-	const countdonTimeStyleClass = getValidClassNames(
-		styles["countdown-time"],
+	const countdownStyleClass = getValidClassNames(
+		styles["countdown"],
 		isExpired && styles["expired"],
 	);
 
@@ -45,13 +46,18 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 			(timeToDeadline % MillisecondsPerUnit.HOUR) / MillisecondsPerUnit.MINUTE,
 		);
 
+		const formattedDays = String(days);
 		const formattedHours = String(hours).padStart(TimePad.HOURS, TIME_PAD_FILL);
 		const formattedMinutes = String(minutes).padStart(
 			TimePad.MINUTES,
 			TIME_PAD_FILL,
 		);
 
-		setCountdown(`${String(days)}:${formattedHours}:${formattedMinutes}`);
+		setCountdown({
+			days: formattedDays,
+			hours: formattedHours,
+			minutes: formattedMinutes,
+		});
 
 		return false;
 	}, [deadline]);
@@ -75,7 +81,11 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 	return (
 		<div className={styles["container"]}>
 			<Icon name={clockIconName} />
-			<p className={countdonTimeStyleClass}>{countdown}</p>
+			<div className={countdownStyleClass}>
+				<p className={styles["countdown-time"]}>{countdown.days}d</p>
+				<p className={styles["countdown-time"]}>{countdown.hours}h</p>
+				<p className={styles["countdown-time"]}>{countdown.minutes}m</p>
+			</div>
 		</div>
 	);
 };
