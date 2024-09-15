@@ -1,4 +1,9 @@
-import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import {
 	type NotificationAnswersPayloadDto,
 	actions as userActions,
@@ -12,16 +17,15 @@ import {
 	NotificationQuestions,
 	QuizForm,
 } from "./libs/components/components.js";
-import { STEP_INCREMENT } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const [step, setStep] = useState<number>(Step.MOTIVATION);
+	const step = useAppSelector(({ quiz }) => quiz.step);
 
 	const handleNextStep = useCallback((): void => {
-		setStep((previousStep) => previousStep + STEP_INCREMENT);
-	}, []);
+		dispatch(quizActions.nextStep());
+	}, [dispatch]);
 
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {

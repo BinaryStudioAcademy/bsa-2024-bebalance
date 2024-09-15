@@ -10,6 +10,7 @@ import {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
 } from "~/modules/quiz/quiz.js";
+import { Step } from "~/pages/quiz/libs/enums/step.js";
 
 import {
 	editScores,
@@ -22,16 +23,20 @@ type State = {
 	currentCategory: null | QuizQuestionDto[];
 	currentCategoryIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
+	isRetakingQuiz: boolean;
 	questions: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
+	step: ValueOf<typeof Step>;
 };
 
 const initialState: State = {
 	currentCategory: null,
 	currentCategoryIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
+	isRetakingQuiz: false,
 	questions: [],
 	scores: [],
+	step: Step.MOTIVATION,
 };
 
 const { actions, name, reducer } = createSlice({
@@ -51,9 +56,19 @@ const { actions, name, reducer } = createSlice({
 
 		builder.addCase(getQuestionsByCategoryIds.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
+			state.isRetakingQuiz = true;
+		});
+		builder.addCase(getQuestionsByCategoryIds.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.questions = action.payload.items;
+			state.currentCategory =
+				state.questions[state.currentCategoryIndex] || null;
+			state.step = Step.QUIZ;
 		});
 		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+			state.isRetakingQuiz = false;
+			state.step = Step.MOTIVATION;
 		});
 
 		builder.addCase(getScores.pending, (state) => {
@@ -100,6 +115,9 @@ const { actions, name, reducer } = createSlice({
 			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentCategory =
 				state.questions[state.currentCategoryIndex] || null;
+		},
+		nextStep(state) {
+			state.step++;
 		},
 		previousQuestion(state) {
 			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {

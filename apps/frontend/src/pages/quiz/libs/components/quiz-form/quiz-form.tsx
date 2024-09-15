@@ -39,17 +39,25 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		validationSchema: categoryAnswerSelectedValidationSchema,
 	});
 
-	const { category, currentCategoryIndex, dataStatus, questions } =
-		useAppSelector(({ quiz }) => ({
-			category: quiz.currentCategory,
-			currentCategoryIndex: quiz.currentCategoryIndex,
-			dataStatus: quiz.dataStatus,
-			questions: quiz.questions,
-		}));
+	const {
+		category,
+		currentCategoryIndex,
+		dataStatus,
+		isRetakingQuiz,
+		questions,
+	} = useAppSelector(({ quiz }) => ({
+		category: quiz.currentCategory,
+		currentCategoryIndex: quiz.currentCategoryIndex,
+		dataStatus: quiz.dataStatus,
+		isRetakingQuiz: quiz.isRetakingQuiz,
+		questions: quiz.questions,
+	}));
 
 	useEffect(() => {
-		void dispatch(quizActions.getAllQuestions());
-	}, [dispatch]);
+		if (!isRetakingQuiz) {
+			void dispatch(quizActions.getAllQuestions());
+		}
+	}, [dispatch, isRetakingQuiz]);
 
 	useEffect(() => {
 		setIsLast(currentCategoryIndex === questions.length - ONE_STEP_OFFSET);
