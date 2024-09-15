@@ -17,6 +17,7 @@ export {
 	HTTPError,
 	OnboardingError,
 	QuizError,
+	TaskError,
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
@@ -85,6 +86,11 @@ export {
 	quizUserAnswersValidationSchema,
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
+export {
+	type TaskDto,
+	TasksApiPath,
+	TaskStatus,
+} from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,

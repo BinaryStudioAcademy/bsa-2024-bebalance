@@ -1,0 +1,36 @@
+.card {
+	width: 356px;
+	height: 251px;
+	padding: 20px;
+	padding-right: 12px;
+	background-color: var(--white);
+	border: 1px solid var(--background-gray);
+	border-radius: 20px;
+}
+
+.card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.card-body {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding-top: 25px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 25px;
+}
+
+.text {
+	width: 262px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 19px;
+	color: var(--text-secondary);
+}

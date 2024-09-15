@@ -1,5 +1,7 @@
 type IconName =
 	| "check"
+	| "clockActive"
+	| "clockInactive"
 	| "close"
 	| "crossedEye"
 	| "eye"
@@ -7,6 +9,8 @@ type IconName =
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
+	| "tasksActive"
+	| "tasksInactive"
 	| "wheelActive"
 	| "wheelInactive";
 
