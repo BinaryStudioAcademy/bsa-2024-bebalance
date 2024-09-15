@@ -1,8 +1,9 @@
-import { initConversation } from "./actions.js";
+import { getTasksForCategories, initConversation } from "./actions.js";
 import { actions } from "./chat.slice.js";
 
 const allActions = {
 	...actions,
+	getTasksForCategories,
 	initConversation,
 };
 

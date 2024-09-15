@@ -5,7 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 
 import { type Message } from "../libs/types/message.type.js";
 import { type SimplifiedQuizScoreDto } from "../libs/types/types.js";
-import { initConversation } from "./actions.js";
+import { getTasksForCategories, initConversation } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -40,20 +40,49 @@ const { actions, name, reducer } = createSlice({
 						type: "wheelAnalysis",
 					},
 					{
-						buttonLabels: ["✅ Yes, 3 lowest", "🚫 No smth else"],
+						buttonLabels: ["✅  Yes, 3 lowest", "🚫  No smth else"],
 						text: action.payload.messages.question,
-						type: "suggestionButtons",
+						type: "confirmationButtons",
 					},
 				);
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
+			})
+			.addCase(getTasksForCategories.pending, (state) => {
+				state.dataStatus = DataStatus.PENDING;
+			})
+			.addCase(getTasksForCategories.fulfilled, (state, action) => {
+				state.dataStatus = DataStatus.FULFILLED;
+				const { message, tasks } = action.payload;
+				state.messages.push({
+					taskList: tasks,
+					text: message,
+					type: "taskList",
+				});
+			})
+			.addCase(getTasksForCategories.rejected, (state) => {
+				state.dataStatus = DataStatus.REJECTED;
 			});
 	},
 	initialState,
 	name: "chat",
-	reducers: {},
+	reducers: {
+		addCategoryCheckboxMessage(state) {
+			state.messages.push({
+				buttonLabels: ["Accept categories"],
+				text: "What categories do you want to work on?",
+				type: "categoryForm",
+			});
+		},
+		updateSelectedCategories(
+			state,
+			action: { payload: SimplifiedQuizScoreDto[] },
+		) {
+			state.selectedCategories = action.payload;
+		},
+	},
 });
 
 export { actions, name, reducer };
