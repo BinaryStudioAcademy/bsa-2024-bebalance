@@ -1,4 +1,5 @@
 export {
+	INDEX_ONE,
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "./libs/constants/constant.js";
@@ -47,6 +48,7 @@ export {
 	type BalanceWheelAnalysisResponseDto,
 	type SelectedCategories,
 	type SimplifiedQuizScoreDto,
+	type SimplifiedTaskDto,
 	type TaskSuggestionRequestDto,
 	TaskSuggestionRequestValidationSchema,
 	type TaskSuggestionsResponseDto,
