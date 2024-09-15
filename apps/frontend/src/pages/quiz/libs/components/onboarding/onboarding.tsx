@@ -30,7 +30,7 @@ const ONE = 1;
 const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
-	const [questionDone, setQuestionDone] = useState<number[]>([]);
+	const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
 	const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
 
 	const { currentQuestionIndex, dataStatus, question, questions } =
@@ -61,10 +61,10 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	);
 
 	useEffect(() => {
-		if (questionDone.includes(currentQuestionIndex)) {
+		if (completedQuestions.includes(currentQuestionIndex)) {
 			setIsDisabled(false);
 		}
-	}, [currentQuestionIndex, questionDone]);
+	}, [completedQuestions, currentQuestionIndex]);
 
 	const handleOnChange = useCallback(() => {
 		if (!question) {
@@ -103,20 +103,20 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					onNext();
 				}
 
-				setQuestionDone([...questionDone, currentQuestionIndex]);
+				setCompletedQuestions([...completedQuestions, currentQuestionIndex]);
 				setIsDisabled(true);
 				void dispatch(onboardingActions.nextQuestion());
 			}
 		},
 
 		[
+			completedQuestions,
 			currentQuestionIndex,
 			dispatch,
 			getAnswerIds,
 			isLastQuestion,
 			onNext,
 			question,
-			questionDone,
 		],
 	);
 
