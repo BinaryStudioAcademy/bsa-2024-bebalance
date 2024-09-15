@@ -427,10 +427,6 @@ class AiAssistantController extends BaseController {
 	 *           type: integer
 	 *           description: The category id
 	 *           example: 1
-	 *         score:
-	 *           type: number
-	 *           description: The score for the category
-	 *           example: 3
 	 */
 	private async initNewChat(
 		options: APIHandlerOptions<{
