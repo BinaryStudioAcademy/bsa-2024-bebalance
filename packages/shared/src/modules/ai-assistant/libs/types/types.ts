@@ -6,5 +6,8 @@ export {
 	type SelectedCategories,
 	type TaskSuggestionRequestDto,
 } from "./task-suggestion-request-dto.type.js";
-export { type TaskSuggestionsResponseDto } from "./task-suggestion-response-dto.type.js";
+export {
+	type SimplifiedTaskDto,
+	type TaskSuggestionsResponseDto,
+} from "./task-suggestion-response-dto.type.js";
 export { type ThreadMessageCreateDto } from "./thread-message-create-dto.type.js";

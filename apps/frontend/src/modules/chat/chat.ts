@@ -11,4 +11,8 @@ const chatApi = new ChatApi({
 });
 
 export { chatApi };
+export {
+	type SimplifiedQuizScoreDto,
+	type TaskSuggestionRequestDto,
+} from "./libs/types/types.js";
 export { actions, reducer } from "./slices/chat.js";

@@ -3,6 +3,7 @@ export {
 	type BalanceWheelAnalysisResponseDto,
 	type SelectedCategories,
 	type SimplifiedQuizScoreDto,
+	type SimplifiedTaskDto,
 	type TaskSuggestionRequestDto,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,

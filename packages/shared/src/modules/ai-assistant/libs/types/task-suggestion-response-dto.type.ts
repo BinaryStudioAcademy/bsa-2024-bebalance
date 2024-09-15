@@ -10,4 +10,4 @@ type TaskSuggestionsResponseDto = {
 	tasks: SimplifiedTaskDto[];
 };
 
-export { type TaskSuggestionsResponseDto };
+export { type SimplifiedTaskDto, type TaskSuggestionsResponseDto };
