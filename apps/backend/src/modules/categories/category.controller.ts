@@ -53,7 +53,6 @@ class CategoryController extends BaseController {
 	 *   get:
 	 *     tags: [categories]
 	 *     summary: Get all categories
-	 *     description: Returns an array of categories
 	 *     security:
 	 *       - bearerAuth: []
 	 *     responses:
@@ -68,6 +67,12 @@ class CategoryController extends BaseController {
 	 *                   type: array
 	 *                   items:
 	 *                     $ref: "#/components/schemas/Category"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private async getCategories(): Promise<APIHandlerResponse> {
 		return {
