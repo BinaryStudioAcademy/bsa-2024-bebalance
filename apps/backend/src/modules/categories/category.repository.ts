@@ -107,25 +107,6 @@ class CategoryRepository implements Repository {
 		);
 	}
 
-	public async findByIds(categoryIds: number[]): Promise<CategoryEntity[]> {
-		const categories = await this.categoryModel
-			.query()
-			.whereIn("id", categoryIds)
-			.select("*");
-
-		return await Promise.all(
-			categories.map((category) => {
-				return CategoryEntity.initialize({
-					createdAt: category.createdAt,
-					id: category.id,
-					name: category.name,
-					scores: [],
-					updatedAt: category.updatedAt,
-				});
-			}),
-		);
-	}
-
 	public async findScoreByUser(userId: number): Promise<CategoryEntity | null> {
 		const scoreModel = await this.categoryModel
 			.query()

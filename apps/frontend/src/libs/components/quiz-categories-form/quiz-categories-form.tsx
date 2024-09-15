@@ -8,6 +8,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { type InputOption } from "~/libs/types/types.js";
 import { actions as categoriesActions } from "~/modules/categories/categories.js";
+import { type CategoriesGetRequestQueryDto } from "~/modules/categories/categories.js";
 
 import { Button, Checkbox, Loader } from "../components.js";
 import { QUIZ_CATEGORIES_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
@@ -17,7 +18,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	buttonLabel: string;
 	header?: string;
-	onSubmit: (payload: { categoryIds: number[] }) => void;
+	onSubmit: (payload: CategoriesGetRequestQueryDto) => void;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({
@@ -75,7 +76,8 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	const handleFormSubmit = useCallback(
 		(event: React.BaseSyntheticEvent): void => {
 			void handleSubmit(({ categoryIds }) => {
-				onSubmit({ categoryIds });
+				const categoryIdsStringified = categoryIds.toString();
+				onSubmit({ categoryIds: categoryIdsStringified });
 			})(event);
 		},
 		[onSubmit, handleSubmit],

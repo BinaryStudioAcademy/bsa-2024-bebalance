@@ -7,7 +7,6 @@ import { type CategoryRepository } from "./category.repository.js";
 import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoriesGetAllResponseDto,
-	type CategoriesGetRequestQueryDto,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
@@ -108,27 +107,6 @@ class CategoryService implements Service {
 
 		const items = categories.map((categoryEntity) => {
 			return this.convertCategoryEntityToDto(categoryEntity);
-		});
-
-		return { items };
-	}
-
-	public async findCategories(
-		query: CategoriesGetRequestQueryDto,
-	): Promise<CategoriesGetAllResponseDto> {
-		if (!query.categoryIds) {
-			return await this.findAll();
-		}
-
-		const categories = await this.categoryRepository.findByIds(
-			JSON.parse(query.categoryIds) as number[],
-		);
-
-		const items = categories.map((categoryEntity) => {
-			const { createdAt, id, name, updatedAt } =
-				this.convertCategoryEntityToDto(categoryEntity);
-
-			return { createdAt, id, name, updatedAt };
 		});
 
 		return { items };
