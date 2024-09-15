@@ -31,7 +31,7 @@ const generateScoresResponse = (
 
 		return {
 			lowestCategories: resultData.lowestCategories.map((category) => ({
-				categoryId: Number(category.categoryId),
+				categoryId: category.categoryId,
 				categoryName: category.categoryName,
 			})),
 			messages: {

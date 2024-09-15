@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const Category = z.object({
-	categoryId: z.string(),
+	categoryId: z.number(),
 	categoryName: z.string(),
 });
 
