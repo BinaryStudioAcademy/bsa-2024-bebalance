@@ -6,11 +6,11 @@ import {
 } from "~/libs/hooks/hooks.js";
 import {
 	actions as chatActions,
-	// type TaskSuggestionRequestDto,
+	type TaskSuggestionRequestDto,
 } from "~/modules/chat/chat.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { ChatMessage } from "./libs/components/chat-message/chat-message.js";
+import { ChatMessage } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const ChatComponent: React.FC = () => {
@@ -40,10 +40,8 @@ const ChatComponent: React.FC = () => {
 	);
 
 	const formattedCategories = selectedCategories.map((category) => ({
-		categoryId: category.categoryId.toString(),
-		name: category.categoryName,
-
-		// categoryName: category.categoryName,
+		categoryId: category.categoryId,
+		categoryName: category.categoryName,
 	}));
 
 	const contentData = {
@@ -59,25 +57,30 @@ const ChatComponent: React.FC = () => {
 	}, [dispatch]);
 
 	const handleCategoriesSubmit = useCallback(
-		(payload: { categoryIds: number[] }): void => {
+		async (payload: { categoryIds: number[] }): Promise<void> => {
 			const newSelectedCategories = quizCategories
 				.filter((category) => payload.categoryIds.includes(category.id))
 				.map((category) => ({
 					categoryId: category.id,
 					categoryName: category.name,
-					score: 0,
 				}));
 			dispatch(chatActions.updateSelectedCategories(newSelectedCategories));
 
-			// const taskPayload: TaskSuggestionRequestDto = {
-			// 	categories: newSelectedCategories,
-			// 	threadId: threadId ?? "",
-			// };
+			const taskPayload: TaskSuggestionRequestDto = {
+				categories: newSelectedCategories,
+				threadId: threadId ?? "",
+			};
 
-			// await dispatch(chatActions.getTasksForCategories(taskPayload));
+			await dispatch(chatActions.getTasksForCategories(taskPayload));
 		},
-		// [dispatch, quizCategories, threadId],
-		[dispatch, quizCategories],
+		[dispatch, quizCategories, threadId],
+	);
+
+	const handleFormSubmitWrapper = useCallback(
+		(payload: { categoryIds: number[] }): void => {
+			void handleCategoriesSubmit(payload);
+		},
+		[handleCategoriesSubmit],
 	);
 
 	return (
@@ -90,7 +93,7 @@ const ChatComponent: React.FC = () => {
 								buttonLabels={message.buttonLabels ?? []}
 								contentData={contentData}
 								key={message.text}
-								onFormSubmit={handleCategoriesSubmit}
+								onFormSubmit={handleFormSubmitWrapper}
 								text={message.text}
 								type={message.type}
 							/>
