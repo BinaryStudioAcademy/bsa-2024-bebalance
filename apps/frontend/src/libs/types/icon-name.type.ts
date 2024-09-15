@@ -7,6 +7,8 @@ type IconName =
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
+	| "tasksActive"
+	| "tasksInactive"
 	| "wheelActive"
 	| "wheelInactive";
 

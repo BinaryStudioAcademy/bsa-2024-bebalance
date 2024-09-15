@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 import {
-	categoriesValidationMessage,
-	categoriesValidationRegexRule,
+	CategoriesValidationMessage,
+	CategoriesValidationRegexRule,
 } from "../enums/enums.js";
 
 const categoryIds = z.object({
@@ -10,8 +10,8 @@ const categoryIds = z.object({
 		.string()
 		.trim()
 		.regex(
-			categoriesValidationRegexRule.QUERY_IS_STRINGIFIED_INTEGERS_ARRAY,
-			categoriesValidationMessage.NOT_INTEGER_ARRAY,
+			CategoriesValidationRegexRule.QUERY_IS_STRINGIFIED_INTEGERS_ARRAY,
+			CategoriesValidationMessage.NOT_INTEGER_ARRAY,
 		)
 		.optional()
 		.or(z.literal("")),
