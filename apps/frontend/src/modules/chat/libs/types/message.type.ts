@@ -7,7 +7,6 @@ type Message = {
 	lowestCategories?: Array<{
 		categoryId: number;
 		categoryName: string;
-		score: number;
 	}>;
 	taskList?: SimplifiedTaskDto[];
 	text: string;

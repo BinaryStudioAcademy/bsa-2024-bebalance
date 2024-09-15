@@ -32,7 +32,7 @@ const generateTaskSuggestionsResponse = (
 		return {
 			message: resultData.message,
 			tasks: resultData.tasks.map((task) => ({
-				categoryId: Number(task.categoryId),
+				categoryId: task.categoryId,
 				categoryName: task.categoryName,
 				description: task.description,
 				dueDate: task.dueDate,

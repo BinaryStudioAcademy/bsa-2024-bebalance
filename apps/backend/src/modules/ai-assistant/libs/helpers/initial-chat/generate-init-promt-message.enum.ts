@@ -55,9 +55,8 @@ response_structure:
 	},
 	lowestCategories: [      // An array containing the three categories with the lowest scores.
 		{
-			categoryId: string,   // Unique identifier of the category.
+			categoryId: number,   // Unique identifier of the category.
 			categoryName: string, // Name of the category.
-			score: number         // The user's score for the category.
 		}
 	]
 }

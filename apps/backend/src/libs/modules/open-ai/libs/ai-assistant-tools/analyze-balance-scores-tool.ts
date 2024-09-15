@@ -13,7 +13,7 @@ const AnalyzeBalanceScoresTool = {
 						properties: {
 							categoryId: {
 								description: "Unique identifier for the category",
-								type: "string",
+								type: "number",
 							},
 							categoryName: {
 								description: "The name of the category (e.g., Health, Work)",
@@ -71,18 +71,14 @@ const AnalyzeBalanceScoresTool = {
 								properties: {
 									categoryId: {
 										description: "Unique identifier for the category",
-										type: "string",
+										type: "number",
 									},
 									categoryName: {
 										description: "The name of the category",
 										type: "string",
 									},
-									score: {
-										description: "User's score for the category, from 1 to 10",
-										type: "number",
-									},
 								},
-								required: ["categoryId", "categoryName", "score"],
+								required: ["categoryId", "categoryName"],
 								type: "object",
 							},
 							type: "array",

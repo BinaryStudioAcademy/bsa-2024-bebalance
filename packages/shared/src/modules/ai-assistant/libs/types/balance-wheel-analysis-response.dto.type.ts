@@ -2,7 +2,7 @@ import { type QuizScoresGetAllItemResponseDto } from "../../../quiz/quiz.js";
 
 type SimplifiedQuizScoreDto = Omit<
 	QuizScoresGetAllItemResponseDto,
-	"createdAt" | "id" | "updatedAt" | "userId"
+	"createdAt" | "id" | "score" | "updatedAt" | "userId"
 >;
 
 type BalanceWheelAnalysisResponseDto = {

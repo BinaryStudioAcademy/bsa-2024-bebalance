@@ -5,7 +5,7 @@ import {
 import { INDEX_ONE, ZERO_INDEX } from "~/libs/enums/enums.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 
-import { handleButtonAction } from "../../helpers/handle-button-action.helper.js";
+import { handleButtonAction } from "../../helpers/helpers.js";
 import { ConfirmationButtons } from "../confirmation-buttons/confirmation-buttons.js";
 import styles from "./styles.module.css";
 
@@ -14,8 +14,7 @@ type Properties = {
 	contentData: {
 		chartData: { data: number; label: string }[];
 		selectedCategories: {
-			categories: { categoryId: string; name: string }[];
-			// categories: { categoryId: string; categoryName: string }[];
+			categories: { categoryId: number; categoryName: string }[];
 			threadId: string;
 		};
 	};
