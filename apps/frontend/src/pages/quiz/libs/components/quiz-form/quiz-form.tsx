@@ -119,20 +119,11 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					onNext();
 				}
 
-				setCategoryDone([...categoryDone, currentCategoryIndex]);
 				setIsDisabled(true);
 				void dispatch(quizActions.nextQuestion());
 			}
 		},
-		[
-			category,
-			categoryDone,
-			currentCategoryIndex,
-			dispatch,
-			getAnswerIds,
-			isLast,
-			onNext,
-		],
+		[category, dispatch, getAnswerIds, isLast, onNext],
 	);
 
 	const handleFormSubmit = useCallback(
