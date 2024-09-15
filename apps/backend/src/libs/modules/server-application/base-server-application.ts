@@ -70,13 +70,16 @@ class BaseServerApplication implements ServerApplication {
 						this.logger.error(`[${issue.path.toString()}] — ${issue.message}`);
 					}
 
+					const details = error.issues.map((issue) => ({
+						message: issue.message,
+						path: issue.path,
+					}));
+					const [firstDetail] = details;
+
 					const response: ServerValidationErrorResponse = {
-						details: error.issues.map((issue) => ({
-							message: issue.message,
-							path: issue.path,
-						})),
+						details,
 						errorType: ServerErrorType.VALIDATION,
-						message: error.message,
+						message: firstDetail?.message ?? error.message,
 					};
 
 					return reply.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
