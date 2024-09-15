@@ -29,6 +29,8 @@ const ONE = 1;
 
 const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
+	const [isDisabled, setIsDisabled] = useState<boolean>(true);
+	const [questionDone, setQuestionDone] = useState<number[]>([]);
 	const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
 
 	const { currentQuestionIndex, dataStatus, question, questions } =
@@ -56,6 +58,25 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
 	});
 
+	useEffect(() => {
+		if (questionDone.includes(currentQuestionIndex)) {
+			setIsDisabled(false);
+		}
+	}, [currentQuestionIndex, questionDone]);
+
+	const handleOnChange = useCallback(() => {
+		if (!question) {
+			return;
+		}
+
+		const questionLabel = `question${question.id.toString()}`;
+		const isUndefined = control._formValues[questionLabel] === undefined;
+
+		if (!isUndefined) {
+			setIsDisabled(false);
+		}
+	}, [control._formValues, question]);
+
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);
 	}, []);
@@ -66,7 +87,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				return;
 			}
 
-			const hasAnswer = data[`answer${question.id.toString()}`] !== undefined;
+			const hasAnswer = data[`question${question.id.toString()}`] !== undefined;
 
 			if (hasAnswer) {
 				const newObject = Object.fromEntries(
@@ -79,11 +100,21 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					onNext();
 				}
 
+				setQuestionDone([...questionDone, currentQuestionIndex]);
+				setIsDisabled(true);
 				void dispatch(onboardingActions.nextQuestion());
 			}
 		},
 
-		[dispatch, getAnswerIds, isLastQuestion, onNext, question],
+		[
+			currentQuestionIndex,
+			dispatch,
+			getAnswerIds,
+			isLastQuestion,
+			onNext,
+			question,
+			questionDone,
+		],
 	);
 
 	const handlePreviousStep = useCallback(() => {
@@ -109,7 +140,11 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 							/>
 						</div>
 						<h2 className={styles["question"]}>{question.label}</h2>
-						<form className={styles["answers"]} onSubmit={handleFormSubmit}>
+						<form
+							className={styles["answers"]}
+							onChange={handleOnChange}
+							onSubmit={handleFormSubmit}
+						>
 							{question.answers.map((answer) => {
 								const answerOptions = [
 									{ label: answer.label, value: answer.id.toString() },
@@ -137,6 +172,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 								)}
 								<div className={styles["button-wrapper"]}>
 									<Button
+										isDisabled={isDisabled}
 										label={
 											isLastQuestion ? ButtonLabel.ANALYZE : ButtonLabel.NEXT
 										}
