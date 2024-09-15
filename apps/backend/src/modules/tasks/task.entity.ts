@@ -3,6 +3,8 @@ import { type Entity, type ValueOf } from "~/libs/types/types.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 
 class TaskEntity implements Entity {
+	private category: null | string;
+
 	private categoryId: number;
 
 	private createdAt: string;
@@ -22,6 +24,7 @@ class TaskEntity implements Entity {
 	private userId: number;
 
 	private constructor({
+		category,
 		categoryId,
 		createdAt,
 		description,
@@ -32,6 +35,7 @@ class TaskEntity implements Entity {
 		updatedAt,
 		userId,
 	}: {
+		category: null | string;
 		categoryId: number;
 		createdAt: string;
 		description: string;
@@ -44,6 +48,7 @@ class TaskEntity implements Entity {
 	}) {
 		this.createdAt = createdAt;
 		this.id = id;
+		this.category = category;
 		this.categoryId = categoryId;
 		this.label = label;
 		this.description = description;
@@ -54,6 +59,7 @@ class TaskEntity implements Entity {
 	}
 
 	public static initialize({
+		category,
 		categoryId,
 		createdAt,
 		description,
@@ -64,6 +70,7 @@ class TaskEntity implements Entity {
 		updatedAt,
 		userId,
 	}: {
+		category: null | string;
 		categoryId: number;
 		createdAt: string;
 		description: string;
@@ -75,6 +82,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	}): TaskEntity {
 		return new TaskEntity({
+			category,
 			categoryId,
 			createdAt,
 			description,
@@ -101,6 +109,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	}): TaskEntity {
 		return new TaskEntity({
+			category: null,
 			categoryId,
 			createdAt: "",
 			description,
@@ -114,6 +123,7 @@ class TaskEntity implements Entity {
 	}
 
 	public toNewObject(): {
+		category: string;
 		categoryId: number;
 		createdAt: string;
 		description: string;
@@ -124,6 +134,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	} {
 		return {
+			category: this.category as string,
 			categoryId: this.categoryId,
 			createdAt: this.createdAt,
 			description: this.description,
@@ -136,6 +147,7 @@ class TaskEntity implements Entity {
 	}
 
 	public toObject(): {
+		category: string;
 		categoryId: number;
 		createdAt: string;
 		description: string;
@@ -147,6 +159,7 @@ class TaskEntity implements Entity {
 		userId: number;
 	} {
 		return {
+			category: this.category as string,
 			categoryId: this.categoryId,
 			createdAt: this.createdAt,
 			description: this.description,

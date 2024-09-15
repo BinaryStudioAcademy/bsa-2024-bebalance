@@ -1,5 +1,7 @@
 import { Button } from "~/libs/components/components.js";
 
+import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
+import { useAnimatedSpans } from "./libs/hooks/hooks.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -7,6 +9,16 @@ type Properties = {
 };
 
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
+	const secondParagraphDelay =
+		AnalyzingText.firstParagraph.split(" ").length *
+		TextAnimationDelay.DELAY_MULTIPLIER;
+
+	const firstParagraph = useAnimatedSpans(AnalyzingText.firstParagraph);
+	const secondParagraph = useAnimatedSpans(
+		AnalyzingText.secondParagraph,
+		secondParagraphDelay,
+	);
+
 	return (
 		<div className={styles["page-container"]}>
 			<div className={styles["white-dots"]} />
@@ -14,19 +26,8 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 				<div className={styles["content-container"]}>
 					<h1 className={styles["title"]}>We’re Analyzing Your Journey!</h1>
 					<div className={styles["text"]}>
-						<p>
-							Thank you for sharing your insights! We’re currently processing
-							your responses to create a personalized path just for you. This is
-							where the magic begins—we’re using your input to tailor the
-							experience, offering you the guidance and motivation you need to
-							achieve a balanced, fulfilling life.
-						</p>
-						<p>
-							Hang tight while we set things up! In just a moment, you’ll dive
-							into the areas that matter most to you, and together, we’ll start
-							making progress toward your goals. Your journey to a better life
-							starts now!
-						</p>
+						<p>{firstParagraph}</p>
+						<p>{secondParagraph}</p>
 					</div>
 					<Button label="Let’s continue" onClick={onNext} type="button" />
 				</div>

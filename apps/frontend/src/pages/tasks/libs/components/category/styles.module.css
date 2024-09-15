@@ -1,0 +1,75 @@
+.border-container {
+	position: relative;
+	width: 97px;
+	height: 28px;
+	padding: 1px;
+	border-radius: 17px;
+}
+
+.content-container {
+	position: relative;
+	display: flex;
+	gap: 6px;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	padding: 6px;
+	background-color: var(--white);
+	border-radius: 17px;
+}
+
+.content {
+	font-size: 12px;
+	line-height: 1.2;
+}
+
+.circle {
+	z-index: var(--z-index-medium);
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+}
+
+.physical {
+	background: linear-gradient(
+		to top,
+		var(--physical-start),
+		var(--physical-end)
+	);
+}
+
+.work {
+	background: linear-gradient(to top, var(--work-start), var(--work-end));
+}
+
+.friends {
+	background: linear-gradient(to top, var(--friend-start), var(--friend-end));
+}
+
+.love {
+	background: linear-gradient(to top, var(--love-start), var(--love-end));
+}
+
+.money {
+	background: linear-gradient(to top, var(--money-start), var(--money-end));
+}
+
+.free-time {
+	background: linear-gradient(
+		to top,
+		var(--free-time-start),
+		var(--free-time-end)
+	);
+}
+
+.spiritual {
+	background: linear-gradient(
+		to top,
+		var(--spiritual-start),
+		var(--spiritual-end)
+	);
+}
+
+.mental {
+	background: linear-gradient(to top, var(--mental-start), var(--mental-end));
+}

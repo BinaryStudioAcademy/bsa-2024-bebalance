@@ -42,7 +42,7 @@ const NotificationQuestions: React.FC<Properties> = ({
 				<form className={styles["form"]} onSubmit={handleFormSubmit}>
 					<Checkbox
 						control={control}
-						label="Which days would you like to receive tasks"
+						label="Which days would you like to receive tasks?"
 						name="userTaskDays"
 						options={TASK_DAYS_OPTIONS}
 					/>
