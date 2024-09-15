@@ -47,6 +47,8 @@ export {
 export {
 	CategoriesApiPath,
 	type CategoriesGetAllResponseDto,
+	type CategoriesSelectedRequestDto,
+	categoriesSelectedValidationSchema,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
 	type CategoryUpdateRequestDto,
@@ -83,6 +85,12 @@ export {
 	quizUserAnswersValidationSchema,
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
+export {
+	type TaskCreateDto,
+	type TaskDto,
+	TasksApiPath,
+	TaskStatus,
+} from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,
