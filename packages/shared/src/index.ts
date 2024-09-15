@@ -17,6 +17,7 @@ export {
 	HTTPError,
 	OnboardingError,
 	QuizError,
+	TaskError,
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";

@@ -9,6 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
+import { checkAccessToTask } from "./libs/hooks/hooks.js";
 import {
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
@@ -81,6 +82,7 @@ class TaskController extends BaseController {
 				),
 			method: "PATCH",
 			path: TasksApiPath.$ID,
+			preHandlers: [checkAccessToTask(taskService)],
 			validation: {
 				body: taskUpdateValidationSchema,
 			},
