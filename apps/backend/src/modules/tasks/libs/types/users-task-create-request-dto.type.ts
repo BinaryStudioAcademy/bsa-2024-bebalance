@@ -1,5 +1,10 @@
-import { type TaskCreateDto } from "./types.js";
+import { type UserDto } from "~/modules/users/users.js";
 
-type UsersTaskCreateRequestDto = { userId: number } & TaskCreateDto;
+type UsersTaskCreateRequestDto = {
+	categoryId: number;
+	description: string;
+	label: string;
+	user: UserDto;
+};
 
 export { type UsersTaskCreateRequestDto };
