@@ -1,6 +1,6 @@
 type SelectedCategories = {
 	categoryId: string;
-	name: string;
+	categoryName: string;
 };
 
 type TaskSuggestionRequestDto = {
