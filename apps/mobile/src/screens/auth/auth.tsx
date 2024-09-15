@@ -4,13 +4,12 @@ import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
 	LoaderWrapper,
-	Planet,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
-	Image,
 } from "~/libs/components/components";
+import { Logo } from "~/libs/components/logo/logo";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
@@ -29,7 +28,6 @@ import { actions as authActions } from "~/slices/auth/auth";
 
 import { SignInForm, SignUpForm } from "./components/components";
 import { styles } from "./styles";
-import { type ImageSourcePropType } from "~/libs/types/types";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
@@ -112,11 +110,7 @@ const Auth: React.FC = () => {
 										globalStyles.mb32,
 									]}
 								>
-									<Image
-										source={
-											require("~/assets/images/logo.png") as ImageSourcePropType
-										}
-									/>
+									<Logo />
 									<Text preset="subheading" size="xl" weight="bold">
 										BeBalance
 									</Text>
