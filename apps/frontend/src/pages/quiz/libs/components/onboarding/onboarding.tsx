@@ -54,11 +54,9 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		}
 	}, [currentQuestionIndex, dataStatus, questions]);
 
-	const { control, getValues, handleSubmit } = useAppForm<OnboardingFormValues>(
-		{
-			defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
-		},
-	);
+	const { control, handleSubmit } = useAppForm<OnboardingFormValues>({
+		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
+	});
 
 	useEffect(() => {
 		if (completedQuestions.includes(currentQuestionIndex)) {
@@ -71,14 +69,9 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			return;
 		}
 
-		const formValues = getValues();
-		const questionLabel = `question${question.id.toString()}`;
-		const isUndefined = formValues[questionLabel] === undefined;
-
-		if (!isUndefined) {
-			setIsDisabled(false);
-		}
-	}, [getValues, question]);
+		setCompletedQuestions([...completedQuestions, currentQuestionIndex]);
+		setIsDisabled(false);
+	}, [completedQuestions, currentQuestionIndex, question]);
 
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);
@@ -103,21 +96,12 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					onNext();
 				}
 
-				setCompletedQuestions([...completedQuestions, currentQuestionIndex]);
 				setIsDisabled(true);
 				void dispatch(onboardingActions.nextQuestion());
 			}
 		},
 
-		[
-			completedQuestions,
-			currentQuestionIndex,
-			dispatch,
-			getAnswerIds,
-			isLastQuestion,
-			onNext,
-			question,
-		],
+		[dispatch, getAnswerIds, isLastQuestion, onNext, question],
 	);
 
 	const handlePreviousStep = useCallback(() => {
