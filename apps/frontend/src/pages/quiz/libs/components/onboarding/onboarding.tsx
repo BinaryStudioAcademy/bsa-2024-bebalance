@@ -1,5 +1,5 @@
 import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/data-status.enum.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -30,7 +30,7 @@ const ONE = 1;
 const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
-	const [questionDone, setQuestionDone] = useState<number[]>([]);
+	const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
 	const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
 
 	const { currentQuestionIndex, dataStatus, question, questions } =
@@ -48,34 +48,29 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	useEffect(() => {
 		if (
 			dataStatus === DataStatus.FULFILLED &&
-			currentQuestionIndex === questions.length - ONE
+			currentQuestionIndex === questions.length - ONE &&
+			completedQuestions.includes(currentQuestionIndex)
 		) {
 			setIsLastQuestion(true);
+		} else {
+			setIsLastQuestion(false);
 		}
-	}, [currentQuestionIndex, dataStatus, questions]);
+	}, [completedQuestions, currentQuestionIndex, dataStatus, questions]);
 
 	const { control, handleSubmit } = useAppForm<OnboardingFormValues>({
 		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
 	});
 
 	useEffect(() => {
-		if (questionDone.includes(currentQuestionIndex)) {
+		if (completedQuestions.includes(currentQuestionIndex)) {
 			setIsDisabled(false);
 		}
-	}, [currentQuestionIndex, questionDone]);
+	}, [completedQuestions, currentQuestionIndex]);
 
 	const handleOnChange = useCallback(() => {
-		if (!question) {
-			return;
-		}
-
-		const questionLabel = `question${question.id.toString()}`;
-		const isUndefined = control._formValues[questionLabel] === undefined;
-
-		if (!isUndefined) {
-			setIsDisabled(false);
-		}
-	}, [control._formValues, question]);
+		setCompletedQuestions([...completedQuestions, currentQuestionIndex]);
+		setIsDisabled(false);
+	}, [completedQuestions, currentQuestionIndex]);
 
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);
@@ -83,38 +78,21 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			if (!question) {
-				return;
+			const questionAnswers = Object.fromEntries(
+				Object.entries(data).filter(([key]) => key !== "answers"),
+			);
+
+			if (isLastQuestion) {
+				const answerIds = getAnswerIds(questionAnswers);
+				void dispatch(onboardingActions.saveAnswers({ answerIds }));
+				onNext();
 			}
 
-			const hasAnswer = data[`question${question.id.toString()}`] !== undefined;
-
-			if (hasAnswer) {
-				const newObject = Object.fromEntries(
-					Object.entries(data).filter(([key]) => key !== "answers"),
-				);
-
-				if (isLastQuestion) {
-					const answerIds = getAnswerIds(newObject);
-					void dispatch(onboardingActions.saveAnswers({ answerIds }));
-					onNext();
-				}
-
-				setQuestionDone([...questionDone, currentQuestionIndex]);
-				setIsDisabled(true);
-				void dispatch(onboardingActions.nextQuestion());
-			}
+			setIsDisabled(true);
+			void dispatch(onboardingActions.nextQuestion());
 		},
 
-		[
-			currentQuestionIndex,
-			dispatch,
-			getAnswerIds,
-			isLastQuestion,
-			onNext,
-			question,
-			questionDone,
-		],
+		[dispatch, getAnswerIds, isLastQuestion, onNext],
 	);
 
 	const handlePreviousStep = useCallback(() => {

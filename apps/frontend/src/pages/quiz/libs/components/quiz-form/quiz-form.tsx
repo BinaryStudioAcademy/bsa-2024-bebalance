@@ -38,7 +38,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 	const [categoryDone, setCategoryDone] = useState<number[]>([]);
 
-	const { control, handleSubmit } = useAppForm<QuizFormValues>({
+	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
 		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
 	});
 
@@ -77,14 +77,17 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			(categoryItem) => `question${categoryItem.id.toString()}`,
 		);
 
+		const formValues = getValues();
+
 		const hasUndefined = questionLabels.some(
-			(question) => control._formValues[question] === undefined,
+			(question) => formValues[question] === undefined,
 		);
 
 		if (!hasUndefined) {
+			setCategoryDone([...categoryDone, currentCategoryIndex]);
 			setIsDisabled(false);
 		}
-	}, [category, control._formValues]);
+	}, [category, categoryDone, currentCategoryIndex, getValues]);
 
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);
@@ -92,44 +95,22 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: QuizFormValues) => {
-			if (!category) {
-				return;
-			}
-
-			const questionLabels = category.map(
-				(categoryItem) => `question${categoryItem.id.toString()}`,
-			);
-			const hasUndefinedAnswers = questionLabels.some(
-				(question) => data[question] === undefined,
+			const questionFormAnswers = Object.fromEntries(
+				Object.entries(data).filter(([key]) => key !== "answers"),
 			);
 
-			if (!hasUndefinedAnswers) {
-				const questionFormAnswers = Object.fromEntries(
-					Object.entries(data).filter(([key]) => key !== "answers"),
-				);
+			if (isLast) {
+				const answerIds = getAnswerIds(questionFormAnswers);
 
-				if (isLast) {
-					const answerIds = getAnswerIds(questionFormAnswers);
+				void dispatch(quizActions.saveAnswers({ answerIds }));
 
-					void dispatch(quizActions.saveAnswers({ answerIds }));
-
-					onNext();
-				}
-
-				setCategoryDone([...categoryDone, currentCategoryIndex]);
-				setIsDisabled(true);
-				void dispatch(quizActions.nextQuestion());
+				onNext();
 			}
+
+			setIsDisabled(true);
+			void dispatch(quizActions.nextQuestion());
 		},
-		[
-			category,
-			categoryDone,
-			currentCategoryIndex,
-			dispatch,
-			getAnswerIds,
-			isLast,
-			onNext,
-		],
+		[dispatch, getAnswerIds, isLast, onNext],
 	);
 
 	const handleFormSubmit = useCallback(
@@ -192,7 +173,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					<div className={styles["button-container"]}>
 						<Button
 							isDisabled={isDisabled}
-							label="NEXT"
+							label={isLast ? "ANALYZE" : "NEXT"}
 							type="submit"
 							variant="primary"
 						/>
