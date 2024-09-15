@@ -15,6 +15,9 @@ import { type OnboardingService } from "./onboarding.service.js";
 
 /**
  * @swagger
+ * tags:
+ *   - name: onboarding
+ *     description: Endpoints related to onboarding questions
  * components:
  *   schemas:
  *     OnboardingAnswer:
@@ -67,7 +70,6 @@ import { type OnboardingService } from "./onboarding.service.js";
  *           format: date-time
  *           description: The last update date of the question.
  */
-
 class OnboardingController extends BaseController {
 	private onboardingService: OnboardingService;
 
@@ -100,17 +102,9 @@ class OnboardingController extends BaseController {
 
 	/**
 	 * @swagger
-	 * tags:
-	 *   - name: Onboarding
-	 *     description: Endpoints related to onboarding
-	 */
-
-	/**
-	 * @swagger
 	 * /onboarding:
 	 *   get:
-	 *     tags:
-	 *       - Onboarding
+	 *     tags: [onboarding]
 	 *     summary: Get onboarding questions
 	 *     description: Returns an array of onboarding questions with possible answers.
 	 *     security:
@@ -135,12 +129,12 @@ class OnboardingController extends BaseController {
 			status: HTTPCode.OK,
 		};
 	}
+
 	/**
 	 * @swagger
 	 * /onboarding/answer:
 	 *   post:
-	 *     tags:
-	 *       - Onboarding
+	 *     tags: [onboarding]
 	 *     description: Saves user answers for onboarding questions
 	 *     security:
 	 *       - bearerAuth: []

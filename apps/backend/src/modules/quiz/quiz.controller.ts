@@ -30,6 +30,9 @@ type Constructor = {
 
 /**
  * @swagger
+ * tags:
+ *   - name: quiz
+ *     description: Endpoints related to quiz
  * components:
  *   schemas:
  *     UserScore:
@@ -142,6 +145,7 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/answer:
 	 *   post:
+	 *     tags: [quiz]
 	 *     description: Saves user answers for all quiz questions at once
 	 *     security:
 	 *       - bearerAuth: []
@@ -201,8 +205,8 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/score:
 	 *   get:
+	 *     tags: [quiz]
 	 *     description: Returns all user scores
-	 *
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -246,6 +250,7 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/score:
 	 *   patch:
+	 *     tags: [quiz]
 	 *     description: Updates multiple or single user scores
 	 *     requestBody:
 	 *       required: true
@@ -263,7 +268,6 @@ class QuizController extends BaseController {
 	 *                       type: number
 	 *                     score:
 	 *                       type: number
-	 *
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation

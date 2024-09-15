@@ -24,6 +24,9 @@ import { notificationAnswersValidationSchema } from "./libs/validation-schemas/v
 
 /**
  * @swagger
+ * tags:
+ *   - name: users
+ *     description: Endpoints related to users
  * components:
  *    schemas:
  *      User:
@@ -56,7 +59,6 @@ import { notificationAnswersValidationSchema } from "./libs/validation-schemas/v
  *          userId:
  *            type: number
  */
-
 class UserController extends BaseController {
 	private userService: UserService;
 
@@ -130,22 +132,23 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users:
-	 *    get:
-	 *      description: Returns an array of users
-	 *      security:
-	 *        - bearerAuth: []
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  items:
-	 *                    type: array
-	 *                    items:
-	 *                      $ref: "#/components/schemas/User"
+	 *   get:
+	 *     tags: [users]
+	 *     description: Returns an array of users
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/User"
 	 */
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
@@ -157,18 +160,19 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users/:id:
-	 *    get:
-	 *      description: Return user by id
-	 *      security:
-	 *        - bearerAuth: []
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                $ref: "#/components/schemas/User"
+	 *   get:
+	 *     tags: [users]
+	 *     description: Return user by id
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
 	 */
 	private async getById(
 		options: APIHandlerOptions<{
@@ -186,25 +190,25 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users/notification-questions:
-	 *    post:
-	 *      description: Save user preferences based on notification questions form
-	 *      security:
-	 *        - bearerAuth: []
-	 *      requestBody:
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              $ref: "#/components/schemas/NotificationQuestionsRequest"
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                $ref: "#/components/schemas/User"
+	 *   post:
+	 *     tags: [users]
+	 *     description: Save user preferences based on notification questions form
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             $ref: "#/components/schemas/NotificationQuestionsRequest"
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/User"
 	 */
-
 	private async saveNotificationAnswers(
 		options: APIHandlerOptions<{
 			body: NotificationAnswersPayloadDto;
@@ -225,26 +229,27 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users/:id:
-	 *    patch:
-	 *      description: Update user by id
-	 *      requestBody:
-	 *        description: Data to update
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                name:
-	 *                  type: string
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                $ref: "#/components/schemas/User"
+	 *   patch:
+	 *     tags: [users]
+	 *     description: Update user by id
+	 *     requestBody:
+	 *       description: Data to update
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               name:
+	 *                 type: string
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/User"
 	 */
 	private async update(
 		options: APIHandlerOptions<{
@@ -260,67 +265,68 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /user/avatar:
-	 *    post:
-	 *      summary: Update user's avatar
-	 *      description: Upload a new avatar for the user.
-	 *      requestBody:
-	 *        description: Avatar file to upload
-	 *        required: true
-	 *        content:
-	 *          multipart/form-data:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                file:
-	 *                  type: string
-	 *                  format: binary
-	 *                  description: The avatar image file to be uploaded.
-	 *      responses:
-	 *        200:
-	 *          description: Avatar updated successfully
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  avatarUrl:
-	 *                    type: string
-	 *                    description: URL of the uploaded avatar image.
-	 *                    example: "https://<bucket-name>.s3.amazonaws.com/<file-name>"
-	 *                  id:
-	 *                    type: integer
-	 *                    description: User ID.
-	 *                  email:
-	 *                    type: string
-	 *                    description: User's email.
-	 *                  name:
-	 *                    type: string
-	 *                    description: User's name.
-	 *                  createdAt:
-	 *                    type: string
-	 *                    format: date-time
-	 *                    description: Timestamp of user creation.
-	 *                  updatedAt:
-	 *                    type: string
-	 *                    format: date-time
-	 *                    description: Timestamp of the last update.
-	 *        400:
-	 *          description: Bad Request - Missing required file
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  status:
-	 *                    type: integer
-	 *                    example: 400
-	 *                  error:
-	 *                    type: string
-	 *                    example: "Bad Request"
-	 *                  message:
-	 *                    type: string
-	 *                    example: "Invalid request: A required file is missing. Please ensure that all necessary files are included and try again."
+	 * /users/avatar:
+	 *   post:
+	 *     tags: [users]
+	 *     summary: Update user's avatar
+	 *     description: Upload a new avatar for the user.
+	 *     requestBody:
+	 *       description: Avatar file to upload
+	 *       required: true
+	 *       content:
+	 *         multipart/form-data:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               file:
+	 *                 type: string
+	 *                 format: binary
+	 *                 description: The avatar image file to be uploaded.
+	 *     responses:
+	 *       200:
+	 *         description: Avatar updated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 avatarUrl:
+	 *                   type: string
+	 *                   description: URL of the uploaded avatar image.
+	 *                   example: "https://<bucket-name>.s3.amazonaws.com/<file-name>"
+	 *                 id:
+	 *                   type: integer
+	 *                   description: User ID.
+	 *                 email:
+	 *                   type: string
+	 *                   description: User's email.
+	 *                 name:
+	 *                   type: string
+	 *                   description: User's name.
+	 *                 createdAt:
+	 *                   type: string
+	 *                   format: date-time
+	 *                   description: Timestamp of user creation.
+	 *                 updatedAt:
+	 *                   type: string
+	 *                   format: date-time
+	 *                   description: Timestamp of the last update.
+	 *       400:
+	 *         description: Bad Request - Missing required file
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 status:
+	 *                   type: integer
+	 *                   example: 400
+	 *                 error:
+	 *                   type: string
+	 *                   example: "Bad Request"
+	 *                 message:
+	 *                   type: string
+	 *                   example: "Invalid request: A required file is missing. Please ensure that all necessary files are included and try again."
 	 */
 	private async updateAvatar(
 		options: APIHandlerOptions<{

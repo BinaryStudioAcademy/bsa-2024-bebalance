@@ -22,6 +22,12 @@ import {
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
 
+/**
+ * @swagger
+ * tags:
+ *   - name: auth
+ *     description: Endpoints related to authentication
+ */
 class AuthController extends BaseController {
 	private authService: AuthService;
 
@@ -126,6 +132,7 @@ class AuthController extends BaseController {
 	 * @swagger
 	 * /auth/forgot-password:
 	 *   post:
+	 *     tags: [auth]
 	 *     description: Return authenticated user
 	 *     security:
 	 *       - bearerAuth: []
@@ -133,7 +140,6 @@ class AuthController extends BaseController {
 	 *       200:
 	 *         description: Successfull operation
 	 */
-
 	private async forgotPassword(
 		options: APIHandlerOptions<{
 			body: EmailDto;
@@ -149,6 +155,7 @@ class AuthController extends BaseController {
 	 * @swagger
 	 * /auth/authenticated-user:
 	 *   get:
+	 *     tags: [auth]
 	 *     description: Return authenticated user
 	 *     security:
 	 *       - bearerAuth: []
@@ -176,6 +183,7 @@ class AuthController extends BaseController {
 	 * @swagger
 	 * /auth/reset-password:
 	 *   post:
+	 *     tags: [auth]
 	 *     description: Return authenticated user
 	 *     security:
 	 *       - bearerAuth: []
@@ -183,7 +191,6 @@ class AuthController extends BaseController {
 	 *       200:
 	 *         description: Successfull operation
 	 */
-
 	private async resetPassword(
 		options: APIHandlerOptions<{
 			body: ResetPasswordDto;
@@ -198,36 +205,37 @@ class AuthController extends BaseController {
 	/**
 	 * @swagger
 	 * /auth/sign-in:
-	 *    post:
-	 *      description: Sign in user into the system
-	 *      requestBody:
-	 *        description: User auth data
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                email:
-	 *                  type: string
-	 *                  format: email
-	 *                password:
-	 *                  type: string
-	 *                  example: s3cr3tpass
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  user:
-	 *                    $ref: "#/components/schemas/User"
-	 *                  token:
-	 *                    type: string
-	 *                    description: "Authentication token for the user."
-	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *   post:
+	 *     tags: [auth]
+	 *     description: Sign in user into the system
+	 *     requestBody:
+	 *       description: User auth data
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               email:
+	 *                 type: string
+	 *                 format: email
+	 *               password:
+	 *                 type: string
+	 *                 example: s3cr3tpass
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 user:
+	 *                   $ref: "#/components/schemas/User"
+	 *                 token:
+	 *                   type: string
+	 *                   description: "Authentication token for the user."
+	 *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
 	private async signIn(
 		options: APIHandlerOptions<{
@@ -243,41 +251,41 @@ class AuthController extends BaseController {
 	/**
 	 * @swagger
 	 * /auth/sign-up:
-	 *    post:
-	 *      description: Sign up user into the system
-	 *      requestBody:
-	 *        description: User auth data
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                email:
-	 *                  type: string
-	 *                  format: email
-	 *                name:
-	 *                  type: string
-	 *                  example: username
-	 *                password:
-	 *                  type: string
-	 *                  example: s3cr3tpass
-	 *      responses:
-	 *        201:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  user:
-	 *                    $ref: "#/components/schemas/User"
-	 *                  token:
-	 *                    type: string
-	 *                    description: "Authentication token for the user."
-	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *   post:
+	 *     tags: [auth]
+	 *     description: Sign up user into the system
+	 *     requestBody:
+	 *       description: User auth data
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               email:
+	 *                 type: string
+	 *                 format: email
+	 *               name:
+	 *                 type: string
+	 *                 example: username
+	 *               password:
+	 *                 type: string
+	 *                 example: s3cr3tpass
+	 *     responses:
+	 *       201:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 user:
+	 *                   $ref: "#/components/schemas/User"
+	 *                 token:
+	 *                   type: string
+	 *                   description: "Authentication token for the user."
+	 *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
 	 */
-
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;

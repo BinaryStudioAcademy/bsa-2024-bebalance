@@ -11,6 +11,9 @@ import { CategoriesApiPath } from "./libs/enums/enums.js";
 
 /**
  * @swagger
+ * tags:
+ *   - name: categories
+ *     description: Endpoints related to categories
  * components:
  *   schemas:
  *     Category:
@@ -48,7 +51,9 @@ class CategoryController extends BaseController {
 	 * @swagger
 	 * /categories:
 	 *   get:
-	 *     description: Returns an array of quiz categories
+	 *     tags: [categories]
+	 *     summary: Get all categories
+	 *     description: Returns an array of categories
 	 *     security:
 	 *       - bearerAuth: []
 	 *     responses:
