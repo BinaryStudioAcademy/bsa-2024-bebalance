@@ -64,6 +64,7 @@ export {
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionRequestDto,
 	type OnboardingQuestionResponseDto,
+	type OnboardingUserAnswerDto,
 	OnboardingValidationMessage,
 	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
