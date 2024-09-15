@@ -14,7 +14,7 @@ const TaskSuggestionRequest = z.object({
 					.min(AiAssistantValidationRule.NON_EMPTY_NUMBER_MIN_LENGTH, {
 						message: AiAssistantValidationMessage.CATEGORY_ID_REQUIRED,
 					}),
-				name: z
+				categoryName: z
 					.string()
 					.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 						message: AiAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
