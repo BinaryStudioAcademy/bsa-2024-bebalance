@@ -1,5 +1,5 @@
 type SelectedCategories = {
-	categoryId: string;
+	categoryId: number;
 	categoryName: string;
 };
 
