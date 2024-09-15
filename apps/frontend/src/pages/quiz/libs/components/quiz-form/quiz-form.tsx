@@ -38,7 +38,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 	const [categoryDone, setCategoryDone] = useState<number[]>([]);
 
-	const { control, handleSubmit } = useAppForm<QuizFormValues>({
+	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
 		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
 	});
 
@@ -77,14 +77,17 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			(categoryItem) => `question${categoryItem.id.toString()}`,
 		);
 
+		const formValues = getValues();
+
 		const hasUndefined = questionLabels.some(
-			(question) => control._formValues[question] === undefined,
+			(question) => formValues[question] === undefined,
 		);
 
 		if (!hasUndefined) {
+			setCategoryDone([...categoryDone, currentCategoryIndex]);
 			setIsDisabled(false);
 		}
-	}, [category, control._formValues]);
+	}, [category, categoryDone, currentCategoryIndex, getValues]);
 
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);

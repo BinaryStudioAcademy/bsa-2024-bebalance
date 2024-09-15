@@ -1,5 +1,5 @@
 import { Button, Loader, ProgressBar } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/data-status.enum.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -54,9 +54,11 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		}
 	}, [currentQuestionIndex, dataStatus, questions]);
 
-	const { control, handleSubmit } = useAppForm<OnboardingFormValues>({
-		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
-	});
+	const { control, getValues, handleSubmit } = useAppForm<OnboardingFormValues>(
+		{
+			defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
+		},
+	);
 
 	useEffect(() => {
 		if (questionDone.includes(currentQuestionIndex)) {
@@ -69,13 +71,14 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			return;
 		}
 
+		const formValues = getValues();
 		const questionLabel = `question${question.id.toString()}`;
-		const isUndefined = control._formValues[questionLabel] === undefined;
+		const isUndefined = formValues[questionLabel] === undefined;
 
 		if (!isUndefined) {
 			setIsDisabled(false);
 		}
-	}, [control._formValues, question]);
+	}, [getValues, question]);
 
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);
@@ -90,12 +93,12 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			const hasAnswer = data[`question${question.id.toString()}`] !== undefined;
 
 			if (hasAnswer) {
-				const newObject = Object.fromEntries(
+				const questionAnswers = Object.fromEntries(
 					Object.entries(data).filter(([key]) => key !== "answers"),
 				);
 
 				if (isLastQuestion) {
-					const answerIds = getAnswerIds(newObject);
+					const answerIds = getAnswerIds(questionAnswers);
 					void dispatch(onboardingActions.saveAnswers({ answerIds }));
 					onNext();
 				}
