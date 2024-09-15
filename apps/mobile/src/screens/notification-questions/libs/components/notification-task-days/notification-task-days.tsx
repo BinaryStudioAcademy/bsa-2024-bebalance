@@ -37,7 +37,7 @@ const NotificationTaskDays: React.FC<
 				<MultipleCheckboxInput
 					control={control}
 					errors={errors}
-					fieldName="userTaskDays"
+					name="userTaskDays"
 					options={TASK_DAYS_OPTIONS}
 				/>
 			</View>
