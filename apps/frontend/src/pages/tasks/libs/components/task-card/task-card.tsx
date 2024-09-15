@@ -1,6 +1,6 @@
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { Category } from "../components.js";
+import { Category, Deadline } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -12,6 +12,7 @@ const TaskCard: React.FC<Properties> = ({ task }: Properties) => {
 		<div className={styles["card"]}>
 			<div className={styles["card-header"]}>
 				<Category categoryName={task.category} />
+				<Deadline deadline={task.dueDate} />
 			</div>
 			<div className={styles["card-body"]}>
 				<h4 className={styles["title"]}>{task.label}</h4>
