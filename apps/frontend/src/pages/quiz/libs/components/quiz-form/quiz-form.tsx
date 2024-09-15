@@ -95,35 +95,22 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: QuizFormValues) => {
-			if (!category) {
-				return;
-			}
-
-			const questionLabels = category.map(
-				(categoryItem) => `question${categoryItem.id.toString()}`,
-			);
-			const hasUndefinedAnswers = questionLabels.some(
-				(question) => data[question] === undefined,
+			const questionFormAnswers = Object.fromEntries(
+				Object.entries(data).filter(([key]) => key !== "answers"),
 			);
 
-			if (!hasUndefinedAnswers) {
-				const questionFormAnswers = Object.fromEntries(
-					Object.entries(data).filter(([key]) => key !== "answers"),
-				);
+			if (isLast) {
+				const answerIds = getAnswerIds(questionFormAnswers);
 
-				if (isLast) {
-					const answerIds = getAnswerIds(questionFormAnswers);
+				void dispatch(quizActions.saveAnswers({ answerIds }));
 
-					void dispatch(quizActions.saveAnswers({ answerIds }));
-
-					onNext();
-				}
-
-				setIsDisabled(true);
-				void dispatch(quizActions.nextQuestion());
+				onNext();
 			}
+
+			setIsDisabled(true);
+			void dispatch(quizActions.nextQuestion());
 		},
-		[category, dispatch, getAnswerIds, isLast, onNext],
+		[dispatch, getAnswerIds, isLast, onNext],
 	);
 
 	const handleFormSubmit = useCallback(
@@ -186,7 +173,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					<div className={styles["button-container"]}>
 						<Button
 							isDisabled={isDisabled}
-							label="NEXT"
+							label={isLast ? "ANALYZE" : "NEXT"}
 							type="submit"
 							variant="primary"
 						/>

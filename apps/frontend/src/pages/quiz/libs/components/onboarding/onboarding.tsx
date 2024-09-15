@@ -48,11 +48,14 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	useEffect(() => {
 		if (
 			dataStatus === DataStatus.FULFILLED &&
-			currentQuestionIndex === questions.length - ONE
+			currentQuestionIndex === questions.length - ONE &&
+			completedQuestions.includes(currentQuestionIndex)
 		) {
 			setIsLastQuestion(true);
+		} else {
+			setIsLastQuestion(false);
 		}
-	}, [currentQuestionIndex, dataStatus, questions]);
+	}, [completedQuestions, currentQuestionIndex, dataStatus, questions]);
 
 	const { control, handleSubmit } = useAppForm<OnboardingFormValues>({
 		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
@@ -65,13 +68,9 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	}, [completedQuestions, currentQuestionIndex]);
 
 	const handleOnChange = useCallback(() => {
-		if (!question) {
-			return;
-		}
-
 		setCompletedQuestions([...completedQuestions, currentQuestionIndex]);
 		setIsDisabled(false);
-	}, [completedQuestions, currentQuestionIndex, question]);
+	}, [completedQuestions, currentQuestionIndex]);
 
 	const getAnswerIds = useCallback((formData: FormToSave) => {
 		return Object.values(formData).map(Number);
@@ -79,29 +78,21 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			if (!question) {
-				return;
+			const questionAnswers = Object.fromEntries(
+				Object.entries(data).filter(([key]) => key !== "answers"),
+			);
+
+			if (isLastQuestion) {
+				const answerIds = getAnswerIds(questionAnswers);
+				void dispatch(onboardingActions.saveAnswers({ answerIds }));
+				onNext();
 			}
 
-			const hasAnswer = data[`question${question.id.toString()}`] !== undefined;
-
-			if (hasAnswer) {
-				const questionAnswers = Object.fromEntries(
-					Object.entries(data).filter(([key]) => key !== "answers"),
-				);
-
-				if (isLastQuestion) {
-					const answerIds = getAnswerIds(questionAnswers);
-					void dispatch(onboardingActions.saveAnswers({ answerIds }));
-					onNext();
-				}
-
-				setIsDisabled(true);
-				void dispatch(onboardingActions.nextQuestion());
-			}
+			setIsDisabled(true);
+			void dispatch(onboardingActions.nextQuestion());
 		},
 
-		[dispatch, getAnswerIds, isLastQuestion, onNext, question],
+		[dispatch, getAnswerIds, isLastQuestion, onNext],
 	);
 
 	const handlePreviousStep = useCallback(() => {
