@@ -6,6 +6,7 @@ type IconName =
 	| "eye"
 	| "info"
 	| "menu"
+	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
 	| "success"

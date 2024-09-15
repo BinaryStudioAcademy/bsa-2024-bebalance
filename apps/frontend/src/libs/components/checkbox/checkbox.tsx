@@ -7,6 +7,7 @@ import {
 	type InputOption,
 } from "~/libs/types/types.js";
 
+import { Icon } from "../icon/icon.js";
 import styles from "./styles.module.css";
 
 type Properties<T extends FieldValues, OptionValueT extends number | string> = {
@@ -104,7 +105,9 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 										type="checkbox"
 										value={option.value}
 									/>
-									<span className={styles["checkmark"]} />
+									<span className={styles["checkmark-container"]}>
+										<Icon name="roundedCheck" />
+									</span>
 									{option.label}
 								</label>
 							</div>
@@ -130,7 +133,9 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 								type="checkbox"
 								value={value}
 							/>
-							<span className={styles["checkmark"]} />
+							<span className={styles["checkmark-container"]}>
+								<Icon name="roundedCheck" />
+							</span>
 							{label}
 						</label>
 					</div>

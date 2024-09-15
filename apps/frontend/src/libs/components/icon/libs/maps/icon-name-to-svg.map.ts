@@ -5,6 +5,7 @@ import Error from "~/assets/img/error.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
 import Info from "~/assets/img/info.svg?react";
 import Menu from "~/assets/img/menu.svg?react";
+import RoundedCheck from "~/assets/img/rounded-check.svg?react";
 import SettingsActive from "~/assets/img/settings-active.svg?react";
 import SettingsInactive from "~/assets/img/settings-inactive.svg?react";
 import Success from "~/assets/img/success.svg?react";
@@ -24,6 +25,7 @@ const iconNameToSvg: Record<
 	eye: Eye,
 	info: Info,
 	menu: Menu,
+	roundedCheck: RoundedCheck,
 	settingsActive: SettingsActive,
 	settingsInactive: SettingsInactive,
 	success: Success,

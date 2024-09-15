@@ -1,4 +1,4 @@
-const fontWeightToFamilyMap = {
+const fontWeightToFamily = {
 	bold: { fontFamily: "Nunito-Bold" },
 	extraBold: { fontFamily: "Nunito-ExtraBold" },
 	medium: { fontFamily: "Nunito-Medium" },
@@ -6,4 +6,4 @@ const fontWeightToFamilyMap = {
 	semiBold: { fontFamily: "Nunito-SemiBold" },
 };
 
-export { fontWeightToFamilyMap };
+export { fontWeightToFamily };
