@@ -28,6 +28,7 @@ import { actions as quizActions } from "~/slices/quiz/quiz";
 import { Content, Counter } from "./libs/components/components";
 import { QUIZ_FORM_DEFAULT_VALUES } from "./libs/constants/costants";
 import {
+	type QuizAnswersRequestDto,
 	type QuizFormValues,
 	type RootStackParameterList,
 } from "./libs/types/types";
@@ -67,23 +68,42 @@ const Quiz: React.FC = () => {
 
 	useEffect(() => {
 		reset({ answer: currentAnswer.toString() });
-	}, [currentQuestionIndex, currentAnswer, reset]);
+	}, [currentAnswer, reset]);
+
+	const handleSaveAnswers = useCallback(
+		(payload: QuizAnswersRequestDto) => {
+			void dispatch(quizActions.saveAnswers(payload));
+		},
+		[dispatch],
+	);
 
 	const handleNextClick = useCallback(
 		(payload: QuizFormValues) => {
+			const answerId = Number(payload.answer);
+
 			dispatch(
 				quizActions.setAnswersByQuestionIndex({
-					answerId: Number(payload.answer),
+					answerId,
 					questionIndex: currentQuestionIndex,
 				}),
 			);
+
+			if (isLastQuestion) {
+				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
+			}
 
 			infinitePagerReference.current?.incrementPage({ animated: true });
 
 			void dispatch(quizActions.nextQuestion());
 		},
 
-		[dispatch, currentQuestionIndex],
+		[
+			dispatch,
+			currentQuestionIndex,
+			isLastQuestion,
+			answersByQuestionIndex,
+			handleSaveAnswers,
+		],
 	);
 
 	const handlePreviousClick = useCallback(() => {
