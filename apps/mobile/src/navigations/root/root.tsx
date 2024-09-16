@@ -26,6 +26,12 @@ const Root: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user);
 	const hasUser = Boolean(user);
 
+	const { hasAnsweredOnboardingQuestions, hasAnsweredQuizQuestions } =
+		useAppSelector(({ auth }) => ({
+			hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: auth.user?.hasAnsweredQuizQuestions,
+		}));
+
 	return (
 		<NativeStack.Navigator screenOptions={SCREEN_OPTIONS}>
 			{hasUser ? (
