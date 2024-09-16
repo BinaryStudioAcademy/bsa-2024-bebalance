@@ -3,16 +3,14 @@ import React from "react";
 import { GradientSlider, Text, View } from "~/libs/components/components";
 import { categoryToColors, type colorToGradientColors } from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
+import { type SliderData } from "~/libs/types/types";
 
 type Properties = {
-	id: number;
-	label: string;
-	onValueChange: (categoryId: number, value: number) => void;
-	value: number;
+	data: SliderData;
+	onValueChange: (id: number, sliderValue: number) => void;
 };
 
 const MAX_SLIDER_VALUE = 10;
-const MIN_SLIDER_VALUE = 0;
 
 const getGradientColorsForCategory = (
 	categoryName: string,
@@ -20,13 +18,8 @@ const getGradientColorsForCategory = (
 	return categoryToColors[categoryName.replaceAll(/\s+/g, "")] ?? "blue";
 };
 
-const SliderContent: React.FC<Properties> = ({
-	id,
-	label,
-	onValueChange,
-	value,
-}) => {
-	const color = getGradientColorsForCategory(label);
+const SliderContent: React.FC<Properties> = ({ data, onValueChange }) => {
+	const color = getGradientColorsForCategory(data.label);
 
 	return (
 		<View
@@ -34,20 +27,18 @@ const SliderContent: React.FC<Properties> = ({
 				globalStyles.flex1,
 				globalStyles.justifyContentCenter,
 				globalStyles.mt32,
-				globalStyles.mh32,
-				globalStyles.pt8,
+				globalStyles.mh24,
 			]}
 		>
 			<Text preset="tag" style={globalStyles.mb4}>
-				{label}
+				{data.label}
 			</Text>
 			<GradientSlider
 				gradientColors={color}
-				id={id}
+				id={data.id}
 				max={MAX_SLIDER_VALUE}
-				min={MIN_SLIDER_VALUE}
 				onValueChange={onValueChange}
-				value={value}
+				value={data.value}
 			/>
 		</View>
 	);
