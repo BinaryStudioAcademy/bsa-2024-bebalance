@@ -1,7 +1,7 @@
 export {
 	type OnboardingAnswerDto,
+	type OnboardingAnswerRequestBodyDto,
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionResponseDto,
-	type OnboardingAnswerRequestBodyDto,
 	type OnboardingUserAnswerDto,
 } from "shared";
