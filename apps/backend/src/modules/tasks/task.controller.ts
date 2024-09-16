@@ -74,6 +74,17 @@ class TaskController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.findPastByUserId(
+					options as APIHandlerOptions<{
+						user: UserDto;
+					}>,
+				),
+			method: "GET",
+			path: TasksApiPath.PAST,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.update(
 					options as APIHandlerOptions<{
 						body: TaskUpdateRequestDto;
@@ -116,6 +127,37 @@ class TaskController extends BaseController {
 
 		return {
 			payload: await this.taskService.findCurrentByUserId(user.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/past:
+	 *    get:
+	 *      description: Returns an array of past users tasks
+	 *      security:
+	 *        - bearerAuth: []
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: array
+	 *                items:
+	 *                  $ref: "#/components/schemas/Task"
+	 */
+
+	private async findPastByUserId(
+		options: APIHandlerOptions<{
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { user } = options;
+
+		return {
+			payload: await this.taskService.findPastByUserId(user.id),
 			status: HTTPCode.OK,
 		};
 	}
