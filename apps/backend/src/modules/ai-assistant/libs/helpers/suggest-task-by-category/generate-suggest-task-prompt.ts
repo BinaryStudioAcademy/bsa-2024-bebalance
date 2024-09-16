@@ -8,15 +8,11 @@ import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-messages.enum.
 
 function generateSuggestTaskPrompt(
 	categories: SelectedCategories[],
+	context: string = SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT,
 ): OpenAiRequestMessage {
 	/* eslint-disable perfectionist/sort-objects */
-	const promptContent = {
-		context: SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT,
-		categories,
-	};
-
 	return {
-		content: JSON.stringify(promptContent),
+		content: JSON.stringify({ context, categories }),
 		role: OpenAiRoleKey.USER,
 	};
 }

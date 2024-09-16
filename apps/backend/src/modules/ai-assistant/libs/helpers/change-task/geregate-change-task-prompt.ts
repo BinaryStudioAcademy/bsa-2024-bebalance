@@ -6,14 +6,13 @@ import {
 import { type TaskCreateDto } from "../../types/types.js";
 import { ChangeTaskPromptTemplates } from "./change-task-message.enum.js";
 
-function generaChangeTaskPrompt(task: TaskCreateDto): OpenAiRequestMessage {
-	const promptContent = {
-		context: ChangeTaskPromptTemplates.CHANGE_TASKS_CONTEXT,
-		task,
-	};
-
+function generaChangeTaskPrompt(
+	task: TaskCreateDto,
+	context: string = ChangeTaskPromptTemplates.CHANGE_TASKS_CONTEXT,
+): OpenAiRequestMessage {
+	/* eslint-disable perfectionist/sort-objects */
 	return {
-		content: JSON.stringify(promptContent),
+		content: JSON.stringify({ context, task }),
 		role: OpenAiRoleKey.USER,
 	};
 }

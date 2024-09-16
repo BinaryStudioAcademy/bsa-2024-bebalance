@@ -8,6 +8,7 @@ import { OpenAiInitialPromptTemplates } from "./generate-init-promt-message.enum
 
 function generateUserScoresPrompt(
 	userScores: QuizScoresGetAllResponseDto,
+	context: string = OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_CONTEXT,
 ): OpenAiRequestMessage {
 	const { items } = userScores;
 
@@ -17,13 +18,8 @@ function generateUserScoresPrompt(
 	}));
 
 	/* eslint-disable perfectionist/sort-objects */
-	const promptContent = {
-		context: OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_CONTEXT,
-		categories,
-	};
-
 	return {
-		content: JSON.stringify(promptContent),
+		content: JSON.stringify({ context, categories }),
 		role: OpenAiRoleKey.USER,
 	};
 }
