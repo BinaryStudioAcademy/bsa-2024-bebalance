@@ -19,4 +19,7 @@ export {
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
 } from "./libs/types/types";
-export { categoryAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas";
+export {
+	categoryAnswerSelectedValidationSchema,
+	updateScoresValidationSchema,
+} from "./libs/validation-schemas/validation-schemas";
