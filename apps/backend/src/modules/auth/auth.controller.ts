@@ -255,8 +255,7 @@ class AuthController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               type: object
-	 *               $ref: "#/components/schemas/User"
+	 *               $ref: "#/components/schemas/UserDto"
 	 *       401:
 	 *         description: Unauthorized
 	 *         content:
@@ -355,12 +354,12 @@ class AuthController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 user:
-	 *                   $ref: "#/components/schemas/User"
 	 *                 token:
 	 *                   type: string
 	 *                   description: "Authentication token for the user."
 	 *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *                 user:
+	 *                   $ref: "#/components/schemas/UserDto"
 	 *       401:
 	 *         description: Invalid credentials
 	 *         content:
@@ -416,12 +415,12 @@ class AuthController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 user:
-	 *                   $ref: "#/components/schemas/User"
 	 *                 token:
 	 *                   type: string
 	 *                   description: "Authentication token for the user."
 	 *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *                 user:
+	 *                   $ref: "#/components/schemas/UserDto"
 	 *       422:
 	 *         description: Validation error
 	 *         content:
