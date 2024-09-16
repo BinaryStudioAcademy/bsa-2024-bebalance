@@ -17,18 +17,19 @@ import {
 	userSignUpValidationSchema,
 } from "~/packages/users/users";
 
-import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
-import { ConfirmPasswordCustomValidation } from "./libs/enums/enums";
+import { ConfirmPasswordCustomValidation } from "../../enums/enums";
+import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants/constants";
 
 type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;
 };
 
+const INPUT_ICON_SIZE = 20;
+
 const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
 	const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] =
 		useState<boolean>(true);
-	const INPUT_ICON_SIZE = 20;
 
 	const handlePasswordIconPress = useCallback((): void => {
 		setIsPasswordHidden(!isPasswordHidden);
@@ -70,7 +71,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 				<Link
 					color={BaseColor.BLUE}
 					label="Sign In"
-					to={`/${RootScreenName.SIGN_UP}`}
+					to={`/${RootScreenName.SIGN_IN}`}
 					weight="semiBold"
 				/>
 			</Text>

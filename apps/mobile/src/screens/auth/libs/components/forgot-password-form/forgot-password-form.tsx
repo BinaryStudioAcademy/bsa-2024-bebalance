@@ -7,7 +7,7 @@ import {
 	userForgotPasswordValidationSchema,
 } from "~/packages/users/users";
 
-import { FORGOT_PASSWORD_DEFAULT_VALUES } from "./libs/constants";
+import { FORGOT_PASSWORD_FORM_DEFAULT_VALUES } from "./libs/constants";
 
 type Properties = {
 	onSubmit: (payload: EmailDto) => void;
@@ -15,7 +15,7 @@ type Properties = {
 
 const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const { control, errors, handleSubmit } = useAppForm<EmailDto>({
-		defaultValues: FORGOT_PASSWORD_DEFAULT_VALUES,
+		defaultValues: FORGOT_PASSWORD_FORM_DEFAULT_VALUES,
 		validationSchema: userForgotPasswordValidationSchema,
 	});
 
