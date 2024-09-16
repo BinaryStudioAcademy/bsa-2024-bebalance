@@ -7,9 +7,9 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskSuggestionsResponseDto } from "../../types/types.js";
-import { type ChangeTaskByCategory } from "./change-task.validation-schema.js";
+import { type changeTaskByCategory } from "./change-task.validation-schema.js";
 
-type TaskByCategoryData = z.infer<typeof ChangeTaskByCategory>;
+type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
 
 const generateChangeTaskSuggestionsResponse = (
 	aiResponse: OpenAiResponseMessage,

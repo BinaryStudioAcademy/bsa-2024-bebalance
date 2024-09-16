@@ -11,9 +11,9 @@ const Messages = z.object({
 	question: z.string(),
 });
 
-const BalanceAnalysis = z.object({
+const balanceAnalysis = z.object({
 	lowestCategories: z.array(Category),
 	messages: Messages,
 });
 
-export { BalanceAnalysis };
+export { balanceAnalysis };

@@ -4,7 +4,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
 
-import { BalanceAnalysis as BalanceAnalysisResponseValidationSchema } from "./balance-analysis.validation-schema.js";
+import { balanceAnalysis as BalanceAnalysisResponseValidationSchema } from "./balance-analysis.validation-schema.js";
 import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-message.enum.js";
 import { generateUserScoresPrompt } from "./generate-scores-prompt.js";
 

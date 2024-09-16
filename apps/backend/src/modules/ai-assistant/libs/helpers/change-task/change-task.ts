@@ -4,7 +4,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { ChangeTaskByCategory as ChangeTaskByCategoryValidationSchema } from "./change-task.validation-schema.js";
+import { changeTaskByCategory as ChangeTaskByCategoryValidationSchema } from "./change-task.validation-schema.js";
 import { ChangeTaskPromptTemplates } from "./change-task-message.enum.js";
 import { generaChangeTaskPrompt } from "./geregate-change-task-prompt.js";
 

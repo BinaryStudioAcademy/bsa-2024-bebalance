@@ -5,7 +5,7 @@ import {
 
 import { type SelectedCategories } from "../../types/types.js";
 import { generateSuggestTaskPrompt } from "./generate-suggest-task-prompt.js";
-import { TaskByCategory as TaskByCategoryValidationSchema } from "./suggest-task-by-category.validation-schema.js";
+import { taskByCategory as TaskByCategoryValidationSchema } from "./suggest-task-by-category.validation-schema.js";
 import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-messages.enum.js";
 
 const runTaskByCategoryOptions = (

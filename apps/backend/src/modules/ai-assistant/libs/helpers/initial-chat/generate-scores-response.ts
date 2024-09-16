@@ -7,9 +7,9 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type BalanceWheelAnalysisResponseDto } from "../../types/types.js";
-import { type BalanceAnalysis } from "./balance-analysis.validation-schema.js";
+import { type balanceAnalysis } from "./balance-analysis.validation-schema.js";
 
-type BalanceAnalysisData = z.infer<typeof BalanceAnalysis>;
+type BalanceAnalysisData = z.infer<typeof balanceAnalysis>;
 
 const generateScoresResponse = (
 	aiResponse: OpenAiResponseMessage,

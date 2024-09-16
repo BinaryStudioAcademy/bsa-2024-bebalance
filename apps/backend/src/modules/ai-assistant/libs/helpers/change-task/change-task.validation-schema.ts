@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const ChangeTaskByCategory = z.object({
+const changeTaskByCategory = z.object({
 	message: z.string(),
 	tasks: z.object({
 		categoryId: z.number(),
@@ -11,4 +11,4 @@ const ChangeTaskByCategory = z.object({
 	}),
 });
 
-export { ChangeTaskByCategory };
+export { changeTaskByCategory };
