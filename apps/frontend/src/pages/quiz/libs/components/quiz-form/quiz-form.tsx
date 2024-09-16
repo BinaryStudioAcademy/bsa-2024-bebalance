@@ -79,12 +79,15 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 		const formValues = getValues();
 
-		const hasUndefined = questionLabels.some(
+		const hasUnansweredQuestions = questionLabels.some(
 			(question) => formValues[question] === undefined,
 		);
 
-		if (!hasUndefined) {
-			setCategoryDone([...categoryDone, currentCategoryIndex]);
+		if (!hasUnansweredQuestions) {
+			if (!categoryDone.includes(currentCategoryIndex)) {
+				setCategoryDone([...categoryDone, currentCategoryIndex]);
+			}
+
 			setIsDisabled(false);
 		}
 	}, [category, categoryDone, currentCategoryIndex, getValues]);
