@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.37.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.36.0...frontend-v1.37.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend:** Onboarding/quiz flow bb-242 ([#351](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/351)) ([060f881](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/060f881e68e1427e72099d9aa0a3038fe88f3984))
+
 ## [1.36.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.35.0...frontend-v1.36.0) (2024-09-16)
 
 
