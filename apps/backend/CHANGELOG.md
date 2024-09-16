@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.18.0...backend-v1.19.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend/shared:** add deadline for tasks bb-361 ([#440](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/440)) ([e4b6f27](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e4b6f2731682aa5c0cda0fa8ee89bc9101e730a3))
+* **frontend/backend/shared:** add my tasks screen bb-335 ([#397](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/397)) ([b2aebbc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b2aebbcf396e87b96edc9e1f30820556042781e8))
+
+
+### Bug Fixes
+
+* **backend:** add missing auth on quiz endpoints swagger doc bb-431 ([#436](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/436)) ([dbf576e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dbf576e583c6cf68c74e197d0df17745a280cec4))
+
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.17.0...backend-v1.18.0) (2024-09-13)
+
+
+### Features
+
+* **backend:** update profile picture bb-173 ([#276](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/276)) ([9917ccf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9917ccfd70fdb371fd9be7ad475c833161ce17f1))
+
 ## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.16.0...backend-v1.17.0) (2024-09-11)
 
 

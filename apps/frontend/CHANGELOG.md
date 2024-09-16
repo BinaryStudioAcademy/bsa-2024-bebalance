@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.36.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.35.0...frontend-v1.36.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend/shared:** add deadline for tasks bb-361 ([#440](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/440)) ([e4b6f27](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e4b6f2731682aa5c0cda0fa8ee89bc9101e730a3))
+* **frontend/backend/shared:** add my tasks screen bb-335 ([#397](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/397)) ([b2aebbc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b2aebbcf396e87b96edc9e1f30820556042781e8))
+* **frontend:** add logo to signin and signup pages bb-373 ([#416](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/416)) ([4682c82](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/4682c82f58320775dd24ecf118e7ac1785cd1da3))
+* **frontend:** add logo to signin signup pages and sidebar bb-373 ([#433](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/433)) ([7a1cc3f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7a1cc3fb701d9528e4303df52e57403f4b5c7966))
+* **frontend:** New design for toast messages bb-372 ([#435](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/435)) ([d6afc9b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d6afc9bd38f3e0ae5a6eb36c9be315bbf2cc3734))
+
+
+### Bug Fixes
+
+* **frontend:** add font-weight property to active sidebar link bb-432 ([#434](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/434)) ([c29d85c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c29d85c7daf8ba4bb3ec6decc8c462284fe1d05a))
+* **frontend:** button color doesnt match design bb-396 ([#430](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/430)) ([d55719d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d55719db3cc99ad0f69504cdfe416f87659f9820))
+
+## [1.35.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.34.1...frontend-v1.35.0) (2024-09-14)
+
+
+### Features
+
+* Balance Wheel animation bb-204 ([#425](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/425)) ([9c04ae5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9c04ae55b66e7473205cf88033258ad0153bef02))
+* **frontend:** Text under the title "We’re Analyzing Your Journey!" must be dynamic bb-303 ([#359](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/359)) ([5b10823](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b108239c34d7de79bd231d30b3f3a3b68b17340))
+
+
+### Bug Fixes
+
+* **frontend:** add "?" to question bb-243 ([#421](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/421)) ([52ff4ec](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/52ff4ecef4489264594831f10d566756d397a747))
+
+## [1.34.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.34.0...frontend-v1.34.1) (2024-09-13)
+
+
+### Bug Fixes
+
+* **frontend:** add color to navlink bb-406 ([#411](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/411)) ([ffb2f05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ffb2f05e9948e32d6ae749488acff2d01338ecaa))
+
 ## [1.34.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.33.0...frontend-v1.34.0) (2024-09-12)
 
 

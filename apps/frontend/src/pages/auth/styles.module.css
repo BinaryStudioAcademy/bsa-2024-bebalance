@@ -66,17 +66,11 @@
 	font-size: 16px;
 }
 
-.title-container {
+.logo-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-}
-
-.title {
-	font-size: 70px;
-	color: var(--white);
-	text-transform: uppercase;
 }
 
 .ripple-effect__background1 {
@@ -90,11 +84,11 @@
 
 .ripple-effect__background2 {
 	position: absolute;
-	bottom: -35%;
+	bottom: -40%;
 	left: 42%;
 	width: 60%;
 	height: auto;
-	max-height: 500px;
+	max-height: 440px;
 	transform: translateY(-50%);
 }
 
@@ -117,7 +111,7 @@
 }
 
 @media (width <= 768px) {
-	.title-container {
+	.logo-container {
 		display: none;
 	}
 
