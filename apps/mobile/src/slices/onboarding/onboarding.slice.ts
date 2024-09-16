@@ -3,9 +3,12 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
-import { type OnboardingQuestionResponseDto } from "~/packages/onboarding/onboarding";
+import {
+	type OnboardingQuestionResponseDto,
+	type OnboardingUserAnswerDto,
+} from "~/packages/onboarding/onboarding";
 
-import { getAll } from "./actions";
+import { getAll, saveAnswers } from "./actions";
 
 type State = {
 	answersByQuestionIndex: number[];
@@ -13,6 +16,7 @@ type State = {
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: OnboardingQuestionResponseDto[];
+	userAnswers: OnboardingUserAnswerDto[];
 };
 
 type Properties = {
@@ -26,6 +30,7 @@ const initialState: State = {
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
+	userAnswers: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -41,6 +46,16 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(saveAnswers.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.userAnswers = action.payload;
+		});
+		builder.addCase(saveAnswers.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
 		});
 	},
 	initialState,

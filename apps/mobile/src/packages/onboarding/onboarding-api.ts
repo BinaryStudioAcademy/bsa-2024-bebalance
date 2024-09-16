@@ -3,8 +3,8 @@ import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { OnboardingApiPath } from "./libs/enums/enums";
 import {
-	type OnboardingGetAllResponseDto,
 	type OnboardingAnswerRequestBodyDto,
+	type OnboardingGetAllResponseDto,
 	type OnboardingUserAnswerDto,
 } from "./libs/types/types";
 

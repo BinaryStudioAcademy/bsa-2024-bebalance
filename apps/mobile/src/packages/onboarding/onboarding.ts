@@ -13,9 +13,9 @@ const onboardingApi = new OnboardingApi({
 export { onboardingApi };
 export {
 	type OnboardingAnswerDto,
+	type OnboardingAnswerRequestBodyDto,
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionResponseDto,
-	type OnboardingAnswerRequestBodyDto,
 	type OnboardingUserAnswerDto,
 } from "./libs/types/types";
 export { oneAnswerSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas";

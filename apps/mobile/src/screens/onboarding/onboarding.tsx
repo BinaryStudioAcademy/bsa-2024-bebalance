@@ -66,29 +66,30 @@ const Onboarding: React.FC = () => {
 			validationSchema: oneAnswerSelectedValidationSchema,
 		});
 
+	useEffect(() => {
+		reset({ answer: currentAnswer.toString() });
+	}, [currentAnswer, reset]);
+
 	const handleSaveAnswers = useCallback(
 		(payload: OnboardingAnswerRequestBodyDto) => {
-			//TODO: save data to backend
-			return payload;
+			void dispatch(onboardingActions.saveAnswers(payload));
 		},
 		[],
 	);
 
-	useEffect(() => {
-		reset({ answer: currentAnswer.toString() });
-	}, [currentQuestionIndex, currentAnswer, reset]);
-
 	const handleNextClick = useCallback(
 		(payload: OnboardingFormValues) => {
+			const answerId = Number(payload.answer);
+
 			dispatch(
 				onboardingActions.setAnswersByQuestionIndex({
-					answerId: Number(payload.answer),
+					answerId,
 					questionIndex: currentQuestionIndex,
 				}),
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: answersByQuestionIndex });
+				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
 
 				return;
 			}
@@ -100,13 +101,7 @@ const Onboarding: React.FC = () => {
 			void dispatch(onboardingActions.nextQuestion());
 		},
 
-		[
-			isLastQuestion,
-			dispatch,
-			handleSaveAnswers,
-			currentQuestionIndex,
-			answersByQuestionIndex,
-		],
+		[isLastQuestion, dispatch, currentQuestionIndex, answersByQuestionIndex],
 	);
 
 	const handlePreviousClick = useCallback(() => {
