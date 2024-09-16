@@ -90,6 +90,7 @@ export {
 	type TaskDto,
 	TasksApiPath,
 	TaskStatus,
+	type TaskUpdateRequestDto,
 } from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,

@@ -12,6 +12,7 @@ import { Sunday } from "./libs/enums/enums.js";
 import { TaskError } from "./libs/exceptions/exceptions.js";
 import {
 	type TaskDto,
+	type TaskUpdateRequestDto,
 	type UsersTaskCreateRequestDto,
 } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
@@ -100,12 +101,7 @@ class TaskService implements Service {
 
 	public async update(
 		id: number,
-		// TODO: Add as separate type
-		payload: {
-			description: string;
-			label: string;
-			status: "Completed" | "Current" | "Skipped";
-		},
+		payload: TaskUpdateRequestDto,
 	): Promise<TaskDto> {
 		const task = await this.taskRepository.update(id, payload);
 
