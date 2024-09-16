@@ -28,8 +28,7 @@ type Properties = {
 	gradientColors: keyof typeof colorToGradientColors;
 	id: number;
 	max: number;
-	min: number;
-	onValueChange?: (categoryId: number, value: number) => void;
+	onValueChange: (categoryId: number, value: number) => void;
 	value: number;
 };
 
@@ -37,7 +36,6 @@ const GradientSlider: React.FC<Properties> = ({
 	gradientColors,
 	id,
 	max,
-	min,
 	onValueChange,
 	value,
 }) => {
@@ -62,7 +60,7 @@ const GradientSlider: React.FC<Properties> = ({
 			setSliderValue(sliderValue);
 			setColor(generateSliderGradientColors(sliderValue, gradientColors, max));
 
-			onValueChange?.(id, sliderValue);
+			onValueChange(id, sliderValue);
 		},
 		[gradientColors, id, max, onValueChange],
 	);
@@ -125,10 +123,11 @@ const GradientSlider: React.FC<Properties> = ({
 				/>
 
 				<Slider
+					hitSlop={{ bottom: 20, left: 20, right: 20, top: 20 }}
 					maximumTrackTintColor="transparent"
 					maximumValue={max}
 					minimumTrackTintColor="transparent"
-					minimumValue={min}
+					minimumValue={SliderConfig.MIN_VALUE}
 					onValueChange={handleValueChange}
 					step={SliderConfig.STEP_VALUE}
 					style={styles.slider}
