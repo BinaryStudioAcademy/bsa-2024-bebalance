@@ -4,7 +4,6 @@ import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
 	container: {
-		display: "flex",
 		height: "100%",
 		justifyContent: "space-evenly",
 	},
