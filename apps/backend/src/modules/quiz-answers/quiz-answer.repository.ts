@@ -72,6 +72,18 @@ class QuizAnswerRepository implements Repository {
 			.delete();
 	}
 
+	public async deleteUserAnswersByAnswerIds(
+		userId: number,
+		answerIds: number[],
+	): Promise<number> {
+		return await this.quizAnswerModel
+			.query()
+			.from(DatabaseTableName.QUIZ_ANSWERS_TO_USERS)
+			.where({ userId })
+			.andWhere("answer_id", "in", answerIds)
+			.delete();
+	}
+
 	public async find(id: number): Promise<null | QuizAnswerEntity> {
 		const answer = await this.quizAnswerModel
 			.query()

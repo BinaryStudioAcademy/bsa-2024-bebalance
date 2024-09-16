@@ -23,6 +23,15 @@ class QuizQuestionRepository implements Repository {
 
 		return Number(questionModelCount[FIRST_ELEMENT_INDEX].count);
 	}
+	public async countByCategoryIds(categoryIds: number[]): Promise<number> {
+		const questionModelCount = await this.quizQuestionModel
+			.query()
+			.whereIn("categoryId", categoryIds)
+			.count()
+			.castTo<[{ count: string }]>();
+
+		return Number(questionModelCount[FIRST_ELEMENT_INDEX].count);
+	}
 
 	public async create(entity: QuizQuestionEntity): Promise<QuizQuestionEntity> {
 		const { categoryId, label } = entity.toNewObject();

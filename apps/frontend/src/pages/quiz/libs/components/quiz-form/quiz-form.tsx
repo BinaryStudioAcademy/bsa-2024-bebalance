@@ -19,6 +19,7 @@ import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import { QUIZ_FORM_DEFAULT_VALUES } from "../../constants/constants.js";
 import { type QuizFormValues } from "../../types/types.js";
+import { extractCategoryIdsFromQuestions } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -112,15 +113,32 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			if (isLast) {
 				const answerIds = getAnswerIds(questionFormAnswers);
 
-				void dispatch(quizActions.saveAnswers({ answerIds }));
+				if (isRetakingQuiz) {
+					const categoryIds = extractCategoryIdsFromQuestions(
+						questionsByCategories,
+					);
 
-				onNext();
+					void dispatch(quizActions.saveAnswers({ answerIds, categoryIds }));
+					onNext();
+					onNext();
+				} else {
+					void dispatch(quizActions.saveAnswers({ answerIds }));
+
+					onNext();
+				}
 			}
 
 			setIsDisabled(true);
 			void dispatch(quizActions.nextQuestion());
 		},
-		[dispatch, getAnswerIds, isLast, onNext],
+		[
+			dispatch,
+			getAnswerIds,
+			isLast,
+			isRetakingQuiz,
+			questionsByCategories,
+			onNext,
+		],
 	);
 
 	const handleFormSubmit = useCallback(

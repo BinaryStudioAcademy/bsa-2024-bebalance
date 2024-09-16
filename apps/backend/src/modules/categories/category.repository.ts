@@ -73,6 +73,17 @@ class CategoryRepository implements Repository {
 			.where({ userId })
 			.delete();
 	}
+	public async deleteUserScoresByCategoryIds(
+		userId: number,
+		categoryIds: number[],
+	): Promise<number> {
+		return await this.categoryModel
+			.query()
+			.from(DatabaseTableName.QUIZ_SCORES)
+			.where({ userId })
+			.andWhere("category_id", "in", categoryIds)
+			.delete();
+	}
 
 	public async find(id: number): Promise<CategoryEntity | null> {
 		const category = await this.categoryModel

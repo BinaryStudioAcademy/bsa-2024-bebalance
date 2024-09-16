@@ -44,6 +44,10 @@ class QuizQuestionService implements Service {
 		return await this.quizQuestionRepository.countAll();
 	}
 
+	public async countByCategoryIds(categoryIds: number[]): Promise<number> {
+		return await this.quizQuestionRepository.countByCategoryIds(categoryIds);
+	}
+
 	public async create(
 		payload: QuizQuestionRequestDto,
 	): Promise<QuizQuestionDto> {

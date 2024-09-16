@@ -191,11 +191,12 @@ class QuizController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { answerIds } = options.body;
+		const { answerIds, categoryIds } = options.body;
 
 		return {
 			payload: await this.quizAnswerService.createUserAnswers({
 				answerIds,
+				categoryIds,
 				userId: options.user.id,
 			}),
 			status: HTTPCode.CREATED,
