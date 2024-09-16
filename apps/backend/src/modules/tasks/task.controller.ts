@@ -9,6 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
+import { type TaskUpdateRequestDto } from "./libs/types/types.js";
 import { type TaskService } from "./task.service.js";
 
 /*** @swagger
@@ -65,6 +66,30 @@ class TaskController extends BaseController {
 			method: "GET",
 			path: TasksApiPath.CURRENT,
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.update(
+					options as APIHandlerOptions<{
+						body: TaskUpdateRequestDto;
+						params: { id: number };
+					}>,
+				),
+			method: "PATCH",
+			path: TasksApiPath.$ID,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.updateDueDate(
+					options as APIHandlerOptions<{
+						params: { id: number };
+						user: UserDto;
+					}>,
+				),
+			method: "PATCH",
+			path: TasksApiPath.DEADLINE_$ID,
+		});
 	}
 
 	/**
@@ -94,6 +119,33 @@ class TaskController extends BaseController {
 
 		return {
 			payload: await this.taskService.findCurrentByUserId(user.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async update(
+		options: APIHandlerOptions<{
+			body: TaskUpdateRequestDto;
+			params: { id: number };
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.taskService.update(options.params.id, options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async updateDueDate(
+		options: APIHandlerOptions<{
+			params: { id: number };
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.taskService.updateDueDate(
+				options.params.id,
+				options.user,
+			),
 			status: HTTPCode.OK,
 		};
 	}
