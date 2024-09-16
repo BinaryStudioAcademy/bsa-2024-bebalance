@@ -330,7 +330,7 @@ class AuthController extends BaseController {
 	 *                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ....
 	 *
 	 *      responses:
-	 *        201:
+	 *        200:
 	 *          description: Successful operation
 	 *          content:
 	 *            application/json:
