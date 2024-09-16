@@ -2,13 +2,14 @@ import React from "react";
 
 import {
 	Button,
+	LoaderWrapper,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
 import { PageSwitcher } from "~/libs/components/switch/switch";
-import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { BaseColor, DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { getScreenWidth } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
@@ -31,7 +32,7 @@ import { styles } from "./styles";
 const EditWheelResults: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
-	const scores = useAppSelector((state) => state.quiz.scores);
+	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const dispatch = useAppDispatch();
 
 	const handleStartPress = useCallback((): void => {
@@ -60,49 +61,51 @@ const EditWheelResults: React.FC = () => {
 			edges={["top", "left", "right"]}
 			style={{ backgroundColor: BaseColor.BG_WHITE }}
 		>
-			<View style={[styles.container]}>
-				<Text
-					preset="subheading"
-					style={[globalStyles.ph4, globalStyles.pv4]}
-					weight="bold"
-				>
-					Edit My Wheel Results
-				</Text>
-
-				<View style={[globalStyles.mh12, globalStyles.mb8]}>
-					<PageSwitcher
-						activeTab={activeTab}
-						onTabChange={handleTabChange}
-						tabs={["Edit manually", "Retake Quiz"]}
-					/>
-				</View>
-
-				{activeTab === "Edit manually" ? (
-					<ScrollView>
-						<ScoresEditForm data={scores} onSubmit={handleEditScores} />
-					</ScrollView>
-				) : (
-					<View
-						style={[
-							globalStyles.mv24,
-							globalStyles.pv16,
-							globalStyles.flex1,
-							globalStyles.justifyContentCenter,
-							styles.checkboxForm,
-							{ width: screenWidth },
-						]}
+			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
+				<View style={[styles.container]}>
+					<Text
+						preset="subheading"
+						style={[globalStyles.ph4, globalStyles.pv4]}
+						weight="bold"
 					>
-						<View style={[globalStyles.flex1, globalStyles.alignItemsCenter]}>
-							<Text weight="bold">Do you feel any changes in anything?</Text>
-							<Text weight="bold">Estimate the fields from 1 to 10</Text>
-						</View>
-						<Text>CheckBox Form</Text>
-						<View style={[globalStyles.mh32, globalStyles.pt24]}>
-							<Button label="RETAKE QUIZ" onPress={handleStartPress} />
-						</View>
+						Edit My Wheel Results
+					</Text>
+
+					<View style={[globalStyles.mh12, globalStyles.mb8]}>
+						<PageSwitcher
+							activeTab={activeTab}
+							onTabChange={handleTabChange}
+							tabs={["Edit manually", "Retake Quiz"]}
+						/>
 					</View>
-				)}
-			</View>
+
+					{activeTab === "Edit manually" ? (
+						<ScrollView>
+							<ScoresEditForm data={scores} onSubmit={handleEditScores} />
+						</ScrollView>
+					) : (
+						<View
+							style={[
+								globalStyles.mv24,
+								globalStyles.pv16,
+								globalStyles.flex1,
+								globalStyles.justifyContentCenter,
+								styles.checkboxForm,
+								{ width: screenWidth },
+							]}
+						>
+							<View style={[globalStyles.flex1, globalStyles.alignItemsCenter]}>
+								<Text weight="bold">Do you feel any changes in anything?</Text>
+								<Text weight="bold">Estimate the fields from 1 to 10</Text>
+							</View>
+							<Text>CheckBox Form</Text>
+							<View style={[globalStyles.mh32, globalStyles.pt24]}>
+								<Button label="RETAKE QUIZ" onPress={handleStartPress} />
+							</View>
+						</View>
+					)}
+				</View>
+			</LoaderWrapper>
 		</ScreenWrapper>
 	);
 };
