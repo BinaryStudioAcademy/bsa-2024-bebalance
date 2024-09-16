@@ -14,7 +14,7 @@ import {
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "../../constants/constants.js";
-import { getOnboardingDefaultValues } from "../../helpers/helper.js";
+import { getOnboardingDefaultValues } from "../../helpers/helpers.js";
 import { OnboardingAnswer } from "./libs/components/components.js";
 import { ButtonLabel } from "./libs/enums/enums.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";

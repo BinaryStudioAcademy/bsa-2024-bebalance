@@ -21,7 +21,7 @@ import {
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "../../constants/constants.js";
-import { getQuizDefaultValues } from "../../helpers/helper.js";
+import { getQuizDefaultValues } from "../../helpers/helpers.js";
 import { type QuizFormValues } from "../../types/types.js";
 import styles from "./styles.module.css";
 
