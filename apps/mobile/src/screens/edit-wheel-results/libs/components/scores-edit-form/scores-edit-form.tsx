@@ -1,3 +1,4 @@
+import { type BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import React from "react";
 
 import {
@@ -6,8 +7,10 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import { BottomTabScreenName } from "~/libs/enums/enums";
 import { useAppForm, useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import { type BottomTabNavigationParameterList } from "~/libs/types/types";
 import {
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresUpdateRequestDto,
@@ -16,9 +19,6 @@ import {
 import { SCORE_FORM_DEFAULT_VALUES } from "~/screens/edit-wheel-results/libs/constants/constants";
 
 import { styles } from "./styles";
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { BottomTabNavigationParameterList } from "~/libs/types/navigation/bottom-tab-navigation-parameter-list.type";
-import { BottomTabScreenName } from "~/libs/enums/enums";
 
 type Properties = {
 	data: QuizScoresGetAllItemResponseDto[];
@@ -39,7 +39,7 @@ const ScoresEditForm: React.FC<Properties> = ({ data, onSubmit }) => {
 			onSubmit(formData);
 			navigation.navigate(BottomTabScreenName.WHEEL_SCREEN);
 		})();
-	}, [handleSubmit, onSubmit]);
+	}, [handleSubmit, onSubmit, navigation]);
 
 	const sliderValues = data.map(({ categoryId, categoryName, score }) => {
 		return {
