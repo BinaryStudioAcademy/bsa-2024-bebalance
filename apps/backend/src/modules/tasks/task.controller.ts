@@ -81,7 +81,7 @@ class TaskController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.updateDueDate(
+				this.updateDeadline(
 					options as APIHandlerOptions<{
 						params: { id: number };
 						user: UserDto;
@@ -135,14 +135,14 @@ class TaskController extends BaseController {
 		};
 	}
 
-	private async updateDueDate(
+	private async updateDeadline(
 		options: APIHandlerOptions<{
 			params: { id: number };
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.taskService.updateDueDate(
+			payload: await this.taskService.updateDeadline(
 				options.params.id,
 				options.user,
 			),

@@ -108,7 +108,7 @@ class TaskService implements Service {
 		return task.toObject();
 	}
 
-	public async updateDueDate(id: number, user: UserDto): Promise<TaskDto> {
+	public async updateDeadline(id: number, user: UserDto): Promise<TaskDto> {
 		const { userTaskDays } = user;
 
 		if (!userTaskDays || userTaskDays.length === NO_USER_TASK_DAYS) {
