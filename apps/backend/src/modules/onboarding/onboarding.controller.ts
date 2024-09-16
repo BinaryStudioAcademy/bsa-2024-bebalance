@@ -113,15 +113,20 @@ class OnboardingController extends BaseController {
 	 *       200:
 	 *         description: Successful operation
 	 *         content:
-	 *             application/json:
-	 *               schema:
-	 *                 type: object
-	 *                 properties:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
 	 *                   items:
-	 *                     type: array
-	 *                     items:
-	 *                      $ref: "#/components/schemas/OnboardingQuestion"
-	 *
+	 *                     $ref: "#/components/schemas/OnboardingQuestion"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
@@ -135,6 +140,7 @@ class OnboardingController extends BaseController {
 	 * /onboarding/answer:
 	 *   post:
 	 *     tags: [onboarding]
+	 *     summary: Saves user answers
 	 *     description: Saves user answers for onboarding questions
 	 *     security:
 	 *       - bearerAuth: []
@@ -164,23 +170,22 @@ class OnboardingController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 addedAnswers:
+	 *                 answers:
 	 *                   type: array
 	 *                   items:
-	 *                     type: object
-	 *                     properties:
-	 *                       id:
-	 *                         type: number
-	 *                       label:
-	 *                         type: string
-	 *                       questionId:
-	 *                         type: number
-	 *                       createdAt:
-	 *                         type: string
-	 *                         format: date-time
-	 *                       updatedAt:
-	 *                         type: string
-	 *                         format: date-time
+	 *                     $ref: "#/components/schemas/OnboardingAnswer"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async saveOnboardingAnswers(
 		options: APIHandlerOptions<{
