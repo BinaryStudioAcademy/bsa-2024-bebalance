@@ -17,30 +17,23 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { QUIZ_FORM_DEFAULT_VALUES } from "../../constants/constants.js";
+import {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "../../constants/constants.js";
 import { type QuizFormValues } from "../../types/types.js";
+import { getDefaultValues } from "./helpers/helper.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	onNext: () => void;
 };
 
-type FormToSave = {
-	[key: string]: string;
-};
-
-const ONE_STEP_OFFSET = 1;
-const ZERO = 0;
-
 const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [isLast, setIsLast] = useState<boolean>(false);
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 	const [categoryDone, setCategoryDone] = useState<number[]>([]);
-
-	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
-		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
-	});
 
 	const { category, currentCategoryIndex, dataStatus, questions } =
 		useAppSelector(({ quiz }) => ({
@@ -50,12 +43,20 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			questions: quiz.questions,
 		}));
 
+	const defaultValues = getDefaultValues(questions);
+
+	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
+		defaultValues,
+	});
+
 	useEffect(() => {
 		void dispatch(quizActions.getAllQuestions());
 	}, [dispatch]);
 
 	useEffect(() => {
-		setIsLast(currentCategoryIndex === questions.length - ONE_STEP_OFFSET);
+		setIsLast(
+			currentCategoryIndex === questions.length - PREVIOUS_INDEX_OFFSET,
+		);
 	}, [currentCategoryIndex, questions]);
 
 	const handlePreviousStep = useCallback(() => {
@@ -92,21 +93,15 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		}
 	}, [category, categoryDone, currentCategoryIndex, getValues]);
 
-	const getAnswerIds = useCallback((formData: FormToSave) => {
+	const getAnswerIds = useCallback((formData: QuizFormValues) => {
 		return Object.values(formData).map(Number);
 	}, []);
 
 	const handleNextStep = useCallback(
 		(data: QuizFormValues) => {
-			const questionFormAnswers = Object.fromEntries(
-				Object.entries(data).filter(([key]) => key !== "answers"),
-			);
-
 			if (isLast) {
-				const answerIds = getAnswerIds(questionFormAnswers);
-
+				const answerIds = getAnswerIds(data);
 				void dispatch(quizActions.saveAnswers({ answerIds }));
-
 				onNext();
 			}
 
@@ -164,7 +159,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
-					{currentCategoryIndex !== ZERO && (
+					{currentCategoryIndex !== ZERO_INDEX && (
 						<div className={styles["button-container"]}>
 							<Button
 								label="BACK"
