@@ -7,6 +7,7 @@ type RootNavigationParameterList = {
 	[RootScreenName.ONBOARDING]: undefined;
 	[RootScreenName.QUIZ]: undefined;
 	[RootScreenName.QUIZ_ENTRY]: undefined;
+	[RootScreenName.RESET_PASSWORD]: { token: string } | undefined;
 	[RootScreenName.SIGN_IN]: undefined;
 	[RootScreenName.SIGN_UP]: undefined;
 	[RootScreenName.WELCOME]: undefined;

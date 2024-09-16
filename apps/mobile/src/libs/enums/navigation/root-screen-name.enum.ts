@@ -5,6 +5,7 @@ const RootScreenName = {
 	ONBOARDING: "Onboarding",
 	QUIZ: "Quiz",
 	QUIZ_ENTRY: "Quiz Entry",
+	RESET_PASSWORD: "Reset Password",
 	SIGN_IN: "Sign In",
 	SIGN_UP: "Sign Up",
 	WELCOME: "Welcome",
