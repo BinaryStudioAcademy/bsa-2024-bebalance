@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.48.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.47.0...v1.48.0) (2024-09-16)
+
+
+### Features
+
+* **backend/shared:** add action buttons to tasks bb-362 ([#451](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/451)) ([15c3ef0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15c3ef0b633a96a3c7cb8ed07cb4d423b4e38515))
+* **frontend/backend:** Onboarding/quiz flow bb-242 ([#351](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/351)) ([060f881](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/060f881e68e1427e72099d9aa0a3038fe88f3984))
+* **mobile:** last step quiz questions bb-330 ([#438](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/438)) ([924b8a4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/924b8a47f9d2433a2326fe1e5c38ec0bf397e43a))
+
+
+### Bug Fixes
+
+* **backend:** swagger docs and uploading file key bb-173 ([#450](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/450)) ([54ba144](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/54ba1449f417bd5e0f7841fb947111f1f970f06e))
+
 ## [1.47.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.46.0...v1.47.0) (2024-09-16)
 
 
