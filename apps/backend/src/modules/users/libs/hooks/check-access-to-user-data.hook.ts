@@ -1,5 +1,5 @@
 import { ErrorMessage } from "~/libs/enums/enums.js";
-import { type APIPreHandler } from "~/libs/modules/controller/libs/types/types.js";
+import { type APIPreHandler } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { UserError } from "~/modules/users/libs/exceptions/exceptions.js";
 import {
