@@ -13,7 +13,7 @@ import {
 } from "~/libs/types/types";
 
 import { TASK_DAYS_OPTIONS } from "../../constants/constants";
-import { type NotificationQuestionsFormValues } from "./../../types/types";
+import { type NotificationQuestionsFormValues } from "../../types/types";
 import { styles } from "./styles";
 
 type Properties<T extends FieldValues> = {

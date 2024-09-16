@@ -122,7 +122,6 @@ const NotificationQuestions: React.FC = () => {
 					>
 						<View>
 							<Text
-								preset="subheading"
 								size="xl"
 								style={[globalStyles.mb48, globalStyles.mt12, styles.title]}
 								weight="bold"
