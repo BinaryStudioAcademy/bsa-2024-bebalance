@@ -6,6 +6,7 @@ const pathToWorkspaceNodeModules = path.resolve(
 	__dirname,
 	"../../node_modules",
 );
+const { assetExts, sourceExts } = getDefaultConfig(__dirname).resolver;
 
 /**
  * Metro configuration
@@ -14,6 +15,13 @@ const pathToWorkspaceNodeModules = path.resolve(
  * @type {import('metro-config').MetroConfig}
  */
 const config = {
+	resolver: {
+		assetExts: assetExts.filter((extension) => extension !== "svg"),
+		sourceExts: [...sourceExts, "svg"],
+	},
+	transformer: {
+		babelTransformerPath: require.resolve("react-native-svg-transformer"),
+	},
 	watchFolders: [pathToShared, pathToWorkspaceNodeModules],
 };
 
