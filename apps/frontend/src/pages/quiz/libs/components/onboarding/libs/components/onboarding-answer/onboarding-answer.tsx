@@ -24,6 +24,7 @@ const OnboardingAnswer = <T extends FieldValues>({
 			<Input
 				control={control}
 				hasVisuallyHiddenLabel
+				isFullWidth
 				label="answer"
 				name={name as FieldPath<T>}
 				options={options}

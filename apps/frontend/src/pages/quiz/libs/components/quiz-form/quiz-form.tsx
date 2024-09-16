@@ -15,12 +15,13 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import {
-	categoryAnswerSelectedValidationSchema,
-	actions as quizActions,
-} from "~/modules/quiz/quiz.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { QUIZ_FORM_DEFAULT_VALUES } from "../../constants/constants.js";
+import {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "../../constants/constants.js";
+import { getQuizDefaultValues } from "../../helpers/helpers.js";
 import { type QuizFormValues } from "../../types/types.js";
 import styles from "./styles.module.css";
 
@@ -28,16 +29,11 @@ type Properties = {
 	onNext: () => void;
 };
 
-const ONE_STEP_OFFSET = 1;
-
 const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [isLast, setIsLast] = useState<boolean>(false);
-
-	const { control, handleSubmit, reset } = useAppForm<QuizFormValues>({
-		defaultValues: QUIZ_FORM_DEFAULT_VALUES,
-		validationSchema: categoryAnswerSelectedValidationSchema,
-	});
+	const [isDisabled, setIsDisabled] = useState<boolean>(true);
+	const [categoryDone, setCategoryDone] = useState<number[]>([]);
 
 	const { category, currentCategoryIndex, dataStatus, questions } =
 		useAppSelector(({ quiz }) => ({
@@ -47,26 +43,71 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			questions: quiz.questions,
 		}));
 
+	const defaultValues = getQuizDefaultValues(questions);
+
+	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
+		defaultValues,
+	});
+
 	useEffect(() => {
 		void dispatch(quizActions.getAllQuestions());
 	}, [dispatch]);
 
 	useEffect(() => {
-		setIsLast(currentCategoryIndex === questions.length - ONE_STEP_OFFSET);
+		setIsLast(
+			currentCategoryIndex === questions.length - PREVIOUS_INDEX_OFFSET,
+		);
 	}, [currentCategoryIndex, questions]);
 
 	const handlePreviousStep = useCallback(() => {
 		void dispatch(quizActions.previousQuestion());
 	}, [dispatch]);
 
-	const handleNextStep = useCallback(() => {
-		if (isLast) {
+	useEffect(() => {
+		if (categoryDone.includes(currentCategoryIndex)) {
+			setIsDisabled(false);
+		}
+	}, [categoryDone, currentCategoryIndex]);
+
+	const handleOnChange = useCallback(() => {
+		if (!category) {
 			return;
 		}
 
-		void dispatch(quizActions.nextQuestion());
-		reset();
-	}, [dispatch, isLast, reset]);
+		const questionLabels = category.map(
+			(categoryItem) => `question${categoryItem.id.toString()}`,
+		);
+		const formValues = getValues();
+		const hasUnansweredQuestions = questionLabels.some(
+			(question) => !formValues[question],
+		);
+
+		if (!hasUnansweredQuestions) {
+			if (!categoryDone.includes(currentCategoryIndex)) {
+				setCategoryDone([...categoryDone, currentCategoryIndex]);
+			}
+
+			setIsDisabled(false);
+		}
+	}, [category, categoryDone, currentCategoryIndex, getValues]);
+
+	const getAnswerIds = useCallback((formData: QuizFormValues) => {
+		return Object.values(formData).map(Number);
+	}, []);
+
+	const handleNextStep = useCallback(
+		(data: QuizFormValues) => {
+			if (isLast) {
+				const answerIds = getAnswerIds(data);
+				void dispatch(quizActions.saveAnswers({ answerIds }));
+				onNext();
+			}
+
+			setIsDisabled(true);
+			void dispatch(quizActions.nextQuestion());
+		},
+		[dispatch, getAnswerIds, isLast, onNext],
+	);
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -79,7 +120,11 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	return (
 		<div className={styles["quiz-container"]}>
-			<form className={styles["questions-form"]} onSubmit={handleFormSubmit}>
+			<form
+				className={styles["questions-form"]}
+				onChange={handleOnChange}
+				onSubmit={handleFormSubmit}
+			>
 				<div className={styles["progress-bar-container"]}>
 					<ProgressBar
 						currentStep={currentCategoryIndex}
@@ -94,19 +139,17 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 						</div>
 					) : (
 						category?.map((question) => {
-							const answerOptions = question.answers.map(
-								({ label, value }) => ({
-									label,
-									value: value.toString(),
-								}),
-							);
+							const answerOptions = question.answers.map(({ id, label }) => ({
+								label,
+								value: id.toString(),
+							}));
 
 							return (
 								<QuizQuestion
 									control={control}
 									key={question.id}
 									label={question.label}
-									name={question.id.toString()}
+									name={`question${question.id.toString()}`}
 									options={answerOptions}
 								/>
 							);
@@ -114,19 +157,22 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					)}
 				</div>
 				<div className={styles["form-footer"]}>
+					{currentCategoryIndex !== ZERO_INDEX && (
+						<div className={styles["button-container"]}>
+							<Button
+								label="BACK"
+								onClick={handlePreviousStep}
+								variant="secondary"
+							/>
+						</div>
+					)}
 					<div className={styles["button-container"]}>
 						<Button
-							label="BACK"
-							onClick={handlePreviousStep}
-							variant="secondary"
+							isDisabled={isDisabled}
+							label={isLast ? "ANALYZE" : "NEXT"}
+							type="submit"
+							variant="primary"
 						/>
-					</div>
-					<div className={styles["button-container"]}>
-						{isLast ? (
-							<Button label="CONTINUE" onClick={onNext} type="submit" />
-						) : (
-							<Button label="NEXT" onClick={handleNextStep} type="submit" />
-						)}
 					</div>
 				</div>
 			</form>
