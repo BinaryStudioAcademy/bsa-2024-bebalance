@@ -39,12 +39,10 @@ type Constructor = {
  *       type: object
  *       properties:
  *         id:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         categoryId:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         label:
  *           type: string
@@ -62,12 +60,10 @@ type Constructor = {
  *       type: object
  *       properties:
  *         id:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         questionId:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         label:
  *           type: string
@@ -87,16 +83,13 @@ type Constructor = {
  *       type: object
  *       properties:
  *         id:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         answerId:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         userId:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         createdAt:
  *           type: string
@@ -115,21 +108,19 @@ type Constructor = {
  *                 properties:
  *                   categoryName:
  *                     type: string
+ *                     example: "Physical"
  *               - $ref: "#/components/schemas/QuizScoreDto"
  *     QuizScoreDto:
  *       type: object
  *       properties:
  *         id:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         categoryId:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         userId:
- *           type: number
- *           format: int64
+ *           type: integer
  *           example: 1
  *         score:
  *           type: number
@@ -241,11 +232,11 @@ class QuizController extends BaseController {
 	 *                 scores:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserScore"
+	 *                     $ref: "#/components/schemas/QuizScoreDto"
 	 *                 userAnswers:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserAnswer"
+	 *                     $ref: "#/components/schemas/QuizUserAnswerDto"
 	 *       401:
 	 *         description: Unauthorized
 	 *         content:

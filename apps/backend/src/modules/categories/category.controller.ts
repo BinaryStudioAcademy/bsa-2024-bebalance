@@ -16,7 +16,7 @@ import { CategoriesApiPath } from "./libs/enums/enums.js";
  *     description: Endpoints related to categories
  * components:
  *   schemas:
- *     Category:
+ *     CategoryDto:
  *       type: object
  *       properties:
  *         id:
@@ -66,7 +66,7 @@ class CategoryController extends BaseController {
 	 *                 items:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/Category"
+	 *                     $ref: "#/components/schemas/CategoryDto"
 	 *       401:
 	 *         description: Unauthorized
 	 *         content:

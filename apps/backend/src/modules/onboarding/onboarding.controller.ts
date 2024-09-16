@@ -20,21 +20,25 @@ import { type OnboardingService } from "./onboarding.service.js";
  *     description: Endpoints related to onboarding questions
  * components:
  *   schemas:
- *     OnboardingAnswer:
+ *     OnboardingAnswerDto:
  *       type: object
  *       properties:
  *         id:
  *           type: integer
  *           description: The unique identifier for the answer.
  *           example: 1
- *         label:
- *           type: string
- *           description: The text of the answer.
- *           example: "Yes"
  *         questionId:
  *           type: integer
  *           description: The ID of the question this answer belongs to.
  *           example: 1
+ *         userId:
+ *           type: integer
+ *           description: The ID of the user who answered this question.
+ *           example: 1
+ *         label:
+ *           type: string
+ *           description: The text of the answer.
+ *           example: "Yes"
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -45,7 +49,7 @@ import { type OnboardingService } from "./onboarding.service.js";
  *           format: date-time
  *           description: The last update date of the answer.
  *           example: "2020-01-01T00:00:00.000Z"
- *     OnboardingQuestion:
+ *     OnboardingQuestionDto:
  *       type: object
  *       properties:
  *         id:
@@ -59,7 +63,7 @@ import { type OnboardingService } from "./onboarding.service.js";
  *         answers:
  *           type: array
  *           items:
- *             $ref: '#/components/schemas/OnboardingAnswer'
+ *             $ref: '#/components/schemas/OnboardingAnswerDto'
  *           description: The list of possible answers for this question.
  *         createdAt:
  *           type: string
@@ -120,7 +124,7 @@ class OnboardingController extends BaseController {
 	 *                 items:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/OnboardingQuestion"
+	 *                     $ref: "#/components/schemas/OnboardingQuestionDto"
 	 *       401:
 	 *         description: Unauthorized
 	 *         content:
@@ -173,7 +177,7 @@ class OnboardingController extends BaseController {
 	 *                 answers:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/OnboardingAnswer"
+	 *                     $ref: "#/components/schemas/OnboardingAnswerDto"
 	 *       401:
 	 *         description: Unauthorized
 	 *         content:
