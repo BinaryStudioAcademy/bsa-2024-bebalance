@@ -1,7 +1,7 @@
 type SliderData = {
-	categoryId: number;
-	categoryName: string;
-	score: number;
+	id: number;
+	label: string;
+	value: number;
 };
 
 export { type SliderData };
