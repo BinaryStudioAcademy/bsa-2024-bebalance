@@ -77,9 +77,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		const questionLabels = category.map(
 			(categoryItem) => `question${categoryItem.id.toString()}`,
 		);
-
 		const formValues = getValues();
-
 		const hasUnansweredQuestions = questionLabels.some(
 			(question) => formValues[question] === undefined,
 		);
