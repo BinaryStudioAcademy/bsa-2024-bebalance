@@ -127,7 +127,13 @@ const { actions, name, reducer } = createSlice({
 	name: "quiz",
 	reducers: {
 		nextQuestion(state) {
-			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
+			if (
+				(state.questionsByCategories as QuizQuestionDto[][]).length >
+				state.currentCategoryIndex
+			) {
+				state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
+			}
+
 			state.currentCategoryQuestions =
 				state.questionsByCategories[state.currentCategoryIndex] || null;
 		},
