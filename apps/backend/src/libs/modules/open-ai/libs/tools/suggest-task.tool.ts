@@ -1,4 +1,4 @@
-const GenerateTaskByCategoryTool = {
+const SuggestTaskTool = {
 	function: {
 		description:
 			"Generates specific and actionable tasks for each user-selected category based on their onboarding responses.",
@@ -105,4 +105,4 @@ const GenerateTaskByCategoryTool = {
 	type: "function",
 } as const;
 
-export { GenerateTaskByCategoryTool };
+export { SuggestTaskTool };

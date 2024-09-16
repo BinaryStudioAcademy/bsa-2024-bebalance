@@ -1,4 +1,4 @@
-const AnalyzeBalanceScoresTool = {
+const AnalyzeBalanceTool = {
 	function: {
 		description:
 			"Analyzes user's life balance scores and identifies the three lowest categories with suggestions for improvement.",
@@ -78,7 +78,7 @@ const AnalyzeBalanceScoresTool = {
 										type: "string",
 									},
 								},
-								required: ["categoryId", "categoryName", "score"],
+								required: ["categoryId", "categoryName"],
 								type: "object",
 							},
 							type: "array",
@@ -101,4 +101,4 @@ const AnalyzeBalanceScoresTool = {
 	type: "function",
 } as const;
 
-export { AnalyzeBalanceScoresTool };
+export { AnalyzeBalanceTool };

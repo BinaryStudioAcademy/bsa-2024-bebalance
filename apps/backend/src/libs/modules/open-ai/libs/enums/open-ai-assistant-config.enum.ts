@@ -1,15 +1,16 @@
 import {
-	AnalyzeBalanceScoresTool,
+	AnalyzeBalanceTool,
 	ChangeTaskTool,
-	GenerateTaskByCategoryTool,
-} from "../ai-assistant-tools/ai-assistant-tools.js";
+	SuggestTaskTool,
+} from "~/libs/modules/open-ai/libs/tools/tools.js";
+
 import { OpenAiPromptTemplates } from "./open-ai-prompt-messages.enum.js";
 
 const OpenAiAssistantConfig = {
 	INSTRUCTION: OpenAiPromptTemplates.ASSISTANT_INSTRUCTION,
 	NAME: "Wheel of Balance Assistant",
 	TEMPERATURE: 1,
-	TOOLS: [AnalyzeBalanceScoresTool, GenerateTaskByCategoryTool, ChangeTaskTool],
+	TOOLS: [AnalyzeBalanceTool, SuggestTaskTool, ChangeTaskTool],
 	TOP_P: 1,
 } as const;
 
