@@ -77,30 +77,38 @@ class OpenAi {
 		run: OpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
 	): Promise<void> {
-		if (run.required_action) {
-			await Promise.all(
-				run.required_action.submit_tool_outputs.tool_calls.map(
-					async (toolCall) => {
-						const { function: toolFunction } = toolCall;
-
-						if (toolFunction.name === functionName) {
-							await this.openAi.beta.threads.runs.submitToolOutputsAndPoll(
-								run.thread_id,
-								run.id,
-								{
-									tool_outputs: [
-										{
-											output: toolCall.function.arguments,
-											tool_call_id: toolCall.id,
-										},
-									],
-								},
-							);
-						}
-					},
-				),
-			);
+		if (!run.required_action) {
+			return;
 		}
+
+		const { tool_calls } = run.required_action.submit_tool_outputs;
+
+		await Promise.all(
+			tool_calls.map(
+				async ({
+					function: toolFunction,
+					function: { arguments: arguments_ },
+					id,
+				}) => {
+					if (toolFunction.name !== functionName) {
+						return;
+					}
+
+					await this.openAi.beta.threads.runs.submitToolOutputsAndPoll(
+						run.thread_id,
+						run.id,
+						{
+							tool_outputs: [
+								{
+									output: arguments_,
+									tool_call_id: id,
+								},
+							],
+						},
+					);
+				},
+			),
+		);
 	}
 
 	private async handleRunStatus(
