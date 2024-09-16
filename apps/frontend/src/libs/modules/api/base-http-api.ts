@@ -110,6 +110,10 @@ class BaseHTTPApi implements HTTPApi {
 
 		const headers = await this.getHeaders(contentType, hasAuth);
 
+		if (payload instanceof FormData) {
+			headers.delete(HTTPHeader.CONTENT_TYPE);
+		}
+
 		const response = await this.http.load(path, {
 			headers,
 			method,
