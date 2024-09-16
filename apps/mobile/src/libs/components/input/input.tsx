@@ -1,10 +1,4 @@
 import React from "react";
-import {
-	type Control,
-	type FieldErrors,
-	type FieldPath,
-	type FieldValues,
-} from "react-hook-form";
 
 import {
 	LinearGradient,
@@ -15,6 +9,12 @@ import {
 import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
 import { useCallback, useFormController, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type Control,
+	type FieldErrors,
+	type FieldPath,
+	type FieldValues,
+} from "~/libs/types/types";
 
 import { styles } from "./styles";
 

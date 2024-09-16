@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	width: 123px;
+	user-select: none;
+}
+
+.countdown {
+	display: flex;
+	gap: 3px;
+	justify-content: space-between;
+	line-height: 1;
+}
+
+.expired {
+	color: var(--error);
+}
+
+.countdown-time {
+	font-size: 18px;
+	font-weight: bold;
+}
