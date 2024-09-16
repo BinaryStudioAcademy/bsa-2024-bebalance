@@ -6,9 +6,10 @@ import { type ValueOf } from "~/libs/types/types";
 import {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
+	type QuizUserAnswerDto,
 } from "~/packages/quiz/quiz";
 
-import { editScores, getAllQuestions, getScores } from "./actions";
+import { editScores, getAllQuestions, getScores, saveAnswers } from "./actions";
 
 type Properties = {
 	answerId: number;
@@ -22,6 +23,7 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: QuizQuestionDto[];
 	scores: QuizScoresGetAllItemResponseDto[];
+	userAnswers: QuizUserAnswerDto[];
 };
 
 const initialState: State = {
@@ -31,6 +33,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	questions: [],
 	scores: [],
+	userAnswers: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -67,10 +70,10 @@ const { actions, name, reducer } = createSlice({
 
 				return updatedScore
 					? {
-							...stateScore,
-							score: updatedScore.score,
-							updatedAt: updatedScore.updatedAt,
-						}
+						...stateScore,
+						score: updatedScore.score,
+						updatedAt: updatedScore.updatedAt,
+					}
 					: stateScore;
 			});
 
@@ -80,6 +83,16 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(editScores.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(saveAnswers.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.userAnswers = action.payload;
+		});
+		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
 	},

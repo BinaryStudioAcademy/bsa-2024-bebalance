@@ -2,13 +2,25 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizUserAnswerDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
 } from "~/packages/quiz/quiz";
 
 import { name as sliceName } from "./quiz.slice";
+
+const getScores = createAsyncThunk<
+	QuizScoresGetAllResponseDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/get-scores`, async (_, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.getScores();
+});
 
 const editScores = createAsyncThunk<
 	QuizScoresResponseDto,
@@ -30,14 +42,14 @@ const getAllQuestions = createAsyncThunk<
 	return await quizApi.getAllQuestions();
 });
 
-const getScores = createAsyncThunk<
-	QuizScoresGetAllResponseDto,
-	undefined,
+const saveAnswers = createAsyncThunk<
+	QuizUserAnswerDto[],
+	QuizAnswersRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/get-scores`, async (_, { extra }) => {
+>(`${sliceName}/save-answers`, async (createAnswerPayload, { extra }) => {
 	const { quizApi } = extra;
 
-	return await quizApi.getScores();
+	return await quizApi.saveAnswers(createAnswerPayload);
 });
 
-export { editScores, getAllQuestions, getScores };
+export { getAllQuestions, getScores, saveAnswers, editScores };
