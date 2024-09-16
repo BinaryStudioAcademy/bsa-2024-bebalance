@@ -1,6 +1,6 @@
 import { type QuizQuestionDto } from "~/libs/types/types.js";
 
-const getDefaultValues = (
+const getQuizDefaultValues = (
 	categorizedQuestions: QuizQuestionDto[][],
 ): Record<string, null | string> => {
 	const defaultValues: Record<string, null | string> = {};
@@ -14,4 +14,4 @@ const getDefaultValues = (
 	return defaultValues;
 };
 
-export { getDefaultValues };
+export { getQuizDefaultValues };

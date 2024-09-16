@@ -21,8 +21,8 @@ import {
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "../../constants/constants.js";
+import { getQuizDefaultValues } from "../../helpers/helper.js";
 import { type QuizFormValues } from "../../types/types.js";
-import { getDefaultValues } from "./helpers/helper.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -43,7 +43,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			questions: quiz.questions,
 		}));
 
-	const defaultValues = getDefaultValues(questions);
+	const defaultValues = getQuizDefaultValues(questions);
 
 	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
 		defaultValues,
@@ -79,7 +79,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		);
 		const formValues = getValues();
 		const hasUnansweredQuestions = questionLabels.some(
-			(question) => formValues[question] === undefined,
+			(question) => !formValues[question],
 		);
 
 		if (!hasUnansweredQuestions) {
