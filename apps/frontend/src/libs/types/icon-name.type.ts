@@ -4,13 +4,17 @@ type IconName =
 	| "clockInactive"
 	| "close"
 	| "crossedEye"
+	| "error"
 	| "eye"
+	| "info"
 	| "menu"
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
+	| "success"
 	| "tasksActive"
 	| "tasksInactive"
+	| "warning"
 	| "wheelActive"
 	| "wheelInactive";
 

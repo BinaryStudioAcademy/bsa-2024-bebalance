@@ -10,8 +10,12 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as onboardingActions } from "~/modules/onboarding/onboarding.js";
 
+import {
+	PREVIOUS_INDEX_OFFSET,
+	ZERO_INDEX,
+} from "../../constants/constants.js";
+import { getOnboardingDefaultValues } from "../../helpers/helpers.js";
 import { OnboardingAnswer } from "./libs/components/components.js";
-import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants.js";
 import { ButtonLabel } from "./libs/enums/enums.js";
 import { type OnboardingFormValues } from "./libs/types/types.js";
 import styles from "./styles.module.css";
@@ -19,13 +23,6 @@ import styles from "./styles.module.css";
 type Properties = {
 	onNext: () => void;
 };
-
-type FormToSave = {
-	[key: string]: string[];
-};
-
-const ZERO = 0;
-const ONE = 1;
 
 const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
@@ -48,7 +45,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	useEffect(() => {
 		if (
 			dataStatus === DataStatus.FULFILLED &&
-			currentQuestionIndex === questions.length - ONE &&
+			currentQuestionIndex === questions.length - PREVIOUS_INDEX_OFFSET &&
 			completedQuestions.includes(currentQuestionIndex)
 		) {
 			setIsLastQuestion(true);
@@ -57,8 +54,10 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		}
 	}, [completedQuestions, currentQuestionIndex, dataStatus, questions]);
 
+	const defaultValues = getOnboardingDefaultValues(questions);
+
 	const { control, handleSubmit } = useAppForm<OnboardingFormValues>({
-		defaultValues: ONBOARDING_FORM_DEFAULT_VALUES,
+		defaultValues,
 	});
 
 	useEffect(() => {
@@ -72,18 +71,14 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		setIsDisabled(false);
 	}, [completedQuestions, currentQuestionIndex]);
 
-	const getAnswerIds = useCallback((formData: FormToSave) => {
+	const getAnswerIds = useCallback((formData: OnboardingFormValues) => {
 		return Object.values(formData).map(Number);
 	}, []);
 
 	const handleNextStep = useCallback(
 		(data: OnboardingFormValues) => {
-			const questionAnswers = Object.fromEntries(
-				Object.entries(data).filter(([key]) => key !== "answers"),
-			);
-
 			if (isLastQuestion) {
-				const answerIds = getAnswerIds(questionAnswers);
+				const answerIds = getAnswerIds(data);
 				void dispatch(onboardingActions.saveAnswers({ answerIds }));
 				onNext();
 			}
@@ -138,7 +133,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 								);
 							})}
 							<div className={styles["button-container"]}>
-								{currentQuestionIndex !== ZERO && (
+								{currentQuestionIndex !== ZERO_INDEX && (
 									<div className={styles["button-wrapper"]}>
 										<Button
 											label={ButtonLabel.BACK}

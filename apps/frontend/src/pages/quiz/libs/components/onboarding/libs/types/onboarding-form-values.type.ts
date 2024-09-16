@@ -1,5 +1,5 @@
 type OnboardingFormValues = {
-	[key: string]: string[];
+	[key: string]: null | string;
 };
 
 export { type OnboardingFormValues };

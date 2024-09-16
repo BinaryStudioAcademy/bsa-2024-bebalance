@@ -96,7 +96,7 @@ const Quiz: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WHEEL_LOADING);
+			navigation.navigate(RootScreenName.NOTIFICATION_QUESTIONS);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
@@ -147,7 +147,7 @@ const Quiz: React.FC = () => {
 									<View style={globalStyles.gap16}>
 										<Button
 											isDisabled={!isValid}
-											label={isLastQuestion ? "ANALYZE" : "NEXT"}
+											label={isLastQuestion ? "CONTINUE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
 										{currentQuestionIndex !== NumericalValue.ZERO && (

@@ -217,7 +217,8 @@ class QuizController extends BaseController {
 	 * /quiz/score:
 	 *   get:
 	 *     description: Returns all user scores
-	 *
+	 *     security:
+	 *       - bearerAuth: []
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -226,7 +227,7 @@ class QuizController extends BaseController {
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 payload:
+	 *                 items:
 	 *                   type: array
 	 *                   items:
 	 *                     type: object
@@ -262,6 +263,8 @@ class QuizController extends BaseController {
 	 * /quiz/score:
 	 *   patch:
 	 *     description: Updates multiple or single user scores
+	 *     security:
+	 *       - bearerAuth: []
 	 *     requestBody:
 	 *       required: true
 	 *       content:
@@ -278,7 +281,6 @@ class QuizController extends BaseController {
 	 *                       type: number
 	 *                     score:
 	 *                       type: number
-	 *
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation

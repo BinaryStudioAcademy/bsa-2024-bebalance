@@ -1,12 +1,7 @@
 import { Loader, Navigate } from "~/libs/components/components.js";
 import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
-import {
-	useAppDispatch,
-	useAppSelector,
-	useLocation,
-} from "~/libs/hooks/hooks.js";
+import { useAppSelector, useLocation } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { actions as appActions } from "~/modules/app/app.js";
 
 import { AuthWrapper } from "../auth-wrapper/auth-wrapper.js";
 import { checkHasAuthWrapper } from "./libs/helpers/helpers.js";
@@ -32,7 +27,6 @@ const ProtectedRoute: React.FC<Properties> = ({
 		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
 
 	const { pathname } = useLocation();
-	const dispatch = useAppDispatch();
 
 	if (isLoading) {
 		return <Loader />;
@@ -43,7 +37,7 @@ const ProtectedRoute: React.FC<Properties> = ({
 	}
 
 	if (!hasAnsweredQuizQuestions && pathname !== AppRoute.QUIZ) {
-		dispatch(appActions.changeLink(AppRoute.QUIZ));
+		return <Navigate replace to={AppRoute.QUIZ} />;
 	}
 
 	if (checkHasAuthWrapper(pathname as ValueOf<typeof AppRoute>)) {

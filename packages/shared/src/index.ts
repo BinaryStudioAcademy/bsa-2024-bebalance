@@ -93,6 +93,9 @@ export {
 	type TaskDto,
 	TasksApiPath,
 	TaskStatus,
+	type TaskUpdateParametersDto,
+	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
 } from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
