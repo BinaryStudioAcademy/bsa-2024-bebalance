@@ -1,6 +1,6 @@
 import { type TextStyle } from "~/libs/types/types";
 
-const sizeToStyleMap = {
+const sizeToTextStyle = {
 	lg: { fontSize: 20, lineHeight: 25 } satisfies TextStyle,
 	md: { fontSize: 16, lineHeight: 22 } satisfies TextStyle,
 	sm: { fontSize: 14, lineHeight: 19 } satisfies TextStyle,
@@ -10,4 +10,4 @@ const sizeToStyleMap = {
 	xxs: { fontSize: 10, lineHeight: 14 } satisfies TextStyle,
 };
 
-export { sizeToStyleMap };
+export { sizeToTextStyle };
