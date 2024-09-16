@@ -78,6 +78,7 @@ export {
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionRequestDto,
 	type OnboardingQuestionResponseDto,
+	type OnboardingUserAnswerDto,
 	OnboardingValidationMessage,
 	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
@@ -105,6 +106,9 @@ export {
 	type TaskGetAllResponseDto,
 	TasksApiPath,
 	TaskStatus,
+	type TaskUpdateParametersDto,
+	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
 } from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,

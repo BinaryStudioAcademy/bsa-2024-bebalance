@@ -1,6 +1,7 @@
 import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
+import { STATUS_FIELD } from "./libs/constants/constants.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 import { TaskEntity } from "./task.entity.js";
 import { TaskModel } from "./task.model.js";
@@ -132,6 +133,30 @@ class TaskRepository implements Repository {
 			});
 		});
 	}
+
+	public async findPastByUserId(userId: number): Promise<TaskEntity[]> {
+		const tasks = await this.taskModel
+			.query()
+			.withGraphFetched(`[${RelationName.CATEGORY}]`)
+			.whereIn(STATUS_FIELD, [TaskStatus.COMPLETED, TaskStatus.SKIPPED])
+			.andWhere({ userId });
+
+		return tasks.map((task) => {
+			return TaskEntity.initialize({
+				category: task.category.name,
+				categoryId: task.categoryId,
+				createdAt: task.createdAt,
+				description: task.description,
+				dueDate: task.dueDate,
+				id: task.id,
+				label: task.label,
+				status: task.status,
+				updatedAt: task.updatedAt,
+				userId: task.userId,
+			});
+		});
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<TaskModel>,

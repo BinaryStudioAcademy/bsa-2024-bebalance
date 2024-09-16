@@ -102,6 +102,12 @@ class TaskService implements Service {
 		return tasks.map((task) => task.toObject());
 	}
 
+	public async findPastByUserId(userId: number): Promise<TaskDto[]> {
+		const tasks = await this.taskRepository.findPastByUserId(userId);
+
+		return tasks.map((task) => task.toObject());
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<TaskModel>,
