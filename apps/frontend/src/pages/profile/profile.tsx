@@ -7,13 +7,18 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserDto,
 	actions as usersActions,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
-import { UpdateUserForm } from "./libs/components/components.js";
+import {
+	UpdatePasswordForm,
+	UpdateUserForm,
+} from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Profile: React.FC = () => {
@@ -39,6 +44,21 @@ const Profile: React.FC = () => {
 		[dispatch, user],
 	);
 
+	const handleUpdatePasswordSubmit = useCallback(
+		(
+			payload: Omit<UserUpdatePasswordRequestDto, "email" | "jwtToken">,
+		): void => {
+			void dispatch(
+				authActions.updatePassword({
+					email: user?.email as string,
+					jwtToken: "",
+					...payload,
+				}),
+			);
+		},
+		[dispatch, user],
+	);
+
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
@@ -54,6 +74,10 @@ const Profile: React.FC = () => {
 							src={defaultAvatar}
 						/>
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
+					</div>
+					<h4 className={styles["title-password"]}>Change your password</h4>
+					<div className={styles["password-container"]}>
+						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
 					</div>
 				</div>
 			)}

@@ -17,6 +17,7 @@ import {
 	userSignInValidationSchema,
 	type UserSignUpRequestDto,
 	userSignUpValidationSchema,
+	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/users.js";
 
 import { type AuthService } from "./auth.service.js";
@@ -106,6 +107,17 @@ class AuthController extends BaseController {
 				),
 			method: "GET",
 			path: AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.updatePassword(
+					options as APIHandlerOptions<{
+						body: UserUpdatePasswordRequestDto;
+					}>,
+				),
+			method: "PATCH",
+			path: AuthApiPath.UPDATE_PASSWORD,
 		});
 	}
 
@@ -286,6 +298,55 @@ class AuthController extends BaseController {
 		return {
 			payload: await this.authService.signUp(options.body),
 			status: HTTPCode.CREATED,
+		};
+	}
+
+	//! update password
+	/**
+	 * @swagger
+	 * /auth/update-password:
+	 *    post:
+	 *      description: Update user password
+	 * 			security:
+	 *       	- bearerAuth: []
+	 *      requestBody:
+	 *        description: User auth data
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                email:
+	 *                  type: string
+	 *                  format: email
+	 *                currentPassword:
+	 *                  type: string
+	 *                  example: password123
+	 *                newPassword:
+	 *                  type: string
+	 *                  example: password123
+	 *
+	 *      responses:
+	 *        201:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
+	 *                properties:
+	 *                  user:
+	 *                    $ref: "#/components/schemas/User"
+	 */
+
+	private async updatePassword(
+		options: APIHandlerOptions<{
+			body: UserUpdatePasswordRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.authService.updatePassword(options.body),
+			status: HTTPCode.OK,
 		};
 	}
 }

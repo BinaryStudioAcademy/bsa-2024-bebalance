@@ -15,5 +15,6 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "shared";

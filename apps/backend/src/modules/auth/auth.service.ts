@@ -8,10 +8,12 @@ import {
 	type EmailDto,
 	type ResetPasswordDto,
 	type ResetPasswordLinkDto,
+	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/libs/types/types.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
@@ -173,6 +175,41 @@ class AuthService {
 		});
 
 		return { token: jwtToken, user };
+	}
+
+	public async updatePassword(
+		payload: UserUpdatePasswordRequestDto,
+	): Promise<null | UserDto> {
+		const { currentPassword, email, jwtToken, newPassword } = payload;
+
+		const user = await this.userService.findByEmail(email);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		const {
+			payload: { userId },
+		} = await token.decode(jwtToken);
+
+		const { passwordHash, passwordSalt } = user.toNewObject();
+		const isPasswordValid = await this.encrypt.compare(
+			currentPassword,
+			passwordHash,
+			passwordSalt,
+		);
+
+		if (!isPasswordValid) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		return await this.userService.changePassword(userId, newPassword);
 	}
 }
 
