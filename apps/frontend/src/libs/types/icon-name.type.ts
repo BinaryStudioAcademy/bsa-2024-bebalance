@@ -1,5 +1,7 @@
 type IconName =
 	| "check"
+	| "clockActive"
+	| "clockInactive"
 	| "close"
 	| "crossedEye"
 	| "error"
