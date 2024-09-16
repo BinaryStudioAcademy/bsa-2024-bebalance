@@ -5,7 +5,7 @@ import {
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
 
 import { BalanceAnalysis as BalanceAnalysisResponseValidationSchema } from "./balance-analysis.validation-schema.js";
-import { OpenAiInitialPromptTemplates } from "./generate-init-promt-message.enum.js";
+import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-message.enum.js";
 import { generateUserScoresPrompt } from "./generate-scores-prompt.js";
 
 const runInitialThreadOptions = (
