@@ -22,28 +22,27 @@ const generateChangeTaskSuggestionsResponse = (
 
 	const parsedResult = AiAssistantMessageValidationSchema.safeParse(message);
 
-	if (parsedResult.success) {
-		const contentText: string =
-			parsedResult.data.content[ZERO_INDEX].text.value;
-		const resultData: TaskByCategoryData = JSON.parse(
-			contentText,
-		) as TaskByCategoryData;
-
-		return {
-			message: resultData.message,
-			tasks: [
-				{
-					categoryId: Number(resultData.tasks.categoryId),
-					categoryName: resultData.tasks.categoryName,
-					description: resultData.tasks.description,
-					dueDate: resultData.tasks.dueDate,
-					label: resultData.tasks.label,
-				},
-			],
-		};
+	if (!parsedResult.success) {
+		return null;
 	}
 
-	return null;
+	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const resultData: TaskByCategoryData = JSON.parse(
+		contentText,
+	) as TaskByCategoryData;
+
+	return {
+		message: resultData.message,
+		tasks: [
+			{
+				categoryId: Number(resultData.tasks.categoryId),
+				categoryName: resultData.tasks.categoryName,
+				description: resultData.tasks.description,
+				dueDate: resultData.tasks.dueDate,
+				label: resultData.tasks.label,
+			},
+		],
+	};
 };
 
 export { generateChangeTaskSuggestionsResponse };

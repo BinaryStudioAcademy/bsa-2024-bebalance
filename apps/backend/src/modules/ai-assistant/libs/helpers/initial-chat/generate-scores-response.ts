@@ -22,28 +22,27 @@ const generateScoresResponse = (
 
 	const parsedResult = AiAssistantMessageValidationSchema.safeParse(message);
 
-	if (parsedResult.success) {
-		const contentText: string =
-			parsedResult.data.content[ZERO_INDEX].text.value;
-		const resultData: BalanceAnalysisData = JSON.parse(
-			contentText,
-		) as BalanceAnalysisData;
-
-		return {
-			lowestCategories: resultData.lowestCategories.map((category) => ({
-				categoryId: category.categoryId,
-				categoryName: category.categoryName,
-			})),
-			messages: {
-				comments: resultData.messages.comments,
-				greeting: resultData.messages.greeting,
-				question: resultData.messages.question,
-			},
-			threadId: message.thread_id,
-		};
+	if (!parsedResult.success) {
+		return null;
 	}
 
-	return null;
+	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const resultData: BalanceAnalysisData = JSON.parse(
+		contentText,
+	) as BalanceAnalysisData;
+
+	return {
+		lowestCategories: resultData.lowestCategories.map((category) => ({
+			categoryId: category.categoryId,
+			categoryName: category.categoryName,
+		})),
+		messages: {
+			comments: resultData.messages.comments,
+			greeting: resultData.messages.greeting,
+			question: resultData.messages.question,
+		},
+		threadId: message.thread_id,
+	};
 };
 
 export { generateScoresResponse };

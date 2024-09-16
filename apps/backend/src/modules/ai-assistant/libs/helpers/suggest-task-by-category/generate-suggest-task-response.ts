@@ -22,26 +22,25 @@ const generateTaskSuggestionsResponse = (
 
 	const parsedResult = AiAssistantMessageValidationSchema.safeParse(message);
 
-	if (parsedResult.success) {
-		const contentText: string =
-			parsedResult.data.content[ZERO_INDEX].text.value;
-		const resultData: TaskByCategoryData = JSON.parse(
-			contentText,
-		) as TaskByCategoryData;
-
-		return {
-			message: resultData.message,
-			tasks: resultData.tasks.map((task) => ({
-				categoryId: task.categoryId,
-				categoryName: task.categoryName,
-				description: task.description,
-				dueDate: task.dueDate,
-				label: task.label,
-			})),
-		};
+	if (!parsedResult.success) {
+		return null;
 	}
 
-	return null;
+	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const resultData: TaskByCategoryData = JSON.parse(
+		contentText,
+	) as TaskByCategoryData;
+
+	return {
+		message: resultData.message,
+		tasks: resultData.tasks.map((task) => ({
+			categoryId: task.categoryId,
+			categoryName: task.categoryName,
+			description: task.description,
+			dueDate: task.dueDate,
+			label: task.label,
+		})),
+	};
 };
 
 export { generateTaskSuggestionsResponse };
