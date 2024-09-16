@@ -11,6 +11,7 @@ import {
 	resetPassword,
 	signIn,
 	signUp,
+	updatePassword,
 } from "./actions.js";
 
 type State = {
@@ -79,6 +80,16 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(checkIsResetPasswordExpired.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(updatePassword.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(updatePassword.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(updatePassword.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

@@ -117,10 +117,16 @@ const updatePassword = createAsyncThunk<
 	UserUpdatePasswordRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/update-password`, async (updatePasswordPayload, { extra }) => {
-	const { authApi, storage } = extra;
+	const { authApi, notification, storage } = extra;
 	const jwtToken = (await storage.get(StorageKey.TOKEN)) as string;
 
-	return await authApi.updatePassword({ ...updatePasswordPayload, jwtToken });
+	const response = await authApi.updatePassword({
+		...updatePasswordPayload,
+		jwtToken,
+	});
+	notification.success(NotificationMessage.PASSWORD_UPDATED);
+
+	return response;
 });
 
 export {
