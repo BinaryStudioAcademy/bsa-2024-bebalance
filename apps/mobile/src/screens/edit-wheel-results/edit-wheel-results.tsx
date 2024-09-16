@@ -3,12 +3,12 @@ import React from "react";
 import {
 	Button,
 	LoaderWrapper,
+	PageSwitcher,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
-import { PageSwitcher } from "~/libs/components/switch/switch";
 import { BaseColor, DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { getScreenWidth } from "~/libs/helpers/helpers";
 import {

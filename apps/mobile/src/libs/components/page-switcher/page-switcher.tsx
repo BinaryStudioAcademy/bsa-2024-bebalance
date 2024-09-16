@@ -1,8 +1,10 @@
 import React, { useCallback } from "react";
-import { StyleSheet } from "react-native";
 
 import { Text, TouchableOpacity, View } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
+import { globalStyles } from "~/libs/styles/styles";
+
+import { styles } from "./style";
 
 type PageSwitcherProperties = {
 	activeTab: string;
@@ -35,7 +37,13 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 			<TouchableOpacity
 				key={tab}
 				onPress={handlePress(tab)}
-				style={[styles.tab, isActive ? styles.activeTab : styles.inactiveTab]}
+				style={[
+					globalStyles.alignItemsCenter,
+					globalStyles.flex1,
+					globalStyles.pv8,
+					styles.tab,
+					isActive ? styles.activeTab : styles.inactiveTab,
+				]}
 			>
 				<Text
 					preset="regular"
@@ -49,29 +57,18 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 		);
 	});
 
-	return <View style={styles.container}>{renderedTabs}</View>;
+	return (
+		<View
+			style={[
+				globalStyles.flexDirectionRow,
+				globalStyles.justifyContentSpaceBetween,
+				globalStyles.p4,
+				styles.container,
+			]}
+		>
+			{renderedTabs}
+		</View>
+	);
 };
-
-const styles = StyleSheet.create({
-	activeTab: {
-		backgroundColor: BaseColor.BG_WHITE,
-	},
-	container: {
-		backgroundColor: BaseColor.EXTRA_LIGHT_GRAY,
-		borderRadius: 30,
-		flexDirection: "row",
-		justifyContent: "space-around",
-		padding: 5,
-	},
-	inactiveTab: {
-		backgroundColor: "transparent",
-	},
-	tab: {
-		alignItems: "center",
-		borderRadius: 30,
-		flex: 1,
-		paddingVertical: 5,
-	},
-});
 
 export { PageSwitcher };
