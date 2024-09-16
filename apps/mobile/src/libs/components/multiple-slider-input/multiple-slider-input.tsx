@@ -4,40 +4,42 @@ import { SliderContent, View } from "~/libs/components/components";
 import { useFormController } from "~/libs/hooks/hooks";
 import {
 	type Control,
-	type FieldValues,
 	type FieldPath,
+	type FieldValues,
 	type SliderData,
 } from "~/libs/types/types";
 
 type Properties<T extends FieldValues> = {
-	data: SliderData[];
 	control: Control<T, null>;
+	data: SliderData[];
 	name: FieldPath<T>;
 };
 
+type ScoreItem = { categoryId: number; score: number };
+
+const NEGATIVE_INDEX = -1;
+
 const MultipleSliderInput = <T extends FieldValues>({
-	data,
 	control,
+	data,
 	name,
 }: Properties<T>): JSX.Element | null => {
 	const { field } = useFormController({ control, name });
 	const { onChange, value } = field;
 
 	const handleSliderChange = useCallback(
-		(categoryId, score) => {
-			const currentItems = value ? value : [];
+		(categoryId: number, score: number) => {
+			const currentItems: ScoreItem[] = value || [];
 			const existingItemIndex = currentItems.findIndex(
 				(item) => item.categoryId === categoryId,
 			);
-			let updatedItems;
 
-			if (existingItemIndex !== -1) {
-				updatedItems = currentItems.map((item, index) =>
-					index === existingItemIndex ? { ...item, score: score } : item,
-				);
-			} else {
-				updatedItems = [...currentItems, { categoryId, score }];
-			}
+			const updatedItems =
+				existingItemIndex === NEGATIVE_INDEX
+					? [...currentItems, { categoryId, score }]
+					: currentItems.map((item, index) =>
+							index === existingItemIndex ? { ...item, score } : item,
+						);
 
 			onChange(updatedItems);
 		},
@@ -48,9 +50,9 @@ const MultipleSliderInput = <T extends FieldValues>({
 		<View>
 			{data.map((item) => (
 				<SliderContent
+					data={item}
 					key={item.id}
 					onValueChange={handleSliderChange}
-					data={item}
 				/>
 			))}
 		</View>
