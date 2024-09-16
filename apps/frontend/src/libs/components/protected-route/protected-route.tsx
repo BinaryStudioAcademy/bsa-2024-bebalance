@@ -1,5 +1,5 @@
 import { Loader, Navigate } from "~/libs/components/components.js";
-import { type AppRoute, DataStatus } from "~/libs/enums/enums.js";
+import { AppRoute, DataStatus } from "~/libs/enums/enums.js";
 import { useAppSelector, useLocation } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
@@ -15,7 +15,13 @@ const ProtectedRoute: React.FC<Properties> = ({
 	component,
 	redirectTo,
 }: Properties) => {
-	const { dataStatus, user } = useAppSelector(({ auth }) => auth);
+	const { dataStatus, hasAnsweredQuizQuestions, user } = useAppSelector(
+		({ auth }) => ({
+			dataStatus: auth.dataStatus,
+			hasAnsweredQuizQuestions: auth.user?.hasAnsweredQuizQuestions,
+			user: auth.user,
+		}),
+	);
 
 	const isLoading =
 		dataStatus === DataStatus.PENDING || dataStatus === DataStatus.IDLE;
@@ -28,6 +34,10 @@ const ProtectedRoute: React.FC<Properties> = ({
 
 	if (!user) {
 		return <Navigate replace to={redirectTo} />;
+	}
+
+	if (!hasAnsweredQuizQuestions && pathname !== AppRoute.QUIZ) {
+		return <Navigate replace to={AppRoute.QUIZ} />;
 	}
 
 	if (checkHasAuthWrapper(pathname as ValueOf<typeof AppRoute>)) {

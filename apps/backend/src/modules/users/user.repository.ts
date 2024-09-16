@@ -3,6 +3,7 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
+import { ZERO_INDEX } from "./libs/constants/constants.js";
 import {
 	type UserDetailsWithAvatarFile,
 	type UserTaskDay,
@@ -53,6 +54,8 @@ class UserRepository implements Repository {
 			avatarUrl: null,
 			createdAt: user.createdAt,
 			email: user.email,
+			hasAnsweredOnboardingQuestions: false,
+			hasAnsweredQuizQuestions: false,
 			id: user.id,
 			name: userDetails.name,
 			notificationFrequency: "all",
@@ -82,7 +85,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			)
 			.findById(id)
 			.castTo<undefined | UserWithAvatarFile>();
@@ -93,6 +96,9 @@ class UserRepository implements Repository {
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: user.userDetails.notificationFrequency,
@@ -110,7 +116,7 @@ class UserRepository implements Repository {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			)
 			.castTo<UserWithAvatarFile[]>();
 
@@ -120,6 +126,9 @@ class UserRepository implements Repository {
 				avatarUrl: user.userDetails.avatarFile?.url ?? null,
 				createdAt: user.createdAt,
 				email: user.email,
+				hasAnsweredOnboardingQuestions:
+					user.onboardingAnswers.length > ZERO_INDEX,
+				hasAnsweredQuizQuestions: Boolean(user.quizAnswers),
 				id: user.id,
 				name: user.userDetails.name,
 				notificationFrequency: user.userDetails.notificationFrequency,
@@ -139,7 +148,7 @@ class UserRepository implements Repository {
 			.where({ email })
 			.first()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			)
 			.castTo<undefined | UserWithAvatarFile>();
 
@@ -149,6 +158,9 @@ class UserRepository implements Repository {
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: Boolean(user.quizAnswers),
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: user.userDetails.notificationFrequency,
@@ -178,7 +190,9 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.findById(id)
-			.withGraphFetched(RelationName.USER_TASK_DAYS);
+			.withGraphFetched(
+				`[${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+			);
 
 		return user && updatedUserDetails
 			? UserEntity.initialize({
@@ -186,6 +200,9 @@ class UserRepository implements Repository {
 					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: updatedUserDetails.name,
 					notificationFrequency: updatedUserDetails.notificationFrequency,
@@ -219,7 +236,7 @@ class UserRepository implements Repository {
 			.query()
 			.findById(id)
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			);
 
 		return user && userDetails
@@ -228,6 +245,9 @@ class UserRepository implements Repository {
 					avatarUrl: userDetails.avatarFile?.url ?? null,
 					createdAt: user.createdAt,
 					email: user.email,
+					hasAnsweredOnboardingQuestions:
+						user.onboardingAnswers.length > ZERO_INDEX,
+					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
 					name: user.userDetails.name,
 					notificationFrequency: userDetails.notificationFrequency,
@@ -248,7 +268,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
 			)
 			.patchAndFetchById(id, passwordPayload)
 			.castTo<UserWithAvatarFile>()
@@ -259,6 +279,9 @@ class UserRepository implements Repository {
 			avatarUrl: user.userDetails.avatarFile?.url ?? null,
 			createdAt: user.createdAt,
 			email: user.email,
+			hasAnsweredOnboardingQuestions:
+				user.onboardingAnswers.length > ZERO_INDEX,
+			hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 			id: user.id,
 			name: user.userDetails.name,
 			notificationFrequency: user.userDetails.notificationFrequency,

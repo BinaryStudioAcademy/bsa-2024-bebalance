@@ -1,9 +1,10 @@
-import { getAll } from "./actions.js";
+import { getAll, saveAnswers } from "./actions.js";
 import { actions } from "./onboarding.slice.js";
 
 const allActions = {
 	...actions,
 	getAll,
+	saveAnswers,
 };
 
 export { allActions as actions };
