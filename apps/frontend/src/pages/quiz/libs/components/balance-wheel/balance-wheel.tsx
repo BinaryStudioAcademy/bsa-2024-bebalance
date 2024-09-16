@@ -1,15 +1,29 @@
-import { BalanceWheelChart } from "~/libs/components/components.js";
+import { BalanceWheelChart, Navigate } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useNavigate,
+	useState,
+} from "~/libs/hooks/hooks.js";
 
 import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const BalanceWheel: React.FC = () => {
+	const navigate = useNavigate();
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
+
+	const { hasAnsweredOnboardingQuestions, hasAnsweredQuizQuestions } =
+		useAppSelector(({ auth }) => ({
+			hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: auth.user?.hasAnsweredQuizQuestions,
+		}));
 
 	const handleUpdatePercentage = useCallback(() => {
 		setPercentage((previousPercentage) => {
@@ -35,7 +49,16 @@ const BalanceWheel: React.FC = () => {
 		return (): void => {
 			clearInterval(intervalId);
 		};
-	}, [handleUpdatePercentage]);
+	}, [handleUpdatePercentage, navigate]);
+
+	const isDone =
+		percentage >= PercentageConfig.MAX_VALUE &&
+		hasAnsweredQuizQuestions &&
+		hasAnsweredOnboardingQuestions;
+
+	if (isDone) {
+		return <Navigate replace to={AppRoute.ROOT} />;
+	}
 
 	const roundedPercentage = Math.ceil(percentage);
 

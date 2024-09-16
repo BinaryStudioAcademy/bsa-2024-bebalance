@@ -1,0 +1,21 @@
+.notificaiton-icon {
+	display: flex;
+	padding: 8px;
+	border-radius: 50%;
+}
+
+.success {
+	background-color: var(--background-success);
+}
+
+.error {
+	background-color: var(--background-error);
+}
+
+.info {
+	background-color: var(--background-info);
+}
+
+.warning {
+	background-color: var(--background-warning);
+}

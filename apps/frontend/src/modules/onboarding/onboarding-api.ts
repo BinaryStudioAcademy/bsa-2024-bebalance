@@ -4,7 +4,11 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { OnboardingApiPath } from "./libs/enums/enums.js";
-import { type OnboardingGetAllResponseDto } from "./libs/types/types.js";
+import {
+	type OnboardingAnswerRequestBodyDto,
+	type OnboardingGetAllResponseDto,
+	type OnboardingUserAnswerDto,
+} from "./libs/types/types.js";
 
 type Constructor = {
 	baseUrl: string;
@@ -28,6 +32,22 @@ class OnboardingApi extends BaseHTTPApi {
 		);
 
 		return await response.json<OnboardingGetAllResponseDto>();
+	}
+
+	public async saveAnswers(
+		payload: OnboardingAnswerRequestBodyDto,
+	): Promise<OnboardingUserAnswerDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(OnboardingApiPath.ANSWER, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<OnboardingUserAnswerDto[]>();
 	}
 }
 

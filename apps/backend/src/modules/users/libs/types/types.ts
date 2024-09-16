@@ -5,6 +5,7 @@ export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,
 	type NotificationAnswersRequestDto,
+	type QuizUserAnswerDto,
 	type ResetPasswordDto,
 	type ResetPasswordLinkDto,
 	type UserDto,
