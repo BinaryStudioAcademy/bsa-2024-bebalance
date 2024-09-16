@@ -135,6 +135,20 @@ erDiagram
         int day_of_week
         int user_id FK
     }
+
+    tasks }o--|| users : user_id
+    tasks }o--|| categories : category_id
+    tasks {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int category_id FK
+        int user_id FK
+        dateTime due_date
+        varchar label
+        text description
+        text status
+    }
 ```
 
 ## 5. Architecture
