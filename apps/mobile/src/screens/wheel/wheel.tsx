@@ -9,6 +9,7 @@ import {
 	Wheel as WheelChart,
 } from "~/libs/components/components";
 import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
+import { getFormattedDate } from "~/libs/helpers/helpers";
 import { useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
@@ -25,6 +26,8 @@ const Wheel: React.FC = () => {
 		navigation.navigate(BottomTabScreenName.EDIT_WHEEL_RESULTS);
 	}, [navigation]);
 
+	const date = getFormattedDate();
+
 	return (
 		<ScreenWrapper style={{ backgroundColor: BaseColor.BG_WHITE }}>
 			<View style={[globalStyles.m16]}>
@@ -35,7 +38,7 @@ const Wheel: React.FC = () => {
 					preset="tag"
 					style={[globalStyles.pv4, globalStyles.ph12, styles.date]}
 				>
-					5 Aug 2024, Tuesday
+					{date}
 				</Text>
 				<View style={styles.container}>
 					<View style={globalStyles.alignItemsCenter}>
