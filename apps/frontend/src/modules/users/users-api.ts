@@ -66,21 +66,6 @@ class UsersApi extends BaseHTTPApi {
 
 		return await response.json<UserDto>();
 	}
-
-	// public async updatePassword(
-	// 	id: number,
-	// 	user: UserUpdatePasswordRequestDto,
-	// ): Promise<UserDto> {
-	// 	const response = await this.load(
-	// 		this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
-	// 		{
-	// 			contentType: ContentType.JSON,
-	// 			hasAuth: true,
-	// 			method: "PATCH",
-	// 			payload: JSON.stringify(user),
-	// 		},
-	// 	);
-	// }
 }
 
 export { UsersApi };
