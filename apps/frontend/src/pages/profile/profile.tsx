@@ -1,11 +1,13 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
-import { Loader } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/enums.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Loader, Popup } from "~/libs/components/components.js";
+import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
@@ -59,10 +61,29 @@ const Profile: React.FC = () => {
 		[dispatch, user],
 	);
 
+	const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState<boolean>(false);
+
+	const handleSignOut = useCallback(() => {
+		setIsLogoutPopupOpen((previousState) => !previousState);
+	}, [setIsLogoutPopupOpen]);
+
+	const handleConfirmLogout = useCallback(() => {
+		void dispatch(authActions.logOut());
+	}, [dispatch]);
+
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
 		<>
+			<Popup
+				closeButtonLabel="No"
+				confirmButtonLabel="Yes"
+				icon={runImg}
+				isOpen={isLogoutPopupOpen}
+				onClose={handleSignOut}
+				onConfirm={handleConfirmLogout}
+				title={PopupMessage.LOGOUT_CONFIRM}
+			/>
 			{isLoading && <Loader />}
 			{user && (
 				<div className={styles["page-container"]}>
@@ -78,6 +99,9 @@ const Profile: React.FC = () => {
 					<h4 className={styles["title-password"]}>Change your password</h4>
 					<div className={styles["password-container"]}>
 						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
+						<div className={styles["button-container"]}>
+							<Button label="SIGN OUT" onClick={handleSignOut} type="button" />
+						</div>
 					</div>
 				</div>
 			)}
