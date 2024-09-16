@@ -71,7 +71,7 @@ class UsersApi extends BaseHTTPApi {
 		const response = await this.load(
 			this.getFullEndpoint(UsersApiPath.AVATAR, {}),
 			{
-				contentType: ContentType.MULTIPART,
+				contentType: ContentType.MULTIPART_FORM_DATA,
 				hasAuth: true,
 				method: "POST",
 				payload,
