@@ -10,15 +10,22 @@ import {
 } from "~/libs/components/components";
 import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
 import { getFormattedDate } from "~/libs/helpers/helpers";
-import { useCallback, useNavigation } from "~/libs/hooks/hooks";
+import {
+	useAppDispatch,
+	useCallback,
+	useEffect,
+	useNavigation,
+} from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
+import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { styles } from "./styles";
 
 const WHEEL_SIZE = 250;
 
 const Wheel: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<BottomTabNavigationProp<BottomTabNavigationParameterList>>();
 
@@ -27,6 +34,10 @@ const Wheel: React.FC = () => {
 	}, [navigation]);
 
 	const date = getFormattedDate();
+
+	useEffect(() => {
+		void dispatch(quizActions.getScores());
+	}, [dispatch]);
 
 	return (
 		<ScreenWrapper style={{ backgroundColor: BaseColor.BG_WHITE }}>
