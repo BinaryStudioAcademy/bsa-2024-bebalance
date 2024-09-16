@@ -260,7 +260,7 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /user/avatar:
+	 * /users/avatar:
 	 *    post:
 	 *      summary: Update user's avatar
 	 *      description: Upload a new avatar for the user.
