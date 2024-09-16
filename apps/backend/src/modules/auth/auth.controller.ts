@@ -301,11 +301,10 @@ class AuthController extends BaseController {
 		};
 	}
 
-	//! update password
 	/**
 	 * @swagger
 	 * /auth/update-password:
-	 *    post:
+	 *    patch:
 	 *      description: Update user password
 	 * 			security:
 	 *       	- bearerAuth: []
@@ -325,7 +324,10 @@ class AuthController extends BaseController {
 	 *                  example: password123
 	 *                newPassword:
 	 *                  type: string
-	 *                  example: password123
+	 *                  example: password123456
+	 *                jwtToken:
+	 *                  type: string
+	 *                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ....
 	 *
 	 *      responses:
 	 *        201:
