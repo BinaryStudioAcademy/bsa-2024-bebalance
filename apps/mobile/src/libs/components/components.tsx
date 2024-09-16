@@ -15,6 +15,7 @@ export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { Logo } from "./logo/logo";
 export { MultipleCheckboxInput } from "./multiple-checkbox-input/multiple-checkbox-input";
+export { MultipleSliderInput } from "./multiple-slider-input/multiple-slider-input";
 export { Planet } from "./planet/planet";
 export { ProgressBar } from "./progress-bar/progress-bar";
 export { RadioGroup } from "./radio-group/radio-group";
