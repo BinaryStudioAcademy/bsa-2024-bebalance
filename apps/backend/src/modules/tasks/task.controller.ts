@@ -9,7 +9,10 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
-import { type TaskUpdateRequestDto } from "./libs/types/types.js";
+import {
+	type TaskUpdateParametersDto,
+	type TaskUpdateRequestDto,
+} from "./libs/types/types.js";
 import { type TaskService } from "./task.service.js";
 
 /*** @swagger
@@ -72,7 +75,7 @@ class TaskController extends BaseController {
 				this.update(
 					options as APIHandlerOptions<{
 						body: TaskUpdateRequestDto;
-						params: { id: number };
+						params: TaskUpdateParametersDto;
 					}>,
 				),
 			method: "PATCH",
@@ -83,7 +86,7 @@ class TaskController extends BaseController {
 			handler: (options) =>
 				this.updateDeadline(
 					options as APIHandlerOptions<{
-						params: { id: number };
+						params: TaskUpdateParametersDto;
 						user: UserDto;
 					}>,
 				),
@@ -126,7 +129,7 @@ class TaskController extends BaseController {
 	private async update(
 		options: APIHandlerOptions<{
 			body: TaskUpdateRequestDto;
-			params: { id: number };
+			params: TaskUpdateParametersDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
@@ -137,7 +140,7 @@ class TaskController extends BaseController {
 
 	private async updateDeadline(
 		options: APIHandlerOptions<{
-			params: { id: number };
+			params: TaskUpdateParametersDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
