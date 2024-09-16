@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.47.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.46.0...v1.47.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend/shared:** add deadline for tasks bb-361 ([#440](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/440)) ([e4b6f27](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e4b6f2731682aa5c0cda0fa8ee89bc9101e730a3))
+* **frontend/backend/shared:** add my tasks screen bb-335 ([#397](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/397)) ([b2aebbc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b2aebbcf396e87b96edc9e1f30820556042781e8))
+* **frontend:** add logo to signin and signup pages bb-373 ([#416](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/416)) ([4682c82](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/4682c82f58320775dd24ecf118e7ac1785cd1da3))
+* **frontend:** add logo to signin signup pages and sidebar bb-373 ([#433](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/433)) ([7a1cc3f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7a1cc3fb701d9528e4303df52e57403f4b5c7966))
+* **frontend:** New design for toast messages bb-372 ([#435](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/435)) ([d6afc9b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d6afc9bd38f3e0ae5a6eb36c9be315bbf2cc3734))
+* **mobile:** add logo to mobile app bb-423 ([#439](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/439)) ([d1d3b5a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d1d3b5a5275045a2a578248582dbb9861b9649b3))
+* **mobile:** create checkbox categories form bb-250 ([#387](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/387)) ([3126c4d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3126c4d8373d40b25d83ceb0df19c8fb3a1fff3b))
+
+
+### Bug Fixes
+
+* **backend:** add missing auth on quiz endpoints swagger doc bb-431 ([#436](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/436)) ([dbf576e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dbf576e583c6cf68c74e197d0df17745a280cec4))
+* **frontend:** add font-weight property to active sidebar link bb-432 ([#434](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/434)) ([c29d85c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c29d85c7daf8ba4bb3ec6decc8c462284fe1d05a))
+* **frontend:** button color doesnt match design bb-396 ([#430](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/430)) ([d55719d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d55719db3cc99ad0f69504cdfe416f87659f9820))
+* **mobile:** "Forgot password" link is missing on the Sign In page bb-349 ([#412](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/412)) ([0ce6618](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0ce66186ff27818e68df8406bb0439d5f4d281e2))
+
 ## [1.46.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.45.0...v1.46.0) (2024-09-14)
 
 

@@ -4,12 +4,12 @@ import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
 	LoaderWrapper,
-	Planet,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
+import { Logo } from "~/libs/components/logo/logo";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
@@ -104,20 +104,15 @@ const Auth: React.FC = () => {
 							>
 								<View
 									style={[
-										globalStyles.gap8,
+										globalStyles.gap12,
 										globalStyles.alignItemsCenter,
 										globalStyles.flexDirectionRow,
 										globalStyles.mb32,
 									]}
 								>
-									<Planet color="pink" size="xxs" />
-									<Text
-										preset="uppercase"
-										size="xl"
-										style={globalStyles.ml48}
-										weight="bold"
-									>
-										Logo
+									<Logo />
+									<Text preset="subheading" size="xl" weight="bold">
+										BeBalance
 									</Text>
 								</View>
 								<View style={globalStyles.gap24}>{getScreen(name)}</View>
