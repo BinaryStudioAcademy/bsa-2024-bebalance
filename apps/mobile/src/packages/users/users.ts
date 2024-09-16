@@ -14,6 +14,9 @@ export { userApi };
 export { UserValidationMessage } from "./libs/enums/enums";
 export {
 	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetParametersDto,
 	type UserSignInRequestDto,
@@ -24,6 +27,7 @@ export {
 } from "./libs/types/types";
 export {
 	userForgotPasswordValidationSchema,
+	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 } from "./libs/validation-schemas/validation-schemas";
