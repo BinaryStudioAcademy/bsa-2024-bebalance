@@ -11,6 +11,7 @@ const chatApi = new ChatApi({
 });
 
 export { chatApi };
+export { ChatMessageType } from "./libs/enums/enums.js";
 export {
 	type SimplifiedQuizScoreDto,
 	type TaskSuggestionRequestDto,

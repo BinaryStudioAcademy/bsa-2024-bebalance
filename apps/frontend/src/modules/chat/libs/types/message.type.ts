@@ -1,22 +1,15 @@
-import { type TaskCreateDto } from "./types.js";
+import { type ValueOf } from "~/libs/types/types.js";
 
-type ButtonLabels = string[];
+import { type ChatMessageType } from "../enums/enums.js";
+import { type SelectedCategories, type TaskCreateDto } from "./types.js";
 
 type Message = {
-	buttonLabels?: ButtonLabels;
-	lowestCategories?: Array<{
-		categoryId: number;
-		categoryName: string;
-	}>;
-	taskList?: TaskCreateDto[];
-	text: string;
+	buttonLabels?: string[];
+	lowestCategories?: SelectedCategories[];
+	message: string;
+	tasks?: TaskCreateDto[];
 	threadId?: string;
-	type:
-		| "categoryForm"
-		| "confirmationButtons"
-		| "taskList"
-		| "text"
-		| "wheelAnalysis";
+	type: ValueOf<typeof ChatMessageType>;
 };
 
 export { type Message };
