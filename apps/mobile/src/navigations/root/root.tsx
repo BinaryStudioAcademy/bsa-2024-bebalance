@@ -9,6 +9,7 @@ import { useAppSelector } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { Auth } from "~/screens/auth/auth";
+import { Intro } from "~/screens/intro/intro";
 import { NotificationQuestions } from "~/screens/notification-questions/notification-questions";
 import { Onboarding } from "~/screens/onboarding/onboarding";
 import { Quiz } from "~/screens/quiz/quiz";
@@ -30,6 +31,7 @@ const Root: React.FC = () => {
 		<NativeStack.Navigator screenOptions={screenOptions}>
 			{hasUser ? (
 				<NativeStack.Group>
+					<NativeStack.Screen component={Intro} name={RootScreenName.INTRO} />
 					<NativeStack.Screen
 						component={Onboarding}
 						name={RootScreenName.ONBOARDING}
