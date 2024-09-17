@@ -2,7 +2,10 @@ import { APIPath, ContentType } from "~/libs/enums/enums";
 import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { UsersApiPath } from "./libs/enums/enums";
-import { type UserDto } from "./libs/types/types";
+import {
+	type NotificationAnswersPayloadDto,
+	type UserDto,
+} from "./libs/types/types";
 
 class UserApi extends BaseHttpApi {
 	public constructor({ baseUrl, http, storage }: APIConfiguration) {
@@ -16,6 +19,22 @@ class UserApi extends BaseHttpApi {
 				contentType: ContentType.JSON,
 				hasAuth: true,
 				method: "GET",
+			},
+		);
+
+		return await response.json<UserDto>();
+	}
+
+	public async saveNotificationAnswers(
+		payload: NotificationAnswersPayloadDto,
+	): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.NOTIFICATION_QUESTIONS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
 			},
 		);
 

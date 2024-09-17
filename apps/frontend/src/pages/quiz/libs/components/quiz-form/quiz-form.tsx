@@ -15,6 +15,7 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import {
@@ -35,12 +36,13 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 	const [categoryDone, setCategoryDone] = useState<number[]>([]);
 
-	const { category, currentCategoryIndex, dataStatus, questions } =
-		useAppSelector(({ quiz }) => ({
+	const { category, currentCategoryIndex, dataStatus, questions, user } =
+		useAppSelector(({ auth, quiz }) => ({
 			category: quiz.currentCategory,
 			currentCategoryIndex: quiz.currentCategoryIndex,
 			dataStatus: quiz.dataStatus,
 			questions: quiz.questions,
+			user: auth.user,
 		}));
 
 	const defaultValues = getQuizDefaultValues(questions);
@@ -99,14 +101,24 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		(data: QuizFormValues) => {
 			if (isLast) {
 				const answerIds = getAnswerIds(data);
+
 				void dispatch(quizActions.saveAnswers({ answerIds }));
+
+				if (!user) {
+					return;
+				}
+
+				const updatedUser = { ...user };
+				updatedUser.hasAnsweredQuizQuestions = true;
+
+				void dispatch(authActions.updateAuthUser(updatedUser));
 				onNext();
 			}
 
 			setIsDisabled(true);
 			void dispatch(quizActions.nextQuestion());
 		},
-		[dispatch, getAnswerIds, isLast, onNext],
+		[dispatch, getAnswerIds, isLast, onNext, user],
 	);
 
 	const handleFormSubmit = useCallback(

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.19.0...shared-v1.20.0) (2024-09-16)
+
+
+### Features
+
+* **backend/shared:** add action buttons to tasks bb-362 ([#451](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/451)) ([15c3ef0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15c3ef0b633a96a3c7cb8ed07cb4d423b4e38515))
+* **frontend/backend:** Onboarding/quiz flow bb-242 ([#351](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/351)) ([060f881](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/060f881e68e1427e72099d9aa0a3038fe88f3984))
+
 ## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.18.0...shared-v1.19.0) (2024-09-16)
 
 

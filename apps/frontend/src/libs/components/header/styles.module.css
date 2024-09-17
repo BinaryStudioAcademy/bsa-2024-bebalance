@@ -27,6 +27,7 @@
 	width: 47px;
 	height: 47px;
 	margin-right: 9px;
+	object-fit: cover;
 	border-radius: 50%;
 }
 

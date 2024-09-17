@@ -1,4 +1,10 @@
 import { Button } from "~/libs/components/components.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 
 import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
 import { useAnimatedSpans } from "./libs/hooks/hooks.js";
@@ -9,6 +15,11 @@ type Properties = {
 };
 
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
+	const dispatch = useAppDispatch();
+	const { user } = useAppSelector(({ auth }) => ({
+		user: auth.user,
+	}));
+
 	const secondParagraphDelay =
 		AnalyzingText.firstParagraph.split(" ").length *
 		TextAnimationDelay.DELAY_MULTIPLIER;
@@ -18,6 +29,17 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 		AnalyzingText.secondParagraph,
 		secondParagraphDelay,
 	);
+
+	const handleNextStep = useCallback(() => {
+		if (!user) {
+			return;
+		}
+
+		const updatedUser = { ...user };
+		updatedUser.hasAnsweredOnboardingQuestions = true;
+		void dispatch(authActions.updateAuthUser(updatedUser));
+		onNext();
+	}, [dispatch, onNext, user]);
 
 	return (
 		<div className={styles["page-container"]}>
@@ -29,7 +51,11 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 						<p>{firstParagraph}</p>
 						<p>{secondParagraph}</p>
 					</div>
-					<Button label="Let’s continue" onClick={onNext} type="button" />
+					<Button
+						label="Let’s continue"
+						onClick={handleNextStep}
+						type="button"
+					/>
 				</div>
 			</div>
 		</div>
