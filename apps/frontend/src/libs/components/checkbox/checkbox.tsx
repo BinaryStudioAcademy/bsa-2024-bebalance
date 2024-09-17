@@ -81,14 +81,7 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 			>
 				{label}
 			</p>
-			<i
-				className={getValidClassNames(
-					styles["tip"],
-					!hasTip && "visually-hidden",
-				)}
-			>
-				{tip}
-			</i>
+			{hasTip && <i className={getValidClassNames(styles["tip"])}>{tip}</i>}
 			<section
 				className={getValidClassNames(styles["options-container"], layoutStyle)}
 			>
