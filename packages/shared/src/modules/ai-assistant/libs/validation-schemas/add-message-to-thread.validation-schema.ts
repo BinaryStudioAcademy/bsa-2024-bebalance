@@ -15,13 +15,13 @@ const addMessageToThread = z
 		text: z
 			.string()
 			.trim()
-			.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 				message: AiAssistantValidationMessage.TEXT_REQUIRED,
 			}),
 		threadId: z
 			.string()
 			.trim()
-			.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 				message: AiAssistantValidationMessage.THREAD_ID_REQUIRED,
 			})
 			.regex(AiAssistantValidationRule.THREAD_ID_VALID_CHARS, {

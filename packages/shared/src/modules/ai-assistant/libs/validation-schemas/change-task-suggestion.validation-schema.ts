@@ -12,27 +12,25 @@ const ChangeTaskSuggestionRequest = z.object({
 		}),
 		categoryName: z
 			.string()
-			.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 				message: AiAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
 			}),
 		description: z
 			.string()
-			.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+			.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 				message: AiAssistantValidationMessage.DESCRIPTION_REQUIRED,
 			}),
 		dueDate: z.string().datetime({
 			message: AiAssistantValidationMessage.DUE_DATE_INVALID_FORMAT,
 		}),
-		label: z
-			.string()
-			.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-				message: AiAssistantValidationMessage.LABEL_REQUIRED,
-			}),
+		label: z.string().min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+			message: AiAssistantValidationMessage.LABEL_REQUIRED,
+		}),
 	}),
 	threadId: z
 		.string()
 		.trim()
-		.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+		.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 			message: AiAssistantValidationMessage.THREAD_ID_REQUIRED,
 		})
 		.regex(AiAssistantValidationRule.THREAD_ID_VALID_CHARS, {

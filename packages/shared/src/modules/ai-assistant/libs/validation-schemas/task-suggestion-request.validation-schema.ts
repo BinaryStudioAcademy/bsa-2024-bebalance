@@ -11,12 +11,12 @@ const TaskSuggestionRequest = z.object({
 			z.object({
 				categoryId: z
 					.number()
-					.min(AiAssistantValidationRule.NON_EMPTY_NUMBER_MIN_LENGTH, {
+					.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 						message: AiAssistantValidationMessage.CATEGORY_ID_REQUIRED,
 					}),
 				categoryName: z
 					.string()
-					.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+					.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 						message: AiAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
 					}),
 			}),
@@ -27,7 +27,7 @@ const TaskSuggestionRequest = z.object({
 	threadId: z
 		.string()
 		.trim()
-		.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
+		.min(AiAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 			message: AiAssistantValidationMessage.THREAD_ID_REQUIRED,
 		})
 		.regex(AiAssistantValidationRule.THREAD_ID_VALID_CHARS, {
