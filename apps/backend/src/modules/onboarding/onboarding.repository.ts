@@ -264,16 +264,16 @@ class OnboardingRepository implements Repository {
 			);
 
 			return OnboardingQuestionEntity.initialize({
-				answers: answersForQuestion.map((answer) =>
-					OnboardingAnswerEntity.initialize({
+				answers: answersForQuestion.map((answer) => {
+					return OnboardingAnswerEntity.initialize({
 						createdAt: answer.createdAt,
 						id: answer.id,
 						label: answer.label,
 						questionId: answer.questionId,
 						updatedAt: answer.updatedAt,
 						userId,
-					}),
-				),
+					});
+				}),
 				createdAt: question.createdAt,
 				id: question.id,
 				label: question.label,
