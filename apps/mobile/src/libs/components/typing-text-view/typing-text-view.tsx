@@ -21,7 +21,9 @@ import { useTypingText } from "./libs/hooks/hooks";
 
 type Properties = {
 	children: string;
+	lettersPrintedPerStep?: number;
 	maskingColor?: ValueOf<typeof BaseColor>;
+	nextLettersPrintedDelay?: number;
 	preset?: keyof typeof presetToTextStyle;
 	size?: keyof typeof sizeToTextStyle;
 	startTypingDelay?: number;
@@ -32,7 +34,9 @@ type Properties = {
 
 const TypingTextView: React.FC<Properties> = ({
 	children,
+	lettersPrintedPerStep = LETTERS_PRINTED_PER_STEP,
 	maskingColor = BaseColor.BG_WHITE,
+	nextLettersPrintedDelay = NEXT_LETTERS_PRINTED_DELAY,
 	preset = "default",
 	size,
 	startTypingDelay = DEFAULT_START_TYPING_DELAY,
@@ -52,8 +56,8 @@ const TypingTextView: React.FC<Properties> = ({
 
 	const { hiddenLetters, visibleLetters } = useTypingText({
 		firstLetterIndex: FIRST_LETTER_INDEX,
-		lettersPrintedPerStep: LETTERS_PRINTED_PER_STEP,
-		nextLettersPrintedDelay: NEXT_LETTERS_PRINTED_DELAY,
+		lettersPrintedPerStep,
+		nextLettersPrintedDelay,
 		startTypingDelay,
 		text: children,
 	});
