@@ -19,7 +19,10 @@ import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthError } from "./libs/exceptions/exceptions.js";
-import { createResetPasswordEmail } from "./libs/helpers/helpers.js";
+import {
+	checkIsPasswordValid,
+	createResetPasswordEmail,
+} from "./libs/helpers/helpers.js";
 
 type Constructor = {
 	encrypt: Encrypt;
@@ -137,12 +140,7 @@ class AuthService {
 			payload: { userId: userDetails.id },
 		});
 
-		const { passwordHash, passwordSalt } = user.toNewObject();
-		const isPasswordValid = await this.encrypt.compare(
-			password,
-			passwordHash,
-			passwordSalt,
-		);
+		const isPasswordValid = await checkIsPasswordValid(password, user);
 
 		if (!isPasswordValid) {
 			throw new AuthError({
@@ -180,7 +178,7 @@ class AuthService {
 	public async updatePassword(
 		payload: UserUpdatePasswordRequestDto,
 	): Promise<null | UserDto> {
-		const { currentPassword, email, jwtToken, newPassword } = payload;
+		const { currentPassword, email, newPassword } = payload;
 
 		const user = await this.userService.findByEmail(email);
 
@@ -191,16 +189,8 @@ class AuthService {
 			});
 		}
 
-		const {
-			payload: { userId },
-		} = await token.decode(jwtToken);
-
-		const { passwordHash, passwordSalt } = user.toNewObject();
-		const isPasswordValid = await this.encrypt.compare(
-			currentPassword,
-			passwordHash,
-			passwordSalt,
-		);
+		const userId = user.toObject().id;
+		const isPasswordValid = await checkIsPasswordValid(currentPassword, user);
 
 		if (!isPasswordValid) {
 			throw new AuthError({

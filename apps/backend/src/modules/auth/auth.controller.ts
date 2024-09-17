@@ -325,9 +325,6 @@ class AuthController extends BaseController {
 	 *                newPassword:
 	 *                  type: string
 	 *                  example: password123456
-	 *                jwtToken:
-	 *                  type: string
-	 *                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ....
 	 *
 	 *      responses:
 	 *        200:

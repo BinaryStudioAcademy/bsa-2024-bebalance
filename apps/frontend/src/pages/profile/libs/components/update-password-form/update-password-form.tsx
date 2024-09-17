@@ -10,9 +10,7 @@ import { DEFAULT_UPDATE_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (
-		payload: Omit<UserUpdatePasswordRequestDto, "email" | "jwtToken">,
-	) => void;
+	onSubmit: (payload: Omit<UserUpdatePasswordRequestDto, "email">) => void;
 };
 
 const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
@@ -51,7 +49,7 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				control={control}
 				errors={errors}
 				label="Confirm New Password"
-				name="confirmPassword"
+				name="confirmNewPassword"
 				placeholder="••••••"
 				type="password"
 			/>

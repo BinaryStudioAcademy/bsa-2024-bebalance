@@ -45,13 +45,10 @@ const Profile: React.FC = () => {
 	);
 
 	const handleUpdatePasswordSubmit = useCallback(
-		(
-			payload: Omit<UserUpdatePasswordRequestDto, "email" | "jwtToken">,
-		): void => {
+		(payload: Omit<UserUpdatePasswordRequestDto, "email">): void => {
 			void dispatch(
 				authActions.updatePassword({
 					email: user?.email as string,
-					jwtToken: "",
 					...payload,
 				}),
 			);
