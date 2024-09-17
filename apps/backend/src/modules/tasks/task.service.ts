@@ -12,8 +12,8 @@ import { Sunday } from "./libs/enums/enums.js";
 import { TaskError } from "./libs/exceptions/exceptions.js";
 import {
 	type TaskDto,
-	type TaskUpdateRequestDto,
 	type UsersTaskCreateRequestDto,
+	type UsersTaskUpdateRequestDto,
 } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
 import { type TaskRepository } from "./task.repository.js";
@@ -101,8 +101,18 @@ class TaskService implements Service {
 
 	public async update(
 		id: number,
-		payload: TaskUpdateRequestDto,
+		payload: UsersTaskUpdateRequestDto,
 	): Promise<TaskDto> {
+		const usersTaskEntity = await this.taskRepository.find(id);
+		const usersTask = usersTaskEntity ? usersTaskEntity.toObject() : null;
+
+		if (usersTask === null || usersTask.userId !== payload.user.id) {
+			throw new TaskError({
+				message: ErrorMessage.TASK_MISSING,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
 		const task = await this.taskRepository.update(id, payload);
 
 		return task.toObject();
@@ -115,6 +125,16 @@ class TaskService implements Service {
 			throw new TaskError({
 				message: ErrorMessage.TASK_DAYS_NOT_DEFINED,
 				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const usersTaskEntity = await this.taskRepository.find(id);
+		const usersTask = usersTaskEntity ? usersTaskEntity.toObject() : null;
+
+		if (usersTask === null || usersTask.userId !== user.id) {
+			throw new TaskError({
+				message: ErrorMessage.TASK_MISSING,
+				status: HTTPCode.NOT_FOUND,
 			});
 		}
 

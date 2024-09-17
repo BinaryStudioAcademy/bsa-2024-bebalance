@@ -13,6 +13,7 @@ import {
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
+import { taskUpdateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type TaskService } from "./task.service.js";
 
 /*** @swagger
@@ -76,10 +77,14 @@ class TaskController extends BaseController {
 					options as APIHandlerOptions<{
 						body: TaskUpdateRequestDto;
 						params: TaskUpdateParametersDto;
+						user: UserDto;
 					}>,
 				),
 			method: "PATCH",
 			path: TasksApiPath.$ID,
+			validation: {
+				body: taskUpdateValidationSchema,
+			},
 		});
 
 		this.addRoute({
@@ -130,10 +135,14 @@ class TaskController extends BaseController {
 		options: APIHandlerOptions<{
 			body: TaskUpdateRequestDto;
 			params: TaskUpdateParametersDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.taskService.update(options.params.id, options.body),
+			payload: await this.taskService.update(options.params.id, {
+				...options.body,
+				user: options.user,
+			}),
 			status: HTTPCode.OK,
 		};
 	}
