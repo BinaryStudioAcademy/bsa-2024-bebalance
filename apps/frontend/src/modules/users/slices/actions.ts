@@ -53,4 +53,17 @@ const update = createAsyncThunk<UserDto, UserUpdatePayload, AsyncThunkConfig>(
 	},
 );
 
-export { getById, saveNotificationAnswers, update };
+const uploadAvatar = createAsyncThunk<UserDto, FormData, AsyncThunkConfig>(
+	`${sliceName}/upload-avatar`,
+	async (payload, { dispatch, extra }) => {
+		const { notification, usersApi } = extra;
+
+		const response = await usersApi.uploadAvatar(payload);
+		dispatch(authActions.updateAuthUser(response));
+		notification.success(NotificationMessage.AVATAR_UPLOADED);
+
+		return response;
+	},
+);
+
+export { getById, saveNotificationAnswers, update, uploadAvatar };
