@@ -1,26 +1,25 @@
 import { Button } from "~/libs/components/components.js";
-import { type WheelEditMode } from "~/libs/types/types.js";
 
 import styles from "./styles.module.css";
 
-type Properties = {
-	currentMode: WheelEditMode;
-	leftButtonProperties: SwitchButtonProperties;
+type Properties<T> = {
+	currentMode: T;
+	leftButtonProperties: SwitchButtonProperties<T>;
 	onToggleMode: () => void;
-	rightButtonProperties: SwitchButtonProperties;
+	rightButtonProperties: SwitchButtonProperties<T>;
 };
 
-type SwitchButtonProperties = {
+type SwitchButtonProperties<T> = {
 	label: string;
-	mode: WheelEditMode;
+	mode: T;
 };
 
-const Switch: React.FC<Properties> = ({
+const Switch = <T extends string>({
 	currentMode,
 	leftButtonProperties,
 	onToggleMode,
 	rightButtonProperties,
-}: Properties) => {
+}: Properties<T>): React.ReactNode => {
 	return (
 		<div className={styles["container"]}>
 			<Button

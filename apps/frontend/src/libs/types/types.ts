@@ -12,7 +12,6 @@ export { type InputOption } from "./input-option.type.js";
 export { type NotificationQuestionsFormValues } from "./notification-questions-form-values.type.js";
 export { type QueryParameters } from "./query-parameters.type.js";
 export { type SidebarItem } from "./sidebar-item.type.js";
-export { type WheelEditMode } from "./wheel-edit-mode.type.js";
 export {
 	type Chart,
 	type ChartArea,

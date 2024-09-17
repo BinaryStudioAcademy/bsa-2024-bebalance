@@ -11,13 +11,13 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { type WheelEditMode } from "~/libs/types/types.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
+import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
@@ -83,7 +83,7 @@ const UserWheel: React.FC = () => {
 				{isEditingModalOpen && (
 					<Switch
 						currentMode={editMode}
-						leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
+						leftButtonProperties={{ label: "Edit manually", mode: "" }}
 						onToggleMode={handleModeToggle}
 						rightButtonProperties={{
 							label: "Retake quiz",
