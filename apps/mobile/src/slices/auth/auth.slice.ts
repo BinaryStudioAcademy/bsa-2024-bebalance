@@ -4,7 +4,14 @@ import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type UserDto } from "~/packages/users/users";
 
-import { getAuthenticatedUser, signIn, signOut, signUp } from "./actions";
+import {
+	checkIsResetPasswordExpired,
+	getAuthenticatedUser,
+	resetPassword,
+	signIn,
+	signOut,
+	signUp,
+} from "./actions";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -43,6 +50,24 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(signOut.fulfilled, (state, action) => {
 			state.user = action.payload;
+		});
+		builder.addCase(checkIsResetPasswordExpired.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(checkIsResetPasswordExpired.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(checkIsResetPasswordExpired.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(resetPassword.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(resetPassword.fulfilled, (state) => {
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(resetPassword.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
 	initialState,

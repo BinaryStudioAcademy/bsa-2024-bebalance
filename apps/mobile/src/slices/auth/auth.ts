@@ -1,6 +1,8 @@
 import {
+	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
 	requestResetPassword,
+	resetPassword,
 	signIn,
 	signOut,
 	signUp,
@@ -9,8 +11,10 @@ import { actions } from "./auth.slice";
 
 const allActions = {
 	...actions,
+	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
 	requestResetPassword,
+	resetPassword,
 	signIn,
 	signOut,
 	signUp,

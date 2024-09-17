@@ -1,13 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { RootScreenName } from "~/libs/enums/enums";
 import { storage, StorageKey } from "~/libs/packages/storage/storage";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import {
 	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/packages/users/users";
+import { actions as appActions } from "~/slices/app/app";
 
 import { name as sliceName } from "./auth.slice";
 
@@ -34,6 +38,32 @@ const requestResetPassword = createAsyncThunk<
 	const { authApi } = extra;
 
 	return await authApi.requestResetPassword(emailPayload);
+});
+
+const resetPassword = createAsyncThunk<
+	boolean,
+	ResetPasswordDto,
+	AsyncThunkConfig
+>(`${sliceName}/reset-password`, async (emailPayload, { dispatch, extra }) => {
+	const { authApi } = extra;
+
+	const isSuccessful = await authApi.resetPassword(emailPayload);
+
+	if (isSuccessful) {
+		dispatch(appActions.changeLink(RootScreenName.SIGN_IN));
+	}
+
+	return isSuccessful;
+});
+
+const checkIsResetPasswordExpired = createAsyncThunk<
+	boolean,
+	ResetPasswordLinkDto,
+	AsyncThunkConfig
+>(`${sliceName}/check-reset-password-link`, async (payload, { extra }) => {
+	const { authApi } = extra;
+
+	return await authApi.checkIsResetPasswordExpired(payload);
 });
 
 const signIn = createAsyncThunk<
@@ -71,4 +101,12 @@ const signOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 	},
 );
 
-export { getAuthenticatedUser, requestResetPassword, signIn, signOut, signUp };
+export {
+	checkIsResetPasswordExpired,
+	getAuthenticatedUser,
+	requestResetPassword,
+	resetPassword,
+	signIn,
+	signOut,
+	signUp,
+};
