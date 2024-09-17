@@ -5,17 +5,20 @@ import { categoryToColors, type colorToGradientColors } from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
 import { type SliderData } from "~/libs/types/types";
 
+import { DEFAULT_SLIDER_COLOR, MAX_SLIDER_VALUE } from "./constants/constants";
+
 type Properties = {
 	data: SliderData;
 	onValueChange: (id: number, sliderValue: number) => void;
 };
 
-const MAX_SLIDER_VALUE = 10;
-
 const getGradientColorsForCategory = (
 	categoryName: string,
 ): keyof typeof colorToGradientColors => {
-	return categoryToColors[categoryName.replaceAll(/\s+/g, "")];
+	return (
+		categoryToColors[categoryName.replaceAll(/\s+/g, "")] ??
+		DEFAULT_SLIDER_COLOR
+	);
 };
 
 const SliderContent: React.FC<Properties> = ({ data, onValueChange }) => {
