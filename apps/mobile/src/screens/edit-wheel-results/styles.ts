@@ -7,11 +7,10 @@ const styles = StyleSheet.create({
 		borderColor: BaseColor.LIGHT_GRAY,
 		borderRadius: 14,
 		borderWidth: 1,
-		height: 500,
+		height: "100%",
 	},
 	container: {
 		marginBottom: 0,
-		paddingBottom: 20,
 	},
 });
 
