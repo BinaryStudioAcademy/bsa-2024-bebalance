@@ -11,9 +11,12 @@ import { CategoriesApiPath } from "./libs/enums/enums.js";
 
 /**
  * @swagger
+ * tags:
+ *   - name: categories
+ *     description: Endpoints related to categories
  * components:
  *   schemas:
- *     Category:
+ *     CategoryDto:
  *       type: object
  *       properties:
  *         id:
@@ -48,7 +51,8 @@ class CategoryController extends BaseController {
 	 * @swagger
 	 * /categories:
 	 *   get:
-	 *     description: Returns an array of quiz categories
+	 *     tags: [categories]
+	 *     summary: Get all categories
 	 *     security:
 	 *       - bearerAuth: []
 	 *     responses:
@@ -62,7 +66,13 @@ class CategoryController extends BaseController {
 	 *                 items:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/Category"
+	 *                     $ref: "#/components/schemas/CategoryDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private async getCategories(): Promise<APIHandlerResponse> {
 		return {
