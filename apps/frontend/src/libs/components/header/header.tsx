@@ -29,7 +29,7 @@ const Header: React.FC<Properties> = ({ onSidebarToggle }: Properties) => {
 				<img
 					alt={`${user.name}'s avatar`}
 					className={styles["user-avatar"]}
-					src={defaultAvatar}
+					src={user.avatarUrl ?? defaultAvatar}
 				/>
 				<span className={styles["user-name"]}>{user.name}</span>
 			</div>
