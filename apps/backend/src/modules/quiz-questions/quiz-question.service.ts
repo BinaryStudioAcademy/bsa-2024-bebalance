@@ -101,9 +101,16 @@ class QuizQuestionService implements Service {
 			return await this.findAll();
 		}
 
-		const questions = await this.quizQuestionRepository.findByCategoryIds(
+		return await this.findQuestionsByCategoryIds(
 			JSON.parse(query.categoryIds) as number[],
 		);
+	}
+
+	public async findQuestionsByCategoryIds(
+		categoryIds: number[],
+	): Promise<{ items: QuizQuestionDto[][] }> {
+		const questions =
+			await this.quizQuestionRepository.findByCategoryIds(categoryIds);
 
 		const items = questions.map((questionEntity) => {
 			return this.convertQuestionEntityToDto(questionEntity);
