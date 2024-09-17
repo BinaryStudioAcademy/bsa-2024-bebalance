@@ -14,7 +14,7 @@
 		"lint": "concurrently \"npm:lint:*\"",
 		"build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"zod": "3.23.8",
 		"date-fns": "3.6.0"
 	}
