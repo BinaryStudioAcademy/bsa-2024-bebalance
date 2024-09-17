@@ -47,10 +47,10 @@ export {
 	AiAssistantApiPath,
 	type BalanceWheelAnalysisResponseDto,
 	type ChangeTaskSuggestionRequestDto,
-	ChangeTaskSuggestionRequestValidationSchema,
+	changeTaskSuggestionRequestValidationSchema,
 	type SelectedCategories,
 	type TaskSuggestionRequestDto,
-	TaskSuggestionRequestValidationSchema,
+	taskSuggestionRequestValidationSchema,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./modules/ai-assistant/ai-assistant.js";

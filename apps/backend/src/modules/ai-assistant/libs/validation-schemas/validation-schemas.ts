@@ -1,5 +1,5 @@
 export {
 	addMessageToThreadValidationSchema,
-	ChangeTaskSuggestionRequestValidationSchema,
-	TaskSuggestionRequestValidationSchema,
+	changeTaskSuggestionRequestValidationSchema,
+	taskSuggestionRequestValidationSchema,
 } from "shared";

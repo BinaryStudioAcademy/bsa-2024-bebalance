@@ -5,7 +5,7 @@ import {
 	AiAssistantValidationRule,
 } from "../enums/enums.js";
 
-const ChangeTaskSuggestionRequest = z.object({
+const changeTaskSuggestionRequest = z.object({
 	task: z.object({
 		categoryId: z.number({
 			invalid_type_error: AiAssistantValidationMessage.CATEGORY_ID_REQUIRED,
@@ -38,4 +38,4 @@ const ChangeTaskSuggestionRequest = z.object({
 		}),
 });
 
-export { ChangeTaskSuggestionRequest };
+export { changeTaskSuggestionRequest };

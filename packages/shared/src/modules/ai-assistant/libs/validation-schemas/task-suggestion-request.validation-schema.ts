@@ -5,7 +5,7 @@ import {
 	AiAssistantValidationRule,
 } from "../enums/enums.js";
 
-const TaskSuggestionRequest = z.object({
+const taskSuggestionRequest = z.object({
 	categories: z
 		.array(
 			z.object({
@@ -35,4 +35,4 @@ const TaskSuggestionRequest = z.object({
 		}),
 });
 
-export { TaskSuggestionRequest };
+export { taskSuggestionRequest };

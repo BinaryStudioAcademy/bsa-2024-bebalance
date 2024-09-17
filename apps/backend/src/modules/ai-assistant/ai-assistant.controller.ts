@@ -17,8 +17,8 @@ import {
 } from "./libs/types/types.js";
 import {
 	addMessageToThreadValidationSchema,
-	ChangeTaskSuggestionRequestValidationSchema,
-	TaskSuggestionRequestValidationSchema,
+	changeTaskSuggestionRequestValidationSchema,
+	taskSuggestionRequestValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 
 /**
@@ -167,7 +167,7 @@ class AiAssistantController extends BaseController {
 			method: "POST",
 			path: AiAssistantApiPath.CHAT_CHANGE_TASK,
 			validation: {
-				body: ChangeTaskSuggestionRequestValidationSchema,
+				body: changeTaskSuggestionRequestValidationSchema,
 			},
 		});
 
@@ -182,7 +182,7 @@ class AiAssistantController extends BaseController {
 			method: "POST",
 			path: AiAssistantApiPath.CHAT_SUGGEST_TASKS,
 			validation: {
-				body: TaskSuggestionRequestValidationSchema,
+				body: taskSuggestionRequestValidationSchema,
 			},
 		});
 
@@ -197,7 +197,7 @@ class AiAssistantController extends BaseController {
 			method: "POST",
 			path: AiAssistantApiPath.CHAT_ACCEPT_TASK,
 			validation: {
-				body: ChangeTaskSuggestionRequestValidationSchema,
+				body: changeTaskSuggestionRequestValidationSchema,
 			},
 		});
 	}
