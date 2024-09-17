@@ -1,9 +1,7 @@
-import { type QuizScoresGetAllItemResponseDto } from "../../../quiz/quiz.js";
-
-type SimplifiedQuizScoreDto = Omit<
-	QuizScoresGetAllItemResponseDto,
-	"createdAt" | "id" | "score" | "updatedAt" | "userId"
->;
+type SimplifiedQuizScoreDto = {
+	categoryId: number;
+	categoryName: string;
+};
 
 type BalanceWheelAnalysisResponseDto = {
 	lowestCategories: SimplifiedQuizScoreDto[];
