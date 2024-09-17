@@ -3,6 +3,8 @@ import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import {
 	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -14,6 +16,24 @@ import { AuthApiPath } from "./libs/enums/enums";
 class AuthApi extends BaseHttpApi {
 	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
+	}
+
+	public async checkIsResetPasswordExpired(
+		payload: ResetPasswordLinkDto,
+	): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(
+				`${AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION}?token=${payload.token}`,
+				{},
+			),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "GET",
+			},
+		);
+
+		return await response.json<boolean>();
 	}
 
 	public async getAuthenticatedUser(): Promise<UserDto> {
@@ -36,6 +56,20 @@ class AuthApi extends BaseHttpApi {
 				contentType: ContentType.JSON,
 				hasAuth: false,
 				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<boolean>();
+	}
+
+	public async resetPassword(payload: ResetPasswordDto): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "PATCH",
 				payload: JSON.stringify(payload),
 			},
 		);
