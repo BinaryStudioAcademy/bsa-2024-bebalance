@@ -31,7 +31,7 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 		};
 	};
 
-	const renderedTabs = tabs.map((tab) => {
+	const handleRenderTabs = tabs.map((tab) => {
 		const isActive = activeTab === tab;
 
 		return (
@@ -67,7 +67,7 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 				styles.container,
 			]}
 		>
-			{renderedTabs}
+			{handleRenderTabs}
 		</View>
 	);
 };
