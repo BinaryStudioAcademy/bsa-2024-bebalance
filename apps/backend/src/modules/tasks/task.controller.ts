@@ -181,7 +181,7 @@ class TaskController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /tasks/{id}/deadline:
+	 * /tasks/deadline/{id}:
 	 *    patch:
 	 *      description: Update the deadline of a task
 	 *      security:
