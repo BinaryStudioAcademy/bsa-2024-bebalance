@@ -8,7 +8,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
-import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import { DataStatus, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -74,7 +74,7 @@ const Onboarding: React.FC = () => {
 		(payload: OnboardingAnswerRequestBodyDto) => {
 			void dispatch(onboardingActions.saveAnswers(payload));
 		},
-		[],
+		[dispatch],
 	);
 
 	const handleNextClick = useCallback(
@@ -101,7 +101,13 @@ const Onboarding: React.FC = () => {
 			void dispatch(onboardingActions.nextQuestion());
 		},
 
-		[isLastQuestion, dispatch, currentQuestionIndex, answersByQuestionIndex],
+		[
+			isLastQuestion,
+			dispatch,
+			currentQuestionIndex,
+			answersByQuestionIndex,
+			handleSaveAnswers,
+		],
 	);
 
 	const handlePreviousClick = useCallback(() => {
@@ -116,7 +122,7 @@ const Onboarding: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WELCOME);
+			navigation.navigate(QuestionsStackName.WELCOME);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 

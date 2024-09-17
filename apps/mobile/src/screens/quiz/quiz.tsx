@@ -7,7 +7,11 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { DataStatus, NumericalValue, RootScreenName } from "~/libs/enums/enums";
+import {
+	DataStatus,
+	NumericalValue,
+	QuestionsStackName,
+} from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -116,7 +120,7 @@ const Quiz: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.NOTIFICATION_QUESTIONS);
+			navigation.navigate(QuestionsStackName.NOTIFICATION_QUESTIONS);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 

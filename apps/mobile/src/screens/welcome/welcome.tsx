@@ -5,21 +5,24 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { BaseColor, QuestionsStackName } from "~/libs/enums/enums";
 import { useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type NativeStackNavigationProp,
-	type RootNavigationParameterList,
+	type QuestionsStackNavigationParameterList,
 } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 const Welcome: React.FC = () => {
 	const navigation =
-		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
+		useNavigation<
+			NativeStackNavigationProp<QuestionsStackNavigationParameterList>
+		>();
+
 	const handleContinuePress = useCallback((): void => {
-		navigation.navigate(RootScreenName.QUIZ_ENTRY);
+		navigation.navigate(QuestionsStackName.QUIZ_ENTRY);
 	}, [navigation]);
 
 	return (
