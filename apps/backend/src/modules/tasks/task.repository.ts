@@ -96,8 +96,8 @@ class TaskRepository implements Repository {
 	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
 		const tasks = await TaskModel.query().where({ userId });
 
-		return tasks.map((task) =>
-			TaskEntity.initialize({
+		return tasks.map((task) => {
+			return TaskEntity.initialize({
 				category: task.category.name,
 				categoryId: task.categoryId,
 				createdAt: task.createdAt,
@@ -108,8 +108,8 @@ class TaskRepository implements Repository {
 				status: task.status,
 				updatedAt: task.updatedAt,
 				userId: task.userId,
-			}),
-		);
+			});
+		});
 	}
 
 	public async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
