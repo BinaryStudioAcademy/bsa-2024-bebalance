@@ -21,9 +21,12 @@ const UpdateAvatarForm: React.FC<Properties> = ({
 	const handleFormChange: React.FormEventHandler = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
 			event.preventDefault();
-			const formData = new FormData();
-			formData.append("file", event.target.files?.item(ZERO_INDEX) as File);
-			onSubmit(formData);
+
+			if (event.target.files?.length) {
+				const formData = new FormData();
+				formData.append("file", event.target.files.item(ZERO_INDEX) as File);
+				onSubmit(formData);
+			}
 		},
 		[onSubmit],
 	);
