@@ -17,7 +17,7 @@ type Properties<T extends FieldValues> = {
 
 type ScoreItem = { categoryId: number; score: number };
 
-const NEGATIVE_INDEX = -1;
+const NO_ITEM_INDEX = -1;
 
 const MultipleSliderInput = <T extends FieldValues>({
 	control,
@@ -35,7 +35,7 @@ const MultipleSliderInput = <T extends FieldValues>({
 			);
 
 			const updatedItems =
-				existingItemIndex === NEGATIVE_INDEX
+				existingItemIndex === NO_ITEM_INDEX
 					? [...currentItems, { categoryId, score }]
 					: currentItems.map((item, index) =>
 							index === existingItemIndex ? { ...item, score } : item,
