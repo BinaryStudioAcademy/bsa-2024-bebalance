@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Text, TouchableOpacity, View } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
 import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
@@ -48,9 +47,7 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 			>
 				<Text
 					preset="regular"
-					style={{
-						color: isActive ? BaseColor.BLACK : BaseColor.GRAY,
-					}}
+					style={isActive ? styles.active : styles.inactive}
 				>
 					{tab}
 				</Text>
