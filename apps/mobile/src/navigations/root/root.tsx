@@ -59,6 +59,10 @@ const Root: React.FC = () => {
 						component={Auth}
 						name={RootScreenName.FORGOT_PASSWORD}
 					/>
+					<NativeStack.Screen
+						component={Auth}
+						name={RootScreenName.RESET_PASSWORD}
+					/>
 				</NativeStack.Group>
 			)}
 		</NativeStack.Navigator>
