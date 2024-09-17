@@ -8,7 +8,7 @@ import {
 	View,
 	Wheel as WheelChart,
 } from "~/libs/components/components";
-import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
+import { BottomTabScreenName } from "~/libs/enums/enums";
 import { getFormattedDate } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
@@ -40,7 +40,7 @@ const Wheel: React.FC = () => {
 	}, [dispatch]);
 
 	return (
-		<ScreenWrapper style={{ backgroundColor: BaseColor.BG_WHITE }}>
+		<ScreenWrapper style={styles.screenWrapper}>
 			<View style={globalStyles.m16}>
 				<Text preset="subheading" weight="bold">
 					My Wheel Results

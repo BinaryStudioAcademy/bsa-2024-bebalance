@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
 		borderRadius: 22,
 		width: "50%",
 	},
+	screenWrapper: {
+		backgroundColor: BaseColor.BG_WHITE,
+	},
 });
 
 export { styles };
