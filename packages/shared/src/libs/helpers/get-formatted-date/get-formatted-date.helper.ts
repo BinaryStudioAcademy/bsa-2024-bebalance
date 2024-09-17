@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 
-const getFormattedDate = (): string => {
+const getFormattedDate = (dateFormat: string): string => {
 	const today = new Date();
 
-	return format(today, "d MMM yyyy, EEEE");
+	return format(today, dateFormat);
 };
 
 export { getFormattedDate };
