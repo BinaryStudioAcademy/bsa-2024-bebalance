@@ -8,11 +8,15 @@ import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-template.enum.
 
 function generateSuggestTaskPrompt(
 	categories: SelectedCategories[],
-	context: string = SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT,
 ): OpenAiRequestMessage {
-	/* eslint-disable perfectionist/sort-objects */
+	const content = `
+	{
+	"context": "${SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT}",
+	"categories": ${JSON.stringify(categories)},
+	}`;
+
 	return {
-		content: JSON.stringify({ context, categories }),
+		content,
 		role: OpenAIRoleKey.USER,
 	};
 }

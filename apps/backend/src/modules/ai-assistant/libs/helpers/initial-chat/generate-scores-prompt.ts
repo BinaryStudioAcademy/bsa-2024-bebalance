@@ -8,7 +8,6 @@ import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-message.enu
 
 function generateUserScoresPrompt(
 	userScores: QuizScoresGetAllResponseDto,
-	context: string = OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_CONTEXT,
 ): OpenAiRequestMessage {
 	const { items } = userScores;
 
@@ -17,9 +16,14 @@ function generateUserScoresPrompt(
 		categoryName,
 	}));
 
-	/* eslint-disable perfectionist/sort-objects */
+	const content = `
+	{
+	"context": "${OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_CONTEXT}"
+	"categories": ${JSON.stringify(categories)},
+	}`;
+
 	return {
-		content: JSON.stringify({ context, categories }),
+		content,
 		role: OpenAIRoleKey.USER,
 	};
 }

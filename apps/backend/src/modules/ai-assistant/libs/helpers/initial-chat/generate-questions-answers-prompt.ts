@@ -19,20 +19,15 @@ function generateQuestionsAnswersPrompt(
 		},
 	);
 
-	/* eslint-disable perfectionist/sort-objects */
-	const promptContent = {
-		context: OpenAiInitialPromptTemplates.INIT_CHAT_CONTENT,
-		user_answers: questionsWithAnswers
-			.map(
-				({ answer, question }) =>
-					`- Question: ${question}\nAnswer: ${answer as string}`,
-			)
-			.join("\n"),
-		instructions: OpenAiInitialPromptTemplates.INIT_CHAT_INSTRUCTION,
-	};
+	const content = `
+	{
+	"context": "${OpenAiInitialPromptTemplates.INIT_CHAT_CONTENT}",
+	"user_answers": ${JSON.stringify(questionsWithAnswers)},
+	"instructions": "${OpenAiInitialPromptTemplates.INIT_CHAT_INSTRUCTION}",
+	}`;
 
 	return {
-		content: JSON.stringify(promptContent),
+		content,
 		role: OpenAIRoleKey.USER,
 	};
 }
