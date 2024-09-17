@@ -32,6 +32,8 @@ type Properties = {
 	value: number;
 };
 
+const HIT_SLOP = 20;
+
 const GradientSlider: React.FC<Properties> = ({
 	gradientColors,
 	id,
@@ -123,12 +125,7 @@ const GradientSlider: React.FC<Properties> = ({
 				/>
 
 				<Slider
-					hitSlop={{
-						bottom: SliderConfig.HIT_SLOP_VERTICAL,
-						left: SliderConfig.HIT_SLOP_HORIZONTAL,
-						right: SliderConfig.HIT_SLOP_VERTICAL,
-						top: SliderConfig.HIT_SLOP_HORIZONTAL,
-					}}
+					hitSlop={HIT_SLOP}
 					maximumTrackTintColor="transparent"
 					maximumValue={max}
 					minimumTrackTintColor="transparent"
