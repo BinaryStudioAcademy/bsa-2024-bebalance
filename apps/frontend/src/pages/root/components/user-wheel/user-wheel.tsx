@@ -2,7 +2,6 @@ import {
 	BalanceWheelChart,
 	Button,
 	Loader,
-	ScoresEditModal,
 } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
@@ -16,6 +15,7 @@ import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import {
 	EditModeSwitch,
 	RetakeQuizModal,
+	ScoresEditModal,
 } from "./libs/components/components.js";
 import { type EditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
