@@ -51,7 +51,6 @@ import { type TaskService } from "./task.service.js";
  *            type: string
  *            format: date-time
  */
-
 class TaskController extends BaseController {
 	private taskService: TaskService;
 
@@ -117,7 +116,6 @@ class TaskController extends BaseController {
 	 *                items:
 	 *                  $ref: "#/components/schemas/Task"
 	 */
-
 	private async findCurrentByUserId(
 		options: APIHandlerOptions<{
 			user: UserDto;
@@ -131,6 +129,40 @@ class TaskController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /tasks/{id}:
+	 *    patch:
+	 *      description: Update a task
+	 *      security:
+	 *        - bearerAuth: []
+	 *      parameters:
+	 *        - in: path
+	 *          name: id
+	 *          required: true
+	 *          schema:
+	 *            type: number
+	 *      requestBody:
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                description:
+	 *                  type: string
+	 *                label:
+	 *                  type: string
+	 *                status:
+	 *                  type: string
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                $ref: "#/components/schemas/Task"
+	 */
 	private async update(
 		options: APIHandlerOptions<{
 			body: TaskUpdateRequestDto;
@@ -147,6 +179,27 @@ class TaskController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /tasks/{id}/deadline:
+	 *    patch:
+	 *      description: Update the deadline of a task
+	 *      security:
+	 *        - bearerAuth: []
+	 *      parameters:
+	 *        - in: path
+	 *          name: id
+	 *          required: true
+	 *          schema:
+	 *            type: number
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                $ref: "#/components/schemas/Task"
+	 */
 	private async updateDeadline(
 		options: APIHandlerOptions<{
 			params: TaskUpdateParametersDto;
