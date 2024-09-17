@@ -21,7 +21,7 @@ export {
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString } from "./libs/helpers/helpers.js";
+export { configureString, getFormattedDate } from "./libs/helpers/helpers.js";
 export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
