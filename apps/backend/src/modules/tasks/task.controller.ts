@@ -88,7 +88,6 @@ class TaskController extends BaseController {
 					options as APIHandlerOptions<{
 						body: TaskUpdateRequestDto;
 						params: TaskUpdateParametersDto;
-						user: UserDto;
 					}>,
 				),
 			method: "PATCH",
@@ -109,6 +108,7 @@ class TaskController extends BaseController {
 				),
 			method: "PATCH",
 			path: TasksApiPath.DEADLINE_$ID,
+			preHandlers: [checkAccessToTask(taskService)],
 		});
 	}
 
@@ -175,33 +175,48 @@ class TaskController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /tasks/current:
-	 *    get:
-	 *      description: updates status of task by id
+	 * /tasks/{id}:
+	 *    patch:
+	 *      description: Update a task
 	 *      security:
 	 *        - bearerAuth: []
+	 *      parameters:
+	 *        - in: path
+	 *          name: id
+	 *          required: true
+	 *          schema:
+	 *            type: number
+	 *      requestBody:
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                description:
+	 *                  type: string
+	 *                label:
+	 *                  type: string
+	 *                status:
+	 *                  type: string
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
 	 *          content:
 	 *            application/json:
 	 *              schema:
-	 *                type: object
-	 *                $ref: "#/components/schemas/Task"
+	 *                type: array
+	 *                items:
+	 *                  $ref: "#/components/schemas/Task"
 	 */
-
 	private async update(
 		options: APIHandlerOptions<{
 			body: TaskUpdateRequestDto;
 			params: TaskUpdateParametersDto;
-			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.taskService.update(options.params.id, {
-				...options.body,
-				user: options.user,
-			}),
+			payload: await this.taskService.update(options.params.id, options.body),
 			status: HTTPCode.OK,
 		};
 	}
