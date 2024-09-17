@@ -1,11 +1,10 @@
 const AiAssistantApiPath = {
-	ACCEPT_TASK: "/chat/accept-task",
-	ADD_MESSAGE: "/chat/add-message",
-	CHANGE_TASK: "/chat/change-task",
-	CONTINUE_CHAT: "/chat/continue",
-	DELETE_CHAT: "/chat/remove",
-	INIT_NEW_CHAT: "/chat/initiate",
-	SUGGEST_TASKS: "/chat/suggest-tasks",
+	CHAT_ACCEPT_TASK: "/chat/accept-task",
+	CHAT_ADD_MESSAGE: "/chat/add-message",
+	CHAT_CHANGE_TASK: "/chat/change-task",
+	CHAT_CONTINUE: "/chat/continue",
+	CHAT_INITIATE: "/chat/initiate",
+	CHAT_SUGGEST_TASKS: "/chat/suggest-tasks",
 } as const;
 
 export { AiAssistantApiPath };

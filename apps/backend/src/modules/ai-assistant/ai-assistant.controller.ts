@@ -139,7 +139,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.INIT_NEW_CHAT,
+			path: AiAssistantApiPath.CHAT_INITIATE,
 		});
 
 		this.addRoute({
@@ -150,7 +150,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.ADD_MESSAGE,
+			path: AiAssistantApiPath.CHAT_ADD_MESSAGE,
 			validation: {
 				body: addMessageToThreadValidationSchema,
 			},
@@ -165,7 +165,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.CHANGE_TASK,
+			path: AiAssistantApiPath.CHAT_CHANGE_TASK,
 			validation: {
 				body: ChangeTaskSuggestionRequestValidationSchema,
 			},
@@ -180,7 +180,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.SUGGEST_TASKS,
+			path: AiAssistantApiPath.CHAT_SUGGEST_TASKS,
 			validation: {
 				body: TaskSuggestionRequestValidationSchema,
 			},
@@ -195,7 +195,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.ACCEPT_TASK,
+			path: AiAssistantApiPath.CHAT_ACCEPT_TASK,
 			validation: {
 				body: ChangeTaskSuggestionRequestValidationSchema,
 			},
