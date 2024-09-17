@@ -1,4 +1,5 @@
 export {
+	type NotificationAnswersPayloadDto,
 	type UserDto,
 	type UserGetParametersDto,
 	type UserSignInRequestDto,

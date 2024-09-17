@@ -9,6 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
+import { checkAccessToTask } from "./libs/hooks/hooks.js";
 import {
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
@@ -72,6 +73,17 @@ class TaskController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.findPastByUserId(
+					options as APIHandlerOptions<{
+						user: UserDto;
+					}>,
+				),
+			method: "GET",
+			path: TasksApiPath.PAST,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.update(
 					options as APIHandlerOptions<{
 						body: TaskUpdateRequestDto;
@@ -81,6 +93,7 @@ class TaskController extends BaseController {
 				),
 			method: "PATCH",
 			path: TasksApiPath.$ID,
+			preHandlers: [checkAccessToTask(taskService)],
 			validation: {
 				body: taskUpdateValidationSchema,
 			},
@@ -131,38 +144,52 @@ class TaskController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /tasks/{id}:
-	 *    patch:
-	 *      description: Update a task
+	 * /tasks/past:
+	 *    get:
+	 *      description: Returns an array of past users tasks
 	 *      security:
 	 *        - bearerAuth: []
-	 *      parameters:
-	 *        - in: path
-	 *          name: id
-	 *          required: true
-	 *          schema:
-	 *            type: number
-	 *      requestBody:
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                description:
-	 *                  type: string
-	 *                label:
-	 *                  type: string
-	 *                status:
-	 *                  type: string
 	 *      responses:
 	 *        200:
 	 *          description: Successful operation
 	 *          content:
 	 *            application/json:
 	 *              schema:
+	 *                type: array
+	 *                items:
+	 *                  $ref: "#/components/schemas/Task"
+	 */
+
+	private async findPastByUserId(
+		options: APIHandlerOptions<{
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { user } = options;
+
+		return {
+			payload: await this.taskService.findPastByUserId(user.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/current:
+	 *    get:
+	 *      description: updates status of task by id
+	 *      security:
+	 *        - bearerAuth: []
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                type: object
 	 *                $ref: "#/components/schemas/Task"
 	 */
+
 	private async update(
 		options: APIHandlerOptions<{
 			body: TaskUpdateRequestDto;

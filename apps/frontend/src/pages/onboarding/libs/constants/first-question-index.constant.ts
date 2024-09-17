@@ -1,3 +1,0 @@
-const FIRST_QUESTION_INDEX = 0;
-
-export { FIRST_QUESTION_INDEX };

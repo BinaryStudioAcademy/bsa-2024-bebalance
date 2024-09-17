@@ -4,4 +4,5 @@ export { type OnboardingAnswerRequestDto } from "./onboarding-answer-request-dto
 export { type OnboardingAnswerResponseDto } from "./onboarding-answer-response-dto.type.js";
 export { type OnboardingGetAllResponseDto } from "./onboarding-get-all-questions-response-dto.type.js";
 export { type OnboardingQuestionResponseDto } from "./onboarding-question-response-dto.type.js";
+export { type OnboardingUserAnswerDto } from "./onboarding-user-answer-dto.type.js";
 export { type OnboardingQuestionRequestDto } from "./ondoarding-question-request-dto.js";
