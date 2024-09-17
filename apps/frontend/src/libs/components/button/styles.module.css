@@ -7,7 +7,6 @@
 	font-size: 16px;
 	font-weight: 700;
 	text-align: center;
-	text-transform: uppercase;
 	cursor: pointer;
 	border: none;
 	border-radius: 35px;
@@ -17,6 +16,7 @@
 .primary-button {
 	line-height: 24px;
 	color: var(--white);
+	text-transform: uppercase;
 	background-color: var(--black);
 }
 
@@ -36,6 +36,7 @@
 .secondary-button {
 	line-height: 22px;
 	color: var(--black);
+	text-transform: uppercase;
 	background:
 		linear-gradient(var(--white), var(--white)) padding-box,
 		linear-gradient(to bottom right, var(--brand), var(--light-brand))
@@ -76,6 +77,17 @@
 	color: var(--gray);
 	background-color: transparent;
 	transform: translateY(-50%);
+}
+
+.action-button {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	padding: 5px;
+	font-size: 14px;
+	color: var(--black);
+	background-color: transparent;
+	border: 1px solid var(--light-gray);
 }
 
 .position-right {

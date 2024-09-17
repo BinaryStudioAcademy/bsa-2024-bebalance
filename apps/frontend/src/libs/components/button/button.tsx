@@ -12,7 +12,7 @@ type Properties = {
 	label: string;
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant?: "icon" | "primary" | "secondary";
+	variant?: "action" | "icon" | "primary" | "secondary";
 };
 
 const Button: React.FC<Properties> = ({
@@ -35,6 +35,7 @@ const Button: React.FC<Properties> = ({
 		onClick={onClick}
 		type={type}
 	>
+		{iconName && <Icon name={iconName} />}
 		<span
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
@@ -43,7 +44,6 @@ const Button: React.FC<Properties> = ({
 		>
 			{label}
 		</span>
-		{iconName && <Icon name={iconName} />}
 	</button>
 );
 
