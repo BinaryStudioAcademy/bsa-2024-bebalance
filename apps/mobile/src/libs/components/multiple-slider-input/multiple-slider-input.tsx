@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import { SliderContent, View } from "~/libs/components/components";
-import { useFormController } from "~/libs/hooks/hooks";
+import { useCallback, useFormController } from "~/libs/hooks/hooks";
 import {
 	type Control,
 	type FieldPath,

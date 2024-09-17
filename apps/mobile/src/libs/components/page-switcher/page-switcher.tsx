@@ -1,7 +1,8 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import { Text, TouchableOpacity, View } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
+import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./style";
