@@ -34,44 +34,107 @@ type Constructor = {
 
 /**
  * @swagger
+ * tags:
+ *   - name: quiz
+ *     description: Endpoints related to quiz
  * components:
  *   schemas:
- *     UserScore:
+ *     QuizQuestionDto:
  *       type: object
  *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
  *         categoryId:
- *           type: number
- *           format: int64
+ *           type: integer
+ *           example: 1
+ *         label:
+ *           type: string
+ *         answers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/QuizAnswerDto"
  *         createdAt:
  *           type: string
  *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *     QuizAnswerDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         questionId:
+ *           type: integer
+ *           example: 1
+ *         label:
+ *           type: string
+ *         value:
+ *           type: number
+ *         userAnswers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/QuizUserAnswerDto"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *     QuizUserAnswerDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         answerId:
+ *           type: integer
+ *           example: 1
+ *         userId:
+ *           type: integer
+ *           example: 1
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *     QuizGetAllScoresResponseDto:
+ *       type: object
+ *       properties:
+ *         items:
+ *           type: array
+ *           items:
+ *             allOf:
+ *               - type: object
+ *                 properties:
+ *                   categoryName:
+ *                     type: string
+ *                     example: "Physical"
+ *               - $ref: "#/components/schemas/QuizScoreDto"
+ *     QuizScoreDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         categoryId:
+ *           type: integer
+ *           example: 1
+ *         userId:
+ *           type: integer
+ *           example: 1
  *         score:
  *           type: number
  *           format: float
- *         updatedAt:
- *           type: string
- *           format: date-time
- *         userId:
- *           type: number
- *           format: int64
- *     UserAnswer:
- *       type: object
- *       properties:
- *         answerId:
- *           type: number
- *           format: int64
  *         createdAt:
  *           type: string
  *           format: date-time
- *         id:
- *           type: number
- *           format: int64
  *         updatedAt:
  *           type: string
  *           format: date-time
- *         userId:
- *           type: number
- *           format: int64
  */
 class QuizController extends BaseController {
 	private categoryService: CategoryService;
@@ -154,6 +217,8 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/answer:
 	 *   post:
+	 *     tags: [quiz]
+	 *     summary: Saves user quiz answers
 	 *     description: Saves user answers for all quiz questions at once
 	 *     security:
 	 *       - bearerAuth: []
@@ -179,11 +244,23 @@ class QuizController extends BaseController {
 	 *                 scores:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserScore"
+	 *                     $ref: "#/components/schemas/QuizScoreDto"
 	 *                 userAnswers:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserAnswer"
+	 *                     $ref: "#/components/schemas/QuizUserAnswerDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async createUserAnswers(
 		options: APIHandlerOptions<{
@@ -207,7 +284,7 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/questions:
 	 *   get:
-	 *     summary: Get all quiz questions
+	 *     summary: Get quiz questions
 	 *     security:
 	 *       - bearerAuth: []
 	 *     parameters:
@@ -253,6 +330,8 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/score:
 	 *   get:
+	 *     tags: [quiz]
+	 *     summary: Get user scores on quiz
 	 *     description: Returns all user scores
 	 *     security:
 	 *       - bearerAuth: []
@@ -262,27 +341,7 @@ class QuizController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               type: object
-	 *               properties:
-	 *                 items:
-	 *                   type: array
-	 *                   items:
-	 *                     type: object
-	 *                     properties:
-	 *                       categoryName:
-	 *                         type: string
-	 *                       categoryId:
-	 *                         type: number
-	 *                       createdAt:
-	 *                         type: string
-	 *                       id:
-	 *                         type: number
-	 *                       score:
-	 *                         type: number
-	 *                       updatedAt:
-	 *                         type: string
-	 *                       userId:
-	 *                         type: number
+	 *               $ref: "#/components/schemas/QuizGetAllScoresResponseDto"
 	 */
 	private async findUserScores(
 		options: APIHandlerOptions<{
@@ -299,6 +358,8 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/score:
 	 *   patch:
+	 *     tags: [quiz]
+	 *     summary: Partially update user scores on each category
 	 *     description: Updates multiple or single user scores
 	 *     security:
 	 *       - bearerAuth: []
@@ -329,7 +390,19 @@ class QuizController extends BaseController {
 	 *                 items:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserScore"
+	 *                     $ref: "#/components/schemas/QuizScoreDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async updateUserScores(
 		options: APIHandlerOptions<{
