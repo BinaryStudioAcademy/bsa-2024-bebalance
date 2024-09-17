@@ -22,6 +22,7 @@ import {
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type EmailDto,
+	type ResetPasswordDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/packages/users/users";
@@ -29,18 +30,24 @@ import { actions as authActions } from "~/slices/auth/auth";
 
 import {
 	ForgotPasswordForm,
+	ResetPasswordForm,
 	SignInForm,
 	SignUpForm,
-} from "./components/components";
+} from "./libs/components/components";
 import { styles } from "./styles";
 
 const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
-	const { name } = useAppRoute();
+	const { name, params } = useAppRoute();
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
+
+	const { token } =
+		name === RootScreenName.RESET_PASSWORD
+			? (params as { token: string })
+			: { token: "" };
 
 	useEffect(() => {
 		if (!user) {
@@ -69,6 +76,18 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleResetPasswordSubmit = useCallback(
+		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
+			void dispatch(
+				authActions.resetPassword({
+					jwtToken: token,
+					newPassword: payload.newPassword,
+				}),
+			);
+		},
+		[dispatch, token],
+	);
+
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case RootScreenName.SIGN_IN: {
@@ -77,6 +96,10 @@ const Auth: React.FC = () => {
 
 			case RootScreenName.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
+			}
+
+			case RootScreenName.RESET_PASSWORD: {
+				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
 			}
 
 			case RootScreenName.FORGOT_PASSWORD: {
