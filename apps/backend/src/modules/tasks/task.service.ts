@@ -18,7 +18,9 @@ import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
 
 class TaskService implements Service {
-	private calculateDeadline = (userTaskDays: number[]): string => {
+	private taskRepository: TaskRepository;
+
+	public calculateDeadline = (userTaskDays: number[]): string => {
 		const createdAt = new Date();
 		const createdAtDayOfWeek = createdAt.getDay();
 
@@ -44,8 +46,6 @@ class TaskService implements Service {
 
 		return deadline.toISOString();
 	};
-
-	private taskRepository: TaskRepository;
 
 	public constructor(taskRepository: TaskRepository) {
 		this.taskRepository = taskRepository;

@@ -51,22 +51,12 @@ const ChangeTaskTool = {
 									description: "Detailed description of the new task",
 									type: "string",
 								},
-								dueDate: {
-									description: "Suggested due date for the new task",
-									type: "string",
-								},
 								label: {
 									description: "Label or name of the task",
 									type: "string",
 								},
 							},
-							required: [
-								"categoryId",
-								"categoryName",
-								"description",
-								"dueDate",
-								"label",
-							],
+							required: ["categoryId", "categoryName", "description", "label"],
 							type: "object",
 						},
 					},

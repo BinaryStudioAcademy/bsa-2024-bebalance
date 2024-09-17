@@ -9,7 +9,7 @@ const taskRepository = new TaskRepository(TaskModel);
 const taskService = new TaskService(taskRepository);
 const taskController = new TaskController(logger, taskService);
 
-export { taskController, taskRepository };
+export { taskController, taskService };
 export { TaskEntity } from "./task.entity.js";
 export { TaskModel } from "./task.model.js";
-export { type TaskRepository } from "./task.repository.js";
+export { type TaskService } from "./task.service.js";

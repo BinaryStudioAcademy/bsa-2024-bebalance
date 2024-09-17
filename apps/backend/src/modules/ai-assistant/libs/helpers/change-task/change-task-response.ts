@@ -13,6 +13,7 @@ type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
 
 const generateChangeTaskSuggestionsResponse = (
 	aiResponse: OpenAiResponseMessage,
+	taskDeadLine: string,
 ): null | TaskSuggestionsResponseDto => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -38,7 +39,7 @@ const generateChangeTaskSuggestionsResponse = (
 				categoryId: Number(resultData.tasks.categoryId),
 				categoryName: resultData.tasks.categoryName,
 				description: resultData.tasks.description,
-				dueDate: resultData.tasks.dueDate,
+				dueDate: taskDeadLine,
 				label: resultData.tasks.label,
 			},
 		],

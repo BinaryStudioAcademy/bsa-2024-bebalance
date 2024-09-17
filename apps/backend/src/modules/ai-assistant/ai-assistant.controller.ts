@@ -161,6 +161,7 @@ class AiAssistantController extends BaseController {
 				this.changeTaskSuggestion(
 					options as APIHandlerOptions<{
 						body: ChangeTaskSuggestionRequestDto;
+						user: UserDto;
 					}>,
 				),
 			method: "POST",
@@ -333,12 +334,13 @@ class AiAssistantController extends BaseController {
 	private async changeTaskSuggestion(
 		options: APIHandlerOptions<{
 			body: ChangeTaskSuggestionRequestDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body } = options;
+		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.changeTaskSuggestion(body),
+			payload: await this.openAiService.changeTaskSuggestion(user, body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -537,12 +539,13 @@ class AiAssistantController extends BaseController {
 	private async suggestTasksForCategories(
 		options: APIHandlerOptions<{
 			body: TaskSuggestionRequestDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body } = options;
+		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.suggestTasksForCategories(body),
+			payload: await this.openAiService.suggestTasksForCategories(user, body),
 			status: HTTPCode.OK,
 		};
 	}

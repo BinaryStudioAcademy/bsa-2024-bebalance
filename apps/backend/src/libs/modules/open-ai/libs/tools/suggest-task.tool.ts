@@ -72,10 +72,6 @@ const SuggestTaskTool = {
 										description: "Detailed description of the task",
 										type: "string",
 									},
-									dueDate: {
-										description: "Suggested due date for the task",
-										type: "string",
-									},
 									label: {
 										description: "Label or name of the task",
 										type: "string",
@@ -85,7 +81,6 @@ const SuggestTaskTool = {
 									"categoryId",
 									"categoryName",
 									"description",
-									"dueDate",
 									"label",
 								],
 								type: "object",

@@ -20,7 +20,7 @@ const ChangeTaskSuggestionRequest = z.object({
 			.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
 				message: AiAssistantValidationMessage.DESCRIPTION_REQUIRED,
 			}),
-		dueDate: z.string().regex(AiAssistantValidationRule.DATE_FORMAT, {
+		dueDate: z.string().datetime({
 			message: AiAssistantValidationMessage.DUE_DATE_INVALID_FORMAT,
 		}),
 		label: z
