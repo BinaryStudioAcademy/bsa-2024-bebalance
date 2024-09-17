@@ -29,7 +29,7 @@ const MultipleSliderInput = <T extends FieldValues>({
 
 	const handleSliderChange = useCallback(
 		(categoryId: number, score: number) => {
-			const currentItems: ScoreItem[] = value || [];
+			const currentItems: ScoreItem[] = value ?? [];
 			const existingItemIndex = currentItems.findIndex((item) => {
 				return item.categoryId === categoryId;
 			});
