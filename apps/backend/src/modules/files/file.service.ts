@@ -98,7 +98,7 @@ class FileService implements Service {
 		await this.s3.uploadFile({
 			buffer,
 			contentType,
-			key,
+			key: fileKey,
 		});
 
 		const fileUrl = createFileUrl(fileKey);

@@ -25,6 +25,7 @@ export {
 } from "chart.js";
 export {
 	type OnboardingQuestionResponseDto,
+	type QuizQuestionDto,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type UserDto,
