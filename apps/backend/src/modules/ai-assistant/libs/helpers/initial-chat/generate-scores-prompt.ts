@@ -1,6 +1,6 @@
 import {
 	type OpenAiRequestMessage,
-	OpenAiRoleKey,
+	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
 
@@ -20,7 +20,7 @@ function generateUserScoresPrompt(
 	/* eslint-disable perfectionist/sort-objects */
 	return {
 		content: JSON.stringify({ context, categories }),
-		role: OpenAiRoleKey.USER,
+		role: OpenAIRoleKey.USER,
 	};
 }
 

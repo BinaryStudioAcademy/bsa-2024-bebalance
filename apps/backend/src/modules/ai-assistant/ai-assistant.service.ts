@@ -1,4 +1,4 @@
-import { type OpenAi, OpenAiRoleKey } from "~/libs/modules/open-ai/open-ai.js";
+import { type OpenAi, OpenAIRoleKey } from "~/libs/modules/open-ai/open-ai.js";
 import { type UserDto } from "~/libs/types/types.js";
 import { type CategoryService } from "~/modules/categories/categories.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
@@ -61,7 +61,7 @@ class AiAssistantService {
 		});
 		const chatMessage = {
 			content: `User has accepted this task: ${JSON.stringify(newTask)}`,
-			role: OpenAiRoleKey.USER,
+			role: OpenAIRoleKey.USER,
 		};
 
 		await this.openAi.addMessageToThread(threadId, chatMessage);
@@ -76,7 +76,7 @@ class AiAssistantService {
 
 		const prompt = {
 			content: text,
-			role: OpenAiRoleKey.USER,
+			role: OpenAIRoleKey.USER,
 		};
 
 		return await this.openAi.addMessageToThread(threadId, prompt);

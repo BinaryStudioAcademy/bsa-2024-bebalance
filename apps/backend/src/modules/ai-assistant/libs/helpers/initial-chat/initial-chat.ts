@@ -1,5 +1,5 @@
 import {
-	OpenAiFunctionName,
+	OpenAIFunctionName,
 	type OpenAiRunThreadRequestDto,
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
@@ -16,7 +16,7 @@ const runInitialThreadOptions = (
 
 	return {
 		additional_instructions: null,
-		function_name: OpenAiFunctionName.ANALYZE_BALANCE_SCORES,
+		function_name: OpenAIFunctionName.ANALYZE_BALANCE_SCORES,
 		instructions:
 			OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_INSTRUCTIONS.replace(
 				"{{userName}}",

@@ -1,7 +1,7 @@
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
 	type OpenAiRequestMessage,
-	OpenAiRoleKey,
+	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type OnboardingQuestionEntity } from "~/modules/onboarding/onboarding.js";
 
@@ -33,7 +33,7 @@ function generateQuestionsAnswersPrompt(
 
 	return {
 		content: JSON.stringify(promptContent),
-		role: OpenAiRoleKey.USER,
+		role: OpenAIRoleKey.USER,
 	};
 }
 

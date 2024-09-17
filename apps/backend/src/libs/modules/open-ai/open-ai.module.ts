@@ -6,7 +6,7 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import {
-	OpenAiAssistantConfig,
+	OpenAIAssistantConfig,
 	OpenAIErrorMessage,
 } from "./libs/enums/enums.js";
 import { OpenAIError } from "./libs/exceptions/exceptions.js";
@@ -43,18 +43,18 @@ class OpenAi {
 		try {
 			const existingAssistants = await this.openAi.beta.assistants.list();
 			const assistant = existingAssistants.data.find(
-				(assistant) => assistant.name === OpenAiAssistantConfig.NAME,
+				(assistant) => assistant.name === OpenAIAssistantConfig.NAME,
 			);
 
 			const initializedAssistant =
 				assistant ??
 				(await this.openAi.beta.assistants.create({
-					instructions: OpenAiAssistantConfig.INSTRUCTION,
+					instructions: OpenAIAssistantConfig.INSTRUCTION,
 					model: this.config.ENV.OPEN_AI.MODEL,
-					name: OpenAiAssistantConfig.NAME,
-					temperature: OpenAiAssistantConfig.TEMPERATURE,
-					tools: [...OpenAiAssistantConfig.TOOLS],
-					top_p: OpenAiAssistantConfig.TOP_P,
+					name: OpenAIAssistantConfig.NAME,
+					temperature: OpenAIAssistantConfig.TEMPERATURE,
+					tools: [...OpenAIAssistantConfig.TOOLS],
+					top_p: OpenAIAssistantConfig.TOP_P,
 				}));
 
 			this.logger.info(

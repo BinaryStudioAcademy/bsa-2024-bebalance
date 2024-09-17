@@ -1,10 +1,10 @@
 import {
 	type OpenAiRequestMessage,
-	OpenAiRoleKey,
+	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { ChangeTaskPromptTemplates } from "./change-task-message.enum.js";
+import { ChangeTaskPromptTemplates } from "./change-task-template.enum.js";
 
 function generaChangeTaskPrompt(
 	task: TaskCreateDto,
@@ -13,7 +13,7 @@ function generaChangeTaskPrompt(
 	/* eslint-disable perfectionist/sort-objects */
 	return {
 		content: JSON.stringify({ context, task }),
-		role: OpenAiRoleKey.USER,
+		role: OpenAIRoleKey.USER,
 	};
 }
 

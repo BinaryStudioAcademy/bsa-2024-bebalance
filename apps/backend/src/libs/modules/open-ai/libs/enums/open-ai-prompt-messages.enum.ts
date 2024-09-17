@@ -1,4 +1,4 @@
-const OpenAiPromptTemplates = {
+const OpenAIPromptTemplate = {
 	ASSISTANT_INSTRUCTION: `
 You are an instructor responsible for analyzing the user's preferences and scores based on the Wheel of Balance.
 The Wheel of Balance helps the user prioritize various areas of their life, such as health, career, relationships,
@@ -19,4 +19,4 @@ After this stage, you will generate appropriate tasks for improvement later.
 `,
 } as const;
 
-export { OpenAiPromptTemplates };
+export { OpenAIPromptTemplate };
