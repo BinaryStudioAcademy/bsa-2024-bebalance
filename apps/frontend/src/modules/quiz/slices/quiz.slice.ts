@@ -91,6 +91,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.userAnswers = action.payload;
+			state.currentCategoryIndex = ZERO_INDEX;
 			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.pending, (state) => {

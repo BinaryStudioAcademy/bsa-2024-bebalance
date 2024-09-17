@@ -13,8 +13,7 @@ const categoryIds = z.object({
 			CategoriesValidationRegexRule.QUERY_IS_STRINGIFIED_INTEGERS_ARRAY,
 			CategoriesValidationMessage.NOT_INTEGER_ARRAY,
 		)
-		.optional()
-		.or(z.literal("")),
+		.optional(),
 });
 
 export { categoryIds };
