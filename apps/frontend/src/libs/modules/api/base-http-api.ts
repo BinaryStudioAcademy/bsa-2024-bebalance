@@ -66,9 +66,9 @@ class BaseHTTPApi implements HTTPApi {
 		hasAuth: boolean,
 	): Promise<Headers> {
 		const headers = new Headers();
-		const isMultipartFormData = contentType !== ContentType.MULTIPART_FORM_DATA;
+		const isMultipartFormData = contentType === ContentType.MULTIPART_FORM_DATA;
 
-		if (isMultipartFormData) {
+		if (!isMultipartFormData) {
 			headers.append(HTTPHeader.CONTENT_TYPE, contentType);
 		}
 
