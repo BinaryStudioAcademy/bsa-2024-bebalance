@@ -203,6 +203,43 @@ class QuizController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /quiz/questions:
+	 *   get:
+	 *     summary: Get all quiz questions
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: query
+	 *         name: categoryIds
+	 *         schema:
+	 *           type: string
+	 *           items:
+	 *             type: string
+	 *         description: Array of category IDs to filter the quiz questions (optional)
+	 *         required: false  # Optional parameter
+	 *         example: [3, 6]
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/QuizQuestionDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
+
 	private async findQuestions(
 		options: APIHandlerOptions<{ query: CategoriesGetRequestQueryDto }>,
 	): Promise<APIHandlerResponse> {

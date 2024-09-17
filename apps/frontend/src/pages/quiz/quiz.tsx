@@ -23,7 +23,7 @@ import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const step = useAppSelector(({ quiz }) => quiz.step);
+	const { isRetakingQuiz, step } = useAppSelector(({ quiz }) => quiz);
 
 	const handleNextStep = useCallback((): void => {
 		dispatch(quizActions.nextStep());
@@ -42,10 +42,10 @@ const Quiz: React.FC = () => {
 	);
 
 	useEffect(() => {
-		if (hasAnsweredOnboardingQuestions) {
+		if (hasAnsweredOnboardingQuestions && isRetakingQuiz) {
 			dispatch(quizActions.setStep(Step.INTRODUCTION));
 		}
-	}, [dispatch, hasAnsweredOnboardingQuestions]);
+	}, [dispatch, hasAnsweredOnboardingQuestions, isRetakingQuiz]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {

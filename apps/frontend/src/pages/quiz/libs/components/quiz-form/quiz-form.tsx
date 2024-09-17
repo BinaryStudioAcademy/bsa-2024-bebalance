@@ -21,6 +21,7 @@ import {
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "../../constants/constants.js";
+import { Step } from "../../enums/enums.js";
 import { getQuizDefaultValues } from "../../helpers/helpers.js";
 import { type QuizFormValues } from "../../types/types.js";
 import { extractCategoryIdsFromQuestions } from "./libs/helpers/helpers.js";
@@ -123,8 +124,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					);
 
 					void dispatch(quizActions.saveAnswers({ answerIds, categoryIds }));
-					onNext();
-					onNext();
+					void dispatch(quizActions.setStep(Step.BALANCE_WHEEL));
 				} else {
 					void dispatch(quizActions.saveAnswers({ answerIds }));
 
