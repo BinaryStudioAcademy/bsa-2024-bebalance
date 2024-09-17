@@ -21,5 +21,5 @@ export {
 	type OpenAiResponseMessage,
 	type OpenAiRunThreadRequestDto,
 } from "./libs/types/types.js";
-export { AiAssistantMessageValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { AIAssistantMessageValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { type OpenAi } from "./open-ai.module.js";

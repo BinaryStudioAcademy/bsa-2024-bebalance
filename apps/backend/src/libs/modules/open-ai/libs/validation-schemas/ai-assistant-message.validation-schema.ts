@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const AiAssistantMessage = z.object({
+const openAIAssistantMessage = z.object({
 	content: z
 		.array(
 			z.object({
@@ -14,4 +14,4 @@ const AiAssistantMessage = z.object({
 	id: z.string(),
 });
 
-export { AiAssistantMessage };
+export { openAIAssistantMessage };

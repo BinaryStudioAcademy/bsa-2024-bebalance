@@ -2,7 +2,7 @@ import { type z } from "zod";
 
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
-	AiAssistantMessageValidationSchema,
+	AIAssistantMessageValidationSchema,
 	type OpenAiResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
@@ -21,7 +21,7 @@ const generateChangeTaskSuggestionsResponse = (
 		return null;
 	}
 
-	const parsedResult = AiAssistantMessageValidationSchema.safeParse(message);
+	const parsedResult = AIAssistantMessageValidationSchema.safeParse(message);
 
 	if (!parsedResult.success) {
 		return null;
