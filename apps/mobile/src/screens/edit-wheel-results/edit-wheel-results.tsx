@@ -17,12 +17,20 @@ import {
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type CategoriesSelectedRequestDto } from "~/libs/types/types";
+import {
+	type CategoriesSelectedRequestDto,
+	type ValueOf,
+} from "~/libs/types/types";
 import { type QuizScoresUpdateRequestDto } from "~/packages/quiz/quiz";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { ScoresEditForm } from "./libs/components/componets";
 import { styles } from "./styles";
+
+const EditWheelResultsTabs = {
+	EDIT_MANUALLY: "Edit manually",
+	RETAKE_QUIZ: "Retake Quiz",
+};
 
 const EditWheelResults: React.FC = () => {
 	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<number[]>(
@@ -38,11 +46,15 @@ const EditWheelResults: React.FC = () => {
 		[dispatch],
 	);
 
-	const [activeTab, setActiveTab] = useState<string>("Edit manually");
+	const [activeTab, setActiveTab] = useState<
+		ValueOf<typeof EditWheelResultsTabs>
+	>(EditWheelResultsTabs.EDIT_MANUALLY);
 
 	const handleTabChange = useCallback(() => {
 		setActiveTab((previousTab) =>
-			previousTab === "Edit manually" ? "Retake Quiz" : "Edit manually",
+			previousTab === EditWheelResultsTabs.EDIT_MANUALLY
+				? EditWheelResultsTabs.RETAKE_QUIZ
+				: EditWheelResultsTabs.EDIT_MANUALLY,
 		);
 	}, []);
 
@@ -73,11 +85,14 @@ const EditWheelResults: React.FC = () => {
 						<PageSwitcher
 							activeTab={activeTab}
 							onTabChange={handleTabChange}
-							tabs={["Edit manually", "Retake Quiz"]}
+							tabs={[
+								EditWheelResultsTabs.EDIT_MANUALLY,
+								EditWheelResultsTabs.RETAKE_QUIZ,
+							]}
 						/>
 					</View>
 
-					{activeTab === "Edit manually" ? (
+					{activeTab === EditWheelResultsTabs.EDIT_MANUALLY ? (
 						<ScrollView>
 							<ScoresEditForm data={scores} onSubmit={handleEditScores} />
 						</ScrollView>
