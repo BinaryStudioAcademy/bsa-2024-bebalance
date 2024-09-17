@@ -1,28 +1,16 @@
-.container {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
 .message-container {
-	max-width: 620px;
-	padding: 13px;
-	background-color: #f6f5fa;
-
-	/* border-radius: 0px 10px 10px; */
-}
-
-.button-container {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
-	align-items: center;
+	justify-content: center;
+	max-width: 730px;
+	padding: 15px;
+	background-color: var(--background-gray);
+	border-radius: 0 10px 10px;
 }
 
-.button {
-	width: 200px;
-	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid var(--blue-accent);
-	border-radius: 30px;
+.content {
+	display: flex;
+	justify-content: center;
+	padding: 15px;
+	border-radius: 0 10px 10px;
 }

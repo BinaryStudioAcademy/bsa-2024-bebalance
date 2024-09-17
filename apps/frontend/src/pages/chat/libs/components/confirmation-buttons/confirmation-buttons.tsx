@@ -1,3 +1,7 @@
+import { Button } from "~/libs/components/components.js";
+
+import styles from "./styles.module.css";
+
 type Properties = {
 	handleNo: () => void;
 	handleYes: () => void;
@@ -12,9 +16,9 @@ const ConfirmationButtons: React.FC<Properties> = ({
 	yesButtonLabel,
 }: Properties) => {
 	return (
-		<div>
-			<button onClick={handleYes}>{yesButtonLabel}</button>
-			<button onClick={handleNo}>{noButtonLabel}</button>
+		<div className={styles["button-container"]}>
+			<Button label={yesButtonLabel} onClick={handleYes} variant="secondary" />
+			<Button label={noButtonLabel} onClick={handleNo} variant="secondary" />
 		</div>
 	);
 };

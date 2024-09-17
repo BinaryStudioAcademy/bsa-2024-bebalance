@@ -4,27 +4,8 @@
 	gap: 10px;
 }
 
-.message-container {
-	max-width: 620px;
-	padding: 13px;
-	background-color: #f6f5fa;
-
-	/* border-radius: 0px 10px 10px; */
-}
-
 .page-container {
 	display: flex;
 	justify-content: space-between;
 	padding: 24px;
-}
-
-.quiz-form-container {
-	display: flex;
-	flex-direction: column;
-	min-width: 400px;
-	padding: 24px 32px;
-	text-align: center;
-	border: 2px solid var(--light-gray);
-	border-radius: 24px;
-	box-shadow: 0 0 4px var(--light-blue);
 }
