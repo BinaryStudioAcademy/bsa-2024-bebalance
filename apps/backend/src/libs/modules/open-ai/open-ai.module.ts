@@ -8,6 +8,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import {
 	OpenAIAssistantConfig,
 	OpenAIErrorMessage,
+	OpenAIRunStatus,
 } from "./libs/enums/enums.js";
 import { OpenAIError } from "./libs/exceptions/exceptions.js";
 import {
@@ -87,7 +88,7 @@ class OpenAi {
 			tool_calls.map(
 				async ({
 					function: toolFunction,
-					function: { arguments: arguments_ },
+					function: { arguments: toolArguments },
 					id,
 				}) => {
 					if (toolFunction.name !== functionName) {
@@ -101,7 +102,7 @@ class OpenAi {
 							{
 								tool_outputs: [
 									{
-										output: arguments_,
+										output: toolArguments,
 										tool_call_id: id,
 									},
 								],
@@ -127,9 +128,9 @@ class OpenAi {
 		run: OpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
 	): Promise<OpenAiResponseMessage> {
-		if (run.status === "completed") {
+		if (run.status === OpenAIRunStatus.COMPLETED) {
 			return await this.getAllMessages(threadId);
-		} else if (run.status === "requires_action") {
+		} else if (run.status === OpenAIRunStatus.REQUIRE_ACTIONS) {
 			await this.handleRequiresAction(run, functionName);
 
 			return await this.getAllMessages(threadId);
@@ -232,7 +233,9 @@ class OpenAi {
 			const runs = await this.openAi.beta.threads.runs.list(threadId);
 
 			const pendingRuns = runs.data.filter(
-				(run) => run.status === "in_progress" || run.status === "queued",
+				(run) =>
+					run.status === OpenAIRunStatus.IN_PROGRESS ||
+					run.status === OpenAIRunStatus.QUEUED,
 			);
 
 			for (const run of pendingRuns) {
