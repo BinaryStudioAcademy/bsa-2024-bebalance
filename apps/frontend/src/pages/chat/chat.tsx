@@ -3,6 +3,7 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useMemo,
 } from "~/libs/hooks/hooks.js";
 import {
 	actions as chatActions,
@@ -16,10 +17,15 @@ import styles from "./styles.module.css";
 const ChatComponent: React.FC = () => {
 	const dispatch = useAppDispatch();
 
-	const { scores } = useAppSelector((state) => state.quiz);
-	const { quizCategories } = useAppSelector(({ categories }) => ({
-		quizCategories: categories.items,
-	}));
+	const { messages, quizCategories, scores, selectedCategories, threadId } =
+		useAppSelector((state) => ({
+			messages: state.chat.messages,
+			quizCategories: state.categories.items,
+			scores: state.quiz.scores,
+			selectedCategories: state.chat.selectedCategories,
+			threadId: state.chat.threadId,
+		}));
+
 	const chartData = scores.map((score) => {
 		return {
 			data: score.score,
@@ -27,32 +33,26 @@ const ChatComponent: React.FC = () => {
 		};
 	});
 
-	useEffect(() => {
-		void dispatch(quizActions.getScores());
-	}, [dispatch]);
+	const formattedCategories = selectedCategories.map((category) => {
+		return {
+			categoryId: category.categoryId,
+			categoryName: category.categoryName,
+		};
+	});
 
-	const { messages, selectedCategories, threadId } = useAppSelector(
-		({ chat }) => ({
-			messages: chat.messages,
-			selectedCategories: chat.selectedCategories,
-			threadId: chat.threadId,
+	const contentData = useMemo(
+		() => ({
+			chartData,
+			selectedCategories: {
+				categories: formattedCategories,
+				threadId: threadId ?? "",
+			},
 		}),
+		[chartData, formattedCategories, threadId],
 	);
 
-	const formattedCategories = selectedCategories.map((category) => ({
-		categoryId: category.categoryId,
-		categoryName: category.categoryName,
-	}));
-
-	const contentData = {
-		chartData,
-		selectedCategories: {
-			categories: formattedCategories,
-			threadId: threadId ?? "",
-		},
-	};
-
 	useEffect(() => {
+		void dispatch(quizActions.getScores());
 		void dispatch(chatActions.initConversation());
 	}, [dispatch]);
 
@@ -64,6 +64,7 @@ const ChatComponent: React.FC = () => {
 					categoryId: category.id,
 					categoryName: category.name,
 				}));
+
 			dispatch(chatActions.updateSelectedCategories(newSelectedCategories));
 
 			const taskPayload: TaskSuggestionRequestDto = {
@@ -92,9 +93,10 @@ const ChatComponent: React.FC = () => {
 							<ChatMessage
 								buttonLabels={message.buttonLabels ?? []}
 								contentData={contentData}
-								key={message.text}
+								key={message.message}
 								onFormSubmit={handleFormSubmitWrapper}
-								text={message.text}
+								// taskList={message.tasks ?? []}
+								text={message.message}
 								type={message.type}
 							/>
 						);

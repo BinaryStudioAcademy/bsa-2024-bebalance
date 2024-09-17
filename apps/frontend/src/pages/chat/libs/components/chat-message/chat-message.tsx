@@ -4,34 +4,36 @@ import {
 } from "~/libs/components/components.js";
 import { INDEX_ONE, ZERO_INDEX } from "~/libs/enums/enums.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
+import { type ValueOf } from "~/libs/types/types.js";
+import {
+	ChatMessageType,
+	type TaskSuggestionRequestDto,
+} from "~/modules/chat/chat.js";
+// import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 
 import { handleButtonAction } from "../../helpers/helpers.js";
+import { type ChartDataType } from "../../types/types.js";
 import { ConfirmationButtons } from "../confirmation-buttons/confirmation-buttons.js";
+import { TaskListContainer } from "../task-list-container/task-list-container.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	buttonLabels?: string[];
 	contentData: {
-		chartData: { data: number; label: string }[];
-		selectedCategories: {
-			categories: { categoryId: number; categoryName: string }[];
-			threadId: string;
-		};
+		chartData: ChartDataType[];
+		selectedCategories: TaskSuggestionRequestDto;
 	};
 	onFormSubmit?: (payload: { categoryIds: number[] }) => void;
+	// taskList: TaskCreateDto[];
 	text: string;
-	type:
-		| "categoryForm"
-		| "confirmationButtons"
-		| "taskList"
-		| "text"
-		| "wheelAnalysis";
+	type: ValueOf<typeof ChatMessageType>;
 };
 
 const ChatMessage: React.FC<Properties> = ({
 	buttonLabels = [],
 	contentData,
 	onFormSubmit,
+	// taskList,
 	text,
 	type,
 }: Properties) => {
@@ -51,7 +53,7 @@ const ChatMessage: React.FC<Properties> = ({
 
 	const renderContent = (): JSX.Element | null => {
 		switch (type) {
-			case "categoryForm": {
+			case ChatMessageType.CATEGORY_FORM: {
 				return onFormSubmit ? (
 					<QuizCategoriesForm
 						buttonLabel={buttonLabels[ZERO_INDEX] ?? ""}
@@ -60,7 +62,7 @@ const ChatMessage: React.FC<Properties> = ({
 				) : null;
 			}
 
-			case "confirmationButtons": {
+			case ChatMessageType.CONFIRMATION_BUTTONS: {
 				return (
 					<ConfirmationButtons
 						handleNo={handleNo}
@@ -71,12 +73,12 @@ const ChatMessage: React.FC<Properties> = ({
 				);
 			}
 
-			case "wheelAnalysis": {
+			case ChatMessageType.WHEEL_ANALYSIS: {
 				return <BalanceWheelChart data={contentData.chartData} />;
 			}
 
-			case "taskList": {
-				return <div>Task list</div>;
+			case ChatMessageType.TASK_LIST: {
+				return <TaskListContainer />;
 			}
 
 			default: {
@@ -89,8 +91,8 @@ const ChatMessage: React.FC<Properties> = ({
 
 	return (
 		<li className={styles["message-container"]} key={text}>
-			{text}
-			{content}
+			<p>{text}</p>
+			{content && <div className={styles["content"]}>{content}</div>}
 		</li>
 	);
 };

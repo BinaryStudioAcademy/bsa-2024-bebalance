@@ -1,21 +1,24 @@
 import { type AppDispatch } from "~/libs/hooks/hooks.js";
-import { type TaskSuggestionRequestDto } from "~/modules/chat/chat.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import { type ValueOf } from "~/libs/types/types.js";
+import {
+	actions as chatActions,
+	type TaskSuggestionRequestDto,
+} from "~/modules/chat/chat.js";
 
-type ActionType = "getCategoryForm" | "getTasks";
+import { ChatButtonAction } from "../enums/enums.js";
 
 const handleButtonAction = async (
 	dispatch: AppDispatch,
-	actionType: ActionType,
+	actionType: ValueOf<typeof ChatButtonAction>,
 	payload?: TaskSuggestionRequestDto,
 ): Promise<void> => {
 	switch (actionType) {
-		case "getCategoryForm": {
+		case ChatButtonAction.GET_CATEGORY_FORM: {
 			dispatch(chatActions.addCategoryCheckboxMessage());
 			break;
 		}
 
-		case "getTasks": {
+		case ChatButtonAction.GET_TASKS: {
 			await dispatch(
 				chatActions.getTasksForCategories(payload as TaskSuggestionRequestDto),
 			);

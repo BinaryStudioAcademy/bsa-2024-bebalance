@@ -3,8 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
-import { type Message } from "../libs/types/message.type.js";
-import { type SimplifiedQuizScoreDto } from "../libs/types/types.js";
+import { ChatButtonLabels, ChatMessageType } from "../libs/enums/enums.js";
+import {
+	type Message,
+	type SimplifiedQuizScoreDto,
+} from "../libs/types/types.js";
 import { getTasksForCategories, initConversation } from "./actions.js";
 
 type State = {
@@ -32,17 +35,21 @@ const { actions, name, reducer } = createSlice({
 				state.threadId = action.payload.threadId;
 				state.messages.push(
 					{
-						text: action.payload.messages.greeting,
-						type: "text",
+						message: action.payload.messages.greeting,
+						type: ChatMessageType.TEXT,
+					},
+
+					{
+						message: action.payload.messages.comments,
+						type: ChatMessageType.WHEEL_ANALYSIS,
 					},
 					{
-						text: action.payload.messages.comments,
-						type: "wheelAnalysis",
-					},
-					{
-						buttonLabels: ["✅  Yes, 3 lowest", "🚫  No smth else"],
-						text: action.payload.messages.question,
-						type: "confirmationButtons",
+						buttonLabels: [
+							ChatButtonLabels.YES_LOWEST,
+							ChatButtonLabels.NO_DIFFERENT,
+						],
+						message: action.payload.messages.question,
+						type: ChatMessageType.CONFIRMATION_BUTTONS,
 					},
 				);
 				state.dataStatus = DataStatus.FULFILLED;
@@ -55,11 +62,9 @@ const { actions, name, reducer } = createSlice({
 			})
 			.addCase(getTasksForCategories.fulfilled, (state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
-				const { message, tasks } = action.payload;
 				state.messages.push({
-					taskList: tasks,
-					text: message,
-					type: "taskList",
+					...action.payload,
+					type: ChatMessageType.TASK_LIST,
 				});
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
@@ -71,9 +76,9 @@ const { actions, name, reducer } = createSlice({
 	reducers: {
 		addCategoryCheckboxMessage(state) {
 			state.messages.push({
-				buttonLabels: ["Accept categories"],
-				text: "What categories do you want to work on?",
-				type: "categoryForm",
+				buttonLabels: [ChatButtonLabels.ACCEPT_CATEGORIES],
+				message: "What categories do you want to work on?",
+				type: ChatMessageType.CATEGORY_FORM,
 			});
 		},
 		updateSelectedCategories(
