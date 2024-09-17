@@ -32,10 +32,12 @@ const generateScoresResponse = (
 	) as BalanceAnalysisData;
 
 	return {
-		lowestCategories: resultData.lowestCategories.map((category) => ({
-			categoryId: category.categoryId,
-			categoryName: category.categoryName,
-		})),
+		lowestCategories: resultData.lowestCategories.map((category) => {
+			return {
+				categoryId: category.categoryId,
+				categoryName: category.categoryName,
+			};
+		}),
 		messages: {
 			comments: resultData.messages.comments,
 			greeting: resultData.messages.greeting,

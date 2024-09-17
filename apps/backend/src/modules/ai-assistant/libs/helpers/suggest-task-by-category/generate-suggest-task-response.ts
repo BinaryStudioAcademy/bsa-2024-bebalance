@@ -34,13 +34,15 @@ const generateTaskSuggestionsResponse = (
 
 	return {
 		message: resultData.message,
-		tasks: resultData.tasks.map((task) => ({
-			categoryId: task.categoryId,
-			categoryName: task.categoryName,
-			description: task.description,
-			dueDate: taskDeadLine,
-			label: task.label,
-		})),
+		tasks: resultData.tasks.map((task) => {
+			return {
+				categoryId: task.categoryId,
+				categoryName: task.categoryName,
+				description: task.description,
+				dueDate: taskDeadLine,
+				label: task.label,
+			};
+		}),
 	};
 };
 
