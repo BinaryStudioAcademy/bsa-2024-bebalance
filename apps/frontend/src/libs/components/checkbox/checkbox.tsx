@@ -17,6 +17,7 @@ type Properties<T extends FieldValues, OptionValueT extends number | string> = {
 	layout?: "column" | "wrap";
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	options: InputOption<OptionValueT>[];
+	tip?: string;
 } & FormFieldProperties<T>;
 
 const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
@@ -28,6 +29,7 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 	name,
 	onChange,
 	options,
+	tip,
 }: Properties<T, OptionValueT>): JSX.Element => {
 	const { field } = useFormController({ control, name });
 	const { onChange: onFieldChange, value } = field;
@@ -36,6 +38,8 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 	const variantStyle = isRounded
 		? styles["rounded-checkbox"]
 		: styles["rectangular-checkbox"];
+
+	const hasTip = Boolean(tip);
 
 	const handleCheckboxesChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -77,6 +81,14 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 			>
 				{label}
 			</p>
+			<i
+				className={getValidClassNames(
+					styles["tip"],
+					!hasTip && "visually-hidden",
+				)}
+			>
+				{tip}
+			</i>
 			<section
 				className={getValidClassNames(styles["options-container"], layoutStyle)}
 			>

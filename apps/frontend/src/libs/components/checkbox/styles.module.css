@@ -6,7 +6,7 @@
 }
 
 .main-label {
-	margin-bottom: 12px;
+	margin-bottom: 6px;
 	font-size: 20px;
 	line-height: 1.4;
 }
@@ -87,4 +87,9 @@
 		var(--light-brand) 130%
 	);
 	border: none;
+}
+
+.tip {
+	font-size: 15px;
+	line-height: 1.4;
 }
