@@ -34,7 +34,7 @@ const getScores = createAsyncThunk<
 	QuizScoresGetAllResponseDto,
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/score`, async (_, { extra }) => {
+>(`${sliceName}/get-scores`, async (_, { extra }) => {
 	const { quizApi } = extra;
 
 	return await quizApi.getScores();
