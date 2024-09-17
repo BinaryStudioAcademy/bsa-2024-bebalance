@@ -101,7 +101,7 @@ class QuizQuestionService implements Service {
 			return await this.findAll();
 		}
 
-		const questions = await this.quizQuestionRepository.findByIds(
+		const questions = await this.quizQuestionRepository.findByCategoryIds(
 			JSON.parse(query.categoryIds) as number[],
 		);
 

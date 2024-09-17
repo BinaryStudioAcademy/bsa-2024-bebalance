@@ -112,7 +112,9 @@ class QuizQuestionRepository implements Repository {
 		);
 	}
 
-	public async findByIds(categoryIds: number[]): Promise<QuizQuestionEntity[]> {
+	public async findByCategoryIds(
+		categoryIds: number[],
+	): Promise<QuizQuestionEntity[]> {
 		const questions = await this.quizQuestionModel
 			.query()
 			.whereIn("categoryId", categoryIds)
