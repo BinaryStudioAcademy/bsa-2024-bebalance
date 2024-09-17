@@ -1,4 +1,3 @@
-import defaultAvatar from "~/assets/img/default-avatar.png";
 import { Loader } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import {
@@ -16,6 +15,7 @@ import {
 } from "~/modules/users/users.js";
 
 import {
+	UpdateAvatarForm,
 	UpdatePasswordForm,
 	UpdateUserForm,
 } from "./libs/components/components.js";
@@ -56,6 +56,13 @@ const Profile: React.FC = () => {
 		[dispatch, user],
 	);
 
+	const handleUploadAvatarSubmit = useCallback(
+		(payload: FormData): void => {
+			void dispatch(usersActions.uploadAvatar(payload));
+		},
+		[dispatch],
+	);
+
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
@@ -65,11 +72,7 @@ const Profile: React.FC = () => {
 				<div className={styles["page-container"]}>
 					<h4 className={styles["title"]}>Profile</h4>
 					<div className={styles["content-container"]}>
-						<img
-							alt={`${user.name}'s avatar`}
-							className={styles["user-avatar"]}
-							src={defaultAvatar}
-						/>
+						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
 					</div>
 					<h4 className={styles["title-password"]}>Change your password</h4>

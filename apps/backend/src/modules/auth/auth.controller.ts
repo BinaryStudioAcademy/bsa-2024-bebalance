@@ -23,6 +23,48 @@ import {
 import { type AuthService } from "./auth.service.js";
 import { AuthApiPath } from "./libs/enums/enums.js";
 
+/**
+ * @swagger
+ * tags:
+ *   - name: auth
+ *     description: Endpoints related to authentication
+ * components:
+ *   schemas:
+ *     ErrorTypeEnum:
+ *       type: string
+ *       enum: [COMMON, VALIDATION]
+ *     CommonErrorResponse:
+ *       type: object
+ *       properties:
+ *         errorType:
+ *           $ref: "#/components/schemas/ErrorTypeEnum"
+ *           example: COMMON
+ *         message:
+ *           type: string
+ *           example: "Error message"
+ *     ValidationErrorResponse:
+ *       type: object
+ *       properties:
+ *         details:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               message:
+ *                 type: string
+ *                 example: "This field is required"
+ *               path:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   example: ["email"]
+ *         errorType:
+ *           $ref: "#/components/schemas/ErrorTypeEnum"
+ *           example: VALIDATION
+ *         message:
+ *           type: string
+ *           example: "Error message"
+ */
 class AuthController extends BaseController {
 	private authService: AuthService;
 
@@ -121,6 +163,34 @@ class AuthController extends BaseController {
 		});
 	}
 
+	/**
+	 * @swagger
+	 * /auth/check-reset-password-expiration:
+	 *   get:
+	 *     tags: [auth]
+	 *     summary: Check if reset password link is expired
+	 *     parameters:
+	 *       - name: token
+	 *         in: query
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *           example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *     responses:
+	 *       200:
+	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: boolean
+	 *               example: true
+	 *       401:
+	 *         description: Token expired
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
 	private async checkIsResetPasswordExpired(
 		options: APIHandlerOptions<{
 			query: ResetPasswordLinkDto;
@@ -138,14 +208,40 @@ class AuthController extends BaseController {
 	 * @swagger
 	 * /auth/forgot-password:
 	 *   post:
-	 *     description: Return authenticated user
-	 *     security:
-	 *       - bearerAuth: []
+	 *     tags: [auth]
+	 *     summary: Request reset password
+	 *     description: Will send reset password link to given email
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               email:
+	 *                 type: string
+	 *                 format: email
 	 *     responses:
 	 *       200:
 	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: boolean
+	 *               example: true
+	 *       401:
+	 *         description: Email not found
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
-
 	private async forgotPassword(
 		options: APIHandlerOptions<{
 			body: EmailDto;
@@ -161,7 +257,8 @@ class AuthController extends BaseController {
 	 * @swagger
 	 * /auth/authenticated-user:
 	 *   get:
-	 *     description: Return authenticated user
+	 *     tags: [auth]
+	 *     summary: Get authenticated user
 	 *     security:
 	 *       - bearerAuth: []
 	 *     responses:
@@ -170,8 +267,13 @@ class AuthController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               type: object
-	 *               $ref: "#/components/schemas/User"
+	 *               $ref: "#/components/schemas/UserDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private getAuthenticatedUser(
 		options: APIHandlerOptions<{
@@ -187,15 +289,44 @@ class AuthController extends BaseController {
 	/**
 	 * @swagger
 	 * /auth/reset-password:
-	 *   post:
-	 *     description: Return authenticated user
-	 *     security:
-	 *       - bearerAuth: []
+	 *   patch:
+	 *     tags: [auth]
+	 *     summary: Reset user password
+	 *     description: Will update user password with a new one
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               jwtToken:
+	 *                 type: string
+	 *                 example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *               newPassword:
+	 *                 type: string
+	 *                 example: "123newPass"
 	 *     responses:
 	 *       200:
 	 *         description: Successfull operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: boolean
+	 *               example: true
+	 *       401:
+	 *         description: Invalid token
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
-
 	private async resetPassword(
 		options: APIHandlerOptions<{
 			body: ResetPasswordDto;
@@ -210,36 +341,49 @@ class AuthController extends BaseController {
 	/**
 	 * @swagger
 	 * /auth/sign-in:
-	 *    post:
-	 *      description: Sign in user into the system
-	 *      requestBody:
-	 *        description: User auth data
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                email:
-	 *                  type: string
-	 *                  format: email
-	 *                password:
-	 *                  type: string
-	 *                  example: s3cr3tpass
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  user:
-	 *                    $ref: "#/components/schemas/User"
-	 *                  token:
-	 *                    type: string
-	 *                    description: "Authentication token for the user."
-	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *   post:
+	 *     tags: [auth]
+	 *     summary: Authenticate with email and password
+	 *     requestBody:
+	 *       description: User credentials
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               email:
+	 *                 type: string
+	 *                 format: email
+	 *               password:
+	 *                 type: string
+	 *                 example: s3cr3tpass
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 token:
+	 *                   type: string
+	 *                   description: "Authentication token for the user."
+	 *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *                 user:
+	 *                   $ref: "#/components/schemas/UserDto"
+	 *       401:
+	 *         description: Invalid credentials
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async signIn(
 		options: APIHandlerOptions<{
@@ -255,41 +399,47 @@ class AuthController extends BaseController {
 	/**
 	 * @swagger
 	 * /auth/sign-up:
-	 *    post:
-	 *      description: Sign up user into the system
-	 *      requestBody:
-	 *        description: User auth data
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                email:
-	 *                  type: string
-	 *                  format: email
-	 *                name:
-	 *                  type: string
-	 *                  example: username
-	 *                password:
-	 *                  type: string
-	 *                  example: s3cr3tpass
-	 *      responses:
-	 *        201:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  user:
-	 *                    $ref: "#/components/schemas/User"
-	 *                  token:
-	 *                    type: string
-	 *                    description: "Authentication token for the user."
-	 *                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *   post:
+	 *     tags: [auth]
+	 *     summary: Register as new user
+	 *     requestBody:
+	 *       description: New user data
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               email:
+	 *                 type: string
+	 *                 format: email
+	 *               name:
+	 *                 type: string
+	 *                 example: username
+	 *               password:
+	 *                 type: string
+	 *                 example: s3cr3tpass
+	 *     responses:
+	 *       201:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 token:
+	 *                   type: string
+	 *                   description: "Authentication token for the user."
+	 *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."
+	 *                 user:
+	 *                   $ref: "#/components/schemas/UserDto"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
-
 	private async signUp(
 		options: APIHandlerOptions<{
 			body: UserSignUpRequestDto;
