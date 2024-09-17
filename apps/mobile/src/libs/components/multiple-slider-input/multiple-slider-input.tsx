@@ -30,16 +30,16 @@ const MultipleSliderInput = <T extends FieldValues>({
 	const handleSliderChange = useCallback(
 		(categoryId: number, score: number) => {
 			const currentItems: ScoreItem[] = value || [];
-			const existingItemIndex = currentItems.findIndex(
-				(item) => item.categoryId === categoryId,
-			);
+			const existingItemIndex = currentItems.findIndex((item) => {
+				return item.categoryId === categoryId;
+			});
 
 			const updatedItems =
 				existingItemIndex === NO_ITEM_INDEX
 					? [...currentItems, { categoryId, score }]
-					: currentItems.map((item, index) =>
-							index === existingItemIndex ? { ...item, score } : item,
-						);
+					: currentItems.map((item, index) => {
+							return index === existingItemIndex ? { ...item, score } : item;
+						});
 
 			onChange(updatedItems);
 		},
@@ -48,13 +48,15 @@ const MultipleSliderInput = <T extends FieldValues>({
 
 	return (
 		<View>
-			{data.map((item) => (
-				<SliderContent
-					data={item}
-					key={item.id}
-					onValueChange={handleSliderChange}
-				/>
-			))}
+			{data.map((item) => {
+				return (
+					<SliderContent
+						data={item}
+						key={item.id}
+						onValueChange={handleSliderChange}
+					/>
+				);
+			})}
 		</View>
 	);
 };
