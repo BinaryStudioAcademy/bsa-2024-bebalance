@@ -16,7 +16,7 @@ const UpdateAvatarForm: React.FC<Properties> = ({
 	onSubmit,
 	user,
 }: Properties) => {
-	const fileInputReference = useRef<HTMLInputElement>(null);
+	const fileInputReference = useRef<HTMLInputElement | null>(null);
 
 	const handleFormChange: React.FormEventHandler = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>): void => {
