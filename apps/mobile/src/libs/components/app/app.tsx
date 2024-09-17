@@ -6,16 +6,29 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider as StoreProvider } from "react-redux";
 
 import { ToastMessage } from "~/libs/components/components";
+import { RootScreenName } from "~/libs/enums/enums";
 import { store } from "~/libs/packages/store/store";
 import { globalStyles } from "~/libs/styles/styles";
 import { Root as RootNavigation } from "~/navigations/navigations";
+
+const linking = {
+	config: {
+		screens: {
+			[RootScreenName.FORGOT_PASSWORD]: "Forgot Password",
+			[RootScreenName.RESET_PASSWORD]: "/reset-password",
+			[RootScreenName.SIGN_IN]: "Sign In",
+			[RootScreenName.SIGN_UP]: "Sign Up",
+		},
+	},
+	prefixes: ["app://bebalance", "http://localhost:8081"],
+};
 
 const App: FC = () => {
 	return (
 		<StoreProvider store={store.instance}>
 			<GestureHandlerRootView style={globalStyles.flex1}>
 				<SafeAreaProvider>
-					<NavigationContainer>
+					<NavigationContainer linking={linking}>
 						<RootNavigation />
 						<ToastMessage />
 					</NavigationContainer>
