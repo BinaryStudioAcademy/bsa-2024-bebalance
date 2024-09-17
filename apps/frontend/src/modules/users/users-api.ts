@@ -66,6 +66,20 @@ class UsersApi extends BaseHTTPApi {
 
 		return await response.json<UserDto>();
 	}
+
+	public async uploadAvatar(payload: FormData): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.AVATAR, {}),
+			{
+				contentType: ContentType.MULTIPART_FORM_DATA,
+				hasAuth: true,
+				method: "POST",
+				payload,
+			},
+		);
+
+		return await response.json<UserDto>();
+	}
 }
 
 export { UsersApi };

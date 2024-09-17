@@ -1,4 +1,4 @@
-import { type ContentType, ServerErrorType } from "~/libs/enums/enums.js";
+import { ContentType, ServerErrorType } from "~/libs/enums/enums.js";
 import { configureString } from "~/libs/helpers/helpers.js";
 import {
 	type HTTP,
@@ -66,8 +66,11 @@ class BaseHTTPApi implements HTTPApi {
 		hasAuth: boolean,
 	): Promise<Headers> {
 		const headers = new Headers();
+		const isMultipartFormData = contentType === ContentType.MULTIPART_FORM_DATA;
 
-		headers.append(HTTPHeader.CONTENT_TYPE, contentType);
+		if (!isMultipartFormData) {
+			headers.append(HTTPHeader.CONTENT_TYPE, contentType);
+		}
 
 		if (hasAuth) {
 			const token = await this.storage.get<string>(StorageKey.TOKEN);
