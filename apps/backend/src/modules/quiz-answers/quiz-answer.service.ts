@@ -10,7 +10,6 @@ import {
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { INITIAL_STATISTIC_VALUE } from "./libs/constants/constants.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
-import { extractIdsFromAnswerEntities } from "./libs/helpers/helpers.js";
 import {
 	type CategoryStatistic,
 	type QuizAnswerDto,
@@ -39,7 +38,7 @@ class QuizAnswerService implements Service {
 		this.quizQuestionService = quizQuestionService;
 	}
 
-	public convertAnswerEntityToDto(
+	private convertAnswerEntityToDto(
 		answerEntity: QuizAnswerEntity,
 	): QuizAnswerDto {
 		const answer = answerEntity.toObject();
@@ -53,6 +52,20 @@ class QuizAnswerService implements Service {
 			...answer,
 			userAnswers,
 		};
+	}
+
+	private extractIdsFromAnswerEntities(
+		answerEntities: QuizAnswerEntity[],
+	): number[] {
+		const answerIds: number[] = [];
+
+		for (const answerEntity of answerEntities) {
+			const answer = answerEntity.toObject();
+
+			answerIds.push(answer.id);
+		}
+
+		return answerIds;
 	}
 
 	public async create(payload: QuizAnswerRequestDto): Promise<QuizAnswerDto> {
@@ -202,7 +215,8 @@ class QuizAnswerService implements Service {
 			});
 		}
 
-		const existingAnswersIds = extractIdsFromAnswerEntities(existingAnswers);
+		const existingAnswersIds =
+			this.extractIdsFromAnswerEntities(existingAnswers);
 
 		await this.quizAnswerRepository.deleteUserAnswersByAnswerIds(
 			userId,
