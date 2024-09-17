@@ -41,7 +41,7 @@ const Wheel: React.FC = () => {
 
 	return (
 		<ScreenWrapper style={{ backgroundColor: BaseColor.BG_WHITE }}>
-			<View style={[globalStyles.m16]}>
+			<View style={globalStyles.m16}>
 				<Text preset="subheading" weight="bold">
 					My Wheel Results
 				</Text>
@@ -55,7 +55,7 @@ const Wheel: React.FC = () => {
 					<View style={globalStyles.alignItemsCenter}>
 						<WheelChart size={WHEEL_SIZE} />
 					</View>
-					<View style={[globalStyles.mh48]}>
+					<View style={globalStyles.mh48}>
 						<Button label="EDIT MY WHEEL RESULTS" onPress={handleEditPress} />
 					</View>
 				</View>
