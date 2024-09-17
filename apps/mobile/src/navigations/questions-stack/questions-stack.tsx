@@ -7,8 +7,8 @@ import { type QuestionsStackNavigationParameterList } from "~/libs/types/types";
 import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
 import { NotificationQuestions } from "~/screens/notification-questions/notification-questions";
 import { Onboarding } from "~/screens/onboarding/onboarding";
-import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
 import { Quiz } from "~/screens/quiz/quiz";
+import { QuizEntry } from "~/screens/quiz-entry/quiz-entry";
 import { Welcome } from "~/screens/welcome/welcome";
 import { WheelLoading } from "~/screens/wheel-loading/wheel-loading";
 
