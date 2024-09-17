@@ -1,9 +1,5 @@
 import { Button } from "~/libs/components/components.js";
-import {
-	useAppDispatch,
-	useAppSelector,
-	useCallback,
-} from "~/libs/hooks/hooks.js";
+import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 
 import { AnalyzingText, TextAnimationDelay } from "./libs/enums/enums.js";
@@ -16,9 +12,6 @@ type Properties = {
 
 const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	const dispatch = useAppDispatch();
-	const { user } = useAppSelector(({ auth }) => ({
-		user: auth.user,
-	}));
 
 	const secondParagraphDelay =
 		AnalyzingText.firstParagraph.split(" ").length *
@@ -31,15 +24,9 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	);
 
 	const handleNextStep = useCallback(() => {
-		if (!user) {
-			return;
-		}
-
-		const updatedUser = { ...user };
-		updatedUser.hasAnsweredOnboardingQuestions = true;
-		void dispatch(authActions.updateAuthUser(updatedUser));
+		void dispatch(authActions.hasOnboardingAnswer());
 		onNext();
-	}, [dispatch, onNext, user]);
+	}, [dispatch, onNext]);
 
 	return (
 		<div className={styles["page-container"]}>

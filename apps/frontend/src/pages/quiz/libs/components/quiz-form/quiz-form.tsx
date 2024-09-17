@@ -36,13 +36,12 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 	const [categoryDone, setCategoryDone] = useState<number[]>([]);
 
-	const { category, currentCategoryIndex, dataStatus, questions, user } =
-		useAppSelector(({ auth, quiz }) => ({
+	const { category, currentCategoryIndex, dataStatus, questions } =
+		useAppSelector(({ quiz }) => ({
 			category: quiz.currentCategory,
 			currentCategoryIndex: quiz.currentCategoryIndex,
 			dataStatus: quiz.dataStatus,
 			questions: quiz.questions,
-			user: auth.user,
 		}));
 
 	const defaultValues = getQuizDefaultValues(questions);
@@ -101,24 +100,15 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		(data: QuizFormValues) => {
 			if (isLast) {
 				const answerIds = getAnswerIds(data);
-
 				void dispatch(quizActions.saveAnswers({ answerIds }));
-
-				if (!user) {
-					return;
-				}
-
-				const updatedUser = { ...user };
-				updatedUser.hasAnsweredQuizQuestions = true;
-
-				void dispatch(authActions.updateAuthUser(updatedUser));
+				void dispatch(authActions.hasQuizAnswer());
 				onNext();
 			}
 
 			setIsDisabled(true);
 			void dispatch(quizActions.nextQuestion());
 		},
-		[dispatch, getAnswerIds, isLast, onNext, user],
+		[dispatch, getAnswerIds, isLast, onNext],
 	);
 
 	const handleFormSubmit = useCallback(
