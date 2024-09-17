@@ -62,7 +62,7 @@ import { AuthApiPath } from "./libs/enums/enums.js";
  *           example: VALIDATION
  *         message:
  *           type: string
- *           example: "This field is required"
+ *           example: "Error message"
  */
 class AuthController extends BaseController {
 	private authService: AuthService;
