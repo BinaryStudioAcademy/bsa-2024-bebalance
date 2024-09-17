@@ -1,4 +1,10 @@
-import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks.js";
 import {
 	type NotificationAnswersPayloadDto,
 	actions as userActions,
@@ -10,34 +16,50 @@ import {
 	Introduction,
 	Motivation,
 	NotificationQuestions,
+	OnboardingForm,
 	QuizForm,
 } from "./libs/components/components.js";
-import { STEP_INCREMENT } from "./libs/constants/constants.js";
+import { PREVIOUS_INDEX_OFFSET } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	const dispatch = useAppDispatch();
 	const [step, setStep] = useState<number>(Step.MOTIVATION);
+	const dispatch = useAppDispatch();
+
+	const { hasAnsweredOnboardingQuestions } = useAppSelector(({ auth }) => ({
+		hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+	}));
 
 	const handleNextStep = useCallback((): void => {
-		setStep((previousStep) => previousStep + STEP_INCREMENT);
+		setStep((previousStep) => previousStep + PREVIOUS_INDEX_OFFSET);
 	}, []);
 
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
 			void dispatch(userActions.saveNotificationAnswers(payload));
+			handleNextStep();
 		},
-		[dispatch],
+		[dispatch, handleNextStep],
 	);
+
+	useEffect(() => {
+		if (hasAnsweredOnboardingQuestions) {
+			setStep(Step.INTRODUCTION);
+		}
+	}, [hasAnsweredOnboardingQuestions]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
-			case Step.ANALYZING: {
-				return <Analyzing onNext={handleNextStep} />;
-			}
-
 			case Step.MOTIVATION: {
 				return <Motivation onNext={handleNextStep} />;
+			}
+
+			case Step.ONBOARDING: {
+				return <OnboardingForm onNext={handleNextStep} />;
+			}
+
+			case Step.ANALYZING: {
+				return <Analyzing onNext={handleNextStep} />;
 			}
 
 			case Step.INTRODUCTION: {
