@@ -18,7 +18,7 @@ const BalanceWheel: React.FC = () => {
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
-	const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
+	const [isShouldNavigate, setIsShouldNavigate] = useState<boolean>(false);
 
 	const { hasAnsweredOnboardingQuestions, hasAnsweredQuizQuestions } =
 		useAppSelector(({ auth }) => ({
@@ -49,7 +49,7 @@ const BalanceWheel: React.FC = () => {
 
 		if (isDone) {
 			setTimeout(() => {
-				setShouldNavigate(true);
+				setIsShouldNavigate(true);
 			}, PercentageConfig.PERCENTAGE_INCREASE_INTERVAL);
 		}
 	}, [percentage, hasAnsweredQuizQuestions, hasAnsweredOnboardingQuestions]);
@@ -69,7 +69,7 @@ const BalanceWheel: React.FC = () => {
 		};
 	}, [handleUpdatePercentage, navigate]);
 
-	if (shouldNavigate) {
+	if (isShouldNavigate) {
 		return <Navigate replace to={AppRoute.ROOT} />;
 	}
 
