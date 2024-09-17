@@ -1,4 +1,9 @@
-import { getById, saveNotificationAnswers, update } from "./actions.js";
+import {
+	getById,
+	saveNotificationAnswers,
+	update,
+	uploadAvatar,
+} from "./actions.js";
 import { actions } from "./users.slice.js";
 
 const allActions = {
@@ -6,6 +11,7 @@ const allActions = {
 	getById,
 	saveNotificationAnswers,
 	update,
+	uploadAvatar,
 };
 
 export { allActions as actions };
