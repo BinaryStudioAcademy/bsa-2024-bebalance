@@ -19,9 +19,9 @@ import {
 import { globalStyles } from "~/libs/styles/styles";
 import { type CategoriesSelectedRequestDto } from "~/libs/types/types";
 import { type QuizScoresUpdateRequestDto } from "~/packages/quiz/quiz";
-import { ScoresEditForm } from "~/screens/edit-wheel-results/libs/components/scores-edit-form/scores-edit-form";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
+import { ScoresEditForm } from "./libs/components/componets";
 import { styles } from "./styles";
 
 const EditWheelResults: React.FC = () => {
@@ -57,7 +57,7 @@ const EditWheelResults: React.FC = () => {
 	return (
 		<ScreenWrapper
 			edges={["top", "left", "right"]}
-			style={{ backgroundColor: BaseColor.BG_WHITE }}
+			style={styles.screenWrapper}
 		>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 				<View style={[globalStyles.pb24, styles.container]}>

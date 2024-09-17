@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
 	container: {
 		marginBottom: 0,
 	},
+	screenWrapper: {
+		backgroundColor: BaseColor.BG_WHITE,
+	},
 });
 
 export { styles };

@@ -16,8 +16,8 @@ import {
 	type QuizScoresUpdateRequestDto,
 	updateScoresValidationSchema,
 } from "~/packages/quiz/quiz";
-import { SCORE_FORM_DEFAULT_VALUES } from "~/screens/edit-wheel-results/libs/constants/constants";
 
+import { SCORE_FORM_DEFAULT_VALUES } from "../../constants/constants";
 import { styles } from "./styles";
 
 type Properties = {
