@@ -84,7 +84,8 @@ const EditWheelResults: React.FC = () => {
 					) : (
 						<ScrollView
 							style={[
-								globalStyles.pv16,
+								globalStyles.pt12,
+								globalStyles.pb2,
 								styles.checkboxForm,
 								globalStyles.mh12,
 							]}
