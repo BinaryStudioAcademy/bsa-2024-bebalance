@@ -2,6 +2,7 @@ import {
 	BalanceWheelChart,
 	Button,
 	Loader,
+	Switch,
 } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
@@ -10,14 +11,13 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import { type WheelEditMode } from "~/libs/types/types.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import {
-	EditModeSwitch,
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
-import { type EditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
@@ -26,7 +26,7 @@ const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-	const [editMode, setEditMode] = useState<EditMode>("manual");
+	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
 	const chartData = scores.map((score) => {
@@ -58,7 +58,7 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
-	function getModal(mode: EditMode): React.ReactNode {
+	function getModal(mode: WheelEditMode): React.ReactNode {
 		switch (mode) {
 			case "manual": {
 				return (
@@ -81,9 +81,14 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
 				{isEditingModalOpen && (
-					<EditModeSwitch
+					<Switch
 						currentMode={editMode}
-						onModeToggle={handleModeToggle}
+						leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
+						onToggleMode={handleModeToggle}
+						rightButtonProperties={{
+							label: "Retake quiz",
+							mode: "retake_quiz",
+						}}
 					/>
 				)}
 			</div>
