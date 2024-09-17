@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const Category = z.object({
+const category = z.object({
 	categoryId: z.number(),
 	categoryName: z.string(),
 });
@@ -12,7 +12,7 @@ const Messages = z.object({
 });
 
 const balanceAnalysis = z.object({
-	lowestCategories: z.array(Category),
+	lowestCategories: z.array(category),
 	messages: Messages,
 });
 
