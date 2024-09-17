@@ -83,11 +83,14 @@
 	display: flex;
 	gap: 5px;
 	align-items: center;
+	height: 100%;
 	padding: 5px;
-	font-size: 14px;
+	font-size: 13px;
+	font-weight: 600;
 	color: var(--black);
 	background-color: transparent;
 	border: 1px solid var(--light-gray);
+	border-radius: 5px;
 }
 
 .position-right {

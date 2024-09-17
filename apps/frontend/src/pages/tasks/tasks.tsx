@@ -3,11 +3,13 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
+	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
 import { TaskCard } from "./libs/components/components.js";
+import { TaskStatus } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -23,6 +25,24 @@ const Tasks: React.FC = () => {
 		void dispatch(taskActions.getCurrentTasks());
 	}, [dispatch]);
 
+	const handleSkip = useCallback(
+		(id: number): void => {
+			void dispatch(
+				taskActions.update({ data: { status: TaskStatus.SKIPPED }, id }),
+			);
+		},
+		[dispatch],
+	);
+
+	const handleComplete = useCallback(
+		(id: number): void => {
+			void dispatch(
+				taskActions.update({ data: { status: TaskStatus.COMPLETED }, id }),
+			);
+		},
+		[dispatch],
+	);
+
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
@@ -32,7 +52,14 @@ const Tasks: React.FC = () => {
 				{isLoading ? (
 					<Loader />
 				) : (
-					tasks.map((task) => <TaskCard key={task.id} task={task} />)
+					tasks.map((task) => (
+						<TaskCard
+							key={task.id}
+							onComplete={handleComplete}
+							onSkip={handleSkip}
+							task={task}
+						/>
+					))
 				)}
 			</div>
 		</>

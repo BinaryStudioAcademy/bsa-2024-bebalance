@@ -26,7 +26,7 @@ const getPastTasks = createAsyncThunk<TaskDto[], undefined, AsyncThunkConfig>(
 );
 
 const update = createAsyncThunk<TaskDto, TaskUpdatePayload, AsyncThunkConfig>(
-	`${sliceName}/get-current-tasks`,
+	`${sliceName}/update`,
 	async (payload, { extra }) => {
 		const { tasksApi } = extra;
 		const { data, id } = payload;

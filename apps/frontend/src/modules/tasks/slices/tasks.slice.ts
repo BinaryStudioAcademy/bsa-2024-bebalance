@@ -4,6 +4,7 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
+import { NumericalValue } from "../libs/enums/enums.js";
 import { getCurrentTasks, getPastTasks, update } from "./actions.js";
 
 type State = {
@@ -48,7 +49,10 @@ const { actions, name, reducer } = createSlice({
 			const index = state.tasks.findIndex(
 				(task) => task.id === action.payload.id,
 			);
-			state.tasks[index] = action.payload;
+			state.tasks = [
+				...state.tasks.slice(NumericalValue.ZERO, index),
+				...state.tasks.slice(index + NumericalValue.ONE),
+			];
 		});
 		builder.addCase(update.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;

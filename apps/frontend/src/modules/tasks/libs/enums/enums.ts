@@ -1,1 +1,1 @@
-export { TasksApiPath } from "shared";
+export { NumericalValue, TasksApiPath } from "shared";
