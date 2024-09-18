@@ -128,15 +128,10 @@ const { actions, name, reducer } = createSlice({
 	name: "quiz",
 	reducers: {
 		nextQuestion(state) {
-			if (
-				(state.questionsByCategories as QuizQuestionDto[][]).length >
-				state.currentCategoryIndex
-			) {
-				state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
-			}
+			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
 
 			state.currentCategoryQuestions =
-				state.questionsByCategories[state.currentCategoryIndex] || null;
+				state.questionsByCategories[state.currentCategoryIndex] ?? null;
 		},
 		nextStep(state) {
 			state.step++;
@@ -145,7 +140,7 @@ const { actions, name, reducer } = createSlice({
 			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {
 				state.currentCategoryIndex -= PREVIOUS_INDEX_OFFSET;
 				state.currentCategoryQuestions =
-					state.questionsByCategories[state.currentCategoryIndex] || null;
+					state.questionsByCategories[state.currentCategoryIndex] ?? null;
 			}
 		},
 		setStep(state, action: PayloadAction<ValueOf<typeof Step>>) {
