@@ -3,7 +3,8 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { ZERO_INDEX } from "./libs/constants/constants.js";
+import { ONE_HUNDRED, ZERO_INDEX } from "./libs/constants/constants.js";
+import { TaskStatus } from "./libs/enums/enums.js";
 import {
 	type UserDetailsWithAvatarFile,
 	type UserTaskDay,
@@ -61,6 +62,7 @@ class UserRepository implements Repository {
 			notificationFrequency: "all",
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
+			taskPercentage: 0,
 			updatedAt: user.updatedAt,
 			userTaskDays: [],
 		});
@@ -85,7 +87,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.findById(id)
 			.castTo<undefined | UserWithAvatarFile>();
@@ -104,6 +106,12 @@ class UserRepository implements Repository {
 					notificationFrequency: user.userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					taskPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -116,7 +124,7 @@ class UserRepository implements Repository {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.castTo<UserWithAvatarFile[]>();
 
@@ -134,6 +142,11 @@ class UserRepository implements Repository {
 				notificationFrequency: user.userDetails.notificationFrequency,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
+				taskPercentage:
+					(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
+						.length /
+						user.userTasks.length) *
+					ONE_HUNDRED,
 				updatedAt: user.updatedAt,
 				userTaskDays: user.userTaskDays.map(
 					(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -148,7 +161,7 @@ class UserRepository implements Repository {
 			.where({ email })
 			.first()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.castTo<undefined | UserWithAvatarFile>();
 
@@ -166,6 +179,12 @@ class UserRepository implements Repository {
 					notificationFrequency: user.userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					taskPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -191,7 +210,7 @@ class UserRepository implements Repository {
 			.query()
 			.findById(id)
 			.withGraphFetched(
-				`[${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			);
 
 		return user && updatedUserDetails
@@ -208,6 +227,12 @@ class UserRepository implements Repository {
 					notificationFrequency: updatedUserDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					taskPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -236,7 +261,7 @@ class UserRepository implements Repository {
 			.query()
 			.findById(id)
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			);
 
 		return user && userDetails
@@ -253,6 +278,12 @@ class UserRepository implements Repository {
 					notificationFrequency: userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
+					taskPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -268,7 +299,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.patchAndFetchById(id, passwordPayload)
 			.castTo<UserWithAvatarFile>()
@@ -287,6 +318,11 @@ class UserRepository implements Repository {
 			notificationFrequency: user.userDetails.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
+			taskPercentage:
+				(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
+					.length /
+					user.userTasks.length) *
+				ONE_HUNDRED,
 			updatedAt: user.updatedAt,
 			userTaskDays: user.userTaskDays.map(
 				(taskDay: UserTaskDay) => taskDay.dayOfWeek,
