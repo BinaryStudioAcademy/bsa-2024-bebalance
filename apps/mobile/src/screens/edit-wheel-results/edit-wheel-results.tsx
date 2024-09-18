@@ -47,11 +47,11 @@ const EditWheelResults: React.FC = () => {
 	>(EditWheelResultsTab.EDIT_MANUALLY);
 
 	const handleTabChange = useCallback(() => {
-		setActiveTab((previousTab) =>
-			previousTab === EditWheelResultsTab.EDIT_MANUALLY
+		setActiveTab((previousTab) => {
+			return previousTab === EditWheelResultsTab.EDIT_MANUALLY
 				? EditWheelResultsTab.RETAKE_QUIZ
-				: EditWheelResultsTab.EDIT_MANUALLY,
-		);
+				: EditWheelResultsTab.EDIT_MANUALLY;
+		});
 	}, []);
 
 	const handleRetakeQuizSubmit = useCallback(
