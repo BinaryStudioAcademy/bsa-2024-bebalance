@@ -18,13 +18,8 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useNavigation,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import {
-	type NativeStackNavigationProp,
-	type RootNavigationParameterList,
-} from "~/libs/types/types";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
@@ -45,9 +40,8 @@ const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
-	const navigation =
-		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 	const { name, params } = useAppRoute();
+
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
 
@@ -61,6 +55,12 @@ const Auth: React.FC = () => {
 			void dispatch(authActions.getAuthenticatedUser());
 		}
 	}, [dispatch, user]);
+
+	useEffect(() => {
+		if (token) {
+			void dispatch(authActions.checkIsResetPasswordExpired({ token }));
+		}
+	}, [dispatch, token]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -91,9 +91,8 @@ const Auth: React.FC = () => {
 					newPassword: payload.newPassword,
 				}),
 			);
-			navigation.navigate(RootScreenName.SIGN_IN);
 		},
-		[dispatch, navigation, token],
+		[dispatch, token],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {

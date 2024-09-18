@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { RootScreenName, ToastMessageContent } from "~/libs/enums/enums";
+import { ToastMessageContent } from "~/libs/enums/enums";
 import { storage, StorageKey } from "~/libs/packages/storage/storage";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import {
@@ -11,7 +11,6 @@ import {
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/packages/users/users";
-import { actions as appActions } from "~/slices/app/app";
 
 import { name as sliceName } from "./auth.slice";
 
@@ -50,14 +49,13 @@ const resetPassword = createAsyncThunk<
 	boolean,
 	ResetPasswordDto,
 	AsyncThunkConfig
->(`${sliceName}/reset-password`, async (emailPayload, { dispatch, extra }) => {
+>(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
 	const { authApi, toastMessage } = extra;
 
 	const isSuccessful = await authApi.resetPassword(emailPayload);
 
 	if (isSuccessful) {
 		toastMessage.success({ message: ToastMessageContent.PASSWORD_UPDATED });
-		dispatch(appActions.changeLink(RootScreenName.SIGN_IN));
 	}
 
 	return isSuccessful;
