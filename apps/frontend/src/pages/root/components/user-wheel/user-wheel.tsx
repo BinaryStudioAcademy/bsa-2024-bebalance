@@ -20,9 +20,9 @@ import {
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const UserWheel: React.FC = () => {
-	const NO_SCORES_COUNT = 0;
+const NO_SCORES_COUNT = 0;
 
+const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
@@ -58,7 +58,7 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
-	const getModal = (mode: WheelEditMode): React.ReactNode => {
+	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
 			case "manual": {
 				return (
@@ -96,7 +96,7 @@ const UserWheel: React.FC = () => {
 				{scores.length > NO_SCORES_COUNT && (
 					<BalanceWheelChart data={chartData} />
 				)}
-				{isEditingModalOpen && getModal(editMode)}
+				{isEditingModalOpen && handleGetModal(editMode)}
 			</div>
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
