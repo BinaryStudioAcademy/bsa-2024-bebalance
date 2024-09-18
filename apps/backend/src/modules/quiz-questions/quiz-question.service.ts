@@ -97,7 +97,9 @@ class QuizQuestionService implements Service {
 	public async findQuestions(
 		query: CategoriesGetRequestQueryDto,
 	): Promise<{ items: QuizQuestionDto[][] }> {
-		if (!query.categoryIds) {
+		const { categoryIds } = query;
+
+		if (!categoryIds) {
 			return await this.findAll();
 		}
 
