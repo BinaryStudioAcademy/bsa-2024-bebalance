@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.50.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.49.0...v1.50.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+* **mobile:** edit wheel manually bb-344 ([#455](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/455)) ([833d5ed](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833d5ed12587e7e93804c6852e093df20283938d))
+
+
+### Bug Fixes
+
+* **frontend:** Balance Wheel animation bb-204 ([#462](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/462)) ([18e8750](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/18e8750d0b6872ea4d164fc9826f34ae0bc1fbd9))
+
 ## [1.49.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.48.0...v1.49.0) (2024-09-18)
 
 
