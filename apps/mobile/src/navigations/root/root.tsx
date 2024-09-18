@@ -18,7 +18,7 @@ import { WheelLoading } from "~/screens/wheel-loading/wheel-loading";
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
-const screenOptions: NativeStackNavigationOptions = {
+const SCREEN_OPTIONS: NativeStackNavigationOptions = {
 	headerShown: false,
 };
 
@@ -27,7 +27,7 @@ const Root: React.FC = () => {
 	const hasUser = Boolean(user);
 
 	return (
-		<NativeStack.Navigator screenOptions={screenOptions}>
+		<NativeStack.Navigator screenOptions={SCREEN_OPTIONS}>
 			{hasUser ? (
 				<NativeStack.Group>
 					<NativeStack.Screen

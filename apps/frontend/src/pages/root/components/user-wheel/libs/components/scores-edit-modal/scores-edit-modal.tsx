@@ -1,7 +1,7 @@
+import { Button, Slider } from "~/libs/components/components.js";
 import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { Button, Slider } from "../components.js";
 import { NO_SCORES_COUNT } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
