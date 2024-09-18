@@ -108,7 +108,7 @@
 .lower-content {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	gap: 15px;
 	width: 100%;
 	height: 223px;
 }

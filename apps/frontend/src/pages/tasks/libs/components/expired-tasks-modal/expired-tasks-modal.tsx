@@ -9,6 +9,7 @@ import {
 
 import {
 	DRAG_THRESHOLD,
+	FIRST_SLIDE,
 	INITIAL_SLIDE,
 	INITIAL_X,
 	POSITIVE_MIN_THRESHOLD,
@@ -112,11 +113,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 						</h4>
 						{isSingleSlide ? (
 							<div>
-								{slides.map((SlideContent, index) => (
-									<div className={styles["slide"]} key={index}>
-										{SlideContent}
-									</div>
-								))}
+								<div className={styles["slide"]}>{slides[FIRST_SLIDE]}</div>
 							</div>
 						) : (
 							<div
@@ -156,12 +153,14 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 								variant="secondary"
 							/>
 						</div>
-						<div className={styles["counter"]}>
-							<p className={styles["page-number"]}>
-								{currentSlide + SINGLE_SLIDE}
-							</p>
-							<p className={styles["total-page-number"]}>/{totalSlides}</p>
-						</div>
+						{!isSingleSlide && (
+							<div className={styles["counter"]}>
+								<p className={styles["page-number"]}>
+									{currentSlide + SINGLE_SLIDE}
+								</p>
+								<p className={styles["total-page-number"]}>/{totalSlides}</p>
+							</div>
+						)}
 					</div>
 				</div>
 
