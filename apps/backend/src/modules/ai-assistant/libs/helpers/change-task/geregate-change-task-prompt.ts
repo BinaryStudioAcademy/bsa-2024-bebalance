@@ -6,7 +6,7 @@ import {
 import { type TaskCreateDto } from "../../types/types.js";
 import { ChangeTaskPromptTemplates } from "./change-task-prompt-template.enum.js";
 
-function generaChangeTaskPrompt(task: TaskCreateDto): OpenAiRequestMessage {
+function generateChangeTaskPrompt(task: TaskCreateDto): OpenAiRequestMessage {
 	const content = `
 	{
 	"context": "${ChangeTaskPromptTemplates.CHANGE_TASKS_CONTEXT}",
@@ -19,4 +19,4 @@ function generaChangeTaskPrompt(task: TaskCreateDto): OpenAiRequestMessage {
 	};
 }
 
-export { generaChangeTaskPrompt };
+export { generateChangeTaskPrompt };

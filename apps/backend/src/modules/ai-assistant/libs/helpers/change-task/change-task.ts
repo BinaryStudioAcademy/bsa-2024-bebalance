@@ -6,12 +6,12 @@ import {
 import { type TaskCreateDto } from "../../types/types.js";
 import { changeTaskByCategory as ChangeTaskByCategoryValidationSchema } from "./change-task.validation-schema.js";
 import { ChangeTaskPromptTemplates } from "./change-task-prompt-template.enum.js";
-import { generaChangeTaskPrompt } from "./geregate-change-task-prompt.js";
+import { generateChangeTaskPrompt } from "./geregate-change-task-prompt.js";
 
 const runChangeTaskByCategoryOptions = (
 	task: TaskCreateDto,
 ): OpenAiRunThreadRequestDto => {
-	const changeTaskPrompt = generaChangeTaskPrompt(task);
+	const changeTaskPrompt = generateChangeTaskPrompt(task);
 
 	return {
 		additional_instructions: null,

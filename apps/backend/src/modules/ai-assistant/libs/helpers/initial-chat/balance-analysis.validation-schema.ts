@@ -5,7 +5,7 @@ const category = z.object({
 	categoryName: z.string(),
 });
 
-const Messages = z.object({
+const messages = z.object({
 	comments: z.string(),
 	greeting: z.string(),
 	question: z.string(),
@@ -13,7 +13,7 @@ const Messages = z.object({
 
 const balanceAnalysis = z.object({
 	lowestCategories: z.array(category),
-	messages: Messages,
+	messages,
 });
 
 export { balanceAnalysis };
