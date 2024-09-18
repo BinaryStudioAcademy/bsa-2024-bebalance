@@ -4,7 +4,7 @@ export {
 	type QuizQuestionDto,
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizUserAnswerDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizUserAnswerDto,
 } from "shared";

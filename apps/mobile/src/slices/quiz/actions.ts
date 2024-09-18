@@ -52,4 +52,4 @@ const saveAnswers = createAsyncThunk<
 	return await quizApi.saveAnswers(createAnswerPayload);
 });
 
-export { getAllQuestions, getScores, saveAnswers, editScores };
+export { editScores, getAllQuestions, getScores, saveAnswers };
