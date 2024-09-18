@@ -81,15 +81,17 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
 				{isEditingModalOpen && (
-					<Switch
-						currentMode={editMode}
-						leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
-						onToggleMode={handleModeToggle}
-						rightButtonProperties={{
-							label: "Retake quiz",
-							mode: "retake_quiz",
-						}}
-					/>
+					<div className={styles["switch-container"]}>
+						<Switch
+							currentMode={editMode}
+							leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
+							onToggleMode={handleModeToggle}
+							rightButtonProperties={{
+								label: "Retake quiz",
+								mode: "retake_quiz",
+							}}
+						/>
+					</div>
 				)}
 			</div>
 			<div className={styles["content-wrapper"]}>
