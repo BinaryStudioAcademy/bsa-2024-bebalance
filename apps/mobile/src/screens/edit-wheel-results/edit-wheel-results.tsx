@@ -25,12 +25,8 @@ import { type QuizScoresUpdateRequestDto } from "~/packages/quiz/quiz";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { ScoresEditForm } from "./libs/components/componets";
+import { EditWheelResultsTab } from "./libs/enums/enums";
 import { styles } from "./styles";
-
-const EditWheelResultsTabs = {
-	EDIT_MANUALLY: "Edit manually",
-	RETAKE_QUIZ: "Retake Quiz",
-};
 
 const EditWheelResults: React.FC = () => {
 	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<number[]>(
@@ -47,14 +43,14 @@ const EditWheelResults: React.FC = () => {
 	);
 
 	const [activeTab, setActiveTab] = useState<
-		ValueOf<typeof EditWheelResultsTabs>
-	>(EditWheelResultsTabs.EDIT_MANUALLY);
+		ValueOf<typeof EditWheelResultsTab>
+	>(EditWheelResultsTab.EDIT_MANUALLY);
 
 	const handleTabChange = useCallback(() => {
 		setActiveTab((previousTab) =>
-			previousTab === EditWheelResultsTabs.EDIT_MANUALLY
-				? EditWheelResultsTabs.RETAKE_QUIZ
-				: EditWheelResultsTabs.EDIT_MANUALLY,
+			previousTab === EditWheelResultsTab.EDIT_MANUALLY
+				? EditWheelResultsTab.RETAKE_QUIZ
+				: EditWheelResultsTab.EDIT_MANUALLY,
 		);
 	}, []);
 
@@ -86,13 +82,13 @@ const EditWheelResults: React.FC = () => {
 							activeTab={activeTab}
 							onTabChange={handleTabChange}
 							tabs={[
-								EditWheelResultsTabs.EDIT_MANUALLY,
-								EditWheelResultsTabs.RETAKE_QUIZ,
+								EditWheelResultsTab.EDIT_MANUALLY,
+								EditWheelResultsTab.RETAKE_QUIZ,
 							]}
 						/>
 					</View>
 
-					{activeTab === EditWheelResultsTabs.EDIT_MANUALLY ? (
+					{activeTab === EditWheelResultsTab.EDIT_MANUALLY ? (
 						<ScrollView>
 							<ScoresEditForm data={scores} onSubmit={handleEditScores} />
 						</ScrollView>
