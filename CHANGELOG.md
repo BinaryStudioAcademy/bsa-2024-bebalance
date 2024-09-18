@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.50.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.49.0...v1.50.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+* **mobile:** edit wheel manually bb-344 ([#455](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/455)) ([833d5ed](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833d5ed12587e7e93804c6852e093df20283938d))
+
+
+### Bug Fixes
+
+* **frontend:** Balance Wheel animation bb-204 ([#462](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/462)) ([18e8750](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/18e8750d0b6872ea4d164fc9826f34ae0bc1fbd9))
+
+## [1.49.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.48.0...v1.49.0) (2024-09-18)
+
+
+### Features
+
+* **backend:** backend documentation improvements bb-437 ([#453](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/453)) ([df2cc1c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/df2cc1c91e53173661e9cfe002ed16207c58213a))
+* **frontend:** add default answer and quick tip bb-460 ([#475](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/475)) ([968e9f7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/968e9f7bcad3490a780e00fe721b1e5b25aae5c9))
+* **frontend:** New design for toast messages bb-372 ([#458](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/458)) ([63734d7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/63734d71053aa1c70689bbc20f39625e44fc051a))
+* **frontend:** upload a new avatar bb-341 ([#448](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/448)) ([b3fe346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3fe346ab6e9b1f85a67af19bbd0a64db476d145))
+
+
+### Bug Fixes
+
+* **frontend:** Flow after sign up bb-242 ([#468](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/468)) ([b6d59b2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b6d59b29a7863463b649832520a789aefb6238a1))
+* **mobile:** Sign in" link on the "Create an account" page is inactive bb-461 ([#471](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/471)) ([03db2a9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03db2a9f78f29e23c0335fd5957563435456df3a))
+
 ## [1.48.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.47.0...v1.48.0) (2024-09-16)
 
 

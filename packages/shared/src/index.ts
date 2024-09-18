@@ -1,4 +1,5 @@
 export {
+	FIRST_ITEM_INDEX,
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "./libs/constants/constant.js";
@@ -22,7 +23,7 @@ export {
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString } from "./libs/helpers/helpers.js";
+export { configureString, getFormattedDate } from "./libs/helpers/helpers.js";
 export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
@@ -61,10 +62,12 @@ export {
 export {
 	CategoriesApiPath,
 	type CategoriesGetAllResponseDto,
+	type CategoriesGetRequestQueryDto,
 	type CategoriesSelectedRequestDto,
 	categoriesSelectedValidationSchema,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
+	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
 } from "./modules/categories/categories.js";

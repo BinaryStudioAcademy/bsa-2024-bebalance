@@ -88,6 +88,16 @@ const { actions, name, reducer } = createSlice({
 		updateAuthUser(state, action: PayloadAction<UserDto>) {
 			state.user = action.payload;
 		},
+		updateOnboardingAnsweredState(state) {
+			if (state.user) {
+				state.user.hasAnsweredOnboardingQuestions = true;
+			}
+		},
+		updateQuizAnsweredState(state) {
+			if (state.user) {
+				state.user.hasAnsweredQuizQuestions = true;
+			}
+		},
 	},
 });
 

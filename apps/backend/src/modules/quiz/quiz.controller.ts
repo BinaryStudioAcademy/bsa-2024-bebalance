@@ -19,7 +19,11 @@ import {
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { type UserDto } from "../users/users.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
-import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+import { type CategoriesGetRequestQueryDto } from "./libs/types/types.js";
+import {
+	categoryIdsValidationSchema,
+	quizUserAnswersValidationSchema,
+} from "./libs/validation-schemas/validation-schemas.js";
 
 type Constructor = {
 	categoryService: CategoryService;
@@ -169,9 +173,17 @@ class QuizController extends BaseController {
 		});
 
 		this.addRoute({
-			handler: () => this.findAll(),
+			handler: (options) =>
+				this.findQuestions(
+					options as APIHandlerOptions<{
+						query: CategoriesGetRequestQueryDto;
+					}>,
+				),
 			method: "GET",
 			path: QuizApiPath.QUESTIONS,
+			validation: {
+				query: categoryIdsValidationSchema,
+			},
 		});
 
 		this.addRoute({
@@ -257,10 +269,12 @@ class QuizController extends BaseController {
 		}>,
 	): Promise<APIHandlerResponse> {
 		const { answerIds } = options.body;
+		const categoryIds = options.body.categoryIds as number[];
 
 		return {
 			payload: await this.quizAnswerService.createUserAnswers({
 				answerIds,
+				categoryIds,
 				userId: options.user.id,
 			}),
 			status: HTTPCode.CREATED,
@@ -271,10 +285,19 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/questions:
 	 *   get:
-	 *     tags: [quiz]
-	 *     summary: Get all quiz questions
+	 *     summary: Get quiz questions
 	 *     security:
 	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: query
+	 *         name: categoryIds
+	 *         schema:
+	 *           type: string
+	 *           items:
+	 *             type: string
+	 *         description: Array of category IDs to filter the quiz questions (optional)
+	 *         required: false  # Optional parameter
+	 *         example: [3, 6]
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -294,9 +317,12 @@ class QuizController extends BaseController {
 	 *             schema:
 	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
-	private async findAll(): Promise<APIHandlerResponse> {
+
+	private async findQuestions(
+		options: APIHandlerOptions<{ query: CategoriesGetRequestQueryDto }>,
+	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.quizQuestionService.findAll(),
+			payload: await this.quizQuestionService.findQuestions(options.query),
 			status: HTTPCode.OK,
 		};
 	}
