@@ -81,7 +81,7 @@
 .switch-button {
 	padding: 0 10px;
 	font-size: 10px;
-	color: var(--switch-disable);
+	color: var(--medium-gray);
 	background: none;
 	border-radius: 20px;
 	transition: all 200ms ease-in;
