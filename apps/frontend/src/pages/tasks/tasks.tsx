@@ -7,7 +7,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
-import { TaskCard } from "./libs/components/components.js";
+import { ExpiredTasksSlider, TaskCard } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -27,6 +27,11 @@ const Tasks: React.FC = () => {
 
 	return (
 		<>
+			<ExpiredTasksSlider
+				slides={tasks.map((task) => (
+					<TaskCard key={task.id} task={task} />
+				))}
+			/>
 			<h4 className={styles["title"]}>My Tasks</h4>
 			<div className={styles["board"]}>
 				{isLoading ? (
