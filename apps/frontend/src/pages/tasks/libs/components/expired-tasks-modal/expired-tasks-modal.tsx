@@ -26,12 +26,14 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 	const [startX, setStartX] = useState<number>(INITIAL_X);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
+	const totalSlides = slides.length;
+	const isSingleSlide = totalSlides === SINGLE_SLIDE;
 
 	const goToSlide = useCallback(
 		(index: number): void => {
-			setCurrentSlide((index + slides.length) % slides.length);
+			setCurrentSlide((index + totalSlides) % totalSlides);
 		},
-		[slides.length],
+		[totalSlides],
 	);
 
 	const nextSlide = useCallback((): void => {
@@ -90,34 +92,46 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["slider-container"]}>
-				<button className={styles["control"]} onClick={previousSlide}>
-					<div
-						className={getValidClassNames(
-							styles["arrow"],
-							styles["arrow-left"],
-						)}
-					/>
-				</button>
+				{!isSingleSlide && (
+					<button className={styles["control"]} onClick={previousSlide}>
+						<div
+							className={getValidClassNames(
+								styles["arrow"],
+								styles["arrow-left"],
+							)}
+						/>
+					</button>
+				)}
 
 				<div className={styles["content"]}>
 					<div className={styles["upper-content"]}>
 						<h4 className={styles["title"]}>
 							The time to complete this task is over
 						</h4>
-						<div
-							className={styles["slider"]}
-							onMouseDown={handleDragStart}
-							onMouseMove={handleDragMove}
-							ref={sliderReference}
-							role="button"
-							tabIndex={0}
-						>
-							{slides.map((SlideContent, index) => (
-								<div className={styles["slide"]} key={index}>
-									{SlideContent}
-								</div>
-							))}
-						</div>
+						{isSingleSlide ? (
+							<div>
+								{slides.map((SlideContent, index) => (
+									<div className={styles["slide"]} key={index}>
+										{SlideContent}
+									</div>
+								))}
+							</div>
+						) : (
+							<div
+								className={styles["slider"]}
+								onMouseDown={handleDragStart}
+								onMouseMove={handleDragMove}
+								ref={sliderReference}
+								role="button"
+								tabIndex={0}
+							>
+								{slides.map((SlideContent, index) => (
+									<div className={styles["slide"]} key={index}>
+										{SlideContent}
+									</div>
+								))}
+							</div>
+						)}
 					</div>
 
 					<div className={styles["lower-content"]}>
@@ -139,19 +153,21 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 							<p className={styles["page-number"]}>
 								{currentSlide + SINGLE_SLIDE}
 							</p>
-							<p className={styles["total-page-number"]}>/{slides.length}</p>
+							<p className={styles["total-page-number"]}>/{totalSlides}</p>
 						</div>
 					</div>
 				</div>
 
-				<button className={styles["control"]} onClick={nextSlide}>
-					<div
-						className={getValidClassNames(
-							styles["arrow"],
-							styles["arrow-right"],
-						)}
-					/>
-				</button>
+				{!isSingleSlide && (
+					<button className={styles["control"]} onClick={nextSlide}>
+						<div
+							className={getValidClassNames(
+								styles["arrow"],
+								styles["arrow-right"],
+							)}
+						/>
+					</button>
+				)}
 			</div>
 		</div>
 	);
