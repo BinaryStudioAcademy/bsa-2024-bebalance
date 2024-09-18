@@ -1,4 +1,5 @@
 export {
+	INDEX_ONE,
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "./libs/constants/constant.js";
@@ -16,6 +17,7 @@ export {
 	FileError,
 	HTTPError,
 	OnboardingError,
+	OpenAIError,
 	QuizError,
 	TaskError,
 	UserError,
@@ -41,6 +43,19 @@ export {
 	type ValidationSchema,
 	type ValueOf,
 } from "./libs/types/types.js";
+export {
+	addMessageToThreadValidationSchema,
+	AiAssistantApiPath,
+	type BalanceWheelAnalysisResponseDto,
+	type ChangeTaskSuggestionRequestDto,
+	ChangeTaskSuggestionRequestValidationSchema,
+	type SelectedCategories,
+	type SimplifiedQuizScoreDto,
+	type TaskSuggestionRequestDto,
+	TaskSuggestionRequestValidationSchema,
+	type TaskSuggestionsResponseDto,
+	type ThreadMessageCreateDto,
+} from "./modules/ai-assistant/ai-assistant.js";
 export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
@@ -88,7 +103,9 @@ export {
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type TaskCreateDto,
 	type TaskDto,
+	type TaskGetAllResponseDto,
 	TasksApiPath,
 	TaskStatus,
 	type TaskUpdateParametersDto,
