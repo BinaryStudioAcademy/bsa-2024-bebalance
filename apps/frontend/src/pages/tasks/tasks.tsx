@@ -10,10 +10,8 @@ import {
 import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ExpiredTasksSlider, TaskCard } from "./libs/components/components.js";
+import { DEADLINE_OVER, NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
-
-const DEADLINE_OVER = 0;
-const NO_EXPIRED_TASKS = 0;
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();

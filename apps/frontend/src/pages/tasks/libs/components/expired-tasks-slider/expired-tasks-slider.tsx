@@ -7,24 +7,24 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 
+import {
+	DRAG_THRESHOLD,
+	INITIAL_SLIDE,
+	INITIAL_X,
+	POSITIVE_MIN_THRESHOLD,
+	SINGLE_SLIDE,
+	SLIDE_WIDTH_PERCENTAGE,
+} from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	slides: JSX.Element[];
 };
 
-const INITIAL_SLIDE = 0;
-const INITIAL_X = 0;
-const INITIAL_IS_DRAG = false;
-const SINGLE_SLIDE = 1;
-const SLIDE_WIDTH_PERCENTAGE = 100;
-const DRAG_THRESHOLD = 50;
-const POSITIVE_MIN_THRESHOLD = 0;
-
 const ExpiredTasksSlider: React.FC<Properties> = ({ slides }: Properties) => {
 	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
-	const [isDragging, setIsDragging] = useState<boolean>(INITIAL_IS_DRAG);
+	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
 
 	const goToSlide = useCallback(

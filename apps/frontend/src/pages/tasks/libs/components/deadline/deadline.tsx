@@ -3,9 +3,9 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
+import { DEADLINE_OVER } from "../../constants/constants.js";
 import {
 	COUNTDOWN_EXPIRED,
-	DEADLINE_OVER,
 	ONE_MINUTE,
 	TIME_PAD_FILL,
 } from "./libs/constants/constants.js";
