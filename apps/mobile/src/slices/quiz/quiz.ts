@@ -1,4 +1,4 @@
-import { editScores, getAllQuestions, getScores } from "./actions";
+import { editScores, getAllQuestions, getScores, saveAnswers } from "./actions";
 import { actions } from "./quiz.slice";
 
 const allActions = {
@@ -6,6 +6,7 @@ const allActions = {
 	editScores,
 	getAllQuestions,
 	getScores,
+	saveAnswers,
 };
 
 export { allActions as actions };

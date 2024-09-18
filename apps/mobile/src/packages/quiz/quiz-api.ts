@@ -3,10 +3,12 @@ import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { QuizApiPath } from "./libs/enums/enums";
 import {
+	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizUserAnswerDto,
 } from "./libs/types/types";
 
 class QuizApi extends BaseHttpApi {
@@ -54,6 +56,22 @@ class QuizApi extends BaseHttpApi {
 		);
 
 		return await response.json<QuizScoresGetAllResponseDto>();
+	}
+
+	public async saveAnswers(
+		payload: QuizAnswersRequestDto,
+	): Promise<QuizUserAnswerDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(QuizApiPath.ANSWER, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<QuizUserAnswerDto[]>();
 	}
 }
 

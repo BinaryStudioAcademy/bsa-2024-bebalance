@@ -8,7 +8,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
-import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import { DataStatus, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -66,29 +66,30 @@ const Onboarding: React.FC = () => {
 			validationSchema: oneAnswerSelectedValidationSchema,
 		});
 
-	const handleSaveAnswers = useCallback(
-		(payload: OnboardingAnswerRequestBodyDto) => {
-			//TODO: save data to backend
-			return payload;
-		},
-		[],
-	);
-
 	useEffect(() => {
 		reset({ answer: currentAnswer.toString() });
-	}, [currentQuestionIndex, currentAnswer, reset]);
+	}, [currentAnswer, reset]);
+
+	const handleSaveAnswers = useCallback(
+		(payload: OnboardingAnswerRequestBodyDto) => {
+			void dispatch(onboardingActions.saveAnswers(payload));
+		},
+		[dispatch],
+	);
 
 	const handleNextClick = useCallback(
 		(payload: OnboardingFormValues) => {
+			const answerId = Number(payload.answer);
+
 			dispatch(
 				onboardingActions.setAnswersByQuestionIndex({
-					answerId: Number(payload.answer),
+					answerId,
 					questionIndex: currentQuestionIndex,
 				}),
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: answersByQuestionIndex });
+				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
 
 				return;
 			}
@@ -103,9 +104,9 @@ const Onboarding: React.FC = () => {
 		[
 			isLastQuestion,
 			dispatch,
-			handleSaveAnswers,
 			currentQuestionIndex,
 			answersByQuestionIndex,
+			handleSaveAnswers,
 		],
 	);
 
@@ -121,7 +122,7 @@ const Onboarding: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WELCOME);
+			navigation.navigate(QuestionsStackName.WELCOME);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 

@@ -31,7 +31,7 @@ const Content: React.FC<Properties<QuizFormValues>> = ({
 		? question.answers.map((answer: QuizAnswerDto) => {
 				return {
 					label: answer.label,
-					value: answer.value.toString(),
+					value: answer.id.toString(),
 				};
 			})
 		: [];
