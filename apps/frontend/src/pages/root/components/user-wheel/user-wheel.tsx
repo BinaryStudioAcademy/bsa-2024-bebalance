@@ -58,7 +58,7 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
-	function getModal(mode: WheelEditMode): React.ReactNode {
+	const getModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
 			case "manual": {
 				return (
@@ -74,7 +74,7 @@ const UserWheel: React.FC = () => {
 				return null;
 			}
 		}
-	}
+	};
 
 	return (
 		<div className={styles["container"]}>
