@@ -1,4 +1,5 @@
 import { Button } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useCallback,
 	useEffect,
@@ -90,7 +91,12 @@ const ExpiredTasksSlider: React.FC<Properties> = ({ slides }: Properties) => {
 		<div className={styles["container"]}>
 			<div className={styles["slider-container"]}>
 				<button className={styles["control"]} onClick={previousSlide}>
-					👈
+					<div
+						className={getValidClassNames(
+							styles["arrow"],
+							styles["arrow-left"],
+						)}
+					/>
 				</button>
 
 				<div className={styles["content"]}>
@@ -139,7 +145,12 @@ const ExpiredTasksSlider: React.FC<Properties> = ({ slides }: Properties) => {
 				</div>
 
 				<button className={styles["control"]} onClick={nextSlide}>
-					👉
+					<div
+						className={getValidClassNames(
+							styles["arrow"],
+							styles["arrow-right"],
+						)}
+					/>
 				</button>
 			</div>
 		</div>
