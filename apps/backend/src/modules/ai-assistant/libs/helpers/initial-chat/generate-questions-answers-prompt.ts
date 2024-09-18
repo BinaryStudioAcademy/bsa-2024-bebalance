@@ -5,7 +5,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type OnboardingQuestionEntity } from "~/modules/onboarding/onboarding.js";
 
-import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-message.enum.js";
+import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-template.enum.js";
 
 function generateQuestionsAnswersPrompt(
 	userQuestionsWithAnswers: OnboardingQuestionEntity[],

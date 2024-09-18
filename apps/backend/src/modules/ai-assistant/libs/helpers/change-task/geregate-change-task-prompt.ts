@@ -4,7 +4,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { ChangeTaskPromptTemplates } from "./change-task-template.enum.js";
+import { ChangeTaskPromptTemplates } from "./change-task-prompt-template.enum.js";
 
 function generaChangeTaskPrompt(task: TaskCreateDto): OpenAiRequestMessage {
 	const content = `
