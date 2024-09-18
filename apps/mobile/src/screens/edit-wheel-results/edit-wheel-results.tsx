@@ -90,7 +90,7 @@ const EditWheelResults: React.FC = () => {
 
 					{activeTab === EditWheelResultsTab.EDIT_MANUALLY ? (
 						<ScrollView>
-							<ScoresEditForm data={scores} onSubmit={handleEditScores} />
+							<ScoresEditForm onSubmit={handleEditScores} scores={scores} />
 						</ScrollView>
 					) : (
 						<ScrollView

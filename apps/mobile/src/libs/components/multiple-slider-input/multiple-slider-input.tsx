@@ -11,8 +11,8 @@ import {
 
 type Properties<T extends FieldValues> = {
 	control: Control<T, null>;
-	data: SliderData[];
 	name: FieldPath<T>;
+	scores: SliderData[];
 };
 
 type ScoreItem = { categoryId: number; score: number };
@@ -21,8 +21,8 @@ const NO_ITEM_INDEX = -1;
 
 const MultipleSliderInput = <T extends FieldValues>({
 	control,
-	data,
 	name,
+	scores,
 }: Properties<T>): JSX.Element | null => {
 	const { field } = useFormController({ control, name });
 	const { onChange, value } = field;
@@ -48,12 +48,12 @@ const MultipleSliderInput = <T extends FieldValues>({
 
 	return (
 		<View>
-			{data.map((item) => {
+			{scores.map((score) => {
 				return (
 					<SliderContent
-						data={item}
-						key={item.id}
+						key={score.id}
 						onValueChange={handleSliderChange}
+						score={score}
 					/>
 				);
 			})}

@@ -21,11 +21,11 @@ import { SCORE_FORM_DEFAULT_VALUES } from "../../constants/constants";
 import { styles } from "./styles";
 
 type Properties = {
-	data: QuizScoresGetAllItemResponseDto[];
 	onSubmit: (payload: QuizScoresUpdateRequestDto) => void;
+	scores: QuizScoresGetAllItemResponseDto[];
 };
 
-const ScoresEditForm: React.FC<Properties> = ({ data, onSubmit }) => {
+const ScoresEditForm: React.FC<Properties> = ({ onSubmit, scores }) => {
 	const { control, handleSubmit } = useAppForm<QuizScoresUpdateRequestDto>({
 		defaultValues: SCORE_FORM_DEFAULT_VALUES,
 		validationSchema: updateScoresValidationSchema,
@@ -41,7 +41,7 @@ const ScoresEditForm: React.FC<Properties> = ({ data, onSubmit }) => {
 		})();
 	}, [handleSubmit, onSubmit, navigation]);
 
-	const sliderValues = data.map(({ categoryId, categoryName, score }) => {
+	const sliderValues = scores.map(({ categoryId, categoryName, score }) => {
 		return {
 			id: categoryId,
 			label: categoryName,
@@ -62,7 +62,11 @@ const ScoresEditForm: React.FC<Properties> = ({ data, onSubmit }) => {
 				<Text weight="bold">Do you feel any changes in anything?</Text>
 				<Text weight="bold">Estimate the fields from 1 to 10</Text>
 			</View>
-			<MultipleSliderInput control={control} data={sliderValues} name="items" />
+			<MultipleSliderInput
+				control={control}
+				name="items"
+				scores={sliderValues}
+			/>
 			<View style={[globalStyles.mh32, globalStyles.pt24]}>
 				<Button label="SAVE CHANGES" onPress={handleFormSubmit} />
 			</View>

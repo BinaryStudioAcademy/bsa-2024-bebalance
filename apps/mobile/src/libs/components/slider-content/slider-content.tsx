@@ -8,8 +8,8 @@ import { type SliderData } from "~/libs/types/types";
 import { DEFAULT_SLIDER_COLOR, MAX_SLIDER_VALUE } from "./constants/constants";
 
 type Properties = {
-	data: SliderData;
 	onValueChange: (id: number, sliderValue: number) => void;
+	score: SliderData;
 };
 
 const getGradientColorsForCategory = (
@@ -21,8 +21,8 @@ const getGradientColorsForCategory = (
 	);
 };
 
-const SliderContent: React.FC<Properties> = ({ data, onValueChange }) => {
-	const color = getGradientColorsForCategory(data.label);
+const SliderContent: React.FC<Properties> = ({ onValueChange, score }) => {
+	const color = getGradientColorsForCategory(score.label);
 
 	return (
 		<View
@@ -34,14 +34,14 @@ const SliderContent: React.FC<Properties> = ({ data, onValueChange }) => {
 			]}
 		>
 			<Text preset="tag" style={globalStyles.mb4}>
-				{data.label}
+				{score.label}
 			</Text>
 			<GradientSlider
 				gradientColors={color}
-				id={data.id}
+				id={score.id}
 				max={MAX_SLIDER_VALUE}
 				onValueChange={onValueChange}
-				value={data.value}
+				value={score.value}
 			/>
 		</View>
 	);
