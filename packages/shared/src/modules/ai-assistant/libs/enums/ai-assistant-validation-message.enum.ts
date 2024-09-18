@@ -5,7 +5,7 @@ const AiAssistantValidationMessage = {
 	DESCRIPTION_REQUIRED: "Description is required",
 	DUE_DATE_INVALID_FORMAT: "Due date has an invalid format",
 	LABEL_REQUIRED: "Label is required",
-	TEXT_REQUIRED: "text  required",
+	TEXT_REQUIRED: "Text is required",
 	THREAD_ID_INVALID_FORMAT: "Thread ID has an invalid format",
 	THREAD_ID_REQUIRED: "Thread ID is required",
 } as const;
