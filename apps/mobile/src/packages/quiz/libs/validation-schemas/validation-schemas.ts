@@ -1,1 +1,4 @@
-export { categoryAnswerSelectedValidationSchema } from "shared";
+export {
+	categoryAnswerSelectedValidationSchema,
+	updateScoresValidationSchema,
+} from "shared";
