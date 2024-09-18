@@ -26,14 +26,14 @@ const Root: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 
-	const hasAnsweredQuizQuestions = user?.hasAnsweredQuizQuestions;
+	const hasAnsweredQuizQuestions = Boolean(user?.hasAnsweredQuizQuestions);
 	const hasUser = Boolean(user);
 
 	const filteredNavigationItems = useMemo(() => {
 		return NAVIGATION_ITEMS.filter((screen) => {
 			return screen.checkShouldBeRendered({
-				hasAnsweredQuizQuestions: Boolean(hasAnsweredQuizQuestions),
-				hasUser: Boolean(hasUser),
+				hasAnsweredQuizQuestions,
+				hasUser,
 			});
 		});
 	}, [hasUser, hasAnsweredQuizQuestions]);

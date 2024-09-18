@@ -21,9 +21,7 @@ const QuestionsStack: React.FC = () => {
 	);
 
 	const hasNotificationDays = useAppSelector(
-		({ auth }) =>
-			(auth.user?.userTaskDays?.length ?? NumericalValue.ZERO) >
-			NumericalValue.ZERO,
+		({ auth }) => Number(auth.user?.userTaskDays?.length) > NumericalValue.ZERO,
 	);
 
 	return (
