@@ -3,7 +3,10 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import { ONE_HUNDRED, ZERO_INDEX } from "./libs/constants/constants.js";
+import {
+	ONE_HUNDRED_PERCENT_COMPLETION,
+	ZERO_INDEX,
+} from "./libs/constants/constants.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 import {
 	type UserDetailsWithAvatarFile,
@@ -53,6 +56,7 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: userDetails.avatarFileId,
 			avatarUrl: null,
+			completionTasksPercentage: 0,
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions: false,
@@ -62,7 +66,6 @@ class UserRepository implements Repository {
 			notificationFrequency: "all",
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
-			taskPercentage: 0,
 			updatedAt: user.updatedAt,
 			userTaskDays: [],
 		});
@@ -96,6 +99,12 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
+					completionTasksPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED_PERCENT_COMPLETION,
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -106,12 +115,6 @@ class UserRepository implements Repository {
 					notificationFrequency: user.userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					taskPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -132,6 +135,11 @@ class UserRepository implements Repository {
 			return UserEntity.initialize({
 				avatarFileId: user.userDetails.avatarFileId,
 				avatarUrl: user.userDetails.avatarFile?.url ?? null,
+				completionTasksPercentage:
+					(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
+						.length /
+						user.userTasks.length) *
+					ONE_HUNDRED_PERCENT_COMPLETION,
 				createdAt: user.createdAt,
 				email: user.email,
 				hasAnsweredOnboardingQuestions:
@@ -142,11 +150,6 @@ class UserRepository implements Repository {
 				notificationFrequency: user.userDetails.notificationFrequency,
 				passwordHash: user.passwordHash,
 				passwordSalt: user.passwordSalt,
-				taskPercentage:
-					(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
-						.length /
-						user.userTasks.length) *
-					ONE_HUNDRED,
 				updatedAt: user.updatedAt,
 				userTaskDays: user.userTaskDays.map(
 					(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -169,6 +172,12 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
+					completionTasksPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED_PERCENT_COMPLETION,
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -179,12 +188,6 @@ class UserRepository implements Repository {
 					notificationFrequency: user.userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					taskPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -217,6 +220,12 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: userDetails?.avatarFileId ?? null,
 					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
+					completionTasksPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED_PERCENT_COMPLETION,
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -227,12 +236,6 @@ class UserRepository implements Repository {
 					notificationFrequency: updatedUserDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					taskPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -268,6 +271,12 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: userDetails.avatarFileId,
 					avatarUrl: userDetails.avatarFile?.url ?? null,
+					completionTasksPercentage:
+						(user.userTasks.filter(
+							(task) => task.status === TaskStatus.COMPLETED,
+						).length /
+							user.userTasks.length) *
+						ONE_HUNDRED_PERCENT_COMPLETION,
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -278,12 +287,6 @@ class UserRepository implements Repository {
 					notificationFrequency: userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					taskPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -308,6 +311,11 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
 			avatarUrl: user.userDetails.avatarFile?.url ?? null,
+			completionTasksPercentage:
+				(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
+					.length /
+					user.userTasks.length) *
+				ONE_HUNDRED_PERCENT_COMPLETION,
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions:
@@ -318,11 +326,6 @@ class UserRepository implements Repository {
 			notificationFrequency: user.userDetails.notificationFrequency,
 			passwordHash: user.passwordHash,
 			passwordSalt: user.passwordSalt,
-			taskPercentage:
-				(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
-					.length /
-					user.userTasks.length) *
-				ONE_HUNDRED,
 			updatedAt: user.updatedAt,
 			userTaskDays: user.userTaskDays.map(
 				(taskDay: UserTaskDay) => taskDay.dayOfWeek,

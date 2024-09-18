@@ -1,3 +1,3 @@
-const ONE_HUNDRED = 100;
-export { ONE_HUNDRED };
+const ONE_HUNDRED_PERCENT_COMPLETION = 100;
+export { ONE_HUNDRED_PERCENT_COMPLETION };
 export { ZERO_INDEX } from "shared";

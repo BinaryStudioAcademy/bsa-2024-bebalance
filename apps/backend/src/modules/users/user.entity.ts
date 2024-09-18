@@ -8,6 +8,8 @@ class UserEntity implements Entity {
 
 	private avatarUrl: null | string;
 
+	private completionTasksPercentage: null | number;
+
 	private createdAt: string;
 
 	private email: string;
@@ -26,8 +28,6 @@ class UserEntity implements Entity {
 
 	private passwordSalt: string;
 
-	private taskPercentage: null | number;
-
 	private updatedAt: string;
 
 	private userTaskDays: null | number[];
@@ -35,6 +35,7 @@ class UserEntity implements Entity {
 	private constructor({
 		avatarFileId,
 		avatarUrl,
+		completionTasksPercentage,
 		createdAt,
 		email,
 		hasAnsweredOnboardingQuestions,
@@ -44,12 +45,12 @@ class UserEntity implements Entity {
 		notificationFrequency,
 		passwordHash,
 		passwordSalt,
-		taskPercentage,
 		updatedAt,
 		userTaskDays,
 	}: {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -59,7 +60,6 @@ class UserEntity implements Entity {
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
-		taskPercentage: null | number;
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
@@ -74,7 +74,7 @@ class UserEntity implements Entity {
 		this.notificationFrequency = notificationFrequency;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
-		this.taskPercentage = taskPercentage;
+		this.completionTasksPercentage = completionTasksPercentage;
 		this.updatedAt = updatedAt;
 		this.userTaskDays = userTaskDays;
 	}
@@ -82,6 +82,7 @@ class UserEntity implements Entity {
 	public static initialize({
 		avatarFileId,
 		avatarUrl,
+		completionTasksPercentage,
 		createdAt,
 		email,
 		hasAnsweredOnboardingQuestions,
@@ -91,12 +92,12 @@ class UserEntity implements Entity {
 		notificationFrequency,
 		passwordHash,
 		passwordSalt,
-		taskPercentage,
 		updatedAt,
 		userTaskDays,
 	}: {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -106,13 +107,13 @@ class UserEntity implements Entity {
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
-		taskPercentage: null | number;
 		updatedAt: string;
 		userTaskDays?: number[];
 	}): UserEntity {
 		return new UserEntity({
 			avatarFileId,
 			avatarUrl,
+			completionTasksPercentage: completionTasksPercentage ?? ZERO_INDEX,
 			createdAt,
 			email,
 			hasAnsweredOnboardingQuestions,
@@ -123,7 +124,6 @@ class UserEntity implements Entity {
 				notificationFrequency ?? NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
-			taskPercentage: taskPercentage ?? ZERO_INDEX,
 			updatedAt,
 			userTaskDays: userTaskDays ?? null,
 		});
@@ -143,6 +143,7 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			avatarFileId: null,
 			avatarUrl: null,
+			completionTasksPercentage: ZERO_INDEX,
 			createdAt: "",
 			email,
 			hasAnsweredOnboardingQuestions: false,
@@ -152,7 +153,6 @@ class UserEntity implements Entity {
 			notificationFrequency: NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
-			taskPercentage: ZERO_INDEX,
 			updatedAt: "",
 			userTaskDays: null,
 		});
@@ -161,6 +161,7 @@ class UserEntity implements Entity {
 	public toNewObject(): {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -169,13 +170,13 @@ class UserEntity implements Entity {
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
-		taskPercentage: null | number;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
 		return {
 			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
+			completionTasksPercentage: this.completionTasksPercentage ?? ZERO_INDEX,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
@@ -184,7 +185,6 @@ class UserEntity implements Entity {
 			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
-			taskPercentage: this.taskPercentage ?? ZERO_INDEX,
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
@@ -193,6 +193,7 @@ class UserEntity implements Entity {
 	public toObject(): {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -200,13 +201,13 @@ class UserEntity implements Entity {
 		id: number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
-		taskPercentage: null | number;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
 		return {
 			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
+			completionTasksPercentage: this.completionTasksPercentage ?? ZERO_INDEX,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
@@ -214,7 +215,6 @@ class UserEntity implements Entity {
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
-			taskPercentage: this.taskPercentage ?? ZERO_INDEX,
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
