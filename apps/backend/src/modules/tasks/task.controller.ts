@@ -17,40 +17,45 @@ import {
 import { taskUpdateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 import { type TaskService } from "./task.service.js";
 
-/*** @swagger
+/**
+ * @swagger
+ * tags:
+ *   - name: tasks
+ *     description: Endpoints related to tasks
  * components:
- *    schemas:
- *      Task:
- *        type: object
- *        properties:
- *          id:
- *            type: number
- *            format: number
- *            minimum: 1
- *          category:
- *            type: string
- *          categoryId:
- *            type: number
- *            format: number
- *            minimum: 1
- *          description:
- *            type: string
- *          dueDate:
- *            type: string
- *          label:
- *            type: string
- *          status:
- *            type: string
- *          userId:
- *            type: number
- *            format: number
- *            minimum: 1
- *          createdAt:
- *            type: string
- *            format: date-time
- *          updatedAt:
- *            type: string
- *            format: date-time
+ *   schemas:
+ *     TaskStatusEnum:
+ *       type: string
+ *       enum: [Current, Completed, Skipped]
+ *     TaskDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         categoryId:
+ *           type: integer
+ *           example: 1
+ *         userId:
+ *           type: integer
+ *           example: 1
+ *         category:
+ *           type: string
+ *         description:
+ *           type: string
+ *         dueDate:
+ *           type: string
+ *           format: date-time
+ *         label:
+ *           type: string
+ *         status:
+ *           $ref: '#/components/schemas/TaskStatusEnum'
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
  */
 class TaskController extends BaseController {
 	private taskService: TaskService;
@@ -115,19 +120,26 @@ class TaskController extends BaseController {
 	/**
 	 * @swagger
 	 * /tasks/current:
-	 *    get:
-	 *      description: Returns an array of current users tasks
-	 *      security:
-	 *        - bearerAuth: []
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: array
-	 *                items:
-	 *                  $ref: "#/components/schemas/Task"
+	 *   get:
+	 *     tags: [tasks]
+	 *     summary: Get user current tasks
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: array
+	 *               items:
+	 *                 $ref: "#/components/schemas/TaskDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private async findCurrentByUserId(
 		options: APIHandlerOptions<{
@@ -146,7 +158,8 @@ class TaskController extends BaseController {
 	 * @swagger
 	 * /tasks/past:
 	 *    get:
-	 *      description: Returns an array of past users tasks
+	 *      tags: [tasks]
+	 *      summary: Get user past tasks
 	 *      security:
 	 *        - bearerAuth: []
 	 *      responses:
@@ -157,9 +170,14 @@ class TaskController extends BaseController {
 	 *              schema:
 	 *                type: array
 	 *                items:
-	 *                  $ref: "#/components/schemas/Task"
+	 *                  $ref: "#/components/schemas/TaskDto"
+	 *        401:
+	 *          description: Unauthorized
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                $ref: "#/components/schemas/CommonErrorResponse"
 	 */
-
 	private async findPastByUserId(
 		options: APIHandlerOptions<{
 			user: UserDto;
@@ -176,16 +194,19 @@ class TaskController extends BaseController {
 	/**
 	 * @swagger
 	 * /tasks/{id}:
-	 *    patch:
-	 *      description: Update a task
-	 *      security:
-	 *        - bearerAuth: []
-	 *      parameters:
-	 *        - in: path
-	 *          name: id
-	 *          required: true
-	 *          schema:
-	 *            type: number
+	 *   patch:
+	 *     tags: [tasks]
+	 *     summary: Update task status by id
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - name: id
+	 *         in: path
+	 *         required: true
+	 *         description: Task id
+	 *         schema:
+	 *           type: integer
+	 *           example: 1
 	 *      requestBody:
 	 *        required: true
 	 *        content:
@@ -198,16 +219,32 @@ class TaskController extends BaseController {
 	 *                label:
 	 *                  type: string
 	 *                status:
-	 *                  type: string
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: array
-	 *                items:
-	 *                  $ref: "#/components/schemas/Task"
+	 *                  $ref: "#/components/schemas/TaskStatusEnum"
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/TaskDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       403:
+	 *         description: Forbidden to update other user's tasks
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async update(
 		options: APIHandlerOptions<{
