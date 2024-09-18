@@ -15,6 +15,7 @@ import {
 	SINGLE_SLIDE,
 	SLIDE_WIDTH_PERCENTAGE,
 } from "./libs/constants/constants.js";
+import { getClientX } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -45,25 +46,22 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 	}, [currentSlide, goToSlide]);
 
 	const handleDragStart = useCallback(
-		(event: React.MouseEvent): void => {
+		(event: React.MouseEvent | React.TouchEvent): void => {
 			setIsDragging(true);
-
-			if (event.clientX) {
-				setStartX(event.clientX);
-			}
+			const clientX = getClientX(event);
+			setStartX(clientX);
 		},
 		[setIsDragging, setStartX],
 	);
 
 	const handleDragMove = useCallback(
-		(event: React.MouseEvent) => {
+		(event: React.MouseEvent | React.TouchEvent) => {
 			if (!isDragging) {
 				return;
 			}
 
-			const currentX = event.clientX || INITIAL_X;
-
-			const movementDistance = startX - currentX;
+			const clientX = getClientX(event);
+			const movementDistance = startX - clientX;
 
 			if (Math.abs(movementDistance) <= DRAG_THRESHOLD) {
 				return;
@@ -79,6 +77,10 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 		},
 		[isDragging, startX, nextSlide, previousSlide, setIsDragging],
 	);
+
+	const handleDragEnd = useCallback(() => {
+		setIsDragging(false);
+	}, [setIsDragging]);
 
 	useEffect(() => {
 		if (!sliderReference.current) {
@@ -120,7 +122,12 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 							<div
 								className={styles["slider"]}
 								onMouseDown={handleDragStart}
+								onMouseLeave={handleDragEnd}
 								onMouseMove={handleDragMove}
+								onMouseUp={handleDragEnd}
+								onTouchEnd={handleDragEnd}
+								onTouchMove={handleDragMove}
+								onTouchStart={handleDragStart}
 								ref={sliderReference}
 								role="button"
 								tabIndex={0}
