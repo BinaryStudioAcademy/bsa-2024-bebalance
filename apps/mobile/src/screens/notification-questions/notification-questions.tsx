@@ -92,7 +92,7 @@ const NotificationQuestions: React.FC = () => {
 		handleStepChange,
 	]);
 
-	const onPageRender = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return currentStep === NumericalValue.ZERO ? (
 			<NotificationTaskDays control={control} errors={errors} />
 		) : (
@@ -130,7 +130,7 @@ const NotificationQuestions: React.FC = () => {
 							</Text>
 							<InfinitePager
 								infinitePagerReference={infinitePagerReference}
-								onPageRender={onPageRender}
+								onPageRender={handleRenderPageComponent}
 							/>
 						</View>
 

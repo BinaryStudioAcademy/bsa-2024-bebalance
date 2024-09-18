@@ -35,7 +35,7 @@ import {
 } from "./libs/types/types";
 import { styles } from "./styles";
 
-const ZERO = 0;
+const FIRST_ITEM_INDEX = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -125,7 +125,7 @@ const Onboarding: React.FC = () => {
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
-	const renderPageComponent = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return (
 			<Content control={control} errors={errors} question={currentQuestion} />
 		);
@@ -161,7 +161,7 @@ const Onboarding: React.FC = () => {
 								>
 									<InfinitePager
 										infinitePagerReference={infinitePager}
-										onPageRender={renderPageComponent}
+										onPageRender={handleRenderPageComponent}
 									/>
 									<View style={globalStyles.gap16}>
 										<Button
@@ -169,7 +169,7 @@ const Onboarding: React.FC = () => {
 											label={isLastQuestion ? "ANALYZE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
-										{currentQuestionIndex !== ZERO && (
+										{currentQuestionIndex !== FIRST_ITEM_INDEX && (
 											<Button
 												appearance="outlined"
 												label="BACK"
