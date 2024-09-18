@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.20.0...shared-v1.21.0) (2024-09-18)
+
+
+### Features
+
+* **frontend:** upload a new avatar bb-341 ([#448](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/448)) ([b3fe346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3fe346ab6e9b1f85a67af19bbd0a64db476d145))
+
 ## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.19.0...shared-v1.20.0) (2024-09-16)
 
 

@@ -33,6 +33,12 @@ const Quiz: React.FC = () => {
 		hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
 	}));
 
+	useEffect(() => {
+		if (hasAnsweredOnboardingQuestions) {
+			dispatch(quizActions.setStep(Step.INTRODUCTION));
+		}
+	}, [hasAnsweredOnboardingQuestions, dispatch]);
+
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
 			void dispatch(userActions.saveNotificationAnswers(payload));

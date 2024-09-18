@@ -21,6 +21,7 @@ const BalanceWheel: React.FC = () => {
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
+	const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
 
 	const { hasAnsweredOnboardingQuestions, hasAnsweredQuizQuestions } =
 		useAppSelector(({ auth }) => ({
@@ -43,6 +44,23 @@ const BalanceWheel: React.FC = () => {
 		});
 	}, []);
 
+	const handleNavigate = useCallback(() => {
+		const isDone =
+			percentage >= PercentageConfig.MAX_VALUE &&
+			hasAnsweredQuizQuestions &&
+			hasAnsweredOnboardingQuestions;
+
+		if (isDone) {
+			setTimeout(() => {
+				setShouldNavigate(true);
+			}, PercentageConfig.PERCENTAGE_INCREASE_INTERVAL);
+		}
+	}, [percentage, hasAnsweredQuizQuestions, hasAnsweredOnboardingQuestions]);
+
+	useEffect(() => {
+		handleNavigate();
+	}, [handleNavigate]);
+
 	useEffect(() => {
 		const intervalId = setInterval(
 			handleUpdatePercentage,
@@ -54,12 +72,7 @@ const BalanceWheel: React.FC = () => {
 		};
 	}, [handleUpdatePercentage]);
 
-	const isDone =
-		percentage >= PercentageConfig.MAX_VALUE &&
-		hasAnsweredQuizQuestions &&
-		hasAnsweredOnboardingQuestions;
-
-	if (isDone) {
+	if (shouldNavigate) {
 		dispatch(appActions.changeLink(AppRoute.ROOT));
 		dispatch(quizActions.setStep(Step.MOTIVATION));
 	}

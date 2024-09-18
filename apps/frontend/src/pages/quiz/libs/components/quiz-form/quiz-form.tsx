@@ -15,6 +15,7 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import {
@@ -123,7 +124,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 					void dispatch(quizActions.setStep(Step.BALANCE_WHEEL));
 				} else {
 					void dispatch(quizActions.saveAnswers({ answerIds }));
-
+					void dispatch(authActions.updateQuizAnsweredState());
 					onNext();
 				}
 			}
