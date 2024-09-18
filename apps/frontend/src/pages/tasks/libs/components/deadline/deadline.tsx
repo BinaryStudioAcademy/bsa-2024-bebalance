@@ -1,6 +1,7 @@
 import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
+import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import {
 	COUNTDOWN_EXPIRED,
@@ -13,10 +14,12 @@ import { type Countdown } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	deadline: string;
+	onExpire: ((expiredTask: TaskDto) => void) | undefined;
+	task: TaskDto;
 };
 
-const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
+const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
+	const { dueDate: deadline } = task;
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 	const [isExpired, setIsExpired] = useState<boolean>(false);
 
@@ -34,6 +37,7 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 		if (timeToDeadline < DEADLINE_OVER) {
 			setCountdown(COUNTDOWN_EXPIRED);
 			setIsExpired(true);
+			onExpire?.(task);
 
 			return true;
 		}
@@ -60,7 +64,7 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 		});
 
 		return false;
-	}, [deadline]);
+	}, [deadline, onExpire, task]);
 
 	useEffect(() => {
 		const countdownInterval = setInterval(() => {

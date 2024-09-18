@@ -3,9 +3,16 @@
 	height: 251px;
 	padding: 20px;
 	padding-right: 12px;
-	background-color: var(--white);
 	border: 1px solid var(--background-gray);
 	border-radius: 20px;
+}
+
+.card-active {
+	background-color: var(--white);
+}
+
+.card-expired {
+	background-color: var(--background-gray);
 }
 
 .card-header {
