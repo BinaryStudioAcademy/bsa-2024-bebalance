@@ -4,16 +4,10 @@ import {
 } from "@react-navigation/native-stack";
 import React from "react";
 
-import {
-	useAppDispatch,
-	useAppSelector,
-	useEffect,
-	useMemo,
-} from "~/libs/hooks/hooks";
+import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { actions as authActions } from "~/slices/auth/auth";
-
-import { NAVIGATION_ITEMS } from "./libs/constants/constants";
+import { useConditionalScreens } from "./libs/hooks/hooks";
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -29,14 +23,10 @@ const Root: React.FC = () => {
 	const hasAnsweredQuizQuestions = Boolean(user?.hasAnsweredQuizQuestions);
 	const hasUser = Boolean(user);
 
-	const filteredNavigationItems = useMemo(() => {
-		return NAVIGATION_ITEMS.filter((screen) => {
-			return screen.checkShouldBeRendered({
-				hasAnsweredQuizQuestions,
-				hasUser,
-			});
-		});
-	}, [hasUser, hasAnsweredQuizQuestions]);
+	const filteredScreens = useConditionalScreens({
+		hasUser,
+		hasAnsweredQuizQuestions,
+	});
 
 	useEffect(() => {
 		void dispatch(authActions.getAuthenticatedUser());
@@ -44,7 +34,7 @@ const Root: React.FC = () => {
 
 	return (
 		<NativeStack.Navigator screenOptions={SCREEN_OPTIONS}>
-			{filteredNavigationItems.map((screen) => {
+			{filteredScreens.map((screen) => {
 				return (
 					<NativeStack.Screen
 						component={screen.component}
