@@ -9,6 +9,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { CategoryModel } from "../categories/category.model.js";
 import { UserModel } from "../users/users.js";
 import { type TaskStatus } from "./libs/enums/enums.js";
+import { TaskNoteModel } from "./task-note.model.js";
 
 class TaskModel extends AbstractModel {
 	public category!: CategoryModel;
@@ -34,6 +35,14 @@ class TaskModel extends AbstractModel {
 				},
 				modelClass: CategoryModel,
 				relation: Model.BelongsToOneRelation,
+			},
+			notes: {
+				join: {
+					from: `${DatabaseTableName.TASKS}.id`,
+					to: `${DatabaseTableName.TASK_NOTES}.taskId`,
+				},
+				modelClass: TaskNoteModel,
+				relation: Model.HasManyRelation,
 			},
 			user: {
 				join: {

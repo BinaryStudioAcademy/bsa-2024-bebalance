@@ -9,6 +9,7 @@ const DatabaseTableName = {
 	QUIZ_ANSWERS_TO_USERS: "quiz_answers_to_users",
 	QUIZ_QUESTIONS: "quiz_questions",
 	QUIZ_SCORES: "quiz_scores",
+	TASK_NOTES: "tasks_notes",
 	TASKS: "tasks",
 	USER_DETAILS: "user_details",
 	USER_TASK_DAYS: "user_task_days",

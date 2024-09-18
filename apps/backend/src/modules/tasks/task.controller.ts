@@ -11,10 +11,14 @@ import { type UserDto } from "~/modules/users/users.js";
 import { TasksApiPath } from "./libs/enums/enums.js";
 import { checkAccessToTask } from "./libs/hooks/hooks.js";
 import {
+	type TaskNoteRequestDto,
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
-import { taskUpdateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+import {
+	taskNoteValidationSchema,
+	taskUpdateValidationSchema,
+} from "./libs/validation-schemas/validation-schemas.js";
 import { type TaskService } from "./task.service.js";
 
 /**
@@ -102,6 +106,74 @@ class TaskController extends BaseController {
 				body: taskUpdateValidationSchema,
 			},
 		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.addNote(
+					options as APIHandlerOptions<{ body: TaskNoteRequestDto }>,
+				),
+			method: "POST",
+			path: TasksApiPath.NOTE,
+			validation: {
+				body: taskNoteValidationSchema,
+			},
+		});
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/note:
+	 *   post:
+	 *     tags: [tasks]
+	 *     summary: Add a note to a task
+	 *     description: Allows users to add a note to a specific task.
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               taskId:
+	 *                 type: integer
+	 *                 description: The ID of the task to which the note is being added
+	 *                 example: 1
+	 *               content:
+	 *                 type: string
+	 *                 description: The content of the note
+	 *                 example: "This is a note for a task."
+	 *     responses:
+	 *       201:
+	 *         description: Note added successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               $ref: "#/components/schemas/TaskNoteDto"
+	 *       401:
+	 *         description: Unauthorized (invalid or missing token)
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       404:
+	 *         description: Task not found
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
+	private async addNote(
+		options: APIHandlerOptions<{
+			body: TaskNoteRequestDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.taskService.addNote(options.body),
+			status: HTTPCode.CREATED,
+		};
 	}
 
 	/**

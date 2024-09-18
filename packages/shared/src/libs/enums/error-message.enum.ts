@@ -17,6 +17,7 @@ const ErrorMessage = {
 		"Scores cannot be updated before the quiz is taken.",
 	TASK_DAYS_NOT_DEFINED:
 		"You must define the days for tasks before creating tasks.",
+	TASK_NOT_FOUNT: "The task does not exist.",
 	UNAUTHORIZED: "You are unauthorized to access the requested resource.",
 	UNSUPPORTED_FILE_TYPE: "Unsupported file type.",
 } as const;
