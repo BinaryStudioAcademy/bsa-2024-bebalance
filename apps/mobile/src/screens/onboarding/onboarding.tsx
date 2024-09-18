@@ -8,7 +8,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
-import { DataStatus, NumericalValue, RootScreenName } from "~/libs/enums/enums";
+import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -34,6 +34,8 @@ import {
 	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
+
+const FIRST_ITEM_INDEX = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -167,7 +169,7 @@ const Onboarding: React.FC = () => {
 											label={isLastQuestion ? "ANALYZE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
-										{currentQuestionIndex !== NumericalValue.ZERO && (
+										{currentQuestionIndex !== FIRST_ITEM_INDEX && (
 											<Button
 												appearance="outlined"
 												label="BACK"
