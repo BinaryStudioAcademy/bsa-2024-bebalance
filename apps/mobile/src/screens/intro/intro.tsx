@@ -6,21 +6,23 @@ import {
 	TypingTextView,
 	View,
 } from "~/libs/components/components";
-import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { BaseColor, QuestionsStackName } from "~/libs/enums/enums";
 import { useCallback, useNavigation } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type NativeStackNavigationProp,
-	type RootNavigationParameterList,
+	type QuestionsStackNavigationParameterList,
 } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 const Intro: React.FC = () => {
 	const navigation =
-		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
+		useNavigation<
+			NativeStackNavigationProp<QuestionsStackNavigationParameterList>
+		>();
 	const handleContinuePress = useCallback((): void => {
-		navigation.navigate(RootScreenName.ONBOARDING);
+		navigation.navigate(QuestionsStackName.ONBOARDING);
 	}, [navigation]);
 
 	return (

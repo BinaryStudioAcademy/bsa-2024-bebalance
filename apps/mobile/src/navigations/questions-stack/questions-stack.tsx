@@ -5,6 +5,7 @@ import { NumericalValue, QuestionsStackName } from "~/libs/enums/enums";
 import { useAppSelector } from "~/libs/hooks/hooks";
 import { type QuestionsStackNavigationParameterList } from "~/libs/types/types";
 import { BottomTabsNavigator } from "~/navigations/bottom-tabs-navigator/bottom-tabs-navigator";
+import { Intro } from "~/screens/intro/intro";
 import { NotificationQuestions } from "~/screens/notification-questions/notification-questions";
 import { Onboarding } from "~/screens/onboarding/onboarding";
 import { Quiz } from "~/screens/quiz/quiz";
@@ -30,6 +31,10 @@ const QuestionsStack: React.FC = () => {
 		<NativeStack.Navigator screenOptions={{ headerShown: false }}>
 			{!hasAnsweredOnboardingQuestions && (
 				<>
+					<NativeStack.Screen
+						component={Intro}
+						name={QuestionsStackName.INTRO}
+					/>
 					<NativeStack.Screen
 						component={Onboarding}
 						name={QuestionsStackName.ONBOARDING}
