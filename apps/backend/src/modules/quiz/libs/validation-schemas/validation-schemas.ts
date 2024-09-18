@@ -1,1 +1,4 @@
-export { quizUserAnswersValidationSchema } from "shared";
+export {
+	categoryIdsValidationSchema,
+	quizUserAnswersValidationSchema,
+} from "shared";

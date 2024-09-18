@@ -5,6 +5,7 @@ import {
 	type QuizAnswerEntity,
 } from "../quiz-answers/quiz-answers.js";
 import {
+	type CategoriesGetRequestQueryDto,
 	type QuizQuestionDto,
 	type QuizQuestionRequestDto,
 } from "./libs/types/types.js";
@@ -43,6 +44,10 @@ class QuizQuestionService implements Service {
 		return await this.quizQuestionRepository.countAll();
 	}
 
+	public async countByCategoryIds(categoryIds: number[]): Promise<number> {
+		return await this.quizQuestionRepository.countByCategoryIds(categoryIds);
+	}
+
 	public async create(
 		payload: QuizQuestionRequestDto,
 	): Promise<QuizQuestionDto> {
@@ -67,6 +72,47 @@ class QuizQuestionService implements Service {
 
 	public async findAll(): Promise<{ items: QuizQuestionDto[][] }> {
 		const questions = await this.quizQuestionRepository.findAll();
+
+		const items = questions.map((questionEntity) => {
+			return this.convertQuestionEntityToDto(questionEntity);
+		});
+
+		const groupedByCategory: Record<number, QuizQuestionDto[]> = {};
+
+		for (const question of items) {
+			const { categoryId } = question;
+
+			if (!groupedByCategory[categoryId]) {
+				groupedByCategory[categoryId] = [];
+			}
+
+			groupedByCategory[categoryId].push(question);
+		}
+
+		const result = Object.values(groupedByCategory);
+
+		return { items: result };
+	}
+
+	public async findQuestions(
+		query: CategoriesGetRequestQueryDto,
+	): Promise<{ items: QuizQuestionDto[][] }> {
+		const { categoryIds } = query;
+
+		if (!categoryIds) {
+			return await this.findAll();
+		}
+
+		return await this.findQuestionsByCategoryIds(
+			JSON.parse(query.categoryIds) as number[],
+		);
+	}
+
+	public async findQuestionsByCategoryIds(
+		categoryIds: number[],
+	): Promise<{ items: QuizQuestionDto[][] }> {
+		const questions =
+			await this.quizQuestionRepository.findByCategoryIds(categoryIds);
 
 		const items = questions.map((questionEntity) => {
 			return this.convertQuestionEntityToDto(questionEntity);

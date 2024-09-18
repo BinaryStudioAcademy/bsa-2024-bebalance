@@ -69,6 +69,10 @@ const { actions, name, reducer } = createSlice({
 					state.questions[state.currentQuestionIndex] ?? null;
 			}
 		},
+		resetState(state) {
+			state.dataStatus = DataStatus.IDLE;
+			state.currentQuestionIndex = ZERO_INDEX;
+		},
 	},
 });
 

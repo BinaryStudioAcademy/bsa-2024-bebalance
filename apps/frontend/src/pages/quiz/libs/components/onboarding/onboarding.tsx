@@ -80,6 +80,7 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			if (isLastQuestion) {
 				const answerIds = getAnswerIds(data);
 				void dispatch(onboardingActions.saveAnswers({ answerIds }));
+				void dispatch(onboardingActions.resetState());
 				onNext();
 			}
 

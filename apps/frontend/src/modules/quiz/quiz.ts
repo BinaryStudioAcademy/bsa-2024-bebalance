@@ -12,6 +12,7 @@ const quizApi = new QuizApi({
 
 export { quizApi };
 export {
+	type CategoriesGetRequestQueryDto,
 	type QuizAnswerDto,
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
