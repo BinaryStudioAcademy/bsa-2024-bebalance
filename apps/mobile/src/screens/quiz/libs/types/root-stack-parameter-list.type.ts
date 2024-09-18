@@ -1,7 +1,7 @@
-import { type RootScreenName } from "~/libs/enums/enums";
+import { type QuestionsStackName } from "~/libs/enums/enums";
 
 type RootStackParameterList = {
-	[RootScreenName.NOTIFICATION_QUESTIONS]: undefined;
+	[QuestionsStackName.NOTIFICATION_QUESTIONS]: undefined;
 };
 
 export { type RootStackParameterList };
