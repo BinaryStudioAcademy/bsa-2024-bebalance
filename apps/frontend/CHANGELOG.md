@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.38.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.37.0...frontend-v1.38.0) (2024-09-18)
+
+
+### Features
+
+* **frontend:** add default answer and quick tip bb-460 ([#475](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/475)) ([968e9f7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/968e9f7bcad3490a780e00fe721b1e5b25aae5c9))
+* **frontend:** New design for toast messages bb-372 ([#458](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/458)) ([63734d7](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/63734d71053aa1c70689bbc20f39625e44fc051a))
+* **frontend:** upload a new avatar bb-341 ([#448](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/448)) ([b3fe346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3fe346ab6e9b1f85a67af19bbd0a64db476d145))
+
+
+### Bug Fixes
+
+* **frontend:** Flow after sign up bb-242 ([#468](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/468)) ([b6d59b2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b6d59b29a7863463b649832520a789aefb6238a1))
+
 ## [1.37.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.36.0...frontend-v1.37.0) (2024-09-16)
 
 
