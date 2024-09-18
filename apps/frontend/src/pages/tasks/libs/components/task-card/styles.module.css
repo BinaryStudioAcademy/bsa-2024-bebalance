@@ -12,6 +12,7 @@
 }
 
 .card-expired {
+	user-select: none;
 	background-color: var(--background-gray);
 }
 

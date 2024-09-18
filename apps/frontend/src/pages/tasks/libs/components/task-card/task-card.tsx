@@ -15,13 +15,12 @@ const TaskCard: React.FC<Properties> = ({
 	task,
 	variant = "active",
 }: Properties) => {
-	const cardVariantStyleClass =
-		variant === "active" ? styles["card-active"] : styles["card-expired"];
-
 	return (
-		<div className={getValidClassNames(styles["card"], cardVariantStyleClass)}>
+		<div
+			className={getValidClassNames(styles["card"], styles[`card-${variant}`])}
+		>
 			<div className={styles["card-header"]}>
-				<Category categoryName={task.category} />
+				<Category categoryName={task.category} variant={variant} />
 				<Deadline onExpire={onExpire} task={task} />
 			</div>
 			<div className={styles["card-body"]}>
