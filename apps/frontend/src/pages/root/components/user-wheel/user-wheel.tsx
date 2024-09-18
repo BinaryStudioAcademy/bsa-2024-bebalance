@@ -71,7 +71,7 @@ const UserWheel: React.FC = () => {
 			}
 
 			default: {
-				return;
+				return null;
 			}
 		}
 	}
