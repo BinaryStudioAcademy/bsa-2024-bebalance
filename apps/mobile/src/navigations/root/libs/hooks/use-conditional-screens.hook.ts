@@ -10,30 +10,30 @@ type Properties = {
 };
 
 const useConditionalScreens = ({
-	hasUser,
 	hasAnsweredQuizQuestions,
+	hasUser,
 }: Properties): NavigationItem[] => {
 	return useMemo(() => {
 		const screens: NavigationItem[] = [
 			{
-				shouldBeRendered: hasUser && !hasAnsweredQuizQuestions,
 				component: QuestionsStack,
 				name: RootScreenName.QUESTIONS_STACK,
+				shouldBeRendered: hasUser && !hasAnsweredQuizQuestions,
 			},
 			{
-				shouldBeRendered: hasUser && hasAnsweredQuizQuestions,
 				component: BottomTabsNavigator,
 				name: RootScreenName.BOTTOM_TABS_NAVIGATOR,
+				shouldBeRendered: hasUser && hasAnsweredQuizQuestions,
 			},
 			{
-				shouldBeRendered: !hasUser,
 				component: Auth,
 				name: RootScreenName.SIGN_IN,
+				shouldBeRendered: !hasUser,
 			},
 			{
-				shouldBeRendered: !hasUser,
 				component: Auth,
 				name: RootScreenName.SIGN_UP,
+				shouldBeRendered: !hasUser,
 			},
 		];
 

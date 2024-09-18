@@ -7,6 +7,7 @@ import React from "react";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { actions as authActions } from "~/slices/auth/auth";
+
 import { useConditionalScreens } from "./libs/hooks/hooks";
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
@@ -24,8 +25,8 @@ const Root: React.FC = () => {
 	const hasUser = Boolean(user);
 
 	const filteredScreens = useConditionalScreens({
-		hasUser,
 		hasAnsweredQuizQuestions,
+		hasUser,
 	});
 
 	useEffect(() => {

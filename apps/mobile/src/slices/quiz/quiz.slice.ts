@@ -70,10 +70,10 @@ const { actions, name, reducer } = createSlice({
 
 				return updatedScore
 					? {
-						...stateScore,
-						score: updatedScore.score,
-						updatedAt: updatedScore.updatedAt,
-					}
+							...stateScore,
+							score: updatedScore.score,
+							updatedAt: updatedScore.updatedAt,
+						}
 					: stateScore;
 			});
 

@@ -6,9 +6,9 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizUserAnswerDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizUserAnswerDto,
 } from "./libs/types/types";
 
 class QuizApi extends BaseHttpApi {

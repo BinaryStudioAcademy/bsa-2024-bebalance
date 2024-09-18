@@ -5,9 +5,9 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizUserAnswerDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizUserAnswerDto,
 } from "~/packages/quiz/quiz";
 
 import { name as sliceName } from "./quiz.slice";
