@@ -1,4 +1,3 @@
-const DEFAULT_SLIDER_COLOR = "blue";
 const MAX_SLIDER_VALUE = 10;
 
-export { DEFAULT_SLIDER_COLOR, MAX_SLIDER_VALUE };
+export { MAX_SLIDER_VALUE };
