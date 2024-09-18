@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { RootScreenName } from "~/libs/enums/enums";
+import { RootScreenName, ToastMessageContent } from "~/libs/enums/enums";
 import { storage, StorageKey } from "~/libs/packages/storage/storage";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import {
@@ -35,9 +35,15 @@ const requestResetPassword = createAsyncThunk<
 	EmailDto,
 	AsyncThunkConfig
 >(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
-	const { authApi } = extra;
+	const { authApi, toastMessage } = extra;
 
-	return await authApi.requestResetPassword(emailPayload);
+	const isSuccessful = await authApi.requestResetPassword(emailPayload);
+
+	if (isSuccessful) {
+		toastMessage.success({ message: ToastMessageContent.LINK_SENT });
+	}
+
+	return isSuccessful;
 });
 
 const resetPassword = createAsyncThunk<
@@ -45,11 +51,12 @@ const resetPassword = createAsyncThunk<
 	ResetPasswordDto,
 	AsyncThunkConfig
 >(`${sliceName}/reset-password`, async (emailPayload, { dispatch, extra }) => {
-	const { authApi } = extra;
+	const { authApi, toastMessage } = extra;
 
 	const isSuccessful = await authApi.resetPassword(emailPayload);
 
 	if (isSuccessful) {
+		toastMessage.success({ message: ToastMessageContent.PASSWORD_UPDATED });
 		dispatch(appActions.changeLink(RootScreenName.SIGN_IN));
 	}
 
