@@ -101,7 +101,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 			if (isLast) {
 				const answerIds = getAnswerIds(data);
 				void dispatch(quizActions.saveAnswers({ answerIds }));
-				void dispatch(authActions.hasQuizAnswer());
+				void dispatch(authActions.updateQuizAnsweredState());
 				onNext();
 			}
 

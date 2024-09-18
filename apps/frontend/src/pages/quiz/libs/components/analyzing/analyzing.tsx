@@ -24,7 +24,7 @@ const Analyzing: React.FC<Properties> = ({ onNext }: Properties) => {
 	);
 
 	const handleNextStep = useCallback(() => {
-		void dispatch(authActions.hasOnboardingAnswer());
+		void dispatch(authActions.updateOnboardingAnsweredState());
 		onNext();
 	}, [dispatch, onNext]);
 
