@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 import React from "react";
 
-import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
+import { useAppDispatch, useEffect } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { actions as authActions } from "~/slices/auth/auth";
 
@@ -17,17 +17,8 @@ const SCREEN_OPTIONS: NativeStackNavigationOptions = {
 };
 
 const Root: React.FC = () => {
-	const user = useAppSelector((state) => state.auth.user);
-
 	const dispatch = useAppDispatch();
-
-	const hasAnsweredQuizQuestions = Boolean(user?.hasAnsweredQuizQuestions);
-	const hasUser = Boolean(user);
-
-	const filteredScreens = useConditionalScreens({
-		hasAnsweredQuizQuestions,
-		hasUser,
-	});
+	const filteredScreens = useConditionalScreens();
 
 	useEffect(() => {
 		void dispatch(authActions.getAuthenticatedUser());

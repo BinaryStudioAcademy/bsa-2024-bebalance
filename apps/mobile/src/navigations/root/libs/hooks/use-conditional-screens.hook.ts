@@ -1,18 +1,14 @@
 import { RootScreenName } from "~/libs/enums/enums";
-import { useMemo } from "~/libs/hooks/hooks";
+import { useAppSelector, useMemo } from "~/libs/hooks/hooks";
 import { type NavigationItem } from "~/libs/types/types";
 import { BottomTabsNavigator, QuestionsStack } from "~/navigations/navigations";
 import { Auth } from "~/screens/auth/auth";
 
-type Properties = {
-	hasAnsweredQuizQuestions: boolean;
-	hasUser: boolean;
-};
+const useConditionalScreens = (): NavigationItem[] => {
+	const user = useAppSelector(({ auth }) => auth.user);
+	const hasAnsweredQuizQuestions = Boolean(user?.hasAnsweredQuizQuestions);
+	const hasUser = Boolean(user);
 
-const useConditionalScreens = ({
-	hasAnsweredQuizQuestions,
-	hasUser,
-}: Properties): NavigationItem[] => {
 	return useMemo(() => {
 		const screens: NavigationItem[] = [
 			{
