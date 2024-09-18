@@ -13,6 +13,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
+import { Insights } from "../insights/insights.js";
 import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
@@ -60,6 +61,7 @@ const UserWheel: React.FC = () => {
 					<ScoresEditModal data={scores} onSaveChanges={handleFinishEditing} />
 				)}
 			</div>
+			<Insights />
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
 					<Button
