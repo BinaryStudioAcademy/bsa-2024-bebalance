@@ -30,6 +30,12 @@ const Quiz: React.FC = () => {
 		hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
 	}));
 
+	useEffect(() => {
+		if (hasAnsweredOnboardingQuestions) {
+			setStep(Step.INTRODUCTION);
+		}
+	}, [hasAnsweredOnboardingQuestions]);
+
 	const handleNextStep = useCallback((): void => {
 		setStep((previousStep) => previousStep + PREVIOUS_INDEX_OFFSET);
 	}, []);
@@ -41,12 +47,6 @@ const Quiz: React.FC = () => {
 		},
 		[dispatch, handleNextStep],
 	);
-
-	useEffect(() => {
-		if (hasAnsweredOnboardingQuestions) {
-			setStep(Step.INTRODUCTION);
-		}
-	}, [hasAnsweredOnboardingQuestions]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {
