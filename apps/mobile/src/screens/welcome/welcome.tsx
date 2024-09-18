@@ -14,10 +14,11 @@ import {
 	type RootNavigationParameterList,
 } from "~/libs/types/types";
 
+import {
+	LETTERS_PRINTED_PER_STEP,
+	NEXT_LETTERS_DELAY,
+} from "./libs/constants/constants";
 import { styles } from "./styles";
-
-const LETTERS_PRINTED_PER_STEP = 5;
-const NEXT_LETTERS_DELAY = 50;
 
 const paragraphs = [
 	"Thank you for sharing your insights! We’re currently processing your responses to create a personalized path just for you. This is where the magic begins—we’re using your input to tailor the experience, offering you the guidance and motivation you need to achieve a balanced, fulfilling life.\n\nHang tight while we set things up! In just a moment, you’ll dive into the areas that matter most to you, and together, we’ll start making progress toward your goals. Your journey to a better life starts now!",
