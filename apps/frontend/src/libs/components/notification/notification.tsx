@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useCallback } from "~/libs/hooks/hooks.js";
 
 import { NotificationIcon } from "./libs/components/components.js";
+import { NOTIFICATION_DURATION } from "./libs/constants/constants.js";
 import { type IconProperties } from "./libs/types/types.js";
 
 const Notification: React.FC = () => {
@@ -17,7 +18,13 @@ const Notification: React.FC = () => {
 		return <NotificationIcon notificationType={type} />;
 	}, []);
 
-	return <ToastContainer hideProgressBar icon={handleRenderIcon} />;
+	return (
+		<ToastContainer
+			autoClose={NOTIFICATION_DURATION}
+			hideProgressBar
+			icon={handleRenderIcon}
+		/>
+	);
 };
 
 export { Notification };
