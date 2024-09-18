@@ -4,10 +4,10 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
 import {
-	ONE_HUNDRED_PERCENT_COMPLETION,
+	NO_COMPLETED_TASKS_PERCENTAGE,
 	ZERO_INDEX,
 } from "./libs/constants/constants.js";
-import { TaskStatus } from "./libs/enums/enums.js";
+import { getCompletedTaskPercentage } from "./libs/helpers/helpers.js";
 import {
 	type UserDetailsWithAvatarFile,
 	type UserTaskDay,
@@ -56,7 +56,7 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: userDetails.avatarFileId,
 			avatarUrl: null,
-			completionTasksPercentage: 0,
+			completionTasksPercentage: NO_COMPLETED_TASKS_PERCENTAGE,
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions: false,
@@ -99,12 +99,7 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
-					completionTasksPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED_PERCENT_COMPLETION,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -135,11 +130,7 @@ class UserRepository implements Repository {
 			return UserEntity.initialize({
 				avatarFileId: user.userDetails.avatarFileId,
 				avatarUrl: user.userDetails.avatarFile?.url ?? null,
-				completionTasksPercentage:
-					(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
-						.length /
-						user.userTasks.length) *
-					ONE_HUNDRED_PERCENT_COMPLETION,
+				completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 				createdAt: user.createdAt,
 				email: user.email,
 				hasAnsweredOnboardingQuestions:
@@ -172,12 +163,7 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
-					completionTasksPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED_PERCENT_COMPLETION,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -220,12 +206,7 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: userDetails?.avatarFileId ?? null,
 					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
-					completionTasksPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED_PERCENT_COMPLETION,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -271,12 +252,7 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: userDetails.avatarFileId,
 					avatarUrl: userDetails.avatarFile?.url ?? null,
-					completionTasksPercentage:
-						(user.userTasks.filter(
-							(task) => task.status === TaskStatus.COMPLETED,
-						).length /
-							user.userTasks.length) *
-						ONE_HUNDRED_PERCENT_COMPLETION,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -311,11 +287,7 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
 			avatarUrl: user.userDetails.avatarFile?.url ?? null,
-			completionTasksPercentage:
-				(user.userTasks.filter((task) => task.status === TaskStatus.COMPLETED)
-					.length /
-					user.userTasks.length) *
-				ONE_HUNDRED_PERCENT_COMPLETION,
+			completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions:
