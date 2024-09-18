@@ -8,7 +8,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
-import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import { DataStatus, NumericalValue, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -34,8 +34,6 @@ import {
 	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
-
-const ZERO = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -125,7 +123,7 @@ const Onboarding: React.FC = () => {
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
-	const renderPageComponent = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return (
 			<Content control={control} errors={errors} question={currentQuestion} />
 		);
@@ -161,7 +159,7 @@ const Onboarding: React.FC = () => {
 								>
 									<InfinitePager
 										infinitePagerReference={infinitePager}
-										onPageRender={renderPageComponent}
+										onPageRender={handleRenderPageComponent}
 									/>
 									<View style={globalStyles.gap16}>
 										<Button
@@ -169,7 +167,7 @@ const Onboarding: React.FC = () => {
 											label={isLastQuestion ? "ANALYZE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
-										{currentQuestionIndex !== ZERO && (
+										{currentQuestionIndex !== NumericalValue.ZERO && (
 											<Button
 												appearance="outlined"
 												label="BACK"
