@@ -111,12 +111,8 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 	const handleNextStep = useCallback(
 		(data: QuizFormValues) => {
-			const questionFormAnswers = Object.fromEntries(
-				Object.entries(data).filter(([key]) => key !== "answers"),
-			);
-
 			if (isLast) {
-				const answerIds = getAnswerIds(questionFormAnswers);
+				const answerIds = getAnswerIds(data);
 
 				if (isRetakingQuiz) {
 					const categoryIds = extractCategoryIdsFromQuestions(

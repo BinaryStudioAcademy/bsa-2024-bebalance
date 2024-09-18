@@ -83,7 +83,7 @@ const UserWheel: React.FC = () => {
 				{isEditingModalOpen && (
 					<Switch
 						currentMode={editMode}
-						leftButtonProperties={{ label: "Edit manually", mode: "" }}
+						leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
 						onToggleMode={handleModeToggle}
 						rightButtonProperties={{
 							label: "Retake quiz",
