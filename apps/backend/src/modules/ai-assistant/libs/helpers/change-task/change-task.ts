@@ -6,7 +6,7 @@ import {
 import { type TaskCreateDto } from "../../types/types.js";
 import { changeTaskByCategory as ChangeTaskByCategoryValidationSchema } from "./change-task.validation-schema.js";
 import { ChangeTaskPromptTemplates } from "./change-task-prompt-template.enum.js";
-import { generateChangeTaskPrompt } from "./geregate-change-task-prompt.js";
+import { generateChangeTaskPrompt } from "./generate-change-task-prompt.js";
 
 const runChangeTaskByCategoryOptions = (
 	task: TaskCreateDto,
