@@ -1,17 +1,9 @@
 import React from "react";
 
-import {
-	ScreenWrapper,
-	SliderContent,
-	Tag,
-	Text,
-} from "~/libs/components/components";
+import { ScreenWrapper, Tag, Text } from "~/libs/components/components";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
-import { type SliderData } from "~/libs/types/types";
 import { type UserDto } from "~/packages/users/users";
 import { actions as userActions } from "~/slices/users/users";
-
-const SLIDER_DATA: SliderData[] = [{ color: "red", label: "Love" }];
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -36,10 +28,6 @@ const Tasks: React.FC = () => {
 			<Tag color="pink" label="Free time" />
 			<Tag color="orange" label="Spiritual" />
 			<Tag color="blue" label="Mental" />
-
-			{SLIDER_DATA.map((item) => (
-				<SliderContent color={item.color} key={item.label} label={item.label} />
-			))}
 		</ScreenWrapper>
 	);
 };
