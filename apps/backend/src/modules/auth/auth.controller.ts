@@ -156,6 +156,7 @@ class AuthController extends BaseController {
 				this.updatePassword(
 					options as APIHandlerOptions<{
 						body: UserUpdatePasswordRequestDto;
+						user: UserDto;
 					}>,
 				),
 			method: "PATCH",
@@ -491,10 +492,14 @@ class AuthController extends BaseController {
 	private async updatePassword(
 		options: APIHandlerOptions<{
 			body: UserUpdatePasswordRequestDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
-			payload: await this.authService.updatePassword(options.body),
+			payload: await this.authService.updatePassword(
+				options.body,
+				options.user.email,
+			),
 			status: HTTPCode.OK,
 		};
 	}

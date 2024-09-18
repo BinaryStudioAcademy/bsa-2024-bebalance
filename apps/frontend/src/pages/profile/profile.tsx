@@ -45,15 +45,10 @@ const Profile: React.FC = () => {
 	);
 
 	const handleUpdatePasswordSubmit = useCallback(
-		(payload: Omit<UserUpdatePasswordRequestDto, "email">): void => {
-			void dispatch(
-				authActions.updatePassword({
-					email: user?.email as string,
-					...payload,
-				}),
-			);
+		(payload: UserUpdatePasswordRequestDto): void => {
+			void dispatch(authActions.updatePassword(payload));
 		},
-		[dispatch, user],
+		[dispatch],
 	);
 
 	const handleUploadAvatarSubmit = useCallback(

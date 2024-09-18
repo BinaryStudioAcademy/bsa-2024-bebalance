@@ -1,6 +1,5 @@
 type UserUpdatePasswordRequestDto = {
 	currentPassword: string;
-	email: string;
 	newPassword: string;
 };
 

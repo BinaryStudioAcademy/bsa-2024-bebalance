@@ -15,14 +15,12 @@ import {
 	type UserSignUpResponseDto,
 	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/libs/types/types.js";
+import { type UserEntity } from "~/modules/users/user.entity.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
 import { AuthError } from "./libs/exceptions/exceptions.js";
-import {
-	checkIsPasswordValid,
-	createResetPasswordEmail,
-} from "./libs/helpers/helpers.js";
+import { createResetPasswordEmail } from "./libs/helpers/helpers.js";
 
 type Constructor = {
 	encrypt: Encrypt;
@@ -47,6 +45,19 @@ class AuthService {
 		this.encrypt = encrypt;
 		this.sessionDuration = sessionDuration;
 		this.resetPasswordLinkDuration = resetPasswordLinkDuration;
+	}
+
+	private async checkIsPasswordValid(
+		currentPassword: string,
+		user: UserEntity,
+	): Promise<boolean> {
+		const { passwordHash, passwordSalt } = user.toNewObject();
+
+		return await this.encrypt.compare(
+			currentPassword,
+			passwordHash,
+			passwordSalt,
+		);
 	}
 
 	public async checkIsResetPasswordExpired(
@@ -140,7 +151,7 @@ class AuthService {
 			payload: { userId: userDetails.id },
 		});
 
-		const isPasswordValid = await checkIsPasswordValid(password, user);
+		const isPasswordValid = await this.checkIsPasswordValid(password, user);
 
 		if (!isPasswordValid) {
 			throw new AuthError({
@@ -177,9 +188,9 @@ class AuthService {
 
 	public async updatePassword(
 		payload: UserUpdatePasswordRequestDto,
+		email: string,
 	): Promise<null | UserDto> {
-		const { currentPassword, email, newPassword } = payload;
-
+		const { currentPassword, newPassword } = payload;
 		const user = await this.userService.findByEmail(email);
 
 		if (!user) {
@@ -190,7 +201,10 @@ class AuthService {
 		}
 
 		const userId = user.toObject().id;
-		const isPasswordValid = await checkIsPasswordValid(currentPassword, user);
+		const isPasswordValid = await this.checkIsPasswordValid(
+			currentPassword,
+			user,
+		);
 
 		if (!isPasswordValid) {
 			throw new AuthError({
