@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { DEADLINE_OVER } from "../../constants/constants.js";
+import { getTimeLeft } from "../../helpers/helpers.js";
 import {
 	COUNTDOWN_EXPIRED,
 	ONE_MINUTE,
@@ -30,9 +31,9 @@ const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 	);
 
 	const calculateDaysUntilDeadline = useCallback((): boolean => {
-		const deadlineTime = new Date(deadline).getTime();
 		const currentTime = Date.now();
-		const timeToDeadline = deadlineTime - currentTime;
+
+		const timeToDeadline = getTimeLeft(currentTime, deadline);
 
 		if (timeToDeadline < DEADLINE_OVER) {
 			setCountdown(COUNTDOWN_EXPIRED);

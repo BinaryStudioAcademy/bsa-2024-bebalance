@@ -11,6 +11,7 @@ import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ExpiredTasksSlider, TaskCard } from "./libs/components/components.js";
 import { DEADLINE_OVER, NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
+import { getTimeLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -46,9 +47,9 @@ const Tasks: React.FC = () => {
 		const active: TaskDto[] = [];
 
 		for (const task of tasks) {
-			const deadlineTime = new Date(task.dueDate).getTime();
+			const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
 
-			if (deadlineTime - currentTime < DEADLINE_OVER) {
+			if (timeToDeadline < DEADLINE_OVER) {
 				expired.push(task);
 			} else {
 				active.push(task);
