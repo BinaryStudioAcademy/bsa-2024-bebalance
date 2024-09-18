@@ -71,8 +71,8 @@ const BalanceWheelChart: React.FC<Properties> = ({
 	);
 
 	const handleAnimateChart = useCallback(() => {
-		const chartInstance = chartReference.current;
 		const FIRST_ITEM_INDEX = 0;
+		const chartInstance = chartReference.current;
 
 		if (
 			!chartInstance ||
