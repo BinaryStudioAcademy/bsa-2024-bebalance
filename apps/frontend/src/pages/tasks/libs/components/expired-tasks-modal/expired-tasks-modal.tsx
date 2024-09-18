@@ -21,7 +21,7 @@ type Properties = {
 	slides: JSX.Element[];
 };
 
-const ExpiredTasksSlider: React.FC<Properties> = ({ slides }: Properties) => {
+const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -157,4 +157,4 @@ const ExpiredTasksSlider: React.FC<Properties> = ({ slides }: Properties) => {
 	);
 };
 
-export { ExpiredTasksSlider };
+export { ExpiredTasksModal };

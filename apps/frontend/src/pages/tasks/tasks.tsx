@@ -9,7 +9,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { ExpiredTasksSlider, TaskCard } from "./libs/components/components.js";
+import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
 import { DEADLINE_OVER, NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
 import { getTimeLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
@@ -65,7 +65,7 @@ const Tasks: React.FC = () => {
 	return (
 		<>
 			{expiredTasks.length > NO_EXPIRED_TASKS && (
-				<ExpiredTasksSlider
+				<ExpiredTasksModal
 					slides={expiredTasks.map((task) => renderExpiredTaskCard(task))}
 				/>
 			)}
