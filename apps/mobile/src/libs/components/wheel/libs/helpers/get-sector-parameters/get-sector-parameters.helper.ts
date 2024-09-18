@@ -4,7 +4,7 @@ import {
 } from "~/libs/types/types";
 
 const QUARTER_PERCENT = 25;
-const TWO = 2;
+const SCALING_FACTOR = 2;
 const MAX_PERCENT = 100;
 
 const getSectorParameters = ({
@@ -16,10 +16,10 @@ const getSectorParameters = ({
 	startPercentInner,
 	startPercentOuter,
 }: SectorParametersCalculationData): SectorParameters => {
-	const outerStrokeWidth = height + layerOffset * TWO - centerGap;
-	const innerStrokeWidth = height - layerOffset * TWO - centerGap;
-	const radius = (height + centerGap) / TWO;
-	const circumference = Math.round(radius * TWO * Math.PI);
+	const outerStrokeWidth = height + layerOffset * SCALING_FACTOR - centerGap;
+	const innerStrokeWidth = height - layerOffset * SCALING_FACTOR - centerGap;
+	const radius = (height + centerGap) / SCALING_FACTOR;
+	const circumference = Math.round(radius * SCALING_FACTOR * Math.PI);
 	const innerDashArrayDash =
 		((endPercentInner - startPercentInner) * circumference) / MAX_PERCENT;
 	const outerDashArrayDash =

@@ -6,7 +6,7 @@
 }
 
 .main-label {
-	margin-bottom: 12px;
+	margin-bottom: 6px;
 	font-size: 20px;
 	line-height: 1.4;
 }
@@ -58,7 +58,7 @@
 
 .rounded-checkbox {
 	border-radius: 40px;
-	box-shadow: 0 0 8px var(--light-blue);
+	box-shadow: 0 0 8px -3px var(--light-blue);
 }
 
 .checkbox-gradient-border > .rounded-checkbox {
@@ -87,4 +87,9 @@
 		var(--light-brand) 130%
 	);
 	border: none;
+}
+
+.tip {
+	font-size: 15px;
+	line-height: 1.4;
 }

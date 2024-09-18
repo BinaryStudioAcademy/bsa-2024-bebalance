@@ -3,7 +3,7 @@ import { NotificationFrequency } from "~/modules/users/users.js";
 
 const NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES: NotificationQuestionsFormValues =
 	{
-		notificationFrequency: NotificationFrequency.NONE,
+		notificationFrequency: NotificationFrequency.ALL,
 		userTaskDays: [],
 	};
 

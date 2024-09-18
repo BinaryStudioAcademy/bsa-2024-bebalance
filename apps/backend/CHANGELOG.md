@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.21.0...backend-v1.22.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.20.0...backend-v1.21.0) (2024-09-18)
+
+
+### Features
+
+* **backend:** backend documentation improvements bb-437 ([#453](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/453)) ([df2cc1c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/df2cc1c91e53173661e9cfe002ed16207c58213a))
+
 ## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.19.0...backend-v1.20.0) (2024-09-16)
 
 

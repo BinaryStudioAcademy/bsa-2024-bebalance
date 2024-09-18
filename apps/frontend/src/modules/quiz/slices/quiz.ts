@@ -1,6 +1,7 @@
 import {
 	editScores,
 	getAllQuestions,
+	getQuestionsByCategoryIds,
 	getScores,
 	saveAnswers,
 } from "./actions.js";
@@ -10,6 +11,7 @@ const allActions = {
 	...actions,
 	editScores,
 	getAllQuestions,
+	getQuestionsByCategoryIds,
 	getScores,
 	saveAnswers,
 };

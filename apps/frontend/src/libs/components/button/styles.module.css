@@ -78,6 +78,27 @@
 	transform: translateY(-50%);
 }
 
+.switch-button {
+	padding: 0 10px;
+	font-size: 10px;
+	color: var(--medium-gray);
+	background: none;
+	border-radius: 20px;
+	transition: all 200ms ease-in;
+}
+
+.switch-button:hover,
+.switch-button-selected {
+	color: var(--black);
+	background-color: var(--white);
+	transition: all 200ms ease-in;
+}
+
+.switch-button-selected:disabled {
+	cursor: not-allowed;
+	opacity: 1;
+}
+
 .position-right {
 	right: 20px;
 }

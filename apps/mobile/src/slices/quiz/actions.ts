@@ -4,18 +4,20 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 } from "~/packages/quiz/quiz";
 
 import { name as sliceName } from "./quiz.slice";
 
-const getScores = createAsyncThunk<
-	QuizScoresGetAllResponseDto,
-	undefined,
+const editScores = createAsyncThunk<
+	QuizScoresResponseDto,
+	QuizScoresUpdateRequestDto,
 	AsyncThunkConfig
->(`${sliceName}/score`, async (_, { extra }) => {
+>(`${sliceName}/edit-scores`, async (editScoresPayload, { extra }) => {
 	const { quizApi } = extra;
 
-	return await quizApi.getScores();
+	return await quizApi.editScores(editScoresPayload);
 });
 
 const getAllQuestions = createAsyncThunk<
@@ -28,4 +30,14 @@ const getAllQuestions = createAsyncThunk<
 	return await quizApi.getAllQuestions();
 });
 
-export { getAllQuestions, getScores };
+const getScores = createAsyncThunk<
+	QuizScoresGetAllResponseDto,
+	undefined,
+	AsyncThunkConfig
+>(`${sliceName}/get-scores`, async (_, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.getScores();
+});
+
+export { editScores, getAllQuestions, getScores };
