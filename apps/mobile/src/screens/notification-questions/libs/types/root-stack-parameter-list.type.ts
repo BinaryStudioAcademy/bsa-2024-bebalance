@@ -1,7 +1,7 @@
-import { type RootScreenName } from "~/libs/enums/enums";
+import { type QuestionsStackName } from "~/libs/enums/enums";
 
 type RootStackParameterList = {
-	[RootScreenName.WHEEL_LOADING]: undefined;
+	[QuestionsStackName.WHEEL_LOADING]: undefined;
 };
 
 export { type RootStackParameterList };

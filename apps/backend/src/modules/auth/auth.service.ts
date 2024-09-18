@@ -15,6 +15,7 @@ import {
 	type UserSignUpResponseDto,
 	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/libs/types/types.js";
+import { type UserEntity } from "~/modules/users/user.entity.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
@@ -44,6 +45,19 @@ class AuthService {
 		this.encrypt = encrypt;
 		this.sessionDuration = sessionDuration;
 		this.resetPasswordLinkDuration = resetPasswordLinkDuration;
+	}
+
+	private async checkIsPasswordValid(
+		currentPassword: string,
+		user: UserEntity,
+	): Promise<boolean> {
+		const { passwordHash, passwordSalt } = user.toNewObject();
+
+		return await this.encrypt.compare(
+			currentPassword,
+			passwordHash,
+			passwordSalt,
+		);
 	}
 
 	public async checkIsResetPasswordExpired(
@@ -137,12 +151,7 @@ class AuthService {
 			payload: { userId: userDetails.id },
 		});
 
-		const { passwordHash, passwordSalt } = user.toNewObject();
-		const isPasswordValid = await this.encrypt.compare(
-			password,
-			passwordHash,
-			passwordSalt,
-		);
+		const isPasswordValid = await this.checkIsPasswordValid(password, user);
 
 		if (!isPasswordValid) {
 			throw new AuthError({
@@ -179,9 +188,9 @@ class AuthService {
 
 	public async updatePassword(
 		payload: UserUpdatePasswordRequestDto,
+		email: string,
 	): Promise<null | UserDto> {
-		const { currentPassword, email, jwtToken, newPassword } = payload;
-
+		const { currentPassword, newPassword } = payload;
 		const user = await this.userService.findByEmail(email);
 
 		if (!user) {
@@ -191,15 +200,10 @@ class AuthService {
 			});
 		}
 
-		const {
-			payload: { userId },
-		} = await token.decode(jwtToken);
-
-		const { passwordHash, passwordSalt } = user.toNewObject();
-		const isPasswordValid = await this.encrypt.compare(
+		const userId = user.toObject().id;
+		const isPasswordValid = await this.checkIsPasswordValid(
 			currentPassword,
-			passwordHash,
-			passwordSalt,
+			user,
 		);
 
 		if (!isPasswordValid) {

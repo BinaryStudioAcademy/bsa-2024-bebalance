@@ -1,4 +1,3 @@
-import defaultAvatar from "~/assets/img/default-avatar.png";
 import runImg from "~/assets/img/run.svg";
 import { Button, Loader, Popup } from "~/libs/components/components.js";
 import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
@@ -18,6 +17,7 @@ import {
 } from "~/modules/users/users.js";
 
 import {
+	UpdateAvatarForm,
 	UpdatePasswordForm,
 	UpdateUserForm,
 } from "./libs/components/components.js";
@@ -47,18 +47,17 @@ const Profile: React.FC = () => {
 	);
 
 	const handleUpdatePasswordSubmit = useCallback(
-		(
-			payload: Omit<UserUpdatePasswordRequestDto, "email" | "jwtToken">,
-		): void => {
-			void dispatch(
-				authActions.updatePassword({
-					email: user?.email as string,
-					jwtToken: "",
-					...payload,
-				}),
-			);
+		(payload: UserUpdatePasswordRequestDto): void => {
+			void dispatch(authActions.updatePassword(payload));
 		},
-		[dispatch, user],
+		[dispatch],
+	);
+
+	const handleUploadAvatarSubmit = useCallback(
+		(payload: FormData): void => {
+			void dispatch(usersActions.uploadAvatar(payload));
+		},
+		[dispatch],
 	);
 
 	const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState<boolean>(false);
@@ -89,11 +88,7 @@ const Profile: React.FC = () => {
 				<div className={styles["page-container"]}>
 					<h4 className={styles["title"]}>Profile</h4>
 					<div className={styles["content-container"]}>
-						<img
-							alt={`${user.name}'s avatar`}
-							className={styles["user-avatar"]}
-							src={defaultAvatar}
-						/>
+						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
 					</div>
 					<h4 className={styles["title-password"]}>Change your password</h4>

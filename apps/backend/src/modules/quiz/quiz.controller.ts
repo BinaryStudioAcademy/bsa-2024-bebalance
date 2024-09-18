@@ -19,7 +19,11 @@ import {
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
 import { type UserDto } from "../users/users.js";
 import { QuizApiPath } from "./libs/enums/enums.js";
-import { quizUserAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+import { type CategoriesGetRequestQueryDto } from "./libs/types/types.js";
+import {
+	categoryIdsValidationSchema,
+	quizUserAnswersValidationSchema,
+} from "./libs/validation-schemas/validation-schemas.js";
 
 type Constructor = {
 	categoryService: CategoryService;
@@ -30,44 +34,107 @@ type Constructor = {
 
 /**
  * @swagger
+ * tags:
+ *   - name: quiz
+ *     description: Endpoints related to quiz
  * components:
  *   schemas:
- *     UserScore:
+ *     QuizQuestionDto:
  *       type: object
  *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
  *         categoryId:
- *           type: number
- *           format: int64
+ *           type: integer
+ *           example: 1
+ *         label:
+ *           type: string
+ *         answers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/QuizAnswerDto"
  *         createdAt:
  *           type: string
  *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *     QuizAnswerDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         questionId:
+ *           type: integer
+ *           example: 1
+ *         label:
+ *           type: string
+ *         value:
+ *           type: number
+ *         userAnswers:
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/QuizUserAnswerDto"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *     QuizUserAnswerDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         answerId:
+ *           type: integer
+ *           example: 1
+ *         userId:
+ *           type: integer
+ *           example: 1
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *     QuizGetAllScoresResponseDto:
+ *       type: object
+ *       properties:
+ *         items:
+ *           type: array
+ *           items:
+ *             allOf:
+ *               - type: object
+ *                 properties:
+ *                   categoryName:
+ *                     type: string
+ *                     example: "Physical"
+ *               - $ref: "#/components/schemas/QuizScoreDto"
+ *     QuizScoreDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         categoryId:
+ *           type: integer
+ *           example: 1
+ *         userId:
+ *           type: integer
+ *           example: 1
  *         score:
  *           type: number
  *           format: float
- *         updatedAt:
- *           type: string
- *           format: date-time
- *         userId:
- *           type: number
- *           format: int64
- *     UserAnswer:
- *       type: object
- *       properties:
- *         answerId:
- *           type: number
- *           format: int64
  *         createdAt:
  *           type: string
  *           format: date-time
- *         id:
- *           type: number
- *           format: int64
  *         updatedAt:
  *           type: string
  *           format: date-time
- *         userId:
- *           type: number
- *           format: int64
  */
 class QuizController extends BaseController {
 	private categoryService: CategoryService;
@@ -106,9 +173,17 @@ class QuizController extends BaseController {
 		});
 
 		this.addRoute({
-			handler: () => this.findAll(),
+			handler: (options) =>
+				this.findQuestions(
+					options as APIHandlerOptions<{
+						query: CategoriesGetRequestQueryDto;
+					}>,
+				),
 			method: "GET",
 			path: QuizApiPath.QUESTIONS,
+			validation: {
+				query: categoryIdsValidationSchema,
+			},
 		});
 
 		this.addRoute({
@@ -142,6 +217,8 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/answer:
 	 *   post:
+	 *     tags: [quiz]
+	 *     summary: Saves user quiz answers
 	 *     description: Saves user answers for all quiz questions at once
 	 *     security:
 	 *       - bearerAuth: []
@@ -167,11 +244,23 @@ class QuizController extends BaseController {
 	 *                 scores:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserScore"
+	 *                     $ref: "#/components/schemas/QuizScoreDto"
 	 *                 userAnswers:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserAnswer"
+	 *                     $ref: "#/components/schemas/QuizUserAnswerDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async createUserAnswers(
 		options: APIHandlerOptions<{
@@ -180,30 +269,35 @@ class QuizController extends BaseController {
 		}>,
 	): Promise<APIHandlerResponse> {
 		const { answerIds } = options.body;
+		const categoryIds = options.body.categoryIds as number[];
 
 		return {
 			payload: await this.quizAnswerService.createUserAnswers({
 				answerIds,
+				categoryIds,
 				userId: options.user.id,
 			}),
 			status: HTTPCode.CREATED,
 		};
 	}
 
-	private async findAll(): Promise<APIHandlerResponse> {
-		return {
-			payload: await this.quizQuestionService.findAll(),
-			status: HTTPCode.OK,
-		};
-	}
-
 	/**
 	 * @swagger
-	 * /quiz/score:
+	 * /quiz/questions:
 	 *   get:
-	 *     description: Returns all user scores
+	 *     summary: Get quiz questions
 	 *     security:
 	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - in: query
+	 *         name: categoryIds
+	 *         schema:
+	 *           type: string
+	 *           items:
+	 *             type: string
+	 *         description: Array of category IDs to filter the quiz questions (optional)
+	 *         required: false  # Optional parameter
+	 *         example: [3, 6]
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -215,22 +309,40 @@ class QuizController extends BaseController {
 	 *                 items:
 	 *                   type: array
 	 *                   items:
-	 *                     type: object
-	 *                     properties:
-	 *                       categoryName:
-	 *                         type: string
-	 *                       categoryId:
-	 *                         type: number
-	 *                       createdAt:
-	 *                         type: string
-	 *                       id:
-	 *                         type: number
-	 *                       score:
-	 *                         type: number
-	 *                       updatedAt:
-	 *                         type: string
-	 *                       userId:
-	 *                         type: number
+	 *                     $ref: "#/components/schemas/QuizQuestionDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
+
+	private async findQuestions(
+		options: APIHandlerOptions<{ query: CategoriesGetRequestQueryDto }>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.quizQuestionService.findQuestions(options.query),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /quiz/score:
+	 *   get:
+	 *     tags: [quiz]
+	 *     summary: Get user scores on quiz
+	 *     description: Returns all user scores
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/QuizGetAllScoresResponseDto"
 	 */
 	private async findUserScores(
 		options: APIHandlerOptions<{
@@ -247,6 +359,8 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/score:
 	 *   patch:
+	 *     tags: [quiz]
+	 *     summary: Partially update user scores on each category
 	 *     description: Updates multiple or single user scores
 	 *     security:
 	 *       - bearerAuth: []
@@ -277,7 +391,19 @@ class QuizController extends BaseController {
 	 *                 items:
 	 *                   type: array
 	 *                   items:
-	 *                     $ref: "#/components/schemas/UserScore"
+	 *                     $ref: "#/components/schemas/QuizScoreDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async updateUserScores(
 		options: APIHandlerOptions<{

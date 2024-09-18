@@ -8,7 +8,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
-import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import { DataStatus, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -35,7 +35,7 @@ import {
 } from "./libs/types/types";
 import { styles } from "./styles";
 
-const ZERO = 0;
+const FIRST_ITEM_INDEX = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -66,29 +66,30 @@ const Onboarding: React.FC = () => {
 			validationSchema: oneAnswerSelectedValidationSchema,
 		});
 
-	const handleSaveAnswers = useCallback(
-		(payload: OnboardingAnswerRequestBodyDto) => {
-			//TODO: save data to backend
-			return payload;
-		},
-		[],
-	);
-
 	useEffect(() => {
 		reset({ answer: currentAnswer.toString() });
-	}, [currentQuestionIndex, currentAnswer, reset]);
+	}, [currentAnswer, reset]);
+
+	const handleSaveAnswers = useCallback(
+		(payload: OnboardingAnswerRequestBodyDto) => {
+			void dispatch(onboardingActions.saveAnswers(payload));
+		},
+		[dispatch],
+	);
 
 	const handleNextClick = useCallback(
 		(payload: OnboardingFormValues) => {
+			const answerId = Number(payload.answer);
+
 			dispatch(
 				onboardingActions.setAnswersByQuestionIndex({
-					answerId: Number(payload.answer),
+					answerId,
 					questionIndex: currentQuestionIndex,
 				}),
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: answersByQuestionIndex });
+				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
 
 				return;
 			}
@@ -103,9 +104,9 @@ const Onboarding: React.FC = () => {
 		[
 			isLastQuestion,
 			dispatch,
-			handleSaveAnswers,
 			currentQuestionIndex,
 			answersByQuestionIndex,
+			handleSaveAnswers,
 		],
 	);
 
@@ -121,11 +122,11 @@ const Onboarding: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WELCOME);
+			navigation.navigate(QuestionsStackName.WELCOME);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
-	const renderPageComponent = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return (
 			<Content control={control} errors={errors} question={currentQuestion} />
 		);
@@ -161,7 +162,7 @@ const Onboarding: React.FC = () => {
 								>
 									<InfinitePager
 										infinitePagerReference={infinitePager}
-										onPageRender={renderPageComponent}
+										onPageRender={handleRenderPageComponent}
 									/>
 									<View style={globalStyles.gap16}>
 										<Button
@@ -169,7 +170,7 @@ const Onboarding: React.FC = () => {
 											label={isLastQuestion ? "ANALYZE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
-										{currentQuestionIndex !== ZERO && (
+										{currentQuestionIndex !== FIRST_ITEM_INDEX && (
 											<Button
 												appearance="outlined"
 												label="BACK"

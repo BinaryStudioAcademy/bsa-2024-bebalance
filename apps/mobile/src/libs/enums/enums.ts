@@ -7,7 +7,11 @@ export {
 	ToastMessageTitle,
 	ToastMessageType,
 } from "./app/app";
-export { BottomTabScreenName, RootScreenName } from "./navigation/navigation";
+export {
+	BottomTabScreenName,
+	QuestionsStackName,
+	RootScreenName,
+} from "./navigation/navigation";
 export {
 	APIPath,
 	AppEnvironment,

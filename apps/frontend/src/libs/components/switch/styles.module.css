@@ -1,0 +1,11 @@
+.container {
+	position: relative;
+	left: 25%;
+	display: flex;
+	gap: 5px;
+	min-width: 250px;
+	height: 40px;
+	padding: 5px;
+	background-color: var(--background-gray);
+	border-radius: 20px;
+}

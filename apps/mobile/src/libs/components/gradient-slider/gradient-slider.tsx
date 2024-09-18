@@ -26,22 +26,30 @@ import { styles } from "./styles";
 
 type Properties = {
 	gradientColors: keyof typeof colorToGradientColors;
+	id: number;
 	max: number;
-	min: number;
-	onValueChange?: (value: number) => void;
+	onValueChange: (categoryId: number, value: number) => void;
+	value: number;
 };
+
+const HIT_SLOP = 20;
 
 const GradientSlider: React.FC<Properties> = ({
 	gradientColors,
+	id,
 	max,
-	min,
 	onValueChange,
+	value,
 }) => {
-	const [value, setValue] = useState<number>(min);
+	const [sliderValue, setSliderValue] = useState<number>(value);
 	const [sliderWidth, setSliderWidth] = useState<number>(
 		SliderConfig.INITIAL_WIDTH,
 	);
-	const initialColors = generateSliderGradientColors(min, gradientColors, max);
+	const initialColors = generateSliderGradientColors(
+		value,
+		gradientColors,
+		max,
+	);
 	const [color, setColor] = useState<string[]>(initialColors);
 
 	const handleLayout = useCallback((event: LayoutChangeEvent): void => {
@@ -51,17 +59,17 @@ const GradientSlider: React.FC<Properties> = ({
 
 	const handleValueChange = useCallback(
 		(sliderValue: number) => {
-			setValue(sliderValue);
+			setSliderValue(sliderValue);
 			setColor(generateSliderGradientColors(sliderValue, gradientColors, max));
 
-			onValueChange?.(sliderValue);
+			onValueChange(id, sliderValue);
 		},
-		[gradientColors, max, onValueChange],
+		[gradientColors, id, max, onValueChange],
 	);
 
 	const pixelsPerPercent = sliderWidth / SliderConfig.MAX_PERCENT;
 	const translateXBase =
-		(value / max) * SliderConfig.MAX_PERCENT * pixelsPerPercent;
+		(sliderValue / max) * SliderConfig.MAX_PERCENT * pixelsPerPercent;
 
 	const translateXForSliderSection =
 		translateXBase - SliderStyle.SECTION_TRANSLATE_OFFSET;
@@ -94,11 +102,15 @@ const GradientSlider: React.FC<Properties> = ({
 				>
 					<Icon
 						color={BaseColor.BLACK}
-						name="place"
+						name="fmd-good"
 						size={SliderStyle.MARKER_ICON_SIZE}
 					/>
-					<Text preset="regular" style={[globalStyles.mt12, styles.labelText]}>
-						{value}
+					<Text
+						size="sm"
+						style={[globalStyles.mt8, styles.labelText]}
+						weight="bold"
+					>
+						{sliderValue}
 					</Text>
 				</View>
 
@@ -113,15 +125,16 @@ const GradientSlider: React.FC<Properties> = ({
 				/>
 
 				<Slider
+					hitSlop={HIT_SLOP}
 					maximumTrackTintColor="transparent"
 					maximumValue={max}
 					minimumTrackTintColor="transparent"
-					minimumValue={min}
+					minimumValue={SliderConfig.MIN_VALUE}
 					onValueChange={handleValueChange}
 					step={SliderConfig.STEP_VALUE}
 					style={styles.slider}
 					thumbTintColor="transparent"
-					value={value}
+					value={sliderValue}
 				/>
 			</View>
 		</View>
