@@ -80,8 +80,8 @@ class CategoryRepository implements Repository {
 		return await this.categoryModel
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
-			.where({ userId })
-			.andWhere("category_id", "in", categoryIds)
+			.whereIn("category_id", categoryIds)
+			.andWhere({ userId })
 			.delete();
 	}
 
