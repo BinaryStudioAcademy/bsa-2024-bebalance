@@ -1,6 +1,6 @@
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
+import { NO_COMPLETED_TASKS_PERCENTAGE } from "./libs/constants/constants.js";
 import { NotificationFrequency } from "./libs/enums/enums.js";
 
 class UserEntity implements Entity {
@@ -113,7 +113,8 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			avatarFileId,
 			avatarUrl,
-			completionTasksPercentage: completionTasksPercentage ?? ZERO_INDEX,
+			completionTasksPercentage:
+				completionTasksPercentage ?? NO_COMPLETED_TASKS_PERCENTAGE,
 			createdAt,
 			email,
 			hasAnsweredOnboardingQuestions,
@@ -143,7 +144,7 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			avatarFileId: null,
 			avatarUrl: null,
-			completionTasksPercentage: ZERO_INDEX,
+			completionTasksPercentage: NO_COMPLETED_TASKS_PERCENTAGE,
 			createdAt: "",
 			email,
 			hasAnsweredOnboardingQuestions: false,
@@ -176,7 +177,8 @@ class UserEntity implements Entity {
 		return {
 			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
-			completionTasksPercentage: this.completionTasksPercentage ?? ZERO_INDEX,
+			completionTasksPercentage:
+				this.completionTasksPercentage ?? NO_COMPLETED_TASKS_PERCENTAGE,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
@@ -207,7 +209,8 @@ class UserEntity implements Entity {
 		return {
 			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
-			completionTasksPercentage: this.completionTasksPercentage ?? ZERO_INDEX,
+			completionTasksPercentage:
+				this.completionTasksPercentage ?? NO_COMPLETED_TASKS_PERCENTAGE,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
