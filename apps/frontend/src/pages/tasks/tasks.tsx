@@ -66,7 +66,7 @@ const Tasks: React.FC = () => {
 		<>
 			{expiredTasks.length > NO_EXPIRED_TASKS && (
 				<ExpiredTasksModal
-					slides={expiredTasks.map((task) => renderExpiredTaskCard(task))}
+					tasks={expiredTasks.map((task) => renderExpiredTaskCard(task))}
 				/>
 			)}
 			<h4 className={styles["title"]}>My Tasks</h4>

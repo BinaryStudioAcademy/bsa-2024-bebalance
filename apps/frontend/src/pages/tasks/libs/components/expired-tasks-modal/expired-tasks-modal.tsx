@@ -20,15 +20,15 @@ import { getClientX } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	slides: JSX.Element[];
+	tasks: JSX.Element[];
 };
 
-const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
+const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
-	const totalSlides = slides.length;
+	const totalSlides = tasks.length;
 	const isSingleSlide = totalSlides === SINGLE_SLIDE;
 
 	const goToSlide = useCallback(
@@ -113,7 +113,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 						</h4>
 						{isSingleSlide ? (
 							<div>
-								<div className={styles["slide"]}>{slides[FIRST_SLIDE]}</div>
+								<div className={styles["slide"]}>{tasks[FIRST_SLIDE]}</div>
 							</div>
 						) : (
 							<div
@@ -129,9 +129,9 @@ const ExpiredTasksModal: React.FC<Properties> = ({ slides }: Properties) => {
 								role="button"
 								tabIndex={0}
 							>
-								{slides.map((SlideContent, index) => (
+								{tasks.map((slide, index) => (
 									<div className={styles["slide"]} key={index}>
-										{SlideContent}
+										{slide}
 									</div>
 								))}
 							</div>
