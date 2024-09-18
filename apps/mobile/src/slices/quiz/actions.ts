@@ -22,16 +22,6 @@ const getScores = createAsyncThunk<
 	return await quizApi.getScores();
 });
 
-const editScores = createAsyncThunk<
-	QuizScoresResponseDto,
-	QuizScoresUpdateRequestDto,
-	AsyncThunkConfig
->(`${sliceName}/edit-scores`, async (editScoresPayload, { extra }) => {
-	const { quizApi } = extra;
-
-	return await quizApi.editScores(editScoresPayload);
-});
-
 const getAllQuestions = createAsyncThunk<
 	{ items: QuizQuestionDto[][] },
 	undefined,
@@ -50,6 +40,16 @@ const saveAnswers = createAsyncThunk<
 	const { quizApi } = extra;
 
 	return await quizApi.saveAnswers(createAnswerPayload);
+});
+
+const editScores = createAsyncThunk<
+	QuizScoresResponseDto,
+	QuizScoresUpdateRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/edit-scores`, async (editScoresPayload, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.editScores(editScoresPayload);
 });
 
 export { editScores, getAllQuestions, getScores, saveAnswers };
