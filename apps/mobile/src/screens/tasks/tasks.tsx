@@ -11,7 +11,7 @@ import { type SliderData } from "~/libs/types/types";
 import { type UserDto } from "~/packages/users/users";
 import { actions as userActions } from "~/slices/users/users";
 
-const sliderData: SliderData[] = [{ color: "red", label: "Love" }];
+const SLIDER_DATA: SliderData[] = [{ color: "red", label: "Love" }];
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ const Tasks: React.FC = () => {
 			<Tag color="orange" label="Spiritual" />
 			<Tag color="blue" label="Mental" />
 
-			{sliderData.map((item) => (
+			{SLIDER_DATA.map((item) => (
 				<SliderContent color={item.color} key={item.label} label={item.label} />
 			))}
 		</ScreenWrapper>
