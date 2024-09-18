@@ -268,7 +268,8 @@ class QuizController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { answerIds, categoryIds } = options.body;
+		const { answerIds } = options.body;
+		const categoryIds = options.body.categoryIds as number[];
 
 		return {
 			payload: await this.quizAnswerService.createUserAnswers({
