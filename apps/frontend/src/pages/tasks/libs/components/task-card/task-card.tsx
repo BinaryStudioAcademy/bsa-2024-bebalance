@@ -3,7 +3,7 @@ import { useCallback } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { TaskStatus } from "../../enums/enums.js";
-import { Category, Deadline } from "../components.js";
+import { Category, Deadline, PastTaskStatus } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -40,7 +40,7 @@ const TaskCard: React.FC<Properties> = ({
 			<div className={styles["card-footer"]}>
 				<div className={styles["divider"]} />
 				<div className={styles["buttons-container"]}>
-					{isActive && (
+					{isActive ? (
 						<>
 							<div className={styles["button-container"]}>
 								<Button
@@ -61,6 +61,10 @@ const TaskCard: React.FC<Properties> = ({
 								/>
 							</div>
 						</>
+					) : (
+						<div>
+							<PastTaskStatus status={task.status} />
+						</div>
 					)}
 				</div>
 			</div>

@@ -21,6 +21,8 @@
 	--disable: #e0e0e0;
 	--complete: #c2eacd;
 	--completed: #f0fff4;
+	--skipped-border: #ff292866;
+	--skipped-background: #ff29281a;
 	--physical-start: #ffe307;
 	--physical-end: #fff8b5;
 	--work-start: #69ff35;

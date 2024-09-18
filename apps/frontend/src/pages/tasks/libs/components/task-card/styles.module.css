@@ -51,6 +51,7 @@
 .buttons-container {
 	display: flex;
 	gap: 10px;
+	justify-content: flex-end;
 	padding: 15px;
 }
 
