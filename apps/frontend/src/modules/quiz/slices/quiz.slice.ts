@@ -46,7 +46,7 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.questions = action.payload.items;
 			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+				state.questions[state.currentCategoryIndex] ?? null;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -103,13 +103,13 @@ const { actions, name, reducer } = createSlice({
 		nextQuestion(state) {
 			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+				state.questions[state.currentCategoryIndex] ?? null;
 		},
 		previousQuestion(state) {
 			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {
 				state.currentCategoryIndex -= PREVIOUS_INDEX_OFFSET;
 				state.currentCategory =
-					state.questions[state.currentCategoryIndex] || null;
+					state.questions[state.currentCategoryIndex] ?? null;
 			}
 		},
 	},
