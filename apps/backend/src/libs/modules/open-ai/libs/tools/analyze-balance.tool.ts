@@ -1,8 +1,10 @@
+import { OpenAIFunctionName } from "../enums/open-ai-function-name.enum.js";
+
 const AnalyzeBalanceTool = {
 	function: {
 		description:
 			"Analyzes user's life balance scores and identifies the three lowest categories with suggestions for improvement.",
-		name: "analyze_balance_scores",
+		name: OpenAIFunctionName.ANALYZE_BALANCE_SCORES,
 		parameters: {
 			additionalProperties: false,
 			properties: {

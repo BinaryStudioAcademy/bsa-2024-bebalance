@@ -1,8 +1,10 @@
+import { OpenAIFunctionName } from "../enums/open-ai-function-name.enum.js";
+
 const SuggestTaskTool = {
 	function: {
 		description:
 			"Generates specific and actionable tasks for each user-selected category based on their onboarding responses.",
-		name: "generate_task_by_category",
+		name: OpenAIFunctionName.GENERATE_TASK_BY_CATEGORY,
 		parameters: {
 			additionalProperties: false,
 			properties: {
