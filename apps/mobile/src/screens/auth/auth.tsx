@@ -4,12 +4,12 @@ import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
 	LoaderWrapper,
-	Planet,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
+import { Logo } from "~/libs/components/logo/logo";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
@@ -18,8 +18,13 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useNavigation,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type NativeStackNavigationProp,
+	type RootNavigationParameterList,
+} from "~/libs/types/types";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
@@ -40,6 +45,8 @@ const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 	const { name, params } = useAppRoute();
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
@@ -84,8 +91,9 @@ const Auth: React.FC = () => {
 					newPassword: payload.newPassword,
 				}),
 			);
+			navigation.navigate(RootScreenName.SIGN_IN);
 		},
-		[dispatch, token],
+		[dispatch, navigation, token],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
@@ -143,20 +151,15 @@ const Auth: React.FC = () => {
 							>
 								<View
 									style={[
-										globalStyles.gap8,
+										globalStyles.gap12,
 										globalStyles.alignItemsCenter,
 										globalStyles.flexDirectionRow,
 										globalStyles.mb32,
 									]}
 								>
-									<Planet color="pink" size="xxs" />
-									<Text
-										preset="uppercase"
-										size="xl"
-										style={globalStyles.ml48}
-										weight="bold"
-									>
-										Logo
+									<Logo />
+									<Text preset="subheading" size="xl" weight="bold">
+										BeBalance
 									</Text>
 								</View>
 								<View style={globalStyles.gap24}>{getScreen(name)}</View>

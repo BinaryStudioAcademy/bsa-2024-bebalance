@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.21.0...shared-v1.22.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+* **mobile:** edit wheel manually bb-344 ([#455](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/455)) ([833d5ed](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833d5ed12587e7e93804c6852e093df20283938d))
+
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.20.0...shared-v1.21.0) (2024-09-18)
+
+
+### Features
+
+* **frontend:** upload a new avatar bb-341 ([#448](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/448)) ([b3fe346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3fe346ab6e9b1f85a67af19bbd0a64db476d145))
+
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.19.0...shared-v1.20.0) (2024-09-16)
+
+
+### Features
+
+* **backend/shared:** add action buttons to tasks bb-362 ([#451](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/451)) ([15c3ef0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15c3ef0b633a96a3c7cb8ed07cb4d423b4e38515))
+* **frontend/backend:** Onboarding/quiz flow bb-242 ([#351](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/351)) ([060f881](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/060f881e68e1427e72099d9aa0a3038fe88f3984))
+
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.18.0...shared-v1.19.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend/shared:** add deadline for tasks bb-361 ([#440](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/440)) ([e4b6f27](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e4b6f2731682aa5c0cda0fa8ee89bc9101e730a3))
+* **frontend/backend/shared:** add my tasks screen bb-335 ([#397](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/397)) ([b2aebbc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b2aebbcf396e87b96edc9e1f30820556042781e8))
+* **mobile:** create checkbox categories form bb-250 ([#387](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/387)) ([3126c4d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3126c4d8373d40b25d83ceb0df19c8fb3a1fff3b))
+
 ## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.17.1...shared-v1.18.0) (2024-09-13)
 
 

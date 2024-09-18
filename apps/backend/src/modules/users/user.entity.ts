@@ -11,6 +11,10 @@ class UserEntity implements Entity {
 
 	private email: string;
 
+	private hasAnsweredOnboardingQuestions: boolean;
+
+	private hasAnsweredQuizQuestions: boolean;
+
 	private id: null | number;
 
 	private name: string;
@@ -30,6 +34,8 @@ class UserEntity implements Entity {
 		avatarUrl,
 		createdAt,
 		email,
+		hasAnsweredOnboardingQuestions,
+		hasAnsweredQuizQuestions,
 		id,
 		name,
 		notificationFrequency,
@@ -42,6 +48,8 @@ class UserEntity implements Entity {
 		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		id: null | number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
@@ -53,6 +61,8 @@ class UserEntity implements Entity {
 		this.avatarFileId = avatarFileId;
 		this.avatarUrl = avatarUrl;
 		this.createdAt = createdAt;
+		this.hasAnsweredOnboardingQuestions = hasAnsweredOnboardingQuestions;
+		this.hasAnsweredQuizQuestions = hasAnsweredQuizQuestions;
 		this.email = email;
 		this.id = id;
 		this.name = name;
@@ -68,6 +78,8 @@ class UserEntity implements Entity {
 		avatarUrl,
 		createdAt,
 		email,
+		hasAnsweredOnboardingQuestions,
+		hasAnsweredQuizQuestions,
 		id,
 		name,
 		notificationFrequency,
@@ -80,6 +92,8 @@ class UserEntity implements Entity {
 		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		id: null | number;
 		name: string;
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
@@ -93,6 +107,8 @@ class UserEntity implements Entity {
 			avatarUrl,
 			createdAt,
 			email,
+			hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: Boolean(hasAnsweredQuizQuestions),
 			id,
 			name,
 			notificationFrequency:
@@ -120,6 +136,8 @@ class UserEntity implements Entity {
 			avatarUrl: null,
 			createdAt: "",
 			email,
+			hasAnsweredOnboardingQuestions: false,
+			hasAnsweredQuizQuestions: false,
 			id: null,
 			name,
 			notificationFrequency: NotificationFrequency.NONE,
@@ -135,6 +153,8 @@ class UserEntity implements Entity {
 		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
@@ -147,6 +167,8 @@ class UserEntity implements Entity {
 			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
+			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: Boolean(this.hasAnsweredQuizQuestions),
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
@@ -161,6 +183,8 @@ class UserEntity implements Entity {
 		avatarUrl: null | string;
 		createdAt: string;
 		email: string;
+		hasAnsweredOnboardingQuestions: boolean;
+		hasAnsweredQuizQuestions: boolean;
 		id: number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
@@ -172,6 +196,8 @@ class UserEntity implements Entity {
 			avatarUrl: this.avatarUrl,
 			createdAt: this.createdAt,
 			email: this.email,
+			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: Boolean(this.hasAnsweredQuizQuestions),
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,

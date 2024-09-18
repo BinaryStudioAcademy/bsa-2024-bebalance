@@ -1,4 +1,3 @@
-import defaultAvatar from "~/assets/img/default-avatar.png";
 import { Loader } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import {
@@ -7,13 +6,19 @@ import {
 	useCallback,
 	useEffect,
 } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserDto,
 	actions as usersActions,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
-import { UpdateUserForm } from "./libs/components/components.js";
+import {
+	UpdateAvatarForm,
+	UpdatePasswordForm,
+	UpdateUserForm,
+} from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Profile: React.FC = () => {
@@ -39,6 +44,20 @@ const Profile: React.FC = () => {
 		[dispatch, user],
 	);
 
+	const handleUpdatePasswordSubmit = useCallback(
+		(payload: UserUpdatePasswordRequestDto): void => {
+			void dispatch(authActions.updatePassword(payload));
+		},
+		[dispatch],
+	);
+
+	const handleUploadAvatarSubmit = useCallback(
+		(payload: FormData): void => {
+			void dispatch(usersActions.uploadAvatar(payload));
+		},
+		[dispatch],
+	);
+
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
@@ -48,12 +67,12 @@ const Profile: React.FC = () => {
 				<div className={styles["page-container"]}>
 					<h4 className={styles["title"]}>Profile</h4>
 					<div className={styles["content-container"]}>
-						<img
-							alt={`${user.name}'s avatar`}
-							className={styles["user-avatar"]}
-							src={defaultAvatar}
-						/>
+						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
+					</div>
+					<h4 className={styles["title-password"]}>Change your password</h4>
+					<div className={styles["password-container"]}>
+						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
 					</div>
 				</div>
 			)}

@@ -3,9 +3,18 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
-import { type QuizQuestionDto } from "~/packages/quiz/quiz";
+import {
+	type QuizQuestionDto,
+	type QuizScoresGetAllItemResponseDto,
+	type QuizUserAnswerDto,
+} from "~/packages/quiz/quiz";
 
-import { getAllQuestions } from "./actions";
+import { editScores, getAllQuestions, getScores, saveAnswers } from "./actions";
+
+type Properties = {
+	answerId: number;
+	questionIndex: number;
+};
 
 type State = {
 	answersByQuestionIndex: number[];
@@ -13,11 +22,8 @@ type State = {
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
 	questions: QuizQuestionDto[];
-};
-
-type Properties = {
-	answerId: number;
-	questionIndex: number;
+	scores: QuizScoresGetAllItemResponseDto[];
+	userAnswers: QuizUserAnswerDto[];
 };
 
 const initialState: State = {
@@ -26,10 +32,22 @@ const initialState: State = {
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
 	questions: [],
+	scores: [],
+	userAnswers: [],
 };
 
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
+		builder.addCase(getScores.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getScores.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.scores = action.payload.items;
+		});
+		builder.addCase(getScores.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
 		builder.addCase(getAllQuestions.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
@@ -41,6 +59,41 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(editScores.fulfilled, (state, action) => {
+			const updatedScores = new Map(
+				action.payload.items.map((score) => [score.id, score]),
+			);
+
+			state.scores = state.scores.map((stateScore) => {
+				const updatedScore = updatedScores.get(stateScore.id);
+
+				return updatedScore
+					? {
+							...stateScore,
+							score: updatedScore.score,
+							updatedAt: updatedScore.updatedAt,
+						}
+					: stateScore;
+			});
+
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(editScores.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(editScores.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(saveAnswers.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(saveAnswers.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.userAnswers = action.payload;
+		});
+		builder.addCase(saveAnswers.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
 		});
 	},
 	initialState,

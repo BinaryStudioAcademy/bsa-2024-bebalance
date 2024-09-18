@@ -6,6 +6,8 @@ type UserDto = {
 	avatarUrl: null | string;
 	createdAt: string;
 	email: string;
+	hasAnsweredOnboardingQuestions: boolean;
+	hasAnsweredQuizQuestions: boolean;
 	id: number;
 	name: string;
 	notificationFrequency?: ValueOf<typeof NotificationFrequency>;

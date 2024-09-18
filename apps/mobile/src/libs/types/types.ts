@@ -3,7 +3,9 @@ export { type IconName } from "./icon/icon";
 export { type InfinitePagerImperativeApi } from "./infinite-pager/infinite-pager";
 export {
 	type BottomTabNavigationParameterList,
+	type NavigationItem,
 	type NavigationScreenProperties,
+	type QuestionsStackNavigationParameterList,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
 export {
@@ -35,7 +37,9 @@ export { type LinearGradientProps } from "react-native-linear-gradient";
 export { type RadioButtonProps } from "react-native-radio-buttons-group";
 export { type SharedValue } from "react-native-reanimated";
 export {
+	type CategoriesSelectedRequestDto,
 	type OnboardingQuestionResponseDto,
+	type QuizScoresGetAllItemResponseDto,
 	type ServerErrorDetail,
 	type ServerErrorResponse,
 	type ValidationSchema,

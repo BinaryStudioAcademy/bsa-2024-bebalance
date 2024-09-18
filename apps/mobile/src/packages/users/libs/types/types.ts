@@ -1,5 +1,6 @@
 export {
 	type EmailDto,
+	type NotificationAnswersPayloadDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
 	type ResetPasswordLinkDto,

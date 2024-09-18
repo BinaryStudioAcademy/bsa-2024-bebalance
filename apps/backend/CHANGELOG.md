@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.21.0...backend-v1.22.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.20.0...backend-v1.21.0) (2024-09-18)
+
+
+### Features
+
+* **backend:** backend documentation improvements bb-437 ([#453](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/453)) ([df2cc1c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/df2cc1c91e53173661e9cfe002ed16207c58213a))
+
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.19.0...backend-v1.20.0) (2024-09-16)
+
+
+### Features
+
+* **backend/shared:** add action buttons to tasks bb-362 ([#451](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/451)) ([15c3ef0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15c3ef0b633a96a3c7cb8ed07cb4d423b4e38515))
+* **frontend/backend:** Onboarding/quiz flow bb-242 ([#351](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/351)) ([060f881](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/060f881e68e1427e72099d9aa0a3038fe88f3984))
+
+
+### Bug Fixes
+
+* **backend:** swagger docs and uploading file key bb-173 ([#450](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/450)) ([54ba144](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/54ba1449f417bd5e0f7841fb947111f1f970f06e))
+
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.18.0...backend-v1.19.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend/shared:** add deadline for tasks bb-361 ([#440](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/440)) ([e4b6f27](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e4b6f2731682aa5c0cda0fa8ee89bc9101e730a3))
+* **frontend/backend/shared:** add my tasks screen bb-335 ([#397](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/397)) ([b2aebbc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b2aebbcf396e87b96edc9e1f30820556042781e8))
+
+
+### Bug Fixes
+
+* **backend:** add missing auth on quiz endpoints swagger doc bb-431 ([#436](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/436)) ([dbf576e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dbf576e583c6cf68c74e197d0df17745a280cec4))
+
 ## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.17.0...backend-v1.18.0) (2024-09-13)
 
 

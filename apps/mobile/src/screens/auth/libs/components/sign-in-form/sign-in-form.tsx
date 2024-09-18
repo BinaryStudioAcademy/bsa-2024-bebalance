@@ -23,9 +23,10 @@ type Properties = {
 	onSubmit: (payload: UserSignInRequestDto) => void;
 };
 
+const INPUT_ICON_SIZE = 20;
+
 const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
-	const INPUT_ICON_SIZE = 20;
 
 	const handlePasswordIconPress = useCallback((): void => {
 		setIsPasswordHidden(!isPasswordHidden);

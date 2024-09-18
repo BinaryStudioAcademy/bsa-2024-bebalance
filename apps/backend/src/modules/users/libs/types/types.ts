@@ -5,6 +5,7 @@ export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,
 	type NotificationAnswersRequestDto,
+	type QuizUserAnswerDto,
 	type ResetPasswordDto,
 	type ResetPasswordLinkDto,
 	type UserDto,
@@ -15,5 +16,6 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "shared";

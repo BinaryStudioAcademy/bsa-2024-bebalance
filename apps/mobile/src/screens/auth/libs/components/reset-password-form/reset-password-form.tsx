@@ -97,7 +97,7 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				name="confirmPassword"
 				placeholder="*******"
 			/>
-			<Button label="RESET PASSWORD" onPress={handleFormSubmit} />
+			<Button label="SAVE PASSWORD" onPress={handleFormSubmit} />
 			<View style={globalStyles.alignItemsCenter}>
 				<Text style={globalStyles.mb16} weight="semiBold">
 					Back to{" "}

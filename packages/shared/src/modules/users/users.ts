@@ -21,6 +21,8 @@ export {
 	type UserSignUpResponseDto,
 	type UserUpdateFormDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordFormDto,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
@@ -30,4 +32,5 @@ export {
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
 	userUpdate as userUpdateValidationSchema,
+	userUpdatePassword as userUpdatePasswordValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

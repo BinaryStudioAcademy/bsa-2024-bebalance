@@ -7,7 +7,11 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { DataStatus, NumericalValue, RootScreenName } from "~/libs/enums/enums";
+import {
+	DataStatus,
+	NumericalValue,
+	QuestionsStackName,
+} from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -28,6 +32,7 @@ import { actions as quizActions } from "~/slices/quiz/quiz";
 import { Content, Counter } from "./libs/components/components";
 import { QUIZ_FORM_DEFAULT_VALUES } from "./libs/constants/costants";
 import {
+	type QuizAnswersRequestDto,
 	type QuizFormValues,
 	type RootStackParameterList,
 } from "./libs/types/types";
@@ -67,23 +72,42 @@ const Quiz: React.FC = () => {
 
 	useEffect(() => {
 		reset({ answer: currentAnswer.toString() });
-	}, [currentQuestionIndex, currentAnswer, reset]);
+	}, [currentAnswer, reset]);
+
+	const handleSaveAnswers = useCallback(
+		(payload: QuizAnswersRequestDto) => {
+			void dispatch(quizActions.saveAnswers(payload));
+		},
+		[dispatch],
+	);
 
 	const handleNextClick = useCallback(
 		(payload: QuizFormValues) => {
+			const answerId = Number(payload.answer);
+
 			dispatch(
 				quizActions.setAnswersByQuestionIndex({
-					answerId: Number(payload.answer),
+					answerId,
 					questionIndex: currentQuestionIndex,
 				}),
 			);
+
+			if (isLastQuestion) {
+				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
+			}
 
 			infinitePagerReference.current?.incrementPage({ animated: true });
 
 			void dispatch(quizActions.nextQuestion());
 		},
 
-		[dispatch, currentQuestionIndex],
+		[
+			dispatch,
+			currentQuestionIndex,
+			isLastQuestion,
+			answersByQuestionIndex,
+			handleSaveAnswers,
+		],
 	);
 
 	const handlePreviousClick = useCallback(() => {
@@ -96,7 +120,7 @@ const Quiz: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WHEEL_LOADING);
+			navigation.navigate(QuestionsStackName.NOTIFICATION_QUESTIONS);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
@@ -147,7 +171,7 @@ const Quiz: React.FC = () => {
 									<View style={globalStyles.gap16}>
 										<Button
 											isDisabled={!isValid}
-											label={isLastQuestion ? "ANALYZE" : "NEXT"}
+											label={isLastQuestion ? "CONTINUE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
 										{currentQuestionIndex !== NumericalValue.ZERO && (
