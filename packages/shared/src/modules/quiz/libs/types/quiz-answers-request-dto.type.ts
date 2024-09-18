@@ -1,6 +1,6 @@
 type QuizAnswersRequestDto = {
 	answerIds: number[];
-	categoryIds?: number[] | undefined;
+	categoryIds?: number[];
 };
 
 export { type QuizAnswersRequestDto };
