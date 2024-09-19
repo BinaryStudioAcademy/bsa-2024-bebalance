@@ -15,7 +15,6 @@
 	--light-blue: #b4d6ff;
 	--light-brand: #00f0ff;
 	--text-background: #63a0e7;
-	--text-secondary: #7c7c7c;
 	--medium-gray: #7c7c7c;
 	--light-gray: #e0e0e0;
 	--white: #ffffff;
@@ -23,6 +22,8 @@
 	--switch-disable: #7c7c7c;
 	--complete: #c2eacd;
 	--completed: #f0fff4;
+	--skipped-border: #ff292866;
+	--skipped-background: #ff29281a;
 	--physical-start: #ffe307;
 	--physical-end: #fff8b5;
 	--work-start: #69ff35;
