@@ -10,7 +10,7 @@ import { DEFAULT_UPDATE_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: Omit<UserUpdatePasswordRequestDto, "email">) => void;
+	onSubmit: (payload: UserUpdatePasswordRequestDto) => void;
 };
 
 const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
