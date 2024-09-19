@@ -81,10 +81,12 @@
 
 .action-button {
 	display: flex;
-	gap: 5px;
+	flex-direction: row-reverse;
+	gap: 8px;
 	align-items: center;
+	justify-content: flex-end;
 	height: 100%;
-	padding: 5px;
+	padding: 5px 10px;
 	font-size: 13px;
 	font-weight: 600;
 	color: var(--black);

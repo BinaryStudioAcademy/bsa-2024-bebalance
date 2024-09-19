@@ -38,7 +38,6 @@ const Button: React.FC<Properties> = ({
 		onClick={onClick}
 		type={type}
 	>
-		{iconName && <Icon name={iconName} />}
 		<span
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
@@ -47,6 +46,7 @@ const Button: React.FC<Properties> = ({
 		>
 			{label}
 		</span>
+		{iconName && <Icon name={iconName} />}
 	</button>
 );
 

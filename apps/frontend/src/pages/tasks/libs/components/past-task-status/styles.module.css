@@ -1,6 +1,6 @@
 .status {
 	display: flex;
-	gap: 5px;
+	gap: 8px;
 	align-items: center;
 	height: 34px;
 	padding: 6px 10px;
@@ -14,7 +14,6 @@
 
 .skipped {
 	width: 89px;
-	padding-left: 5px;
 	background-color: var(--skipped-background);
 	border: 1px solid var(--skipped-border);
 }
