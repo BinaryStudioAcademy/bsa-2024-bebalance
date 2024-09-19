@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	align-items: center;
+	margin-top: 13px;
+	margin-bottom: 17px;
+	cursor: pointer;
+}
+
+.avatar {
+	width: 47px;
+	height: 47px;
+	margin-right: 9px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.username {
+	padding-right: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	color: var(--black);
+}
+
+@media screen and (width <= 768px) {
+	.username {
+		display: none;
+	}
+}
