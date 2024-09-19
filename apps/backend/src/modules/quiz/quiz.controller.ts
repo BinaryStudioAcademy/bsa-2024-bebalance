@@ -285,19 +285,18 @@ class QuizController extends BaseController {
 	 * @swagger
 	 * /quiz/questions:
 	 *   get:
+	 *     tags: [quiz]
 	 *     summary: Get quiz questions
 	 *     security:
 	 *       - bearerAuth: []
 	 *     parameters:
 	 *       - in: query
 	 *         name: categoryIds
+	 *         required: false  # Optional parameter
+	 *         description: Array of category IDs to filter the quiz questions (optional)
 	 *         schema:
 	 *           type: string
-	 *           items:
-	 *             type: string
-	 *         description: Array of category IDs to filter the quiz questions (optional)
-	 *         required: false  # Optional parameter
-	 *         example: [3, 6]
+	 *         example: "[3, 6]"
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
