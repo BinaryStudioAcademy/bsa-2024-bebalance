@@ -41,16 +41,6 @@ const Tasks: React.FC = () => {
 		[expiredTasks, activeTasks],
 	);
 
-	const handleExpiredTaskResolved = useCallback(
-		(resolvedTask: TaskDto) => {
-			const newExpiredTasks = [...expiredTasks].filter(
-				(task) => task.id !== resolvedTask.id,
-			);
-			setExpiredTasks(newExpiredTasks);
-		},
-		[expiredTasks],
-	);
-
 	useEffect(() => {
 		const currentTime = Date.now();
 		const expired: TaskDto[] = [];
@@ -75,10 +65,7 @@ const Tasks: React.FC = () => {
 	return (
 		<>
 			{expiredTasks.length > NO_EXPIRED_TASKS && (
-				<ExpiredTasksModal
-					onResolveTask={handleExpiredTaskResolved}
-					tasks={expiredTasks}
-				/>
+				<ExpiredTasksModal tasks={expiredTasks} />
 			)}
 			<h4 className={styles["title"]}>My Tasks</h4>
 			<div className={styles["board"]}>

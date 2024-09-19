@@ -26,14 +26,10 @@ import { getClientX } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onResolveTask: (task: TaskDto) => void;
 	tasks: TaskDto[];
 };
 
-const ExpiredTasksModal: React.FC<Properties> = ({
-	onResolveTask,
-	tasks,
-}: Properties) => {
+const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	const dispatch = useAppDispatch();
 	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
@@ -55,8 +51,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({
 				},
 			}),
 		);
-		onResolveTask(tasks[currentSlide]);
-	}, [dispatch, onResolveTask, currentSlide, tasks]);
+	}, [dispatch, currentSlide, tasks]);
 
 	const renderExpiredTaskCard = useCallback(
 		(task: TaskDto) => <TaskCard key={task.id} task={task} />,
