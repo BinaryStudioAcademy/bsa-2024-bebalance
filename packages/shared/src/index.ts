@@ -1,4 +1,5 @@
 export {
+	FIRST_ITEM_INDEX,
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "./libs/constants/constant.js";
@@ -48,10 +49,12 @@ export {
 export {
 	CategoriesApiPath,
 	type CategoriesGetAllResponseDto,
+	type CategoriesGetRequestQueryDto,
 	type CategoriesSelectedRequestDto,
 	categoriesSelectedValidationSchema,
 	type CategoryCreateRequestDto,
 	type CategoryDto,
+	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
 } from "./modules/categories/categories.js";
@@ -119,6 +122,9 @@ export {
 	userSignUpValidationSchema,
 	type UserUpdateFormDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordFormDto,
+	type UserUpdatePasswordRequestDto,
+	userUpdatePasswordValidationSchema,
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,

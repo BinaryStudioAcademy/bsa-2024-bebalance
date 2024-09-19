@@ -11,6 +11,7 @@ import {
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
+	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/users.js";
 
 import { name as sliceName } from "./auth.slice.js";
@@ -111,6 +112,20 @@ const checkIsResetPasswordExpired = createAsyncThunk<
 	return await authApi.checkIsResetPasswordExpired(payload);
 });
 
+const updatePassword = createAsyncThunk<
+	null | UserDto,
+	UserUpdatePasswordRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/update-password`, async (updatePasswordPayload, { extra }) => {
+	const { authApi, notification } = extra;
+
+	const response = await authApi.updatePassword(updatePasswordPayload);
+
+	notification.success(NotificationMessage.PASSWORD_UPDATED);
+
+	return response;
+});
+
 export {
 	checkIsResetPasswordExpired,
 	getAuthenticatedUser,
@@ -119,4 +134,5 @@ export {
 	resetPassword,
 	signIn,
 	signUp,
+	updatePassword,
 };
