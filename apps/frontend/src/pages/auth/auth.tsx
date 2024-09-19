@@ -8,6 +8,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
+	useEffect,
 	useLocation,
 	useNavigate,
 	useQuery,
@@ -41,6 +42,12 @@ const Auth: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		if (pathname === AppRoute.SIGN_UP && user !== null) {
+			navigate(AppRoute.QUIZ);
+		}
+	}, [navigate, pathname, user]);
+
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
 			void dispatch(authActions.signIn(payload));
@@ -51,9 +58,8 @@ const Auth: React.FC = () => {
 	const handleSignUpSubmit = useCallback(
 		(payload: UserSignUpRequestDto): void => {
 			void dispatch(authActions.signUp(payload));
-			navigate(AppRoute.QUIZ);
 		},
-		[dispatch, navigate],
+		[dispatch],
 	);
 
 	const handleForgotPasswordSubmit = useCallback(
