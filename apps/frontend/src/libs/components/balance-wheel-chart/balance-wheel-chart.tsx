@@ -73,7 +73,7 @@ const BalanceWheelChart: React.FC<Properties> = ({
 	const handleAnimateChart = useCallback(() => {
 		const chartInstance = chartReference.current;
 
-		if (!chartInstance || !chartInstance.data.datasets[ZERO_INDEX]?.data) {
+		if (!chartInstance?.data.datasets[ZERO_INDEX]?.data) {
 			return;
 		}
 
