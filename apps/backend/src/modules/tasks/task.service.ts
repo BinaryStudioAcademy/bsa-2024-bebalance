@@ -58,7 +58,7 @@ class TaskService implements Service {
 
 		if (!task) {
 			throw new TaskError({
-				message: ErrorMessage.TASK_NOT_FOUNT,
+				message: ErrorMessage.TASK_NOT_FOUND,
 				status: HTTPCode.NOT_FOUND,
 			});
 		}

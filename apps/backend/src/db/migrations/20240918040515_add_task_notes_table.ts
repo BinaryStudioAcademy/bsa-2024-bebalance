@@ -1,7 +1,7 @@
 import { type Knex } from "knex";
 
 const TableName = {
-	NOTES: "task_notes",
+	TASK_NOTES: "task_notes",
 	TASKS: "tasks",
 } as const;
 
@@ -16,11 +16,10 @@ const ColumnName = {
 const DELETE_STRATEGY = "CASCADE";
 
 async function up(knex: Knex): Promise<void> {
-	await knex.schema.createTable(TableName.NOTES, (table) => {
+	await knex.schema.createTable(TableName.TASK_NOTES, (table) => {
 		table.increments(ColumnName.ID).primary();
 		table
 			.integer(ColumnName.TASK_ID)
-			.unsigned()
 			.notNullable()
 			.references(ColumnName.ID)
 			.inTable(TableName.TASKS)
@@ -32,7 +31,7 @@ async function up(knex: Knex): Promise<void> {
 }
 
 async function down(knex: Knex): Promise<void> {
-	await knex.schema.dropTableIfExists(TableName.NOTES);
+	await knex.schema.dropTableIfExists(TableName.TASK_NOTES);
 }
 
 export { down, up };
