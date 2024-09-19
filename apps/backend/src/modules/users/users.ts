@@ -28,6 +28,7 @@ export {
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdatePasswordRequestDto,
 } from "./libs/types/types.js";
 export {
 	notificationAnswersValidationSchema,

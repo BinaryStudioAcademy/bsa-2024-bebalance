@@ -7,12 +7,12 @@ import {
 	View,
 	WheelLoader,
 } from "~/libs/components/components";
-import { BaseColor, RootScreenName } from "~/libs/enums/enums";
+import { BaseColor, QuestionsStackName } from "~/libs/enums/enums";
 import { useEffect, useNavigation, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type NativeStackNavigationProp,
-	type RootNavigationParameterList,
+	type QuestionsStackNavigationParameterList,
 } from "~/libs/types/types";
 
 import { LoadingSetting } from "./libs/enums";
@@ -21,7 +21,9 @@ const ANIMATION_CYCLE_DURATION = 1000;
 
 const WheelLoading: React.FC = () => {
 	const navigation =
-		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
+		useNavigation<
+			NativeStackNavigationProp<QuestionsStackNavigationParameterList>
+		>();
 	const [percentLoading, setPercentLoading] = useState<number>(
 		LoadingSetting.INITIAL_PERCENT,
 	);
@@ -37,7 +39,7 @@ const WheelLoading: React.FC = () => {
 				setPercentLoading(nextPercentLoading);
 			}, LoadingSetting.PROCESSING_STAGE_LENGTH);
 		} else {
-			navigation.navigate(RootScreenName.BOTTOM_TABS_NAVIGATOR);
+			navigation.navigate(QuestionsStackName.BOTTOM_TABS);
 		}
 	}, [navigation, percentLoading]);
 

@@ -13,6 +13,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
+import { CircularProgress } from "../circular-progress/circular-progress.js";
 import {
 	RetakeQuizModal,
 	ScoresEditModal,
@@ -24,8 +25,15 @@ const NO_SCORES_COUNT = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
+	const { completionTasksPercentage, dataStatus, scores } = useAppSelector(
+		({ auth, quiz }) => ({
+			completionTasksPercentage: auth.user?.completionTasksPercentage,
+			dataStatus: quiz.dataStatus,
+			scores: quiz.scores,
+		}),
+	);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
+	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
@@ -58,6 +66,12 @@ const UserWheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
+	useEffect(() => {
+		if (completionTasksPercentage) {
+			setPercentage(completionTasksPercentage);
+		}
+	}, [completionTasksPercentage]);
+
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
 			case "manual": {
@@ -81,15 +95,17 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
 				{isEditingModalOpen && (
-					<Switch
-						currentMode={editMode}
-						leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
-						onToggleMode={handleModeToggle}
-						rightButtonProperties={{
-							label: "Retake quiz",
-							mode: "retake_quiz",
-						}}
-					/>
+					<div className={styles["switch-container"]}>
+						<Switch
+							currentMode={editMode}
+							leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
+							onToggleMode={handleModeToggle}
+							rightButtonProperties={{
+								label: "Retake quiz",
+								mode: "retake_quiz",
+							}}
+						/>
+					</div>
 				)}
 			</div>
 			<div className={styles["content-wrapper"]}>
@@ -98,6 +114,7 @@ const UserWheel: React.FC = () => {
 				)}
 				{isEditingModalOpen && handleGetModal(editMode)}
 			</div>
+			<CircularProgress percentage={percentage} />
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
 					<Button

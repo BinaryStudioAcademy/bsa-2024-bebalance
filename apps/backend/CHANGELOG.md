@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.22.0...backend-v1.23.0) (2024-09-19)
+
+
+### Features
+
+* **backend/frontend/shared:** change password funcionality in profile screen bb-417 ([#456](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/456)) ([fd26ffe](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fd26ffe236a77dc5653bbd4d78d7f6102e753715))
+* **backend/frontend:** Insights bb-444 ([#478](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/478)) ([9869571](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/98695718f4269d2796151c68383649cb61128739))
+
+
+### Bug Fixes
+
+* **backend:** fix `/quiz/questions` endpoint doc bb-437 ([#497](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/497)) ([c638a81](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c638a818612d196a2d7c774a7c90634a70086b67))
+
 ## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.21.0...backend-v1.22.0) (2024-09-18)
 
 
