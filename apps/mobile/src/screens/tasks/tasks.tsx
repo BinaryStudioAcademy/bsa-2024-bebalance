@@ -1,14 +1,21 @@
 import React from "react";
 
-import { ScreenWrapper, Tag, Text } from "~/libs/components/components";
+import {
+	LoaderWrapper,
+	ScreenWrapper,
+	TaskCard,
+} from "~/libs/components/components";
+import { BaseColor, DataStatus } from "~/libs/enums/enums";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type UserDto } from "~/packages/users/users";
+import { actions as taskActions } from "~/slices/task/task";
 import { actions as userActions } from "~/slices/users/users";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
+	const { dataStatus, tasks } = useAppSelector(({ tasks }) => tasks);
 
 	useEffect(() => {
 		void dispatch(
@@ -16,18 +23,17 @@ const Tasks: React.FC = () => {
 		);
 	}, [dispatch, authenticatedUser]);
 
+	useEffect(() => {
+		void dispatch(taskActions.getCurrentTasks());
+	}, [dispatch]);
+
 	return (
-		<ScreenWrapper>
-			<Text>Tasks</Text>
-			{/* TODO: Replace these static categories with categories from the Backend in the future */}
-			<Tag color="red" label="Love" />
-			<Tag color="violet" label="Friends" />
-			<Tag color="lime" label="Work" />
-			<Tag color="yellow" label="Physical" />
-			<Tag color="green" label="Money" />
-			<Tag color="pink" label="Free time" />
-			<Tag color="orange" label="Spiritual" />
-			<Tag color="blue" label="Mental" />
+		<ScreenWrapper style={{ backgroundColor: BaseColor.BG_WHITE }}>
+			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
+				{tasks.map((task) => (
+					<TaskCard key={task.id} task={task} />
+				))}
+			</LoaderWrapper>
 		</ScreenWrapper>
 	);
 };
