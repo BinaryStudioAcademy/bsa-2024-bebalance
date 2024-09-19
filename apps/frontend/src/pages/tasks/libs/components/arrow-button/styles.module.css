@@ -8,8 +8,8 @@
 .arrow {
 	width: 24px;
 	height: 24px;
-	border-top: 2px solid var(--text-secondary);
-	border-right: 2px solid var(--text-secondary);
+	border-top: 2px solid var(--medium-gray);
+	border-right: 2px solid var(--medium-gray);
 }
 
 .arrow:hover {

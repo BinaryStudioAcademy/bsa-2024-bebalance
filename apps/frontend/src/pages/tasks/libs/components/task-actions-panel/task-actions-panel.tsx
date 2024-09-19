@@ -24,11 +24,9 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const handleTaskSkipping = useCallback(() => {
 		const task = tasks[currentTaskIndex] as TaskDto;
 		void dispatch(
-			tasksActions.updateTask({
+			tasksActions.update({
 				id: task.id,
-				task: {
-					status: "Skipped",
-				},
+				status: "Skipped",
 			}),
 		);
 	}, [dispatch, currentTaskIndex, tasks]);
@@ -36,11 +34,9 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const handleTaskCompletion = useCallback(() => {
 		const task = tasks[currentTaskIndex] as TaskDto;
 		void dispatch(
-			tasksActions.updateTask({
+			tasksActions.update({
 				id: task.id,
-				task: {
-					status: "Completed",
-				},
+				status: "Completed",
 			}),
 		);
 	}, [dispatch, currentTaskIndex, tasks]);

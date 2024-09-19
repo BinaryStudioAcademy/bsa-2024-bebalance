@@ -9,10 +9,11 @@ type Properties = {
 	iconName?: IconName;
 	iconPosition?: "center" | "left" | "right";
 	isDisabled?: boolean;
+	isSelected?: boolean;
 	label: string;
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
-	variant?: "icon" | "primary" | "secondary";
+	variant?: "action" | "icon" | "primary" | "secondary" | "switch";
 };
 
 const Button: React.FC<Properties> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<Properties> = ({
 	iconName,
 	iconPosition = "right",
 	isDisabled = false,
+	isSelected = false,
 	label,
 	onClick,
 	type = "button",
@@ -30,6 +32,7 @@ const Button: React.FC<Properties> = ({
 			styles["btn"],
 			variant === "icon" && styles[`position-${iconPosition}`],
 			styles[`${variant}-button`],
+			isSelected && styles[`${variant}-button-selected`],
 		)}
 		disabled={isDisabled}
 		onClick={onClick}

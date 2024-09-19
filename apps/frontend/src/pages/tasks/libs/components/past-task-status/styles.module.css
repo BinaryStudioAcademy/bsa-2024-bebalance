@@ -1,0 +1,25 @@
+.status {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	height: 34px;
+	padding: 6px 10px;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--black);
+	background-color: transparent;
+	border: 1px solid var(--light-gray);
+	border-radius: 5px;
+}
+
+.skipped {
+	width: 89px;
+	background-color: var(--skipped-background);
+	border: 1px solid var(--skipped-border);
+}
+
+.completed {
+	width: 130px;
+	background-color: var(--completed);
+	border: 1px solid var(--complete);
+}

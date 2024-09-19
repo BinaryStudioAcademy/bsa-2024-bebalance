@@ -33,7 +33,20 @@ class TasksApi extends BaseHTTPApi {
 		return await response.json<TaskDto[]>();
 	}
 
-	public async updateTask(
+	public async getPastTasks(): Promise<TaskDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.PAST, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "GET",
+			},
+		);
+
+		return await response.json<TaskDto[]>();
+	}
+
+	public async update(
 		id: number,
 		task: Partial<TaskUpdateRequestDto>,
 	): Promise<TaskDto> {

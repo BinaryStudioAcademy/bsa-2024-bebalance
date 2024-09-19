@@ -4,11 +4,13 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
+import { NOT_FOUND_INDEX } from "../libs/constants/constants.js";
 import {
-	NOT_FOUND_INDEX,
-	SINGLE_ELEMENT,
-} from "../libs/constants/constants.js";
-import { getCurrentTasks, updateTask, updateTaskDeadline } from "./actions.js";
+	getCurrentTasks,
+	getPastTasks,
+	update,
+	updateTaskDeadline,
+} from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -32,21 +34,28 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getCurrentTasks.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(updateTask.pending, (state) => {
+
+		builder.addCase(getPastTasks.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
-		builder.addCase(updateTask.fulfilled, (state, action) => {
-			const taskIndex = state.tasks.findIndex(
-				(task) => task.id === action.payload.id,
-			);
-
-			if (taskIndex !== NOT_FOUND_INDEX) {
-				state.tasks.splice(taskIndex, SINGLE_ELEMENT);
-			}
-
+		builder.addCase(getPastTasks.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
+			state.tasks = action.payload;
 		});
-		builder.addCase(updateTask.rejected, (state) => {
+		builder.addCase(getPastTasks.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(update.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(update.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.tasks = state.tasks.filter((task) => {
+				return task.id !== action.payload.id;
+			});
+		});
+		builder.addCase(update.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(updateTaskDeadline.pending, (state) => {

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import {
 	PREVIOUS_INDEX_OFFSET,
@@ -11,29 +11,35 @@ import {
 	type QuizScoresGetAllItemResponseDto,
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
+import { Step } from "~/pages/quiz/libs/enums/step.js";
 
 import {
 	editScores,
 	getAllQuestions,
+	getQuestionsByCategoryIds,
 	getScores,
 	saveAnswers,
 } from "./actions.js";
 
 type State = {
-	currentCategory: null | QuizQuestionDto[];
 	currentCategoryIndex: number;
+	currentCategoryQuestions: null | QuizQuestionDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
-	questions: QuizQuestionDto[][];
+	isRetakingQuiz: boolean;
+	questionsByCategories: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
+	step: ValueOf<typeof Step>;
 	userAnswers: QuizUserAnswerDto[];
 };
 
 const initialState: State = {
-	currentCategory: null,
 	currentCategoryIndex: ZERO_INDEX,
+	currentCategoryQuestions: null,
 	dataStatus: DataStatus.IDLE,
-	questions: [],
+	isRetakingQuiz: false,
+	questionsByCategories: [],
 	scores: [],
+	step: Step.MOTIVATION,
 	userAnswers: [],
 };
 
@@ -44,13 +50,29 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getAllQuestions.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.questions = action.payload.items;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+			state.questionsByCategories = action.payload.items;
+			state.currentCategoryQuestions =
+				state.questionsByCategories[state.currentCategoryIndex] || null;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
+
+		builder.addCase(getQuestionsByCategoryIds.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isRetakingQuiz = true;
+		});
+		builder.addCase(getQuestionsByCategoryIds.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.questionsByCategories = action.payload.items;
+			state.currentCategoryQuestions =
+				state.questionsByCategories[state.currentCategoryIndex] || null;
+		});
+		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+			state.isRetakingQuiz = false;
+		});
+
 		builder.addCase(getScores.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
@@ -61,16 +83,21 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
+
 		builder.addCase(saveAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.userAnswers = action.payload;
+			state.currentCategoryIndex = ZERO_INDEX;
+			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
+
 		builder.addCase(editScores.fulfilled, (state, action) => {
 			const updatedScores = new Map(
 				action.payload.items.map((score) => [score.id, score]),
@@ -102,15 +129,22 @@ const { actions, name, reducer } = createSlice({
 	reducers: {
 		nextQuestion(state) {
 			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
-			state.currentCategory =
-				state.questions[state.currentCategoryIndex] || null;
+
+			state.currentCategoryQuestions =
+				state.questionsByCategories[state.currentCategoryIndex] ?? null;
+		},
+		nextStep(state) {
+			state.step++;
 		},
 		previousQuestion(state) {
 			if (state.currentCategoryIndex > initialState.currentCategoryIndex) {
 				state.currentCategoryIndex -= PREVIOUS_INDEX_OFFSET;
-				state.currentCategory =
-					state.questions[state.currentCategoryIndex] || null;
+				state.currentCategoryQuestions =
+					state.questionsByCategories[state.currentCategoryIndex] ?? null;
 			}
+		},
+		setStep(state, action: PayloadAction<ValueOf<typeof Step>>) {
+			state.step = action.payload;
 		},
 	},
 });

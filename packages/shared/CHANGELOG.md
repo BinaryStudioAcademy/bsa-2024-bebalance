@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.22.0...shared-v1.23.0) (2024-09-19)
+
+
+### Features
+
+* **backend/frontend/shared:** change password funcionality in profile screen bb-417 ([#456](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/456)) ([fd26ffe](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fd26ffe236a77dc5653bbd4d78d7f6102e753715))
+* **backend/frontend:** Insights bb-444 ([#478](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/478)) ([9869571](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/98695718f4269d2796151c68383649cb61128739))
+
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.21.0...shared-v1.22.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+* **mobile:** edit wheel manually bb-344 ([#455](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/455)) ([833d5ed](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833d5ed12587e7e93804c6852e093df20283938d))
+
 ## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.20.0...shared-v1.21.0) (2024-09-18)
 
 

@@ -15,16 +15,24 @@ const getCurrentTasks = createAsyncThunk<
 	return await tasksApi.getCurrentTasks();
 });
 
-const updateTask = createAsyncThunk<
-	TaskDto,
-	TaskUpdatePayload,
-	AsyncThunkConfig
->(`${sliceName}/update-task`, async (payload, { extra }) => {
-	const { tasksApi } = extra;
-	const { id, task } = payload;
+const getPastTasks = createAsyncThunk<TaskDto[], undefined, AsyncThunkConfig>(
+	`${sliceName}/get-past-tasks`,
+	async (_, { extra }) => {
+		const { tasksApi } = extra;
 
-	return await tasksApi.updateTask(id, task);
-});
+		return await tasksApi.getPastTasks();
+	},
+);
+
+const update = createAsyncThunk<TaskDto, TaskUpdatePayload, AsyncThunkConfig>(
+	`${sliceName}/update`,
+	async (payload, { extra }) => {
+		const { tasksApi } = extra;
+		const { id, ...data } = payload;
+
+		return await tasksApi.update(id, data);
+	},
+);
 
 const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
 	`${sliceName}/update-task-deadline`,
@@ -35,4 +43,4 @@ const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
 	},
 );
 
-export { getCurrentTasks, updateTask, updateTaskDeadline };
+export { getCurrentTasks, getPastTasks, update, updateTaskDeadline };

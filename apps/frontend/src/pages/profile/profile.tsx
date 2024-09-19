@@ -1,19 +1,24 @@
-import { Loader } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/enums.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Loader, Popup } from "~/libs/components/components.js";
+import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import {
 	type UserDto,
 	actions as usersActions,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "~/modules/users/users.js";
 
 import {
 	UpdateAvatarForm,
+	UpdatePasswordForm,
 	UpdateUserForm,
 } from "./libs/components/components.js";
 import styles from "./styles.module.css";
@@ -41,6 +46,13 @@ const Profile: React.FC = () => {
 		[dispatch, user],
 	);
 
+	const handleUpdatePasswordSubmit = useCallback(
+		(payload: UserUpdatePasswordRequestDto): void => {
+			void dispatch(authActions.updatePassword(payload));
+		},
+		[dispatch],
+	);
+
 	const handleUploadAvatarSubmit = useCallback(
 		(payload: FormData): void => {
 			void dispatch(usersActions.uploadAvatar(payload));
@@ -48,10 +60,29 @@ const Profile: React.FC = () => {
 		[dispatch],
 	);
 
+	const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState<boolean>(false);
+
+	const handleSignOut = useCallback(() => {
+		setIsLogoutPopupOpen((previousState) => !previousState);
+	}, [setIsLogoutPopupOpen]);
+
+	const handleConfirmLogout = useCallback(() => {
+		void dispatch(authActions.logOut());
+	}, [dispatch]);
+
 	const isLoading = dataStatus === DataStatus.PENDING;
 
 	return (
 		<>
+			<Popup
+				closeButtonLabel="No"
+				confirmButtonLabel="Yes"
+				icon={runImg}
+				isOpen={isLogoutPopupOpen}
+				onClose={handleSignOut}
+				onConfirm={handleConfirmLogout}
+				title={PopupMessage.LOGOUT_CONFIRM}
+			/>
 			{isLoading && <Loader />}
 			{user && (
 				<div className={styles["page-container"]}>
@@ -59,6 +90,13 @@ const Profile: React.FC = () => {
 					<div className={styles["content-container"]}>
 						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
+					</div>
+					<h4 className={styles["title-password"]}>Change your password</h4>
+					<div className={styles["password-container"]}>
+						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
+						<div className={styles["button-container"]}>
+							<Button label="SIGN OUT" onClick={handleSignOut} type="button" />
+						</div>
 					</div>
 				</div>
 			)}

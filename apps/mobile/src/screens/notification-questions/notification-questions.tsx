@@ -8,7 +8,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { NumericalValue, RootScreenName } from "~/libs/enums/enums";
+import { NumericalValue, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -83,7 +83,7 @@ const NotificationQuestions: React.FC = () => {
 		}
 
 		void handleSubmit(handleSaveAnswers)();
-		navigation.navigate(RootScreenName.WHEEL_LOADING);
+		navigation.navigate(QuestionsStackName.WHEEL_LOADING);
 	}, [
 		currentStep,
 		handleSubmit,
@@ -92,7 +92,7 @@ const NotificationQuestions: React.FC = () => {
 		handleStepChange,
 	]);
 
-	const onPageRender = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return currentStep === NumericalValue.ZERO ? (
 			<NotificationTaskDays control={control} errors={errors} />
 		) : (
@@ -130,7 +130,7 @@ const NotificationQuestions: React.FC = () => {
 							</Text>
 							<InfinitePager
 								infinitePagerReference={infinitePagerReference}
-								onPageRender={onPageRender}
+								onPageRender={handleRenderPageComponent}
 							/>
 						</View>
 

@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.40.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.39.0...frontend-v1.40.0) (2024-09-19)
+
+
+### Features
+
+* **backend/frontend/shared:** change password funcionality in profile screen bb-417 ([#456](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/456)) ([fd26ffe](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fd26ffe236a77dc5653bbd4d78d7f6102e753715))
+* **backend/frontend:** Insights bb-444 ([#478](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/478)) ([9869571](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/98695718f4269d2796151c68383649cb61128739))
+* **frontend:** move signout button from sidebar to profile bb-308 ([#490](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/490)) ([5512a69](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5512a69679a11111702e5c38de83115d59e07ad5))
+
+
+### Bug Fixes
+
+* **frontend:** add text-align property to radio option bb-493 ([#499](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/499)) ([7ab70f1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7ab70f1cb374efa4feb80bb248828d82fd807944))
+
+## [1.39.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.38.0...frontend-v1.39.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+
+
+### Bug Fixes
+
+* **frontend:** Balance Wheel animation bb-204 ([#462](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/462)) ([18e8750](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/18e8750d0b6872ea4d164fc9826f34ae0bc1fbd9))
+
 ## [1.38.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.37.0...frontend-v1.38.0) (2024-09-18)
 
 

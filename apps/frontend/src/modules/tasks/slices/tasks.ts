@@ -1,10 +1,16 @@
-import { getCurrentTasks, updateTask, updateTaskDeadline } from "./actions.js";
+import {
+	getCurrentTasks,
+	getPastTasks,
+	update,
+	updateTaskDeadline,
+} from "./actions.js";
 import { actions } from "./tasks.slice.js";
 
 const allActions = {
 	...actions,
 	getCurrentTasks,
-	updateTask,
+	getPastTasks,
+	update,
 	updateTaskDeadline,
 };
 

@@ -6,6 +6,7 @@ import {
 	resetPassword,
 	signIn,
 	signUp,
+	updatePassword,
 } from "./actions.js";
 import { actions } from "./auth.slice.js";
 
@@ -18,6 +19,7 @@ const allActions = {
 	resetPassword,
 	signIn,
 	signUp,
+	updatePassword,
 };
 
 export { reducer } from "./auth.slice.js";
