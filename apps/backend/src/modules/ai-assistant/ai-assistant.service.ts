@@ -22,7 +22,6 @@ import {
 	type SelectedCategory,
 	type TaskCreateDto,
 	type TaskDto,
-	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 
@@ -88,9 +87,10 @@ class AiAssistantService {
 
 	public async changeTaskSuggestion(
 		user: UserDto,
-		body: ChangeTaskSuggestionRequestDto,
-	): Promise<null | TaskSuggestionsResponseDto> {
-		const { task, threadId } = body;
+		body: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto | null> {
+		const { lastMessageId, payload, threadId } = body;
+		const task = payload as TaskCreateDto;
 
 		const runThreadOptions = runChangeTaskByCategoryOptions(task);
 		const taskDeadLine = this.taskService.calculateDeadline(
@@ -98,7 +98,11 @@ class AiAssistantService {
 		);
 		const result = await this.openAi.runThread(threadId, runThreadOptions);
 
-		return generateChangeTaskSuggestionsResponse(result, taskDeadLine);
+		return generateChangeTaskSuggestionsResponse(
+			result,
+			taskDeadLine,
+			lastMessageId,
+		);
 	}
 
 	public async explainTaskSuggestion(

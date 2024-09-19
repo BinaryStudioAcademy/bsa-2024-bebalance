@@ -160,7 +160,7 @@ class AiAssistantController extends BaseController {
 			handler: (options) =>
 				this.changeTaskSuggestion(
 					options as APIHandlerOptions<{
-						body: ChangeTaskSuggestionRequestDto;
+						body: AIAssistantRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -348,7 +348,7 @@ class AiAssistantController extends BaseController {
 	 */
 	private async changeTaskSuggestion(
 		options: APIHandlerOptions<{
-			body: ChangeTaskSuggestionRequestDto;
+			body: AIAssistantRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
