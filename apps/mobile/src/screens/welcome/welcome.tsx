@@ -17,11 +17,13 @@ import {
 import {
 	LETTERS_PRINTED_PER_STEP,
 	NEXT_LETTERS_DELAY,
+	NEXT_PARAGRAPH_DELAY,
 } from "./libs/constants/constants";
 import { styles } from "./styles";
 
 const paragraphs = [
-	"Thank you for sharing your insights! We’re currently processing your responses to create a personalized path just for you. This is where the magic begins—we’re using your input to tailor the experience, offering you the guidance and motivation you need to achieve a balanced, fulfilling life.\n\nHang tight while we set things up! In just a moment, you’ll dive into the areas that matter most to you, and together, we’ll start making progress toward your goals. Your journey to a better life starts now!",
+	"Thank you for sharing your insights! We’re currently processing your responses to create a personalized path just for you. This is where the magic begins—we’re using your input to tailor the experience, offering you the guidance and motivation you need to achieve a balanced, fulfilling life.",
+	"Hang tight while we set things up! In just a moment, you’ll dive into the areas that matter most to you, and together, we’ll start making progress toward your goals. Your journey to a better life starts now!",
 ];
 
 const Welcome: React.FC = () => {
@@ -42,6 +44,7 @@ const Welcome: React.FC = () => {
 				maskingColor={BaseColor.DARK_BLUE}
 				nextLettersPrintedDelay={NEXT_LETTERS_DELAY}
 				size="sm"
+				startTypingDelay={index * NEXT_PARAGRAPH_DELAY}
 				textColor={BaseColor.BG_WHITE}
 				weight="regular"
 			>
