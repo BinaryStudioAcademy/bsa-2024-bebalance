@@ -154,7 +154,10 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 						{isSingleSlide ? (
 							<div>
 								<div className={styles["slide"]}>
-									<TaskCard task={tasks[FIRST_SLIDE] as TaskDto} />
+									<TaskCard
+										task={tasks[FIRST_SLIDE] as TaskDto}
+										variant="expired"
+									/>
 								</div>
 							</div>
 						) : (
@@ -173,7 +176,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							>
 								{tasks.map((task, index) => (
 									<div className={styles["slide"]} key={index}>
-										<TaskCard task={task} />
+										<TaskCard task={task} variant="expired" />
 									</div>
 								))}
 							</div>
