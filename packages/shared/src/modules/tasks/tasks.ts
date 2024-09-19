@@ -2,6 +2,7 @@ export { TasksApiPath, TaskStatus } from "./libs/enums/enums.js";
 export {
 	type TaskDto,
 	type TaskNoteDto,
+	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,

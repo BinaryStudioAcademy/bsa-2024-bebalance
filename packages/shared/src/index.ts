@@ -93,6 +93,7 @@ export {
 export {
 	type TaskDto,
 	type TaskNoteDto,
+	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
 	taskNoteValidationSchema,
 	TasksApiPath,

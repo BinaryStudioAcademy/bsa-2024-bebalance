@@ -121,6 +121,23 @@ class TaskService implements Service {
 		return tasks.map((task) => task.toObject());
 	}
 
+	public async getNotesByTaskId(taskId: number): Promise<TaskNoteDto[]> {
+		const task = await this.taskRepository.find(taskId);
+
+		if (!task) {
+			throw new TaskError({
+				message: ErrorMessage.TASK_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const notes = await this.taskRepository.getNotesByTaskId(taskId);
+
+		return notes.map((note) => {
+			return note.toObject();
+		});
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<TaskModel>,

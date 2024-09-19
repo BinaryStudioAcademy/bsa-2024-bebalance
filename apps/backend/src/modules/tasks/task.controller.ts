@@ -11,6 +11,7 @@ import { type UserDto } from "~/modules/users/users.js";
 import { TasksApiPath } from "./libs/enums/enums.js";
 import { checkAccessToTask } from "./libs/hooks/hooks.js";
 import {
+	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
@@ -113,16 +114,27 @@ class TaskController extends BaseController {
 					options as APIHandlerOptions<{ body: TaskNoteRequestDto }>,
 				),
 			method: "POST",
-			path: TasksApiPath.NOTE,
+			path: TasksApiPath.NOTES,
 			validation: {
 				body: taskNoteValidationSchema,
 			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.getNotesByTaskId(
+					options as APIHandlerOptions<{
+						params: TaskNoteParametersDto;
+					}>,
+				),
+			method: "GET",
+			path: TasksApiPath.NOTES_$ID,
 		});
 	}
 
 	/**
 	 * @swagger
-	 * /tasks/note:
+	 * /tasks/notes:
 	 *   post:
 	 *     tags: [tasks]
 	 *     summary: Add a note to a task
@@ -246,6 +258,49 @@ class TaskController extends BaseController {
 
 		return {
 			payload: await this.taskService.findPastByUserId(user.id),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/notes/:id:
+	 *   get:
+	 *     tags: [tasks]
+	 *     summary: Get all task notes
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - name: id
+	 *         in: path
+	 *         required: true
+	 *         description: ID of the task to get notes for
+	 *         schema:
+	 *           type: integer
+	 *           example: 1
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: array
+	 *               items:
+	 *                 $ref: "#/components/schemas/TaskNoteDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
+	private async getNotesByTaskId(
+		options: APIHandlerOptions<{
+			params: TaskNoteParametersDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.taskService.getNotesByTaskId(options.params.id),
 			status: HTTPCode.OK,
 		};
 	}

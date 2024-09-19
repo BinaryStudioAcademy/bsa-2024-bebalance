@@ -163,6 +163,23 @@ class TaskRepository implements Repository {
 		});
 	}
 
+	public async getNotesByTaskId(taskId: number): Promise<TaskNoteEntity[]> {
+		const notes = await this.taskNoteModel
+			.query()
+			.where({ taskId })
+			.orderBy("createdAt", "asc");
+
+		return notes.map((note) => {
+			return TaskNoteEntity.initialize({
+				content: note.content,
+				createdAt: note.createdAt,
+				id: note.id,
+				taskId: note.taskId,
+				updatedAt: note.updatedAt,
+			});
+		});
+	}
+
 	public async update(
 		id: number,
 		payload: Partial<TaskModel>,
