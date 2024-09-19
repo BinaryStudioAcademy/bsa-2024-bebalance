@@ -14,26 +14,43 @@
 	color: #e5e7eb;
 }
 
-.inner-circle {
-	color: #ff4040;
+.second-path {
+	color: #0085ff;
 	transition: all 0.5s ease-out;
 }
 
 .percentage-wrapper {
 	position: absolute;
+	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
+	animation: fade-in-up 0.5s;
 }
 
 .percentage {
 	font-size: 24px;
 	font-weight: bold;
 	line-height: 100%;
-	color: #ff4040;
 }
 
 .percentage-title {
 	font-size: 10px;
+}
+
+.percent-symbol {
+	font-size: 12px;
+}
+
+@keyframes fade-in-up {
+	0% {
+		bottom: -30px;
+		opacity: 0;
+	}
+
+	100% {
+		bottom: 0;
+		opacity: 1;
+	}
 }

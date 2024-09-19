@@ -2,22 +2,23 @@ import { useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import styles from "./styles.module.css";
 
-const ZERO = 0;
-const HUNDRED = 100;
-const TWO = 2;
-const SIXTY = 60;
+const TOTAL_PERCENTAGE = 100;
 
-const CircularProgress: React.FC = () => {
-	const [animatedValue, setAnimatedValue] = useState<number>(ZERO);
-	const radius = 43;
-	const circumference = TWO * Math.PI * radius;
-	const strokeDashoffset =
-		circumference - (animatedValue / HUNDRED) * circumference;
+type Properties = {
+	percentage: number;
+};
+
+const CircularProgress: React.FC<Properties> = ({ percentage }: Properties) => {
+	const [isVisible, setIsVisible] = useState<boolean>(false);
+	const RADIUS = 90;
+	const circumference = Math.PI * RADIUS;
+	const offset =
+		circumference - (percentage / TOTAL_PERCENTAGE) * circumference;
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
-			setAnimatedValue(SIXTY);
-		}, HUNDRED);
+			setIsVisible(true);
+		}, TOTAL_PERCENTAGE);
 
 		return (): void => {
 			clearTimeout(timer);
@@ -26,36 +27,31 @@ const CircularProgress: React.FC = () => {
 
 	return (
 		<div className={styles["container"]}>
-			<svg
-				className={styles["circles-container"]}
-				height="120"
-				viewBox="0 0 100 100"
-				width="120"
-			>
-				<circle
+			<svg height="90" viewBox="0 0 200 100" width="150">
+				<path
 					className={styles["outer-circle"]}
-					cx="50"
-					cy="50"
-					fill="transparent"
-					r={radius}
+					d="M20 100 A80 80 0 0 1 180 100"
+					fill="none"
 					stroke="currentColor"
-					strokeWidth="10"
+					strokeLinecap="round"
+					strokeWidth="20"
 				/>
-				<circle
-					className={styles["inner-circle"]}
-					cx="50"
-					cy="50"
-					fill="transparent"
-					r={radius}
+				<path
+					className={styles["second-path"]}
+					d="M20 100 A80 80 0 0 1 180 100"
+					fill="none"
 					stroke="currentColor"
 					strokeDasharray={circumference}
-					strokeDashoffset={strokeDashoffset}
+					strokeDashoffset={isVisible ? offset : circumference}
 					strokeLinecap="round"
-					strokeWidth="10"
+					strokeWidth="20"
 				/>
 			</svg>
 			<div className={styles["percentage-wrapper"]}>
-				<span className={styles["percentage"]}>66%</span>
+				<p className={styles["percentage"]}>
+					{percentage}
+					<span className={styles["percent-symbol"]}>%</span>
+				</p>
 				<span className={styles["percentage-title"]}>Completed Tasks</span>
 			</div>
 		</div>

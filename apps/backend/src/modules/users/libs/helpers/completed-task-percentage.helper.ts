@@ -9,7 +9,9 @@ const getCompletedTaskPercentage = (tasks: TaskModel[]): number => {
 		(task) => task.status === TaskStatus.COMPLETED,
 	).length;
 
-	return (completedTasks / totalTasks) * ONE_HUNDRED_PERCENT_COMPLETION;
+	return Math.ceil(
+		(completedTasks / totalTasks) * ONE_HUNDRED_PERCENT_COMPLETION,
+	);
 };
 
 export { getCompletedTaskPercentage };

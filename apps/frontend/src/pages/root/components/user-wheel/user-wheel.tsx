@@ -13,7 +13,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { Insights } from "../insights/insights.js";
+import { CircularProgress } from "../circular-progress/circular-progress.js";
 import {
 	RetakeQuizModal,
 	ScoresEditModal,
@@ -25,8 +25,15 @@ const NO_SCORES_COUNT = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
+	const { completionTasksPercentage, dataStatus, scores } = useAppSelector(
+		({ auth, quiz }) => ({
+			completionTasksPercentage: auth.user?.completionTasksPercentage,
+			dataStatus: quiz.dataStatus,
+			scores: quiz.scores,
+		}),
+	);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
+	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
@@ -58,6 +65,12 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (completionTasksPercentage) {
+			setPercentage(completionTasksPercentage);
+		}
+	}, [completionTasksPercentage]);
 
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
@@ -99,7 +112,7 @@ const UserWheel: React.FC = () => {
 				)}
 				{isEditingModalOpen && handleGetModal(editMode)}
 			</div>
-			<Insights />
+			<CircularProgress percentage={percentage} />
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
 					<Button
