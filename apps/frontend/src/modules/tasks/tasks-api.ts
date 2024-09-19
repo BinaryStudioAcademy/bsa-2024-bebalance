@@ -59,6 +59,7 @@ class TasksApi extends BaseHTTPApi {
 				contentType: ContentType.JSON,
 				hasAuth: true,
 				method: "PATCH",
+				payload: JSON.stringify({}),
 			},
 		);
 
