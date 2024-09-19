@@ -2,7 +2,7 @@
 	position: relative;
 	display: flex;
 	min-height: 100vh;
-	padding: 34px;
+	padding: 27px 34px;
 	overflow: hidden;
 	background-color: var(--background);
 }

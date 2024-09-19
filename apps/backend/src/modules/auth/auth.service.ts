@@ -8,11 +8,14 @@ import {
 	type EmailDto,
 	type ResetPasswordDto,
 	type ResetPasswordLinkDto,
+	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/libs/types/types.js";
+import { type UserEntity } from "~/modules/users/user.entity.js";
 import { type UserService } from "~/modules/users/user.service.js";
 
 import { HTTPCode, UserValidationMessage } from "./libs/enums/enums.js";
@@ -42,6 +45,19 @@ class AuthService {
 		this.encrypt = encrypt;
 		this.sessionDuration = sessionDuration;
 		this.resetPasswordLinkDuration = resetPasswordLinkDuration;
+	}
+
+	private async checkIsPasswordValid(
+		currentPassword: string,
+		user: UserEntity,
+	): Promise<boolean> {
+		const { passwordHash, passwordSalt } = user.toNewObject();
+
+		return await this.encrypt.compare(
+			currentPassword,
+			passwordHash,
+			passwordSalt,
+		);
 	}
 
 	public async checkIsResetPasswordExpired(
@@ -135,12 +151,7 @@ class AuthService {
 			payload: { userId: userDetails.id },
 		});
 
-		const { passwordHash, passwordSalt } = user.toNewObject();
-		const isPasswordValid = await this.encrypt.compare(
-			password,
-			passwordHash,
-			passwordSalt,
-		);
+		const isPasswordValid = await this.checkIsPasswordValid(password, user);
 
 		if (!isPasswordValid) {
 			throw new AuthError({
@@ -173,6 +184,36 @@ class AuthService {
 		});
 
 		return { token: jwtToken, user };
+	}
+
+	public async updatePassword(
+		payload: UserUpdatePasswordRequestDto,
+		email: string,
+	): Promise<null | UserDto> {
+		const { currentPassword, newPassword } = payload;
+		const user = await this.userService.findByEmail(email);
+
+		if (!user) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		const userId = user.toObject().id;
+		const isPasswordValid = await this.checkIsPasswordValid(
+			currentPassword,
+			user,
+		);
+
+		if (!isPasswordValid) {
+			throw new AuthError({
+				message: ErrorMessage.INCORRECT_CREDENTIALS,
+				status: HTTPCode.UNAUTHORIZED,
+			});
+		}
+
+		return await this.userService.changePassword(userId, newPassword);
 	}
 }
 
