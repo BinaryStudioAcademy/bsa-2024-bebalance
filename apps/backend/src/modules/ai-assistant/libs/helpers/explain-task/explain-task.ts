@@ -15,7 +15,7 @@ const runExplainTaskOptions = (
 
 	return {
 		additional_instructions: null,
-		function_name: OpenAIFunctionName.CHANGE_TASK,
+		function_name: OpenAIFunctionName.EXPLAIN_TASK,
 		instructions: ExplainTaskPromptTemplates.EXPLAIN_TASK_INSTRUCTIONS,
 		messages: [explainTaskPrompt],
 		validationSchema: explainTaskValidationSchema,
