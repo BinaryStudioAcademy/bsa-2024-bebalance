@@ -62,11 +62,6 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 		);
 	}, [dispatch, currentSlide, tasks]);
 
-	const renderExpiredTaskCard = useCallback(
-		(task: TaskDto) => <TaskCard key={task.id} task={task} />,
-		[],
-	);
-
 	const goToSlide = useCallback(
 		(index: number): void => {
 			setCurrentSlide((index + totalSlides) % totalSlides);
@@ -154,7 +149,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 						{isSingleSlide ? (
 							<div>
 								<div className={styles["slide"]}>
-									{renderExpiredTaskCard(tasks[FIRST_SLIDE] as TaskDto)}
+									<TaskCard task={tasks[FIRST_SLIDE] as TaskDto} />
 								</div>
 							</div>
 						) : (
@@ -173,7 +168,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							>
 								{tasks.map((task, index) => (
 									<div className={styles["slide"]} key={index}>
-										{renderExpiredTaskCard(task)}
+										<TaskCard task={task} />
 									</div>
 								))}
 							</div>
