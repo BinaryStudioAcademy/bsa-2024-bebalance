@@ -3,13 +3,13 @@ import {
 	type OpenAiRunThreadRequestDto,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { type SelectedCategories } from "../../types/types.js";
+import { type SelectedCategory } from "../../types/types.js";
 import { generateSuggestTaskPrompt } from "./generate-suggest-task-prompt.js";
 import { taskByCategory as TaskByCategoryValidationSchema } from "./suggest-task-by-category.validation-schema.js";
 import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-template.enum.js";
 
 const runTaskByCategoryOptions = (
-	categories: SelectedCategories[],
+	categories: SelectedCategory[],
 ): OpenAiRunThreadRequestDto => {
 	const suggestTaskPrompt = generateSuggestTaskPrompt(categories);
 

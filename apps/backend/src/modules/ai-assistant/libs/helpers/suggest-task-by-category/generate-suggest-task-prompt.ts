@@ -3,11 +3,11 @@ import {
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { type SelectedCategories } from "../../types/types.js";
+import { type SelectedCategory } from "../../types/types.js";
 import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-template.enum.js";
 
 function generateSuggestTaskPrompt(
-	categories: SelectedCategories[],
+	categories: SelectedCategory[],
 ): OpenAiRequestMessage {
 	const content = `
 	{
