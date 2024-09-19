@@ -46,6 +46,8 @@ export {
 export {
 	addMessageToThreadValidationSchema,
 	AiAssistantApiPath,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
 	type BalanceWheelAnalysisResponseDto,
 	type ChangeTaskSuggestionRequestDto,
 	changeTaskSuggestionRequestValidationSchema,
@@ -70,7 +72,17 @@ export {
 	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
+	type SelectedCategory,
 } from "./modules/categories/categories.js";
+export {
+	type BalanceWheelMessage,
+	ChatMessageAuthor,
+	type ChatMessageDto,
+	ChatMessageType,
+	type QuestionMessage,
+	type TaskMessage,
+	type TextMessage,
+} from "./modules/chats/chats.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
