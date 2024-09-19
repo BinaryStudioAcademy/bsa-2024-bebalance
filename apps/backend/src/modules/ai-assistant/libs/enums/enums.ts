@@ -1,1 +1,1 @@
-export { AiAssistantApiPath } from "shared";
+export { AIAssistantApiPath, ChatMessageAuthor, ChatMessageType } from "shared";

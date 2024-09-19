@@ -45,7 +45,7 @@ export {
 } from "./libs/types/types.js";
 export {
 	addMessageToThreadValidationSchema,
-	AiAssistantApiPath,
+	AIAssistantApiPath,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type BalanceWheelAnalysisResponseDto,
