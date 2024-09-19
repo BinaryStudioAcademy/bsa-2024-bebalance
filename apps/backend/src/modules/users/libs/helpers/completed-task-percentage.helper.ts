@@ -1,7 +1,6 @@
 import { type TaskModel } from "~/modules/tasks/tasks.js";
 
-import { ONE_HUNDRED_PERCENT_COMPLETION } from "../constants/constants.js";
-import { TaskStatus } from "../enums/enums.js";
+import { TaskCompletion, TaskStatus } from "../enums/enums.js";
 
 const getCompletedTaskPercentage = (tasks: TaskModel[]): number => {
 	const totalTasks = tasks.length;
@@ -10,7 +9,7 @@ const getCompletedTaskPercentage = (tasks: TaskModel[]): number => {
 	).length;
 
 	return Math.ceil(
-		(completedTasks / totalTasks) * ONE_HUNDRED_PERCENT_COMPLETION,
+		(completedTasks / totalTasks) * TaskCompletion.ONE_HUNDRED_PERCENT,
 	);
 };
 

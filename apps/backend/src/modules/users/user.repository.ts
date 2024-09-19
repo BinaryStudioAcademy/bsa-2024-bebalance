@@ -3,10 +3,8 @@ import { type Repository } from "~/libs/types/types.js";
 import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
-import {
-	NO_COMPLETED_TASKS_PERCENTAGE,
-	ZERO_INDEX,
-} from "./libs/constants/constants.js";
+import { ZERO_INDEX } from "./libs/constants/constants.js";
+import { TaskCompletion } from "./libs/enums/enums.js";
 import { getCompletedTaskPercentage } from "./libs/helpers/helpers.js";
 import {
 	type UserDetailsWithAvatarFile,
@@ -56,7 +54,7 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: userDetails.avatarFileId,
 			avatarUrl: null,
-			completionTasksPercentage: NO_COMPLETED_TASKS_PERCENTAGE,
+			completionTasksPercentage: TaskCompletion.NO_COMPLETED_TASKS,
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions: false,

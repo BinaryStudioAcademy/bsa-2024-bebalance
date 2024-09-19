@@ -1,3 +1,4 @@
+export { TaskCompletion } from "./task-completion.enum.js";
 export {
 	NotificationFrequency,
 	TaskStatus,
