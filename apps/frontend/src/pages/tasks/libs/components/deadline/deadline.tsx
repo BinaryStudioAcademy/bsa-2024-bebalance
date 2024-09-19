@@ -3,11 +3,10 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { DEADLINE_OVER } from "../../constants/constants.js";
+import { ONE_MINUTE } from "../../constants/constants.js";
 import { getTimeLeft } from "../../helpers/helpers.js";
 import {
 	COUNTDOWN_EXPIRED,
-	ONE_MINUTE,
 	TIME_PAD_FILL,
 } from "./libs/constants/constants.js";
 import { MillisecondsPerUnit, TimePad } from "./libs/enums/enums.js";
@@ -35,7 +34,7 @@ const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 
 		const timeToDeadline = getTimeLeft(currentTime, deadline);
 
-		if (timeToDeadline < DEADLINE_OVER) {
+		if (timeToDeadline < ONE_MINUTE) {
 			setCountdown(COUNTDOWN_EXPIRED);
 			setIsExpired(true);
 			onExpire?.(task);

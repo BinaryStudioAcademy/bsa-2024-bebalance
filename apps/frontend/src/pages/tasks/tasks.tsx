@@ -10,7 +10,7 @@ import {
 import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
-import { DEADLINE_OVER, NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
+import { NO_EXPIRED_TASKS, ONE_MINUTE } from "./libs/constants/constants.js";
 import { getTimeLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -49,7 +49,7 @@ const Tasks: React.FC = () => {
 		for (const task of tasks) {
 			const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
 
-			if (timeToDeadline < DEADLINE_OVER) {
+			if (timeToDeadline < ONE_MINUTE) {
 				expired.push(task);
 			} else {
 				active.push(task);
