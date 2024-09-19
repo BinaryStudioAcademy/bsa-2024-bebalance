@@ -11,6 +11,7 @@ import {
 	type UserSignInResponseDto,
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
+	type UserUpdatePasswordRequestDto,
 } from "~/modules/users/users.js";
 
 import { AuthApiPath } from "./libs/enums/enums.js";
@@ -115,6 +116,22 @@ class AuthApi extends BaseHTTPApi {
 		);
 
 		return await response.json<UserSignUpResponseDto>();
+	}
+
+	public async updatePassword(
+		payload: UserUpdatePasswordRequestDto,
+	): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.UPDATE_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "PATCH",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<UserDto>();
 	}
 }
 
