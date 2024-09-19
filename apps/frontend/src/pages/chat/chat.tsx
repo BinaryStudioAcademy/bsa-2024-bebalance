@@ -1,3 +1,4 @@
+import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -11,20 +12,27 @@ import {
 } from "~/modules/chat/chat.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { ChatMessage } from "./libs/components/components.js";
+import { ChatMessage, MessageLoader } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 const Chat: React.FC = () => {
 	const dispatch = useAppDispatch();
 
-	const { messages, quizCategories, scores, selectedCategories, threadId } =
-		useAppSelector((state) => ({
-			messages: state.chat.messages,
-			quizCategories: state.categories.items,
-			scores: state.quiz.scores,
-			selectedCategories: state.chat.selectedCategories,
-			threadId: state.chat.threadId,
-		}));
+	const {
+		messages,
+		messageStatus,
+		quizCategories,
+		scores,
+		selectedCategories,
+		threadId,
+	} = useAppSelector((state) => ({
+		messages: state.chat.messages,
+		messageStatus: state.chat.dataStatus,
+		quizCategories: state.categories.items,
+		scores: state.quiz.scores,
+		selectedCategories: state.chat.selectedCategories,
+		threadId: state.chat.threadId,
+	}));
 
 	const chartData = scores.map((score) => {
 		return {
@@ -101,6 +109,7 @@ const Chat: React.FC = () => {
 							/>
 						);
 					})}
+					{messageStatus === DataStatus.PENDING && <MessageLoader />}
 				</ul>
 			</div>
 		</main>
