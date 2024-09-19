@@ -51,18 +51,14 @@ const Tasks: React.FC = () => {
 
 	const handleSkip = useCallback(
 		(id: number): void => {
-			void dispatch(
-				taskActions.update({ data: { status: TaskStatus.SKIPPED }, id }),
-			);
+			void dispatch(taskActions.update({ id, status: TaskStatus.SKIPPED }));
 		},
 		[dispatch],
 	);
 
 	const handleComplete = useCallback(
 		(id: number): void => {
-			void dispatch(
-				taskActions.update({ data: { status: TaskStatus.COMPLETED }, id }),
-			);
+			void dispatch(taskActions.update({ id, status: TaskStatus.COMPLETED }));
 		},
 		[dispatch],
 	);

@@ -29,7 +29,7 @@ const update = createAsyncThunk<TaskDto, TaskUpdatePayload, AsyncThunkConfig>(
 	`${sliceName}/update`,
 	async (payload, { extra }) => {
 		const { tasksApi } = extra;
-		const { data, id } = payload;
+		const { id, ...data } = payload;
 
 		return await tasksApi.update(id, data);
 	},

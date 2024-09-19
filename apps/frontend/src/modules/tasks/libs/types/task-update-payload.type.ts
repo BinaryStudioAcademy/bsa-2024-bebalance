@@ -1,8 +1,7 @@
 import { type TaskUpdateRequestDto } from "shared";
 
 type TaskUpdatePayload = {
-	data: TaskUpdateRequestDto;
 	id: number;
-};
+} & TaskUpdateRequestDto;
 
 export { type TaskUpdatePayload };
