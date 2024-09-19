@@ -11,5 +11,9 @@ const tasksApi = new TasksApi({
 });
 
 export { tasksApi };
-export { type TaskDto } from "./libs/types/types.js";
+export {
+	type TaskDto,
+	type TaskUpdatePayload,
+	type TaskUpdateRequestDto,
+} from "./libs/types/types.js";
 export { actions, reducer } from "./slices/tasks.js";

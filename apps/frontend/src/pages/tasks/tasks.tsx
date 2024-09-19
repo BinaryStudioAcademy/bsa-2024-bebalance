@@ -29,16 +29,26 @@ const Tasks: React.FC = () => {
 		void dispatch(taskActions.getCurrentTasks());
 	}, [dispatch]);
 
-	const handleTaskExpiration = useCallback((expiredTask: TaskDto) => {
-		setExpiredTasks((previous) => [...previous, expiredTask]);
-		setActiveTasks((previous) =>
-			previous.filter((task) => task.id !== expiredTask.id),
-		);
-	}, []);
+	const handleTaskExpiration = useCallback(
+		(expiredTask: TaskDto) => {
+			const newExpiredTasks = [...expiredTasks, expiredTask];
+			const newActiveTasks = [...activeTasks].filter(
+				(task) => task.id !== expiredTask.id,
+			);
+			setExpiredTasks(newExpiredTasks);
+			setActiveTasks(newActiveTasks);
+		},
+		[expiredTasks, activeTasks],
+	);
 
-	const renderExpiredTaskCard = useCallback(
-		(task: TaskDto) => <TaskCard key={task.id} task={task} variant="expired" />,
-		[],
+	const handleExpiredTaskResolved = useCallback(
+		(resolvedTask: TaskDto) => {
+			const newExpiredTasks = [...expiredTasks].filter(
+				(task) => task.id !== resolvedTask.id,
+			);
+			setExpiredTasks(newExpiredTasks);
+		},
+		[expiredTasks],
 	);
 
 	useEffect(() => {
@@ -66,7 +76,8 @@ const Tasks: React.FC = () => {
 		<>
 			{expiredTasks.length > NO_EXPIRED_TASKS && (
 				<ExpiredTasksModal
-					tasks={expiredTasks.map((task) => renderExpiredTaskCard(task))}
+					onResolveTask={handleExpiredTaskResolved}
+					tasks={expiredTasks}
 				/>
 			)}
 			<h4 className={styles["title"]}>My Tasks</h4>

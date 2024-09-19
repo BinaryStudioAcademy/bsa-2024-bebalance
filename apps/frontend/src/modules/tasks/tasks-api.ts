@@ -2,7 +2,10 @@ import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import {
+	type TaskDto,
+	type TaskUpdateRequestDto,
+} from "~/modules/tasks/tasks.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
 
@@ -28,6 +31,23 @@ class TasksApi extends BaseHTTPApi {
 		);
 
 		return await response.json<TaskDto[]>();
+	}
+
+	public async updateTask(
+		id: number,
+		task: Partial<TaskUpdateRequestDto>,
+	): Promise<TaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.$ID, { id: id.toString() }),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "PATCH",
+				payload: JSON.stringify(task),
+			},
+		);
+
+		return await response.json<TaskDto>();
 	}
 }
 

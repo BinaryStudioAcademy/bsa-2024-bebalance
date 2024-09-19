@@ -4,7 +4,11 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { getCurrentTasks } from "./actions.js";
+import {
+	NOT_FOUND_INDEX,
+	SINGLE_ELEMENT,
+} from "../libs/constants/constants.js";
+import { getCurrentTasks, updateTask } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -26,6 +30,23 @@ const { actions, name, reducer } = createSlice({
 			state.tasks = action.payload;
 		});
 		builder.addCase(getCurrentTasks.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(updateTask.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(updateTask.fulfilled, (state, action) => {
+			const taskIndex = state.tasks.findIndex(
+				(task) => task.id === action.payload.id,
+			);
+
+			if (taskIndex !== NOT_FOUND_INDEX) {
+				state.tasks.splice(taskIndex, SINGLE_ELEMENT);
+			}
+
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(updateTask.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

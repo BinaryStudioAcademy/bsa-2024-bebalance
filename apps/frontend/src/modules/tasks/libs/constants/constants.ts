@@ -1,0 +1,5 @@
+const NOT_FOUND_INDEX = -1;
+
+const SINGLE_ELEMENT = 1;
+
+export { NOT_FOUND_INDEX, SINGLE_ELEMENT };

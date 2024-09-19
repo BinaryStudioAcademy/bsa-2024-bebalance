@@ -1,12 +1,18 @@
 import { Button } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
+	useAppDispatch,
 	useCallback,
 	useEffect,
 	useRef,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import {
+	type TaskDto,
+	actions as tasksActions,
+} from "~/modules/tasks/tasks.js";
 
+import { TaskCard } from "../components.js";
 import {
 	DRAG_THRESHOLD,
 	FIRST_SLIDE,
@@ -20,16 +26,42 @@ import { getClientX } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	tasks: JSX.Element[];
+	onResolveTask: (task: TaskDto) => void;
+	tasks: TaskDto[];
 };
 
-const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
+const ExpiredTasksModal: React.FC<Properties> = ({
+	onResolveTask,
+	tasks,
+}: Properties) => {
+	const dispatch = useAppDispatch();
 	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
 	const totalSlides = tasks.length;
 	const isSingleSlide = totalSlides === SINGLE_SLIDE;
+
+	const handleSkippingTask = useCallback(() => {
+		if (!tasks[currentSlide]) {
+			return;
+		}
+
+		void dispatch(
+			tasksActions.updateTask({
+				id: tasks[currentSlide].id,
+				task: {
+					status: "Skipped",
+				},
+			}),
+		);
+		onResolveTask(tasks[currentSlide]);
+	}, [dispatch, onResolveTask, currentSlide, tasks]);
+
+	const renderExpiredTaskCard = useCallback(
+		(task: TaskDto) => <TaskCard key={task.id} task={task} />,
+		[],
+	);
 
 	const goToSlide = useCallback(
 		(index: number): void => {
@@ -92,6 +124,10 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 		sliderReference.current.style.transform = `translateX(-${String(slideTranslationX)}%)`;
 	}, [currentSlide]);
 
+	useEffect(() => {
+		setCurrentSlide(INITIAL_SLIDE);
+	}, [tasks]);
+
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["slider-container"]}>
@@ -113,7 +149,10 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 						</h4>
 						{isSingleSlide ? (
 							<div>
-								<div className={styles["slide"]}>{tasks[FIRST_SLIDE]}</div>
+								<div className={styles["slide"]}>
+									{tasks[FIRST_SLIDE] &&
+										renderExpiredTaskCard(tasks[FIRST_SLIDE])}
+								</div>
 							</div>
 						) : (
 							<div
@@ -129,9 +168,9 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 								role="button"
 								tabIndex={0}
 							>
-								{tasks.map((slide, index) => (
+								{tasks.map((task, index) => (
 									<div className={styles["slide"]} key={index}>
-										{slide}
+										{renderExpiredTaskCard(task)}
 									</div>
 								))}
 							</div>
@@ -146,6 +185,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							<Button label="Yes, I want to extend deadline" />
 							<Button
 								label="No, I want to skip this task"
+								onClick={handleSkippingTask}
 								variant="secondary"
 							/>
 							<Button
