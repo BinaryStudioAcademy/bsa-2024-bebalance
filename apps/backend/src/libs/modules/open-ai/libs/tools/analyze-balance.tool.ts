@@ -55,16 +55,6 @@ const AnalyzeBalanceTool = {
 				response_structure: {
 					additionalProperties: false,
 					properties: {
-						comments: {
-							description:
-								"A summary of the balance analysis and the identified areas for improvement.",
-							type: "string",
-						},
-						greeting: {
-							description:
-								"A personalized greeting for the user based on their name, e.g., 'Hello, John!'",
-							type: "string",
-						},
 						lowestCategories: {
 							description:
 								"An array of the three categories where the user scored the lowest, including category ID, name, and score.",
@@ -85,13 +75,30 @@ const AnalyzeBalanceTool = {
 							},
 							type: "array",
 						},
-						question: {
-							description:
-								"A follow-up question that guides the user to either focus on improving the three areas with the lowest scores or allows them to choose the areas for further improvement. The question should be crafted to encourage thoughtful reflection and engagement, and it must include the user's name.",
-							type: "string",
+						messages: {
+							additionalProperties: false,
+							description: "An array of messages summarizing the analysis.",
+							properties: {
+								comments: {
+									description:
+										"Summary of the balance analysis with identified areas for improvement.",
+									type: "string",
+								},
+								greeting: {
+									description: "A personalized greeting for the user.",
+									type: "string",
+								},
+								question: {
+									description:
+										"A follow-up question that prompts the user to engage further with the suggested improvements.",
+									type: "string",
+								},
+							},
+							required: ["greeting", "comments", "question"],
+							type: "object",
 						},
 					},
-					required: ["greeting", "comments", "lowestCategories", "question"],
+					required: ["messages", "lowestCategories"],
 					type: "object",
 				},
 			},
