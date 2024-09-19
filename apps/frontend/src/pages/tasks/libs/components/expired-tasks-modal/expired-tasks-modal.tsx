@@ -154,8 +154,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 						{isSingleSlide ? (
 							<div>
 								<div className={styles["slide"]}>
-									{tasks[FIRST_SLIDE] &&
-										renderExpiredTaskCard(tasks[FIRST_SLIDE])}
+									{renderExpiredTaskCard(tasks[FIRST_SLIDE] as TaskDto)}
 								</div>
 							</div>
 						) : (
