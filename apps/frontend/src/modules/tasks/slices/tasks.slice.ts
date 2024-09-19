@@ -45,7 +45,6 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getPastTasks.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-
 		builder.addCase(update.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});

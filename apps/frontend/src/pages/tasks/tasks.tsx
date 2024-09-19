@@ -102,7 +102,7 @@ const Tasks: React.FC = () => {
 
 	return (
 		<>
-			{expiredTasks.length > NO_EXPIRED_TASKS && (
+			{expiredTasks.length > NO_EXPIRED_TASKS && mode === TasksMode.CURRENT && (
 				<ExpiredTasksModal tasks={expiredTasks} />
 			)}
 			<h4 className={styles["title"]}>My Tasks</h4>
