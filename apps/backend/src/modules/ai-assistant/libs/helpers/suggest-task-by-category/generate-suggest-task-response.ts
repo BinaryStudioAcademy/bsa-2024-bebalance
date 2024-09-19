@@ -4,9 +4,14 @@ import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
 	type OpenAiResponseMessage,
+	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { type TaskSuggestionsResponseDto } from "../../types/types.js";
+import { ChatMessageAuthor } from "../../enums/enums.js";
+import {
+	type AIAssistantResponseDto,
+	type ChatMessageDto,
+} from "../../types/types.js";
 import { type taskByCategory } from "./suggest-task-by-category.validation-schema.js";
 
 type TaskByCategoryData = z.infer<typeof taskByCategory>;
@@ -14,7 +19,8 @@ type TaskByCategoryData = z.infer<typeof taskByCategory>;
 const generateTaskSuggestionsResponse = (
 	aiResponse: OpenAiResponseMessage,
 	taskDeadLine: string,
-): null | TaskSuggestionsResponseDto => {
+	lastMessageId: number,
+): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
 	if (!message) {
@@ -32,17 +38,39 @@ const generateTaskSuggestionsResponse = (
 		contentText,
 	) as TaskByCategoryData;
 
+	const textMessage: ChatMessageDto = {
+		author: OpenAIRoleKey.ASSISTANT,
+		createdAt: new Date().toISOString(),
+		id: lastMessageId++,
+		isRead: false,
+		payload: {
+			text: resultData.message,
+		},
+		type: "text",
+	};
+
+	const taskMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
+		return {
+			author: ChatMessageAuthor.ASSISTANT,
+			createdAt: new Date().toISOString(),
+			id: lastMessageId++,
+			isRead: false,
+			payload: {
+				task: {
+					categoryId: task.categoryId,
+					categoryName: task.categoryName,
+					description: task.description,
+					dueDate: taskDeadLine,
+					label: task.label,
+				},
+			},
+			type: "task",
+		};
+	});
+
 	return {
-		message: resultData.message,
-		tasks: resultData.tasks.map((task) => {
-			return {
-				categoryId: task.categoryId,
-				categoryName: task.categoryName,
-				description: task.description,
-				dueDate: taskDeadLine,
-				label: task.label,
-			};
-		}),
+		messages: [textMessage, ...taskMessages],
+		threadId: message.thread_id,
 	};
 };
 
