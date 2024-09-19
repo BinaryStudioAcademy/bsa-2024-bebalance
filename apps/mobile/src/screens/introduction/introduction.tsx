@@ -16,7 +16,7 @@ import {
 
 import { styles } from "./styles";
 
-const Intro: React.FC = () => {
+const Introduction: React.FC = () => {
 	const navigation =
 		useNavigation<
 			NativeStackNavigationProp<QuestionsStackNavigationParameterList>
@@ -74,4 +74,4 @@ const Intro: React.FC = () => {
 	);
 };
 
-export { Intro };
+export { Introduction };

@@ -2,7 +2,7 @@ import { type QuestionsStackName } from "~/libs/enums/enums";
 
 type QuestionsStackNavigationParameterList = {
 	[QuestionsStackName.BOTTOM_TABS]: undefined;
-	[QuestionsStackName.INTRO]: undefined;
+	[QuestionsStackName.INTRODUCTION]: undefined;
 	[QuestionsStackName.NOTIFICATION_QUESTIONS]: undefined;
 	[QuestionsStackName.ONBOARDING]: undefined;
 	[QuestionsStackName.QUIZ]: undefined;
