@@ -8,7 +8,7 @@ import {
 	NOT_FOUND_INDEX,
 	SINGLE_ELEMENT,
 } from "../libs/constants/constants.js";
-import { getCurrentTasks, updateTask } from "./actions.js";
+import { getCurrentTasks, updateTask, updateTaskDeadline } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -47,6 +47,23 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(updateTask.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(updateTaskDeadline.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(updateTaskDeadline.fulfilled, (state, action) => {
+			const taskIndex = state.tasks.findIndex(
+				(task) => task.id === action.payload.id,
+			);
+
+			if (taskIndex !== NOT_FOUND_INDEX) {
+				state.tasks[taskIndex] = action.payload;
+			}
+
+			state.dataStatus = DataStatus.FULFILLED;
+		});
+		builder.addCase(updateTaskDeadline.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

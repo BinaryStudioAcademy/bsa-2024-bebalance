@@ -26,4 +26,13 @@ const updateTask = createAsyncThunk<
 	return await tasksApi.updateTask(id, task);
 });
 
-export { getCurrentTasks, updateTask };
+const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
+	`${sliceName}/update-task-deadline`,
+	async (id: number, { extra }) => {
+		const { tasksApi } = extra;
+
+		return await tasksApi.updateTaskDeadline(id);
+	},
+);
+
+export { getCurrentTasks, updateTask, updateTaskDeadline };

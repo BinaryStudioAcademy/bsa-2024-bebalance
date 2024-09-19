@@ -62,6 +62,11 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 		);
 	}, [dispatch, currentSlide, tasks]);
 
+	const handleExtendingDeadline = useCallback(() => {
+		const task = tasks[currentSlide] as TaskDto;
+		void dispatch(tasksActions.updateTaskDeadline(task.id));
+	}, [dispatch, currentSlide, tasks]);
+
 	const goToSlide = useCallback(
 		(index: number): void => {
 			setCurrentSlide((index + totalSlides) % totalSlides);
@@ -180,7 +185,10 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							Do you want to extend the deadline by 24 hours?
 						</p>
 						<div className={styles["actions"]}>
-							<Button label="Yes, I want to extend deadline" />
+							<Button
+								label="Yes, I want to extend deadline"
+								onClick={handleExtendingDeadline}
+							/>
 							<Button
 								label="No, I want to skip this task"
 								onClick={handleTaskSkipping}
