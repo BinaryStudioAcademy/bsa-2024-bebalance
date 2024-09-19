@@ -12,7 +12,6 @@ import { type AiAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type AIAssistantRequestDto,
-	type ChangeTaskSuggestionRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 import {
@@ -205,7 +204,7 @@ class AiAssistantController extends BaseController {
 			handler: (options) =>
 				this.acceptTask(
 					options as APIHandlerOptions<{
-						body: ChangeTaskSuggestionRequestDto;
+						body: AIAssistantRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -249,7 +248,7 @@ class AiAssistantController extends BaseController {
 	 */
 	private async acceptTask(
 		options: APIHandlerOptions<{
-			body: ChangeTaskSuggestionRequestDto;
+			body: AIAssistantRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {

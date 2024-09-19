@@ -18,7 +18,6 @@ import {
 import {
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
-	type ChangeTaskSuggestionRequestDto,
 	type SelectedCategory,
 	type TaskCreateDto,
 	type TaskDto,
@@ -52,9 +51,10 @@ class AiAssistantService {
 
 	public async acceptTask(
 		user: UserDto,
-		body: ChangeTaskSuggestionRequestDto,
+		body: AIAssistantRequestDto,
 	): Promise<TaskDto> {
-		const { task, threadId } = body;
+		const { payload, threadId } = body;
+		const task = payload as TaskCreateDto;
 
 		const newTask = await this.taskService.create({
 			categoryId: task.categoryId,
