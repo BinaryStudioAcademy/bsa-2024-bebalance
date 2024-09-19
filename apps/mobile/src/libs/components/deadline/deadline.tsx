@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
+import ClockActive from "~/assets/svg/clock-active.svg";
 import { Text, View } from "~/libs/components/components";
 import { COUNTDOWN_EXPIRED } from "~/libs/constants/constants";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks";
@@ -87,6 +88,7 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 
 	return (
 		<View style={styles.container}>
+			<ClockActive />
 			<View style={countdownStyle}>
 				<Text style={styles.countdownTime}>{countdown.days}d</Text>
 				<Text style={styles.countdownTime}>{countdown.hours}h</Text>

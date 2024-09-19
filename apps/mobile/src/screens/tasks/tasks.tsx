@@ -5,11 +5,13 @@ import {
 	ScreenWrapper,
 	TaskCard,
 } from "~/libs/components/components";
-import { BaseColor, DataStatus } from "~/libs/enums/enums";
+import { DataStatus } from "~/libs/enums/enums";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type UserDto } from "~/packages/users/users";
 import { actions as taskActions } from "~/slices/task/task";
 import { actions as userActions } from "~/slices/users/users";
+
+import { styles } from "./styles";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -28,7 +30,7 @@ const Tasks: React.FC = () => {
 	}, [dispatch]);
 
 	return (
-		<ScreenWrapper style={{ backgroundColor: BaseColor.BG_WHITE }}>
+		<ScreenWrapper style={styles.container}>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
 				{tasks.map((task) => (
 					<TaskCard key={task.id} task={task} />

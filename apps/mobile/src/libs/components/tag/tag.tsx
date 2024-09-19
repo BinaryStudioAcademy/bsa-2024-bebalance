@@ -27,7 +27,7 @@ const Tag: React.FC<Properties> = ({ color, label }) => {
 			}}
 			colors={colorToGradientColors[color]}
 			locations={[AngleGradient.FIRST_STOP, AngleGradient.SECOND_STOP]}
-			style={[globalStyles.mt16, styles.gradientContainer]}
+			style={styles.gradientContainer}
 			useAngle
 		>
 			<View
