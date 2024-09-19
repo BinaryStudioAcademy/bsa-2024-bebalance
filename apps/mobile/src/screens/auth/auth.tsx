@@ -18,8 +18,13 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useNavigation,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type NativeStackNavigationProp,
+	type RootNavigationParameterList,
+} from "~/libs/types/types";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
@@ -44,6 +49,9 @@ const Auth: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
+
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 
 	const { token } =
 		name === RootScreenName.RESET_PASSWORD
@@ -79,8 +87,9 @@ const Auth: React.FC = () => {
 	const handleForgotPasswordSubmit = useCallback(
 		(payload: EmailDto): void => {
 			void dispatch(authActions.requestResetPassword(payload));
+			navigation.navigate(RootScreenName.SIGN_IN);
 		},
-		[dispatch],
+		[dispatch, navigation],
 	);
 
 	const handleResetPasswordSubmit = useCallback(
@@ -91,8 +100,9 @@ const Auth: React.FC = () => {
 					newPassword: payload.newPassword,
 				}),
 			);
+			navigation.navigate(RootScreenName.SIGN_IN);
 		},
-		[dispatch, token],
+		[dispatch, navigation, token],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
