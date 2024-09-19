@@ -16,34 +16,7 @@
 	display: none;
 }
 
-.user-info {
-	display: flex;
-	align-items: center;
-	margin-top: 13px;
-	margin-bottom: 17px;
-}
-
-.user-avatar {
-	width: 47px;
-	height: 47px;
-	margin-right: 9px;
-	object-fit: cover;
-	border-radius: 50%;
-}
-
-.user-name {
-	padding-right: 4px;
-	font-size: 16px;
-	font-weight: 600;
-	line-height: 24px;
-	color: var(--black);
-}
-
 @media screen and (width <= 768px) {
-	.user-name {
-		display: none;
-	}
-
 	.header {
 		justify-content: space-between;
 		padding-inline: 15px;
