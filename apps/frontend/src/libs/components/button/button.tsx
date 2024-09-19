@@ -11,6 +11,7 @@ type Properties = {
 	isDisabled?: boolean;
 	isSelected?: boolean;
 	label: string;
+	labelVariant?: "light" | "primary";
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
 	variant?: "action" | "icon" | "primary" | "secondary" | "switch";
@@ -23,6 +24,7 @@ const Button: React.FC<Properties> = ({
 	isDisabled = false,
 	isSelected = false,
 	label,
+	labelVariant = "primary",
 	onClick,
 	type = "button",
 	variant = "primary",
@@ -42,6 +44,7 @@ const Button: React.FC<Properties> = ({
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
 				variant === "secondary" && styles["secondary-label"],
+				styles[`${labelVariant}-label`],
 			)}
 		>
 			{label}

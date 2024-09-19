@@ -1,10 +1,12 @@
 type IconName =
 	| "check"
 	| "checkBlack"
+	| "checkGray"
 	| "clockActive"
 	| "clockInactive"
 	| "close"
 	| "closeSmall"
+	| "closeSmallGray"
 	| "crossedEye"
 	| "error"
 	| "eye"
