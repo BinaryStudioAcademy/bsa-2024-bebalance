@@ -1,6 +1,6 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
 import { AppRoute } from "~/libs/enums/enums.js";
-import { useAppNavigate, useCallback } from "~/libs/hooks/hooks.js";
+import { useCallback, useNavigate } from "~/libs/hooks/hooks.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import styles from "./styles.module.css";
@@ -10,7 +10,7 @@ type Properties = {
 };
 
 const HeaderUserInfo: React.FC<Properties> = ({ user }: Properties) => {
-	const navigate = useAppNavigate();
+	const navigate = useNavigate();
 
 	const handleClick = useCallback(() => {
 		navigate(AppRoute.PROFILE);
