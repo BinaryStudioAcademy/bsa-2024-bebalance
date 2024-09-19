@@ -3,8 +3,8 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import {
 	type NotificationAnswersPayloadDto,
 	actions as userActions,
@@ -19,12 +19,15 @@ import {
 	OnboardingForm,
 	QuizForm,
 } from "./libs/components/components.js";
-import { PREVIOUS_INDEX_OFFSET } from "./libs/constants/constants.js";
 import { Step } from "./libs/enums/enums.js";
 
 const Quiz: React.FC = () => {
-	const [step, setStep] = useState<number>(Step.MOTIVATION);
 	const dispatch = useAppDispatch();
+	const { isRetakingQuiz, step } = useAppSelector(({ quiz }) => quiz);
+
+	const handleNextStep = useCallback((): void => {
+		dispatch(quizActions.nextStep());
+	}, [dispatch]);
 
 	const { hasAnsweredOnboardingQuestions } = useAppSelector(({ auth }) => ({
 		hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
@@ -32,13 +35,9 @@ const Quiz: React.FC = () => {
 
 	useEffect(() => {
 		if (hasAnsweredOnboardingQuestions) {
-			setStep(Step.INTRODUCTION);
+			dispatch(quizActions.setStep(Step.INTRODUCTION));
 		}
-	}, [hasAnsweredOnboardingQuestions]);
-
-	const handleNextStep = useCallback((): void => {
-		setStep((previousStep) => previousStep + PREVIOUS_INDEX_OFFSET);
-	}, []);
+	}, [hasAnsweredOnboardingQuestions, dispatch]);
 
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
@@ -47,6 +46,12 @@ const Quiz: React.FC = () => {
 		},
 		[dispatch, handleNextStep],
 	);
+
+	useEffect(() => {
+		if (hasAnsweredOnboardingQuestions && isRetakingQuiz) {
+			dispatch(quizActions.setStep(Step.INTRODUCTION));
+		}
+	}, [dispatch, hasAnsweredOnboardingQuestions, isRetakingQuiz]);
 
 	const getScreen = (step: number): React.ReactNode => {
 		switch (step) {

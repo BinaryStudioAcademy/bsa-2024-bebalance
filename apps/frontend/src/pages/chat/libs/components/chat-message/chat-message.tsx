@@ -2,7 +2,7 @@ import {
 	BalanceWheelChart,
 	QuizCategoriesForm,
 } from "~/libs/components/components.js";
-import { INDEX_ONE, ZERO_INDEX } from "~/libs/enums/enums.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import {
@@ -23,7 +23,7 @@ type Properties = {
 		chartData: ChartDataType[];
 		selectedCategories: TaskSuggestionRequestDto;
 	};
-	onFormSubmit?: (payload: { categoryIds: number[] }) => void;
+	onFormSubmit?: (categoryIds: number[]) => void;
 	// taskList: TaskCreateDto[];
 	text: string;
 	type: ValueOf<typeof ChatMessageType>;
@@ -56,7 +56,7 @@ const ChatMessage: React.FC<Properties> = ({
 			case ChatMessageType.CATEGORY_FORM: {
 				return onFormSubmit ? (
 					<QuizCategoriesForm
-						buttonLabel={buttonLabels[ZERO_INDEX] ?? ""}
+						buttonLabel={buttonLabels[NumericalValue.ZERO] ?? ""}
 						onSubmit={onFormSubmit}
 					/>
 				) : null;
@@ -67,8 +67,8 @@ const ChatMessage: React.FC<Properties> = ({
 					<ConfirmationButtons
 						handleNo={handleNo}
 						handleYes={handleYes}
-						noButtonLabel={buttonLabels[INDEX_ONE] || "No"}
-						yesButtonLabel={buttonLabels[ZERO_INDEX] || "Yes"}
+						noButtonLabel={buttonLabels[NumericalValue.ONE] || "No"}
+						yesButtonLabel={buttonLabels[NumericalValue.ZERO] || "Yes"}
 					/>
 				);
 			}

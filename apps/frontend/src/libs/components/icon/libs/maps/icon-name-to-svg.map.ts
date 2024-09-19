@@ -1,3 +1,5 @@
+import AiChatActive from "~/assets/img/ai-chat-active.svg?react";
+import AiChatInactive from "~/assets/img/ai-chat-inactive.svg?react";
 import CheckIcon from "~/assets/img/check-icon.svg?react";
 import ClockActive from "~/assets/img/clock-active.svg?react";
 import ClockInactive from "~/assets/img/clock-inactive.svg?react";
@@ -22,6 +24,8 @@ const iconNameToSvg: Record<
 	IconName,
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
+	aiChatActive: AiChatActive,
+	aiChatInactive: AiChatInactive,
 	check: CheckIcon,
 	clockActive: ClockActive,
 	clockInactive: ClockInactive,

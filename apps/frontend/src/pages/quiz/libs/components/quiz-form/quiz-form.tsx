@@ -22,8 +22,10 @@ import {
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "../../constants/constants.js";
+import { Step } from "../../enums/enums.js";
 import { getQuizDefaultValues } from "../../helpers/helpers.js";
 import { type QuizFormValues } from "../../types/types.js";
+import { extractCategoryIdsFromQuestions } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -36,29 +38,41 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 	const [categoryDone, setCategoryDone] = useState<number[]>([]);
 
-	const { category, currentCategoryIndex, dataStatus, questions } =
-		useAppSelector(({ quiz }) => ({
-			category: quiz.currentCategory,
-			currentCategoryIndex: quiz.currentCategoryIndex,
-			dataStatus: quiz.dataStatus,
-			questions: quiz.questions,
-		}));
+	const {
+		categoryQuestions,
+		currentCategoryIndex,
+		dataStatus,
+		isRetakingQuiz,
+		questionsByCategories,
+	} = useAppSelector(({ quiz }) => ({
+		categoryQuestions: quiz.currentCategoryQuestions,
+		currentCategoryIndex: quiz.currentCategoryIndex,
+		dataStatus: quiz.dataStatus,
+		isRetakingQuiz: quiz.isRetakingQuiz,
+		questionsByCategories: quiz.questionsByCategories,
+	}));
 
-	const defaultValues = getQuizDefaultValues(questions);
+	const defaultValues = getQuizDefaultValues(questionsByCategories) as Record<
+		string,
+		string
+	>;
 
 	const { control, getValues, handleSubmit } = useAppForm<QuizFormValues>({
 		defaultValues,
 	});
 
 	useEffect(() => {
-		void dispatch(quizActions.getAllQuestions());
-	}, [dispatch]);
+		if (!isRetakingQuiz) {
+			void dispatch(quizActions.getAllQuestions());
+		}
+	}, [dispatch, isRetakingQuiz]);
 
 	useEffect(() => {
 		setIsLast(
-			currentCategoryIndex === questions.length - PREVIOUS_INDEX_OFFSET,
+			currentCategoryIndex ===
+				questionsByCategories.length - PREVIOUS_INDEX_OFFSET,
 		);
-	}, [currentCategoryIndex, questions]);
+	}, [currentCategoryIndex, questionsByCategories]);
 
 	const handlePreviousStep = useCallback(() => {
 		void dispatch(quizActions.previousQuestion());
@@ -71,11 +85,11 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	}, [categoryDone, currentCategoryIndex]);
 
 	const handleOnChange = useCallback(() => {
-		if (!category) {
+		if (!categoryQuestions) {
 			return;
 		}
 
-		const questionLabels = category.map(
+		const questionLabels = categoryQuestions.map(
 			(categoryItem) => `question${categoryItem.id.toString()}`,
 		);
 		const formValues = getValues();
@@ -90,7 +104,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 
 			setIsDisabled(false);
 		}
-	}, [category, categoryDone, currentCategoryIndex, getValues]);
+	}, [categoryQuestions, categoryDone, currentCategoryIndex, getValues]);
 
 	const getAnswerIds = useCallback((formData: QuizFormValues) => {
 		return Object.values(formData).map(Number);
@@ -100,15 +114,32 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 		(data: QuizFormValues) => {
 			if (isLast) {
 				const answerIds = getAnswerIds(data);
-				void dispatch(quizActions.saveAnswers({ answerIds }));
-				void dispatch(authActions.updateQuizAnsweredState());
-				onNext();
+
+				if (isRetakingQuiz) {
+					const categoryIds = extractCategoryIdsFromQuestions(
+						questionsByCategories,
+					);
+
+					void dispatch(quizActions.saveAnswers({ answerIds, categoryIds }));
+					void dispatch(quizActions.setStep(Step.BALANCE_WHEEL));
+				} else {
+					void dispatch(quizActions.saveAnswers({ answerIds }));
+					void dispatch(authActions.updateQuizAnsweredState());
+					onNext();
+				}
 			}
 
 			setIsDisabled(true);
 			void dispatch(quizActions.nextQuestion());
 		},
-		[dispatch, getAnswerIds, isLast, onNext],
+		[
+			dispatch,
+			getAnswerIds,
+			isLast,
+			isRetakingQuiz,
+			questionsByCategories,
+			onNext,
+		],
 	);
 
 	const handleFormSubmit = useCallback(
@@ -130,7 +161,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				<div className={styles["progress-bar-container"]}>
 					<ProgressBar
 						currentStep={currentCategoryIndex}
-						numberOfSteps={questions.length}
+						numberOfSteps={questionsByCategories.length}
 					/>
 				</div>
 				<h2 className={styles["quiz-header"]}>Wheel Quiz questions</h2>
@@ -140,7 +171,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 							<Loader />
 						</div>
 					) : (
-						category?.map((question) => {
+						categoryQuestions?.map((question) => {
 							const answerOptions = question.answers.map(({ id, label }) => ({
 								label,
 								value: id.toString(),

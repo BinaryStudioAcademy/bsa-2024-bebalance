@@ -7,7 +7,6 @@ export {
 	AppEnvironment,
 	ContentType,
 	ErrorMessage,
-	INDEX_ONE,
 	NumericalValue,
 	ServerErrorType,
 	ZERO_INDEX,

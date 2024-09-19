@@ -58,7 +58,7 @@
 
 .rounded-checkbox {
 	border-radius: 40px;
-	box-shadow: 0 0 8px var(--light-blue);
+	box-shadow: 0 0 8px -3px var(--light-blue);
 }
 
 .checkbox-gradient-border > .rounded-checkbox {

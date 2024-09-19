@@ -1,4 +1,6 @@
 type IconName =
+	| "aiChatActive"
+	| "aiChatInactive"
 	| "check"
 	| "clockActive"
 	| "clockInactive"

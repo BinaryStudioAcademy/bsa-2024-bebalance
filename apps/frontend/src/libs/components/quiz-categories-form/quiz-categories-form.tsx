@@ -16,11 +16,13 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	buttonLabel: string;
-	onSubmit: (payload: { categoryIds: number[] }) => void;
+	header?: string;
+	onSubmit: (payload: number[]) => void;
 };
 
 const QuizCategoriesForm: React.FC<Properties> = ({
 	buttonLabel,
+	header,
 	onSubmit,
 }: Properties) => {
 	const { control, getValues, handleSubmit, setValue } =
@@ -73,7 +75,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	const handleFormSubmit = useCallback(
 		(event: React.BaseSyntheticEvent): void => {
 			void handleSubmit(({ categoryIds }) => {
-				onSubmit({ categoryIds });
+				onSubmit(categoryIds);
 			})(event);
 		},
 		[onSubmit, handleSubmit],
@@ -84,7 +86,8 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	}
 
 	return (
-		<section>
+		<section className={styles["container"]}>
+			{header && <span className={styles["header"]}>{header}</span>}
 			<form onSubmit={handleFormSubmit}>
 				<Checkbox
 					control={control}
@@ -108,7 +111,7 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 					options={categoryInputOptions}
 				/>
 				<br />
-				<Button label={buttonLabel} type="submit" variant="secondary" />
+				<Button label={buttonLabel} type="submit" />
 			</form>
 		</section>
 	);

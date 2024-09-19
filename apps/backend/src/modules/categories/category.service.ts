@@ -74,6 +74,16 @@ class CategoryService implements Service {
 		return this.categoryRepository.deleteUserScores(userId);
 	}
 
+	public deleteUserScoresByCategoryIds(
+		userId: number,
+		categoryIds: number[],
+	): Promise<number> {
+		return this.categoryRepository.deleteUserScoresByCategoryIds(
+			userId,
+			categoryIds,
+		);
+	}
+
 	public async find(id: number): Promise<CategoryDto | null> {
 		const categoryEntity = await this.categoryRepository.find(id);
 

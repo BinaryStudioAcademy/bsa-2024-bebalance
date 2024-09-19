@@ -12,7 +12,7 @@ import {
 import { AppRoute } from "~/libs/enums/enums.js";
 import { store } from "~/libs/modules/store/store.js";
 import { Auth } from "~/pages/auth/auth.jsx";
-import { ChatComponent } from "~/pages/chat/chat.jsx";
+import { Chat } from "~/pages/chat/chat.jsx";
 import { NotFound } from "~/pages/not-found/not-found.jsx";
 import { Profile } from "~/pages/profile/profile.jsx";
 import { Quiz } from "~/pages/quiz/quiz.jsx";
@@ -58,7 +58,7 @@ createRoot(document.querySelector("#root") as HTMLElement).render(
 							{
 								element: (
 									<ProtectedRoute
-										component={<ChatComponent />}
+										component={<Chat />}
 										redirectTo={AppRoute.SIGN_IN}
 									/>
 								),

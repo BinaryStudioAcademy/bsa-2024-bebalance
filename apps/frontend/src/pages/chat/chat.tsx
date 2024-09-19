@@ -14,7 +14,7 @@ import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { ChatMessage } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
-const ChatComponent: React.FC = () => {
+const Chat: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const { messages, quizCategories, scores, selectedCategories, threadId } =
@@ -57,9 +57,9 @@ const ChatComponent: React.FC = () => {
 	}, [dispatch]);
 
 	const handleCategoriesSubmit = useCallback(
-		async (payload: { categoryIds: number[] }): Promise<void> => {
+		async (categoryIds: number[]): Promise<void> => {
 			const newSelectedCategories = quizCategories
-				.filter((category) => payload.categoryIds.includes(category.id))
+				.filter((category) => categoryIds.includes(category.id))
 				.map((category) => ({
 					categoryId: category.id,
 					categoryName: category.name,
@@ -78,8 +78,8 @@ const ChatComponent: React.FC = () => {
 	);
 
 	const handleFormSubmitWrapper = useCallback(
-		(payload: { categoryIds: number[] }): void => {
-			void handleCategoriesSubmit(payload);
+		(categoryIds: number[]): void => {
+			void handleCategoriesSubmit(categoryIds);
 		},
 		[handleCategoriesSubmit],
 	);
@@ -107,4 +107,4 @@ const ChatComponent: React.FC = () => {
 	);
 };
 
-export { ChatComponent };
+export { Chat };
