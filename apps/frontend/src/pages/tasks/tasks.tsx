@@ -25,7 +25,6 @@ const Tasks: React.FC = () => {
 		};
 	});
 	const [expiredTasks, setExpiredTasks] = useState<TaskDto[]>([]);
-	const [activeTasks, setActiveTasks] = useState<TaskDto[]>([]);
 
 	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
 		TasksMode.CURRENT,
@@ -34,32 +33,24 @@ const Tasks: React.FC = () => {
 	const handleTaskExpiration = useCallback(
 		(expiredTask: TaskDto) => {
 			const newExpiredTasks = [...expiredTasks, expiredTask];
-			const newActiveTasks = [...activeTasks].filter(
-				(task) => task.id !== expiredTask.id,
-			);
 			setExpiredTasks(newExpiredTasks);
-			setActiveTasks(newActiveTasks);
 		},
-		[expiredTasks, activeTasks],
+		[expiredTasks],
 	);
 
 	useEffect(() => {
 		const currentTime = Date.now();
 		const expired: TaskDto[] = [];
-		const active: TaskDto[] = [];
 
 		for (const task of tasks) {
 			const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
 
 			if (timeToDeadline < ONE_MINUTE) {
 				expired.push(task);
-			} else {
-				active.push(task);
 			}
 		}
 
 		setExpiredTasks(expired);
-		setActiveTasks(active);
 	}, [tasks]);
 
 	useEffect(() => {
@@ -124,7 +115,7 @@ const Tasks: React.FC = () => {
 					{isLoading ? (
 						<Loader />
 					) : (
-						activeTasks.map((task) => (
+						tasks.map((task) => (
 							<TaskCard
 								key={task.id}
 								onComplete={handleComplete}
