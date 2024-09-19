@@ -4,6 +4,7 @@ import { type NotificationFrequency } from "../enums/enums.js";
 type UserDto = {
 	avatarFileId: null | number;
 	avatarUrl: null | string;
+	completionTasksPercentage: null | number;
 	createdAt: string;
 	email: string;
 	hasAnsweredOnboardingQuestions: boolean;
