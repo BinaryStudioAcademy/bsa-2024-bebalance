@@ -1,5 +1,4 @@
 import { Button } from "~/libs/components/components.js";
-import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useCallback,
@@ -12,7 +11,7 @@ import {
 	actions as tasksActions,
 } from "~/modules/tasks/tasks.js";
 
-import { TaskCard } from "../components.js";
+import { ArrowButton, TaskCard } from "../components.js";
 import {
 	DRAG_THRESHOLD,
 	FIRST_SLIDE,
@@ -135,16 +134,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["slider-container"]}>
-				{!isSingleSlide && (
-					<button className={styles["control"]} onClick={previousSlide}>
-						<div
-							className={getValidClassNames(
-								styles["arrow"],
-								styles["arrow-left"],
-							)}
-						/>
-					</button>
-				)}
+				{!isSingleSlide && <ArrowButton onClick={previousSlide} />}
 
 				<div className={styles["content"]}>
 					<div className={styles["upper-content"]}>
@@ -214,16 +204,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 					</div>
 				</div>
 
-				{!isSingleSlide && (
-					<button className={styles["control"]} onClick={nextSlide}>
-						<div
-							className={getValidClassNames(
-								styles["arrow"],
-								styles["arrow-right"],
-							)}
-						/>
-					</button>
-				)}
+				{!isSingleSlide && <ArrowButton onClick={nextSlide} variant="right" />}
 			</div>
 		</div>
 	);

@@ -1,0 +1,25 @@
+.control {
+	position: relative;
+	height: 46px;
+	background-color: transparent;
+	border: none;
+}
+
+.arrow {
+	width: 24px;
+	height: 24px;
+	border-top: 2px solid var(--text-secondary);
+	border-right: 2px solid var(--text-secondary);
+}
+
+.arrow:hover {
+	border-color: var(--black);
+}
+
+.arrow-left {
+	transform: rotate(225deg);
+}
+
+.arrow-right {
+	transform: rotate(45deg);
+}
