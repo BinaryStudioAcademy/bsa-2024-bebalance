@@ -38,16 +38,25 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	const totalSlides = tasks.length;
 	const isSingleSlide = totalSlides === SINGLE_SLIDE;
 
-	const handleSkippingTask = useCallback(() => {
-		if (!tasks[currentSlide]) {
-			return;
-		}
-
+	const handleTaskSkipping = useCallback(() => {
+		const task = tasks[currentSlide] as TaskDto;
 		void dispatch(
 			tasksActions.updateTask({
-				id: tasks[currentSlide].id,
+				id: task.id,
 				task: {
 					status: "Skipped",
+				},
+			}),
+		);
+	}, [dispatch, currentSlide, tasks]);
+
+	const handleTaskCompletion = useCallback(() => {
+		const task = tasks[currentSlide] as TaskDto;
+		void dispatch(
+			tasksActions.updateTask({
+				id: task.id,
+				task: {
+					status: "Completed",
 				},
 			}),
 		);
@@ -180,11 +189,12 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							<Button label="Yes, I want to extend deadline" />
 							<Button
 								label="No, I want to skip this task"
-								onClick={handleSkippingTask}
+								onClick={handleTaskSkipping}
 								variant="secondary"
 							/>
 							<Button
 								label="I already complete this task"
+								onClick={handleTaskCompletion}
 								variant="secondary"
 							/>
 						</div>
