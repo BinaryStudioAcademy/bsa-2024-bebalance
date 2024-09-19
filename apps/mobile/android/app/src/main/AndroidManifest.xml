@@ -34,7 +34,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="http"
+            <data android:scheme="@string/API_URL_SCHEME"
               android:host="@string/API_URL_HOST"
               android:pathPrefix="/" />
         </intent-filter>
