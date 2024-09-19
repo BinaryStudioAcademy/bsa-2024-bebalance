@@ -57,42 +57,10 @@
 	font-size: 20px;
 }
 
-.counter {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 50px;
-	margin: 0 auto;
-	font-size: 20px;
-	font-weight: 600;
-}
-
-.page-number {
-	flex-grow: 1;
-	text-align: right;
-}
-
-.total-page-number {
-	flex-grow: 1;
-}
-
-.control {
-	position: relative;
-	height: 46px;
-	background-color: transparent;
-	border: none;
-}
-
 .title {
 	font-size: 20px;
 	font-weight: 700;
 	line-height: 125%;
-	text-align: center;
-}
-
-.introduction {
-	font-size: 14px;
-	font-weight: 400;
 	text-align: center;
 }
 
@@ -103,39 +71,4 @@
 	width: 100%;
 	height: 303px;
 	overflow: hidden;
-}
-
-.lower-content {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	width: 100%;
-	height: 223px;
-}
-
-.actions {
-	display: flex;
-	flex-direction: column;
-	gap: 11px;
-	width: 100%;
-	padding: 0 8px;
-}
-
-.arrow {
-	width: 24px;
-	height: 24px;
-	border-top: 2px solid var(--text-secondary);
-	border-right: 2px solid var(--text-secondary);
-}
-
-.arrow:hover {
-	border-color: var(--black);
-}
-
-.arrow-left {
-	transform: rotate(225deg);
-}
-
-.arrow-right {
-	transform: rotate(45deg);
 }

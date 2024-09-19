@@ -1,17 +1,12 @@
-import { Button } from "~/libs/components/components.js";
 import {
-	useAppDispatch,
 	useCallback,
 	useEffect,
 	useRef,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import {
-	type TaskDto,
-	actions as tasksActions,
-} from "~/modules/tasks/tasks.js";
+import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { ArrowButton, TaskCard } from "../components.js";
+import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
 import {
 	DRAG_THRESHOLD,
 	FIRST_SLIDE,
@@ -29,42 +24,12 @@ type Properties = {
 };
 
 const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
-	const dispatch = useAppDispatch();
 	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
 	const totalSlides = tasks.length;
 	const isSingleSlide = totalSlides === SINGLE_SLIDE;
-
-	const handleTaskSkipping = useCallback(() => {
-		const task = tasks[currentSlide] as TaskDto;
-		void dispatch(
-			tasksActions.updateTask({
-				id: task.id,
-				task: {
-					status: "Skipped",
-				},
-			}),
-		);
-	}, [dispatch, currentSlide, tasks]);
-
-	const handleTaskCompletion = useCallback(() => {
-		const task = tasks[currentSlide] as TaskDto;
-		void dispatch(
-			tasksActions.updateTask({
-				id: task.id,
-				task: {
-					status: "Completed",
-				},
-			}),
-		);
-	}, [dispatch, currentSlide, tasks]);
-
-	const handleExtendingDeadline = useCallback(() => {
-		const task = tasks[currentSlide] as TaskDto;
-		void dispatch(tasksActions.updateTaskDeadline(task.id));
-	}, [dispatch, currentSlide, tasks]);
 
 	const goToSlide = useCallback(
 		(index: number): void => {
@@ -127,10 +92,6 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 		sliderReference.current.style.transform = `translateX(-${String(slideTranslationX)}%)`;
 	}, [currentSlide]);
 
-	useEffect(() => {
-		setCurrentSlide(INITIAL_SLIDE);
-	}, [tasks]);
-
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["slider-container"]}>
@@ -173,35 +134,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 						)}
 					</div>
 
-					<div className={styles["lower-content"]}>
-						<p className={styles["introduction"]}>
-							Do you want to extend the deadline by 24 hours?
-						</p>
-						<div className={styles["actions"]}>
-							<Button
-								label="Yes, I want to extend deadline"
-								onClick={handleExtendingDeadline}
-							/>
-							<Button
-								label="No, I want to skip this task"
-								onClick={handleTaskSkipping}
-								variant="secondary"
-							/>
-							<Button
-								label="I already complete this task"
-								onClick={handleTaskCompletion}
-								variant="secondary"
-							/>
-						</div>
-						{!isSingleSlide && (
-							<div className={styles["counter"]}>
-								<p className={styles["page-number"]}>
-									{currentSlide + SINGLE_SLIDE}
-								</p>
-								<p className={styles["total-page-number"]}>/{totalSlides}</p>
-							</div>
-						)}
-					</div>
+					<TaskActionsPanel currentTaskIndex={currentSlide} tasks={tasks} />
 				</div>
 
 				{!isSingleSlide && <ArrowButton onClick={nextSlide} variant="right" />}
