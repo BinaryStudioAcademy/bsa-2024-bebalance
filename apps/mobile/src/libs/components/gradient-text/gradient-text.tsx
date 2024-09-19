@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
 	LinearGradient,
 	MaskedView,
@@ -7,16 +5,22 @@ import {
 	View,
 } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
-import { type LinearGradientProps } from "~/libs/types/types";
+import {
+	type ComponentProps,
+	type LinearGradientProps,
+} from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 type Properties = {
 	gradientProps: LinearGradientProps;
-	textProps: React.ComponentProps<typeof Text>;
+	textProps: ComponentProps<typeof Text>;
 };
 
-const GradientText: React.FC<Properties> = ({ gradientProps, textProps }) => {
+const GradientText: React.FC<Properties> = ({
+	gradientProps,
+	textProps,
+}: Properties) => {
 	return (
 		<MaskedView
 			maskElement={

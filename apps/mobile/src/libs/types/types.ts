@@ -20,6 +20,7 @@ export {
 	type WheelDataItem,
 } from "./wheel/wheel";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
+export { type ComponentProps } from "react";
 export {
 	type Control,
 	type FieldErrors,

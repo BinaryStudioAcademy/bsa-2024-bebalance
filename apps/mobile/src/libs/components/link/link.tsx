@@ -1,5 +1,4 @@
 import { Link as UILink } from "@react-navigation/native";
-import React, { type ComponentProps } from "react";
 
 import { BaseColor } from "~/libs/enums/enums";
 import {
@@ -8,6 +7,7 @@ import {
 	sizeToTextStyle,
 } from "~/libs/maps/maps";
 import {
+	type ComponentProps,
 	type StyleProp,
 	type TextStyle,
 	type ValueOf,
