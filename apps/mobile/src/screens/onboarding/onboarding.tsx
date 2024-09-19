@@ -7,7 +7,7 @@ import {
 	ScreenWrapper,
 	View,
 } from "~/libs/components/components";
-import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
+import { PREVIOUS_INDEX_OFFSET, ZERO_INDEX } from "~/libs/constants/constants";
 import { DataStatus, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
@@ -34,8 +34,6 @@ import {
 	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
-
-const FIRST_ITEM_INDEX = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -170,7 +168,7 @@ const Onboarding: React.FC = () => {
 											label={isLastQuestion ? "ANALYZE" : "NEXT"}
 											onPress={handleFormSubmit}
 										/>
-										{currentQuestionIndex !== FIRST_ITEM_INDEX && (
+										{currentQuestionIndex !== ZERO_INDEX && (
 											<Button
 												appearance="outlined"
 												label="BACK"

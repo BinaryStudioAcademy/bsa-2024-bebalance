@@ -1,5 +1,4 @@
 export {
-	FIRST_ITEM_INDEX,
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "./libs/constants/constant.js";

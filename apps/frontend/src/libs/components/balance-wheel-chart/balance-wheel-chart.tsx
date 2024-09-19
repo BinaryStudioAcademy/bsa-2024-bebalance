@@ -71,17 +71,13 @@ const BalanceWheelChart: React.FC<Properties> = ({
 	);
 
 	const handleAnimateChart = useCallback(() => {
-		const FIRST_ITEM_INDEX = 0;
 		const chartInstance = chartReference.current;
 
-		if (
-			!chartInstance ||
-			!chartInstance.data.datasets[FIRST_ITEM_INDEX]?.data
-		) {
+		if (!chartInstance || !chartInstance.data.datasets[ZERO_INDEX]?.data) {
 			return;
 		}
 
-		chartInstance.data.datasets[FIRST_ITEM_INDEX].data = generateRandomData();
+		chartInstance.data.datasets[ZERO_INDEX].data = generateRandomData();
 		chartInstance.update();
 	}, []);
 

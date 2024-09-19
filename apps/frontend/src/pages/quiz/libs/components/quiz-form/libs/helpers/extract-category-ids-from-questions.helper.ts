@@ -1,4 +1,4 @@
-import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
+import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { type QuizQuestionDto } from "~/modules/quiz/quiz.js";
 
 function extractCategoryIdsFromQuestions(
@@ -8,7 +8,7 @@ function extractCategoryIdsFromQuestions(
 
 	for (const questionsInsideCategory of questions) {
 		categoryIds.add(
-			(questionsInsideCategory[FIRST_ITEM_INDEX] as QuizQuestionDto).categoryId,
+			(questionsInsideCategory[ZERO_INDEX] as QuizQuestionDto).categoryId,
 		);
 	}
 
