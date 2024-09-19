@@ -93,8 +93,19 @@ const generateExplainTaskSuggestionsResponse = (
 		type: ChatMessageType.QUESTION_WITH_BUTTONS,
 	};
 
+	const motivationMessage = {
+		author: ChatMessageAuthor.ASSISTANT,
+		createdAt: new Date().toISOString(),
+		id: lastMessageId++,
+		isRead: false,
+		payload: {
+			text: resultData.message.motivation_tips,
+		},
+		type: ChatMessageType.TEXT,
+	};
+
 	return {
-		messages: [textMessage, taskMessage, acceptTaskQuestion],
+		messages: [textMessage, taskMessage, acceptTaskQuestion, motivationMessage],
 		threadId: message.thread_id,
 	};
 };
