@@ -1,4 +1,5 @@
 export { type AsyncThunkConfig } from "./app/app";
+export { type Countdown } from "./countdown/countdown";
 export { type IconName } from "./icon/icon";
 export { type InfinitePagerImperativeApi } from "./infinite-pager/infinite-pager";
 export {
