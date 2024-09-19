@@ -1,11 +1,6 @@
 import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-} from "~/libs/hooks/hooks.js";
+import { useEffect, useRef, useState } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ONE_MINUTE } from "../../constants/constants.js";
@@ -26,7 +21,7 @@ type Properties = {
 const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 	const [isExpired, setIsExpired] = useState<boolean>(false);
-	const onExpireReferene = useRef(onExpire);
+	const onExpireReference = useRef(onExpire);
 
 	const clockIconName = isExpired ? "clockInactive" : "clockActive";
 	const countdownStyleClass = getValidClassNames(
@@ -34,48 +29,51 @@ const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 		isExpired && styles["expired"],
 	);
 
-	const calculateDaysUntilDeadline = useCallback((): boolean => {
-		const currentTime = Date.now();
-
-		const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
-
-		if (timeToDeadline < ONE_MINUTE) {
-			setCountdown(COUNTDOWN_EXPIRED);
-			setIsExpired(true);
-			onExpireReferene.current?.(task);
-
-			return true;
-		}
-
-		const days = Math.floor(timeToDeadline / MillisecondsPerUnit.DAY);
-		const hours = Math.floor(
-			(timeToDeadline % MillisecondsPerUnit.DAY) / MillisecondsPerUnit.HOUR,
-		);
-		const minutes = Math.floor(
-			(timeToDeadline % MillisecondsPerUnit.HOUR) / MillisecondsPerUnit.MINUTE,
-		);
-
-		const formattedDays = String(days);
-		const formattedHours = String(hours).padStart(TimePad.HOURS, TIME_PAD_FILL);
-		const formattedMinutes = String(minutes).padStart(
-			TimePad.MINUTES,
-			TIME_PAD_FILL,
-		);
-
-		setCountdown({
-			days: formattedDays,
-			hours: formattedHours,
-			minutes: formattedMinutes,
-		});
-
-		return false;
-	}, [task]);
-
 	useEffect(() => {
-		onExpireReferene.current = onExpire;
+		onExpireReference.current = onExpire;
 	}, [onExpire]);
 
 	useEffect(() => {
+		const calculateDaysUntilDeadline = (): boolean => {
+			const currentTime = Date.now();
+			const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
+
+			if (timeToDeadline < ONE_MINUTE) {
+				setCountdown(COUNTDOWN_EXPIRED);
+				setIsExpired(true);
+				onExpireReference.current?.(task);
+
+				return true;
+			}
+
+			const days = Math.floor(timeToDeadline / MillisecondsPerUnit.DAY);
+			const hours = Math.floor(
+				(timeToDeadline % MillisecondsPerUnit.DAY) / MillisecondsPerUnit.HOUR,
+			);
+			const minutes = Math.floor(
+				(timeToDeadline % MillisecondsPerUnit.HOUR) /
+					MillisecondsPerUnit.MINUTE,
+			);
+
+			const formattedDays = String(days);
+			const formattedHours = String(hours).padStart(
+				TimePad.HOURS,
+				TIME_PAD_FILL,
+			);
+			const formattedMinutes = String(minutes).padStart(
+				TimePad.MINUTES,
+				TIME_PAD_FILL,
+			);
+
+			setCountdown({
+				days: formattedDays,
+				hours: formattedHours,
+				minutes: formattedMinutes,
+			});
+
+			return false;
+		};
+
 		const countdownInterval = setInterval(() => {
 			const isExpired = calculateDaysUntilDeadline();
 
@@ -89,7 +87,7 @@ const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 		return (): void => {
 			clearInterval(countdownInterval);
 		};
-	}, [calculateDaysUntilDeadline]);
+	}, [task]);
 
 	return (
 		<div className={styles["container"]}>
