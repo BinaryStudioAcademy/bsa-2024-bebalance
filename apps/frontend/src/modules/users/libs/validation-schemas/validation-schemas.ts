@@ -4,5 +4,6 @@ export {
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
+	userUpdatePasswordValidationSchema,
 	userUpdateValidationSchema,
 } from "shared";

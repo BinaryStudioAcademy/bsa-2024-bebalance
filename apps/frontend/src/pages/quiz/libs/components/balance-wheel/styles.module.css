@@ -6,7 +6,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	padding: 35px;
+	padding: 27px 34px;
 	background-color: var(--background);
 	background-image: url("../../../../../assets/img/ripple-effect-bg3.svg"),
 		url("../../../../../assets/img/ripple-effect-bg.svg"),

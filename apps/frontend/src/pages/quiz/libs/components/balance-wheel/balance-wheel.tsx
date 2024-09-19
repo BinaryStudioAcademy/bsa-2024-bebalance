@@ -1,20 +1,23 @@
-import { BalanceWheelChart, Navigate } from "~/libs/components/components.js";
+import { BalanceWheelChart } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
+	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useNavigate,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as appActions } from "~/modules/app/app.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
+import { Step } from "../../enums/step.js";
 import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const BalanceWheel: React.FC = () => {
-	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
@@ -67,10 +70,11 @@ const BalanceWheel: React.FC = () => {
 		return (): void => {
 			clearInterval(intervalId);
 		};
-	}, [handleUpdatePercentage, navigate]);
+	}, [handleUpdatePercentage]);
 
 	if (shouldNavigate) {
-		return <Navigate replace to={AppRoute.ROOT} />;
+		dispatch(appActions.changeLink(AppRoute.ROOT));
+		dispatch(quizActions.setStep(Step.MOTIVATION));
 	}
 
 	const roundedPercentage = Math.ceil(percentage);

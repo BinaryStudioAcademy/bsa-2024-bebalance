@@ -3,9 +3,9 @@
 }
 
 .content-container {
-	display: flex;
-	flex-direction: row;
-	gap: 20px;
+	display: grid;
+	grid-template-columns: 200px 350px;
+	column-gap: 20px;
 }
 
 .title {
@@ -30,4 +30,22 @@
 
 .label {
 	font-weight: bold;
+}
+
+.title-password {
+	margin-top: 32px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.password-container {
+	display: grid;
+	grid-template-columns: 200px 350px auto;
+	gap: 20px;
+	align-items: end;
+}
+
+.button-container {
+	justify-self: end;
+	width: 300px;
 }

@@ -3,7 +3,9 @@ export { type IconName } from "./icon/icon";
 export { type InfinitePagerImperativeApi } from "./infinite-pager/infinite-pager";
 export {
 	type BottomTabNavigationParameterList,
+	type NavigationItem,
 	type NavigationScreenProperties,
+	type QuestionsStackNavigationParameterList,
 	type RootNavigationParameterList,
 } from "./navigation/navigation";
 export {

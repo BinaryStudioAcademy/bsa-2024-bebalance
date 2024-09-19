@@ -2,7 +2,7 @@ import {
 	BalanceWheelChart,
 	Button,
 	Loader,
-	ScoresEditModal,
+	Switch,
 } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
@@ -14,15 +14,20 @@ import {
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import { Insights } from "../insights/insights.js";
+import {
+	RetakeQuizModal,
+	ScoresEditModal,
+} from "./libs/components/components.js";
+import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const UserWheel: React.FC = () => {
-	const NO_SCORES_COUNT = 0;
+const NO_SCORES_COUNT = 0;
 
+const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-
+	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
 	const chartData = scores.map((score) => {
@@ -44,22 +49,55 @@ const UserWheel: React.FC = () => {
 		setIsEditingModalOpen(false);
 	}, []);
 
+	const handleModeToggle = useCallback(() => {
+		setEditMode((previousState) => {
+			return previousState === "manual" ? "retake_quiz" : "manual";
+		});
+	}, []);
+
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
+
+	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
+		switch (mode) {
+			case "manual": {
+				return (
+					<ScoresEditModal data={scores} onSaveChanges={handleFinishEditing} />
+				);
+			}
+
+			case "retake_quiz": {
+				return <RetakeQuizModal />;
+			}
+
+			default: {
+				return null;
+			}
+		}
+	};
 
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
+				{isEditingModalOpen && (
+					<Switch
+						currentMode={editMode}
+						leftButtonProperties={{ label: "Edit manually", mode: "manual" }}
+						onToggleMode={handleModeToggle}
+						rightButtonProperties={{
+							label: "Retake quiz",
+							mode: "retake_quiz",
+						}}
+					/>
+				)}
 			</div>
 			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
 					<BalanceWheelChart data={chartData} />
 				)}
-				{isEditingModalOpen && (
-					<ScoresEditModal data={scores} onSaveChanges={handleFinishEditing} />
-				)}
+				{isEditingModalOpen && handleGetModal(editMode)}
 			</div>
 			<Insights />
 			{!isEditingModalOpen && (
