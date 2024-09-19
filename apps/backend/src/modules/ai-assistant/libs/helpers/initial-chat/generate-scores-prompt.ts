@@ -11,9 +11,10 @@ function generateUserScoresPrompt(
 ): OpenAiRequestMessage {
 	const { items } = userScores;
 
-	const categories = items.map(({ categoryId, categoryName }) => ({
+	const categories = items.map(({ categoryId, categoryName, score }) => ({
 		categoryId,
 		categoryName,
+		score,
 	}));
 
 	const content = `
