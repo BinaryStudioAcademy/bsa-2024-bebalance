@@ -52,6 +52,7 @@ export {
 	type ChangeTaskSuggestionRequestDto,
 	changeTaskSuggestionRequestValidationSchema,
 	type SelectedCategories,
+	taskActionRequestSchemaValidationSchema,
 	type TaskSuggestionRequestDto,
 	taskSuggestionRequestValidationSchema,
 	type TaskSuggestionsResponseDto,
