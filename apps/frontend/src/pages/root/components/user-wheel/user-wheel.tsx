@@ -110,11 +110,13 @@ const UserWheel: React.FC = () => {
 			</div>
 			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
-					<BalanceWheelChart data={chartData} />
+					<div>
+						<BalanceWheelChart data={chartData} />
+						<CircularProgress percentage={percentage} />
+					</div>
 				)}
 				{isEditingModalOpen && handleGetModal(editMode)}
 			</div>
-			<CircularProgress percentage={percentage} />
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
 					<Button
