@@ -31,17 +31,12 @@ const Tasks: React.FC = () => {
 		TasksMode.CURRENT,
 	);
 
-	const handleTaskExpiration = useCallback(
-		(expiredTask: TaskDto) => {
-			const newExpiredTasks = [...expiredTasks, expiredTask];
-			const newActiveTasks = [...activeTasks].filter(
-				(task) => task.id !== expiredTask.id,
-			);
-			setExpiredTasks(newExpiredTasks);
-			setActiveTasks(newActiveTasks);
-		},
-		[expiredTasks, activeTasks],
-	);
+	const handleTaskExpiration = useCallback((expiredTask: TaskDto) => {
+		setExpiredTasks((previousTasks) => [...previousTasks, expiredTask]);
+		setActiveTasks((previousTasks) => {
+			return previousTasks.filter((task) => task.id !== expiredTask.id);
+		});
+	}, []);
 
 	useEffect(() => {
 		const currentTime = Date.now();
