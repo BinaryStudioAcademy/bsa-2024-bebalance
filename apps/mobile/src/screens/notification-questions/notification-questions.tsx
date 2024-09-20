@@ -8,7 +8,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { NumericalValue, RootScreenName } from "~/libs/enums/enums";
+import { NumericalValue, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -83,7 +83,7 @@ const NotificationQuestions: React.FC = () => {
 		}
 
 		void handleSubmit(handleSaveAnswers)();
-		navigation.navigate(RootScreenName.WHEEL_LOADING);
+		navigation.navigate(QuestionsStackName.WHEEL_LOADING);
 	}, [
 		currentStep,
 		handleSubmit,

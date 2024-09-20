@@ -4,6 +4,8 @@ import { UserEntity } from "~/modules/users/user.entity.js";
 import { type UserModel } from "~/modules/users/user.model.js";
 
 import { ZERO_INDEX } from "./libs/constants/constants.js";
+import { TaskCompletion } from "./libs/enums/enums.js";
+import { getCompletedTaskPercentage } from "./libs/helpers/helpers.js";
 import {
 	type UserDetailsWithAvatarFile,
 	type UserTaskDay,
@@ -52,6 +54,7 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: userDetails.avatarFileId,
 			avatarUrl: null,
+			completionTasksPercentage: TaskCompletion.NO_COMPLETED_TASKS,
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions: false,
@@ -85,7 +88,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.findById(id)
 			.castTo<undefined | UserWithAvatarFile>();
@@ -94,6 +97,7 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -116,7 +120,7 @@ class UserRepository implements Repository {
 		const users = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.castTo<UserWithAvatarFile[]>();
 
@@ -124,6 +128,7 @@ class UserRepository implements Repository {
 			return UserEntity.initialize({
 				avatarFileId: user.userDetails.avatarFileId,
 				avatarUrl: user.userDetails.avatarFile?.url ?? null,
+				completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 				createdAt: user.createdAt,
 				email: user.email,
 				hasAnsweredOnboardingQuestions:
@@ -148,7 +153,7 @@ class UserRepository implements Repository {
 			.where({ email })
 			.first()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.castTo<undefined | UserWithAvatarFile>();
 
@@ -156,6 +161,7 @@ class UserRepository implements Repository {
 			? UserEntity.initialize({
 					avatarFileId: user.userDetails.avatarFileId,
 					avatarUrl: user.userDetails.avatarFile?.url ?? null,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -191,13 +197,14 @@ class UserRepository implements Repository {
 			.query()
 			.findById(id)
 			.withGraphFetched(
-				`[${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			);
 
 		return user && updatedUserDetails
 			? UserEntity.initialize({
 					avatarFileId: userDetails?.avatarFileId ?? null,
 					avatarUrl: updatedUserDetails.avatarFile?.url ?? null,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -236,13 +243,14 @@ class UserRepository implements Repository {
 			.query()
 			.findById(id)
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}, ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			);
 
 		return user && userDetails
 			? UserEntity.initialize({
 					avatarFileId: userDetails.avatarFileId,
 					avatarUrl: userDetails.avatarFile?.url ?? null,
+					completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 					createdAt: user.createdAt,
 					email: user.email,
 					hasAnsweredOnboardingQuestions:
@@ -268,7 +276,7 @@ class UserRepository implements Repository {
 		const user = await this.userModel
 			.query()
 			.withGraphFetched(
-				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS}]`,
+				`[${RelationName.USER_DETAILS}.[${RelationName.AVATAR}], ${RelationName.USER_TASK_DAYS}, ${RelationName.ONBOARDING_USER_ANSWERS}, ${RelationName.QUIZ_USER_ANSWERS},${RelationName.USER_TASKS}]`,
 			)
 			.patchAndFetchById(id, passwordPayload)
 			.castTo<UserWithAvatarFile>()
@@ -277,6 +285,7 @@ class UserRepository implements Repository {
 		return UserEntity.initialize({
 			avatarFileId: user.userDetails.avatarFileId,
 			avatarUrl: user.userDetails.avatarFile?.url ?? null,
+			completionTasksPercentage: getCompletedTaskPercentage(user.userTasks),
 			createdAt: user.createdAt,
 			email: user.email,
 			hasAnsweredOnboardingQuestions:
