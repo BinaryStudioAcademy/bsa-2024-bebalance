@@ -27,10 +27,9 @@ const TaskActionButton: React.FC<Properties> = ({
 	const { backgroundColor, iconName, typeColor } = useMemo(() => {
 		return {
 			backgroundColor:
-				type === "skip" ? "rgba(255, 41, 40, 0.1)" : "rgba(240, 255, 244, 1)",
+				type === "skip" ? BaseColor.LIGHT_RED : BaseColor.LIGHT_GREEN,
 			iconName: type === "skip" ? "close" : "check",
-			typeColor:
-				type === "skip" ? "rgba(255, 41, 40, 0.4)" : "rgba(194, 234, 205, 1)",
+			typeColor: type === "skip" ? BaseColor.EXTRA_LIGHT_RED : BaseColor.GREEN,
 		};
 	}, [type]);
 

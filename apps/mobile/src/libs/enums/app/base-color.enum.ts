@@ -8,10 +8,12 @@ const BaseColor = {
 	DARK_BLUE: "rgba(99, 160, 231, 1)",
 	DARK_GRAY: "rgba(124, 124, 124, 1)",
 	EXTRA_LIGHT_GRAY: "rgba(224, 224, 224, 0.3)",
+	EXTRA_LIGHT_RED: "rgba(255, 41, 40, 0.4)",
 	GRAY: "rgba(176, 176, 178, 1)",
 	GREEN: "rgba(194, 234, 205, 1)",
 	LIGHT_GRAY: "rgba(224, 224, 224, 1)",
 	LIGHT_GREEN: "rgba(240, 255, 244, 1)",
+	LIGHT_RED: "rgba(255, 41, 40, 0.1)",
 	RED: "rgba(255, 41, 40, 1)",
 } as const;
 
