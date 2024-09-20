@@ -43,15 +43,12 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (
+		const isLastQuestion = Boolean(
 			dataStatus === DataStatus.FULFILLED &&
-			currentQuestionIndex === questions.length - PREVIOUS_INDEX_OFFSET &&
-			completedQuestions.includes(currentQuestionIndex)
-		) {
-			setIsLastQuestion(true);
-		} else {
-			setIsLastQuestion(false);
-		}
+				currentQuestionIndex === questions.length - PREVIOUS_INDEX_OFFSET &&
+				completedQuestions.includes(currentQuestionIndex),
+		);
+		setIsLastQuestion(isLastQuestion);
 	}, [completedQuestions, currentQuestionIndex, dataStatus, questions]);
 
 	const defaultValues = getOnboardingDefaultValues(questions);

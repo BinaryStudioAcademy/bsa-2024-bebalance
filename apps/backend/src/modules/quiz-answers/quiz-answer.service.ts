@@ -136,7 +136,7 @@ class QuizAnswerService implements Service {
 
 		for (const answer of categorizedAnswers) {
 			const { categoryId, value } = answer;
-			const statistic = categoryStatistics.get(categoryId) || {
+			const statistic = categoryStatistics.get(categoryId) ?? {
 				accumulatedSum: INITIAL_STATISTIC_VALUE,
 				categoryCount: INITIAL_STATISTIC_VALUE,
 			};
