@@ -17,7 +17,7 @@ type Properties = {
 
 const TaskCard: React.FC<Properties> = ({
 	onComplete = (): void => {},
-	onExpire,
+	onExpire = (): void => {},
 	onSkip = (): void => {},
 	task,
 	variant = "active",
@@ -29,6 +29,10 @@ const TaskCard: React.FC<Properties> = ({
 	const handleComplete = useCallback(() => {
 		onComplete(task.id);
 	}, [task, onComplete]);
+
+	const handleExpire = useCallback(() => {
+		onExpire(task);
+	}, [task, onExpire]);
 
 	const areActionsDisabled = variant === "expired";
 	const buttonsContainerClass = getValidClassNames(
@@ -43,7 +47,9 @@ const TaskCard: React.FC<Properties> = ({
 		>
 			<div className={styles["card-header"]}>
 				<Category categoryName={task.category} variant={variant} />
-				{isActive && <Deadline onExpire={onExpire} task={task} />}
+				{isActive && (
+					<Deadline deadline={task.dueDate} onExpire={handleExpire} />
+				)}
 			</div>
 			<div className={styles["card-body"]}>
 				<h4 className={styles["title"]}>{task.label}</h4>

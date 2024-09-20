@@ -1,7 +1,6 @@
 import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useEffect, useRef, useState } from "~/libs/hooks/hooks.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ONE_MINUTE } from "../../constants/constants.js";
 import { getTimeLeft } from "../../helpers/helpers.js";
@@ -14,11 +13,11 @@ import { type Countdown } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onExpire: ((expiredTask: TaskDto) => void) | undefined;
-	task: TaskDto;
+	deadline: string;
+	onExpire: (() => void) | undefined;
 };
 
-const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
+const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 	const [isExpired, setIsExpired] = useState<boolean>(false);
 	const onExpireReference = useRef(onExpire);
@@ -36,12 +35,12 @@ const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 	useEffect(() => {
 		const calculateDaysUntilDeadline = (): boolean => {
 			const currentTime = Date.now();
-			const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
+			const timeToDeadline = getTimeLeft(currentTime, deadline);
 
 			if (timeToDeadline < ONE_MINUTE) {
 				setCountdown(COUNTDOWN_EXPIRED);
 				setIsExpired(true);
-				onExpireReference.current?.(task);
+				onExpireReference.current?.();
 
 				return true;
 			}
@@ -87,7 +86,7 @@ const Deadline: React.FC<Properties> = ({ onExpire, task }: Properties) => {
 		return (): void => {
 			clearInterval(countdownInterval);
 		};
-	}, [task]);
+	}, [deadline]);
 
 	return (
 		<div className={styles["container"]}>
