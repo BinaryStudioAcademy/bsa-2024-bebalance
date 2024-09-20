@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import ClockActive from "~/assets/svg/clock-active.svg";
 import { Text, View } from "~/libs/components/components";
 import { COUNTDOWN_EXPIRED } from "~/libs/constants/constants";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks";
+import { globalStyles } from "~/libs/styles/styles";
 import { type Countdown } from "~/libs/types/types";
 
 type Properties = {
@@ -31,8 +31,6 @@ const TimePad = {
 const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 	const [isExpired, setIsExpired] = useState<boolean>(false);
-
-	const countdownStyle = isExpired ? styles.expired : styles.countdown;
 
 	const calculateDaysUntilDeadline = useCallback((): boolean => {
 		const deadlineTime = new Date(deadline).getTime();
@@ -87,36 +85,23 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 	}, [calculateDaysUntilDeadline]);
 
 	return (
-		<View style={styles.container}>
+		<View
+			style={[globalStyles.alignItemsCenter, globalStyles.flexDirectionRow]}
+		>
 			<ClockActive />
-			<View style={countdownStyle}>
-				<Text style={styles.countdownTime}>{countdown.days}d</Text>
-				<Text style={styles.countdownTime}>{countdown.hours}h</Text>
-				<Text style={styles.countdownTime}>{countdown.minutes}m</Text>
+			<View style={[globalStyles.flexDirectionRow, globalStyles.ml8]}>
+				<Text preset="regular" style={globalStyles.mr4} weight="bold">
+					{countdown.days}d
+				</Text>
+				<Text preset="regular" style={globalStyles.mr4} weight="bold">
+					{countdown.hours}h
+				</Text>
+				<Text preset="regular" style={globalStyles.mr4} weight="bold">
+					{countdown.minutes}m
+				</Text>
 			</View>
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		alignItems: "center",
-		flexDirection: "row",
-	},
-	countdown: {
-		flexDirection: "row",
-		marginLeft: 8,
-	},
-	countdownTime: {
-		fontSize: 16,
-		fontWeight: "bold",
-		marginRight: 4,
-	},
-	expired: {
-		color: "red",
-		flexDirection: "row",
-		marginLeft: 8,
-	},
-});
 
 export { Deadline };
