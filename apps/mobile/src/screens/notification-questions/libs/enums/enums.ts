@@ -1,1 +1,1 @@
-export { Week } from "./week.enum";
+export { DayOfWeek } from "./day-of-week.enum";
