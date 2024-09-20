@@ -16,11 +16,13 @@ import {
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	user: null | UserDto;
+	userCanResetPassword: boolean;
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	user: null,
+	userCanResetPassword: false,
 };
 
 const { actions, name, reducer } = createSlice({
@@ -62,9 +64,11 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.PENDING;
 		});
 		builder.addCase(checkIsResetPasswordExpired.fulfilled, (state) => {
+			state.userCanResetPassword = true;
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(checkIsResetPasswordExpired.rejected, (state) => {
+			state.userCanResetPassword = false;
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(resetPassword.pending, (state) => {

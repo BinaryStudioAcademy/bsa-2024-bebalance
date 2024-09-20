@@ -48,7 +48,9 @@ const Auth: React.FC = () => {
 	const { name, params } = useAppRoute();
 
 	const dispatch = useAppDispatch();
-	const { dataStatus, user } = useAppSelector((state) => state.auth);
+	const { dataStatus, user, userCanResetPassword } = useAppSelector(
+		(state) => state.auth,
+	);
 
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
@@ -117,7 +119,11 @@ const Auth: React.FC = () => {
 			}
 
 			case RootScreenName.RESET_PASSWORD: {
-				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
+				return userCanResetPassword ? (
+					<ResetPasswordForm onSubmit={handleResetPasswordSubmit} />
+				) : (
+					<ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />
+				);
 			}
 
 			case RootScreenName.FORGOT_PASSWORD: {
