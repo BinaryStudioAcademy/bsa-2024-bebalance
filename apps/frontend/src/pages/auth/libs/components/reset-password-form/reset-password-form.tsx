@@ -49,7 +49,7 @@ const ResetPasswordForm: React.FC<Properties> = ({
 						newPassword,
 					});
 				} else {
-					setError(ConfirmPasswordCustomValidation.FIELDS.confirmPassword, {
+					setError(ConfirmPasswordCustomValidation.FIELDS, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 					});

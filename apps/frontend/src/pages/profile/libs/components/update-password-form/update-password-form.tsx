@@ -37,7 +37,7 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				if (confirmNewPassword === newPassword) {
 					onSubmit(payload);
 				} else {
-					setError(ConfirmPasswordCustomValidation.FIELDS.confirmNewPassword, {
+					setError("confirmNewPassword", {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 					});
