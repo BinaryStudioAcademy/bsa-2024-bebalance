@@ -39,14 +39,16 @@ const Auth: React.FC = () => {
 		user: auth.user,
 	}));
 
+	const hasUser = Boolean(user);
+
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (pathname === AppRoute.SIGN_UP && user !== null) {
+		if (pathname === AppRoute.SIGN_UP && hasUser) {
 			navigate(AppRoute.QUIZ);
 		}
-	}, [navigate, pathname, user]);
+	}, [navigate, pathname, hasUser]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -108,8 +110,6 @@ const Auth: React.FC = () => {
 			}
 		}
 	};
-
-	const hasUser = Boolean(user);
 
 	if (hasUser) {
 		return <Navigate replace to={AppRoute.ROOT} />;
