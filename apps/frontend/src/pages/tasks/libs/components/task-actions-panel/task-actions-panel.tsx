@@ -6,7 +6,6 @@ import {
 } from "~/modules/tasks/tasks.js";
 
 import { TaskStatus } from "../../enums/enums.js";
-import { SINGLE_TASK } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -18,6 +17,8 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	currentTaskIndex,
 	tasks,
 }: Properties) => {
+	const SINGLE_TASK = 1;
+
 	const dispatch = useAppDispatch();
 	const totalTasks = tasks.length;
 	const isSingleTask = totalTasks === SINGLE_TASK;
