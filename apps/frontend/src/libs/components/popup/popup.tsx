@@ -1,4 +1,5 @@
 import { Button } from "~/libs/components/components.js";
+import { NumericalValue } from "~/libs/enums/enums.js";
 
 import styles from "./styles.module.css";
 
@@ -21,6 +22,8 @@ const Popup: React.FC<Properties> = ({
 	onConfirm,
 	title,
 }: Properties) => {
+	const multilineTitles: string[] = title.split("\n");
+
 	return (
 		<dialog className={styles["logout-dialog"]} open={isOpen}>
 			<div className={styles["popup-container"]}>
@@ -31,7 +34,17 @@ const Popup: React.FC<Properties> = ({
 						</div>
 					)}
 					<div className={styles["contents"]}>
-						<h1 className={styles["title"]}>{title}</h1>
+						{multilineTitles.length > NumericalValue.ZERO ? (
+							multilineTitles.map((line, index) => {
+								return (
+									<h1 className={styles["title"]} key={index}>
+										{line}
+									</h1>
+								);
+							})
+						) : (
+							<h1 className={styles["title"]}>{title}</h1>
+						)}
 						<div className={styles["buttons-content"]}>
 							<Button label={closeButtonLabel} onClick={onClose} />
 							<Button
