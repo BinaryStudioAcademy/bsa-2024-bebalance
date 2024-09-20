@@ -4,7 +4,7 @@ import {
 	ExplainTaskTool,
 	SuggestTaskTool,
 } from "../../libs/tools/tools.js";
-import { OpenAIPromptTemplate } from "./open-ai-prompt-template.enum.js";
+import { OpenAIPromptTemplate } from "./open-ai-initial-prompt-template.enum.js";
 
 const OpenAIAssistantConfig = {
 	INSTRUCTION: OpenAIPromptTemplate.ASSISTANT_INSTRUCTION,
