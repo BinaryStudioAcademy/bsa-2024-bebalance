@@ -3,7 +3,7 @@ import { type z } from "zod";
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
-	type OpenAiResponseMessage,
+	type OpenAIResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
@@ -16,7 +16,7 @@ import { type balanceAnalysis } from "./balance-analysis.validation-schema.js";
 type BalanceAnalysisData = z.infer<typeof balanceAnalysis>;
 
 const generateScoresResponse = (
-	aiResponse: OpenAiResponseMessage,
+	aiResponse: OpenAIResponseMessage,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 

@@ -1,6 +1,6 @@
 import {
 	OpenAIFunctionName,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRunThreadRequestDto,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type SelectedCategory } from "../../types/types.js";
@@ -10,7 +10,7 @@ import { SuggestTaskPromptTemplate } from "./suggest-task-prompt-template.enum.j
 
 const runTaskByCategoryOptions = (
 	categories: SelectedCategory[],
-): OpenAiRunThreadRequestDto => {
+): OpenAIRunThreadRequestDto => {
 	const suggestTaskPrompt = generateSuggestTaskPrompt(categories);
 
 	return {

@@ -123,12 +123,12 @@ import {
  */
 
 class AIAssistantController extends BaseController {
-	private openAiService: AIAssistantService;
+	private openAIService: AIAssistantService;
 
-	public constructor(logger: Logger, openAiService: AIAssistantService) {
+	public constructor(logger: Logger, openAIService: AIAssistantService) {
 		super(logger, APIPath.ASSISTANT);
 
-		this.openAiService = openAiService;
+		this.openAIService = openAIService;
 
 		this.addRoute({
 			handler: (options) =>
@@ -255,7 +255,7 @@ class AIAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.acceptTask(user, body),
+			payload: await this.openAIService.acceptTask(user, body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -301,7 +301,7 @@ class AIAssistantController extends BaseController {
 		const { body } = options;
 
 		return {
-			payload: await this.openAiService.addMessageToThread(body),
+			payload: await this.openAIService.addMessageToThread(body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -354,7 +354,7 @@ class AIAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.changeTaskSuggestion(user, body),
+			payload: await this.openAIService.changeTaskSuggestion(user, body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -367,7 +367,7 @@ class AIAssistantController extends BaseController {
 		const { body } = options;
 
 		return {
-			payload: await this.openAiService.explainTaskSuggestion(body),
+			payload: await this.openAIService.explainTaskSuggestion(body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -465,7 +465,7 @@ class AIAssistantController extends BaseController {
 		const { user } = options;
 
 		return {
-			payload: await this.openAiService.initNewChat(user),
+			payload: await this.openAIService.initNewChat(user),
 			status: HTTPCode.OK,
 		};
 	}
@@ -572,7 +572,7 @@ class AIAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.suggestTasksForCategories(user, body),
+			payload: await this.openAIService.suggestTasksForCategories(user, body),
 			status: HTTPCode.OK,
 		};
 	}

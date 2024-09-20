@@ -1,6 +1,6 @@
 import {
 	OpenAIFunctionName,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRunThreadRequestDto,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
@@ -10,7 +10,7 @@ import { generateChangeTaskPrompt } from "./generate-change-task-prompt.js";
 
 const runChangeTaskByCategoryOptions = (
 	task: TaskCreateDto,
-): OpenAiRunThreadRequestDto => {
+): OpenAIRunThreadRequestDto => {
 	const changeTaskPrompt = generateChangeTaskPrompt(task);
 
 	return {

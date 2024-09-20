@@ -1,4 +1,4 @@
-import { type OpenAi, OpenAIRoleKey } from "~/libs/modules/open-ai/open-ai.js";
+import { type OpenAI, OpenAIRoleKey } from "~/libs/modules/open-ai/open-ai.js";
 import { type UserDto } from "~/libs/types/types.js";
 import { type CategoryService } from "~/modules/categories/categories.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
@@ -27,23 +27,23 @@ import {
 type Constructor = {
 	categoryService: CategoryService;
 	onboardingRepository: OnboardingRepository;
-	openAi: OpenAi;
+	openAI: OpenAI;
 	taskService: TaskService;
 };
 
 class AIAssistantService {
 	private categoryService: CategoryService;
 	private onboardingRepository: OnboardingRepository;
-	private openAi: OpenAi;
+	private openAI: OpenAI;
 	private taskService: TaskService;
 
 	public constructor({
 		categoryService,
 		onboardingRepository,
-		openAi,
+		openAI,
 		taskService,
 	}: Constructor) {
-		this.openAi = openAi;
+		this.openAI = openAI;
 		this.categoryService = categoryService;
 		this.onboardingRepository = onboardingRepository;
 		this.taskService = taskService;
@@ -67,7 +67,7 @@ class AIAssistantService {
 			role: OpenAIRoleKey.USER,
 		};
 
-		await this.openAi.addMessageToThread(threadId, chatMessage);
+		await this.openAI.addMessageToThread(threadId, chatMessage);
 
 		return newTask;
 	}
@@ -82,7 +82,7 @@ class AIAssistantService {
 			role: OpenAIRoleKey.USER,
 		};
 
-		return await this.openAi.addMessageToThread(threadId, prompt);
+		return await this.openAI.addMessageToThread(threadId, prompt);
 	}
 
 	public async changeTaskSuggestion(
@@ -96,7 +96,7 @@ class AIAssistantService {
 		const taskDeadLine = this.taskService.calculateDeadline(
 			user.userTaskDays as number[],
 		);
-		const result = await this.openAi.runThread(threadId, runThreadOptions);
+		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
 		return generateChangeTaskSuggestionsResponse(
 			result,
@@ -114,7 +114,7 @@ class AIAssistantService {
 
 		const runThreadOptions = runExplainTaskOptions(task);
 
-		const result = await this.openAi.runThread(threadId, runThreadOptions);
+		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
 		return generateExplainTaskSuggestionsResponse(result, task, lastMessageId);
 	}
@@ -130,14 +130,14 @@ class AIAssistantService {
 		);
 
 		const initPrompt = generateQuestionsAnswersPrompt(userQuestionsWithAnswers);
-		const threadId = await this.openAi.createThread([initPrompt]);
+		const threadId = await this.openAI.createThread([initPrompt]);
 
 		const runThreadOptions = runInitialThreadOptions(
 			user.name,
 			userWheelBalanceScores,
 		);
 
-		const result = await this.openAi.runThread(threadId, runThreadOptions);
+		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
 		return generateScoresResponse(result);
 	}
@@ -154,7 +154,7 @@ class AIAssistantService {
 			user.userTaskDays as number[],
 		);
 
-		const result = await this.openAi.runThread(threadId, runThreadOptions);
+		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
 		return generateTaskSuggestionsResponse(result, taskDeadLine, lastMessageId);
 	}

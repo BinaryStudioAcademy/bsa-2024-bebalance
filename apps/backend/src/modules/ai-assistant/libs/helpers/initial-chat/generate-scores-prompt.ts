@@ -1,14 +1,14 @@
 import {
-	type OpenAiRequestMessage,
+	type OpenAIRequestMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
 
-import { OpenAiInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
+import { OpenAIInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
 
 function generateUserScoresPrompt(
 	userScores: QuizScoresGetAllResponseDto,
-): OpenAiRequestMessage {
+): OpenAIRequestMessage {
 	const { items } = userScores;
 
 	const categories = items.map(({ categoryId, categoryName, score }) => ({
@@ -19,7 +19,7 @@ function generateUserScoresPrompt(
 
 	const content = `
 	{
-	"context": "${OpenAiInitialPromptTemplate.WHEEL_OF_BALANCE_CONTEXT}"
+	"context": "${OpenAIInitialPromptTemplate.WHEEL_OF_BALANCE_CONTEXT}"
 	"categories": ${JSON.stringify(categories)},
 	}`;
 

@@ -10,7 +10,7 @@ import { AIAssistantService } from "./ai-assistant.service.js";
 const aiAssistantService = new AIAssistantService({
 	categoryService,
 	onboardingRepository,
-	openAi: openAI,
+	openAI,
 	taskService,
 });
 

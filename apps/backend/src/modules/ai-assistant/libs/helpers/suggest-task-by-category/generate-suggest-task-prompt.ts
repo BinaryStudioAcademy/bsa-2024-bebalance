@@ -1,5 +1,5 @@
 import {
-	type OpenAiRequestMessage,
+	type OpenAIRequestMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
@@ -8,7 +8,7 @@ import { SuggestTaskPromptTemplate } from "./suggest-task-prompt-template.enum.j
 
 function generateSuggestTaskPrompt(
 	categories: SelectedCategory[],
-): OpenAiRequestMessage {
+): OpenAIRequestMessage {
 	const content = `
 	{
 	"context": "${SuggestTaskPromptTemplate.SUGGEST_TASKS_CONTEXT}",

@@ -1,6 +1,6 @@
 import {
 	OpenAIFunctionName,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRunThreadRequestDto,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
@@ -10,7 +10,7 @@ import { generateExplainTaskPrompt } from "./generate-explain-task-prompt.js";
 
 const runExplainTaskOptions = (
 	task: TaskCreateDto,
-): OpenAiRunThreadRequestDto => {
+): OpenAIRunThreadRequestDto => {
 	const explainTaskPrompt = generateExplainTaskPrompt(task);
 
 	return {

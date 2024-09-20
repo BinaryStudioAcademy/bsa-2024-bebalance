@@ -1,4 +1,4 @@
-import { OpenAI } from "openai";
+import { OpenAI as LibraryOpenAI } from "openai";
 import { zodResponseFormat } from "openai/helpers/zod";
 
 import { type Config } from "~/libs/modules/config/config.js";
@@ -12,9 +12,9 @@ import {
 } from "./libs/enums/enums.js";
 import { OpenAIError } from "./libs/exceptions/exceptions.js";
 import {
-	type OpenAiRequestMessage,
-	type OpenAiResponseMessage,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRequestMessage,
+	type OpenAIResponseMessage,
+	type OpenAIRunThreadRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -22,22 +22,16 @@ type Constructor = {
 	logger: Logger;
 };
 
-class OpenAi {
+class OpenAI {
 	private assistantId: null | string = null;
 	private config: Config;
 	private logger: Logger;
-	private openAI: OpenAI;
+	private openAI: LibraryOpenAI;
 
 	public constructor({ config, logger }: Constructor) {
 		this.config = config;
 		this.logger = logger;
-		this.openAI = this.createOpenAi();
-	}
-
-	private createOpenAi(): OpenAI {
-		return new OpenAI({
-			apiKey: this.config.ENV.OPEN_AI.API_KEY,
-		});
+		this.openAI = this.initialize();
 	}
 
 	private async getOrInitializeAssistant(): Promise<string> {
@@ -75,7 +69,7 @@ class OpenAi {
 	}
 
 	private async handleRequiresAction(
-		run: OpenAI.Beta.Threads.Runs.Run,
+		run: LibraryOpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
 	): Promise<void> {
 		if (!run.required_action) {
@@ -125,9 +119,9 @@ class OpenAi {
 
 	private async handleRunStatus(
 		threadId: string,
-		run: OpenAI.Beta.Threads.Runs.Run,
+		run: LibraryOpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
-	): Promise<OpenAiResponseMessage> {
+	): Promise<OpenAIResponseMessage> {
 		if (run.status === OpenAIRunStatus.COMPLETED) {
 			return await this.getAllMessages(threadId);
 		}
@@ -146,9 +140,15 @@ class OpenAi {
 		});
 	}
 
+	private initialize(): LibraryOpenAI {
+		return new LibraryOpenAI({
+			apiKey: this.config.ENV.OPEN_AI.API_KEY,
+		});
+	}
+
 	public async addMessageToThread(
 		threadId: string,
-		message: OpenAiRequestMessage,
+		message: OpenAIRequestMessage,
 	): Promise<boolean> {
 		try {
 			const newMessage = await this.openAI.beta.threads.messages.create(
@@ -168,7 +168,7 @@ class OpenAi {
 	}
 
 	public async createThread(
-		message: OpenAiRequestMessage[] = [],
+		message: OpenAIRequestMessage[] = [],
 	): Promise<string> {
 		try {
 			const thread = await this.openAI.beta.threads.create({
@@ -210,7 +210,7 @@ class OpenAi {
 
 	public async getAllMessages(
 		threadId: string,
-	): Promise<OpenAiResponseMessage> {
+	): Promise<OpenAIResponseMessage> {
 		try {
 			return await this.openAI.beta.threads.messages.list(threadId);
 		} catch (error) {
@@ -229,8 +229,8 @@ class OpenAi {
 
 	public async runThread(
 		threadId: string,
-		runOptions: OpenAiRunThreadRequestDto,
-	): Promise<OpenAiResponseMessage> {
+		runOptions: OpenAIRunThreadRequestDto,
+	): Promise<OpenAIResponseMessage> {
 		try {
 			const runs = await this.openAI.beta.threads.runs.list(threadId);
 
@@ -275,4 +275,4 @@ class OpenAi {
 	}
 }
 
-export { OpenAi };
+export { OpenAI };

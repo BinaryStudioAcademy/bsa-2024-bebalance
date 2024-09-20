@@ -1,4 +1,4 @@
-const OpenAiInitialPromptTemplate = {
+const OpenAIInitialPromptTemplate = {
 	INIT_CHAT_CONTENT: `
 The user has completed an onboarding quiz where they prioritized different areas of their life.
 Based on the user's answers, you will later recommend specific tasks to help user improve in areas such as health,
@@ -85,4 +85,4 @@ Ensure this data is placed in the \`lowestCategories\` field of the response.
 `,
 } as const;
 
-export { OpenAiInitialPromptTemplate };
+export { OpenAIInitialPromptTemplate };

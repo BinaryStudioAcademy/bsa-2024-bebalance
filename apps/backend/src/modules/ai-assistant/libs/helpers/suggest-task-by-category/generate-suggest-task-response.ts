@@ -3,7 +3,7 @@ import { type z } from "zod";
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
-	type OpenAiResponseMessage,
+	type OpenAIResponseMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
@@ -17,7 +17,7 @@ import { type taskByCategory } from "./suggest-task-by-category.validation-schem
 type TaskByCategoryData = z.infer<typeof taskByCategory>;
 
 const generateTaskSuggestionsResponse = (
-	aiResponse: OpenAiResponseMessage,
+	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
 	lastMessageId: number,
 ): AIAssistantResponseDto | null => {
