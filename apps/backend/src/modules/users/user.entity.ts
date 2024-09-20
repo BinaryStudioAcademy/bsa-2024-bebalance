@@ -1,11 +1,13 @@
 import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
-import { NotificationFrequency } from "./libs/enums/enums.js";
+import { NotificationFrequency, TaskCompletion } from "./libs/enums/enums.js";
 
 class UserEntity implements Entity {
 	private avatarFileId: null | number;
 
 	private avatarUrl: null | string;
+
+	private completionTasksPercentage: null | number;
 
 	private createdAt: string;
 
@@ -32,6 +34,7 @@ class UserEntity implements Entity {
 	private constructor({
 		avatarFileId,
 		avatarUrl,
+		completionTasksPercentage,
 		createdAt,
 		email,
 		hasAnsweredOnboardingQuestions,
@@ -46,6 +49,7 @@ class UserEntity implements Entity {
 	}: {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -69,6 +73,7 @@ class UserEntity implements Entity {
 		this.notificationFrequency = notificationFrequency;
 		this.passwordHash = passwordHash;
 		this.passwordSalt = passwordSalt;
+		this.completionTasksPercentage = completionTasksPercentage;
 		this.updatedAt = updatedAt;
 		this.userTaskDays = userTaskDays;
 	}
@@ -76,6 +81,7 @@ class UserEntity implements Entity {
 	public static initialize({
 		avatarFileId,
 		avatarUrl,
+		completionTasksPercentage,
 		createdAt,
 		email,
 		hasAnsweredOnboardingQuestions,
@@ -90,6 +96,7 @@ class UserEntity implements Entity {
 	}: {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -105,6 +112,8 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			avatarFileId,
 			avatarUrl,
+			completionTasksPercentage:
+				completionTasksPercentage ?? TaskCompletion.NO_COMPLETED_TASKS,
 			createdAt,
 			email,
 			hasAnsweredOnboardingQuestions,
@@ -134,6 +143,7 @@ class UserEntity implements Entity {
 		return new UserEntity({
 			avatarFileId: null,
 			avatarUrl: null,
+			completionTasksPercentage: TaskCompletion.NO_COMPLETED_TASKS,
 			createdAt: "",
 			email,
 			hasAnsweredOnboardingQuestions: false,
@@ -151,6 +161,7 @@ class UserEntity implements Entity {
 	public toNewObject(): {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -165,6 +176,8 @@ class UserEntity implements Entity {
 		return {
 			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
+			completionTasksPercentage:
+				this.completionTasksPercentage ?? TaskCompletion.NO_COMPLETED_TASKS,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
@@ -181,6 +194,7 @@ class UserEntity implements Entity {
 	public toObject(): {
 		avatarFileId: null | number;
 		avatarUrl: null | string;
+		completionTasksPercentage: null | number;
 		createdAt: string;
 		email: string;
 		hasAnsweredOnboardingQuestions: boolean;
@@ -194,6 +208,8 @@ class UserEntity implements Entity {
 		return {
 			avatarFileId: this.avatarFileId,
 			avatarUrl: this.avatarUrl,
+			completionTasksPercentage:
+				this.completionTasksPercentage ?? TaskCompletion.NO_COMPLETED_TASKS,
 			createdAt: this.createdAt,
 			email: this.email,
 			hasAnsweredOnboardingQuestions: this.hasAnsweredOnboardingQuestions,
