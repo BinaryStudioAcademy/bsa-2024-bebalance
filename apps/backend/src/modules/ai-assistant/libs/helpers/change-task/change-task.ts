@@ -4,7 +4,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { changeTaskByCategory as ChangeTaskByCategoryValidationSchema } from "./change-task.validation-schema.js";
+import { changeTaskByCategory } from "./change-task.validation-schema.js";
 import { ChangeTaskPromptTemplate } from "./change-task-prompt-template.enum.js";
 import { generateChangeTaskPrompt } from "./generate-change-task-prompt.js";
 
@@ -18,7 +18,7 @@ const runChangeTaskByCategoryOptions = (
 		function_name: OpenAIFunctionName.CHANGE_TASK,
 		instructions: ChangeTaskPromptTemplate.CHANGE_TASKS_INSTRUCTIONS,
 		messages: [changeTaskPrompt],
-		validationSchema: ChangeTaskByCategoryValidationSchema,
+		validationSchema: changeTaskByCategory,
 	};
 };
 
