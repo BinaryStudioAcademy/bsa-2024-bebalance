@@ -12,7 +12,11 @@ import {
 } from "~/modules/chat/chat.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
-import { ChatMessage, MessageLoader } from "./libs/components/components.js";
+import {
+	ChatMessage,
+	InitialMessages,
+	MessageLoader,
+} from "./libs/components/components.js";
 import { type ChartDataType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -94,6 +98,7 @@ const Chat: React.FC = () => {
 		<main className={styles["page-container"]}>
 			<div>
 				<ul className={styles["container"]}>
+					{threadId && <InitialMessages />}
 					{messages.map((message) => {
 						return (
 							<ChatMessage

@@ -12,7 +12,7 @@ import {
 
 import { handleButtonAction } from "../../helpers/helpers.js";
 import { type ChartDataType } from "../../types/types.js";
-import { ConfirmationButtons } from "../confirmation-buttons/confirmation-buttons.js";
+import { ChatButtons } from "../confirmation-buttons/confirmation-buttons.js";
 import { TaskListContainer } from "../task-list-container/task-list-container.js";
 import styles from "./styles.module.css";
 
@@ -59,7 +59,7 @@ const ChatMessage: React.FC<Properties> = ({
 
 			case ChatMessageType.CONFIRMATION_BUTTONS: {
 				return (
-					<ConfirmationButtons
+					<ChatButtons
 						handleNo={handleNo}
 						handleYes={handleYes}
 						noButtonLabel={buttonLabels[NumericalValue.ONE] || "No"}

@@ -31,27 +31,8 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(initConversation.fulfilled, (state, action) => {
-				state.selectedCategories = action.payload.lowestCategories;
 				state.threadId = action.payload.threadId;
-				state.messages.push(
-					{
-						message: action.payload.messages.greeting,
-						type: ChatMessageType.TEXT,
-					},
 
-					{
-						message: action.payload.messages.comments,
-						type: ChatMessageType.WHEEL_ANALYSIS,
-					},
-					{
-						buttonLabels: [
-							ChatButtonLabels.YES_LOWEST,
-							ChatButtonLabels.NO_DIFFERENT,
-						],
-						message: action.payload.messages.question,
-						type: ChatMessageType.CONFIRMATION_BUTTONS,
-					},
-				);
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {

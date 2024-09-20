@@ -9,7 +9,7 @@ type Properties = {
 	yesButtonLabel: string;
 };
 
-const ConfirmationButtons: React.FC<Properties> = ({
+const ChatButtons: React.FC<Properties> = ({
 	handleNo,
 	handleYes,
 	noButtonLabel,
@@ -23,4 +23,4 @@ const ConfirmationButtons: React.FC<Properties> = ({
 	);
 };
 
-export { ConfirmationButtons };
+export { ChatButtons };
