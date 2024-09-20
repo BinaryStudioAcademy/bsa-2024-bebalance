@@ -22,14 +22,17 @@ const Link: React.FC<Properties> = ({
 }: Properties) => {
 	return (
 		<NavLink
-			className={getValidClassNames(
-				styles["link"],
-				isActive && type && styles[`${type}-active`],
-				type && styles[type],
-			)}
+			className={getValidClassNames(styles["link"], type && styles[type])}
 			to={to}
 		>
-			{children}
+			<span
+				className={getValidClassNames(
+					styles["content-container"],
+					isActive && type && styles[`${type}-active`],
+				)}
+			>
+				{children}
+			</span>
 		</NavLink>
 	);
 };
