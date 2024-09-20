@@ -20,6 +20,12 @@
 	text-transform: capitalize;
 }
 
+.switch-container {
+	position: relative;
+	left: 25%;
+	width: 253px;
+}
+
 .content-wrapper {
 	display: flex;
 	gap: 45px;

@@ -92,6 +92,10 @@ export {
 } from "./modules/quiz/quiz.js";
 export {
 	type TaskDto,
+	type TaskNoteDto,
+	type TaskNoteParametersDto,
+	type TaskNoteRequestDto,
+	taskNoteValidationSchema,
 	TasksApiPath,
 	TaskStatus,
 	type TaskUpdateParametersDto,

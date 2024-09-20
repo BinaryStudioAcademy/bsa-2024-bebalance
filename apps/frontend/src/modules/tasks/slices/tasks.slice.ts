@@ -4,7 +4,7 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { getCurrentTasks } from "./actions.js";
+import { getCurrentTasks, getPastTasks, update } from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
@@ -26,6 +26,30 @@ const { actions, name, reducer } = createSlice({
 			state.tasks = action.payload;
 		});
 		builder.addCase(getCurrentTasks.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(getPastTasks.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getPastTasks.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.tasks = action.payload;
+		});
+		builder.addCase(getPastTasks.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(update.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(update.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.tasks = state.tasks.filter((task) => {
+				return task.id !== action.payload.id;
+			});
+		});
+		builder.addCase(update.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},
