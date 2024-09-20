@@ -14,7 +14,7 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	deadline: string;
-	onExpire: (() => void) | undefined;
+	onExpire: () => void;
 };
 
 const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
@@ -35,7 +35,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 			if (timeToDeadline < ONE_MINUTE_IN_MILLISECONDS) {
 				setCountdown(COUNTDOWN_EXPIRED);
 				setIsExpired(true);
-				onExpire?.();
+				onExpire();
 
 				return true;
 			}
