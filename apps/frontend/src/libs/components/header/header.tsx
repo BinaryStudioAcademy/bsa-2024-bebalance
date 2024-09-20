@@ -2,7 +2,7 @@ import { Button } from "~/libs/components/components.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { type UserDto } from "~/modules/users/users.js";
 
-import { HeaderUserInfo } from "./libs/components/components.js";
+import { HeaderUserInformation } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -25,7 +25,7 @@ const Header: React.FC<Properties> = ({ onSidebarToggle }: Properties) => {
 				/>
 			</div>
 
-			<HeaderUserInfo user={user} />
+			<HeaderUserInformation user={user} />
 		</header>
 	);
 };

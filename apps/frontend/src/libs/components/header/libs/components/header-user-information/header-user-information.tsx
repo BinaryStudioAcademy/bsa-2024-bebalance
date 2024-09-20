@@ -9,7 +9,7 @@ type Properties = {
 	user: UserDto;
 };
 
-const HeaderUserInfo: React.FC<Properties> = ({ user }: Properties) => {
+const HeaderUserInformation: React.FC<Properties> = ({ user }: Properties) => {
 	return (
 		<Link to={AppRoute.PROFILE}>
 			<div className={styles["container"]}>
@@ -24,4 +24,4 @@ const HeaderUserInfo: React.FC<Properties> = ({ user }: Properties) => {
 	);
 };
 
-export { HeaderUserInfo };
+export { HeaderUserInformation };
