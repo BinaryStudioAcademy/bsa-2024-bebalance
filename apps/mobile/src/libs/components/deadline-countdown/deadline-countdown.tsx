@@ -28,7 +28,7 @@ const TimePad = {
 	MINUTES: 2,
 } as const;
 
-const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
+const DeadlineCountdown: React.FC<Properties> = ({ deadline }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 
 	const calculateDaysUntilDeadline = useCallback((): boolean => {
@@ -102,4 +102,4 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 	);
 };
 
-export { Deadline };
+export { DeadlineCountdown };

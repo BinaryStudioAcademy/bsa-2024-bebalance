@@ -3,7 +3,7 @@ export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
 export { Checkbox } from "./checkbox/checkbox";
 export { CheckboxCategoriesForm } from "./checkbox-categories-form/checkbox-categories-form";
-export { Deadline } from "./deadline/deadline";
+export { DeadlineCountdown } from "./deadline-countdown/deadline-countdown";
 export { GradientSlider } from "./gradient-slider/gradient-slider";
 export { GradientTabIcon } from "./gradient-tab-icon/gradient-tab-icon";
 export { GradientText } from "./gradient-text/gradient-text";

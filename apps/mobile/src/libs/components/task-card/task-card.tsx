@@ -2,7 +2,7 @@ import React from "react";
 import { TaskStatus } from "shared";
 
 import {
-	Deadline,
+	DeadlineCountdown,
 	Icon,
 	Tag,
 	TaskActionButton,
@@ -64,7 +64,7 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 				]}
 			>
 				<Tag label={task.category} />
-				{isActiveTask && <Deadline deadline={task.dueDate} />}
+				{isActiveTask && <DeadlineCountdown deadline={task.dueDate} />}
 			</View>
 			<View style={[globalStyles.mt32, globalStyles.pb32, globalStyles.ph16]}>
 				<Text preset="subheading" weight="bold">
