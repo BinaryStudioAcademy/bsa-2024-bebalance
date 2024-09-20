@@ -35,7 +35,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				if (confirmPassword === password) {
 					onSubmit(payload);
 				} else {
-					setError(ConfirmPasswordCustomValidation.FIELD, {
+					setError(ConfirmPasswordCustomValidation.FIELDS.confirmPassword, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 					});
