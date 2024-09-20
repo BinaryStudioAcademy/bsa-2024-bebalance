@@ -26,20 +26,18 @@ const useTypingText = ({
 	const hiddenLetters = text.slice(currentLettersPrinted);
 
 	useEffect(() => {
-		if (currentLettersPrinted < text.length) {
-			if (currentLettersPrinted === firstLetterIndex) {
-				setTimeout(() => {
-					setCurrentLettersPrinted(
-						currentLettersPrinted + lettersPrintedPerStep,
-					);
-				}, startTypingDelay);
-			} else {
-				setTimeout(() => {
-					setCurrentLettersPrinted(
-						currentLettersPrinted + lettersPrintedPerStep,
-					);
-				}, nextLettersPrintedDelay);
-			}
+		if (currentLettersPrinted >= text.length) {
+			return;
+		}
+
+		if (currentLettersPrinted === firstLetterIndex) {
+			setTimeout(() => {
+				setCurrentLettersPrinted(currentLettersPrinted + lettersPrintedPerStep);
+			}, startTypingDelay);
+		} else {
+			setTimeout(() => {
+				setCurrentLettersPrinted(currentLettersPrinted + lettersPrintedPerStep);
+			}, nextLettersPrintedDelay);
 		}
 	}, [
 		currentLettersPrinted,
