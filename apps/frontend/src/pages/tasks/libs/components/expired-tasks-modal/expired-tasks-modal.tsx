@@ -31,20 +31,20 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	const totalSlides = tasks.length;
 	const isSingleSlide = totalSlides === SINGLE_SLIDE;
 
-	const goToSlide = useCallback(
+	const handleSwitchSlide = useCallback(
 		(index: number): void => {
 			setCurrentSlide((index + totalSlides) % totalSlides);
 		},
 		[totalSlides],
 	);
 
-	const nextSlide = useCallback((): void => {
-		goToSlide(currentSlide + SINGLE_SLIDE);
-	}, [currentSlide, goToSlide]);
+	const handleNextSlide = useCallback((): void => {
+		handleSwitchSlide(currentSlide + SINGLE_SLIDE);
+	}, [currentSlide, handleSwitchSlide]);
 
-	const previousSlide = useCallback((): void => {
-		goToSlide(currentSlide - SINGLE_SLIDE);
-	}, [currentSlide, goToSlide]);
+	const handlePreviousSlide = useCallback((): void => {
+		handleSwitchSlide(currentSlide - SINGLE_SLIDE);
+	}, [currentSlide, handleSwitchSlide]);
 
 	const handleDragStart = useCallback(
 		(event: React.MouseEvent | React.TouchEvent): void => {
@@ -69,19 +69,15 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 			}
 
 			if (movementDistance > POSITIVE_MIN_THRESHOLD) {
-				nextSlide();
+				handleNextSlide();
 			} else {
-				previousSlide();
+				handlePreviousSlide();
 			}
 
 			setIsDragging(false);
 		},
-		[isDragging, startX, nextSlide, previousSlide, setIsDragging],
+		[isDragging, startX, handleNextSlide, handlePreviousSlide, setIsDragging],
 	);
-
-	const handleDragEnd = useCallback(() => {
-		setIsDragging(false);
-	}, [setIsDragging]);
 
 	useEffect(() => {
 		if (!sliderReference.current) {
@@ -95,7 +91,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["slider-container"]}>
-				{!isSingleSlide && <ArrowButton onClick={previousSlide} />}
+				{!isSingleSlide && <ArrowButton onClick={handlePreviousSlide} />}
 
 				<div className={styles["content"]}>
 					<div className={styles["upper-content"]}>
@@ -115,10 +111,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							<div
 								className={styles["slider"]}
 								onMouseDown={handleDragStart}
-								onMouseLeave={handleDragEnd}
 								onMouseMove={handleDragMove}
-								onMouseUp={handleDragEnd}
-								onTouchEnd={handleDragEnd}
 								onTouchMove={handleDragMove}
 								onTouchStart={handleDragStart}
 								ref={sliderReference}
@@ -137,7 +130,9 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 					<TaskActionsPanel currentTaskIndex={currentSlide} tasks={tasks} />
 				</div>
 
-				{!isSingleSlide && <ArrowButton onClick={nextSlide} variant="right" />}
+				{!isSingleSlide && (
+					<ArrowButton onClick={handleNextSlide} variant="right" />
+				)}
 			</div>
 		</div>
 	);
