@@ -5,12 +5,37 @@ import { STATUS_FIELD } from "./libs/constants/constants.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 import { TaskEntity } from "./task.entity.js";
 import { TaskModel } from "./task.model.js";
+import { TaskNoteEntity } from "./task-note.entity.js";
+import { type TaskNoteModel } from "./task-note.model.js";
 
 class TaskRepository implements Repository {
 	private taskModel: typeof TaskModel;
+	private taskNoteModel: typeof TaskNoteModel;
 
-	public constructor(taskModel: typeof TaskModel) {
+	public constructor(
+		taskModel: typeof TaskModel,
+		taskNoteModel: typeof TaskNoteModel,
+	) {
 		this.taskModel = taskModel;
+		this.taskNoteModel = taskNoteModel;
+	}
+
+	public async addNote(payload: {
+		content: string;
+		taskId: number;
+	}): Promise<TaskNoteEntity> {
+		const note = await this.taskNoteModel
+			.query()
+			.insert(payload)
+			.returning("*");
+
+		return TaskNoteEntity.initialize({
+			content: note.content,
+			createdAt: note.createdAt,
+			id: note.id,
+			taskId: note.taskId,
+			updatedAt: note.updatedAt,
+		});
 	}
 
 	public async create(entity: TaskEntity): Promise<TaskEntity> {
@@ -153,6 +178,23 @@ class TaskRepository implements Repository {
 				status: task.status,
 				updatedAt: task.updatedAt,
 				userId: task.userId,
+			});
+		});
+	}
+
+	public async getNotesByTaskId(taskId: number): Promise<TaskNoteEntity[]> {
+		const notes = await this.taskNoteModel
+			.query()
+			.where({ taskId })
+			.orderBy("createdAt", "asc");
+
+		return notes.map((note) => {
+			return TaskNoteEntity.initialize({
+				content: note.content,
+				createdAt: note.createdAt,
+				id: note.id,
+				taskId: note.taskId,
+				updatedAt: note.updatedAt,
 			});
 		});
 	}
