@@ -26,12 +26,12 @@ class OpenAi {
 	private assistantId: null | string = null;
 	private config: Config;
 	private logger: Logger;
-	private openAi: OpenAI;
+	private openAI: OpenAI;
 
 	public constructor({ config, logger }: Constructor) {
 		this.config = config;
 		this.logger = logger;
-		this.openAi = this.createOpenAi();
+		this.openAI = this.createOpenAi();
 	}
 
 	private createOpenAi(): OpenAI {
@@ -42,14 +42,14 @@ class OpenAi {
 
 	private async getOrInitializeAssistant(): Promise<string> {
 		try {
-			const existingAssistants = await this.openAi.beta.assistants.list();
+			const existingAssistants = await this.openAI.beta.assistants.list();
 			const assistant = existingAssistants.data.find(
 				(assistant) => assistant.name === OpenAIAssistantConfig.NAME,
 			);
 
 			const initializedAssistant =
 				assistant ??
-				(await this.openAi.beta.assistants.create({
+				(await this.openAI.beta.assistants.create({
 					instructions: OpenAIAssistantConfig.INSTRUCTION,
 					model: this.config.ENV.OPEN_AI.MODEL,
 					name: OpenAIAssistantConfig.NAME,
@@ -96,7 +96,7 @@ class OpenAi {
 					}
 
 					try {
-						await this.openAi.beta.threads.runs.submitToolOutputsAndPoll(
+						await this.openAI.beta.threads.runs.submitToolOutputsAndPoll(
 							run.thread_id,
 							run.id,
 							{
@@ -130,18 +130,20 @@ class OpenAi {
 	): Promise<OpenAiResponseMessage> {
 		if (run.status === OpenAIRunStatus.COMPLETED) {
 			return await this.getAllMessages(threadId);
-		} else if (run.status === OpenAIRunStatus.REQUIRE_ACTIONS) {
+		}
+
+		if (run.status === OpenAIRunStatus.REQUIRE_ACTIONS) {
 			await this.handleRequiresAction(run, functionName);
 
 			return await this.getAllMessages(threadId);
-		} else {
-			this.logger.error(`AI Assistant run failed: ${run.status}`);
-
-			throw new OpenAIError({
-				message: OpenAIErrorMessage.WRONG_RESPONSE,
-				status: HTTPCode.INTERNAL_SERVER_ERROR,
-			});
 		}
+
+		this.logger.error(`AI Assistant run failed: ${run.status}`);
+
+		throw new OpenAIError({
+			message: OpenAIErrorMessage.WRONG_RESPONSE,
+			status: HTTPCode.INTERNAL_SERVER_ERROR,
+		});
 	}
 
 	public async addMessageToThread(
@@ -149,7 +151,7 @@ class OpenAi {
 		message: OpenAiRequestMessage,
 	): Promise<boolean> {
 		try {
-			const newMessage = await this.openAi.beta.threads.messages.create(
+			const newMessage = await this.openAI.beta.threads.messages.create(
 				threadId,
 				message,
 			);
@@ -169,7 +171,7 @@ class OpenAi {
 		message: OpenAiRequestMessage[] = [],
 	): Promise<string> {
 		try {
-			const thread = await this.openAi.beta.threads.create({
+			const thread = await this.openAI.beta.threads.create({
 				messages: message,
 			});
 
@@ -193,7 +195,7 @@ class OpenAi {
 
 	public async deleteThread(threadId: string): Promise<boolean> {
 		try {
-			const result = await this.openAi.beta.threads.del(threadId);
+			const result = await this.openAI.beta.threads.del(threadId);
 
 			return result.deleted;
 		} catch (error) {
@@ -210,7 +212,7 @@ class OpenAi {
 		threadId: string,
 	): Promise<OpenAiResponseMessage> {
 		try {
-			return await this.openAi.beta.threads.messages.list(threadId);
+			return await this.openAI.beta.threads.messages.list(threadId);
 		} catch (error) {
 			this.logger.error(`Error getting messages: ${String(error)}`);
 
@@ -230,7 +232,7 @@ class OpenAi {
 		runOptions: OpenAiRunThreadRequestDto,
 	): Promise<OpenAiResponseMessage> {
 		try {
-			const runs = await this.openAi.beta.threads.runs.list(threadId);
+			const runs = await this.openAI.beta.threads.runs.list(threadId);
 
 			const pendingRuns = runs.data.filter(
 				(run) =>
@@ -239,10 +241,10 @@ class OpenAi {
 			);
 
 			for (const run of pendingRuns) {
-				await this.openAi.beta.threads.runs.poll(threadId, run.id);
+				await this.openAI.beta.threads.runs.poll(threadId, run.id);
 			}
 
-			const run = await this.openAi.beta.threads.runs.createAndPoll(threadId, {
+			const run = await this.openAI.beta.threads.runs.createAndPoll(threadId, {
 				additional_instructions: runOptions.additional_instructions,
 				additional_messages: runOptions.messages,
 				assistant_id: this.assistantId as string,
