@@ -23,7 +23,7 @@ import { type UserDto } from "~/packages/users/users";
 import { actions as taskActions } from "~/slices/task/task";
 import { actions as userActions } from "~/slices/users/users";
 
-import { TasksMode, TaskStatus } from "./libs/enums/enums";
+import { TasksMode, TaskStatus, TaskTab } from "./libs/enums/enums";
 import { styles } from "./styles";
 
 const Tasks: React.FC = () => {
@@ -97,9 +97,11 @@ const Tasks: React.FC = () => {
 					</Text>
 					<View style={[globalStyles.flex1, styles.switch]}>
 						<PageSwitcher
-							activeTab={mode === TasksMode.CURRENT ? "Active" : "Past"}
+							activeTab={
+								mode === TasksMode.CURRENT ? TaskTab.ACTIVE : TaskTab.PAST
+							}
 							onTabChange={handleModeToggle}
-							tabs={["Active", "Past"]}
+							tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
 						/>
 					</View>
 				</View>
