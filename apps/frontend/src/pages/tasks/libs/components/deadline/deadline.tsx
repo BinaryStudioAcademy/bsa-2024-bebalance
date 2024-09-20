@@ -1,6 +1,6 @@
 import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useEffect, useRef, useState } from "~/libs/hooks/hooks.js";
+import { useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import { ONE_MINUTE } from "../../constants/constants.js";
 import { getTimeLeft } from "../../helpers/helpers.js";
@@ -20,17 +20,12 @@ type Properties = {
 const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 	const [isExpired, setIsExpired] = useState<boolean>(false);
-	const onExpireReference = useRef(onExpire);
 
 	const clockIconName = isExpired ? "clockInactive" : "clockActive";
 	const countdownStyleClass = getValidClassNames(
 		styles["countdown"],
 		isExpired && styles["expired"],
 	);
-
-	useEffect(() => {
-		onExpireReference.current = onExpire;
-	}, [onExpire]);
 
 	useEffect(() => {
 		const calculateDaysUntilDeadline = (): boolean => {
@@ -40,7 +35,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 			if (timeToDeadline < ONE_MINUTE) {
 				setCountdown(COUNTDOWN_EXPIRED);
 				setIsExpired(true);
-				onExpireReference.current?.();
+				onExpire?.();
 
 				return true;
 			}
@@ -86,7 +81,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 		return (): void => {
 			clearInterval(countdownInterval);
 		};
-	}, [deadline]);
+	}, [deadline, onExpire]);
 
 	return (
 		<div className={styles["container"]}>
