@@ -1,5 +1,6 @@
 import { Button } from "~/libs/components/components.js";
 
+import { NEWLINE_CHARACTER } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -21,7 +22,7 @@ const Popup: React.FC<Properties> = ({
 	onConfirm,
 	title,
 }: Properties) => {
-	const multilineTitles: string[] = title.split("\n");
+	const multilineTitles: string[] = title.split(NEWLINE_CHARACTER);
 
 	return (
 		<dialog className={styles["logout-dialog"]} open={isOpen}>
