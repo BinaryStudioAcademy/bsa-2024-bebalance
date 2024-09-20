@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import { type QueryParameters } from "~/libs/types/types.js";
 
-function useQuery(): QueryParameters {
+const useQuery = (): QueryParameters => {
 	const { search } = useLocation();
 
 	const queryParametersList: QueryParameters = {};
@@ -15,6 +15,6 @@ function useQuery(): QueryParameters {
 	}
 
 	return queryParametersList;
-}
+};
 
 export { useQuery };
