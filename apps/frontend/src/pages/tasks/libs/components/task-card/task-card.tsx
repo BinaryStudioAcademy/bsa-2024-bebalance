@@ -67,10 +67,12 @@ const TaskCard: React.FC<Properties> = ({
 						<>
 							<div className={styles["button-container"]}>
 								<Button
-									iconName="closeSmallGray"
+									iconName={
+										areActionsDisabled ? "closeSmallGray" : "closeSmall"
+									}
 									isDisabled={areActionsDisabled}
 									label="Skip the task"
-									labelVariant="light"
+									labelVariant={areActionsDisabled ? "light" : "primary"}
 									onClick={handleSkip}
 									type="button"
 									variant="action"
@@ -78,10 +80,10 @@ const TaskCard: React.FC<Properties> = ({
 							</div>
 							<div className={styles["button-container"]}>
 								<Button
-									iconName="checkGray"
+									iconName={areActionsDisabled ? "checkGray" : "check"}
 									isDisabled={areActionsDisabled}
 									label="Mark complete"
-									labelVariant="light"
+									labelVariant={areActionsDisabled ? "light" : "primary"}
 									onClick={handleComplete}
 									type="button"
 									variant="action"
