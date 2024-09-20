@@ -2,7 +2,7 @@ import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useEffect, useState } from "~/libs/hooks/hooks.js";
 
-import { ONE_MINUTE } from "../../constants/constants.js";
+import { ONE_MINUTE_IN_MILLISECONDS } from "../../constants/constants.js";
 import { getMillisecondsLeft } from "../../helpers/helpers.js";
 import {
 	COUNTDOWN_EXPIRED,
@@ -32,7 +32,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 			const currentTime = Date.now();
 			const timeToDeadline = getMillisecondsLeft(currentTime, deadline);
 
-			if (timeToDeadline < ONE_MINUTE) {
+			if (timeToDeadline < ONE_MINUTE_IN_MILLISECONDS) {
 				setCountdown(COUNTDOWN_EXPIRED);
 				setIsExpired(true);
 				onExpire?.();
@@ -74,7 +74,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 			if (isExpired) {
 				clearInterval(countdownInterval);
 			}
-		}, ONE_MINUTE);
+		}, ONE_MINUTE_IN_MILLISECONDS);
 
 		calculateDaysUntilDeadline();
 

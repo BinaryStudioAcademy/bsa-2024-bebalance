@@ -11,7 +11,10 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
-import { NO_EXPIRED_TASKS, ONE_MINUTE } from "./libs/constants/constants.js";
+import {
+	NO_EXPIRED_TASKS,
+	ONE_MINUTE_IN_MILLISECONDS,
+} from "./libs/constants/constants.js";
 import { TasksMode, TaskStatus } from "./libs/enums/enums.js";
 import { getMillisecondsLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
@@ -46,7 +49,7 @@ const Tasks: React.FC = () => {
 		for (const task of tasks) {
 			const timeToDeadline = getMillisecondsLeft(currentTime, task.dueDate);
 
-			if (timeToDeadline < ONE_MINUTE) {
+			if (timeToDeadline < ONE_MINUTE_IN_MILLISECONDS) {
 				expired.push(task);
 			} else {
 				active.push(task);
