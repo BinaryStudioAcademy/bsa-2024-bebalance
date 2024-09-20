@@ -53,10 +53,9 @@ const Auth: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 
-	const { token } =
-		name === RootScreenName.RESET_PASSWORD
-			? (params as { token: string })
-			: { token: "" };
+	const { token: resetPasswordToken = "" } = (params ?? {}) as {
+		token: string;
+	};
 
 	useEffect(() => {
 		if (!user) {
@@ -65,10 +64,12 @@ const Auth: React.FC = () => {
 	}, [dispatch, user]);
 
 	useEffect(() => {
-		if (token) {
-			void dispatch(authActions.checkIsResetPasswordExpired({ token }));
+		if (resetPasswordToken) {
+			void dispatch(
+				authActions.checkIsResetPasswordExpired({ token: resetPasswordToken }),
+			);
 		}
-	}, [dispatch, token]);
+	}, [dispatch, resetPasswordToken]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -96,13 +97,13 @@ const Auth: React.FC = () => {
 		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
 			void dispatch(
 				authActions.resetPassword({
-					jwtToken: token,
+					jwtToken: resetPasswordToken,
 					newPassword: payload.newPassword,
 				}),
 			);
 			navigation.navigate(RootScreenName.SIGN_IN);
 		},
-		[dispatch, navigation, token],
+		[dispatch, navigation, resetPasswordToken],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {

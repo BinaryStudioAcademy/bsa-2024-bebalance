@@ -17,7 +17,7 @@ const linking = {
 	config: {
 		screens: {
 			[RootScreenName.FORGOT_PASSWORD]: "Forgot Password",
-			[RootScreenName.RESET_PASSWORD]: "/reset-password",
+			[RootScreenName.RESET_PASSWORD]: "reset-password",
 			[RootScreenName.SIGN_IN]: "Sign In",
 			[RootScreenName.SIGN_UP]: "Sign Up",
 		},
