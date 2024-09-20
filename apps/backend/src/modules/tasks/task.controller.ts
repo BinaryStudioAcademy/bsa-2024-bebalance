@@ -129,6 +129,7 @@ class TaskController extends BaseController {
 				),
 			method: "GET",
 			path: TasksApiPath.NOTES_$ID,
+			preHandlers: [checkAccessToTask(taskService)],
 		});
 	}
 
