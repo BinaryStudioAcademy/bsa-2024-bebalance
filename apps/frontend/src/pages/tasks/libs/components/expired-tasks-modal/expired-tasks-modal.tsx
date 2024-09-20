@@ -8,14 +8,10 @@ import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
 import {
-	DRAG_THRESHOLD,
-	FIRST_SLIDE,
-	INITIAL_SLIDE,
 	INITIAL_X,
-	POSITIVE_MIN_THRESHOLD,
-	SINGLE_SLIDE,
 	SLIDE_WIDTH_PERCENTAGE,
 } from "./libs/constants/constants.js";
+import { DragThreshold, Slide } from "./libs/enums/enums.js";
 import { getClientX } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -24,12 +20,12 @@ type Properties = {
 };
 
 const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
-	const [currentSlide, setCurrentSlide] = useState<number>(INITIAL_SLIDE);
+	const [currentSlide, setCurrentSlide] = useState<number>(Slide.INITIAL);
 	const [startX, setStartX] = useState<number>(INITIAL_X);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
 	const totalSlides = tasks.length;
-	const isSingleSlide = totalSlides === SINGLE_SLIDE;
+	const isSingleSlide = totalSlides === Slide.SINGLE;
 
 	const handleSwitchSlide = useCallback(
 		(index: number): void => {
@@ -39,11 +35,11 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	);
 
 	const handleNextSlide = useCallback((): void => {
-		handleSwitchSlide(currentSlide + SINGLE_SLIDE);
+		handleSwitchSlide(currentSlide + Slide.SINGLE);
 	}, [currentSlide, handleSwitchSlide]);
 
 	const handlePreviousSlide = useCallback((): void => {
-		handleSwitchSlide(currentSlide - SINGLE_SLIDE);
+		handleSwitchSlide(currentSlide - Slide.SINGLE);
 	}, [currentSlide, handleSwitchSlide]);
 
 	const handleDragStart = useCallback(
@@ -64,11 +60,11 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 			const clientX = getClientX(event);
 			const movementDistance = startX - clientX;
 
-			if (Math.abs(movementDistance) <= DRAG_THRESHOLD) {
+			if (Math.abs(movementDistance) <= DragThreshold.SWIPE_MAXIMUM) {
 				return;
 			}
 
-			if (movementDistance > POSITIVE_MIN_THRESHOLD) {
+			if (movementDistance > DragThreshold.POSITIVE_MINIMUM) {
 				handleNextSlide();
 			} else {
 				handlePreviousSlide();
@@ -102,7 +98,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							<div>
 								<div className={styles["slide"]}>
 									<TaskCard
-										task={tasks[FIRST_SLIDE] as TaskDto}
+										task={tasks[Slide.INITIAL] as TaskDto}
 										variant="expired"
 									/>
 								</div>
