@@ -23,6 +23,7 @@ export {
 	type RadialLinearScale,
 	type ScriptableContext,
 } from "chart.js";
+export { type CSSProperties } from "react";
 export {
 	type OnboardingQuestionResponseDto,
 	type QuizQuestionDto,

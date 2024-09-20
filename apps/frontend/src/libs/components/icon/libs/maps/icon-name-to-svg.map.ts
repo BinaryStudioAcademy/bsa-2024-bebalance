@@ -1,11 +1,9 @@
-import CheckBlack from "~/assets/img/check-black.svg?react";
-import CheckGray from "~/assets/img/check-gray.svg?react";
 import CheckIcon from "~/assets/img/check-icon.svg?react";
+import CheckSmall from "~/assets/img/check-small.svg?react";
 import ClockActive from "~/assets/img/clock-active.svg?react";
 import ClockInactive from "~/assets/img/clock-inactive.svg?react";
 import Close from "~/assets/img/close.svg?react";
 import CloseSmall from "~/assets/img/close-small.svg?react";
-import CloseSmallGray from "~/assets/img/close-small-gray.svg?react";
 import CrossedEye from "~/assets/img/crossed-eye.svg?react";
 import Error from "~/assets/img/error.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
@@ -27,13 +25,11 @@ const iconNameToSvg: Record<
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
 	check: CheckIcon,
-	checkBlack: CheckBlack,
-	checkGray: CheckGray,
+	checkSmall: CheckSmall,
 	clockActive: ClockActive,
 	clockInactive: ClockInactive,
 	close: Close,
 	closeSmall: CloseSmall,
-	closeSmallGray: CloseSmallGray,
 	crossedEye: CrossedEye,
 	error: Error,
 	eye: Eye,

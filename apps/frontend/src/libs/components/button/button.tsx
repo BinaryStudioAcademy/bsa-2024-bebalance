@@ -1,5 +1,5 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { type IconName } from "~/libs/types/types.js";
+import { type CSSProperties, type IconName } from "~/libs/types/types.js";
 
 import { Icon } from "../icon/icon.js";
 import styles from "./styles.module.css";
@@ -8,6 +8,7 @@ type Properties = {
 	hasVisuallyHiddenLabel?: boolean;
 	iconName?: IconName;
 	iconPosition?: "center" | "left" | "right";
+	iconStyle?: CSSProperties | undefined;
 	isDisabled?: boolean;
 	isSelected?: boolean;
 	label: string;
@@ -21,6 +22,7 @@ const Button: React.FC<Properties> = ({
 	hasVisuallyHiddenLabel = false,
 	iconName,
 	iconPosition = "right",
+	iconStyle,
 	isDisabled = false,
 	isSelected = false,
 	label,
@@ -49,7 +51,7 @@ const Button: React.FC<Properties> = ({
 		>
 			{label}
 		</span>
-		{iconName && <Icon name={iconName} />}
+		{iconName && <Icon name={iconName} style={iconStyle} />}
 	</button>
 );
 

@@ -5,6 +5,7 @@ import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { TaskStatus } from "../../enums/enums.js";
 import { Category, Deadline, PastTaskStatus } from "../components.js";
+import { IconColorVariant } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -40,6 +41,9 @@ const TaskCard: React.FC<Properties> = ({
 		areActionsDisabled && styles["buttons-container-expired"],
 	);
 	const isActive = task.status === TaskStatus.CURRENT;
+	const iconColor = areActionsDisabled
+		? IconColorVariant.LIGHT
+		: IconColorVariant.PRIMARY;
 
 	return (
 		<div
@@ -67,9 +71,8 @@ const TaskCard: React.FC<Properties> = ({
 						<>
 							<div className={styles["button-container"]}>
 								<Button
-									iconName={
-										areActionsDisabled ? "closeSmallGray" : "closeSmall"
-									}
+									iconName="closeSmall"
+									iconStyle={{ color: iconColor }}
 									isDisabled={areActionsDisabled}
 									label="Skip the task"
 									labelVariant={areActionsDisabled ? "light" : "primary"}
@@ -80,7 +83,8 @@ const TaskCard: React.FC<Properties> = ({
 							</div>
 							<div className={styles["button-container"]}>
 								<Button
-									iconName={areActionsDisabled ? "checkGray" : "check"}
+									iconName="checkSmall"
+									iconStyle={{ color: iconColor }}
 									isDisabled={areActionsDisabled}
 									label="Mark complete"
 									labelVariant={areActionsDisabled ? "light" : "primary"}
