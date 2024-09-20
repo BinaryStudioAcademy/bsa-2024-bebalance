@@ -115,6 +115,7 @@ class TaskController extends BaseController {
 				),
 			method: "POST",
 			path: TasksApiPath.NOTES,
+			preHandlers: [checkAccessToTask(taskService)],
 			validation: {
 				body: taskNoteValidationSchema,
 			},
