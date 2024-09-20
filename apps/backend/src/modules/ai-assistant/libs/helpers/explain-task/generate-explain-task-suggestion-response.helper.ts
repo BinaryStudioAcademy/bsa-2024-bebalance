@@ -73,27 +73,6 @@ const generateExplainTaskSuggestionsResponse = (
 		type: "task",
 	};
 
-	const acceptTaskQuestion = {
-		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
-		isRead: false,
-		payload: {
-			buttons: [
-				{
-					label: "Yes, accepts the task",
-					value: "Yes, accepts the task",
-				},
-				{
-					label: "No, I would like to try something else",
-					value: "No, I would like to try something else",
-				},
-			],
-			text: resultData.message.question,
-		},
-		type: ChatMessageType.QUESTION_WITH_BUTTONS,
-	};
-
 	const motivationMessage = {
 		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
@@ -106,7 +85,7 @@ const generateExplainTaskSuggestionsResponse = (
 	};
 
 	return {
-		messages: [textMessage, taskMessage, acceptTaskQuestion, motivationMessage],
+		messages: [textMessage, taskMessage, motivationMessage],
 		threadId: message.thread_id,
 	};
 };

@@ -4,10 +4,9 @@ import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
 	type OpenAIResponseMessage,
-	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { ChatMessageAuthor } from "../../enums/enums.js";
+import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
 import {
 	type AIAssistantResponseDto,
 	type ChatMessageDto,
@@ -40,14 +39,14 @@ const generateTaskSuggestionsResponse = (
 	) as TaskByCategoryData;
 
 	const textMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
+		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
 		id: lastMessageId++,
 		isRead: false,
 		payload: {
 			text: resultData.message,
 		},
-		type: "text",
+		type: ChatMessageType.TEXT,
 	};
 
 	const taskMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
@@ -65,7 +64,7 @@ const generateTaskSuggestionsResponse = (
 					label: task.label,
 				},
 			},
-			type: "task",
+			type: ChatMessageType.TASK,
 		};
 	});
 

@@ -46,7 +46,7 @@ const generateScoresResponse = (
 		payload: {
 			text: resultData.messages.greeting,
 		},
-		type: "text",
+		type: ChatMessageType.TEXT,
 	};
 
 	const balanceWheelMessage: ChatMessageDto = {
@@ -63,32 +63,11 @@ const generateScoresResponse = (
 			}),
 			text: resultData.messages.comments,
 		},
-		type: "balance wheel",
-	};
-
-	const categoryQuestion = {
-		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: messageIdCounter++,
-		isRead: false,
-		payload: {
-			buttons: [
-				{
-					label: "Yes, 3 lowest",
-					value: "Yes, 3 lowest",
-				},
-				{
-					label: "No, something else",
-					value: "No, something else",
-				},
-			],
-			text: resultData.messages.question,
-		},
-		type: ChatMessageType.QUESTION_WITH_BUTTONS,
+		type: ChatMessageType.BALANCE_WHEEL,
 	};
 
 	return {
-		messages: [greetingMessage, balanceWheelMessage, categoryQuestion],
+		messages: [greetingMessage, balanceWheelMessage],
 		threadId: message.thread_id,
 	};
 };

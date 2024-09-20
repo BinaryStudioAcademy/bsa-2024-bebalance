@@ -1,10 +1,10 @@
+import { ChatMessageAuthor, ChatMessageType } from "shared";
 import { type z } from "zod";
 
 import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
 	type OpenAIResponseMessage,
-	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import {
@@ -39,18 +39,18 @@ const generateChangeTaskSuggestionsResponse = (
 	) as TaskByCategoryData;
 
 	const textMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
+		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
 		id: lastMessageId++,
 		isRead: false,
 		payload: {
 			text: resultData.message,
 		},
-		type: "text",
+		type: ChatMessageType.TEXT,
 	};
 
 	const taskMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
+		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
 		id: lastMessageId++,
 		isRead: false,
@@ -63,7 +63,7 @@ const generateChangeTaskSuggestionsResponse = (
 				label: resultData.tasks.label,
 			},
 		},
-		type: "task",
+		type: ChatMessageType.TASK,
 	};
 
 	return {
