@@ -1,1 +1,1 @@
-export { taskUpdateValidationSchema } from "shared";
+export { taskNoteValidationSchema, taskUpdateValidationSchema } from "shared";
