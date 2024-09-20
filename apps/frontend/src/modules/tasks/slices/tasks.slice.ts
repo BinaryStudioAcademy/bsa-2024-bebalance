@@ -4,7 +4,6 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { NOT_FOUND_INDEX } from "../libs/constants/constants.js";
 import {
 	getCurrentTasks,
 	getPastTasks,
@@ -61,13 +60,13 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.PENDING;
 		});
 		builder.addCase(updateTaskDeadline.fulfilled, (state, action) => {
-			const taskIndex = state.tasks.findIndex(
-				(task) => task.id === action.payload.id,
-			);
+			state.tasks = state.tasks.map((task) => {
+				if (task.id === action.payload.id) {
+					return action.payload;
+				}
 
-			if (taskIndex !== NOT_FOUND_INDEX) {
-				state.tasks[taskIndex] = action.payload;
-			}
+				return task;
+			});
 
 			state.dataStatus = DataStatus.FULFILLED;
 		});
