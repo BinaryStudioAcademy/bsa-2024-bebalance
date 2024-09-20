@@ -8,7 +8,7 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
-import { type AiAssistantService } from "./ai-assistant.service.js";
+import { type AIAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type AIAssistantRequestDto,
@@ -122,10 +122,10 @@ import {
  *     description: Endpoints related to AI Assistant services and interactions
  */
 
-class AiAssistantController extends BaseController {
-	private openAiService: AiAssistantService;
+class AIAssistantController extends BaseController {
+	private openAiService: AIAssistantService;
 
-	public constructor(logger: Logger, openAiService: AiAssistantService) {
+	public constructor(logger: Logger, openAiService: AIAssistantService) {
 		super(logger, APIPath.ASSISTANT);
 
 		this.openAiService = openAiService;
@@ -578,4 +578,4 @@ class AiAssistantController extends BaseController {
 	}
 }
 
-export { AiAssistantController };
+export { AIAssistantController };

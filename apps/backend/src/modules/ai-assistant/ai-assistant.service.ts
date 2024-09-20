@@ -31,7 +31,7 @@ type Constructor = {
 	taskService: TaskService;
 };
 
-class AiAssistantService {
+class AIAssistantService {
 	private categoryService: CategoryService;
 	private onboardingRepository: OnboardingRepository;
 	private openAi: OpenAi;
@@ -160,4 +160,4 @@ class AiAssistantService {
 	}
 }
 
-export { AiAssistantService };
+export { AIAssistantService };
