@@ -13,7 +13,7 @@ import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
 import { NO_EXPIRED_TASKS, ONE_MINUTE } from "./libs/constants/constants.js";
 import { TasksMode, TaskStatus } from "./libs/enums/enums.js";
-import { getTimeLeft } from "./libs/helpers/helpers.js";
+import { getMillisecondsLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
@@ -44,7 +44,7 @@ const Tasks: React.FC = () => {
 		const active: TaskDto[] = [];
 
 		for (const task of tasks) {
-			const timeToDeadline = getTimeLeft(currentTime, task.dueDate);
+			const timeToDeadline = getMillisecondsLeft(currentTime, task.dueDate);
 
 			if (timeToDeadline < ONE_MINUTE) {
 				expired.push(task);

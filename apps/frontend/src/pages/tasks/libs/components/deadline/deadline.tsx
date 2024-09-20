@@ -3,7 +3,7 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import { ONE_MINUTE } from "../../constants/constants.js";
-import { getTimeLeft } from "../../helpers/helpers.js";
+import { getMillisecondsLeft } from "../../helpers/helpers.js";
 import {
 	COUNTDOWN_EXPIRED,
 	TIME_PAD_FILL,
@@ -30,7 +30,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 	useEffect(() => {
 		const calculateDaysUntilDeadline = (): boolean => {
 			const currentTime = Date.now();
-			const timeToDeadline = getTimeLeft(currentTime, deadline);
+			const timeToDeadline = getMillisecondsLeft(currentTime, deadline);
 
 			if (timeToDeadline < ONE_MINUTE) {
 				setCountdown(COUNTDOWN_EXPIRED);
