@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: BaseColor.BG_WHITE,
 	},
+	switch: {
+		maxWidth: "50%",
+	},
 });
 
 export { styles };

@@ -3,11 +3,25 @@ import { StyleSheet } from "react-native";
 import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
+	actions: {
+		borderTopColor: BaseColor.LIGHT_GRAY,
+		borderTopWidth: 1,
+	},
 	container: {
 		borderColor: BaseColor.LIGHT_GRAY,
 		borderRadius: 16,
 		borderWidth: 1,
 		height: 250,
+	},
+	description: {
+		width: "80%",
+	},
+	edit: {
+		backgroundColor: BaseColor.LIGHT_GRAY,
+		borderRadius: 20,
+	},
+	label: {
+		alignSelf: "flex-end",
 	},
 });
 
