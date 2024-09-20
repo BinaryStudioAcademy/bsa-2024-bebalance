@@ -1,0 +1,64 @@
+import React from "react";
+
+import {
+	ChatMessage,
+	CheckboxCategoriesForm,
+} from "~/libs/components/components";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks";
+import { type CategoriesSelectedRequestDto } from "~/libs/types/types";
+import { actions as chatActions } from "~/slices/chat/chat";
+
+import { CHECKBOX_SELECTOR_TEXT } from "./libs/constants/constants";
+import { getSelectedCategoriesHelper } from "./libs/helpers/helpers";
+
+const CheckBoxButtons: React.FC = () => {
+	const dispatch = useAppDispatch();
+
+	const threadId = useAppSelector((state) => state.chat.threadId);
+	const quizCategories = useAppSelector((state) => state.quiz.scores);
+
+	const handleFormSubmit = useCallback(
+		(payload: CategoriesSelectedRequestDto): void => {
+			const { categoryIds } = payload;
+
+			const newSelectedCategories = getSelectedCategoriesHelper(
+				quizCategories,
+				categoryIds,
+			);
+
+			void dispatch(
+				chatActions.updateSelectedCategories(newSelectedCategories),
+			);
+
+			const taskPayload = {
+				categories: newSelectedCategories,
+				threadId: threadId as string,
+			};
+
+			void dispatch(chatActions.getTasksForCategories(taskPayload));
+			dispatch(
+				chatActions.addTextMessage({
+					author: "user",
+					text: "Confirm tasks generation",
+				}),
+			);
+		},
+		[dispatch, quizCategories, threadId],
+	);
+
+	return (
+		<ChatMessage isUser={false} text={CHECKBOX_SELECTOR_TEXT}>
+			<CheckboxCategoriesForm
+				categories={quizCategories}
+				onSubmit={handleFormSubmit}
+				submitButtonLabel="Confirm"
+			/>
+		</ChatMessage>
+	);
+};
+
+export { CheckBoxButtons };

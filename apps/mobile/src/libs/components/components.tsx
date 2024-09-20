@@ -1,6 +1,8 @@
 export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
+export { ChatHeader } from "./chat-header/chat-header";
+export { ChatMessage } from "./chat-message/chat-message";
 export { Checkbox } from "./checkbox/checkbox";
 export { CheckboxCategoriesForm } from "./checkbox-categories-form/checkbox-categories-form";
 export { DeadlineCountdown } from "./deadline-countdown/deadline-countdown";
@@ -35,6 +37,9 @@ export { TypingTextView } from "./typing-text-view/typing-text-view";
 export { Wheel } from "./wheel/wheel";
 export { WheelLoader } from "./wheel-loader/wheel-loader";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
+export { ChatBox } from "~/screens/chat/libs/components/chat-box/chat-box";
+export { InitialChatMessage } from "~/screens/chat/libs/components/initial-chat-message/initial-chat-message";
+export { FlatList } from "react-native";
 export {
 	ActivityIndicator,
 	Image,

@@ -1,1 +1,1 @@
-export { categoriesSelectedValidationSchema } from "./libs/validation-schemas/validation-schemas";
+export { categoriesSelectedValidationSchema } from "./libs/validation-schemas";

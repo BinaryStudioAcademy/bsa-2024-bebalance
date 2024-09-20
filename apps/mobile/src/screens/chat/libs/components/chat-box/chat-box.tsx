@@ -1,15 +1,44 @@
-import { View } from "~/libs/components/components";
-import { type StyleProp, type ViewStyle } from "~/libs/types/types";
+import { ChatMessage } from "~/libs/components/components";
+import { type ValueOf } from "~/libs/types/types";
+import {
+	type ChatMessageAuthor,
+	ChatMessageType,
+	type TaskMessage,
+	type TextMessage,
+} from "~/packages/chat/chat";
 
-import { styles } from "./styles";
+import { AiTask } from "./libs/components/components";
 
 type Properties = {
-	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+	author: ValueOf<typeof ChatMessageAuthor>;
+	payload: TaskMessage | TaskMessage[] | TextMessage;
+	type: ValueOf<typeof ChatMessageType>;
 };
 
-const ChatBox: React.FC<Properties> = ({ children, style }: Properties) => {
-	return <View style={[styles.container, style]}>{children}</View>;
+const ChatBox: React.FC<Properties> = ({
+	author,
+	payload,
+	type,
+}: Properties) => {
+	const isUser = author === "user";
+
+	switch (type) {
+		case ChatMessageType.TEXT: {
+			return <ChatMessage content={payload as TextMessage} isUser={isUser} />;
+		}
+
+		case ChatMessageType.TASK: {
+			return (
+				<ChatMessage isUser={isUser}>
+					<AiTask tasks={payload as TaskMessage[]} />
+				</ChatMessage>
+			);
+		}
+
+		default: {
+			return null;
+		}
+	}
 };
 
 export { ChatBox };
