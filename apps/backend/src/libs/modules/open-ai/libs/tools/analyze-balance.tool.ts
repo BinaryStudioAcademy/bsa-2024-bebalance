@@ -13,11 +13,11 @@ const AnalyzeBalanceTool = {
 					items: {
 						additionalProperties: false,
 						properties: {
-							categoryId: {
+							id: {
 								description: "Unique identifier for the category",
 								type: "string",
 							},
-							categoryName: {
+							name: {
 								description: "The name of the category (e.g., Health, Work)",
 								type: "string",
 							},
@@ -26,7 +26,7 @@ const AnalyzeBalanceTool = {
 								type: "number",
 							},
 						},
-						required: ["categoryId", "categoryName", "score"],
+						required: ["id", "name", "score"],
 						type: "object",
 					},
 					type: "array",
@@ -61,16 +61,16 @@ const AnalyzeBalanceTool = {
 							items: {
 								additionalProperties: false,
 								properties: {
-									categoryId: {
+									id: {
 										description: "Unique identifier for the category",
 										type: "number",
 									},
-									categoryName: {
+									name: {
 										description: "The name of the category",
 										type: "string",
 									},
 								},
-								required: ["categoryId", "categoryName"],
+								required: ["id", "name"],
 								type: "object",
 							},
 							type: "array",

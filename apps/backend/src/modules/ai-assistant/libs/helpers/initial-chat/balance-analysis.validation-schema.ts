@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const category = z.object({
-	categoryId: z.number(),
-	categoryName: z.string(),
+	id: z.number(),
+	name: z.string(),
 });
 
 const messages = z.object({

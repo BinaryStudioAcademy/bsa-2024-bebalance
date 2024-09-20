@@ -57,8 +57,8 @@ const generateScoresResponse = (
 		payload: {
 			lowestCategories: resultData.lowestCategories.map((category) => {
 				return {
-					categoryId: category.categoryId,
-					categoryName: category.categoryName,
+					id: category.id,
+					name: category.name,
 				};
 			}),
 			text: resultData.messages.comments,

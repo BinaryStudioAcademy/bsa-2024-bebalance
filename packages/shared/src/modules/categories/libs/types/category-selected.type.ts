@@ -1,6 +1,6 @@
 type SelectedCategory = {
-	categoryId: number;
-	categoryName: string;
+	id: number;
+	name: string;
 };
 
 export { type SelectedCategory };

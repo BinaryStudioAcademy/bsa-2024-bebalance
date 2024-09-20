@@ -14,16 +14,16 @@ const SuggestTaskTool = {
 					items: {
 						additionalProperties: false,
 						properties: {
-							categoryId: {
+							id: {
 								description: "Unique identifier for the category",
 								type: "number",
 							},
-							categoryName: {
+							name: {
 								description: "The name of the category (e.g., Health, Work)",
 								type: "string",
 							},
 						},
-						required: ["categoryId", "categoryName"],
+						required: ["id", "name"],
 						type: "object",
 					},
 					type: "array",
