@@ -30,7 +30,6 @@ const TimePad = {
 
 const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
-	const [isExpired, setIsExpired] = useState<boolean>(false);
 
 	const calculateDaysUntilDeadline = useCallback((): boolean => {
 		const deadlineTime = new Date(deadline).getTime();
@@ -39,7 +38,6 @@ const Deadline: React.FC<Properties> = ({ deadline }: Properties) => {
 
 		if (timeToDeadline < DEADLINE_OVER) {
 			setCountdown(COUNTDOWN_EXPIRED);
-			setIsExpired(true);
 
 			return true;
 		}
