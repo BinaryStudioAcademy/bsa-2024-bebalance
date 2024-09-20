@@ -4,7 +4,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
 
-import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-template.enum.js";
+import { OpenAiInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
 
 function generateUserScoresPrompt(
 	userScores: QuizScoresGetAllResponseDto,
@@ -19,7 +19,7 @@ function generateUserScoresPrompt(
 
 	const content = `
 	{
-	"context": "${OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_CONTEXT}"
+	"context": "${OpenAiInitialPromptTemplate.WHEEL_OF_BALANCE_CONTEXT}"
 	"categories": ${JSON.stringify(categories)},
 	}`;
 

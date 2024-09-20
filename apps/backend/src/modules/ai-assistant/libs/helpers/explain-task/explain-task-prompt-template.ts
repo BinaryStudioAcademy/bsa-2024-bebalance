@@ -1,4 +1,4 @@
-const ExplainTaskPromptTemplates = {
+const ExplainTaskPromptTemplate = {
 	EXPLAIN_TASK_CONTEXT: `
 The user is asking for an explanation of the task that was previously suggested to them. Your role as the assistant is to
 provide a clear and concise summary of the task, emphasizing its purpose and how it aligns with the user's goals.
@@ -33,4 +33,4 @@ action:
 `,
 } as const;
 
-export { ExplainTaskPromptTemplates };
+export { ExplainTaskPromptTemplate };

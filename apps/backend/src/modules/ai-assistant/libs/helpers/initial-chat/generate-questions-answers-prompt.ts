@@ -5,7 +5,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type OnboardingQuestionEntity } from "~/modules/onboarding/onboarding.js";
 
-import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-template.enum.js";
+import { OpenAiInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
 
 function generateQuestionsAnswersPrompt(
 	userQuestionsWithAnswers: OnboardingQuestionEntity[],
@@ -21,9 +21,9 @@ function generateQuestionsAnswersPrompt(
 
 	const content = `
 	{
-	"context": "${OpenAiInitialPromptTemplates.INIT_CHAT_CONTENT}",
+	"context": "${OpenAiInitialPromptTemplate.INIT_CHAT_CONTENT}",
 	"user_answers": ${JSON.stringify(questionsWithAnswers)},
-	"instructions": "${OpenAiInitialPromptTemplates.INIT_CHAT_INSTRUCTION}",
+	"instructions": "${OpenAiInitialPromptTemplate.INIT_CHAT_INSTRUCTION}",
 	}`;
 
 	return {

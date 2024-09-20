@@ -5,7 +5,7 @@ import {
 import { type QuizScoresGetAllResponseDto } from "~/modules/categories/categories.js";
 
 import { balanceAnalysis as BalanceAnalysisResponseValidationSchema } from "./balance-analysis.validation-schema.js";
-import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-template.enum.js";
+import { OpenAiInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
 import { generateUserScoresPrompt } from "./generate-scores-prompt.js";
 
 const runInitialThreadOptions = (
@@ -18,7 +18,7 @@ const runInitialThreadOptions = (
 		additional_instructions: null,
 		function_name: OpenAIFunctionName.ANALYZE_BALANCE_SCORES,
 		instructions:
-			OpenAiInitialPromptTemplates.WHEEL_OF_BALANCE_INSTRUCTIONS.replace(
+			OpenAiInitialPromptTemplate.WHEEL_OF_BALANCE_INSTRUCTIONS.replace(
 				"{{userName}}",
 				userName,
 			),

@@ -5,7 +5,7 @@ import {
 
 import { type TaskCreateDto } from "../../types/types.js";
 import { explainTask as explainTaskValidationSchema } from "./explain-task.validation-schema.js";
-import { ExplainTaskPromptTemplates } from "./explain-task-prompt-template.js";
+import { ExplainTaskPromptTemplate } from "./explain-task-prompt-template.js";
 import { generateExplainTaskPrompt } from "./generate-explain-task-prompt.js";
 
 const runExplainTaskOptions = (
@@ -16,7 +16,7 @@ const runExplainTaskOptions = (
 	return {
 		additional_instructions: null,
 		function_name: OpenAIFunctionName.EXPLAIN_TASK,
-		instructions: ExplainTaskPromptTemplates.EXPLAIN_TASK_INSTRUCTIONS,
+		instructions: ExplainTaskPromptTemplate.EXPLAIN_TASK_INSTRUCTIONS,
 		messages: [explainTaskPrompt],
 		validationSchema: explainTaskValidationSchema,
 	};

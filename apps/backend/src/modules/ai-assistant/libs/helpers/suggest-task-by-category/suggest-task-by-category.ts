@@ -6,7 +6,7 @@ import {
 import { type SelectedCategory } from "../../types/types.js";
 import { generateSuggestTaskPrompt } from "./generate-suggest-task-prompt.js";
 import { taskByCategory as TaskByCategoryValidationSchema } from "./suggest-task-by-category.validation-schema.js";
-import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-template.enum.js";
+import { SuggestTaskPromptTemplate } from "./suggest-task-prompt-template.enum.js";
 
 const runTaskByCategoryOptions = (
 	categories: SelectedCategory[],
@@ -16,7 +16,7 @@ const runTaskByCategoryOptions = (
 	return {
 		additional_instructions: null,
 		function_name: OpenAIFunctionName.GENERATE_TASK_BY_CATEGORY,
-		instructions: SuggestTaskPromptTemplates.SUGGEST_TASKS_INSTRUCTIONS,
+		instructions: SuggestTaskPromptTemplate.SUGGEST_TASKS_INSTRUCTIONS,
 		messages: [suggestTaskPrompt],
 		validationSchema: TaskByCategoryValidationSchema,
 	};

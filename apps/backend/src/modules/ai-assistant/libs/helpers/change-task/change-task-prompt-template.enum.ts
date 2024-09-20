@@ -1,4 +1,4 @@
-const ChangeTaskPromptTemplates = {
+const ChangeTaskPromptTemplate = {
 	CHANGE_TASKS_CONTEXT: `
 The user has reviewed the suggested task for the category  and would like to request a new task.
 
@@ -38,4 +38,4 @@ and focused on gradual and meaningful progress in line with their priorities.
 `,
 } as const;
 
-export { ChangeTaskPromptTemplates };
+export { ChangeTaskPromptTemplate };
