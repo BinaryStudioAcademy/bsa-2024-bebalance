@@ -42,4 +42,10 @@
 	display: grid;
 	grid-template-columns: 200px 350px auto;
 	gap: 20px;
+	align-items: end;
+}
+
+.button-container {
+	justify-self: end;
+	width: 300px;
 }

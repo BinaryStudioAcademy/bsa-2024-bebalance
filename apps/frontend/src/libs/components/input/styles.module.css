@@ -52,6 +52,7 @@
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 22px;
+	text-align: left;
 	cursor: pointer;
 	border: 1px solid var(--light-gray);
 	border-radius: 5px;
@@ -114,5 +115,6 @@
 		justify-content: center;
 		width: 100%;
 		max-width: 312px;
+		text-align: center;
 	}
 }
