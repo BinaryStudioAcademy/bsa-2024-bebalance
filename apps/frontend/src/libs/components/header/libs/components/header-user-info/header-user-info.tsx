@@ -17,15 +17,14 @@ const HeaderUserInfo: React.FC<Properties> = ({ user }: Properties) => {
 	}, [navigate]);
 
 	return (
-		<label className={styles["container"]}>
-			<input className="visually-hidden" onClick={handleClick} type="button" />
+		<button className={styles["container"]} onClick={handleClick}>
 			<img
 				alt={`${user.name}'s avatar`}
 				className={styles["avatar"]}
 				src={user.avatarUrl ?? defaultAvatar}
 			/>
 			<span className={styles["username"]}>{user.name}</span>
-		</label>
+		</button>
 	);
 };
 
