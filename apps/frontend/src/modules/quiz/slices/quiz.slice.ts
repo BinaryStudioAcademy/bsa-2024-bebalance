@@ -66,7 +66,7 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.questionsByCategories = action.payload.items;
 			state.currentCategoryQuestions =
-				state.questionsByCategories[state.currentCategoryIndex] || null;
+				state.questionsByCategories[state.currentCategoryIndex] ?? null;
 		});
 		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
