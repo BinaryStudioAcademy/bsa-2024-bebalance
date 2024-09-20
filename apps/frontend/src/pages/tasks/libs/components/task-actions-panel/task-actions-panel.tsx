@@ -19,8 +19,8 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	tasks,
 }: Properties) => {
 	const dispatch = useAppDispatch();
-	const totalSlides = tasks.length;
-	const isSingleSlide = totalSlides === SINGLE_TASK;
+	const totalTasks = tasks.length;
+	const isSingleTask = totalTasks === SINGLE_TASK;
 
 	const handleTaskSkipping = useCallback(() => {
 		const task = tasks[currentTaskIndex] as TaskDto;
@@ -68,12 +68,12 @@ const TaskActionsPanel: React.FC<Properties> = ({
 					variant="secondary"
 				/>
 			</div>
-			{!isSingleSlide && (
+			{!isSingleTask && (
 				<div className={styles["counter"]}>
 					<p className={styles["page-number"]}>
 						{currentTaskIndex + SINGLE_TASK}
 					</p>
-					<p className={styles["total-page-number"]}>/{totalSlides}</p>
+					<p className={styles["total-page-number"]}>/{totalTasks}</p>
 				</div>
 			)}
 		</div>
