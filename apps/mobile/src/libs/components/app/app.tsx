@@ -13,6 +13,8 @@ import { store } from "~/libs/packages/store/store";
 import { globalStyles } from "~/libs/styles/styles";
 import { Root as RootNavigation } from "~/navigations/navigations";
 
+import { DEEP_LINK_PREFIX } from "./libs/constants/constants";
+
 const linking = {
 	config: {
 		screens: {
@@ -22,7 +24,7 @@ const linking = {
 			[RootScreenName.SIGN_UP]: "Sign Up",
 		},
 	},
-	prefixes: ["app://bebalance", "http://localhost:8081"],
+	prefixes: [DEEP_LINK_PREFIX],
 };
 
 const App: FC = () => {
