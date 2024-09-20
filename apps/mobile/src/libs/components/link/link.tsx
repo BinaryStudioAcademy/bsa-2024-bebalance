@@ -1,4 +1,5 @@
 import { Link as UILink } from "@react-navigation/native";
+import React from "react";
 
 import { BaseColor } from "~/libs/enums/enums";
 import {
@@ -7,7 +8,6 @@ import {
 	sizeToTextStyle,
 } from "~/libs/maps/maps";
 import {
-	type ComponentProps,
 	type StyleProp,
 	type TextStyle,
 	type ValueOf,
@@ -19,7 +19,7 @@ type Properties = {
 	preset?: keyof typeof presetToTextStyle;
 	size?: keyof typeof sizeToTextStyle;
 	style?: StyleProp<TextStyle>;
-	to: ComponentProps<typeof UILink>["to"];
+	to: React.ComponentProps<typeof UILink>["to"];
 	weight?: keyof typeof fontWeightToFamily;
 };
 
@@ -31,7 +31,7 @@ const Link: React.FC<Properties> = ({
 	style: styleOverride,
 	to,
 	weight,
-}: Properties) => {
+}) => {
 	const styles: StyleProp<TextStyle> = [
 		presetToTextStyle[preset],
 		size && sizeToTextStyle[size],
