@@ -262,6 +262,7 @@ class TaskController extends BaseController {
 	 * @swagger
 	 * /tasks/deadline/{id}:
 	 *    patch:
+	 *     tags: [tasks]
 	 *      description: Update the deadline of a task
 	 *      security:
 	 *        - bearerAuth: []
@@ -278,6 +279,18 @@ class TaskController extends BaseController {
 	 *            application/json:
 	 *              schema:
 	 *                $ref: "#/components/schemas/Task"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       403:
+	 *         description: Forbidden to update other user's tasks
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private async updateDeadline(
 		options: APIHandlerOptions<{
