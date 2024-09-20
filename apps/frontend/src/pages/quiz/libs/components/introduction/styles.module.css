@@ -1,7 +1,7 @@
 .container {
 	position: relative;
 	height: 100dvh;
-	padding: 15px;
+	padding: 27px 34px;
 	overflow: hidden;
 	background-color: var(--background);
 }
