@@ -5,6 +5,7 @@ import {
 	actions as tasksActions,
 } from "~/modules/tasks/tasks.js";
 
+import { TaskStatus } from "../../enums/enums.js";
 import { SINGLE_TASK } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
@@ -26,7 +27,7 @@ const TaskActionsPanel: React.FC<Properties> = ({
 		void dispatch(
 			tasksActions.update({
 				id: task.id,
-				status: "Skipped",
+				status: TaskStatus.SKIPPED,
 			}),
 		);
 	}, [dispatch, currentTaskIndex, tasks]);
@@ -36,7 +37,7 @@ const TaskActionsPanel: React.FC<Properties> = ({
 		void dispatch(
 			tasksActions.update({
 				id: task.id,
-				status: "Completed",
+				status: TaskStatus.COMPLETED,
 			}),
 		);
 	}, [dispatch, currentTaskIndex, tasks]);
