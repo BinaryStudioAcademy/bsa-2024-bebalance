@@ -23,4 +23,4 @@ const runChangeTaskByCategoryOptions = (
 };
 
 export { runChangeTaskByCategoryOptions };
-export { generateChangeTaskSuggestionsResponse } from "./change-task-response.js";
+export { generateChangeTaskSuggestionsResponse } from "./generate-change-task-suggestions-response.helper.js";

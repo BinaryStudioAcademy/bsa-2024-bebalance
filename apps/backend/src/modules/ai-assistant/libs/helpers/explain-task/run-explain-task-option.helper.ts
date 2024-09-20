@@ -23,4 +23,4 @@ const runExplainTaskOptions = (
 };
 
 export { runExplainTaskOptions };
-export { generateExplainTaskSuggestionsResponse } from "./explain-task-response.js";
+export { generateExplainTaskSuggestionsResponse } from "./generate-explain-task-suggestion-response.helper.js";

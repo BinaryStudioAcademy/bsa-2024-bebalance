@@ -12,8 +12,8 @@ import {
 	generateTaskSuggestionsResponse,
 	runChangeTaskByCategoryOptions,
 	runExplainTaskOptions,
-	runInitialThreadOptions,
-	runTaskByCategoryOptions,
+	runInitialChatOptions,
+	runSuggestTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
 	type AIAssistantRequestDto,
@@ -132,7 +132,7 @@ class AIAssistantService {
 		const initPrompt = generateQuestionsAnswersPrompt(userQuestionsWithAnswers);
 		const threadId = await this.openAI.createThread([initPrompt]);
 
-		const runThreadOptions = runInitialThreadOptions(
+		const runThreadOptions = runInitialChatOptions(
 			user.name,
 			userWheelBalanceScores,
 		);
@@ -148,7 +148,7 @@ class AIAssistantService {
 	): Promise<AIAssistantResponseDto | null> {
 		const { lastMessageId, payload, threadId } = body;
 		const categories = payload as SelectedCategory[];
-		const runThreadOptions = runTaskByCategoryOptions(categories);
+		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
 		const taskDeadLine = this.taskService.calculateDeadline(
 			user.userTaskDays as number[],

@@ -8,7 +8,7 @@ import { balanceAnalysis } from "./balance-analysis.validation-schema.js";
 import { OpenAIInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
 import { generateUserScoresPrompt } from "./generate-scores-prompt.js";
 
-const runInitialThreadOptions = (
+const runInitialChatOptions = (
 	userName: string,
 	userWheelBalanceScores: QuizScoresGetAllResponseDto,
 ): OpenAIRunThreadRequestDto => {
@@ -27,6 +27,6 @@ const runInitialThreadOptions = (
 	};
 };
 
-export { runInitialThreadOptions };
+export { runInitialChatOptions };
 export { generateQuestionsAnswersPrompt } from "./generate-questions-answers-prompt.js";
-export { generateScoresResponse } from "./generate-scores-response.js";
+export { generateScoresResponse } from "./generate-scores-response.helper.js";

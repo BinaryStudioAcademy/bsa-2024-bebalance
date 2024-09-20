@@ -1,7 +1,7 @@
 import { ChatMessageAuthor, ChatMessageType } from "shared";
 import { type z } from "zod";
 
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
 	type OpenAIResponseMessage,
@@ -34,7 +34,8 @@ const generateExplainTaskSuggestionsResponse = (
 		return null;
 	}
 
-	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const contentText: string =
+		parsedResult.data.content[FIRST_ITEM_INDEX].text.value;
 	const resultData: TaskByCategoryData = JSON.parse(
 		contentText,
 	) as TaskByCategoryData;

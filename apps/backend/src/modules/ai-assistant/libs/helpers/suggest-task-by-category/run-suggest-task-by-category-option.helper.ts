@@ -8,7 +8,7 @@ import { generateSuggestTaskPrompt } from "./generate-suggest-task-prompt.js";
 import { taskByCategory } from "./suggest-task-by-category.validation-schema.js";
 import { SuggestTaskPromptTemplate } from "./suggest-task-prompt-template.enum.js";
 
-const runTaskByCategoryOptions = (
+const runSuggestTaskByCategoryOptions = (
 	categories: SelectedCategory[],
 ): OpenAIRunThreadRequestDto => {
 	const suggestTaskPrompt = generateSuggestTaskPrompt(categories);
@@ -22,5 +22,5 @@ const runTaskByCategoryOptions = (
 	};
 };
 
-export { runTaskByCategoryOptions };
-export { generateTaskSuggestionsResponse } from "./generate-suggest-task-response.js";
+export { runSuggestTaskByCategoryOptions };
+export { generateTaskSuggestionsResponse } from "./generate-suggest-task-response.helper.js";
