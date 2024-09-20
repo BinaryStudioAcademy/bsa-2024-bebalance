@@ -56,14 +56,10 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 	const handleSelectAll = useCallback(() => {
 		const { hasSelectedAll } = getValues();
 
-		if (hasSelectedAll) {
-			setValue(
-				"categoryIds",
-				quizCategories.map((category) => category.id),
-			);
-		} else {
-			setValue("categoryIds", []);
-		}
+		const categoryIds = hasSelectedAll
+			? quizCategories.map((category) => category.id)
+			: [];
+		setValue("categoryIds", categoryIds);
 	}, [getValues, quizCategories, setValue]);
 
 	const handleInputSelect = useCallback(() => {
