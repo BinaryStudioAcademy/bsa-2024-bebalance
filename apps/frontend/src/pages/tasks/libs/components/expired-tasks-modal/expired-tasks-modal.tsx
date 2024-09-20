@@ -75,6 +75,13 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 		[isDragging, startX, handleNextSlide, handlePreviousSlide, setIsDragging],
 	);
 
+	const handleSlideRemoval = useCallback(() => {
+		const previousSlide = currentSlide - Slide.SINGLE;
+		setCurrentSlide(
+			previousSlide < Slide.INITIAL ? Slide.INITIAL : previousSlide,
+		);
+	}, [currentSlide]);
+
 	useEffect(() => {
 		if (!sliderReference.current) {
 			return;
@@ -132,7 +139,11 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 						)}
 					</div>
 
-					<TaskActionsPanel currentTaskIndex={currentSlide} tasks={tasks} />
+					<TaskActionsPanel
+						currentTaskIndex={currentSlide}
+						onResolve={handleSlideRemoval}
+						tasks={tasks}
+					/>
 				</div>
 
 				{!isSingleSlide && (

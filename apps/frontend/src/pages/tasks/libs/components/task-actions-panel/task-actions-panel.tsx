@@ -10,11 +10,13 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	currentTaskIndex: number;
+	onResolve: () => void;
 	tasks: TaskDto[];
 };
 
 const TaskActionsPanel: React.FC<Properties> = ({
 	currentTaskIndex,
+	onResolve,
 	tasks,
 }: Properties) => {
 	const SINGLE_TASK = 1;
@@ -23,30 +25,38 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const totalTasks = tasks.length;
 	const isSingleTask = totalTasks === SINGLE_TASK;
 
-	const handleTaskSkipping = useCallback(() => {
-		const task = tasks[currentTaskIndex] as TaskDto;
+	const handleTaskAction = useCallback(
+		(action: (task: TaskDto) => void) => {
+			return (): void => {
+				const task = tasks[currentTaskIndex] as TaskDto;
+				action(task);
+				onResolve();
+			};
+		},
+		[currentTaskIndex, tasks, onResolve],
+	);
+
+	const handleTaskSkipping = handleTaskAction((task) => {
 		void dispatch(
 			tasksActions.update({
 				id: task.id,
 				status: TaskStatus.SKIPPED,
 			}),
 		);
-	}, [dispatch, currentTaskIndex, tasks]);
+	});
 
-	const handleTaskCompletion = useCallback(() => {
-		const task = tasks[currentTaskIndex] as TaskDto;
+	const handleTaskCompletion = handleTaskAction((task) => {
 		void dispatch(
 			tasksActions.update({
 				id: task.id,
 				status: TaskStatus.COMPLETED,
 			}),
 		);
-	}, [dispatch, currentTaskIndex, tasks]);
+	});
 
-	const handleExtendingDeadline = useCallback(() => {
-		const task = tasks[currentTaskIndex] as TaskDto;
+	const handleExtendingDeadline = handleTaskAction((task) => {
 		void dispatch(tasksActions.updateTaskDeadline(task.id));
-	}, [dispatch, currentTaskIndex, tasks]);
+	});
 
 	return (
 		<div className={styles["lower-content"]}>
