@@ -128,6 +128,7 @@ class TaskController extends BaseController {
 	 *             schema:
 	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
+
 	private async findCurrentByUserId(
 		options: APIHandlerOptions<{
 			user: UserDto;

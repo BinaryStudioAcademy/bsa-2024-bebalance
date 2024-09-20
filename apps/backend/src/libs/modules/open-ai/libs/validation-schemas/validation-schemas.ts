@@ -1,1 +1,1 @@
-export { AiAssistantMessage as AiAssistantMessageValidationSchema } from "./ai-assistant-message.validation-schema.js";
+export { openAIAssistantMessage as AIAssistantMessageValidationSchema } from "./ai-assistant-message.validation-schema.js";

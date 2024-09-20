@@ -1,8 +1,8 @@
-export {
-	type BalanceWheelAnalysisResponseDto,
-	type SimplifiedQuizScoreDto,
-} from "./balance-wheel-analysis-response.dto.type.js";
+export { type AIAssistantRequestDto } from "./ai-assistant-request-dto.type.js";
+export { type AIAssistantResponseDto } from "./ai-assistant-response-dto.type.js";
+export { type BalanceWheelAnalysisResponseDto } from "./balance-wheel-analysis-response.dto.type.js";
 export { type ChangeTaskSuggestionRequestDto } from "./change-task-suggestion-request-dto.type.js";
+export { type SimplifiedQuizScoreDto } from "./simplified-quiz-score-dto.type.js";
 export {
 	type SelectedCategories,
 	type TaskSuggestionRequestDto,

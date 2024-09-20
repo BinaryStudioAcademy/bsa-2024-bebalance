@@ -3,7 +3,7 @@ import { BaseHTTPApi } from "~/libs/modules/api/api.js";
 import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 
-import { AiAssistantApiPath } from "./libs/enums/enums.js";
+import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type BalanceWheelAnalysisResponseDto,
 	type TaskSuggestionRequestDto,
@@ -25,7 +25,7 @@ class ChatApi extends BaseHTTPApi {
 		payload: TaskSuggestionRequestDto,
 	): Promise<TaskSuggestionsResponseDto> {
 		const response = await this.load(
-			this.getFullEndpoint(AiAssistantApiPath.SUGGEST_TASKS, {}),
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_SUGGEST_TASKS, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -39,7 +39,7 @@ class ChatApi extends BaseHTTPApi {
 
 	public async initiateConversation(): Promise<BalanceWheelAnalysisResponseDto> {
 		const response = await this.load(
-			this.getFullEndpoint(AiAssistantApiPath.INIT_NEW_CHAT, {}),
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_INITIATE, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,

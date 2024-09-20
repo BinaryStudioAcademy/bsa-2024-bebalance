@@ -1,9 +1,11 @@
 import AiChatActive from "~/assets/img/ai-chat-active.svg?react";
 import AiChatInactive from "~/assets/img/ai-chat-inactive.svg?react";
+import CheckBlack from "~/assets/img/check-black.svg?react";
 import CheckIcon from "~/assets/img/check-icon.svg?react";
 import ClockActive from "~/assets/img/clock-active.svg?react";
 import ClockInactive from "~/assets/img/clock-inactive.svg?react";
 import Close from "~/assets/img/close.svg?react";
+import CloseSmall from "~/assets/img/close-small.svg?react";
 import CrossedEye from "~/assets/img/crossed-eye.svg?react";
 import Error from "~/assets/img/error.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
@@ -27,9 +29,11 @@ const iconNameToSvg: Record<
 	aiChatActive: AiChatActive,
 	aiChatInactive: AiChatInactive,
 	check: CheckIcon,
+	checkBlack: CheckBlack,
 	clockActive: ClockActive,
 	clockInactive: ClockInactive,
 	close: Close,
+	closeSmall: CloseSmall,
 	crossedEye: CrossedEye,
 	error: Error,
 	eye: Eye,

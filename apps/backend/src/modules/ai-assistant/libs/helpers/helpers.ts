@@ -3,6 +3,10 @@ export {
 	runChangeTaskByCategoryOptions,
 } from "./change-task/change-task.js";
 export {
+	generateExplainTaskSuggestionsResponse,
+	runExplainTaskOptions,
+} from "./explain-task/explain-task.js";
+export {
 	generateQuestionsAnswersPrompt,
 	generateScoresResponse,
 	runInitialThreadOptions,

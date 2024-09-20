@@ -1,34 +1,41 @@
 import { z } from "zod";
 
 import {
-	AiAssistantValidationMessage,
-	AiAssistantValidationRule,
+	AIAssistantValidationMessage,
+	AIAssistantValidationRule,
 } from "../enums/enums.js";
 
-const TaskSuggestionRequest = z.object({
-	categories: z
-		.array(
-			z.object({
-				categoryId: z.number(),
-				categoryName: z
-					.string()
-					.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-						message: AiAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
-					}),
-			}),
-		)
-		.nonempty({
-			message: AiAssistantValidationMessage.CATEGORIES_REQUIRED,
+const selectedCategory = z.object({
+	categoryId: z
+		.number()
+		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+			message: AIAssistantValidationMessage.CATEGORY_ID_REQUIRED,
 		}),
-	threadId: z
+	categoryName: z
 		.string()
-		.trim()
-		.min(AiAssistantValidationRule.NON_EMPTY_STRING_MIN_LENGTH, {
-			message: AiAssistantValidationMessage.THREAD_ID_REQUIRED,
-		})
-		.regex(AiAssistantValidationRule.THREAD_ID_VALID_CHARS, {
-			message: AiAssistantValidationMessage.THREAD_ID_INVALID_FORMAT,
+		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+			message: AIAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
 		}),
 });
 
-export { TaskSuggestionRequest };
+const taskSuggestionRequest = z.object({
+	lastMessageId: z
+		.number()
+		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+			message: AIAssistantValidationMessage.LAST_MESSAGE_ID_REQUIRED,
+		}),
+	payload: z
+		.array(selectedCategory)
+		.nonempty({ message: AIAssistantValidationMessage.CATEGORIES_REQUIRED }),
+	threadId: z
+		.string()
+		.trim()
+		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+			message: AIAssistantValidationMessage.THREAD_ID_REQUIRED,
+		})
+		.regex(AIAssistantValidationRule.THREAD_ID_VALID_CHARS, {
+			message: AIAssistantValidationMessage.THREAD_ID_INVALID_FORMAT,
+		}),
+});
+
+export { taskSuggestionRequest };

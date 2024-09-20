@@ -4,7 +4,7 @@ import { type Repository } from "~/libs/types/types.js";
 import { STATUS_FIELD } from "./libs/constants/constants.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 import { TaskEntity } from "./task.entity.js";
-import { type TaskModel } from "./task.model.js";
+import { TaskModel } from "./task.model.js";
 
 class TaskRepository implements Repository {
 	private taskModel: typeof TaskModel;
@@ -76,6 +76,25 @@ class TaskRepository implements Repository {
 		const tasks = await this.taskModel
 			.query()
 			.withGraphFetched(`[${RelationName.CATEGORY}]`);
+
+		return tasks.map((task) => {
+			return TaskEntity.initialize({
+				category: task.category.name,
+				categoryId: task.categoryId,
+				createdAt: task.createdAt,
+				description: task.description,
+				dueDate: task.dueDate,
+				id: task.id,
+				label: task.label,
+				status: task.status,
+				updatedAt: task.updatedAt,
+				userId: task.userId,
+			});
+		});
+	}
+
+	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
+		const tasks = await TaskModel.query().where({ userId });
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({

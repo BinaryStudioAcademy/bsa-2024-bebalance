@@ -45,14 +45,17 @@ export {
 } from "./libs/types/types.js";
 export {
 	addMessageToThreadValidationSchema,
-	AiAssistantApiPath,
+	AIAssistantApiPath,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
 	type BalanceWheelAnalysisResponseDto,
 	type ChangeTaskSuggestionRequestDto,
-	ChangeTaskSuggestionRequestValidationSchema,
+	changeTaskSuggestionRequestValidationSchema,
 	type SelectedCategories,
 	type SimplifiedQuizScoreDto,
+	taskActionRequestSchemaValidationSchema,
 	type TaskSuggestionRequestDto,
-	TaskSuggestionRequestValidationSchema,
+	taskSuggestionRequestValidationSchema,
 	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./modules/ai-assistant/ai-assistant.js";
@@ -71,7 +74,17 @@ export {
 	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
+	type SelectedCategory,
 } from "./modules/categories/categories.js";
+export {
+	type BalanceWheelMessage,
+	ChatMessageAuthor,
+	type ChatMessageDto,
+	ChatMessageType,
+	type QuestionMessage,
+	type TaskMessage,
+	type TextMessage,
+} from "./modules/chats/chats.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
@@ -138,6 +151,9 @@ export {
 	userSignUpValidationSchema,
 	type UserUpdateFormDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordFormDto,
+	type UserUpdatePasswordRequestDto,
+	userUpdatePasswordValidationSchema,
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,

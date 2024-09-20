@@ -14,4 +14,6 @@ export { type UserSignUpRequestDto } from "./user-sign-up-request-dto.type.js";
 export { type UserSignUpResponseDto } from "./user-sign-up-response-dto.type.js";
 export { type UserUpdateFormDto } from "./user-update-form-dto.type.js";
 export { type UserUpdateParametersDto } from "./user-update-parameters-dto.type.js";
+export { type UserUpdatePasswordFormDto } from "./user-update-password-form-dto.type.js";
+export { type UserUpdatePasswordRequestDto } from "./user-update-password-request-dto.type.js";
 export { type UserUpdateRequestDto } from "./user-update-request-dto.type.js";

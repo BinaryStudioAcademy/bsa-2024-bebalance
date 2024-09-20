@@ -1,16 +1,15 @@
 import { z } from "zod";
 
-const Task = z.object({
+const task = z.object({
 	categoryId: z.number(),
 	categoryName: z.string(),
 	description: z.string(),
-	dueDate: z.string(),
 	label: z.string(),
 });
 
-const TaskByCategory = z.object({
+const taskByCategory = z.object({
 	message: z.string(),
-	tasks: z.array(Task),
+	tasks: z.array(task),
 });
 
-export { TaskByCategory };
+export { taskByCategory };

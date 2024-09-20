@@ -27,6 +27,8 @@ class UserModel extends AbstractModel {
 
 	public userTaskDays!: UserTaskDaysModel[];
 
+	public userTasks!: TaskModel[];
+
 	static get relationMappings(): RelationMappings {
 		return {
 			onboardingAnswers: {
@@ -88,6 +90,14 @@ class UserModel extends AbstractModel {
 					to: `${DatabaseTableName.USER_TASK_DAYS}.userId`,
 				},
 				modelClass: UserTaskDaysModel,
+				relation: Model.HasManyRelation,
+			},
+			userTasks: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					to: `${DatabaseTableName.TASKS}.userId`,
+				},
+				modelClass: TaskModel,
 				relation: Model.HasManyRelation,
 			},
 		};

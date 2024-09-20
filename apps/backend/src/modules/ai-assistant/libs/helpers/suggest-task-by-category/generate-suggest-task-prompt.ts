@@ -1,23 +1,23 @@
 import {
 	type OpenAiRequestMessage,
-	OpenAiRoleKey,
+	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { type SelectedCategories } from "../../types/types.js";
-import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-messages.enum.js";
+import { type SelectedCategory } from "../../types/types.js";
+import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-template.enum.js";
 
 function generateSuggestTaskPrompt(
-	categories: SelectedCategories[],
+	categories: SelectedCategory[],
 ): OpenAiRequestMessage {
-	/* eslint-disable perfectionist/sort-objects */
-	const promptContent = {
-		context: SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT,
-		categories,
-	};
+	const content = `
+	{
+	"context": "${SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT}",
+	"categories": ${JSON.stringify(categories)},
+	}`;
 
 	return {
-		content: JSON.stringify(promptContent),
-		role: OpenAiRoleKey.USER,
+		content,
+		role: OpenAIRoleKey.USER,
 	};
 }
 

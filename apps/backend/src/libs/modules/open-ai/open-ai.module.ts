@@ -6,8 +6,9 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 
 import {
-	OpenAiAssistantConfig,
+	OpenAIAssistantConfig,
 	OpenAIErrorMessage,
+	OpenAIRunStatus,
 } from "./libs/enums/enums.js";
 import { OpenAIError } from "./libs/exceptions/exceptions.js";
 import {
@@ -40,21 +41,21 @@ class OpenAi {
 	}
 
 	private async getOrInitializeAssistant(): Promise<string> {
-		const existingAssistants = await this.openAi.beta.assistants.list();
-		const assistant = existingAssistants.data.find(
-			(assistant) => assistant.name === OpenAiAssistantConfig.NAME,
-		);
-
 		try {
+			const existingAssistants = await this.openAi.beta.assistants.list();
+			const assistant = existingAssistants.data.find(
+				(assistant) => assistant.name === OpenAIAssistantConfig.NAME,
+			);
+
 			const initializedAssistant =
 				assistant ??
 				(await this.openAi.beta.assistants.create({
-					instructions: OpenAiAssistantConfig.INSTRUCTION,
+					instructions: OpenAIAssistantConfig.INSTRUCTION,
 					model: this.config.ENV.OPEN_AI.MODEL,
-					name: OpenAiAssistantConfig.NAME,
-					temperature: OpenAiAssistantConfig.TEMPERATURE,
-					tools: [...OpenAiAssistantConfig.TOOLS],
-					top_p: OpenAiAssistantConfig.TOP_P,
+					name: OpenAIAssistantConfig.NAME,
+					temperature: OpenAIAssistantConfig.TEMPERATURE,
+					tools: [...OpenAIAssistantConfig.TOOLS],
+					top_p: OpenAIAssistantConfig.TOP_P,
 				}));
 
 			this.logger.info(
@@ -77,30 +78,49 @@ class OpenAi {
 		run: OpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
 	): Promise<void> {
-		if (run.required_action) {
-			await Promise.all(
-				run.required_action.submit_tool_outputs.tool_calls.map(
-					async (toolCall) => {
-						const { function: toolFunction } = toolCall;
-
-						if (toolFunction.name === functionName) {
-							await this.openAi.beta.threads.runs.submitToolOutputsAndPoll(
-								run.thread_id,
-								run.id,
-								{
-									tool_outputs: [
-										{
-											output: toolCall.function.arguments,
-											tool_call_id: toolCall.id,
-										},
-									],
-								},
-							);
-						}
-					},
-				),
-			);
+		if (!run.required_action) {
+			return;
 		}
+
+		const { tool_calls } = run.required_action.submit_tool_outputs;
+
+		await Promise.all(
+			tool_calls.map(
+				async ({
+					function: toolFunction,
+					function: { arguments: toolArguments },
+					id,
+				}) => {
+					if (toolFunction.name !== functionName) {
+						return;
+					}
+
+					try {
+						await this.openAi.beta.threads.runs.submitToolOutputsAndPoll(
+							run.thread_id,
+							run.id,
+							{
+								tool_outputs: [
+									{
+										output: toolArguments,
+										tool_call_id: id,
+									},
+								],
+							},
+						);
+					} catch (error) {
+						this.logger.error(
+							`Error submitting tool outputs: ${String(error)}`,
+						);
+
+						throw new OpenAIError({
+							message: OpenAIErrorMessage.WRONG_RESPONSE,
+							status: HTTPCode.INTERNAL_SERVER_ERROR,
+						});
+					}
+				},
+			),
+		);
 	}
 
 	private async handleRunStatus(
@@ -108,9 +128,9 @@ class OpenAi {
 		run: OpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
 	): Promise<OpenAiResponseMessage> {
-		if (run.status === "completed") {
+		if (run.status === OpenAIRunStatus.COMPLETED) {
 			return await this.getAllMessages(threadId);
-		} else if (run.status === "requires_action") {
+		} else if (run.status === OpenAIRunStatus.REQUIRE_ACTIONS) {
 			await this.handleRequiresAction(run, functionName);
 
 			return await this.getAllMessages(threadId);
@@ -128,53 +148,77 @@ class OpenAi {
 		threadId: string,
 		message: OpenAiRequestMessage,
 	): Promise<boolean> {
-		const newMessage = await this.openAi.beta.threads.messages.create(
-			threadId,
-			message,
-		);
+		try {
+			const newMessage = await this.openAi.beta.threads.messages.create(
+				threadId,
+				message,
+			);
 
-		if ("error" in newMessage) {
+			return !("error" in newMessage);
+		} catch (error) {
+			this.logger.error(`Error adding message to thread: ${String(error)}`);
+
 			throw new OpenAIError({
 				message: OpenAIErrorMessage.WRONG_RESPONSE,
 				status: HTTPCode.INTERNAL_SERVER_ERROR,
 			});
 		}
-
-		return true;
 	}
 
 	public async createThread(
 		message: OpenAiRequestMessage[] = [],
 	): Promise<string> {
-		const thread = await this.openAi.beta.threads.create({ messages: message });
+		try {
+			const thread = await this.openAi.beta.threads.create({
+				messages: message,
+			});
 
-		if ("error" in thread) {
+			if ("error" in thread) {
+				throw new OpenAIError({
+					message: OpenAIErrorMessage.WRONG_RESPONSE,
+					status: HTTPCode.INTERNAL_SERVER_ERROR,
+				});
+			}
+
+			return thread.id;
+		} catch (error) {
+			this.logger.error(`Error creating thread: ${String(error)}`);
+
 			throw new OpenAIError({
 				message: OpenAIErrorMessage.WRONG_RESPONSE,
 				status: HTTPCode.INTERNAL_SERVER_ERROR,
 			});
 		}
-
-		return thread.id;
 	}
 
 	public async deleteThread(threadId: string): Promise<boolean> {
-		const result = await this.openAi.beta.threads.del(threadId);
+		try {
+			const result = await this.openAi.beta.threads.del(threadId);
 
-		if (!result.deleted) {
+			return result.deleted;
+		} catch (error) {
+			this.logger.error(`Error deleting thread: ${String(error)}`);
+
 			throw new OpenAIError({
 				message: OpenAIErrorMessage.WRONG_RESPONSE,
 				status: HTTPCode.INTERNAL_SERVER_ERROR,
 			});
 		}
-
-		return result.deleted;
 	}
 
 	public async getAllMessages(
 		threadId: string,
 	): Promise<OpenAiResponseMessage> {
-		return await this.openAi.beta.threads.messages.list(threadId);
+		try {
+			return await this.openAi.beta.threads.messages.list(threadId);
+		} catch (error) {
+			this.logger.error(`Error getting messages: ${String(error)}`);
+
+			throw new OpenAIError({
+				message: OpenAIErrorMessage.WRONG_RESPONSE,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
+		}
 	}
 
 	async initializeAssistant(): Promise<void> {
@@ -185,32 +229,47 @@ class OpenAi {
 		threadId: string,
 		runOptions: OpenAiRunThreadRequestDto,
 	): Promise<OpenAiResponseMessage> {
-		const runs = await this.openAi.beta.threads.runs.list(threadId);
+		try {
+			const runs = await this.openAi.beta.threads.runs.list(threadId);
 
-		const pendingRuns = runs.data.filter(
-			(run) => run.status === "in_progress" || run.status === "queued",
-		);
+			const pendingRuns = runs.data.filter(
+				(run) =>
+					run.status === OpenAIRunStatus.IN_PROGRESS ||
+					run.status === OpenAIRunStatus.QUEUED,
+			);
 
-		for (const run of pendingRuns) {
-			await this.openAi.beta.threads.runs.poll(threadId, run.id);
+			for (const run of pendingRuns) {
+				await this.openAi.beta.threads.runs.poll(threadId, run.id);
+			}
+
+			const run = await this.openAi.beta.threads.runs.createAndPoll(threadId, {
+				additional_instructions: runOptions.additional_instructions,
+				additional_messages: runOptions.messages,
+				assistant_id: this.assistantId as string,
+				instructions: runOptions.instructions,
+				response_format: zodResponseFormat(
+					runOptions.validationSchema,
+					"use_response_validation",
+				),
+				tool_choice: {
+					function: { name: runOptions.function_name },
+					type: "function",
+				},
+			});
+
+			return await this.handleRunStatus(
+				threadId,
+				run,
+				runOptions.function_name,
+			);
+		} catch (error) {
+			this.logger.error(`Error running thread: ${String(error)}`);
+
+			throw new OpenAIError({
+				message: OpenAIErrorMessage.WRONG_RESPONSE,
+				status: HTTPCode.INTERNAL_SERVER_ERROR,
+			});
 		}
-
-		const run = await this.openAi.beta.threads.runs.createAndPoll(threadId, {
-			additional_instructions: runOptions.additional_instructions,
-			additional_messages: runOptions.messages,
-			assistant_id: this.assistantId as string,
-			instructions: runOptions.instructions,
-			response_format: zodResponseFormat(
-				runOptions.validationSchema,
-				"use_response_validation",
-			),
-			tool_choice: {
-				function: { name: runOptions.function_name },
-				type: "function",
-			},
-		});
-
-		return await this.handleRunStatus(threadId, run, runOptions.function_name);
 	}
 }
 

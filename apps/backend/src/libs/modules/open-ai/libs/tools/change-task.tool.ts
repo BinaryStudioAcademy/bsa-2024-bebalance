@@ -1,8 +1,10 @@
+import { OpenAIFunctionName } from "../enums/open-ai-function-name.enum.js";
+
 const ChangeTaskTool = {
 	function: {
 		description:
 			"Generates a new task for the category based on the user's request, ensuring it doesn't repeat previously suggested tasks and takes into account the user's onboarding quiz priorities.",
-		name: "change_task",
+		name: OpenAIFunctionName.CHANGE_TASK,
 		parameters: {
 			additionalProperties: false,
 			properties: {
@@ -51,22 +53,12 @@ const ChangeTaskTool = {
 									description: "Detailed description of the new task",
 									type: "string",
 								},
-								dueDate: {
-									description: "Suggested due date for the new task",
-									type: "string",
-								},
 								label: {
 									description: "Label or name of the task",
 									type: "string",
 								},
 							},
-							required: [
-								"categoryId",
-								"categoryName",
-								"description",
-								"dueDate",
-								"label",
-							],
+							required: ["categoryId", "categoryName", "description", "label"],
 							type: "object",
 						},
 					},

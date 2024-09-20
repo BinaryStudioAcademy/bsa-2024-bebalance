@@ -46,21 +46,6 @@ erDiagram
         int avatar_file_id FK
     }
 
-    tasks {
-        int id PK
-        varchar label
-        varchar description
-        varchar status
-        int user_id FK
-        int category_id FK
-        dateTime due_date
-        dateTime created_at
-        dateTime updated_at
-    }
-
-    users }|--o| tasks: user_id
-    categories }|--o| tasks: category_id
-
     files {
         int id PK
         varchar file_key UK

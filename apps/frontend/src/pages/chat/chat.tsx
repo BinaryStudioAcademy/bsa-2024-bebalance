@@ -13,6 +13,7 @@ import {
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
 import { ChatMessage, MessageLoader } from "./libs/components/components.js";
+import { type ChartDataType } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const Chat: React.FC = () => {
@@ -39,7 +40,7 @@ const Chat: React.FC = () => {
 			data: score.score,
 			label: score.categoryName,
 		};
-	});
+	}) as ChartDataType[];
 
 	const formattedCategories = selectedCategories.map((category) => {
 		return {
@@ -51,12 +52,9 @@ const Chat: React.FC = () => {
 	const contentData = useMemo(
 		() => ({
 			chartData,
-			selectedCategories: {
-				categories: formattedCategories,
-				threadId: threadId ?? "",
-			},
+			selectedCategories: formattedCategories,
 		}),
-		[chartData, formattedCategories, threadId],
+		[chartData, formattedCategories],
 	);
 
 	useEffect(() => {

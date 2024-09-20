@@ -3,23 +3,23 @@ import { logger } from "~/libs/modules/logger/logger.js";
 
 import { OpenAi } from "./open-ai.module.js";
 
-const openAi = new OpenAi({
+const openAI = new OpenAi({
 	config,
 	logger,
 });
 
-await openAi.initializeAssistant();
+await openAI.initializeAssistant();
 
-export { openAi };
+export { openAI };
 export {
-	OpenAiFunctionName,
-	OpenAiPromptTemplates,
-	OpenAiRoleKey,
+	OpenAIFunctionName,
+	OpenAIPromptTemplate,
+	OpenAIRoleKey,
 } from "./libs/enums/enums.js";
 export {
 	type OpenAiRequestMessage,
 	type OpenAiResponseMessage,
 	type OpenAiRunThreadRequestDto,
 } from "./libs/types/types.js";
-export { AiAssistantMessageValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { AIAssistantMessageValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { type OpenAi } from "./open-ai.module.js";

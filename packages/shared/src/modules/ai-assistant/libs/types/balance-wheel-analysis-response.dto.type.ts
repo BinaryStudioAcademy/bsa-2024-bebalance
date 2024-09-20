@@ -1,9 +1,4 @@
-import { type QuizScoresGetAllItemResponseDto } from "../../../quiz/quiz.js";
-
-type SimplifiedQuizScoreDto = Omit<
-	QuizScoresGetAllItemResponseDto,
-	"createdAt" | "id" | "score" | "updatedAt" | "userId"
->;
+import { type SimplifiedQuizScoreDto } from "./simplified-quiz-score-dto.type.js";
 
 type BalanceWheelAnalysisResponseDto = {
 	lowestCategories: SimplifiedQuizScoreDto[];
@@ -15,4 +10,4 @@ type BalanceWheelAnalysisResponseDto = {
 	threadId: string;
 };
 
-export { type BalanceWheelAnalysisResponseDto, type SimplifiedQuizScoreDto };
+export { type BalanceWheelAnalysisResponseDto };

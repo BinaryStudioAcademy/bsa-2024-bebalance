@@ -1,24 +1,26 @@
-import { type OpenAi, OpenAiRoleKey } from "~/libs/modules/open-ai/open-ai.js";
+import { type OpenAi, OpenAIRoleKey } from "~/libs/modules/open-ai/open-ai.js";
 import { type UserDto } from "~/libs/types/types.js";
 import { type CategoryService } from "~/modules/categories/categories.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
-import { TaskEntity, type TaskRepository } from "~/modules/tasks/tasks.js";
+import { type TaskService } from "~/modules/tasks/tasks.js";
 
 import {
 	generateChangeTaskSuggestionsResponse,
+	generateExplainTaskSuggestionsResponse,
 	generateQuestionsAnswersPrompt,
 	generateScoresResponse,
 	generateTaskSuggestionsResponse,
 	runChangeTaskByCategoryOptions,
+	runExplainTaskOptions,
 	runInitialThreadOptions,
 	runTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
-	type BalanceWheelAnalysisResponseDto,
-	type ChangeTaskSuggestionRequestDto,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
+	type SelectedCategory,
+	type TaskCreateDto,
 	type TaskDto,
-	type TaskSuggestionRequestDto,
-	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 
@@ -26,50 +28,48 @@ type Constructor = {
 	categoryService: CategoryService;
 	onboardingRepository: OnboardingRepository;
 	openAi: OpenAi;
-	taskRepository: TaskRepository;
+	taskService: TaskService;
 };
 
 class AiAssistantService {
 	private categoryService: CategoryService;
 	private onboardingRepository: OnboardingRepository;
 	private openAi: OpenAi;
-	private taskRepository: TaskRepository;
+	private taskService: TaskService;
 
 	public constructor({
 		categoryService,
 		onboardingRepository,
 		openAi,
-		taskRepository,
+		taskService,
 	}: Constructor) {
 		this.openAi = openAi;
 		this.categoryService = categoryService;
 		this.onboardingRepository = onboardingRepository;
-		this.taskRepository = taskRepository;
+		this.taskService = taskService;
 	}
 
 	public async acceptTask(
 		user: UserDto,
-		body: ChangeTaskSuggestionRequestDto,
+		body: AIAssistantRequestDto,
 	): Promise<TaskDto> {
-		const { task, threadId } = body;
+		const { payload, threadId } = body;
+		const task = payload as TaskCreateDto;
 
-		const newTask = await this.taskRepository.create(
-			TaskEntity.initializeNew({
-				categoryId: task.categoryId,
-				description: task.description,
-				dueDate: task.dueDate,
-				label: task.label,
-				userId: user.id,
-			}),
-		);
+		const newTask = await this.taskService.create({
+			categoryId: task.categoryId,
+			description: task.description,
+			label: task.label,
+			user,
+		});
 		const chatMessage = {
 			content: `User has accepted this task: ${JSON.stringify(newTask)}`,
-			role: OpenAiRoleKey.USER,
+			role: OpenAIRoleKey.USER,
 		};
 
 		await this.openAi.addMessageToThread(threadId, chatMessage);
 
-		return newTask.toObject();
+		return newTask;
 	}
 
 	public async addMessageToThread(
@@ -79,27 +79,49 @@ class AiAssistantService {
 
 		const prompt = {
 			content: text,
-			role: OpenAiRoleKey.USER,
+			role: OpenAIRoleKey.USER,
 		};
 
 		return await this.openAi.addMessageToThread(threadId, prompt);
 	}
 
 	public async changeTaskSuggestion(
-		body: ChangeTaskSuggestionRequestDto,
-	): Promise<null | TaskSuggestionsResponseDto> {
-		const { task, threadId } = body;
+		user: UserDto,
+		body: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto | null> {
+		const { lastMessageId, payload, threadId } = body;
+		const task = payload as TaskCreateDto;
 
 		const runThreadOptions = runChangeTaskByCategoryOptions(task);
+		const taskDeadLine = this.taskService.calculateDeadline(
+			user.userTaskDays as number[],
+		);
+		const result = await this.openAi.runThread(threadId, runThreadOptions);
+
+		return generateChangeTaskSuggestionsResponse(
+			result,
+			taskDeadLine,
+			lastMessageId,
+		);
+	}
+
+	public async explainTaskSuggestion(
+		body: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto | null> {
+		const { lastMessageId, payload, threadId } = body;
+
+		const task = payload as TaskCreateDto;
+
+		const runThreadOptions = runExplainTaskOptions(task);
 
 		const result = await this.openAi.runThread(threadId, runThreadOptions);
 
-		return generateChangeTaskSuggestionsResponse(result);
+		return generateExplainTaskSuggestionsResponse(result, task, lastMessageId);
 	}
 
 	public async initNewChat(
 		user: UserDto,
-	): Promise<BalanceWheelAnalysisResponseDto | null> {
+	): Promise<AIAssistantResponseDto | null> {
 		const userQuestionsWithAnswers =
 			await this.onboardingRepository.findUserAnswersWithQuestions(user.id);
 
@@ -121,15 +143,20 @@ class AiAssistantService {
 	}
 
 	public async suggestTasksForCategories(
-		body: TaskSuggestionRequestDto,
-	): Promise<null | TaskSuggestionsResponseDto> {
-		const { categories, threadId } = body;
-
+		user: UserDto,
+		body: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto | null> {
+		const { lastMessageId, payload, threadId } = body;
+		const categories = payload as SelectedCategory[];
 		const runThreadOptions = runTaskByCategoryOptions(categories);
+
+		const taskDeadLine = this.taskService.calculateDeadline(
+			user.userTaskDays as number[],
+		);
 
 		const result = await this.openAi.runThread(threadId, runThreadOptions);
 
-		return generateTaskSuggestionsResponse(result);
+		return generateTaskSuggestionsResponse(result, taskDeadLine, lastMessageId);
 	}
 }
 

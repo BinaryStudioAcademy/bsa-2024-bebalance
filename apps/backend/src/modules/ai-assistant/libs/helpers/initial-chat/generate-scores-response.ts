@@ -2,48 +2,94 @@ import { type z } from "zod";
 
 import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import {
-	AiAssistantMessageValidationSchema,
+	AIAssistantMessageValidationSchema,
 	type OpenAiResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { type BalanceWheelAnalysisResponseDto } from "../../types/types.js";
-import { type BalanceAnalysis } from "./balance-analysis.validation-schema.js";
+import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
+import {
+	type AIAssistantResponseDto,
+	type ChatMessageDto,
+} from "../../types/types.js";
+import { type balanceAnalysis } from "./balance-analysis.validation-schema.js";
 
-type BalanceAnalysisData = z.infer<typeof BalanceAnalysis>;
+type BalanceAnalysisData = z.infer<typeof balanceAnalysis>;
 
 const generateScoresResponse = (
 	aiResponse: OpenAiResponseMessage,
-): BalanceWheelAnalysisResponseDto | null => {
+): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
 	if (!message) {
 		return null;
 	}
 
-	const parsedResult = AiAssistantMessageValidationSchema.safeParse(message);
+	const parsedResult = AIAssistantMessageValidationSchema.safeParse(message);
 
-	if (parsedResult.success) {
-		const contentText: string =
-			parsedResult.data.content[ZERO_INDEX].text.value;
-		const resultData: BalanceAnalysisData = JSON.parse(
-			contentText,
-		) as BalanceAnalysisData;
-
-		return {
-			lowestCategories: resultData.lowestCategories.map((category) => ({
-				categoryId: category.categoryId,
-				categoryName: category.categoryName,
-			})),
-			messages: {
-				comments: resultData.messages.comments,
-				greeting: resultData.messages.greeting,
-				question: resultData.messages.question,
-			},
-			threadId: message.thread_id,
-		};
+	if (!parsedResult.success) {
+		return null;
 	}
 
-	return null;
+	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const resultData: BalanceAnalysisData = JSON.parse(
+		contentText,
+	) as BalanceAnalysisData;
+
+	let messageIdCounter = ZERO_INDEX;
+
+	const greetingMessage: ChatMessageDto = {
+		author: ChatMessageAuthor.ASSISTANT,
+		createdAt: new Date().toISOString(),
+		id: messageIdCounter++,
+		isRead: false,
+		payload: {
+			text: resultData.messages.greeting,
+		},
+		type: "text",
+	};
+
+	const balanceWheelMessage: ChatMessageDto = {
+		author: ChatMessageAuthor.ASSISTANT,
+		createdAt: new Date().toISOString(),
+		id: messageIdCounter++,
+		isRead: false,
+		payload: {
+			lowestCategories: resultData.lowestCategories.map((category) => {
+				return {
+					categoryId: category.categoryId,
+					categoryName: category.categoryName,
+				};
+			}),
+			text: resultData.messages.comments,
+		},
+		type: "balance wheel",
+	};
+
+	const categoryQuestion = {
+		author: ChatMessageAuthor.ASSISTANT,
+		createdAt: new Date().toISOString(),
+		id: messageIdCounter++,
+		isRead: false,
+		payload: {
+			buttons: [
+				{
+					label: "Yes, 3 lowest",
+					value: "Yes, 3 lowest",
+				},
+				{
+					label: "No, something else",
+					value: "No, something else",
+				},
+			],
+			text: resultData.messages.question,
+		},
+		type: ChatMessageType.QUESTION_WITH_BUTTONS,
+	};
+
+	return {
+		messages: [greetingMessage, balanceWheelMessage, categoryQuestion],
+		threadId: message.thread_id,
+	};
 };
 
 export { generateScoresResponse };

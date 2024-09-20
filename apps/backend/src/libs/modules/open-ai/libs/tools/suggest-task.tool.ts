@@ -1,8 +1,10 @@
-const GenerateTaskByCategoryTool = {
+import { OpenAIFunctionName } from "../enums/open-ai-function-name.enum.js";
+
+const SuggestTaskTool = {
 	function: {
 		description:
 			"Generates specific and actionable tasks for each user-selected category based on their onboarding responses.",
-		name: "generate_task_by_category",
+		name: OpenAIFunctionName.GENERATE_TASK_BY_CATEGORY,
 		parameters: {
 			additionalProperties: false,
 			properties: {
@@ -72,10 +74,6 @@ const GenerateTaskByCategoryTool = {
 										description: "Detailed description of the task",
 										type: "string",
 									},
-									dueDate: {
-										description: "Suggested due date for the task",
-										type: "string",
-									},
 									label: {
 										description: "Label or name of the task",
 										type: "string",
@@ -85,7 +83,6 @@ const GenerateTaskByCategoryTool = {
 									"categoryId",
 									"categoryName",
 									"description",
-									"dueDate",
 									"label",
 								],
 								type: "object",
@@ -105,4 +102,4 @@ const GenerateTaskByCategoryTool = {
 	type: "function",
 } as const;
 
-export { GenerateTaskByCategoryTool };
+export { SuggestTaskTool };

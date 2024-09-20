@@ -9,16 +9,15 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { type AiAssistantService } from "./ai-assistant.service.js";
-import { AiAssistantApiPath } from "./libs/enums/enums.js";
+import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
-	type ChangeTaskSuggestionRequestDto,
-	type TaskSuggestionRequestDto,
+	type AIAssistantRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 import {
 	addMessageToThreadValidationSchema,
-	ChangeTaskSuggestionRequestValidationSchema,
-	TaskSuggestionRequestValidationSchema,
+	taskActionRequestSchemaValidationSchema,
+	taskSuggestionRequestValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 
 /**
@@ -139,7 +138,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.INIT_NEW_CHAT,
+			path: AIAssistantApiPath.CHAT_INITIATE,
 		});
 
 		this.addRoute({
@@ -150,7 +149,7 @@ class AiAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.ADD_MESSAGE,
+			path: AIAssistantApiPath.CHAT_ADD_MESSAGE,
 			validation: {
 				body: addMessageToThreadValidationSchema,
 			},
@@ -160,13 +159,29 @@ class AiAssistantController extends BaseController {
 			handler: (options) =>
 				this.changeTaskSuggestion(
 					options as APIHandlerOptions<{
-						body: ChangeTaskSuggestionRequestDto;
+						body: AIAssistantRequestDto;
+						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.CHANGE_TASK,
+			path: AIAssistantApiPath.CHAT_CHANGE_TASK,
 			validation: {
-				body: ChangeTaskSuggestionRequestValidationSchema,
+				body: taskActionRequestSchemaValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.explainTaskSuggestion(
+					options as APIHandlerOptions<{
+						body: AIAssistantRequestDto;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: AIAssistantApiPath.CHAT_EXPLAIN_TASK,
+			validation: {
+				body: taskActionRequestSchemaValidationSchema,
 			},
 		});
 
@@ -174,14 +189,14 @@ class AiAssistantController extends BaseController {
 			handler: (options) =>
 				this.suggestTasksForCategories(
 					options as APIHandlerOptions<{
-						body: TaskSuggestionRequestDto;
+						body: AIAssistantRequestDto;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.SUGGEST_TASKS,
+			path: AIAssistantApiPath.CHAT_SUGGEST_TASKS,
 			validation: {
-				body: TaskSuggestionRequestValidationSchema,
+				body: taskSuggestionRequestValidationSchema,
 			},
 		});
 
@@ -189,14 +204,14 @@ class AiAssistantController extends BaseController {
 			handler: (options) =>
 				this.acceptTask(
 					options as APIHandlerOptions<{
-						body: ChangeTaskSuggestionRequestDto;
+						body: AIAssistantRequestDto;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AiAssistantApiPath.ACCEPT_TASK,
+			path: AIAssistantApiPath.CHAT_ACCEPT_TASK,
 			validation: {
-				body: ChangeTaskSuggestionRequestValidationSchema,
+				body: taskActionRequestSchemaValidationSchema,
 			},
 		});
 	}
@@ -233,7 +248,7 @@ class AiAssistantController extends BaseController {
 	 */
 	private async acceptTask(
 		options: APIHandlerOptions<{
-			body: ChangeTaskSuggestionRequestDto;
+			body: AIAssistantRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
@@ -332,13 +347,27 @@ class AiAssistantController extends BaseController {
 	 */
 	private async changeTaskSuggestion(
 		options: APIHandlerOptions<{
-			body: ChangeTaskSuggestionRequestDto;
+			body: AIAssistantRequestDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { body, user } = options;
+
+		return {
+			payload: await this.openAiService.changeTaskSuggestion(user, body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	private async explainTaskSuggestion(
+		options: APIHandlerOptions<{
+			body: AIAssistantRequestDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		const { body } = options;
 
 		return {
-			payload: await this.openAiService.changeTaskSuggestion(body),
+			payload: await this.openAiService.explainTaskSuggestion(body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -427,10 +456,6 @@ class AiAssistantController extends BaseController {
 	 *           type: integer
 	 *           description: The category id
 	 *           example: 1
-	 *         score:
-	 *           type: number
-	 *           description: The score for the category
-	 *           example: 3
 	 */
 	private async initNewChat(
 		options: APIHandlerOptions<{
@@ -540,13 +565,14 @@ class AiAssistantController extends BaseController {
 	 */
 	private async suggestTasksForCategories(
 		options: APIHandlerOptions<{
-			body: TaskSuggestionRequestDto;
+			body: AIAssistantRequestDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body } = options;
+		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.suggestTasksForCategories(body),
+			payload: await this.openAiService.suggestTasksForCategories(user, body),
 			status: HTTPCode.OK,
 		};
 	}

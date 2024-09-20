@@ -1,5 +1,7 @@
-export { AiAssistantApiPath } from "./libs/enums/enums.js";
+export { AIAssistantApiPath } from "./libs/enums/enums.js";
 export {
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
 	type BalanceWheelAnalysisResponseDto,
 	type ChangeTaskSuggestionRequestDto,
 	type SelectedCategories,
@@ -9,5 +11,6 @@ export {
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 export { addMessageToThread as addMessageToThreadValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
-export { TaskSuggestionRequest as TaskSuggestionRequestValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
-export { ChangeTaskSuggestionRequest as ChangeTaskSuggestionRequestValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { taskSuggestionRequest as taskSuggestionRequestValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { changeTaskSuggestionRequest as changeTaskSuggestionRequestValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export { taskActionRequestSchema as taskActionRequestSchemaValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

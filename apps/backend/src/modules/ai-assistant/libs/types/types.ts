@@ -1,11 +1,13 @@
 export {
-	type BalanceWheelAnalysisResponseDto,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
 	type ChangeTaskSuggestionRequestDto,
-	type SelectedCategories,
-	type SimplifiedQuizScoreDto,
+	type ChatMessageDto,
+	type SelectedCategory,
 	type TaskCreateDto,
 	type TaskDto,
 	type TaskSuggestionRequestDto,
 	type TaskSuggestionsResponseDto,
+	type TextMessage,
 	type ThreadMessageCreateDto,
 } from "shared";

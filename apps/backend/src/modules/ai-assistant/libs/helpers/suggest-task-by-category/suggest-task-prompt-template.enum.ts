@@ -19,7 +19,6 @@ response_structure:
 			categoryId: number,   // Unique identifier for the category.
 			categoryName: string, // Name of the category.
 			description: string,  // Detailed description of the task.
-			dueDate: string,      // Suggested due date for the task.
 			label: string         // Label or name of the task.
 		}
 	]

@@ -7,9 +7,8 @@ import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import {
 	ChatMessageType,
-	type TaskSuggestionRequestDto,
+	type SelectedCategories,
 } from "~/modules/chat/chat.js";
-// import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 
 import { handleButtonAction } from "../../helpers/helpers.js";
 import { type ChartDataType } from "../../types/types.js";
@@ -21,7 +20,7 @@ type Properties = {
 	buttonLabels?: string[];
 	contentData: {
 		chartData: ChartDataType[];
-		selectedCategories: TaskSuggestionRequestDto;
+		selectedCategories: SelectedCategories[];
 	};
 	onFormSubmit?: (categoryIds: number[]) => void;
 	// taskList: TaskCreateDto[];
@@ -44,12 +43,8 @@ const ChatMessage: React.FC<Properties> = ({
 	}, [dispatch]);
 
 	const handleYes = useCallback(() => {
-		void handleButtonAction(
-			dispatch,
-			"getTasks",
-			contentData.selectedCategories,
-		);
-	}, [dispatch, contentData.selectedCategories]);
+		void handleButtonAction(dispatch, "getTasks");
+	}, [dispatch]);
 
 	const renderContent = (): JSX.Element | null => {
 		switch (type) {
