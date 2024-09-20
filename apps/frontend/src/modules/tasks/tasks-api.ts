@@ -65,7 +65,7 @@ class TasksApi extends BaseHTTPApi {
 
 	public async updateTaskDeadline(id: number): Promise<TaskDto> {
 		const response = await this.load(
-			this.getFullEndpoint(TasksApiPath.DEADLINE_$ID, {
+			this.getFullEndpoint(TasksApiPath.$ID_DEADLINE, {
 				id: id.toString(),
 			}),
 			{

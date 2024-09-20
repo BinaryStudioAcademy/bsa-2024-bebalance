@@ -117,7 +117,7 @@ class TaskController extends BaseController {
 					}>,
 				),
 			method: "PATCH",
-			path: TasksApiPath.DEADLINE_$ID,
+			path: TasksApiPath.$ID_DEADLINE,
 			preHandlers: [checkAccessToTask(taskService)],
 		});
 
@@ -389,7 +389,7 @@ class TaskController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /tasks/deadline/{id}:
+	 * /tasks/{id}/deadline:
 	 *    patch:
 	 *     tags: [tasks]
 	 *      description: Update the deadline of a task

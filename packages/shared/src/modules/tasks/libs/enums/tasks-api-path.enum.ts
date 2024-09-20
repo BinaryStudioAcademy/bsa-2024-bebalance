@@ -1,7 +1,7 @@
 const TasksApiPath = {
 	$ID: "/:id",
+	$ID_DEADLINE: "/:id/deadline",
 	CURRENT: "/current",
-	DEADLINE_$ID: "/deadline/:id",
 	NOTES: "/notes",
 	NOTES_$ID: "/notes/:id",
 	PAST: "/past",
