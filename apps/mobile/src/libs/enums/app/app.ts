@@ -3,6 +3,6 @@ export { AnimationName } from "./animation-name.enum";
 export { BaseColor } from "./base-color.enum";
 export { DataStatus } from "./data-status.enum";
 export { GradientColor } from "./gradient-color.enum";
-export { ToastMessageContent } from "./toast-message-content.enum";
+export { NotificationMessage } from "./notification-message.enum";
 export { ToastMessageTitle } from "./toast-message-title.enum";
 export { ToastMessageType } from "./toast-message-type.enum";

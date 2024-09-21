@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { ToastMessageContent } from "~/libs/enums/enums";
+import { NotificationMessage } from "~/libs/enums/enums";
 import { storage, StorageKey } from "~/libs/packages/storage/storage";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import {
@@ -39,7 +39,7 @@ const requestResetPassword = createAsyncThunk<
 	const isSuccessful = await authApi.requestResetPassword(emailPayload);
 
 	if (isSuccessful) {
-		toastMessage.success({ message: ToastMessageContent.LINK_SENT });
+		toastMessage.success({ message: NotificationMessage.LINK_SENT });
 	}
 
 	return isSuccessful;
@@ -55,7 +55,7 @@ const resetPassword = createAsyncThunk<
 	const isSuccessful = await authApi.resetPassword(emailPayload);
 
 	if (isSuccessful) {
-		toastMessage.success({ message: ToastMessageContent.PASSWORD_UPDATED });
+		toastMessage.success({ message: NotificationMessage.PASSWORD_UPDATED });
 	}
 
 	return isSuccessful;
