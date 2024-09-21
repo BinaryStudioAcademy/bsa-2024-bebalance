@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.23.0...backend-v1.24.0) (2024-09-20)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#484](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/484)) ([80cfe92](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/80cfe922e1a2a5bee49c24ad771d0a36d153b554))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.22.0...backend-v1.23.0) (2024-09-19)
 
 
