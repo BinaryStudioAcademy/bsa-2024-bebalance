@@ -28,10 +28,13 @@ const NotificationTaskDays: React.FC<
 		<>
 			<Text
 				preset="subheading"
-				style={[globalStyles.mb48, globalStyles.mt12, styles.title]}
+				style={[globalStyles.mb12, globalStyles.mt12, styles.title]}
 				weight="bold"
 			>
 				Which days would you like to receive tasks?
+			</Text>
+			<Text style={globalStyles.mb16}>
+				Choose at least 3 days in order to achieve your life balance
 			</Text>
 			<View style={[globalStyles.gap16, globalStyles.mb24]}>
 				<MultipleCheckboxInput
