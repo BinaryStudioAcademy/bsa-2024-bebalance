@@ -1,4 +1,3 @@
-import { ChatMessageAuthor, ChatMessageType } from "shared";
 import { type z } from "zod";
 
 import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
@@ -7,10 +6,8 @@ import {
 	type OpenAIResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import {
-	type AIAssistantResponseDto,
-	type ChatMessageDto,
-} from "../../types/types.js";
+import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
+import { type ChatMessageCreateDto } from "../../types/types.js";
 import { type changeTaskByCategory } from "./change-task.validation-schema.js";
 
 type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
@@ -18,7 +15,7 @@ type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
 const generateChangeTaskSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
-): AIAssistantResponseDto | null => {
+): ChatMessageCreateDto[] | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
 	if (!message) {
@@ -37,22 +34,17 @@ const generateChangeTaskSuggestionsResponse = (
 		contentText,
 	) as TaskByCategoryData;
 
-	const textMessage: ChatMessageDto = {
+	const textMessage: ChatMessageCreateDto = {
 		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: FIRST_ITEM_INDEX,
-		isRead: false,
 		payload: {
 			text: resultData.message,
 		},
+		threadId: message.thread_id,
 		type: ChatMessageType.TEXT,
 	};
 
-	const taskMessage: ChatMessageDto = {
+	const taskMessage: ChatMessageCreateDto = {
 		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: FIRST_ITEM_INDEX,
-		isRead: false,
 		payload: {
 			task: {
 				categoryId: resultData.tasks.categoryId,
@@ -62,13 +54,11 @@ const generateChangeTaskSuggestionsResponse = (
 				label: resultData.tasks.label,
 			},
 		},
+		threadId: message.thread_id,
 		type: ChatMessageType.TASK,
 	};
 
-	return {
-		messages: [textMessage, taskMessage],
-		threadId: message.thread_id,
-	};
+	return [taskMessage, textMessage];
 };
 
 export { generateChangeTaskSuggestionsResponse };

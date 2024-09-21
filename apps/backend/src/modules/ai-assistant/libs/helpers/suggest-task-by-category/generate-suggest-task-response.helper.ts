@@ -7,10 +7,7 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
-import {
-	type AIAssistantResponseDto,
-	type ChatMessageDto,
-} from "../../types/types.js";
+import { type ChatMessageCreateDto } from "../../types/types.js";
 import { type taskByCategory } from "./suggest-task-by-category.validation-schema.js";
 
 type TaskByCategoryData = z.infer<typeof taskByCategory>;
@@ -18,7 +15,7 @@ type TaskByCategoryData = z.infer<typeof taskByCategory>;
 const generateTaskSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
-): AIAssistantResponseDto | null => {
+): ChatMessageCreateDto[] | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
 	if (!message) {
@@ -37,23 +34,18 @@ const generateTaskSuggestionsResponse = (
 		contentText,
 	) as TaskByCategoryData;
 
-	const textMessage: ChatMessageDto = {
+	const textMessage: ChatMessageCreateDto = {
 		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: FIRST_ITEM_INDEX,
-		isRead: false,
 		payload: {
 			text: resultData.message,
 		},
+		threadId: message.thread_id,
 		type: ChatMessageType.TEXT,
 	};
 
-	const taskMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
+	const taskMessages: ChatMessageCreateDto[] = resultData.tasks.map((task) => {
 		return {
 			author: ChatMessageAuthor.ASSISTANT,
-			createdAt: new Date().toISOString(),
-			id: FIRST_ITEM_INDEX,
-			isRead: false,
 			payload: {
 				task: {
 					categoryId: task.categoryId,
@@ -63,14 +55,12 @@ const generateTaskSuggestionsResponse = (
 					label: task.label,
 				},
 			},
+			threadId: message.thread_id,
 			type: ChatMessageType.TASK,
 		};
 	});
 
-	return {
-		messages: [textMessage, ...taskMessages],
-		threadId: message.thread_id,
-	};
+	return [...taskMessages, textMessage];
 };
 
 export { generateTaskSuggestionsResponse };

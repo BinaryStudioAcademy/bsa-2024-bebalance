@@ -20,6 +20,7 @@ import {
 import {
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
+	type ChatMessageDto,
 	type SelectedCategory,
 	type TaskCreateDto,
 	type TaskDto,
@@ -115,7 +116,25 @@ class AIAssistantService {
 		);
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateChangeTaskSuggestionsResponse(result, taskDeadLine);
+		const response = generateChangeTaskSuggestionsResponse(
+			result,
+			taskDeadLine,
+		);
+
+		if (!response) {
+			return null;
+		}
+
+		const messages: ChatMessageDto[] = await Promise.all(
+			response.map(
+				async (message) => await this.chatMessageService.create(message),
+			),
+		);
+
+		return {
+			messages,
+			threadId,
+		};
 	}
 
 	public async explainTaskSuggestion(
@@ -129,7 +148,22 @@ class AIAssistantService {
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateExplainTaskSuggestionsResponse(result, task);
+		const response = generateExplainTaskSuggestionsResponse(result, task);
+
+		if (!response) {
+			return null;
+		}
+
+		const messages: ChatMessageDto[] = await Promise.all(
+			response.map(
+				async (message) => await this.chatMessageService.create(message),
+			),
+		);
+
+		return {
+			messages,
+			threadId,
+		};
 	}
 
 	public async initializeNewChat(
@@ -168,7 +202,22 @@ class AIAssistantService {
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateTaskSuggestionsResponse(result, taskDeadLine);
+		const response = generateTaskSuggestionsResponse(result, taskDeadLine);
+
+		if (!response) {
+			return null;
+		}
+
+		const messages: ChatMessageDto[] = await Promise.all(
+			response.map(
+				async (message) => await this.chatMessageService.create(message),
+			),
+		);
+
+		return {
+			messages,
+			threadId,
+		};
 	}
 }
 
