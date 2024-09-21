@@ -38,7 +38,7 @@ const { actions, name, reducer } = createSlice({
 			state.questions = action.payload.items;
 			state.dataStatus = DataStatus.FULFILLED;
 			state.currentQuestion =
-				state.questions[state.currentQuestionIndex] || null;
+				state.questions[state.currentQuestionIndex] ?? null;
 		});
 		builder.addCase(getAll.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -60,13 +60,13 @@ const { actions, name, reducer } = createSlice({
 		nextQuestion(state) {
 			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentQuestion =
-				state.questions[state.currentQuestionIndex] || null;
+				state.questions[state.currentQuestionIndex] ?? null;
 		},
 		previousQuestion(state) {
 			if (state.currentQuestionIndex > initialState.currentQuestionIndex) {
 				state.currentQuestionIndex -= PREVIOUS_INDEX_OFFSET;
 				state.currentQuestion =
-					state.questions[state.currentQuestionIndex] || null;
+					state.questions[state.currentQuestionIndex] ?? null;
 			}
 		},
 		resetState(state) {
