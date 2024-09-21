@@ -219,7 +219,7 @@ class UserRepository implements Repository {
 					notificationFrequency: updatedUserDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
-					threadId: user.userDetails.threadId,
+					threadId: updatedUserDetails.threadId,
 					updatedAt: user.updatedAt,
 					userTaskDays: user.userTaskDays.map(
 						(taskDay: UserTaskDay) => taskDay.dayOfWeek,
@@ -262,7 +262,7 @@ class UserRepository implements Repository {
 						user.onboardingAnswers.length > ZERO_INDEX,
 					hasAnsweredQuizQuestions: user.quizAnswers.length > ZERO_INDEX,
 					id: user.id,
-					name: user.userDetails.name,
+					name: userDetails.name,
 					notificationFrequency: userDetails.notificationFrequency,
 					passwordHash: user.passwordHash,
 					passwordSalt: user.passwordSalt,
