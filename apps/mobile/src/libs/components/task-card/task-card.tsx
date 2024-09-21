@@ -1,5 +1,4 @@
 import React from "react";
-import { TaskStatus } from "shared";
 
 import {
 	DeadlineCountdown,
@@ -9,7 +8,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
+import { BaseColor, TaskStatus } from "~/libs/enums/enums";
 import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type TaskDto } from "~/packages/tasks/tasks";
