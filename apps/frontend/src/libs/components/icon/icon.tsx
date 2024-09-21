@@ -1,16 +1,16 @@
-import { type CSSProperties, type IconName } from "~/libs/types/types.js";
+import { type IconName } from "~/libs/types/types.js";
 
 import { iconNameToSvg } from "./libs/maps/maps.js";
 
 type Properties = {
+	color?: string | undefined;
 	name: IconName;
-	style?: CSSProperties | undefined;
 };
 
-const Icon: React.FC<Properties> = ({ name, style }: Properties) => {
+const Icon: React.FC<Properties> = ({ color, name }: Properties) => {
 	const Icon = iconNameToSvg[name];
 
-	return <Icon style={style} />;
+	return <Icon color={color} />;
 };
 
 export { Icon };
