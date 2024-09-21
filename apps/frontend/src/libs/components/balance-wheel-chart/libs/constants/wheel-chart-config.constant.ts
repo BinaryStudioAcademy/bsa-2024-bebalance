@@ -23,7 +23,7 @@ const WHEEL_CHART_CONFIG: ChartConfiguration<PolarAreaType> = {
 			easing: "easeInOutQuad",
 		},
 		layout: {
-			padding: 10,
+			padding: 20,
 		},
 		plugins: {
 			tooltip: {
