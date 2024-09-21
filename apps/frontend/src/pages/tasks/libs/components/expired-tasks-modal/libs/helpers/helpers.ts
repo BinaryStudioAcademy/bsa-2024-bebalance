@@ -1,1 +1,1 @@
-export { getClientX } from "./get-client-x/get-client-x.constant.js";
+export { getHorizontalPointerPosition } from "./get-horizontal-pointer-position/get-horizontal-pointer-position.helper.js";

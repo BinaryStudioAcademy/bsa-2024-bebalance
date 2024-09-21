@@ -8,11 +8,11 @@ import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
 import {
-	INITIAL_X,
+	INITIAL_POINTER_POSITION_X,
 	SLIDE_WIDTH_PERCENTAGE,
 } from "./libs/constants/constants.js";
 import { DragThreshold, Slide } from "./libs/enums/enums.js";
-import { getClientX } from "./libs/helpers/helpers.js";
+import { getHorizontalPointerPosition } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -21,7 +21,9 @@ type Properties = {
 
 const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	const [currentSlide, setCurrentSlide] = useState<number>(Slide.INITIAL);
-	const [startX, setStartX] = useState<number>(INITIAL_X);
+	const [pointerStartPositionX, setPointerStartPositionX] = useState<number>(
+		INITIAL_POINTER_POSITION_X,
+	);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const sliderReference = useRef<HTMLDivElement>(null);
 	const totalSlides = tasks.length;
@@ -45,10 +47,10 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 	const handleDragStart = useCallback(
 		(event: React.MouseEvent | React.TouchEvent): void => {
 			setIsDragging(true);
-			const clientX = getClientX(event);
-			setStartX(clientX);
+			const pointerPositionX = getHorizontalPointerPosition(event);
+			setPointerStartPositionX(pointerPositionX);
 		},
-		[setIsDragging, setStartX],
+		[setIsDragging, setPointerStartPositionX],
 	);
 
 	const handleDragMove = useCallback(
@@ -57,8 +59,8 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 				return;
 			}
 
-			const clientX = getClientX(event);
-			const movementDistance = startX - clientX;
+			const pointerPositionX = getHorizontalPointerPosition(event);
+			const movementDistance = pointerStartPositionX - pointerPositionX;
 
 			if (Math.abs(movementDistance) <= DragThreshold.SWIPE_MAXIMUM) {
 				return;
@@ -72,7 +74,13 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 
 			setIsDragging(false);
 		},
-		[isDragging, startX, handleNextSlide, handlePreviousSlide, setIsDragging],
+		[
+			isDragging,
+			pointerStartPositionX,
+			handleNextSlide,
+			handlePreviousSlide,
+			setIsDragging,
+		],
 	);
 
 	const handleSlideRemoval = useCallback(() => {
