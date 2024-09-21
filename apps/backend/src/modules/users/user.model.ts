@@ -5,7 +5,7 @@ import {
 	DatabaseTableName,
 } from "~/libs/modules/database/database.js";
 
-import { CategoryModel } from "../categories/category.model.js";
+import { CategoryModel } from "../categories/categories.js";
 import { OnboardingAnswerModel } from "../onboarding/onboarding.js";
 import { QuizAnswerModel } from "../quiz-answers/quiz-answer.model.js";
 import { TaskModel } from "../tasks/tasks.js";
@@ -67,6 +67,14 @@ class UserModel extends AbstractModel {
 				},
 				modelClass: CategoryModel,
 				relation: Model.ManyToManyRelation,
+			},
+			tasks: {
+				join: {
+					from: `${DatabaseTableName.USERS}.id`,
+					to: `${DatabaseTableName.TASKS}.userId`,
+				},
+				modelClass: TaskModel,
+				relation: Model.HasManyRelation,
 			},
 			userDetails: {
 				join: {
