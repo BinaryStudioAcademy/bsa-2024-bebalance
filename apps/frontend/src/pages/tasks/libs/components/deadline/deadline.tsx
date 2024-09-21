@@ -3,13 +3,12 @@ import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import { ONE_MINUTE_IN_MILLISECONDS } from "../../constants/constants.js";
-import { getMillisecondsLeft } from "../../helpers/helpers.js";
+import { COUNTDOWN_EXPIRED } from "./libs/constants/constants.js";
+import { updateCountdown } from "./libs/helpers/helpers.js";
 import {
-	COUNTDOWN_EXPIRED,
-	TIME_PAD_FILL,
-} from "./libs/constants/constants.js";
-import { MillisecondsPerUnit, TimePad } from "./libs/enums/enums.js";
-import { type Countdown } from "./libs/types/types.js";
+	type Countdown,
+	type CountdownUpdateHandlingData,
+} from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -28,55 +27,18 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 	);
 
 	useEffect(() => {
-		const calculateDaysUntilDeadline = (): boolean => {
-			const currentTime = Date.now();
-			const timeToDeadline = getMillisecondsLeft(currentTime, deadline);
-
-			if (timeToDeadline < ONE_MINUTE_IN_MILLISECONDS) {
-				setCountdown(COUNTDOWN_EXPIRED);
-				setIsExpired(true);
-				onExpire();
-
-				return true;
-			}
-
-			const days = Math.floor(timeToDeadline / MillisecondsPerUnit.DAY);
-			const hours = Math.floor(
-				(timeToDeadline % MillisecondsPerUnit.DAY) / MillisecondsPerUnit.HOUR,
-			);
-			const minutes = Math.floor(
-				(timeToDeadline % MillisecondsPerUnit.HOUR) /
-					MillisecondsPerUnit.MINUTE,
-			);
-
-			const formattedDays = String(days);
-			const formattedHours = String(hours).padStart(
-				TimePad.HOURS,
-				TIME_PAD_FILL,
-			);
-			const formattedMinutes = String(minutes).padStart(
-				TimePad.MINUTES,
-				TIME_PAD_FILL,
-			);
-
-			setCountdown({
-				days: formattedDays,
-				hours: formattedHours,
-				minutes: formattedMinutes,
-			});
-
-			return false;
+		const updateHandlingData: CountdownUpdateHandlingData = {
+			deadline,
+			onExpire,
+			setCountdown,
+			setIsExpired,
 		};
 
 		const countdownInterval = setInterval(() => {
-			const isExpired = calculateDaysUntilDeadline();
-
-			if (isExpired) {
-				clearInterval(countdownInterval);
-			}
+			updateCountdown(updateHandlingData);
 		}, ONE_MINUTE_IN_MILLISECONDS);
 
-		calculateDaysUntilDeadline();
+		updateCountdown(updateHandlingData);
 
 		return (): void => {
 			clearInterval(countdownInterval);
