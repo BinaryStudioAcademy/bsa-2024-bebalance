@@ -48,12 +48,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit((signUpSubmissionData: UserSignUpFormDto) => {
 			const { password } = signUpSubmissionData;
-			const confirmPassword = watch(ConfirmPasswordCustomValidation.FIELD);
+			const confirmPassword = watch(
+				ConfirmPasswordCustomValidation.FIELDS.confirmPassword,
+			);
 
 			if (confirmPassword === password) {
 				onSubmit(signUpSubmissionData);
 			} else {
-				setError(ConfirmPasswordCustomValidation.FIELD, {
+				setError(ConfirmPasswordCustomValidation.FIELDS.confirmPassword, {
 					message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 					type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 				});
