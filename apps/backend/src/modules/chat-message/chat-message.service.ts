@@ -1,22 +1,11 @@
-import { type Service, type ValueOf } from "~/libs/types/types.js";
+import { type Service } from "~/libs/types/types.js";
 
 import { ChatMessageEntity } from "./chat-message.entity.js";
 import { type ChatMessageRepository } from "./chat-message.repository.js";
 import {
-	type ChatMessageAuthor,
-	type ChatMessageType,
-} from "./libs/enums/enums.js";
-import {
+	type ChatMessageCreateDto,
 	type ChatMessageDto,
-	type ChatMessagePayload,
 } from "./libs/types/types.js";
-
-type ChatMessageCreateDto = {
-	author: ValueOf<typeof ChatMessageAuthor>;
-	payload: ChatMessagePayload;
-	threadId: string;
-	type: ValueOf<typeof ChatMessageType>;
-};
 
 class ChatMessageService implements Service {
 	private chatMessageRepository: ChatMessageRepository;

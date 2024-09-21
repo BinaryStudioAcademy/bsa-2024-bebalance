@@ -15,7 +15,9 @@ type ChatMessageDto = {
 	id: number;
 	isRead: boolean;
 	payload: ChatMessagePayload;
+	threadId: string;
 	type: ValueOf<typeof ChatMessageType>;
+	updatedAt: string;
 };
 
 export { type ChatMessageDto, type ChatMessagePayload };
