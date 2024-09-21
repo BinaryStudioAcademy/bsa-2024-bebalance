@@ -67,6 +67,13 @@ class AIAssistantService {
 		const { payload, threadId } = body;
 		const task = payload as TaskCreateDto;
 
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: `Accept ${task.label} task` },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
+
 		const newTask = await this.taskService.create({
 			categoryId: task.categoryId,
 			description: task.description,
@@ -105,7 +112,7 @@ class AIAssistantService {
 
 		await this.chatMessageService.create({
 			author: ChatMessageAuthor.USER,
-			payload: { text: `Accept ${task.label} task` },
+			payload: { text: "Change task suggestion" },
 			threadId,
 			type: ChatMessageType.TEXT,
 		});
@@ -142,6 +149,13 @@ class AIAssistantService {
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
 
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: "Explain task suggestion" },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
+
 		const task = payload as TaskCreateDto;
 
 		const runThreadOptions = runExplainTaskOptions(task);
@@ -169,6 +183,17 @@ class AIAssistantService {
 	public async initializeNewChat(
 		user: UserDto,
 	): Promise<AIAssistantResponseDto | null> {
+		if (user.threadId) {
+			const messages = await this.chatMessageService.findByThreadId(
+				user.threadId,
+			);
+
+			return {
+				messages,
+				threadId: user.threadId,
+			};
+		}
+
 		const userQuestionsWithAnswers =
 			await this.onboardingRepository.findUserAnswersWithQuestions(user.id);
 
@@ -193,6 +218,14 @@ class AIAssistantService {
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
+
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: "Suggest tasks for chosen categories" },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
+
 		const categories = payload as SelectedCategory[];
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
