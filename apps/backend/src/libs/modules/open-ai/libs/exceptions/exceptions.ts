@@ -1,0 +1,1 @@
+export { OpenAIError } from "shared";
