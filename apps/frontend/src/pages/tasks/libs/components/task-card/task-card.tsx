@@ -9,9 +9,9 @@ import { IconColorVariant } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onComplete: ((id: number) => void) | undefined;
-	onExpire: ((expiredTask: TaskDto) => void) | undefined;
-	onSkip: ((id: number) => void) | undefined;
+	onComplete?: (id: number) => void;
+	onExpire?: (expiredTask: TaskDto) => void;
+	onSkip?: (id: number) => void;
 	task: TaskDto;
 	variant?: "active" | "expired";
 };

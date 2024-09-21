@@ -105,9 +105,6 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							<div>
 								<div className={styles["slide"]}>
 									<TaskCard
-										onComplete={undefined}
-										onExpire={undefined}
-										onSkip={undefined}
 										task={tasks[Slide.INITIAL] as TaskDto}
 										variant="expired"
 									/>
@@ -126,13 +123,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							>
 								{tasks.map((task, index) => (
 									<div className={styles["slide"]} key={index}>
-										<TaskCard
-											onComplete={undefined}
-											onExpire={undefined}
-											onSkip={undefined}
-											task={task}
-											variant="expired"
-										/>
+										<TaskCard task={task} variant="expired" />
 									</div>
 								))}
 							</div>
