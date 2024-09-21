@@ -30,15 +30,13 @@ const useTypingText = ({
 			return;
 		}
 
-		if (currentLettersPrinted === firstLetterIndex) {
-			setTimeout(() => {
-				setCurrentLettersPrinted(currentLettersPrinted + lettersPrintedPerStep);
-			}, startTypingDelay);
-		} else {
-			setTimeout(() => {
-				setCurrentLettersPrinted(currentLettersPrinted + lettersPrintedPerStep);
-			}, nextLettersPrintedDelay);
-		}
+		const delay =
+			currentLettersPrinted === firstLetterIndex
+				? startTypingDelay
+				: nextLettersPrintedDelay;
+		setTimeout(() => {
+			setCurrentLettersPrinted(currentLettersPrinted + lettersPrintedPerStep);
+		}, delay);
 	}, [
 		currentLettersPrinted,
 		startTypingDelay,
