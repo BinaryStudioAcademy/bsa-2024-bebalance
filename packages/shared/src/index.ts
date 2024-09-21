@@ -79,6 +79,7 @@ export {
 	type BalanceWheelMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
+	type ChatMessagePayload,
 	ChatMessageType,
 	type QuestionMessage,
 	type TaskMessage,

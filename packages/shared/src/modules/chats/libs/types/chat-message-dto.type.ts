@@ -23,4 +23,4 @@ type ChatMessageDto = {
 	type: ValueOf<typeof ChatMessageType>;
 };
 
-export { type ChatMessageDto };
+export { type ChatMessageDto, type ChatMessagePayload };

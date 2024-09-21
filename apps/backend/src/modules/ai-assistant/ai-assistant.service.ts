@@ -1,9 +1,11 @@
 import { type OpenAi, OpenAIRoleKey } from "~/libs/modules/open-ai/open-ai.js";
 import { type UserDto } from "~/libs/types/types.js";
 import { type CategoryService } from "~/modules/categories/categories.js";
+import { type ChatMessageService } from "~/modules/chat-message/chat-message.service.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { type TaskService } from "~/modules/tasks/tasks.js";
 
+import { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 import {
 	generateChangeTaskSuggestionsResponse,
 	generateExplainTaskSuggestionsResponse,
@@ -26,6 +28,7 @@ import {
 
 type Constructor = {
 	categoryService: CategoryService;
+	chatMessageService: ChatMessageService;
 	onboardingRepository: OnboardingRepository;
 	openAi: OpenAi;
 	taskService: TaskService;
@@ -33,18 +36,21 @@ type Constructor = {
 
 class AiAssistantService {
 	private categoryService: CategoryService;
+	private chatMessageService: ChatMessageService;
 	private onboardingRepository: OnboardingRepository;
 	private openAi: OpenAi;
 	private taskService: TaskService;
 
 	public constructor({
 		categoryService,
+		chatMessageService,
 		onboardingRepository,
 		openAi,
 		taskService,
 	}: Constructor) {
 		this.openAi = openAi;
 		this.categoryService = categoryService;
+		this.chatMessageService = chatMessageService;
 		this.onboardingRepository = onboardingRepository;
 		this.taskService = taskService;
 	}
@@ -91,6 +97,13 @@ class AiAssistantService {
 	): Promise<AIAssistantResponseDto | null> {
 		const { lastMessageId, payload, threadId } = body;
 		const task = payload as TaskCreateDto;
+
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: `Accept ${task.label} task` },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		const runThreadOptions = runChangeTaskByCategoryOptions(task);
 		const taskDeadLine = this.taskService.calculateDeadline(

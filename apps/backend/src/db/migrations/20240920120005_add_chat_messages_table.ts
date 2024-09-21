@@ -14,6 +14,7 @@ const ColumnName = {
 	TEXT: "text",
 	THREAD_ID: "thread_id",
 	TYPE: "type",
+	UPDATED_AT: "updated_at",
 } as const;
 
 const ChatMessageType = {
@@ -30,8 +31,9 @@ const DELETE_STRATEGY = "CASCADE";
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable(TableName.CHAT_MESSAGES, (table) => {
-		table.integer(ColumnName.ID).primary();
+		table.increments(ColumnName.ID).primary();
 		table.timestamp(ColumnName.CREATED_AT).defaultTo(knex.fn.now());
+		table.timestamp(ColumnName.UPDATED_AT).defaultTo(knex.fn.now());
 		table
 			.enum(ColumnName.AUTHOR, [
 				ChatMessageAuthor.ASSISTANT,

@@ -6,7 +6,7 @@ const COLUMN_NAME = "thread_id";
 
 function up(knex: Knex): Promise<void> {
 	return knex.schema.alterTable(TABLE_NAME, (table) => {
-		table.string(COLUMN_NAME);
+		table.string(COLUMN_NAME).unique();
 	});
 }
 
