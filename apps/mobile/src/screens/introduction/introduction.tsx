@@ -58,14 +58,13 @@ const Introduction: React.FC = () => {
 						]}
 					>
 						<TypingTextView
+							content="You are on the right way to achieving life balance..."
 							maskingColor={BaseColor.DARK_BLUE}
 							preset="heading"
 							style={styles.text}
 							textColor={BaseColor.BG_WHITE}
 							weight="regular"
-						>
-							You are on the right way to achieving life balance...
-						</TypingTextView>
+						/>
 					</View>
 					<Button label="Let's Start" onPress={handleContinuePress} />
 				</View>

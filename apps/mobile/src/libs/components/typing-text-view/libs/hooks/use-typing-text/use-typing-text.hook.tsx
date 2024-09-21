@@ -1,11 +1,11 @@
 import { useEffect, useState } from "~/libs/hooks/hooks";
 
 type UseTypingTextApruments = {
+	content: string;
 	firstLetterIndex: number;
 	lettersPrintedPerStep: number;
 	nextLettersPrintedDelay: number;
 	startTypingDelay: number;
-	text: string;
 };
 
 type UseTypingTextReturnData = {
@@ -14,19 +14,19 @@ type UseTypingTextReturnData = {
 };
 
 const useTypingText = ({
+	content,
 	firstLetterIndex,
 	lettersPrintedPerStep,
 	nextLettersPrintedDelay,
 	startTypingDelay,
-	text,
 }: UseTypingTextApruments): UseTypingTextReturnData => {
 	const [currentLettersPrinted, setCurrentLettersPrinted] =
 		useState<number>(firstLetterIndex);
-	const visibleLetters = text.slice(firstLetterIndex, currentLettersPrinted);
-	const hiddenLetters = text.slice(currentLettersPrinted);
+	const visibleLetters = content.slice(firstLetterIndex, currentLettersPrinted);
+	const hiddenLetters = content.slice(currentLettersPrinted);
 
 	useEffect(() => {
-		if (currentLettersPrinted >= text.length) {
+		if (currentLettersPrinted >= content.length) {
 			return;
 		}
 
@@ -34,13 +34,17 @@ const useTypingText = ({
 			currentLettersPrinted === firstLetterIndex
 				? startTypingDelay
 				: nextLettersPrintedDelay;
-		setTimeout(() => {
+		const timer = setTimeout(() => {
 			setCurrentLettersPrinted(currentLettersPrinted + lettersPrintedPerStep);
 		}, delay);
+
+		return (): void => {
+			clearTimeout(timer);
+		};
 	}, [
+		content,
 		currentLettersPrinted,
 		startTypingDelay,
-		text,
 		firstLetterIndex,
 		lettersPrintedPerStep,
 		nextLettersPrintedDelay,

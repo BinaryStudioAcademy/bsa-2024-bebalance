@@ -39,6 +39,7 @@ const Welcome: React.FC = () => {
 	const typingParapraphs = paragraphs.map((paragraph, index) => {
 		return (
 			<TypingTextView
+				content={paragraph}
 				key={index}
 				lettersPrintedPerStep={LETTERS_PRINTED_PER_STEP}
 				maskingColor={BaseColor.DARK_BLUE}
@@ -47,9 +48,7 @@ const Welcome: React.FC = () => {
 				startTypingDelay={index * NEXT_PARAGRAPH_DELAY}
 				textColor={BaseColor.BG_WHITE}
 				weight="regular"
-			>
-				{paragraph}
-			</TypingTextView>
+			/>
 		);
 	});
 
