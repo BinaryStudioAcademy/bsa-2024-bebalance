@@ -17,6 +17,7 @@ export {
 	FileError,
 	HTTPError,
 	OnboardingError,
+	OpenAIError,
 	QuizError,
 	TaskError,
 	UserError,
@@ -43,6 +44,16 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	addMessageToThreadValidationSchema,
+	AIAssistantApiPath,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
+	changeTaskSuggestionRequestValidationSchema,
+	taskActionRequestSchemaValidationSchema,
+	taskSuggestionRequestValidationSchema,
+	type ThreadMessageCreateDto,
+} from "./modules/ai-assistant/ai-assistant.js";
+export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
@@ -57,7 +68,16 @@ export {
 	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
+	type SelectedCategory,
 } from "./modules/categories/categories.js";
+export {
+	type BalanceWheelMessage,
+	ChatMessageAuthor,
+	type ChatMessageDto,
+	ChatMessageType,
+	type TaskMessage,
+	type TextMessage,
+} from "./modules/chats/chats.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
@@ -91,7 +111,9 @@ export {
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type TaskCreateDto,
 	type TaskDto,
+	type TaskGetAllResponseDto,
 	type TaskNoteDto,
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,

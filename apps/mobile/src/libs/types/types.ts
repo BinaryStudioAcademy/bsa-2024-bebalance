@@ -19,6 +19,7 @@ export {
 	type SectorParametersCalculationData,
 	type WheelDataItem,
 } from "./wheel/wheel";
+export { type RouteProp } from "@react-navigation/native";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type Control,

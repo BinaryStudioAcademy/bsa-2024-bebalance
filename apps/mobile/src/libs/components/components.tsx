@@ -27,6 +27,7 @@ export { SliderSection } from "./slider-section/slider-section";
 export { Tag } from "./tag/tag";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
+export { TypingTextView } from "./typing-text-view/typing-text-view";
 export { Wheel } from "./wheel/wheel";
 export { WheelLoader } from "./wheel-loader/wheel-loader";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
