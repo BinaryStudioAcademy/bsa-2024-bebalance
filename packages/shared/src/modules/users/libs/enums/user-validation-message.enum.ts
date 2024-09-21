@@ -8,7 +8,6 @@ const UserValidationMessage = {
 	EMAIL_WRONG: "Please enter a valid email address",
 	FIELD_REQUIRED: "This field is required",
 	MAX_7_DAYS: "You can select a maximum of 7 days",
-	MIN_3_DAYS: "You can select a minimum of 3 days",
 	NAME_INVALID_CHARACTERS: `Please enter a valid name. Your name must be between ${String(UserValidationRule.NAME_MIN_LENGTH)} and ${String(UserValidationRule.NAME_MAX_LENGTH)} characters. Only Latin letters, numbers, hyphens, and underscores are allowed`,
 	NOTIFICATION_FREQUENCY_STRING_REQUIRED:
 		"Notification frequency must be a string value",

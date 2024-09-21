@@ -17,8 +17,8 @@ const notificationAnswers = z.object({
 				required_error: UserValidationMessage.TASK_DAY_REQUIRED,
 			}),
 		)
-		.min(NotificationAnswersValidationRule.NOTIFICATION_FREQUENCY_MIN_LENGTH, {
-			message: UserValidationMessage.MIN_3_DAYS,
+		.nonempty({
+			message: UserValidationMessage.DAYS_BETWEEN_1_AND_7,
 		})
 		.max(NotificationAnswersValidationRule.TASK_DAY_MAX, {
 			message: UserValidationMessage.MAX_7_DAYS,
