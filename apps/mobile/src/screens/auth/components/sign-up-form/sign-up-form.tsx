@@ -49,13 +49,13 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 		void handleSubmit((signUpSubmissionData: UserSignUpFormDto) => {
 			const { password } = signUpSubmissionData;
 			const confirmPassword = watch(
-				ConfirmPasswordCustomValidation.FIELDS.confirmPassword,
+				ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD,
 			);
 
 			if (confirmPassword === password) {
 				onSubmit(signUpSubmissionData);
 			} else {
-				setError(ConfirmPasswordCustomValidation.FIELDS.confirmPassword, {
+				setError(ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD, {
 					message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 					type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 				});
