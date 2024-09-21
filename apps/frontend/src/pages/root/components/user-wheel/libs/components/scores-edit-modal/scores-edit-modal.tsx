@@ -43,14 +43,16 @@ const ScoresEditModal: React.FC<Properties> = ({
 				),
 			);
 
-			const scoreChange = scores.map((score) => {
+			const updatedScores = scores.map((score) => {
 				return score.categoryId === categoryId
 					? { ...score, score: value }
 					: score;
 			});
 
 			void dispatch(
-				quizActions.editScore(scoreChange as QuizScoresGetAllItemResponseDto[]),
+				quizActions.editScore(
+					updatedScores as QuizScoresGetAllItemResponseDto[],
+				),
 			);
 		},
 
