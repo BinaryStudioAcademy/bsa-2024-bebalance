@@ -66,6 +66,13 @@ class AIAssistantService {
 		const { payload, threadId } = body;
 		const task = payload as TaskCreateDto;
 
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: `Accept ${task.label} task` },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
+
 		const newTask = await this.taskService.create({
 			categoryId: task.categoryId,
 			description: task.description,
@@ -104,7 +111,7 @@ class AIAssistantService {
 
 		await this.chatMessageService.create({
 			author: ChatMessageAuthor.USER,
-			payload: { text: `Accept ${task.label} task` },
+			payload: { text: "Change task suggestion" },
 			threadId,
 			type: ChatMessageType.TEXT,
 		});
@@ -122,6 +129,13 @@ class AIAssistantService {
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
+
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: "Explain task suggestion" },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		const task = payload as TaskCreateDto;
 
@@ -170,6 +184,14 @@ class AIAssistantService {
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
+
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: { text: "Suggest tasks for chosen categories" },
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
+
 		const categories = payload as SelectedCategory[];
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
