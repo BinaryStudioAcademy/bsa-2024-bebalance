@@ -10,5 +10,7 @@ const taskRepository = new TaskRepository(TaskModel, TaskNoteModel);
 const taskService = new TaskService(taskRepository);
 const taskController = new TaskController(logger, taskService);
 
-export { taskController };
+export { taskController, taskService };
+export { TaskEntity } from "./task.entity.js";
 export { TaskModel } from "./task.model.js";
+export { type TaskService } from "./task.service.js";

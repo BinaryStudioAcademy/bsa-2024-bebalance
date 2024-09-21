@@ -245,6 +245,43 @@ class OnboardingRepository implements Repository {
 		});
 	}
 
+	public async findUserAnswersWithQuestions(
+		userId: number,
+	): Promise<OnboardingQuestionEntity[]> {
+		const userAnswers = await this.onboardingAnswerModel
+			.query()
+			.joinRelated(RelationName.USERS)
+			.where("users.id", userId);
+
+		const questionIds = userAnswers.map((answer) => answer.questionId);
+		const questions = await this.onboardingQuestionModel
+			.query()
+			.whereIn("id", questionIds);
+
+		return questions.map((question) => {
+			const answersForQuestion = userAnswers.filter(
+				(answer) => answer.questionId === question.id,
+			);
+
+			return OnboardingQuestionEntity.initialize({
+				answers: answersForQuestion.map((answer) => {
+					return OnboardingAnswerEntity.initialize({
+						createdAt: answer.createdAt,
+						id: answer.id,
+						label: answer.label,
+						questionId: answer.questionId,
+						updatedAt: answer.updatedAt,
+						userId,
+					});
+				}),
+				createdAt: question.createdAt,
+				id: question.id,
+				label: question.label,
+				updatedAt: question.updatedAt,
+			});
+		});
+	}
+
 	public async update(
 		id: number,
 		entity: OnboardingQuestionEntity,
