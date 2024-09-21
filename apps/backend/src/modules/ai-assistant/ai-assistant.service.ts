@@ -118,7 +118,7 @@ class AIAssistantService {
 		return generateExplainTaskSuggestionsResponse(result, task, lastMessageId);
 	}
 
-	public async initNewChat(
+	public async initializeNewChat(
 		user: UserDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const userQuestionsWithAnswers =

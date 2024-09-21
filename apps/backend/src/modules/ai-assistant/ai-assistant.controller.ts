@@ -132,13 +132,13 @@ class AIAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.initNewChat(
+				this.initializeNewChat(
 					options as APIHandlerOptions<{
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_INITIATE,
+			path: AIAssistantApiPath.CHAT_INITIALIZE,
 		});
 
 		this.addRoute({
@@ -457,7 +457,7 @@ class AIAssistantController extends BaseController {
 	 *           description: The category id
 	 *           example: 1
 	 */
-	private async initNewChat(
+	private async initializeNewChat(
 		options: APIHandlerOptions<{
 			user: UserDto;
 		}>,
@@ -465,7 +465,7 @@ class AIAssistantController extends BaseController {
 		const { user } = options;
 
 		return {
-			payload: await this.openAIService.initNewChat(user),
+			payload: await this.openAIService.initializeNewChat(user),
 			status: HTTPCode.OK,
 		};
 	}
