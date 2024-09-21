@@ -96,7 +96,7 @@ const Tasks: React.FC = () => {
 		[dispatch],
 	);
 
-	const renderTaskCards = (tasks: TaskDto[]): JSX.Element[] =>
+	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] =>
 		tasks.map((task) => (
 			<TaskCard
 				key={task.id}
@@ -131,7 +131,7 @@ const Tasks: React.FC = () => {
 					</div>
 				</div>
 				<div className={styles["cards-container"]}>
-					{isLoading ? <Loader /> : renderTaskCards(taskbarTasks)}
+					{isLoading ? <Loader /> : handleRenderTaskCards(taskbarTasks)}
 				</div>
 			</div>
 		</>
