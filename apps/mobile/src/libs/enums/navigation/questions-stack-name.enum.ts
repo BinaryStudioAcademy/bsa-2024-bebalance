@@ -1,5 +1,6 @@
 const QuestionsStackName = {
 	BOTTOM_TABS: "Bottom Tabs",
+	INTRODUCTION: "Introduction",
 	NOTIFICATION_QUESTIONS: "Notification questions",
 	ONBOARDING: "Onboarding",
 	QUIZ: "Quiz",

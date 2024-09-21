@@ -15,7 +15,9 @@ class BaseConfig implements Config {
 	private get envSchema(): EnvironmentSchema {
 		return {
 			API: {
+				HOST: EnvConfig["API_URL_HOST"] as string,
 				ORIGIN_URL: EnvConfig["API_URL"] as string,
+				SCHEME: EnvConfig["API_URL_SCHEME"] as string,
 			},
 			APP: {
 				ENVIRONMENT: EnvConfig["ENVIRONMENT"] as ValueOf<typeof AppEnvironment>,
