@@ -26,7 +26,7 @@ const TypingTextView: React.FC<Properties> = ({
 	textColor = BaseColor.BLACK,
 	...textProperties
 }) => {
-	const { hiddenLetters, visibleLetters } = useTypingText({
+	const { hiddenContent, visibleContent } = useTypingText({
 		content,
 		firstLetterIndex: FIRST_LETTER_INDEX,
 		lettersPrintedPerStep,
@@ -38,9 +38,9 @@ const TypingTextView: React.FC<Properties> = ({
 		<>
 			<Text {...textProperties} color={maskingColor}>
 				<Text {...textProperties} color={textColor}>
-					{visibleLetters}
+					{visibleContent}
 				</Text>
-				{hiddenLetters}
+				{hiddenContent}
 			</Text>
 		</>
 	);

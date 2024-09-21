@@ -9,8 +9,8 @@ type UseTypingTextArguments = {
 };
 
 type UseTypingTextReturnData = {
-	hiddenLetters: string;
-	visibleLetters: string;
+	hiddenContent: string;
+	visibleContent: string;
 };
 
 const useTypingText = ({
@@ -22,8 +22,8 @@ const useTypingText = ({
 }: UseTypingTextArguments): UseTypingTextReturnData => {
 	const [currentLettersPrinted, setCurrentLettersPrinted] =
 		useState<number>(firstLetterIndex);
-	const visibleLetters = content.slice(firstLetterIndex, currentLettersPrinted);
-	const hiddenLetters = content.slice(currentLettersPrinted);
+	const visibleContent = content.slice(firstLetterIndex, currentLettersPrinted);
+	const hiddenContent = content.slice(currentLettersPrinted);
 
 	useEffect(() => {
 		if (currentLettersPrinted >= content.length) {
@@ -51,8 +51,8 @@ const useTypingText = ({
 	]);
 
 	return {
-		hiddenLetters,
-		visibleLetters,
+		hiddenContent,
+		visibleContent,
 	};
 };
 
