@@ -135,6 +135,17 @@ class AIAssistantService {
 	public async initializeNewChat(
 		user: UserDto,
 	): Promise<AIAssistantResponseDto | null> {
+		if (user.threadId) {
+			const messages = await this.chatMessageService.findByThreadId(
+				user.threadId,
+			);
+
+			return {
+				messages,
+				threadId: user.threadId,
+			};
+		}
+
 		const userQuestionsWithAnswers =
 			await this.onboardingRepository.findUserAnswersWithQuestions(user.id);
 
