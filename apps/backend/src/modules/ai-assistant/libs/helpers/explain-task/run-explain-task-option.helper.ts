@@ -1,26 +1,26 @@
 import {
 	OpenAIFunctionName,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRunThreadRequestDto,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { explainTask as explainTaskValidationSchema } from "./explain-task.validation-schema.js";
-import { ExplainTaskPromptTemplates } from "./explain-task-prompt-template.js";
+import { explainTask } from "./explain-task.validation-schema.js";
+import { ExplainTaskPromptTemplate } from "./explain-task-prompt-template.js";
 import { generateExplainTaskPrompt } from "./generate-explain-task-prompt.js";
 
 const runExplainTaskOptions = (
 	task: TaskCreateDto,
-): OpenAiRunThreadRequestDto => {
+): OpenAIRunThreadRequestDto => {
 	const explainTaskPrompt = generateExplainTaskPrompt(task);
 
 	return {
 		additional_instructions: null,
 		function_name: OpenAIFunctionName.EXPLAIN_TASK,
-		instructions: ExplainTaskPromptTemplates.EXPLAIN_TASK_INSTRUCTIONS,
+		instructions: ExplainTaskPromptTemplate.EXPLAIN_TASK_INSTRUCTIONS,
 		messages: [explainTaskPrompt],
-		validationSchema: explainTaskValidationSchema,
+		validationSchema: explainTask,
 	};
 };
 
 export { runExplainTaskOptions };
-export { generateExplainTaskSuggestionsResponse } from "./explain-task-response.js";
+export { generateExplainTaskSuggestionsResponse } from "./generate-explain-task-suggestion-response.helper.js";

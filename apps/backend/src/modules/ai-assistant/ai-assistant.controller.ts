@@ -8,7 +8,7 @@ import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
-import { type AiAssistantService } from "./ai-assistant.service.js";
+import { type AIAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type AIAssistantRequestDto,
@@ -122,23 +122,23 @@ import {
  *     description: Endpoints related to AI Assistant services and interactions
  */
 
-class AiAssistantController extends BaseController {
-	private openAiService: AiAssistantService;
+class AIAssistantController extends BaseController {
+	private openAIService: AIAssistantService;
 
-	public constructor(logger: Logger, openAiService: AiAssistantService) {
+	public constructor(logger: Logger, openAIService: AIAssistantService) {
 		super(logger, APIPath.ASSISTANT);
 
-		this.openAiService = openAiService;
+		this.openAIService = openAIService;
 
 		this.addRoute({
 			handler: (options) =>
-				this.initNewChat(
+				this.initializeNewChat(
 					options as APIHandlerOptions<{
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_INITIATE,
+			path: AIAssistantApiPath.CHAT_INITIALIZE,
 		});
 
 		this.addRoute({
@@ -255,7 +255,7 @@ class AiAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.acceptTask(user, body),
+			payload: await this.openAIService.acceptTask(user, body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -301,7 +301,7 @@ class AiAssistantController extends BaseController {
 		const { body } = options;
 
 		return {
-			payload: await this.openAiService.addMessageToThread(body),
+			payload: await this.openAIService.addMessageToThread(body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -354,7 +354,7 @@ class AiAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.changeTaskSuggestion(user, body),
+			payload: await this.openAIService.changeTaskSuggestion(user, body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -367,7 +367,7 @@ class AiAssistantController extends BaseController {
 		const { body } = options;
 
 		return {
-			payload: await this.openAiService.explainTaskSuggestion(body),
+			payload: await this.openAIService.explainTaskSuggestion(body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -457,7 +457,7 @@ class AiAssistantController extends BaseController {
 	 *           description: The category id
 	 *           example: 1
 	 */
-	private async initNewChat(
+	private async initializeNewChat(
 		options: APIHandlerOptions<{
 			user: UserDto;
 		}>,
@@ -465,7 +465,7 @@ class AiAssistantController extends BaseController {
 		const { user } = options;
 
 		return {
-			payload: await this.openAiService.initNewChat(user),
+			payload: await this.openAIService.initializeNewChat(user),
 			status: HTTPCode.OK,
 		};
 	}
@@ -572,10 +572,10 @@ class AiAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAiService.suggestTasksForCategories(user, body),
+			payload: await this.openAIService.suggestTasksForCategories(user, body),
 			status: HTTPCode.OK,
 		};
 	}
 }
 
-export { AiAssistantController };
+export { AIAssistantController };

@@ -1,4 +1,4 @@
-const ExplainTaskPromptTemplates = {
+const ExplainTaskPromptTemplate = {
 	EXPLAIN_TASK_CONTEXT: `
 The user is asking for an explanation of the task that was previously suggested to them. Your role as the assistant is to
 provide a clear and concise summary of the task, emphasizing its purpose and how it aligns with the user's goals.
@@ -28,9 +28,9 @@ action:
 1. Provide a **summary** of the task that briefly explains its purpose and importance to the user's goals. Start with: "This task is..."
 2. Offer **details** that give more context and explanation about why the task is important.
 3. Explain how the task **aligns with the user's goals** and priorities, taking into account their onboarding quiz results.
-4. List specific, **actionable steps** that the user should take to successfully complete the task.
+4. List specific, **actionable steps** that the user should take to successfully complete the task. Start new step from new line.
 5. Include **motivation tips** that encourage consistency and help the user stay focused and make gradual progress toward their goals.
 `,
 } as const;
 
-export { ExplainTaskPromptTemplates };
+export { ExplainTaskPromptTemplate };

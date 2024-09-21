@@ -1,10 +1,10 @@
 import { ChatMessageAuthor, ChatMessageType } from "shared";
 import { type z } from "zod";
 
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
-	type OpenAiResponseMessage,
+	type OpenAIResponseMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
@@ -18,9 +18,8 @@ import { type explainTask } from "./explain-task.validation-schema.js";
 type TaskByCategoryData = z.infer<typeof explainTask>;
 
 const generateExplainTaskSuggestionsResponse = (
-	aiResponse: OpenAiResponseMessage,
+	aiResponse: OpenAIResponseMessage,
 	task: TaskCreateDto,
-	lastMessageId: number,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -34,7 +33,8 @@ const generateExplainTaskSuggestionsResponse = (
 		return null;
 	}
 
-	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const contentText: string =
+		parsedResult.data.content[FIRST_ITEM_INDEX].text.value;
 	const resultData: TaskByCategoryData = JSON.parse(
 		contentText,
 	) as TaskByCategoryData;
@@ -42,7 +42,7 @@ const generateExplainTaskSuggestionsResponse = (
 	const textMessage: ChatMessageDto = {
 		author: OpenAIRoleKey.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text:
@@ -58,7 +58,7 @@ const generateExplainTaskSuggestionsResponse = (
 	const taskMessage: ChatMessageDto = {
 		author: OpenAIRoleKey.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			task: {
@@ -72,31 +72,10 @@ const generateExplainTaskSuggestionsResponse = (
 		type: "task",
 	};
 
-	const acceptTaskQuestion = {
-		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
-		isRead: false,
-		payload: {
-			buttons: [
-				{
-					label: "Yes, accepts the task",
-					value: "Yes, accepts the task",
-				},
-				{
-					label: "No, I would like to try something else",
-					value: "No, I would like to try something else",
-				},
-			],
-			text: resultData.message.question,
-		},
-		type: ChatMessageType.QUESTION_WITH_BUTTONS,
-	};
-
 	const motivationMessage = {
 		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text: resultData.message.motivation_tips,
@@ -105,7 +84,7 @@ const generateExplainTaskSuggestionsResponse = (
 	};
 
 	return {
-		messages: [textMessage, taskMessage, acceptTaskQuestion, motivationMessage],
+		messages: [textMessage, taskMessage, motivationMessage],
 		threadId: message.thread_id,
 	};
 };

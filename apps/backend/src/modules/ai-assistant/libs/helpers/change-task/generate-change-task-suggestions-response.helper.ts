@@ -1,10 +1,10 @@
+import { ChatMessageAuthor, ChatMessageType } from "shared";
 import { type z } from "zod";
 
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
-	type OpenAiResponseMessage,
-	OpenAIRoleKey,
+	type OpenAIResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import {
@@ -16,9 +16,8 @@ import { type changeTaskByCategory } from "./change-task.validation-schema.js";
 type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
 
 const generateChangeTaskSuggestionsResponse = (
-	aiResponse: OpenAiResponseMessage,
+	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
-	lastMessageId: number,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -32,26 +31,27 @@ const generateChangeTaskSuggestionsResponse = (
 		return null;
 	}
 
-	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const contentText: string =
+		parsedResult.data.content[FIRST_ITEM_INDEX].text.value;
 	const resultData: TaskByCategoryData = JSON.parse(
 		contentText,
 	) as TaskByCategoryData;
 
 	const textMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
+		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text: resultData.message,
 		},
-		type: "text",
+		type: ChatMessageType.TEXT,
 	};
 
 	const taskMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
+		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			task: {
@@ -62,7 +62,7 @@ const generateChangeTaskSuggestionsResponse = (
 				label: resultData.tasks.label,
 			},
 		},
-		type: "task",
+		type: ChatMessageType.TASK,
 	};
 
 	return {

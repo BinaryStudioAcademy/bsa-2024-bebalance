@@ -3,7 +3,13 @@ export {
 	type TaskCreateDto,
 	type TaskDto,
 	type TaskGetAllResponseDto,
+	type TaskNoteDto,
+	type TaskNoteParametersDto,
+	type TaskNoteRequestDto,
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
-export { taskUpdate as taskUpdateValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
+export {
+	taskNoteCreate as taskNoteValidationSchema,
+	taskUpdate as taskUpdateValidationSchema,
+} from "./libs/validation-schemas/validation-schemas.js";

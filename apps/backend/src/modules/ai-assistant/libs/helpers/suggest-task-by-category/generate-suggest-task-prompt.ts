@@ -1,17 +1,17 @@
 import {
-	type OpenAiRequestMessage,
+	type OpenAIRequestMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type SelectedCategory } from "../../types/types.js";
-import { SuggestTaskPromptTemplates } from "./suggest-task-prompt-template.enum.js";
+import { SuggestTaskPromptTemplate } from "./suggest-task-prompt-template.enum.js";
 
 function generateSuggestTaskPrompt(
 	categories: SelectedCategory[],
-): OpenAiRequestMessage {
+): OpenAIRequestMessage {
 	const content = `
 	{
-	"context": "${SuggestTaskPromptTemplates.SUGGEST_TASKS_CONTEXT}",
+	"context": "${SuggestTaskPromptTemplate.SUGGEST_TASKS_CONTEXT}",
 	"categories": ${JSON.stringify(categories)},
 	}`;
 

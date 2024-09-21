@@ -1,13 +1,12 @@
 import { type z } from "zod";
 
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	AIAssistantMessageValidationSchema,
-	type OpenAiResponseMessage,
-	OpenAIRoleKey,
+	type OpenAIResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { ChatMessageAuthor } from "../../enums/enums.js";
+import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
 import {
 	type AIAssistantResponseDto,
 	type ChatMessageDto,
@@ -17,9 +16,8 @@ import { type taskByCategory } from "./suggest-task-by-category.validation-schem
 type TaskByCategoryData = z.infer<typeof taskByCategory>;
 
 const generateTaskSuggestionsResponse = (
-	aiResponse: OpenAiResponseMessage,
+	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
-	lastMessageId: number,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -33,27 +31,28 @@ const generateTaskSuggestionsResponse = (
 		return null;
 	}
 
-	const contentText: string = parsedResult.data.content[ZERO_INDEX].text.value;
+	const contentText: string =
+		parsedResult.data.content[FIRST_ITEM_INDEX].text.value;
 	const resultData: TaskByCategoryData = JSON.parse(
 		contentText,
 	) as TaskByCategoryData;
 
 	const textMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
+		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text: resultData.message,
 		},
-		type: "text",
+		type: ChatMessageType.TEXT,
 	};
 
 	const taskMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
 		return {
 			author: ChatMessageAuthor.ASSISTANT,
 			createdAt: new Date().toISOString(),
-			id: lastMessageId++,
+			id: FIRST_ITEM_INDEX,
 			isRead: false,
 			payload: {
 				task: {
@@ -64,7 +63,7 @@ const generateTaskSuggestionsResponse = (
 					label: task.label,
 				},
 			},
-			type: "task",
+			type: ChatMessageType.TASK,
 		};
 	});
 
