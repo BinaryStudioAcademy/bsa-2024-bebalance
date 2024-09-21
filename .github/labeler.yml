@@ -36,3 +36,8 @@ env:
           - "apps/backend/.env.example"
           - "apps/frontend/.env.example"
           - "apps/mobile/.env.example"
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".platform/**/*"
