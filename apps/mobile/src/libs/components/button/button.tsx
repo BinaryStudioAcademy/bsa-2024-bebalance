@@ -2,6 +2,7 @@ import React from "react";
 
 import {
 	GradientText,
+	Icon,
 	LinearGradient,
 	Pressable,
 	Text,
@@ -9,11 +10,13 @@ import {
 } from "~/libs/components/components";
 import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
+import { type IconName } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 type Properties = {
 	appearance?: "filled" | "outlined";
+	iconLeftName?: IconName;
 	isDisabled?: boolean;
 	label: string;
 	onPress: () => void;
@@ -21,6 +24,7 @@ type Properties = {
 
 const Button: React.FC<Properties> = ({
 	appearance = "filled",
+	iconLeftName,
 	isDisabled = false,
 	label,
 	onPress,
@@ -48,6 +52,8 @@ const Button: React.FC<Properties> = ({
 						style={[
 							globalStyles.alignItemsCenter,
 							globalStyles.flex1,
+							globalStyles.flexDirectionRow,
+							globalStyles.gap8,
 							globalStyles.justifyContentCenter,
 							styles.rounded,
 							!isFilled && globalStyles.p2,
@@ -55,14 +61,23 @@ const Button: React.FC<Properties> = ({
 						useAngle
 					>
 						{isFilled ? (
-							<Text
-								color={BaseColor.BG_WHITE}
-								preset="uppercase"
-								size="md"
-								weight="bold"
-							>
-								{label}
-							</Text>
+							<>
+								{iconLeftName && (
+									<Icon
+										color={BaseColor.BG_WHITE}
+										name={iconLeftName}
+										size={24}
+									/>
+								)}
+								<Text
+									color={BaseColor.BG_WHITE}
+									preset="uppercase"
+									size="md"
+									weight="bold"
+								>
+									{label}
+								</Text>
+							</>
 						) : (
 							<View
 								style={[

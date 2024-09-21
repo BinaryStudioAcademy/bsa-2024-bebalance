@@ -14,6 +14,7 @@ export { Input } from "./input/input";
 export { Link } from "./link/link";
 export { LoaderWrapper } from "./loader-wrapper/loader-wrapper";
 export { Logo } from "./logo/logo";
+export { Modal } from "./modal/modal";
 export { MultipleCheckboxInput } from "./multiple-checkbox-input/multiple-checkbox-input";
 export { MultipleSliderInput } from "./multiple-slider-input/multiple-slider-input";
 export { PageSwitcher } from "./page-switcher/page-switcher";

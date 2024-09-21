@@ -1,44 +1,72 @@
+import { type ComponentProps } from "react";
+
 import {
-	Icon,
-	Pressable,
+	Button,
 	ScreenWrapper,
 	Text,
+	View,
 } from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
-import { useAppDispatch, useCallback } from "~/libs/hooks/hooks";
+import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { actions as authActions } from "~/slices/auth/auth";
 
-const SIGN_OUT_ICON_SIZE = 40;
+import { SignOutModal } from "./libs/components/components";
 
 const Settings: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const [isConfirmationModalVisible, setIsConfirmationModalVisible] =
+		useState<boolean>(false);
+
+	const handleModalDismiss = useCallback((): void => {
+		setIsConfirmationModalVisible(false);
+	}, []);
+
+	const handleModalShow = useCallback((): void => {
+		setIsConfirmationModalVisible(true);
+	}, []);
 
 	const handleSignOut = useCallback(
 		() => void dispatch(authActions.signOut()),
 		[dispatch],
 	);
 
-	return (
-		<ScreenWrapper>
-			<Text>Settings!</Text>
+	const modalButtonsConfiguration: ComponentProps<
+		typeof SignOutModal
+	>["buttonsConfiguration"] = [
+		{
+			label: "Yes",
+			onPress: handleSignOut,
+			type: "secondary",
+		},
+		{
+			label: "No",
+			onPress: handleModalDismiss,
+			type: "primary",
+		},
+	];
 
-			<Pressable
-				onPress={handleSignOut}
+	return (
+		<ScreenWrapper edges={["top"]}>
+			<View
 				style={[
-					globalStyles.alignItemsCenter,
-					globalStyles.flexDirectionRow,
-					globalStyles.gap12,
-					globalStyles.mt24,
+					globalStyles.flex1,
+					globalStyles.justifyContentSpaceBetween,
+					globalStyles.p16,
 				]}
 			>
-				<Icon
-					color={BaseColor.BLACK}
-					name="exit-to-app"
-					size={SIGN_OUT_ICON_SIZE}
+				<Text>Settings!</Text>
+
+				<Button
+					iconLeftName="exit-to-app"
+					label="SIGN OUT"
+					onPress={handleModalShow}
 				/>
-				<Text preset="subheading">SIGN OUT</Text>
-			</Pressable>
+			</View>
+			<SignOutModal
+				buttonsConfiguration={modalButtonsConfiguration}
+				isVisible={isConfirmationModalVisible}
+				onBackdropPress={handleModalDismiss}
+			/>
 		</ScreenWrapper>
 	);
 };
