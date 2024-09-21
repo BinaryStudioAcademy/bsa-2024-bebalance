@@ -7,6 +7,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_UPDATE_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
+import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -21,7 +22,7 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] =
 		useState<boolean>(false);
 
-	const { control, errors, handleSubmit } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserUpdatePasswordFormDto>({
 			defaultValues: DEFAULT_UPDATE_PASSWORD_PAYLOAD,
 			validationSchema: userUpdatePasswordValidationSchema,
@@ -29,9 +30,21 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(onSubmit)(event_);
+			void handleSubmit((payload: UserUpdatePasswordRequestDto) => {
+				const { confirmNewPassword } = getValues();
+				const { newPassword } = payload;
+
+				if (confirmNewPassword === newPassword) {
+					onSubmit(payload);
+				} else {
+					setError(ConfirmPasswordCustomValidation.FIELD.CONFIRM_NEW_PASSWORD, {
+						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
+						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
+					});
+				}
+			})(event_);
 		},
-		[handleSubmit, onSubmit],
+		[handleSubmit, onSubmit, setError, getValues],
 	);
 
 	const handleTogglePasswordVisibility = useCallback(() => {
