@@ -77,12 +77,14 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }) => {
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit((resetPasswordSubmissionData: ResetPasswordFormDto) => {
 			const { newPassword } = resetPasswordSubmissionData;
-			const confirmPassword = watch(ConfirmPasswordCustomValidation.FIELD);
+			const confirmPassword = watch(
+				ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD,
+			);
 
 			if (confirmPassword === newPassword) {
 				onSubmit({ jwtToken: token, newPassword });
 			} else {
-				setError(ConfirmPasswordCustomValidation.FIELD, {
+				setError(ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD, {
 					message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 					type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 				});
