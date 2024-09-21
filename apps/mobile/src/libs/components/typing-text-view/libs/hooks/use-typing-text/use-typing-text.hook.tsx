@@ -1,6 +1,6 @@
 import { useEffect, useState } from "~/libs/hooks/hooks";
 
-type UseTypingTextApruments = {
+type UseTypingTextArguments = {
 	content: string;
 	firstLetterIndex: number;
 	lettersPrintedPerStep: number;
@@ -19,7 +19,7 @@ const useTypingText = ({
 	lettersPrintedPerStep,
 	nextLettersPrintedDelay,
 	startTypingDelay,
-}: UseTypingTextApruments): UseTypingTextReturnData => {
+}: UseTypingTextArguments): UseTypingTextReturnData => {
 	const [currentLettersPrinted, setCurrentLettersPrinted] =
 		useState<number>(firstLetterIndex);
 	const visibleLetters = content.slice(firstLetterIndex, currentLettersPrinted);
