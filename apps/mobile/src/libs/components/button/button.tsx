@@ -90,8 +90,11 @@ const Button: React.FC<Properties> = ({
 							>
 								<GradientText
 									gradientProps={{
-										angle: 305,
-										angleCenter: { x: 0.5, y: 0.5 },
+										angle: AngleGradient.ANGLE,
+										angleCenter: {
+											x: AngleGradient.X_POINT,
+											y: AngleGradient.Y_POINT,
+										},
 										colors: conditionalColors,
 										locations: [FIRST_COLOR_STOP, SECOND_COLOR_STOP],
 										useAngle: true,
