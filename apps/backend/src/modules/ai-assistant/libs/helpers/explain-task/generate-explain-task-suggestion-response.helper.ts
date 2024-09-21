@@ -20,7 +20,6 @@ type TaskByCategoryData = z.infer<typeof explainTask>;
 const generateExplainTaskSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 	task: TaskCreateDto,
-	lastMessageId: number,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -43,7 +42,7 @@ const generateExplainTaskSuggestionsResponse = (
 	const textMessage: ChatMessageDto = {
 		author: OpenAIRoleKey.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text:
@@ -59,7 +58,7 @@ const generateExplainTaskSuggestionsResponse = (
 	const taskMessage: ChatMessageDto = {
 		author: OpenAIRoleKey.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			task: {
@@ -76,7 +75,7 @@ const generateExplainTaskSuggestionsResponse = (
 	const motivationMessage = {
 		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text: resultData.message.motivation_tips,

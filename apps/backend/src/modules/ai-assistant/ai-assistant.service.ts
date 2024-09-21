@@ -88,7 +88,7 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { lastMessageId, payload, threadId } = body;
+		const { payload, threadId } = body;
 		const task = payload as TaskCreateDto;
 
 		const runThreadOptions = runChangeTaskByCategoryOptions(task);
@@ -97,17 +97,13 @@ class AIAssistantService {
 		);
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateChangeTaskSuggestionsResponse(
-			result,
-			taskDeadLine,
-			lastMessageId,
-		);
+		return generateChangeTaskSuggestionsResponse(result, taskDeadLine);
 	}
 
 	public async explainTaskSuggestion(
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { lastMessageId, payload, threadId } = body;
+		const { payload, threadId } = body;
 
 		const task = payload as TaskCreateDto;
 
@@ -115,7 +111,7 @@ class AIAssistantService {
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateExplainTaskSuggestionsResponse(result, task, lastMessageId);
+		return generateExplainTaskSuggestionsResponse(result, task);
 	}
 
 	public async initializeNewChat(
@@ -143,7 +139,7 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { lastMessageId, payload, threadId } = body;
+		const { payload, threadId } = body;
 		const categories = payload as SelectedCategory[];
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
@@ -153,7 +149,7 @@ class AIAssistantService {
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateTaskSuggestionsResponse(result, taskDeadLine, lastMessageId);
+		return generateTaskSuggestionsResponse(result, taskDeadLine);
 	}
 }
 

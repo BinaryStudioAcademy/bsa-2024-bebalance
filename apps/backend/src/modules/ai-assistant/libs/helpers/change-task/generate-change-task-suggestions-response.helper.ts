@@ -18,7 +18,6 @@ type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
 const generateChangeTaskSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
-	lastMessageId: number,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -41,7 +40,7 @@ const generateChangeTaskSuggestionsResponse = (
 	const textMessage: ChatMessageDto = {
 		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			text: resultData.message,
@@ -52,7 +51,7 @@ const generateChangeTaskSuggestionsResponse = (
 	const taskMessage: ChatMessageDto = {
 		author: ChatMessageAuthor.ASSISTANT,
 		createdAt: new Date().toISOString(),
-		id: lastMessageId++,
+		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
 			task: {

@@ -28,11 +28,6 @@ const taskCreateDto = z.object({
 });
 
 const taskActionRequestSchema = z.object({
-	lastMessageId: z
-		.number()
-		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-			message: AIAssistantValidationMessage.LAST_MESSAGE_ID_REQUIRED,
-		}),
 	payload: taskCreateDto,
 	threadId: z
 		.string()

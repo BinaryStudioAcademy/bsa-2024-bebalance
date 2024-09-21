@@ -15,11 +15,6 @@ const selectedCategory = z.object({
 });
 
 const taskSuggestionRequest = z.object({
-	lastMessageId: z
-		.number()
-		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-			message: AIAssistantValidationMessage.LAST_MESSAGE_ID_REQUIRED,
-		}),
 	payload: z
 		.array(selectedCategory)
 		.nonempty({ message: AIAssistantValidationMessage.CATEGORIES_REQUIRED }),
