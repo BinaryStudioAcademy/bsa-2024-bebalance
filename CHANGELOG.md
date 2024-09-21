@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.53.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.52.0...v1.53.0) (2024-09-21)
+
+
+### Features
+
+* **frontend:** Balance Wheel animation bb-204 ([#519](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/519)) ([a059a5e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a059a5e70a6b5ead50ba0f04f6b6cccbfe0dda0f))
+* **mobile:** Update "And the last step" screens - request from PO bb-514 ([#518](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/518)) ([d994d24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d994d246805a8f25b157fc1a486e64c81a7659fb))
+
 ## [1.52.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.51.0...v1.52.0) (2024-09-20)
 
 
