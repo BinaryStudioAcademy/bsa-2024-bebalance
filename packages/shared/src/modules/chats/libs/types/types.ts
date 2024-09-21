@@ -1,4 +1,5 @@
 export { type BalanceWheelMessage } from "./balance-wheel-message.type.js";
+export { type ChatMessageCreateDto } from "./chat-message-create-dto.type.js";
 export {
 	type ChatMessageDto,
 	type ChatMessagePayload,

@@ -1,6 +1,7 @@
 export { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 export {
 	type BalanceWheelMessage,
+	type ChatMessageCreateDto,
 	type ChatMessageDto,
 	type ChatMessagePayload,
 	type TaskMessage,
