@@ -22,6 +22,8 @@ type Properties = {
 	onPress: () => void;
 };
 
+const ICON_SIZE = 24;
+
 const Button: React.FC<Properties> = ({
 	appearance = "filled",
 	iconLeftName,
@@ -66,7 +68,7 @@ const Button: React.FC<Properties> = ({
 									<Icon
 										color={BaseColor.BG_WHITE}
 										name={iconLeftName}
-										size={24}
+										size={ICON_SIZE}
 									/>
 								)}
 								<Text
