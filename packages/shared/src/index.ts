@@ -75,7 +75,6 @@ export {
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	ChatMessageType,
-	type QuestionMessage,
 	type TaskMessage,
 	type TextMessage,
 } from "./modules/chats/chats.js";
