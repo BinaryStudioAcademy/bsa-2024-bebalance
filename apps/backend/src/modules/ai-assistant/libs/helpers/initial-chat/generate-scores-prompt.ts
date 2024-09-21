@@ -21,6 +21,7 @@ function generateUserScoresPrompt(
 	{
 	"context": "${OpenAIInitialPromptTemplate.WHEEL_OF_BALANCE_CONTEXT}"
 	"categories": ${JSON.stringify(categories)},
+	"instructions": "${OpenAIInitialPromptTemplate.WHEEL_OF_BALANCE_INSTRUCTIONS}",
 	}`;
 
 	return {

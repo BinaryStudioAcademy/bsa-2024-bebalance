@@ -8,9 +8,8 @@ export {
 } from "./explain-task/run-explain-task-option.helper.js";
 export {
 	generateQuestionsAnswersPrompt,
-	generateScoresResponse,
-	runInitialChatOptions,
-} from "./initial-chat/run-initial-chat-options.helper.js";
+	generateUserScoresPrompt,
+} from "./initial-chat/initial-chat.js";
 export {
 	generateTaskSuggestionsResponse,
 	runSuggestTaskByCategoryOptions,

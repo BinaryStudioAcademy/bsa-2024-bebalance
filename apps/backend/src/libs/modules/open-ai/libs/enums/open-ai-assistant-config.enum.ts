@@ -1,5 +1,4 @@
 import {
-	AnalyzeBalanceTool,
 	ChangeTaskTool,
 	ExplainTaskTool,
 	SuggestTaskTool,
@@ -10,7 +9,7 @@ const OpenAIAssistantConfig = {
 	INSTRUCTION: OpenAIPromptTemplate.ASSISTANT_INSTRUCTION,
 	NAME: "Wheel of Balance Assistant",
 	TEMPERATURE: 1,
-	TOOLS: [AnalyzeBalanceTool, SuggestTaskTool, ChangeTaskTool, ExplainTaskTool],
+	TOOLS: [SuggestTaskTool, ChangeTaskTool, ExplainTaskTool],
 	TOP_P: 1,
 } as const;
 

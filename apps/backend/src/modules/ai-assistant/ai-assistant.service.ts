@@ -8,11 +8,10 @@ import {
 	generateChangeTaskSuggestionsResponse,
 	generateExplainTaskSuggestionsResponse,
 	generateQuestionsAnswersPrompt,
-	generateScoresResponse,
 	generateTaskSuggestionsResponse,
+	generateUserScoresPrompt,
 	runChangeTaskByCategoryOptions,
 	runExplainTaskOptions,
-	runInitialChatOptions,
 	runSuggestTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
@@ -131,15 +130,13 @@ class AIAssistantService {
 
 		const initPrompt = generateQuestionsAnswersPrompt(userQuestionsWithAnswers);
 		const threadId = await this.openAI.createThread([initPrompt]);
+		const userScoresPrompt = generateUserScoresPrompt(userWheelBalanceScores);
+		await this.openAI.addMessageToThread(threadId, userScoresPrompt);
 
-		const runThreadOptions = runInitialChatOptions(
-			user.name,
-			userWheelBalanceScores,
-		);
-
-		const result = await this.openAI.runThread(threadId, runThreadOptions);
-
-		return generateScoresResponse(result);
+		return {
+			messages: [],
+			threadId,
+		};
 	}
 
 	public async suggestTasksForCategories(
