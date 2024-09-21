@@ -11,11 +11,13 @@ function generateUserScoresPrompt(
 ): OpenAIRequestMessage {
 	const { items } = userScores;
 
-	const categories = items.map(({ categoryId, categoryName, score }) => ({
-		categoryId,
-		categoryName,
-		score,
-	}));
+	const categories = items.map(({ categoryId, categoryName, score }) => {
+		return {
+			categoryId,
+			categoryName,
+			score,
+		};
+	});
 
 	const content = `
 	{
