@@ -39,7 +39,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 		setIsConfirmPasswordHidden(!isConfirmPasswordHidden);
 	}, [isConfirmPasswordHidden]);
 
-	const { control, errors, handleSubmit, setError, watch } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserSignUpFormDto>({
 			defaultValues: USER_SIGN_UP_DEFAULT_VALUES,
 			validationSchema: userSignUpValidationSchema,
@@ -48,18 +48,20 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit((signUpSubmissionData: UserSignUpFormDto) => {
 			const { password } = signUpSubmissionData;
-			const confirmPassword = watch(ConfirmPasswordCustomValidation.FIELD);
+			const confirmPassword = getValues(
+				ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD,
+			);
 
 			if (confirmPassword === password) {
 				onSubmit(signUpSubmissionData);
 			} else {
-				setError(ConfirmPasswordCustomValidation.FIELD, {
+				setError(ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD, {
 					message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
 					type: ConfirmPasswordCustomValidation.ERROR_TYPE,
 				});
 			}
 		})();
-	}, [handleSubmit, onSubmit, setError, watch]);
+	}, [handleSubmit, onSubmit, setError, getValues]);
 
 	return (
 		<>

@@ -1,6 +1,7 @@
 import { Button, Slider } from "~/libs/components/components.js";
 import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
+import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 
 import { NO_SCORES_COUNT } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
@@ -41,8 +42,21 @@ const ScoresEditModal: React.FC<Properties> = ({
 					item.categoryId === categoryId ? { ...item, score: value } : item,
 				),
 			);
+
+			const updatedScores = scores.map((score) => {
+				return score.categoryId === categoryId
+					? { ...score, score: value }
+					: score;
+			});
+
+			void dispatch(
+				quizActions.editScore(
+					updatedScores as QuizScoresGetAllItemResponseDto[],
+				),
+			);
 		},
-		[scores],
+
+		[scores, dispatch],
 	);
 
 	return (
