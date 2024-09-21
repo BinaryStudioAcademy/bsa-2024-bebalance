@@ -45,19 +45,13 @@ const IOS_KEYBOARD_OFFSET = 40;
 const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
-	const { name, params } = useAppRoute();
+	const { name } = useAppRoute();
 
 	const dispatch = useAppDispatch();
-	const { dataStatus, user, userCanResetPassword } = useAppSelector(
-		(state) => state.auth,
-	);
+	const { dataStatus, user } = useAppSelector((state) => state.auth);
 
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
-
-	const { token: resetPasswordToken = "" } = (params ?? {}) as {
-		token: string;
-	};
 
 	useEffect(() => {
 		if (!user) {
@@ -66,12 +60,10 @@ const Auth: React.FC = () => {
 	}, [dispatch, user]);
 
 	useEffect(() => {
-		if (resetPasswordToken) {
-			void dispatch(
-				authActions.checkIsResetPasswordExpired({ token: resetPasswordToken }),
-			);
+		if (name === RootScreenName.RESET_PASSWORD) {
+			void dispatch(authActions.startCheckingDeepLink());
 		}
-	}, [dispatch, resetPasswordToken]);
+	}, [dispatch, name]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -96,16 +88,11 @@ const Auth: React.FC = () => {
 	);
 
 	const handleResetPasswordSubmit = useCallback(
-		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
-			void dispatch(
-				authActions.resetPassword({
-					jwtToken: resetPasswordToken,
-					newPassword: payload.newPassword,
-				}),
-			);
+		(payload: ResetPasswordDto): void => {
+			void dispatch(authActions.resetPassword(payload));
 			navigation.navigate(RootScreenName.SIGN_IN);
 		},
-		[dispatch, navigation, resetPasswordToken],
+		[dispatch, navigation],
 	);
 
 	const getScreen = (screen: string): React.ReactNode => {
@@ -119,11 +106,7 @@ const Auth: React.FC = () => {
 			}
 
 			case RootScreenName.RESET_PASSWORD: {
-				return userCanResetPassword ? (
-					<ResetPasswordForm onSubmit={handleResetPasswordSubmit} />
-				) : (
-					<ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />
-				);
+				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
 			}
 
 			case RootScreenName.FORGOT_PASSWORD: {
