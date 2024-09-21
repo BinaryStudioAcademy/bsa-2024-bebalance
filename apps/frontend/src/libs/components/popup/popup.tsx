@@ -1,5 +1,6 @@
 import { Button } from "~/libs/components/components.js";
 
+import { NEWLINE_CHARACTER } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -21,6 +22,8 @@ const Popup: React.FC<Properties> = ({
 	onConfirm,
 	title,
 }: Properties) => {
+	const multilineTitles: string[] = title.split(NEWLINE_CHARACTER);
+
 	return (
 		<dialog className={styles["logout-dialog"]} open={isOpen}>
 			<div className={styles["popup-container"]}>
@@ -31,7 +34,13 @@ const Popup: React.FC<Properties> = ({
 						</div>
 					)}
 					<div className={styles["contents"]}>
-						<h1 className={styles["title"]}>{title}</h1>
+						{multilineTitles.map((line, index) => {
+							return (
+								<h1 className={styles["title"]} key={index}>
+									{line}
+								</h1>
+							);
+						})}
 						<div className={styles["buttons-content"]}>
 							<Button label={closeButtonLabel} onClick={onClose} />
 							<Button

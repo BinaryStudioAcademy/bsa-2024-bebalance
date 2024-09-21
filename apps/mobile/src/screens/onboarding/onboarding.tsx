@@ -7,7 +7,10 @@ import {
 	ScreenWrapper,
 	View,
 } from "~/libs/components/components";
-import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
+import {
+	FIRST_ITEM_INDEX,
+	PREVIOUS_INDEX_OFFSET,
+} from "~/libs/constants/constants";
 import { DataStatus, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
@@ -34,8 +37,6 @@ import {
 	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
-
-const FIRST_ITEM_INDEX = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
