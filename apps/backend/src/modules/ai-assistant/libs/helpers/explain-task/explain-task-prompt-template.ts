@@ -28,7 +28,7 @@ action:
 1. Provide a **summary** of the task that briefly explains its purpose and importance to the user's goals. Start with: "This task is..."
 2. Offer **details** that give more context and explanation about why the task is important.
 3. Explain how the task **aligns with the user's goals** and priorities, taking into account their onboarding quiz results.
-4. List specific, **actionable steps** that the user should take to successfully complete the task.
+4. List specific, **actionable steps** that the user should take to successfully complete the task. Start new step from new line.
 5. Include **motivation tips** that encourage consistency and help the user stay focused and make gradual progress toward their goals.
 `,
 } as const;
