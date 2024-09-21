@@ -6,6 +6,7 @@ import { Spacing } from "~/libs/styles/global-styles/spacing";
 const styles = StyleSheet.create({
 	backdrop: {
 		backgroundColor: BaseColor.TRANSPARENT_BLACK,
+		...StyleSheet.absoluteFillObject,
 	},
 	container: {
 		backgroundColor: BaseColor.BG_WHITE,

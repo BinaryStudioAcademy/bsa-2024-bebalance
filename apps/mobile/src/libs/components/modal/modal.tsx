@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Modal as RNModal, StyleSheet } from "react-native";
+import { Modal as RNModal } from "react-native";
 
 import { TouchableOpacity, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
@@ -32,7 +32,7 @@ const Modal: FC<Properties> = ({
 				<TouchableOpacity
 					activeOpacity={1}
 					onPress={onBackdropPress}
-					style={[styles.backdrop, StyleSheet.absoluteFillObject]}
+					style={styles.backdrop}
 				/>
 				<View
 					style={[
