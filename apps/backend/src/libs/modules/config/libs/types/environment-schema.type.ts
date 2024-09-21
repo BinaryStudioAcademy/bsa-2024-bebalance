@@ -33,6 +33,10 @@ type EnvironmentSchema = {
 		PORT: number;
 		SERVICE: string;
 	};
+	OPEN_AI: {
+		API_KEY: string;
+		MODEL: string;
+	};
 	S3_BUCKET: {
 		BUCKET_ACCESS_KEY: string;
 		BUCKET_NAME: string;

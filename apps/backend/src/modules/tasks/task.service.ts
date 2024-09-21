@@ -21,7 +21,9 @@ import { TaskEntity } from "./task.entity.js";
 import { type TaskRepository } from "./task.repository.js";
 
 class TaskService implements Service {
-	private calculateDeadline = (userTaskDays: number[]): string => {
+	private taskRepository: TaskRepository;
+
+	public calculateDeadline = (userTaskDays: number[]): string => {
 		const createdAt = new Date();
 		const createdAtDayOfWeek = createdAt.getDay();
 
@@ -47,8 +49,6 @@ class TaskService implements Service {
 
 		return deadline.toISOString();
 	};
-
-	private taskRepository: TaskRepository;
 
 	public constructor(taskRepository: TaskRepository) {
 		this.taskRepository = taskRepository;
@@ -108,6 +108,10 @@ class TaskService implements Service {
 		const tasks = await this.taskRepository.findAll();
 
 		return { items: tasks.map((task) => task.toObject()) };
+	}
+
+	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
+		return await this.taskRepository.findAllByUserId(userId);
 	}
 
 	public async findCurrentByUserId(userId: number): Promise<TaskDto[]> {
