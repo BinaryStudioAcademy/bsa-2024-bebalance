@@ -98,6 +98,10 @@ class UserService implements Service {
 		return user?.toObject() ?? null;
 	}
 
+	public async saveThreadId(id: number, threadId: string): Promise<void> {
+		await this.userRepository.update(id, { threadId });
+	}
+
 	public async update(
 		id: number,
 		payload: UserUpdateRequestDto,

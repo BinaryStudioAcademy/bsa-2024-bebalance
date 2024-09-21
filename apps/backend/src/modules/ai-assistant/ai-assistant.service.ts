@@ -4,6 +4,7 @@ import { type CategoryService } from "~/modules/categories/categories.js";
 import { type ChatMessageService } from "~/modules/chat-message/chat-message.service.js";
 import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { type TaskService } from "~/modules/tasks/tasks.js";
+import { type UserService } from "~/modules/users/users.js";
 
 import { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 import {
@@ -31,6 +32,7 @@ type Constructor = {
 	onboardingRepository: OnboardingRepository;
 	openAI: OpenAI;
 	taskService: TaskService;
+	userService: UserService;
 };
 
 class AIAssistantService {
@@ -39,6 +41,7 @@ class AIAssistantService {
 	private onboardingRepository: OnboardingRepository;
 	private openAI: OpenAI;
 	private taskService: TaskService;
+	private userService: UserService;
 
 	public constructor({
 		categoryService,
@@ -46,12 +49,14 @@ class AIAssistantService {
 		onboardingRepository,
 		openAI,
 		taskService,
+		userService,
 	}: Constructor) {
 		this.openAI = openAI;
 		this.categoryService = categoryService;
 		this.chatMessageService = chatMessageService;
 		this.onboardingRepository = onboardingRepository;
 		this.taskService = taskService;
+		this.userService = userService;
 	}
 
 	public async acceptTask(
@@ -139,6 +144,7 @@ class AIAssistantService {
 
 		const initPrompt = generateQuestionsAnswersPrompt(userQuestionsWithAnswers);
 		const threadId = await this.openAI.createThread([initPrompt]);
+		await this.userService.saveThreadId(user.id, threadId);
 		const userScoresPrompt = generateUserScoresPrompt(userWheelBalanceScores);
 		await this.openAI.addMessageToThread(threadId, userScoresPrompt);
 
