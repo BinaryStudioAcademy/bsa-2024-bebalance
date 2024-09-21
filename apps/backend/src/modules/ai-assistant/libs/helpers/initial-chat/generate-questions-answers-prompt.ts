@@ -1,4 +1,4 @@
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
 	type OpenAIRequestMessage,
 	OpenAIRoleKey,
@@ -13,7 +13,7 @@ function generateQuestionsAnswersPrompt(
 	const questionsWithAnswers = userQuestionsWithAnswers.map(
 		(questionEntity) => {
 			const { answers, label: question } = questionEntity.toObject();
-			const answer = answers[ZERO_INDEX]?.label;
+			const answer = answers[FIRST_ITEM_INDEX]?.label;
 
 			return { answer, question };
 		},
