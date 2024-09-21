@@ -60,7 +60,7 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }) => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 
-	const { control, errors, handleSubmit, setError, watch } =
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<ResetPasswordFormDto>({
 			defaultValues: RESET_PASSWORD_FORM_DEFAULT_VALUES,
 			validationSchema: userResetPasswordValidationSchema,
@@ -77,9 +77,7 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }) => {
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit((resetPasswordSubmissionData: ResetPasswordFormDto) => {
 			const { newPassword } = resetPasswordSubmissionData;
-			const confirmPassword = watch(
-				ConfirmPasswordCustomValidation.FIELD.CONFIRM_PASSWORD,
-			);
+			const confirmPassword = getValues("confirmPassword");
 
 			if (confirmPassword === newPassword) {
 				onSubmit({ jwtToken: token, newPassword });
@@ -90,7 +88,7 @@ const ResetPasswordForm: React.FC<Properties> = ({ onSubmit }) => {
 				});
 			}
 		})();
-	}, [handleSubmit, onSubmit, setError, token, watch]);
+	}, [getValues, handleSubmit, onSubmit, setError, token]);
 
 	useEffect(() => {
 		if (isDeepLinkBeingChecked) {
