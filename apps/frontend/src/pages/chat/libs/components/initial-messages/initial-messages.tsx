@@ -7,12 +7,14 @@ import {
 
 import { handleButtonAction } from "../../helpers/handle-button-action.helper.js";
 import { ChatButtons } from "../components.js";
+import { getThreeLowestScores } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const InitialMessages: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { scores, user } = useAppSelector((state) => ({
+	const { scores, threadId, user } = useAppSelector((state) => ({
 		scores: state.quiz.scores,
+		threadId: state.chat.threadId,
 		user: state.auth.user,
 	}));
 
@@ -28,8 +30,19 @@ const InitialMessages: React.FC = () => {
 	}, [dispatch]);
 
 	const handleYes = useCallback(() => {
-		void handleButtonAction(dispatch, "getTasks");
-	}, [dispatch]);
+		const threeLowestScores = getThreeLowestScores(scores);
+		const selectedCategories = threeLowestScores.map((score) => {
+			return {
+				categoryId: score.categoryId,
+				categoryName: score.categoryName,
+			};
+		});
+
+		void handleButtonAction(dispatch, "getTasks", {
+			categories: selectedCategories,
+			threadId: threadId as string,
+		});
+	}, [dispatch, scores, threadId]);
 
 	return (
 		<>
