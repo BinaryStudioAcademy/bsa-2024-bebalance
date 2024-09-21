@@ -34,14 +34,14 @@ const Settings: React.FC = () => {
 		typeof SignOutModal
 	>["buttonsConfiguration"] = [
 		{
+			appearance: "outlined",
 			label: "Yes",
 			onPress: handleSignOut,
-			type: "secondary",
 		},
 		{
+			appearance: "filled",
 			label: "No",
 			onPress: handleModalDismiss,
-			type: "primary",
 		},
 	];
 

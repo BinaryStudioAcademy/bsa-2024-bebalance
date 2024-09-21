@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type ComponentProps, type FC } from "react";
 
 import {
 	Button,
@@ -13,9 +13,9 @@ import { globalStyles } from "~/libs/styles/styles";
 import { styles } from "./styles";
 
 type ModalButtonConfiguration = {
+	appearance: ComponentProps<typeof Button>["appearance"];
 	label: string;
 	onPress: () => void;
-	type: "primary" | "secondary";
 };
 
 type Properties = {
@@ -52,9 +52,9 @@ const SignOutModal: FC<Properties> = ({
 					</Text>
 				</View>
 				<View style={globalStyles.gap12}>
-					{buttonsConfiguration.map(({ label, onPress, type }) => (
+					{buttonsConfiguration.map(({ appearance, label, onPress }) => (
 						<Button
-							appearance={type === "primary" ? "filled" : "outlined"}
+							appearance={appearance ?? "filled"}
 							key={label}
 							label={label}
 							onPress={onPress}
