@@ -11,6 +11,8 @@ import { Sunday } from "./libs/enums/enums.js";
 import { TaskError } from "./libs/exceptions/exceptions.js";
 import {
 	type TaskDto,
+	type TaskNoteDto,
+	type TaskNoteRequestDto,
 	type UsersTaskCreateRequestDto,
 } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
@@ -49,6 +51,21 @@ class TaskService implements Service {
 
 	public constructor(taskRepository: TaskRepository) {
 		this.taskRepository = taskRepository;
+	}
+
+	public async addNote(payload: TaskNoteRequestDto): Promise<TaskNoteDto> {
+		const task = await this.taskRepository.find(payload.taskId);
+
+		if (!task) {
+			throw new TaskError({
+				message: ErrorMessage.TASK_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const note = await this.taskRepository.addNote(payload);
+
+		return note.toObject();
 	}
 
 	public async create(payload: UsersTaskCreateRequestDto): Promise<TaskDto> {
@@ -106,6 +123,14 @@ class TaskService implements Service {
 		const tasks = await this.taskRepository.findPastByUserId(userId);
 
 		return tasks.map((task) => task.toObject());
+	}
+
+	public async getNotesByTaskId(taskId: number): Promise<TaskNoteDto[]> {
+		const notes = await this.taskRepository.getNotesByTaskId(taskId);
+
+		return notes.map((note) => {
+			return note.toObject();
+		});
 	}
 
 	public async update(

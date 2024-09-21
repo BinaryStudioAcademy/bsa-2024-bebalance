@@ -120,7 +120,10 @@ export {
 export {
 	type TaskCreateDto,
 	type TaskDto,
-	type TaskGetAllResponseDto,
+	type TaskNoteDto,
+	type TaskNoteParametersDto,
+	type TaskNoteRequestDto,
+	taskNoteValidationSchema,
 	TasksApiPath,
 	TaskStatus,
 	type TaskUpdateParametersDto,
