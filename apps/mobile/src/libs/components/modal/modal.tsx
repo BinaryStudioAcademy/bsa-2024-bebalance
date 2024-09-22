@@ -1,7 +1,8 @@
-import { type FC } from "react";
+import React from "react";
 import { Modal as RNModal } from "react-native";
 
 import { TouchableOpacity, View } from "~/libs/components/components";
+import { NumericalValue } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 
@@ -14,7 +15,7 @@ type Properties = {
 	onBackdropPress?: () => void;
 };
 
-const Modal: FC<Properties> = ({
+const Modal: React.FC<Properties> = ({
 	children,
 	containerStyle,
 	isVisible,
@@ -30,7 +31,7 @@ const Modal: FC<Properties> = ({
 				]}
 			>
 				<TouchableOpacity
-					activeOpacity={1}
+					activeOpacity={NumericalValue.ONE}
 					onPress={onBackdropPress}
 					style={styles.backdrop}
 				/>
