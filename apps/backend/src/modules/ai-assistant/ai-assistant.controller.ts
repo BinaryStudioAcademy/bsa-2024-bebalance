@@ -12,6 +12,7 @@ import { type AIAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type AIAssistantRequestDto,
+	type AIAssistantSuggestTaskRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 import {
@@ -331,7 +332,7 @@ class AIAssistantController extends BaseController {
 			handler: (options) =>
 				this.suggestTasksForCategories(
 					options as APIHandlerOptions<{
-						body: AIAssistantRequestDto;
+						body: AIAssistantSuggestTaskRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -618,7 +619,7 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               payload:
+	 *               categories:
 	 *                 type: array
 	 *                 description: Array of selected categories for task suggestions
 	 *                 items:
@@ -649,7 +650,7 @@ class AIAssistantController extends BaseController {
 	 */
 	private async suggestTasksForCategories(
 		options: APIHandlerOptions<{
-			body: AIAssistantRequestDto;
+			body: AIAssistantSuggestTaskRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {

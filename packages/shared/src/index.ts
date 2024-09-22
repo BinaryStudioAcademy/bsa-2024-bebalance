@@ -48,6 +48,7 @@ export {
 	AIAssistantApiPath,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
+	type AIAssistantSuggestTaskRequestDto,
 	changeTaskSuggestionRequestValidationSchema,
 	taskActionRequestSchemaValidationSchema,
 	taskSuggestionRequestValidationSchema,
