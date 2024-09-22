@@ -48,8 +48,8 @@ const Chat: React.FC = () => {
 						);
 					})}
 
-					{messageStatus === DataStatus.PENDING && <MessageLoader />}
 					{threadId && <ButtonsController />}
+					{messageStatus === DataStatus.PENDING && <MessageLoader />}
 				</ul>
 			</div>
 		</main>
