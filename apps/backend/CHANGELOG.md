@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.24.0...backend-v1.25.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+
 ## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.23.0...backend-v1.24.0) (2024-09-20)
 
 
