@@ -8,6 +8,7 @@ import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
 import {
+	FOCUSABLE_ELEMENT_TAB_INDEX,
 	INITIAL_POINTER_POSITION_X,
 	SLIDE_WIDTH_PERCENTAGE,
 } from "./libs/constants/constants.js";
@@ -127,7 +128,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 								onTouchStart={handleDragStart}
 								ref={sliderReference}
 								role="button"
-								tabIndex={0}
+								tabIndex={FOCUSABLE_ELEMENT_TAB_INDEX}
 							>
 								{tasks.map((task, index) => (
 									<div className={styles["slide"]} key={index}>
