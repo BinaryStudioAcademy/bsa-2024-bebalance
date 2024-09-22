@@ -1,8 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { NotificationMessage } from "~/libs/enums/enums";
 import { storage, StorageKey } from "~/libs/packages/storage/storage";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import {
+	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
@@ -23,6 +27,48 @@ const getAuthenticatedUser = createAsyncThunk<
 	}
 
 	return await authApi.getAuthenticatedUser();
+});
+
+const requestResetPassword = createAsyncThunk<
+	boolean,
+	EmailDto,
+	AsyncThunkConfig
+>(`${sliceName}/send-reset-password-link`, async (emailPayload, { extra }) => {
+	const { authApi, toastMessage } = extra;
+
+	const isSuccessful = await authApi.requestResetPassword(emailPayload);
+
+	if (isSuccessful) {
+		toastMessage.success({ message: NotificationMessage.LINK_SENT });
+	}
+
+	return isSuccessful;
+});
+
+const resetPassword = createAsyncThunk<
+	boolean,
+	ResetPasswordDto,
+	AsyncThunkConfig
+>(`${sliceName}/reset-password`, async (emailPayload, { extra }) => {
+	const { authApi, toastMessage } = extra;
+
+	const isSuccessful = await authApi.resetPassword(emailPayload);
+
+	if (isSuccessful) {
+		toastMessage.success({ message: NotificationMessage.PASSWORD_UPDATED });
+	}
+
+	return isSuccessful;
+});
+
+const checkIsResetPasswordExpired = createAsyncThunk<
+	boolean,
+	ResetPasswordLinkDto,
+	AsyncThunkConfig
+>(`${sliceName}/check-reset-password-link`, async (payload, { extra }) => {
+	const { authApi } = extra;
+
+	return await authApi.checkIsResetPasswordExpired(payload);
 });
 
 const signIn = createAsyncThunk<
@@ -60,4 +106,12 @@ const signOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 	},
 );
 
-export { getAuthenticatedUser, signIn, signOut, signUp };
+export {
+	checkIsResetPasswordExpired,
+	getAuthenticatedUser,
+	requestResetPassword,
+	resetPassword,
+	signIn,
+	signOut,
+	signUp,
+};

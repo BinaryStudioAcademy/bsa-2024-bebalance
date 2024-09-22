@@ -7,10 +7,25 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider as StoreProvider } from "react-redux";
 
 import { ToastMessage } from "~/libs/components/components";
+import { RootScreenName } from "~/libs/enums/enums";
 import { useCallback } from "~/libs/hooks/hooks";
 import { store } from "~/libs/packages/store/store";
 import { globalStyles } from "~/libs/styles/styles";
 import { Root as RootNavigation } from "~/navigations/navigations";
+
+import { DEEP_LINK_PREFIX } from "./libs/constants/constants";
+
+const linking = {
+	config: {
+		screens: {
+			[RootScreenName.FORGOT_PASSWORD]: "Forgot Password",
+			[RootScreenName.RESET_PASSWORD]: "reset-password",
+			[RootScreenName.SIGN_IN]: "Sign In",
+			[RootScreenName.SIGN_UP]: "Sign Up",
+		},
+	},
+	prefixes: [DEEP_LINK_PREFIX],
+};
 
 const App: FC = () => {
 	const handleNavigationReady = useCallback(() => {
@@ -21,7 +36,10 @@ const App: FC = () => {
 		<StoreProvider store={store.instance}>
 			<GestureHandlerRootView style={globalStyles.flex1}>
 				<SafeAreaProvider>
-					<NavigationContainer onReady={handleNavigationReady}>
+					<NavigationContainer
+						linking={linking}
+						onReady={handleNavigationReady}
+					>
 						<RootNavigation />
 						<ToastMessage />
 					</NavigationContainer>
