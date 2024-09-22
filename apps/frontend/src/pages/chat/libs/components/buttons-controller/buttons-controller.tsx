@@ -1,5 +1,6 @@
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
+import { buttonsModeOption } from "../../enums/enums.js";
 import {
 	CategoriesSelector,
 	TaskCreationOptions,
@@ -8,15 +9,19 @@ import {
 const ButtonsController: React.FC = () => {
 	const buttonsMode = useAppSelector((state) => state.chat.buttonsMode);
 
-	if (buttonsMode === "taskGenerationOptions") {
-		return <TaskCreationOptions />;
-	}
+	switch (buttonsMode) {
+		case buttonsModeOption.TASK_CREATION: {
+			return <TaskCreationOptions />;
+		}
 
-	if (buttonsMode === "CategoriesCheckbox") {
-		return <CategoriesSelector />;
-	}
+		case buttonsModeOption.CATEGORIES_CHECKBOX: {
+			return <CategoriesSelector />;
+		}
 
-	return null;
+		default: {
+			return null;
+		}
+	}
 };
 
 export { ButtonsController };

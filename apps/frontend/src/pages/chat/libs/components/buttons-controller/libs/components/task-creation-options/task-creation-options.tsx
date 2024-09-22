@@ -5,6 +5,7 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
+import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { CONFIRMATION_BUTTONS_TEXT } from "./libs/constants/constants.js";
 import { selectCategoriesButtonLabel } from "./libs/enums/enums.js";
@@ -21,7 +22,7 @@ const TaskCreationOptions: React.FC = () => {
 	const handleNo = useCallback(() => {
 		dispatch(chatActions.addAssistantTextMessage(CONFIRMATION_BUTTONS_TEXT));
 		dispatch(chatActions.addUserTextMessage(selectCategoriesButtonLabel.NO));
-		dispatch(chatActions.setButtonsMode("CategoriesCheckbox"));
+		dispatch(chatActions.setButtonsMode(buttonsModeOption.CATEGORIES_CHECKBOX));
 	}, [dispatch]);
 
 	const handleYes = useCallback(() => {
@@ -33,7 +34,7 @@ const TaskCreationOptions: React.FC = () => {
 			};
 		});
 
-		dispatch(chatActions.setButtonsMode("none"));
+		dispatch(chatActions.setButtonsMode(buttonsModeOption.NONE));
 		dispatch(chatActions.addAssistantTextMessage(CONFIRMATION_BUTTONS_TEXT));
 		dispatch(chatActions.addUserTextMessage(selectCategoriesButtonLabel.YES));
 		void dispatch(

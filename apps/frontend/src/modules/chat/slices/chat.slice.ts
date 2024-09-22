@@ -3,17 +3,14 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
-import {
-	type ButtonsMode,
-	ChatMessageAuthor,
-	ChatMessageType,
-} from "~/modules/chat/chat.js";
+import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
+import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { type ChatMessageDto } from "../libs/types/types.js";
 import { getTasksForCategories, initConversation } from "./actions.js";
 
 type State = {
-	buttonsMode: ButtonsMode;
+	buttonsMode: ValueOf<typeof buttonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
 	selectedCategories: SelectedCategory[];
@@ -21,7 +18,7 @@ type State = {
 };
 
 const initialState: State = {
-	buttonsMode: "taskGenerationOptions",
+	buttonsMode: buttonsModeOption.TASK_CREATION,
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
@@ -80,7 +77,10 @@ const { actions, name, reducer } = createSlice({
 
 			state.messages.push(userMessage);
 		},
-		setButtonsMode(state, action: PayloadAction<ButtonsMode>) {
+		setButtonsMode(
+			state,
+			action: PayloadAction<ValueOf<typeof buttonsModeOption>>,
+		) {
 			state.buttonsMode = action.payload;
 		},
 		updateSelectedCategories(state, action: { payload: SelectedCategory[] }) {

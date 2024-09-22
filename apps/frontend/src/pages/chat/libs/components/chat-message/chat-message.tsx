@@ -4,7 +4,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import {
 	type ChatMessageAuthor,
 	type ChatMessagePayload,
-	type ChatMessageType,
+	ChatMessageType,
 } from "~/modules/chat/chat.js";
 
 import styles from "./styles.module.css";
@@ -34,13 +34,23 @@ const ChatMessage: React.FC<Properties> = ({
 			: styles["content-container-user"],
 	);
 
-	if (type === "text") {
-		return (
-			<li className={messageContainerStyle}>
-				<Icon name="aiAssistantAvatar" />
-				<div className={contentContainerStyle}>{payload.text}</div>
-			</li>
-		);
+	switch (type) {
+		case ChatMessageType.TEXT: {
+			return (
+				<li className={messageContainerStyle}>
+					<Icon name="aiAssistantAvatar" />
+					<div className={contentContainerStyle}>{payload.text}</div>
+				</li>
+			);
+		}
+
+		case ChatMessageType.TASK: {
+			return "hello";
+		}
+
+		default: {
+			return null;
+		}
 	}
 };
 

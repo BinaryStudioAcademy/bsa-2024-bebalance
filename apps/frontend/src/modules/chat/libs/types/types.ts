@@ -1,4 +1,3 @@
-export { type ButtonsMode } from "./buttons-mode.type.js";
 export {
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
