@@ -118,6 +118,7 @@ export {
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
 	taskNoteValidationSchema,
+	type TaskPayload,
 	TasksApiPath,
 	TaskStatus,
 	type TaskUpdateParametersDto,

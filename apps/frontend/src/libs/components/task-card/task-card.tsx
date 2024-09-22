@@ -34,7 +34,7 @@ const TaskCard: React.FC<Properties> = ({
 	}, [task, onComplete]);
 
 	const isActive = (task as TaskDto).status === TaskStatus.CURRENT;
-	const isChatTask = Boolean(onComplete) && Boolean(onSkip);
+	const isAcceptedTask = Boolean(onComplete) && Boolean(onSkip);
 
 	return (
 		<div className={styles["card"]}>
@@ -53,7 +53,7 @@ const TaskCard: React.FC<Properties> = ({
 			<div className={styles["card-footer"]}>
 				<div className={styles["divider"]} />
 				<div className={styles["buttons-container"]}>
-					{isActive && isChatTask ? (
+					{isActive && isAcceptedTask ? (
 						<>
 							<div className={styles["button-container"]}>
 								<Button
@@ -77,7 +77,7 @@ const TaskCard: React.FC<Properties> = ({
 						</>
 					) : (
 						<div>
-							{isChatTask && (
+							{isAcceptedTask && (
 								<PastTaskStatus status={(task as TaskDto).status} />
 							)}
 						</div>

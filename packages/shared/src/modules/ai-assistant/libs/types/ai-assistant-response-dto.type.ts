@@ -1,8 +1,8 @@
 import { type ChatMessageDto, type TextMessage } from "../../../chats/chats.js";
-import { type TaskCreateDto, type TaskDto } from "../../../tasks/tasks.js";
+import { type TaskPayload } from "../../../tasks/tasks.js";
 
 type AIAssistantResponseDto = {
-	messages: ChatMessageDto<TaskCreateDto & TaskDto & TextMessage>[];
+	messages: ChatMessageDto<TaskPayload & TextMessage>[];
 	threadId: string;
 };
 
