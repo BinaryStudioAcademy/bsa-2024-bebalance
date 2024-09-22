@@ -35,7 +35,10 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 
 	const isActiveTask = task.status === TaskStatus.CURRENT;
 
-	const statusProperties = useMemo(() => {
+	const statusProperties = useMemo<{
+		label: string;
+		type: "complete" | "skip";
+	} | null>(() => {
 		if (task.status === TaskStatus.SKIPPED) {
 			return { label: "Skipped", type: "skip" };
 		}
