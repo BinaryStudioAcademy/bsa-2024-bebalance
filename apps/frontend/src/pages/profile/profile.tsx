@@ -17,6 +17,7 @@ import {
 } from "~/modules/users/users.js";
 
 import {
+	ProfileSection,
 	UpdateAvatarForm,
 	UpdatePasswordForm,
 	UpdateUserForm,
@@ -86,18 +87,18 @@ const Profile: React.FC = () => {
 			{isLoading && <Loader />}
 			{user && (
 				<div className={styles["page-container"]}>
-					<h4 className={styles["title"]}>Profile</h4>
-					<div className={styles["content-container"]}>
+					<ProfileSection title="Profile">
 						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
-					</div>
-					<h4 className={styles["title-password"]}>Change your password</h4>
-					<div className={styles["password-container"]}>
+					</ProfileSection>
+					<ProfileSection title="Change Password">
 						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
-						<div className={styles["button-container"]}>
+					</ProfileSection>
+					<ProfileSection title="Danger Zone">
+						<div className={styles["sign-out-button"]}>
 							<Button label="SIGN OUT" onClick={handleSignOut} type="button" />
 						</div>
-					</div>
+					</ProfileSection>
 				</div>
 			)}
 		</>

@@ -1,51 +1,16 @@
 .page-container {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 	padding: 35px;
 }
 
-.content-container {
-	display: grid;
-	grid-template-columns: 200px 350px;
-	column-gap: 20px;
+.sign-out-button {
+	width: 350px;
 }
 
-.title {
-	margin-bottom: 24px;
-	font-size: 20px;
-	font-weight: 700;
-	line-height: 25px;
-}
-
-.user-info {
-	display: grid;
-	grid-template-columns: auto auto;
-	gap: 10px;
-	font-size: 16px;
-}
-
-.user-info-container {
-	display: flex;
-	flex-direction: column;
-	gap: 35px;
-}
-
-.label {
-	font-weight: bold;
-}
-
-.title-password {
-	margin-top: 32px;
-	font-size: 18px;
-	font-weight: 700;
-}
-
-.password-container {
-	display: grid;
-	grid-template-columns: 200px 350px auto;
-	gap: 20px;
-	align-items: end;
-}
-
-.button-container {
-	justify-self: end;
-	width: 300px;
+@media (width <= 768px) {
+	.sign-out-button {
+		width: 100%;
+	}
 }
