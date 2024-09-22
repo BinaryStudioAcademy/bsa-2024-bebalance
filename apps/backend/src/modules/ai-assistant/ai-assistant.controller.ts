@@ -22,21 +22,20 @@ import {
 
 /**
  * @swagger
+ * tags:
+ *   - name: AI Assistant
+ *     description: Endpoints related to AI Assistant services and interactions
  * components:
  *   securitySchemes:
  *     bearerAuth:
  *       type: http
  *       scheme: bearer
  *       bearerFormat: JWT
+ *
  *   schemas:
- *     NewTask:
+ *     TaskPayload:
  *       type: object
- *       required:
- *         - categoryId
- *         - categoryName
- *         - description
- *         - dueDate
- *         - label
+ *       description: Task details associated with the message.
  *       properties:
  *         categoryId:
  *           type: integer
@@ -45,20 +44,20 @@ import {
  *         categoryName:
  *           type: string
  *           description: Name of the task category
- *           example: "Work"
+ *           example: "Health"
  *         description:
  *           type: string
  *           description: Detailed description of the task
- *           example: "Finish the project by the deadline"
+ *           example: "Set a goal to prepare at least two healthy home-cooked meals this week, focusing on incorporating more fruits and vegetables into your diet."
  *         dueDate:
  *           type: string
  *           format: date-time
  *           description: The deadline for the task
- *           example: "2024-09-30"
+ *           example: "2024-09-23T15:15:48.971Z"
  *         label:
  *           type: string
  *           description: A label for the task (priority, tags, etc.)
- *           example: "Finish project"
+ *           example: "Healthy Meal Prep"
  *
  *     Task:
  *       type: object
@@ -117,9 +116,152 @@ import {
  *           description: Unique identifier of the user who created the task
  *           example: 42
  *
- * tags:
- *   - name: AI Assistant
- *     description: Endpoints related to AI Assistant services and interactions
+ *     SelectedCategory:
+ *       type: object
+ *       description: Selected category object.
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: Unique identifier for the category.
+ *           example: 1
+ *         name:
+ *           type: string
+ *           description: Name of the category.
+ *           example: "Work"
+ *
+ *     ChatResponse:
+ *       type: object
+ *       description: Response object containing a list of messages and a thread identifier.
+ *       properties:
+ *         messages:
+ *           type: array
+ *           description: Array of chat messages.
+ *           items:
+ *             $ref: '#/components/schemas/ChatMessage'
+ *         threadId:
+ *           type: string
+ *           description: Identifier for the chat thread.
+ *           example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
+ *
+ *     ChatMessageText:
+ *       type: object
+ *       description: Text message in the chat.
+ *       properties:
+ *         author:
+ *           type: string
+ *           description: The author of the message (e.g., "assistant").
+ *           example: "assistant"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the message was created.
+ *           example: "2024-09-22T10:25:07.841Z"
+ *         id:
+ *           type: integer
+ *           description: Unique identifier for the message.
+ *           example: 0
+ *         isRead:
+ *           type: boolean
+ *           description: Indicates if the message has been read.
+ *           example: false
+ *         payload:
+ *           type: object
+ *           properties:
+ *             text:
+ *               type: string
+ *               description: Text content of the message.
+ *               example: "Here are some actionable tasks to help you improve in Health and Work."
+ *         type:
+ *           type: string
+ *           description: The type of the message.
+ *           example: "text"
+ *
+ *     ChatMessageTask:
+ *       type: object
+ *       description: Task message in the chat.
+ *       properties:
+ *         author:
+ *           type: string
+ *           description: The author of the message (e.g., "assistant").
+ *           example: "assistant"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the message was created.
+ *           example: "2024-09-22T10:25:07.841Z"
+ *         id:
+ *           type: integer
+ *           description: Unique identifier for the message.
+ *           example: 0
+ *         isRead:
+ *           type: boolean
+ *           description: Indicates if the message has been read.
+ *           example: false
+ *         payload:
+ *           type: object
+ *           properties:
+ *             task:
+ *               type: object
+ *               description: Task details associated with the message.
+ *               properties:
+ *                 categoryId:
+ *                   type: integer
+ *                   description: Unique identifier for the category of the task.
+ *                   example: 1
+ *                 categoryName:
+ *                   type: string
+ *                   description: Name of the task category.
+ *                   example: "Health"
+ *                 description:
+ *                   type: string
+ *                   description: Detailed description of the task.
+ *                   example: "Set aside 15 minutes in your daily schedule to engage in reflective journaling about your physical health."
+ *                 dueDate:
+ *                   type: string
+ *                   format: date-time
+ *                   description: The deadline for the task.
+ *                   example: "2024-09-23T10:24:49.654Z"
+ *                 label:
+ *                   type: string
+ *                   description: A label for the task (priority, tags, etc.).
+ *                   example: "Daily Journaling for Health"
+ *         type:
+ *           type: string
+ *           description: The type of the message.
+ *           example: "task"
+ *
+ *     ChatMessageTextExplanation:
+ *       type: object
+ *       description: Text message with task explanation in the chat.
+ *       properties:
+ *         author:
+ *           type: string
+ *           description: The author of the message (e.g., "assistant").
+ *           example: "assistant"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the message was created.
+ *           example: "2024-09-22T10:25:07.841Z"
+ *         id:
+ *           type: integer
+ *           description: Unique identifier for the message.
+ *           example: 0
+ *         isRead:
+ *           type: boolean
+ *           description: Indicates if the message has been read.
+ *           example: false
+ *         payload:
+ *           type: object
+ *           properties:
+ *             text:
+ *               type: string
+ *               description: Explanation of the task suggestion.
+ *               example: "This task will help you focus on building healthy eating habits by preparing meals at home."
+ *         type:
+ *           type: string
+ *           description: The type of the message.
+ *           example: "text"
  */
 
 class AIAssistantController extends BaseController {
@@ -232,12 +374,12 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               task:
-	 *                 $ref: '#/components/schemas/NewTask'
 	 *               threadId:
 	 *                 type: string
 	 *                 description: Identifier for the thread
-	 *                 example: "thread_abc123"
+	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
+	 *               payload:
+	 *                 $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns the accepted task
@@ -246,6 +388,7 @@ class AIAssistantController extends BaseController {
 	 *             schema:
 	 *               $ref: '#/components/schemas/Task'
 	 */
+
 	private async acceptTask(
 		options: APIHandlerOptions<{
 			body: AIAssistantRequestDto;
@@ -322,28 +465,31 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               task:
-	 *                 $ref: '#/components/schemas/NewTask'
 	 *               threadId:
 	 *                 type: string
 	 *                 description: Identifier for the thread
-	 *                 example: "thread_abc123"
+	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
+	 *               payload:
+	 *                 $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
-	 *         description: Returns task suggestions based on the provided input
+	 *         description: Returns task suggestions for the provided categories
 	 *         content:
 	 *           application/json:
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 message:
-	 *                   type: string
-	 *                   description: Message about the task suggestion
-	 *                   example: "Task suggestions updated successfully"
-	 *                 tasks:
+	 *                 messages:
 	 *                   type: array
+	 *                   description: Array of chat messages containing task suggestions.
 	 *                   items:
-	 *                     $ref: '#/components/schemas/NewTask'
+	 *                     oneOf:
+	 *                       - $ref: '#/components/schemas/ChatMessageText'
+	 *                       - $ref: '#/components/schemas/ChatMessageTask'
+	 *                 threadId:
+	 *                   type: string
+	 *                   description: Identifier for the chat thread.
+	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async changeTaskSuggestion(
 		options: APIHandlerOptions<{
@@ -359,6 +505,48 @@ class AIAssistantController extends BaseController {
 		};
 	}
 
+	/**
+	 * @swagger
+	 * /assistant/chat/explain-task:
+	 *   post:
+	 *     summary: Explain task suggestion
+	 *     tags:
+	 *       - AI Assistant
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               threadId:
+	 *                 type: string
+	 *                 description: Identifier for the thread
+	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
+	 *               payload:
+	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *     responses:
+	 *       200:
+	 *         description: Returns explanations for the provided task suggestions
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 messages:
+	 *                   type: array
+	 *                   description: Array of chat messages containing explanations of task suggestions.
+	 *                   items:
+	 *                     oneOf:
+	 *                       - $ref: '#/components/schemas/ChatMessageTextExplanation'
+	 *                       - $ref: '#/components/schemas/ChatMessageTask'
+	 *                 threadId:
+	 *                   type: string
+	 *                   description: Identifier for the chat thread.
+	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
+	 */
 	private async explainTaskSuggestion(
 		options: APIHandlerOptions<{
 			body: AIAssistantRequestDto;
@@ -374,7 +562,7 @@ class AIAssistantController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /assistant/chat/initiate:
+	 * /assistant/chat/initialize:
 	 *   post:
 	 *     summary: Initialize a new chat
 	 *     tags:
@@ -386,76 +574,20 @@ class AIAssistantController extends BaseController {
 	 *       content: {}
 	 *     responses:
 	 *       200:
-	 *         description: Returns the analysis of the balance wheel with messages and thread information
+	 *         description: Returns an initialized chat with an empty message array and thread identifier.
 	 *         content:
 	 *           application/json:
 	 *             schema:
 	 *               type: object
 	 *               properties:
-	 *                 lowestCategories:
-	 *                   type: array
-	 *                   description: Array of the lowest scoring categories
-	 *                   items:
-	 *                     $ref: '#/components/schemas/QuizScore'
 	 *                 messages:
-	 *                   type: object
-	 *                   properties:
-	 *                     comments:
-	 *                       type: string
-	 *                       description: Comments for the analysis
-	 *                       example: "Your balance wheel shows imbalance in certain areas."
-	 *                     greeting:
-	 *                       type: string
-	 *                       description: Greeting message
-	 *                       example: "Welcome to your analysis!"
-	 *                     question:
-	 *                       type: string
-	 *                       description: A question posed to the user
-	 *                       example: "How do you feel about these results?"
+	 *                   type: array
+	 *                   description: Array of chat messages (initially empty).
+	 *                   example: []
 	 *                 threadId:
 	 *                   type: string
-	 *                   description: Identifier for the chat thread
-	 *                   example: "thread_abc123"
-	 * components:
-	 *   schemas:
-	 *     BalanceWheelAnalysis:
-	 *       type: object
-	 *       properties:
-	 *         lowestCategories:
-	 *           type: array
-	 *           description: Array of the lowest scoring categories
-	 *           items:
-	 *             $ref: '#/components/schemas/QuizScore'
-	 *         messages:
-	 *           type: object
-	 *           properties:
-	 *             comments:
-	 *               type: string
-	 *               description: Comments for the analysis
-	 *               example: "Your balance wheel shows imbalance in certain areas."
-	 *             greeting:
-	 *               type: string
-	 *               description: Greeting message
-	 *               example: "Welcome to your analysis!"
-	 *             question:
-	 *               type: string
-	 *               description: A question posed to the user
-	 *               example: "How do you feel about these results?"
-	 *         threadId:
-	 *           type: string
-	 *           description: Identifier for the chat thread
-	 *           example: "thread_abc123"
-	 *     QuizScore:
-	 *       type: object
-	 *       properties:
-	 *         categoryName:
-	 *           type: string
-	 *           description: The category name
-	 *           example: "Health"
-	 *         categoryId:
-	 *           type: integer
-	 *           description: The category id
-	 *           example: 1
+	 *                   description: Identifier for the chat thread.
+	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async initializeNewChat(
 		options: APIHandlerOptions<{
@@ -486,11 +618,11 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               categories:
+	 *               payload:
 	 *                 type: array
 	 *                 description: Array of selected categories for task suggestions
 	 *                 items:
-	 *                   $ref: '#/components/schemas/SelectedCategories'
+	 *                   $ref: '#/components/schemas/SelectedCategory'
 	 *               threadId:
 	 *                 type: string
 	 *                 description: Identifier for the thread
@@ -501,67 +633,19 @@ class AIAssistantController extends BaseController {
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/TaskSuggestionsResponseDto'
-	 * components:
-	 *   securitySchemes:
-	 *     bearerAuth:
-	 *       type: http
-	 *       scheme: bearer
-	 *       bearerFormat: JWT
-	 *   schemas:
-	 *     SelectedCategories:
-	 *       type: object
-	 *       properties:
-	 *         categoryId:
-	 *           type: integer
-	 *           description: Unique identifier for the category
-	 *           example: 1
-	 *         name:
-	 *           type: string
-	 *           description: Name of the category
-	 *           example: "Work"
-	 *     TaskSuggestionsResponseDto:
-	 *       type: object
-	 *       properties:
-	 *         message:
-	 *           type: string
-	 *           description: Response message regarding task suggestions
-	 *           example: "Tasks suggested successfully."
-	 *         tasks:
-	 *           type: array
-	 *           description: Suggested tasks for the selected categories
-	 *           items:
-	 *             $ref: '#/components/schemas/TaskCreateDto'
-	 *     TaskCreateDto:
-	 *       type: object
-	 *       required:
-	 *         - categoryId
-	 *         - categoryName
-	 *         - description
-	 *         - dueDate
-	 *         - label
-	 *       properties:
-	 *         categoryId:
-	 *           type: integer
-	 *           description: Unique identifier for the category of the task
-	 *           example: 1
-	 *         categoryName:
-	 *           type: string
-	 *           description: Name of the task category
-	 *           example: "Work"
-	 *         description:
-	 *           type: string
-	 *           description: Detailed description of the task
-	 *           example: "Finish the project by the deadline"
-	 *         dueDate:
-	 *           type: string
-	 *           format: date-time
-	 *           description: The deadline for the task
-	 *           example: "2024-09-30T10:00:00Z"
-	 *         label:
-	 *           type: string
-	 *           description: A label for the task
-	 *           example: "High Priority"
+	 *               type: object
+	 *               properties:
+	 *                 messages:
+	 *                   type: array
+	 *                   description: Array of chat messages containing task suggestions.
+	 *                   items:
+	 *                     oneOf:
+	 *                       - $ref: '#/components/schemas/ChatMessageText'
+	 *                       - $ref: '#/components/schemas/ChatMessageTask'
+	 *                 threadId:
+	 *                   type: string
+	 *                   description: Identifier for the chat thread.
+	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async suggestTasksForCategories(
 		options: APIHandlerOptions<{
