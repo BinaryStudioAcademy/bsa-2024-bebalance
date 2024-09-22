@@ -1,1 +1,1 @@
-export { updateCountdown } from "./update-countdown/update-countdown.helper.js";
+export { calculateCountdown } from "./calculate-countdown/calculate-countdown.helper.js";

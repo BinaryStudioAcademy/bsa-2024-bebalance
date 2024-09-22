@@ -1,14 +1,11 @@
 import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useEffect, useState } from "~/libs/hooks/hooks.js";
+import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 
 import { MillisecondsPerUnit } from "../../enums/enums.js";
 import { COUNTDOWN_EXPIRED } from "./libs/constants/constants.js";
-import { updateCountdown } from "./libs/helpers/helpers.js";
-import {
-	type Countdown,
-	type CountdownUpdateHandlingData,
-} from "./libs/types/types.js";
+import { calculateCountdown } from "./libs/helpers/helpers.js";
+import { type Countdown } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -26,24 +23,27 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 		isExpired && styles["expired"],
 	);
 
-	useEffect(() => {
-		const updateHandlingData: CountdownUpdateHandlingData = {
-			deadline,
-			onExpire,
-			setCountdown,
-			setIsExpired,
-		};
+	const handleUpdateCountdown = useCallback(() => {
+		const deadlineCountdown = calculateCountdown(deadline);
+		setCountdown(deadlineCountdown);
 
+		if (deadlineCountdown === COUNTDOWN_EXPIRED) {
+			setIsExpired(true);
+			onExpire();
+		}
+	}, [deadline, onExpire]);
+
+	useEffect(() => {
 		const countdownInterval = setInterval(() => {
-			updateCountdown(updateHandlingData);
+			handleUpdateCountdown();
 		}, MillisecondsPerUnit.MINUTE);
 
-		updateCountdown(updateHandlingData);
+		handleUpdateCountdown();
 
 		return (): void => {
 			clearInterval(countdownInterval);
 		};
-	}, [deadline, onExpire]);
+	}, [handleUpdateCountdown]);
 
 	return (
 		<div className={styles["container"]}>
