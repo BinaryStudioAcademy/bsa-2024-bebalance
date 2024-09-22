@@ -37,6 +37,7 @@ export {
 export { type LinearGradientProps } from "react-native-linear-gradient";
 export { type RadioButtonProps } from "react-native-radio-buttons-group";
 export { type SharedValue } from "react-native-reanimated";
+export { type ToastData } from "react-native-toast-message";
 export {
 	type CategoriesSelectedRequestDto,
 	type OnboardingQuestionResponseDto,
