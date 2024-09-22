@@ -2,13 +2,17 @@ import { Button } from "~/libs/components/components.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { TaskStatus } from "../../enums/enums.js";
-import { Category, Deadline, PastTaskStatus } from "../components.js";
+import {
+	Category,
+	Deadline,
+	PastTaskStatus,
+} from "./libs/components/components.js";
+import { TaskStatus } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onComplete: (id: number) => void;
-	onSkip: (id: number) => void;
+	onComplete?: (id: number) => void;
+	onSkip?: (id: number) => void;
 	task: TaskDto;
 };
 
@@ -18,11 +22,15 @@ const TaskCard: React.FC<Properties> = ({
 	task,
 }: Properties) => {
 	const handleSkip = useCallback(() => {
-		onSkip(task.id);
+		if (onSkip) {
+			onSkip(task.id);
+		}
 	}, [task, onSkip]);
 
 	const handleComplete = useCallback(() => {
-		onComplete(task.id);
+		if (onComplete) {
+			onComplete(task.id);
+		}
 	}, [task, onComplete]);
 
 	const isActive = task.status === TaskStatus.CURRENT;
@@ -42,24 +50,28 @@ const TaskCard: React.FC<Properties> = ({
 				<div className={styles["buttons-container"]}>
 					{isActive ? (
 						<>
-							<div className={styles["button-container"]}>
-								<Button
-									iconName="closeSmall"
-									label="Skip the task"
-									onClick={handleSkip}
-									type="button"
-									variant="action"
-								/>
-							</div>
-							<div className={styles["button-container"]}>
-								<Button
-									iconName="checkBlack"
-									label="Mark complete"
-									onClick={handleComplete}
-									type="button"
-									variant="action"
-								/>
-							</div>
+							{Boolean(onSkip) && (
+								<div className={styles["button-container"]}>
+									<Button
+										iconName="closeSmall"
+										label="Skip the task"
+										onClick={handleSkip}
+										type="button"
+										variant="action"
+									/>
+								</div>
+							)}
+							{Boolean(onComplete) && (
+								<div className={styles["button-container"]}>
+									<Button
+										iconName="checkBlack"
+										label="Mark complete"
+										onClick={handleComplete}
+										type="button"
+										variant="action"
+									/>
+								</div>
+							)}
 						</>
 					) : (
 						<div>

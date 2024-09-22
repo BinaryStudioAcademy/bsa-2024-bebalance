@@ -1,4 +1,4 @@
-import { Loader, Switch } from "~/libs/components/components.js";
+import { Loader, Switch, TaskCard } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -10,7 +10,6 @@ import {
 import { type ValueOf } from "~/libs/types/types.js";
 import { actions as taskActions } from "~/modules/tasks/tasks.js";
 
-import { TaskCard } from "./libs/components/components.js";
 import { TasksMode, TaskStatus } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 

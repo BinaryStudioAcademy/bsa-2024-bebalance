@@ -1,6 +1,6 @@
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 
-import { convertCategoryNameToKebabCase } from "../../helpers/helpers.js";
+import { convertCategoryNameToKebabCase } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {

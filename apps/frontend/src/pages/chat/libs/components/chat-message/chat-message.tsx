@@ -1,4 +1,4 @@
-import { Icon } from "~/libs/components/components.js";
+import { Icon, TaskCard } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import {
@@ -6,6 +6,7 @@ import {
 	type ChatMessagePayload,
 	ChatMessageType,
 } from "~/modules/chat/chat.js";
+import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import styles from "./styles.module.css";
 
@@ -45,7 +46,14 @@ const ChatMessage: React.FC<Properties> = ({
 		}
 
 		case ChatMessageType.TASK: {
-			return "hello";
+			return (
+				<li>
+					<Icon name="aiAssistantAvatar" />
+					<div className={contentContainerStyle}>
+						<TaskCard task={payload.task as TaskDto} />
+					</div>
+				</li>
+			);
 		}
 
 		default: {
