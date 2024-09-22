@@ -25,7 +25,7 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 		INITIAL_POINTER_POSITION_X,
 	);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
-	const sliderReference = useRef<HTMLDivElement>(null);
+	const sliderReference = useRef<HTMLDivElement | null>(null);
 	const totalSlides = tasks.length;
 	const isSingleSlide = totalSlides === Slide.SINGLE;
 
