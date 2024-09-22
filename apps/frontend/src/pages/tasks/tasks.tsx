@@ -97,16 +97,19 @@ const Tasks: React.FC = () => {
 		[dispatch],
 	);
 
-	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] =>
-		tasks.map((task) => (
-			<TaskCard
-				key={task.id}
-				onComplete={handleComplete}
-				onExpire={handleTaskExpiration}
-				onSkip={handleSkip}
-				task={task}
-			/>
-		));
+	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] => {
+		return tasks.map((task) => {
+			return (
+				<TaskCard
+					key={task.id}
+					onComplete={handleComplete}
+					onExpire={handleTaskExpiration}
+					onSkip={handleSkip}
+					task={task}
+				/>
+			);
+		});
+	};
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 	const taskbarTasks = mode === TasksMode.CURRENT ? activeTasks : tasks;
