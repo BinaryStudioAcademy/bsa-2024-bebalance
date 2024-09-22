@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
 		backgroundColor: BaseColor.BG_WHITE,
 		borderRadius: 10,
 		elevation: 2,
-		height: 70,
+		minHeight: 70,
 		overflow: "hidden",
 	},
 	iconWrapper: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 	typeIndicator: {
 		borderBottomLeftRadius: 12,
 		borderTopLeftRadius: 12,
-		height: 70,
+		height: "100%",
 		width: 8,
 	},
 });
