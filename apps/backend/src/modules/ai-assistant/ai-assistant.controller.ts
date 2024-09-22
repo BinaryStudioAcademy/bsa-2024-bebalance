@@ -362,12 +362,13 @@ class AIAssistantController extends BaseController {
 	private async explainTaskSuggestion(
 		options: APIHandlerOptions<{
 			body: AIAssistantRequestDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body } = options;
+		const { body, user } = options;
 
 		return {
-			payload: await this.openAIService.explainTaskSuggestion(body),
+			payload: await this.openAIService.explainTaskSuggestion(body, user),
 			status: HTTPCode.OK,
 		};
 	}
