@@ -7,24 +7,12 @@ import { useCallback, useEffect, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type Countdown } from "~/libs/types/types";
 
+import { DEADLINE_OVER, TIME_PAD_FILL } from "./libs/constants/constants";
+import { MillisecondsPerUnit, TimePad } from "./libs/enums/enums";
+
 type Properties = {
 	deadline: string;
 };
-
-const DEADLINE_OVER = 0;
-
-const TIME_PAD_FILL = "0";
-
-const MillisecondsPerUnit = {
-	DAY: 86_400_000,
-	HOUR: 3_600_000,
-	MINUTE: 60_000,
-} as const;
-
-const TimePad = {
-	HOURS: 2,
-	MINUTES: 2,
-} as const;
 
 const DeadlineCountdown: React.FC<Properties> = ({ deadline }: Properties) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
