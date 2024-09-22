@@ -15,7 +15,7 @@ const selectedCategory = z.object({
 });
 
 const taskSuggestionRequest = z.object({
-	payload: z
+	categories: z
 		.array(selectedCategory)
 		.nonempty({ message: AIAssistantValidationMessage.CATEGORIES_REQUIRED }),
 	threadId: z
