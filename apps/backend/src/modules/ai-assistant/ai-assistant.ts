@@ -4,17 +4,17 @@ import { categoryService } from "~/modules/categories/categories.js";
 import { onboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { taskService } from "~/modules/tasks/tasks.js";
 
-import { AiAssistantController } from "./ai-assistant.controller.js";
-import { AiAssistantService } from "./ai-assistant.service.js";
+import { AIAssistantController } from "./ai-assistant.controller.js";
+import { AIAssistantService } from "./ai-assistant.service.js";
 
-const aiAssistantService = new AiAssistantService({
+const aiAssistantService = new AIAssistantService({
 	categoryService,
 	onboardingRepository,
-	openAi: openAI,
+	openAI,
 	taskService,
 });
 
-const aiAssistantController = new AiAssistantController(
+const aiAssistantController = new AIAssistantController(
 	logger,
 	aiAssistantService,
 );

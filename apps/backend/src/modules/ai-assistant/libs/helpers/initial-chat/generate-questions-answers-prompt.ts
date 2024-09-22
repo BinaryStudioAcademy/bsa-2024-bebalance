@@ -1,19 +1,19 @@
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
+import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
 import {
-	type OpenAiRequestMessage,
+	type OpenAIRequestMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 import { type OnboardingQuestionEntity } from "~/modules/onboarding/onboarding.js";
 
-import { OpenAiInitialPromptTemplates } from "./generate-init-prompt-template.enum.js";
+import { OpenAIInitialPromptTemplate } from "./generate-init-prompt-template.enum.js";
 
 function generateQuestionsAnswersPrompt(
 	userQuestionsWithAnswers: OnboardingQuestionEntity[],
-): OpenAiRequestMessage {
+): OpenAIRequestMessage {
 	const questionsWithAnswers = userQuestionsWithAnswers.map(
 		(questionEntity) => {
 			const { answers, label: question } = questionEntity.toObject();
-			const answer = answers[ZERO_INDEX]?.label;
+			const answer = answers[FIRST_ITEM_INDEX]?.label;
 
 			return { answer, question };
 		},
@@ -21,9 +21,9 @@ function generateQuestionsAnswersPrompt(
 
 	const content = `
 	{
-	"context": "${OpenAiInitialPromptTemplates.INIT_CHAT_CONTENT}",
+	"context": "${OpenAIInitialPromptTemplate.INIT_CHAT_CONTENT}",
 	"user_answers": ${JSON.stringify(questionsWithAnswers)},
-	"instructions": "${OpenAiInitialPromptTemplates.INIT_CHAT_INSTRUCTION}",
+	"instructions": "${OpenAIInitialPromptTemplate.INIT_CHAT_INSTRUCTION}",
 	}`;
 
 	return {

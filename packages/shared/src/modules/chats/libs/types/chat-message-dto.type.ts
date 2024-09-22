@@ -3,16 +3,7 @@ import {
 	type ChatMessageAuthor,
 	type ChatMessageType,
 } from "../enums/enums.js";
-import { type BalanceWheelMessage } from "./balance-wheel-message.type.js";
-import { type QuestionMessage } from "./question-message.type.js";
-import { type TaskMessage } from "./task-message.type.js";
-import { type TextMessage } from "./text.message.type.js";
-
-type ChatMessagePayload =
-	| BalanceWheelMessage
-	| QuestionMessage
-	| TaskMessage
-	| TextMessage;
+import { type ChatMessagePayload } from "./chat-message-payload.type.js";
 
 type ChatMessageDto = {
 	author: ValueOf<typeof ChatMessageAuthor>;

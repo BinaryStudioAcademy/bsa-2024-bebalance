@@ -1,95 +1,47 @@
-import {
-	BalanceWheelChart,
-	QuizCategoriesForm,
-} from "~/libs/components/components.js";
-import { NumericalValue } from "~/libs/enums/enums.js";
-import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
+import { Icon } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import {
-	ChatMessageType,
-	type SelectedCategories,
+	type ChatMessageAuthor,
+	type ChatMessagePayload,
+	type ChatMessageType,
 } from "~/modules/chat/chat.js";
 
-import { handleButtonAction } from "../../helpers/helpers.js";
-import { type ChartDataType } from "../../types/types.js";
-import { ChatButtons } from "../confirmation-buttons/confirmation-buttons.js";
-import { TaskListContainer } from "../task-list-container/task-list-container.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	buttonLabels?: string[];
-	contentData: {
-		chartData: ChartDataType[];
-		selectedCategories: SelectedCategories[];
-	};
-	onFormSubmit?: (categoryIds: number[]) => void;
-	// taskList: TaskCreateDto[];
-	text: string;
+	author: ValueOf<typeof ChatMessageAuthor>;
+	payload: ChatMessagePayload;
 	type: ValueOf<typeof ChatMessageType>;
 };
 
 const ChatMessage: React.FC<Properties> = ({
-	buttonLabels = [],
-	contentData,
-	onFormSubmit,
-	// taskList,
-	text,
+	author,
+	payload,
 	type,
 }: Properties) => {
-	const dispatch = useAppDispatch();
-
-	const handleNo = useCallback(() => {
-		void handleButtonAction(dispatch, "getCategoryForm");
-	}, [dispatch]);
-
-	const handleYes = useCallback(() => {
-		void handleButtonAction(dispatch, "getTasks");
-	}, [dispatch]);
-
-	const renderContent = (): JSX.Element | null => {
-		switch (type) {
-			case ChatMessageType.CATEGORY_FORM: {
-				return onFormSubmit ? (
-					<QuizCategoriesForm
-						buttonLabel={buttonLabels[NumericalValue.ZERO] ?? ""}
-						onSubmit={onFormSubmit}
-					/>
-				) : null;
-			}
-
-			case ChatMessageType.CONFIRMATION_BUTTONS: {
-				return (
-					<ChatButtons
-						handleNo={handleNo}
-						handleYes={handleYes}
-						noButtonLabel={buttonLabels[NumericalValue.ONE] || "No"}
-						yesButtonLabel={buttonLabels[NumericalValue.ZERO] || "Yes"}
-					/>
-				);
-			}
-
-			case ChatMessageType.WHEEL_ANALYSIS: {
-				return <BalanceWheelChart data={contentData.chartData} />;
-			}
-
-			case ChatMessageType.TASK_LIST: {
-				return <TaskListContainer />;
-			}
-
-			default: {
-				return null;
-			}
-		}
-	};
-
-	const content = renderContent();
-
-	return (
-		<li className={styles["message-container"]} key={text}>
-			<p>{text}</p>
-			{content && <div className={styles["content"]}>{content}</div>}
-		</li>
+	const messageContainerStyle = getValidClassNames(
+		styles["message-container"],
+		author === "assistant"
+			? styles["message-container-assistant"]
+			: styles["message-container-user"],
 	);
+
+	const contentContainerStyle = getValidClassNames(
+		styles["content-container"],
+		author === "assistant"
+			? styles["content-container-assistant"]
+			: styles["content-container-user"],
+	);
+
+	if (type === "text") {
+		return (
+			<li className={messageContainerStyle}>
+				<Icon name="aiAssistantAvatar" />
+				<div className={contentContainerStyle}>{payload.text}</div>
+			</li>
+		);
+	}
 };
 
 export { ChatMessage };

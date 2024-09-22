@@ -1,9 +1,9 @@
 import { config } from "~/libs/modules/config/config.js";
 import { logger } from "~/libs/modules/logger/logger.js";
 
-import { OpenAi } from "./open-ai.module.js";
+import { OpenAI } from "./open-ai.module.js";
 
-const openAI = new OpenAi({
+const openAI = new OpenAI({
 	config,
 	logger,
 });
@@ -17,9 +17,9 @@ export {
 	OpenAIRoleKey,
 } from "./libs/enums/enums.js";
 export {
-	type OpenAiRequestMessage,
-	type OpenAiResponseMessage,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRequestMessage,
+	type OpenAIResponseMessage,
+	type OpenAIRunThreadRequestDto,
 } from "./libs/types/types.js";
 export { AIAssistantMessageValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
-export { type OpenAi } from "./open-ai.module.js";
+export { type OpenAI } from "./open-ai.module.js";

@@ -1,4 +1,4 @@
-import { OpenAI } from "openai";
+import { OpenAI as LibraryOpenAI } from "openai";
 import { zodResponseFormat } from "openai/helpers/zod";
 
 import { type Config } from "~/libs/modules/config/config.js";
@@ -12,9 +12,9 @@ import {
 } from "./libs/enums/enums.js";
 import { OpenAIError } from "./libs/exceptions/exceptions.js";
 import {
-	type OpenAiRequestMessage,
-	type OpenAiResponseMessage,
-	type OpenAiRunThreadRequestDto,
+	type OpenAIRequestMessage,
+	type OpenAIResponseMessage,
+	type OpenAIRunThreadRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -22,34 +22,28 @@ type Constructor = {
 	logger: Logger;
 };
 
-class OpenAi {
+class OpenAI {
 	private assistantId: null | string = null;
 	private config: Config;
 	private logger: Logger;
-	private openAi: OpenAI;
+	private openAI: LibraryOpenAI;
 
 	public constructor({ config, logger }: Constructor) {
 		this.config = config;
 		this.logger = logger;
-		this.openAi = this.createOpenAi();
-	}
-
-	private createOpenAi(): OpenAI {
-		return new OpenAI({
-			apiKey: this.config.ENV.OPEN_AI.API_KEY,
-		});
+		this.openAI = this.initialize();
 	}
 
 	private async getOrInitializeAssistant(): Promise<string> {
 		try {
-			const existingAssistants = await this.openAi.beta.assistants.list();
+			const existingAssistants = await this.openAI.beta.assistants.list();
 			const assistant = existingAssistants.data.find(
 				(assistant) => assistant.name === OpenAIAssistantConfig.NAME,
 			);
 
 			const initializedAssistant =
 				assistant ??
-				(await this.openAi.beta.assistants.create({
+				(await this.openAI.beta.assistants.create({
 					instructions: OpenAIAssistantConfig.INSTRUCTION,
 					model: this.config.ENV.OPEN_AI.MODEL,
 					name: OpenAIAssistantConfig.NAME,
@@ -75,7 +69,7 @@ class OpenAi {
 	}
 
 	private async handleRequiresAction(
-		run: OpenAI.Beta.Threads.Runs.Run,
+		run: LibraryOpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
 	): Promise<void> {
 		if (!run.required_action) {
@@ -96,7 +90,7 @@ class OpenAi {
 					}
 
 					try {
-						await this.openAi.beta.threads.runs.submitToolOutputsAndPoll(
+						await this.openAI.beta.threads.runs.submitToolOutputsAndPoll(
 							run.thread_id,
 							run.id,
 							{
@@ -124,33 +118,41 @@ class OpenAi {
 	}
 
 	private async handleRunStatus(
-		threadId: string,
-		run: OpenAI.Beta.Threads.Runs.Run,
+		id: string,
+		run: LibraryOpenAI.Beta.Threads.Runs.Run,
 		functionName: string,
-	): Promise<OpenAiResponseMessage> {
+	): Promise<OpenAIResponseMessage> {
 		if (run.status === OpenAIRunStatus.COMPLETED) {
-			return await this.getAllMessages(threadId);
-		} else if (run.status === OpenAIRunStatus.REQUIRE_ACTIONS) {
+			return await this.getAllMessages(id);
+		}
+
+		if (run.status === OpenAIRunStatus.REQUIRE_ACTIONS) {
 			await this.handleRequiresAction(run, functionName);
 
-			return await this.getAllMessages(threadId);
-		} else {
-			this.logger.error(`AI Assistant run failed: ${run.status}`);
-
-			throw new OpenAIError({
-				message: OpenAIErrorMessage.WRONG_RESPONSE,
-				status: HTTPCode.INTERNAL_SERVER_ERROR,
-			});
+			return await this.getAllMessages(id);
 		}
+
+		this.logger.error(`AI Assistant run failed: ${run.status}`);
+
+		throw new OpenAIError({
+			message: OpenAIErrorMessage.WRONG_RESPONSE,
+			status: HTTPCode.INTERNAL_SERVER_ERROR,
+		});
+	}
+
+	private initialize(): LibraryOpenAI {
+		return new LibraryOpenAI({
+			apiKey: this.config.ENV.OPEN_AI.API_KEY,
+		});
 	}
 
 	public async addMessageToThread(
-		threadId: string,
-		message: OpenAiRequestMessage,
+		id: string,
+		message: OpenAIRequestMessage,
 	): Promise<boolean> {
 		try {
-			const newMessage = await this.openAi.beta.threads.messages.create(
-				threadId,
+			const newMessage = await this.openAI.beta.threads.messages.create(
+				id,
 				message,
 			);
 
@@ -166,10 +168,10 @@ class OpenAi {
 	}
 
 	public async createThread(
-		message: OpenAiRequestMessage[] = [],
+		message: OpenAIRequestMessage[] = [],
 	): Promise<string> {
 		try {
-			const thread = await this.openAi.beta.threads.create({
+			const thread = await this.openAI.beta.threads.create({
 				messages: message,
 			});
 
@@ -191,9 +193,9 @@ class OpenAi {
 		}
 	}
 
-	public async deleteThread(threadId: string): Promise<boolean> {
+	public async deleteThread(id: string): Promise<boolean> {
 		try {
-			const result = await this.openAi.beta.threads.del(threadId);
+			const result = await this.openAI.beta.threads.del(id);
 
 			return result.deleted;
 		} catch (error) {
@@ -206,11 +208,9 @@ class OpenAi {
 		}
 	}
 
-	public async getAllMessages(
-		threadId: string,
-	): Promise<OpenAiResponseMessage> {
+	public async getAllMessages(id: string): Promise<OpenAIResponseMessage> {
 		try {
-			return await this.openAi.beta.threads.messages.list(threadId);
+			return await this.openAI.beta.threads.messages.list(id);
 		} catch (error) {
 			this.logger.error(`Error getting messages: ${String(error)}`);
 
@@ -226,11 +226,11 @@ class OpenAi {
 	}
 
 	public async runThread(
-		threadId: string,
-		runOptions: OpenAiRunThreadRequestDto,
-	): Promise<OpenAiResponseMessage> {
+		id: string,
+		options: OpenAIRunThreadRequestDto,
+	): Promise<OpenAIResponseMessage> {
 		try {
-			const runs = await this.openAi.beta.threads.runs.list(threadId);
+			const runs = await this.openAI.beta.threads.runs.list(id);
 
 			const pendingRuns = runs.data.filter(
 				(run) =>
@@ -239,29 +239,25 @@ class OpenAi {
 			);
 
 			for (const run of pendingRuns) {
-				await this.openAi.beta.threads.runs.poll(threadId, run.id);
+				await this.openAI.beta.threads.runs.poll(id, run.id);
 			}
 
-			const run = await this.openAi.beta.threads.runs.createAndPoll(threadId, {
-				additional_instructions: runOptions.additional_instructions,
-				additional_messages: runOptions.messages,
+			const run = await this.openAI.beta.threads.runs.createAndPoll(id, {
+				additional_instructions: options.additional_instructions,
+				additional_messages: options.messages,
 				assistant_id: this.assistantId as string,
-				instructions: runOptions.instructions,
+				instructions: options.instructions,
 				response_format: zodResponseFormat(
-					runOptions.validationSchema,
+					options.validationSchema,
 					"use_response_validation",
 				),
 				tool_choice: {
-					function: { name: runOptions.function_name },
+					function: { name: options.function_name },
 					type: "function",
 				},
 			});
 
-			return await this.handleRunStatus(
-				threadId,
-				run,
-				runOptions.function_name,
-			);
+			return await this.handleRunStatus(id, run, options.function_name);
 		} catch (error) {
 			this.logger.error(`Error running thread: ${String(error)}`);
 
@@ -273,4 +269,4 @@ class OpenAi {
 	}
 }
 
-export { OpenAi };
+export { OpenAI };

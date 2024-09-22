@@ -5,9 +5,8 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
-	type BalanceWheelAnalysisResponseDto,
-	type TaskSuggestionRequestDto,
-	type TaskSuggestionsResponseDto,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -22,8 +21,8 @@ class ChatApi extends BaseHTTPApi {
 	}
 
 	public async getTasksForCategories(
-		payload: TaskSuggestionRequestDto,
-	): Promise<TaskSuggestionsResponseDto> {
+		payload: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_SUGGEST_TASKS, {}),
 			{
@@ -34,10 +33,10 @@ class ChatApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<TaskSuggestionsResponseDto>();
+		return await response.json<AIAssistantResponseDto>();
 	}
 
-	public async initiateConversation(): Promise<BalanceWheelAnalysisResponseDto> {
+	public async initiateConversation(): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_INITIATE, {}),
 			{
@@ -48,7 +47,7 @@ class ChatApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<BalanceWheelAnalysisResponseDto>();
+		return await response.json<AIAssistantResponseDto>();
 	}
 }
 

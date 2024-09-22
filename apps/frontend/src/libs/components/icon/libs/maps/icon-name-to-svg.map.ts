@@ -1,3 +1,4 @@
+import AiAssistantAvatar from "~/assets/img/ai-assistant-avatar.svg?react";
 import AiChatActive from "~/assets/img/ai-chat-active.svg?react";
 import AiChatInactive from "~/assets/img/ai-chat-inactive.svg?react";
 import CheckBlack from "~/assets/img/check-black.svg?react";
@@ -26,6 +27,7 @@ const iconNameToSvg: Record<
 	IconName,
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
+	aiAssistantAvatar: AiAssistantAvatar,
 	aiChatActive: AiChatActive,
 	aiChatInactive: AiChatInactive,
 	check: CheckIcon,

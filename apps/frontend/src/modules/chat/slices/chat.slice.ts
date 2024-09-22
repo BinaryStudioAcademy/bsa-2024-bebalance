@@ -1,23 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-
-import { ChatButtonLabels, ChatMessageType } from "../libs/enums/enums.js";
+import { type SelectedCategory } from "~/modules/categories/categories.js";
 import {
-	type Message,
-	type SimplifiedQuizScoreDto,
-} from "../libs/types/types.js";
+	type ButtonsMode,
+	ChatMessageAuthor,
+	ChatMessageType,
+} from "~/modules/chat/chat.js";
+
+import { type ChatMessageDto } from "../libs/types/types.js";
 import { getTasksForCategories, initConversation } from "./actions.js";
 
 type State = {
+	buttonsMode: ButtonsMode;
 	dataStatus: ValueOf<typeof DataStatus>;
-	messages: Message[];
-	selectedCategories: SimplifiedQuizScoreDto[];
+	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
+	selectedCategories: SelectedCategory[];
 	threadId: null | string;
 };
 
 const initialState: State = {
+	buttonsMode: "taskGenerationOptions",
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
@@ -43,10 +47,11 @@ const { actions, name, reducer } = createSlice({
 			})
 			.addCase(getTasksForCategories.fulfilled, (state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
-				state.messages.push({
-					...action.payload,
-					type: ChatMessageType.TASK_LIST,
-				});
+				const newMessages = action.payload.messages;
+
+				for (const message of newMessages) {
+					state.messages.push(message);
+				}
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
@@ -55,17 +60,30 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "chat",
 	reducers: {
-		addCategoryCheckboxMessage(state) {
-			state.messages.push({
-				buttonLabels: [ChatButtonLabels.ACCEPT_CATEGORIES],
-				message: "What categories do you want to work on?",
-				type: ChatMessageType.CATEGORY_FORM,
-			});
+		addAssistantTextMessage(state, action: { payload: string }) {
+			const assistantMessage = {
+				author: ChatMessageAuthor.ASSISTANT,
+				isRead: true,
+				payload: { text: action.payload },
+				type: ChatMessageType.TEXT,
+			};
+
+			state.messages.push(assistantMessage);
 		},
-		updateSelectedCategories(
-			state,
-			action: { payload: SimplifiedQuizScoreDto[] },
-		) {
+		addUserTextMessage(state, action: { payload: string }) {
+			const userMessage = {
+				author: ChatMessageAuthor.USER,
+				isRead: true,
+				payload: { text: action.payload },
+				type: ChatMessageType.TEXT,
+			};
+
+			state.messages.push(userMessage);
+		},
+		setButtonsMode(state, action: PayloadAction<ButtonsMode>) {
+			state.buttonsMode = action.payload;
+		},
+		updateSelectedCategories(state, action: { payload: SelectedCategory[] }) {
 			state.selectedCategories = action.payload;
 		},
 	},

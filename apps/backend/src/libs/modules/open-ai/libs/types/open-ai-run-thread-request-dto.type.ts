@@ -4,7 +4,7 @@ import { type ZodSchema } from "zod";
 import { type OpenAIFunctionName } from "~/libs/modules/open-ai/open-ai.js";
 import { type ValueOf } from "~/libs/types/types.js";
 
-type OpenAiRunThreadRequestDto = {
+type OpenAIRunThreadRequestDto = {
 	additional_instructions: null | string;
 	function_name: ValueOf<typeof OpenAIFunctionName>;
 	instructions: null | string;
@@ -12,4 +12,4 @@ type OpenAiRunThreadRequestDto = {
 	validationSchema: ZodSchema;
 };
 
-export { type OpenAiRunThreadRequestDto };
+export { type OpenAIRunThreadRequestDto };

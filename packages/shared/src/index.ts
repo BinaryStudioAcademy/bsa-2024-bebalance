@@ -48,15 +48,9 @@ export {
 	AIAssistantApiPath,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
-	type BalanceWheelAnalysisResponseDto,
-	type ChangeTaskSuggestionRequestDto,
 	changeTaskSuggestionRequestValidationSchema,
-	type SelectedCategories,
-	type SimplifiedQuizScoreDto,
 	taskActionRequestSchemaValidationSchema,
-	type TaskSuggestionRequestDto,
 	taskSuggestionRequestValidationSchema,
-	type TaskSuggestionsResponseDto,
 	type ThreadMessageCreateDto,
 } from "./modules/ai-assistant/ai-assistant.js";
 export {
@@ -80,8 +74,8 @@ export {
 	type BalanceWheelMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
+	type ChatMessagePayload,
 	ChatMessageType,
-	type QuestionMessage,
 	type TaskMessage,
 	type TextMessage,
 } from "./modules/chats/chats.js";
@@ -120,6 +114,7 @@ export {
 export {
 	type TaskCreateDto,
 	type TaskDto,
+	type TaskGetAllResponseDto,
 	type TaskNoteDto,
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,

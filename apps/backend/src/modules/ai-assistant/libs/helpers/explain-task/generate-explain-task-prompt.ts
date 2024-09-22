@@ -1,15 +1,15 @@
 import {
-	type OpenAiRequestMessage,
+	type OpenAIRequestMessage,
 	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { ExplainTaskPromptTemplates } from "./explain-task-prompt-template.js";
+import { ExplainTaskPromptTemplate } from "./explain-task-prompt-template.js";
 
-function generateExplainTaskPrompt(task: TaskCreateDto): OpenAiRequestMessage {
+function generateExplainTaskPrompt(task: TaskCreateDto): OpenAIRequestMessage {
 	const content = `
 	{
-	"context": "${ExplainTaskPromptTemplates.EXPLAIN_TASK_CONTEXT}",
+	"context": "${ExplainTaskPromptTemplate.EXPLAIN_TASK_CONTEXT}",
 	"task": ${JSON.stringify(task)},
 	}`;
 

@@ -11,10 +11,9 @@ const chatApi = new ChatApi({
 });
 
 export { chatApi };
-export { ChatMessageType } from "./libs/enums/enums.js";
+export { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 export {
-	type SimplifiedQuizScoreDto,
-	type TaskSuggestionRequestDto,
+	type ButtonsMode,
+	type ChatMessagePayload,
 } from "./libs/types/types.js";
-export { type SelectedCategories } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/chat.js";

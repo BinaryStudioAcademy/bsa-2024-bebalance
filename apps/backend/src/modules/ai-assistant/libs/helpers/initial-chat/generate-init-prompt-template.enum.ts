@@ -1,4 +1,4 @@
-const OpenAiInitialPromptTemplates = {
+const OpenAIInitialPromptTemplate = {
 	INIT_CHAT_CONTENT: `
 The user has completed an onboarding quiz where they prioritized different areas of their life.
 Based on the user's answers, you will later recommend specific tasks to help user improve in areas such as health,
@@ -39,50 +39,16 @@ After this context, a structured array of categories will be provided. Each cate
 and 10 represents high satisfaction.
 `,
 	WHEEL_OF_BALANCE_INSTRUCTIONS: `
-task:
-Your role is to analyze the user's ratings in these categories, identify areas where the user needs improvement,
-and later recommend tasks to help them achieve better balance in life. Do not provide tasks at this stage.
-
-Focus on the categories that the user has rated the lowest, as these are likely the areas where they
-seek the most improvement.
-
-response_structure:
-{
-	messages: {              // A section containing the greeting, question and comments
-		greeting: string,      // A friendly and motivational greeting that uses the user's name.
-		comments: string       // A summary of the analysis and a motivational question for the user.
-		question: string        // A follow-up question for the user to guide further action.
-	},
-	lowestCategories: [      // An array containing the three categories with the lowest scores.
-		{
-			categoryId: number,   // Unique identifier of the category.
-			categoryName: string, // Name of the category.
-		}
-	]
-}
+The assistant's role is to simply acknowledge the user's provided information about their ratings in the
+Wheel of Balance categories. No action, response, or task generation is required at this stage.
+The assistant should take note of this information to be used in future interactions or task recommendations.
 
 action:
-1. Your first task is to greet the user using their name. The greeting should be friendly, motivational, and supportive.
-The goal is to make the user feel welcome and encouraged as they begin their journey toward better balance in life.
-Ensure the greeting is short, positive, and personal. Use the user’s name, {{userName}}, to make it feel more engaging.
-Place the greeting in the \`greeting\` field of the response.
-
-2.Your second task is to provide a brief summary of the user's Wheel of Balance analysis. Highlight that the analysis
-has identified the three areas where the user scored the lowest, which represent areas for potential improvement.
-Keep the explanation concise but clear, avoiding unnecessary details.
-Place this explanation n in the \`comments\` field of the response.
-
-3. Your third task is to respond with a follow-up question for the user. The question should guide the user to either
-focus on improving the three areas with the lowest scores, or to decide whether they would prefer to choose the areas
-themselves for further improvement. You must craft the question in a way that encourages thoughtful reflection and
-engagement from the user. The question should be specific, clear, and include the user's name, {{userName}}.
-Place this question in the \`question\` field of the response.
-
-4.Your forth task is to identify the three categories with the lowest scores in the user's Wheel of Balance analysis.
-Select these categories and provide them in a structured format, listing the category ID, category name, and score.
-
-Ensure this data is placed in the \`lowestCategories\` field of the response.
+1. Acknowledge the user's ratings in the Wheel of Balance categories without providing any feedback,
+tasks, or responses at this time.
+2. Simply store this information to inform future task generation or guidance based on the user's progress in life
+balance categories.
 `,
 } as const;
 
-export { OpenAiInitialPromptTemplates };
+export { OpenAIInitialPromptTemplate };

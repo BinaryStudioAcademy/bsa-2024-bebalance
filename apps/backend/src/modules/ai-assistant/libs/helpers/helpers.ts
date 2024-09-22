@@ -1,17 +1,16 @@
 export {
 	generateChangeTaskSuggestionsResponse,
 	runChangeTaskByCategoryOptions,
-} from "./change-task/change-task.js";
+} from "./change-task/run-change-task-by-category-options.helper.js";
 export {
 	generateExplainTaskSuggestionsResponse,
 	runExplainTaskOptions,
-} from "./explain-task/explain-task.js";
+} from "./explain-task/run-explain-task-option.helper.js";
 export {
 	generateQuestionsAnswersPrompt,
-	generateScoresResponse,
-	runInitialThreadOptions,
+	generateUserScoresPrompt,
 } from "./initial-chat/initial-chat.js";
 export {
 	generateTaskSuggestionsResponse,
-	runTaskByCategoryOptions,
-} from "./suggest-task-by-category/suggest-task-by-category.js";
+	runSuggestTaskByCategoryOptions,
+} from "./suggest-task-by-category/run-suggest-task-by-category-option.helper.js";

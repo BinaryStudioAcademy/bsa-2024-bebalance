@@ -1,4 +1,4 @@
-const SuggestTaskPromptTemplates = {
+const SuggestTaskPromptTemplate = {
 	SUGGEST_TASKS_CONTEXT: `
 The user has selected the following categories that are important for their personal growth and improvement.
 Each category represents an area where the user would like to make progress.
@@ -35,4 +35,4 @@ The tasks should be easy to follow and achievable.
 `,
 } as const;
 
-export { SuggestTaskPromptTemplates };
+export { SuggestTaskPromptTemplate };

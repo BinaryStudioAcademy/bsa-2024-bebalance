@@ -110,6 +110,17 @@ class TaskController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.findAllByUserId(
+					options as APIHandlerOptions<{
+						user: UserDto;
+					}>,
+				),
+			method: "GET",
+			path: TasksApiPath.ROOT,
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.addNote(
 					options as APIHandlerOptions<{ body: TaskNoteRequestDto }>,
 				),
@@ -214,6 +225,19 @@ class TaskController extends BaseController {
 	 *             schema:
 	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
+
+	private async findAllByUserId(
+		options: APIHandlerOptions<{
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { user } = options;
+
+		return {
+			payload: await this.taskService.findAllByUserId(user.id),
+			status: HTTPCode.OK,
+		};
+	}
 
 	private async findCurrentByUserId(
 		options: APIHandlerOptions<{

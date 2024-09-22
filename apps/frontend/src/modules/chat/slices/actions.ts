@@ -3,14 +3,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
 import {
-	type BalanceWheelAnalysisResponseDto,
-	type TaskSuggestionRequestDto,
-	type TaskSuggestionsResponseDto,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
 } from "../libs/types/types.js";
 import { name as sliceName } from "./chat.slice.js";
 
 const initConversation = createAsyncThunk<
-	BalanceWheelAnalysisResponseDto,
+	AIAssistantResponseDto,
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/init-conversation`, async (_, { extra }) => {
@@ -20,8 +19,8 @@ const initConversation = createAsyncThunk<
 });
 
 const getTasksForCategories = createAsyncThunk<
-	TaskSuggestionsResponseDto,
-	TaskSuggestionRequestDto,
+	AIAssistantResponseDto,
+	AIAssistantRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/get-tasks-for-categories`, async (payload, { extra }) => {
 	const { chatApi } = extra;

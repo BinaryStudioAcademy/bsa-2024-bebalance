@@ -1,16 +1,29 @@
 .message-container {
 	display: flex;
+	gap: 10px;
+}
+
+.message-container-assistant {
+	flex-direction: row;
+}
+
+.message-container-user {
+	flex-direction: row-reverse;
+}
+
+.content-container {
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	max-width: 730px;
 	padding: 15px;
-	background-color: var(--background-gray);
 	border-radius: 0 10px 10px;
 }
 
-.content {
-	display: flex;
-	justify-content: center;
-	padding: 15px;
-	border-radius: 0 10px 10px;
+.content-container-assistant {
+	background-color: var(--background-gray);
+}
+
+.content-container-user {
+	background-color: var(--user-chat-bubble);
 }
