@@ -10,6 +10,7 @@ import {
 	View,
 } from "~/libs/components/components";
 import { BaseColor, TaskStatus } from "~/libs/enums/enums";
+import { getStatusProperties } from "~/libs/helpers/helpers";
 import { useCallback, useMemo } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type TaskDto } from "~/packages/tasks/tasks";
@@ -35,20 +36,10 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 
 	const isActiveTask = task.status === TaskStatus.CURRENT;
 
-	const statusProperties = useMemo<{
-		label: string;
-		type: "complete" | "skip";
-	} | null>(() => {
-		if (task.status === TaskStatus.SKIPPED) {
-			return { label: "Skipped", type: "skip" };
-		}
-
-		if (task.status === TaskStatus.COMPLETED) {
-			return { label: "Completed", type: "complete" };
-		}
-
-		return null;
-	}, [task.status]);
+	const statusProperties = useMemo(
+		() => getStatusProperties(task.status),
+		[task.status],
+	);
 
 	return (
 		<View style={[globalStyles.mb16, globalStyles.mh16, styles.container]}>
