@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.54.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.53.0...v1.54.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+* **frontend/shared:** change password funcionality in profile screen bb-417 ([#512](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/512)) ([b3e98c8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3e98c866bf44a2ebc450ac048f6be2cf121468b))
+* **frontend:** the wheel parts should adjust to new estimations immediately bb-472 ([#517](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/517)) ([124fbfa](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/124fbfa0c0d8df91066444e42d9916e57f3c3f07))
+* **mobile:** add Intro motivation screen bb-378 ([#489](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/489)) ([5ab7e69](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ab7e6994ccd51c52b41fbb1fa5dd2461bc3f94a))
+* **mobile:** Added log out confirmation bb-366 ([#524](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/524)) ([b09e641](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b09e6413daefae302bd456ace6826733e73da3ec))
+* **mobile:** forgot password functionality bb-358 ([#500](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/500)) ([247f917](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/247f917684da1cd3e2442700bb7179c0152c0fdf))
+
 ## [1.53.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.52.0...v1.53.0) (2024-09-21)
 
 
