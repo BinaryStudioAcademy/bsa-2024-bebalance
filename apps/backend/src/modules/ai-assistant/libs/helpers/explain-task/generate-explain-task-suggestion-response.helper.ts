@@ -64,7 +64,7 @@ const generateExplainTaskSuggestionsResponse = (
 			},
 		},
 		threadId: message.thread_id,
-		type: ChatMessageType.TEXT,
+		type: ChatMessageType.TASK,
 	};
 
 	const motivationMessage: ChatMessageCreateDto = {
