@@ -1,6 +1,6 @@
 type IconName =
 	| "check"
-	| "checkBlack"
+	| "checkSmall"
 	| "clockActive"
 	| "clockInactive"
 	| "close"

@@ -2,9 +2,17 @@
 	position: relative;
 	width: 356px;
 	height: 251px;
-	background-color: var(--white);
 	border: 1px solid var(--background-gray);
 	border-radius: 20px;
+}
+
+.card-active {
+	background-color: var(--white);
+}
+
+.card-expired {
+	user-select: none;
+	background-color: var(--background-gray);
 }
 
 .card-header {
@@ -42,6 +50,14 @@
 	background-color: var(--background-gray);
 }
 
+.divider-active {
+	background-color: var(--background-gray);
+}
+
+.divider-expired {
+	background-color: var(--white);
+}
+
 .card-footer {
 	position: absolute;
 	bottom: 0;
@@ -53,6 +69,11 @@
 	gap: 10px;
 	justify-content: flex-end;
 	padding: 15px;
+}
+
+.buttons-container-expired {
+	pointer-events: none;
+	user-select: none;
 }
 
 .button-container {
