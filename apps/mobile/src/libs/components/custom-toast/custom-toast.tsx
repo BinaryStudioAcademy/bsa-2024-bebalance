@@ -17,6 +17,7 @@ type Properties = {
 } & ToastData;
 
 const ICON_SIZE = 24;
+const MESSAGE_NUMBER_OF_LINES = 2;
 
 const CustomToast: React.FC<Properties> = ({
 	text1,
@@ -33,7 +34,7 @@ const CustomToast: React.FC<Properties> = ({
 				globalStyles.flexDirectionRow,
 				globalStyles.alignItemsCenter,
 				globalStyles.justifyContentSpaceBetween,
-				globalStyles.gap24,
+				globalStyles.gap16,
 				globalStyles.boxShadow,
 				styles.container,
 			]}
@@ -49,7 +50,9 @@ const CustomToast: React.FC<Properties> = ({
 					globalStyles.flex1,
 					globalStyles.flexDirectionRow,
 					globalStyles.alignItemsCenter,
-					globalStyles.gap24,
+					globalStyles.gap16,
+					globalStyles.pr12,
+					globalStyles.pv12,
 				]}
 			>
 				<View
@@ -70,7 +73,12 @@ const CustomToast: React.FC<Properties> = ({
 					<Text color={colorScheme.primaryColor} size="md" weight="bold">
 						{text1}
 					</Text>
-					<Text color={BaseColor.DARK_GRAY} preset="regular">
+					<Text
+						color={BaseColor.DARK_GRAY}
+						ellipsizeMode="tail"
+						numberOfLines={MESSAGE_NUMBER_OF_LINES}
+						preset="regular"
+					>
 						{text2}
 					</Text>
 				</View>
