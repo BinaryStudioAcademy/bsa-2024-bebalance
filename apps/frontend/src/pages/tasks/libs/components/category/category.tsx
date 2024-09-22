@@ -5,9 +5,13 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	categoryName: string;
+	variant?: "active" | "expired";
 };
 
-const Category: React.FC<Properties> = ({ categoryName }: Properties) => {
+const Category: React.FC<Properties> = ({
+	categoryName,
+	variant = "active",
+}: Properties) => {
 	const className = convertCategoryNameToKebabCase(categoryName);
 
 	return (
@@ -17,7 +21,12 @@ const Category: React.FC<Properties> = ({ categoryName }: Properties) => {
 				styles[className],
 			)}
 		>
-			<div className={styles["content-container"]}>
+			<div
+				className={getValidClassNames(
+					styles["content-container"],
+					styles[`content-container-${variant}`],
+				)}
+			>
 				<div
 					className={getValidClassNames(styles["circle"], styles[className])}
 				/>

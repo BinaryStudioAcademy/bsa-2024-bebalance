@@ -110,6 +110,19 @@ class TaskController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.updateDeadline(
+					options as APIHandlerOptions<{
+						params: TaskUpdateParametersDto;
+						user: UserDto;
+					}>,
+				),
+			method: "PATCH",
+			path: TasksApiPath.$ID_DEADLINE,
+			preHandlers: [checkAccessToTask(taskService)],
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.findAllByUserId(
 					options as APIHandlerOptions<{
 						user: UserDto;
@@ -348,15 +361,19 @@ class TaskController extends BaseController {
 	 *         schema:
 	 *           type: integer
 	 *           example: 1
-	 *     requestBody:
-	 *       required: true
-	 *       content:
-	 *         application/json:
-	 *           schema:
-	 *             type: object
-	 *             properties:
-	 *               status:
-	 *                 $ref: "#/components/schemas/TaskStatusEnum"
+	 *      requestBody:
+	 *        required: true
+	 *        content:
+	 *          application/json:
+	 *            schema:
+	 *              type: object
+	 *              properties:
+	 *                description:
+	 *                  type: string
+	 *                label:
+	 *                  type: string
+	 *                status:
+	 *                  $ref: "#/components/schemas/TaskStatusEnum"
 	 *     responses:
 	 *       200:
 	 *         description: Successful operation
@@ -391,6 +408,55 @@ class TaskController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.taskService.update(options.params.id, options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /tasks/{id}/deadline:
+	 *    patch:
+	 *     tags: [tasks]
+	 *      description: Update the deadline of a task
+	 *      security:
+	 *        - bearerAuth: []
+	 *      parameters:
+	 *        - in: path
+	 *          name: id
+	 *          required: true
+	 *          schema:
+	 *            type: number
+	 *      responses:
+	 *        200:
+	 *          description: Successful operation
+	 *          content:
+	 *            application/json:
+	 *              schema:
+	 *                $ref: "#/components/schemas/Task"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       403:
+	 *         description: Forbidden to update other user's tasks
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
+	private async updateDeadline(
+		options: APIHandlerOptions<{
+			params: TaskUpdateParametersDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		return {
+			payload: await this.taskService.updateDeadline(
+				options.params.id,
+				options.user,
+			),
 			status: HTTPCode.OK,
 		};
 	}
