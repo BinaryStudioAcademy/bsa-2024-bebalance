@@ -1,0 +1,3 @@
+const FIRST_LETTER_INDEX = 0;
+
+export { FIRST_LETTER_INDEX };

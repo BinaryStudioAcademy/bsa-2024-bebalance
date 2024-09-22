@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.24.0...shared-v1.25.0) (2024-09-21)
+
+
+### Features
+
+* **mobile:** Update "And the last step" screens - request from PO bb-514 ([#518](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/518)) ([d994d24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d994d246805a8f25b157fc1a486e64c81a7659fb))
+
 ## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.23.0...shared-v1.24.0) (2024-09-20)
 
 
