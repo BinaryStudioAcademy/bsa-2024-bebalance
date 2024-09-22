@@ -3,14 +3,13 @@ import {
 	type ChatMessageAuthor,
 	type ChatMessageType,
 } from "../enums/enums.js";
-import { type ChatMessagePayload } from "./chat-message-payload.type.js";
 
-type ChatMessageDto = {
+type ChatMessageDto<PayloadType> = {
 	author: ValueOf<typeof ChatMessageAuthor>;
 	createdAt: string;
 	id: number;
 	isRead: boolean;
-	payload: ChatMessagePayload;
+	payload: PayloadType;
 	type: ValueOf<typeof ChatMessageType>;
 };
 

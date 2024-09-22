@@ -1,18 +1,20 @@
+import defaultAvatar from "~/assets/img/default-avatar.png";
 import { Icon, TaskCard } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { type ValueOf } from "~/libs/types/types.js";
+import { useAppSelector } from "~/libs/hooks/hooks.js";
+import { type UserDto, type ValueOf } from "~/libs/types/types.js";
 import {
-	type ChatMessageAuthor,
-	type ChatMessagePayload,
+	ChatMessageAuthor,
 	ChatMessageType,
+	type TextMessage,
 } from "~/modules/chat/chat.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 
 import styles from "./styles.module.css";
 
 type Properties = {
 	author: ValueOf<typeof ChatMessageAuthor>;
-	payload: ChatMessagePayload;
+	payload: TaskCreateDto | TextMessage;
 	type: ValueOf<typeof ChatMessageType>;
 };
 
@@ -21,6 +23,7 @@ const ChatMessage: React.FC<Properties> = ({
 	payload,
 	type,
 }: Properties) => {
+	const user = useAppSelector((state) => state.auth.user as UserDto);
 	const messageContainerStyle = getValidClassNames(
 		styles["message-container"],
 		author === "assistant"
@@ -39,18 +42,28 @@ const ChatMessage: React.FC<Properties> = ({
 		case ChatMessageType.TEXT: {
 			return (
 				<li className={messageContainerStyle}>
-					<Icon name="aiAssistantAvatar" />
-					<div className={contentContainerStyle}>{payload.text}</div>
+					{author === ChatMessageAuthor.ASSISTANT ? (
+						<Icon name="aiAssistantAvatar" />
+					) : (
+						<img
+							alt={`${user.name}'s avatar`}
+							className={styles["avatar"]}
+							src={user.avatarUrl ?? defaultAvatar}
+						/>
+					)}
+					<div className={contentContainerStyle}>
+						{(payload as TextMessage).text}
+					</div>
 				</li>
 			);
 		}
 
 		case ChatMessageType.TASK: {
 			return (
-				<li>
+				<li className={messageContainerStyle}>
 					<Icon name="aiAssistantAvatar" />
 					<div className={contentContainerStyle}>
-						<TaskCard task={payload.task as TaskDto} />
+						<TaskCard task={payload as TaskCreateDto} />
 					</div>
 				</li>
 			);

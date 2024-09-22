@@ -6,14 +6,19 @@ import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import { type ChatMessageDto } from "../libs/types/types.js";
+import {
+	type ChatMessageDto,
+	type TaskCreateDto,
+	type TextMessage,
+} from "../libs/types/types.js";
 import { getTasksForCategories, initConversation } from "./actions.js";
 
 type State = {
 	buttonsMode: ValueOf<typeof buttonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
-	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
+	messages: Omit<ChatMessageDto<TextMessage>, "createdAt" | "id">[];
 	selectedCategories: SelectedCategory[];
+	taskSuggestions: Omit<TaskCreateDto, "dueDate">[];
 	threadId: null | string;
 };
 
@@ -22,6 +27,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
+	taskSuggestions: [],
 	threadId: null,
 };
 
@@ -48,6 +54,12 @@ const { actions, name, reducer } = createSlice({
 
 				for (const message of newMessages) {
 					state.messages.push(message);
+					state.taskSuggestions.push({
+						categoryId: message.payload.categoryId,
+						categoryName: message.payload.categoryName,
+						description: message.payload.description,
+						label: message.payload.label,
+					});
 				}
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {

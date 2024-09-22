@@ -5,5 +5,6 @@ export {
 	type ChatMessagePayload,
 	type TaskCreateDto,
 	type TaskDto,
+	type TextMessage,
 	type ThreadMessageCreateDto,
 } from "shared";

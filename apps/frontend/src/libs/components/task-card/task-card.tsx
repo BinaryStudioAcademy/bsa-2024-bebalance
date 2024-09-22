@@ -1,6 +1,6 @@
 import { Button } from "~/libs/components/components.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import { type TaskCreateDto, type TaskDto } from "~/modules/tasks/tasks.js";
 
 import {
 	Category,
@@ -13,7 +13,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	onComplete?: (id: number) => void;
 	onSkip?: (id: number) => void;
-	task: TaskDto;
+	task: TaskCreateDto | TaskDto;
 };
 
 const TaskCard: React.FC<Properties> = ({
@@ -23,22 +23,27 @@ const TaskCard: React.FC<Properties> = ({
 }: Properties) => {
 	const handleSkip = useCallback(() => {
 		if (onSkip) {
-			onSkip(task.id);
+			onSkip((task as TaskDto).id);
 		}
 	}, [task, onSkip]);
 
 	const handleComplete = useCallback(() => {
 		if (onComplete) {
-			onComplete(task.id);
+			onComplete((task as TaskDto).id);
 		}
 	}, [task, onComplete]);
 
-	const isActive = task.status === TaskStatus.CURRENT;
+	const isActive = (task as TaskDto).status === TaskStatus.CURRENT;
+	const isChatTask = Boolean(onComplete) && Boolean(onSkip);
 
 	return (
 		<div className={styles["card"]}>
 			<div className={styles["card-header"]}>
-				<Category categoryName={task.category} />
+				<Category
+					categoryName={
+						(task as TaskDto).category || (task as TaskCreateDto).categoryName
+					}
+				/>
 				{isActive && <Deadline deadline={task.dueDate} />}
 			</div>
 			<div className={styles["card-body"]}>
@@ -48,34 +53,33 @@ const TaskCard: React.FC<Properties> = ({
 			<div className={styles["card-footer"]}>
 				<div className={styles["divider"]} />
 				<div className={styles["buttons-container"]}>
-					{isActive ? (
+					{isActive && isChatTask ? (
 						<>
-							{Boolean(onSkip) && (
-								<div className={styles["button-container"]}>
-									<Button
-										iconName="closeSmall"
-										label="Skip the task"
-										onClick={handleSkip}
-										type="button"
-										variant="action"
-									/>
-								</div>
-							)}
-							{Boolean(onComplete) && (
-								<div className={styles["button-container"]}>
-									<Button
-										iconName="checkBlack"
-										label="Mark complete"
-										onClick={handleComplete}
-										type="button"
-										variant="action"
-									/>
-								</div>
-							)}
+							<div className={styles["button-container"]}>
+								<Button
+									iconName="closeSmall"
+									label="Skip the task"
+									onClick={handleSkip}
+									type="button"
+									variant="action"
+								/>
+							</div>
+
+							<div className={styles["button-container"]}>
+								<Button
+									iconName="checkBlack"
+									label="Mark complete"
+									onClick={handleComplete}
+									type="button"
+									variant="action"
+								/>
+							</div>
 						</>
 					) : (
 						<div>
-							<PastTaskStatus status={task.status} />
+							{isChatTask && (
+								<PastTaskStatus status={(task as TaskDto).status} />
+							)}
 						</div>
 					)}
 				</div>

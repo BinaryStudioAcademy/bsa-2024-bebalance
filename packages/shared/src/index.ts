@@ -71,7 +71,6 @@ export {
 	type SelectedCategory,
 } from "./modules/categories/categories.js";
 export {
-	type BalanceWheelMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	type ChatMessagePayload,
