@@ -19,6 +19,7 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	id: number;
+	isResetSlider?: boolean;
 	label: string;
 	onValueChange: (categoryId: number, value: number) => void;
 	value: number;
@@ -26,6 +27,7 @@ type Properties = {
 
 const Slider: React.FC<Properties> = ({
 	id,
+	isResetSlider,
 	label,
 	onValueChange,
 	value,
@@ -34,6 +36,7 @@ const Slider: React.FC<Properties> = ({
 	const [step, setStep] = useState<number>(value);
 	const rangeReference = useRef<HTMLInputElement | null>(null);
 	const bubbleReference = useRef<HTMLDivElement | null>(null);
+	const currentSliderValueReference = useRef<number>(value);
 
 	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
 	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
@@ -98,6 +101,13 @@ const Slider: React.FC<Properties> = ({
 		handleSliderBackgroundUpdate();
 		bubbleReference.current.style.transform = `translateX(${String((sliderValue - SliderValue.MIN) * step)}px)`;
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
+
+	useEffect(() => {
+		if (isResetSlider && currentSliderValueReference.current !== sliderValue) {
+			setSliderValue(currentSliderValueReference.current);
+			onValueChange(id, currentSliderValueReference.current);
+		}
+	}, [isResetSlider, sliderValue, setSliderValue, onValueChange, id]);
 
 	return (
 		<div className={styles["container"]}>
