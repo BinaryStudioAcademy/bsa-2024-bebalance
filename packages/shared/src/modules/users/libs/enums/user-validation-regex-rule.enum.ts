@@ -1,4 +1,4 @@
-import { UserValidationRule } from "./enums.js";
+import { UserValidationRule } from "./user-validation-rule.enum.js";
 
 const UserValidationRegexRule = {
 	EMAIL_DOMAIN_PART_VALID_CHARS:

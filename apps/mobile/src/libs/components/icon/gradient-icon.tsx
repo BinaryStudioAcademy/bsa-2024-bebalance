@@ -5,11 +5,11 @@ import {
 	MaskedView,
 	MaterialIcon,
 } from "~/libs/components/components";
-import { type LinearGradientProps } from "~/libs/types/types";
+import { type IconName, type LinearGradientProps } from "~/libs/types/types";
 
 type Properties = {
 	gradientProps: LinearGradientProps;
-	name: string;
+	name: IconName;
 	size: number;
 };
 

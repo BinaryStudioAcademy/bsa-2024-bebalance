@@ -127,6 +127,9 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "quiz",
 	reducers: {
+		editScore(state, action: PayloadAction<QuizScoresGetAllItemResponseDto[]>) {
+			state.scores = action.payload;
+		},
 		nextQuestion(state) {
 			state.currentCategoryIndex += PREVIOUS_INDEX_OFFSET;
 

@@ -31,6 +31,16 @@ const useConditionalScreens = (): NavigationItem[] => {
 				name: RootScreenName.SIGN_UP,
 				shouldBeRendered: !hasUser,
 			},
+			{
+				component: Auth,
+				name: RootScreenName.FORGOT_PASSWORD,
+				shouldBeRendered: !hasUser,
+			},
+			{
+				component: Auth,
+				name: RootScreenName.RESET_PASSWORD,
+				shouldBeRendered: !hasUser,
+			},
 		];
 
 		return screens.filter((screen) => screen.shouldBeRendered);
