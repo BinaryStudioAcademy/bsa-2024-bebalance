@@ -2,6 +2,7 @@ import React from "react";
 
 import {
 	GradientText,
+	Icon,
 	LinearGradient,
 	Pressable,
 	Text,
@@ -9,18 +10,23 @@ import {
 } from "~/libs/components/components";
 import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
 import { globalStyles } from "~/libs/styles/styles";
+import { type IconName } from "~/libs/types/types";
 
 import { styles } from "./styles";
 
 type Properties = {
 	appearance?: "filled" | "outlined";
+	iconLeftName?: IconName;
 	isDisabled?: boolean;
 	label: string;
 	onPress: () => void;
 };
 
+const ICON_SIZE = 24;
+
 const Button: React.FC<Properties> = ({
 	appearance = "filled",
+	iconLeftName,
 	isDisabled = false,
 	label,
 	onPress,
@@ -48,6 +54,8 @@ const Button: React.FC<Properties> = ({
 						style={[
 							globalStyles.alignItemsCenter,
 							globalStyles.flex1,
+							globalStyles.flexDirectionRow,
+							globalStyles.gap8,
 							globalStyles.justifyContentCenter,
 							styles.rounded,
 							!isFilled && globalStyles.p2,
@@ -55,14 +63,23 @@ const Button: React.FC<Properties> = ({
 						useAngle
 					>
 						{isFilled ? (
-							<Text
-								color={BaseColor.BG_WHITE}
-								preset="uppercase"
-								size="md"
-								weight="bold"
-							>
-								{label}
-							</Text>
+							<>
+								{iconLeftName && (
+									<Icon
+										color={BaseColor.BG_WHITE}
+										name={iconLeftName}
+										size={ICON_SIZE}
+									/>
+								)}
+								<Text
+									color={BaseColor.BG_WHITE}
+									preset="uppercase"
+									size="md"
+									weight="bold"
+								>
+									{label}
+								</Text>
+							</>
 						) : (
 							<View
 								style={[
@@ -75,8 +92,11 @@ const Button: React.FC<Properties> = ({
 							>
 								<GradientText
 									gradientProps={{
-										angle: 305,
-										angleCenter: { x: 0.5, y: 0.5 },
+										angle: AngleGradient.ANGLE,
+										angleCenter: {
+											x: AngleGradient.X_POINT,
+											y: AngleGradient.Y_POINT,
+										},
 										colors: conditionalColors,
 										locations: [FIRST_COLOR_STOP, SECOND_COLOR_STOP],
 										useAngle: true,

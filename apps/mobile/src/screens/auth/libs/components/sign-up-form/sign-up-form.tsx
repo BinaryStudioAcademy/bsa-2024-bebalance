@@ -17,8 +17,8 @@ import {
 	userSignUpValidationSchema,
 } from "~/packages/users/users";
 
-import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants";
-import { ConfirmPasswordCustomValidation } from "./libs/enums/enums";
+import { ConfirmPasswordCustomValidation } from "../../enums/enums";
+import { USER_SIGN_UP_DEFAULT_VALUES } from "./libs/constants/constants";
 
 type Properties = {
 	onSubmit: (payload: UserSignUpRequestDto) => void;

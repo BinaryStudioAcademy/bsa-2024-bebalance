@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.43.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.42.0...frontend-v1.43.0) (2024-09-22)
+
+
+### Features
+
+* **frontend/shared:** change password funcionality in profile screen bb-417 ([#512](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/512)) ([b3e98c8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3e98c866bf44a2ebc450ac048f6be2cf121468b))
+* **frontend:** the wheel parts should adjust to new estimations immediately bb-472 ([#517](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/517)) ([124fbfa](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/124fbfa0c0d8df91066444e42d9916e57f3c3f07))
+
 ## [1.42.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.41.0...frontend-v1.42.0) (2024-09-21)
 
 
