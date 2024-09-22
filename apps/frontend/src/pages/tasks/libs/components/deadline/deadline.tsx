@@ -2,7 +2,7 @@ import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useEffect, useState } from "~/libs/hooks/hooks.js";
 
-import { ONE_MINUTE_IN_MILLISECONDS } from "../../constants/constants.js";
+import { MillisecondsPerUnit } from "../../enums/enums.js";
 import { COUNTDOWN_EXPIRED } from "./libs/constants/constants.js";
 import { updateCountdown } from "./libs/helpers/helpers.js";
 import {
@@ -36,7 +36,7 @@ const Deadline: React.FC<Properties> = ({ deadline, onExpire }: Properties) => {
 
 		const countdownInterval = setInterval(() => {
 			updateCountdown(updateHandlingData);
-		}, ONE_MINUTE_IN_MILLISECONDS);
+		}, MillisecondsPerUnit.MINUTE);
 
 		updateCountdown(updateHandlingData);
 

@@ -1,15 +1,15 @@
-import { ONE_MINUTE_IN_MILLISECONDS } from "~/pages/tasks/libs/constants/constants.js";
+import { MillisecondsPerUnit } from "~/pages/tasks/libs/enums/enums.js";
 import { getMillisecondsLeft } from "~/pages/tasks/libs/helpers/helpers.js";
 
 import { COUNTDOWN_EXPIRED, TIME_PAD_FILL } from "../../constants/constants.js";
-import { MillisecondsPerUnit, TimePad } from "../../enums/enums.js";
+import { TimePad } from "../../enums/enums.js";
 import { type Countdown } from "../../types/types.js";
 
 const calculateCountdown = (targetDate: string): Countdown => {
 	const currentTime = Date.now();
 	const timeToDeadline = getMillisecondsLeft(currentTime, targetDate);
 
-	if (timeToDeadline < ONE_MINUTE_IN_MILLISECONDS) {
+	if (timeToDeadline < MillisecondsPerUnit.MINUTE) {
 		return COUNTDOWN_EXPIRED;
 	}
 
