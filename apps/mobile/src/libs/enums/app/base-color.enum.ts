@@ -13,6 +13,7 @@ const BaseColor = {
 	LIGHT_GRAY: "rgba(224, 224, 224, 1)",
 	LIGHT_GREEN: "rgba(240, 255, 244, 1)",
 	RED: "rgba(255, 41, 40, 1)",
+	TRANSPARENT_BLACK: "rgba(0, 0, 0, 0.5)",
 } as const;
 
 export { BaseColor };
