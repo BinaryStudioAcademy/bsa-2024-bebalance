@@ -22,25 +22,27 @@ import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus, tasks } = useAppSelector(({ tasks }) => {
-		return {
-			dataStatus: tasks.dataStatus,
-			tasks: tasks.tasks,
-		};
-	});
-	const [expiredTasks, setExpiredTasks] = useState<TaskDto[]>([]);
-	const [activeTasks, setActiveTasks] = useState<TaskDto[]>([]);
+	const { activeTasks, dataStatus, expiredTasks, tasks } = useAppSelector(
+		({ tasks }) => {
+			return {
+				activeTasks: tasks.activeTasks,
+				dataStatus: tasks.dataStatus,
+				expiredTasks: tasks.expiredTasks,
+				tasks: tasks.tasks,
+			};
+		},
+	);
 
 	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
 		TasksMode.CURRENT,
 	);
 
-	const handleTaskExpiration = useCallback((expiredTask: TaskDto) => {
-		setExpiredTasks((previousTasks) => [...previousTasks, expiredTask]);
-		setActiveTasks((previousTasks) => {
-			return previousTasks.filter((task) => task.id !== expiredTask.id);
-		});
-	}, []);
+	const handleTaskExpiration = useCallback(
+		(expiredTask: TaskDto) => {
+			void dispatch(taskActions.addExpiredTask(expiredTask));
+		},
+		[dispatch],
+	);
 
 	useEffect(() => {
 		const currentTime = Date.now();
@@ -57,9 +59,9 @@ const Tasks: React.FC = () => {
 			}
 		}
 
-		setExpiredTasks(expired);
-		setActiveTasks(active);
-	}, [tasks]);
+		void dispatch(taskActions.setActiveTasks(active));
+		void dispatch(taskActions.setExpiredTasks(expired));
+	}, [tasks, dispatch]);
 
 	useEffect(() => {
 		void dispatch(taskActions.getCurrentTasks());

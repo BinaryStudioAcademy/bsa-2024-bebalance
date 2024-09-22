@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
@@ -12,12 +12,16 @@ import {
 } from "./actions.js";
 
 type State = {
+	activeTasks: TaskDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
+	expiredTasks: TaskDto[];
 	tasks: TaskDto[];
 };
 
 const initialState: State = {
+	activeTasks: [],
 	dataStatus: DataStatus.IDLE,
+	expiredTasks: [],
 	tasks: [],
 };
 
@@ -76,7 +80,20 @@ const { actions, name, reducer } = createSlice({
 	},
 	initialState,
 	name: "tasks",
-	reducers: {},
+	reducers: {
+		addExpiredTask(state, action: PayloadAction<TaskDto>) {
+			state.expiredTasks = [...state.expiredTasks, action.payload];
+			state.activeTasks = state.activeTasks.filter(
+				(task) => task.id !== action.payload.id,
+			);
+		},
+		setActiveTasks(state, action: PayloadAction<TaskDto[]>) {
+			state.activeTasks = action.payload;
+		},
+		setExpiredTasks(state, action: PayloadAction<TaskDto[]>) {
+			state.expiredTasks = action.payload;
+		},
+	},
 });
 
 export { actions, name, reducer };
