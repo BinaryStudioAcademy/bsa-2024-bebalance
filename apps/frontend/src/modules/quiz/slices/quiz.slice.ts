@@ -28,6 +28,7 @@ type State = {
 	isRetakingQuiz: boolean;
 	questionsByCategories: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
+	scoresLastUpdatedAt: string;
 	step: ValueOf<typeof Step>;
 	userAnswers: QuizUserAnswerDto[];
 };
@@ -39,6 +40,7 @@ const initialState: State = {
 	isRetakingQuiz: false,
 	questionsByCategories: [],
 	scores: [],
+	scoresLastUpdatedAt: "",
 	step: Step.MOTIVATION,
 	userAnswers: [],
 };
@@ -145,6 +147,23 @@ const { actions, name, reducer } = createSlice({
 				state.currentCategoryQuestions =
 					state.questionsByCategories[state.currentCategoryIndex] ?? null;
 			}
+		},
+		setLastUpdatedScore(state) {
+			const tasksDescendingByUpdatedAt = state.scores.sort(
+				(priorScore, nextScore) => {
+					return (
+						new Date(nextScore.updatedAt).getTime() -
+						new Date(priorScore.updatedAt).getTime()
+					);
+				},
+			);
+
+			if (!tasksDescendingByUpdatedAt[ZERO_INDEX]) {
+				return;
+			}
+
+			state.scoresLastUpdatedAt =
+				tasksDescendingByUpdatedAt[ZERO_INDEX].updatedAt;
 		},
 		setStep(state, action: PayloadAction<ValueOf<typeof Step>>) {
 			state.step = action.payload;
