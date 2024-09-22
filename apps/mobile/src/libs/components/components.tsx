@@ -27,6 +27,7 @@ export { SliderSection } from "./slider-section/slider-section";
 export { Tag } from "./tag/tag";
 export { TaskActionButton } from "./task-action-button/task-action-button";
 export { TaskCard } from "./task-card/task-card";
+export { TaskStatusLabel } from "./task-status-label/task-status-label";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
 export { Wheel } from "./wheel/wheel";

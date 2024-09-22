@@ -13,8 +13,6 @@ type Properties = {
 
 const DEADLINE_OVER = 0;
 
-const ONE_MINUTE = 60_000;
-
 const TIME_PAD_FILL = "0";
 
 const MillisecondsPerUnit = {
@@ -73,7 +71,7 @@ const DeadlineCountdown: React.FC<Properties> = ({ deadline }: Properties) => {
 			if (isExpired) {
 				clearInterval(countdownInterval);
 			}
-		}, ONE_MINUTE);
+		}, MillisecondsPerUnit.MINUTE);
 
 		handleCalculateDaysUntilDeadline();
 

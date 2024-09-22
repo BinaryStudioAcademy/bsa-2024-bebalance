@@ -5,6 +5,7 @@ import {
 	Icon,
 	Tag,
 	TaskActionButton,
+	TaskStatusLabel,
 	Text,
 	View,
 } from "~/libs/components/components";
@@ -34,7 +35,7 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 
 	const isActiveTask = task.status === TaskStatus.CURRENT;
 
-	const getButtonProperties = (): {
+	const getStatusProperties = (): {
 		label: string;
 		type: "complete" | "skip";
 	} | null => {
@@ -49,7 +50,7 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 		return null;
 	};
 
-	const buttonProperties = getButtonProperties();
+	const statusProperties = getStatusProperties();
 
 	return (
 		<View style={[globalStyles.mb16, globalStyles.mh16, styles.container]}>
@@ -114,14 +115,12 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 					/>
 				</View>
 			) : (
-				buttonProperties && (
+				statusProperties && (
 					<View style={[globalStyles.pt16, styles.actions]}>
 						<View style={[globalStyles.ph16, styles.label]}>
-							<TaskActionButton
-								isDisabled
-								isLabel
-								label={buttonProperties.label}
-								type={buttonProperties.type}
+							<TaskStatusLabel
+								label={statusProperties.label}
+								type={statusProperties.type}
 							/>
 						</View>
 					</View>

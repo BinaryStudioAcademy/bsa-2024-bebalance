@@ -9,7 +9,6 @@ import { styles } from "./styles";
 
 type Properties = {
 	isDisabled?: boolean;
-	isLabel?: boolean;
 	label: string;
 	onPress?: () => void;
 	type: "complete" | "skip";
@@ -19,7 +18,6 @@ const ICON_SIZE = 15;
 
 const TaskActionButton: React.FC<Properties> = ({
 	isDisabled = false,
-	isLabel = false,
 	label,
 	onPress,
 	type,
@@ -34,11 +32,11 @@ const TaskActionButton: React.FC<Properties> = ({
 	}, [type]);
 
 	return (
-		<Pressable disabled={isDisabled || isLabel} onPress={onPress}>
+		<Pressable disabled={isDisabled} onPress={onPress}>
 			{({ pressed }) => {
 				const activeStyles = {
-					backgroundColor: isLabel || pressed ? backgroundColor : "transparent",
-					borderColor: isLabel || pressed ? typeColor : BaseColor.LIGHT_GRAY,
+					backgroundColor: pressed ? backgroundColor : "transparent",
+					borderColor: pressed ? typeColor : BaseColor.LIGHT_GRAY,
 				};
 
 				return (
