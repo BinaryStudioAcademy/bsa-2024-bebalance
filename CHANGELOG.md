@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.55.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.54.0...v1.55.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+* **frontend:** update text on and last step screen bb-538 ([#543](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/543)) ([3baeebc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3baeebcded839fe0c2169468434746958c1615ac))
+* **frontend:** update ui on profile screen bb-542 ([#548](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/548)) ([dd801cf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dd801cf560b71930f1ef4aed4667b4769c38e9c0))
+* **mobile:** Toast messages redesign bb-516 ([#526](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/526)) ([03703e9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03703e98a5b2d11b89146ae5dfce37f7b7a36ca7))
+* **shared:** requirements for authorization pages for web version bb-209 ([#536](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/536)) ([64547cd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/64547cd8a734301193532b1e86828d4e3d55a3c7))
+
+
+### Bug Fixes
+
+* **backend:** fix swagger documentation in  ai assistant module bb-203 ([#527](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/527)) ([5ac5a3d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ac5a3dec8b2fa33396cc98285129b3eb849134f))
+* **backend:** update updatedAt for scores, onboarding and quiz answers bb-533 ([#539](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/539)) ([cde2bf9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/cde2bf998e2ecb740bf37dc12f52fed7f01b8a88))
+* **mobile:** Toast messages redesign bb-516 ([#529](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/529)) ([e3264ab](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e3264ab42061567771d29257b8e383fff2482ac5))
+
 ## [1.54.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.53.0...v1.54.0) (2024-09-22)
 
 
