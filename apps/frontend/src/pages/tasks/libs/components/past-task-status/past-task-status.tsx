@@ -21,7 +21,7 @@ const PastTaskStatus: React.FC<Properties> = ({ status }: Properties) => {
 				isSkipped && styles["skipped"],
 			)}
 		>
-			<Icon name={isCompleted ? "checkBlack" : "closeSmall"} />
+			<Icon name={isCompleted ? "checkSmall" : "closeSmall"} />
 			<span>{status}</span>
 		</div>
 	);

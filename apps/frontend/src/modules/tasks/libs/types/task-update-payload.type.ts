@@ -1,7 +1,7 @@
-import { type TaskUpdateRequestDto } from "shared";
+import { type TaskUpdateRequestDto } from "./types.js";
 
 type TaskUpdatePayload = {
 	id: number;
-} & TaskUpdateRequestDto;
+} & Partial<TaskUpdateRequestDto>;
 
 export { type TaskUpdatePayload };

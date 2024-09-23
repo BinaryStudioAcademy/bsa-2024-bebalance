@@ -19,8 +19,8 @@ import {
 import {
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
+	type AIAssistantSuggestTaskRequestDto,
 	type ChatMessageDto,
-	type SelectedCategory,
 	type TaskCreateDto,
 	type TaskDto,
 	type ThreadMessageCreateDto,
@@ -203,14 +203,13 @@ class AIAssistantService {
 
 	public async suggestTasksForCategories(
 		user: UserDto,
-		body: AIAssistantRequestDto,
+		body: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { message, payload } = body;
+		const { categories, message } = body;
 		const threadId = user.threadId as string;
 
 		await this.chatMessageService.create(message);
 
-		const categories = payload as SelectedCategory[];
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
 		const taskDeadLine = this.taskService.calculateDeadline(

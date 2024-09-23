@@ -1,21 +1,27 @@
 import { Button } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
 import { TaskStatus } from "../../enums/enums.js";
 import { Category, Deadline, PastTaskStatus } from "../components.js";
+import { IconColorVariant } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onComplete: (id: number) => void;
-	onSkip: (id: number) => void;
+	onComplete?: (id: number) => void;
+	onExpire?: (expiredTask: TaskDto) => void;
+	onSkip?: (id: number) => void;
 	task: TaskDto;
+	variant?: "active" | "expired";
 };
 
 const TaskCard: React.FC<Properties> = ({
-	onComplete,
-	onSkip,
+	onComplete = (): void => {},
+	onExpire = (): void => {},
+	onSkip = (): void => {},
 	task,
+	variant = "active",
 }: Properties) => {
 	const handleSkip = useCallback(() => {
 		onSkip(task.id);
@@ -25,27 +31,51 @@ const TaskCard: React.FC<Properties> = ({
 		onComplete(task.id);
 	}, [task, onComplete]);
 
+	const handleExpire = useCallback(() => {
+		onExpire(task);
+	}, [task, onExpire]);
+
+	const areActionsDisabled = variant === "expired";
+	const buttonsContainerClass = getValidClassNames(
+		styles["buttons-container"],
+		areActionsDisabled && styles["buttons-container-expired"],
+	);
 	const isActive = task.status === TaskStatus.CURRENT;
+	const iconColor = areActionsDisabled
+		? IconColorVariant.LIGHT
+		: IconColorVariant.PRIMARY;
 
 	return (
-		<div className={styles["card"]}>
+		<div
+			className={getValidClassNames(styles["card"], styles[`card-${variant}`])}
+		>
 			<div className={styles["card-header"]}>
-				<Category categoryName={task.category} />
-				{isActive && <Deadline deadline={task.dueDate} />}
+				<Category categoryName={task.category} variant={variant} />
+				{isActive && (
+					<Deadline deadline={task.dueDate} onExpire={handleExpire} />
+				)}
 			</div>
 			<div className={styles["card-body"]}>
 				<h4 className={styles["title"]}>{task.label}</h4>
 				<div className={styles["text"]}>{task.description}</div>
 			</div>
 			<div className={styles["card-footer"]}>
-				<div className={styles["divider"]} />
-				<div className={styles["buttons-container"]}>
+				<div
+					className={getValidClassNames(
+						styles["divider"],
+						styles[`divider-${variant}`],
+					)}
+				/>
+				<div className={buttonsContainerClass}>
 					{isActive ? (
 						<>
 							<div className={styles["button-container"]}>
 								<Button
+									iconColor={iconColor}
 									iconName="closeSmall"
+									isDisabled={areActionsDisabled}
 									label="Skip the task"
+									labelVariant={areActionsDisabled ? "light" : "primary"}
 									onClick={handleSkip}
 									type="button"
 									variant="action"
@@ -53,8 +83,11 @@ const TaskCard: React.FC<Properties> = ({
 							</div>
 							<div className={styles["button-container"]}>
 								<Button
-									iconName="checkBlack"
+									iconColor={iconColor}
+									iconName="checkSmall"
+									isDisabled={areActionsDisabled}
 									label="Mark complete"
+									labelVariant={areActionsDisabled ? "light" : "primary"}
 									onClick={handleComplete}
 									type="button"
 									variant="action"
