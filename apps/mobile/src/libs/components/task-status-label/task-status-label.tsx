@@ -25,6 +25,7 @@ const TaskStatusLabel: React.FC<Properties> = ({ label, type }) => {
 		<View
 			style={[
 				globalStyles.ph8,
+				globalStyles.mh16,
 				globalStyles.alignItemsCenter,
 				globalStyles.justifyContentCenter,
 				globalStyles.flexDirectionRow,

@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
 		backgroundColor: BaseColor.LIGHT_GRAY,
 		borderRadius: 20,
 	},
-	label: {
-		alignSelf: "flex-end",
-	},
 });
 
 export { styles };

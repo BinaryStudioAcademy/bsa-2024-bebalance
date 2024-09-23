@@ -106,12 +106,10 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 			) : (
 				statusProperties && (
 					<View style={[globalStyles.pt16, styles.actions]}>
-						<View style={[globalStyles.ph16, styles.label]}>
-							<TaskStatusLabel
-								label={statusProperties.label}
-								type={statusProperties.type}
-							/>
-						</View>
+						<TaskStatusLabel
+							label={statusProperties.label}
+							type={statusProperties.type}
+						/>
 					</View>
 				)
 			)}
