@@ -49,7 +49,15 @@ const UpdateAvatarForm: React.FC<Properties> = ({
 				ref={fileInputReference}
 				type="file"
 			/>
-			<Button label="UPLOAD AVATAR" onClick={handleButtonClick} />
+			<div className={styles["button-container"]}>
+				<Button
+					iconName="upload"
+					iconPosition="right"
+					label="UPLOAD"
+					onClick={handleButtonClick}
+					variant="secondary"
+				/>
+			</div>
 		</form>
 	);
 };

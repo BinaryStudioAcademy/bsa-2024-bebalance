@@ -7,17 +7,19 @@ import {
 	View,
 } from "~/libs/components/components";
 import { AngleGradient } from "~/libs/enums/enums";
+import { getGradientColorsForCategory } from "~/libs/helpers/helpers";
 import { colorToGradientColors } from "~/libs/maps/maps";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { styles } from "./styles";
 
 type Properties = {
-	color: keyof typeof colorToGradientColors;
 	label: string;
 };
 
-const Tag: React.FC<Properties> = ({ color, label }) => {
+const Tag: React.FC<Properties> = ({ label }) => {
+	const color = getGradientColorsForCategory(label);
+
 	return (
 		<LinearGradient
 			angle={AngleGradient.ANGLE}
@@ -27,7 +29,7 @@ const Tag: React.FC<Properties> = ({ color, label }) => {
 			}}
 			colors={colorToGradientColors[color]}
 			locations={[AngleGradient.FIRST_STOP, AngleGradient.SECOND_STOP]}
-			style={[globalStyles.mt16, styles.gradientContainer]}
+			style={styles.gradientContainer}
 			useAngle
 		>
 			<View

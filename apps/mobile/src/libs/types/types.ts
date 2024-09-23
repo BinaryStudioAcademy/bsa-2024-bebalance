@@ -1,4 +1,5 @@
 export { type AsyncThunkConfig } from "./app/app";
+export { type Countdown } from "./countdown/countdown";
 export { type IconName } from "./icon/icon";
 export { type InfinitePagerImperativeApi } from "./infinite-pager/infinite-pager";
 export {
@@ -13,6 +14,7 @@ export {
 	type RadioGroupOption,
 } from "./radio-group/types";
 export { type SliderData } from "./slider/slider";
+export { type TaskStatusStyle } from "./task-status-style/task-status-style.type";
 export {
 	type SectorInitialSharedValues,
 	type SectorParameters,

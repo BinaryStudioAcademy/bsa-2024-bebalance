@@ -42,6 +42,9 @@ const Button: React.FC<Properties> = ({
 		onClick={onClick}
 		type={type}
 	>
+		{iconPosition === "right" && iconName && (
+			<Icon color={iconColor} name={iconName} />
+		)}
 		<span
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
@@ -51,7 +54,9 @@ const Button: React.FC<Properties> = ({
 		>
 			{label}
 		</span>
-		{iconName && <Icon color={iconColor} name={iconName} />}
+		{iconPosition === "left" && iconName && (
+			<Icon color={iconColor} name={iconName} />
+		)}
 	</button>
 );
 
