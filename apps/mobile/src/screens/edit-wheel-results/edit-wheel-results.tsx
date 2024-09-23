@@ -21,7 +21,10 @@ import {
 	type CategoriesSelectedRequestDto,
 	type ValueOf,
 } from "~/libs/types/types";
-import { type QuizScoresUpdateRequestDto } from "~/packages/quiz/quiz";
+import {
+	type CategoriesGetRequestQueryDto,
+	type QuizScoresUpdateRequestDto,
+} from "~/packages/quiz/quiz";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { ScoresEditForm } from "./libs/components/componets";
@@ -57,9 +60,12 @@ const EditWheelResults: React.FC = () => {
 	const handleRetakeQuizSubmit = useCallback(
 		(payload: CategoriesSelectedRequestDto): void => {
 			setSubmittedCategoryIds(payload.categoryIds);
-			// TODO: send selectedCategoriesSubmissionData to backend
+			const categoriesIds: CategoriesGetRequestQueryDto = {
+				categoryIds: payload.categoryIds.join(","),
+			};
+			void dispatch(quizActions.getQuestionsByCategoryIds(categoriesIds));
 		},
-		[],
+		[dispatch],
 	);
 
 	return (
