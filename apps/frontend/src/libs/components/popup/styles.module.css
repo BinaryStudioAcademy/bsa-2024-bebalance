@@ -44,4 +44,6 @@
 	right: 15px;
 	z-index: var(--z-index-high);
 	cursor: pointer;
+	background: none;
+	border: none;
 }

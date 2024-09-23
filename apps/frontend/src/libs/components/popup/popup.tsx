@@ -1,6 +1,4 @@
 import { Button, Icon } from "~/libs/components/components.js";
-import { ZERO_INDEX } from "~/libs/constants/constants.js";
-import { useCallback } from "~/libs/hooks/hooks.js";
 
 import { NEWLINE_CHARACTER } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
@@ -28,30 +26,17 @@ const Popup: React.FC<Properties> = ({
 }: Properties) => {
 	const multilineTitles: string[] = title.split(NEWLINE_CHARACTER);
 
-	const handleKeyDown = useCallback(
-		(event: React.KeyboardEvent<HTMLDivElement>) => {
-			if (event.key === "Enter" || event.key === " ") {
-				event.preventDefault();
-				onClose();
-			}
-		},
-		[onClose],
-	);
-
 	return (
 		<dialog className={styles["logout-dialog"]} open={isOpen}>
 			<div className={styles["popup-container"]}>
 				<div className={styles["contents-container"]}>
 					{hasCloseIcon && (
-						<input
+						<button
 							className={styles["close-icon-container"]}
 							onClick={onClose}
-							onKeyDown={handleKeyDown}
-							role="button"
-							tabIndex={ZERO_INDEX}
 						>
 							<Icon name="close" />
-						</input>
+						</button>
 					)}
 					{icon && (
 						<div className={styles["icon"]}>
