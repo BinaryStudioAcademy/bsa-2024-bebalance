@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.26.0...shared-v1.27.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+* **shared:** requirements for authorization pages for web version bb-209 ([#536](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/536)) ([64547cd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/64547cd8a734301193532b1e86828d4e3d55a3c7))
+
+
+### Bug Fixes
+
+* **backend:** fix swagger documentation in  ai assistant module bb-203 ([#527](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/527)) ([5ac5a3d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ac5a3dec8b2fa33396cc98285129b3eb849134f))
+
 ## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.25.0...shared-v1.26.0) (2024-09-22)
 
 

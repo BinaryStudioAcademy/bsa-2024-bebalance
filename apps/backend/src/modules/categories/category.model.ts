@@ -8,6 +8,7 @@ import {
 import { TaskModel } from "../tasks/tasks.js";
 import { UserModel } from "../users/users.js";
 import { type CategoryEntity } from "./category.entity.js";
+import { ScoreModel } from "./score.model.js";
 
 class CategoryModel extends AbstractModel {
 	public name!: string;
@@ -22,6 +23,7 @@ class CategoryModel extends AbstractModel {
 					through: {
 						extra: ["score"],
 						from: `${DatabaseTableName.QUIZ_SCORES}.categoryId`,
+						modelClass: ScoreModel,
 						to: `${DatabaseTableName.QUIZ_SCORES}.userId`,
 					},
 					to: `${DatabaseTableName.USERS}.id`,
