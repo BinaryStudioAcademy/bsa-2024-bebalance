@@ -14,7 +14,7 @@ type Properties = {
 	deadline: string;
 };
 
-const DeadlineCountdown: React.FC<Properties> = ({ deadline }: Properties) => {
+const DeadlineCountdown: React.FC<Properties> = ({ deadline }) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 
 	const handleCalculateDaysUntilDeadline = useCallback((): boolean => {
