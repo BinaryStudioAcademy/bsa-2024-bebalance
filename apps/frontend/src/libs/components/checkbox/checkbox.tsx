@@ -50,13 +50,10 @@ const Checkbox = <T extends FieldValues, OptionValueT extends number | string>({
 				? Number(event.target.value)
 				: event.target.value;
 
-			if (isChecked) {
-				onFieldChange([...value, inputValue]);
-			} else {
-				onFieldChange(
-					(value as number[]).filter((value) => value !== inputValue),
-				);
-			}
+			const checkedFields = isChecked
+				? [...value, inputValue]
+				: (value as number[]).filter((value) => value !== inputValue);
+			onFieldChange(checkedFields);
 
 			onChange?.(event);
 		},

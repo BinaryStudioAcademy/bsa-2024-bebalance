@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import { AppEnvironment } from "~/libs/enums/enums";
+import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { authApi } from "~/packages/auth/auth";
 import { onboardingApi } from "~/packages/onboarding/onboarding";
 import { quizApi } from "~/packages/quiz/quiz";
@@ -33,6 +34,7 @@ type ExtraArguments = {
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
 	tasksApi: typeof tasksApi;
+	toastMessage: typeof toastMessage;
 	userApi: typeof userApi;
 };
 
@@ -71,6 +73,7 @@ class Store {
 			onboardingApi,
 			quizApi,
 			tasksApi,
+			toastMessage,
 			userApi,
 		};
 	}

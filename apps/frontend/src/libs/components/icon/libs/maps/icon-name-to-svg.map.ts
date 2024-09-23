@@ -1,5 +1,5 @@
-import CheckBlack from "~/assets/img/check-black.svg?react";
 import CheckIcon from "~/assets/img/check-icon.svg?react";
+import CheckSmall from "~/assets/img/check-small.svg?react";
 import ClockActive from "~/assets/img/clock-active.svg?react";
 import ClockInactive from "~/assets/img/clock-inactive.svg?react";
 import Close from "~/assets/img/close.svg?react";
@@ -25,7 +25,7 @@ const iconNameToSvg: Record<
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
 	check: CheckIcon,
-	checkBlack: CheckBlack,
+	checkSmall: CheckSmall,
 	clockActive: ClockActive,
 	clockInactive: ClockInactive,
 	close: Close,

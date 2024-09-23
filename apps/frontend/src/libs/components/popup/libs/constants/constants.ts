@@ -1,0 +1,3 @@
+const NEWLINE_CHARACTER = "\n";
+
+export { NEWLINE_CHARACTER };

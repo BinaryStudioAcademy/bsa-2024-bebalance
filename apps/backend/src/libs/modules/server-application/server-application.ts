@@ -1,6 +1,7 @@
 import { config } from "~/libs/modules/config/config.js";
 import { database } from "~/libs/modules/database/database.js";
 import { logger } from "~/libs/modules/logger/logger.js";
+import { aiAssistantController } from "~/modules/ai-assistant/ai-assistant.js";
 import { authController } from "~/modules/auth/auth.js";
 import { categoryController } from "~/modules/categories/categories.js";
 import { onboardingController } from "~/modules/onboarding/onboarding.js";
@@ -19,6 +20,7 @@ const apiV1 = new BaseServerApplicationApi(
 	...onboardingController.routes,
 	...categoryController.routes,
 	...quizController.routes,
+	...aiAssistantController.routes,
 	...taskController.routes,
 );
 const serverApplication = new BaseServerApplication({

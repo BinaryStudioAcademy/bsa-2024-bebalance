@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bebalance",
+      "sha256_cert_fingerprints": [
+        "EE:BF:EB:A7:45:CA:A3:5D:BB:3F:83:F9:75:15:D0:28:A1:A5:F1:6E:79:E9:63:CC:71:A7:AF:1C:04:53:B8:FF"
+      ]
+    }
+  }
+]

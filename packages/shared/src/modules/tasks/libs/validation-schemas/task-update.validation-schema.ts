@@ -1,27 +1,38 @@
 import { z } from "zod";
 
-import { TaskStatus, TaskValidationMessage } from "../enums/enums.js";
+import { type ValueOf } from "../../../../libs/types/types.js";
+import {
+	TaskStatus,
+	TaskValidationMessage,
+	TaskValidationRule,
+} from "../enums/enums.js";
 
 type TaskUpdateRequestValidationDto = {
-	status: z.ZodEnum<
-		[
-			typeof TaskStatus.COMPLETED,
-			typeof TaskStatus.CURRENT,
-			typeof TaskStatus.SKIPPED,
-		]
-	>;
+	description: z.ZodString;
+	label: z.ZodString;
+	status: z.ZodEnum<[ValueOf<typeof TaskStatus>]>;
 };
 
 const taskUpdate = z
 	.object<TaskUpdateRequestValidationDto>({
-		status: z.enum(
-			[TaskStatus.COMPLETED, TaskStatus.CURRENT, TaskStatus.SKIPPED],
-			{
-				invalid_type_error: TaskValidationMessage.INVALID_TYPE,
-				required_error: TaskValidationMessage.REQUIRED,
-			},
-		),
+		description: z
+			.string()
+			.trim()
+			.min(TaskValidationRule.DESCRIPTION_MIN_LENGTH, {
+				message: TaskValidationMessage.DESCRIPTION_MIN_LENGTH,
+			}),
+		label: z.string().trim().min(TaskValidationRule.LABEL_MIN_LENGTH, {
+			message: TaskValidationMessage.LABEL_MIN_LENGTH,
+		}),
+		status: z.enum(Object.values(TaskStatus) as [ValueOf<typeof TaskStatus>], {
+			errorMap: () => ({
+				message: TaskValidationMessage.INVALID_STATUS,
+			}),
+		}),
 	})
-	.required();
+	.partial()
+	.refine((data) => Object.values(data).some((value) => value !== undefined), {
+		message: TaskValidationMessage.DATA_REQUIRED,
+	});
 
 export { taskUpdate };

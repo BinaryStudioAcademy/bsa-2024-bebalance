@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.25.0...shared-v1.26.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+* **frontend/shared:** change password funcionality in profile screen bb-417 ([#512](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/512)) ([b3e98c8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3e98c866bf44a2ebc450ac048f6be2cf121468b))
+
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.24.0...shared-v1.25.0) (2024-09-21)
+
+
+### Features
+
+* **mobile:** Update "And the last step" screens - request from PO bb-514 ([#518](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/518)) ([d994d24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d994d246805a8f25b157fc1a486e64c81a7659fb))
+
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.23.0...shared-v1.24.0) (2024-09-20)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#484](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/484)) ([80cfe92](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/80cfe922e1a2a5bee49c24ad771d0a36d153b554))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.22.0...shared-v1.23.0) (2024-09-19)
 
 

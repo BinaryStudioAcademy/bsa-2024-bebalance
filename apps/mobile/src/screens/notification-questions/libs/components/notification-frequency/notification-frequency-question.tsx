@@ -27,7 +27,7 @@ const NotificationFrequencyQuestion: React.FC<
 				style={[globalStyles.mb48, globalStyles.mt12, styles.title]}
 				weight="bold"
 			>
-				Would you like to receive motivational follow-ups?
+				How often would you like to receive motivational follow-ups?
 			</Text>
 			<RadioGroup
 				control={control}

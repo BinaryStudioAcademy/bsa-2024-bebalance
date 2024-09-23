@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+import { boxShadow } from "./box-shadow";
 import { Flex } from "./flex";
 import { Gap } from "./gap";
 import { Margin } from "./margin";
@@ -12,6 +13,7 @@ const globalStyles = StyleSheet.create({
 	...Margin,
 	...Padding,
 	...visuallyHidden,
+	...boxShadow,
 });
 
 export { globalStyles };
