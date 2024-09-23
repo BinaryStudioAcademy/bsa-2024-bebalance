@@ -378,11 +378,10 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               threadId:
+	 *               text:
 	 *                 type: string
-	 *                 description: Identifier for the thread
-	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
-	 *               payload:
+	 *                 description: Text of user message
+	 *               task:
 	 *                 $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
@@ -427,10 +426,6 @@ class AIAssistantController extends BaseController {
 	 *                 type: string
 	 *                 description: The text message to add to the thread
 	 *                 example: "Hello, how can I assist you?"
-	 *               threadId:
-	 *                 type: string
-	 *                 description: Identifier for the conversation thread
-	 *                 example: "thread_abc123"
 	 *     responses:
 	 *       200:
 	 *         description: Indicates if the message was successfully added
@@ -470,11 +465,10 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               threadId:
+	 *               text:
 	 *                 type: string
-	 *                 description: Identifier for the thread
-	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
-	 *               payload:
+	 *                 description: Text of user message
+	 *               task:
 	 *                 $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
@@ -491,10 +485,6 @@ class AIAssistantController extends BaseController {
 	 *                     oneOf:
 	 *                       - $ref: '#/components/schemas/ChatMessageText'
 	 *                       - $ref: '#/components/schemas/ChatMessageTask'
-	 *                 threadId:
-	 *                   type: string
-	 *                   description: Identifier for the chat thread.
-	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async changeTaskSuggestion(
 		options: APIHandlerOptions<{
@@ -526,11 +516,10 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               threadId:
+	 *               text:
 	 *                 type: string
-	 *                 description: Identifier for the thread
-	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
-	 *               payload:
+	 *                 description: Text of user message
+	 *               task:
 	 *                 $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
@@ -547,10 +536,6 @@ class AIAssistantController extends BaseController {
 	 *                     oneOf:
 	 *                       - $ref: '#/components/schemas/ChatMessageTextExplanation'
 	 *                       - $ref: '#/components/schemas/ChatMessageTask'
-	 *                 threadId:
-	 *                   type: string
-	 *                   description: Identifier for the chat thread.
-	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async explainTaskSuggestion(
 		options: APIHandlerOptions<{
@@ -590,10 +575,6 @@ class AIAssistantController extends BaseController {
 	 *                   type: array
 	 *                   description: Array of chat messages (initially empty).
 	 *                   example: []
-	 *                 threadId:
-	 *                   type: string
-	 *                   description: Identifier for the chat thread.
-	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async initializeNewChat(
 		options: APIHandlerOptions<{
@@ -629,10 +610,9 @@ class AIAssistantController extends BaseController {
 	 *                 description: Array of selected categories for task suggestions
 	 *                 items:
 	 *                   $ref: '#/components/schemas/SelectedCategory'
-	 *               threadId:
+	 *               text:
 	 *                 type: string
-	 *                 description: Identifier for the thread
-	 *                 example: "thread_abc123"
+	 *                 description:Text of user message
 	 *     responses:
 	 *       200:
 	 *         description: Returns task suggestions for the provided categories
@@ -648,10 +628,6 @@ class AIAssistantController extends BaseController {
 	 *                     oneOf:
 	 *                       - $ref: '#/components/schemas/ChatMessageText'
 	 *                       - $ref: '#/components/schemas/ChatMessageTask'
-	 *                 threadId:
-	 *                   type: string
-	 *                   description: Identifier for the chat thread.
-	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
 	private async suggestTasksForCategories(
 		options: APIHandlerOptions<{
