@@ -1,4 +1,5 @@
 import { Button, Icon } from "~/libs/components/components.js";
+import { ZERO_INDEX } from "~/libs/constants/constants.js";
 import { useCallback } from "~/libs/hooks/hooks.js";
 
 import { NEWLINE_CHARACTER } from "./libs/constants/constants.js";
@@ -42,15 +43,15 @@ const Popup: React.FC<Properties> = ({
 			<div className={styles["popup-container"]}>
 				<div className={styles["contents-container"]}>
 					{hasCloseIcon && (
-						<div
+						<input
 							className={styles["close-icon-container"]}
 							onClick={onClose}
 							onKeyDown={handleKeyDown}
 							role="button"
-							tabIndex={0}
+							tabIndex={ZERO_INDEX}
 						>
 							<Icon name="close" />
-						</div>
+						</input>
 					)}
 					{icon && (
 						<div className={styles["icon"]}>
