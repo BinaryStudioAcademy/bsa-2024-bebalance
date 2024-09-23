@@ -100,8 +100,8 @@ const Tasks: React.FC = () => {
 							mode === TasksMode.CURRENT ? TaskTab.ACTIVE : TaskTab.PAST
 						}
 						onTabChange={handleModeToggle}
-						tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
 						style={[globalStyles.flex1, styles.switch]}
+						tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
 					/>
 				</View>
 				<ScrollView>

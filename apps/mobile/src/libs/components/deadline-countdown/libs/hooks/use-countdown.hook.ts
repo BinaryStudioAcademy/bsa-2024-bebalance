@@ -8,39 +8,38 @@ import { getFormattedCountdownUnits } from "../../libs/helpers/helpers";
 const useCountdown = (deadline: string): Countdown => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 
-	const handleCalculateDaysUntilDeadline = useCallback((): boolean => {
-		const updatedCountdown = getFormattedCountdownUnits(deadline);
-
-		if (
-			updatedCountdown.days === COUNTDOWN_EXPIRED.days &&
-			updatedCountdown.hours === COUNTDOWN_EXPIRED.hours &&
-			updatedCountdown.minutes === COUNTDOWN_EXPIRED.minutes
-		) {
-			setCountdown(updatedCountdown);
-
-			return true;
-		}
-
-		setCountdown(updatedCountdown);
-
-		return false;
+	const handleCalculateCountdown = useCallback((): Countdown => {
+		return getFormattedCountdownUnits(deadline);
 	}, [deadline]);
+
+	const isExpired = useCallback(
+		({ days, hours, minutes }: Countdown): boolean => {
+			return (
+				days === COUNTDOWN_EXPIRED.days &&
+				hours === COUNTDOWN_EXPIRED.hours &&
+				minutes === COUNTDOWN_EXPIRED.minutes
+			);
+		},
+		[],
+	);
 
 	useEffect(() => {
 		const countdownInterval = setInterval(() => {
-			const isExpired = handleCalculateDaysUntilDeadline();
+			const updatedCountdown = handleCalculateCountdown();
+			setCountdown(updatedCountdown);
 
-			if (isExpired) {
+			if (isExpired(updatedCountdown)) {
 				clearInterval(countdownInterval);
 			}
 		}, MillisecondsPerUnit.MINUTE);
 
-		handleCalculateDaysUntilDeadline();
+		const initialCountdown = handleCalculateCountdown();
+		setCountdown(initialCountdown);
 
 		return (): void => {
 			clearInterval(countdownInterval);
 		};
-	}, [handleCalculateDaysUntilDeadline]);
+	}, [handleCalculateCountdown, isExpired]);
 
 	return countdown;
 };
