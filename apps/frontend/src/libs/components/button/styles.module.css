@@ -49,10 +49,14 @@
 }
 
 .secondary-label {
+	padding-right: 10px;
+	padding-left: 10px;
 	background-clip: text;
 }
 
 .light-label {
+	padding-right: 10px;
+	padding-left: 10px;
 	color: var(--medium-light-gray);
 }
 

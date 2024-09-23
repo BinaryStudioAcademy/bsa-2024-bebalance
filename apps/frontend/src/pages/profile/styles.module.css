@@ -4,7 +4,7 @@
 
 .content-container {
 	display: grid;
-	grid-template-columns: 200px 350px;
+	grid-template-columns: 200px 350px auto;
 	column-gap: 20px;
 }
 
@@ -40,12 +40,17 @@
 
 .password-container {
 	display: grid;
-	grid-template-columns: 200px 350px auto;
+	grid-template-columns: 200px 350px;
 	gap: 20px;
 	align-items: end;
 }
 
 .button-container {
 	justify-self: end;
-	width: 300px;
+	width: fit-content;
+}
+
+.header-container {
+	display: flex;
+	justify-content: space-between;
 }
