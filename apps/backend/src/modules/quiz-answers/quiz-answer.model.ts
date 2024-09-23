@@ -8,6 +8,7 @@ import {
 import { QuizQuestionModel } from "../quiz-questions/quiz-question.model.js";
 import { UserModel } from "../users/users.js";
 import { type QuizAnswerEntity } from "./quiz-answer.entity.js";
+import { QuizUserAnswerModel } from "./quiz-user-answer.model.js";
 
 class QuizAnswerModel extends AbstractModel {
 	public label!: string;
@@ -33,6 +34,7 @@ class QuizAnswerModel extends AbstractModel {
 					from: `${DatabaseTableName.QUIZ_ANSWERS}.id`,
 					through: {
 						from: `${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.answerId`,
+						modelClass: QuizUserAnswerModel,
 						to: `${DatabaseTableName.QUIZ_ANSWERS_TO_USERS}.userId`,
 					},
 					to: `${DatabaseTableName.USERS}.id`,
