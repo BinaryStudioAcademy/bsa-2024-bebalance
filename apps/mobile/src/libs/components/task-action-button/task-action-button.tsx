@@ -21,7 +21,7 @@ const TaskActionButton: React.FC<Properties> = ({
 	label,
 	onPress,
 	type,
-}): JSX.Element => {
+}) => {
 	const { backgroundColor, iconName, typeColor } = useMemo(() => {
 		return {
 			backgroundColor:
