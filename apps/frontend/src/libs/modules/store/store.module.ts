@@ -21,6 +21,7 @@ import {
 } from "~/modules/onboarding/onboarding.js";
 import { quizApi, reducer as quizReducer } from "~/modules/quiz/quiz.js";
 import { tasksApi, reducer as tasksReducer } from "~/modules/tasks/tasks.js";
+import { reducer as unsavedChangesReducer } from "~/modules/unsaved-changes/unsaved-changes.js";
 import { usersApi, reducer as usersReducer } from "~/modules/users/users.js";
 
 import { handleErrorMiddleware } from "./libs/middlewares/middlewares.js";
@@ -32,6 +33,7 @@ type RootReducer = {
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
 	tasks: ReturnType<typeof tasksReducer>;
+	unsavedChanges: ReturnType<typeof unsavedChangesReducer>;
 	users: ReturnType<typeof usersReducer>;
 };
 
@@ -72,6 +74,7 @@ class Store {
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
 				tasks: tasksReducer,
+				unsavedChanges: unsavedChangesReducer,
 				users: usersReducer,
 			},
 		});
