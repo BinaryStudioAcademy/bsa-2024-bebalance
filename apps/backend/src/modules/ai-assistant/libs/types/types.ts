@@ -1,4 +1,5 @@
 export {
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,

@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
 import {
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 } from "../libs/types/types.js";
@@ -28,4 +29,14 @@ const getTasksForCategories = createAsyncThunk<
 	return await chatApi.getTasksForCategories(payload);
 });
 
-export { getTasksForCategories, initConversation };
+const createTasksFromSuggestions = createAsyncThunk<
+	boolean[],
+	AIAssistantCreateMultipleTasksDto,
+	AsyncThunkConfig
+>(`${sliceName}/create-tasks-from-suggestions`, async (payload, { extra }) => {
+	const { chatApi } = extra;
+
+	return await chatApi.createTasksFromSuggestions(payload);
+});
+
+export { createTasksFromSuggestions, getTasksForCategories, initConversation };

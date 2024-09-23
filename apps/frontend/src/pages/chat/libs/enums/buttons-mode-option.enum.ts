@@ -1,7 +1,8 @@
 const buttonsModeOption = {
 	CATEGORIES_CHECKBOX: "categoriesCheckbox",
 	NONE: "none",
-	TASK_CREATION: "taskGeneration",
+	SUGGESTIONS_CREATION: "suggestionsGeneration",
+	SUGGESTIONS_MANIPULATION: "suggestionsManipulation",
 } as const;
 
 export { buttonsModeOption };

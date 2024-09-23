@@ -17,12 +17,12 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
 	selectedCategories: SelectedCategory[];
-	taskSuggestions: Omit<TaskCreateDto, "dueDate">[];
+	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
 };
 
 const initialState: State = {
-	buttonsMode: buttonsModeOption.TASK_CREATION,
+	buttonsMode: buttonsModeOption.SUGGESTIONS_CREATION,
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
@@ -63,6 +63,8 @@ const { actions, name, reducer } = createSlice({
 						});
 					}
 				}
+
+				state.buttonsMode = buttonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;

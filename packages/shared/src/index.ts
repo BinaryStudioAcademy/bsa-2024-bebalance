@@ -44,8 +44,10 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
 	AIAssistantApiPath,
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,

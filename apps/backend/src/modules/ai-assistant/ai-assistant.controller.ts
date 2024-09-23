@@ -11,11 +11,13 @@ import { type UserDto } from "~/modules/users/users.js";
 import { type AIAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 import {
+	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
 	taskActionRequestSchemaValidationSchema,
 	taskSuggestionRequestValidationSchema,
@@ -345,6 +347,21 @@ class AIAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.acceptMultipleTasks(
+					options as APIHandlerOptions<{
+						body: AIAssistantCreateMultipleTasksDto;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: AIAssistantApiPath.CHAT_ACCEPT_MULTIPLE_TASKS,
+			validation: {
+				body: acceptMultipleTasksValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.acceptTask(
 					options as APIHandlerOptions<{
 						body: AIAssistantRequestDto;
@@ -357,6 +374,20 @@ class AIAssistantController extends BaseController {
 				body: taskActionRequestSchemaValidationSchema,
 			},
 		});
+	}
+
+	private async acceptMultipleTasks(
+		options: APIHandlerOptions<{
+			body: AIAssistantCreateMultipleTasksDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { body, user } = options;
+
+		return {
+			payload: await this.openAIService.acceptMultipleTasks(user, body),
+			status: HTTPCode.OK,
+		};
 	}
 
 	/**

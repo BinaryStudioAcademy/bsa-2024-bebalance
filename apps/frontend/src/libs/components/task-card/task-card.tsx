@@ -60,7 +60,10 @@ const TaskCard: React.FC<Properties> = ({
 			<div className={styles["card-header"]}>
 				<Category categoryName={task.categoryName} />
 				{isActive && (
-					<Deadline deadline={task.dueDate} onExpire={handleExpire} />
+					<Deadline
+						deadline={(task as TaskDto).dueDate}
+						onExpire={handleExpire}
+					/>
 				)}
 			</div>
 			<div className={styles["card-body"]}>

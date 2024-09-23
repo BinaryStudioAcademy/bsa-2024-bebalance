@@ -3,15 +3,20 @@ import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { buttonsModeOption } from "../../enums/enums.js";
 import {
 	CategoriesSelector,
-	TaskCreationOptions,
+	SuggestionsCreationOptions,
+	SuggestionsManipulationOptions,
 } from "./libs/components/components.js";
 
 const ButtonsController: React.FC = () => {
 	const buttonsMode = useAppSelector((state) => state.chat.buttonsMode);
 
 	switch (buttonsMode) {
-		case buttonsModeOption.TASK_CREATION: {
-			return <TaskCreationOptions />;
+		case buttonsModeOption.SUGGESTIONS_CREATION: {
+			return <SuggestionsCreationOptions />;
+		}
+
+		case buttonsModeOption.SUGGESTIONS_MANIPULATION: {
+			return <SuggestionsManipulationOptions />;
 		}
 
 		case buttonsModeOption.CATEGORIES_CHECKBOX: {

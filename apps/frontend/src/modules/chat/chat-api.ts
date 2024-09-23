@@ -5,6 +5,7 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 } from "./libs/types/types.js";
@@ -18,6 +19,22 @@ type Constructor = {
 class ChatApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.ASSISTANT, storage });
+	}
+
+	public async createTasksFromSuggestions(
+		payload: AIAssistantCreateMultipleTasksDto,
+	): Promise<boolean[]> {
+		const response = await this.load(
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_ACCEPT_MULTIPLE_TASKS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<boolean[]>();
 	}
 
 	public async getTasksForCategories(
