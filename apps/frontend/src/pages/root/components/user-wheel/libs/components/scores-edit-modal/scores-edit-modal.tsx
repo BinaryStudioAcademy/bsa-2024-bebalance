@@ -2,16 +2,14 @@ import { Button, Slider } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useCallback,
+	useEffect,
 	useRef,
 	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 
-import {
-	INITIALIZE_DISCARD_BUTTON,
-	ZERO_TIMER,
-} from "./libs/constants/constants.js";
+import { INITIALIZE_DISCARD_BUTTON } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -28,7 +26,8 @@ const ScoresEditModal: React.FC<Properties> = ({
 	const [scores, setScores] = useState<ModalData[]>(data);
 	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
 		useState<boolean>(INITIALIZE_DISCARD_BUTTON);
-	const [isDiscardChanges, setIsDiscardChanges] = useState<boolean>(false);
+	const [areChangesDiscarded, setAreChangesDiscarded] =
+		useState<boolean>(false);
 	const originalScoresReference = useRef<ModalData[]>(data);
 
 	const handleSaveChanges = useCallback(() => {
@@ -71,12 +70,15 @@ const ScoresEditModal: React.FC<Properties> = ({
 
 	const handleDiscardChanges = useCallback(() => {
 		setScores(originalScoresReference.current);
-		setIsDiscardChanges((previousValue) => !previousValue);
-		setTimeout(() => {
-			setIsDiscardChanges((previousValue) => !previousValue);
+		setAreChangesDiscarded((previousValue) => !previousValue);
+	}, [setScores, setAreChangesDiscarded]);
+
+	useEffect(() => {
+		if (areChangesDiscarded) {
+			setAreChangesDiscarded((previousValue) => !previousValue);
 			setIsDiscardButtonDisabled(INITIALIZE_DISCARD_BUTTON);
-		}, ZERO_TIMER);
-	}, [setScores, setIsDiscardButtonDisabled]);
+		}
+	}, [areChangesDiscarded]);
 
 	return (
 		<div className={styles["container"]}>
@@ -86,8 +88,8 @@ const ScoresEditModal: React.FC<Properties> = ({
 			<div className={styles["scores-container"]}>
 				{scores.map((item, index) => (
 					<Slider
+						areChangesDiscarded={areChangesDiscarded}
 						id={item.categoryId}
-						isDiscardChanges={isDiscardChanges}
 						key={index}
 						label={item.categoryName}
 						onValueChange={handleSliderChange}
