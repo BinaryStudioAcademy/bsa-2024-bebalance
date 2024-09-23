@@ -7,8 +7,8 @@ import { useCallback, useEffect, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type Countdown } from "~/libs/types/types";
 
-import { DEADLINE_OVER, TIME_PAD_FILL } from "./libs/constants/constants";
-import { MillisecondsPerUnit, TimePad } from "./libs/enums/enums";
+import { MillisecondsPerUnit } from "./libs/enums/enums";
+import { getFormattedCountdownUnits } from "./libs/helpers/helpers";
 
 type Properties = {
 	deadline: string;
@@ -18,36 +18,19 @@ const DeadlineCountdown: React.FC<Properties> = ({ deadline }) => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 
 	const handleCalculateDaysUntilDeadline = useCallback((): boolean => {
-		const deadlineTime = new Date(deadline).getTime();
-		const currentTime = Date.now();
-		const timeToDeadline = deadlineTime - currentTime;
+		const updatedCountdown = getFormattedCountdownUnits(deadline);
 
-		if (timeToDeadline < DEADLINE_OVER) {
-			setCountdown(COUNTDOWN_EXPIRED);
+		if (
+			updatedCountdown.days === COUNTDOWN_EXPIRED.days &&
+			updatedCountdown.hours === COUNTDOWN_EXPIRED.hours &&
+			updatedCountdown.minutes === COUNTDOWN_EXPIRED.minutes
+		) {
+			setCountdown(updatedCountdown);
 
 			return true;
 		}
 
-		const days = Math.floor(timeToDeadline / MillisecondsPerUnit.DAY);
-		const hours = Math.floor(
-			(timeToDeadline % MillisecondsPerUnit.DAY) / MillisecondsPerUnit.HOUR,
-		);
-		const minutes = Math.floor(
-			(timeToDeadline % MillisecondsPerUnit.HOUR) / MillisecondsPerUnit.MINUTE,
-		);
-
-		const formattedDays = String(days);
-		const formattedHours = String(hours).padStart(TimePad.HOURS, TIME_PAD_FILL);
-		const formattedMinutes = String(minutes).padStart(
-			TimePad.MINUTES,
-			TIME_PAD_FILL,
-		);
-
-		setCountdown({
-			days: formattedDays,
-			hours: formattedHours,
-			minutes: formattedMinutes,
-		});
+		setCountdown(updatedCountdown);
 
 		return false;
 	}, [deadline]);
