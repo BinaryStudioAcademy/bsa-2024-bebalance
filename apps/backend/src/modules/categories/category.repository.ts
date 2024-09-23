@@ -129,7 +129,7 @@ class CategoryRepository implements Repository {
 			return null;
 		}
 
-		const { name: categoryName } = await this.categoryModel
+		const { name } = await this.categoryModel
 			.query()
 			.findById(scoreModel.categoryId)
 			.select("name")
@@ -138,7 +138,7 @@ class CategoryRepository implements Repository {
 		return CategoryEntity.initialize({
 			createdAt: scoreModel.createdAt,
 			id: scoreModel.id,
-			name: categoryName,
+			name,
 			score: scoreModel.score,
 			scores: [],
 			updatedAt: scoreModel.updatedAt,
