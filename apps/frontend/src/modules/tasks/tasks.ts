@@ -11,5 +11,12 @@ const tasksApi = new TasksApi({
 });
 
 export { tasksApi };
-export { type TaskDto, type TaskUpdateRequestDto } from "./libs/types/types.js";
+export {
+	type TaskDto,
+	type TaskNoteDto,
+	type TaskNoteParametersDto,
+	type TaskNoteRequestDto,
+	type TaskUpdateRequestDto,
+} from "./libs/types/types.js";
+export { taskNoteValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/tasks.js";

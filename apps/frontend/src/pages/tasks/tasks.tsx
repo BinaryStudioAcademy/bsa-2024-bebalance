@@ -8,7 +8,10 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { actions as taskActions } from "~/modules/tasks/tasks.js";
+import {
+	actions as taskActions,
+	type TaskNoteRequestDto,
+} from "~/modules/tasks/tasks.js";
 
 import { TaskCard } from "./libs/components/components.js";
 import { TasksMode, TaskStatus } from "./libs/enums/enums.js";
@@ -40,6 +43,20 @@ const Tasks: React.FC = () => {
 			void dispatch(taskActions.getPastTasks());
 		}
 	}, [dispatch, mode]);
+
+	const handleAddTaskNote = useCallback(
+		(payload: TaskNoteRequestDto) => {
+			void dispatch(taskActions.addNote(payload));
+		},
+		[dispatch],
+	);
+
+	const handleGetTaskNotes = useCallback(
+		(id: number) => {
+			void dispatch(taskActions.getTaskNotes({ id }));
+		},
+		[dispatch],
+	);
 
 	const handleModeToggle = useCallback(() => {
 		setMode((previousState) => {
@@ -89,7 +106,9 @@ const Tasks: React.FC = () => {
 						tasks.map((task) => (
 							<TaskCard
 								key={task.id}
+								onAddTaskNote={handleAddTaskNote}
 								onComplete={handleComplete}
+								onGetTaskNotes={handleGetTaskNotes}
 								onSkip={handleSkip}
 								task={task}
 							/>

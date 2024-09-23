@@ -2,17 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import { type TaskDto, type TaskNoteDto } from "~/modules/tasks/tasks.js";
 
-import { getCurrentTasks, getPastTasks, update } from "./actions.js";
+import {
+	addNote,
+	getCurrentTasks,
+	getPastTasks,
+	getTaskNotes,
+	update,
+} from "./actions.js";
 
 type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
+	task_notes: TaskNoteDto[];
 	tasks: TaskDto[];
 };
 
 const initialState: State = {
 	dataStatus: DataStatus.IDLE,
+	task_notes: [],
 	tasks: [],
 };
 
@@ -50,6 +58,24 @@ const { actions, name, reducer } = createSlice({
 			});
 		});
 		builder.addCase(update.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(addNote.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(addNote.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.task_notes = action.payload;
+		});
+		builder.addCase(addNote.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(getTaskNotes.fulfilled, (state, action) => {
+			state.task_notes = action.payload;
+		});
+		builder.addCase(getTaskNotes.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

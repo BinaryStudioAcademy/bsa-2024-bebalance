@@ -1,22 +1,39 @@
 import { Button } from "~/libs/components/components.js";
-import { useCallback } from "~/libs/hooks/hooks.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
+import {
+	type TaskDto,
+	type TaskNoteRequestDto,
+} from "~/modules/tasks/tasks.js";
 
 import { TaskStatus } from "../../enums/enums.js";
-import { Category, Deadline, PastTaskStatus } from "../components.js";
+import { Category, Deadline, Notes, PastTaskStatus } from "../components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	onAddTaskNote: (payload: TaskNoteRequestDto) => void;
 	onComplete: (id: number) => void;
+	onGetTaskNotes: (id: number) => void;
 	onSkip: (id: number) => void;
 	task: TaskDto;
 };
 
 const TaskCard: React.FC<Properties> = ({
+	onAddTaskNote,
 	onComplete,
+	onGetTaskNotes,
 	onSkip,
 	task,
 }: Properties) => {
+	const [isNoteOpen, setIsNoteOpen] = useState<boolean>(false);
+
+	const handleNoteOpen = useCallback(() => {
+		setIsNoteOpen(true);
+	}, []);
+
+	const handleNoteClose = useCallback(() => {
+		setIsNoteOpen(false);
+	}, []);
+
 	const handleSkip = useCallback(() => {
 		onSkip(task.id);
 	}, [task, onSkip]);
@@ -24,6 +41,10 @@ const TaskCard: React.FC<Properties> = ({
 	const handleComplete = useCallback(() => {
 		onComplete(task.id);
 	}, [task, onComplete]);
+
+	useEffect(() => {
+		onGetTaskNotes(task.id);
+	}, [onGetTaskNotes, task.id]);
 
 	const isActive = task.status === TaskStatus.CURRENT;
 
@@ -43,6 +64,14 @@ const TaskCard: React.FC<Properties> = ({
 					{isActive ? (
 						<>
 							<div className={styles["button-container"]}>
+								<Button
+									hasVisuallyHiddenLabel
+									iconName="note"
+									iconPosition="left"
+									label="notes"
+									onClick={handleNoteOpen}
+									variant="icon"
+								/>
 								<Button
 									iconName="closeSmall"
 									label="Skip the task"
@@ -68,6 +97,14 @@ const TaskCard: React.FC<Properties> = ({
 					)}
 				</div>
 			</div>
+
+			{isNoteOpen && (
+				<Notes
+					onNoteClose={handleNoteClose}
+					onSubmit={onAddTaskNote}
+					task={task}
+				/>
+			)}
 		</div>
 	);
 };

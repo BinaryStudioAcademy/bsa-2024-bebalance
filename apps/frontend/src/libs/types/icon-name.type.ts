@@ -1,4 +1,5 @@
 type IconName =
+	| "arrow_next"
 	| "check"
 	| "checkBlack"
 	| "clockActive"
@@ -10,6 +11,7 @@ type IconName =
 	| "eye"
 	| "info"
 	| "menu"
+	| "note"
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"

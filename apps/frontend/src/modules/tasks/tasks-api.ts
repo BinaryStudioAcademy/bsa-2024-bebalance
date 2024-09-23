@@ -4,6 +4,8 @@ import { type HTTP } from "~/libs/modules/http/http.js";
 import { type Storage } from "~/libs/modules/storage/storage.js";
 import {
 	type TaskDto,
+	type TaskNoteDto,
+	type TaskNoteRequestDto,
 	type TaskUpdateRequestDto,
 } from "~/modules/tasks/tasks.js";
 
@@ -18,6 +20,20 @@ type Constructor = {
 class TasksApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: Constructor) {
 		super({ baseUrl, http, path: APIPath.TASKS, storage });
+	}
+
+	public async addNote(payload: TaskNoteRequestDto): Promise<TaskNoteDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.NOTES, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<TaskNoteDto[]>();
 	}
 
 	public async getCurrentTasks(): Promise<TaskDto[]> {
@@ -44,6 +60,17 @@ class TasksApi extends BaseHTTPApi {
 		);
 
 		return await response.json<TaskDto[]>();
+	}
+
+	public async getTaskNotes(taskId: number): Promise<TaskNoteDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.NOTES_$ID, {
+				id: taskId.toString(),
+			}),
+			{ contentType: ContentType.JSON, hasAuth: true, method: "GET" },
+		);
+
+		return await response.json<TaskNoteDto[]>();
 	}
 
 	public async update(

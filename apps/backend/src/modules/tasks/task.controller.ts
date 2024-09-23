@@ -9,7 +9,10 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
-import { checkAccessToTask } from "./libs/hooks/hooks.js";
+import {
+	checkAccessToTask,
+	checkNoteAccessToTask,
+} from "./libs/hooks/hooks.js";
 import {
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
@@ -115,7 +118,7 @@ class TaskController extends BaseController {
 				),
 			method: "POST",
 			path: TasksApiPath.NOTES,
-			preHandlers: [checkAccessToTask(taskService)],
+			preHandlers: [checkNoteAccessToTask(taskService)],
 			validation: {
 				body: taskNoteValidationSchema,
 			},
