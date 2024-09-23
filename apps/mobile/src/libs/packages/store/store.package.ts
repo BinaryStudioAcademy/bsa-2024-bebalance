@@ -25,6 +25,7 @@ type RootReducer = {
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
 	tasks: ReturnType<typeof tasksReducer>;
+	users: ReturnType<typeof usersReducer>;
 };
 
 type ExtraArguments = {
