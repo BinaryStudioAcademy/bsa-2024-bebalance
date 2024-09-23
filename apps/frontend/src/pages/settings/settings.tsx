@@ -121,6 +121,7 @@ const Settings: React.FC = () => {
 			<Popup
 				closeButtonLabel="CANCEL"
 				confirmButtonLabel="YES"
+				hasCloseIcon
 				icon={runImg}
 				isOpen={hasUnsavedChanges && !isUserCanceledSaving}
 				onClose={handleCancelPopupClick}

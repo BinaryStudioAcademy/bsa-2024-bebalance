@@ -17,6 +17,7 @@
 }
 
 .contents-container {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
@@ -35,4 +36,12 @@
 	display: flex;
 	gap: 16px;
 	margin-top: 40px;
+}
+
+.close-icon-container {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: var(--z-index-high);
+	cursor: pointer;
 }

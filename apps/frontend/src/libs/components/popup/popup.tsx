@@ -1,4 +1,5 @@
-import { Button } from "~/libs/components/components.js";
+import { Button, Icon } from "~/libs/components/components.js";
+import { useCallback } from "~/libs/hooks/hooks.js";
 
 import { NEWLINE_CHARACTER } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
@@ -6,6 +7,7 @@ import styles from "./styles.module.css";
 type Properties = {
 	closeButtonLabel: string;
 	confirmButtonLabel: string;
+	hasCloseIcon?: boolean;
 	icon: string;
 	isOpen: boolean;
 	onClose: () => void;
@@ -16,6 +18,7 @@ type Properties = {
 const Popup: React.FC<Properties> = ({
 	closeButtonLabel,
 	confirmButtonLabel,
+	hasCloseIcon,
 	icon,
 	isOpen = false,
 	onClose,
@@ -24,10 +27,31 @@ const Popup: React.FC<Properties> = ({
 }: Properties) => {
 	const multilineTitles: string[] = title.split(NEWLINE_CHARACTER);
 
+	const handleKeyDown = useCallback(
+		(event: React.KeyboardEvent<HTMLDivElement>) => {
+			if (event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+				onClose();
+			}
+		},
+		[onClose],
+	);
+
 	return (
 		<dialog className={styles["logout-dialog"]} open={isOpen}>
 			<div className={styles["popup-container"]}>
 				<div className={styles["contents-container"]}>
+					{hasCloseIcon && (
+						<div
+							className={styles["close-icon-container"]}
+							onClick={onClose}
+							onKeyDown={handleKeyDown}
+							role="button"
+							tabIndex={0}
+						>
+							<Icon name="close" />
+						</div>
+					)}
 					{icon && (
 						<div className={styles["icon"]}>
 							<img alt={icon} className={styles["img"]} src={icon} />
