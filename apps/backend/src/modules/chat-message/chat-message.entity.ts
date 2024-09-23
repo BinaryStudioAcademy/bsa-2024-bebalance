@@ -1,10 +1,12 @@
 import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
+import { type ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 import {
-	type ChatMessageAuthor,
-	type ChatMessageType,
-} from "./libs/enums/enums.js";
-import { type ChatMessagePayload } from "./libs/types/types.js";
+	type ChatMessagePayload,
+	type TaskCreateDto,
+	type TaskDto,
+	type TaskMessage,
+} from "./libs/types/types.js";
 
 class ChatMessageEntity implements Entity {
 	private author: ValueOf<typeof ChatMessageAuthor>;
@@ -57,7 +59,8 @@ class ChatMessageEntity implements Entity {
 		createdAt,
 		id,
 		isRead,
-		payload,
+		task,
+		text,
 		threadId,
 		type,
 		updatedAt,
@@ -66,17 +69,37 @@ class ChatMessageEntity implements Entity {
 		createdAt: string;
 		id: null | number;
 		isRead: boolean;
-		payload: ChatMessagePayload;
+		task: null | TaskCreateDto | TaskDto;
+		text: null | string;
 		threadId: string;
 		type: ValueOf<typeof ChatMessageType>;
 		updatedAt: string;
 	}): ChatMessageEntity {
+		if (type === ChatMessageType.TASK) {
+			const payload: TaskMessage = { task: task as TaskCreateDto };
+
+			if (text) {
+				payload.text = text;
+			}
+
+			return new ChatMessageEntity({
+				author,
+				createdAt,
+				id,
+				isRead,
+				payload,
+				threadId,
+				type,
+				updatedAt,
+			});
+		}
+
 		return new ChatMessageEntity({
 			author,
 			createdAt,
 			id,
 			isRead,
-			payload,
+			payload: { text: text as string },
 			threadId,
 			type,
 			updatedAt,

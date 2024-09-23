@@ -18,9 +18,9 @@ class ChatMessageModel extends AbstractModel {
 
 	public isRead!: boolean;
 
-	public task!: TaskCreateDto | TaskDto;
+	public task!: null | TaskCreateDto | TaskDto;
 
-	public text!: string;
+	public text!: null | string;
 
 	public threadId!: string;
 

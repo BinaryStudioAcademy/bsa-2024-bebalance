@@ -60,7 +60,7 @@ const generateTaskSuggestionsResponse = (
 		};
 	});
 
-	return [...taskMessages, textMessage];
+	return [textMessage, ...taskMessages];
 };
 
 export { generateTaskSuggestionsResponse };
