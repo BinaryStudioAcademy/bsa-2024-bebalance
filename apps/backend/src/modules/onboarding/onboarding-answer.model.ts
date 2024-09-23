@@ -7,6 +7,7 @@ import {
 
 import { UserModel } from "../users/users.js";
 import { OnboardingQuestionModel } from "./onboarding-question.model.js";
+import { OnboardingUserAnswerModel } from "./onboarding-user-answer.model.js";
 
 class OnboardingAnswerModel extends AbstractModel {
 	public label!: string;
@@ -32,6 +33,7 @@ class OnboardingAnswerModel extends AbstractModel {
 					from: `${DatabaseTableName.ONBOARDING_ANSWERS}.id`,
 					through: {
 						from: `${DatabaseTableName.ONBOARDING_ANSWERS_TO_USERS}.answerId`,
+						modelClass: OnboardingUserAnswerModel,
 						to: `${DatabaseTableName.ONBOARDING_ANSWERS_TO_USERS}.userId`,
 					},
 					to: `${DatabaseTableName.USERS}.id`,
