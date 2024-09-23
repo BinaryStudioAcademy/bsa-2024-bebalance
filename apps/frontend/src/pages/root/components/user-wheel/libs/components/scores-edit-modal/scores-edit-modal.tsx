@@ -88,7 +88,6 @@ const ScoresEditModal: React.FC<Properties> = ({
 			<div className={styles["scores-container"]}>
 				{scores.map((item, index) => (
 					<Slider
-						areChangesDiscarded={areChangesDiscarded}
 						id={item.categoryId}
 						key={index}
 						label={item.categoryName}

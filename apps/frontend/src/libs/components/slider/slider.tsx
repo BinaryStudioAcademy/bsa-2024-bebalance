@@ -18,7 +18,6 @@ import { formatToKebabCase } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	areChangesDiscarded?: boolean;
 	id: number;
 	label: string;
 	onValueChange: (categoryId: number, value: number) => void;
@@ -26,7 +25,6 @@ type Properties = {
 };
 
 const Slider: React.FC<Properties> = ({
-	areChangesDiscarded,
 	id,
 	label,
 	onValueChange,
@@ -102,18 +100,11 @@ const Slider: React.FC<Properties> = ({
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
 	useEffect(() => {
-		if (areChangesDiscarded && value !== sliderValue) {
+		if (value !== sliderValue) {
 			setSliderValue(value);
 			onValueChange(id, value);
 		}
-	}, [
-		areChangesDiscarded,
-		sliderValue,
-		setSliderValue,
-		onValueChange,
-		id,
-		value,
-	]);
+	}, [sliderValue, setSliderValue, onValueChange, id, value]);
 
 	return (
 		<div className={styles["container"]}>
