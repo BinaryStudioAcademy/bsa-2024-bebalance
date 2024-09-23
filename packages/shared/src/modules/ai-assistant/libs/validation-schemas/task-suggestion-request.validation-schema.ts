@@ -18,14 +18,11 @@ const taskSuggestionRequest = z.object({
 	categories: z
 		.array(selectedCategory)
 		.nonempty({ message: AIAssistantValidationMessage.CATEGORIES_REQUIRED }),
-	threadId: z
+	text: z
 		.string()
 		.trim()
 		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-			message: AIAssistantValidationMessage.THREAD_ID_REQUIRED,
-		})
-		.regex(AIAssistantValidationRule.THREAD_ID_VALID_CHARS, {
-			message: AIAssistantValidationMessage.THREAD_ID_INVALID_FORMAT,
+			message: AIAssistantValidationMessage.TEXT_REQUIRED,
 		}),
 });
 

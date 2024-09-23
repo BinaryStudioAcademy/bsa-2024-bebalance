@@ -1,5 +1,7 @@
 export {
-	type AIAssistantRequestDto,
+	type AIAssistantAcceptTaskRequestDto,
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ChatMessageCreateDto,

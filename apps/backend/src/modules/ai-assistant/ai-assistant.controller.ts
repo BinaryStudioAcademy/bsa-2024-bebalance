@@ -11,7 +11,9 @@ import { type UserDto } from "~/modules/users/users.js";
 import { type AIAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
-	type AIAssistantRequestDto,
+	type AIAssistantAcceptTaskRequestDto,
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
@@ -289,6 +291,7 @@ class AIAssistantController extends BaseController {
 				this.addMessageToConversation(
 					options as APIHandlerOptions<{
 						body: ThreadMessageCreateDto;
+						user: UserDto;
 					}>,
 				),
 			method: "POST",
@@ -302,7 +305,7 @@ class AIAssistantController extends BaseController {
 			handler: (options) =>
 				this.changeTaskSuggestion(
 					options as APIHandlerOptions<{
-						body: AIAssistantRequestDto;
+						body: AIAssistantChangeTaskRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -317,7 +320,7 @@ class AIAssistantController extends BaseController {
 			handler: (options) =>
 				this.explainTaskSuggestion(
 					options as APIHandlerOptions<{
-						body: AIAssistantRequestDto;
+						body: AIAssistantExplainTaskRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -347,7 +350,7 @@ class AIAssistantController extends BaseController {
 			handler: (options) =>
 				this.acceptTask(
 					options as APIHandlerOptions<{
-						body: AIAssistantRequestDto;
+						body: AIAssistantAcceptTaskRequestDto;
 						user: UserDto;
 					}>,
 				),
@@ -392,7 +395,7 @@ class AIAssistantController extends BaseController {
 
 	private async acceptTask(
 		options: APIHandlerOptions<{
-			body: AIAssistantRequestDto;
+			body: AIAssistantAcceptTaskRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
@@ -440,12 +443,13 @@ class AIAssistantController extends BaseController {
 	private async addMessageToConversation(
 		options: APIHandlerOptions<{
 			body: ThreadMessageCreateDto;
+			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body } = options;
+		const { body, user } = options;
 
 		return {
-			payload: await this.openAIService.addMessageToThread(body),
+			payload: await this.openAIService.addMessageToThread(body, user),
 			status: HTTPCode.OK,
 		};
 	}
@@ -494,7 +498,7 @@ class AIAssistantController extends BaseController {
 	 */
 	private async changeTaskSuggestion(
 		options: APIHandlerOptions<{
-			body: AIAssistantRequestDto;
+			body: AIAssistantChangeTaskRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
@@ -550,7 +554,7 @@ class AIAssistantController extends BaseController {
 	 */
 	private async explainTaskSuggestion(
 		options: APIHandlerOptions<{
-			body: AIAssistantRequestDto;
+			body: AIAssistantExplainTaskRequestDto;
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {

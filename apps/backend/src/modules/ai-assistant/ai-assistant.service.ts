@@ -6,6 +6,7 @@ import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { type TaskService } from "~/modules/tasks/tasks.js";
 import { type UserService } from "~/modules/users/users.js";
 
+import { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 import {
 	generateChangeTaskSuggestionsResponse,
 	generateExplainTaskSuggestionsResponse,
@@ -17,11 +18,12 @@ import {
 	runSuggestTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
-	type AIAssistantRequestDto,
+	type AIAssistantAcceptTaskRequestDto,
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ChatMessageDto,
-	type TaskCreateDto,
 	type TaskDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
@@ -61,13 +63,19 @@ class AIAssistantService {
 
 	public async acceptTask(
 		user: UserDto,
-		body: AIAssistantRequestDto,
+		body: AIAssistantAcceptTaskRequestDto,
 	): Promise<TaskDto> {
-		const { message, payload } = body;
+		const { task, text } = body;
 		const threadId = user.threadId as string;
-		const task = payload as TaskCreateDto;
 
-		await this.chatMessageService.create(message);
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: {
+				text,
+			},
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		const newTask = await this.taskService.create({
 			categoryId: task.categoryId,
@@ -87,8 +95,10 @@ class AIAssistantService {
 
 	public async addMessageToThread(
 		body: ThreadMessageCreateDto,
+		user: UserDto,
 	): Promise<boolean> {
-		const { text, threadId } = body;
+		const { text } = body;
+		const threadId = user.threadId as string;
 
 		const prompt = {
 			content: text,
@@ -100,13 +110,19 @@ class AIAssistantService {
 
 	public async changeTaskSuggestion(
 		user: UserDto,
-		body: AIAssistantRequestDto,
+		body: AIAssistantChangeTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { message, payload } = body;
+		const { task, text } = body;
 		const threadId = user.threadId as string;
-		const task = payload as TaskCreateDto;
 
-		await this.chatMessageService.create(message);
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: {
+				text,
+			},
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		const runThreadOptions = runChangeTaskByCategoryOptions(task);
 		const taskDeadLine = this.taskService.calculateDeadline(
@@ -131,20 +147,24 @@ class AIAssistantService {
 
 		return {
 			messages,
-			threadId,
 		};
 	}
 
 	public async explainTaskSuggestion(
-		body: AIAssistantRequestDto,
+		body: AIAssistantExplainTaskRequestDto,
 		user: UserDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { message, payload } = body;
+		const { task, text } = body;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create(message);
-
-		const task = payload as TaskCreateDto;
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: {
+				text,
+			},
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		const runThreadOptions = runExplainTaskOptions(task);
 
@@ -164,7 +184,6 @@ class AIAssistantService {
 
 		return {
 			messages,
-			threadId,
 		};
 	}
 
@@ -178,7 +197,6 @@ class AIAssistantService {
 
 			return {
 				messages,
-				threadId: user.threadId,
 			};
 		}
 
@@ -197,7 +215,6 @@ class AIAssistantService {
 
 		return {
 			messages: [],
-			threadId,
 		};
 	}
 
@@ -205,10 +222,17 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { categories, message } = body;
+		const { categories, text } = body;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create(message);
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: {
+				text,
+			},
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
@@ -232,7 +256,6 @@ class AIAssistantService {
 
 		return {
 			messages,
-			threadId,
 		};
 	}
 }

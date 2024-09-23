@@ -1,6 +1,8 @@
 export { AIAssistantApiPath } from "./libs/enums/enums.js";
 export {
-	type AIAssistantRequestDto,
+	type AIAssistantAcceptTaskRequestDto,
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ThreadMessageCreateDto,
