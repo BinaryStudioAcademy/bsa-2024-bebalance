@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.25.0...backend-v1.26.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+
+
+### Bug Fixes
+
+* **backend:** fix swagger documentation in  ai assistant module bb-203 ([#527](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/527)) ([5ac5a3d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ac5a3dec8b2fa33396cc98285129b3eb849134f))
+* **backend:** update updatedAt for scores, onboarding and quiz answers bb-533 ([#539](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/539)) ([cde2bf9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/cde2bf998e2ecb740bf37dc12f52fed7f01b8a88))
+
 ## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.24.0...backend-v1.25.0) (2024-09-22)
 
 
