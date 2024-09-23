@@ -95,15 +95,14 @@ const Tasks: React.FC = () => {
 					<Text preset="subheading" weight="bold">
 						My Tasks
 					</Text>
-					<View style={[globalStyles.flex1, styles.switch]}>
-						<PageSwitcher
-							activeTab={
-								mode === TasksMode.CURRENT ? TaskTab.ACTIVE : TaskTab.PAST
-							}
-							onTabChange={handleModeToggle}
-							tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
-						/>
-					</View>
+					<PageSwitcher
+						activeTab={
+							mode === TasksMode.CURRENT ? TaskTab.ACTIVE : TaskTab.PAST
+						}
+						onTabChange={handleModeToggle}
+						tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
+						style={[globalStyles.flex1, styles.switch]}
+					/>
 				</View>
 				<ScrollView>
 					{tasks.map((task) => (
