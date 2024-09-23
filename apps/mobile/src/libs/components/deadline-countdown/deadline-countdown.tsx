@@ -11,7 +11,7 @@ type Properties = {
 };
 
 const DeadlineCountdown: React.FC<Properties> = ({ deadline }) => {
-	const countdown = useCountdown(deadline);
+	const { days, hours, minutes } = useCountdown(deadline);
 
 	return (
 		<View
@@ -20,13 +20,13 @@ const DeadlineCountdown: React.FC<Properties> = ({ deadline }) => {
 			<ClockActive />
 			<View style={[globalStyles.flexDirectionRow, globalStyles.ml8]}>
 				<Text preset="regular" style={globalStyles.mr4} weight="bold">
-					{countdown.days}d
+					{days}d
 				</Text>
 				<Text preset="regular" style={globalStyles.mr4} weight="bold">
-					{countdown.hours}h
+					{hours}h
 				</Text>
 				<Text preset="regular" style={globalStyles.mr4} weight="bold">
-					{countdown.minutes}m
+					{minutes}m
 				</Text>
 			</View>
 		</View>
