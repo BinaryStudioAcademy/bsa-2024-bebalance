@@ -52,6 +52,10 @@
 	background-clip: text;
 }
 
+.light-label {
+	color: var(--medium-light-gray);
+}
+
 .secondary-button:hover .secondary-label {
 	color: transparent;
 	background: linear-gradient(
