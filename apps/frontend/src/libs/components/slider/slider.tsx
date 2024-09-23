@@ -19,7 +19,7 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	id: number;
-	isResetSlider?: boolean;
+	isDiscardChanges?: boolean;
 	label: string;
 	onValueChange: (categoryId: number, value: number) => void;
 	value: number;
@@ -27,7 +27,7 @@ type Properties = {
 
 const Slider: React.FC<Properties> = ({
 	id,
-	isResetSlider,
+	isDiscardChanges,
 	label,
 	onValueChange,
 	value,
@@ -36,7 +36,6 @@ const Slider: React.FC<Properties> = ({
 	const [step, setStep] = useState<number>(value);
 	const rangeReference = useRef<HTMLInputElement | null>(null);
 	const bubbleReference = useRef<HTMLDivElement | null>(null);
-	const currentSliderValueReference = useRef<number>(value);
 
 	const categorizedSliderClass = `slider-${formatToKebabCase(label)}`;
 	const categorizedGradientBoxClass = `gradient-box-${formatToKebabCase(label)}`;
@@ -103,11 +102,11 @@ const Slider: React.FC<Properties> = ({
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
 	useEffect(() => {
-		if (isResetSlider && currentSliderValueReference.current !== sliderValue) {
-			setSliderValue(currentSliderValueReference.current);
-			onValueChange(id, currentSliderValueReference.current);
+		if (isDiscardChanges && value !== sliderValue) {
+			setSliderValue(value);
+			onValueChange(id, value);
 		}
-	}, [isResetSlider, sliderValue, setSliderValue, onValueChange, id]);
+	}, [isDiscardChanges, sliderValue, setSliderValue, onValueChange, id, value]);
 
 	return (
 		<div className={styles["container"]}>

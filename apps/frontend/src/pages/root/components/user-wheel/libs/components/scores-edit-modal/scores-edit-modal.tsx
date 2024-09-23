@@ -28,7 +28,7 @@ const ScoresEditModal: React.FC<Properties> = ({
 	const [scores, setScores] = useState<ModalData[]>(data);
 	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
 		useState<boolean>(INITIALIZE_DISCARD_BUTTON);
-	const [isResetSlider, setIsResetSlider] = useState<boolean>(false);
+	const [isDiscardChanges, setIsDiscardChanges] = useState<boolean>(false);
 	const originalScoresReference = useRef<ModalData[]>(data);
 
 	const handleSaveChanges = useCallback(() => {
@@ -71,9 +71,9 @@ const ScoresEditModal: React.FC<Properties> = ({
 
 	const handleDiscardChanges = useCallback(() => {
 		setScores(originalScoresReference.current);
-		setIsResetSlider((previousValue) => !previousValue);
+		setIsDiscardChanges((previousValue) => !previousValue);
 		setTimeout(() => {
-			setIsResetSlider((previousValue) => !previousValue);
+			setIsDiscardChanges((previousValue) => !previousValue);
 			setIsDiscardButtonDisabled(INITIALIZE_DISCARD_BUTTON);
 		}, ZERO_TIMER);
 	}, [setScores, setIsDiscardButtonDisabled]);
@@ -87,7 +87,7 @@ const ScoresEditModal: React.FC<Properties> = ({
 				{scores.map((item, index) => (
 					<Slider
 						id={item.categoryId}
-						isResetSlider={isResetSlider}
+						isDiscardChanges={isDiscardChanges}
 						key={index}
 						label={item.categoryName}
 						onValueChange={handleSliderChange}
