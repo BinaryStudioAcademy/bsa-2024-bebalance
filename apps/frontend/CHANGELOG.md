@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.44.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.43.0...frontend-v1.44.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+* **frontend:** update text on and last step screen bb-538 ([#543](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/543)) ([3baeebc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3baeebcded839fe0c2169468434746958c1615ac))
+* **frontend:** update ui on profile screen bb-542 ([#548](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/548)) ([dd801cf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dd801cf560b71930f1ef4aed4667b4769c38e9c0))
+
 ## [1.43.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.42.0...frontend-v1.43.0) (2024-09-22)
 
 
