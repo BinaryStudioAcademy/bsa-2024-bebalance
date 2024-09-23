@@ -37,7 +37,7 @@ class TasksApi extends BaseHttpApi {
 
 	public async updateTask(
 		id: number,
-		task: TaskUpdateRequestDto,
+		task: Partial<TaskUpdateRequestDto>,
 	): Promise<TaskDto> {
 		const response = await this.load(
 			this.getFullEndpoint(TasksApiPath.$ID, { id: id.toString() }),
