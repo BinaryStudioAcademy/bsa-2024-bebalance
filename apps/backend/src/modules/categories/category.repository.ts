@@ -123,7 +123,7 @@ class CategoryRepository implements Repository {
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
 			.findOne({ userId })
-			.castTo<null | ScoreModel>();
+			.castTo<ScoreModel | undefined>();
 
 		if (!scoreModel) {
 			return null;
