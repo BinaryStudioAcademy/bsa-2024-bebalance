@@ -3,15 +3,20 @@ import React from "react";
 
 import {
 	Button,
+	LoaderWrapper,
 	ScreenWrapper,
 	Text,
 	View,
 	Wheel as WheelChart,
 } from "~/libs/components/components";
-import { BottomTabScreenName } from "~/libs/enums/enums";
-import { getFormattedDate } from "~/libs/helpers/helpers";
+import { BottomTabScreenName, DataStatus } from "~/libs/enums/enums";
+import {
+	getFormattedDate,
+	transformScoresToWheelData,
+} from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
+	useAppSelector,
 	useCallback,
 	useEffect,
 	useNavigation,
@@ -29,6 +34,8 @@ const Wheel: React.FC = () => {
 	const navigation =
 		useNavigation<BottomTabNavigationProp<BottomTabNavigationParameterList>>();
 
+	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
+
 	const handleEditPress = useCallback((): void => {
 		navigation.navigate(BottomTabScreenName.EDIT_WHEEL_RESULTS);
 	}, [navigation]);
@@ -39,27 +46,31 @@ const Wheel: React.FC = () => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
 
+	const wheelData = transformScoresToWheelData(scores);
+
 	return (
 		<ScreenWrapper style={styles.screenWrapper}>
-			<View style={globalStyles.m16}>
-				<Text preset="subheading" weight="bold">
-					My Wheel Results
-				</Text>
-				<Text
-					preset="tag"
-					style={[globalStyles.pv4, globalStyles.ph12, styles.date]}
-				>
-					{date}
-				</Text>
-				<View style={styles.container}>
-					<View style={globalStyles.alignItemsCenter}>
-						<WheelChart size={WHEEL_SIZE} />
-					</View>
-					<View style={globalStyles.mh48}>
-						<Button label="EDIT MY WHEEL RESULTS" onPress={handleEditPress} />
+			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
+				<View style={globalStyles.m16}>
+					<Text preset="subheading" weight="bold">
+						My Wheel Results
+					</Text>
+					<Text
+						preset="tag"
+						style={[globalStyles.pv4, globalStyles.ph12, styles.date]}
+					>
+						{date}
+					</Text>
+					<View style={styles.container}>
+						<View style={globalStyles.alignItemsCenter}>
+							<WheelChart categoriesData={wheelData} size={WHEEL_SIZE} />
+						</View>
+						<View style={globalStyles.mh48}>
+							<Button label="EDIT MY WHEEL RESULTS" onPress={handleEditPress} />
+						</View>
 					</View>
 				</View>
-			</View>
+			</LoaderWrapper>
 		</ScreenWrapper>
 	);
 };
