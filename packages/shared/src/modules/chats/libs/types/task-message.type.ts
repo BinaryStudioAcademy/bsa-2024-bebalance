@@ -1,7 +1,7 @@
 import { type TaskCreateDto, type TaskDto } from "../../../tasks/tasks.js";
 
 type TaskMessage = {
-	task: TaskCreateDto & TaskDto;
+	task: TaskCreateDto | TaskDto;
 	text?: string;
 };
 

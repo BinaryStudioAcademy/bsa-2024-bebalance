@@ -31,7 +31,7 @@ const CategoriesSelector: React.FC = () => {
 			dispatch(chatActions.updateSelectedCategories(newSelectedCategories));
 
 			const taskPayload = {
-				payload: newSelectedCategories,
+				categories: newSelectedCategories,
 				threadId: threadId ?? "",
 			};
 

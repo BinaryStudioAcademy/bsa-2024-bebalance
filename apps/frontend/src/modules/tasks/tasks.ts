@@ -14,6 +14,7 @@ export { tasksApi };
 export {
 	type TaskCreateDto,
 	type TaskDto,
+	type TaskUpdatePayload,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
 export { actions, reducer } from "./slices/tasks.js";

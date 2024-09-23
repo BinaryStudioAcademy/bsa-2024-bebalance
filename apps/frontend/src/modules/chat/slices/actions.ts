@@ -3,8 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
 import {
-	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
+	type AIAssistantSuggestTaskRequestDto,
 } from "../libs/types/types.js";
 import { name as sliceName } from "./chat.slice.js";
 
@@ -20,7 +20,7 @@ const initConversation = createAsyncThunk<
 
 const getTasksForCategories = createAsyncThunk<
 	AIAssistantResponseDto,
-	AIAssistantRequestDto,
+	AIAssistantSuggestTaskRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/get-tasks-for-categories`, async (payload, { extra }) => {
 	const { chatApi } = extra;

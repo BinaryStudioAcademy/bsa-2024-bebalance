@@ -5,8 +5,8 @@ import { type Storage } from "~/libs/modules/storage/storage.js";
 
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
-	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
+	type AIAssistantSuggestTaskRequestDto,
 } from "./libs/types/types.js";
 
 type Constructor = {
@@ -21,7 +21,7 @@ class ChatApi extends BaseHTTPApi {
 	}
 
 	public async getTasksForCategories(
-		payload: AIAssistantRequestDto,
+		payload: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_SUGGEST_TASKS, {}),

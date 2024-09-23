@@ -6,7 +6,7 @@ import { type UserDto, type ValueOf } from "~/libs/types/types.js";
 import {
 	ChatMessageAuthor,
 	ChatMessageType,
-	type TaskPayload,
+	type TaskMessage,
 	type TextMessage,
 } from "~/modules/chat/chat.js";
 
@@ -14,7 +14,7 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	author: ValueOf<typeof ChatMessageAuthor>;
-	payload: TaskPayload | TextMessage;
+	payload: TaskMessage | TextMessage;
 	type: ValueOf<typeof ChatMessageType>;
 };
 
@@ -63,7 +63,7 @@ const ChatMessage: React.FC<Properties> = ({
 				<li className={messageContainerStyle}>
 					<Icon name="aiAssistantAvatar" />
 					<div className={contentContainerStyle}>
-						<TaskCard task={(payload as TaskPayload).task} />
+						<TaskCard task={(payload as TaskMessage).task} />
 					</div>
 				</li>
 			);

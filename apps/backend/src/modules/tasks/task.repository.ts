@@ -56,8 +56,8 @@ class TaskRepository implements Repository {
 			.withGraphFetched(`[${RelationName.CATEGORY}]`);
 
 		return TaskEntity.initialize({
-			category: task.category.name,
 			categoryId: task.categoryId,
+			categoryName: task.category.name,
 			createdAt: task.createdAt,
 			description: task.description,
 			dueDate: task.dueDate,
@@ -83,8 +83,8 @@ class TaskRepository implements Repository {
 
 		return task
 			? TaskEntity.initialize({
-					category: task.category.name,
 					categoryId: task.categoryId,
+					categoryName: task.category.name,
 					createdAt: task.createdAt,
 					description: task.description,
 					dueDate: task.dueDate,
@@ -104,8 +104,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -123,8 +123,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -145,8 +145,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -168,8 +168,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -209,8 +209,8 @@ class TaskRepository implements Repository {
 			.withGraphFetched(`[${RelationName.CATEGORY}]`);
 
 		return TaskEntity.initialize({
-			category: task.category.name,
 			categoryId: task.categoryId,
+			categoryName: task.category.name,
 			createdAt: task.createdAt,
 			description: task.description,
 			dueDate: task.dueDate,

@@ -37,9 +37,10 @@ const TaskCreationOptions: React.FC = () => {
 		dispatch(chatActions.setButtonsMode(buttonsModeOption.NONE));
 		dispatch(chatActions.addAssistantTextMessage(CONFIRMATION_BUTTONS_TEXT));
 		dispatch(chatActions.addUserTextMessage(selectCategoriesButtonLabel.YES));
+
 		void dispatch(
 			chatActions.getTasksForCategories({
-				payload: selectedCategories,
+				categories: selectedCategories,
 				threadId: threadId as string,
 			}),
 		);

@@ -1,9 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import { type TaskDto, type TaskUpdatePayload } from "~/modules/tasks/tasks.js";
 
-import { type TaskUpdatePayload } from "../libs/types/types.js";
 import { name as sliceName } from "./tasks.slice.js";
 
 const getCurrentTasks = createAsyncThunk<
@@ -35,4 +34,13 @@ const update = createAsyncThunk<TaskDto, TaskUpdatePayload, AsyncThunkConfig>(
 	},
 );
 
-export { getCurrentTasks, getPastTasks, update };
+const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
+	`${sliceName}/update-task-deadline`,
+	async (id: number, { extra }) => {
+		const { tasksApi } = extra;
+
+		return await tasksApi.updateTaskDeadline(id);
+	},
+);
+
+export { getCurrentTasks, getPastTasks, update, updateTaskDeadline };

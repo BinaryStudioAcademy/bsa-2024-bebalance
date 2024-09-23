@@ -9,18 +9,13 @@ import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 import {
 	type ChatMessageDto,
 	type TaskCreateDto,
-	type TaskPayload,
-	type TextMessage,
 } from "../libs/types/types.js";
 import { getTasksForCategories, initConversation } from "./actions.js";
 
 type State = {
 	buttonsMode: ValueOf<typeof buttonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
-	messages: Omit<
-		ChatMessageDto<TaskPayload | TextMessage>,
-		"createdAt" | "id"
-	>[];
+	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
 	selectedCategories: SelectedCategory[];
 	taskSuggestions: Omit<TaskCreateDto, "dueDate">[];
 	threadId: null | string;
@@ -59,7 +54,7 @@ const { actions, name, reducer } = createSlice({
 				for (const message of newMessages) {
 					state.messages.push(message);
 
-					if (message.type === "task") {
+					if ("task" in message.payload) {
 						state.taskSuggestions.push({
 							categoryId: message.payload.task.categoryId,
 							categoryName: message.payload.task.categoryName,

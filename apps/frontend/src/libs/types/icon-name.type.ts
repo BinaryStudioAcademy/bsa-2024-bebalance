@@ -3,7 +3,7 @@ type IconName =
 	| "aiChatActive"
 	| "aiChatInactive"
 	| "check"
-	| "checkBlack"
+	| "checkSmall"
 	| "clockActive"
 	| "clockInactive"
 	| "close"
