@@ -125,12 +125,12 @@ class OnboardingService implements Service {
 			}),
 		};
 	}
+
 	public async findAnswer(id: number): Promise<null | OnboardingAnswerDto> {
 		const answer = await this.onboardingRepository.findAnswerById(id);
 
 		return answer ? answer.toObject() : null;
 	}
-
 	public async findAnswersByIds(
 		ids: number[],
 	): Promise<OnboardingAnswerEntity[]> {

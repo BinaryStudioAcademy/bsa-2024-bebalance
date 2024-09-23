@@ -4,12 +4,12 @@ import {
 	BackgroundWrapper,
 	KeyboardAvoidingView,
 	LoaderWrapper,
-	Planet,
 	ScreenWrapper,
 	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
+import { Logo } from "~/libs/components/logo/logo";
 import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import { checkIfAndroid, checkIfIos } from "~/libs/helpers/helpers";
 import {
@@ -18,15 +18,27 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useNavigation,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
+	type NativeStackNavigationProp,
+	type RootNavigationParameterList,
+} from "~/libs/types/types";
+import {
+	type EmailDto,
+	type ResetPasswordDto,
 	type UserSignInRequestDto,
 	type UserSignUpRequestDto,
 } from "~/packages/users/users";
 import { actions as authActions } from "~/slices/auth/auth";
 
-import { SignInForm, SignUpForm } from "./components/components";
+import {
+	ForgotPasswordForm,
+	ResetPasswordForm,
+	SignInForm,
+	SignUpForm,
+} from "./libs/components/components";
 import { styles } from "./styles";
 
 const IOS_KEYBOARD_OFFSET = 40;
@@ -34,14 +46,24 @@ const ANDROID_KEYBOARD_OFFSET = 0;
 
 const Auth: React.FC = () => {
 	const { name } = useAppRoute();
+
 	const dispatch = useAppDispatch();
 	const { dataStatus, user } = useAppSelector((state) => state.auth);
+
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
 
 	useEffect(() => {
 		if (!user) {
 			void dispatch(authActions.getAuthenticatedUser());
 		}
 	}, [dispatch, user]);
+
+	useEffect(() => {
+		if (name === RootScreenName.RESET_PASSWORD) {
+			void dispatch(authActions.startCheckingDeepLink());
+		}
+	}, [dispatch, name]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -57,6 +79,22 @@ const Auth: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleForgotPasswordSubmit = useCallback(
+		(payload: EmailDto): void => {
+			void dispatch(authActions.requestResetPassword(payload));
+			navigation.navigate(RootScreenName.SIGN_IN);
+		},
+		[dispatch, navigation],
+	);
+
+	const handleResetPasswordSubmit = useCallback(
+		(payload: ResetPasswordDto): void => {
+			void dispatch(authActions.resetPassword(payload));
+			navigation.navigate(RootScreenName.SIGN_IN);
+		},
+		[dispatch, navigation],
+	);
+
 	const getScreen = (screen: string): React.ReactNode => {
 		switch (screen) {
 			case RootScreenName.SIGN_IN: {
@@ -66,6 +104,14 @@ const Auth: React.FC = () => {
 			case RootScreenName.SIGN_UP: {
 				return <SignUpForm onSubmit={handleSignUpSubmit} />;
 			}
+
+			case RootScreenName.RESET_PASSWORD: {
+				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
+			}
+
+			case RootScreenName.FORGOT_PASSWORD: {
+				return <ForgotPasswordForm onSubmit={handleForgotPasswordSubmit} />;
+			}
 		}
 
 		return null;
@@ -73,7 +119,9 @@ const Auth: React.FC = () => {
 
 	return (
 		<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-			<BackgroundWrapper>
+			<BackgroundWrapper
+				planetLayout={name === RootScreenName.SIGN_IN ? "signIn" : "signUp"}
+			>
 				<ScreenWrapper>
 					<KeyboardAvoidingView
 						behavior={checkIfAndroid() ? "height" : "padding"}
@@ -102,20 +150,15 @@ const Auth: React.FC = () => {
 							>
 								<View
 									style={[
-										globalStyles.gap8,
+										globalStyles.gap12,
 										globalStyles.alignItemsCenter,
 										globalStyles.flexDirectionRow,
 										globalStyles.mb32,
 									]}
 								>
-									<Planet color="pink" size="xs" />
-									<Text
-										preset="uppercase"
-										size="xl"
-										style={globalStyles.ml48}
-										weight="bold"
-									>
-										Logo
+									<Logo />
+									<Text preset="subheading" size="xl" weight="bold">
+										BeBalance
 									</Text>
 								</View>
 								<View style={globalStyles.gap24}>{getScreen(name)}</View>

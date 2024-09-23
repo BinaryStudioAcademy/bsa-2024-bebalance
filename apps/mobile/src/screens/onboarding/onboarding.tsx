@@ -2,14 +2,16 @@ import {
 	BackgroundWrapper,
 	Button,
 	InfinitePager,
-	type InfinitePagerImperativeApi,
 	LoaderWrapper,
 	ProgressBar,
 	ScreenWrapper,
 	View,
 } from "~/libs/components/components";
-import { PREVIOUS_INDEX_OFFSET } from "~/libs/constants/constants";
-import { DataStatus, RootScreenName } from "~/libs/enums/enums";
+import {
+	FIRST_ITEM_INDEX,
+	PREVIOUS_INDEX_OFFSET,
+} from "~/libs/constants/constants";
+import { DataStatus, QuestionsStackName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -20,24 +22,21 @@ import {
 	useRef,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type NativeStackNavigationProp } from "~/libs/types/types";
+import {
+	type InfinitePagerImperativeApi,
+	type NativeStackNavigationProp,
+} from "~/libs/types/types";
 import { oneAnswerSelectedValidationSchema } from "~/packages/onboarding/onboarding";
 import { actions as onboardingActions } from "~/slices/onboarding/onboarding";
 
-import { getPageInterpolatorSlide } from "./libs/animations/animations";
 import { Content } from "./libs/components/components";
-import {
-	ANIMATION_CONFIG,
-	ONBOARDING_FORM_DEFAULT_VALUES,
-} from "./libs/constants/constants";
+import { ONBOARDING_FORM_DEFAULT_VALUES } from "./libs/constants/constants";
 import {
 	type OnboardingAnswerRequestBodyDto,
 	type OnboardingFormValues,
 	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
-
-const ZERO = 0;
 
 const Onboarding: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -68,29 +67,30 @@ const Onboarding: React.FC = () => {
 			validationSchema: oneAnswerSelectedValidationSchema,
 		});
 
-	const handleSaveAnswers = useCallback(
-		(payload: OnboardingAnswerRequestBodyDto) => {
-			//TODO: save data to backend
-			return payload;
-		},
-		[],
-	);
-
 	useEffect(() => {
 		reset({ answer: currentAnswer.toString() });
-	}, [currentQuestionIndex, currentAnswer, reset]);
+	}, [currentAnswer, reset]);
+
+	const handleSaveAnswers = useCallback(
+		(payload: OnboardingAnswerRequestBodyDto) => {
+			void dispatch(onboardingActions.saveAnswers(payload));
+		},
+		[dispatch],
+	);
 
 	const handleNextClick = useCallback(
 		(payload: OnboardingFormValues) => {
+			const answerId = Number(payload.answer);
+
 			dispatch(
 				onboardingActions.setAnswersByQuestionIndex({
-					answerId: Number(payload.answer),
+					answerId,
 					questionIndex: currentQuestionIndex,
 				}),
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: answersByQuestionIndex });
+				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
 
 				return;
 			}
@@ -105,9 +105,9 @@ const Onboarding: React.FC = () => {
 		[
 			isLastQuestion,
 			dispatch,
-			handleSaveAnswers,
 			currentQuestionIndex,
 			answersByQuestionIndex,
+			handleSaveAnswers,
 		],
 	);
 
@@ -123,11 +123,11 @@ const Onboarding: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(RootScreenName.WELCOME);
+			navigation.navigate(QuestionsStackName.WELCOME);
 		}
 	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
 
-	const renderPageComponent = useCallback(() => {
+	const handleRenderPageComponent = useCallback(() => {
 		return (
 			<Content control={control} errors={errors} question={currentQuestion} />
 		);
@@ -143,7 +143,9 @@ const Onboarding: React.FC = () => {
 							globalStyles.mb16,
 							globalStyles.mh12,
 							globalStyles.mt12,
-							globalStyles.p24,
+							globalStyles.pt24,
+							globalStyles.ph16,
+							globalStyles.pb16,
 							styles.container,
 						]}
 					>
@@ -153,27 +155,30 @@ const Onboarding: React.FC = () => {
 									currentItemIndex={currentQuestionIndex}
 									totalItemsAmount={totalQuestionsAmount}
 								/>
-								<InfinitePager
-									animationConfig={ANIMATION_CONFIG}
-									gesturesDisabled
-									pageBuffer={PREVIOUS_INDEX_OFFSET}
-									PageComponent={renderPageComponent}
-									pageInterpolator={getPageInterpolatorSlide}
-									ref={infinitePager}
-								/>
-								<View style={globalStyles.gap12}>
-									<Button
-										isDisabled={!isValid}
-										label={isLastQuestion ? "ANALYZE" : "NEXT"}
-										onPress={handleFormSubmit}
+								<View
+									style={[
+										globalStyles.flex1,
+										globalStyles.justifyContentSpaceBetween,
+									]}
+								>
+									<InfinitePager
+										infinitePagerReference={infinitePager}
+										onPageRender={handleRenderPageComponent}
 									/>
-									{currentQuestionIndex !== ZERO && (
+									<View style={globalStyles.gap16}>
 										<Button
-											appearance="outlined"
-											label="BACK"
-											onPress={handlePreviousClick}
+											isDisabled={!isValid}
+											label={isLastQuestion ? "ANALYZE" : "NEXT"}
+											onPress={handleFormSubmit}
 										/>
-									)}
+										{currentQuestionIndex !== FIRST_ITEM_INDEX && (
+											<Button
+												appearance="outlined"
+												label="BACK"
+												onPress={handlePreviousClick}
+											/>
+										)}
+									</View>
 								</View>
 							</>
 						)}

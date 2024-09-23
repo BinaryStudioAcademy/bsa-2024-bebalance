@@ -1,15 +1,33 @@
 import { BalanceWheelChart } from "~/libs/components/components.js";
+import { AppRoute } from "~/libs/enums/enums.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks.js";
+import { actions as appActions } from "~/modules/app/app.js";
+import { actions as quizActions } from "~/modules/quiz/quiz.js";
 
+import { Step } from "../../enums/step.js";
 import { BALANCE_WHEEL_ANIMATED_INITIAL_DATA } from "./libs/constants/constants.js";
 import { PercentageConfig } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const BalanceWheel: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const [percentage, setPercentage] = useState<number>(
 		PercentageConfig.DEFAULT_VALUE,
 	);
+	const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
+
+	const { hasAnsweredOnboardingQuestions, hasAnsweredQuizQuestions } =
+		useAppSelector(({ auth }) => ({
+			hasAnsweredOnboardingQuestions: auth.user?.hasAnsweredOnboardingQuestions,
+			hasAnsweredQuizQuestions: auth.user?.hasAnsweredQuizQuestions,
+		}));
 
 	const handleUpdatePercentage = useCallback(() => {
 		setPercentage((previousPercentage) => {
@@ -26,6 +44,23 @@ const BalanceWheel: React.FC = () => {
 		});
 	}, []);
 
+	const handleNavigate = useCallback(() => {
+		const isDone =
+			percentage >= PercentageConfig.MAX_VALUE &&
+			hasAnsweredQuizQuestions &&
+			hasAnsweredOnboardingQuestions;
+
+		if (isDone) {
+			setTimeout(() => {
+				setShouldNavigate(true);
+			}, PercentageConfig.PERCENTAGE_INCREASE_INTERVAL);
+		}
+	}, [percentage, hasAnsweredQuizQuestions, hasAnsweredOnboardingQuestions]);
+
+	useEffect(() => {
+		handleNavigate();
+	}, [handleNavigate]);
+
 	useEffect(() => {
 		const intervalId = setInterval(
 			handleUpdatePercentage,
@@ -36,6 +71,13 @@ const BalanceWheel: React.FC = () => {
 			clearInterval(intervalId);
 		};
 	}, [handleUpdatePercentage]);
+
+	if (shouldNavigate) {
+		dispatch(appActions.changeLink(AppRoute.ROOT));
+		dispatch(quizActions.setStep(Step.MOTIVATION));
+	}
+
+	const roundedPercentage = Math.ceil(percentage);
 
 	return (
 		<div className={styles["container"]}>
@@ -64,7 +106,7 @@ const BalanceWheel: React.FC = () => {
 				data={BALANCE_WHEEL_ANIMATED_INITIAL_DATA}
 				isAnimating
 			/>
-			<span className={styles["text"]}>Analyzing {percentage}%</span>
+			<span className={styles["text"]}>Analyzing {roundedPercentage}%</span>
 		</div>
 	);
 };

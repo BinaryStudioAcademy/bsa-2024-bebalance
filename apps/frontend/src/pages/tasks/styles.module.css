@@ -1,0 +1,30 @@
+.title {
+	padding: 20px 30px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 25px;
+}
+
+.board {
+	height: fit-content;
+	min-height: calc(100vh - 77px - 65px);
+	background-image: url("../../assets/img/board-background.svg");
+	background-repeat: repeat;
+}
+
+.board-header {
+	display: flex;
+	justify-content: center;
+	padding-top: 15px;
+}
+
+.switch-container {
+	width: 234px;
+}
+
+.cards-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding: 15px 26px;
+}

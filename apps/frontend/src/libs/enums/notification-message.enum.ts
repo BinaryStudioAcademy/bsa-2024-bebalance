@@ -1,6 +1,8 @@
 const NotificationMessage = {
-	LINK_SENT: "Reset email sent",
-	PROFILE_UPDATED: "Profile data was updated successfully",
+	AVATAR_UPLOADED: "New profile avatar was updated successfully",
+	LINK_SENT: "Link has been sent to your email",
+	PASSWORD_UPDATED: "Your password has been successfully changed.",
+	PROFILE_UPDATED: "Your profile was updated successfully!",
 } as const;
 
 export { NotificationMessage };

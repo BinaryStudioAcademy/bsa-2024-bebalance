@@ -1,27 +1,24 @@
 import React from "react";
-import { Text as RNText } from "react-native";
+import { Text as RNText, type TextProps } from "react-native";
 
 import { BaseColor } from "~/libs/enums/enums";
+import {
+	fontWeightToFamily,
+	presetToTextStyle,
+	sizeToTextStyle,
+} from "~/libs/maps/maps";
 import {
 	type StyleProp,
 	type TextStyle,
 	type ValueOf,
 } from "~/libs/types/types";
 
-import {
-	fontWeightToFamilyMap,
-	presetToStyleMap,
-	sizeToStyleMap,
-} from "./libs/maps/maps";
-
 type Properties = {
-	children: React.ReactNode;
 	color?: ValueOf<typeof BaseColor>;
-	preset?: keyof typeof presetToStyleMap;
-	size?: keyof typeof sizeToStyleMap;
-	style?: StyleProp<TextStyle>;
-	weight?: keyof typeof fontWeightToFamilyMap;
-};
+	preset?: keyof typeof presetToTextStyle;
+	size?: keyof typeof sizeToTextStyle;
+	weight?: keyof typeof fontWeightToFamily;
+} & TextProps;
 
 const Text: React.FC<Properties> = ({
 	children,
@@ -30,16 +27,21 @@ const Text: React.FC<Properties> = ({
 	size,
 	style: styleOverride,
 	weight,
+	...textProperties
 }: Properties) => {
 	const styles: StyleProp<TextStyle> = [
-		presetToStyleMap[preset],
-		size && sizeToStyleMap[size],
-		weight && fontWeightToFamilyMap[weight],
+		presetToTextStyle[preset],
+		size && sizeToTextStyle[size],
+		weight && fontWeightToFamily[weight],
 		{ color },
 		styleOverride,
 	];
 
-	return <RNText style={styles}>{children}</RNText>;
+	return (
+		<RNText style={styles} {...textProperties}>
+			{children}
+		</RNText>
+	);
 };
 
 export { Text };

@@ -1,11 +1,14 @@
+import ColorfullLogo from "~/assets/img/colorfull-logo.svg?react";
 import RippleEffectBg from "~/assets/img/ripple-effect-bg.svg?react";
 import RippleEffectBg2 from "~/assets/img/ripple-effect-bg2.svg?react";
+import WhiteLogo from "~/assets/img/white-logo.svg?react";
 import { Link, Navigate } from "~/libs/components/components.js";
 import { AppRoute } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
+	useEffect,
 	useLocation,
 	useNavigate,
 	useQuery,
@@ -36,10 +39,16 @@ const Auth: React.FC = () => {
 		user: auth.user,
 	}));
 
-	const { token } = useQuery();
+	const hasUser = Boolean(user);
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (pathname === AppRoute.SIGN_UP && hasUser) {
+			navigate(AppRoute.QUIZ);
+		}
+	}, [navigate, pathname, hasUser]);
 
 	const handleSignInSubmit = useCallback(
 		(payload: UserSignInRequestDto): void => {
@@ -62,6 +71,8 @@ const Auth: React.FC = () => {
 		},
 		[dispatch, navigate],
 	);
+
+	const { token } = useQuery();
 
 	const handleResetPasswordSubmit = useCallback(
 		(payload: Omit<ResetPasswordDto, "jwtToken">): void => {
@@ -90,12 +101,15 @@ const Auth: React.FC = () => {
 			}
 
 			case AppRoute.RESET_PASSWORD: {
-				return <ResetPasswordForm onSubmit={handleResetPasswordSubmit} />;
+				return (
+					<ResetPasswordForm
+						onSubmit={handleResetPasswordSubmit}
+						token={token as string}
+					/>
+				);
 			}
 		}
 	};
-
-	const hasUser = Boolean(user);
 
 	if (hasUser) {
 		return <Navigate replace to={AppRoute.ROOT} />;
@@ -109,31 +123,36 @@ const Auth: React.FC = () => {
 			<div className={styles["form-container"]}>
 				<div className={styles["form-header"]}>
 					<div className={styles["form-header__logo-container"]}>
-						<div className={styles["form-header__logo"]} />
-						<span className={styles["form-header__logo-text"]}>logo</span>
+						<ColorfullLogo />
 					</div>
 
 					<h1 className={styles["form-header__text"]}>
 						{authRouteToHeader[pathname as ValueOf<RoutesWithHeader>]}
 					</h1>
 					<span className={styles["form-header__sub-text"]}>
+						{pathname === AppRoute.FORGOT_PASSWORD && (
+							<div>
+								Enter your email address and we will send you a link to reset
+								your password.
+							</div>
+						)}
 						{pathname === AppRoute.SIGN_IN ? (
-							<>
+							<div>
 								<span>No account? Go to </span>
 								<Link to={AppRoute.SIGN_UP}>Create an account</Link>
-							</>
+							</div>
 						) : (
-							<>
+							<div>
 								<span>Already have an account? Go to </span>
 								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
-							</>
+							</div>
 						)}
 					</span>
 				</div>
 				{getScreen(pathname)}
 			</div>
-			<div className={styles["title-container"]}>
-				<h1 className={styles["title"]}>Logo</h1>
+			<div className={styles["logo-container"]}>
+				<WhiteLogo />
 			</div>
 		</div>
 	);

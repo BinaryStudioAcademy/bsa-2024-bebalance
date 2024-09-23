@@ -17,6 +17,7 @@ export {
 	type NotificationAnswersPayloadDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
@@ -26,15 +27,18 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	type UserUpdateFormDto,
+	type UserUpdatePasswordFormDto,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdatePayload,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
 	notificationAnswersValidationSchema,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
+	userUpdatePasswordValidationSchema,
 	userUpdateValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
 export { actions, reducer } from "./slices/users.js";

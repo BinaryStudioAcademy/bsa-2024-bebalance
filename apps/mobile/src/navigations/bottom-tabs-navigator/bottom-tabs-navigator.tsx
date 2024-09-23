@@ -7,10 +7,10 @@ import React from "react";
 import { GradientTabIcon, Text } from "~/libs/components/components";
 import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
+import { WheelStackNavigator } from "~/navigations/bottom-tabs-navigator/wheel/wheel";
 import { Chat } from "~/screens/chat/chat";
 import { Settings } from "~/screens/settings/settings";
 import { Tasks } from "~/screens/tasks/tasks";
-import { Wheel } from "~/screens/wheel/wheel";
 
 const BottomTabs = createBottomTabNavigator<BottomTabNavigationParameterList>();
 
@@ -45,7 +45,7 @@ const BottomTabsNavigator: React.FC = () => {
 				}}
 			/>
 			<BottomTabs.Screen
-				component={Wheel}
+				component={WheelStackNavigator}
 				name={BottomTabScreenName.WHEEL}
 				options={{
 					tabBarIcon: ({ focused }) => (

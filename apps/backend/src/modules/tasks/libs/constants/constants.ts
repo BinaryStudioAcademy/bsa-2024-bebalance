@@ -1,0 +1,9 @@
+const FULL_WEEK = 7;
+
+const NO_DAYS_THIS_WEEK = 0;
+
+const NO_USER_TASK_DAYS = 0;
+
+const STATUS_FIELD = "status";
+
+export { FULL_WEEK, NO_DAYS_THIS_WEEK, NO_USER_TASK_DAYS, STATUS_FIELD };

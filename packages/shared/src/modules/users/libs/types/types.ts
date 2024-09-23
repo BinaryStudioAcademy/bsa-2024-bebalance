@@ -3,6 +3,7 @@ export { type NotificationAnswersPayloadDto } from "./notification-answers-paylo
 export { type NotificationAnswersRequestDto } from "./notification-answers-request-dto.type.js";
 export { type ResetPasswordDto } from "./reset-password-dto.type.js";
 export { type ResetPasswordFormDto } from "./reset-password-form-dto.type.js";
+export { type ResetPasswordLinkDto } from "./reset-password-link-dto.type.js";
 export { type UserDto } from "./user-dto.type.js";
 export { type UserGetAllResponseDto } from "./user-get-all-response-dto.type.js";
 export { type UserGetParametersDto } from "./user-get-parameters-dto.type.js";
@@ -13,4 +14,6 @@ export { type UserSignUpRequestDto } from "./user-sign-up-request-dto.type.js";
 export { type UserSignUpResponseDto } from "./user-sign-up-response-dto.type.js";
 export { type UserUpdateFormDto } from "./user-update-form-dto.type.js";
 export { type UserUpdateParametersDto } from "./user-update-parameters-dto.type.js";
+export { type UserUpdatePasswordFormDto } from "./user-update-password-form-dto.type.js";
+export { type UserUpdatePasswordRequestDto } from "./user-update-password-request-dto.type.js";
 export { type UserUpdateRequestDto } from "./user-update-request-dto.type.js";

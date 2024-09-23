@@ -1,0 +1,3 @@
+const ALLOWED_NUMBER_OF_FILES = 1;
+
+export { ALLOWED_NUMBER_OF_FILES };

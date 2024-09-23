@@ -1,4 +1,5 @@
 export {
+	FIRST_ITEM_INDEX,
 	PREVIOUS_INDEX_OFFSET,
 	ZERO_INDEX,
 } from "./libs/constants/constant.js";
@@ -7,17 +8,23 @@ export {
 	AppEnvironment,
 	ContentType,
 	ErrorMessage,
+	NumericalValue,
 	ServerErrorType,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
+	CategoryError,
+	FileError,
 	HTTPError,
 	OnboardingError,
+	OpenAIError,
 	QuizError,
+	TaskError,
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString } from "./libs/helpers/helpers.js";
+export { configureString, getFormattedDate } from "./libs/helpers/helpers.js";
+export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
 	type HTTP,
@@ -37,9 +44,41 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	addMessageToThreadValidationSchema,
+	AIAssistantApiPath,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
+	type AIAssistantSuggestTaskRequestDto,
+	changeTaskSuggestionRequestValidationSchema,
+	taskActionRequestSchemaValidationSchema,
+	taskSuggestionRequestValidationSchema,
+	type ThreadMessageCreateDto,
+} from "./modules/ai-assistant/ai-assistant.js";
+export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
+export {
+	CategoriesApiPath,
+	type CategoriesGetAllResponseDto,
+	type CategoriesGetRequestQueryDto,
+	type CategoriesSelectedRequestDto,
+	categoriesSelectedValidationSchema,
+	type CategoryCreateRequestDto,
+	type CategoryDto,
+	categoryIdsValidationSchema,
+	type CategoryUpdateRequestDto,
+	type CategoryWithScoresDto,
+	type SelectedCategory,
+} from "./modules/categories/categories.js";
+export {
+	type BalanceWheelMessage,
+	ChatMessageAuthor,
+	type ChatMessageDto,
+	ChatMessageType,
+	type TaskMessage,
+	type TextMessage,
+} from "./modules/chats/chats.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
@@ -50,13 +89,12 @@ export {
 	type OnboardingGetAllResponseDto,
 	type OnboardingQuestionRequestDto,
 	type OnboardingQuestionResponseDto,
+	type OnboardingUserAnswerDto,
 	OnboardingValidationMessage,
 	oneAnswerSelectedValidationSchema,
 } from "./modules/onboarding/onboarding.js";
 export {
 	categoryAnswerSelectedValidationSchema,
-	type CategoryDto,
-	type CategoryRequestDto,
 	type QuizAnswerDto,
 	type QuizAnswerRequestDto,
 	type QuizAnswersRequestDto,
@@ -68,9 +106,25 @@ export {
 	type QuizScoresGetAllItemResponseDto,
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
+	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
+export {
+	type TaskCreateDto,
+	type TaskDto,
+	type TaskGetAllResponseDto,
+	type TaskNoteDto,
+	type TaskNoteParametersDto,
+	type TaskNoteRequestDto,
+	taskNoteValidationSchema,
+	TasksApiPath,
+	TaskStatus,
+	type TaskUpdateParametersDto,
+	type TaskUpdateRequestDto,
+	taskUpdateValidationSchema,
+} from "./modules/tasks/tasks.js";
 export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,
@@ -79,8 +133,9 @@ export {
 	NotificationFrequency,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
 	userResetPasswordValidationSchema,
@@ -94,8 +149,10 @@ export {
 	userSignUpValidationSchema,
 	type UserUpdateFormDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordFormDto,
+	type UserUpdatePasswordRequestDto,
+	userUpdatePasswordValidationSchema,
 	type UserUpdateRequestDto,
 	userUpdateValidationSchema,
 	UserValidationMessage,
-	UserValidationRule,
 } from "./modules/users/users.js";

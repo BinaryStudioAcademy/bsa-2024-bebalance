@@ -1,16 +1,47 @@
 import { Link as UILink } from "@react-navigation/native";
-import React, { type ComponentProps } from "react";
+import React from "react";
 
-import { styles } from "./styles";
+import { BaseColor } from "~/libs/enums/enums";
+import {
+	fontWeightToFamily,
+	presetToTextStyle,
+	sizeToTextStyle,
+} from "~/libs/maps/maps";
+import {
+	type StyleProp,
+	type TextStyle,
+	type ValueOf,
+} from "~/libs/types/types";
 
 type Properties = {
+	color?: ValueOf<typeof BaseColor>;
 	label: string;
-	to: ComponentProps<typeof UILink>["to"];
+	preset?: keyof typeof presetToTextStyle;
+	size?: keyof typeof sizeToTextStyle;
+	style?: StyleProp<TextStyle>;
+	to: React.ComponentProps<typeof UILink>["to"];
+	weight?: keyof typeof fontWeightToFamily;
 };
 
-const Link: React.FC<Properties> = ({ label, to }) => {
+const Link: React.FC<Properties> = ({
+	color = BaseColor.BLACK,
+	label,
+	preset = "default",
+	size,
+	style: styleOverride,
+	to,
+	weight,
+}) => {
+	const styles: StyleProp<TextStyle> = [
+		presetToTextStyle[preset],
+		size && sizeToTextStyle[size],
+		weight && fontWeightToFamily[weight],
+		{ color },
+		styleOverride,
+	];
+
 	return (
-		<UILink style={styles.link} to={to}>
+		<UILink style={styles} to={to}>
 			{label}
 		</UILink>
 	);

@@ -1,19 +1,15 @@
 import { APIPath, ContentType } from "~/libs/enums/enums";
-import { BaseHttpApi } from "~/libs/packages/api/api";
-import { type HTTP } from "~/libs/packages/http/http";
-import { type Storage } from "~/libs/packages/storage/storage";
+import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { OnboardingApiPath } from "./libs/enums/enums";
-import { type OnboardingGetAllResponseDto } from "./libs/types/types";
-
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
+import {
+	type OnboardingAnswerRequestBodyDto,
+	type OnboardingGetAllResponseDto,
+	type OnboardingUserAnswerDto,
+} from "./libs/types/types";
 
 class OnboardingApi extends BaseHttpApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.ONBOARDING, storage });
 	}
 
@@ -28,6 +24,22 @@ class OnboardingApi extends BaseHttpApi {
 		);
 
 		return await response.json<OnboardingGetAllResponseDto>();
+	}
+
+	public async saveAnswers(
+		payload: OnboardingAnswerRequestBodyDto,
+	): Promise<OnboardingUserAnswerDto[]> {
+		const response = await this.load(
+			this.getFullEndpoint(OnboardingApiPath.ANSWER, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<OnboardingUserAnswerDto[]>();
 	}
 }
 

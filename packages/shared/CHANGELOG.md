@@ -1,5 +1,115 @@
 # Changelog
 
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.25.0...shared-v1.26.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+* **frontend/shared:** change password funcionality in profile screen bb-417 ([#512](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/512)) ([b3e98c8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3e98c866bf44a2ebc450ac048f6be2cf121468b))
+
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.24.0...shared-v1.25.0) (2024-09-21)
+
+
+### Features
+
+* **mobile:** Update "And the last step" screens - request from PO bb-514 ([#518](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/518)) ([d994d24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d994d246805a8f25b157fc1a486e64c81a7659fb))
+
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.23.0...shared-v1.24.0) (2024-09-20)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#484](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/484)) ([80cfe92](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/80cfe922e1a2a5bee49c24ad771d0a36d153b554))
+
+## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.22.0...shared-v1.23.0) (2024-09-19)
+
+
+### Features
+
+* **backend/frontend/shared:** change password funcionality in profile screen bb-417 ([#456](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/456)) ([fd26ffe](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fd26ffe236a77dc5653bbd4d78d7f6102e753715))
+* **backend/frontend:** Insights bb-444 ([#478](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/478)) ([9869571](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/98695718f4269d2796151c68383649cb61128739))
+
+## [1.22.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.21.0...shared-v1.22.0) (2024-09-18)
+
+
+### Features
+
+* **backend/frontend:** retake quiz bb-357 ([#404](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/404)) ([bbc02a8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bbc02a8ac06ae976c5b162bf73b8dff02db5b600))
+* **mobile:** edit wheel manually bb-344 ([#455](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/455)) ([833d5ed](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/833d5ed12587e7e93804c6852e093df20283938d))
+
+## [1.21.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.20.0...shared-v1.21.0) (2024-09-18)
+
+
+### Features
+
+* **frontend:** upload a new avatar bb-341 ([#448](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/448)) ([b3fe346](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3fe346ab6e9b1f85a67af19bbd0a64db476d145))
+
+## [1.20.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.19.0...shared-v1.20.0) (2024-09-16)
+
+
+### Features
+
+* **backend/shared:** add action buttons to tasks bb-362 ([#451](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/451)) ([15c3ef0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15c3ef0b633a96a3c7cb8ed07cb4d423b4e38515))
+* **frontend/backend:** Onboarding/quiz flow bb-242 ([#351](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/351)) ([060f881](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/060f881e68e1427e72099d9aa0a3038fe88f3984))
+
+## [1.19.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.18.0...shared-v1.19.0) (2024-09-16)
+
+
+### Features
+
+* **frontend/backend/shared:** add deadline for tasks bb-361 ([#440](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/440)) ([e4b6f27](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e4b6f2731682aa5c0cda0fa8ee89bc9101e730a3))
+* **frontend/backend/shared:** add my tasks screen bb-335 ([#397](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/397)) ([b2aebbc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b2aebbcf396e87b96edc9e1f30820556042781e8))
+* **mobile:** create checkbox categories form bb-250 ([#387](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/387)) ([3126c4d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3126c4d8373d40b25d83ceb0df19c8fb3a1fff3b))
+
+## [1.18.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.17.1...shared-v1.18.0) (2024-09-13)
+
+
+### Features
+
+* **backend:** update profile picture bb-173 ([#276](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/276)) ([9917ccf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9917ccfd70fdb371fd9be7ad475c833161ce17f1))
+
+## [1.17.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.17.0...shared-v1.17.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* **frontend:** forgot-password reset-password forms validation bb-285 ([#405](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/405)) ([0e132a9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0e132a9de36425fb0c54443571cb8c3061d005f2))
+
+## [1.17.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.16.0...shared-v1.17.0) (2024-09-11)
+
+
+### Features
+
+* **backend/frontend/shared:** edit wheel manually bb-309 ([#343](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/343)) ([ec28e98](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ec28e9872bc2091798693dcd42f695d9c647249c))
+
+## [1.16.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.15.0...shared-v1.16.0) (2024-09-11)
+
+
+### Features
+
+* **frontend/backend/shared:** Quiz categories form bb-220 ([#266](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/266)) ([03f6e6c](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03f6e6cd6ebd9a6e2babcf4e1b18467ce91b313f))
+
+## [1.15.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.14.1...shared-v1.15.0) (2024-09-10)
+
+
+### Features
+
+* **frontend/backend:** forgot password functionality requirements bb-285 ([#329](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/329)) ([6e80423](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6e8042368c4f56ae8702a708b2b7e3da36c644f1))
+* **mobile:** quiz screen bb-245 ([#352](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/352)) ([2caeeea](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2caeeea30d26f2921786f89f10028537ab717fd4))
+
+
+### Bug Fixes
+
+* **shared:** notification questions validation bb-243 ([#364](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/364)) ([e032708](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e0327083cc777a9431f4c28523b1da8e5af42793))
+
+## [1.14.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.14.0...shared-v1.14.1) (2024-09-10)
+
+
+### Bug Fixes
+
+* **frontend/shared:** requirements for authorization pages for web version bb-209 ([#356](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/356)) ([2256493](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2256493a3efbd62a54ce0f9a8293198a44d813cc))
+
 ## [1.14.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.13.0...shared-v1.14.0) (2024-09-09)
 
 

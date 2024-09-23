@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 391px;
+	padding: 15px 40px;
+	border: 1px solid var(--light-gray);
+	border-radius: 16px;
+}
+
+.categories-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+}

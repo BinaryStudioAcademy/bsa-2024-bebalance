@@ -38,7 +38,7 @@ class QuizAnswerService implements Service {
 		this.quizQuestionService = quizQuestionService;
 	}
 
-	public convertAnswerEntityToDto(
+	private convertAnswerEntityToDto(
 		answerEntity: QuizAnswerEntity,
 	): QuizAnswerDto {
 		const answer = answerEntity.toObject();
@@ -54,6 +54,20 @@ class QuizAnswerService implements Service {
 		};
 	}
 
+	private extractIdsFromAnswerEntities(
+		answerEntities: QuizAnswerEntity[],
+	): number[] {
+		const answerIds: number[] = [];
+
+		for (const answerEntity of answerEntities) {
+			const answer = answerEntity.toObject();
+
+			answerIds.push(answer.id);
+		}
+
+		return answerIds;
+	}
+
 	public async create(payload: QuizAnswerRequestDto): Promise<QuizAnswerDto> {
 		const answerEntity = await this.quizAnswerRepository.create(
 			QuizAnswerEntity.initializeNew(payload),
@@ -62,47 +76,7 @@ class QuizAnswerService implements Service {
 		return this.convertAnswerEntityToDto(answerEntity);
 	}
 
-	public async createScores({
-		answerIds,
-		userId,
-	}: UserAnswersRequestDto): Promise<QuizScoresResponseDto> {
-		const categoryStatistics = new Map<number, CategoryStatistic>();
-
-		const categorizedAnswers = await Promise.all(
-			answerIds.map((answerId) => {
-				return this.quizAnswerRepository.getCategorizedAnswer(answerId);
-			}),
-		);
-
-		for (const answer of categorizedAnswers) {
-			const { categoryId, value } = answer;
-			const statistic = categoryStatistics.get(categoryId) || {
-				accumulatedSum: INITIAL_STATISTIC_VALUE,
-				categoryCount: INITIAL_STATISTIC_VALUE,
-			};
-			statistic.accumulatedSum += value;
-			statistic.categoryCount += 1;
-			categoryStatistics.set(categoryId, statistic);
-		}
-
-		const scores: QuizScoreDto[] = await Promise.all(
-			[...categoryStatistics.entries()].map(async ([categoryId, stats]) => {
-				const averageScore = Math.round(
-					stats.accumulatedSum / stats.categoryCount,
-				);
-
-				return await this.categoryService.createScore({
-					categoryId,
-					score: averageScore,
-					userId,
-				});
-			}),
-		);
-
-		return { items: scores };
-	}
-
-	public async createUserAnswers({
+	public async createAllUserAnswers({
 		answerIds,
 		userId,
 	}: UserAnswersRequestDto): Promise<QuizAnswersResponseDto> {
@@ -143,6 +117,121 @@ class QuizAnswerService implements Service {
 		);
 
 		await this.categoryService.deleteUserScores(userId);
+		const { items } = await this.createScores({ answerIds, userId });
+
+		return { scores: items, userAnswers };
+	}
+
+	public async createScores({
+		answerIds,
+		userId,
+	}: UserAnswersRequestDto): Promise<QuizScoresResponseDto> {
+		const categoryStatistics = new Map<number, CategoryStatistic>();
+
+		const categorizedAnswers = await Promise.all(
+			answerIds.map((answerId) => {
+				return this.quizAnswerRepository.getCategorizedAnswer(answerId);
+			}),
+		);
+
+		for (const answer of categorizedAnswers) {
+			const { categoryId, value } = answer;
+			const statistic = categoryStatistics.get(categoryId) ?? {
+				accumulatedSum: INITIAL_STATISTIC_VALUE,
+				categoryCount: INITIAL_STATISTIC_VALUE,
+			};
+			statistic.accumulatedSum += value;
+			statistic.categoryCount += 1;
+			categoryStatistics.set(categoryId, statistic);
+		}
+
+		const scores: QuizScoreDto[] = await Promise.all(
+			[...categoryStatistics.entries()].map(async ([categoryId, stats]) => {
+				const averageScore = Math.round(
+					stats.accumulatedSum / stats.categoryCount,
+				);
+
+				return await this.categoryService.createScore({
+					categoryId,
+					score: averageScore,
+					userId,
+				});
+			}),
+		);
+
+		return { items: scores };
+	}
+
+	public async createUserAnswers({
+		answerIds,
+		categoryIds,
+		userId,
+	}: UserAnswersRequestDto): Promise<QuizAnswersResponseDto> {
+		if (!categoryIds) {
+			return await this.createAllUserAnswers({ answerIds, userId });
+		}
+
+		return await this.createUserAnswersByCategories({
+			answerIds,
+			categoryIds,
+			userId,
+		});
+	}
+
+	public async createUserAnswersByCategories({
+		answerIds,
+		categoryIds,
+		userId,
+	}: UserAnswersRequestDto): Promise<QuizAnswersResponseDto> {
+		const existingAnswers =
+			await this.quizAnswerRepository.findByIds(answerIds);
+
+		if (existingAnswers.length !== answerIds.length) {
+			throw new QuizError({
+				message: ErrorMessage.REQUESTED_ENTITY_NOT_FOUND,
+				status: HTTPCode.NOT_FOUND,
+			});
+		}
+
+		const questionsCount = await this.quizQuestionService.countByCategoryIds(
+			categoryIds as number[],
+		);
+
+		if (questionsCount !== existingAnswers.length) {
+			throw new QuizError({
+				message: ErrorMessage.INSUFFICIENT_ANSWERS,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const answerEntities = existingAnswers.map((answer) => answer.toObject());
+		const questionIds = answerEntities.map((answer) => answer.questionId);
+		const uniqueQuestionIds = new Set(questionIds);
+
+		if (uniqueQuestionIds.size !== questionIds.length) {
+			throw new QuizError({
+				message: ErrorMessage.DUPLICATE_QUESTION_ANSWER,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const existingAnswersIds =
+			this.extractIdsFromAnswerEntities(existingAnswers);
+
+		await this.quizAnswerRepository.deleteUserAnswersByAnswerIds(
+			userId,
+			existingAnswersIds,
+		);
+
+		const userAnswers = await this.quizAnswerRepository.createUserAnswers(
+			userId,
+			answerIds,
+		);
+
+		await this.categoryService.deleteUserScoresByCategoryIds(
+			userId,
+			categoryIds as number[],
+		);
 		const { items } = await this.createScores({ answerIds, userId });
 
 		return { scores: items, userAnswers };

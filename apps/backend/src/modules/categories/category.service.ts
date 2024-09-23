@@ -1,13 +1,21 @@
+import { ErrorMessage } from "~/libs/enums/enums.js";
+import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
+import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
+	type CategoriesGetAllResponseDto,
+	type CategoryCreateRequestDto,
 	type CategoryDto,
-	type CategoryRequestDto,
+	type CategoryUpdateRequestDto,
+	type CategoryWithScoresDto,
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 	type QuizScoresGetAllResponseDto,
+	type QuizScoresResponseDto,
+	type QuizScoresUpdateRequestDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -17,34 +25,33 @@ class CategoryService implements Service {
 		this.categoryRepository = categoryRepository;
 	}
 
-	public convertCategoryEntityToDto(
+	private convertCategoryEntityToDto(
 		categoryEntity: CategoryEntity,
-	): CategoryDto {
+	): CategoryWithScoresDto {
 		const category = categoryEntity.toObject();
 
 		const scores: QuizScoreDto[] = category.scores.map(
 			(scoreEntity: CategoryEntity) => {
 				const score = scoreEntity.toObject();
 
-				return {
-					...score,
-					categoryId: category.id,
-				};
+				return { ...score, categoryId: category.id };
 			},
 		);
 
-		return {
-			...category,
-			scores,
-		};
+		const { createdAt, id, name, updatedAt } = category;
+
+		return { createdAt, id, name, scores, updatedAt };
 	}
 
-	public async create(payload: CategoryRequestDto): Promise<CategoryDto> {
+	public async create(payload: CategoryCreateRequestDto): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.create(
 			CategoryEntity.initializeNew(payload),
 		);
 
-		return this.convertCategoryEntityToDto(categoryEntity);
+		const { createdAt, id, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
 	public async createScore({
@@ -67,15 +74,45 @@ class CategoryService implements Service {
 		return this.categoryRepository.deleteUserScores(userId);
 	}
 
+	public deleteUserScoresByCategoryIds(
+		userId: number,
+		categoryIds: number[],
+	): Promise<number> {
+		return this.categoryRepository.deleteUserScoresByCategoryIds(
+			userId,
+			categoryIds,
+		);
+	}
+
 	public async find(id: number): Promise<CategoryDto | null> {
 		const categoryEntity = await this.categoryRepository.find(id);
 
-		return categoryEntity
-			? this.convertCategoryEntityToDto(categoryEntity)
-			: null;
+		if (!categoryEntity) {
+			return null;
+		}
+
+		const { createdAt, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
 	}
 
-	public async findAll(): Promise<{ items: CategoryDto[] }> {
+	public async findAll(): Promise<CategoriesGetAllResponseDto> {
+		const categories = await this.categoryRepository.findAll();
+
+		const items = categories.map((categoryEntity) => {
+			const { createdAt, id, name, updatedAt } =
+				this.convertCategoryEntityToDto(categoryEntity);
+
+			return { createdAt, id, name, updatedAt };
+		});
+
+		return { items };
+	}
+
+	public async findAllWithScores(): Promise<{
+		items: CategoryWithScoresDto[];
+	}> {
 		const categories = await this.categoryRepository.findAll();
 
 		const items = categories.map((categoryEntity) => {
@@ -112,11 +149,77 @@ class CategoryService implements Service {
 
 	public async update(
 		id: number,
-		payload: Partial<CategoryRequestDto>,
+		payload: CategoryUpdateRequestDto,
 	): Promise<CategoryDto> {
 		const categoryEntity = await this.categoryRepository.update(id, payload);
 
-		return this.convertCategoryEntityToDto(categoryEntity);
+		const { createdAt, name, updatedAt } =
+			this.convertCategoryEntityToDto(categoryEntity);
+
+		return { createdAt, id, name, updatedAt };
+	}
+
+	public async updateUserScores(
+		payload: QuizScoresUpdateRequestDto,
+		userId: number,
+	): Promise<QuizScoresResponseDto> {
+		const { items: scoresData } = payload;
+
+		const userScore = await this.categoryRepository.findScoreByUser(userId);
+
+		if (!userScore) {
+			throw new CategoryError({
+				message: ErrorMessage.SCORES_UPDATE_UNAVAILABLE,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const allCategories = await this.categoryRepository.findAll();
+		const allCategoryIds = new Set(
+			allCategories.map((category) => category.toObject().id),
+		);
+
+		const payloadCategoryIds = scoresData.map(
+			(payloadScore) => payloadScore.categoryId,
+		);
+
+		const hasMissingCategoryIds = payloadCategoryIds.some(
+			(categoryId) => !allCategoryIds.has(categoryId),
+		);
+
+		if (hasMissingCategoryIds) {
+			throw new CategoryError({
+				message: ErrorMessage.INVALID_CATEGORY,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const scores = await Promise.all(
+			scoresData.map(async (payloadScore) => {
+				const { categoryId, score } = payloadScore;
+
+				const scoreEntity = await this.categoryRepository.updateScore({
+					categoryId,
+					score,
+					userId,
+				});
+
+				return scoreEntity.toObject();
+			}),
+		);
+
+		const items = scores.map((score) => {
+			return {
+				categoryId: score.categoryId,
+				createdAt: score.createdAt,
+				id: score.id,
+				score: score.score,
+				updatedAt: score.updatedAt,
+				userId: score.userId,
+			};
+		});
+
+		return { items };
 	}
 }
 

@@ -1,8 +1,9 @@
 export {
 	notificationAnswersValidationSchema,
-	userForgotPasswordVaidationSchema,
+	userForgotPasswordValidationSchema,
 	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
+	userUpdatePasswordValidationSchema,
 	userUpdateValidationSchema,
 } from "shared";

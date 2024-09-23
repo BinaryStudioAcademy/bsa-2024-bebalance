@@ -4,13 +4,18 @@ import { Image, Planet, View } from "~/libs/components/components";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 
+import { presetToPlanetPosition } from "./libs/maps/maps";
 import { styles } from "./styles";
 
 type Properties = {
 	children: React.ReactNode;
+	planetLayout?: keyof typeof presetToPlanetPosition;
 };
 
-const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
+const BackgroundWrapper: React.FC<Properties> = ({
+	children,
+	planetLayout = "default",
+}: Properties) => {
 	return (
 		<View style={[globalStyles.flex1, styles.container]}>
 			<Image
@@ -24,20 +29,10 @@ const BackgroundWrapper: React.FC<Properties> = ({ children }: Properties) => {
 			<View style={[styles.dot, styles.dotPositionRightBottom]} />
 			<View style={[styles.dot, styles.dotPositionBottom]} />
 			<View style={[styles.dot, styles.dotPositionLeft]} />
-			<Planet color="lime" size="sm" style={styles.topPlanet} />
-			<Planet
-				color="blue"
-				gradientDirection="topToBottom"
-				size="sm"
-				style={styles.leftPlanet}
-			/>
+			{presetToPlanetPosition[planetLayout].map((properties, index) => (
+				<Planet key={index} {...properties} />
+			))}
 
-			<Planet
-				color="pink"
-				gradientDirection="topToBottom"
-				size="lg"
-				style={styles.bottomPlanet}
-			/>
 			<Image
 				source={
 					require("~/assets/images/bottom-circle.png") as ImageSourcePropType

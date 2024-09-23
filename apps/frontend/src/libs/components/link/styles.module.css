@@ -19,23 +19,46 @@
 }
 
 .button:hover {
-	color: var(--black);
-	background-color: var(--white);
-	border: 1px solid var(--black);
+	background: linear-gradient(
+		to bottom right,
+		var(--brand),
+		var(--light-brand)
+	);
 }
 
 .navLink {
 	display: flex;
-	gap: 12px;
-	align-items: center;
 	width: 100%;
 	height: 60px;
-	padding: 18px;
+	padding: 2px;
 	font-size: 18px;
+	color: var(--black);
 	border-radius: 30px;
 }
 
+.navLink > .content-container {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	width: 100%;
+	padding: 18px;
+	border-radius: 30px;
+}
+
+.navLink:hover {
+	background: linear-gradient(
+		to bottom right,
+		var(--brand),
+		var(--light-brand)
+	);
+}
+
+.navLink:hover > .content-container {
+	background: var(--white);
+}
+
 .navLink-active {
+	font-weight: 700;
 	background-color: var(--white);
 }
 

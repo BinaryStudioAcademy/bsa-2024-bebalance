@@ -10,6 +10,7 @@ export {
 	type NotificationAnswersRequestDto,
 	type ResetPasswordDto,
 	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
@@ -20,13 +21,16 @@ export {
 	type UserSignUpResponseDto,
 	type UserUpdateFormDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordFormDto,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 export {
 	notificationAnswers as notificationAnswersValidationSchema,
-	userForgotPassword as userForgotPasswordVaidationSchema,
+	userForgotPassword as userForgotPasswordValidationSchema,
 	userResetPassword as userResetPasswordValidationSchema,
 	userSignIn as userSignInValidationSchema,
 	userSignUp as userSignUpValidationSchema,
 	userUpdate as userUpdateValidationSchema,
+	userUpdatePassword as userUpdatePasswordValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";

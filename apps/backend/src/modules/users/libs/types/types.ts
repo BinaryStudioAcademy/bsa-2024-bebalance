@@ -1,9 +1,13 @@
+export { type UserDetailsWithAvatarFile } from "./user-details-with-avatar-file.type.js";
 export { type UserTaskDay } from "./user-task-day.type.js";
+export { type UserWithAvatarFile } from "./user-with-avatar-file.type.js";
 export {
 	type EmailDto,
 	type NotificationAnswersPayloadDto,
 	type NotificationAnswersRequestDto,
+	type QuizUserAnswerDto,
 	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetAllResponseDto,
 	type UserGetParametersDto,
@@ -12,5 +16,6 @@ export {
 	type UserSignUpRequestDto,
 	type UserSignUpResponseDto,
 	type UserUpdateParametersDto,
+	type UserUpdatePasswordRequestDto,
 	type UserUpdateRequestDto,
 } from "shared";

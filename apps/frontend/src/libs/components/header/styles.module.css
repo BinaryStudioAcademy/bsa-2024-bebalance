@@ -1,7 +1,7 @@
 .header {
 	position: sticky;
 	top: 0;
-	z-index: var(--z-index-medium);
+	z-index: var(--z-index-high);
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -27,6 +27,7 @@
 	width: 47px;
 	height: 47px;
 	margin-right: 9px;
+	object-fit: cover;
 	border-radius: 50%;
 }
 

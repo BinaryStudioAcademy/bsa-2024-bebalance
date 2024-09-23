@@ -1,18 +1,46 @@
 .page-container {
 	height: 100vh;
-	padding: 35px;
+	padding: 27px 34px;
 	background-color: var(--background);
-	background-image: url("../../../../../assets/img/circle-group-large.svg"),
-		url("../../../../../assets/img/circle-group-medium.svg"),
-		url("../../../../../assets/img/circle-group-small.svg");
-	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-image: url("../../../../../assets/img/blue-circle.svg"),
+		url("../../../../../assets/img/pink-circle.svg"),
+		url("../../../../../assets/img/green-circle.svg"),
+		url("../../../../../assets/img/ripple-effect-bg.svg"),
+		url("../../../../../assets/img/ripple-effect-bg2.svg"),
+		url("../../../../../assets/img/ripple-effect-bg4.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 	background-position:
-		left -600px top 50%,
-		right -30% bottom -500px,
-		right 20% top -270px;
+		right 40% bottom 15%,
+		left 15% top 45%,
+		right 10% top 20%,
+		left 600px top -15%,
+		right -150px bottom -300px,
+		left -500px bottom -100px;
+}
+
+.white-dots {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg"),
+		url("../../../../../assets/img/ellipse.svg");
+	background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+	background-position:
+		top 100px right 120px,
+		top 400px right 100px,
+		bottom 100px right 400px,
+		top 270px right 400px,
+		bottom 170px right 620px;
 }
 
 .border-container {
+	position: relative;
+	z-index: var(--z-index-low);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -38,11 +66,10 @@
 .text {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 20px;
 	padding: 30px;
 	margin-bottom: 30px;
 	font-size: 14px;
-	line-height: 1.4;
 	color: var(--white);
 	background-color: var(--text-background);
 	border-radius: 14px;

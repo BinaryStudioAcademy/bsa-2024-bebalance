@@ -23,6 +23,15 @@ class QuizQuestionRepository implements Repository {
 
 		return Number(questionModelCount[FIRST_ELEMENT_INDEX].count);
 	}
+	public async countByCategoryIds(categoryIds: number[]): Promise<number> {
+		const questionModelCount = await this.quizQuestionModel
+			.query()
+			.whereIn("categoryId", categoryIds)
+			.count()
+			.castTo<[{ count: string }]>();
+
+		return Number(questionModelCount[FIRST_ELEMENT_INDEX].count);
+	}
 
 	public async create(entity: QuizQuestionEntity): Promise<QuizQuestionEntity> {
 		const { categoryId, label } = entity.toNewObject();
@@ -88,7 +97,39 @@ class QuizQuestionRepository implements Repository {
 					.castTo<QuizAnswerModel[]>();
 
 				const answerEntities = answersModel.map((answer) => {
-					return QuizAnswerEntity.initializeNew(answer);
+					return QuizAnswerEntity.initialize(answer);
+				});
+
+				return QuizQuestionEntity.initialize({
+					answers: answerEntities,
+					categoryId: question.categoryId,
+					createdAt: question.createdAt,
+					id: question.id,
+					label: question.label,
+					updatedAt: question.updatedAt,
+				});
+			}),
+		);
+	}
+
+	public async findByCategoryIds(
+		categoryIds: number[],
+	): Promise<QuizQuestionEntity[]> {
+		const questions = await this.quizQuestionModel
+			.query()
+			.whereIn("categoryId", categoryIds)
+			.select("*");
+
+		return await Promise.all(
+			questions.map(async (question) => {
+				const answersModel = await this.quizQuestionModel
+					.relatedQuery(RelationName.QUIZ_ANSWERS)
+					.for(question.id)
+					.select("*")
+					.castTo<QuizAnswerModel[]>();
+
+				const answerEntities = answersModel.map((answer) => {
+					return QuizAnswerEntity.initialize(answer);
 				});
 
 				return QuizQuestionEntity.initialize({

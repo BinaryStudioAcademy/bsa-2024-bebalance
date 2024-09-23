@@ -6,6 +6,7 @@ import {
 } from "~/libs/modules/controller/controller.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Logger } from "~/libs/modules/logger/logger.js";
+import { type UploadedFile } from "~/modules/files/files.js";
 import { type UserService } from "~/modules/users/user.service.js";
 import { userUpdateValidationSchema } from "~/modules/users/users.js";
 
@@ -21,40 +22,49 @@ import {
 } from "./libs/types/types.js";
 import { notificationAnswersValidationSchema } from "./libs/validation-schemas/validation-schemas.js";
 
-/*** @swagger
+/**
+ * @swagger
+ * tags:
+ *   - name: users
+ *     description: Endpoints related to users
  * components:
  *    schemas:
- *      User:
+ *      NotificationFrequencyEnum:
+ *        type: string
+ *        enum: [all, none]
+ *      UserDto:
  *        type: object
  *        properties:
  *          id:
- *            type: number
- *            format: number
- *            minimum: 1
+ *            type: integer
+ *            example: 1
+ *          avatarFileId:
+ *            type: integer
+ *            nullable: true
+ *            example: 1
  *          email:
  *            type: string
  *            format: email
  *          name:
  *            type: string
+ *          avatarUrl:
+ *            type: string
+ *            nullable: true
+ *            example: https://example.com/avatar.png
+ *          notificationFrequency:
+ *            $ref: '#/components/schemas/NotificationFrequencyEnum'
+ *          userTaskDays:
+ *            type: array
+ *            items:
+ *              type: number
+ *            example: [1, 2, 3, 4, 5]
  *          createdAt:
  *            type: string
  *            format: date-time
  *          updatedAt:
  *            type: string
  *            format: date-time
- *      NotificationQuestionsRequest:
- *        type: object
- *        properties:
- *          notificationFrequency:
- *            type: string
- *          userTaskDays:
- *            type: array
- *            items:
- *              type: number
- *          userId:
- *            type: number
  */
-
 class UserController extends BaseController {
 	private userService: UserService;
 
@@ -67,6 +77,18 @@ class UserController extends BaseController {
 			handler: () => this.findAll(),
 			method: "GET",
 			path: UsersApiPath.ROOT,
+		});
+
+		this.addRoute({
+			handler: (options) =>
+				this.updateAvatar(
+					options as APIHandlerOptions<{
+						uploadedFile: UploadedFile;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: UsersApiPath.AVATAR,
 		});
 
 		this.addRoute({
@@ -116,24 +138,30 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users:
-	 *    get:
-	 *      description: Returns an array of users
-	 *      security:
-	 *        - bearerAuth: []
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                properties:
-	 *                  items:
-	 *                    type: array
-	 *                    items:
-	 *                      $ref: "#/components/schemas/User"
+	 *   get:
+	 *     tags: [users]
+	 *     summary: Get all users
+	 *     security:
+	 *       - bearerAuth: []
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               type: object
+	 *               properties:
+	 *                 items:
+	 *                   type: array
+	 *                   items:
+	 *                     $ref: "#/components/schemas/UserDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
-
 	private async findAll(): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.findAll(),
@@ -143,27 +171,43 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /users/:id:
-	 *    get:
-	 *      description: Return user by id
-	 *      security:
-	 *        - bearerAuth: []
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                $ref: "#/components/schemas/User"
+	 * /users/{id}:
+	 *   get:
+	 *     tags: [users]
+	 *     summary: Get user by id
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - name: id
+	 *         in: path
+	 *         required: true
+	 *         description: User id to get
+	 *         schema:
+	 *           type: integer
+	 *           example: 1
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/UserDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
 	 */
 	private async getById(
 		options: APIHandlerOptions<{
 			params: UserGetParametersDto;
 		}>,
 	): Promise<APIHandlerResponse> {
+		const user = await this.userService.find(options.params.id);
+
 		return {
-			payload: await this.userService.find(options.params.id),
+			payload: user,
 			status: HTTPCode.OK,
 		};
 	}
@@ -171,25 +215,45 @@ class UserController extends BaseController {
 	/**
 	 * @swagger
 	 * /users/notification-questions:
-	 *    post:
-	 *      description: Save user preferences based on notification questions form
-	 *      security:
-	 *        - bearerAuth: []
-	 *      requestBody:
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              $ref: "#/components/schemas/NotificationQuestionsRequest"
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                $ref: "#/components/schemas/User"
+	 *   post:
+	 *     tags: [users]
+	 *     summary: Save user notification preferences
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               notificationFrequency:
+	 *                 $ref: "#/components/schemas/NotificationFrequencyEnum"
+	 *               userTaskDays:
+	 *                 type: array
+	 *                 items:
+	 *                   type: integer
+	 *                 example: [1, 2, 3, 4, 5]
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/UserDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
-
 	private async saveNotificationAnswers(
 		options: APIHandlerOptions<{
 			body: NotificationAnswersPayloadDto;
@@ -209,27 +273,55 @@ class UserController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /users/:id:
-	 *    patch:
-	 *      description: Update user by id
-	 *      requestBody:
-	 *        description: Data to update
-	 *        required: true
-	 *        content:
-	 *          application/json:
-	 *            schema:
-	 *              type: object
-	 *              properties:
-	 *                name:
-	 *                  type: string
-	 *      responses:
-	 *        200:
-	 *          description: Successful operation
-	 *          content:
-	 *            application/json:
-	 *              schema:
-	 *                type: object
-	 *                $ref: "#/components/schemas/User"
+	 * /users/{id}:
+	 *   patch:
+	 *     tags: [users]
+	 *     summary: Update user data by id
+	 *     security:
+	 *       - bearerAuth: []
+	 *     parameters:
+	 *       - name: id
+	 *         in: path
+	 *         required: true
+	 *         description: User id to update
+	 *         schema:
+	 *           type: integer
+	 *           example: 1
+	 *     requestBody:
+	 *       description: Data to update
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               name:
+	 *                 type: string
+	 *     responses:
+	 *       200:
+	 *         description: Successful operation
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/UserDto"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       403:
+	 *         description: Forbidden to update other users data
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       422:
+	 *         description: Validation error
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/ValidationErrorResponse"
 	 */
 	private async update(
 		options: APIHandlerOptions<{
@@ -239,6 +331,64 @@ class UserController extends BaseController {
 	): Promise<APIHandlerResponse> {
 		return {
 			payload: await this.userService.update(options.params.id, options.body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
+	 * /users/avatar:
+	 *   post:
+	 *     tags: [users]
+	 *     summary: Update user's avatar
+	 *     description: Upload a new avatar for the user.
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       description: Avatar file to upload
+	 *       required: true
+	 *       content:
+	 *         multipart/form-data:
+	 *           schema:
+	 *             type: object
+	 *             properties:
+	 *               file:
+	 *                 type: string
+	 *                 format: binary
+	 *                 description: The avatar image file to be uploaded.
+	 *     responses:
+	 *       200:
+	 *         description: Avatar updated successfully
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/UserDto"
+	 *       400:
+	 *         description: Bad Request - Missing required file
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 *       401:
+	 *         description: Unauthorized
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: "#/components/schemas/CommonErrorResponse"
+	 */
+	private async updateAvatar(
+		options: APIHandlerOptions<{
+			uploadedFile: UploadedFile;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const user = await this.userService.updateAvatar(
+			options.user.id,
+			options.uploadedFile,
+		);
+
+		return {
+			payload: user,
 			status: HTTPCode.OK,
 		};
 	}

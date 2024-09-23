@@ -1,19 +1,14 @@
 import { APIPath, ContentType } from "~/libs/enums/enums";
-import { BaseHttpApi } from "~/libs/packages/api/api";
-import { type HTTP } from "~/libs/packages/http/http";
-import { type Storage } from "~/libs/packages/storage/storage";
+import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { UsersApiPath } from "./libs/enums/enums";
-import { type UserDto } from "./libs/types/types";
-
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
+import {
+	type NotificationAnswersPayloadDto,
+	type UserDto,
+} from "./libs/types/types";
 
 class UserApi extends BaseHttpApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 
@@ -24,6 +19,22 @@ class UserApi extends BaseHttpApi {
 				contentType: ContentType.JSON,
 				hasAuth: true,
 				method: "GET",
+			},
+		);
+
+		return await response.json<UserDto>();
+	}
+
+	public async saveNotificationAnswers(
+		payload: NotificationAnswersPayloadDto,
+	): Promise<UserDto> {
+		const response = await this.load(
+			this.getFullEndpoint(UsersApiPath.NOTIFICATION_QUESTIONS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
 			},
 		);
 

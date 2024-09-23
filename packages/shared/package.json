@@ -1,6 +1,6 @@
 {
 	"name": "shared",
-	"version": "1.14.0",
+	"version": "1.26.0",
 	"type": "module",
 	"main": "build/index.js",
 	"types": "src/index.ts",
@@ -14,7 +14,8 @@
 		"lint": "concurrently \"npm:lint:*\"",
 		"build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
 	},
-	"devDependencies": {
-		"zod": "3.23.8"
+	"dependencies": {
+		"zod": "3.23.8",
+		"date-fns": "3.6.0"
 	}
 }

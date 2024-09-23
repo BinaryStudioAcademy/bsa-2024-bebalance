@@ -1,9 +1,10 @@
 import { APIPath, ContentType } from "~/libs/enums/enums";
-import { BaseHttpApi } from "~/libs/packages/api/api";
-import { type HTTP } from "~/libs/packages/http/http";
-import { type Storage } from "~/libs/packages/storage/storage";
+import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import {
+	type EmailDto,
+	type ResetPasswordDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserSignInRequestDto,
 	type UserSignInResponseDto,
@@ -12,15 +13,27 @@ import {
 } from "../users/users";
 import { AuthApiPath } from "./libs/enums/enums";
 
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
-
 class AuthApi extends BaseHttpApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
+	}
+
+	public async checkIsResetPasswordExpired(
+		payload: ResetPasswordLinkDto,
+	): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(
+				`${AuthApiPath.CHECK_RESET_PASSWORD_EXPIRATION}?token=${payload.token}`,
+				{},
+			),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "GET",
+			},
+		);
+
+		return await response.json<boolean>();
 	}
 
 	public async getAuthenticatedUser(): Promise<UserDto> {
@@ -34,6 +47,34 @@ class AuthApi extends BaseHttpApi {
 		);
 
 		return await response.json<UserDto>();
+	}
+
+	public async requestResetPassword(payload: EmailDto): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.FORGOT_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<boolean>();
+	}
+
+	public async resetPassword(payload: ResetPasswordDto): Promise<boolean> {
+		const response = await this.load(
+			this.getFullEndpoint(AuthApiPath.RESET_PASSWORD, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: false,
+				method: "PATCH",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<boolean>();
 	}
 
 	public async signIn(
