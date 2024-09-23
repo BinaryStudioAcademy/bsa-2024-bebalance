@@ -58,7 +58,7 @@ const generateChangeTaskSuggestionsResponse = (
 		type: ChatMessageType.TASK,
 	};
 
-	return [taskMessage, textMessage];
+	return [textMessage, taskMessage];
 };
 
 export { generateChangeTaskSuggestionsResponse };

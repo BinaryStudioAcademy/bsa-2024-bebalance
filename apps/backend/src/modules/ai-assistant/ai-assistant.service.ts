@@ -139,11 +139,11 @@ class AIAssistantService {
 			return null;
 		}
 
-		const messages: ChatMessageDto[] = await Promise.all(
-			response.map(
-				async (message) => await this.chatMessageService.create(message),
-			),
-		);
+		const messages: ChatMessageDto[] = [];
+
+		for (const message of response) {
+			messages.push(await this.chatMessageService.create(message));
+		}
 
 		return {
 			messages,
@@ -176,11 +176,11 @@ class AIAssistantService {
 			return null;
 		}
 
-		const messages: ChatMessageDto[] = await Promise.all(
-			response.map(
-				async (message) => await this.chatMessageService.create(message),
-			),
-		);
+		const messages: ChatMessageDto[] = [];
+
+		for (const message of response) {
+			messages.push(await this.chatMessageService.create(message));
+		}
 
 		return {
 			messages,
@@ -248,11 +248,11 @@ class AIAssistantService {
 			return null;
 		}
 
-		const messages: ChatMessageDto[] = await Promise.all(
-			response.map(
-				async (message) => await this.chatMessageService.create(message),
-			),
-		);
+		const messages: ChatMessageDto[] = [];
+
+		for (const message of response) {
+			messages.push(await this.chatMessageService.create(message));
+		}
 
 		return {
 			messages,
