@@ -10,25 +10,62 @@ import {
 import { type ValueOf } from "~/libs/types/types.js";
 import {
 	actions as taskActions,
+	type TaskDto,
 	type TaskNoteRequestDto,
 } from "~/modules/tasks/tasks.js";
 
-import { TaskCard } from "./libs/components/components.js";
-import { TasksMode, TaskStatus } from "./libs/enums/enums.js";
+import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
+import { NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
+import {
+	MillisecondsPerUnit,
+	TasksMode,
+	TaskStatus,
+} from "./libs/enums/enums.js";
+import { getMillisecondsLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { dataStatus, tasks } = useAppSelector(({ tasks }) => {
-		return {
-			dataStatus: tasks.dataStatus,
-			tasks: tasks.tasks,
-		};
-	});
+	const { activeTasks, dataStatus, expiredTasks, tasks } = useAppSelector(
+		({ tasks }) => {
+			return {
+				activeTasks: tasks.activeTasks,
+				dataStatus: tasks.dataStatus,
+				expiredTasks: tasks.expiredTasks,
+				tasks: tasks.tasks,
+			};
+		},
+	);
 
 	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
 		TasksMode.CURRENT,
 	);
+
+	const handleTaskExpiration = useCallback(
+		(expiredTask: TaskDto) => {
+			void dispatch(taskActions.addExpiredTask(expiredTask));
+		},
+		[dispatch],
+	);
+
+	useEffect(() => {
+		const currentTime = Date.now();
+		const expired: TaskDto[] = [];
+		const active: TaskDto[] = [];
+
+		for (const task of tasks) {
+			const timeToDeadline = getMillisecondsLeft(currentTime, task.dueDate);
+
+			if (timeToDeadline < MillisecondsPerUnit.MINUTE) {
+				expired.push(task);
+			} else {
+				active.push(task);
+			}
+		}
+
+		void dispatch(taskActions.setActiveTasks(active));
+		void dispatch(taskActions.setExpiredTasks(expired));
+	}, [tasks, dispatch]);
 
 	useEffect(() => {
 		void dispatch(taskActions.getCurrentTasks());
@@ -80,10 +117,34 @@ const Tasks: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] => {
+		return tasks.map((task) => {
+			return (
+				<TaskCard
+					key={task.id}
+					onAddTaskNote={handleAddTaskNote}
+					onComplete={handleComplete}
+					onExpire={handleTaskExpiration}
+					onGetTaskNotes={handleGetTaskNotes}
+					onSkip={handleSkip}
+					task={task}
+				/>
+			);
+		});
+	};
+
 	const isLoading = dataStatus === DataStatus.PENDING;
+	const taskbarTasks = mode === TasksMode.CURRENT ? activeTasks : tasks;
 
 	return (
 		<>
+			{expiredTasks.length > NO_EXPIRED_TASKS && mode === TasksMode.CURRENT && (
+				<ExpiredTasksModal
+					onAddTaskNote={handleAddTaskNote}
+					onGetTaskNotes={handleGetTaskNotes}
+					tasks={expiredTasks}
+				/>
+			)}
 			<h4 className={styles["title"]}>My Tasks</h4>
 			<div className={styles["board"]}>
 				<div className={styles["board-header"]}>
@@ -100,20 +161,7 @@ const Tasks: React.FC = () => {
 					</div>
 				</div>
 				<div className={styles["cards-container"]}>
-					{isLoading ? (
-						<Loader />
-					) : (
-						tasks.map((task) => (
-							<TaskCard
-								key={task.id}
-								onAddTaskNote={handleAddTaskNote}
-								onComplete={handleComplete}
-								onGetTaskNotes={handleGetTaskNotes}
-								onSkip={handleSkip}
-								task={task}
-							/>
-						))
-					)}
+					{isLoading ? <Loader /> : handleRenderTaskCards(taskbarTasks)}
 				</div>
 			</div>
 		</>

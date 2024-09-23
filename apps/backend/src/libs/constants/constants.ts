@@ -1,1 +1,1 @@
-export { ZERO_INDEX } from "shared";
+export { FIRST_ITEM_INDEX, ZERO_INDEX } from "shared";

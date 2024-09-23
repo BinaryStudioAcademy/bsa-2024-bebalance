@@ -16,6 +16,7 @@ export {
 	type TaskNoteDto,
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
+	type TaskUpdatePayload,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
 export { taskNoteValidationSchema } from "./libs/validation-schemas/validation-schemas.js";

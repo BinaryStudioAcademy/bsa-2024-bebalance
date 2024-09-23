@@ -5,12 +5,10 @@ import {
 	type TaskDto,
 	type TaskNoteDto,
 	type TaskNoteParametersDto,
-} from "~/modules/tasks/tasks.js";
-
-import {
 	type TaskNoteRequestDto,
 	type TaskUpdatePayload,
-} from "../libs/types/types.js";
+} from "~/modules/tasks/tasks.js";
+
 import { name as sliceName } from "./tasks.slice.js";
 
 const addNote = createAsyncThunk<
@@ -63,4 +61,20 @@ const update = createAsyncThunk<TaskDto, TaskUpdatePayload, AsyncThunkConfig>(
 	},
 );
 
-export { addNote, getCurrentTasks, getPastTasks, getTaskNotes, update };
+const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
+	`${sliceName}/update-task-deadline`,
+	async (id: number, { extra }) => {
+		const { tasksApi } = extra;
+
+		return await tasksApi.updateTaskDeadline(id);
+	},
+);
+
+export {
+	addNote,
+	getCurrentTasks,
+	getPastTasks,
+	getTaskNotes,
+	update,
+	updateTaskDeadline,
+};

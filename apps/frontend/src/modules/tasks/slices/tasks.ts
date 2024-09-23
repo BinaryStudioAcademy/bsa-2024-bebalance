@@ -4,6 +4,7 @@ import {
 	getPastTasks,
 	getTaskNotes,
 	update,
+	updateTaskDeadline,
 } from "./actions.js";
 import { actions } from "./tasks.slice.js";
 
@@ -14,6 +15,7 @@ const allActions = {
 	getPastTasks,
 	getTaskNotes,
 	update,
+	updateTaskDeadline,
 };
 
 export { allActions as actions };

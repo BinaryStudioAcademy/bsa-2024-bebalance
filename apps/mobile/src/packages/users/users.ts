@@ -16,7 +16,11 @@ export {
 	UserValidationMessage,
 } from "./libs/enums/enums";
 export {
+	type EmailDto,
 	type NotificationAnswersPayloadDto,
+	type ResetPasswordDto,
+	type ResetPasswordFormDto,
+	type ResetPasswordLinkDto,
 	type UserDto,
 	type UserGetParametersDto,
 	type UserSignInRequestDto,
@@ -27,6 +31,8 @@ export {
 } from "./libs/types/types";
 export {
 	notificationAnswersValidationSchema,
+	userForgotPasswordValidationSchema,
+	userResetPasswordValidationSchema,
 	userSignInValidationSchema,
 	userSignUpValidationSchema,
 } from "./libs/validation-schemas/validation-schemas";

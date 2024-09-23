@@ -19,6 +19,7 @@ export {
 	type SectorParametersCalculationData,
 	type WheelDataItem,
 } from "./wheel/wheel";
+export { type RouteProp } from "@react-navigation/native";
 export { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 export {
 	type Control,
@@ -36,6 +37,7 @@ export {
 export { type LinearGradientProps } from "react-native-linear-gradient";
 export { type RadioButtonProps } from "react-native-radio-buttons-group";
 export { type SharedValue } from "react-native-reanimated";
+export { type ToastData } from "react-native-toast-message";
 export {
 	type CategoriesSelectedRequestDto,
 	type OnboardingQuestionResponseDto,

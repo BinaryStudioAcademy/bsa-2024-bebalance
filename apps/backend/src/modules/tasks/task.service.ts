@@ -2,6 +2,7 @@ import { ErrorMessage } from "~/libs/enums/enums.js";
 import { HTTPCode } from "~/libs/modules/http/http.js";
 import { type Service } from "~/libs/types/types.js";
 
+import { type UserDto } from "../users/users.js";
 import {
 	FULL_WEEK,
 	NO_DAYS_THIS_WEEK,
@@ -13,14 +14,16 @@ import {
 	type TaskDto,
 	type TaskNoteDto,
 	type TaskNoteRequestDto,
+	type TaskUpdateRequestDto,
 	type UsersTaskCreateRequestDto,
 } from "./libs/types/types.js";
 import { TaskEntity } from "./task.entity.js";
-import { type TaskModel } from "./task.model.js";
 import { type TaskRepository } from "./task.repository.js";
 
 class TaskService implements Service {
-	private calculateDeadline = (userTaskDays: number[]): string => {
+	private taskRepository: TaskRepository;
+
+	public calculateDeadline = (userTaskDays: number[]): string => {
 		const createdAt = new Date();
 		const createdAtDayOfWeek = createdAt.getDay();
 
@@ -46,8 +49,6 @@ class TaskService implements Service {
 
 		return deadline.toISOString();
 	};
-
-	private taskRepository: TaskRepository;
 
 	public constructor(taskRepository: TaskRepository) {
 		this.taskRepository = taskRepository;
@@ -109,6 +110,10 @@ class TaskService implements Service {
 		return { items: tasks.map((task) => task.toObject()) };
 	}
 
+	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
+		return await this.taskRepository.findAllByUserId(userId);
+	}
+
 	public async findCurrentByUserId(userId: number): Promise<TaskDto[]> {
 		const tasks = await this.taskRepository.findCurrentByUserId(userId);
 
@@ -131,9 +136,26 @@ class TaskService implements Service {
 
 	public async update(
 		id: number,
-		payload: Partial<TaskModel>,
+		payload: TaskUpdateRequestDto,
 	): Promise<TaskDto> {
 		const task = await this.taskRepository.update(id, payload);
+
+		return task.toObject();
+	}
+
+	public async updateDeadline(id: number, user: UserDto): Promise<TaskDto> {
+		const { userTaskDays } = user;
+
+		if (!userTaskDays || userTaskDays.length === NO_USER_TASK_DAYS) {
+			throw new TaskError({
+				message: ErrorMessage.TASK_DAYS_NOT_DEFINED,
+				status: HTTPCode.BAD_REQUEST,
+			});
+		}
+
+		const deadline = this.calculateDeadline(userTaskDays);
+
+		const task = await this.taskRepository.update(id, { dueDate: deadline });
 
 		return task.toObject();
 	}

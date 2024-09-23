@@ -1,5 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type UserUpdatePasswordFormDto,
 	type UserUpdatePasswordRequestDto,
@@ -7,6 +7,7 @@ import {
 } from "~/modules/users/users.js";
 
 import { DEFAULT_UPDATE_PASSWORD_PAYLOAD } from "./libs/constants/constants.js";
+import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -14,7 +15,14 @@ type Properties = {
 };
 
 const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
-	const { control, errors, handleSubmit } =
+	const [isCurrentPasswordVisible, setIsCurrentPasswordVisible] =
+		useState<boolean>(false);
+	const [isNewPasswordVisible, setIsNewPasswordVisible] =
+		useState<boolean>(false);
+	const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] =
+		useState<boolean>(false);
+
+	const { control, errors, getValues, handleSubmit, setError } =
 		useAppForm<UserUpdatePasswordFormDto>({
 			defaultValues: DEFAULT_UPDATE_PASSWORD_PAYLOAD,
 			validationSchema: userUpdatePasswordValidationSchema,
@@ -22,36 +30,66 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
-			void handleSubmit(onSubmit)(event_);
+			void handleSubmit((payload: UserUpdatePasswordRequestDto) => {
+				const { confirmNewPassword } = getValues();
+				const { newPassword } = payload;
+
+				if (confirmNewPassword === newPassword) {
+					onSubmit(payload);
+				} else {
+					setError(ConfirmPasswordCustomValidation.FIELD.CONFIRM_NEW_PASSWORD, {
+						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,
+						type: ConfirmPasswordCustomValidation.ERROR_TYPE,
+					});
+				}
+			})(event_);
 		},
-		[handleSubmit, onSubmit],
+		[handleSubmit, onSubmit, setError, getValues],
 	);
+
+	const handleTogglePasswordVisibility = useCallback(() => {
+		setIsCurrentPasswordVisible((previousState) => !previousState);
+	}, []);
+
+	const handleToggleNewPasswordVisibility = useCallback(() => {
+		setIsNewPasswordVisible((previousState) => !previousState);
+	}, []);
+
+	const handleToggleConfirmNewPasswordVisibility = useCallback(() => {
+		setIsConfirmNewPasswordVisible((previousState) => !previousState);
+	}, []);
 
 	return (
 		<form className={styles["form"]} onSubmit={handleFormSubmit}>
 			<Input
 				control={control}
 				errors={errors}
+				iconName={isCurrentPasswordVisible ? "crossedEye" : "eye"}
 				label="Current Password"
 				name="currentPassword"
+				onIconClick={handleTogglePasswordVisibility}
 				placeholder="••••••"
-				type="password"
+				type={isCurrentPasswordVisible ? "text" : "password"}
 			/>
 			<Input
 				control={control}
 				errors={errors}
+				iconName={isNewPasswordVisible ? "crossedEye" : "eye"}
 				label="New Password"
 				name="newPassword"
+				onIconClick={handleToggleNewPasswordVisibility}
 				placeholder="••••••"
-				type="password"
+				type={isNewPasswordVisible ? "text" : "password"}
 			/>
 			<Input
 				control={control}
 				errors={errors}
+				iconName={isConfirmNewPasswordVisible ? "crossedEye" : "eye"}
 				label="Confirm New Password"
 				name="confirmNewPassword"
+				onIconClick={handleToggleConfirmNewPasswordVisibility}
 				placeholder="••••••"
-				type="password"
+				type={isConfirmNewPasswordVisible ? "text" : "password"}
 			/>
 			<Button label="SAVE" type="submit" />
 		</form>

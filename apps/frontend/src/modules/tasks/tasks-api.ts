@@ -75,7 +75,7 @@ class TasksApi extends BaseHTTPApi {
 
 	public async update(
 		id: number,
-		task: TaskUpdateRequestDto,
+		task: Partial<TaskUpdateRequestDto>,
 	): Promise<TaskDto> {
 		const response = await this.load(
 			this.getFullEndpoint(TasksApiPath.$ID, { id: id.toString() }),
@@ -84,6 +84,22 @@ class TasksApi extends BaseHTTPApi {
 				hasAuth: true,
 				method: "PATCH",
 				payload: JSON.stringify(task),
+			},
+		);
+
+		return await response.json<TaskDto>();
+	}
+
+	public async updateTaskDeadline(id: number): Promise<TaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.$ID_DEADLINE, {
+				id: id.toString(),
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "PATCH",
+				payload: JSON.stringify({}),
 			},
 		);
 
