@@ -10,7 +10,13 @@ import {
 } from "~/packages/quiz/quiz";
 
 import { signOut } from "../auth/actions";
-import { editScores, getAllQuestions, getScores, saveAnswers } from "./actions";
+import {
+	editScores,
+	getAllQuestions,
+	getQuestionsByCategoryIds,
+	getScores,
+	saveAnswers,
+} from "./actions";
 
 type Properties = {
 	answerId: number;
@@ -22,6 +28,7 @@ type State = {
 	currentQuestion: null | QuizQuestionDto;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
+	isRetakingQuiz: boolean;
 	questions: QuizQuestionDto[];
 	scores: QuizScoresGetAllItemResponseDto[];
 	userAnswers: QuizUserAnswerDto[];
@@ -32,6 +39,7 @@ const initialState: State = {
 	currentQuestion: null,
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
+	isRetakingQuiz: false,
 	questions: [],
 	scores: [],
 	userAnswers: [],
@@ -61,6 +69,20 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getAllQuestions.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
+		builder.addCase(getQuestionsByCategoryIds.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isRetakingQuiz = true;
+		});
+		builder.addCase(getQuestionsByCategoryIds.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.questions = action.payload.items.flat();
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] ?? null;
+		});
+		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+			state.isRetakingQuiz = false;
+		});
 		builder.addCase(editScores.fulfilled, (state, action) => {
 			const updatedScores = new Map(
 				action.payload.items.map((score) => [score.id, score]),
@@ -88,10 +110,12 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(saveAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.userAnswers = action.payload;
+			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
