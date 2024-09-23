@@ -4,4 +4,9 @@ export { useAppSelector } from "./use-app-selector/use-app-selector.hook.js";
 export { useQuery } from "./use-query/use-query-hook.js";
 export { useCallback, useEffect, useRef, useState } from "react";
 export { useController as useFormController, useWatch } from "react-hook-form";
-export { useLocation, useNavigate, useParams } from "react-router-dom";
+export {
+	useBlocker,
+	useLocation,
+	useNavigate,
+	useParams,
+} from "react-router-dom";

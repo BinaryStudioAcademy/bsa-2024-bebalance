@@ -13,16 +13,16 @@ import {
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
+	useBlocker,
 	useCallback,
 	useEffect,
-	useNavigate,
+	useState,
 	useWatch,
 } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationQuestionsFormValues,
 	type ValueOf,
 } from "~/libs/types/types.js";
-import { actions as unsavedChangesActions } from "~/modules/unsaved-changes/unsaved-changes.js";
 import {
 	type NotificationAnswersPayloadDto,
 	notificationAnswersValidationSchema,
@@ -64,27 +64,30 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
-	const { hasUnsavedChanges, isUserCanceledSaving, nextNavigation } =
-		useAppSelector(({ unsavedChanges }) => unsavedChanges);
-	const navigate = useNavigate();
+	const [hasUnsavedChanges, setHasUnsavedChanges] = useState<boolean>(false);
 	const watchedValues = useWatch({ control });
+
+	const blocker = useBlocker(hasUnsavedChanges);
 
 	useEffect(() => {
 		const isFormChanged =
 			JSON.stringify(watchedValues) !== JSON.stringify(defaultValues);
-		dispatch(unsavedChangesActions.setHasUnsavedChanges(isFormChanged));
-	}, [dispatch, watchedValues, defaultValues]);
+		setHasUnsavedChanges(isFormChanged);
+	}, [watchedValues, defaultValues]);
 
 	const handleCancelPopupClick = useCallback((): void => {
-		dispatch(unsavedChangesActions.setUserCanceledSaving(true));
-	}, [dispatch]);
+		if (blocker.state === "blocked") {
+			blocker.reset();
+		}
+	}, [blocker]);
 
 	const handleConfirmPopupClick = useCallback((): void => {
 		reset();
-		dispatch(unsavedChangesActions.setHasUnsavedChanges(false));
-		navigate(nextNavigation);
-		dispatch(unsavedChangesActions.setUserCanceledSaving(true));
-	}, [dispatch, navigate, nextNavigation, reset]);
+
+		if (blocker.state === "blocked") {
+			blocker.proceed();
+		}
+	}, [blocker, reset]);
 
 	return (
 		<>
@@ -123,7 +126,7 @@ const Settings: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={hasUnsavedChanges && !isUserCanceledSaving}
+				isOpen={hasUnsavedChanges && blocker.state === "blocked"}
 				onClose={handleCancelPopupClick}
 				onConfirm={handleConfirmPopupClick}
 				title="Unsaved changes will be lost. Continue?"
