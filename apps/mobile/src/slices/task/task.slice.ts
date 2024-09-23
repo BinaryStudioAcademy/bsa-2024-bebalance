@@ -4,6 +4,7 @@ import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type TaskDto } from "~/packages/tasks/tasks";
 
+import { signOut } from "../auth/actions";
 import { getCurrentTasks, getPastTasks, updateTask } from "./actions";
 
 type State = {
@@ -50,6 +51,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(updateTask.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(signOut.pending, () => {
+			return initialState;
 		});
 	},
 	initialState,

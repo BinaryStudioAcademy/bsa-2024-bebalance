@@ -8,6 +8,7 @@ import {
 	type OnboardingUserAnswerDto,
 } from "~/packages/onboarding/onboarding";
 
+import { signOut } from "../auth/actions";
 import { getAll, saveAnswers } from "./actions";
 
 type State = {
@@ -56,6 +57,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(signOut.pending, () => {
+			return initialState;
 		});
 	},
 	initialState,
