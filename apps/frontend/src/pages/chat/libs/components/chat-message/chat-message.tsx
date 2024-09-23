@@ -1,5 +1,5 @@
 import defaultAvatar from "~/assets/img/default-avatar.png";
-import { Icon, TaskCard } from "~/libs/components/components.js";
+import { Icon } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { type UserDto, type ValueOf } from "~/libs/types/types.js";
@@ -10,11 +10,12 @@ import {
 	type TextMessage,
 } from "~/modules/chat/chat.js";
 
+import { TaskSuggestionsDisplay } from "./libs/components/components.js";
 import styles from "./styles.module.css";
 
 type Properties = {
 	author: ValueOf<typeof ChatMessageAuthor>;
-	payload: TaskMessage | TextMessage;
+	payload: TaskMessage | TaskMessage[] | TextMessage;
 	type: ValueOf<typeof ChatMessageType>;
 };
 
@@ -63,7 +64,9 @@ const ChatMessage: React.FC<Properties> = ({
 				<li className={messageContainerStyle}>
 					<Icon name="aiAssistantAvatar" />
 					<div className={contentContainerStyle}>
-						<TaskCard task={(payload as TaskMessage).task} />
+						<TaskSuggestionsDisplay
+							taskSuggestions={payload as TaskMessage[]}
+						/>
 					</div>
 				</li>
 			);

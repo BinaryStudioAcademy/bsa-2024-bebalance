@@ -13,7 +13,7 @@ type ChatMessageDto = {
 	createdAt: string;
 	id: number;
 	isRead: boolean;
-	payload: TaskMessage | TextMessage;
+	payload: TaskMessage | TaskMessage[] | TextMessage;
 	type: ValueOf<typeof ChatMessageType>;
 };
 

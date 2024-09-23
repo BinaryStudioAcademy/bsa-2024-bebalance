@@ -9,8 +9,13 @@ import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 import {
 	type ChatMessageDto,
 	type TaskCreateDto,
+	type TaskMessage,
 } from "../libs/types/types.js";
-import { getTasksForCategories, initConversation } from "./actions.js";
+import {
+	createTasksFromSuggestions,
+	getTasksForCategories,
+	initConversation,
+} from "./actions.js";
 
 type State = {
 	buttonsMode: ValueOf<typeof buttonsModeOption>;
@@ -33,6 +38,17 @@ const initialState: State = {
 const { actions, name, reducer } = createSlice({
 	extraReducers(builder) {
 		builder
+			.addCase(createTasksFromSuggestions.pending, (state) => {
+				state.taskSuggestions = [];
+				state.dataStatus = DataStatus.PENDING;
+			})
+			.addCase(createTasksFromSuggestions.fulfilled, (state) => {
+				state.dataStatus = DataStatus.FULFILLED;
+			})
+			.addCase(createTasksFromSuggestions.rejected, (state) => {
+				state.dataStatus = DataStatus.FULFILLED;
+			})
+
 			.addCase(initConversation.pending, (state) => {
 				state.dataStatus = DataStatus.PENDING;
 			})
@@ -44,17 +60,22 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
 			})
+
 			.addCase(getTasksForCategories.pending, (state) => {
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(getTasksForCategories.fulfilled, (state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
 				const newMessages = action.payload.messages;
+				const taskSuggestionsMessagePayload: TaskMessage[] = [];
 
 				for (const message of newMessages) {
-					state.messages.push(message);
+					if ("text" in message.payload) {
+						state.messages.push(message);
+					}
 
 					if ("task" in message.payload) {
+						taskSuggestionsMessagePayload.push(message.payload);
 						state.taskSuggestions.push({
 							categoryId: message.payload.task.categoryId,
 							categoryName: message.payload.task.categoryName,
@@ -63,6 +84,13 @@ const { actions, name, reducer } = createSlice({
 						});
 					}
 				}
+
+				state.messages.push({
+					author: ChatMessageAuthor.ASSISTANT,
+					isRead: true,
+					payload: taskSuggestionsMessagePayload,
+					type: ChatMessageType.TASK,
+				});
 
 				state.buttonsMode = buttonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
