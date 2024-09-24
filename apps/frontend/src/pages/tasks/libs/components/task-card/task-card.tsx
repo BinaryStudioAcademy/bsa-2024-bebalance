@@ -100,15 +100,6 @@ const TaskCard: React.FC<Properties> = ({
 									variant="icon"
 								/>
 								<Button
-									hasVisuallyHiddenLabel
-									iconColor=""
-									iconName="note"
-									iconPosition="left"
-									label="notes"
-									onClick={handleNoteOpen}
-									variant="icon"
-								/>
-								<Button
 									iconColor={iconColor}
 									iconName="closeSmall"
 									isDisabled={areActionsDisabled}

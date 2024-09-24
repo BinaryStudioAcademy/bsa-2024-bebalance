@@ -1,10 +1,9 @@
-import { useEffect, useRef } from "~/libs/hooks/hooks.js";
+import { useEffect } from "~/libs/hooks/hooks.js";
 
-const handleClickOutside = <T extends HTMLElement>(
+const useClickOutside = <T extends HTMLElement>(
 	onClickOutside: () => void,
+	reference: React.MutableRefObject<null | T>,
 ): React.MutableRefObject<null | T> => {
-	const reference = useRef<null | T>(null);
-
 	useEffect(() => {
 		const handleDetectClickOutside = (event: MouseEvent | TouchEvent): void => {
 			if (
@@ -22,9 +21,9 @@ const handleClickOutside = <T extends HTMLElement>(
 			document.removeEventListener("mousedown", handleDetectClickOutside);
 			document.removeEventListener("touchstart", handleDetectClickOutside);
 		};
-	}, [onClickOutside]);
+	}, [onClickOutside, reference]);
 
 	return reference;
 };
 
-export { handleClickOutside };
+export { useClickOutside };

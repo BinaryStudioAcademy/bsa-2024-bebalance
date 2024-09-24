@@ -1,6 +1,11 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { handleClickOutside } from "~/libs/helpers/helpers.js";
-import { useAppForm, useAppSelector, useCallback } from "~/libs/hooks/hooks.js";
+import {
+	useAppForm,
+	useAppSelector,
+	useCallback,
+	useClickOutside,
+	useRef,
+} from "~/libs/hooks/hooks.js";
 import {
 	type TaskDto,
 	type TaskNoteRequestDto,
@@ -21,7 +26,7 @@ const Notes: React.FC<Properties> = ({
 	onSubmit,
 	task,
 }: Properties) => {
-	const notesReference = handleClickOutside<HTMLDivElement>(onNoteClose);
+	const notesReference = useRef<HTMLDivElement | null>(null);
 	const { control, errors, handleSubmit } = useAppForm<TaskNoteRequestDto>({
 		defaultValues: {
 			...DEFAULT_TASK_NOTE_PAYLOAD,
@@ -41,6 +46,8 @@ const Notes: React.FC<Properties> = ({
 		},
 		[onSubmit, handleSubmit],
 	);
+
+	useClickOutside(onNoteClose, notesReference);
 
 	return (
 		<div className={styles["container"]}>
