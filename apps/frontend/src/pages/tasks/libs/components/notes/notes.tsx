@@ -7,6 +7,7 @@ import {
 	taskNoteValidationSchema,
 } from "~/modules/tasks/tasks.js";
 
+import { DEFAULT_TASK_NOTE_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
@@ -23,7 +24,7 @@ const Notes: React.FC<Properties> = ({
 	const reference = handleClickOutside<HTMLDivElement>(onNoteClose);
 	const { control, errors, handleSubmit } = useAppForm<TaskNoteRequestDto>({
 		defaultValues: {
-			content: "",
+			...DEFAULT_TASK_NOTE_PAYLOAD,
 			taskId: task.id,
 		},
 		validationSchema: taskNoteValidationSchema,
