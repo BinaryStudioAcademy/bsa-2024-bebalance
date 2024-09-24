@@ -6,15 +6,15 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
 import { name as sliceName } from "./quiz.slice.js";
 
 const editScores = createAsyncThunk<
-	QuizScoresResponseDto,
+	QuizScoresUpdateResponseDto,
 	QuizScoresUpdateRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/edit-scores`, async (editScoresPayload, { extra }) => {
