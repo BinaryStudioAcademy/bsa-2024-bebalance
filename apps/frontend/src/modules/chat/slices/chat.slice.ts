@@ -7,17 +7,30 @@ import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import { type ChatMessageDto, type TaskMessage } from "../libs/types/types.js";
+import {
+	type ChatMessageDto,
+	type TaskMessage,
+	type TextMessage,
+} from "../libs/types/types.js";
 import {
 	createTasksFromSuggestions,
 	getTasksForCategories,
 	initConversation,
 } from "./actions.js";
 
+const checkIsTask = (
+	message: ChatMessageDto,
+): message is ChatMessageDto<TaskMessage> => {
+	return message.type === "task";
+};
+
 type State = {
 	buttonsMode: ValueOf<typeof ButtonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
-	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
+	messages: Omit<
+		ChatMessageDto<TaskMessage[] | TextMessage>,
+		"createdAt" | "id"
+	>[];
 	selectedCategories: SelectedCategory[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
@@ -68,11 +81,16 @@ const { actions, name, reducer } = createSlice({
 				const taskSuggestionsMessagePayload: TaskMessage[] = [];
 
 				for (const message of newMessages) {
-					if ("text" in message.payload) {
-						state.messages.push(message);
+					if (message.type === "text") {
+						state.messages.push({
+							author: ChatMessageAuthor.ASSISTANT,
+							isRead: true,
+							payload: message.payload as TextMessage,
+							type: message.type,
+						});
 					}
 
-					if ("task" in message.payload) {
+					if (checkIsTask(message)) {
 						taskSuggestionsMessagePayload.push(message.payload);
 						state.taskSuggestions.push({
 							categoryId: message.payload.task.categoryId,

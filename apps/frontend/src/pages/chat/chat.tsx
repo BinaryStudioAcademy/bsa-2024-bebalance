@@ -26,14 +26,14 @@ const Chat: React.FC = () => {
 		threadId: state.chat.threadId,
 	}));
 
-	const scrollToBottom = (): void => {
+	const handleScrollToBottom = (): void => {
 		if (chatEnd.current) {
 			chatEnd.current.scrollIntoView({ behavior: "smooth" });
 		}
 	};
 
 	useEffect(() => {
-		scrollToBottom();
+		handleScrollToBottom();
 	}, [messages]);
 
 	useEffect(() => {

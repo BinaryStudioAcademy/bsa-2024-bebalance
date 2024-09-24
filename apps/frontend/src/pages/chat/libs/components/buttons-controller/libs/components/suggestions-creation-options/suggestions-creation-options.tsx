@@ -8,7 +8,7 @@ import { actions as chatActions } from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { SUGGESTIONS_CREATION_TEXT } from "./libs/constants/constants.js";
-import { suggestionsCreationButtonLabel } from "./libs/enums/enums.js";
+import { SuggestionsCreationButtonLabel } from "./libs/enums/enums.js";
 import { getThreeLowestScores } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -21,7 +21,7 @@ const SuggestionsCreationOptions: React.FC = () => {
 
 	const handleNo = useCallback(() => {
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
-		dispatch(chatActions.addUserTextMessage(suggestionsCreationButtonLabel.NO));
+		dispatch(chatActions.addUserTextMessage(SuggestionsCreationButtonLabel.NO));
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.CATEGORIES_CHECKBOX));
 	}, [dispatch]);
 
@@ -37,7 +37,7 @@ const SuggestionsCreationOptions: React.FC = () => {
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
 		dispatch(
-			chatActions.addUserTextMessage(suggestionsCreationButtonLabel.YES),
+			chatActions.addUserTextMessage(SuggestionsCreationButtonLabel.YES),
 		);
 
 		void dispatch(
@@ -56,12 +56,12 @@ const SuggestionsCreationOptions: React.FC = () => {
 					<p>{SUGGESTIONS_CREATION_TEXT}</p>
 					<div className={styles["button-container"]}>
 						<Button
-							label={suggestionsCreationButtonLabel.YES}
+							label={SuggestionsCreationButtonLabel.YES}
 							onClick={handleYes}
 							variant="secondary"
 						/>
 						<Button
-							label={suggestionsCreationButtonLabel.NO}
+							label={SuggestionsCreationButtonLabel.NO}
 							onClick={handleNo}
 							variant="secondary"
 						/>

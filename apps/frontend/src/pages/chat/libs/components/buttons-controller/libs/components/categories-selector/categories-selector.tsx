@@ -40,7 +40,7 @@ const CategoriesSelector: React.FC = () => {
 		[dispatch, quizCategories, threadId],
 	);
 
-	const handleFormSubmitWrapper = useCallback(
+	const handleFormSubmit = useCallback(
 		(categoryIds: number[]): void => {
 			void handleCategoriesSubmit(categoryIds);
 		},
@@ -55,7 +55,7 @@ const CategoriesSelector: React.FC = () => {
 				<div className={styles["content"]}>
 					<QuizCategoriesForm
 						buttonLabel={CATEGORIES_SELECTOR_BUTTON_LABEL}
-						onSubmit={handleFormSubmitWrapper}
+						onSubmit={handleFormSubmit}
 					/>
 				</div>
 			</div>
