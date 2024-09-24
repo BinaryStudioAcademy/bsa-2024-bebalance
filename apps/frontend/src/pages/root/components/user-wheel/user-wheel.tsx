@@ -18,6 +18,10 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
+import {
+	getFormattedDate,
+	getLocalDatestring,
+} from "./libs/helpers/helpers.js";
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -25,13 +29,13 @@ const NO_SCORES_COUNT = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { completionTasksPercentage, dataStatus, scores } = useAppSelector(
-		({ auth, quiz }) => ({
+	const { completionTasksPercentage, dataStatus, scores, scoresLastUpdatedAt } =
+		useAppSelector(({ auth, quiz }) => ({
 			completionTasksPercentage: auth.user?.completionTasksPercentage,
 			dataStatus: quiz.dataStatus,
 			scores: quiz.scores,
-		}),
-	);
+			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
+		}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
 	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
@@ -47,6 +51,10 @@ const UserWheel: React.FC = () => {
 	const headerText = isEditingModalOpen
 		? "Edit my wheel results"
 		: "My wheel results";
+
+	const lastWheelUpdateDate = scoresLastUpdatedAt
+		? getFormattedDate(getLocalDatestring(scoresLastUpdatedAt))
+		: null;
 
 	const handleEditing = useCallback(() => {
 		setIsEditingModalOpen(true);
@@ -72,6 +80,10 @@ const UserWheel: React.FC = () => {
 		}
 	}, [completionTasksPercentage]);
 
+	useEffect(() => {
+		dispatch(quizActions.setLastUpdatedScore());
+	}, [dispatch, scores]);
+
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
 			case "manual": {
@@ -94,6 +106,9 @@ const UserWheel: React.FC = () => {
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
 				<h4 className={styles["header-text"]}>{headerText}</h4>
+				<div className={styles["date-conrainer"]}>
+					<p className={styles["date"]}>{lastWheelUpdateDate}</p>
+				</div>
 				{isEditingModalOpen && (
 					<div className={styles["switch-container"]}>
 						<Switch

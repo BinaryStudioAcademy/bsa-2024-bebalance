@@ -28,7 +28,7 @@ type State = {
 	isRetakingQuiz: boolean;
 	questionsByCategories: QuizQuestionDto[][];
 	scores: QuizScoresGetAllItemResponseDto[];
-	scoresLastUpdatedAt: string;
+	scoresLastUpdatedAt: null | string;
 	step: ValueOf<typeof Step>;
 	userAnswers: QuizUserAnswerDto[];
 };
@@ -40,7 +40,7 @@ const initialState: State = {
 	isRetakingQuiz: false,
 	questionsByCategories: [],
 	scores: [],
-	scoresLastUpdatedAt: "",
+	scoresLastUpdatedAt: null,
 	step: Step.MOTIVATION,
 	userAnswers: [],
 };
