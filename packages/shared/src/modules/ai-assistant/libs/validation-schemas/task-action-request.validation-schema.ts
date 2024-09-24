@@ -28,7 +28,9 @@ const taskCreateDto = z.object({
 });
 
 const taskActionRequestSchema = z.object({
-	payload: taskCreateDto,
+	payload: z.array(taskCreateDto).nonempty({
+		message: AIAssistantValidationMessage.TASKS_REQUIRED,
+	}),
 	threadId: z
 		.string()
 		.trim()
