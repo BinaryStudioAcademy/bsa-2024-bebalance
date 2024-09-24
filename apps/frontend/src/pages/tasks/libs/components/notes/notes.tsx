@@ -37,9 +37,7 @@ const Notes: React.FC<Properties> = ({
 
 	const handleFormSubmit = useCallback(
 		(event: React.BaseSyntheticEvent): void => {
-			void handleSubmit(({ content, taskId }) => {
-				onSubmit({ content, taskId });
-			})(event);
+			void handleSubmit(onSubmit)(event);
 		},
 		[onSubmit, handleSubmit],
 	);
