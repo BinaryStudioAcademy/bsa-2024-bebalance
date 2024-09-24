@@ -21,7 +21,7 @@ const Notes: React.FC<Properties> = ({
 	onSubmit,
 	task,
 }: Properties) => {
-	const reference = handleClickOutside<HTMLDivElement>(onNoteClose);
+	const notesReference = handleClickOutside<HTMLDivElement>(onNoteClose);
 	const { control, errors, handleSubmit } = useAppForm<TaskNoteRequestDto>({
 		defaultValues: {
 			...DEFAULT_TASK_NOTE_PAYLOAD,
@@ -46,7 +46,7 @@ const Notes: React.FC<Properties> = ({
 
 	return (
 		<div className={styles["container"]}>
-			<div className={styles["overlay"]} ref={reference}>
+			<div className={styles["overlay"]} ref={notesReference}>
 				<div className={styles["close-btn"]}>
 					<Button
 						hasVisuallyHiddenLabel
