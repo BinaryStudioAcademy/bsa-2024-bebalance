@@ -8,6 +8,7 @@
 .notification-questions {
 	display: flex;
 	flex-direction: column;
+	gap: 40px;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
@@ -17,7 +18,6 @@
 }
 
 .title {
-	margin-bottom: 65px;
 	font-size: 32px;
 	font-weight: 700;
 	text-align: center;
@@ -27,6 +27,7 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	gap: 24px;
 	align-items: center;
 	justify-content: space-between;
 	max-width: 580px;
