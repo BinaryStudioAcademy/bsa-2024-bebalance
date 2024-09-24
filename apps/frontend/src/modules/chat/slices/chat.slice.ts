@@ -7,6 +7,7 @@ import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
+import { checkIsTask } from "../libs/helpers/helpers.js";
 import {
 	type ChatMessageDto,
 	type TaskMessage,
@@ -17,12 +18,6 @@ import {
 	getTasksForCategories,
 	initConversation,
 } from "./actions.js";
-
-const checkIsTask = (
-	message: ChatMessageDto,
-): message is ChatMessageDto<TaskMessage> => {
-	return message.type === "task";
-};
 
 type State = {
 	buttonsMode: ValueOf<typeof ButtonsModeOption>;
