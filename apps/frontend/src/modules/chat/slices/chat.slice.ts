@@ -27,7 +27,7 @@ type State = {
 };
 
 const initialState: State = {
-	buttonsMode: buttonsModeOption.SUGGESTIONS_CREATION,
+	buttonsMode: buttonsModeOption.NONE,
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
@@ -55,6 +55,7 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.fulfilled, (state, action) => {
 				state.threadId = action.payload.threadId;
 
+				state.buttonsMode = buttonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {

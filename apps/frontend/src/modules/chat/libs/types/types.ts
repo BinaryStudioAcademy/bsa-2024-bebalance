@@ -5,7 +5,6 @@ export {
 	type AIAssistantSuggestTaskRequestDto,
 	type ChatMessageDto,
 	type TaskCreateDto,
-	type TaskDto,
 	type TaskMessage,
 	type TaskPayload,
 	type TextMessage,
