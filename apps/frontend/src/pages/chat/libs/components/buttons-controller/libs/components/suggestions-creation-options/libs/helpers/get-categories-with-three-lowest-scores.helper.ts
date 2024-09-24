@@ -4,7 +4,9 @@ import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 const getCategoriesWithThreeLowestScores = (
 	categories: QuizScoresGetAllItemResponseDto[],
 ): QuizScoresGetAllItemResponseDto[] => {
-	const categoriesSorted = categories.toSorted((a, b) => a.score - b.score);
+	const categoriesSorted = categories.toSorted(
+		(leftCategory, rightCategory) => leftCategory.score - rightCategory.score,
+	);
 
 	return categoriesSorted.slice(NumericalValue.ZERO, NumericalValue.THREE);
 };
