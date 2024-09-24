@@ -5,4 +5,9 @@ export { useClickOutside } from "./use-click-outside/use-click-outside.hook.js";
 export { useQuery } from "./use-query/use-query-hook.js";
 export { useCallback, useEffect, useRef, useState } from "react";
 export { useController as useFormController } from "react-hook-form";
-export { useLocation, useNavigate, useParams } from "react-router-dom";
+export {
+	useBlocker,
+	useLocation,
+	useNavigate,
+	useParams,
+} from "react-router-dom";
