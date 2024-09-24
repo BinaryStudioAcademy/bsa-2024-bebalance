@@ -50,7 +50,7 @@ const NotificationQuestions: React.FC<Properties> = ({
 					<Input
 						control={control}
 						isFullWidth
-						label="How would you like to receive motivational follow-ups?"
+						label="Would you like to receive daily motivational follow-ups?"
 						name="notificationFrequency"
 						options={NOTIFICATION_FREQUENCY_OPTIONS}
 						type="radio"
