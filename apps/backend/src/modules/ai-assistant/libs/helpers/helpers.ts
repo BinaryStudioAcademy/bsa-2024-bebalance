@@ -3,7 +3,7 @@ export {
 	generateUserScoresPrompt,
 } from "./initial-chat/initial-chat.js";
 export {
-	generateTaskSuggestionsResponse,
+	generateTasksSuggestionsResponse,
 	runSuggestTaskByCategoryOptions,
 } from "./suggest-task-by-category/run-suggest-task-by-category-option.helper.js";
 export {

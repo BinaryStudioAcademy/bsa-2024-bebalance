@@ -1,14 +1,17 @@
-import { HTTPCode } from "shared";
 import { type z } from "zod";
 
 import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
-import { OpenAIErrorMessage } from "~/libs/modules/open-ai/libs/enums/open-ai-error-template.enum.js";
 import {
 	AIAssistantMessageValidationSchema,
+	OpenAIErrorMessage,
 	type OpenAIResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
-import { ChatMessageAuthor, ChatMessageType } from "../../enums/enums.js";
+import {
+	ChatMessageAuthor,
+	ChatMessageType,
+	HTTPCode,
+} from "../../enums/enums.js";
 import { OpenAIError } from "../../exceptions/exceptions.js";
 import {
 	type AIAssistantResponseDto,
@@ -18,7 +21,7 @@ import { type taskByCategory } from "./suggest-task-by-category.validation-schem
 
 type TaskByCategoryData = z.infer<typeof taskByCategory>;
 
-const generateTaskSuggestionsResponse = (
+const generateTasksSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
 ): AIAssistantResponseDto | null => {
@@ -79,4 +82,4 @@ const generateTaskSuggestionsResponse = (
 	}
 };
 
-export { generateTaskSuggestionsResponse };
+export { generateTasksSuggestionsResponse };

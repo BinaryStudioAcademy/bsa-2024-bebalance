@@ -8,7 +8,7 @@ import {
 	generateChangeTasksSuggestionsResponse,
 	generateExplainTasksSuggestionsResponse,
 	generateQuestionsAnswersPrompt,
-	generateTaskSuggestionsResponse,
+	generateTasksSuggestionsResponse,
 	generateUserScoresPrompt,
 	runChangeTasksByCategoryOptions,
 	runExplainTaskOptions,
@@ -177,7 +177,7 @@ class AIAssistantService {
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateTaskSuggestionsResponse(result, taskDeadLine);
+		return generateTasksSuggestionsResponse(result, taskDeadLine);
 	}
 }
 

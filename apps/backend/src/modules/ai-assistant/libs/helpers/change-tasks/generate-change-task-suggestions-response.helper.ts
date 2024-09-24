@@ -1,13 +1,17 @@
-import { ChatMessageAuthor, ChatMessageType, HTTPCode } from "shared";
 import { type z } from "zod";
 
 import { FIRST_ITEM_INDEX } from "~/libs/constants/constants.js";
-import { OpenAIErrorMessage } from "~/libs/modules/open-ai/libs/enums/open-ai-error-template.enum.js";
 import {
 	AIAssistantMessageValidationSchema,
+	OpenAIErrorMessage,
 	type OpenAIResponseMessage,
 } from "~/libs/modules/open-ai/open-ai.js";
 
+import {
+	ChatMessageAuthor,
+	ChatMessageType,
+	HTTPCode,
+} from "../../enums/enums.js";
 import { OpenAIError } from "../../exceptions/exceptions.js";
 import {
 	type AIAssistantResponseDto,

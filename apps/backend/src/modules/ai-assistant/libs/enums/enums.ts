@@ -1,1 +1,6 @@
-export { AIAssistantApiPath, ChatMessageAuthor, ChatMessageType } from "shared";
+export {
+	AIAssistantApiPath,
+	ChatMessageAuthor,
+	ChatMessageType,
+	HTTPCode,
+} from "shared";
