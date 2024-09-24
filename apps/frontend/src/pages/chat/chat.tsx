@@ -23,9 +23,6 @@ const Chat: React.FC = () => {
 	const { messages, messageStatus, threadId } = useAppSelector((state) => ({
 		messages: state.chat.messages,
 		messageStatus: state.chat.dataStatus,
-		quizCategories: state.categories.items,
-		scores: state.quiz.scores,
-		selectedCategories: state.chat.selectedCategories,
 		threadId: state.chat.threadId,
 	}));
 
