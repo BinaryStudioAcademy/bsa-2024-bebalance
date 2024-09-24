@@ -5,4 +5,5 @@ export { generateSliderGradientLocations } from "./generate-slider-gradient-loca
 export { getGradientColorsForCategory } from "./get-gradient-colors-for-category/get-gradient-colors-for-category.helper";
 export { getScreenWidth } from "./get-screen-width/get-screen-width.helper";
 export { getSecurityInputIconName } from "./get-security-input-icon-name/get-security-input-icon-name.helper";
+export { getStatusProperties } from "./get-status-properties/get-status-properties.helper";
 export { configureString, getFormattedDate } from "shared";

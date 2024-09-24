@@ -10,10 +10,12 @@ import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { authApi } from "~/packages/auth/auth";
 import { onboardingApi } from "~/packages/onboarding/onboarding";
 import { quizApi } from "~/packages/quiz/quiz";
+import { tasksApi } from "~/packages/tasks/tasks";
 import { userApi } from "~/packages/users/users";
 import { reducer as authReducer } from "~/slices/auth/auth";
 import { reducer as onboardingReducer } from "~/slices/onboarding/onboarding";
 import { reducer as quizReducer } from "~/slices/quiz/quiz";
+import { reducer as tasksReducer } from "~/slices/task/task";
 import { reducer as usersReducer } from "~/slices/users/users";
 
 import { type Config } from "../config/config";
@@ -23,6 +25,7 @@ type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
+	tasks: ReturnType<typeof tasksReducer>;
 	users: ReturnType<typeof usersReducer>;
 };
 
@@ -30,6 +33,7 @@ type ExtraArguments = {
 	authApi: typeof authApi;
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
+	tasksApi: typeof tasksApi;
 	toastMessage: typeof toastMessage;
 	userApi: typeof userApi;
 };
@@ -57,6 +61,7 @@ class Store {
 				auth: authReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
+				tasks: tasksReducer,
 				users: usersReducer,
 			},
 		});
@@ -67,6 +72,7 @@ class Store {
 			authApi,
 			onboardingApi,
 			quizApi,
+			tasksApi,
 			toastMessage,
 			userApi,
 		};

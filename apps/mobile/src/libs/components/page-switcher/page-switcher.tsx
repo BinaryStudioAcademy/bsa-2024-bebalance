@@ -3,18 +3,21 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "~/libs/components/components";
 import { useCallback } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 
 import { styles } from "./style";
 
 type PageSwitcherProperties = {
 	activeTab: string;
 	onTabChange: (tab: string) => void;
+	style?: StyleProp<ViewStyle>;
 	tabs: string[];
 };
 
 const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 	activeTab,
 	onTabChange,
+	style,
 	tabs,
 }) => {
 	const handleTabPress = useCallback(
@@ -62,6 +65,7 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 				globalStyles.justifyContentSpaceBetween,
 				globalStyles.p4,
 				styles.container,
+				style,
 			]}
 		>
 			{handleRenderTabs}

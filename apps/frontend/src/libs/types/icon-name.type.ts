@@ -15,9 +15,11 @@ type IconName =
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
+	| "signOut"
 	| "success"
 	| "tasksActive"
 	| "tasksInactive"
+	| "upload"
 	| "warning"
 	| "wheelActive"
 	| "wheelInactive";

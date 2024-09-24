@@ -14,9 +14,11 @@ import Note from "~/assets/img/note.svg?react";
 import RoundedCheck from "~/assets/img/rounded-check.svg?react";
 import SettingsActive from "~/assets/img/settings-active.svg?react";
 import SettingsInactive from "~/assets/img/settings-inactive.svg?react";
+import SignOut from "~/assets/img/sign-out.svg?react";
 import Success from "~/assets/img/success.svg?react";
 import TasksActive from "~/assets/img/tasks-active.svg?react";
 import TasksInactive from "~/assets/img/tasks-inactive.svg?react";
+import Upload from "~/assets/img/upload.svg?react";
 import Warning from "~/assets/img/warning.svg?react";
 import WheelOfBalanceActive from "~/assets/img/wheel-of-balance-active.svg?react";
 import WheelOfBalanceInactive from "~/assets/img/wheel-of-balance-inactive.svg?react";
@@ -42,9 +44,11 @@ const iconNameToSvg: Record<
 	roundedCheck: RoundedCheck,
 	settingsActive: SettingsActive,
 	settingsInactive: SettingsInactive,
+	signOut: SignOut,
 	success: Success,
 	tasksActive: TasksActive,
 	tasksInactive: TasksInactive,
+	upload: Upload,
 	warning: Warning,
 	wheelActive: WheelOfBalanceActive,
 	wheelInactive: WheelOfBalanceInactive,
