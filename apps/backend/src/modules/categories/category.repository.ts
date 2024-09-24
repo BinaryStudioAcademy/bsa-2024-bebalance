@@ -1,4 +1,4 @@
-import { RelationName } from "~/libs/enums/enums.js";
+import { RelationName, SortOrder } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
@@ -155,7 +155,7 @@ class CategoryRepository implements Repository {
 					.query()
 					.from(DatabaseTableName.QUIZ_SCORES)
 					.where({ categoryId: category.id, userId })
-					.orderBy("updatedAt", "desc")
+					.orderBy("updatedAt", SortOrder.DESC)
 					.returning("*")
 					.castTo<ScoreModel[]>();
 
