@@ -1,3 +1,4 @@
+import ArrowNext from "~/assets/img/arrow-next.svg?react";
 import CheckIcon from "~/assets/img/check-icon.svg?react";
 import CheckSmall from "~/assets/img/check-small.svg?react";
 import ClockActive from "~/assets/img/clock-active.svg?react";
@@ -9,6 +10,7 @@ import Error from "~/assets/img/error.svg?react";
 import Eye from "~/assets/img/eye.svg?react";
 import Info from "~/assets/img/info.svg?react";
 import Menu from "~/assets/img/menu.svg?react";
+import Note from "~/assets/img/note.svg?react";
 import RoundedCheck from "~/assets/img/rounded-check.svg?react";
 import SettingsActive from "~/assets/img/settings-active.svg?react";
 import SettingsInactive from "~/assets/img/settings-inactive.svg?react";
@@ -26,6 +28,7 @@ const iconNameToSvg: Record<
 	IconName,
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
+	arrowNext: ArrowNext,
 	check: CheckIcon,
 	checkSmall: CheckSmall,
 	clockActive: ClockActive,
@@ -37,6 +40,7 @@ const iconNameToSvg: Record<
 	eye: Eye,
 	info: Info,
 	menu: Menu,
+	note: Note,
 	roundedCheck: RoundedCheck,
 	settingsActive: SettingsActive,
 	settingsInactive: SettingsInactive,
