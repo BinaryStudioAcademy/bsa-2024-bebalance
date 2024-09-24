@@ -18,7 +18,6 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
-import { WHEEL_DATE_FORMAT } from "./libs/constants/constants.js";
 import {
 	getFormattedDate,
 	getLocalDatestring,
@@ -55,8 +54,8 @@ const UserWheel: React.FC = () => {
 
 	const lastWheelUpdateDate = scoresLastUpdatedAt
 		? getFormattedDate(
-				WHEEL_DATE_FORMAT,
-				getLocalDatestring(scoresLastUpdatedAt),
+				new Date(getLocalDatestring(scoresLastUpdatedAt)),
+				"d MMM yyyy, EEEE",
 			)
 		: null;
 

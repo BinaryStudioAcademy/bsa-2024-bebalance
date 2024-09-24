@@ -2,7 +2,7 @@ import { format } from "date-fns";
 
 type DateFormat = "d MMM yyyy, EEEE";
 
-const getFormattedDate = (dateFormat: DateFormat, date: string): string => {
+const getFormattedDate = (date: Date, dateFormat: DateFormat): string => {
 	return format(date, dateFormat);
 };
 
