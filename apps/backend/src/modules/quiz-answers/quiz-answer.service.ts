@@ -8,10 +8,7 @@ import {
 	type QuizScoresResponseDto,
 } from "../categories/categories.js";
 import { type QuizQuestionService } from "../quiz-questions/quiz-questions.js";
-import {
-	FIRST_ELEMENT_INDEX,
-	INITIAL_STATISTIC_VALUE,
-} from "./libs/constants/constants.js";
+import { INITIAL_STATISTIC_VALUE } from "./libs/constants/constants.js";
 import { QuizError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoryStatistic,
@@ -161,9 +158,8 @@ class QuizAnswerService implements Service {
 				});
 			}),
 		);
-		const { updatedAt } = scores[FIRST_ELEMENT_INDEX] as QuizScoreDto;
 
-		return { items: scores, updatedAt };
+		return { items: scores };
 	}
 
 	public async createUserAnswers({

@@ -15,8 +15,8 @@ import {
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -178,7 +178,7 @@ class CategoryService implements Service {
 	public async updateUserScores(
 		payload: QuizScoresUpdateRequestDto,
 		userId: number,
-	): Promise<QuizScoresResponseDto> {
+	): Promise<QuizScoresUpdateResponseDto> {
 		const { items: scoresData } = payload;
 
 		const userScore = await this.categoryRepository.findScoreByUser(userId);
