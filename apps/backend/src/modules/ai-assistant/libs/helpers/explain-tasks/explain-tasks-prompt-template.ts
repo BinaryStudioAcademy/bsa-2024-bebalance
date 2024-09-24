@@ -32,8 +32,8 @@ action:
 1. Retrieve the user's onboarding quiz results and use them to inform your explanation of each task.
 2. Return the tasks exactly as they were originally provided, including \`categoryId\`, \`categoryName\`,
 \`description\`, and \`label\`. **Do not modify the \`description\` field**.
-3. For each task, append a clear and concise explanation in the \`explanation\` field. This explanation should start
-with the task label, followed by a description of how the task helps the user achieve their goals.
+3. For each task, append a clear and concise explanation in the \`explanation\` field. This explanation should be
+a description of how the task helps the user achieve their goals and how it aligns with the user's priorities.
 4. In the \`message\` field, provide a summary of the response.
 5. Explain why the task is valuable for the user’s overall goals and how it contributes to their progress.
 6. Clearly describe how the task aligns with the user’s priorities, based on the answers they provided during the
