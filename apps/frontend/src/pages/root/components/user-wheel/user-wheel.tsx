@@ -80,10 +80,6 @@ const UserWheel: React.FC = () => {
 		}
 	}, [completionTasksPercentage]);
 
-	useEffect(() => {
-		dispatch(quizActions.setLastUpdatedScore());
-	}, [dispatch, scores]);
-
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
 			case "manual": {

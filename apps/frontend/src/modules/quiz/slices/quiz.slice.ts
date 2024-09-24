@@ -81,6 +81,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getScores.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.scores = action.payload.items;
+			state.scoresLastUpdatedAt = action.payload.updatedAt;
 		});
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -117,6 +118,7 @@ const { actions, name, reducer } = createSlice({
 					: stateScore;
 			});
 
+			state.scoresLastUpdatedAt = action.payload.updatedAt;
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(editScores.rejected, (state) => {
@@ -147,23 +149,6 @@ const { actions, name, reducer } = createSlice({
 				state.currentCategoryQuestions =
 					state.questionsByCategories[state.currentCategoryIndex] ?? null;
 			}
-		},
-		setLastUpdatedScore(state) {
-			const tasksDescendingByUpdatedAt = state.scores.sort(
-				(priorScore, nextScore) => {
-					return (
-						new Date(nextScore.updatedAt).getTime() -
-						new Date(priorScore.updatedAt).getTime()
-					);
-				},
-			);
-
-			if (!tasksDescendingByUpdatedAt[ZERO_INDEX]) {
-				return;
-			}
-
-			state.scoresLastUpdatedAt =
-				tasksDescendingByUpdatedAt[ZERO_INDEX].updatedAt;
 		},
 		setStep(state, action: PayloadAction<ValueOf<typeof Step>>) {
 			state.step = action.payload;
