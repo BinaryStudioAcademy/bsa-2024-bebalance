@@ -76,7 +76,6 @@ export {
 export {
 	ChatMessageAuthor,
 	type ChatMessageDto,
-	type ChatMessagePayload,
 	ChatMessageType,
 	type TaskMessage,
 	type TextMessage,
