@@ -425,7 +425,7 @@ class AIAssistantController extends BaseController {
 	 * @swagger
 	 * /assistant/chat/accept-tasks:
 	 *   post:
-	 *     summary: Accept task suggestions
+	 *     summary: Accept tasks suggestions
 	 *     tags:
 	 *       - AI Assistant
 	 *     security:
@@ -435,23 +435,27 @@ class AIAssistantController extends BaseController {
 	 *       content:
 	 *         application/json:
 	 *           schema:
-	 *             type: array
+	 *             type: object
 	 *             properties:
 	 *               threadId:
 	 *                 type: string
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
 	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *                 type: array
+	 *                 description: Array of tasks to accept
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
-	 *         description: Returns the accepted task
+	 *         description: Returns the accepted tasks
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/Task'
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/Task'
 	 */
-
 	private async acceptTasks(
 		options: APIHandlerOptions<{
 			body: AIAssistantCreateMultipleTasksDto;
@@ -534,7 +538,9 @@ class AIAssistantController extends BaseController {
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
 	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *                 type: array
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns task suggestions for the provided categories
@@ -573,7 +579,7 @@ class AIAssistantController extends BaseController {
 	 * @swagger
 	 * /assistant/chat/explain-tasks:
 	 *   post:
-	 *     summary: Explain task suggestion
+	 *     summary: Explain tasks suggestion
 	 *     tags:
 	 *       - AI Assistant
 	 *     security:
@@ -589,8 +595,10 @@ class AIAssistantController extends BaseController {
 	 *                 type: string
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
-	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *               payload:  # Исправлен отступ здесь
+	 *                 type: array
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns explanations for the provided task suggestions
