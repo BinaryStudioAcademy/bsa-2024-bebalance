@@ -354,7 +354,7 @@ class AIAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_ACCEPT_MULTIPLE_TASKS,
+			path: AIAssistantApiPath.CHAT_ACCEPT_TASKS,
 			validation: {
 				body: acceptMultipleTasksValidationSchema,
 			},
