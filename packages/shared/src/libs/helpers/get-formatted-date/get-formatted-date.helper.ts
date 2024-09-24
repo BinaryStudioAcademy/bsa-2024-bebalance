@@ -1,11 +1,11 @@
 import { format } from "date-fns";
 
-type DateFormat = "d MMM yyyy, EEEE";
+const WHEEL_DATE_FORMAT = "d MMM yyyy, EEEE";
 
-const getFormattedDate = (dateFormat: DateFormat): string => {
-	const today = new Date();
+const getFormattedDate = (inputDate?: string): string => {
+	const date = inputDate ? new Date(inputDate) : new Date();
 
-	return format(today, dateFormat);
+	return format(date, WHEEL_DATE_FORMAT);
 };
 
 export { getFormattedDate };
