@@ -11,15 +11,13 @@ import {
 import {
 	type AIAssistantResponseDto,
 	type ChatMessageDto,
-	type TaskCreateDto,
 } from "../../types/types.js";
-import { type explainTask } from "./explain-task.validation-schema.js";
+import { type explainTasks } from "./explain-tasks.validation-schema.js";
 
-type TaskByCategoryData = z.infer<typeof explainTask>;
+type TaskByCategoryData = z.infer<typeof explainTasks>;
 
-const generateExplainTaskSuggestionsResponse = (
+const generateExplainTasksSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
-	task: TaskCreateDto,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
@@ -45,47 +43,34 @@ const generateExplainTaskSuggestionsResponse = (
 		id: FIRST_ITEM_INDEX,
 		isRead: false,
 		payload: {
-			text:
-				resultData.message.explanation +
-				"\n\n" +
-				resultData.message.suggestions +
-				"\n\n" +
-				resultData.message.steps,
+			text: resultData.message,
 		},
 		type: "text",
 	};
 
-	const taskMessage: ChatMessageDto = {
-		author: OpenAIRoleKey.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: FIRST_ITEM_INDEX,
-		isRead: false,
-		payload: {
-			task: {
-				categoryId: task.categoryId,
-				categoryName: task.categoryName,
-				description: task.description,
-				label: task.label,
+	const tasksMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
+		return {
+			author: ChatMessageAuthor.ASSISTANT,
+			createdAt: new Date().toISOString(),
+			id: FIRST_ITEM_INDEX,
+			isRead: false,
+			payload: {
+				task: {
+					categoryId: task.categoryId,
+					categoryName: task.categoryName,
+					description: task.description,
+					label: task.label,
+				},
+				text: task.explanation,
 			},
-		},
-		type: "task",
-	};
-
-	const motivationMessage = {
-		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: FIRST_ITEM_INDEX,
-		isRead: false,
-		payload: {
-			text: resultData.message.motivation_tips,
-		},
-		type: ChatMessageType.TEXT,
-	};
+			type: ChatMessageType.TASK,
+		};
+	});
 
 	return {
-		messages: [textMessage, taskMessage, motivationMessage],
+		messages: [textMessage, ...tasksMessages],
 		threadId: message.thread_id,
 	};
 };
 
-export { generateExplainTaskSuggestionsResponse };
+export { generateExplainTasksSuggestionsResponse };
