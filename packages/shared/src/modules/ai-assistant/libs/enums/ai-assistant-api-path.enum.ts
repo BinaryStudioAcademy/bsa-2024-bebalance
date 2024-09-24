@@ -5,7 +5,7 @@ const AIAssistantApiPath = {
 	CHAT_CHANGE_TASK: "/chat/change-task",
 	CHAT_CONTINUE: "/chat/continue",
 	CHAT_EXPLAIN_TASK: "/chat/explain-task",
-	CHAT_INITIATE: "/chat/initiate",
+	CHAT_INITIALIZE: "/chat/initialize",
 	CHAT_SUGGEST_TASKS: "/chat/suggest-tasks",
 } as const;
 
