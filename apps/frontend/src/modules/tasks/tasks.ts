@@ -12,6 +12,7 @@ const tasksApi = new TasksApi({
 
 export { tasksApi };
 export {
+	type TaskCreateDto,
 	type TaskDto,
 	type TaskUpdatePayload,
 	type TaskUpdateRequestDto,

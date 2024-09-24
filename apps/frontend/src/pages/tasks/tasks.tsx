@@ -1,5 +1,6 @@
-import { Loader, Switch } from "~/libs/components/components.js";
+import { Loader, Switch, TaskCard } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
+import { getMillisecondsLeft } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -10,14 +11,13 @@ import {
 import { type ValueOf } from "~/libs/types/types.js";
 import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
+import { ExpiredTasksModal } from "./libs/components/components.js";
 import { NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
 import {
 	MillisecondsPerUnit,
 	TasksMode,
 	TaskStatus,
 } from "./libs/enums/enums.js";
-import { getMillisecondsLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {

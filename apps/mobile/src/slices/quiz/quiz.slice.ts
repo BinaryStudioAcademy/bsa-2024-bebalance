@@ -9,6 +9,7 @@ import {
 	type QuizUserAnswerDto,
 } from "~/packages/quiz/quiz";
 
+import { signOut } from "../auth/actions";
 import { editScores, getAllQuestions, getScores, saveAnswers } from "./actions";
 
 type Properties = {
@@ -94,6 +95,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(signOut.pending, () => {
+			return initialState;
 		});
 	},
 	initialState,

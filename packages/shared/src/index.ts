@@ -44,10 +44,13 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
 	type AIAssistantAcceptTaskRequestDto,
 	AIAssistantApiPath,
 	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantChatInitializeResponseDto,
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
@@ -74,7 +77,6 @@ export {
 	type SelectedCategory,
 } from "./modules/categories/categories.js";
 export {
-	type BalanceWheelMessage,
 	ChatMessageAuthor,
 	type ChatMessageCreateDto,
 	type ChatMessageDto,
@@ -123,6 +125,7 @@ export {
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
 	taskNoteValidationSchema,
+	type TaskPayload,
 	TasksApiPath,
 	TaskStatus,
 	type TaskUpdateParametersDto,

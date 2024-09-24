@@ -58,7 +58,7 @@ class QuizApi extends BaseHTTPApi {
 	}> {
 		const response = await this.load(
 			this.getFullEndpoint(
-				`${QuizApiPath.QUESTIONS}?categoryIds=[${categoryIds}]`,
+				`${QuizApiPath.QUESTIONS}?categoryIds=${categoryIds}`,
 				{},
 			),
 			{

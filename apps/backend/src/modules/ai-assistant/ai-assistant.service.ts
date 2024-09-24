@@ -20,6 +20,8 @@ import {
 import {
 	type AIAssistantAcceptTaskRequestDto,
 	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantChatInitializeResponseDto,
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
@@ -59,6 +61,35 @@ class AIAssistantService {
 		this.onboardingRepository = onboardingRepository;
 		this.taskService = taskService;
 		this.userService = userService;
+	}
+
+	public async acceptMultipleTasks(
+		user: UserDto,
+		body: AIAssistantCreateMultipleTasksDto,
+	): Promise<boolean[]> {
+		const { payload } = body;
+		const tasks = payload;
+		const threadId = user.threadId as string;
+
+		return await Promise.all(
+			tasks.map(async (task) => {
+				const newTask = await this.taskService.create({
+					categoryId: task.categoryId,
+					description: task.description,
+					label: task.label,
+					user,
+				});
+
+				const chatMessage = {
+					content: `User has accepted this task: ${JSON.stringify(newTask)}`,
+					role: OpenAIRoleKey.USER,
+				};
+
+				await this.openAI.addMessageToThread(threadId, chatMessage);
+
+				return true;
+			}),
+		);
 	}
 
 	public async acceptTask(
@@ -189,7 +220,7 @@ class AIAssistantService {
 
 	public async initializeNewChat(
 		user: UserDto,
-	): Promise<AIAssistantResponseDto | null> {
+	): Promise<AIAssistantChatInitializeResponseDto | null> {
 		if (user.threadId) {
 			const messages = await this.chatMessageService.findByThreadId(
 				user.threadId,
@@ -197,6 +228,7 @@ class AIAssistantService {
 
 			return {
 				messages,
+				threadId: user.threadId,
 			};
 		}
 
@@ -215,6 +247,7 @@ class AIAssistantService {
 
 		return {
 			messages: [],
+			threadId,
 		};
 	}
 

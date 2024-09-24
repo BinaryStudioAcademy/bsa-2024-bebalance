@@ -59,7 +59,6 @@ const generateExplainTaskSuggestionsResponse = (
 				categoryId: task.categoryId,
 				categoryName: task.categoryName,
 				description: task.description,
-				dueDate: task.dueDate,
 				label: task.label,
 			},
 		},

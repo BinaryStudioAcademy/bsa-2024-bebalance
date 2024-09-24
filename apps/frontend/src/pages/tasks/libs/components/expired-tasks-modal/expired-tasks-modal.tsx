@@ -1,3 +1,4 @@
+import { TaskCard } from "~/libs/components/components.js";
 import {
 	useCallback,
 	useEffect,
@@ -6,7 +7,7 @@ import {
 } from "~/libs/hooks/hooks.js";
 import { type TaskDto } from "~/modules/tasks/tasks.js";
 
-import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
+import { ArrowButton, TaskActionsPanel } from "../components.js";
 import {
 	FOCUSABLE_ELEMENT_TAB_INDEX,
 	INITIAL_POINTER_POSITION_X,
