@@ -81,7 +81,7 @@ const Notes: React.FC<Properties> = ({
 					<div className={styles["submit-btn"]}>
 						<Button
 							hasVisuallyHiddenLabel
-							iconName="arrow_next"
+							iconName="arrowNext"
 							iconPosition="center"
 							label="submit"
 							type="submit"

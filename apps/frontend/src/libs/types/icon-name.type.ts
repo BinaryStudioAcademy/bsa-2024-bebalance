@@ -1,5 +1,5 @@
 type IconName =
-	| "arrow_next"
+	| "arrowNext"
 	| "check"
 	| "checkSmall"
 	| "clockActive"

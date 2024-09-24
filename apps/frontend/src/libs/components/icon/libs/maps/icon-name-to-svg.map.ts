@@ -28,7 +28,7 @@ const iconNameToSvg: Record<
 	IconName,
 	React.FC<React.SVGProps<SVGSVGElement>>
 > = {
-	arrow_next: ArrowNext,
+	arrowNext: ArrowNext,
 	check: CheckIcon,
 	checkSmall: CheckSmall,
 	clockActive: ClockActive,
