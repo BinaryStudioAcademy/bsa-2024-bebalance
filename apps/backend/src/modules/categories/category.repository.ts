@@ -155,6 +155,7 @@ class CategoryRepository implements Repository {
 					.query()
 					.from(DatabaseTableName.QUIZ_SCORES)
 					.where({ categoryId: category.id, userId })
+					.orderBy("updatedAt", "desc")
 					.returning("*")
 					.castTo<ScoreModel[]>();
 

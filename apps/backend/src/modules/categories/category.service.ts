@@ -4,7 +4,10 @@ import { type Service } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
-import { FIRST_ELEMENT_INDEX } from "./libs/constants/constants.js";
+import {
+	FIRST_ELEMENT_INDEX,
+	LAST_INDEX_OFFSET,
+} from "./libs/constants/constants.js";
 import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoriesGetAllResponseDto,
@@ -42,21 +45,6 @@ class CategoryService implements Service {
 		const { createdAt, id, name, updatedAt } = category;
 
 		return { createdAt, id, name, scores, updatedAt };
-	}
-
-	private getLatestScoreUpdatedAt(scores: QuizScoreDto[]): string {
-		const scoresDescendingByUpdatedAt = scores.sort((priorScore, nextScore) => {
-			return (
-				new Date(nextScore.updatedAt).getTime() -
-				new Date(priorScore.updatedAt).getTime()
-			);
-		});
-
-		const latestScore = scoresDescendingByUpdatedAt[
-			FIRST_ELEMENT_INDEX
-		] as QuizScoreDto;
-
-		return latestScore.updatedAt;
 	}
 
 	public async create(payload: CategoryCreateRequestDto): Promise<CategoryDto> {
@@ -160,7 +148,9 @@ class CategoryService implements Service {
 			});
 		});
 
-		return { items: scores, updatedAt: this.getLatestScoreUpdatedAt(scores) };
+		const latestUpdatedScore = scores[FIRST_ELEMENT_INDEX] as QuizScoreDto;
+
+		return { items: scores, updatedAt: latestUpdatedScore.updatedAt };
 	}
 
 	public async update(
@@ -235,7 +225,11 @@ class CategoryService implements Service {
 			};
 		});
 
-		return { items, updatedAt: this.getLatestScoreUpdatedAt(items) };
+		const latestUpdatedScore = scores[
+			items.length - LAST_INDEX_OFFSET
+		] as QuizScoreDto;
+
+		return { items, updatedAt: latestUpdatedScore.updatedAt };
 	}
 }
 
