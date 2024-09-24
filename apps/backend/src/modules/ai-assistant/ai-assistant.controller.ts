@@ -309,7 +309,7 @@ class AIAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_CHANGE_TASK,
+			path: AIAssistantApiPath.CHAT_CHANGE_TASKS,
 			validation: {
 				body: taskActionRequestSchemaValidationSchema,
 			},
@@ -324,7 +324,7 @@ class AIAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_EXPLAIN_TASK,
+			path: AIAssistantApiPath.CHAT_EXPLAIN_TASKS,
 			validation: {
 				body: taskActionRequestSchemaValidationSchema,
 			},
@@ -515,7 +515,7 @@ class AIAssistantController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /assistant/chat/change-task:
+	 * /assistant/chat/change-tasks:
 	 *   post:
 	 *     summary: Change task
 	 *     tags:
