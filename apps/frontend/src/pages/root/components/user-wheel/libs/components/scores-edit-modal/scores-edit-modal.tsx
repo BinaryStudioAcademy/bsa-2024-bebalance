@@ -3,13 +3,12 @@ import {
 	useAppDispatch,
 	useCallback,
 	useEffect,
-	useRef,
 	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 
-import { INITIALIZE_DISCARD_BUTTON } from "./libs/constants/constants.js";
+import { IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -23,18 +22,19 @@ const ScoresEditModal: React.FC<Properties> = ({
 	onSaveChanges,
 }: Properties) => {
 	const dispatch = useAppDispatch();
+
 	const [scores, setScores] = useState<ModalData[]>(data);
+	const [originalScores] = useState<ModalData[]>(data);
 	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
-		useState<boolean>(INITIALIZE_DISCARD_BUTTON);
+		useState<boolean>(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 	const [areChangesDiscarded, setAreChangesDiscarded] =
 		useState<boolean>(false);
-	const originalScoresReference = useRef<ModalData[]>(data);
 
 	const handleSaveChanges = useCallback(() => {
 		if (!isDiscardButtonDisabled) {
 			void dispatch(
 				quizActions.editScores({
-					items: scores as QuizScoresGetAllItemResponseDto[],
+					items: scores,
 				}),
 			);
 		}
@@ -44,7 +44,7 @@ const ScoresEditModal: React.FC<Properties> = ({
 
 	const handleSliderChange = useCallback(
 		(categoryId: number, value: number) => {
-			setIsDiscardButtonDisabled(!INITIALIZE_DISCARD_BUTTON);
+			setIsDiscardButtonDisabled(!IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 
 			setScores(
 				scores.map((item) =>
@@ -69,14 +69,14 @@ const ScoresEditModal: React.FC<Properties> = ({
 	);
 
 	const handleDiscardChanges = useCallback(() => {
-		setScores(originalScoresReference.current);
+		setScores(originalScores);
 		setAreChangesDiscarded((previousValue) => !previousValue);
-	}, [setScores, setAreChangesDiscarded]);
+	}, [setScores, setAreChangesDiscarded, originalScores]);
 
 	useEffect(() => {
 		if (areChangesDiscarded) {
 			setAreChangesDiscarded((previousValue) => !previousValue);
-			setIsDiscardButtonDisabled(INITIALIZE_DISCARD_BUTTON);
+			setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 		}
 	}, [areChangesDiscarded]);
 
