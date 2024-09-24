@@ -86,7 +86,7 @@ const Settings: React.FC = () => {
 						<div className={styles["notification-days-input"]}>
 							<Checkbox
 								control={control}
-								label="Day to receive tasks"
+								label="Days to receive tasks"
 								name="userTaskDays"
 								options={TASK_DAYS_OPTIONS}
 							/>
