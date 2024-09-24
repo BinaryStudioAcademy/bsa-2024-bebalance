@@ -9,7 +9,7 @@ import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
 	SuggestionsManipulationButtonLabel,
-	SuggestionsManipulationMessages,
+	SuggestionsManipulationMessage,
 } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
@@ -21,7 +21,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 
 		void dispatch(
 			chatActions.addAssistantTextMessage(
-				SuggestionsManipulationMessages.MAIN_MESSAGE,
+				SuggestionsManipulationMessage.MAIN_MESSAGE,
 			),
 		);
 		void dispatch(
@@ -31,7 +31,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		);
 		void dispatch(
 			chatActions.addAssistantTextMessage(
-				SuggestionsManipulationMessages.ACCEPT_TASKS_RESPONSE,
+				SuggestionsManipulationMessage.ACCEPT_TASKS_RESPONSE,
 			),
 		);
 
@@ -48,7 +48,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 			<Icon name="aiAssistantAvatar" />
 			<div className={styles["content-container"]}>
 				<div className={styles["content"]}>
-					<p>{SuggestionsManipulationMessages.MAIN_MESSAGE}</p>
+					<p>{SuggestionsManipulationMessage.MAIN_MESSAGE}</p>
 					<div className={styles["button-container"]}>
 						<Button
 							label={SuggestionsManipulationButtonLabel.acceptTasks}
