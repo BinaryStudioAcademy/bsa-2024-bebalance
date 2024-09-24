@@ -44,7 +44,7 @@ class CategoryService implements Service {
 		return { createdAt, id, name, scores, updatedAt };
 	}
 
-	private getLastUpdatedScore(scores: QuizScoreDto[]): string {
+	private getLatestScoreUpdatedAt(scores: QuizScoreDto[]): string {
 		const scoresDescendingByUpdatedAt = scores.sort((priorScore, nextScore) => {
 			return (
 				new Date(nextScore.updatedAt).getTime() -
@@ -160,7 +160,7 @@ class CategoryService implements Service {
 			});
 		});
 
-		return { items: scores, updatedAt: this.getLastUpdatedScore(scores) };
+		return { items: scores, updatedAt: this.getLatestScoreUpdatedAt(scores) };
 	}
 
 	public async update(
@@ -235,7 +235,7 @@ class CategoryService implements Service {
 			};
 		});
 
-		return { items, updatedAt: this.getLastUpdatedScore(items) };
+		return { items, updatedAt: this.getLatestScoreUpdatedAt(items) };
 	}
 }
 
