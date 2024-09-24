@@ -17,7 +17,7 @@ type State = {
 	activeTasks: TaskDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
 	expiredTasks: TaskDto[];
-	task_notes: TaskNoteDto[];
+	taskNotes: TaskNoteDto[];
 	tasks: TaskDto[];
 };
 
@@ -25,7 +25,7 @@ const initialState: State = {
 	activeTasks: [],
 	dataStatus: DataStatus.IDLE,
 	expiredTasks: [],
-	task_notes: [],
+	taskNotes: [],
 	tasks: [],
 };
 
@@ -82,19 +82,16 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.REJECTED;
 		});
 
-		builder.addCase(addNote.pending, (state) => {
-			state.dataStatus = DataStatus.PENDING;
-		});
 		builder.addCase(addNote.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.task_notes = action.payload;
+			state.taskNotes = [...state.taskNotes, action.payload];
 		});
 		builder.addCase(addNote.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 
 		builder.addCase(getTaskNotes.fulfilled, (state, action) => {
-			state.task_notes = action.payload;
+			state.taskNotes = action.payload;
 		});
 		builder.addCase(getTaskNotes.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;

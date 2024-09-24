@@ -22,9 +22,11 @@ class TasksApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.TASKS, storage });
 	}
 
-	public async addNote(payload: TaskNoteRequestDto): Promise<TaskNoteDto[]> {
+	public async addNote(payload: TaskNoteRequestDto): Promise<TaskNoteDto> {
 		const response = await this.load(
-			this.getFullEndpoint(TasksApiPath.NOTES, {}),
+			this.getFullEndpoint(TasksApiPath.$ID_NOTES, {
+				id: payload.taskId.toString(),
+			}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
@@ -33,7 +35,7 @@ class TasksApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<TaskNoteDto[]>();
+		return await response.json<TaskNoteDto>();
 	}
 
 	public async getCurrentTasks(): Promise<TaskDto[]> {
@@ -62,11 +64,9 @@ class TasksApi extends BaseHTTPApi {
 		return await response.json<TaskDto[]>();
 	}
 
-	public async getTaskNotes(taskId: number): Promise<TaskNoteDto[]> {
+	public async getTaskNotes(id: number): Promise<TaskNoteDto[]> {
 		const response = await this.load(
-			this.getFullEndpoint(TasksApiPath.NOTES_$ID, {
-				id: taskId.toString(),
-			}),
+			this.getFullEndpoint(TasksApiPath.$ID_NOTES, { id: id.toString() }),
 			{ contentType: ContentType.JSON, hasAuth: true, method: "GET" },
 		);
 

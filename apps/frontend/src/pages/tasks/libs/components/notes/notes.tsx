@@ -28,9 +28,9 @@ const Notes: React.FC<Properties> = ({
 		},
 		validationSchema: taskNoteValidationSchema,
 	});
-	const { task_notes } = useAppSelector(({ tasks }) => {
+	const { taskNotes } = useAppSelector(({ tasks }) => {
 		return {
-			task_notes: tasks.task_notes,
+			taskNotes: tasks.taskNotes,
 		};
 	});
 
@@ -58,8 +58,8 @@ const Notes: React.FC<Properties> = ({
 
 				<h5 className={styles["task-label"]}>{task.label}</h5>
 				<div className={styles["note-content"]}>
-					{task_notes.map((note) => {
-						return <span key={note.id}>{note.content}</span>;
+					{taskNotes.map((taskNote) => {
+						return <span key={taskNote.id}>{taskNote.content}</span>;
 					})}
 				</div>
 

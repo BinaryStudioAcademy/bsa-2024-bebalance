@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { NotificationMessage } from "~/libs/enums/enums.js";
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
 	type TaskDto,
@@ -12,11 +13,13 @@ import {
 import { name as sliceName } from "./tasks.slice.js";
 
 const addNote = createAsyncThunk<
-	TaskNoteDto[],
+	TaskNoteDto,
 	TaskNoteRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/add-task-note`, async (payload, { extra }) => {
-	const { tasksApi } = extra;
+	const { notification, tasksApi } = extra;
+
+	notification.success(NotificationMessage.TASK_NOTES_ADDED);
 
 	return await tasksApi.addNote(payload);
 });

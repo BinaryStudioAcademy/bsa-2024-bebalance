@@ -9,10 +9,7 @@ import { type Logger } from "~/libs/modules/logger/logger.js";
 import { type UserDto } from "~/modules/users/users.js";
 
 import { TasksApiPath } from "./libs/enums/enums.js";
-import {
-	checkAccessToTask,
-	checkNoteAccessToTask,
-} from "./libs/hooks/hooks.js";
+import { checkAccessToTask } from "./libs/hooks/hooks.js";
 import {
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
@@ -138,11 +135,14 @@ class TaskController extends BaseController {
 		this.addRoute({
 			handler: (options) =>
 				this.addNote(
-					options as APIHandlerOptions<{ body: TaskNoteRequestDto }>,
+					options as APIHandlerOptions<{
+						body: TaskNoteRequestDto;
+						params: TaskNoteParametersDto;
+					}>,
 				),
 			method: "POST",
-			path: TasksApiPath.NOTES,
-			preHandlers: [checkNoteAccessToTask(taskService)],
+			path: TasksApiPath.$ID_NOTES,
+			preHandlers: [checkAccessToTask(taskService)],
 			validation: {
 				body: taskNoteValidationSchema,
 			},
@@ -156,7 +156,7 @@ class TaskController extends BaseController {
 					}>,
 				),
 			method: "GET",
-			path: TasksApiPath.NOTES_$ID,
+			path: TasksApiPath.$ID_NOTES,
 			preHandlers: [checkAccessToTask(taskService)],
 		});
 	}
@@ -209,6 +209,7 @@ class TaskController extends BaseController {
 	private async addNote(
 		options: APIHandlerOptions<{
 			body: TaskNoteRequestDto;
+			params: TaskNoteParametersDto;
 		}>,
 	): Promise<APIHandlerResponse> {
 		return {
@@ -307,7 +308,7 @@ class TaskController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /tasks/notes/:id:
+	 * /tasks/:id/notes:
 	 *   get:
 	 *     tags: [tasks]
 	 *     summary: Get all task notes
