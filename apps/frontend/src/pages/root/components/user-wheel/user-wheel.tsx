@@ -105,9 +105,11 @@ const UserWheel: React.FC = () => {
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
-				<h4 className={styles["header-text"]}>{headerText}</h4>
-				<div className={styles["date-conrainer"]}>
-					<p className={styles["date"]}>{lastWheelUpdateDate}</p>
+				<div className={styles["header-text-container"]}>
+					<h4 className={styles["header-text"]}>{headerText}</h4>
+					<div className={styles["date-conrainer"]}>
+						<p className={styles["date"]}>{lastWheelUpdateDate}</p>
+					</div>
 				</div>
 				{isEditingModalOpen && (
 					<div className={styles["switch-container"]}>
