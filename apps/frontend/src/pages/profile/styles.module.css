@@ -5,12 +5,19 @@
 	padding: 35px;
 }
 
-.sign-out-button {
-	width: 350px;
+.header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-@media (width <= 768px) {
-	.sign-out-button {
-		width: 100%;
-	}
+.header-title {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 25px;
+}
+
+.button-container {
+	justify-self: end;
+	width: fit-content;
 }

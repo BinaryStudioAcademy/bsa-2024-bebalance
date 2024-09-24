@@ -1,6 +1,6 @@
 type IconName =
 	| "check"
-	| "checkBlack"
+	| "checkSmall"
 	| "clockActive"
 	| "clockInactive"
 	| "close"
@@ -13,9 +13,11 @@ type IconName =
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"
+	| "signOut"
 	| "success"
 	| "tasksActive"
 	| "tasksInactive"
+	| "upload"
 	| "warning"
 	| "wheelActive"
 	| "wheelInactive";

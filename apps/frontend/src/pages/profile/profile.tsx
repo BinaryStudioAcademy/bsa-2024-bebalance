@@ -87,17 +87,26 @@ const Profile: React.FC = () => {
 			{isLoading && <Loader />}
 			{user && (
 				<div className={styles["page-container"]}>
-					<ProfileSection title="Profile">
+					<div className={styles["header-container"]}>
+						<h4 className={styles["header-title"]}>Profile</h4>
+						<div className={styles["button-container"]}>
+							<Button
+								iconName="signOut"
+								label="LOG OUT"
+								onClick={handleSignOut}
+								type="button"
+								variant="secondary"
+							/>
+						</div>
+					</div>
+
+					<ProfileSection hasVisuallyHiddenTitle title="Profile">
 						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
 					</ProfileSection>
+
 					<ProfileSection title="Change Password">
 						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
-					</ProfileSection>
-					<ProfileSection title="Danger Zone">
-						<div className={styles["sign-out-button"]}>
-							<Button label="SIGN OUT" onClick={handleSignOut} type="button" />
-						</div>
 					</ProfileSection>
 				</div>
 			)}

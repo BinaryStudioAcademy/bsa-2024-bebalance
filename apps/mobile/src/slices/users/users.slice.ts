@@ -4,6 +4,7 @@ import { DataStatus } from "~/libs/enums/enums";
 import { type ValueOf } from "~/libs/types/types";
 import { type UserDto } from "~/packages/users/users";
 
+import { signOut } from "../auth/actions";
 import { getById, saveNotificationAnswers } from "./actions";
 
 type State = {
@@ -39,6 +40,9 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(saveNotificationAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(signOut.pending, () => {
+			return initialState;
 		});
 	},
 	initialState,

@@ -6,11 +6,13 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	hasVisuallyHiddenLabel?: boolean;
+	iconColor?: string | undefined;
 	iconName?: IconName;
 	iconPosition?: "center" | "left" | "right";
 	isDisabled?: boolean;
 	isSelected?: boolean;
 	label: string;
+	labelVariant?: "light" | "primary";
 	onClick?: (() => void) | undefined;
 	type?: "button" | "submit";
 	variant?: "action" | "icon" | "primary" | "secondary" | "switch";
@@ -18,11 +20,13 @@ type Properties = {
 
 const Button: React.FC<Properties> = ({
 	hasVisuallyHiddenLabel = false,
+	iconColor,
 	iconName,
 	iconPosition = "right",
 	isDisabled = false,
 	isSelected = false,
 	label,
+	labelVariant = "primary",
 	onClick,
 	type = "button",
 	variant = "primary",
@@ -38,15 +42,21 @@ const Button: React.FC<Properties> = ({
 		onClick={onClick}
 		type={type}
 	>
+		{iconPosition === "right" && iconName && (
+			<Icon color={iconColor} name={iconName} />
+		)}
 		<span
 			className={getValidClassNames(
 				hasVisuallyHiddenLabel && "visually-hidden",
 				variant === "secondary" && styles["secondary-label"],
+				styles[`${labelVariant}-label`],
 			)}
 		>
 			{label}
 		</span>
-		{iconName && <Icon name={iconName} />}
+		{iconPosition === "left" && iconName && (
+			<Icon color={iconColor} name={iconName} />
+		)}
 	</button>
 );
 
