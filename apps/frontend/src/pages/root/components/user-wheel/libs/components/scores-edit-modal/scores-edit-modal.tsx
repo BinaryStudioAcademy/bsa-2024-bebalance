@@ -1,6 +1,7 @@
 import { Button, Slider } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
+	useAppSelector,
 	useCallback,
 	useEffect,
 	useState,
@@ -22,9 +23,11 @@ const ScoresEditModal: React.FC<Properties> = ({
 	onSaveChanges,
 }: Properties) => {
 	const dispatch = useAppDispatch();
+	const { scores: originalScores } = useAppSelector(({ quiz }) => ({
+		scores: quiz.scores,
+	}));
 
 	const [scores, setScores] = useState<ModalData[]>(data);
-	const [originalScores] = useState<ModalData[]>(data);
 	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
 		useState<boolean>(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 	const [areChangesDiscarded, setAreChangesDiscarded] =
@@ -69,16 +72,18 @@ const ScoresEditModal: React.FC<Properties> = ({
 	);
 
 	const handleDiscardChanges = useCallback(() => {
-		setScores(originalScores);
+		void dispatch(quizActions.getScores());
 		setAreChangesDiscarded((previousValue) => !previousValue);
-	}, [setScores, setAreChangesDiscarded, originalScores]);
+	}, [setAreChangesDiscarded, dispatch]);
 
 	useEffect(() => {
+		setScores(originalScores);
+
 		if (areChangesDiscarded) {
 			setAreChangesDiscarded((previousValue) => !previousValue);
 			setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 		}
-	}, [areChangesDiscarded]);
+	}, [areChangesDiscarded, setScores, originalScores]);
 
 	return (
 		<div className={styles["container"]}>
