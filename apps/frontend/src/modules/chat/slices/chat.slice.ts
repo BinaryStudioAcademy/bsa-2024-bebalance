@@ -4,13 +4,10 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
+import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import {
-	type ChatMessageDto,
-	type TaskCreateDto,
-	type TaskMessage,
-} from "../libs/types/types.js";
+import { type ChatMessageDto, type TaskMessage } from "../libs/types/types.js";
 import {
 	createTasksFromSuggestions,
 	getTasksForCategories,
