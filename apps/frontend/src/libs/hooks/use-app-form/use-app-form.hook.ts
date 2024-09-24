@@ -23,10 +23,10 @@ type Parameters<T extends FieldValues = FieldValues> = {
 
 type ReturnValue<T extends FieldValues = FieldValues> = {
 	control: Control<T, null>;
-	defaultValues: DefaultValues<T>;
 	errors: FieldErrors<T>;
 	getValues: UseFormGetValues<T>;
 	handleSubmit: UseFormHandleSubmit<T>;
+	isDirty: boolean;
 	isValid: boolean;
 	reset: (defaultValues?: DefaultValues<T>) => void;
 	setError: UseFormSetError<T>;
@@ -52,7 +52,7 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 
 	const {
 		control,
-		formState: { errors, isValid },
+		formState: { errors, isDirty, isValid },
 		getValues,
 		handleSubmit,
 		reset,
@@ -62,10 +62,10 @@ const useAppForm = <T extends FieldValues = FieldValues>({
 
 	return {
 		control,
-		defaultValues,
 		errors,
 		getValues,
 		handleSubmit,
+		isDirty,
 		isValid,
 		reset,
 		setError,

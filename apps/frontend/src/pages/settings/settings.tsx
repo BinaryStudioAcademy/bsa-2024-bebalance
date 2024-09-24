@@ -15,9 +15,6 @@ import {
 	useAppSelector,
 	useBlocker,
 	useCallback,
-	useEffect,
-	useState,
-	useWatch,
 } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationQuestionsFormValues,
@@ -35,7 +32,7 @@ import styles from "./styles.module.css";
 
 const Settings: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user) as UserDto;
-	const { control, defaultValues, handleSubmit, reset } =
+	const { control, handleSubmit, isDirty, reset } =
 		useAppForm<NotificationQuestionsFormValues>({
 			defaultValues: {
 				notificationFrequency: user.notificationFrequency as ValueOf<
@@ -64,16 +61,7 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
-	const [hasUnsavedChanges, setHasUnsavedChanges] = useState<boolean>(false);
-	const watchedValues = useWatch({ control });
-
-	const blocker = useBlocker(hasUnsavedChanges);
-
-	useEffect(() => {
-		const isFormChanged =
-			JSON.stringify(watchedValues) !== JSON.stringify(defaultValues);
-		setHasUnsavedChanges(isFormChanged);
-	}, [watchedValues, defaultValues]);
+	const blocker = useBlocker(isDirty);
 
 	const handleCancelPopupClick = useCallback((): void => {
 		if (blocker.state === "blocked") {
@@ -126,7 +114,7 @@ const Settings: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={hasUnsavedChanges && blocker.state === "blocked"}
+				isOpen={isDirty && blocker.state === "blocked"}
 				onClose={handleCancelPopupClick}
 				onConfirm={handleConfirmPopupClick}
 				title="Unsaved changes will be lost. Continue?"
