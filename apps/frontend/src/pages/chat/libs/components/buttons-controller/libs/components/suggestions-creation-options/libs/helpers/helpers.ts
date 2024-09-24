@@ -1,1 +1,1 @@
-export { getThreeLowestScores } from "./get-three-lowest-scores.helper.js";
+export { getCategoriesWithThreeLowestScores } from "./get-categories-with-three-lowest-scores.helper.js";

@@ -9,7 +9,7 @@ import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { SUGGESTIONS_CREATION_TEXT } from "./libs/constants/constants.js";
 import { SuggestionsCreationButtonLabel } from "./libs/enums/enums.js";
-import { getThreeLowestScores } from "./libs/helpers/helpers.js";
+import { getCategoriesWithThreeLowestScores } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const SuggestionsCreationOptions: React.FC = () => {
@@ -26,7 +26,7 @@ const SuggestionsCreationOptions: React.FC = () => {
 	}, [dispatch]);
 
 	const handleCreationForThreeLowest = useCallback(() => {
-		const threeLowestScores = getThreeLowestScores(scores);
+		const threeLowestScores = getCategoriesWithThreeLowestScores(scores);
 		const selectedCategories = threeLowestScores.map((score) => {
 			return {
 				id: score.categoryId,
