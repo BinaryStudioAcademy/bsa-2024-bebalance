@@ -40,9 +40,11 @@
 
 .close-icon-container {
 	position: absolute;
-	top: 15px;
-	right: 15px;
+	top: 20px;
+	right: 10px;
 	z-index: var(--z-index-high);
+	width: 25px;
+	height: 25px;
 	cursor: pointer;
 	background: none;
 	border: none;

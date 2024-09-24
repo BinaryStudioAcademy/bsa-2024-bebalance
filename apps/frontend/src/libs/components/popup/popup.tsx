@@ -1,4 +1,4 @@
-import { Button, Icon } from "~/libs/components/components.js";
+import { Button } from "~/libs/components/components.js";
 
 import { NEWLINE_CHARACTER } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
@@ -31,12 +31,16 @@ const Popup: React.FC<Properties> = ({
 			<div className={styles["popup-container"]}>
 				<div className={styles["contents-container"]}>
 					{hasCloseIcon && (
-						<button
-							className={styles["close-icon-container"]}
-							onClick={onClose}
-						>
-							<Icon name="close" />
-						</button>
+						<div className={styles["close-icon-container"]}>
+							<Button
+								hasVisuallyHiddenLabel
+								iconColor="white"
+								iconName="close"
+								label="close"
+								onClick={onClose}
+								variant="icon"
+							/>
+						</div>
 					)}
 					{icon && (
 						<div className={styles["icon"]}>
