@@ -6,7 +6,7 @@ import { type TaskService } from "~/modules/tasks/tasks.js";
 
 import {
 	generateChangeTasksSuggestionsResponse,
-	generateExplainTaskSuggestionsResponse,
+	generateExplainTasksSuggestionsResponse,
 	generateQuestionsAnswersPrompt,
 	generateTaskSuggestionsResponse,
 	generateUserScoresPrompt,
@@ -129,18 +129,18 @@ class AIAssistantService {
 		return generateChangeTasksSuggestionsResponse(result, taskDeadLine);
 	}
 
-	public async explainTaskSuggestion(
+	public async explainTasksSuggestion(
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
 
-		const task = payload as TaskCreateDto;
+		const tasks = payload as TaskCreateDto[];
 
-		const runThreadOptions = runExplainTaskOptions(task);
+		const runThreadOptions = runExplainTaskOptions(tasks);
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateExplainTaskSuggestionsResponse(result, task);
+		return generateExplainTasksSuggestionsResponse(result);
 	}
 
 	public async initializeNewChat(

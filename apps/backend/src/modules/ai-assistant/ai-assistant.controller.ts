@@ -317,7 +317,7 @@ class AIAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.explainTaskSuggestion(
+				this.explainTasksSuggestion(
 					options as APIHandlerOptions<{
 						body: AIAssistantRequestDto;
 						user: UserDto;
@@ -571,7 +571,7 @@ class AIAssistantController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /assistant/chat/explain-task:
+	 * /assistant/chat/explain-tasks:
 	 *   post:
 	 *     summary: Explain task suggestion
 	 *     tags:
@@ -611,7 +611,7 @@ class AIAssistantController extends BaseController {
 	 *                   description: Identifier for the chat thread.
 	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
-	private async explainTaskSuggestion(
+	private async explainTasksSuggestion(
 		options: APIHandlerOptions<{
 			body: AIAssistantRequestDto;
 		}>,
@@ -619,7 +619,7 @@ class AIAssistantController extends BaseController {
 		const { body } = options;
 
 		return {
-			payload: await this.openAIService.explainTaskSuggestion(body),
+			payload: await this.openAIService.explainTasksSuggestion(body),
 			status: HTTPCode.OK,
 		};
 	}
