@@ -27,9 +27,7 @@ const Chat: React.FC = () => {
 	}));
 
 	const handleScrollToBottom = (): void => {
-		if (chatEnd.current) {
-			chatEnd.current.scrollIntoView({ behavior: "smooth" });
-		}
+		chatEnd.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
 	useEffect(() => {

@@ -1,1 +1,1 @@
-export { checkIsTask } from "./check-is-task.helper.js";
+export { checkIsTaskMessage } from "./check-is-task-message.helper.js";
