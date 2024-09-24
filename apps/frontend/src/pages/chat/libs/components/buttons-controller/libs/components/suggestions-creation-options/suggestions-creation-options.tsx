@@ -19,13 +19,13 @@ const SuggestionsCreationOptions: React.FC = () => {
 	}));
 	const dispatch = useAppDispatch();
 
-	const handleNo = useCallback(() => {
+	const handleDisplayCategoryCheckbox = useCallback(() => {
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
 		dispatch(chatActions.addUserTextMessage(SuggestionsCreationButtonLabel.NO));
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.CATEGORIES_CHECKBOX));
 	}, [dispatch]);
 
-	const handleYes = useCallback(() => {
+	const handleCreationForThreeLowest = useCallback(() => {
 		const threeLowestScores = getThreeLowestScores(scores);
 		const selectedCategories = threeLowestScores.map((score) => {
 			return {
@@ -57,12 +57,12 @@ const SuggestionsCreationOptions: React.FC = () => {
 					<div className={styles["button-container"]}>
 						<Button
 							label={SuggestionsCreationButtonLabel.YES}
-							onClick={handleYes}
+							onClick={handleCreationForThreeLowest}
 							variant="secondary"
 						/>
 						<Button
 							label={SuggestionsCreationButtonLabel.NO}
-							onClick={handleNo}
+							onClick={handleDisplayCategoryCheckbox}
 							variant="secondary"
 						/>
 					</div>
