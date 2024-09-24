@@ -1,5 +1,5 @@
-const suggestionsManipulationButtonLabel = {
-	acceptTasks: "add these tasks",
+const SuggestionsManipulationButtonLabel = {
+	ACCEPT_TASKS: "add these tasks",
 } as const;
 
-export { suggestionsManipulationButtonLabel };
+export { SuggestionsManipulationButtonLabel };

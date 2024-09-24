@@ -2,10 +2,10 @@ import { type Entity, type ValueOf } from "~/libs/types/types.js";
 
 import { type ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
 import {
-	type ChatMessagePayload,
 	type TaskCreateDto,
 	type TaskDto,
 	type TaskMessage,
+	type TextMessage,
 } from "./libs/types/types.js";
 
 class ChatMessageEntity implements Entity {
@@ -17,7 +17,7 @@ class ChatMessageEntity implements Entity {
 
 	private isRead: boolean;
 
-	private payload: ChatMessagePayload;
+	private payload: TaskMessage | TextMessage;
 
 	private threadId: string;
 
@@ -39,7 +39,7 @@ class ChatMessageEntity implements Entity {
 		createdAt: string;
 		id: null | number;
 		isRead: boolean;
-		payload: ChatMessagePayload;
+		payload: TaskMessage | TextMessage;
 		threadId: string;
 		type: ValueOf<typeof ChatMessageType>;
 		updatedAt: string;
@@ -113,7 +113,7 @@ class ChatMessageEntity implements Entity {
 		type,
 	}: {
 		author: ValueOf<typeof ChatMessageAuthor>;
-		payload: ChatMessagePayload;
+		payload: TaskMessage | TextMessage;
 		threadId: string;
 		type: ValueOf<typeof ChatMessageType>;
 	}): ChatMessageEntity {
@@ -133,7 +133,7 @@ class ChatMessageEntity implements Entity {
 		author: ValueOf<typeof ChatMessageAuthor>;
 		createdAt: string;
 		isRead: boolean;
-		payload: ChatMessagePayload;
+		payload: TaskMessage | TextMessage;
 		threadId: string;
 		type: ValueOf<typeof ChatMessageType>;
 		updatedAt: string;
@@ -154,7 +154,7 @@ class ChatMessageEntity implements Entity {
 		createdAt: string;
 		id: null | number;
 		isRead: boolean;
-		payload: ChatMessagePayload;
+		payload: TaskMessage | TextMessage;
 		threadId: string;
 		type: ValueOf<typeof ChatMessageType>;
 		updatedAt: string;

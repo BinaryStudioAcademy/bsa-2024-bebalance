@@ -1,1 +1,1 @@
-export { buttonsModeOption } from "./buttons-mode-option.enum.js";
+export { ButtonsModeOption } from "./buttons-mode-option.enum.js";

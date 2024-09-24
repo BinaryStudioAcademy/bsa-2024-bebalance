@@ -10,6 +10,7 @@ export {
 	ErrorMessage,
 	NumericalValue,
 	ServerErrorType,
+	SortOrder,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
@@ -80,7 +81,6 @@ export {
 	ChatMessageAuthor,
 	type ChatMessageCreateDto,
 	type ChatMessageDto,
-	type ChatMessagePayload,
 	ChatMessageType,
 	type TaskMessage,
 	type TextMessage,

@@ -1,6 +1,6 @@
 import { useAppSelector } from "~/libs/hooks/hooks.js";
 
-import { buttonsModeOption } from "../../enums/enums.js";
+import { ButtonsModeOption } from "../../enums/enums.js";
 import {
 	CategoriesSelector,
 	SuggestionsCreationOptions,
@@ -11,15 +11,15 @@ const ButtonsController: React.FC = () => {
 	const buttonsMode = useAppSelector((state) => state.chat.buttonsMode);
 
 	switch (buttonsMode) {
-		case buttonsModeOption.SUGGESTIONS_CREATION: {
+		case ButtonsModeOption.SUGGESTIONS_CREATION: {
 			return <SuggestionsCreationOptions />;
 		}
 
-		case buttonsModeOption.SUGGESTIONS_MANIPULATION: {
+		case ButtonsModeOption.SUGGESTIONS_MANIPULATION: {
 			return <SuggestionsManipulationOptions />;
 		}
 
-		case buttonsModeOption.CATEGORIES_CHECKBOX: {
+		case ButtonsModeOption.CATEGORIES_CHECKBOX: {
 			return <CategoriesSelector />;
 		}
 

@@ -2,11 +2,13 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import { type TaskDto, type TaskNoteDto } from "~/modules/tasks/tasks.js";
 
 import {
+	addNote,
 	getCurrentTasks,
 	getPastTasks,
+	getTaskNotes,
 	update,
 	updateTaskDeadline,
 } from "./actions.js";
@@ -15,6 +17,7 @@ type State = {
 	activeTasks: TaskDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
 	expiredTasks: TaskDto[];
+	taskNotes: TaskNoteDto[];
 	tasks: TaskDto[];
 };
 
@@ -22,6 +25,7 @@ const initialState: State = {
 	activeTasks: [],
 	dataStatus: DataStatus.IDLE,
 	expiredTasks: [],
+	taskNotes: [],
 	tasks: [],
 };
 
@@ -75,6 +79,21 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(updateTaskDeadline.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(addNote.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.taskNotes = [...state.taskNotes, action.payload];
+		});
+		builder.addCase(addNote.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+
+		builder.addCase(getTaskNotes.fulfilled, (state, action) => {
+			state.taskNotes = action.payload;
+		});
+		builder.addCase(getTaskNotes.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 	},

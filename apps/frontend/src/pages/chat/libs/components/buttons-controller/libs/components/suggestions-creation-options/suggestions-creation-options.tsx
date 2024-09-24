@@ -5,11 +5,11 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
-import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { SUGGESTIONS_CREATION_TEXT } from "./libs/constants/constants.js";
-import { suggestionsCreationButtonLabel } from "./libs/enums/enums.js";
-import { getThreeLowestScores } from "./libs/helpers/helpers.js";
+import { SuggestionsCreationButtonLabel } from "./libs/enums/enums.js";
+import { getCategoriesWithThreeLowestScores } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const SuggestionsCreationOptions: React.FC = () => {
@@ -18,14 +18,14 @@ const SuggestionsCreationOptions: React.FC = () => {
 	}));
 	const dispatch = useAppDispatch();
 
-	const handleNo = useCallback(() => {
+	const handleDisplayCategoryCheckbox = useCallback(() => {
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
-		dispatch(chatActions.addUserTextMessage(suggestionsCreationButtonLabel.NO));
-		dispatch(chatActions.setButtonsMode(buttonsModeOption.CATEGORIES_CHECKBOX));
+		dispatch(chatActions.addUserTextMessage(SuggestionsCreationButtonLabel.NO));
+		dispatch(chatActions.setButtonsMode(ButtonsModeOption.CATEGORIES_CHECKBOX));
 	}, [dispatch]);
 
-	const handleYes = useCallback(() => {
-		const threeLowestScores = getThreeLowestScores(scores);
+	const handleCreationForThreeLowest = useCallback(() => {
+		const threeLowestScores = getCategoriesWithThreeLowestScores(scores);
 		const selectedCategories = threeLowestScores.map((score) => {
 			return {
 				id: score.categoryId,
@@ -33,16 +33,16 @@ const SuggestionsCreationOptions: React.FC = () => {
 			};
 		});
 
-		dispatch(chatActions.setButtonsMode(buttonsModeOption.NONE));
+		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
 		dispatch(
-			chatActions.addUserTextMessage(suggestionsCreationButtonLabel.YES),
+			chatActions.addUserTextMessage(SuggestionsCreationButtonLabel.YES),
 		);
 
 		void dispatch(
 			chatActions.getTasksForCategories({
 				categories: selectedCategories,
-				text: suggestionsCreationButtonLabel.YES,
+				text: SuggestionsCreationButtonLabel.YES,
 			}),
 		);
 	}, [dispatch, scores]);
@@ -55,13 +55,13 @@ const SuggestionsCreationOptions: React.FC = () => {
 					<p>{SUGGESTIONS_CREATION_TEXT}</p>
 					<div className={styles["button-container"]}>
 						<Button
-							label={suggestionsCreationButtonLabel.YES}
-							onClick={handleYes}
+							label={SuggestionsCreationButtonLabel.YES}
+							onClick={handleCreationForThreeLowest}
 							variant="secondary"
 						/>
 						<Button
-							label={suggestionsCreationButtonLabel.NO}
-							onClick={handleNo}
+							label={SuggestionsCreationButtonLabel.NO}
+							onClick={handleDisplayCategoryCheckbox}
 							variant="secondary"
 						/>
 					</div>

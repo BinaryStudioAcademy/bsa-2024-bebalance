@@ -26,14 +26,12 @@ const Chat: React.FC = () => {
 		threadId: state.chat.threadId,
 	}));
 
-	const scrollToBottom = (): void => {
-		if (chatEnd.current) {
-			chatEnd.current.scrollIntoView({ behavior: "smooth" });
-		}
+	const handleScrollToBottom = (): void => {
+		chatEnd.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
 	useEffect(() => {
-		scrollToBottom();
+		handleScrollToBottom();
 	}, [messages]);
 
 	useEffect(() => {
@@ -56,7 +54,7 @@ const Chat: React.FC = () => {
 							/>
 						);
 					})}
-					{threadId && <ButtonsController />}
+					<ButtonsController />
 					{messageStatus === DataStatus.PENDING && <MessageLoader />}
 				</ul>
 				<div ref={chatEnd} />

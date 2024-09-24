@@ -4,12 +4,14 @@ import { DataStatus } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
-import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
+import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
+import { checkIsTaskMessage } from "../libs/helpers/helpers.js";
 import {
 	type ChatMessageDto,
-	type TaskCreateDto,
 	type TaskMessage,
+	type TextMessage,
 } from "../libs/types/types.js";
 import {
 	createTasksFromSuggestions,
@@ -18,10 +20,10 @@ import {
 } from "./actions.js";
 
 type State = {
-	buttonsMode: ValueOf<typeof buttonsModeOption>;
+	buttonsMode: ValueOf<typeof ButtonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: Omit<
-		ChatMessageDto,
+		ChatMessageDto<TaskMessage | TaskMessage[] | TextMessage>,
 		"createdAt" | "id" | "threadId" | "updatedAt"
 	>[];
 	selectedCategories: SelectedCategory[];
@@ -30,7 +32,7 @@ type State = {
 };
 
 const initialState: State = {
-	buttonsMode: buttonsModeOption.SUGGESTIONS_CREATION,
+	buttonsMode: ButtonsModeOption.NONE,
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
@@ -56,6 +58,7 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(initConversation.fulfilled, (state, action) => {
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
 				state.threadId = action.payload.threadId;
 				state.messages = action.payload.messages;
@@ -73,11 +76,16 @@ const { actions, name, reducer } = createSlice({
 				const taskSuggestionsMessagePayload: TaskMessage[] = [];
 
 				for (const message of newMessages) {
-					if ("text" in message.payload) {
-						state.messages.push(message);
+					if (message.type === "text") {
+						state.messages.push({
+							author: ChatMessageAuthor.ASSISTANT,
+							isRead: true,
+							payload: message.payload as TextMessage,
+							type: message.type,
+						});
 					}
 
-					if ("task" in message.payload) {
+					if (checkIsTaskMessage(message)) {
 						taskSuggestionsMessagePayload.push(message.payload);
 						state.taskSuggestions.push({
 							categoryId: message.payload.task.categoryId,
@@ -95,7 +103,7 @@ const { actions, name, reducer } = createSlice({
 					type: ChatMessageType.TASK,
 				});
 
-				state.buttonsMode = buttonsModeOption.SUGGESTIONS_MANIPULATION;
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
@@ -126,7 +134,7 @@ const { actions, name, reducer } = createSlice({
 		},
 		setButtonsMode(
 			state,
-			action: PayloadAction<ValueOf<typeof buttonsModeOption>>,
+			action: PayloadAction<ValueOf<typeof ButtonsModeOption>>,
 		) {
 			state.buttonsMode = action.payload;
 		},

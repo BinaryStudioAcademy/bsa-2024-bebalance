@@ -5,11 +5,11 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
-import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
-	suggestionsManipulationButtonLabel,
-	suggestionsManipulationMessages,
+	SuggestionsManipulationButtonLabel,
+	SuggestionsManipulationMessage,
 } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
@@ -17,21 +17,21 @@ const SuggestionsManipulationOptions: React.FC = () => {
 	const { taskSuggestions } = useAppSelector((state) => state.chat);
 	const dispatch = useAppDispatch();
 	const handleAcceptAllSuggestions = useCallback(() => {
-		void dispatch(chatActions.setButtonsMode(buttonsModeOption.NONE));
+		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 
 		void dispatch(
 			chatActions.addAssistantTextMessage(
-				suggestionsManipulationMessages.MAIN_MESSAGE,
+				SuggestionsManipulationMessage.MAIN_MESSAGE,
 			),
 		);
 		void dispatch(
 			chatActions.addUserTextMessage(
-				suggestionsManipulationButtonLabel.acceptTasks,
+				SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
 			),
 		);
 		void dispatch(
 			chatActions.addAssistantTextMessage(
-				suggestionsManipulationMessages.ACCEPT_TASKS_RESPONSE,
+				SuggestionsManipulationMessage.ACCEPT_TASKS_RESPONSE,
 			),
 		);
 
@@ -47,10 +47,10 @@ const SuggestionsManipulationOptions: React.FC = () => {
 			<Icon name="aiAssistantAvatar" />
 			<div className={styles["content-container"]}>
 				<div className={styles["content"]}>
-					<p>{suggestionsManipulationMessages.MAIN_MESSAGE}</p>
+					<p>{SuggestionsManipulationMessage.MAIN_MESSAGE}</p>
 					<div className={styles["button-container"]}>
 						<Button
-							label={suggestionsManipulationButtonLabel.acceptTasks}
+							label={SuggestionsManipulationButtonLabel.ACCEPT_TASKS}
 							onClick={handleAcceptAllSuggestions}
 							variant="secondary"
 						/>

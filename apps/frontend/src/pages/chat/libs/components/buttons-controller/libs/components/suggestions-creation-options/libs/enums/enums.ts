@@ -1,1 +1,1 @@
-export { suggestionsCreationButtonLabel } from "./suggestions-creation-button-label.enum.js";
+export { SuggestionsCreationButtonLabel } from "./suggestions-creation-button-label.enum.js";

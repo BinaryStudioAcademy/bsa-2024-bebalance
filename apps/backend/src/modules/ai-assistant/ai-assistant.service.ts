@@ -63,35 +63,6 @@ class AIAssistantService {
 		this.userService = userService;
 	}
 
-	public async acceptMultipleTasks(
-		user: UserDto,
-		body: AIAssistantCreateMultipleTasksDto,
-	): Promise<boolean[]> {
-		const { payload } = body;
-		const tasks = payload;
-		const threadId = user.threadId as string;
-
-		return await Promise.all(
-			tasks.map(async (task) => {
-				const newTask = await this.taskService.create({
-					categoryId: task.categoryId,
-					description: task.description,
-					label: task.label,
-					user,
-				});
-
-				const chatMessage = {
-					content: `User has accepted this task: ${JSON.stringify(newTask)}`,
-					role: OpenAIRoleKey.USER,
-				};
-
-				await this.openAI.addMessageToThread(threadId, chatMessage);
-
-				return true;
-			}),
-		);
-	}
-
 	public async acceptTask(
 		user: UserDto,
 		body: AIAssistantAcceptTaskRequestDto,
@@ -122,6 +93,35 @@ class AIAssistantService {
 		await this.openAI.addMessageToThread(threadId, chatMessage);
 
 		return newTask;
+	}
+
+	public async acceptTasks(
+		user: UserDto,
+		body: AIAssistantCreateMultipleTasksDto,
+	): Promise<boolean[]> {
+		const { payload } = body;
+		const tasks = payload;
+		const threadId = user.threadId as string;
+
+		return await Promise.all(
+			tasks.map(async (task) => {
+				const newTask = await this.taskService.create({
+					categoryId: task.categoryId,
+					description: task.description,
+					label: task.label,
+					user,
+				});
+
+				const chatMessage = {
+					content: `User has accepted this task: ${JSON.stringify(newTask)}`,
+					role: OpenAIRoleKey.USER,
+				};
+
+				await this.openAI.addMessageToThread(threadId, chatMessage);
+
+				return true;
+			}),
+		);
 	}
 
 	public async addMessageToThread(

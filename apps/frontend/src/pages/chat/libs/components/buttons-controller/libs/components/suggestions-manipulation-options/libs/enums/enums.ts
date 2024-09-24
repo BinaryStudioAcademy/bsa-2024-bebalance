@@ -1,2 +1,2 @@
-export { suggestionsManipulationButtonLabel } from "./suggestions-manipulation-button-label.enum.js";
-export { suggestionsManipulationMessages } from "./suggestions-manipulation-messages.enum.js";
+export { SuggestionsManipulationButtonLabel } from "./suggestions-manipulation-button-label.enum.js";
+export { SuggestionsManipulationMessage } from "./suggestions-manipulation-messages.enum.js";

@@ -26,7 +26,7 @@ class ChatApi extends BaseHTTPApi {
 		payload: AIAssistantCreateMultipleTasksDto,
 	): Promise<boolean[]> {
 		const response = await this.load(
-			this.getFullEndpoint(AIAssistantApiPath.CHAT_ACCEPT_MULTIPLE_TASKS, {}),
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_ACCEPT_TASKS, {}),
 			{
 				contentType: ContentType.JSON,
 				hasAuth: true,
