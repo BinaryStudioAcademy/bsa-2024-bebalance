@@ -283,7 +283,7 @@ class AIAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_INITIATE,
+			path: AIAssistantApiPath.CHAT_INITIALIZE,
 		});
 
 		this.addRoute({
