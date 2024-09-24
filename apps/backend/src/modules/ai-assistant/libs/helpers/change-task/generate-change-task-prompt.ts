@@ -4,13 +4,15 @@ import {
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import { type TaskCreateDto } from "../../types/types.js";
-import { ChangeTaskPromptTemplate } from "./change-task-prompt-template.enum.js";
+import { ChangeTasksPromptTemplate } from "./change-task-prompt-template.enum.js";
 
-function generateChangeTaskPrompt(task: TaskCreateDto): OpenAIRequestMessage {
+function generateChangeTasksPrompt(
+	tasks: TaskCreateDto[],
+): OpenAIRequestMessage {
 	const content = `
 	{
-	"context": "${ChangeTaskPromptTemplate.CHANGE_TASKS_CONTEXT}",
-	"task": ${JSON.stringify(task)},
+	"context": "${ChangeTasksPromptTemplate.CHANGE_TASKS_CONTEXT}",
+	"tasks": ${JSON.stringify(tasks)},
 	}`;
 
 	return {
@@ -19,4 +21,4 @@ function generateChangeTaskPrompt(task: TaskCreateDto): OpenAIRequestMessage {
 	};
 }
 
-export { generateChangeTaskPrompt };
+export { generateChangeTasksPrompt };

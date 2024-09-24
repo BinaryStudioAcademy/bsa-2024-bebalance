@@ -11,11 +11,11 @@ import {
 	type AIAssistantResponseDto,
 	type ChatMessageDto,
 } from "../../types/types.js";
-import { type changeTaskByCategory } from "./change-task.validation-schema.js";
+import { type changeTasksByCategory } from "./change-task.validation-schema.js";
 
-type TaskByCategoryData = z.infer<typeof changeTaskByCategory>;
+type TaskByCategoryData = z.infer<typeof changeTasksByCategory>;
 
-const generateChangeTaskSuggestionsResponse = (
+const generateChangeTasksSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 	taskDeadLine: string,
 ): AIAssistantResponseDto | null => {
@@ -48,27 +48,29 @@ const generateChangeTaskSuggestionsResponse = (
 		type: ChatMessageType.TEXT,
 	};
 
-	const taskMessage: ChatMessageDto = {
-		author: ChatMessageAuthor.ASSISTANT,
-		createdAt: new Date().toISOString(),
-		id: FIRST_ITEM_INDEX,
-		isRead: false,
-		payload: {
-			task: {
-				categoryId: resultData.tasks.categoryId,
-				categoryName: resultData.tasks.categoryName,
-				description: resultData.tasks.description,
-				dueDate: taskDeadLine,
-				label: resultData.tasks.label,
+	const taskMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
+		return {
+			author: ChatMessageAuthor.ASSISTANT,
+			createdAt: new Date().toISOString(),
+			id: FIRST_ITEM_INDEX,
+			isRead: false,
+			payload: {
+				task: {
+					categoryId: task.categoryId,
+					categoryName: task.categoryName,
+					description: task.description,
+					dueDate: taskDeadLine,
+					label: task.label,
+				},
 			},
-		},
-		type: ChatMessageType.TASK,
-	};
+			type: ChatMessageType.TASK,
+		};
+	});
 
 	return {
-		messages: [textMessage, taskMessage],
+		messages: [textMessage, ...taskMessages],
 		threadId: message.thread_id,
 	};
 };
 
-export { generateChangeTaskSuggestionsResponse };
+export { generateChangeTasksSuggestionsResponse };

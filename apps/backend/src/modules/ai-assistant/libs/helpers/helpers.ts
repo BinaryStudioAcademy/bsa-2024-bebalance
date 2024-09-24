@@ -1,6 +1,6 @@
 export {
-	generateChangeTaskSuggestionsResponse,
-	runChangeTaskByCategoryOptions,
+	generateChangeTasksSuggestionsResponse,
+	runChangeTasksByCategoryOptions,
 } from "./change-task/run-change-task-by-category-options.helper.js";
 export {
 	generateExplainTaskSuggestionsResponse,
