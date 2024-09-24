@@ -52,10 +52,6 @@ const TaskCard: React.FC<Properties> = ({
 		onGetTaskNotes(task.id);
 	}, [onGetTaskNotes, task.id]);
 
-	useEffect(() => {
-		onGetTaskNotes(task.id);
-	}, [onGetTaskNotes, task.id]);
-
 	const handleExpire = useCallback(() => {
 		onExpire(task);
 	}, [task, onExpire]);
