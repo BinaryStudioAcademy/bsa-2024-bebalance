@@ -6,7 +6,7 @@ const handleClickOutside = <T extends HTMLElement>(
 	const reference = useRef<null | T>(null);
 
 	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent | TouchEvent): void => {
+		const detectClickOutside = (event: MouseEvent | TouchEvent): void => {
 			if (
 				reference.current &&
 				!reference.current.contains(event.target as Node)
@@ -15,12 +15,12 @@ const handleClickOutside = <T extends HTMLElement>(
 			}
 		};
 
-		document.addEventListener("mousedown", handleClickOutside);
-		document.addEventListener("touchstart", handleClickOutside);
+		document.addEventListener("mousedown", detectClickOutside);
+		document.addEventListener("touchstart", detectClickOutside);
 
 		return (): void => {
-			document.removeEventListener("mousedown", handleClickOutside);
-			document.removeEventListener("touchstart", handleClickOutside);
+			document.removeEventListener("mousedown", detectClickOutside);
+			document.removeEventListener("touchstart", detectClickOutside);
 		};
 	}, [callback]);
 
