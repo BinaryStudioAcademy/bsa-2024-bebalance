@@ -1,6 +1,7 @@
 .message-container {
 	display: flex;
 	gap: 10px;
+	list-style: none;
 }
 
 .message-container-assistant {

@@ -5,7 +5,7 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
-import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
 	suggestionsManipulationButtonLabel,
@@ -17,7 +17,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 	const { taskSuggestions, threadId } = useAppSelector((state) => state.chat);
 	const dispatch = useAppDispatch();
 	const handleAcceptAllSuggestions = useCallback(() => {
-		void dispatch(chatActions.setButtonsMode(buttonsModeOption.NONE));
+		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 
 		void dispatch(
 			chatActions.addAssistantTextMessage(

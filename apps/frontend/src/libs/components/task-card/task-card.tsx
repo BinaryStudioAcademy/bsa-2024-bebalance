@@ -24,21 +24,15 @@ const TaskCard: React.FC<Properties> = ({
 	variant = "active",
 }: Properties) => {
 	const handleSkip = useCallback(() => {
-		if (onSkip) {
-			onSkip((task as TaskDto).id);
-		}
+		onSkip?.((task as TaskDto).id);
 	}, [task, onSkip]);
 
 	const handleComplete = useCallback(() => {
-		if (onComplete) {
-			onComplete((task as TaskDto).id);
-		}
+		onComplete?.((task as TaskDto).id);
 	}, [task, onComplete]);
 
 	const handleExpire = useCallback(() => {
-		if (onExpire) {
-			onExpire(task as TaskDto);
-		}
+		onExpire?.(task as TaskDto);
 	}, [task, onExpire]);
 
 	const isActive = (task as TaskDto).status === TaskStatus.CURRENT;

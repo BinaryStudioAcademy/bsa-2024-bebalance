@@ -5,7 +5,7 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
-import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { SUGGESTIONS_CREATION_TEXT } from "./libs/constants/constants.js";
 import { suggestionsCreationButtonLabel } from "./libs/enums/enums.js";
@@ -22,7 +22,7 @@ const SuggestionsCreationOptions: React.FC = () => {
 	const handleNo = useCallback(() => {
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
 		dispatch(chatActions.addUserTextMessage(suggestionsCreationButtonLabel.NO));
-		dispatch(chatActions.setButtonsMode(buttonsModeOption.CATEGORIES_CHECKBOX));
+		dispatch(chatActions.setButtonsMode(ButtonsModeOption.CATEGORIES_CHECKBOX));
 	}, [dispatch]);
 
 	const handleYes = useCallback(() => {
@@ -34,7 +34,7 @@ const SuggestionsCreationOptions: React.FC = () => {
 			};
 		});
 
-		dispatch(chatActions.setButtonsMode(buttonsModeOption.NONE));
+		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		dispatch(chatActions.addAssistantTextMessage(SUGGESTIONS_CREATION_TEXT));
 		dispatch(
 			chatActions.addUserTextMessage(suggestionsCreationButtonLabel.YES),

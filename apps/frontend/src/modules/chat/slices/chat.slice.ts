@@ -5,7 +5,7 @@ import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
-import { buttonsModeOption } from "~/pages/chat/libs/enums/enums.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { type ChatMessageDto, type TaskMessage } from "../libs/types/types.js";
 import {
@@ -15,7 +15,7 @@ import {
 } from "./actions.js";
 
 type State = {
-	buttonsMode: ValueOf<typeof buttonsModeOption>;
+	buttonsMode: ValueOf<typeof ButtonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: Omit<ChatMessageDto, "createdAt" | "id">[];
 	selectedCategories: SelectedCategory[];
@@ -24,7 +24,7 @@ type State = {
 };
 
 const initialState: State = {
-	buttonsMode: buttonsModeOption.NONE,
+	buttonsMode: ButtonsModeOption.NONE,
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
@@ -52,7 +52,7 @@ const { actions, name, reducer } = createSlice({
 			.addCase(initConversation.fulfilled, (state, action) => {
 				state.threadId = action.payload.threadId;
 
-				state.buttonsMode = buttonsModeOption.SUGGESTIONS_CREATION;
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
 			})
 			.addCase(initConversation.rejected, (state) => {
@@ -90,7 +90,7 @@ const { actions, name, reducer } = createSlice({
 					type: ChatMessageType.TASK,
 				});
 
-				state.buttonsMode = buttonsModeOption.SUGGESTIONS_MANIPULATION;
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
@@ -121,7 +121,7 @@ const { actions, name, reducer } = createSlice({
 		},
 		setButtonsMode(
 			state,
-			action: PayloadAction<ValueOf<typeof buttonsModeOption>>,
+			action: PayloadAction<ValueOf<typeof ButtonsModeOption>>,
 		) {
 			state.buttonsMode = action.payload;
 		},
