@@ -1,6 +1,12 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	grid-column: 2 / 3;
 	gap: 20px;
+	min-width: 350px;
+}
+
+@media (width <= 768px) {
+	.form {
+		width: 100%;
+	}
 }
