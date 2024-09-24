@@ -564,7 +564,7 @@ class AIAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAIService.changeTaskSuggestion(user, body),
+			payload: await this.openAIService.changeTasksSuggestion(user, body),
 			status: HTTPCode.OK,
 		};
 	}
