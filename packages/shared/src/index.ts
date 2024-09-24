@@ -10,6 +10,7 @@ export {
 	ErrorMessage,
 	NumericalValue,
 	ServerErrorType,
+	SortOrder,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,

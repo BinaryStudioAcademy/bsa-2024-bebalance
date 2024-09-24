@@ -2,7 +2,7 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { STATUS_FIELD } from "./libs/constants/constants.js";
-import { TaskStatus } from "./libs/enums/enums.js";
+import { SortOrder, TaskStatus } from "./libs/enums/enums.js";
 import { TaskEntity } from "./task.entity.js";
 import { TaskModel } from "./task.model.js";
 import { TaskNoteEntity } from "./task-note.entity.js";
@@ -186,7 +186,7 @@ class TaskRepository implements Repository {
 		const notes = await this.taskNoteModel
 			.query()
 			.where({ taskId })
-			.orderBy("createdAt", "asc");
+			.orderBy("createdAt", SortOrder.ASC);
 
 		return notes.map((note) => {
 			return TaskNoteEntity.initialize({
