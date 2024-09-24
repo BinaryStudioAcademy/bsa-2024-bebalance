@@ -14,7 +14,10 @@ import {
 import styles from "./styles.module.css";
 
 const SuggestionsManipulationOptions: React.FC = () => {
-	const { taskSuggestions, threadId } = useAppSelector((state) => state.chat);
+	const { taskSuggestions, threadId } = useAppSelector((state) => ({
+		taskSuggestions: state.chat.taskSuggestions,
+		threadId: state.chat.threadId,
+	}));
 	const dispatch = useAppDispatch();
 	const handleAcceptAllSuggestions = useCallback(() => {
 		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
@@ -26,7 +29,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		);
 		void dispatch(
 			chatActions.addUserTextMessage(
-				SuggestionsManipulationButtonLabel.acceptTasks,
+				SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
 			),
 		);
 		void dispatch(
@@ -51,7 +54,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 					<p>{SuggestionsManipulationMessage.MAIN_MESSAGE}</p>
 					<div className={styles["button-container"]}>
 						<Button
-							label={SuggestionsManipulationButtonLabel.acceptTasks}
+							label={SuggestionsManipulationButtonLabel.ACCEPT_TASKS}
 							onClick={handleAcceptAllSuggestions}
 							variant="secondary"
 						/>

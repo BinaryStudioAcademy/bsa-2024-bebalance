@@ -53,12 +53,16 @@ class QuizApi extends BaseHTTPApi {
 		return await response.json<{ items: QuizQuestionDto[][] }>();
 	}
 
-	public async getQuestionsByCategoryIds(categoryIds: string): Promise<{
+	public async getQuestionsByCategoryIds({
+		categoryIds,
+	}: {
+		categoryIds: number[];
+	}): Promise<{
 		items: QuizQuestionDto[][];
 	}> {
 		const response = await this.load(
 			this.getFullEndpoint(
-				`${QuizApiPath.QUESTIONS}?categoryIds=${categoryIds}`,
+				`${QuizApiPath.QUESTIONS}?categoryIds=${JSON.stringify(categoryIds)}`,
 				{},
 			),
 			{

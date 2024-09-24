@@ -11,10 +11,9 @@ const RetakeQuizModal: React.FC = () => {
 
 	const handleSubmit = useCallback(
 		(payload: number[]): void => {
-			const payloadStringified = JSON.stringify(payload);
 			void dispatch(
 				quizActions.getQuestionsByCategoryIds({
-					categoryIds: payloadStringified,
+					categoryIds: payload,
 				}),
 			);
 			void dispatch(appActions.changeLink(AppRoute.QUIZ));
