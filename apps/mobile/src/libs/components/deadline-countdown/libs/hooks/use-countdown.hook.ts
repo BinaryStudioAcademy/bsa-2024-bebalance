@@ -5,7 +5,15 @@ import { type Countdown } from "~/libs/types/types";
 import { MillisecondsPerUnit } from "../../libs/enums/enums";
 import { getFormattedCountdownUnits } from "../../libs/helpers/helpers";
 
-const useCountdown = (deadline: string): Countdown => {
+type useCountdownArguments = {
+	deadline: string;
+	onExpire?: () => void;
+};
+
+const useCountdown = ({
+	deadline,
+	onExpire = (): void => {},
+}: useCountdownArguments): Countdown => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 
 	const handleCalculateCountdown = useCallback((): Countdown => {
@@ -29,6 +37,7 @@ const useCountdown = (deadline: string): Countdown => {
 			setCountdown(updatedCountdown);
 
 			if (isExpired(updatedCountdown)) {
+				onExpire();
 				clearInterval(countdownInterval);
 			}
 		}, MillisecondsPerUnit.MINUTE);
