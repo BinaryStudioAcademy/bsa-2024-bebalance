@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
 		borderTopWidth: 1,
 	},
 	container: {
+		backgroundColor: BaseColor.BG_WHITE,
 		borderColor: BaseColor.LIGHT_GRAY,
 		borderRadius: 16,
 		borderWidth: 1,

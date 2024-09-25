@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
 		backgroundColor: BaseColor.EXTRA_LIGHT_GRAY,
 		borderRadius: 30,
 	},
+	disabledTab: {
+		opacity: 0.5,
+	},
 	inactive: {
 		color: BaseColor.GRAY,
 	},
