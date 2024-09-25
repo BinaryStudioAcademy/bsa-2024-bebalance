@@ -36,7 +36,7 @@ Ensure the task is unique and does not repeat any previously suggested tasks.
 actionable, and focused on gradual and meaningful progress in line with their priorities.
 
 3. Provide a clear description for the new task, assign a due date, and include a meaningful label.
-Make sure the description of the task is concise and does not exceed 250 characters.
+Make sure the description of the task is concise and does not exceed 190 characters.
 
 4. Place the structured new tasks in the \`tasks\` field, and provide a summary or confirmation in the \`message\` field.
 `,

@@ -26,7 +26,7 @@ const acceptMultipleTasks = z.object({
 				}),
 		}),
 	),
-	payload: z.array(
+	tasks: z.array(
 		z.object({
 			categoryId: z.number({
 				invalid_type_error: AIAssistantValidationMessage.CATEGORY_ID_REQUIRED,

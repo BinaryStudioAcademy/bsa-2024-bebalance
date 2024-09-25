@@ -61,6 +61,7 @@ const { actions, name, reducer } = createSlice({
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
 				state.threadId = action.payload.threadId;
+				state.messages = [];
 
 				const { messages } = action.payload;
 				let taskBuffer: TaskMessage[] = [];
