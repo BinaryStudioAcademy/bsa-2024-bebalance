@@ -31,7 +31,7 @@
 }
 
 .circle {
-	z-index: var(--z-index-medium);
+	z-index: var(--z-index-surface);
 	width: 11px;
 	height: 11px;
 	border-radius: 50%;
