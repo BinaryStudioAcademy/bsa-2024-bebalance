@@ -1,5 +1,6 @@
-import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Input, Popup } from "~/libs/components/components.js";
+import { useAppForm, useBlocker, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type UserDto,
 	type UserUpdateFormDto,
@@ -19,10 +20,11 @@ const UpdateUserForm: React.FC<Properties> = ({
 	user,
 }: Properties) => {
 	const { email, name } = user;
-	const { control, errors, handleSubmit } = useAppForm<UserUpdateFormDto>({
-		defaultValues: { email, name },
-		validationSchema: userUpdateValidationSchema,
-	});
+	const { control, errors, handleSubmit, isDirty, reset } =
+		useAppForm<UserUpdateFormDto>({
+			defaultValues: { email, name },
+			validationSchema: userUpdateValidationSchema,
+		});
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -31,27 +33,55 @@ const UpdateUserForm: React.FC<Properties> = ({
 		[handleSubmit, onSubmit],
 	);
 
+	const blocker = useBlocker(isDirty);
+
+	const handleCancelPopupClick = useCallback((): void => {
+		if (blocker.state === "blocked") {
+			blocker.reset();
+		}
+	}, [blocker]);
+
+	const handleConfirmPopupClick = useCallback((): void => {
+		reset();
+
+		if (blocker.state === "blocked") {
+			blocker.proceed();
+		}
+	}, [blocker, reset]);
+
 	return (
-		<form className={styles["form"]} onSubmit={handleFormSubmit}>
-			<Input
-				control={control}
-				errors={errors}
-				label="Name"
-				name="name"
-				placeholder="name"
-				type="text"
+		<>
+			<Popup
+				closeButtonLabel="CANCEL"
+				confirmButtonLabel="YES"
+				hasCloseIcon
+				icon={runImg}
+				isOpen={isDirty && blocker.state === "blocked"}
+				onClose={handleCancelPopupClick}
+				onConfirm={handleConfirmPopupClick}
+				title="Unsaved changes will be lost. Continue?"
 			/>
-			<Input
-				control={control}
-				errors={errors}
-				isDisabled
-				label="Email"
-				name="email"
-				placeholder="email"
-				type="email"
-			/>
-			<Button label="SAVE" type="submit" />
-		</form>
+			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<Input
+					control={control}
+					errors={errors}
+					label="Name"
+					name="name"
+					placeholder="name"
+					type="text"
+				/>
+				<Input
+					control={control}
+					errors={errors}
+					isDisabled
+					label="Email"
+					name="email"
+					placeholder="email"
+					type="email"
+				/>
+				<Button label="SAVE" type="submit" />
+			</form>
+		</>
 	);
 };
 
