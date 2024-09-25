@@ -98,7 +98,7 @@
 
 	.circle-gradient1,
 	.circle-gradient2 {
-		z-index: var(--z-index-medium);
+		z-index: var(--z-index-surface);
 	}
 
 	.circle-gradient1 {
