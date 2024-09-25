@@ -595,7 +595,7 @@ class AIAssistantController extends BaseController {
 	 *                 type: string
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
-	 *               payload:  # Исправлен отступ здесь
+	 *               payload:
 	 *                 type: array
 	 *                 items:
 	 *                   $ref: '#/components/schemas/TaskPayload'
