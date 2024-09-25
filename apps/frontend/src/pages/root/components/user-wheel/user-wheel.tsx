@@ -12,6 +12,7 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
+import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
 import { CircularProgress } from "../circular-progress/circular-progress.js";
 import {
@@ -29,13 +30,19 @@ const NO_SCORES_COUNT = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { completionTasksPercentage, dataStatus, scores, scoresLastUpdatedAt } =
-		useAppSelector(({ auth, quiz }) => ({
-			completionTasksPercentage: auth.user?.completionTasksPercentage,
-			dataStatus: quiz.dataStatus,
-			scores: quiz.scores,
-			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
-		}));
+	const {
+		authenticatedUser,
+		completionTasksPercentage,
+		dataStatus,
+		scores,
+		scoresLastUpdatedAt,
+	} = useAppSelector(({ auth, quiz, users }) => ({
+		authenticatedUser: auth.user,
+		completionTasksPercentage: users.user?.completionTasksPercentage,
+		dataStatus: quiz.dataStatus,
+		scores: quiz.scores,
+		scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
+	}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
 	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
@@ -76,6 +83,12 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
+
+	useEffect(() => {
+		void dispatch(
+			userActions.getById({ id: (authenticatedUser as UserDto).id }),
+		);
+	}, [dispatch, authenticatedUser]);
 
 	useEffect(() => {
 		if (completionTasksPercentage) {
