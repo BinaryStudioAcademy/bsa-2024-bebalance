@@ -40,7 +40,7 @@ const Wheel: React.FC = () => {
 		navigation.navigate(BottomTabScreenName.EDIT_WHEEL_RESULTS);
 	}, [navigation]);
 
-	const date = getFormattedDate("d MMM yyyy, EEEE");
+	const date = getFormattedDate(new Date(), "d MMM yyyy, EEEE");
 
 	useEffect(() => {
 		void dispatch(quizActions.getScores());

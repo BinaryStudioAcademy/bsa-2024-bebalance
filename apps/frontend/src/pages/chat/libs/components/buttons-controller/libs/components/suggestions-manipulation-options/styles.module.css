@@ -1,0 +1,32 @@
+.button-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	max-width: 280px;
+}
+
+.message-container {
+	display: flex;
+	gap: 10px;
+}
+
+.content-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 730px;
+	padding: 15px;
+	background-color: var(--background-gray);
+	border-radius: 0 10px 10px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 15px;
+	border-radius: 0 10px 10px;
+}

@@ -3,6 +3,14 @@ import { type SidebarItem } from "~/libs/types/types.js";
 
 const SIDEBAR_ITEMS: SidebarItem[] = [
 	{
+		href: AppRoute.CHAT,
+		icon: {
+			active: "aiChatActive",
+			inactive: "aiChatInactive",
+		},
+		label: "AI Assistant",
+	},
+	{
 		href: AppRoute.ROOT,
 		icon: {
 			active: "wheelActive",

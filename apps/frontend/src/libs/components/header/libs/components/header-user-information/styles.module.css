@@ -25,6 +25,10 @@
 	color: var(--black);
 }
 
+.container:hover .username {
+	color: var(--brand);
+}
+
 @media screen and (width <= 768px) {
 	.username {
 		display: none;

@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: var(--z-index-high);
+	z-index: var(--z-index-top);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -17,6 +17,7 @@
 }
 
 .contents-container {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
@@ -35,4 +36,16 @@
 	display: flex;
 	gap: 16px;
 	margin-top: 40px;
+}
+
+.close-icon-container {
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	z-index: var(--z-index-top);
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	background: none;
+	border: none;
 }

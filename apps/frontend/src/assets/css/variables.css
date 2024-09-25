@@ -41,8 +41,10 @@
 	--spiritual-end: #ffe200;
 	--mental-start: #0085ff;
 	--mental-end: #00f0ff;
-	--z-index-low: 1;
-	--z-index-medium: 10;
-	--z-index-high: 100;
-	--z-index-huge: 1000;
+	--user-chat-bubble: #4dc8fd33;
+	--z-index-deep: -10;
+	--z-index-low: 10;
+	--z-index-surface: 20;
+	--z-index-high: 30;
+	--z-index-top: 40;
 }

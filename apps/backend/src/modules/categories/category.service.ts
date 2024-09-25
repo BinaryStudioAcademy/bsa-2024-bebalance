@@ -4,6 +4,10 @@ import { type Service } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryRepository } from "./category.repository.js";
+import {
+	FIRST_ELEMENT_INDEX,
+	LAST_INDEX_OFFSET,
+} from "./libs/constants/constants.js";
 import { CategoryError } from "./libs/exceptions/exceptions.js";
 import {
 	type CategoriesGetAllResponseDto,
@@ -14,8 +18,8 @@ import {
 	type QuizScoreDto,
 	type QuizScoreRequestDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 } from "./libs/types/types.js";
 
 class CategoryService implements Service {
@@ -144,7 +148,9 @@ class CategoryService implements Service {
 			});
 		});
 
-		return { items: scores };
+		const latestUpdatedScore = scores[FIRST_ELEMENT_INDEX] as QuizScoreDto;
+
+		return { items: scores, updatedAt: latestUpdatedScore.updatedAt };
 	}
 
 	public async update(
@@ -162,7 +168,7 @@ class CategoryService implements Service {
 	public async updateUserScores(
 		payload: QuizScoresUpdateRequestDto,
 		userId: number,
-	): Promise<QuizScoresResponseDto> {
+	): Promise<QuizScoresUpdateResponseDto> {
 		const { items: scoresData } = payload;
 
 		const userScore = await this.categoryRepository.findScoreByUser(userId);
@@ -219,7 +225,11 @@ class CategoryService implements Service {
 			};
 		});
 
-		return { items };
+		const latestUpdatedScore = scores[
+			items.length - LAST_INDEX_OFFSET
+		] as QuizScoreDto;
+
+		return { items, updatedAt: latestUpdatedScore.updatedAt };
 	}
 }
 

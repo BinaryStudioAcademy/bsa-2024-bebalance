@@ -29,6 +29,7 @@ action:
 The tasks should be practical and motivating, focusing on gradual and meaningful progress while considering the user's onboarding responses.
 
 2. For each task, provide a clear description, assign a due date, and include a meaningful label.
+Make sure the description of the task is concise and does not exceed 250 characters.
 The tasks should be easy to follow and achievable.
 
 3. Place the structured task suggestions in the \`tasks\` field of the response, and provide a summary in the \`message\` field.

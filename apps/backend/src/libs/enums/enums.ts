@@ -5,4 +5,5 @@ export {
 	ContentType,
 	ErrorMessage,
 	ServerErrorType,
+	SortOrder,
 } from "shared";
