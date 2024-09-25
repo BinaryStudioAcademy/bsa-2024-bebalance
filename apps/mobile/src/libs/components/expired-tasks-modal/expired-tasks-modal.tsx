@@ -98,11 +98,13 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }) => {
 						onPress={handleComplete(id)}
 					/>
 				</View>
-				<View style={[globalStyles.flex1, globalStyles.justifyContentEnd]}>
-					<Text preset="subheading" weight="bold">
-						{currentPage}/{tasks.length}
-					</Text>
-				</View>
+				{tasks.length > NumericalValue.ONE && (
+					<View style={[globalStyles.flex1, globalStyles.justifyContentEnd]}>
+						<Text preset="subheading" weight="bold">
+							{currentPage}/{tasks.length}
+						</Text>
+					</View>
+				)}
 			</View>
 		);
 	});
