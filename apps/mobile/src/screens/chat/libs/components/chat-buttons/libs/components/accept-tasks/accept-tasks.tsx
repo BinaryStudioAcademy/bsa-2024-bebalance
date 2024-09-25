@@ -10,11 +10,11 @@ import {
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type NativeStackNavigationProp } from "~/libs/types/types";
+import { ButtonsMode, ChatMessageAuthor } from "~/packages/chat/chat";
 import { actions as chatActions } from "~/slices/chat/chat";
 
 import { FEEDBACK_TEXT } from "./constants/constants";
 import { type RootStackParameterList } from "./types/types";
-import { ChatMessageAuthor, ButtonsMode } from "~/packages/chat/chat";
 
 const AcceptTasks: React.FC = () => {
 	const dispatch = useAppDispatch();
