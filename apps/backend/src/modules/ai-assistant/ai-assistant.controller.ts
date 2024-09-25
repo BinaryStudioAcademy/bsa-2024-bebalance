@@ -52,11 +52,6 @@ import {
  *           type: string
  *           description: Detailed description of the task
  *           example: "Set a goal to prepare at least two healthy home-cooked meals this week, focusing on incorporating more fruits and vegetables into your diet."
- *         dueDate:
- *           type: string
- *           format: date-time
- *           description: The deadline for the task
- *           example: "2024-09-23T15:15:48.971Z"
  *         label:
  *           type: string
  *           description: A label for the task (priority, tags, etc.)
@@ -309,7 +304,7 @@ class AIAssistantController extends BaseController {
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_CHANGE_TASK,
+			path: AIAssistantApiPath.CHAT_CHANGE_TASKS,
 			validation: {
 				body: taskActionRequestSchemaValidationSchema,
 			},
@@ -317,14 +312,14 @@ class AIAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
-				this.explainTaskSuggestion(
+				this.explainTasksSuggestion(
 					options as APIHandlerOptions<{
 						body: AIAssistantRequestDto;
 						user: UserDto;
 					}>,
 				),
 			method: "POST",
-			path: AIAssistantApiPath.CHAT_EXPLAIN_TASK,
+			path: AIAssistantApiPath.CHAT_EXPLAIN_TASKS,
 			validation: {
 				body: taskActionRequestSchemaValidationSchema,
 			},
@@ -425,7 +420,7 @@ class AIAssistantController extends BaseController {
 	 * @swagger
 	 * /assistant/chat/accept-tasks:
 	 *   post:
-	 *     summary: Accept task suggestions
+	 *     summary: Accept tasks suggestions
 	 *     tags:
 	 *       - AI Assistant
 	 *     security:
@@ -435,23 +430,27 @@ class AIAssistantController extends BaseController {
 	 *       content:
 	 *         application/json:
 	 *           schema:
-	 *             type: array
+	 *             type: object
 	 *             properties:
 	 *               threadId:
 	 *                 type: string
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
 	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *                 type: array
+	 *                 description: Array of tasks to accept
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
-	 *         description: Returns the accepted task
+	 *         description: Returns the accepted tasks
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/Task'
+	 *               type: array
+	 *               items:
+	 *                 $ref: '#/components/schemas/Task'
 	 */
-
 	private async acceptTasks(
 		options: APIHandlerOptions<{
 			body: AIAssistantCreateMultipleTasksDto;
@@ -515,7 +514,7 @@ class AIAssistantController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /assistant/chat/change-task:
+	 * /assistant/chat/change-tasks:
 	 *   post:
 	 *     summary: Change task
 	 *     tags:
@@ -534,7 +533,9 @@ class AIAssistantController extends BaseController {
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
 	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *                 type: array
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns task suggestions for the provided categories
@@ -564,16 +565,16 @@ class AIAssistantController extends BaseController {
 		const { body, user } = options;
 
 		return {
-			payload: await this.openAIService.changeTaskSuggestion(user, body),
+			payload: await this.openAIService.changeTasksSuggestion(user, body),
 			status: HTTPCode.OK,
 		};
 	}
 
 	/**
 	 * @swagger
-	 * /assistant/chat/explain-task:
+	 * /assistant/chat/explain-tasks:
 	 *   post:
-	 *     summary: Explain task suggestion
+	 *     summary: Explain tasks suggestion
 	 *     tags:
 	 *       - AI Assistant
 	 *     security:
@@ -590,7 +591,9 @@ class AIAssistantController extends BaseController {
 	 *                 description: Identifier for the thread
 	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
 	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *                 type: array
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns explanations for the provided task suggestions
@@ -611,7 +614,7 @@ class AIAssistantController extends BaseController {
 	 *                   description: Identifier for the chat thread.
 	 *                   example: "thread_QwWiRV7jFYMz0i0YGcRvcRsU"
 	 */
-	private async explainTaskSuggestion(
+	private async explainTasksSuggestion(
 		options: APIHandlerOptions<{
 			body: AIAssistantRequestDto;
 		}>,
@@ -619,7 +622,7 @@ class AIAssistantController extends BaseController {
 		const { body } = options;
 
 		return {
-			payload: await this.openAIService.explainTaskSuggestion(body),
+			payload: await this.openAIService.explainTasksSuggestion(body),
 			status: HTTPCode.OK,
 		};
 	}
@@ -717,10 +720,10 @@ class AIAssistantController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body, user } = options;
+		const { body } = options;
 
 		return {
-			payload: await this.openAIService.suggestTasksForCategories(user, body),
+			payload: await this.openAIService.suggestTasksForCategories(body),
 			status: HTTPCode.OK,
 		};
 	}

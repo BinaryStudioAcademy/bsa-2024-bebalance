@@ -1,5 +1,5 @@
-import { Button, Input } from "~/libs/components/components.js";
-import { NumericalValue } from "~/libs/enums/enums.js";
+import { Button, Input, Link } from "~/libs/components/components.js";
+import { AppRoute, NumericalValue } from "~/libs/enums/enums.js";
 import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
 import {
 	type EmailDto,
@@ -40,6 +40,10 @@ const ForgotPasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 				/>
 
 				<Button isDisabled={hasError} label="RESET PASSWORD" type="submit" />
+				<div className={styles["sign-in-container"]}>
+					Back to
+					<Link to={AppRoute.SIGN_IN}>Sign In</Link>
+				</div>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />
