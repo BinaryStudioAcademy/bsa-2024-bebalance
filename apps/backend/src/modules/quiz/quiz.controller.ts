@@ -114,6 +114,9 @@ type Constructor = {
  *                     type: string
  *                     example: "Physical"
  *               - $ref: "#/components/schemas/QuizScoreDto"
+ *         updatedAt:
+ *           type: string
+ * 		 	 format: date-time
  *     QuizScoreDto:
  *       type: object
  *       properties:
@@ -391,6 +394,9 @@ class QuizController extends BaseController {
 	 *                   type: array
 	 *                   items:
 	 *                     $ref: "#/components/schemas/QuizScoreDto"
+	 *					updatedAt:
+	 *					  type: string
+	 *					  format: date-time
 	 *       401:
 	 *         description: Unauthorized
 	 *         content:

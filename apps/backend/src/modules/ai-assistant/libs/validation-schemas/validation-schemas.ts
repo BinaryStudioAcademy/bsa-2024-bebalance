@@ -1,4 +1,5 @@
 export {
+	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
 	changeTaskSuggestionRequestValidationSchema,
 	taskActionRequestSchemaValidationSchema,

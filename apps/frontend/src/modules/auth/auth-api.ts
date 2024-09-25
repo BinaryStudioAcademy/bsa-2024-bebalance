@@ -1,7 +1,6 @@
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
-import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage } from "~/libs/modules/storage/storage.js";
+import { type APIConfiguration } from "~/libs/types/types.js";
 import {
 	type EmailDto,
 	type ResetPasswordDto,
@@ -16,14 +15,8 @@ import {
 
 import { AuthApiPath } from "./libs/enums/enums.js";
 
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
-
 class AuthApi extends BaseHTTPApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.AUTH, storage });
 	}
 

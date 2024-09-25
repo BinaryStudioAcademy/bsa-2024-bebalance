@@ -9,4 +9,5 @@ export {
 	ErrorMessage,
 	NumericalValue,
 	ServerErrorType,
+	ZERO_INDEX,
 } from "shared";

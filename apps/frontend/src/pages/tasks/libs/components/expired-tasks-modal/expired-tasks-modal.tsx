@@ -1,12 +1,16 @@
+import { TaskCard } from "~/libs/components/components.js";
 import {
 	useCallback,
 	useEffect,
 	useRef,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { type TaskDto } from "~/modules/tasks/tasks.js";
+import {
+	type AddTaskNoteHandler,
+	type TaskDto,
+} from "~/modules/tasks/tasks.js";
 
-import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
+import { ArrowButton, TaskActionsPanel } from "../components.js";
 import {
 	FOCUSABLE_ELEMENT_TAB_INDEX,
 	INITIAL_POINTER_POSITION_X,
@@ -17,10 +21,16 @@ import { getHorizontalPointerPosition } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	onAddTaskNote: AddTaskNoteHandler;
+	onGetTaskNotes: (id: number) => void;
 	tasks: TaskDto[];
 };
 
-const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
+const ExpiredTasksModal: React.FC<Properties> = ({
+	onAddTaskNote,
+	onGetTaskNotes,
+	tasks,
+}: Properties) => {
 	const [currentSlide, setCurrentSlide] = useState<number>(Slide.INITIAL);
 	const [pointerStartPositionX, setPointerStartPositionX] = useState<number>(
 		INITIAL_POINTER_POSITION_X,
@@ -114,6 +124,8 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							<div>
 								<div className={styles["slide"]}>
 									<TaskCard
+										onAddTaskNote={onAddTaskNote}
+										onGetTaskNotes={onGetTaskNotes}
 										task={tasks[Slide.INITIAL] as TaskDto}
 										variant="expired"
 									/>
@@ -132,7 +144,12 @@ const ExpiredTasksModal: React.FC<Properties> = ({ tasks }: Properties) => {
 							>
 								{tasks.map((task, index) => (
 									<div className={styles["slide"]} key={index}>
-										<TaskCard task={task} variant="expired" />
+										<TaskCard
+											onAddTaskNote={onAddTaskNote}
+											onGetTaskNotes={onGetTaskNotes}
+											task={task}
+											variant="expired"
+										/>
 									</div>
 								))}
 							</div>

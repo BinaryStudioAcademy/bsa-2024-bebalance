@@ -2,7 +2,7 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { STATUS_FIELD } from "./libs/constants/constants.js";
-import { TaskStatus } from "./libs/enums/enums.js";
+import { SortOrder, TaskStatus } from "./libs/enums/enums.js";
 import { TaskEntity } from "./task.entity.js";
 import { TaskModel } from "./task.model.js";
 import { TaskNoteEntity } from "./task-note.entity.js";
@@ -56,8 +56,8 @@ class TaskRepository implements Repository {
 			.withGraphFetched(`[${RelationName.CATEGORY}]`);
 
 		return TaskEntity.initialize({
-			category: task.category.name,
 			categoryId: task.categoryId,
+			categoryName: task.category.name,
 			createdAt: task.createdAt,
 			description: task.description,
 			dueDate: task.dueDate,
@@ -83,8 +83,8 @@ class TaskRepository implements Repository {
 
 		return task
 			? TaskEntity.initialize({
-					category: task.category.name,
 					categoryId: task.categoryId,
+					categoryName: task.category.name,
 					createdAt: task.createdAt,
 					description: task.description,
 					dueDate: task.dueDate,
@@ -104,8 +104,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -123,8 +123,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -145,8 +145,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -168,8 +168,8 @@ class TaskRepository implements Repository {
 
 		return tasks.map((task) => {
 			return TaskEntity.initialize({
-				category: task.category.name,
 				categoryId: task.categoryId,
+				categoryName: task.category.name,
 				createdAt: task.createdAt,
 				description: task.description,
 				dueDate: task.dueDate,
@@ -186,7 +186,7 @@ class TaskRepository implements Repository {
 		const notes = await this.taskNoteModel
 			.query()
 			.where({ taskId })
-			.orderBy("createdAt", "asc");
+			.orderBy("createdAt", SortOrder.ASC);
 
 		return notes.map((note) => {
 			return TaskNoteEntity.initialize({
@@ -209,8 +209,8 @@ class TaskRepository implements Repository {
 			.withGraphFetched(`[${RelationName.CATEGORY}]`);
 
 		return TaskEntity.initialize({
-			category: task.category.name,
 			categoryId: task.categoryId,
+			categoryName: task.category.name,
 			createdAt: task.createdAt,
 			description: task.description,
 			dueDate: task.dueDate,
