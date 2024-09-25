@@ -27,7 +27,7 @@ export {
 export {
 	configureString,
 	getFormattedDate,
-	getLocalDatestring,
+	getLocalDate,
 } from "./libs/helpers/helpers.js";
 export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";

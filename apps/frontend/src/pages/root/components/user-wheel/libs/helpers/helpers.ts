@@ -1,1 +1,1 @@
-export { getFormattedDate, getLocalDatestring } from "shared";
+export { getFormattedDate, getLocalDate } from "shared";

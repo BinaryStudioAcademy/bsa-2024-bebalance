@@ -18,10 +18,7 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
-import {
-	getFormattedDate,
-	getLocalDatestring,
-} from "./libs/helpers/helpers.js";
+import { getFormattedDate, getLocalDate } from "./libs/helpers/helpers.js";
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -53,10 +50,7 @@ const UserWheel: React.FC = () => {
 		: "My wheel results";
 
 	const lastWheelUpdateDate = scoresLastUpdatedAt
-		? getFormattedDate(
-				new Date(getLocalDatestring(scoresLastUpdatedAt)),
-				"d MMM yyyy, EEEE",
-			)
+		? getFormattedDate(getLocalDate(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
 		: null;
 
 	const handleEditing = useCallback(() => {
