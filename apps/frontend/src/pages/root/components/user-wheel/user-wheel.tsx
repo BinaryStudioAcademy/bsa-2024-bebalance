@@ -20,12 +20,13 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
+import {
+	NO_SCORES_COUNT,
+	NO_TASKS_PERCENTAGE,
+} from "./libs/constants/constants.js";
 import { getFormattedDate } from "./libs/helpers/helpers.js";
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
-
-const NO_SCORES_COUNT = 0;
-const NO_TASKS_PERCENTAGE = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
