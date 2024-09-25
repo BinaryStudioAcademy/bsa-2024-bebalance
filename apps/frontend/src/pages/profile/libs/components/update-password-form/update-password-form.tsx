@@ -1,5 +1,11 @@
-import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Input, Popup } from "~/libs/components/components.js";
+import {
+	useAppForm,
+	useBlocker,
+	useCallback,
+	useState,
+} from "~/libs/hooks/hooks.js";
 import {
 	type UserUpdatePasswordFormDto,
 	type UserUpdatePasswordRequestDto,
@@ -22,7 +28,7 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] =
 		useState<boolean>(false);
 
-	const { control, errors, getValues, handleSubmit, setError } =
+	const { control, errors, getValues, handleSubmit, isDirty, reset, setError } =
 		useAppForm<UserUpdatePasswordFormDto>({
 			defaultValues: DEFAULT_UPDATE_PASSWORD_PAYLOAD,
 			validationSchema: userUpdatePasswordValidationSchema,
@@ -59,40 +65,68 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 		setIsConfirmNewPasswordVisible((previousState) => !previousState);
 	}, []);
 
+	const blocker = useBlocker(isDirty);
+
+	const handleCancelPopupClick = useCallback((): void => {
+		if (blocker.state === "blocked") {
+			blocker.reset();
+		}
+	}, [blocker]);
+
+	const handleConfirmPopupClick = useCallback((): void => {
+		reset();
+
+		if (blocker.state === "blocked") {
+			blocker.proceed();
+		}
+	}, [blocker, reset]);
+
 	return (
-		<form className={styles["form"]} onSubmit={handleFormSubmit}>
-			<Input
-				control={control}
-				errors={errors}
-				iconName={isCurrentPasswordVisible ? "crossedEye" : "eye"}
-				label="Current Password"
-				name="currentPassword"
-				onIconClick={handleTogglePasswordVisibility}
-				placeholder="••••••"
-				type={isCurrentPasswordVisible ? "text" : "password"}
+		<>
+			<Popup
+				closeButtonLabel="CANCEL"
+				confirmButtonLabel="YES"
+				hasCloseIcon
+				icon={runImg}
+				isOpen={isDirty && blocker.state === "blocked"}
+				onClose={handleCancelPopupClick}
+				onConfirm={handleConfirmPopupClick}
+				title="Unsaved changes will be lost. Continue?"
 			/>
-			<Input
-				control={control}
-				errors={errors}
-				iconName={isNewPasswordVisible ? "crossedEye" : "eye"}
-				label="New Password"
-				name="newPassword"
-				onIconClick={handleToggleNewPasswordVisibility}
-				placeholder="••••••"
-				type={isNewPasswordVisible ? "text" : "password"}
-			/>
-			<Input
-				control={control}
-				errors={errors}
-				iconName={isConfirmNewPasswordVisible ? "crossedEye" : "eye"}
-				label="Confirm New Password"
-				name="confirmNewPassword"
-				onIconClick={handleToggleConfirmNewPasswordVisibility}
-				placeholder="••••••"
-				type={isConfirmNewPasswordVisible ? "text" : "password"}
-			/>
-			<Button label="SAVE" type="submit" />
-		</form>
+			<form className={styles["form"]} onSubmit={handleFormSubmit}>
+				<Input
+					control={control}
+					errors={errors}
+					iconName={isCurrentPasswordVisible ? "crossedEye" : "eye"}
+					label="Current Password"
+					name="currentPassword"
+					onIconClick={handleTogglePasswordVisibility}
+					placeholder="••••••"
+					type={isCurrentPasswordVisible ? "text" : "password"}
+				/>
+				<Input
+					control={control}
+					errors={errors}
+					iconName={isNewPasswordVisible ? "crossedEye" : "eye"}
+					label="New Password"
+					name="newPassword"
+					onIconClick={handleToggleNewPasswordVisibility}
+					placeholder="••••••"
+					type={isNewPasswordVisible ? "text" : "password"}
+				/>
+				<Input
+					control={control}
+					errors={errors}
+					iconName={isConfirmNewPasswordVisible ? "crossedEye" : "eye"}
+					label="Confirm New Password"
+					name="confirmNewPassword"
+					onIconClick={handleToggleConfirmNewPasswordVisibility}
+					placeholder="••••••"
+					type={isConfirmNewPasswordVisible ? "text" : "password"}
+				/>
+				<Button label="SAVE" type="submit" />
+			</form>
+		</>
 	);
 };
 
