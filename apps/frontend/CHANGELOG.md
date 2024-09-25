@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.46.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.0...frontend-v1.46.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **frontend/shared:** add date on the "My wheel results" (root) page bb-494 ([#572](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/572)) ([b3f1068](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3f10687aa1afa561147589297bcf15f6e9c6513))
+* **frontend:** fix invalid z-index usage bb-162 ([#567](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/567)) ([ddfefa1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ddfefa11051eb7e51556fd8c1ebaacbc358c17ad))
+
 ## [1.46.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.45.0...frontend-v1.46.0) (2024-09-25)
 
 
