@@ -1,7 +1,7 @@
 .header {
 	position: sticky;
 	top: 0;
-	z-index: var(--z-index-high);
+	z-index: var(--z-index-surface);
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
