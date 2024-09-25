@@ -117,11 +117,11 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.FULFILLED;
 				const newMessages = action.payload.messages;
 				state.taskSuggestions = [];
-				const newTaskSuggestions: TaskMessage[] = [];
+				const newTasks: TaskMessage[] = [];
 
 				for (const message of newMessages) {
 					if (checkIsTaskMessage(message)) {
-						newTaskSuggestions.push(message.payload);
+						newTasks.push(message.payload);
 						state.taskSuggestions.push({
 							categoryId: message.payload.task.categoryId,
 							categoryName: message.payload.task.categoryName,
@@ -134,7 +134,7 @@ const { actions, name, reducer } = createSlice({
 				state.messages.push({
 					author: ChatMessageAuthor.ASSISTANT,
 					isRead: true,
-					payload: newTaskSuggestions,
+					payload: newTasks,
 					type: ChatMessageType.TASK,
 				});
 
