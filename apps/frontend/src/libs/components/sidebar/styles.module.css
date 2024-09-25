@@ -1,7 +1,7 @@
 .sidebar-container {
 	position: sticky;
 	top: 0;
-	z-index: var(--z-index-huge);
+	z-index: var(--z-index-high);
 	display: flex;
 	flex-direction: column;
 	justify-content: stretch;
