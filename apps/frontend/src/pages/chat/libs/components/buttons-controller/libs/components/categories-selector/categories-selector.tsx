@@ -5,6 +5,7 @@ import {
 	useCallback,
 } from "~/libs/hooks/hooks.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
 	CATEGORIES_SELECTOR_BUTTON_LABEL,
@@ -35,6 +36,15 @@ const CategoriesSelector: React.FC = () => {
 				threadId: threadId ?? "",
 			};
 
+			let namesOfSelectedCategories = "";
+
+			for (const category of newSelectedCategories) {
+				namesOfSelectedCategories += `${category.name}\n`;
+			}
+
+			dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
+			dispatch(chatActions.addAssistantTextMessage(CATEGORIES_SELECTOR_TEXT));
+			dispatch(chatActions.addUserTextMessage(namesOfSelectedCategories));
 			await dispatch(chatActions.getTasksForCategories(taskPayload));
 		},
 		[dispatch, quizCategories, threadId],

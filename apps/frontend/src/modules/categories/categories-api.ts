@@ -1,19 +1,12 @@
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
-import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage } from "~/libs/modules/storage/storage.js";
+import { type APIConfiguration } from "~/libs/types/types.js";
 
 import { CategoriesApiPath } from "./libs/enums/enums.js";
 import { type CategoriesGetAllResponseDto } from "./libs/types/types.js";
 
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
-
 class CategoriesApi extends BaseHTTPApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.CATEGORIES, storage });
 	}
 

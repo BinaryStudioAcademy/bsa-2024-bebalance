@@ -1,6 +1,6 @@
 const SuggestionsCreationButtonLabel = {
-	NO: "no, smth else",
-	YES: "yes, 3 lowest",
+	NO: "No, something else",
+	YES: "Yes, 3 lowest",
 } as const;
 
 export { SuggestionsCreationButtonLabel };

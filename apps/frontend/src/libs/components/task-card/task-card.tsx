@@ -2,9 +2,9 @@ import { Button } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
 import {
+	type AddTaskNoteHandler,
 	type TaskCreateDto,
 	type TaskDto,
-	type TaskNoteRequestDto,
 } from "~/modules/tasks/tasks.js";
 
 import { Deadline } from "../deadline/deadline.js";
@@ -17,7 +17,7 @@ import { IconColorVariant, TaskStatus } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onAddTaskNote?: (payload: TaskNoteRequestDto) => void;
+	onAddTaskNote?: AddTaskNoteHandler;
 	onComplete?: (id: number) => void;
 	onExpire?: (expiredTask: TaskDto) => void;
 	onGetTaskNotes?: (id: number) => void;
@@ -147,7 +147,7 @@ const TaskCard: React.FC<Properties> = ({
 			{isNoteOpen && (
 				<Notes
 					onNoteClose={handleNoteClose}
-					onSubmit={onAddTaskNote as (payload: TaskNoteRequestDto) => void}
+					onSubmit={onAddTaskNote as AddTaskNoteHandler}
 					task={task as TaskDto}
 				/>
 			)}

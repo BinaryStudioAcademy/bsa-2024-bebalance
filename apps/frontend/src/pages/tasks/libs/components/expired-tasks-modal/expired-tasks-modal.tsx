@@ -6,8 +6,8 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import {
+	type AddTaskNoteHandler,
 	type TaskDto,
-	type TaskNoteRequestDto,
 } from "~/modules/tasks/tasks.js";
 
 import { ArrowButton, TaskActionsPanel } from "../components.js";
@@ -21,7 +21,7 @@ import { getHorizontalPointerPosition } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onAddTaskNote: (payload: TaskNoteRequestDto) => void;
+	onAddTaskNote: AddTaskNoteHandler;
 	onGetTaskNotes: (id: number) => void;
 	tasks: TaskDto[];
 };

@@ -1,32 +1,25 @@
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
-import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage } from "~/libs/modules/storage/storage.js";
+import { type APIConfiguration } from "~/libs/types/types.js";
 import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
 import { QuizApiPath } from "./libs/enums/enums.js";
 
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
-
 class QuizApi extends BaseHTTPApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
 	public async editScores(
 		payload: QuizScoresUpdateRequestDto,
-	): Promise<QuizScoresResponseDto> {
+	): Promise<QuizScoresUpdateResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(QuizApiPath.SCORE, {}),
 			{
@@ -37,7 +30,7 @@ class QuizApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<QuizScoresResponseDto>();
+		return await response.json<QuizScoresUpdateResponseDto>();
 	}
 
 	public async getAllQuestions(): Promise<{ items: QuizQuestionDto[][] }> {

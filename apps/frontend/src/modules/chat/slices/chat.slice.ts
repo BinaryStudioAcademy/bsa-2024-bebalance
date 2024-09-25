@@ -7,7 +7,7 @@ import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import { checkIsTask } from "../libs/helpers/helpers.js";
+import { checkIsTaskMessage } from "../libs/guards/guards.js";
 import {
 	type ChatMessageDto,
 	type TaskMessage,
@@ -85,7 +85,7 @@ const { actions, name, reducer } = createSlice({
 						});
 					}
 
-					if (checkIsTask(message)) {
+					if (checkIsTaskMessage(message)) {
 						taskSuggestionsMessagePayload.push(message.payload);
 						state.taskSuggestions.push({
 							categoryId: message.payload.task.categoryId,

@@ -27,9 +27,7 @@ const Chat: React.FC = () => {
 	}));
 
 	const handleScrollToBottom = (): void => {
-		if (chatEnd.current) {
-			chatEnd.current.scrollIntoView({ behavior: "smooth" });
-		}
+		chatEnd.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
 	useEffect(() => {
@@ -38,8 +36,11 @@ const Chat: React.FC = () => {
 
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
-		void dispatch(chatActions.initConversation());
-	}, [dispatch]);
+
+		if (!threadId) {
+			void dispatch(chatActions.initConversation());
+		}
+	}, [dispatch, threadId]);
 
 	return (
 		<main className={styles["page-container"]}>

@@ -37,3 +37,28 @@
 	width: 306px;
 	margin-top: 36px;
 }
+
+.date-conrainer {
+	display: flex;
+	align-items: center;
+	width: 162px;
+	height: 29px;
+	padding: 5px 17px;
+	text-align: left;
+	user-select: none;
+	background: var(--background-gray);
+	border: 1px solid var(--background-gray);
+	border-radius: 22px;
+}
+
+.date {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 146%;
+}
+
+.header-text-container {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+}
