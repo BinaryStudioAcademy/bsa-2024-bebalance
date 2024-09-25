@@ -50,16 +50,20 @@ const AcceptTasks: React.FC = () => {
 	}, [dispatch, taskSuggestions, threadId, navigation]);
 
 	const handleGenerateNew = useCallback(() => {
-		//TODO add generate new versions of tasks
+		void dispatch(
+			chatActions.getChangedTasksSuggestion({
+				payload: taskSuggestions,
+				threadId: threadId as string,
+			}),
+		);
 
 		dispatch(
 			chatActions.addTextMessage({
-				author: "user",
+				author: ChatMessageAuthor.USER,
 				text: "Generate new",
 			}),
 		);
-		dispatch(chatActions.setButtonsMode("Feedback"));
-	}, [dispatch]);
+	}, [dispatch, taskSuggestions, threadId]);
 
 	return (
 		<ChatMessage isUser={false} text={FEEDBACK_TEXT}>

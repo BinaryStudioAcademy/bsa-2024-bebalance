@@ -17,7 +17,7 @@ export {
 	ChatMessageAuthor,
 	ChatMessageType,
 } from "./libs/enums/enums";
-export { checkIsTaskType } from "./libs/helpers/helpers";
+export { checkIsTaskType, processMessages } from "./libs/helpers/helpers";
 export {
 	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,

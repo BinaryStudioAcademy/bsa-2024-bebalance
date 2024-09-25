@@ -14,6 +14,7 @@ import {
 import { signOut } from "../auth/actions";
 import {
 	createTasks,
+	getChangedTasksSuggestion,
 	getTasksForCategories,
 	initConversation,
 } from "./actions";
@@ -68,6 +69,18 @@ const { actions, name, reducer } = createSlice({
 			state.buttonsMode = ButtonsMode.FEEDBACK;
 		});
 		builder.addCase(getTasksForCategories.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(getChangedTasksSuggestion.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getChangedTasksSuggestion.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.messages.push(...action.payload.messages);
+			state.taskSuggestions = action.payload.taskSuggestions;
+			state.buttonsMode = ButtonsMode.FEEDBACK;
+		});
+		builder.addCase(getChangedTasksSuggestion.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(signOut.pending, () => {
