@@ -121,12 +121,10 @@ class AIAssistantService {
 		const tasks = payload as TaskCreateDto[];
 
 		const runThreadOptions = runChangeTasksByCategoryOptions(tasks);
-		const taskDeadLine = this.taskService.calculateDeadline(
-			user.userTaskDays as number[],
-		);
+
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateChangeTasksSuggestionsResponse(result, taskDeadLine);
+		return generateChangeTasksSuggestionsResponse(result);
 	}
 
 	public async explainTasksSuggestion(
@@ -165,19 +163,14 @@ class AIAssistantService {
 	}
 
 	public async suggestTasksForCategories(
-		user: UserDto,
 		body: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { categories, threadId } = body;
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
-		const taskDeadLine = this.taskService.calculateDeadline(
-			user.userTaskDays as number[],
-		);
-
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateTasksSuggestionsResponse(result, taskDeadLine);
+		return generateTasksSuggestionsResponse(result);
 	}
 }
 

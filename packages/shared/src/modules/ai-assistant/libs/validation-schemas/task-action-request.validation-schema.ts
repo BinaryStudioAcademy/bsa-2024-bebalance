@@ -19,9 +19,6 @@ const taskCreateDto = z.object({
 		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 			message: AIAssistantValidationMessage.DESCRIPTION_REQUIRED,
 		}),
-	dueDate: z.string().datetime({
-		message: AIAssistantValidationMessage.DUE_DATE_INVALID_FORMAT,
-	}),
 	label: z.string().min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
 		message: AIAssistantValidationMessage.LABEL_REQUIRED,
 	}),

@@ -93,22 +93,12 @@ const ChangeTasksTool = {
 								description: "Description of the previously suggested task",
 								type: "string",
 							},
-							dueDate: {
-								description: "Due date of the previously suggested task",
-								type: "string",
-							},
 							label: {
 								description: "Label or name of the previously suggested task",
 								type: "string",
 							},
 						},
-						required: [
-							"categoryId",
-							"categoryName",
-							"description",
-							"dueDate",
-							"label",
-						],
+						required: ["categoryId", "categoryName", "description", "label"],
 						type: "object",
 					},
 					type: "array",

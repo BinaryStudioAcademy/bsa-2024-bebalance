@@ -52,11 +52,6 @@ import {
  *           type: string
  *           description: Detailed description of the task
  *           example: "Set a goal to prepare at least two healthy home-cooked meals this week, focusing on incorporating more fruits and vegetables into your diet."
- *         dueDate:
- *           type: string
- *           format: date-time
- *           description: The deadline for the task
- *           example: "2024-09-23T15:15:48.971Z"
  *         label:
  *           type: string
  *           description: A label for the task (priority, tags, etc.)
@@ -725,10 +720,10 @@ class AIAssistantController extends BaseController {
 			user: UserDto;
 		}>,
 	): Promise<APIHandlerResponse> {
-		const { body, user } = options;
+		const { body } = options;
 
 		return {
-			payload: await this.openAIService.suggestTasksForCategories(user, body),
+			payload: await this.openAIService.suggestTasksForCategories(body),
 			status: HTTPCode.OK,
 		};
 	}
