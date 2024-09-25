@@ -10,6 +10,9 @@ const categoriesApi = new CategoriesApi({
 	storage,
 });
 
-export { type CategoriesGetRequestQueryDto } from "./libs/types/types.js";
+export {
+	type CategoriesGetRequestQueryDto,
+	type SelectedCategory,
+} from "./libs/types/types.js";
 export { actions, reducer } from "./slices/categories.js";
 export { categoriesApi };

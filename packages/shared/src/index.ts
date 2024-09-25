@@ -10,6 +10,7 @@ export {
 	ErrorMessage,
 	NumericalValue,
 	ServerErrorType,
+	SortOrder,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
@@ -44,8 +45,10 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
 	AIAssistantApiPath,
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
@@ -72,7 +75,6 @@ export {
 	type SelectedCategory,
 } from "./modules/categories/categories.js";
 export {
-	type BalanceWheelMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	ChatMessageType,
@@ -107,6 +109,7 @@ export {
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 	updateScoresValidationSchema,
@@ -119,6 +122,7 @@ export {
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
 	taskNoteValidationSchema,
+	type TaskPayload,
 	TasksApiPath,
 	TaskStatus,
 	type TaskUpdateParametersDto,

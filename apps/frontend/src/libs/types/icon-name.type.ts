@@ -1,4 +1,8 @@
 type IconName =
+	| "aiAssistantAvatar"
+	| "aiChatActive"
+	| "aiChatInactive"
+	| "arrowNext"
 	| "check"
 	| "checkSmall"
 	| "clockActive"
@@ -10,6 +14,7 @@ type IconName =
 	| "eye"
 	| "info"
 	| "menu"
+	| "note"
 	| "roundedCheck"
 	| "settingsActive"
 	| "settingsInactive"

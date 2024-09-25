@@ -70,7 +70,7 @@ const TaskCard: React.FC<Properties> = ({
 					globalStyles.pt16,
 				]}
 			>
-				<Tag label={task.category} />
+				<Tag label={task.categoryName} />
 				{isActiveTask && (
 					<DeadlineCountdown
 						deadline={task.dueDate}

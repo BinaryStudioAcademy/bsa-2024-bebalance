@@ -149,6 +149,17 @@ erDiagram
         text description
         text status
     }
+
+    task_notes }o--|| tasks: task_id
+    task_notes }o--|| users: user_id
+    task_notes {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        int task_id FK
+        int user_id FK
+        text content
+    }
 ```
 
 ## 5. Architecture

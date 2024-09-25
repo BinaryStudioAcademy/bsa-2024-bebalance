@@ -1,4 +1,3 @@
-import notifee from "@notifee/react-native";
 import React from "react";
 
 import {
@@ -27,10 +26,7 @@ import { actions as taskActions } from "~/slices/task/task";
 import { actions as userActions } from "~/slices/users/users";
 
 import { TasksMode, TaskStatus, TaskTab } from "./libs/enums/enums";
-import {
-	addNotificationsOnTasksExpired,
-	getMillisecondsLeft,
-} from "./libs/helpers/helpers";
+import { getMillisecondsLeft } from "./libs/helpers/helpers";
 import { styles } from "./styles";
 
 const MILLISECONDS_PER_MINUTE = 60_000;
@@ -59,14 +55,6 @@ const Tasks: React.FC = () => {
 	useEffect(() => {
 		void dispatch(taskActions.getCurrentTasks());
 	}, [dispatch]);
-
-	useEffect(() => {
-		void addNotificationsOnTasksExpired(activeTasks);
-
-		return (): void => {
-			void notifee.cancelAllNotifications();
-		};
-	}, [activeTasks]);
 
 	useEffect(() => {
 		if (mode === TasksMode.CURRENT) {

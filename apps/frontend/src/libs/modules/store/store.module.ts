@@ -15,6 +15,7 @@ import {
 	categoriesApi,
 	reducer as categoriesReducer,
 } from "~/modules/categories/categories.js";
+import { chatApi, reducer as chatReducer } from "~/modules/chat/chat.js";
 import {
 	onboardingApi,
 	reducer as onboardingReducer,
@@ -29,6 +30,7 @@ type RootReducer = {
 	app: ReturnType<typeof appReducer>;
 	auth: ReturnType<typeof authReducer>;
 	categories: ReturnType<typeof categoriesReducer>;
+	chat: ReturnType<typeof chatReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
 	tasks: ReturnType<typeof tasksReducer>;
@@ -38,6 +40,7 @@ type RootReducer = {
 type ExtraArguments = {
 	authApi: typeof authApi;
 	categoriesApi: typeof categoriesApi;
+	chatApi: typeof chatApi;
 	notification: typeof notification;
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
@@ -69,6 +72,7 @@ class Store {
 				app: appReducer,
 				auth: authReducer,
 				categories: categoriesReducer,
+				chat: chatReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
 				tasks: tasksReducer,
@@ -81,6 +85,7 @@ class Store {
 		return {
 			authApi,
 			categoriesApi,
+			chatApi,
 			notification,
 			onboardingApi,
 			quizApi,

@@ -25,9 +25,6 @@ const userSignUp = z
 			})
 			.regex(UserValidationRegexRule.EMAIL_DOMAIN_PART_VALID_CHARS, {
 				message: UserValidationMessage.EMAIL_WRONG,
-			})
-			.regex(UserValidationRegexRule.EMAIL_DOMAIN_MIN_MAX_CHARS, {
-				message: UserValidationMessage.EMAIL_WRONG,
 			}),
 		name: z
 			.string()

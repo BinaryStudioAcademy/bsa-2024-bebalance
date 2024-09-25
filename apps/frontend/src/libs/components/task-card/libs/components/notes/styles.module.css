@@ -1,0 +1,63 @@
+.container {
+	position: absolute;
+	bottom: 60px;
+	left: 0;
+	width: 100%;
+	height: 280px;
+	padding-top: 65px;
+	padding-bottom: 10px;
+	transform: translateY(100%);
+}
+
+.overlay {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 100%;
+	padding: 20px;
+	background-color: var(--white);
+	border-radius: 5px;
+	box-shadow:
+		0 4px 6px -1px rgb(0 0 0 / 10%),
+		0 2px 4px -1px rgb(0 0 0 / 6%);
+}
+
+.task-label {
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 25px;
+}
+
+.note-content {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	overflow-y: auto;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 19px;
+	color: var(--medium-gray);
+}
+
+.notes-footer {
+	display: flex;
+	gap: 10px;
+	margin-top: auto;
+}
+
+.input-container {
+	width: 100%;
+}
+
+.submit-btn {
+	position: relative;
+	width: 45px;
+	height: 45px;
+}
+
+.close-btn {
+	position: absolute;
+	top: 20px;
+	right: 0;
+}

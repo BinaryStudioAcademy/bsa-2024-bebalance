@@ -30,7 +30,11 @@ const getSublabelOffsetX: GetGraphicsCoordinateOffset = (
 	}
 
 	if (y > secondPartCenterY && x < absoluteCenterX) {
-		return SublabelOffsetX.LEFT_CENTER;
+		return SublabelOffsetX.BOTTOM_CENTER_LEFT;
+	}
+
+	if (y < firstPartCenterY && x < absoluteCenterX) {
+		return SublabelOffsetX.UPPER_CENTER_LEFT;
 	}
 
 	if (y > absoluteCenterY && x > secondPartCenterX) {
