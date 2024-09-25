@@ -4,7 +4,6 @@ export { ChartFont } from "./chart-font.enum.js";
 export { ChartGraphicsColor } from "./chart-graphics-color.enum.js";
 export { ChartSliceColor } from "./chart-slice-color.enum.js";
 export { DotOffsetX } from "./dot-offset-x.enum.js";
-export { DotOffsetY } from "./dot-offset-y.enum.js";
 export { LabelDistacneOffset } from "./label-distance-offset.enum.js";
 export { SublabelOffsetX } from "./sublabel-offset-x.enum.js";
 export { SublabelOffsetY } from "./sublabel-offset-y.enum.js";
