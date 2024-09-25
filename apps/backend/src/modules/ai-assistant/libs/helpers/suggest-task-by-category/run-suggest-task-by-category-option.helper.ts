@@ -23,4 +23,4 @@ const runSuggestTaskByCategoryOptions = (
 };
 
 export { runSuggestTaskByCategoryOptions };
-export { generateTaskSuggestionsResponse } from "./generate-suggest-task-response.helper.js";
+export { generateTasksSuggestionsResponse } from "./generate-suggest-task-response.helper.js";

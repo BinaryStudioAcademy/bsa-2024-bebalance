@@ -19,7 +19,6 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		threadId: state.chat.threadId,
 	}));
 	const dispatch = useAppDispatch();
-
 	const handleAcceptAllSuggestions = useCallback(() => {
 		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 

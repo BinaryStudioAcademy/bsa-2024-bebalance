@@ -2,7 +2,7 @@
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	z-index: 100;
+	z-index: var(--z-index-top);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -13,7 +13,7 @@
 }
 
 .slider-container {
-	z-index: 100;
+	z-index: var(--z-index-top);
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
