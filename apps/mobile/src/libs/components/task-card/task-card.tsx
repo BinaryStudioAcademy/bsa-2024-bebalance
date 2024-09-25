@@ -52,7 +52,7 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 					globalStyles.pt16,
 				]}
 			>
-				<Tag label={task.category} />
+				<Tag label={task.categoryName} />
 				{isActiveTask && <DeadlineCountdown deadline={task.dueDate} />}
 			</View>
 			<View style={[globalStyles.mt32, globalStyles.pb32, globalStyles.ph16]}>

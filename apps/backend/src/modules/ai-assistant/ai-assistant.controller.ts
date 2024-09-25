@@ -11,11 +11,13 @@ import { type UserDto } from "~/modules/users/users.js";
 import { type AIAssistantService } from "./ai-assistant.service.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ThreadMessageCreateDto,
 } from "./libs/types/types.js";
 import {
+	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
 	taskActionRequestSchemaValidationSchema,
 	taskSuggestionRequestValidationSchema,
@@ -345,6 +347,21 @@ class AIAssistantController extends BaseController {
 
 		this.addRoute({
 			handler: (options) =>
+				this.acceptTasks(
+					options as APIHandlerOptions<{
+						body: AIAssistantCreateMultipleTasksDto;
+						user: UserDto;
+					}>,
+				),
+			method: "POST",
+			path: AIAssistantApiPath.CHAT_ACCEPT_TASKS,
+			validation: {
+				body: acceptMultipleTasksValidationSchema,
+			},
+		});
+
+		this.addRoute({
+			handler: (options) =>
 				this.acceptTask(
 					options as APIHandlerOptions<{
 						body: AIAssistantRequestDto;
@@ -406,6 +423,51 @@ class AIAssistantController extends BaseController {
 
 	/**
 	 * @swagger
+	 * /assistant/chat/accept-tasks:
+	 *   post:
+	 *     summary: Accept task suggestions
+	 *     tags:
+	 *       - AI Assistant
+	 *     security:
+	 *       - bearerAuth: []
+	 *     requestBody:
+	 *       required: true
+	 *       content:
+	 *         application/json:
+	 *           schema:
+	 *             type: array
+	 *             properties:
+	 *               threadId:
+	 *                 type: string
+	 *                 description: Identifier for the thread
+	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
+	 *               payload:
+	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *     responses:
+	 *       200:
+	 *         description: Returns the accepted task
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Task'
+	 */
+
+	private async acceptTasks(
+		options: APIHandlerOptions<{
+			body: AIAssistantCreateMultipleTasksDto;
+			user: UserDto;
+		}>,
+	): Promise<APIHandlerResponse> {
+		const { body, user } = options;
+
+		return {
+			payload: await this.openAIService.acceptTasks(user, body),
+			status: HTTPCode.OK,
+		};
+	}
+
+	/**
+	 * @swagger
 	 * /assistant/chat/add-message:
 	 *   post:
 	 *     summary: Add a message to a conversation thread
@@ -437,6 +499,7 @@ class AIAssistantController extends BaseController {
 	 *               type: boolean
 	 *               example: true
 	 */
+
 	private async addMessageToConversation(
 		options: APIHandlerOptions<{
 			body: ThreadMessageCreateDto;

@@ -1,3 +1,4 @@
+import { TaskCard } from "~/libs/components/components.js";
 import {
 	useCallback,
 	useEffect,
@@ -5,11 +6,11 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import {
+	type AddTaskNoteHandler,
 	type TaskDto,
-	type TaskNoteRequestDto,
 } from "~/modules/tasks/tasks.js";
 
-import { ArrowButton, TaskActionsPanel, TaskCard } from "../components.js";
+import { ArrowButton, TaskActionsPanel } from "../components.js";
 import {
 	FOCUSABLE_ELEMENT_TAB_INDEX,
 	INITIAL_POINTER_POSITION_X,
@@ -20,7 +21,7 @@ import { getHorizontalPointerPosition } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onAddTaskNote: (payload: TaskNoteRequestDto) => void;
+	onAddTaskNote: AddTaskNoteHandler;
 	onGetTaskNotes: (id: number) => void;
 	tasks: TaskDto[];
 };
