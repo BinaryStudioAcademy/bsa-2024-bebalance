@@ -100,7 +100,7 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<div className={styles["header-text-container"]}>
 					<h4 className={styles["header-text"]}>{headerText}</h4>
-					<div className={styles["date-conrainer"]}>
+					<div className={styles["date-container"]}>
 						<p className={styles["date"]}>{lastWheelUpdateDate}</p>
 					</div>
 				</div>
