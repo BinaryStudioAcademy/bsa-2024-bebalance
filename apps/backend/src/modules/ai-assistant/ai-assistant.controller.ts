@@ -262,6 +262,17 @@ import {
  *           type: string
  *           description: The type of the message.
  *           example: "text"
+ *
+ *     SaveMessage:
+ *       type: object
+ *       properties:
+ *         author:
+ *           type: string
+ *           description: The author of the message (e.g., "assistant").
+ *           example: "assistant"
+ *         text:
+ *           type: string
+ *           description: Text of the message
  */
 
 class AIAssistantController extends BaseController {
@@ -390,9 +401,11 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               text:
-	 *                 type: string
-	 *                 description: Text of user message
+	 *               messages:
+	 *                 type: array
+	 *                 description: array of text messages that should be saved in database
+	 *                 items:
+	 *                   $ref: '#/components/schemas/SaveMessage'
 	 *               task:
 	 *                 $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
@@ -434,19 +447,24 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: array
 	 *             properties:
-	 *               threadId:
-	 *                 type: string
-	 *                 description: Identifier for the thread
-	 *                 example: "thread_5kL0dVY9ADvmNz8U33P7qFX3"
-	 *               payload:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *               messages:
+	 *                 type: array
+	 *                 description: array of text messages that should be saved in database
+	 *                 items:
+	 *                   $ref: '#/components/schemas/SaveMessage'
+	 *               tasks:
+	 *                 type: array
+	 *                 description: array of accepted tasks
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns the accepted task
 	 *         content:
 	 *           application/json:
 	 *             schema:
-	 *               $ref: '#/components/schemas/Task'
+	 *               type: array
+	 *               items: boolean
 	 */
 
 	private async acceptTasks(
@@ -523,11 +541,16 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               text:
-	 *                 type: string
-	 *                 description: Text of user message
-	 *               task:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *               messages:
+	 *                 type: array
+	 *                 description: Array of chat messages containing task suggestions.
+	 *                 items:
+	 *                   $ref: '#/components/schemas/SaveMessage'
+	 *               tasks:
+	 *                 type: array
+	 *                 description: array of denied tasks
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns task suggestions for the provided categories
@@ -574,11 +597,16 @@ class AIAssistantController extends BaseController {
 	 *           schema:
 	 *             type: object
 	 *             properties:
-	 *               text:
-	 *                 type: string
-	 *                 description: Text of user message
-	 *               task:
-	 *                 $ref: '#/components/schemas/TaskPayload'
+	 *               messages:
+	 *                 type: array
+	 *                 description: Array of chat messages containing task suggestions.
+	 *                 items:
+	 *                   $ref: '#/components/schemas/SaveMessage'
+	 *               tasks:
+	 *                 type: array
+	 *                 description: array of tasks which should be explained
+	 *                 items:
+	 *                   $ref: '#/components/schemas/TaskPayload'
 	 *     responses:
 	 *       200:
 	 *         description: Returns explanations for the provided task suggestions
@@ -668,9 +696,11 @@ class AIAssistantController extends BaseController {
 	 *                 description: Array of selected categories for task suggestions
 	 *                 items:
 	 *                   $ref: '#/components/schemas/SelectedCategory'
-	 *               text:
-	 *                 type: string
-	 *                 description:Text of user message
+	 *               messages:
+	 *                 type: array
+	 *                 description: Array of chat messages containing task suggestions.
+	 *                 items:
+	 *                   $ref: '#/components/schemas/SaveMessage'
 	 *     responses:
 	 *       200:
 	 *         description: Returns task suggestions for the provided categories
