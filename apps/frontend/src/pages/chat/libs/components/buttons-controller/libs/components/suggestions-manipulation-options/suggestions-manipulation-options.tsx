@@ -38,6 +38,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		void dispatch(
 			chatActions.createTasksFromSuggestions({
 				payload: taskSuggestions,
+				text: SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
 			}),
 		);
 	}, [dispatch, taskSuggestions]);

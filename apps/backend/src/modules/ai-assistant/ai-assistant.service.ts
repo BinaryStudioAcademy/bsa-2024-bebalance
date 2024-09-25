@@ -99,9 +99,18 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantCreateMultipleTasksDto,
 	): Promise<boolean[]> {
-		const { payload } = body;
+		const { payload, text } = body;
 		const tasks = payload;
 		const threadId = user.threadId as string;
+
+		await this.chatMessageService.create({
+			author: ChatMessageAuthor.USER,
+			payload: {
+				text,
+			},
+			threadId,
+			type: ChatMessageType.TEXT,
+		});
 
 		return await Promise.all(
 			tasks.map(async (task) => {

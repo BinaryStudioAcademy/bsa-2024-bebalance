@@ -61,7 +61,6 @@ const { actions, name, reducer } = createSlice({
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
 				state.threadId = action.payload.threadId;
-				state.messages = action.payload.messages;
 			})
 			.addCase(initConversation.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
@@ -78,8 +77,8 @@ const { actions, name, reducer } = createSlice({
 				for (const message of newMessages) {
 					if (message.type === "text") {
 						state.messages.push({
-							author: ChatMessageAuthor.ASSISTANT,
-							isRead: true,
+							author: message.author,
+							isRead: message.isRead,
 							payload: message.payload as TextMessage,
 							type: message.type,
 						});
