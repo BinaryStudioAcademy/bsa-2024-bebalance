@@ -9,7 +9,7 @@ type Properties = {
 	tasks: TaskMessage[];
 };
 
-const NUMBER_OF_TEXT_LINES = 3;
+const NUMBER_OF_TEXT_LINES = 5;
 
 const AiTask: React.FC<Properties> = ({ tasks }: Properties) => {
 	return (

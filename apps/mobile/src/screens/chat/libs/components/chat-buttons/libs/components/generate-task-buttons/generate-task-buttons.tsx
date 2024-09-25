@@ -21,7 +21,7 @@ const GenerateTaskButtons: React.FC = () => {
 
 	const lowestCategories = getLowestCategories(scores);
 
-	const handleNo = useCallback(() => {
+	const handleDisplayCheckboxes = useCallback(() => {
 		dispatch(chatActions.setButtonsMode(ButtonsMode.CHECKBOX));
 		dispatch(
 			chatActions.addTextMessage({
@@ -31,7 +31,7 @@ const GenerateTaskButtons: React.FC = () => {
 		);
 	}, [dispatch]);
 
-	const handleYes = useCallback(() => {
+	const handleCreationTasksForThreeLowest = useCallback(() => {
 		void dispatch(
 			chatActions.getTasksForCategories({
 				categories: lowestCategories,
@@ -59,8 +59,15 @@ const GenerateTaskButtons: React.FC = () => {
 	return (
 		<ChatMessage isUser={false} text={CONFIRMATION_TEXT}>
 			<View style={[globalStyles.gap12, globalStyles.mt12]}>
-				<Button label="Yes, 3 lowest" onPress={handleYes} />
-				<Button appearance="outlined" label="No smth else" onPress={handleNo} />
+				<Button
+					label="Yes, 3 lowest"
+					onPress={handleCreationTasksForThreeLowest}
+				/>
+				<Button
+					appearance="outlined"
+					label="No smth else"
+					onPress={handleDisplayCheckboxes}
+				/>
 			</View>
 		</ChatMessage>
 	);

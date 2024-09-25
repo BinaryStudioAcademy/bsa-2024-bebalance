@@ -81,10 +81,7 @@ const Chat: React.FC = () => {
 						inverted
 						keyExtractor={handleKeyExtractor}
 						ListFooterComponent={
-							<>
-								{threadId && !isLoading && <ChatButtons />}
-								{isLoading && <Loader />}
-							</>
+							<>{isLoading ? <Loader /> : threadId && <ChatButtons />}</>
 						}
 						ListHeaderComponent={threadId ? <InitialChatMessage /> : null}
 						renderItem={handleRenderItem}

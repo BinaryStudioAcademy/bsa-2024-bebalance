@@ -11,39 +11,35 @@ import { useEffect } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 
 import { ANIMATION_CONFIG } from "./libs/constants/constants";
-import { DotDelays } from "./libs/enums/enums";
-import { getAnimatedStyle } from "./libs/helpers/helpers";
+import { DotDelay, ScaleValue } from "./libs/enums/enums";
+import { useAnimatedScaleStyle } from "./libs/hooks/hooks";
 import { styles } from "./styles";
 
-const INITIAL_SCALE = -1;
-const TARGET_SCALE = 1.5;
-const INITIAL_SCALE_VALUE = 1;
-
 const Loader: React.FC = () => {
-	const scaleDot1 = useSharedValue(INITIAL_SCALE_VALUE);
-	const scaleDot2 = useSharedValue(INITIAL_SCALE_VALUE);
-	const scaleDot3 = useSharedValue(INITIAL_SCALE_VALUE);
+	const scaleDot1 = useSharedValue(ScaleValue.DEFAULT);
+	const scaleDot2 = useSharedValue(ScaleValue.DEFAULT);
+	const scaleDot3 = useSharedValue(ScaleValue.DEFAULT);
 
 	useEffect(() => {
 		const scales = [scaleDot1, scaleDot2, scaleDot3];
-		const delays = [DotDelays.DOT_1, DotDelays.DOT_2, DotDelays.DOT_3];
+		const delays = [DotDelay.DOT_1, DotDelay.DOT_2, DotDelay.DOT_3];
 
 		for (const [index, scale] of scales.entries()) {
 			const delay = delays[index] ?? NumericalValue.ZERO;
 			scale.value = withDelay(
 				delay,
 				withRepeat(
-					withTiming(TARGET_SCALE, ANIMATION_CONFIG),
-					INITIAL_SCALE,
+					withTiming(ScaleValue.TARGET, ANIMATION_CONFIG),
+					ScaleValue.INITIAL,
 					true,
 				),
 			);
 		}
 	}, [scaleDot1, scaleDot2, scaleDot3]);
 
-	const animatedStyle1 = getAnimatedStyle(scaleDot1);
-	const animatedStyle2 = getAnimatedStyle(scaleDot2);
-	const animatedStyle3 = getAnimatedStyle(scaleDot3);
+	const animatedStyle1 = useAnimatedScaleStyle(scaleDot1);
+	const animatedStyle2 = useAnimatedScaleStyle(scaleDot2);
+	const animatedStyle3 = useAnimatedScaleStyle(scaleDot3);
 
 	return (
 		<ChatMessage isUser={false} style={globalStyles.mt8}>

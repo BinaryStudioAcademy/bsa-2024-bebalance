@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
 		backgroundColor: BaseColor.BG_WHITE,
 		borderBottomColor: BaseColor.EXTRA_LIGHT_GRAY,
 		borderBottomWidth: 1,
-		display: "flex",
 		height: 90,
 	},
 });

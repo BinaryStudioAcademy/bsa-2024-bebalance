@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 10,
 		borderTopLeftRadius: 0,
 		borderTopRightRadius: 10,
-		flex: 1,
 	},
 	userContainer: {
 		backgroundColor: BaseColor.LIGHT_BLUE,

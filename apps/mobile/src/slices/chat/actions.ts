@@ -20,7 +20,7 @@ const initConversation = createAsyncThunk<
 	ThreadMessageCreateDto,
 	undefined,
 	AsyncThunkConfig
->(`${sliceName}/init-conversation`, async (_, { extra }) => {
+>(`${sliceName}/initialize-conversation`, async (_, { extra }) => {
 	const { chatApi } = extra;
 
 	return await chatApi.initiateConversation();
