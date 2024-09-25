@@ -10,11 +10,12 @@ import {
 	TASK_DAYS_OPTIONS,
 } from "~/libs/constants/constants.js";
 import {
+	BLOCKED_BLOCKER_STATE,
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
-	useBlocker,
 	useCallback,
+	useUnsavedChangesBlocker,
 } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationQuestionsFormValues,
@@ -61,23 +62,8 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
-	const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-		return isDirty && currentLocation.pathname !== nextLocation.pathname;
-	});
-
-	const handleCancelPopupClick = useCallback((): void => {
-		if (blocker.state === "blocked") {
-			blocker.reset();
-		}
-	}, [blocker]);
-
-	const handleConfirmPopupClick = useCallback((): void => {
-		reset();
-
-		if (blocker.state === "blocked") {
-			blocker.proceed();
-		}
-	}, [blocker, reset]);
+	const { blockerState, handlePopupCancel, handlePopupConfirm } =
+		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty, reset });
 
 	return (
 		<>
@@ -116,9 +102,9 @@ const Settings: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={isDirty && blocker.state === "blocked"}
-				onClose={handleCancelPopupClick}
-				onConfirm={handleConfirmPopupClick}
+				isOpen={isDirty && blockerState === BLOCKED_BLOCKER_STATE}
+				onClose={handlePopupCancel}
+				onConfirm={handlePopupConfirm}
 				title="Unsaved changes will be lost. Continue?"
 			/>
 		</>

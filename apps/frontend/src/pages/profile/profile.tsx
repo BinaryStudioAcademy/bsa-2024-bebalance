@@ -4,10 +4,10 @@ import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
-	useBlocker,
 	useCallback,
 	useEffect,
 	useState,
+	useUnsavedChangesBlocker,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import {
@@ -76,21 +76,8 @@ const Profile: React.FC = () => {
 
 	const [isDirty, setIsDirty] = useState<boolean>(false);
 
-	const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-		return isDirty && currentLocation.pathname !== nextLocation.pathname;
-	});
-
-	const handleCancelPopupClick = useCallback((): void => {
-		if (blocker.state === "blocked") {
-			blocker.reset();
-		}
-	}, [blocker]);
-
-	const handleConfirmPopupClick = useCallback((): void => {
-		if (blocker.state === "blocked") {
-			blocker.proceed();
-		}
-	}, [blocker]);
+	const { blockerState, handlePopupCancel, handlePopupConfirm } =
+		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty });
 
 	return (
 		<>
@@ -109,9 +96,9 @@ const Profile: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={isDirty && blocker.state === "blocked"}
-				onClose={handleCancelPopupClick}
-				onConfirm={handleConfirmPopupClick}
+				isOpen={isDirty && blockerState === "blocked"}
+				onClose={handlePopupCancel}
+				onConfirm={handlePopupConfirm}
 				title="Unsaved changes will be lost. Continue?"
 			/>
 			{isLoading && <Loader />}
