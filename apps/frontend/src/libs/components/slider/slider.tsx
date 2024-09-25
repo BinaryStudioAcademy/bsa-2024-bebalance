@@ -9,12 +9,11 @@ import {
 
 import {
 	FULL_PROGRESS,
-	MAX_VALUE,
 	MIN_SCORE_VALUE,
-	MIN_VALUE,
 	RESIZE_EVENT,
 	SLIDER_BACKGROUND_COLOR,
 } from "./libs/constants/constants.js";
+import { SliderValue } from "./libs/enums/enums.js";
 import { formatToKebabCase } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -45,7 +44,8 @@ const Slider: React.FC<Properties> = ({
 		}
 
 		const currentProgress =
-			((sliderValue - MIN_VALUE) / (MAX_VALUE - MIN_VALUE)) * FULL_PROGRESS;
+			((sliderValue - SliderValue.MIN) / (SliderValue.MAX - SliderValue.MIN)) *
+			FULL_PROGRESS;
 
 		rangeReference.current.style.background = `linear-gradient(to right, transparent ${String(currentProgress)}%, ${SLIDER_BACKGROUND_COLOR} ${String(currentProgress)}%)`;
 	}, [sliderValue]);
@@ -72,7 +72,7 @@ const Slider: React.FC<Properties> = ({
 
 		const newStep =
 			(sliderThumbTrackWidth - SLIDER_THUMB_CENTER_OFFSET) /
-			(MAX_VALUE - MIN_VALUE);
+			(SliderValue.MAX - SliderValue.MIN);
 		setStep(newStep);
 	}, []);
 
@@ -96,8 +96,15 @@ const Slider: React.FC<Properties> = ({
 		}
 
 		handleSliderBackgroundUpdate();
-		bubbleReference.current.style.transform = `translateX(${String((sliderValue - MIN_VALUE) * step)}px)`;
+		bubbleReference.current.style.transform = `translateX(${String((sliderValue - SliderValue.MIN) * step)}px)`;
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
+
+	useEffect(() => {
+		if (value !== sliderValue) {
+			setSliderValue(value);
+			onValueChange(id, value);
+		}
+	}, [sliderValue, setSliderValue, onValueChange, id, value]);
 
 	return (
 		<div className={styles["container"]}>
@@ -110,8 +117,8 @@ const Slider: React.FC<Properties> = ({
 					styles[categorizedSliderClass],
 				)}
 				id="slider"
-				max={MAX_VALUE}
-				min={MIN_VALUE}
+				max={SliderValue.MAX}
+				min={SliderValue.MIN}
 				onChange={handleValueChange}
 				ref={rangeReference}
 				type="range"

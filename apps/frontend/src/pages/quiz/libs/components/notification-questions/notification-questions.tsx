@@ -45,12 +45,12 @@ const NotificationQuestions: React.FC<Properties> = ({
 						label="Which days would you like to receive tasks?"
 						name="userTaskDays"
 						options={TASK_DAYS_OPTIONS}
-						tip="Choose at least 3 days in order to achive your life balance"
+						tip="Quick tip: We recommend selecting at least 3 days in order to achieve your life balance."
 					/>
 					<Input
 						control={control}
 						isFullWidth
-						label="How would you like to receive motivational follow-ups?"
+						label="Would you like to receive daily motivational follow-ups?"
 						name="notificationFrequency"
 						options={NOTIFICATION_FREQUENCY_OPTIONS}
 						type="radio"

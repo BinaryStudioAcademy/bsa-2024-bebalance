@@ -1,5 +1,5 @@
 import React from "react";
-import { Text as RNText } from "react-native";
+import { Text as RNText, type TextProps } from "react-native";
 
 import { BaseColor } from "~/libs/enums/enums";
 import {
@@ -14,13 +14,11 @@ import {
 } from "~/libs/types/types";
 
 type Properties = {
-	children: React.ReactNode;
 	color?: ValueOf<typeof BaseColor>;
 	preset?: keyof typeof presetToTextStyle;
 	size?: keyof typeof sizeToTextStyle;
-	style?: StyleProp<TextStyle>;
 	weight?: keyof typeof fontWeightToFamily;
-};
+} & TextProps;
 
 const Text: React.FC<Properties> = ({
 	children,
@@ -29,6 +27,7 @@ const Text: React.FC<Properties> = ({
 	size,
 	style: styleOverride,
 	weight,
+	...textProperties
 }: Properties) => {
 	const styles: StyleProp<TextStyle> = [
 		presetToTextStyle[preset],
@@ -38,7 +37,11 @@ const Text: React.FC<Properties> = ({
 		styleOverride,
 	];
 
-	return <RNText style={styles}>{children}</RNText>;
+	return (
+		<RNText style={styles} {...textProperties}>
+			{children}
+		</RNText>
+	);
 };
 
 export { Text };

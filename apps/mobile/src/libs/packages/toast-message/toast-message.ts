@@ -4,3 +4,4 @@ const toastMessage = new ToastMessage();
 
 export { toastMessage };
 export { DEFAULT_ERROR_MESSAGE } from "./libs/constants/constants";
+export { toastConfig } from "./toast-config";

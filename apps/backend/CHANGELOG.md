@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.26.0...backend-v1.27.0) (2024-09-24)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#535](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/535)) ([c8ed822](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c8ed822f1f3333d81888f0c6e7467b87ca989dd4))
+* **frontend/backend/shared:** Add date on the "My wheel results" page bb-494 ([#557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/557)) ([5b9a41f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b9a41f831f1aad034cccb02991d71894f836db5))
+
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.25.0...backend-v1.26.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+
+
+### Bug Fixes
+
+* **backend:** fix swagger documentation in  ai assistant module bb-203 ([#527](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/527)) ([5ac5a3d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ac5a3dec8b2fa33396cc98285129b3eb849134f))
+* **backend:** update updatedAt for scores, onboarding and quiz answers bb-533 ([#539](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/539)) ([cde2bf9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/cde2bf998e2ecb740bf37dc12f52fed7f01b8a88))
+
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.24.0...backend-v1.25.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.23.0...backend-v1.24.0) (2024-09-20)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#484](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/484)) ([80cfe92](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/80cfe922e1a2a5bee49c24ad771d0a36d153b554))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.22.0...backend-v1.23.0) (2024-09-19)
 
 

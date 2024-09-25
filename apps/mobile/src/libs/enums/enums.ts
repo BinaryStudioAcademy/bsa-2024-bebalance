@@ -4,6 +4,7 @@ export {
 	BaseColor,
 	DataStatus,
 	GradientColor,
+	NotificationMessage,
 	ToastMessageTitle,
 	ToastMessageType,
 } from "./app/app";
@@ -18,4 +19,5 @@ export {
 	ContentType,
 	NumericalValue,
 	ServerErrorType,
+	TaskStatus,
 } from "shared";

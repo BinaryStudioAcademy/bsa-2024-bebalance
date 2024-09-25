@@ -1,2 +1,2 @@
 export { Sunday } from "./sunday.enum.js";
-export { TasksApiPath, TaskStatus } from "shared";
+export { SortOrder, TasksApiPath, TaskStatus } from "shared";

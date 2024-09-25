@@ -1,5 +1,82 @@
 # Changelog
 
+## [1.56.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.55.0...v1.56.0) (2024-09-24)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#535](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/535)) ([c8ed822](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c8ed822f1f3333d81888f0c6e7467b87ca989dd4))
+* **frontend/backend/shared:** Add date on the "My wheel results" page bb-494 ([#557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/557)) ([5b9a41f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b9a41f831f1aad034cccb02991d71894f836db5))
+* **frontend:** add close icon bb-487 ([#562](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/562)) ([7ca3dc5](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/7ca3dc598a99e5c48e55f175bad911359b063ca0))
+* **frontend:** add discard changes button on edit wheel screen bb-467 ([#530](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/530)) ([fae7bb2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fae7bb26923580fbb05366121b777128f128520b))
+* **frontend:** add hover effect on username bb-556 ([#558](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/558)) ([2e8a84b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/2e8a84bbf7fb96ea316ded56e963845e63e1ea81))
+* **frontend:** popup when user leaves page without saving bb-465 ([#547](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/547)) ([6ae0114](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6ae01145ce0aa65e3e1a49d8f8ec247389a20f4d))
+* **frontend:** profile page responsiveness bb-513 ([#531](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/531)) ([b89ddfd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b89ddfdd2bb87d1cbfdcd209adec4918683b5723))
+* **mobile:** task card bb-321 ([#511](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/511)) ([84ee8b0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/84ee8b0ddd56e04ca60d4aa7a27165f1d75a403c))
+* **shared:** requirements for authorization pages for web version bb-209 ([#552](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/552)) ([29c7631](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/29c7631d19c665bb05bcc23c4717cb2054b85db7))
+
+
+### Bug Fixes
+
+* **frontend:** fix unrendered icon button on sidebar component bb-554 ([#559](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/559)) ([4bfd8a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/4bfd8a214a73f95f3245831fe35b3c77550f49f1))
+* **mobile:** reset stored data on sign out bb-534 ([#549](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/549)) ([6975011](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/697501155257ca2fcdf54e4e9f1dfcf861883fd3))
+
+## [1.55.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.54.0...v1.55.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+* **frontend:** update text on and last step screen bb-538 ([#543](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/543)) ([3baeebc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3baeebcded839fe0c2169468434746958c1615ac))
+* **frontend:** update ui on profile screen bb-542 ([#548](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/548)) ([dd801cf](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/dd801cf560b71930f1ef4aed4667b4769c38e9c0))
+* **mobile:** Toast messages redesign bb-516 ([#526](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/526)) ([03703e9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/03703e98a5b2d11b89146ae5dfce37f7b7a36ca7))
+* **shared:** requirements for authorization pages for web version bb-209 ([#536](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/536)) ([64547cd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/64547cd8a734301193532b1e86828d4e3d55a3c7))
+
+
+### Bug Fixes
+
+* **backend:** fix swagger documentation in  ai assistant module bb-203 ([#527](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/527)) ([5ac5a3d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ac5a3dec8b2fa33396cc98285129b3eb849134f))
+* **backend:** update updatedAt for scores, onboarding and quiz answers bb-533 ([#539](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/539)) ([cde2bf9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/cde2bf998e2ecb740bf37dc12f52fed7f01b8a88))
+* **mobile:** Toast messages redesign bb-516 ([#529](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/529)) ([e3264ab](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e3264ab42061567771d29257b8e383fff2482ac5))
+
+## [1.54.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.53.0...v1.54.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+* **frontend/shared:** change password funcionality in profile screen bb-417 ([#512](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/512)) ([b3e98c8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3e98c866bf44a2ebc450ac048f6be2cf121468b))
+* **frontend:** the wheel parts should adjust to new estimations immediately bb-472 ([#517](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/517)) ([124fbfa](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/124fbfa0c0d8df91066444e42d9916e57f3c3f07))
+* **mobile:** add Intro motivation screen bb-378 ([#489](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/489)) ([5ab7e69](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ab7e6994ccd51c52b41fbb1fa5dd2461bc3f94a))
+* **mobile:** Added log out confirmation bb-366 ([#524](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/524)) ([b09e641](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b09e6413daefae302bd456ace6826733e73da3ec))
+* **mobile:** forgot password functionality bb-358 ([#500](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/500)) ([247f917](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/247f917684da1cd3e2442700bb7179c0152c0fdf))
+
+## [1.53.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.52.0...v1.53.0) (2024-09-21)
+
+
+### Features
+
+* **frontend:** Balance Wheel animation bb-204 ([#519](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/519)) ([a059a5e](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a059a5e70a6b5ead50ba0f04f6b6cccbfe0dda0f))
+* **mobile:** Update "And the last step" screens - request from PO bb-514 ([#518](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/518)) ([d994d24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d994d246805a8f25b157fc1a486e64c81a7659fb))
+
+## [1.52.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.51.0...v1.52.0) (2024-09-20)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#484](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/484)) ([80cfe92](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/80cfe922e1a2a5bee49c24ad771d0a36d153b554))
+* **backend/frontend/shared:** change password funcionality in profile screen bb-417 ([#507](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/507)) ([bd52a7a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bd52a7abf7d3063c3d09358673077b11a9ccf5da))
+* **frontend:** add action buttons to tasks bb-362 ([#486](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/486)) ([bce2889](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/bce2889ffceb49222c810fbd0eded92f3f77ba2e))
+* **frontend:** add hover design on sidebar nav item bb-371 ([#509](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/509)) ([a676c5f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a676c5f80a67996f4c306b4f5d35077611b70af4))
+
+
+### Bug Fixes
+
+* **frontend:** add missing `/profile` navigation on header bb-464 ([#495](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/495)) ([6dda6ff](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/6dda6ff31ebef8c82d6fac5a022477c708033d7a))
+* **frontend:** fix balance wheel truncated border when animating bb-204 ([#506](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/506)) ([824a68a](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/824a68af10516df64cecbea350ab9e81014a35d1))
+* **frontend:** incorrect redirection after account creation attempt with existing email bb-483 ([#502](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/502)) ([eebef9d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/eebef9d7a7de835047c9f91047767fe9685dab7e))
+* **frontend:** move progress components bb-444 ([#505](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/505)) ([d5887a4](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d5887a43253561dc565434821b2a09b0024083ab))
+
 ## [1.51.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.50.0...v1.51.0) (2024-09-19)
 
 

@@ -1,5 +1,49 @@
 # Changelog
 
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.27.0...shared-v1.28.0) (2024-09-24)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#535](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/535)) ([c8ed822](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c8ed822f1f3333d81888f0c6e7467b87ca989dd4))
+* **frontend/backend/shared:** Add date on the "My wheel results" page bb-494 ([#557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/557)) ([5b9a41f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b9a41f831f1aad034cccb02991d71894f836db5))
+* **shared:** requirements for authorization pages for web version bb-209 ([#552](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/552)) ([29c7631](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/29c7631d19c665bb05bcc23c4717cb2054b85db7))
+
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.26.0...shared-v1.27.0) (2024-09-23)
+
+
+### Features
+
+* **frontend/backend/shared:** task deadline actions modal bb-418 ([#508](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/508)) ([16fb19d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/16fb19d7b3397795bbf19a0f5f35846ad61aab0e))
+* **shared:** requirements for authorization pages for web version bb-209 ([#536](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/536)) ([64547cd](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/64547cd8a734301193532b1e86828d4e3d55a3c7))
+
+
+### Bug Fixes
+
+* **backend:** fix swagger documentation in  ai assistant module bb-203 ([#527](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/527)) ([5ac5a3d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5ac5a3dec8b2fa33396cc98285129b3eb849134f))
+
+## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.25.0...shared-v1.26.0) (2024-09-22)
+
+
+### Features
+
+* **backend/shared:** feat ai integration bb-203 ([#442](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/442)) ([c7712a2](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c7712a2b74f786c03bef17aec818031e6834f0de))
+* **frontend/shared:** change password funcionality in profile screen bb-417 ([#512](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/512)) ([b3e98c8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3e98c866bf44a2ebc450ac048f6be2cf121468b))
+
+## [1.25.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.24.0...shared-v1.25.0) (2024-09-21)
+
+
+### Features
+
+* **mobile:** Update "And the last step" screens - request from PO bb-514 ([#518](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/518)) ([d994d24](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/d994d246805a8f25b157fc1a486e64c81a7659fb))
+
+## [1.24.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.23.0...shared-v1.24.0) (2024-09-20)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#484](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/484)) ([80cfe92](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/80cfe922e1a2a5bee49c24ad771d0a36d153b554))
+
 ## [1.23.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.22.0...shared-v1.23.0) (2024-09-19)
 
 

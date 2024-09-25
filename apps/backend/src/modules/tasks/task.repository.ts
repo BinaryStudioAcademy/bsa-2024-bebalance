@@ -2,9 +2,9 @@ import { RelationName } from "~/libs/enums/enums.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { STATUS_FIELD } from "./libs/constants/constants.js";
-import { TaskStatus } from "./libs/enums/enums.js";
+import { SortOrder, TaskStatus } from "./libs/enums/enums.js";
 import { TaskEntity } from "./task.entity.js";
-import { type TaskModel } from "./task.model.js";
+import { TaskModel } from "./task.model.js";
 import { TaskNoteEntity } from "./task-note.entity.js";
 import { type TaskNoteModel } from "./task-note.model.js";
 
@@ -118,6 +118,25 @@ class TaskRepository implements Repository {
 		});
 	}
 
+	async findAllByUserId(userId: number): Promise<TaskEntity[]> {
+		const tasks = await TaskModel.query().where({ userId });
+
+		return tasks.map((task) => {
+			return TaskEntity.initialize({
+				category: task.category.name,
+				categoryId: task.categoryId,
+				createdAt: task.createdAt,
+				description: task.description,
+				dueDate: task.dueDate,
+				id: task.id,
+				label: task.label,
+				status: task.status,
+				updatedAt: task.updatedAt,
+				userId: task.userId,
+			});
+		});
+	}
+
 	public async findCurrentByUserId(userId: number): Promise<TaskEntity[]> {
 		const tasks = await this.taskModel
 			.query()
@@ -167,7 +186,7 @@ class TaskRepository implements Repository {
 		const notes = await this.taskNoteModel
 			.query()
 			.where({ taskId })
-			.orderBy("createdAt", "asc");
+			.orderBy("createdAt", SortOrder.ASC);
 
 		return notes.map((note) => {
 			return TaskNoteEntity.initialize({

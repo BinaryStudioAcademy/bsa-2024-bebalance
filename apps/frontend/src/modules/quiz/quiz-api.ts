@@ -6,8 +6,8 @@ import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 } from "~/modules/quiz/quiz.js";
 
@@ -26,7 +26,7 @@ class QuizApi extends BaseHTTPApi {
 
 	public async editScores(
 		payload: QuizScoresUpdateRequestDto,
-	): Promise<QuizScoresResponseDto> {
+	): Promise<QuizScoresUpdateResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(QuizApiPath.SCORE, {}),
 			{
@@ -37,7 +37,7 @@ class QuizApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<QuizScoresResponseDto>();
+		return await response.json<QuizScoresUpdateResponseDto>();
 	}
 
 	public async getAllQuestions(): Promise<{ items: QuizQuestionDto[][] }> {

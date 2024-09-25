@@ -10,6 +10,7 @@ export {
 	ErrorMessage,
 	NumericalValue,
 	ServerErrorType,
+	SortOrder,
 } from "./libs/enums/enums.js";
 export {
 	AuthError,
@@ -17,12 +18,17 @@ export {
 	FileError,
 	HTTPError,
 	OnboardingError,
+	OpenAIError,
 	QuizError,
 	TaskError,
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString, getFormattedDate } from "./libs/helpers/helpers.js";
+export {
+	configureString,
+	getFormattedDate,
+	getLocalDatestring,
+} from "./libs/helpers/helpers.js";
 export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
@@ -43,6 +49,17 @@ export {
 	type ValueOf,
 } from "./libs/types/types.js";
 export {
+	addMessageToThreadValidationSchema,
+	AIAssistantApiPath,
+	type AIAssistantRequestDto,
+	type AIAssistantResponseDto,
+	type AIAssistantSuggestTaskRequestDto,
+	changeTaskSuggestionRequestValidationSchema,
+	taskActionRequestSchemaValidationSchema,
+	taskSuggestionRequestValidationSchema,
+	type ThreadMessageCreateDto,
+} from "./modules/ai-assistant/ai-assistant.js";
+export {
 	AuthApiPath,
 	ConfirmPasswordCustomValidation,
 } from "./modules/auth/auth.js";
@@ -57,7 +74,16 @@ export {
 	categoryIdsValidationSchema,
 	type CategoryUpdateRequestDto,
 	type CategoryWithScoresDto,
+	type SelectedCategory,
 } from "./modules/categories/categories.js";
+export {
+	type BalanceWheelMessage,
+	ChatMessageAuthor,
+	type ChatMessageDto,
+	ChatMessageType,
+	type TaskMessage,
+	type TextMessage,
+} from "./modules/chats/chats.js";
 export {
 	type OnboardingAnswerDto,
 	type OnboardingAnswerRequestBodyDto,
@@ -86,12 +112,15 @@ export {
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 	updateScoresValidationSchema,
 } from "./modules/quiz/quiz.js";
 export {
+	type TaskCreateDto,
 	type TaskDto,
+	type TaskGetAllResponseDto,
 	type TaskNoteDto,
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
