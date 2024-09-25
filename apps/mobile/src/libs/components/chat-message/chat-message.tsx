@@ -20,9 +20,9 @@ const ICON_SIZE = 34;
 const ChatMessage: React.FC<Properties> = ({
 	children,
 	content,
-	isUser,
+	isUser = false,
 	style,
-	text,
+	text = "",
 }: Properties) => {
 	const messageText = content?.text ?? text;
 

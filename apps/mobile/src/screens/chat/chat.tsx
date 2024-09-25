@@ -73,8 +73,8 @@ const Chat: React.FC = () => {
 					<FlatList
 						contentContainerStyle={[
 							globalStyles.gap8,
-							globalStyles.pt8,
-							globalStyles.pb16,
+							globalStyles.pt24,
+							globalStyles.pb8,
 							styles.screenWrapper,
 						]}
 						data={messages}
