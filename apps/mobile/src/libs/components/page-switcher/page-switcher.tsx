@@ -9,6 +9,7 @@ import { styles } from "./style";
 
 type PageSwitcherProperties = {
 	activeTab: string;
+	isDisabled?: boolean;
 	onTabChange: (tab: string) => void;
 	style?: StyleProp<ViewStyle>;
 	tabs: string[];
@@ -16,15 +17,18 @@ type PageSwitcherProperties = {
 
 const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 	activeTab,
+	isDisabled = false,
 	onTabChange,
 	style,
 	tabs,
 }) => {
 	const handleTabPress = useCallback(
 		(tab: string): void => {
-			onTabChange(tab);
+			if (!isDisabled) {
+				onTabChange(tab);
+			}
 		},
-		[onTabChange],
+		[onTabChange, isDisabled],
 	);
 
 	const handlePress = (tab: string): (() => void) => {
@@ -46,6 +50,7 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 					globalStyles.pv8,
 					styles.tab,
 					isActive ? styles.activeTab : styles.inactiveTab,
+					isDisabled && styles.disabledTab,
 				]}
 			>
 				<Text
