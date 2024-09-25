@@ -17,11 +17,11 @@ import {
 	type AIAssistantResponseDto,
 	type ChatMessageDto,
 } from "../../types/types.js";
-import { type taskByCategory } from "./suggest-task-by-category.validation-schema.js";
+import { type explainTasks } from "./explain-tasks.validation-schema.js";
 
-type TaskByCategoryData = z.infer<typeof taskByCategory>;
+type TaskByCategoryData = z.infer<typeof explainTasks>;
 
-const generateTasksSuggestionsResponse = (
+const generateExplainTasksSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
@@ -50,7 +50,7 @@ const generateTasksSuggestionsResponse = (
 			type: ChatMessageType.TEXT,
 		};
 
-		const taskMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
+		const tasksMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
 			return {
 				author: ChatMessageAuthor.ASSISTANT,
 				createdAt: new Date().toISOString(),
@@ -63,13 +63,14 @@ const generateTasksSuggestionsResponse = (
 						description: task.description,
 						label: task.label,
 					},
+					text: task.explanation,
 				},
 				type: ChatMessageType.TASK,
 			};
 		});
 
 		return {
-			messages: [textMessage, ...taskMessages],
+			messages: [textMessage, ...tasksMessages],
 			threadId: message.thread_id,
 		};
 	} catch {
@@ -80,4 +81,4 @@ const generateTasksSuggestionsResponse = (
 	}
 };
 
-export { generateTasksSuggestionsResponse };
+export { generateExplainTasksSuggestionsResponse };

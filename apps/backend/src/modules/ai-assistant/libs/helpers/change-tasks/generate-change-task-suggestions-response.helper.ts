@@ -17,11 +17,11 @@ import {
 	type AIAssistantResponseDto,
 	type ChatMessageDto,
 } from "../../types/types.js";
-import { type taskByCategory } from "./suggest-task-by-category.validation-schema.js";
+import { type changeTasksByCategory } from "./change-task.validation-schema.js";
 
-type TaskByCategoryData = z.infer<typeof taskByCategory>;
+type TaskByCategoryData = z.infer<typeof changeTasksByCategory>;
 
-const generateTasksSuggestionsResponse = (
+const generateChangeTasksSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
 ): AIAssistantResponseDto | null => {
 	const message = aiResponse.getPaginatedItems().shift();
@@ -35,6 +35,7 @@ const generateTasksSuggestionsResponse = (
 
 		const contentText: string =
 			parsedResult.content[FIRST_ITEM_INDEX].text.value;
+
 		const resultData: TaskByCategoryData = JSON.parse(
 			contentText,
 		) as TaskByCategoryData;
@@ -80,4 +81,4 @@ const generateTasksSuggestionsResponse = (
 	}
 };
 
-export { generateTasksSuggestionsResponse };
+export { generateChangeTasksSuggestionsResponse };

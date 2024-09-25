@@ -5,12 +5,12 @@ import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { type TaskService } from "~/modules/tasks/tasks.js";
 
 import {
-	generateChangeTaskSuggestionsResponse,
-	generateExplainTaskSuggestionsResponse,
+	generateChangeTasksSuggestionsResponse,
+	generateExplainTasksSuggestionsResponse,
 	generateQuestionsAnswersPrompt,
-	generateTaskSuggestionsResponse,
+	generateTasksSuggestionsResponse,
 	generateUserScoresPrompt,
-	runChangeTaskByCategoryOptions,
+	runChangeTasksByCategoryOptions,
 	runExplainTaskOptions,
 	runSuggestTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
@@ -113,34 +113,32 @@ class AIAssistantService {
 		return await this.openAI.addMessageToThread(threadId, prompt);
 	}
 
-	public async changeTaskSuggestion(
+	public async changeTasksSuggestion(
 		user: UserDto,
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
-		const task = payload as TaskCreateDto;
+		const tasks = payload as TaskCreateDto[];
 
-		const runThreadOptions = runChangeTaskByCategoryOptions(task);
-		const taskDeadLine = this.taskService.calculateDeadline(
-			user.userTaskDays as number[],
-		);
+		const runThreadOptions = runChangeTasksByCategoryOptions(tasks);
+
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateChangeTaskSuggestionsResponse(result, taskDeadLine);
+		return generateChangeTasksSuggestionsResponse(result);
 	}
 
-	public async explainTaskSuggestion(
+	public async explainTasksSuggestion(
 		body: AIAssistantRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { payload, threadId } = body;
 
-		const task = payload as TaskCreateDto;
+		const tasks = payload as TaskCreateDto[];
 
-		const runThreadOptions = runExplainTaskOptions(task);
+		const runThreadOptions = runExplainTaskOptions(tasks);
 
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateExplainTaskSuggestionsResponse(result, task);
+		return generateExplainTasksSuggestionsResponse(result);
 	}
 
 	public async initializeNewChat(
@@ -165,19 +163,14 @@ class AIAssistantService {
 	}
 
 	public async suggestTasksForCategories(
-		user: UserDto,
 		body: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
 		const { categories, threadId } = body;
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
-		const taskDeadLine = this.taskService.calculateDeadline(
-			user.userTaskDays as number[],
-		);
-
 		const result = await this.openAI.runThread(threadId, runThreadOptions);
 
-		return generateTaskSuggestionsResponse(result, taskDeadLine);
+		return generateTasksSuggestionsResponse(result);
 	}
 }
 
