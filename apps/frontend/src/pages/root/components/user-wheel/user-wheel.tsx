@@ -11,6 +11,7 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
+import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
@@ -27,6 +28,7 @@ import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
 const NO_SCORES_COUNT = 0;
+const NO_TASKS_PERCENTAGE = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -36,15 +38,14 @@ const UserWheel: React.FC = () => {
 		dataStatus,
 		scores,
 		scoresLastUpdatedAt,
-	} = useAppSelector(({ auth, quiz, users }) => ({
+	} = useAppSelector(({ auth, quiz }) => ({
 		authenticatedUser: auth.user,
-		completionTasksPercentage: users.user?.completionTasksPercentage,
+		completionTasksPercentage: auth.user?.completionTasksPercentage,
 		dataStatus: quiz.dataStatus,
 		scores: quiz.scores,
 		scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
 	}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
@@ -87,14 +88,21 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(
 			userActions.getById({ id: (authenticatedUser as UserDto).id }),
-		);
-	}, [dispatch, authenticatedUser]);
+		).then((action) => {
+			const user = action.payload as UserDto;
+			const { completionTasksPercentage } = user;
 
-	useEffect(() => {
-		if (completionTasksPercentage) {
-			setPercentage(completionTasksPercentage);
-		}
-	}, [completionTasksPercentage]);
+			if (completionTasksPercentage === null) {
+				return;
+			}
+
+			void dispatch(
+				authActions.updateCompletionTasksPercentageState(
+					user.completionTasksPercentage as number,
+				),
+			);
+		});
+	}, [dispatch, authenticatedUser]);
 
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
@@ -141,7 +149,9 @@ const UserWheel: React.FC = () => {
 				{scores.length > NO_SCORES_COUNT && (
 					<div>
 						<BalanceWheelChart data={chartData} />
-						<CircularProgress percentage={percentage} />
+						<CircularProgress
+							percentage={completionTasksPercentage || NO_TASKS_PERCENTAGE}
+						/>
 					</div>
 				)}
 				{isEditingModalOpen && handleGetModal(editMode)}
