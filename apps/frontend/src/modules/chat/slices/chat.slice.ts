@@ -14,6 +14,7 @@ import {
 	type TextMessage,
 } from "../libs/types/types.js";
 import {
+	changeTasksSuggestion,
 	createTasksFromSuggestions,
 	getTasksForCategories,
 	initConversation,
@@ -106,6 +107,40 @@ const { actions, name, reducer } = createSlice({
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
+				state.dataStatus = DataStatus.REJECTED;
+			})
+
+			.addCase(changeTasksSuggestion.pending, (state) => {
+				state.dataStatus = DataStatus.PENDING;
+			})
+			.addCase(changeTasksSuggestion.fulfilled, (state, action) => {
+				state.dataStatus = DataStatus.FULFILLED;
+				const newMessages = action.payload.messages;
+				state.taskSuggestions = [];
+				const newTaskSuggestions: TaskMessage[] = [];
+
+				for (const message of newMessages) {
+					if (checkIsTaskMessage(message)) {
+						newTaskSuggestions.push(message.payload);
+						state.taskSuggestions.push({
+							categoryId: message.payload.task.categoryId,
+							categoryName: message.payload.task.categoryName,
+							description: message.payload.task.description,
+							label: message.payload.task.label,
+						});
+					}
+				}
+
+				state.messages.push({
+					author: ChatMessageAuthor.ASSISTANT,
+					isRead: true,
+					payload: newTaskSuggestions,
+					type: ChatMessageType.TASK,
+				});
+
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
+			})
+			.addCase(changeTasksSuggestion.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
 			});
 	},
