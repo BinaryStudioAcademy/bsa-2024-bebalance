@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: var(--z-index-high);
+	z-index: var(--z-index-top);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -42,7 +42,7 @@
 	position: absolute;
 	top: 20px;
 	right: 10px;
-	z-index: var(--z-index-high);
+	z-index: var(--z-index-top);
 	width: 25px;
 	height: 25px;
 	cursor: pointer;

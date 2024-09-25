@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.57.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.56.0...v1.57.0) (2024-09-25)
+
+
+### Features
+
+* **frontend/backend/mobile:** initial ai chat implementation bb-340 ([#551](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/551)) ([f02689d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f02689dce05de1e1474415da32fafbce43f4b598))
+
+
+### Bug Fixes
+
+* **frontend:** Add missing dot on sign-out confirmation msg bb-477 ([#565](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/565)) ([eda1706](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/eda17065294d0782de3050231edc4010679a8f3d))
+* **frontend:** adjust chart graphics offset bb-515 ([#564](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/564)) ([86fc873](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/86fc8732640274ca155bbc299d763197c7797ab3))
+
 ## [1.56.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.55.0...v1.56.0) (2024-09-24)
 
 
