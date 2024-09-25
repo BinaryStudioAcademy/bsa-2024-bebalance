@@ -1,5 +1,5 @@
-import { Button, Input } from "~/libs/components/components.js";
-import { NumericalValue } from "~/libs/enums/enums.js";
+import { Button, Input, Link } from "~/libs/components/components.js";
+import { AppRoute, NumericalValue } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -98,6 +98,10 @@ const ResetPasswordForm: React.FC<Properties> = ({
 					type={isConfirmPasswordVisible ? "text" : "password"}
 				/>
 				<Button isDisabled={hasError} label="SAVE PASSWORD" type="submit" />
+				<div className={styles["sign-in-container"]}>
+					Back to
+					<Link to={AppRoute.SIGN_IN}>Sign In</Link>
+				</div>
 			</form>
 
 			<div className={styles["circle-gradient1"]} />

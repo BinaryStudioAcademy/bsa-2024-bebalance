@@ -38,10 +38,10 @@
 	margin-top: 36px;
 }
 
-.date-conrainer {
+.date-container {
 	display: flex;
 	align-items: center;
-	width: 162px;
+	width: max-content;
 	height: 29px;
 	padding: 5px 17px;
 	text-align: left;

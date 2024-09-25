@@ -12,6 +12,7 @@ await openAI.initializeAssistant();
 
 export { openAI };
 export {
+	OpenAIErrorMessage,
 	OpenAIFunctionName,
 	OpenAIPromptTemplate,
 	OpenAIRoleKey,
