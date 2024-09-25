@@ -7,6 +7,7 @@ import {
 import { actions as chatActions } from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
+import { RegenerateSuggestionButton } from "./libs/components/components.js";
 import { DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL } from "./libs/constants/constants.js";
 import { DislikeSuggestionMessage } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
@@ -17,6 +18,7 @@ const DislikeSuggestionsOptions: React.FC = () => {
 		threadId: state.chat.threadId,
 	}));
 	const dispatch = useAppDispatch();
+
 	const handleRegenerateAllSuggestions = useCallback(() => {
 		dispatch(
 			chatActions.addAssistantTextMessage(DislikeSuggestionMessage.MAIN),
@@ -48,6 +50,16 @@ const DislikeSuggestionsOptions: React.FC = () => {
 							onClick={handleRegenerateAllSuggestions}
 							variant="secondary"
 						/>
+						{taskSuggestions.map((suggestion) => {
+							return (
+								<RegenerateSuggestionButton
+									key={suggestion.categoryId}
+									label={`${suggestion.categoryName} sector task`}
+									suggestion={suggestion}
+									threadId={threadId as string}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
+import { DataStatus, NumericalValue } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
@@ -8,6 +8,10 @@ import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { checkIsTaskMessage } from "../libs/guards/guards.js";
+import {
+	createTaskMessagesFromSuggestions,
+	updateSuggestions,
+} from "../libs/helpers/helpers.js";
 import {
 	type ChatMessageDto,
 	type TaskMessage,
@@ -74,7 +78,9 @@ const { actions, name, reducer } = createSlice({
 			.addCase(getTasksForCategories.fulfilled, (state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
 				const newMessages = action.payload.messages;
-				const taskSuggestionsMessagePayload: TaskMessage[] = [];
+				state.taskSuggestions = [];
+				const newTaskMessages: TaskMessage[] = [];
+				const newTaskSuggestions: TaskCreateDto[] = [];
 
 				for (const message of newMessages) {
 					if (message.type === "text") {
@@ -87,8 +93,9 @@ const { actions, name, reducer } = createSlice({
 					}
 
 					if (checkIsTaskMessage(message)) {
-						taskSuggestionsMessagePayload.push(message.payload);
-						state.taskSuggestions.push({
+						newTaskMessages.push(message.payload);
+
+						newTaskSuggestions.push({
 							categoryId: message.payload.task.categoryId,
 							categoryName: message.payload.task.categoryName,
 							description: message.payload.task.description,
@@ -97,10 +104,18 @@ const { actions, name, reducer } = createSlice({
 					}
 				}
 
+				state.taskSuggestions =
+					state.taskSuggestions.length === NumericalValue.ZERO
+						? (state.taskSuggestions = newTaskSuggestions)
+						: (state.taskSuggestions = updateSuggestions(
+								state.taskSuggestions,
+								newTaskSuggestions,
+							));
+
 				state.messages.push({
 					author: ChatMessageAuthor.ASSISTANT,
 					isRead: true,
-					payload: taskSuggestionsMessagePayload,
+					payload: newTaskMessages,
 					type: ChatMessageType.TASK,
 				});
 
@@ -116,13 +131,11 @@ const { actions, name, reducer } = createSlice({
 			.addCase(changeTasksSuggestion.fulfilled, (state, action) => {
 				state.dataStatus = DataStatus.FULFILLED;
 				const newMessages = action.payload.messages;
-				state.taskSuggestions = [];
-				const newTasks: TaskMessage[] = [];
+				const newTaskSuggestions: TaskCreateDto[] = [];
 
 				for (const message of newMessages) {
 					if (checkIsTaskMessage(message)) {
-						newTasks.push(message.payload);
-						state.taskSuggestions.push({
+						newTaskSuggestions.push({
 							categoryId: message.payload.task.categoryId,
 							categoryName: message.payload.task.categoryName,
 							description: message.payload.task.description,
@@ -131,10 +144,18 @@ const { actions, name, reducer } = createSlice({
 					}
 				}
 
+				state.taskSuggestions =
+					state.taskSuggestions.length === NumericalValue.ZERO
+						? (state.taskSuggestions = newTaskSuggestions)
+						: (state.taskSuggestions = updateSuggestions(
+								state.taskSuggestions,
+								newTaskSuggestions,
+							));
+
 				state.messages.push({
 					author: ChatMessageAuthor.ASSISTANT,
 					isRead: true,
-					payload: newTasks,
+					payload: createTaskMessagesFromSuggestions(state.taskSuggestions),
 					type: ChatMessageType.TASK,
 				});
 
