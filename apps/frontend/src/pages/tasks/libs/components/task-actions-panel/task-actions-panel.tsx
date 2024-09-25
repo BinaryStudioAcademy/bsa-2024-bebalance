@@ -1,9 +1,14 @@
 import { Button } from "~/libs/components/components.js";
-import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks.js";
 import {
 	type TaskDto,
 	actions as tasksActions,
 } from "~/modules/tasks/tasks.js";
+import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
 import { TaskStatus } from "../../enums/enums.js";
 import styles from "./styles.module.css";
@@ -24,6 +29,8 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const dispatch = useAppDispatch();
 	const totalTasks = tasks.length;
 	const isSingleTask = totalTasks === SINGLE_TASK;
+
+	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
 
 	const handleTaskAction = useCallback(
 		(action: (task: TaskDto) => void) => {
@@ -51,7 +58,13 @@ const TaskActionsPanel: React.FC<Properties> = ({
 				id: task.id,
 				status: TaskStatus.COMPLETED,
 			}),
-		);
+		).then(() => {
+			void dispatch(
+				userActions.updateTasksCompletionPercentage({
+					id: (authenticatedUser as UserDto).id,
+				}),
+			);
+		});
 	});
 
 	const handleExtendingDeadline = handleTaskAction((task) => {

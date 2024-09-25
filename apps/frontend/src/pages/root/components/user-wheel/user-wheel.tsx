@@ -11,9 +11,7 @@ import {
 	useEffect,
 	useState,
 } from "~/libs/hooks/hooks.js";
-import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
-import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
 import { CircularProgress } from "../circular-progress/circular-progress.js";
 import {
@@ -30,19 +28,13 @@ import styles from "./styles.module.css";
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const {
-		authenticatedUser,
-		completionTasksPercentage,
-		dataStatus,
-		scores,
-		scoresLastUpdatedAt,
-	} = useAppSelector(({ auth, quiz }) => ({
-		authenticatedUser: auth.user,
-		completionTasksPercentage: auth.user?.completionTasksPercentage,
-		dataStatus: quiz.dataStatus,
-		scores: quiz.scores,
-		scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
-	}));
+	const { completionTasksPercentage, dataStatus, scores, scoresLastUpdatedAt } =
+		useAppSelector(({ auth, quiz }) => ({
+			completionTasksPercentage: auth.user?.completionTasksPercentage,
+			dataStatus: quiz.dataStatus,
+			scores: quiz.scores,
+			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
+		}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
@@ -79,25 +71,6 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
-
-	useEffect(() => {
-		void dispatch(
-			userActions.getById({ id: (authenticatedUser as UserDto).id }),
-		).then((action) => {
-			const user = action.payload as UserDto;
-			const { completionTasksPercentage } = user;
-
-			if (completionTasksPercentage === null) {
-				return;
-			}
-
-			void dispatch(
-				authActions.updateCompletionTasksPercentageState(
-					user.completionTasksPercentage as number,
-				),
-			);
-		});
-	}, [dispatch, authenticatedUser]);
 
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
