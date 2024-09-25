@@ -38,6 +38,7 @@ export { default as MaskedView } from "@react-native-masked-view/masked-view";
 export {
 	ActivityIndicator,
 	Image,
+	ImageBackground,
 	KeyboardAvoidingView,
 	Pressable,
 	ScrollView,
