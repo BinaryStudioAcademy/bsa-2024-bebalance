@@ -6,7 +6,6 @@ import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { type TaskService } from "~/modules/tasks/tasks.js";
 import { type UserService } from "~/modules/users/users.js";
 
-import { ChatMessageType } from "./libs/enums/enums.js";
 import {
 	generateChangeTasksSuggestionsResponse,
 	generateExplainTasksSuggestionsResponse,
@@ -70,16 +69,7 @@ class AIAssistantService {
 		const { messages, task } = body;
 		const threadId = user.threadId as string;
 
-		for (const message of messages) {
-			await this.chatMessageService.create({
-				author: message.author,
-				payload: {
-					text: message.text,
-				},
-				threadId,
-				type: ChatMessageType.TEXT,
-			});
-		}
+		await this.chatMessageService.saveAllTextMessages(messages, threadId);
 
 		const newTask = await this.taskService.create({
 			categoryId: task.categoryId,
@@ -104,16 +94,7 @@ class AIAssistantService {
 		const { messages, tasks } = body;
 		const threadId = user.threadId as string;
 
-		for (const message of messages) {
-			await this.chatMessageService.create({
-				author: message.author,
-				payload: {
-					text: message.text,
-				},
-				threadId,
-				type: ChatMessageType.TEXT,
-			});
-		}
+		await this.chatMessageService.saveAllTextMessages(messages, threadId);
 
 		return await Promise.all(
 			tasks.map(async (task) => {
@@ -158,16 +139,7 @@ class AIAssistantService {
 		const { messages, tasks } = body;
 		const threadId = user.threadId as string;
 
-		for (const message of messages) {
-			await this.chatMessageService.create({
-				author: message.author,
-				payload: {
-					text: message.text,
-				},
-				threadId,
-				type: ChatMessageType.TEXT,
-			});
-		}
+		await this.chatMessageService.saveAllTextMessages(messages, threadId);
 
 		const runThreadOptions = runChangeTasksByCategoryOptions(tasks);
 
@@ -197,16 +169,7 @@ class AIAssistantService {
 		const { messages, tasks } = body;
 		const threadId = user.threadId as string;
 
-		for (const message of messages) {
-			await this.chatMessageService.create({
-				author: message.author,
-				payload: {
-					text: message.text,
-				},
-				threadId,
-				type: ChatMessageType.TEXT,
-			});
-		}
+		await this.chatMessageService.saveAllTextMessages(messages, threadId);
 
 		const runThreadOptions = runExplainTaskOptions(tasks);
 
@@ -269,16 +232,7 @@ class AIAssistantService {
 		const { categories, messages } = body;
 		const threadId = user.threadId as string;
 
-		for (const message of messages) {
-			await this.chatMessageService.create({
-				author: message.author,
-				payload: {
-					text: message.text,
-				},
-				threadId,
-				type: ChatMessageType.TEXT,
-			});
-		}
+		await this.chatMessageService.saveAllTextMessages(messages, threadId);
 
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 

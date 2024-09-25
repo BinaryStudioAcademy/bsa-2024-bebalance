@@ -1,7 +1,10 @@
+import { type SaveTextMessageDto } from "shared/src/modules/ai-assistant/libs/types/ai-assistant-save-text-message-dto.type.js";
+
 import { type Service } from "~/libs/types/types.js";
 
 import { ChatMessageEntity } from "./chat-message.entity.js";
 import { type ChatMessageRepository } from "./chat-message.repository.js";
+import { ChatMessageType } from "./libs/enums/enums.js";
 import {
 	type ChatMessageCreateDto,
 	type ChatMessageDto,
@@ -54,6 +57,22 @@ class ChatMessageService implements Service {
 		return chatMessages.map((chatMessage) => {
 			return chatMessage.toObject() as ChatMessageDto;
 		});
+	}
+
+	public async saveAllTextMessages(
+		messages: SaveTextMessageDto[],
+		threadId: string,
+	): Promise<void> {
+		for (const message of messages) {
+			await this.create({
+				author: message.author,
+				payload: {
+					text: message.text,
+				},
+				threadId,
+				type: ChatMessageType.TEXT,
+			});
+		}
 	}
 
 	public async update(
