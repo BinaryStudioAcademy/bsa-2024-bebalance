@@ -4,6 +4,7 @@ import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppSelector,
+	useBlocker,
 	useCallback,
 	useEffect,
 	useState,
@@ -73,6 +74,24 @@ const Profile: React.FC = () => {
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
+	const [isDirty, setIsDirty] = useState<boolean>(false);
+
+	const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+		return isDirty && currentLocation.pathname !== nextLocation.pathname;
+	});
+
+	const handleCancelPopupClick = useCallback((): void => {
+		if (blocker.state === "blocked") {
+			blocker.reset();
+		}
+	}, [blocker]);
+
+	const handleConfirmPopupClick = useCallback((): void => {
+		if (blocker.state === "blocked") {
+			blocker.proceed();
+		}
+	}, [blocker]);
+
 	return (
 		<>
 			<Popup
@@ -84,6 +103,16 @@ const Profile: React.FC = () => {
 				onClose={handleSignOut}
 				onConfirm={handleConfirmLogout}
 				title={PopupMessage.LOGOUT_CONFIRM}
+			/>
+			<Popup
+				closeButtonLabel="CANCEL"
+				confirmButtonLabel="YES"
+				hasCloseIcon
+				icon={runImg}
+				isOpen={isDirty && blocker.state === "blocked"}
+				onClose={handleCancelPopupClick}
+				onConfirm={handleConfirmPopupClick}
+				title="Unsaved changes will be lost. Continue?"
 			/>
 			{isLoading && <Loader />}
 			{user && (
@@ -103,11 +132,18 @@ const Profile: React.FC = () => {
 
 					<ProfileSection hasVisuallyHiddenTitle title="Profile">
 						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
-						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
+						<UpdateUserForm
+							onSubmit={handleUpdateSubmit}
+							setIsDirty={setIsDirty}
+							user={user}
+						/>
 					</ProfileSection>
 
 					<ProfileSection title="Change Password">
-						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
+						<UpdatePasswordForm
+							onSubmit={handleUpdatePasswordSubmit}
+							setIsDirty={setIsDirty}
+						/>
 					</ProfileSection>
 				</div>
 			)}

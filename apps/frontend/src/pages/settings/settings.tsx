@@ -61,7 +61,9 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
-	const blocker = useBlocker(isDirty);
+	const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+		return isDirty && currentLocation.pathname !== nextLocation.pathname;
+	});
 
 	const handleCancelPopupClick = useCallback((): void => {
 		if (blocker.state === "blocked") {
