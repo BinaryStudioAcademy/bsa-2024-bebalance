@@ -11,6 +11,7 @@ import {
 } from "~/libs/hooks/hooks";
 import { type CategoriesSelectedRequestDto } from "~/libs/types/types";
 import { actions as chatActions } from "~/slices/chat/chat";
+import { ChatMessageAuthor } from "~/packages/chat/chat";
 
 import { CHECKBOX_SELECTOR_TEXT } from "./libs/constants/constants";
 import { getSelectedCategoriesHelper } from "./libs/helpers/helpers";
@@ -42,7 +43,7 @@ const CheckBoxButtons: React.FC = () => {
 			void dispatch(chatActions.getTasksForCategories(taskPayload));
 			dispatch(
 				chatActions.addTextMessage({
-					author: "user",
+					author: ChatMessageAuthor.USER,
 					text: "Confirm tasks generation",
 				}),
 			);

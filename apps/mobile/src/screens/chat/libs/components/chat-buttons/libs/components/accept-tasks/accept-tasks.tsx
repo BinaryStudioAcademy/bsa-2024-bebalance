@@ -14,6 +14,7 @@ import { actions as chatActions } from "~/slices/chat/chat";
 
 import { FEEDBACK_TEXT } from "./constants/constants";
 import { type RootStackParameterList } from "./types/types";
+import { ChatMessageAuthor, ButtonsMode } from "~/packages/chat/chat";
 
 const AcceptTasks: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -31,16 +32,16 @@ const AcceptTasks: React.FC = () => {
 			}),
 		);
 
-		dispatch(chatActions.setButtonsMode("none"));
+		dispatch(chatActions.setButtonsMode(ButtonsMode.NONE));
 		dispatch(
 			chatActions.addTextMessage({
-				author: "assistant",
+				author: ChatMessageAuthor.ASSISTANT,
 				text: FEEDBACK_TEXT,
 			}),
 		);
 		dispatch(
 			chatActions.addTextMessage({
-				author: "user",
+				author: ChatMessageAuthor.USER,
 				text: "Accept",
 			}),
 		);
