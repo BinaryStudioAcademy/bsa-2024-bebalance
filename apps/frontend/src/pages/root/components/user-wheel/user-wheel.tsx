@@ -53,13 +53,6 @@ const UserWheel: React.FC = () => {
 		? getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
 		: null;
 
-	// const lastWheelUpdateDate = scoresLastUpdatedAt
-	// 	? getFormattedDate(
-	// 			new Date(getLocalDatestring(scoresLastUpdatedAt)),
-	// 			"d MMM yyyy, EEEE",
-	// 		)
-	// 	: null;
-
 	const handleEditing = useCallback(() => {
 		setIsEditingModalOpen(true);
 	}, []);
