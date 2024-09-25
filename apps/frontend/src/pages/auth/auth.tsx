@@ -142,6 +142,12 @@ const Auth: React.FC = () => {
 								<Link to={AppRoute.SIGN_UP}>Create an account</Link>
 							</div>
 						)}
+						{pathname === AppRoute.SIGN_UP && (
+							<div>
+								<span>Already have an account? Go to </span>
+								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
+							</div>
+						)}
 					</span>
 				</div>
 				{getScreen(pathname)}
