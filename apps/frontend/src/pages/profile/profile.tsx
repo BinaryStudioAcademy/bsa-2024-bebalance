@@ -78,6 +78,7 @@ const Profile: React.FC = () => {
 			<Popup
 				closeButtonLabel="No"
 				confirmButtonLabel="Yes"
+				hasCloseIcon
 				icon={runImg}
 				isOpen={isLogoutPopupOpen}
 				onClose={handleSignOut}

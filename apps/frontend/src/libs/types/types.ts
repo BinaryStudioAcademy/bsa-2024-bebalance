@@ -24,6 +24,7 @@ export {
 	type ScriptableContext,
 } from "chart.js";
 export {
+	type APIConfiguration,
 	type OnboardingQuestionResponseDto,
 	type QuizQuestionDto,
 	type ServerErrorDetail,

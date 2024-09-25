@@ -15,6 +15,7 @@ import {
 	runSuggestTaskByCategoryOptions,
 } from "./libs/helpers/helpers.js";
 import {
+	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
@@ -69,6 +70,34 @@ class AIAssistantService {
 		await this.openAI.addMessageToThread(threadId, chatMessage);
 
 		return newTask;
+	}
+
+	public async acceptTasks(
+		user: UserDto,
+		body: AIAssistantCreateMultipleTasksDto,
+	): Promise<boolean[]> {
+		const { payload, threadId } = body;
+		const tasks = payload;
+
+		return await Promise.all(
+			tasks.map(async (task) => {
+				const newTask = await this.taskService.create({
+					categoryId: task.categoryId,
+					description: task.description,
+					label: task.label,
+					user,
+				});
+
+				const chatMessage = {
+					content: `User has accepted this task: ${JSON.stringify(newTask)}`,
+					role: OpenAIRoleKey.USER,
+				};
+
+				await this.openAI.addMessageToThread(threadId, chatMessage);
+
+				return true;
+			}),
+		);
 	}
 
 	public async addMessageToThread(

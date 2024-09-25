@@ -1,8 +1,6 @@
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
-import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage } from "~/libs/modules/storage/storage.js";
-import { type UserDto } from "~/libs/types/types.js";
+import { type APIConfiguration, type UserDto } from "~/libs/types/types.js";
 
 import { UsersApiPath } from "./libs/enums/enums.js";
 import {
@@ -10,14 +8,8 @@ import {
 	type UserUpdateRequestDto,
 } from "./libs/types/types.js";
 
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
-
 class UsersApi extends BaseHTTPApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.USERS, storage });
 	}
 
