@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.27.0...backend-v1.28.0) (2024-09-25)
+
+
+### Features
+
+* **frontend/backend/mobile:** initial ai chat implementation bb-340 ([#551](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/551)) ([f02689d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f02689dce05de1e1474415da32fafbce43f4b598))
+
 ## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.26.0...backend-v1.27.0) (2024-09-24)
 
 
