@@ -54,7 +54,10 @@ const Chat: React.FC = () => {
 	);
 
 	return (
-		<ScreenWrapper edges={[]} style={[globalStyles.flex1, styles.container]}>
+		<ScreenWrapper
+			edges={["left", "right"]}
+			style={[globalStyles.flex1, styles.container]}
+		>
 			<View
 				style={[
 					globalStyles.flex1,

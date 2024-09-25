@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
 		borderTopLeftRadius: 10,
 		borderTopRightRadius: 0,
 	},
+	userImage: {
+		borderRadius: 34,
+		height: 34,
+		width: 34,
+	},
 	userWrapper: {
 		flexDirection: "row-reverse",
 	},

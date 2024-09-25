@@ -11,7 +11,7 @@ type Properties = {
 
 const NUMBER_OF_TEXT_LINES = 5;
 
-const AiTask: React.FC<Properties> = ({ tasks }: Properties) => {
+const AITask: React.FC<Properties> = ({ tasks }: Properties) => {
 	return (
 		<>
 			{tasks.map(({ task }) => {
@@ -38,4 +38,4 @@ const AiTask: React.FC<Properties> = ({ tasks }: Properties) => {
 	);
 };
 
-export { AiTask };
+export { AITask };

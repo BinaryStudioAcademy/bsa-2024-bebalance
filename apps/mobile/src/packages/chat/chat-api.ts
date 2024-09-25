@@ -63,7 +63,7 @@ class ChatApi extends BaseHttpApi {
 		return await response.json<AIAssistantResponseDto>();
 	}
 
-	public async initiateConversation(): Promise<ThreadMessageCreateDto> {
+	public async initializeConversation(): Promise<ThreadMessageCreateDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_INITIALIZE, {}),
 			{

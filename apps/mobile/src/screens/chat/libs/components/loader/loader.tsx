@@ -42,7 +42,7 @@ const Loader: React.FC = () => {
 	const animatedStyle3 = useAnimatedScaleStyle(scaleDot3);
 
 	return (
-		<ChatMessage isUser={false} style={globalStyles.mt8}>
+		<ChatMessage style={globalStyles.mt8}>
 			<Animated.View style={[globalStyles.flexDirectionRow, globalStyles.gap2]}>
 				<Animated.Text style={[animatedStyle1, styles.dot]}>.</Animated.Text>
 				<Animated.Text style={[animatedStyle2, styles.dot]}>.</Animated.Text>

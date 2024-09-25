@@ -1,5 +1,8 @@
-import { ChatMessageType } from "../enums/enums";
-import { type ChatMessageDto, type TaskMessage } from "../types/types";
+import {
+	type ChatMessageDto,
+	ChatMessageType,
+	type TaskMessage,
+} from "../../../chats.js";
 
 const checkIsTaskType = (
 	message: ChatMessageDto,

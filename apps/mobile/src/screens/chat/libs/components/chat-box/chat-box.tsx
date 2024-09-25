@@ -7,7 +7,7 @@ import {
 	type TextMessage,
 } from "~/packages/chat/chat";
 
-import { AiTask } from "./libs/components/components";
+import { AITask } from "./libs/components/components";
 
 type Properties = {
 	author: ValueOf<typeof ChatMessageAuthor>;
@@ -20,17 +20,19 @@ const ChatBox: React.FC<Properties> = ({
 	payload,
 	type,
 }: Properties) => {
-	const isUser = author === "user";
+	const isUserMessage = author === "user";
 
 	switch (type) {
 		case ChatMessageType.TEXT: {
-			return <ChatMessage content={payload as TextMessage} isUser={isUser} />;
+			return (
+				<ChatMessage content={payload as TextMessage} isUser={isUserMessage} />
+			);
 		}
 
 		case ChatMessageType.TASK: {
 			return (
-				<ChatMessage isUser={isUser}>
-					<AiTask tasks={payload as TaskMessage[]} />
+				<ChatMessage isUser={isUserMessage}>
+					<AITask tasks={payload as TaskMessage[]} />
 				</ChatMessage>
 			);
 		}

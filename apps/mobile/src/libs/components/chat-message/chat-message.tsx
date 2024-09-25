@@ -1,9 +1,12 @@
 import AIAvatar from "~/assets/svg/ai-avatar.svg";
-import { Icon, Text, View } from "~/libs/components/components";
+import { Icon, Image, Text, View } from "~/libs/components/components";
 import { BaseColor } from "~/libs/enums/enums";
+import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
 import { type TextMessage } from "~/packages/chat/chat";
+import { type UserDto } from "~/packages/users/users";
+import { actions as usersActions } from "~/slices/users/users";
 
 import { styles } from "./styles";
 
@@ -25,12 +28,33 @@ const ChatMessage: React.FC<Properties> = ({
 	text = "",
 }: Properties) => {
 	const messageText = content?.text ?? text;
+	const dispatch = useAppDispatch();
+	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
+	const user = useAppSelector((state) => state.users.user);
 
-	const Avatar = isUser ? (
-		<Icon color={BaseColor.LIGHT_GRAY} name="account-circle" size={ICON_SIZE} />
-	) : (
-		<AIAvatar />
-	);
+	useEffect(() => {
+		void dispatch(
+			usersActions.getById({ id: (authenticatedUser as UserDto).id }),
+		);
+	}, [dispatch, authenticatedUser]);
+
+	let Avatar;
+
+	if (user?.avatarUrl) {
+		Avatar = (
+			<Image source={{ uri: user.avatarUrl }} style={styles.userImage} />
+		);
+	} else if (isUser) {
+		Avatar = (
+			<Icon
+				color={BaseColor.LIGHT_GRAY}
+				name="account-circle"
+				size={ICON_SIZE}
+			/>
+		);
+	} else {
+		Avatar = <AIAvatar />;
+	}
 
 	return (
 		<View

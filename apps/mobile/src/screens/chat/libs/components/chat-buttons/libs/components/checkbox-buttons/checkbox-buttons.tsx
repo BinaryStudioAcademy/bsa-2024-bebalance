@@ -52,7 +52,7 @@ const CheckBoxButtons: React.FC = () => {
 	);
 
 	return (
-		<ChatMessage isUser={false} text={CHECKBOX_SELECTOR_TEXT}>
+		<ChatMessage text={CHECKBOX_SELECTOR_TEXT}>
 			<CheckboxCategoriesForm
 				categories={quizCategories}
 				onSubmit={handleFormSubmit}

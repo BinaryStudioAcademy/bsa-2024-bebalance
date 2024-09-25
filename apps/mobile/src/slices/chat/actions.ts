@@ -20,7 +20,7 @@ const initConversation = createAsyncThunk<
 >(`${sliceName}/initialize-conversation`, async (_, { extra }) => {
 	const { chatApi } = extra;
 
-	return await chatApi.initiateConversation();
+	return await chatApi.initializeConversation();
 });
 
 const getTasksForCategories = createAsyncThunk<

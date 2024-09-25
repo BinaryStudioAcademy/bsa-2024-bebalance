@@ -26,7 +26,7 @@ const GenerateTaskButtons: React.FC = () => {
 		dispatch(
 			chatActions.addTextMessage({
 				author: ChatMessageAuthor.USER,
-				text: "No smth else",
+				text: "No, something else",
 			}),
 		);
 	}, [dispatch]);

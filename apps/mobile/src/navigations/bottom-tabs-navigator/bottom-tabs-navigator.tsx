@@ -16,6 +16,8 @@ import { Chat } from "~/screens/chat/chat";
 import { Settings } from "~/screens/settings/settings";
 import { Tasks } from "~/screens/tasks/tasks";
 
+import { styles } from "./styles";
+
 const BottomTabs = createBottomTabNavigator<BottomTabNavigationParameterList>();
 
 const screenOptions: BottomTabNavigationOptions = {
@@ -50,7 +52,7 @@ const BottomTabsNavigator: React.FC = () => {
 					tabBarIcon: ({ focused }) => (
 						<GradientTabIcon isFocused={focused} name="sms" />
 					),
-					tabBarStyle: { display: "none" },
+					tabBarStyle: styles.tabBarHidden,
 				}}
 			/>
 			<BottomTabs.Screen

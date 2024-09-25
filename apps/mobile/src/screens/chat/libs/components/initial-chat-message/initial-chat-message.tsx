@@ -14,11 +14,10 @@ const InitialChatMessage: React.FC = () => {
 	return (
 		<>
 			<ChatMessage
-				isUser={false}
 				style={globalStyles.mb8}
 				text={`Hello ${userName}! I'm so glad you're here and taking steps towards a more balanced life. You've got this!`}
 			/>
-			<ChatMessage isUser={false} text="Here are your Wheel results:">
+			<ChatMessage text="Here are your Wheel results:">
 				<View
 					style={[
 						globalStyles.alignItemsCenter,

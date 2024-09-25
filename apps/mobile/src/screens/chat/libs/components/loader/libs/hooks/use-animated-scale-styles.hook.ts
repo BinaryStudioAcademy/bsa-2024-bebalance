@@ -1,10 +1,10 @@
 import { type SharedValue, useAnimatedStyle } from "react-native-reanimated";
 
-type Property = {
+type ReturnValue = {
 	transform: { scale: number }[];
 };
 
-const useAnimatedScaleStyle = (scaleValue: SharedValue<number>): Property =>
+const useAnimatedScaleStyle = (scaleValue: SharedValue<number>): ReturnValue =>
 	useAnimatedStyle(() => ({
 		transform: [{ scale: scaleValue.value }],
 	}));
