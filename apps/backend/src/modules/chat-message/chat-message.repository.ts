@@ -2,7 +2,7 @@ import { type Repository } from "~/libs/types/types.js";
 
 import { ChatMessageEntity } from "./chat-message.entity.js";
 import { type ChatMessageModel } from "./chat-message.model.js";
-import { ChatMessageType } from "./libs/enums/enums.js";
+import { ChatMessageType, SortOrder } from "./libs/enums/enums.js";
 import { type TaskMessage, type TextMessage } from "./libs/types/types.js";
 
 class ChatMessageRepository implements Repository {
@@ -98,7 +98,8 @@ class ChatMessageRepository implements Repository {
 	public async findByThreadId(threadId: string): Promise<ChatMessageEntity[]> {
 		const chatMessages = await this.chatMessageModel
 			.query()
-			.where({ threadId });
+			.where({ threadId })
+			.orderBy("id", SortOrder.ASC);
 
 		return chatMessages.map((chatMessage) => {
 			return ChatMessageEntity.initialize({

@@ -4,7 +4,10 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 
 import {
 	CATEGORIES_SELECTOR_BUTTON_LABEL,
@@ -32,12 +35,17 @@ const CategoriesSelector: React.FC = () => {
 				.map((category) => {
 					return category.name;
 				})
-				.join(",")} categories`;
+				.join(", ")} categories`;
 			dispatch(chatActions.addUserTextMessage(text));
 
 			const taskPayload = {
 				categories: newSelectedCategories,
-				text,
+				messages: [
+					{
+						author: ChatMessageAuthor.USER,
+						text,
+					},
+				],
 			};
 
 			await dispatch(chatActions.getTasksForCategories(taskPayload));

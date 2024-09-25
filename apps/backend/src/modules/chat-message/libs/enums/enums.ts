@@ -1,1 +1,1 @@
-export { ChatMessageAuthor, ChatMessageType } from "shared";
+export { ChatMessageAuthor, ChatMessageType, SortOrder } from "shared";

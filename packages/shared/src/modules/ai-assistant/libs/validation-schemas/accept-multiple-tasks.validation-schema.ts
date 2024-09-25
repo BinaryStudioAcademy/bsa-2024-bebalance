@@ -1,11 +1,31 @@
 import { z } from "zod";
 
+import { type ValueOf } from "../../../../libs/types/types.js";
+import { ChatMessageAuthor } from "../../../chats/chats.js";
 import {
 	AIAssistantValidationMessage,
 	AIAssistantValidationRule,
 } from "../enums/enums.js";
 
 const acceptMultipleTasks = z.object({
+	messages: z.array(
+		z.object({
+			author: z.enum(
+				Object.values(ChatMessageAuthor) as [ValueOf<typeof ChatMessageAuthor>],
+				{
+					errorMap: () => ({
+						message: AIAssistantValidationMessage.INVALID_MESSAGE_AUTHOR,
+					}),
+				},
+			),
+			text: z
+				.string()
+				.trim()
+				.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+					message: AIAssistantValidationMessage.TEXT_REQUIRED,
+				}),
+		}),
+	),
 	payload: z.array(
 		z.object({
 			categoryId: z.number({
@@ -28,15 +48,6 @@ const acceptMultipleTasks = z.object({
 				}),
 		}),
 	),
-	threadId: z
-		.string()
-		.trim()
-		.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-			message: AIAssistantValidationMessage.THREAD_ID_REQUIRED,
-		})
-		.regex(AIAssistantValidationRule.THREAD_ID_VALID_CHARS, {
-			message: AIAssistantValidationMessage.THREAD_ID_INVALID_FORMAT,
-		}),
 });
 
 export { acceptMultipleTasks };

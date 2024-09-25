@@ -6,7 +6,7 @@ import { type OnboardingRepository } from "~/modules/onboarding/onboarding.js";
 import { type TaskService } from "~/modules/tasks/tasks.js";
 import { type UserService } from "~/modules/users/users.js";
 
-import { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
+import { ChatMessageType } from "./libs/enums/enums.js";
 import {
 	generateChangeTaskSuggestionsResponse,
 	generateExplainTaskSuggestionsResponse,
@@ -67,17 +67,19 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantAcceptTaskRequestDto,
 	): Promise<TaskDto> {
-		const { task, text } = body;
+		const { messages, task } = body;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create({
-			author: ChatMessageAuthor.USER,
-			payload: {
-				text,
-			},
-			threadId,
-			type: ChatMessageType.TEXT,
-		});
+		for (const message of messages) {
+			await this.chatMessageService.create({
+				author: message.author,
+				payload: {
+					text: message.text,
+				},
+				threadId,
+				type: ChatMessageType.TEXT,
+			});
+		}
 
 		const newTask = await this.taskService.create({
 			categoryId: task.categoryId,
@@ -99,18 +101,20 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantCreateMultipleTasksDto,
 	): Promise<boolean[]> {
-		const { payload, text } = body;
+		const { messages, payload } = body;
 		const tasks = payload;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create({
-			author: ChatMessageAuthor.USER,
-			payload: {
-				text,
-			},
-			threadId,
-			type: ChatMessageType.TEXT,
-		});
+		for (const message of messages) {
+			await this.chatMessageService.create({
+				author: message.author,
+				payload: {
+					text: message.text,
+				},
+				threadId,
+				type: ChatMessageType.TEXT,
+			});
+		}
 
 		return await Promise.all(
 			tasks.map(async (task) => {
@@ -152,17 +156,19 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantChangeTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { task, text } = body;
+		const { messages, task } = body;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create({
-			author: ChatMessageAuthor.USER,
-			payload: {
-				text,
-			},
-			threadId,
-			type: ChatMessageType.TEXT,
-		});
+		for (const message of messages) {
+			await this.chatMessageService.create({
+				author: message.author,
+				payload: {
+					text: message.text,
+				},
+				threadId,
+				type: ChatMessageType.TEXT,
+			});
+		}
 
 		const runThreadOptions = runChangeTaskByCategoryOptions(task);
 		const taskDeadLine = this.taskService.calculateDeadline(
@@ -179,14 +185,14 @@ class AIAssistantService {
 			return null;
 		}
 
-		const messages: ChatMessageDto[] = [];
+		const responseMessages: ChatMessageDto[] = [];
 
 		for (const message of response) {
-			messages.push(await this.chatMessageService.create(message));
+			responseMessages.push(await this.chatMessageService.create(message));
 		}
 
 		return {
-			messages,
+			messages: responseMessages,
 		};
 	}
 
@@ -194,17 +200,19 @@ class AIAssistantService {
 		body: AIAssistantExplainTaskRequestDto,
 		user: UserDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { task, text } = body;
+		const { messages, task } = body;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create({
-			author: ChatMessageAuthor.USER,
-			payload: {
-				text,
-			},
-			threadId,
-			type: ChatMessageType.TEXT,
-		});
+		for (const message of messages) {
+			await this.chatMessageService.create({
+				author: message.author,
+				payload: {
+					text: message.text,
+				},
+				threadId,
+				type: ChatMessageType.TEXT,
+			});
+		}
 
 		const runThreadOptions = runExplainTaskOptions(task);
 
@@ -216,14 +224,14 @@ class AIAssistantService {
 			return null;
 		}
 
-		const messages: ChatMessageDto[] = [];
+		const responseMessages: ChatMessageDto[] = [];
 
 		for (const message of response) {
-			messages.push(await this.chatMessageService.create(message));
+			responseMessages.push(await this.chatMessageService.create(message));
 		}
 
 		return {
-			messages,
+			messages: responseMessages,
 		};
 	}
 
@@ -264,17 +272,19 @@ class AIAssistantService {
 		user: UserDto,
 		body: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto | null> {
-		const { categories, text } = body;
+		const { categories, messages } = body;
 		const threadId = user.threadId as string;
 
-		await this.chatMessageService.create({
-			author: ChatMessageAuthor.USER,
-			payload: {
-				text,
-			},
-			threadId,
-			type: ChatMessageType.TEXT,
-		});
+		for (const message of messages) {
+			await this.chatMessageService.create({
+				author: message.author,
+				payload: {
+					text: message.text,
+				},
+				threadId,
+				type: ChatMessageType.TEXT,
+			});
+		}
 
 		const runThreadOptions = runSuggestTaskByCategoryOptions(categories);
 
@@ -290,14 +300,14 @@ class AIAssistantService {
 			return null;
 		}
 
-		const messages: ChatMessageDto[] = [];
+		const responseMessages: ChatMessageDto[] = [];
 
 		for (const message of response) {
-			messages.push(await this.chatMessageService.create(message));
+			responseMessages.push(await this.chatMessageService.create(message));
 		}
 
 		return {
-			messages,
+			messages: responseMessages,
 		};
 	}
 }

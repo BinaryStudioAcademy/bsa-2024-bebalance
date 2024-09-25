@@ -4,7 +4,10 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
@@ -37,8 +40,17 @@ const SuggestionsManipulationOptions: React.FC = () => {
 
 		void dispatch(
 			chatActions.createTasksFromSuggestions({
+				messages: [
+					{
+						author: ChatMessageAuthor.USER,
+						text: SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
+					},
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: SuggestionsManipulationMessage.ACCEPT_TASKS_RESPONSE,
+					},
+				],
 				payload: taskSuggestions,
-				text: SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
 			}),
 		);
 	}, [dispatch, taskSuggestions]);

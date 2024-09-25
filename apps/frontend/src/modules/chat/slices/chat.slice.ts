@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
+import { DataStatus, NumericalValue } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
@@ -61,6 +61,36 @@ const { actions, name, reducer } = createSlice({
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
 				state.threadId = action.payload.threadId;
+
+				const { messages } = action.payload;
+				let taskBuffer: TaskMessage[] = [];
+
+				for (const message of messages) {
+					if (message.type === ChatMessageType.TASK) {
+						taskBuffer.push(message.payload as TaskMessage);
+					} else {
+						if (taskBuffer.length > NumericalValue.ZERO) {
+							state.messages.push({
+								author: ChatMessageAuthor.ASSISTANT,
+								isRead: true,
+								payload: taskBuffer,
+								type: ChatMessageType.TASK,
+							});
+						}
+
+						taskBuffer = [];
+						state.messages.push(message);
+					}
+				}
+
+				if (taskBuffer.length > NumericalValue.ZERO) {
+					state.messages.push({
+						author: ChatMessageAuthor.ASSISTANT,
+						isRead: true,
+						payload: taskBuffer,
+						type: ChatMessageType.TASK,
+					});
+				}
 			})
 			.addCase(initConversation.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;

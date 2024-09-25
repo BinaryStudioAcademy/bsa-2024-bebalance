@@ -4,7 +4,10 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { SUGGESTIONS_CREATION_TEXT } from "./libs/constants/constants.js";
@@ -42,7 +45,16 @@ const SuggestionsCreationOptions: React.FC = () => {
 		void dispatch(
 			chatActions.getTasksForCategories({
 				categories: selectedCategories,
-				text: SuggestionsCreationButtonLabel.YES,
+				messages: [
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: SUGGESTIONS_CREATION_TEXT,
+					},
+					{
+						author: ChatMessageAuthor.USER,
+						text: SuggestionsCreationButtonLabel.YES,
+					},
+				],
 			}),
 		);
 	}, [dispatch, scores]);
