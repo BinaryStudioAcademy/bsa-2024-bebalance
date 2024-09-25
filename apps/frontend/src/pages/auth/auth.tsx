@@ -136,15 +136,10 @@ const Auth: React.FC = () => {
 								your password.
 							</div>
 						)}
-						{pathname === AppRoute.SIGN_IN ? (
+						{pathname === AppRoute.SIGN_IN && (
 							<div>
 								<span>No account? Go to </span>
 								<Link to={AppRoute.SIGN_UP}>Create an account</Link>
-							</div>
-						) : (
-							<div>
-								<span>Already have an account? Go to </span>
-								<Link to={AppRoute.SIGN_IN}>Sign In</Link>
 							</div>
 						)}
 					</span>
