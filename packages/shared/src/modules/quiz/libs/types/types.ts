@@ -10,4 +10,5 @@ export { type QuizScoresGetAllResponseDto } from "./quiz-scores-get-all-response
 export { type QuizScoresResponseDto } from "./quiz-scores-response-dto.type.js";
 export { type QuizScoresUpdateItemRequestDto } from "./quiz-scores-update-item-request-dto.type.js";
 export { type QuizScoresUpdateRequestDto } from "./quiz-scores-update-request-dto.type.js";
+export { type QuizScoresUpdateResponseDto } from "./quiz-scores-update-response-dto.type.js";
 export { type QuizUserAnswerDto } from "./quiz-user-answer-dto.type.js";

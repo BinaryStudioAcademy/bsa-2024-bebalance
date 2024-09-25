@@ -2,6 +2,7 @@ import { type QuizScoresGetAllItemResponseDto } from "./quiz-scores-get-all-item
 
 type QuizScoresGetAllResponseDto = {
 	items: QuizScoresGetAllItemResponseDto[];
+	updatedAt: string;
 };
 
 export { type QuizScoresGetAllResponseDto };
