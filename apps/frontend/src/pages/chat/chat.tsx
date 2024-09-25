@@ -36,8 +36,11 @@ const Chat: React.FC = () => {
 
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
-		void dispatch(chatActions.initConversation());
-	}, [dispatch]);
+
+		if (!threadId) {
+			void dispatch(chatActions.initConversation());
+		}
+	}, [dispatch, threadId]);
 
 	return (
 		<main className={styles["page-container"]}>

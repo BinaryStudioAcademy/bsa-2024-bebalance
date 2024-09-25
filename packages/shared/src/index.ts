@@ -113,6 +113,7 @@ export {
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 	quizUserAnswersValidationSchema,
 	updateScoresValidationSchema,

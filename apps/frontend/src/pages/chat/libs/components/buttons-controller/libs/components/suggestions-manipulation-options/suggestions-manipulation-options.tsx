@@ -50,7 +50,7 @@ const SuggestionsManipulationOptions: React.FC = () => {
 						text: SuggestionsManipulationMessage.ACCEPT_TASKS_RESPONSE,
 					},
 				],
-				payload: taskSuggestions,
+				tasks: taskSuggestions,
 			}),
 		);
 	}, [dispatch, taskSuggestions]);

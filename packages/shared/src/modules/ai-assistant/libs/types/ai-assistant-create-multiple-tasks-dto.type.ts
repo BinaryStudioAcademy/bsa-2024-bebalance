@@ -3,7 +3,7 @@ import { type SaveTextMessageDto } from "./ai-assistant-save-text-message-dto.ty
 
 type AIAssistantCreateMultipleTasksDto = {
 	messages: SaveTextMessageDto[];
-	payload: TaskCreateDto[];
+	tasks: TaskCreateDto[];
 };
 
 export { type AIAssistantCreateMultipleTasksDto };

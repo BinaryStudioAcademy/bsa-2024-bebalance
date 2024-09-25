@@ -8,6 +8,7 @@ import {
 	actions as chatActions,
 	ChatMessageAuthor,
 } from "~/modules/chat/chat.js";
+import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
 	CATEGORIES_SELECTOR_BUTTON_LABEL,
@@ -36,11 +37,18 @@ const CategoriesSelector: React.FC = () => {
 					return category.name;
 				})
 				.join(", ")} categories`;
+
+			dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
+			dispatch(chatActions.addAssistantTextMessage(CATEGORIES_SELECTOR_TEXT));
 			dispatch(chatActions.addUserTextMessage(text));
 
 			const taskPayload = {
 				categories: newSelectedCategories,
 				messages: [
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: CATEGORIES_SELECTOR_TEXT,
+					},
 					{
 						author: ChatMessageAuthor.USER,
 						text,

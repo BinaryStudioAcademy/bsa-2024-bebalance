@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.28.0...backend-v1.29.0) (2024-09-25)
+
+
+### Features
+
+* **backend/shared:** add ai chat multi task endpoints bb-340 ([#563](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/563)) ([efac9d9](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/efac9d943b83b3880625af14b05ab7507feade4c))
+
+## [1.28.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.27.0...backend-v1.28.0) (2024-09-25)
+
+
+### Features
+
+* **frontend/backend/mobile:** initial ai chat implementation bb-340 ([#551](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/551)) ([f02689d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f02689dce05de1e1474415da32fafbce43f4b598))
+
+## [1.27.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.26.0...backend-v1.27.0) (2024-09-24)
+
+
+### Features
+
+* **backend/frontend/shared:** Add notes to tasks bb-419 ([#535](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/535)) ([c8ed822](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c8ed822f1f3333d81888f0c6e7467b87ca989dd4))
+* **frontend/backend/shared:** Add date on the "My wheel results" page bb-494 ([#557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/557)) ([5b9a41f](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/5b9a41f831f1aad034cccb02991d71894f836db5))
+
 ## [1.26.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.25.0...backend-v1.26.0) (2024-09-23)
 
 
