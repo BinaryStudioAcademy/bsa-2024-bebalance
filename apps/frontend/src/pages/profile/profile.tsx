@@ -2,6 +2,7 @@ import runImg from "~/assets/img/run.svg";
 import { Button, Loader, Popup } from "~/libs/components/components.js";
 import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
+	BLOCKED_BLOCKER_STATE,
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
@@ -96,7 +97,7 @@ const Profile: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={isDirty && blockerState === "blocked"}
+				isOpen={isDirty && blockerState === BLOCKED_BLOCKER_STATE}
 				onClose={handlePopupCancel}
 				onConfirm={handlePopupConfirm}
 				title="Unsaved changes will be lost. Continue?"
