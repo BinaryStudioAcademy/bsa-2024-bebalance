@@ -9,16 +9,23 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor, DataStatus } from "~/libs/enums/enums";
+import {
+	DataStatus,
+	QuestionsStackName,
+	RootScreenName,
+} from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
+	useNavigation,
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type CategoriesSelectedRequestDto,
+	type NativeStackNavigationProp,
+	type QuestionsStackNavigationParameterList,
 	type ValueOf,
 } from "~/libs/types/types";
 import {
@@ -32,9 +39,11 @@ import { EditWheelResultsTab } from "./libs/enums/enums";
 import { styles } from "./styles";
 
 const EditWheelResults: React.FC = () => {
-	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<number[]>(
-		[],
-	);
+	const navigation =
+		useNavigation<
+			NativeStackNavigationProp<QuestionsStackNavigationParameterList>
+		>();
+
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const dispatch = useAppDispatch();
 
@@ -59,13 +68,16 @@ const EditWheelResults: React.FC = () => {
 
 	const handleRetakeQuizSubmit = useCallback(
 		(payload: CategoriesSelectedRequestDto): void => {
-			setSubmittedCategoryIds(payload.categoryIds);
 			const categoriesIds: CategoriesGetRequestQueryDto = {
 				categoryIds: payload.categoryIds.join(","),
 			};
+			void dispatch(quizActions.cleanAnswers());
 			void dispatch(quizActions.getQuestionsByCategoryIds(categoriesIds));
+			navigation.navigate(RootScreenName.QUESTIONS_STACK, {
+				screen: QuestionsStackName.QUIZ,
+			});
 		},
-		[dispatch],
+		[dispatch, navigation],
 	);
 
 	return (
@@ -125,9 +137,6 @@ const EditWheelResults: React.FC = () => {
 									submitButtonLabel="RETAKE QUIZ"
 								/>
 							</View>
-							<Text color={BaseColor.BLACK}>
-								{submittedCategoryIds.join(", ")}
-							</Text>
 						</ScrollView>
 					)}
 				</View>
