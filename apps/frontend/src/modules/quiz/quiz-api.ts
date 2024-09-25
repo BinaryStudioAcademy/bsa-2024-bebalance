@@ -1,7 +1,6 @@
 import { APIPath, ContentType } from "~/libs/enums/enums.js";
 import { BaseHTTPApi } from "~/libs/modules/api/api.js";
-import { type HTTP } from "~/libs/modules/http/http.js";
-import { type Storage } from "~/libs/modules/storage/storage.js";
+import { type APIConfiguration } from "~/libs/types/types.js";
 import {
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
@@ -13,14 +12,8 @@ import {
 
 import { QuizApiPath } from "./libs/enums/enums.js";
 
-type Constructor = {
-	baseUrl: string;
-	http: HTTP;
-	storage: Storage;
-};
-
 class QuizApi extends BaseHTTPApi {
-	public constructor({ baseUrl, http, storage }: Constructor) {
+	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.QUIZ, storage });
 	}
 
@@ -53,12 +46,16 @@ class QuizApi extends BaseHTTPApi {
 		return await response.json<{ items: QuizQuestionDto[][] }>();
 	}
 
-	public async getQuestionsByCategoryIds(categoryIds: string): Promise<{
+	public async getQuestionsByCategoryIds({
+		categoryIds,
+	}: {
+		categoryIds: number[];
+	}): Promise<{
 		items: QuizQuestionDto[][];
 	}> {
 		const response = await this.load(
 			this.getFullEndpoint(
-				`${QuizApiPath.QUESTIONS}?categoryIds=[${categoryIds}]`,
+				`${QuizApiPath.QUESTIONS}?categoryIds=${JSON.stringify(categoryIds)}`,
 				{},
 			),
 			{

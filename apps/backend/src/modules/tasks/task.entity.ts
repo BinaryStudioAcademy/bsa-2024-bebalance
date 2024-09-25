@@ -3,9 +3,9 @@ import { type Entity, type ValueOf } from "~/libs/types/types.js";
 import { TaskStatus } from "./libs/enums/enums.js";
 
 class TaskEntity implements Entity {
-	private category: null | string;
-
 	private categoryId: number;
+
+	private categoryName: null | string;
 
 	private createdAt: string;
 
@@ -24,8 +24,8 @@ class TaskEntity implements Entity {
 	private userId: number;
 
 	private constructor({
-		category,
 		categoryId,
+		categoryName,
 		createdAt,
 		description,
 		dueDate,
@@ -35,8 +35,8 @@ class TaskEntity implements Entity {
 		updatedAt,
 		userId,
 	}: {
-		category: null | string;
 		categoryId: number;
+		categoryName: null | string;
 		createdAt: string;
 		description: string;
 		dueDate: string;
@@ -48,7 +48,7 @@ class TaskEntity implements Entity {
 	}) {
 		this.createdAt = createdAt;
 		this.id = id;
-		this.category = category;
+		this.categoryName = categoryName;
 		this.categoryId = categoryId;
 		this.label = label;
 		this.description = description;
@@ -59,8 +59,8 @@ class TaskEntity implements Entity {
 	}
 
 	public static initialize({
-		category,
 		categoryId,
+		categoryName,
 		createdAt,
 		description,
 		dueDate,
@@ -70,8 +70,8 @@ class TaskEntity implements Entity {
 		updatedAt,
 		userId,
 	}: {
-		category: null | string;
 		categoryId: number;
+		categoryName: null | string;
 		createdAt: string;
 		description: string;
 		dueDate: string;
@@ -82,8 +82,8 @@ class TaskEntity implements Entity {
 		userId: number;
 	}): TaskEntity {
 		return new TaskEntity({
-			category,
 			categoryId,
+			categoryName,
 			createdAt,
 			description,
 			dueDate,
@@ -109,8 +109,8 @@ class TaskEntity implements Entity {
 		userId: number;
 	}): TaskEntity {
 		return new TaskEntity({
-			category: null,
 			categoryId,
+			categoryName: null,
 			createdAt: "",
 			description,
 			dueDate,
@@ -123,8 +123,8 @@ class TaskEntity implements Entity {
 	}
 
 	public toNewObject(): {
-		category: string;
 		categoryId: number;
+		categoryName: string;
 		createdAt: string;
 		description: string;
 		dueDate: string;
@@ -134,8 +134,8 @@ class TaskEntity implements Entity {
 		userId: number;
 	} {
 		return {
-			category: this.category as string,
 			categoryId: this.categoryId,
+			categoryName: this.categoryName as string,
 			createdAt: this.createdAt,
 			description: this.description,
 			dueDate: this.dueDate,
@@ -147,8 +147,8 @@ class TaskEntity implements Entity {
 	}
 
 	public toObject(): {
-		category: string;
 		categoryId: number;
+		categoryName: string;
 		createdAt: string;
 		description: string;
 		dueDate: string;
@@ -159,8 +159,8 @@ class TaskEntity implements Entity {
 		userId: number;
 	} {
 		return {
-			category: this.category as string,
 			categoryId: this.categoryId,
+			categoryName: this.categoryName as string,
 			createdAt: this.createdAt,
 			description: this.description,
 			dueDate: this.dueDate,

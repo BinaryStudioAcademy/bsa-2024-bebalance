@@ -1,4 +1,7 @@
 type IconName =
+	| "aiAssistantAvatar"
+	| "aiChatActive"
+	| "aiChatInactive"
 	| "arrowNext"
 	| "check"
 	| "checkSmall"
