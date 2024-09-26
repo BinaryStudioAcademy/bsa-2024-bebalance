@@ -115,6 +115,12 @@ const { actions, name, reducer } = createSlice({
 
 			state.messages.push(userMessage);
 		},
+		clearChat(state) {
+			state.messages = [];
+			state.taskSuggestions = [];
+			state.selectedCategories = [];
+			state.buttonsMode = ButtonsModeOption.NONE;
+		},
 		setButtonsMode(
 			state,
 			action: PayloadAction<ValueOf<typeof ButtonsModeOption>>,
