@@ -150,11 +150,10 @@ const Quiz: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			if (isRetakingQuiz) {
-				navigation.navigate(QuestionsStackName.WHEEL_LOADING);
-			} else {
-				navigation.navigate(QuestionsStackName.NOTIFICATION_QUESTIONS);
-			}
+			const destinationScreen = isRetakingQuiz
+				? QuestionsStackName.WHEEL_LOADING
+				: QuestionsStackName.NOTIFICATION_QUESTIONS;
+			navigation.navigate(destinationScreen);
 		}
 	}, [
 		handleNextClick,
