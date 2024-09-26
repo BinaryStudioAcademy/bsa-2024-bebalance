@@ -1,3 +1,4 @@
+import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/blocked-blocker-state.constant.js";
 import { useBlocker, useCallback } from "~/libs/hooks/hooks.js";
 
 type Properties = {
@@ -22,7 +23,7 @@ const useUnsavedChangesBlocker = ({
 	});
 
 	const handlePopupCancel = useCallback((): void => {
-		if (blocker.state === "blocked") {
+		if (blocker.state === BLOCKED_BLOCKER_STATE) {
 			blocker.reset();
 		}
 	}, [blocker]);
@@ -32,7 +33,7 @@ const useUnsavedChangesBlocker = ({
 			reset();
 		}
 
-		if (blocker.state === "blocked") {
+		if (blocker.state === BLOCKED_BLOCKER_STATE) {
 			blocker.proceed();
 		}
 	}, [blocker, reset]);
@@ -45,4 +46,3 @@ const useUnsavedChangesBlocker = ({
 };
 
 export { useUnsavedChangesBlocker };
-export { BLOCKED_BLOCKER_STATE } from "./libs/constants/constants.js";

@@ -1,8 +1,8 @@
 import runImg from "~/assets/img/run.svg";
 import { Button, Loader, Popup } from "~/libs/components/components.js";
+import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/constants.js";
 import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
-	BLOCKED_BLOCKER_STATE,
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
