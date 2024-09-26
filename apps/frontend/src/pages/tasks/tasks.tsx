@@ -14,6 +14,7 @@ import {
 	type TaskDto,
 	type TaskNoteRequestDto,
 } from "~/modules/tasks/tasks.js";
+import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
 import { ExpiredTasksModal } from "./libs/components/components.js";
 import { NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
@@ -26,16 +27,17 @@ import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { activeTasks, dataStatus, expiredTasks, tasks } = useAppSelector(
-		({ tasks }) => {
+	const { activeTasks, authenticatedUser, dataStatus, expiredTasks, tasks } =
+		useAppSelector(({ auth, tasks, users }) => {
 			return {
 				activeTasks: tasks.activeTasks,
+				authenticatedUser: auth.user,
 				dataStatus: tasks.dataStatus,
 				expiredTasks: tasks.expiredTasks,
 				tasks: tasks.tasks,
+				user: users.user,
 			};
-		},
-	);
+		});
 
 	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
 		TasksMode.CURRENT,
@@ -103,18 +105,30 @@ const Tasks: React.FC = () => {
 		});
 	}, []);
 
-	const handleSkip = useCallback(
-		(id: number): void => {
-			void dispatch(taskActions.update({ id, status: TaskStatus.SKIPPED }));
+	const handleTaskUpdateAction = useCallback(
+		async (id: number, status: ValueOf<typeof TaskStatus>): Promise<void> => {
+			await dispatch(taskActions.update({ id, status }));
+			void dispatch(
+				userActions.updateTasksCompletionPercentage({
+					id: (authenticatedUser as UserDto).id,
+				}),
+			);
 		},
-		[dispatch],
+		[dispatch, authenticatedUser],
+	);
+
+	const handleSkip = useCallback(
+		(id: number) => {
+			void handleTaskUpdateAction(id, TaskStatus.SKIPPED);
+		},
+		[handleTaskUpdateAction],
 	);
 
 	const handleComplete = useCallback(
-		(id: number): void => {
-			void dispatch(taskActions.update({ id, status: TaskStatus.COMPLETED }));
+		(id: number) => {
+			void handleTaskUpdateAction(id, TaskStatus.COMPLETED);
 		},
-		[dispatch],
+		[handleTaskUpdateAction],
 	);
 
 	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] => {
