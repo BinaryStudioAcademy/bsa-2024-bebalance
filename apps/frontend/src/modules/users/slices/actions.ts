@@ -66,4 +66,33 @@ const uploadAvatar = createAsyncThunk<UserDto, FormData, AsyncThunkConfig>(
 	},
 );
 
-export { getById, saveNotificationAnswers, update, uploadAvatar };
+const updateTasksCompletionPercentage = createAsyncThunk<
+	UserDto,
+	UserGetParametersDto,
+	AsyncThunkConfig
+>(
+	`${sliceName}/update-task-completion-percentage`,
+	async (payload, { dispatch, extra }) => {
+		const { usersApi } = extra;
+		const { id } = payload;
+
+		const user = await usersApi.getById(id);
+		const { completionTasksPercentage } = user;
+
+		dispatch(
+			authActions.updateCompletionTasksPercentageState(
+				completionTasksPercentage as number,
+			),
+		);
+
+		return user;
+	},
+);
+
+export {
+	getById,
+	saveNotificationAnswers,
+	update,
+	updateTasksCompletionPercentage,
+	uploadAvatar,
+};

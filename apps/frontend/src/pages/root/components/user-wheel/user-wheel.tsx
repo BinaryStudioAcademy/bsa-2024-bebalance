@@ -18,11 +18,13 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
+import {
+	NO_SCORES_COUNT,
+	NO_TASKS_PERCENTAGE,
+} from "./libs/constants/constants.js";
 import { getFormattedDate } from "./libs/helpers/helpers.js";
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
-
-const NO_SCORES_COUNT = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -34,7 +36,6 @@ const UserWheel: React.FC = () => {
 			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
 		}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
@@ -70,12 +71,6 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
-
-	useEffect(() => {
-		if (completionTasksPercentage) {
-			setPercentage(completionTasksPercentage);
-		}
-	}, [completionTasksPercentage]);
 
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
@@ -122,7 +117,9 @@ const UserWheel: React.FC = () => {
 				{scores.length > NO_SCORES_COUNT && (
 					<div>
 						<BalanceWheelChart data={chartData} />
-						<CircularProgress percentage={percentage} />
+						<CircularProgress
+							percentage={completionTasksPercentage ?? NO_TASKS_PERCENTAGE}
+						/>
 					</div>
 				)}
 				{isEditingModalOpen && handleGetModal(editMode)}

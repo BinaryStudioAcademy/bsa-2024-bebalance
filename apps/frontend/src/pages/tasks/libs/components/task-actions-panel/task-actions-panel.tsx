@@ -1,9 +1,14 @@
 import { Button } from "~/libs/components/components.js";
-import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks.js";
 import {
 	type TaskDto,
 	actions as tasksActions,
 } from "~/modules/tasks/tasks.js";
+import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
 import { TaskStatus } from "../../enums/enums.js";
 import styles from "./styles.module.css";
@@ -25,38 +30,49 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const totalTasks = tasks.length;
 	const isSingleTask = totalTasks === SINGLE_TASK;
 
+	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
+
 	const handleTaskAction = useCallback(
-		(action: (task: TaskDto) => void) => {
-			return (): void => {
-				const task = tasks[currentTaskIndex] as TaskDto;
-				action(task);
-				onResolve();
-			};
+		async (action: (task: TaskDto) => Promise<void>) => {
+			const task = tasks[currentTaskIndex] as TaskDto;
+			await action(task);
+			void dispatch(
+				userActions.updateTasksCompletionPercentage({
+					id: (authenticatedUser as UserDto).id,
+				}),
+			);
+			onResolve();
 		},
-		[currentTaskIndex, tasks, onResolve],
+		[currentTaskIndex, tasks, onResolve, dispatch, authenticatedUser],
 	);
 
-	const handleTaskSkipping = handleTaskAction((task) => {
-		void dispatch(
-			tasksActions.update({
-				id: task.id,
-				status: TaskStatus.SKIPPED,
-			}),
-		);
-	});
+	const handleTaskSkipping = useCallback((): void => {
+		void handleTaskAction(async (task) => {
+			await dispatch(
+				tasksActions.update({
+					id: task.id,
+					status: TaskStatus.SKIPPED,
+				}),
+			);
+		});
+	}, [dispatch, handleTaskAction]);
 
-	const handleTaskCompletion = handleTaskAction((task) => {
-		void dispatch(
-			tasksActions.update({
-				id: task.id,
-				status: TaskStatus.COMPLETED,
-			}),
-		);
-	});
+	const handleTaskCompletion = useCallback((): void => {
+		void handleTaskAction(async (task) => {
+			await dispatch(
+				tasksActions.update({
+					id: task.id,
+					status: TaskStatus.COMPLETED,
+				}),
+			);
+		});
+	}, [dispatch, handleTaskAction]);
 
-	const handleExtendingDeadline = handleTaskAction((task) => {
-		void dispatch(tasksActions.updateTaskDeadline(task.id));
-	});
+	const handleExtendingDeadline = useCallback((): void => {
+		void handleTaskAction(async (task) => {
+			await dispatch(tasksActions.updateTaskDeadline(task.id));
+		});
+	}, [dispatch, handleTaskAction]);
 
 	return (
 		<div className={styles["lower-content"]}>
