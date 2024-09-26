@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import { AppEnvironment } from "~/libs/enums/enums";
+import { expiredTaskNotification } from "~/libs/packages/expired-task-notification/expired-task-notification";
 import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { authApi } from "~/packages/auth/auth";
 import { onboardingApi } from "~/packages/onboarding/onboarding";
@@ -31,6 +32,7 @@ type RootReducer = {
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	expiredTaskNotification: typeof expiredTaskNotification;
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
 	tasksApi: typeof tasksApi;
@@ -70,6 +72,7 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			expiredTaskNotification,
 			onboardingApi,
 			quizApi,
 			tasksApi,

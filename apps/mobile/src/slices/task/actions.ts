@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { TaskStatus } from "~/libs/enums/enums";
 import { type AsyncThunkConfig } from "~/libs/types/types";
 import { type TaskDto, type TaskUpdatePayload } from "~/packages/tasks/tasks";
 
@@ -10,9 +11,11 @@ const getCurrentTasks = createAsyncThunk<
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/get-current-tasks`, async (_, { extra }) => {
-	const { tasksApi } = extra;
+	const { expiredTaskNotification, tasksApi } = extra;
+	const tasks = await tasksApi.getCurrentTasks();
+	await expiredTaskNotification.addToTasks(tasks);
 
-	return await tasksApi.getCurrentTasks();
+	return tasks;
 });
 
 const getPastTasks = createAsyncThunk<TaskDto[], undefined, AsyncThunkConfig>(
@@ -29,18 +32,35 @@ const updateTask = createAsyncThunk<
 	TaskUpdatePayload,
 	AsyncThunkConfig
 >(`${sliceName}/update-task`, async (payload, { extra }) => {
-	const { tasksApi } = extra;
+	const { expiredTaskNotification, tasksApi } = extra;
 	const { id, ...data } = payload;
+	const task = await tasksApi.updateTask(id, data);
+	const { status } = task;
 
-	return await tasksApi.updateTask(id, data);
+	const isPastTask =
+		status === TaskStatus.COMPLETED || status === TaskStatus.SKIPPED;
+
+	if (isPastTask) {
+		await expiredTaskNotification.cancel(id);
+	}
+
+	return task;
 });
 
 const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
 	`${sliceName}/update-task-deadline`,
 	async (id: number, { extra }) => {
-		const { tasksApi } = extra;
+		const { expiredTaskNotification, tasksApi } = extra;
 
-		return await tasksApi.updateTaskDeadline(id);
+		const task = await tasksApi.updateTaskDeadline(id);
+		const { description, dueDate: deadline, id: taskId } = task;
+		await expiredTaskNotification.createForNotExpired({
+			deadline,
+			description,
+			taskId,
+		});
+
+		return task;
 	},
 );
 
