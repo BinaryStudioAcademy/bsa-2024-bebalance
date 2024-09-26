@@ -118,7 +118,7 @@ const UserWheel: React.FC = () => {
 					<div>
 						<BalanceWheelChart data={chartData} />
 						<CircularProgress
-							percentage={completionTasksPercentage || NO_TASKS_PERCENTAGE}
+							percentage={completionTasksPercentage ?? NO_TASKS_PERCENTAGE}
 						/>
 					</div>
 				)}
