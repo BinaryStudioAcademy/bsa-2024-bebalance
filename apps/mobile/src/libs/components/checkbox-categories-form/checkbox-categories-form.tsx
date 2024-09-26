@@ -69,7 +69,9 @@ const CheckboxCategoriesForm: React.FC<Properties> = ({
 				name="categoryIds"
 				options={checkboxGroupOptions}
 			/>
-			<Button label={submitButtonLabel} onPress={handleFormSubmit} />
+			<View style={globalStyles.mt24}>
+				<Button label={submitButtonLabel} onPress={handleFormSubmit} />
+			</View>
 		</View>
 	);
 };

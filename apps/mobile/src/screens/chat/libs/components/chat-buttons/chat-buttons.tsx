@@ -2,8 +2,9 @@ import { useAppSelector } from "~/libs/hooks/hooks";
 import { ButtonsMode } from "~/packages/chat/chat";
 
 import {
-	AcceptTasks,
+	AcceptRegenerateTaskButtons,
 	CheckBoxButtons,
+	ExplainAcceptTaskButtons,
 	GenerateTaskButtons,
 } from "./libs/components/components";
 
@@ -19,8 +20,12 @@ const ChatButtons: React.FC = () => {
 			return <GenerateTaskButtons />;
 		}
 
-		case ButtonsMode.FEEDBACK: {
-			return <AcceptTasks />;
+		case ButtonsMode.EXPLAIN_ACCEPT: {
+			return <ExplainAcceptTaskButtons />;
+		}
+
+		case ButtonsMode.ACCEPT_REGENERATE: {
+			return <AcceptRegenerateTaskButtons />;
 		}
 
 		default: {

@@ -1,4 +1,5 @@
 export {
+	type CategoriesGetRequestQueryDto,
 	type QuizAnswerDto,
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
@@ -6,5 +7,6 @@ export {
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 } from "shared";

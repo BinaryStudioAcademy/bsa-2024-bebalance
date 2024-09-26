@@ -3,6 +3,7 @@ import { useAppSelector } from "~/libs/hooks/hooks.js";
 import { ButtonsModeOption } from "../../enums/enums.js";
 import {
 	CategoriesSelector,
+	DislikeSuggestionsOptions,
 	SuggestionsCreationOptions,
 	SuggestionsManipulationOptions,
 } from "./libs/components/components.js";
@@ -21,6 +22,10 @@ const ButtonsController: React.FC = () => {
 
 		case ButtonsModeOption.CATEGORIES_CHECKBOX: {
 			return <CategoriesSelector />;
+		}
+
+		case ButtonsModeOption.DISLIKE_SUGGESTIONS: {
+			return <DislikeSuggestionsOptions />;
 		}
 
 		default: {

@@ -41,7 +41,7 @@ const GenerateTaskButtons: React.FC = () => {
 
 		void dispatch(chatActions.updateSelectedCategories(lowestCategories));
 
-		dispatch(chatActions.setButtonsMode(ButtonsMode.FEEDBACK));
+		dispatch(chatActions.setButtonsMode(ButtonsMode.EXPLAIN_ACCEPT));
 		dispatch(
 			chatActions.addTextMessage({
 				author: ChatMessageAuthor.ASSISTANT,

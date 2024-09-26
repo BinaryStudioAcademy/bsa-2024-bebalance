@@ -46,6 +46,24 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		);
 	}, [dispatch, taskSuggestions, threadId]);
 
+	const handleDislikeSuggestions = useCallback(() => {
+		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
+
+		void dispatch(
+			chatActions.addAssistantTextMessage(
+				SuggestionsManipulationMessage.MAIN_MESSAGE,
+			),
+		);
+		void dispatch(
+			chatActions.addUserTextMessage(
+				SuggestionsManipulationButtonLabel.DISLIKE_TASKS,
+			),
+		);
+		void dispatch(
+			chatActions.setButtonsMode(ButtonsModeOption.DISLIKE_SUGGESTIONS),
+		);
+	}, [dispatch]);
+
 	return (
 		<div className={styles["message-container"]}>
 			<Icon name="aiAssistantAvatar" />
@@ -56,6 +74,11 @@ const SuggestionsManipulationOptions: React.FC = () => {
 						<Button
 							label={SuggestionsManipulationButtonLabel.ACCEPT_TASKS}
 							onClick={handleAcceptAllSuggestions}
+							variant="secondary"
+						/>
+						<Button
+							label={SuggestionsManipulationButtonLabel.DISLIKE_TASKS}
+							onClick={handleDislikeSuggestions}
 							variant="secondary"
 						/>
 					</div>
