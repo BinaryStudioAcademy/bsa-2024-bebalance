@@ -28,18 +28,18 @@ type Properties = {
 const EDIT_ICON_SIZE = 20;
 
 const TaskCard: React.FC<Properties> = ({
-	onComplete = (): void => {},
-	onExpire = (): void => {},
-	onSkip = (): void => {},
+	onComplete,
+	onExpire,
+	onSkip,
 	task,
 	variant = "active",
 }) => {
 	const handleTaskSkip = useCallback(() => {
-		onSkip(task.id);
+		onSkip?.(task.id);
 	}, [task, onSkip]);
 
 	const handleTaskComplete = useCallback(() => {
-		onComplete(task.id);
+		onComplete?.(task.id);
 	}, [task, onComplete]);
 
 	const isActiveTask = task.status === TaskStatus.CURRENT;
@@ -56,7 +56,7 @@ const TaskCard: React.FC<Properties> = ({
 	);
 
 	const handleExpiredTask = useCallback(() => {
-		onExpire(task);
+		onExpire?.(task);
 	}, [onExpire, task]);
 
 	return (

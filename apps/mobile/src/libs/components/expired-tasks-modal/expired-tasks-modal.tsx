@@ -27,7 +27,9 @@ type Properties = {
 const ExpiredTasksModal: React.FC<Properties> = ({ tasks }) => {
 	const { width } = useWindowDimensions();
 
-	const scrollViewWidth = useMemo(() => tasks.length * width, [tasks, width]);
+	const scrollViewWidth = useMemo(() => {
+		return tasks.length * width;
+	}, [tasks, width]);
 	const tasksScrollViewStyle = { width: scrollViewWidth };
 
 	const dispatch = useAppDispatch();

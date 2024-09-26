@@ -17,7 +17,7 @@ type Properties = {
 const DeadlineCountdown: React.FC<Properties> = ({
 	deadline,
 	isExpired = false,
-	onExpire = (): void => {},
+	onExpire,
 }) => {
 	const { days, hours, minutes } = useCountdown({ deadline, onExpire });
 	const countdownColor = isExpired ? BaseColor.RED : BaseColor.BLACK;

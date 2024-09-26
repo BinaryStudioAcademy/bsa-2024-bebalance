@@ -7,12 +7,12 @@ import { getFormattedCountdownUnits } from "../../libs/helpers/helpers";
 
 type useCountdownArguments = {
 	deadline: string;
-	onExpire?: () => void;
+	onExpire?: (() => void) | undefined;
 };
 
 const useCountdown = ({
 	deadline,
-	onExpire = (): void => {},
+	onExpire,
 }: useCountdownArguments): Countdown => {
 	const [countdown, setCountdown] = useState<Countdown>(COUNTDOWN_EXPIRED);
 
@@ -37,7 +37,7 @@ const useCountdown = ({
 			setCountdown(updatedCountdown);
 
 			if (isExpired(updatedCountdown)) {
-				onExpire();
+				onExpire?.();
 				clearInterval(countdownInterval);
 			}
 		}, MillisecondsPerUnit.MINUTE);
