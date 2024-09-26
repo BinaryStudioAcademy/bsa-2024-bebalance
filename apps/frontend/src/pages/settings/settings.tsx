@@ -99,7 +99,7 @@ const Settings: React.FC = () => {
 	return (
 		<>
 			<div>
-				<h1 className={styles["header"]}>Settings</h1>
+				<h4 className={styles["header"]}>Settings</h4>
 				<form className={styles["container"]} onSubmit={handleFormSubmit}>
 					<div className={styles["inputs"]}>
 						<div className={styles["notification-days-input"]}>
