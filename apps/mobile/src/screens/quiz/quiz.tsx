@@ -110,7 +110,10 @@ const Quiz: React.FC = () => {
 			);
 
 			if (isLastQuestion) {
-				const saveAnswersPayload = {
+				const saveAnswersPayload: {
+					answerIds: number[];
+					categoryIds?: number[];
+				} = {
 					answerIds: [...answersByQuestionIndex, answerId],
 				};
 
