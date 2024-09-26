@@ -1,4 +1,4 @@
-import { DataStatus } from "~/libs/enums/enums.js";
+import { DataStatus, NumericalValue } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -29,6 +29,8 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 		useAppForm<QuizCategoriesFormFields>({
 			defaultValues: QUIZ_CATEGORIES_FORM_DEFAULT_VALUES,
 		});
+
+	const { categoryIds } = getValues();
 
 	const { isLoading, quizCategories } = useAppSelector(({ categories }) => {
 		const { dataStatus, items } = categories;
@@ -107,7 +109,11 @@ const QuizCategoriesForm: React.FC<Properties> = ({
 					options={categoryInputOptions}
 				/>
 				<br />
-				<Button label={buttonLabel} type="submit" />
+				<Button
+					isDisabled={categoryIds.length === NumericalValue.ZERO}
+					label={buttonLabel}
+					type="submit"
+				/>
 			</form>
 		</section>
 	);
