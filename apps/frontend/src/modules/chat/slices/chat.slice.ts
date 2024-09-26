@@ -73,7 +73,7 @@ const { actions, name, reducer } = createSlice({
 
 				state.messages.push(...messages);
 
-				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_EXPLANATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;

@@ -13,7 +13,13 @@ import {
 } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
-const SuggestionsManipulationOptions: React.FC = () => {
+type Properties = {
+	isExplained?: boolean;
+};
+
+const SuggestionsManipulationOptions: React.FC<Properties> = ({
+	isExplained,
+}: Properties) => {
 	const { taskSuggestions, threadId } = useAppSelector((state) => ({
 		selectedCategories: state.chat.selectedCategories,
 		taskSuggestions: state.chat.taskSuggestions,
@@ -60,6 +66,10 @@ const SuggestionsManipulationOptions: React.FC = () => {
 				threadId: threadId as string,
 			}),
 		);
+
+		void dispatch(
+			chatActions.setButtonsMode(ButtonsModeOption.SUGGESTIONS_EXPLANATION),
+		);
 	}, [dispatch, taskSuggestions, threadId]);
 
 	const handleDislikeSuggestions = useCallback(() => {
@@ -93,11 +103,14 @@ const SuggestionsManipulationOptions: React.FC = () => {
 							onClick={handleAcceptAllSuggestions}
 							variant="secondary"
 						/>
-						<Button
-							label={SuggestionsManipulationButtonLabel.EXPLAIN_TASKS}
-							onClick={handleExplainTasksSuggestions}
-							variant="secondary"
-						/>
+						{isExplained && (
+							<Button
+								label={SuggestionsManipulationButtonLabel.EXPLAIN_TASKS}
+								onClick={handleExplainTasksSuggestions}
+								variant="secondary"
+							/>
+						)}
+
 						<Button
 							label={SuggestionsManipulationButtonLabel.DISLIKE_TASKS}
 							onClick={handleDislikeSuggestions}
