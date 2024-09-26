@@ -4,17 +4,18 @@ import { actions as chatActions } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import { DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL } from "../../constants/constants.js";
 import { DislikeSuggestionMessage } from "../../enums/enums.js";
 
 type Properties = {
 	label: string;
+	oldSuggestions: TaskCreateDto[];
 	suggestion: TaskCreateDto;
 	threadId: string;
 };
 
 const RegenerateSuggestionButton: React.FC<Properties> = ({
 	label,
+	oldSuggestions,
 	suggestion,
 	threadId,
 }: Properties) => {
@@ -24,20 +25,18 @@ const RegenerateSuggestionButton: React.FC<Properties> = ({
 		dispatch(
 			chatActions.addAssistantTextMessage(DislikeSuggestionMessage.MAIN),
 		);
-		dispatch(
-			chatActions.addUserTextMessage(DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL),
-		);
+		dispatch(chatActions.addUserTextMessage(label));
 		dispatch(
 			chatActions.addAssistantTextMessage(DislikeSuggestionMessage.WAIT),
 		);
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		void dispatch(
 			chatActions.changeTasksSuggestion({
-				payload: [suggestion],
-				threadId,
+				APIPayload: { payload: [suggestion], threadId },
+				oldSuggestions,
 			}),
 		);
-	}, [dispatch, threadId, suggestion]);
+	}, [dispatch, threadId, label, suggestion, oldSuggestions]);
 
 	return (
 		<Button

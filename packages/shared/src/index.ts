@@ -75,6 +75,7 @@ export {
 	type SelectedCategory,
 } from "./modules/categories/categories.js";
 export {
+	type ChatMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	ChatMessageType,

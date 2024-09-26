@@ -32,8 +32,7 @@ const DislikeSuggestionsOptions: React.FC = () => {
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		void dispatch(
 			chatActions.changeTasksSuggestion({
-				payload: taskSuggestions,
-				threadId: threadId as string,
+				APIPayload: { payload: taskSuggestions, threadId: threadId as string },
 			}),
 		);
 	}, [dispatch, threadId, taskSuggestions]);
@@ -55,6 +54,7 @@ const DislikeSuggestionsOptions: React.FC = () => {
 								<RegenerateSuggestionButton
 									key={suggestion.categoryId}
 									label={`${suggestion.categoryName} sector task`}
+									oldSuggestions={taskSuggestions}
 									suggestion={suggestion}
 									threadId={threadId as string}
 								/>
