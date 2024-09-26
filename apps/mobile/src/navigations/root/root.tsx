@@ -1,11 +1,9 @@
-import notifee from "@notifee/react-native";
 import {
 	createNativeStackNavigator,
 	type NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import React from "react";
 
-import { addNotificationsOnTasksExpired } from "~/libs/helpers/helpers";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type RootNavigationParameterList } from "~/libs/types/types";
 import { actions as authActions } from "~/slices/auth/auth";
@@ -24,7 +22,6 @@ const Root: React.FC = () => {
 	const filteredScreens = useConditionalScreens();
 
 	const user = useAppSelector(({ auth }) => auth.user);
-	const tasks = useAppSelector(({ tasks }) => tasks.tasks);
 
 	useEffect(() => {
 		void dispatch(authActions.getAuthenticatedUser());
@@ -35,14 +32,6 @@ const Root: React.FC = () => {
 			void dispatch(taskActions.getCurrentTasks());
 		}
 	}, [dispatch, user]);
-
-	useEffect(() => {
-		void addNotificationsOnTasksExpired(tasks);
-
-		return (): void => {
-			void notifee.cancelAllNotifications();
-		};
-	}, [tasks]);
 
 	return (
 		<NativeStack.Navigator screenOptions={SCREEN_OPTIONS}>

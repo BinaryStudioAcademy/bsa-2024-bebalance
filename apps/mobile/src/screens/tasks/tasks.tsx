@@ -53,10 +53,6 @@ const Tasks: React.FC = () => {
 	}, [dispatch, authenticatedUser]);
 
 	useEffect(() => {
-		void dispatch(taskActions.getCurrentTasks());
-	}, [dispatch]);
-
-	useEffect(() => {
 		if (mode === TasksMode.CURRENT) {
 			void dispatch(taskActions.getCurrentTasks());
 		}
