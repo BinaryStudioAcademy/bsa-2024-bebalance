@@ -4,11 +4,14 @@ type ReturnValue = {
 	transform: { scale: number }[];
 };
 
-const useAnimatedScaleStyle = (scaleValue: SharedValue<number>): ReturnValue =>
-	useAnimatedStyle(() => {
+const useAnimatedScaleStyle = (
+	scaleValue: SharedValue<number>,
+): ReturnValue => {
+	return useAnimatedStyle(() => {
 		return {
 			transform: [{ scale: scaleValue.value }],
 		};
 	});
+};
 
 export { useAnimatedScaleStyle };
