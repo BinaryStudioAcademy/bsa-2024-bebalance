@@ -33,18 +33,24 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
 
 	const handleTaskAction = useCallback(
-		(action: (task: TaskDto) => void) => {
+		(action: (task: TaskDto) => Promise<void>) => {
 			return (): void => {
 				const task = tasks[currentTaskIndex] as TaskDto;
-				action(task);
+				void action(task).then(() => {
+					void dispatch(
+						userActions.updateTasksCompletionPercentage({
+							id: (authenticatedUser as UserDto).id,
+						}),
+					);
+				});
 				onResolve();
 			};
 		},
-		[currentTaskIndex, tasks, onResolve],
+		[currentTaskIndex, tasks, onResolve, dispatch, authenticatedUser],
 	);
 
-	const handleTaskSkipping = handleTaskAction((task) => {
-		void dispatch(
+	const handleTaskSkipping = handleTaskAction(async (task) => {
+		await dispatch(
 			tasksActions.update({
 				id: task.id,
 				status: TaskStatus.SKIPPED,
@@ -52,23 +58,17 @@ const TaskActionsPanel: React.FC<Properties> = ({
 		);
 	});
 
-	const handleTaskCompletion = handleTaskAction((task) => {
-		void dispatch(
+	const handleTaskCompletion = handleTaskAction(async (task) => {
+		await dispatch(
 			tasksActions.update({
 				id: task.id,
 				status: TaskStatus.COMPLETED,
 			}),
-		).then(() => {
-			void dispatch(
-				userActions.updateTasksCompletionPercentage({
-					id: (authenticatedUser as UserDto).id,
-				}),
-			);
-		});
+		);
 	});
 
-	const handleExtendingDeadline = handleTaskAction((task) => {
-		void dispatch(tasksActions.updateTaskDeadline(task.id));
+	const handleExtendingDeadline = handleTaskAction(async (task) => {
+		await dispatch(tasksActions.updateTaskDeadline(task.id));
 	});
 
 	return (
