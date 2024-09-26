@@ -32,12 +32,20 @@ const processExplainedTasksMessages = (
 		}
 
 		if (checkIsTaskType(message)) {
-			const { task } = message.payload;
-			taskExplanationsMessage.push(message.payload);
+			const { task, text } = message.payload;
+			const messagePayload = {
+				task: {
+					categoryId: task.categoryId,
+					categoryName: task.categoryName,
+					description: text ?? "",
+					label: task.label,
+				},
+			};
+			taskExplanationsMessage.push(messagePayload);
 			taskExplanations.push({
 				categoryId: task.categoryId,
 				categoryName: task.categoryName,
-				description: message.payload.text ?? "",
+				description: text ?? "",
 				label: task.label,
 			});
 		}
