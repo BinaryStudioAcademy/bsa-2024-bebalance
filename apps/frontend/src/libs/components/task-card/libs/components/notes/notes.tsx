@@ -4,6 +4,7 @@ import {
 	useAppSelector,
 	useCallback,
 	useClickOutside,
+	useEffect,
 	useRef,
 } from "~/libs/hooks/hooks.js";
 import {
@@ -16,12 +17,14 @@ import { DEFAULT_TASK_NOTE_PAYLOAD } from "./libs/constants/constants.js";
 import styles from "./styles.module.css";
 
 type Properties = {
+	onGetTaskNotes: ((id: number) => void) | undefined;
 	onNoteClose: () => void;
 	onSubmit: (payload: TaskNoteRequestDto) => void;
 	task: TaskDto;
 };
 
 const Notes: React.FC<Properties> = ({
+	onGetTaskNotes,
 	onNoteClose,
 	onSubmit,
 	task,
@@ -36,7 +39,9 @@ const Notes: React.FC<Properties> = ({
 	});
 	const { taskNotes } = useAppSelector(({ tasks }) => {
 		return {
-			taskNotes: tasks.taskNotes,
+			taskNotes: tasks.taskNotes.filter(
+				(taskNote) => taskNote.taskId === task.id,
+			),
 		};
 	});
 
@@ -46,6 +51,12 @@ const Notes: React.FC<Properties> = ({
 		},
 		[onSubmit, handleSubmit],
 	);
+
+	useEffect(() => {
+		if (onGetTaskNotes) {
+			onGetTaskNotes(task.id);
+		}
+	}, [task.id, onGetTaskNotes]);
 
 	useClickOutside(onNoteClose, notesReference);
 
