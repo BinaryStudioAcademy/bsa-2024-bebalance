@@ -34,7 +34,8 @@ const NotificationTaskDays: React.FC<
 				Which days would you like to receive tasks?
 			</Text>
 			<Text style={globalStyles.mb16}>
-				Choose at least 3 days in order to achieve your life balance
+				Quick tip: we recommend selecting at least 3 days in order to achieve
+				your life balance
 			</Text>
 			<View style={[globalStyles.gap16, globalStyles.mb24]}>
 				<MultipleCheckboxInput
