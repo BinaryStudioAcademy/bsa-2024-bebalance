@@ -1,6 +1,8 @@
 export { App } from "./app/app";
 export { BackgroundWrapper } from "./background-wrapper/background-wrapper";
 export { Button } from "./button/button";
+export { ChatHeader } from "./chat-header/chat-header";
+export { ChatMessage } from "./chat-message/chat-message";
 export { Checkbox } from "./checkbox/checkbox";
 export { CheckboxCategoriesForm } from "./checkbox-categories-form/checkbox-categories-form";
 export { DeadlineCountdown } from "./deadline-countdown/deadline-countdown";
@@ -32,11 +34,13 @@ export { TaskStatusLabel } from "./task-status-label/task-status-label";
 export { Text } from "./text/text";
 export { ToastMessage } from "./toast-message/toast-message";
 export { TypingTextView } from "./typing-text-view/typing-text-view";
+export { UserAvatar } from "./user-avatar/user-avatar";
 export { Wheel } from "./wheel/wheel";
 export { WheelLoader } from "./wheel-loader/wheel-loader";
 export { default as MaskedView } from "@react-native-masked-view/masked-view";
 export {
 	ActivityIndicator,
+	FlatList,
 	Image,
 	KeyboardAvoidingView,
 	Pressable,
