@@ -24,6 +24,7 @@ type Properties = {
 };
 
 const EDIT_ICON_SIZE = 20;
+const NUMBER_OF_LINES = 3;
 
 const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 	const handleTaskSkip = useCallback(() => {
@@ -55,12 +56,14 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 				<Tag label={task.categoryName} />
 				{isActiveTask && <DeadlineCountdown deadline={task.dueDate} />}
 			</View>
-			<View style={[globalStyles.mt32, globalStyles.pb32, globalStyles.ph16]}>
+			<View style={[globalStyles.mt32, globalStyles.pb24, globalStyles.ph16]}>
 				<Text preset="subheading" weight="bold">
 					{task.label}
 				</Text>
 				<Text
 					color={BaseColor.GRAY}
+					ellipsizeMode="tail"
+					numberOfLines={NUMBER_OF_LINES}
 					preset="regular"
 					style={styles.description}
 					weight="regular"

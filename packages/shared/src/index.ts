@@ -84,6 +84,7 @@ export {
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	ChatMessageType,
+	checkIsTaskType,
 	type ProcessedMessagesAndSuggestions,
 	type TaskMessage,
 	type TextMessage,

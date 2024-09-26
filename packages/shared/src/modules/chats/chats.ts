@@ -1,4 +1,5 @@
 export { ChatMessageAuthor, ChatMessageType } from "./libs/enums/enums.js";
+export { checkIsTaskType } from "./libs/helpers/helpers.js";
 export {
 	type ChangeTasksSuggestionPayload,
 	type ChatMessage,
