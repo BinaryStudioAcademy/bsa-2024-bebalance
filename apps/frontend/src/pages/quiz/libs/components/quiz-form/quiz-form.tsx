@@ -6,7 +6,7 @@ import {
 	ProgressBar,
 	QuizQuestion,
 } from "~/libs/components/components.js";
-import { DataStatus, NumericalValue } from "~/libs/enums/enums.js";
+import { DataStatus } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -25,6 +25,7 @@ import {
 import { Step } from "../../enums/enums.js";
 import { getQuizDefaultValues } from "../../helpers/helpers.js";
 import { type QuizFormValues } from "../../types/types.js";
+import { TOP_SCROLL_VALUE } from "./libs/constants/constants.js";
 import { extractCategoryIdsFromQuestions } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -77,7 +78,7 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 	useEffect(() => {
 		window.scrollTo({
 			behavior: "smooth",
-			top: NumericalValue.ZERO,
+			top: TOP_SCROLL_VALUE,
 		});
 	}, [currentCategoryIndex]);
 
