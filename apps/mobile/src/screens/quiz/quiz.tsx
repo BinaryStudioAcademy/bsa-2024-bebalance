@@ -113,10 +113,12 @@ const Quiz: React.FC = () => {
 				const saveAnswersPayload = {
 					answerIds: [...answersByQuestionIndex, answerId],
 				};
+
 				if (isRetakingQuiz) {
 					saveAnswersPayload.categoryIds =
 						extractCategoryIdsFromQuestions(questions);
 				}
+
 				handleSaveAnswers(saveAnswersPayload);
 			}
 
