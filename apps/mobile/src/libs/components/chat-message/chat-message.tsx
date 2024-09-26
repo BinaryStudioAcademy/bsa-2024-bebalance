@@ -1,5 +1,6 @@
 import AIAvatar from "~/assets/svg/ai-avatar.svg";
-import { Text, UserAvatar, View } from "~/libs/components/components";
+import { Icon, Image, Text, View } from "~/libs/components/components";
+import { BaseColor } from "~/libs/enums/enums";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type StyleProp, type ViewStyle } from "~/libs/types/types";
@@ -16,6 +17,8 @@ type Properties = {
 	style?: StyleProp<ViewStyle>;
 	text?: string;
 };
+
+const ICON_SIZE = 34;
 
 const ChatMessage: React.FC<Properties> = ({
 	children,
@@ -35,6 +38,24 @@ const ChatMessage: React.FC<Properties> = ({
 		);
 	}, [dispatch, authenticatedUser]);
 
+	let Avatar;
+
+	if (user?.avatarUrl) {
+		Avatar = (
+			<Image source={{ uri: user.avatarUrl }} style={styles.userImage} />
+		);
+	} else if (isUser) {
+		Avatar = (
+			<Icon
+				color={BaseColor.LIGHT_GRAY}
+				name="account-circle"
+				size={ICON_SIZE}
+			/>
+		);
+	} else {
+		Avatar = <AIAvatar />;
+	}
+
 	return (
 		<View
 			style={[
@@ -43,7 +64,7 @@ const ChatMessage: React.FC<Properties> = ({
 				isUser && styles.userWrapper,
 			]}
 		>
-			{isUser ? <UserAvatar user={user} /> : <AIAvatar />}
+			{Avatar}
 			<View
 				style={[
 					globalStyles.p12,
