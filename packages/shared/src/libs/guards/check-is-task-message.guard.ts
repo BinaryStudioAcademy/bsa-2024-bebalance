@@ -1,4 +1,7 @@
-import { type ChatMessageDto, type TaskMessage } from "../types/types.js";
+import {
+	type ChatMessageDto,
+	type TaskMessage,
+} from "../../modules/chats/chats.js";
 
 const checkIsTaskMessage = (
 	message: ChatMessageDto,
