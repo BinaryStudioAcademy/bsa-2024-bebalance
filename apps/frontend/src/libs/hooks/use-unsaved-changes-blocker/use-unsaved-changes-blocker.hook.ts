@@ -1,4 +1,4 @@
-import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/blocked-blocker-state.constant.js";
+import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/constants.js";
 import { useBlocker, useCallback } from "~/libs/hooks/hooks.js";
 
 type Properties = {
