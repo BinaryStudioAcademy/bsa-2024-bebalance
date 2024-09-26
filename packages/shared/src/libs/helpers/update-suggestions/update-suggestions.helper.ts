@@ -1,5 +1,5 @@
-import { NumericalValue } from "~/libs/enums/enums.js";
-import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
+import { NumericalValue } from "../../../libs/enums/enums.js";
+import { type TaskCreateDto } from "../../../modules/tasks/tasks.js";
 
 const updateSuggestions = (
 	oldSuggestions: TaskCreateDto[],

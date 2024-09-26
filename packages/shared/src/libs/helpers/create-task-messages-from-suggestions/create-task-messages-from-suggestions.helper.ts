@@ -1,6 +1,5 @@
-import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
-
-import { type TaskMessage } from "../../libs/types/types.js";
+import { type TaskMessage } from "../../../modules/chats/chats.js";
+import { type TaskCreateDto } from "../../../modules/tasks/tasks.js";
 
 const createTaskMessagesFromSuggestions = (
 	suggestions: TaskCreateDto[],

@@ -1,14 +1,14 @@
-import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
-import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
-
+import { checkIsTaskMessage } from "../../../libs/guards/guards.js";
 import {
 	type ChatMessage,
+	ChatMessageAuthor,
 	type ChatMessageDto,
+	ChatMessageType,
 	type TextMessage,
-} from "../../libs/types/types.js";
-import { checkIsTaskMessage } from "../guards/guards.js";
-import { createTaskMessagesFromSuggestions } from "./create-task-messages-from-suggestions.helper.js";
-import { updateSuggestions } from "./update-suggestions.helper.js";
+} from "../../../modules/chats/chats.js";
+import { type TaskCreateDto } from "../../../modules/tasks/tasks.js";
+import { createTaskMessagesFromSuggestions } from "../create-task-messages-from-suggestions/create-task-messages-from-suggestions.helper.js";
+import { updateSuggestions } from "../update-suggestions/update-suggestions.helper.js";
 
 type ProcessMessagesResult = {
 	messages: ChatMessage[];
