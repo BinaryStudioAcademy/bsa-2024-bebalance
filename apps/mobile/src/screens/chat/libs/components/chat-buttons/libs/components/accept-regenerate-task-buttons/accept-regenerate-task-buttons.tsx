@@ -13,8 +13,8 @@ import { type NativeStackNavigationProp } from "~/libs/types/types";
 import { ButtonsMode, ChatMessageAuthor } from "~/packages/chat/chat";
 import { actions as chatActions } from "~/slices/chat/chat";
 
-import { AI_RESPONSE, EXPLAIN_TEXT } from "./constants/constants";
-import { type RootStackParameterList } from "./types/types";
+import { AI_RESPONSE, EXPLAIN_TEXT } from "../../constants/constants";
+import { type RootStackParameterList } from "../../types/types";
 
 const AcceptRegenerateTaskButtons: React.FC = () => {
 	const dispatch = useAppDispatch();

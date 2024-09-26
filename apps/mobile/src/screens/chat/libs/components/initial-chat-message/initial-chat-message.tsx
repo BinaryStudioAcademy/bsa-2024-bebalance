@@ -1,15 +1,31 @@
+import { useFocusEffect } from "@react-navigation/native";
+
 import { ChatMessage, View, Wheel } from "~/libs/components/components";
-import { useAppSelector } from "~/libs/hooks/hooks";
+import { transformScoresToWheelData } from "~/libs/helpers/helpers";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+} from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { styles } from "./styles";
 
 const WHEEL_SIZE = 210;
 
 const InitialChatMessage: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const user = useAppSelector((state) => state.auth.user);
+	const score = useAppSelector((state) => state.quiz.scores);
 
 	const userName = user?.name ?? "";
+
+	useFocusEffect(
+		useCallback(() => {
+			void dispatch(quizActions.getScores());
+		}, [dispatch]),
+	);
 
 	return (
 		<>
@@ -26,7 +42,10 @@ const InitialChatMessage: React.FC = () => {
 						styles.wheelContainer,
 					]}
 				>
-					<Wheel size={WHEEL_SIZE} />
+					<Wheel
+						categoriesData={transformScoresToWheelData(score)}
+						size={WHEEL_SIZE}
+					/>
 				</View>
 			</ChatMessage>
 		</>
