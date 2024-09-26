@@ -62,7 +62,7 @@ const Settings: React.FC = () => {
 	);
 
 	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
-		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty, reset });
+		useUnsavedChangesBlocker({ hasUnsavedChanges: isDirty, reset });
 
 	return (
 		<>

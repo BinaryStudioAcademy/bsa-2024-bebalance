@@ -2,7 +2,7 @@ import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/constants.js";
 import { useBlocker, useCallback, useEffect } from "~/libs/hooks/hooks.js";
 
 type Properties = {
-	hasUncavedChanges: boolean;
+	hasUnsavedChanges: boolean;
 	reset?: () => void;
 };
 
@@ -13,12 +13,12 @@ type ReturnType = {
 };
 
 const useUnsavedChangesBlocker = ({
-	hasUncavedChanges,
+	hasUnsavedChanges,
 	reset,
 }: Properties): ReturnType => {
 	const blocker = useBlocker(({ currentLocation, nextLocation }) => {
 		return (
-			hasUncavedChanges && currentLocation.pathname !== nextLocation.pathname
+			hasUnsavedChanges && currentLocation.pathname !== nextLocation.pathname
 		);
 	});
 
@@ -38,12 +38,12 @@ const useUnsavedChangesBlocker = ({
 
 	const handleBeforeUnload = useCallback(
 		(event: BeforeUnloadEvent): void => {
-			if (hasUncavedChanges) {
+			if (hasUnsavedChanges) {
 				event.preventDefault();
 				event.returnValue = "Reload site?";
 			}
 		},
-		[hasUncavedChanges],
+		[hasUnsavedChanges],
 	);
 
 	useEffect(() => {

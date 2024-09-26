@@ -79,7 +79,7 @@ const Profile: React.FC = () => {
 	const [isDirty, setIsDirty] = useState<boolean>(false);
 
 	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
-		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty });
+		useUnsavedChangesBlocker({ hasUnsavedChanges: isDirty });
 
 	return (
 		<>
