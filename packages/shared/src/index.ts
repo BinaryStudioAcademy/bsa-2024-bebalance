@@ -79,10 +79,12 @@ export {
 	type SelectedCategory,
 } from "./modules/categories/categories.js";
 export {
+	type ChangeTasksSuggestionPayload,
 	type ChatMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	ChatMessageType,
+	type ProcessedMessagesAndSuggestions,
 	type TaskMessage,
 	type TextMessage,
 } from "./modules/chats/chats.js";
