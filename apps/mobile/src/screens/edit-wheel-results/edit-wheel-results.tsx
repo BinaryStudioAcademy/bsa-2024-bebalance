@@ -75,10 +75,6 @@ const EditWheelResults: React.FC = () => {
 			void dispatch(quizActions.cleanAnswers());
 			void dispatch(quizActions.getQuestionsByCategoryIds(categoriesIds));
 			navigation.dispatch(StackActions.replace(RootScreenName.QUESTIONS_STACK));
-
-			// navigation.navigate(RootScreenName.QUESTIONS_STACK, {
-			// 	screen: QuestionsStackName.QUIZ,
-			// });
 		},
 		[dispatch, navigation],
 	);
