@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.30.0...shared-v1.31.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** regenerate all task suggestions bb-340 ([#576](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/576)) ([8b244e8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8b244e8f9df797193cd695b5dbd62edd6b18b946))
+* **mobile:** ai chat service bb-441 ([#570](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/570)) ([0fc4299](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0fc42990fe81d8e00473a3538dd88db21c0d7d5c))
+
 ## [1.30.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.29.0...shared-v1.30.0) (2024-09-25)
 
 
