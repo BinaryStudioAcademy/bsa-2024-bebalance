@@ -48,9 +48,11 @@ const Settings: React.FC = () => {
 
 	const handleNotificationQuestionsSubmit = useCallback(
 		(payload: NotificationAnswersPayloadDto): void => {
-			void dispatch(userActions.saveNotificationAnswers(payload));
+			void dispatch(userActions.saveNotificationAnswers(payload)).then(() => {
+				reset(payload);
+			});
 		},
-		[dispatch],
+		[dispatch, reset],
 	);
 
 	const handleFormSubmit = useCallback(
