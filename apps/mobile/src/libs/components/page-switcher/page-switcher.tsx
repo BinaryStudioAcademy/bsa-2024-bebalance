@@ -24,11 +24,9 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 }) => {
 	const handleTabPress = useCallback(
 		(tab: string): void => {
-			if (!isDisabled) {
-				onTabChange(tab);
-			}
+			onTabChange(tab);
 		},
-		[onTabChange, isDisabled],
+		[onTabChange],
 	);
 
 	const handlePress = (tab: string): (() => void) => {
@@ -42,6 +40,7 @@ const PageSwitcher: React.FC<PageSwitcherProperties> = ({
 
 		return (
 			<TouchableOpacity
+				disabled={isDisabled}
 				key={tab}
 				onPress={handlePress(tab)}
 				style={[
