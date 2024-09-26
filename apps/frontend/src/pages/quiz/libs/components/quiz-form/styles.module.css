@@ -96,7 +96,7 @@
 	.ripple-effect__background1 {
 		top: -131px;
 		left: 109px;
-		z-index: var(--z-index-medium);
+		z-index: var(--z-index-surface);
 	}
 
 	.ripple-effect__background2 {
@@ -108,7 +108,7 @@
 		position: absolute;
 		bottom: -39px;
 		left: -37px;
-		z-index: var(--z-index-medium);
+		z-index: var(--z-index-surface);
 		width: 148px;
 		height: 148px;
 		background: linear-gradient(

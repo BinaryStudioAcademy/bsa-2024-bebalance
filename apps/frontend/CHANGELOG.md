@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.47.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.1...frontend-v1.47.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** UI improvement on the forgot password pages bb-422 ([#569](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/569)) ([1a0f9a3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1a0f9a3d306c31a805706add9e454faa7c559b61))
+
+## [1.46.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.0...frontend-v1.46.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* **frontend/shared:** add date on the "My wheel results" (root) page bb-494 ([#572](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/572)) ([b3f1068](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b3f10687aa1afa561147589297bcf15f6e9c6513))
+* **frontend:** fix invalid z-index usage bb-162 ([#567](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/567)) ([ddfefa1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ddfefa11051eb7e51556fd8c1ebaacbc358c17ad))
+
+## [1.46.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.45.0...frontend-v1.46.0) (2024-09-25)
+
+
+### Features
+
+* **frontend/backend/mobile:** initial ai chat implementation bb-340 ([#551](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/551)) ([f02689d](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f02689dce05de1e1474415da32fafbce43f4b598))
+
+
+### Bug Fixes
+
+* **frontend:** Add missing dot on sign-out confirmation msg bb-477 ([#565](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/565)) ([eda1706](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/eda17065294d0782de3050231edc4010679a8f3d))
+* **frontend:** adjust chart graphics offset bb-515 ([#564](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/564)) ([86fc873](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/86fc8732640274ca155bbc299d763197c7797ab3))
+
 ## [1.45.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.44.0...frontend-v1.45.0) (2024-09-24)
 
 

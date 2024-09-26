@@ -15,6 +15,7 @@ import {
 	useAppSelector,
 	useBlocker,
 	useCallback,
+	useEffect,
 } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationQuestionsFormValues,
@@ -77,10 +78,28 @@ const Settings: React.FC = () => {
 		}
 	}, [blocker, reset]);
 
+	const handleBeforeUnload = useCallback(
+		(event: BeforeUnloadEvent): void => {
+			if (isDirty) {
+				event.preventDefault();
+				event.returnValue = "Reload site?";
+			}
+		},
+		[isDirty],
+	);
+
+	useEffect(() => {
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return (): void => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, [handleBeforeUnload]);
+
 	return (
 		<>
 			<div>
-				<h1 className={styles["header"]}>Settings</h1>
+				<h4 className={styles["header"]}>Settings</h4>
 				<form className={styles["container"]} onSubmit={handleFormSubmit}>
 					<div className={styles["inputs"]}>
 						<div className={styles["notification-days-input"]}>

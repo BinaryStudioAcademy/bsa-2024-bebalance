@@ -3,7 +3,7 @@ import { type TextMessage } from "../../../chats/chats.js";
 import { type TaskCreateDto } from "../../../tasks/tasks.js";
 
 type AIAssistantRequestDto = {
-	payload: SelectedCategory[] | TaskCreateDto | TextMessage;
+	payload: SelectedCategory[] | TaskCreateDto | TaskCreateDto[] | TextMessage;
 	threadId: string;
 };
 
