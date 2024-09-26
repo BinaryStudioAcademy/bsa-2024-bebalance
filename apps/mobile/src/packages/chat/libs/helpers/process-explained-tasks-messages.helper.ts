@@ -31,8 +31,8 @@ const processExplainedTasksMessages = (
 			processedMessages.push({
 				author: ChatMessageAuthor.ASSISTANT,
 				isRead: true,
-				payload: text as TextMessage,
-				type: ChatMessageType.TASK,
+				payload: { text } as TextMessage,
+				type: ChatMessageType.TEXT,
 			});
 		}
 	}

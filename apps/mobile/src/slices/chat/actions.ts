@@ -6,6 +6,7 @@ import {
 	type AIAssistantRequestDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ChatMessage,
+	processExplainedTasksMessages,
 	processMessages,
 	type TaskCreateDto,
 	type ThreadMessageCreateDto,
@@ -54,7 +55,6 @@ const getChangedTasksSuggestion = createAsyncThunk<
 const getExplainedTasksSuggestion = createAsyncThunk<
 	{
 		messages: ChatMessage[];
-		taskSuggestions: TaskCreateDto[];
 	},
 	AIAssistantRequestDto,
 	AsyncThunkConfig
@@ -62,7 +62,7 @@ const getExplainedTasksSuggestion = createAsyncThunk<
 	const { chatApi } = extra;
 	const response = await chatApi.getExplainedTasksSuggestion(payload);
 
-	return processMessages(response.messages);
+	return processExplainedTasksMessages(response.messages);
 });
 
 const createTasks = createAsyncThunk<

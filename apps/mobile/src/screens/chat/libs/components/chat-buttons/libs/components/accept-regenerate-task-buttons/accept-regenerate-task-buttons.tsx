@@ -13,10 +13,10 @@ import { type NativeStackNavigationProp } from "~/libs/types/types";
 import { ButtonsMode, ChatMessageAuthor } from "~/packages/chat/chat";
 import { actions as chatActions } from "~/slices/chat/chat";
 
-import { FEEDBACK_TEXT } from "./constants/constants";
+import { AI_RESPONSE, EXPLAIN_TEXT } from "./constants/constants";
 import { type RootStackParameterList } from "./types/types";
 
-const AcceptTasks: React.FC = () => {
+const AcceptRegenerateTaskButtons: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
@@ -33,16 +33,18 @@ const AcceptTasks: React.FC = () => {
 		);
 
 		dispatch(chatActions.setButtonsMode(ButtonsMode.NONE));
-		dispatch(
-			chatActions.addTextMessage({
-				author: ChatMessageAuthor.ASSISTANT,
-				text: FEEDBACK_TEXT,
-			}),
-		);
+
 		dispatch(
 			chatActions.addTextMessage({
 				author: ChatMessageAuthor.USER,
 				text: "Accept",
+			}),
+		);
+
+		dispatch(
+			chatActions.addTextMessage({
+				author: ChatMessageAuthor.ASSISTANT,
+				text: AI_RESPONSE,
 			}),
 		);
 
@@ -60,18 +62,18 @@ const AcceptTasks: React.FC = () => {
 		dispatch(
 			chatActions.addTextMessage({
 				author: ChatMessageAuthor.USER,
-				text: "Generate new",
+				text: "I don't like the tasks.",
 			}),
 		);
 	}, [dispatch, taskSuggestions, threadId]);
 
 	return (
-		<ChatMessage text={FEEDBACK_TEXT}>
+		<ChatMessage text={EXPLAIN_TEXT}>
 			<View style={[globalStyles.gap12, globalStyles.mt8]}>
-				<Button label="Accept" onPress={handleAccept} />
+				<Button label="Everything is clear" onPress={handleAccept} />
 				<Button
 					appearance="outlined"
-					label="Regenerate new"
+					label="I don't like the tasks"
 					onPress={handleGenerateNew}
 				/>
 			</View>
@@ -79,4 +81,4 @@ const AcceptTasks: React.FC = () => {
 	);
 };
 
-export { AcceptTasks };
+export { AcceptRegenerateTaskButtons };
