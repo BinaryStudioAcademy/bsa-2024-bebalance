@@ -79,13 +79,11 @@ const updateTasksCompletionPercentage = createAsyncThunk<
 		const user = await usersApi.getById(id);
 		const { completionTasksPercentage } = user;
 
-		if (completionTasksPercentage !== null) {
-			dispatch(
-				authActions.updateCompletionTasksPercentageState(
-					completionTasksPercentage,
-				),
-			);
-		}
+		dispatch(
+			authActions.updateCompletionTasksPercentageState(
+				completionTasksPercentage as number,
+			),
+		);
 
 		return user;
 	},
