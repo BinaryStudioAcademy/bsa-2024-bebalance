@@ -47,10 +47,9 @@ const Settings: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const handleNotificationQuestionsSubmit = useCallback(
-		(payload: NotificationAnswersPayloadDto): void => {
-			void dispatch(userActions.saveNotificationAnswers(payload)).then(() => {
-				reset(payload);
-			});
+		async (payload: NotificationAnswersPayloadDto): Promise<void> => {
+			await dispatch(userActions.saveNotificationAnswers(payload));
+			reset(payload);
 		},
 		[dispatch, reset],
 	);
@@ -58,7 +57,7 @@ const Settings: React.FC = () => {
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
 			void handleSubmit((payload) => {
-				handleNotificationQuestionsSubmit(payload);
+				void handleNotificationQuestionsSubmit(payload);
 			})(event_);
 		},
 		[handleNotificationQuestionsSubmit, handleSubmit],
