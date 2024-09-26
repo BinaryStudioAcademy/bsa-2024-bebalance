@@ -46,7 +46,7 @@ const TaskActionsPanel: React.FC<Properties> = ({
 		[currentTaskIndex, tasks, onResolve, dispatch, authenticatedUser],
 	);
 
-	const handleTaskSkipping = useCallback(() => {
+	const handleTaskSkipping = useCallback((): void => {
 		void handleTaskAction(async (task) => {
 			await dispatch(
 				tasksActions.update({
@@ -57,7 +57,7 @@ const TaskActionsPanel: React.FC<Properties> = ({
 		});
 	}, [dispatch, handleTaskAction]);
 
-	const handleTaskCompletion = useCallback(() => {
+	const handleTaskCompletion = useCallback((): void => {
 		void handleTaskAction(async (task) => {
 			await dispatch(
 				tasksActions.update({
@@ -68,7 +68,7 @@ const TaskActionsPanel: React.FC<Properties> = ({
 		});
 	}, [dispatch, handleTaskAction]);
 
-	const handleExtendingDeadline = useCallback(() => {
+	const handleExtendingDeadline = useCallback((): void => {
 		void handleTaskAction(async (task) => {
 			await dispatch(tasksActions.updateTaskDeadline(task.id));
 		});
