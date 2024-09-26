@@ -33,43 +33,46 @@ const TaskActionsPanel: React.FC<Properties> = ({
 	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
 
 	const handleTaskAction = useCallback(
-		(action: (task: TaskDto) => Promise<void>) => {
-			return (): void => {
-				const task = tasks[currentTaskIndex] as TaskDto;
-				void action(task).then(() => {
-					void dispatch(
-						userActions.updateTasksCompletionPercentage({
-							id: (authenticatedUser as UserDto).id,
-						}),
-					);
-				});
-				onResolve();
-			};
+		async (action: (task: TaskDto) => Promise<void>) => {
+			const task = tasks[currentTaskIndex] as TaskDto;
+			await action(task);
+			void dispatch(
+				userActions.updateTasksCompletionPercentage({
+					id: (authenticatedUser as UserDto).id,
+				}),
+			);
+			onResolve();
 		},
 		[currentTaskIndex, tasks, onResolve, dispatch, authenticatedUser],
 	);
 
-	const handleTaskSkipping = handleTaskAction(async (task) => {
-		await dispatch(
-			tasksActions.update({
-				id: task.id,
-				status: TaskStatus.SKIPPED,
-			}),
-		);
-	});
+	const handleTaskSkipping = useCallback(() => {
+		void handleTaskAction(async (task) => {
+			await dispatch(
+				tasksActions.update({
+					id: task.id,
+					status: TaskStatus.SKIPPED,
+				}),
+			);
+		});
+	}, [dispatch, handleTaskAction]);
 
-	const handleTaskCompletion = handleTaskAction(async (task) => {
-		await dispatch(
-			tasksActions.update({
-				id: task.id,
-				status: TaskStatus.COMPLETED,
-			}),
-		);
-	});
+	const handleTaskCompletion = useCallback(() => {
+		void handleTaskAction(async (task) => {
+			await dispatch(
+				tasksActions.update({
+					id: task.id,
+					status: TaskStatus.COMPLETED,
+				}),
+			);
+		});
+	}, [dispatch, handleTaskAction]);
 
-	const handleExtendingDeadline = handleTaskAction(async (task) => {
-		await dispatch(tasksActions.updateTaskDeadline(task.id));
-	});
+	const handleExtendingDeadline = useCallback(() => {
+		void handleTaskAction(async (task) => {
+			await dispatch(tasksActions.updateTaskDeadline(task.id));
+		});
+	}, [dispatch, handleTaskAction]);
 
 	return (
 		<div className={styles["lower-content"]}>
