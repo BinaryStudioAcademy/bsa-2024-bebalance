@@ -99,6 +99,11 @@ const { actions, name, reducer } = createSlice({
 		updateAuthUser(state, action: PayloadAction<UserDto>) {
 			state.user = action.payload;
 		},
+		updateCompletionTasksPercentageState(state, action: PayloadAction<number>) {
+			if (state.user) {
+				state.user.completionTasksPercentage = action.payload;
+			}
+		},
 		updateOnboardingAnsweredState(state) {
 			if (state.user) {
 				state.user.hasAnsweredOnboardingQuestions = true;

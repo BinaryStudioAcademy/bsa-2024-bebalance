@@ -2,6 +2,7 @@ import {
 	getById,
 	saveNotificationAnswers,
 	update,
+	updateTasksCompletionPercentage,
 	uploadAvatar,
 } from "./actions.js";
 import { actions } from "./users.slice.js";
@@ -11,6 +12,7 @@ const allActions = {
 	getById,
 	saveNotificationAnswers,
 	update,
+	updateTasksCompletionPercentage,
 	uploadAvatar,
 };
 

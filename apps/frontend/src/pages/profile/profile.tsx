@@ -128,7 +128,7 @@ const Profile: React.FC = () => {
 						/>
 					</ProfileSection>
 
-					<ProfileSection title="Change Password">
+					<ProfileSection title="Change your password">
 						<UpdatePasswordForm
 							onSubmit={handleUpdatePasswordSubmit}
 							setIsDirty={setIsDirty}
