@@ -110,18 +110,14 @@ const Quiz: React.FC = () => {
 			);
 
 			if (isLastQuestion) {
+				const saveAnswersPayload = {
+					answerIds: [...answersByQuestionIndex, answerId],
+				};
 				if (isRetakingQuiz) {
-					const categoryIds = extractCategoryIdsFromQuestions(questions);
-					const answerIds = [...answersByQuestionIndex, answerId];
-					handleSaveAnswers({
-						answerIds,
-						categoryIds,
-					});
-				} else {
-					handleSaveAnswers({
-						answerIds: [...answersByQuestionIndex, answerId],
-					});
+					saveAnswersPayload.categoryIds =
+						extractCategoryIdsFromQuestions(questions);
 				}
+				handleSaveAnswers(saveAnswersPayload);
 			}
 
 			infinitePagerReference.current?.incrementPage({ animated: true });
