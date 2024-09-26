@@ -78,20 +78,23 @@ const Settings: React.FC = () => {
 		}
 	}, [blocker, reset]);
 
-	const handleBeforeUnload = useCallback((event: BeforeUnloadEvent): void => {
-		event.preventDefault();
-		event.returnValue = "Reload site?";
-	}, []);
+	const handleBeforeUnload = useCallback(
+		(event: BeforeUnloadEvent): void => {
+			if (isDirty) {
+				event.preventDefault();
+				event.returnValue = "Reload site?";
+			}
+		},
+		[isDirty],
+	);
 
 	useEffect(() => {
-		if (isDirty) {
-			window.addEventListener("beforeunload", handleBeforeUnload);
+		window.addEventListener("beforeunload", handleBeforeUnload);
 
-			return (): void => {
-				window.removeEventListener("beforeunload", handleBeforeUnload);
-			};
-		}
-	}, [handleBeforeUnload, isDirty]);
+		return (): void => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, [handleBeforeUnload]);
 
 	return (
 		<>
