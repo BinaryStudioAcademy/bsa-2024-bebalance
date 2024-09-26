@@ -4,13 +4,19 @@ import {
 } from "@react-navigation/bottom-tabs";
 import React from "react";
 
-import { GradientTabIcon, Text } from "~/libs/components/components";
+import {
+	ChatHeader,
+	GradientTabIcon,
+	Text,
+} from "~/libs/components/components";
 import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
 import { WheelStackNavigator } from "~/navigations/bottom-tabs-navigator/wheel/wheel";
 import { Chat } from "~/screens/chat/chat";
 import { Settings } from "~/screens/settings/settings";
 import { Tasks } from "~/screens/tasks/tasks";
+
+import { styles } from "./styles";
 
 const BottomTabs = createBottomTabNavigator<BottomTabNavigationParameterList>();
 
@@ -39,9 +45,14 @@ const BottomTabsNavigator: React.FC = () => {
 				component={Chat}
 				name={BottomTabScreenName.CHAT}
 				options={{
+					header: (): React.ReactNode => {
+						return <ChatHeader />;
+					},
+					headerShown: true,
 					tabBarIcon: ({ focused }) => (
 						<GradientTabIcon isFocused={focused} name="sms" />
 					),
+					tabBarStyle: styles.tabBarHidden,
 				}}
 			/>
 			<BottomTabs.Screen

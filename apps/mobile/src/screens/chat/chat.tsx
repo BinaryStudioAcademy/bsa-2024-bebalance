@@ -1,72 +1,96 @@
-import {
-	CheckboxCategoriesForm,
-	ScreenWrapper,
-	ScrollView,
-	Text,
-	View,
-} from "~/libs/components/components";
-import { BaseColor } from "~/libs/enums/enums";
+import { FlatList, ScreenWrapper, View } from "~/libs/components/components";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
-	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type CategoriesSelectedRequestDto } from "~/libs/types/types";
-import { actions as categoriesActions } from "~/slices/quiz/quiz";
+import {
+	type ChatMessageDto,
+	type TaskMessage,
+	type TextMessage,
+} from "~/packages/chat/chat";
+import { actions as chatActions } from "~/slices/chat/chat";
 
-import { ChatBox } from "./libs/components/components";
+import {
+	ChatBox,
+	ChatButtons,
+	InitialChatMessage,
+	Loader,
+} from "./libs/components/components";
 import { styles } from "./styles";
 
+type ChatMessageItem = Omit<
+	ChatMessageDto<TaskMessage[] | TextMessage>,
+	"createdAt" | "id"
+>;
+
 const Chat: React.FC = () => {
-	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<number[]>(
-		[],
-	);
 	const dispatch = useAppDispatch();
-	const categories = useAppSelector((state) => state.quiz.scores);
+
+	const threadId = useAppSelector((state) => state.chat.threadId);
+	const dataStatus = useAppSelector((state) => state.chat.dataStatus);
+	const messages = useAppSelector((state) => state.chat.messages);
 
 	useEffect(() => {
-		void dispatch(categoriesActions.getScores());
+		void dispatch(chatActions.initConversation());
 	}, [dispatch]);
 
-	const handleRetakeQuizSubmit = useCallback(
-		(payload: CategoriesSelectedRequestDto): void => {
-			setSubmittedCategoryIds(payload.categoryIds);
-			// TODO: send selectedCategoriesSubmissionData to backend
+	const isLoading = dataStatus === "pending";
+
+	const handleRenderItem = useCallback(
+		({ item }: { item: ChatMessageItem }) => {
+			return (
+				<ChatBox author={item.author} payload={item.payload} type={item.type} />
+			);
 		},
 		[],
 	);
 
+	const handleKeyExtractor = useCallback(
+		(item: ChatMessageItem, index: number) => index.toString(),
+		[],
+	);
+
 	return (
-		<ScreenWrapper style={[globalStyles.flex1, styles.container]}>
-			<ScrollView
+		<ScreenWrapper
+			edges={["left", "right"]}
+			style={[globalStyles.flex1, styles.container]}
+		>
+			<View
 				style={[
 					globalStyles.flex1,
-					globalStyles.pl24,
-					globalStyles.pt24,
+					globalStyles.pl4,
 					globalStyles.pr16,
 					globalStyles.pb12,
 				]}
 			>
 				<View
-					style={[globalStyles.flex1, globalStyles.gap12, globalStyles.p12]}
+					style={[
+						globalStyles.gap12,
+						globalStyles.ph12,
+						globalStyles.flexDirectionColumn,
+					]}
 				>
-					<ChatBox style={[globalStyles.p16, globalStyles.gap8]}>
-						<Text>
-							Do you want to work on 3 fields, with the lowest score, or you
-							want to choose the fields yourself to work on?
-						</Text>
-						<CheckboxCategoriesForm
-							categories={categories}
-							onSubmit={handleRetakeQuizSubmit}
-							submitButtonLabel="Update fields"
-						/>
-					</ChatBox>
-					<Text color={BaseColor.BLACK}>{submittedCategoryIds.join(", ")}</Text>
+					<FlatList
+						contentContainerStyle={[
+							globalStyles.gap8,
+							globalStyles.pt24,
+							globalStyles.pb8,
+							styles.screenWrapper,
+						]}
+						data={messages}
+						inverted
+						keyExtractor={handleKeyExtractor}
+						ListFooterComponent={
+							<>{isLoading ? <Loader /> : threadId && <ChatButtons />}</>
+						}
+						ListHeaderComponent={threadId ? <InitialChatMessage /> : null}
+						renderItem={handleRenderItem}
+					/>
 				</View>
-			</ScrollView>
+			</View>
 		</ScreenWrapper>
 	);
 };
