@@ -16,7 +16,7 @@ import { actions as chatActions } from "~/slices/chat/chat";
 import { AI_RESPONSE, EXPLAIN_TEXT } from "./constants/constants";
 import { type RootStackParameterList } from "./types/types";
 
-const AcceptRegenerateTaskButtons: React.FC = () => {
+const ExplainAcceptTaskButtons: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
@@ -51,6 +51,29 @@ const AcceptRegenerateTaskButtons: React.FC = () => {
 		navigation.navigate(BottomTabScreenName.TASKS);
 	}, [dispatch, taskSuggestions, threadId, navigation]);
 
+	const handleMoreInfo = useCallback(() => {
+		void dispatch(
+			chatActions.getExplainedTasksSuggestion({
+				payload: taskSuggestions,
+				threadId: threadId as string,
+			}),
+		);
+
+		dispatch(chatActions.setButtonsMode(ButtonsMode.NONE));
+		dispatch(
+			chatActions.addTextMessage({
+				author: ChatMessageAuthor.ASSISTANT,
+				text: EXPLAIN_TEXT,
+			}),
+		);
+		dispatch(
+			chatActions.addTextMessage({
+				author: ChatMessageAuthor.USER,
+				text: "Give me more info about the tasks",
+			}),
+		);
+	}, [dispatch, taskSuggestions, threadId]);
+
 	const handleGenerateNew = useCallback(() => {
 		void dispatch(
 			chatActions.getChangedTasksSuggestion({
@@ -73,6 +96,11 @@ const AcceptRegenerateTaskButtons: React.FC = () => {
 				<Button label="Everything is clear" onPress={handleAccept} />
 				<Button
 					appearance="outlined"
+					label="Give me more info"
+					onPress={handleMoreInfo}
+				/>
+				<Button
+					appearance="outlined"
 					label="I don't like the tasks"
 					onPress={handleGenerateNew}
 				/>
@@ -81,4 +109,4 @@ const AcceptRegenerateTaskButtons: React.FC = () => {
 	);
 };
 
-export { AcceptRegenerateTaskButtons };
+export { ExplainAcceptTaskButtons };
