@@ -105,27 +105,28 @@ const Tasks: React.FC = () => {
 		});
 	}, []);
 
-	const handleSkip = useCallback(
-		(id: number): void => {
-			void dispatch(taskActions.update({ id, status: TaskStatus.SKIPPED }));
-		},
-		[dispatch],
-	);
-
-	const handleComplete = useCallback(
-		(id: number): void => {
-			void dispatch(
-				taskActions.update({ id, status: TaskStatus.COMPLETED }),
-			).then(() => {
-				void dispatch(
-					userActions.updateTasksCompletionPercentage({
-						id: (authenticatedUser as UserDto).id,
-					}),
-				);
-			});
+	const handleTaskAction = useCallback(
+		(action: (id: number) => Promise<void>) => {
+			return (id: number): void => {
+				void action(id).then(() => {
+					void dispatch(
+						userActions.updateTasksCompletionPercentage({
+							id: (authenticatedUser as UserDto).id,
+						}),
+					);
+				});
+			};
 		},
 		[dispatch, authenticatedUser],
 	);
+
+	const handleSkip = handleTaskAction(async (id: number): Promise<void> => {
+		await dispatch(taskActions.update({ id, status: TaskStatus.SKIPPED }));
+	});
+
+	const handleComplete = handleTaskAction(async (id: number): Promise<void> => {
+		await dispatch(taskActions.update({ id, status: TaskStatus.COMPLETED }));
+	});
 
 	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] => {
 		return tasks.map((task) => {
