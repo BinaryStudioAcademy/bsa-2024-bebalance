@@ -51,6 +51,20 @@ const getChangedTasksSuggestion = createAsyncThunk<
 	return processMessages(response.messages);
 });
 
+const getExplainedTasksSuggestion = createAsyncThunk<
+	{
+		messages: ChatMessage[];
+		taskSuggestions: TaskCreateDto[];
+	},
+	AIAssistantRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/get-explained-tasks-suggestion`, async (payload, { extra }) => {
+	const { chatApi } = extra;
+	const response = await chatApi.getExplainedTasksSuggestion(payload);
+
+	return processMessages(response.messages);
+});
+
 const createTasks = createAsyncThunk<
 	boolean[],
 	AIAssistantCreateMultipleTasksDto,
@@ -64,6 +78,7 @@ const createTasks = createAsyncThunk<
 export {
 	createTasks,
 	getChangedTasksSuggestion,
+	getExplainedTasksSuggestion,
 	getTasksForCategories,
 	initConversation,
 };

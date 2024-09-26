@@ -24,6 +24,7 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: ChatMessage[];
 	selectedCategories: SelectedCategory[];
+	tasksExplanation: TaskCreateDto[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
 };
