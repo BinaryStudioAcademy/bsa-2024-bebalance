@@ -4,6 +4,10 @@ import { BaseColor } from "~/libs/enums/enums";
 
 const styles = StyleSheet.create({
 	container: {
+		backgroundColor: BaseColor.BG_WHITE,
+		borderRadius: 16,
+	},
+	containerWrapper: {
 		backgroundColor: BaseColor.BG_LIGHT,
 		borderBottomLeftRadius: 10,
 		borderBottomRightRadius: 10,
