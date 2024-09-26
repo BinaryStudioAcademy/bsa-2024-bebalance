@@ -5,12 +5,14 @@ import {
 import React from "react";
 
 import { GradientTabIcon, Text } from "~/libs/components/components";
-import { BaseColor, BottomTabScreenName } from "~/libs/enums/enums";
+import { BaseColor, BottomTabScreenName, DataStatus } from "~/libs/enums/enums";
+import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
 import { WheelStackNavigator } from "~/navigations/bottom-tabs-navigator/wheel/wheel";
 import { Chat } from "~/screens/chat/chat";
 import { Settings } from "~/screens/settings/settings";
 import { Tasks } from "~/screens/tasks/tasks";
+import { actions as appActions } from "~/slices/app/app";
 
 const BottomTabs = createBottomTabNavigator<BottomTabNavigationParameterList>();
 
@@ -30,9 +32,31 @@ const screenOptions: BottomTabNavigationOptions = {
 };
 
 const BottomTabsNavigator: React.FC = () => {
+	const dispatch = useAppDispatch();
+	const dataStatus = useAppSelector(({ app }) => app.dataStatus);
+	const initialNotificationId = useAppSelector(
+		({ app }) => app.initialNotificationId,
+	);
+	const isOpenedWithExpiredTaskNotification =
+		initialNotificationId === "default";
+
+	const isLoading = dataStatus === DataStatus.PENDING;
+
+	useEffect(() => {
+		void dispatch(appActions.updateInitialNotificationId());
+	}, [dispatch]);
+
+	if (isLoading) {
+		return null;
+	}
+
 	return (
 		<BottomTabs.Navigator
-			initialRouteName={BottomTabScreenName.WHEEL}
+			initialRouteName={
+				isOpenedWithExpiredTaskNotification
+					? BottomTabScreenName.TASKS
+					: BottomTabScreenName.WHEEL
+			}
 			screenOptions={screenOptions}
 		>
 			<BottomTabs.Screen
