@@ -53,9 +53,7 @@ const Notes: React.FC<Properties> = ({
 	);
 
 	useEffect(() => {
-		if (onGetTaskNotes) {
-			onGetTaskNotes(task.id);
-		}
+		onGetTaskNotes?.(task.id);
 	}, [task.id, onGetTaskNotes]);
 
 	useClickOutside(onNoteClose, notesReference);
