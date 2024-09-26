@@ -108,7 +108,7 @@ const Profile: React.FC = () => {
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
 					</ProfileSection>
 
-					<ProfileSection title="Change Password">
+					<ProfileSection title="Change your password">
 						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
 					</ProfileSection>
 				</div>
