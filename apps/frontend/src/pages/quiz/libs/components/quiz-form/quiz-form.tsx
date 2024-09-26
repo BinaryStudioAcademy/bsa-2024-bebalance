@@ -6,7 +6,7 @@ import {
 	ProgressBar,
 	QuizQuestion,
 } from "~/libs/components/components.js";
-import { DataStatus } from "~/libs/enums/enums.js";
+import { DataStatus, NumericalValue } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
 	useAppForm,
@@ -73,6 +73,13 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				questionsByCategories.length - PREVIOUS_INDEX_OFFSET,
 		);
 	}, [currentCategoryIndex, questionsByCategories]);
+
+	useEffect(() => {
+		window.scrollTo({
+			behavior: "smooth",
+			top: NumericalValue.ZERO,
+		});
+	}, [currentCategoryIndex]);
 
 	const handlePreviousStep = useCallback(() => {
 		void dispatch(quizActions.previousQuestion());
