@@ -47,6 +47,22 @@ class ChatApi extends BaseHttpApi {
 		return await response.json<AIAssistantResponseDto>();
 	}
 
+	public async getExplainedTasksSuggestion(
+		payload: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_EXPLAIN_TASKS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<AIAssistantResponseDto>();
+	}
+
 	public async getTasksForCategories(
 		payload: AIAssistantSuggestTaskRequestDto,
 	): Promise<AIAssistantResponseDto> {
