@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.59.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.58.0...v1.59.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** UI improvement on the forgot password pages bb-422 ([#569](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/569)) ([1a0f9a3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1a0f9a3d306c31a805706add9e454faa7c559b61))
+
+
+### Bug Fixes
+
+* **mobile:** changed text for And the last step screen bb-537 ([#581](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/581)) ([51b4ebb](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/51b4ebba634d77a0714f5e62c4e2051a6d1df180))
+
 ## [1.58.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.57.0...v1.58.0) (2024-09-25)
 
 
