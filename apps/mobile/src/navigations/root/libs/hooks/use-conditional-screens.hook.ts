@@ -6,6 +6,7 @@ import { Auth } from "~/screens/auth/auth";
 
 const useConditionalScreens = (): NavigationItem[] => {
 	const user = useAppSelector(({ auth }) => auth.user);
+	const isRetakingQuiz = useAppSelector(({ quiz }) => quiz.isRetakingQuiz);
 	const hasAnsweredQuizQuestions = Boolean(user?.hasAnsweredQuizQuestions);
 	const hasUser = Boolean(user);
 
@@ -14,7 +15,8 @@ const useConditionalScreens = (): NavigationItem[] => {
 			{
 				component: QuestionsStack,
 				name: RootScreenName.QUESTIONS_STACK,
-				shouldBeRendered: hasUser && !hasAnsweredQuizQuestions,
+				shouldBeRendered:
+					hasUser && (!hasAnsweredQuizQuestions || isRetakingQuiz),
 			},
 			{
 				component: BottomTabsNavigator,
@@ -44,7 +46,7 @@ const useConditionalScreens = (): NavigationItem[] => {
 		];
 
 		return screens.filter((screen) => screen.shouldBeRendered);
-	}, [hasUser, hasAnsweredQuizQuestions]);
+	}, [hasUser, hasAnsweredQuizQuestions, isRetakingQuiz]);
 };
 
 export { useConditionalScreens };

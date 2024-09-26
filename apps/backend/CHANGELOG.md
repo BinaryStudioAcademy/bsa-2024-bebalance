@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.29.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.29.0...backend-v1.29.1) (2024-09-26)
+
+
+### Bug Fixes
+
+* **frontend/backend:** insights are not updated after user makes actions with tasks bb-561 ([#584](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/584)) ([f30f347](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f30f347b6084e37d491e4297f2abecf7bb80dbbe))
+
 ## [1.29.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/backend-v1.28.0...backend-v1.29.0) (2024-09-25)
 
 
