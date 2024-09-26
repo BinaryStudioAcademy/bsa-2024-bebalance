@@ -31,6 +31,7 @@ type State = {
 	isRetakingQuiz: boolean;
 	questions: QuizQuestionDto[];
 	scores: QuizScoresGetAllItemResponseDto[];
+	scoresLastUpdatedAt: null | string;
 	userAnswers: QuizUserAnswerDto[];
 };
 
@@ -42,6 +43,7 @@ const initialState: State = {
 	isRetakingQuiz: false,
 	questions: [],
 	scores: [],
+	scoresLastUpdatedAt: null,
 	userAnswers: [],
 };
 
@@ -53,6 +55,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getScores.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.scores = action.payload.items;
+			state.scoresLastUpdatedAt = action.payload.updatedAt;
 		});
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -100,6 +103,7 @@ const { actions, name, reducer } = createSlice({
 			});
 
 			state.dataStatus = DataStatus.FULFILLED;
+			state.scoresLastUpdatedAt = action.payload.updatedAt;
 		});
 		builder.addCase(editScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;

@@ -20,6 +20,7 @@ export {
 	type QuizScoresGetAllResponseDto,
 	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 } from "./libs/types/types";
 export {

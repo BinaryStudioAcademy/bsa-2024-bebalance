@@ -40,13 +40,21 @@ const Wheel: React.FC = () => {
 		useNavigation<BottomTabNavigationProp<BottomTabNavigationParameterList>>();
 	const [wheelData, setWheelData] = useState<WheelDataItem[]>([]);
 
-	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
+	const { dataStatus, scores, scoresLastUpdatedAt } = useAppSelector(
+		({ quiz }) => ({
+			dataStatus: quiz.dataStatus,
+			scores: quiz.scores,
+			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
+		}),
+	);
+
+	const lastWheelUpdating =
+		scoresLastUpdatedAt &&
+		getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE");
 
 	const handleEditPress = useCallback((): void => {
 		navigation.navigate(BottomTabScreenName.EDIT_WHEEL_RESULTS);
 	}, [navigation]);
-
-	const date = getFormattedDate(new Date(), "d MMM yyyy, EEEE");
 
 	useFocusEffect(
 		useCallback(() => {
@@ -69,7 +77,7 @@ const Wheel: React.FC = () => {
 						preset="tag"
 						style={[globalStyles.pv4, globalStyles.ph12, styles.date]}
 					>
-						{date}
+						{lastWheelUpdating}
 					</Text>
 					<View style={styles.container}>
 						<View style={globalStyles.alignItemsCenter}>
