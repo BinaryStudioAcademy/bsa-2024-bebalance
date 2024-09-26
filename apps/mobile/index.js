@@ -1,12 +1,9 @@
-import notifee from "@notifee/react-native";
 import { AppRegistry } from "react-native";
 
 import { name as appName } from "./app.json";
 import { App } from "./src/libs/components/components";
+import { expiredTaskNotification } from "./src/libs/packages/expired-task-notification/expired-task-notification";
 
-notifee.onBackgroundEvent(async ({ detail }) => {
-	const { notification } = detail;
-	await notifee.cancelNotification(notification.id);
-});
+expiredTaskNotification.handleBackgroundEvent();
 
 AppRegistry.registerComponent(appName, () => App);
