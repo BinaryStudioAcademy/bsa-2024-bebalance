@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.47.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.1...frontend-v1.47.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** UI improvement on the forgot password pages bb-422 ([#569](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/569)) ([1a0f9a3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1a0f9a3d306c31a805706add9e454faa7c559b61))
+
 ## [1.46.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.0...frontend-v1.46.1) (2024-09-25)
 
 
