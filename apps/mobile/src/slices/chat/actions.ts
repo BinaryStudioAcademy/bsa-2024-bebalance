@@ -55,6 +55,7 @@ const getChangedTasksSuggestion = createAsyncThunk<
 const getExplainedTasksSuggestion = createAsyncThunk<
 	{
 		messages: ChatMessage[];
+		taskExplanations: TaskCreateDto[];
 	},
 	AIAssistantRequestDto,
 	AsyncThunkConfig

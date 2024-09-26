@@ -25,6 +25,7 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: ChatMessage[];
 	selectedCategories: SelectedCategory[];
+	taskExplanations: TaskCreateDto[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
 };
@@ -34,6 +35,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
+	taskExplanations: [],
 	taskSuggestions: [],
 	threadId: null,
 };
@@ -90,6 +92,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getExplainedTasksSuggestion.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.messages.push(...action.payload.messages);
+			state.taskExplanations = action.payload.taskExplanations;
 			state.buttonsMode = ButtonsMode.ACCEPT_REGENERATE;
 		});
 		builder.addCase(getExplainedTasksSuggestion.rejected, (state) => {

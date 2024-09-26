@@ -4,17 +4,22 @@ import {
 	type ChatMessageDto,
 	ChatMessageType,
 	checkIsTaskType,
+	type TaskCreateDto,
+	type TaskMessage,
 	type TextMessage,
 } from "~/packages/chat/chat";
 
 type ProcessMessagesResult = {
 	messages: ChatMessage[];
+	taskExplanations: TaskCreateDto[];
 };
 
 const processExplainedTasksMessages = (
 	newMessages: ChatMessageDto[],
 ): ProcessMessagesResult => {
+	const taskExplanationsMessage: TaskMessage[] = [];
 	const processedMessages: ChatMessage[] = [];
+	const taskExplanations: TaskCreateDto[] = [];
 
 	for (const message of newMessages) {
 		if (message.type === ChatMessageType.TEXT) {
@@ -27,18 +32,27 @@ const processExplainedTasksMessages = (
 		}
 
 		if (checkIsTaskType(message)) {
-			const { text } = message.payload;
-			processedMessages.push({
-				author: ChatMessageAuthor.ASSISTANT,
-				isRead: true,
-				payload: { text } as TextMessage,
-				type: ChatMessageType.TEXT,
+			const { task } = message.payload;
+			taskExplanationsMessage.push(message.payload);
+			taskExplanations.push({
+				categoryId: task.categoryId,
+				categoryName: task.categoryName,
+				description: message.payload.text ?? "",
+				label: task.label,
 			});
 		}
 	}
 
+	processedMessages.push({
+		author: ChatMessageAuthor.ASSISTANT,
+		isRead: true,
+		payload: taskExplanationsMessage,
+		type: ChatMessageType.TASK,
+	});
+
 	return {
 		messages: processedMessages,
+		taskExplanations,
 	};
 };
 
