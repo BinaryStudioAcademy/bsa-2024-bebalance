@@ -1,5 +1,5 @@
-import React from "react";
 import { StackActions } from "@react-navigation/native";
+import React from "react";
 
 import {
 	CheckboxCategoriesForm,
@@ -10,11 +10,7 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import {
-	DataStatus,
-	QuestionsStackName,
-	RootScreenName,
-} from "~/libs/enums/enums";
+import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppSelector,
