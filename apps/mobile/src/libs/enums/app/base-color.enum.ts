@@ -11,6 +11,7 @@ const BaseColor = {
 	EXTRA_LIGHT_RED: "rgba(255, 41, 40, 0.4)",
 	GRAY: "rgba(176, 176, 178, 1)",
 	GREEN: "rgba(32, 184, 47, 1)",
+	LIGHT_BLUE: "rgba(77, 200, 253, 0.2)",
 	LIGHT_GRAY: "rgba(224, 224, 224, 1)",
 	LIGHT_GREEN: "rgba(240, 255, 244, 1)",
 	LIGHT_RED: "rgba(255, 41, 40, 0.1)",

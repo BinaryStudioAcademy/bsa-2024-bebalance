@@ -24,7 +24,11 @@ export {
 	UserError,
 	ValidationError,
 } from "./libs/exceptions/exceptions.js";
-export { configureString, getFormattedDate } from "./libs/helpers/helpers.js";
+export {
+	configureString,
+	getFormattedDate,
+	processMessages,
+} from "./libs/helpers/helpers.js";
 export { type APIConfiguration } from "./libs/modules/api/api.js";
 export { type Config } from "./libs/modules/config/config.js";
 export {
@@ -75,9 +79,13 @@ export {
 	type SelectedCategory,
 } from "./modules/categories/categories.js";
 export {
+	type ChangeTasksSuggestionPayload,
+	type ChatMessage,
 	ChatMessageAuthor,
 	type ChatMessageDto,
 	ChatMessageType,
+	checkIsTaskType,
+	type ProcessedMessagesAndSuggestions,
 	type TaskMessage,
 	type TextMessage,
 } from "./modules/chats/chats.js";
