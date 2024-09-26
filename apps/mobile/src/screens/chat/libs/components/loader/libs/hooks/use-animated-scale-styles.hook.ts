@@ -5,8 +5,10 @@ type ReturnValue = {
 };
 
 const useAnimatedScaleStyle = (scaleValue: SharedValue<number>): ReturnValue =>
-	useAnimatedStyle(() => ({
-		transform: [{ scale: scaleValue.value }],
-	}));
+	useAnimatedStyle(() => {
+		return {
+			transform: [{ scale: scaleValue.value }],
+		};
+	});
 
 export { useAnimatedScaleStyle };

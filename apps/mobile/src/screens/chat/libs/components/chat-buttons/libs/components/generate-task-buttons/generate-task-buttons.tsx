@@ -57,7 +57,7 @@ const GenerateTaskButtons: React.FC = () => {
 	}, [dispatch, threadId, lowestCategories]);
 
 	return (
-		<ChatMessage isUser={false} text={CONFIRMATION_TEXT}>
+		<ChatMessage text={CONFIRMATION_TEXT}>
 			<View style={[globalStyles.gap12, globalStyles.mt12]}>
 				<Button
 					label="Yes, 3 lowest"
@@ -65,7 +65,7 @@ const GenerateTaskButtons: React.FC = () => {
 				/>
 				<Button
 					appearance="outlined"
-					label="No smth else"
+					label="No, something else"
 					onPress={handleDisplayCheckboxes}
 				/>
 			</View>

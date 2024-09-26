@@ -66,7 +66,7 @@ const AcceptTasks: React.FC = () => {
 	}, [dispatch, taskSuggestions, threadId]);
 
 	return (
-		<ChatMessage isUser={false} text={FEEDBACK_TEXT}>
+		<ChatMessage text={FEEDBACK_TEXT}>
 			<View style={[globalStyles.gap12, globalStyles.mt8]}>
 				<Button label="Accept" onPress={handleAccept} />
 				<Button
