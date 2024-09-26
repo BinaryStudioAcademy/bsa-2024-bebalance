@@ -1,7 +1,7 @@
 .card {
 	position: relative;
-	width: 356px;
-	height: 251px;
+	min-width: 356px;
+	min-height: 251px;
 	border: 1px solid var(--background-gray);
 	border-radius: 20px;
 }
@@ -37,7 +37,8 @@
 }
 
 .text {
-	width: 262px;
+	min-width: 262px;
+	margin-bottom: 20px;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 19px;

@@ -4,6 +4,7 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
 import {
 	type AIAssistantCreateMultipleTasksDto,
+	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 } from "../libs/types/types.js";
@@ -29,6 +30,16 @@ const getTasksForCategories = createAsyncThunk<
 	return await chatApi.getTasksForCategories(payload);
 });
 
+const explainTasksSuggestions = createAsyncThunk<
+	AIAssistantResponseDto,
+	AIAssistantRequestDto,
+	AsyncThunkConfig
+>(`${sliceName}/explain-tasks-suggestions`, async (payload, { extra }) => {
+	const { chatApi } = extra;
+
+	return await chatApi.explainTasksSuggestions(payload);
+});
+
 const createTasksFromSuggestions = createAsyncThunk<
 	boolean[],
 	AIAssistantCreateMultipleTasksDto,
@@ -39,4 +50,9 @@ const createTasksFromSuggestions = createAsyncThunk<
 	return await chatApi.createTasksFromSuggestions(payload);
 });
 
-export { createTasksFromSuggestions, getTasksForCategories, initConversation };
+export {
+	createTasksFromSuggestions,
+	explainTasksSuggestions,
+	getTasksForCategories,
+	initConversation,
+};

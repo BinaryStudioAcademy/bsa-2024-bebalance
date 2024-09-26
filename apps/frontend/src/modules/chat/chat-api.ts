@@ -5,6 +5,7 @@ import { type APIConfiguration } from "~/libs/types/types.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type AIAssistantCreateMultipleTasksDto,
+	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 } from "./libs/types/types.js";
@@ -28,6 +29,22 @@ class ChatApi extends BaseHTTPApi {
 		);
 
 		return await response.json<boolean[]>();
+	}
+
+	public async explainTasksSuggestions(
+		payload: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_EXPLAIN_TASKS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<AIAssistantResponseDto>();
 	}
 
 	public async getTasksForCategories(

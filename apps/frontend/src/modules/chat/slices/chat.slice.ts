@@ -15,6 +15,7 @@ import {
 } from "../libs/types/types.js";
 import {
 	createTasksFromSuggestions,
+	explainTasksSuggestions,
 	getTasksForCategories,
 	initConversation,
 } from "./actions.js";
@@ -27,6 +28,7 @@ type State = {
 		"createdAt" | "id"
 	>[];
 	selectedCategories: SelectedCategory[];
+	taskExplanations: TaskCreateDto[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
 };
@@ -36,6 +38,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
+	taskExplanations: [],
 	taskSuggestions: [],
 	threadId: null,
 };
@@ -107,6 +110,55 @@ const { actions, name, reducer } = createSlice({
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
+			})
+			.addCase(explainTasksSuggestions.pending, (state) => {
+				state.dataStatus = DataStatus.PENDING;
+			})
+			.addCase(explainTasksSuggestions.rejected, (state) => {
+				state.dataStatus = DataStatus.REJECTED;
+			})
+			.addCase(explainTasksSuggestions.fulfilled, (state, action) => {
+				state.dataStatus = DataStatus.FULFILLED;
+				const newMessages = action.payload.messages;
+				const taskExplanationsMessagePayload: TaskMessage[] = [];
+
+				for (const message of newMessages) {
+					if (message.type === "text") {
+						state.messages.push({
+							author: ChatMessageAuthor.ASSISTANT,
+							isRead: true,
+							payload: message.payload as TextMessage,
+							type: message.type,
+						});
+					}
+
+					if (checkIsTaskMessage(message)) {
+						const messagePayload = {
+							task: {
+								categoryId: message.payload.task.categoryId,
+								categoryName: message.payload.task.categoryName,
+								description: message.payload.text ?? "",
+								label: message.payload.task.label,
+							},
+						};
+						taskExplanationsMessagePayload.push(messagePayload);
+						state.taskExplanations.push({
+							categoryId: message.payload.task.categoryId,
+							categoryName: message.payload.task.categoryName,
+							description: message.payload.text ?? "",
+							label: message.payload.task.label,
+						});
+					}
+				}
+
+				state.messages.push({
+					author: ChatMessageAuthor.ASSISTANT,
+					isRead: true,
+					payload: taskExplanationsMessagePayload,
+					type: ChatMessageType.TASK,
+				});
+
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			});
 	},
 	initialState,

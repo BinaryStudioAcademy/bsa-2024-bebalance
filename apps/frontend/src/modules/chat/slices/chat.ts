@@ -1,5 +1,6 @@
 import {
 	createTasksFromSuggestions,
+	explainTasksSuggestions,
 	getTasksForCategories,
 	initConversation,
 } from "./actions.js";
@@ -8,6 +9,7 @@ import { actions } from "./chat.slice.js";
 const allActions = {
 	...actions,
 	createTasksFromSuggestions,
+	explainTasksSuggestions,
 	getTasksForCategories,
 	initConversation,
 };

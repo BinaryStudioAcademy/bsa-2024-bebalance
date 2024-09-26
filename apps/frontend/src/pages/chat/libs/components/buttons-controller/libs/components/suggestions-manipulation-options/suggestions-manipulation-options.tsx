@@ -46,16 +46,37 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		);
 	}, [dispatch, taskSuggestions, threadId]);
 
+	const handleExplainTasksSuggestions = useCallback(() => {
+		void dispatch(
+			chatActions.addUserTextMessage(
+				SuggestionsManipulationButtonLabel.EXPLAIN_TASKS,
+			),
+		);
+
+		void dispatch(
+			chatActions.explainTasksSuggestions({
+				payload: taskSuggestions,
+				threadId: threadId as string,
+			}),
+		);
+	}, [dispatch, taskSuggestions, threadId]);
+
 	return (
 		<div className={styles["message-container"]}>
 			<Icon name="aiAssistantAvatar" />
 			<div className={styles["content-container"]}>
 				<div className={styles["content"]}>
 					<p>{SuggestionsManipulationMessage.MAIN_MESSAGE}</p>
+					<br />
 					<div className={styles["button-container"]}>
 						<Button
 							label={SuggestionsManipulationButtonLabel.ACCEPT_TASKS}
 							onClick={handleAcceptAllSuggestions}
+							variant="secondary"
+						/>
+						<Button
+							label={SuggestionsManipulationButtonLabel.EXPLAIN_TASKS}
+							onClick={handleExplainTasksSuggestions}
 							variant="secondary"
 						/>
 					</div>
