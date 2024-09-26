@@ -1,6 +1,6 @@
 const AIAssistantApiPath = {
 	CHAT_ACCEPT_TASK: "/chat/accept-task",
-	CHAT_ACCEPT_TASKS: "/chat/explain-accept-task-buttons",
+	CHAT_ACCEPT_TASKS: "/chat/accept-tasks",
 	CHAT_ADD_MESSAGE: "/chat/add-message",
 	CHAT_CHANGE_TASKS: "/chat/change-tasks",
 	CHAT_CONTINUE: "/chat/continue",

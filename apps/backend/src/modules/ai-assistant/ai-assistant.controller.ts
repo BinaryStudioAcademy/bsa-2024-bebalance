@@ -418,7 +418,7 @@ class AIAssistantController extends BaseController {
 
 	/**
 	 * @swagger
-	 * /assistant/chat/explain-accept-task-buttons:
+	 * /assistant/chat/accept-tasks:
 	 *   post:
 	 *     summary: Accept tasks suggestions
 	 *     tags:
