@@ -123,8 +123,9 @@ const Tasks: React.FC = () => {
 	return (
 		<ScreenWrapper edges={["top", "left", "right"]} style={styles.container}>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
-				<ExpiredTasksModal tasks={expiredTasks} />
-				{!hasExpiredTasks && (
+				{hasExpiredTasks ? (
+					<ExpiredTasksModal tasks={expiredTasks} />
+				) : (
 					<>
 						<View
 							style={[
