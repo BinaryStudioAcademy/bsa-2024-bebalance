@@ -1,4 +1,5 @@
 import { type BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
 import {
@@ -20,9 +21,13 @@ import {
 	useCallback,
 	useEffect,
 	useNavigation,
+	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type BottomTabNavigationParameterList } from "~/libs/types/types";
+import {
+	type BottomTabNavigationParameterList,
+	type WheelDataItem,
+} from "~/libs/types/types";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { styles } from "./styles";
@@ -33,6 +38,7 @@ const Wheel: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigation =
 		useNavigation<BottomTabNavigationProp<BottomTabNavigationParameterList>>();
+	const [wheelData, setWheelData] = useState<WheelDataItem[]>([]);
 
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 
@@ -42,11 +48,15 @@ const Wheel: React.FC = () => {
 
 	const date = getFormattedDate(new Date(), "d MMM yyyy, EEEE");
 
-	useEffect(() => {
-		void dispatch(quizActions.getScores());
-	}, [dispatch]);
+	useFocusEffect(
+		useCallback(() => {
+			void dispatch(quizActions.getScores());
+		}, [dispatch]),
+	);
 
-	const wheelData = transformScoresToWheelData(scores);
+	useEffect(() => {
+		setWheelData(transformScoresToWheelData(scores));
+	}, [scores]);
 
 	return (
 		<ScreenWrapper style={styles.screenWrapper}>

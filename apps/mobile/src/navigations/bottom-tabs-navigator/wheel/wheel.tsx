@@ -11,7 +11,10 @@ const WheelStack =
 
 const WheelStackNavigator: React.FC = () => {
 	return (
-		<WheelStack.Navigator screenOptions={{ headerShown: false }}>
+		<WheelStack.Navigator
+			initialRouteName={BottomTabScreenName.WHEEL_SCREEN}
+			screenOptions={{ headerShown: false }}
+		>
 			<WheelStack.Screen
 				component={Wheel}
 				name={BottomTabScreenName.WHEEL_SCREEN}
