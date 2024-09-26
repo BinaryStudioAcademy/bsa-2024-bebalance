@@ -81,7 +81,6 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
-			state.isRetakingQuiz = false;
 		});
 		builder.addCase(editScores.fulfilled, (state, action) => {
 			const updatedScores = new Map(
@@ -110,12 +109,10 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(saveAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
-			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.userAnswers = action.payload;
-			state.isRetakingQuiz = false;
 		});
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
@@ -127,6 +124,12 @@ const { actions, name, reducer } = createSlice({
 	initialState,
 	name: "quiz",
 	reducers: {
+		cleanAnswers(state) {
+			state.answersByQuestionIndex = [];
+			state.currentQuestionIndex = initialState.currentQuestionIndex;
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] ?? null;
+		},
 		nextQuestion(state) {
 			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentQuestion =
@@ -142,6 +145,9 @@ const { actions, name, reducer } = createSlice({
 		setAnswersByQuestionIndex: (state, action: PayloadAction<Properties>) => {
 			const { answerId, questionIndex } = action.payload;
 			state.answersByQuestionIndex[questionIndex] = answerId;
+		},
+		setRetakingQuiz: (state, action: PayloadAction<boolean>) => {
+			state.isRetakingQuiz = action.payload;
 		},
 	},
 });
