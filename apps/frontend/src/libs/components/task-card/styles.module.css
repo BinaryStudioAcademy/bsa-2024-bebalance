@@ -37,7 +37,7 @@
 }
 
 .text {
-	min-width: 262px;
+	width: 262px;
 	margin-bottom: 20px;
 	font-size: 14px;
 	font-weight: 400;

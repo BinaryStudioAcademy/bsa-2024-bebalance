@@ -15,6 +15,7 @@ import styles from "./styles.module.css";
 
 const SuggestionsManipulationOptions: React.FC = () => {
 	const { taskSuggestions, threadId } = useAppSelector((state) => ({
+		selectedCategories: state.chat.selectedCategories,
 		taskSuggestions: state.chat.taskSuggestions,
 		threadId: state.chat.threadId,
 	}));
@@ -61,6 +62,24 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		);
 	}, [dispatch, taskSuggestions, threadId]);
 
+	const handleDislikeSuggestions = useCallback(() => {
+		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
+
+		void dispatch(
+			chatActions.addAssistantTextMessage(
+				SuggestionsManipulationMessage.MAIN_MESSAGE,
+			),
+		);
+		void dispatch(
+			chatActions.addUserTextMessage(
+				SuggestionsManipulationButtonLabel.DISLIKE_TASKS,
+			),
+		);
+		void dispatch(
+			chatActions.setButtonsMode(ButtonsModeOption.DISLIKE_SUGGESTIONS),
+		);
+	}, [dispatch]);
+
 	return (
 		<div className={styles["message-container"]}>
 			<Icon name="aiAssistantAvatar" />
@@ -77,6 +96,11 @@ const SuggestionsManipulationOptions: React.FC = () => {
 						<Button
 							label={SuggestionsManipulationButtonLabel.EXPLAIN_TASKS}
 							onClick={handleExplainTasksSuggestions}
+							variant="secondary"
+						/>
+						<Button
+							label={SuggestionsManipulationButtonLabel.DISLIKE_TASKS}
+							onClick={handleDislikeSuggestions}
 							variant="secondary"
 						/>
 					</div>

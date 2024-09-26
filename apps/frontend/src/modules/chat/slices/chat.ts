@@ -1,4 +1,5 @@
 import {
+	changeTasksSuggestion,
 	createTasksFromSuggestions,
 	explainTasksSuggestions,
 	getTasksForCategories,
@@ -8,6 +9,7 @@ import { actions } from "./chat.slice.js";
 
 const allActions = {
 	...actions,
+	changeTasksSuggestion,
 	createTasksFromSuggestions,
 	explainTasksSuggestions,
 	getTasksForCategories,

@@ -15,6 +15,22 @@ class ChatApi extends BaseHTTPApi {
 		super({ baseUrl, http, path: APIPath.ASSISTANT, storage });
 	}
 
+	public async changeTasksSuggestion(
+		payload: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_CHANGE_TASKS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<AIAssistantResponseDto>();
+	}
+
 	public async createTasksFromSuggestions(
 		payload: AIAssistantCreateMultipleTasksDto,
 	): Promise<boolean[]> {
@@ -32,7 +48,7 @@ class ChatApi extends BaseHTTPApi {
 	}
 
 	public async explainTasksSuggestions(
-		payload: AIAssistantRequestDto,
+		payload: AIAssistantCreateMultipleTasksDto,
 	): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_EXPLAIN_TASKS, {}),
