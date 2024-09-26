@@ -15,6 +15,7 @@ import { signOut } from "../auth/actions";
 import {
 	createTasks,
 	getChangedTasksSuggestion,
+	getExplainedTasksSuggestion,
 	getTasksForCategories,
 	initConversation,
 } from "./actions";
@@ -24,6 +25,7 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: ChatMessage[];
 	selectedCategories: SelectedCategory[];
+	taskExplanations: TaskCreateDto[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
 };
@@ -33,6 +35,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
+	taskExplanations: [],
 	taskSuggestions: [],
 	threadId: null,
 };
@@ -66,7 +69,7 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.messages.push(...action.payload.messages);
 			state.taskSuggestions.push(...action.payload.taskSuggestions);
-			state.buttonsMode = ButtonsMode.FEEDBACK;
+			state.buttonsMode = ButtonsMode.EXPLAIN_ACCEPT;
 		});
 		builder.addCase(getTasksForCategories.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -78,9 +81,21 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.FULFILLED;
 			state.messages.push(...action.payload.messages);
 			state.taskSuggestions = action.payload.taskSuggestions;
-			state.buttonsMode = ButtonsMode.FEEDBACK;
+			state.buttonsMode = ButtonsMode.EXPLAIN_ACCEPT;
 		});
 		builder.addCase(getChangedTasksSuggestion.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(getExplainedTasksSuggestion.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+		});
+		builder.addCase(getExplainedTasksSuggestion.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.messages.push(...action.payload.messages);
+			state.taskExplanations = action.payload.taskExplanations;
+			state.buttonsMode = ButtonsMode.ACCEPT_REGENERATE;
+		});
+		builder.addCase(getExplainedTasksSuggestion.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(signOut.pending, () => {
