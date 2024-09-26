@@ -7,9 +7,9 @@ type Properties = {
 };
 
 type ReturnType = {
-	blockerState: string;
 	handlePopupCancel: () => void;
 	handlePopupConfirm: () => void;
+	isBlocked: boolean;
 };
 
 const useUnsavedChangesBlocker = ({
@@ -55,9 +55,9 @@ const useUnsavedChangesBlocker = ({
 	}, [handleBeforeUnload]);
 
 	return {
-		blockerState: blocker.state,
 		handlePopupCancel,
 		handlePopupConfirm,
+		isBlocked: blocker.state === BLOCKED_BLOCKER_STATE,
 	};
 };
 

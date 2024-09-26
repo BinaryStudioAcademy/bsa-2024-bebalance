@@ -1,6 +1,5 @@
 import runImg from "~/assets/img/run.svg";
 import { Button, Loader, Popup } from "~/libs/components/components.js";
-import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/constants.js";
 import { DataStatus, PopupMessage } from "~/libs/enums/enums.js";
 import {
 	useAppDispatch,
@@ -79,7 +78,7 @@ const Profile: React.FC = () => {
 
 	const [isDirty, setIsDirty] = useState<boolean>(false);
 
-	const { blockerState, handlePopupCancel, handlePopupConfirm } =
+	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
 		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty });
 
 	return (
@@ -99,7 +98,7 @@ const Profile: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={isDirty && blockerState === BLOCKED_BLOCKER_STATE}
+				isOpen={isDirty && isBlocked}
 				onClose={handlePopupCancel}
 				onConfirm={handlePopupConfirm}
 				title="Unsaved changes will be lost. Continue?"

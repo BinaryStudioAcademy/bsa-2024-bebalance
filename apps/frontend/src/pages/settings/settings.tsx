@@ -6,7 +6,6 @@ import {
 	Popup,
 } from "~/libs/components/components.js";
 import {
-	BLOCKED_BLOCKER_STATE,
 	NOTIFICATION_FREQUENCY_OPTIONS,
 	TASK_DAYS_OPTIONS,
 } from "~/libs/constants/constants.js";
@@ -62,7 +61,7 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
-	const { blockerState, handlePopupCancel, handlePopupConfirm } =
+	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
 		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty, reset });
 
 	return (
@@ -102,7 +101,7 @@ const Settings: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={isDirty && blockerState === BLOCKED_BLOCKER_STATE}
+				isOpen={isDirty && isBlocked}
 				onClose={handlePopupCancel}
 				onConfirm={handlePopupConfirm}
 				title="Unsaved changes will be lost. Continue?"
