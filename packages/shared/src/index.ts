@@ -82,6 +82,7 @@ export {
 	type ChatMessageCreateDto,
 	type ChatMessageDto,
 	ChatMessageType,
+	checkIsTaskType,
 	type TaskMessage,
 	type TextMessage,
 } from "./modules/chats/chats.js";

@@ -178,7 +178,11 @@ erDiagram
 
 ## 5. Architecture
 
-TODO: add application schema
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/application-schema/bebalance-dark-theme.drawio.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./docs/application-schema/bebalance-light-theme.drawio.svg">
+  <img alt="Application schema" src="./docs/application-schema/bebalance-dark-theme.drawio.svg">
+</picture>
 
 ### 5.1 Global
 
