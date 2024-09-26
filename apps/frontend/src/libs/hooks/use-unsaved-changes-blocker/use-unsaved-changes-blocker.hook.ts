@@ -1,5 +1,5 @@
 import { BLOCKED_BLOCKER_STATE } from "~/libs/constants/constants.js";
-import { useBlocker, useCallback } from "~/libs/hooks/hooks.js";
+import { useBlocker, useCallback, useEffect } from "~/libs/hooks/hooks.js";
 
 type Properties = {
 	hasUncavedChanges: boolean;
@@ -35,6 +35,24 @@ const useUnsavedChangesBlocker = ({
 			blocker.proceed();
 		}
 	}, [blocker, reset]);
+
+	const handleBeforeUnload = useCallback(
+		(event: BeforeUnloadEvent): void => {
+			if (hasUncavedChanges) {
+				event.preventDefault();
+				event.returnValue = "Reload site?";
+			}
+		},
+		[hasUncavedChanges],
+	);
+
+	useEffect(() => {
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return (): void => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, [handleBeforeUnload]);
 
 	return {
 		blockerState: blocker.state,
