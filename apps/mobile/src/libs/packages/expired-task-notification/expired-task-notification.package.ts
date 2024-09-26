@@ -1,5 +1,6 @@
 import notifee, {
 	type InitialNotification,
+	type Notification,
 	type TimestampTrigger,
 	TriggerType,
 } from "@notifee/react-native";
@@ -7,13 +8,14 @@ import notifee, {
 import { NumericalValue } from "~/libs/enums/enums";
 import { type TaskDto } from "~/packages/tasks/tasks";
 
+import { ExpiredTaskNotificationSetting } from "./libs/enums/enums";
+
 type TriggerNotificationParameters = {
 	deadline: string;
 	description: string;
 	taskId: number;
 };
 
-const EXPIRED_TASK_NOTIFICATION_TITLE = "The task has expired";
 const NOTFICATION_BODY_LENGTH = 50;
 
 class ExpiredTaskNotification {
@@ -25,7 +27,8 @@ class ExpiredTaskNotification {
 		this.#triggerNotificationIds = [];
 	}
 
-	private addTriggerNotificationIdIfNotExist(id: string): void {
+	private addTriggerNotificationIdIfNotExist(taskId: number): void {
+		const id = this.createId(taskId);
 		const isInTriggerNotificationIds =
 			this.#triggerNotificationIds.includes(id);
 
@@ -34,8 +37,35 @@ class ExpiredTaskNotification {
 		}
 	}
 
+	private async createChannel(): Promise<string> {
+		return await notifee.createChannel({
+			id: ExpiredTaskNotificationSetting.CHANNEL_ID,
+			name: ExpiredTaskNotificationSetting.CHANNEL_NAME,
+		});
+	}
+
 	private createId(taskId: number): string {
 		return taskId.toString();
+	}
+
+	private createNotification({
+		description,
+		taskId,
+	}: Omit<TriggerNotificationParameters, "deadline">): Notification {
+		const id = this.createId(taskId);
+
+		return {
+			android: {
+				channelId: this.#channelId,
+				pressAction: {
+					id: ExpiredTaskNotificationSetting.PRESS_ACTION_ID,
+					launchActivity: ExpiredTaskNotificationSetting.LAUNCH_ACTIVITY,
+				},
+			},
+			body: this.cutDescription(description),
+			id,
+			title: ExpiredTaskNotificationSetting.TITLE,
+		};
 	}
 
 	private createTrigger(deadlineTimestamp: number): TimestampTrigger {
@@ -82,8 +112,8 @@ class ExpiredTaskNotification {
 
 	public async cancel(taskId: number): Promise<void> {
 		const id = this.createId(taskId);
-		this.removeFromTriggerNotificationIds(id);
 		await notifee.cancelTriggerNotification(id);
+		this.removeFromTriggerNotificationIds(id);
 	}
 
 	public async createForNotExpired({
@@ -101,29 +131,17 @@ class ExpiredTaskNotification {
 
 		if (!isChannelExist) {
 			await notifee.requestPermission();
-
-			this.#channelId = await notifee.createChannel({
-				id: "default",
-				name: "default",
-			});
+			this.#channelId = await this.createChannel();
 		}
 
 		const trigger = this.createTrigger(deadlineTimestamp);
-		const id = this.createId(taskId);
 
 		await notifee.createTriggerNotification(
-			{
-				android: {
-					channelId: this.#channelId,
-				},
-				body: this.cutDescription(description),
-				id,
-				title: EXPIRED_TASK_NOTIFICATION_TITLE,
-			},
+			this.createNotification({ description, taskId }),
 			trigger,
 		);
 
-		this.addTriggerNotificationIdIfNotExist(id);
+		this.addTriggerNotificationIdIfNotExist(taskId);
 	}
 
 	public existForTaskId(taskId: number): boolean {
@@ -138,6 +156,21 @@ class ExpiredTaskNotification {
 
 	public async getInitial(): Promise<InitialNotification | null> {
 		return await notifee.getInitialNotification();
+	}
+
+	public handleBackgroundEvent(): void {
+		notifee.onBackgroundEvent(async ({ detail }) => {
+			const { notification } = detail;
+
+			if (notification) {
+				await notifee.cancelNotification(notification.id as string);
+			}
+		});
+	}
+
+	public async removeDisplayed(taskId: number): Promise<void> {
+		const id = this.createId(taskId);
+		await notifee.cancelDisplayedNotification(id);
 	}
 }
 
