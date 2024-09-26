@@ -41,6 +41,7 @@ const updateTask = createAsyncThunk<
 		status === TaskStatus.COMPLETED || status === TaskStatus.SKIPPED;
 
 	if (isPastTask) {
+		await expiredTaskNotification.removeDisplayed(id);
 		await expiredTaskNotification.cancel(id);
 	}
 
@@ -54,6 +55,7 @@ const updateTaskDeadline = createAsyncThunk<TaskDto, number, AsyncThunkConfig>(
 
 		const task = await tasksApi.updateTaskDeadline(id);
 		const { description, dueDate: deadline, id: taskId } = task;
+		await expiredTaskNotification.removeDisplayed(taskId);
 		await expiredTaskNotification.createForNotExpired({
 			deadline,
 			description,
