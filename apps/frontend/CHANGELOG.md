@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.48.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.47.0...frontend-v1.48.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** regenerate all task suggestions bb-340 ([#576](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/576)) ([8b244e8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8b244e8f9df797193cd695b5dbd62edd6b18b946))
+* **frontend:** scroll to top on next and back buttons click bb-290 ([#585](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/585)) ([3737bfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3737bfc93dc8ba9b51ff7836880099a6bfe9754f))
+
+
+### Bug Fixes
+
+* **frontend:** default browser popup bb-580 ([#582](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/582)) ([1503180](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15031802e654d347991e00d1279f0cca8e218649))
+
 ## [1.47.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.1...frontend-v1.47.0) (2024-09-26)
 
 
