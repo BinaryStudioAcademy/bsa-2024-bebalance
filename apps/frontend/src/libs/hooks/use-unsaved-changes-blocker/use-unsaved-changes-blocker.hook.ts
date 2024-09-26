@@ -29,9 +29,7 @@ const useUnsavedChangesBlocker = ({
 	}, [blocker]);
 
 	const handlePopupConfirm = useCallback((): void => {
-		if (reset) {
-			reset();
-		}
+		reset?.();
 
 		if (blocker.state === BLOCKED_BLOCKER_STATE) {
 			blocker.proceed();
