@@ -41,16 +41,12 @@ const Wheel: React.FC = () => {
 	const [wheelData, setWheelData] = useState<WheelDataItem[]>([]);
 
 	const { dataStatus, scores, scoresLastUpdatedAt } = useAppSelector(
-		({ quiz }) => ({
-			dataStatus: quiz.dataStatus,
-			scores: quiz.scores,
-			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
-		}),
+		(state) => state.quiz,
 	);
 
-	const lastWheelUpdating =
-		scoresLastUpdatedAt &&
-		getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE");
+	const lastWheelUpdating = scoresLastUpdatedAt
+		? getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
+		: null;
 
 	const handleEditPress = useCallback((): void => {
 		navigation.navigate(BottomTabScreenName.EDIT_WHEEL_RESULTS);
