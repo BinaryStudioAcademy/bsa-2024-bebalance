@@ -2,11 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 import {
+	type CategoriesGetRequestQueryDto,
 	type QuizAnswersRequestDto,
 	type QuizQuestionDto,
 	type QuizScoresGetAllResponseDto,
-	type QuizScoresResponseDto,
 	type QuizScoresUpdateRequestDto,
+	type QuizScoresUpdateResponseDto,
 	type QuizUserAnswerDto,
 } from "~/packages/quiz/quiz";
 
@@ -23,7 +24,7 @@ const getScores = createAsyncThunk<
 });
 
 const editScores = createAsyncThunk<
-	QuizScoresResponseDto,
+	QuizScoresUpdateResponseDto,
 	QuizScoresUpdateRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/edit-scores`, async (editScoresPayload, { extra }) => {
@@ -42,6 +43,16 @@ const getAllQuestions = createAsyncThunk<
 	return await quizApi.getAllQuestions();
 });
 
+const getQuestionsByCategoryIds = createAsyncThunk<
+	{ items: QuizQuestionDto[][] },
+	CategoriesGetRequestQueryDto,
+	AsyncThunkConfig
+>(`${sliceName}/get-questions-by-category-ids`, async (payload, { extra }) => {
+	const { quizApi } = extra;
+
+	return await quizApi.getQuestionsByCategoryIds(payload.categoryIds);
+});
+
 const saveAnswers = createAsyncThunk<
 	QuizUserAnswerDto[],
 	QuizAnswersRequestDto,
@@ -52,4 +63,10 @@ const saveAnswers = createAsyncThunk<
 	return await quizApi.saveAnswers(createAnswerPayload);
 });
 
-export { editScores, getAllQuestions, getScores, saveAnswers };
+export {
+	editScores,
+	getAllQuestions,
+	getQuestionsByCategoryIds,
+	getScores,
+	saveAnswers,
+};
