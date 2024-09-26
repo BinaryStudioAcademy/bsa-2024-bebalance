@@ -2,7 +2,6 @@ import { RouterOutlet } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppSelector,
-	useCallback,
 	useEffect,
 	useNavigate,
 } from "~/libs/hooks/hooks.js";
@@ -23,19 +22,6 @@ const App: React.FC = () => {
 		navigate(redirectLink);
 		dispatch(appActions.changeLink(null));
 	}
-
-	const handleBeforeUnload = useCallback((event: BeforeUnloadEvent): void => {
-		event.preventDefault();
-		event.returnValue = "Reload site?";
-	}, []);
-
-	useEffect(() => {
-		window.addEventListener("beforeunload", handleBeforeUnload);
-
-		return (): void => {
-			window.removeEventListener("beforeunload", handleBeforeUnload);
-		};
-	}, [handleBeforeUnload]);
 
 	return (
 		<>

@@ -15,6 +15,7 @@ import {
 	useAppForm,
 	useAppSelector,
 	useCallback,
+	useEffect,
 	useUnsavedChangesBlocker,
 } from "~/libs/hooks/hooks.js";
 import {
@@ -64,6 +65,24 @@ const Settings: React.FC = () => {
 
 	const { blockerState, handlePopupCancel, handlePopupConfirm } =
 		useUnsavedChangesBlocker({ hasUncavedChanges: isDirty, reset });
+
+	const handleBeforeUnload = useCallback(
+		(event: BeforeUnloadEvent): void => {
+			if (isDirty) {
+				event.preventDefault();
+				event.returnValue = "Reload site?";
+			}
+		},
+		[isDirty],
+	);
+
+	useEffect(() => {
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return (): void => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, [handleBeforeUnload]);
 
 	return (
 		<>
