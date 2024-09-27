@@ -18,7 +18,7 @@ type Properties = {
 };
 
 const SuggestionsManipulationOptions: React.FC<Properties> = ({
-	isExplained,
+	isExplained = false,
 }: Properties) => {
 	const { taskSuggestions, threadId } = useAppSelector((state) => ({
 		selectedCategories: state.chat.selectedCategories,
