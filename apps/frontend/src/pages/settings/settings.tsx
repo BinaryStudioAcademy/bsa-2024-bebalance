@@ -13,9 +13,8 @@ import {
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
-	useBlocker,
 	useCallback,
-	useEffect,
+	useUnsavedChangesBlocker,
 } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationQuestionsFormValues,
@@ -62,39 +61,8 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
-	const blocker = useBlocker(isDirty);
-
-	const handleCancelPopupClick = useCallback((): void => {
-		if (blocker.state === "blocked") {
-			blocker.reset();
-		}
-	}, [blocker]);
-
-	const handleConfirmPopupClick = useCallback((): void => {
-		reset();
-
-		if (blocker.state === "blocked") {
-			blocker.proceed();
-		}
-	}, [blocker, reset]);
-
-	const handleBeforeUnload = useCallback(
-		(event: BeforeUnloadEvent): void => {
-			if (isDirty) {
-				event.preventDefault();
-				event.returnValue = "Reload site?";
-			}
-		},
-		[isDirty],
-	);
-
-	useEffect(() => {
-		window.addEventListener("beforeunload", handleBeforeUnload);
-
-		return (): void => {
-			window.removeEventListener("beforeunload", handleBeforeUnload);
-		};
-	}, [handleBeforeUnload]);
+	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
+		useUnsavedChangesBlocker({ hasUnsavedChanges: isDirty, reset });
 
 	return (
 		<>
@@ -133,9 +101,9 @@ const Settings: React.FC = () => {
 				confirmButtonLabel="YES"
 				hasCloseIcon
 				icon={runImg}
-				isOpen={isDirty && blocker.state === "blocked"}
-				onClose={handleCancelPopupClick}
-				onConfirm={handleConfirmPopupClick}
+				isOpen={isDirty && isBlocked}
+				onClose={handlePopupCancel}
+				onConfirm={handlePopupConfirm}
 				title="Unsaved changes will be lost. Continue?"
 			/>
 		</>
