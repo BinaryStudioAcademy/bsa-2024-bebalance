@@ -43,6 +43,7 @@ const Settings: React.FC = () => {
 		useState<boolean>(false);
 
 	const user = useAppSelector((state) => state.auth.user) as UserDto;
+	const dataStatus = useAppSelector((state) => state.auth.dataStatus);
 
 	const { control, errors, handleSubmit, isDirty, isValid } =
 		useAppForm<NotificationQuestionsFormValues>({
@@ -93,6 +94,8 @@ const Settings: React.FC = () => {
 	const handleFormSubmit = useCallback((): void => {
 		void handleSubmit(handleSaveAnswers)();
 	}, [handleSubmit, handleSaveAnswers]);
+
+	const isLoading = dataStatus === "pending";
 
 	return (
 		<ScreenWrapper edges={["top"]}>
@@ -149,7 +152,7 @@ const Settings: React.FC = () => {
 							<View style={globalStyles.mt32}>
 								<Button
 									appearance="outlined"
-									isDisabled={!isValid || !isDirty}
+									isDisabled={!isValid || !isDirty || isLoading}
 									label="Save"
 									onPress={handleFormSubmit}
 								/>
