@@ -21,6 +21,7 @@ const NOTFICATION_BODY_LENGTH = 50;
 class ExpiredTaskNotification {
 	#channelId: string;
 	#triggerNotificationIds: string[];
+	#wasUsedOnceToOpenApp = false;
 
 	constructor(channelId: string) {
 		this.#channelId = channelId;
@@ -155,6 +156,12 @@ class ExpiredTaskNotification {
 	}
 
 	public async getInitial(): Promise<InitialNotification | null> {
+		if (this.#wasUsedOnceToOpenApp) {
+			return null;
+		}
+
+		this.#wasUsedOnceToOpenApp = true;
+
 		return await notifee.getInitialNotification();
 	}
 

@@ -79,6 +79,8 @@ const OnboardingForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				void dispatch(onboardingActions.saveAnswers({ answerIds }));
 				void dispatch(onboardingActions.resetState());
 				onNext();
+
+				return;
 			}
 
 			setIsDisabled(true);

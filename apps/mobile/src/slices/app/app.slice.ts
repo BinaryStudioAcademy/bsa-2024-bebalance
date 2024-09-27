@@ -27,6 +27,7 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(updateInitialNotificationId.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
+			state.initialNotificationId = null;
 		});
 		builder.addCase(signOut.pending, () => {
 			return initialState;

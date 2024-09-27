@@ -3,10 +3,12 @@
 	flex-direction: column;
 	gap: 20px;
 	min-width: 350px;
+	margin-left: 224px;
 }
 
 @media (width <= 768px) {
 	.form {
 		width: 100%;
+		margin-left: 0;
 	}
 }

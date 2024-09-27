@@ -26,6 +26,7 @@ type Properties = {
 };
 
 const EDIT_ICON_SIZE = 20;
+const NUMBER_OF_LINES = 3;
 
 const TaskCard: React.FC<Properties> = ({
 	onComplete,
@@ -79,12 +80,14 @@ const TaskCard: React.FC<Properties> = ({
 					/>
 				)}
 			</View>
-			<View style={[globalStyles.mt32, globalStyles.pb32, globalStyles.ph16]}>
+			<View style={[globalStyles.mt32, globalStyles.pb24, globalStyles.ph16]}>
 				<Text preset="subheading" weight="bold">
 					{task.label}
 				</Text>
 				<Text
 					color={BaseColor.GRAY}
+					ellipsizeMode="tail"
+					numberOfLines={NUMBER_OF_LINES}
 					preset="regular"
 					style={styles.description}
 					weight="regular"

@@ -5,6 +5,7 @@ import { type APIConfiguration } from "~/libs/types/types.js";
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
 	type AIAssistantCreateMultipleTasksDto,
+	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 } from "./libs/types/types.js";
@@ -12,6 +13,22 @@ import {
 class ChatApi extends BaseHTTPApi {
 	public constructor({ baseUrl, http, storage }: APIConfiguration) {
 		super({ baseUrl, http, path: APIPath.ASSISTANT, storage });
+	}
+
+	public async changeTasksSuggestion(
+		payload: AIAssistantRequestDto,
+	): Promise<AIAssistantResponseDto> {
+		const response = await this.load(
+			this.getFullEndpoint(AIAssistantApiPath.CHAT_CHANGE_TASKS, {}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "POST",
+				payload: JSON.stringify(payload),
+			},
+		);
+
+		return await response.json<AIAssistantResponseDto>();
 	}
 
 	public async createTasksFromSuggestions(

@@ -9,6 +9,7 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
+import { actions as chatActions } from "~/modules/chat/chat.js";
 import {
 	type UserDto,
 	actions as usersActions,
@@ -69,6 +70,7 @@ const Profile: React.FC = () => {
 
 	const handleConfirmLogout = useCallback(() => {
 		void dispatch(authActions.logOut());
+		void dispatch(chatActions.clearChat());
 	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
@@ -106,7 +108,7 @@ const Profile: React.FC = () => {
 						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
 					</ProfileSection>
 
-					<ProfileSection title="Change Password">
+					<ProfileSection title="Change your password">
 						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
 					</ProfileSection>
 				</div>

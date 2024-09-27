@@ -2,10 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
+import { processMessages } from "../libs/helpers/helpers.js";
 import {
 	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
+	type ChangeTasksSuggestionPayload,
+	type ProcessedMessagesAndSuggestions,
 } from "../libs/types/types.js";
 import { name as sliceName } from "./chat.slice.js";
 
@@ -20,13 +23,15 @@ const initConversation = createAsyncThunk<
 });
 
 const getTasksForCategories = createAsyncThunk<
-	AIAssistantResponseDto,
+	ProcessedMessagesAndSuggestions,
 	AIAssistantSuggestTaskRequestDto,
 	AsyncThunkConfig
 >(`${sliceName}/get-tasks-for-categories`, async (payload, { extra }) => {
 	const { chatApi } = extra;
 
-	return await chatApi.getTasksForCategories(payload);
+	const response = await chatApi.getTasksForCategories(payload);
+
+	return processMessages(response.messages);
 });
 
 const createTasksFromSuggestions = createAsyncThunk<
@@ -39,4 +44,22 @@ const createTasksFromSuggestions = createAsyncThunk<
 	return await chatApi.createTasksFromSuggestions(payload);
 });
 
-export { createTasksFromSuggestions, getTasksForCategories, initConversation };
+const changeTasksSuggestion = createAsyncThunk<
+	ProcessedMessagesAndSuggestions,
+	ChangeTasksSuggestionPayload,
+	AsyncThunkConfig
+>(`${sliceName}/change-tasks-suggestion`, async (payload, { extra }) => {
+	const { chatApi } = extra;
+	const { APIPayload, oldSuggestions } = payload;
+
+	const response = await chatApi.changeTasksSuggestion(APIPayload);
+
+	return processMessages(response.messages, oldSuggestions);
+});
+
+export {
+	changeTasksSuggestion,
+	createTasksFromSuggestions,
+	getTasksForCategories,
+	initConversation,
+};
