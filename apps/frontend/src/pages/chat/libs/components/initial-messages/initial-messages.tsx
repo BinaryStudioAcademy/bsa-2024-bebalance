@@ -32,7 +32,7 @@ const InitialMessages: React.FC = () => {
 				<div className={styles["content-container"]}>
 					<p>here&apos;s how your wheel looks like right now:</p>
 					<div className={styles["content"]}>
-						<BalanceWheelChart data={chartData} />
+						<BalanceWheelChart data={chartData} variant="chat" />
 					</div>
 				</div>
 			</div>
