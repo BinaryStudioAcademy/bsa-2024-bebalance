@@ -6,7 +6,7 @@ import { type UserDto } from "~/packages/users/users";
 
 type Properties = {
 	size?: number;
-	user: null | UserDto;
+	user?: null | UserDto;
 };
 
 const DEFAULT_SIZE = 34;
@@ -24,7 +24,7 @@ const UserAvatar: React.FC<Properties> = ({ size = DEFAULT_SIZE, user }) => {
 		<>
 			{user?.avatarUrl ? (
 				<Image
-					resizeMode="contain"
+					resizeMode="cover"
 					source={{ uri: user.avatarUrl }}
 					style={avatarStyle}
 				/>
