@@ -15,7 +15,6 @@ import {
 
 type State = {
 	activeTasks: TaskDto[];
-	currentTasks: TaskDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
 	expiredTasks: TaskDto[];
 	pastTasks: TaskDto[];
@@ -23,7 +22,6 @@ type State = {
 
 const initialState: State = {
 	activeTasks: [],
-	currentTasks: [],
 	dataStatus: DataStatus.IDLE,
 	expiredTasks: [],
 	pastTasks: [],
