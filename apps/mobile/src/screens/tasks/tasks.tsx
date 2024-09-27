@@ -2,6 +2,7 @@ import React from "react";
 
 import {
 	ExpiredTasksModal,
+	ImageBackground,
 	LoaderWrapper,
 	PageSwitcher,
 	ScreenWrapper,
@@ -19,7 +20,7 @@ import {
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type ValueOf } from "~/libs/types/types";
+import { type ImageSourcePropType, type ValueOf } from "~/libs/types/types";
 import { type TaskDto } from "~/packages/tasks/tasks";
 import { type UserDto } from "~/packages/users/users";
 import { actions as taskActions } from "~/slices/task/task";
@@ -144,19 +145,31 @@ const Tasks: React.FC = () => {
 								tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
 							/>
 						</View>
-						<ScrollView
-							contentContainerStyle={[globalStyles.gap8, globalStyles.p16]}
+						<ImageBackground
+							resizeMode="cover"
+							source={
+								require("~/assets/images/background.png") as ImageSourcePropType
+							}
+							style={[globalStyles.flex1, styles.backgroundContainer]}
 						>
-							{taskbarTasks.map((task) => (
-								<TaskCard
-									key={task.id}
-									onComplete={handleComplete}
-									onExpire={handleExpired}
-									onSkip={handleSkip}
-									task={task}
-								/>
-							))}
-						</ScrollView>
+							<ScrollView
+								contentContainerStyle={[
+									globalStyles.gap8,
+									globalStyles.ph16,
+									globalStyles.pv24,
+								]}
+							>
+								{taskbarTasks.map((task) => (
+									<TaskCard
+										key={task.id}
+										onComplete={handleComplete}
+										onExpire={handleExpired}
+										onSkip={handleSkip}
+										task={task}
+									/>
+								))}
+							</ScrollView>
+						</ImageBackground>
 					</>
 				)}
 			</LoaderWrapper>
