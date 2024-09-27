@@ -1,5 +1,48 @@
 # Changelog
 
+## [1.61.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.60.1...v1.61.0) (2024-09-27)
+
+
+### Features
+
+* change task after deadline bb-446 ([#579](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/579)) ([4199cc0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/4199cc002a17e20a6fee587b465e032f4c5c96b6))
+* **frontend:** popup on profile when user leaves bb-473 ([#574](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/574)) ([6848758](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/684875827d05940aa93ac70f1db2a8f69265143d))
+* **frontend:** responsiveness for wheel of balance (root) screen bb-586 ([#604](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/604)) ([a0142e8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a0142e86db7841e7953ddbf54933795c272a6bf7))
+* **frontend:** task explanations bb-340 ([#589](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/589)) ([58e0557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/58e0557e50b32aaf29b7b1214c8c3ff9b53178d0))
+* **mobile:** ai chat multi task bb-571 ([#595](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/595)) ([ebfde83](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/ebfde83bb145d13c413a1a3e7890f64e85e831ea))
+* **mobile:** settings screen bb-599 ([#602](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/602)) ([13cf4d6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/13cf4d6396a9ee91e063c3573c2e5a3f47afa74d))
+
+
+### Bug Fixes
+
+* **frontend:** Add notes to tasks bb-419 ([#592](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/592)) ([1f34a05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1f34a0501c9bd7e2a19ea3ff1b77804b453d314e))
+* **frontend:** popup about unsaved changes appears after saving changes bb-465 ([#600](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/600)) ([e15ee1b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e15ee1b273651fd26f52da7542eb287f234d5eb3))
+* **mobile:** User's avatar should have a circular form bb-603 ([#607](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/607)) ([25c89b3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/25c89b34465a7ccdc7bbcc65cdf9ae48351ebeb7))
+
+## [1.60.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.60.0...v1.60.1) (2024-09-26)
+
+
+### Bug Fixes
+
+* bug when saving answer ids second time bb-560 ([#597](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/597)) ([3784421](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/378442116164185c1cff351f68e6b5af085573a4))
+* **frontend/backend:** insights are not updated after user makes actions with tasks bb-561 ([#584](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/584)) ([f30f347](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f30f347b6084e37d491e4297f2abecf7bb80dbbe))
+* **frontend:** updated styles for profile page bb-594 ([#596](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/596)) ([0cda480](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0cda48014fb4af1bc5c10dff45396634400c120a))
+
+## [1.60.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.59.0...v1.60.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** regenerate all task suggestions bb-340 ([#576](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/576)) ([8b244e8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8b244e8f9df797193cd695b5dbd62edd6b18b946))
+* **frontend:** scroll to top on next and back buttons click bb-290 ([#585](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/585)) ([3737bfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3737bfc93dc8ba9b51ff7836880099a6bfe9754f))
+* **mobile:** ai chat service bb-441 ([#570](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/570)) ([0fc4299](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0fc42990fe81d8e00473a3538dd88db21c0d7d5c))
+
+
+### Bug Fixes
+
+* **frontend:** default browser popup bb-580 ([#582](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/582)) ([1503180](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15031802e654d347991e00d1279f0cca8e218649))
+* **mobile:** edit scores manually bb-344 ([#590](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/590)) ([83597b6](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/83597b6eed8e7768715dbdc5651d0953991d9df0))
+
 ## [1.59.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.58.0...v1.59.0) (2024-09-26)
 
 

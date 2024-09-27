@@ -1,6 +1,6 @@
 import { Button } from "~/libs/components/components.js";
 import { getValidClassNames } from "~/libs/helpers/helpers.js";
-import { useCallback, useEffect, useState } from "~/libs/hooks/hooks.js";
+import { useCallback, useState } from "~/libs/hooks/hooks.js";
 import {
 	type AddTaskNoteHandler,
 	type TaskCreateDto,
@@ -52,10 +52,6 @@ const TaskCard: React.FC<Properties> = ({
 	const handleComplete = useCallback(() => {
 		onComplete?.((task as TaskDto).id);
 	}, [task, onComplete]);
-
-	useEffect(() => {
-		onGetTaskNotes?.((task as TaskDto).id);
-	}, [onGetTaskNotes, task]);
 
 	const handleExpire = useCallback(() => {
 		onExpire?.(task as TaskDto);
@@ -146,6 +142,7 @@ const TaskCard: React.FC<Properties> = ({
 
 			{isNoteOpen && (
 				<Notes
+					onGetTaskNotes={onGetTaskNotes}
 					onNoteClose={handleNoteClose}
 					onSubmit={onAddTaskNote as AddTaskNoteHandler}
 					task={task as TaskDto}

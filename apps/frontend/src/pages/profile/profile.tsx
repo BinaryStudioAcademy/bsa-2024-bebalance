@@ -7,6 +7,7 @@ import {
 	useCallback,
 	useEffect,
 	useState,
+	useUnsavedChangesBlocker,
 } from "~/libs/hooks/hooks.js";
 import { actions as authActions } from "~/modules/auth/auth.js";
 import { actions as chatActions } from "~/modules/chat/chat.js";
@@ -75,6 +76,11 @@ const Profile: React.FC = () => {
 
 	const isLoading = dataStatus === DataStatus.PENDING;
 
+	const [isDirty, setIsDirty] = useState<boolean>(false);
+
+	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
+		useUnsavedChangesBlocker({ hasUnsavedChanges: isDirty });
+
 	return (
 		<>
 			<Popup
@@ -86,6 +92,16 @@ const Profile: React.FC = () => {
 				onClose={handleSignOut}
 				onConfirm={handleConfirmLogout}
 				title={PopupMessage.LOGOUT_CONFIRM}
+			/>
+			<Popup
+				closeButtonLabel="CANCEL"
+				confirmButtonLabel="YES"
+				hasCloseIcon
+				icon={runImg}
+				isOpen={isDirty && isBlocked}
+				onClose={handlePopupCancel}
+				onConfirm={handlePopupConfirm}
+				title="Unsaved changes will be lost. Continue?"
 			/>
 			{isLoading && <Loader />}
 			{user && (
@@ -105,11 +121,18 @@ const Profile: React.FC = () => {
 
 					<ProfileSection hasVisuallyHiddenTitle title="Profile">
 						<UpdateAvatarForm onSubmit={handleUploadAvatarSubmit} user={user} />
-						<UpdateUserForm onSubmit={handleUpdateSubmit} user={user} />
+						<UpdateUserForm
+							onSubmit={handleUpdateSubmit}
+							setIsDirty={setIsDirty}
+							user={user}
+						/>
 					</ProfileSection>
 
-					<ProfileSection title="Change Password">
-						<UpdatePasswordForm onSubmit={handleUpdatePasswordSubmit} />
+					<ProfileSection title="Change your password">
+						<UpdatePasswordForm
+							onSubmit={handleUpdatePasswordSubmit}
+							setIsDirty={setIsDirty}
+						/>
 					</ProfileSection>
 				</div>
 			)}

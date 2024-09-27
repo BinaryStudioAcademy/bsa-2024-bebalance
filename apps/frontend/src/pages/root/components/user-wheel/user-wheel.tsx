@@ -4,6 +4,7 @@ import {
 	Loader,
 	Switch,
 } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -18,11 +19,13 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
+import {
+	NO_SCORES_COUNT,
+	NO_TASKS_PERCENTAGE,
+} from "./libs/constants/constants.js";
 import { getFormattedDate } from "./libs/helpers/helpers.js";
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
-
-const NO_SCORES_COUNT = 0;
 
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -34,7 +37,6 @@ const UserWheel: React.FC = () => {
 			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
 		}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
@@ -48,6 +50,21 @@ const UserWheel: React.FC = () => {
 	const headerText = isEditingModalOpen
 		? "Edit my wheel results"
 		: "My wheel results";
+
+	const estimationStyles = getValidClassNames(
+		styles["content"],
+		isEditingModalOpen && styles["hidden"],
+	);
+
+	const dateContainerStyles = getValidClassNames(
+		styles["date-container"],
+		isEditingModalOpen && styles["hidden"],
+	);
+
+	const modalStyles = getValidClassNames(
+		styles["content"],
+		!isEditingModalOpen && styles["hidden"],
+	);
 
 	const lastWheelUpdateDate = scoresLastUpdatedAt
 		? getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
@@ -70,12 +87,6 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
-
-	useEffect(() => {
-		if (completionTasksPercentage) {
-			setPercentage(completionTasksPercentage);
-		}
-	}, [completionTasksPercentage]);
 
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
@@ -100,7 +111,7 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<div className={styles["header-text-container"]}>
 					<h4 className={styles["header-text"]}>{headerText}</h4>
-					<div className={styles["date-container"]}>
+					<div className={dateContainerStyles}>
 						<p className={styles["date"]}>{lastWheelUpdateDate}</p>
 					</div>
 				</div>
@@ -120,12 +131,16 @@ const UserWheel: React.FC = () => {
 			</div>
 			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
-					<div>
+					<div className={estimationStyles}>
 						<BalanceWheelChart data={chartData} />
-						<CircularProgress percentage={percentage} />
+						<CircularProgress
+							percentage={completionTasksPercentage ?? NO_TASKS_PERCENTAGE}
+						/>
 					</div>
 				)}
-				{isEditingModalOpen && handleGetModal(editMode)}
+				<div className={modalStyles}>
+					{isEditingModalOpen && handleGetModal(editMode)}
+				</div>
 			</div>
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>

@@ -1,8 +1,21 @@
-.animation-container {
+.animation-wheel-container {
 	z-index: var(--z-index-low);
 	width: 250px;
 }
 
+.chat-wheel-container {
+	width: 500px;
+	height: 500px;
+}
+
 .root-wheel-container {
 	width: 500px;
+	height: 500px;
+}
+
+@media (width <= 1200px) {
+	.root-wheel-container {
+		width: 390px;
+		height: 390px;
+	}
 }
