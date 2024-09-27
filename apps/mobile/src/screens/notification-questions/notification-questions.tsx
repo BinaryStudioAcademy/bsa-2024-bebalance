@@ -21,6 +21,7 @@ import { globalStyles } from "~/libs/styles/styles";
 import {
 	type InfinitePagerImperativeApi,
 	type NativeStackNavigationProp,
+	type NotificationQuestionsFormValues,
 } from "~/libs/types/types";
 import {
 	type NotificationAnswersPayloadDto,
@@ -33,10 +34,7 @@ import {
 	NotificationTaskDays,
 } from "./libs/components/components";
 import { NOTIFICATION_QUESTIONS_FORM_DEFAULT_VALUES } from "./libs/constants/constants";
-import {
-	type NotificationQuestionsFormValues,
-	type RootStackParameterList,
-} from "./libs/types/types";
+import { type RootStackParameterList } from "./libs/types/types";
 import { styles } from "./styles";
 
 const NotificationQuestions: React.FC = () => {

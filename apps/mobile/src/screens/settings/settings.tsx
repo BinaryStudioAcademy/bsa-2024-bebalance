@@ -2,19 +2,59 @@ import { type ComponentProps } from "react";
 
 import {
 	Button,
+	MultipleCheckboxInput,
 	OnLeaveModal,
+	RadioGroup,
 	ScreenWrapper,
+	ScrollView,
 	Text,
 	View,
 } from "~/libs/components/components";
-import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks";
+import {
+	NOTIFICATION_FREQUENCY_OPTIONS,
+	TASK_DAYS_OPTIONS,
+} from "~/libs/constants/constants";
+import {
+	useAppDispatch,
+	useAppForm,
+	useAppSelector,
+	useCallback,
+	useState,
+} from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
+import {
+	type NotificationQuestionsFormValues,
+	type ValueOf,
+} from "~/libs/types/types";
+import {
+	type NotificationAnswersPayloadDto,
+	notificationAnswersValidationSchema,
+	type NotificationFrequency,
+	type UserDto,
+} from "~/packages/users/users";
 import { actions as authActions } from "~/slices/auth/auth";
+import { actions as userActions } from "~/slices/users/users";
+
+import { styles } from "./styles";
 
 const Settings: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [isConfirmationModalVisible, setIsConfirmationModalVisible] =
 		useState<boolean>(false);
+
+	const user = useAppSelector((state) => state.auth.user) as UserDto;
+	const dataStatus = useAppSelector((state) => state.auth.dataStatus);
+
+	const { control, errors, handleSubmit, isDirty, isValid } =
+		useAppForm<NotificationQuestionsFormValues>({
+			defaultValues: {
+				notificationFrequency: user.notificationFrequency as ValueOf<
+					typeof NotificationFrequency
+				>,
+				userTaskDays: user.userTaskDays as number[],
+			},
+			validationSchema: notificationAnswersValidationSchema,
+		});
 
 	const handleModalDismiss = useCallback((): void => {
 		setIsConfirmationModalVisible(false);
@@ -44,30 +84,96 @@ const Settings: React.FC = () => {
 		},
 	];
 
+	const handleSaveAnswers = useCallback(
+		(payload: NotificationAnswersPayloadDto): void => {
+			void dispatch(userActions.saveNotificationAnswers(payload));
+		},
+		[dispatch],
+	);
+
+	const handleFormSubmit = useCallback((): void => {
+		void handleSubmit(handleSaveAnswers)();
+	}, [handleSubmit, handleSaveAnswers]);
+
+	const isLoading = dataStatus === "pending";
+
 	return (
 		<ScreenWrapper edges={["top"]}>
-			<View
-				style={[
-					globalStyles.flex1,
-					globalStyles.justifyContentSpaceBetween,
-					globalStyles.p16,
-				]}
-			>
-				<Text>Settings!</Text>
+			<ScrollView contentContainerStyle={globalStyles.flex1}>
+				<View style={[globalStyles.flex1, globalStyles.p16, styles.container]}>
+					<Text preset="heading" style={globalStyles.mb24} weight="bold">
+						Settings
+					</Text>
+					<Text preset="subheading" style={globalStyles.mb12} weight="bold">
+						Days to receive tasks
+					</Text>
 
-				<Button
-					iconLeftName="exit-to-app"
-					label="SIGN OUT"
-					onPress={handleModalShow}
-				/>
-			</View>
-			<OnLeaveModal
-				buttonsConfiguration={modalButtonsConfiguration}
-				description="Oh no! You're one step away from life balance. Are you sure you
+					<View
+						style={[
+							globalStyles.flexDirectionRow,
+							globalStyles.justifyContentSpaceBetween,
+							globalStyles.gap8,
+							styles.checkboxWrapper,
+						]}
+					>
+						<MultipleCheckboxInput
+							checkAllLabel=""
+							checkboxStyle={[styles.checkbox, globalStyles.pv8]}
+							containerStyle={styles.checkboxContainer}
+							control={control}
+							errors={errors}
+							name="userTaskDays"
+							options={TASK_DAYS_OPTIONS}
+						/>
+					</View>
+
+					<Text
+						preset="subheading"
+						style={[globalStyles.mb12, globalStyles.mt24]}
+						weight="bold"
+					>
+						Notification frequency
+					</Text>
+
+					<View
+						style={[
+							globalStyles.flex1,
+							globalStyles.justifyContentSpaceBetween,
+						]}
+					>
+						<View style={[styles.radioContainer, globalStyles.pb32]}>
+							<RadioGroup
+								control={control}
+								errors={errors}
+								itemContainerStyle={globalStyles.mb16}
+								name="notificationFrequency"
+								options={NOTIFICATION_FREQUENCY_OPTIONS}
+							/>
+							<View style={globalStyles.mt32}>
+								<Button
+									appearance="outlined"
+									isDisabled={!isValid || !isDirty || isLoading}
+									label="Save"
+									onPress={handleFormSubmit}
+								/>
+							</View>
+						</View>
+
+						<Button
+							iconLeftName="exit-to-app"
+							label="SIGN OUT"
+							onPress={handleModalShow}
+						/>
+					</View>
+				</View>
+				<OnLeaveModal
+					buttonsConfiguration={modalButtonsConfiguration}
+					description="Oh no! You're one step away from life balance. Are you sure you
 						want to leave?"
-				isVisible={isConfirmationModalVisible}
-				onBackdropPress={handleModalDismiss}
-			/>
+					isVisible={isConfirmationModalVisible}
+					onBackdropPress={handleModalDismiss}
+				/>
+			</ScrollView>
 		</ScreenWrapper>
 	);
 };
