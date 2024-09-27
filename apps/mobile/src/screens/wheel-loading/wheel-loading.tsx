@@ -38,10 +38,14 @@ const WheelLoading: React.FC = () => {
 						LoadingSetting.PROCESSING_TIME_FINISH;
 				setPercentLoading(nextPercentLoading);
 			}, LoadingSetting.PROCESSING_STAGE_LENGTH);
-		} else {
+		}
+	}, [percentLoading]);
+
+	useEffect(() => {
+		if (percentLoading === LoadingSetting.MAX_PERCENT) {
 			navigation.navigate(QuestionsStackName.BOTTOM_TABS);
 		}
-	}, [navigation, percentLoading]);
+	}, [percentLoading]);
 
 	return (
 		<BackgroundWrapper planetLayout="wheelLoading">

@@ -1,5 +1,4 @@
 import { type BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
 import {
@@ -52,11 +51,9 @@ const Wheel: React.FC = () => {
 		navigation.navigate(BottomTabScreenName.EDIT_WHEEL_RESULTS);
 	}, [navigation]);
 
-	useFocusEffect(
-		useCallback(() => {
-			void dispatch(quizActions.getScores());
-		}, [dispatch]),
-	);
+	useEffect(() => {
+		void dispatch(quizActions.getScores());
+	}, [dispatch]);
 
 	useEffect(() => {
 		setWheelData(transformScoresToWheelData(scores));

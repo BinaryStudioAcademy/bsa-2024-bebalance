@@ -28,7 +28,7 @@ const QuestionsStack: React.FC = () => {
 
 	return (
 		<NativeStack.Navigator screenOptions={{ headerShown: false }}>
-			{!hasAnsweredOnboardingQuestions && (
+			{!hasAnsweredOnboardingQuestions && !isRetakingQuiz && (
 				<>
 					<NativeStack.Screen
 						component={Introduction}
