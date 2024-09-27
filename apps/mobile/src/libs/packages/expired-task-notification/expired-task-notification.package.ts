@@ -20,12 +20,11 @@ const NOTFICATION_BODY_LENGTH = 50;
 
 class ExpiredTaskNotification {
 	#channelId: string;
-	#triggerNotificationIds: string[];
+	#triggerNotificationIds: string[] = [];
 	#wasUsedOnceToOpenApp = false;
 
 	constructor(channelId: string) {
 		this.#channelId = channelId;
-		this.#triggerNotificationIds = [];
 	}
 
 	private addTriggerNotificationIdIfNotExist(taskId: number): void {
