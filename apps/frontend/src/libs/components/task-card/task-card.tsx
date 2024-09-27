@@ -103,6 +103,7 @@ const TaskCard: React.FC<Properties> = ({
 							<div className={styles["button-container"]}>
 								<Button
 									hasVisuallyHiddenLabel
+									iconColor={iconColor}
 									iconName="note"
 									iconPosition="left"
 									label="notes"
