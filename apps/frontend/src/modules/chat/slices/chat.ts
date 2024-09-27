@@ -1,6 +1,7 @@
 import {
 	changeTasksSuggestion,
 	createTasksFromSuggestions,
+	explainTasksSuggestions,
 	getTasksForCategories,
 	initConversation,
 } from "./actions.js";
@@ -10,6 +11,7 @@ const allActions = {
 	...actions,
 	changeTasksSuggestion,
 	createTasksFromSuggestions,
+	explainTasksSuggestions,
 	getTasksForCategories,
 	initConversation,
 };

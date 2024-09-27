@@ -11,6 +11,7 @@ import { type ChatMessage } from "../libs/types/types.js";
 import {
 	changeTasksSuggestion,
 	createTasksFromSuggestions,
+	explainTasksSuggestions,
 	getTasksForCategories,
 	initConversation,
 } from "./actions.js";
@@ -20,6 +21,7 @@ type State = {
 	dataStatus: ValueOf<typeof DataStatus>;
 	messages: ChatMessage[];
 	selectedCategories: SelectedCategory[];
+	taskExplanations: TaskCreateDto[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
 };
@@ -29,6 +31,7 @@ const initialState: State = {
 	dataStatus: DataStatus.IDLE,
 	messages: [],
 	selectedCategories: [],
+	taskExplanations: [],
 	taskSuggestions: [],
 	threadId: null,
 };
@@ -70,17 +73,31 @@ const { actions, name, reducer } = createSlice({
 
 				state.messages.push(...messages);
 
-				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_EXPLANATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
 			})
+			.addCase(explainTasksSuggestions.pending, (state) => {
+				state.dataStatus = DataStatus.PENDING;
+			})
+			.addCase(explainTasksSuggestions.rejected, (state) => {
+				state.dataStatus = DataStatus.REJECTED;
+			})
+			.addCase(explainTasksSuggestions.fulfilled, (state, action) => {
+				const { messages, taskSuggestions } = action.payload;
 
+				state.dataStatus = DataStatus.FULFILLED;
+				state.taskExplanations = taskSuggestions;
+				state.messages.push(...messages);
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
+			})
 			.addCase(changeTasksSuggestion.pending, (state) => {
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(changeTasksSuggestion.fulfilled, (state, action) => {
 				const { messages, taskSuggestions } = action.payload;
+
 				state.dataStatus = DataStatus.FULFILLED;
 				state.taskSuggestions = taskSuggestions;
 
