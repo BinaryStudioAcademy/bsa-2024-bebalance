@@ -24,7 +24,7 @@ const UserAvatar: React.FC<Properties> = ({ size = DEFAULT_SIZE, user }) => {
 		<>
 			{user?.avatarUrl ? (
 				<Image
-					resizeMode="contain"
+					resizeMode="cover"
 					source={{ uri: user.avatarUrl }}
 					style={avatarStyle}
 				/>
