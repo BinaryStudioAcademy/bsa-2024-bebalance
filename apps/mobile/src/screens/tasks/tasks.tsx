@@ -126,7 +126,7 @@ const Tasks: React.FC = () => {
 	);
 
 	const handleKeyExtractor = useCallback(
-		(item: TaskDto, index: number) => index.toString(),
+		(item: TaskDto) => item.id.toString(),
 		[],
 	);
 
