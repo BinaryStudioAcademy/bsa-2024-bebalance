@@ -1,6 +1,6 @@
 import LibraryCheckbox from "@react-native-community/checkbox";
 import React from "react";
-import { StyleProp, ViewStyle } from "react-native";
+import { type StyleProp, type ViewStyle } from "react-native";
 
 import { LinearGradient, Text, View } from "~/libs/components/components";
 import { AngleGradient, BaseColor, GradientColor } from "~/libs/enums/enums";
@@ -9,20 +9,20 @@ import { globalStyles } from "~/libs/styles/styles";
 import { styles } from "./styles";
 
 type Properties = {
+	checkboxStyle?: StyleProp<ViewStyle>;
+	containerStyle?: StyleProp<ViewStyle>;
 	hasVisuallyHiddenLabel?: boolean;
 	isChecked: boolean;
 	label: string;
 	onValueChange: (newValue: boolean) => void;
-	containerStyle?: StyleProp<ViewStyle>;
-	checkboxStyle?: StyleProp<ViewStyle>;
 };
 
 const Checkbox: React.FC<Properties> = ({
+	checkboxStyle,
+	containerStyle,
 	hasVisuallyHiddenLabel = false,
 	isChecked,
 	label,
-	containerStyle,
-	checkboxStyle,
 	onValueChange,
 }) => {
 	const borderColors = isChecked
