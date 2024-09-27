@@ -99,6 +99,13 @@ const Slider: React.FC<Properties> = ({
 		bubbleReference.current.style.transform = `translateX(${String((sliderValue - SliderValue.MIN) * step)}px)`;
 	}, [sliderValue, step, handleSliderBackgroundUpdate]);
 
+	useEffect(() => {
+		if (value !== sliderValue) {
+			setSliderValue(value);
+			onValueChange(id, value);
+		}
+	}, [sliderValue, setSliderValue, onValueChange, id, value]);
+
 	return (
 		<div className={styles["container"]}>
 			<label className={styles["label"]} htmlFor="slider">

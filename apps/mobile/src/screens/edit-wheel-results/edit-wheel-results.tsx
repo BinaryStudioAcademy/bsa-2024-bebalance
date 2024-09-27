@@ -1,3 +1,4 @@
+import { StackActions } from "@react-navigation/native";
 import React from "react";
 
 import {
@@ -9,19 +10,25 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
-import { BaseColor, DataStatus } from "~/libs/enums/enums";
+import { DataStatus, RootScreenName } from "~/libs/enums/enums";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
+	useNavigation,
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type CategoriesSelectedRequestDto,
+	type NativeStackNavigationProp,
+	type QuestionsStackNavigationParameterList,
 	type ValueOf,
 } from "~/libs/types/types";
-import { type QuizScoresUpdateRequestDto } from "~/packages/quiz/quiz";
+import {
+	type CategoriesGetRequestQueryDto,
+	type QuizScoresUpdateRequestDto,
+} from "~/packages/quiz/quiz";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
 import { ScoresEditForm } from "./libs/components/componets";
@@ -29,9 +36,11 @@ import { EditWheelResultsTab } from "./libs/enums/enums";
 import { styles } from "./styles";
 
 const EditWheelResults: React.FC = () => {
-	const [submittedCategoryIds, setSubmittedCategoryIds] = useState<number[]>(
-		[],
-	);
+	const navigation =
+		useNavigation<
+			NativeStackNavigationProp<QuestionsStackNavigationParameterList>
+		>();
+
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
 	const dispatch = useAppDispatch();
 
@@ -56,10 +65,14 @@ const EditWheelResults: React.FC = () => {
 
 	const handleRetakeQuizSubmit = useCallback(
 		(payload: CategoriesSelectedRequestDto): void => {
-			setSubmittedCategoryIds(payload.categoryIds);
-			// TODO: send selectedCategoriesSubmissionData to backend
+			const categoriesIds: CategoriesGetRequestQueryDto = {
+				categoryIds: payload.categoryIds.join(","),
+			};
+			void dispatch(quizActions.cleanAnswers());
+			void dispatch(quizActions.getQuestionsByCategoryIds(categoriesIds));
+			navigation.dispatch(StackActions.replace(RootScreenName.QUESTIONS_STACK));
 		},
-		[],
+		[dispatch, navigation],
 	);
 
 	return (
@@ -119,9 +132,6 @@ const EditWheelResults: React.FC = () => {
 									submitButtonLabel="RETAKE QUIZ"
 								/>
 							</View>
-							<Text color={BaseColor.BLACK}>
-								{submittedCategoryIds.join(", ")}
-							</Text>
 						</ScrollView>
 					)}
 				</View>

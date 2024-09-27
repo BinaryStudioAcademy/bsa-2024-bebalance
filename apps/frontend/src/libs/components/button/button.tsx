@@ -30,29 +30,38 @@ const Button: React.FC<Properties> = ({
 	onClick,
 	type = "button",
 	variant = "primary",
-}: Properties) => (
-	<button
-		className={getValidClassNames(
-			styles["btn"],
-			variant === "icon" && styles[`position-${iconPosition}`],
-			styles[`${variant}-button`],
-			isSelected && styles[`${variant}-button-selected`],
-		)}
-		disabled={isDisabled}
-		onClick={onClick}
-		type={type}
-	>
-		<span
+}: Properties) => {
+	const isRightPosition = iconPosition === "right";
+
+	return (
+		<button
 			className={getValidClassNames(
-				hasVisuallyHiddenLabel && "visually-hidden",
-				variant === "secondary" && styles["secondary-label"],
-				styles[`${labelVariant}-label`],
+				styles["btn"],
+				variant === "icon" && styles[`position-${iconPosition}`],
+				styles[`${variant}-button`],
+				isSelected && styles[`${variant}-button-selected`],
 			)}
+			disabled={isDisabled}
+			onClick={onClick}
+			type={type}
 		>
-			{label}
-		</span>
-		{iconName && <Icon color={iconColor} name={iconName} />}
-	</button>
-);
+			{isRightPosition && iconName && (
+				<Icon color={iconColor} name={iconName} />
+			)}
+			<span
+				className={getValidClassNames(
+					hasVisuallyHiddenLabel && "visually-hidden",
+					variant === "secondary" && styles["secondary-label"],
+					styles[`${labelVariant}-label`],
+				)}
+			>
+				{label}
+			</span>
+			{!isRightPosition && iconName && (
+				<Icon color={iconColor} name={iconName} />
+			)}
+		</button>
+	);
+};
 
 export { Button };

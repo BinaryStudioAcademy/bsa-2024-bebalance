@@ -5,15 +5,15 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import { TASK_DAYS_OPTIONS } from "~/libs/constants/constants";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type Control,
 	type FieldErrors,
 	type FieldValues,
+	type NotificationQuestionsFormValues,
 } from "~/libs/types/types";
 
-import { TASK_DAYS_OPTIONS } from "../../constants/constants";
-import { type NotificationQuestionsFormValues } from "../../types/types";
 import { styles } from "./styles";
 
 type Properties<T extends FieldValues> = {
@@ -34,7 +34,8 @@ const NotificationTaskDays: React.FC<
 				Which days would you like to receive tasks?
 			</Text>
 			<Text style={globalStyles.mb16}>
-				Choose at least 3 days in order to achieve your life balance
+				Quick tip: we recommend selecting at least 3 days in order to achieve
+				your life balance
 			</Text>
 			<View style={[globalStyles.gap16, globalStyles.mb24]}>
 				<MultipleCheckboxInput

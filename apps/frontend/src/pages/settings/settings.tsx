@@ -1,4 +1,10 @@
-import { Button, Checkbox, Input } from "~/libs/components/components.js";
+import runImg from "~/assets/img/run.svg";
+import {
+	Button,
+	Checkbox,
+	Input,
+	Popup,
+} from "~/libs/components/components.js";
 import {
 	NOTIFICATION_FREQUENCY_OPTIONS,
 	TASK_DAYS_OPTIONS,
@@ -7,7 +13,9 @@ import {
 	useAppDispatch,
 	useAppForm,
 	useAppSelector,
+	useBlocker,
 	useCallback,
+	useEffect,
 } from "~/libs/hooks/hooks.js";
 import {
 	type NotificationQuestionsFormValues,
@@ -25,8 +33,8 @@ import styles from "./styles.module.css";
 
 const Settings: React.FC = () => {
 	const user = useAppSelector((state) => state.auth.user) as UserDto;
-	const { control, handleSubmit } = useAppForm<NotificationQuestionsFormValues>(
-		{
+	const { control, handleSubmit, isDirty, reset } =
+		useAppForm<NotificationQuestionsFormValues>({
 			defaultValues: {
 				notificationFrequency: user.notificationFrequency as ValueOf<
 					typeof NotificationFrequency
@@ -34,8 +42,7 @@ const Settings: React.FC = () => {
 				userTaskDays: user.userTaskDays as number[],
 			},
 			validationSchema: notificationAnswersValidationSchema,
-		},
-	);
+		});
 
 	const dispatch = useAppDispatch();
 
@@ -55,37 +62,83 @@ const Settings: React.FC = () => {
 		[handleNotificationQuestionsSubmit, handleSubmit],
 	);
 
+	const blocker = useBlocker(isDirty);
+
+	const handleCancelPopupClick = useCallback((): void => {
+		if (blocker.state === "blocked") {
+			blocker.reset();
+		}
+	}, [blocker]);
+
+	const handleConfirmPopupClick = useCallback((): void => {
+		reset();
+
+		if (blocker.state === "blocked") {
+			blocker.proceed();
+		}
+	}, [blocker, reset]);
+
+	const handleBeforeUnload = useCallback(
+		(event: BeforeUnloadEvent): void => {
+			if (isDirty) {
+				event.preventDefault();
+				event.returnValue = "Reload site?";
+			}
+		},
+		[isDirty],
+	);
+
+	useEffect(() => {
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		return (): void => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+	}, [handleBeforeUnload]);
+
 	return (
-		<div>
-			<h1 className={styles["header"]}>Settings</h1>
-			<form className={styles["container"]} onSubmit={handleFormSubmit}>
-				<div className={styles["inputs"]}>
-					<div className={styles["notification-days-input"]}>
-						<Checkbox
-							control={control}
-							label="Day to receive tasks"
-							name="userTaskDays"
-							options={TASK_DAYS_OPTIONS}
-						/>
-					</div>
-					<hr className={styles["breakline"]} />
-					<div className={styles["notification-frequency-input"]}>
-						<div className={styles["width-limit"]}>
-							<Input
+		<>
+			<div>
+				<h4 className={styles["header"]}>Settings</h4>
+				<form className={styles["container"]} onSubmit={handleFormSubmit}>
+					<div className={styles["inputs"]}>
+						<div className={styles["notification-days-input"]}>
+							<Checkbox
 								control={control}
-								label="Notification frequency"
-								name="notificationFrequency"
-								options={NOTIFICATION_FREQUENCY_OPTIONS}
-								type="radio"
+								label="Days to receive tasks"
+								name="userTaskDays"
+								options={TASK_DAYS_OPTIONS}
 							/>
 						</div>
+						<hr className={styles["breakline"]} />
+						<div className={styles["notification-frequency-input"]}>
+							<div className={styles["width-limit"]}>
+								<Input
+									control={control}
+									label="Notification frequency"
+									name="notificationFrequency"
+									options={NOTIFICATION_FREQUENCY_OPTIONS}
+									type="radio"
+								/>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div className="button-container">
-					<Button label="save changes" type="submit" />
-				</div>
-			</form>
-		</div>
+					<div className="button-container">
+						<Button label="save changes" type="submit" />
+					</div>
+				</form>
+			</div>
+			<Popup
+				closeButtonLabel="CANCEL"
+				confirmButtonLabel="YES"
+				hasCloseIcon
+				icon={runImg}
+				isOpen={isDirty && blocker.state === "blocked"}
+				onClose={handleCancelPopupClick}
+				onConfirm={handleConfirmPopupClick}
+				title="Unsaved changes will be lost. Continue?"
+			/>
+		</>
 	);
 };
 

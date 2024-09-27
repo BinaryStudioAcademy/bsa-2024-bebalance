@@ -10,3 +10,9 @@
 	flex-direction: row;
 	gap: 10px;
 }
+
+@media (width <= 768px) {
+	.form {
+		width: 100%;
+	}
+}

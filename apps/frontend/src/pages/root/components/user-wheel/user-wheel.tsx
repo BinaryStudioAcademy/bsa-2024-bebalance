@@ -18,22 +18,24 @@ import {
 	RetakeQuizModal,
 	ScoresEditModal,
 } from "./libs/components/components.js";
+import {
+	NO_SCORES_COUNT,
+	NO_TASKS_PERCENTAGE,
+} from "./libs/constants/constants.js";
+import { getFormattedDate } from "./libs/helpers/helpers.js";
 import { type WheelEditMode } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
-const NO_SCORES_COUNT = 0;
-
 const UserWheel: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { completionTasksPercentage, dataStatus, scores } = useAppSelector(
-		({ auth, quiz }) => ({
+	const { completionTasksPercentage, dataStatus, scores, scoresLastUpdatedAt } =
+		useAppSelector(({ auth, quiz }) => ({
 			completionTasksPercentage: auth.user?.completionTasksPercentage,
 			dataStatus: quiz.dataStatus,
 			scores: quiz.scores,
-		}),
-	);
+			scoresLastUpdatedAt: quiz.scoresLastUpdatedAt,
+		}));
 	const [isEditingModalOpen, setIsEditingModalOpen] = useState<boolean>(false);
-	const [percentage, setPercentage] = useState<number>(NO_SCORES_COUNT);
 	const [editMode, setEditMode] = useState<WheelEditMode>("manual");
 	const isLoading = dataStatus === "pending";
 
@@ -47,6 +49,10 @@ const UserWheel: React.FC = () => {
 	const headerText = isEditingModalOpen
 		? "Edit my wheel results"
 		: "My wheel results";
+
+	const lastWheelUpdateDate = scoresLastUpdatedAt
+		? getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
+		: null;
 
 	const handleEditing = useCallback(() => {
 		setIsEditingModalOpen(true);
@@ -65,12 +71,6 @@ const UserWheel: React.FC = () => {
 	useEffect(() => {
 		void dispatch(quizActions.getScores());
 	}, [dispatch]);
-
-	useEffect(() => {
-		if (completionTasksPercentage) {
-			setPercentage(completionTasksPercentage);
-		}
-	}, [completionTasksPercentage]);
 
 	const handleGetModal = (mode: WheelEditMode): React.ReactNode => {
 		switch (mode) {
@@ -93,7 +93,12 @@ const UserWheel: React.FC = () => {
 	return (
 		<div className={styles["container"]}>
 			<div className={styles["header"]}>
-				<h4 className={styles["header-text"]}>{headerText}</h4>
+				<div className={styles["header-text-container"]}>
+					<h4 className={styles["header-text"]}>{headerText}</h4>
+					<div className={styles["date-container"]}>
+						<p className={styles["date"]}>{lastWheelUpdateDate}</p>
+					</div>
+				</div>
 				{isEditingModalOpen && (
 					<div className={styles["switch-container"]}>
 						<Switch
@@ -112,7 +117,9 @@ const UserWheel: React.FC = () => {
 				{scores.length > NO_SCORES_COUNT && (
 					<div>
 						<BalanceWheelChart data={chartData} />
-						<CircularProgress percentage={percentage} />
+						<CircularProgress
+							percentage={completionTasksPercentage ?? NO_TASKS_PERCENTAGE}
+						/>
 					</div>
 				)}
 				{isEditingModalOpen && handleGetModal(editMode)}

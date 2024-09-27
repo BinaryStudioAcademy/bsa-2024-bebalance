@@ -1,9 +1,15 @@
 import { Button, Slider } from "~/libs/components/components.js";
-import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 
-import { NO_SCORES_COUNT } from "./libs/constants/constants.js";
+import { IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -17,26 +23,32 @@ const ScoresEditModal: React.FC<Properties> = ({
 	onSaveChanges,
 }: Properties) => {
 	const dispatch = useAppDispatch();
+	const { scores: originalScores } = useAppSelector(({ quiz }) => ({
+		scores: quiz.scores,
+	}));
+
 	const [scores, setScores] = useState<ModalData[]>(data);
+	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
+		useState<boolean>(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
+	const [areChangesDiscarded, setAreChangesDiscarded] =
+		useState<boolean>(false);
 
 	const handleSaveChanges = useCallback(() => {
-		const originalScores = new Map(data.map((item) => [item.categoryId, item]));
-
-		const changedScores = scores.filter((score) => {
-			const originalScore = originalScores.get(score.categoryId);
-
-			return originalScore && score.score !== originalScore.score;
-		});
-
-		if (changedScores.length > NO_SCORES_COUNT) {
-			void dispatch(quizActions.editScores({ items: changedScores }));
+		if (!isDiscardButtonDisabled) {
+			void dispatch(
+				quizActions.editScores({
+					items: scores,
+				}),
+			);
 		}
 
 		onSaveChanges();
-	}, [onSaveChanges, dispatch, scores, data]);
+	}, [onSaveChanges, dispatch, scores, isDiscardButtonDisabled]);
 
 	const handleSliderChange = useCallback(
 		(categoryId: number, value: number) => {
+			setIsDiscardButtonDisabled(!IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
+
 			setScores(
 				scores.map((item) =>
 					item.categoryId === categoryId ? { ...item, score: value } : item,
@@ -59,13 +71,27 @@ const ScoresEditModal: React.FC<Properties> = ({
 		[scores, dispatch],
 	);
 
+	const handleDiscardChanges = useCallback(() => {
+		void dispatch(quizActions.getScores());
+		setAreChangesDiscarded((previousValue) => !previousValue);
+	}, [setAreChangesDiscarded, dispatch]);
+
+	useEffect(() => {
+		setScores(originalScores);
+
+		if (areChangesDiscarded) {
+			setAreChangesDiscarded((previousValue) => !previousValue);
+			setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
+		}
+	}, [areChangesDiscarded, setScores, originalScores]);
+
 	return (
 		<div className={styles["container"]}>
 			<p className={styles["text"]}>
 				Do you feel any changes in anything? Estimate the fields from 1 to 10
 			</p>
 			<div className={styles["scores-container"]}>
-				{data.map((item, index) => (
+				{scores.map((item, index) => (
 					<Slider
 						id={item.categoryId}
 						key={index}
@@ -75,7 +101,15 @@ const ScoresEditModal: React.FC<Properties> = ({
 					/>
 				))}
 			</div>
-			<Button label="Save changes" onClick={handleSaveChanges} />
+			<div className={styles["buttons-container"]}>
+				<Button label="Save changes" onClick={handleSaveChanges} />
+				<Button
+					isDisabled={isDiscardButtonDisabled}
+					label="Discard Changes"
+					onClick={handleDiscardChanges}
+					variant="secondary"
+				/>
+			</div>
 		</div>
 	);
 };

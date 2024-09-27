@@ -17,5 +17,6 @@ export { RouterProvider } from "./router-provider/router-provider.js";
 export { Sidebar } from "./sidebar/sidebar.js";
 export { Slider } from "./slider/slider.js";
 export { Switch } from "./switch/switch.js";
+export { TaskCard } from "./task-card/task-card.js";
 export { Provider as StoreProvider } from "react-redux";
 export { Navigate, Outlet as RouterOutlet } from "react-router-dom";

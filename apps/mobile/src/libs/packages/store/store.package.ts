@@ -8,12 +8,16 @@ import {
 import { AppEnvironment } from "~/libs/enums/enums";
 import { toastMessage } from "~/libs/packages/toast-message/toast-message";
 import { authApi } from "~/packages/auth/auth";
+import { chatApi } from "~/packages/chat/chat";
 import { onboardingApi } from "~/packages/onboarding/onboarding";
 import { quizApi } from "~/packages/quiz/quiz";
+import { tasksApi } from "~/packages/tasks/tasks";
 import { userApi } from "~/packages/users/users";
 import { reducer as authReducer } from "~/slices/auth/auth";
+import { reducer as chatReducer } from "~/slices/chat/chat";
 import { reducer as onboardingReducer } from "~/slices/onboarding/onboarding";
 import { reducer as quizReducer } from "~/slices/quiz/quiz";
+import { reducer as tasksReducer } from "~/slices/task/task";
 import { reducer as usersReducer } from "~/slices/users/users";
 
 import { type Config } from "../config/config";
@@ -21,15 +25,19 @@ import { handleErrorMiddleware } from "./middleware/handle-error.middleware";
 
 type RootReducer = {
 	auth: ReturnType<typeof authReducer>;
+	chat: ReturnType<typeof chatReducer>;
 	onboarding: ReturnType<typeof onboardingReducer>;
 	quiz: ReturnType<typeof quizReducer>;
+	tasks: ReturnType<typeof tasksReducer>;
 	users: ReturnType<typeof usersReducer>;
 };
 
 type ExtraArguments = {
 	authApi: typeof authApi;
+	chatApi: typeof chatApi;
 	onboardingApi: typeof onboardingApi;
 	quizApi: typeof quizApi;
+	tasksApi: typeof tasksApi;
 	toastMessage: typeof toastMessage;
 	userApi: typeof userApi;
 };
@@ -55,8 +63,10 @@ class Store {
 			},
 			reducer: {
 				auth: authReducer,
+				chat: chatReducer,
 				onboarding: onboardingReducer,
 				quiz: quizReducer,
+				tasks: tasksReducer,
 				users: usersReducer,
 			},
 		});
@@ -65,8 +75,10 @@ class Store {
 	public get extraArguments(): ExtraArguments {
 		return {
 			authApi,
+			chatApi,
 			onboardingApi,
 			quizApi,
+			tasksApi,
 			toastMessage,
 			userApi,
 		};

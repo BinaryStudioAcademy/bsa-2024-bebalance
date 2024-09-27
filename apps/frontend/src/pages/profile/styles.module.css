@@ -1,51 +1,23 @@
 .page-container {
-	padding: 35px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	padding: 10px 35px;
 }
 
-.content-container {
-	display: grid;
-	grid-template-columns: 200px 350px;
-	column-gap: 20px;
+.header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.title {
-	margin-bottom: 24px;
+.header-title {
 	font-size: 20px;
 	font-weight: 700;
 	line-height: 25px;
 }
 
-.user-info {
-	display: grid;
-	grid-template-columns: auto auto;
-	gap: 10px;
-	font-size: 16px;
-}
-
-.user-info-container {
-	display: flex;
-	flex-direction: column;
-	gap: 35px;
-}
-
-.label {
-	font-weight: bold;
-}
-
-.title-password {
-	margin-top: 32px;
-	font-size: 18px;
-	font-weight: 700;
-}
-
-.password-container {
-	display: grid;
-	grid-template-columns: 200px 350px auto;
-	gap: 20px;
-	align-items: end;
-}
-
 .button-container {
 	justify-self: end;
-	width: 300px;
+	width: fit-content;
 }

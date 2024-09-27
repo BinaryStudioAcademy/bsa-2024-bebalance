@@ -34,15 +34,30 @@ import { QUIZ_FORM_DEFAULT_VALUES } from "./libs/constants/costants";
 import {
 	type QuizAnswersRequestDto,
 	type QuizFormValues,
+	type QuizQuestionDto,
 	type RootStackParameterList,
 } from "./libs/types/types";
 import { styles } from "./styles";
+
+function extractCategoryIdsFromQuestions(
+	questions: QuizQuestionDto[],
+): number[] {
+	const categoryIds = new Set<number>();
+
+	for (const questionsInsideCategory of questions) {
+		categoryIds.add(questionsInsideCategory.categoryId);
+	}
+
+	return [...categoryIds];
+}
 
 const Quiz: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const infinitePagerReference = useRef<InfinitePagerImperativeApi | null>(
 		null,
 	);
+
+	const { isRetakingQuiz } = useAppSelector(({ quiz }) => quiz);
 
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
@@ -61,8 +76,10 @@ const Quiz: React.FC = () => {
 		currentQuestionIndex + NumericalValue.ONE === totalQuestionsAmount;
 
 	useEffect(() => {
-		void dispatch(quizActions.getAllQuestions());
-	}, [dispatch]);
+		if (!isRetakingQuiz) {
+			void dispatch(quizActions.getAllQuestions());
+		}
+	}, [dispatch, isRetakingQuiz]);
 
 	const { control, errors, handleSubmit, isValid, reset } =
 		useAppForm<QuizFormValues>({
@@ -93,7 +110,19 @@ const Quiz: React.FC = () => {
 			);
 
 			if (isLastQuestion) {
-				handleSaveAnswers({ answerIds: [...answersByQuestionIndex, answerId] });
+				const saveAnswersPayload: {
+					answerIds: number[];
+					categoryIds?: number[];
+				} = {
+					answerIds: [...answersByQuestionIndex, answerId],
+				};
+
+				if (isRetakingQuiz) {
+					saveAnswersPayload.categoryIds =
+						extractCategoryIdsFromQuestions(questions);
+				}
+
+				handleSaveAnswers(saveAnswersPayload);
 			}
 
 			infinitePagerReference.current?.incrementPage({ animated: true });
@@ -105,8 +134,10 @@ const Quiz: React.FC = () => {
 			dispatch,
 			currentQuestionIndex,
 			isLastQuestion,
+			isRetakingQuiz,
 			answersByQuestionIndex,
 			handleSaveAnswers,
+			questions,
 		],
 	);
 
@@ -120,9 +151,18 @@ const Quiz: React.FC = () => {
 		void handleSubmit(handleNextClick)();
 
 		if (isLastQuestion) {
-			navigation.navigate(QuestionsStackName.NOTIFICATION_QUESTIONS);
+			const destinationScreen = isRetakingQuiz
+				? QuestionsStackName.WHEEL_LOADING
+				: QuestionsStackName.NOTIFICATION_QUESTIONS;
+			navigation.navigate(destinationScreen);
 		}
-	}, [handleNextClick, handleSubmit, isLastQuestion, navigation]);
+	}, [
+		handleNextClick,
+		handleSubmit,
+		isLastQuestion,
+		navigation,
+		isRetakingQuiz,
+	]);
 
 	const handleRenderPageComponent = useCallback(() => {
 		return (

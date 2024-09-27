@@ -1,5 +1,6 @@
-import { Loader, Switch } from "~/libs/components/components.js";
+import { Loader, Switch, TaskCard } from "~/libs/components/components.js";
 import { DataStatus } from "~/libs/enums/enums.js";
+import { getMillisecondsLeft } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -8,30 +9,35 @@ import {
 	useState,
 } from "~/libs/hooks/hooks.js";
 import { type ValueOf } from "~/libs/types/types.js";
-import { actions as taskActions, type TaskDto } from "~/modules/tasks/tasks.js";
+import {
+	actions as taskActions,
+	type TaskDto,
+	type TaskNoteRequestDto,
+} from "~/modules/tasks/tasks.js";
+import { actions as userActions, type UserDto } from "~/modules/users/users.js";
 
-import { ExpiredTasksModal, TaskCard } from "./libs/components/components.js";
+import { ExpiredTasksModal } from "./libs/components/components.js";
 import { NO_EXPIRED_TASKS } from "./libs/constants/constants.js";
 import {
 	MillisecondsPerUnit,
 	TasksMode,
 	TaskStatus,
 } from "./libs/enums/enums.js";
-import { getMillisecondsLeft } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { activeTasks, dataStatus, expiredTasks, tasks } = useAppSelector(
-		({ tasks }) => {
+	const { activeTasks, authenticatedUser, dataStatus, expiredTasks, tasks } =
+		useAppSelector(({ auth, tasks, users }) => {
 			return {
 				activeTasks: tasks.activeTasks,
+				authenticatedUser: auth.user,
 				dataStatus: tasks.dataStatus,
 				expiredTasks: tasks.expiredTasks,
 				tasks: tasks.tasks,
+				user: users.user,
 			};
-		},
-	);
+		});
 
 	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
 		TasksMode.CURRENT,
@@ -77,6 +83,20 @@ const Tasks: React.FC = () => {
 		}
 	}, [dispatch, mode]);
 
+	const handleAddTaskNote = useCallback(
+		(payload: TaskNoteRequestDto) => {
+			void dispatch(taskActions.addNote(payload));
+		},
+		[dispatch],
+	);
+
+	const handleGetTaskNotes = useCallback(
+		(id: number) => {
+			void dispatch(taskActions.getTaskNotes({ id }));
+		},
+		[dispatch],
+	);
+
 	const handleModeToggle = useCallback(() => {
 		setMode((previousState) => {
 			return previousState === TasksMode.CURRENT
@@ -85,18 +105,30 @@ const Tasks: React.FC = () => {
 		});
 	}, []);
 
-	const handleSkip = useCallback(
-		(id: number): void => {
-			void dispatch(taskActions.update({ id, status: TaskStatus.SKIPPED }));
+	const handleTaskUpdateAction = useCallback(
+		async (id: number, status: ValueOf<typeof TaskStatus>): Promise<void> => {
+			await dispatch(taskActions.update({ id, status }));
+			void dispatch(
+				userActions.updateTasksCompletionPercentage({
+					id: (authenticatedUser as UserDto).id,
+				}),
+			);
 		},
-		[dispatch],
+		[dispatch, authenticatedUser],
+	);
+
+	const handleSkip = useCallback(
+		(id: number) => {
+			void handleTaskUpdateAction(id, TaskStatus.SKIPPED);
+		},
+		[handleTaskUpdateAction],
 	);
 
 	const handleComplete = useCallback(
-		(id: number): void => {
-			void dispatch(taskActions.update({ id, status: TaskStatus.COMPLETED }));
+		(id: number) => {
+			void handleTaskUpdateAction(id, TaskStatus.COMPLETED);
 		},
-		[dispatch],
+		[handleTaskUpdateAction],
 	);
 
 	const handleRenderTaskCards = (tasks: TaskDto[]): JSX.Element[] => {
@@ -104,8 +136,10 @@ const Tasks: React.FC = () => {
 			return (
 				<TaskCard
 					key={task.id}
+					onAddTaskNote={handleAddTaskNote}
 					onComplete={handleComplete}
 					onExpire={handleTaskExpiration}
+					onGetTaskNotes={handleGetTaskNotes}
 					onSkip={handleSkip}
 					task={task}
 				/>
@@ -119,7 +153,11 @@ const Tasks: React.FC = () => {
 	return (
 		<>
 			{expiredTasks.length > NO_EXPIRED_TASKS && mode === TasksMode.CURRENT && (
-				<ExpiredTasksModal tasks={expiredTasks} />
+				<ExpiredTasksModal
+					onAddTaskNote={handleAddTaskNote}
+					onGetTaskNotes={handleGetTaskNotes}
+					tasks={expiredTasks}
+				/>
 			)}
 			<h4 className={styles["title"]}>My Tasks</h4>
 			<div className={styles["board"]}>

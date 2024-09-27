@@ -9,7 +9,14 @@ import {
 	type QuizUserAnswerDto,
 } from "~/packages/quiz/quiz";
 
-import { editScores, getAllQuestions, getScores, saveAnswers } from "./actions";
+import { signOut } from "../auth/actions";
+import {
+	editScores,
+	getAllQuestions,
+	getQuestionsByCategoryIds,
+	getScores,
+	saveAnswers,
+} from "./actions";
 
 type Properties = {
 	answerId: number;
@@ -21,8 +28,10 @@ type State = {
 	currentQuestion: null | QuizQuestionDto;
 	currentQuestionIndex: number;
 	dataStatus: ValueOf<typeof DataStatus>;
+	isRetakingQuiz: boolean;
 	questions: QuizQuestionDto[];
 	scores: QuizScoresGetAllItemResponseDto[];
+	scoresLastUpdatedAt: null | string;
 	userAnswers: QuizUserAnswerDto[];
 };
 
@@ -31,8 +40,10 @@ const initialState: State = {
 	currentQuestion: null,
 	currentQuestionIndex: ZERO_INDEX,
 	dataStatus: DataStatus.IDLE,
+	isRetakingQuiz: false,
 	questions: [],
 	scores: [],
+	scoresLastUpdatedAt: null,
 	userAnswers: [],
 };
 
@@ -44,6 +55,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(getScores.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
 			state.scores = action.payload.items;
+			state.scoresLastUpdatedAt = action.payload.updatedAt;
 		});
 		builder.addCase(getScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -58,6 +70,19 @@ const { actions, name, reducer } = createSlice({
 				state.questions[state.currentQuestionIndex] ?? null;
 		});
 		builder.addCase(getAllQuestions.rejected, (state) => {
+			state.dataStatus = DataStatus.REJECTED;
+		});
+		builder.addCase(getQuestionsByCategoryIds.pending, (state) => {
+			state.dataStatus = DataStatus.PENDING;
+			state.isRetakingQuiz = true;
+		});
+		builder.addCase(getQuestionsByCategoryIds.fulfilled, (state, action) => {
+			state.dataStatus = DataStatus.FULFILLED;
+			state.questions = action.payload.items.flat();
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] ?? null;
+		});
+		builder.addCase(getQuestionsByCategoryIds.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
 		builder.addCase(editScores.fulfilled, (state, action) => {
@@ -78,6 +103,7 @@ const { actions, name, reducer } = createSlice({
 			});
 
 			state.dataStatus = DataStatus.FULFILLED;
+			state.scoresLastUpdatedAt = action.payload.updatedAt;
 		});
 		builder.addCase(editScores.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -95,10 +121,19 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(saveAnswers.pending, (state) => {
 			state.dataStatus = DataStatus.PENDING;
 		});
+		builder.addCase(signOut.pending, () => {
+			return initialState;
+		});
 	},
 	initialState,
 	name: "quiz",
 	reducers: {
+		cleanAnswers(state) {
+			state.answersByQuestionIndex = [];
+			state.currentQuestionIndex = initialState.currentQuestionIndex;
+			state.currentQuestion =
+				state.questions[state.currentQuestionIndex] ?? null;
+		},
 		nextQuestion(state) {
 			state.currentQuestionIndex += PREVIOUS_INDEX_OFFSET;
 			state.currentQuestion =
@@ -114,6 +149,9 @@ const { actions, name, reducer } = createSlice({
 		setAnswersByQuestionIndex: (state, action: PayloadAction<Properties>) => {
 			const { answerId, questionIndex } = action.payload;
 			state.answersByQuestionIndex[questionIndex] = answerId;
+		},
+		setRetakingQuiz: (state, action: PayloadAction<boolean>) => {
+			state.isRetakingQuiz = action.payload;
 		},
 	},
 });

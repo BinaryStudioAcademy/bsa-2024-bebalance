@@ -19,4 +19,5 @@ export {
 	ContentType,
 	NumericalValue,
 	ServerErrorType,
+	TaskStatus,
 } from "shared";

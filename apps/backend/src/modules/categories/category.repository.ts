@@ -1,14 +1,14 @@
-import { RelationName } from "~/libs/enums/enums.js";
+import { RelationName, SortOrder } from "~/libs/enums/enums.js";
 import { DatabaseTableName } from "~/libs/modules/database/database.js";
 import { type Repository } from "~/libs/types/types.js";
 
 import { CategoryEntity } from "./category.entity.js";
 import { type CategoryModel } from "./category.model.js";
 import {
-	type CategoryScoreModel,
 	type CategoryUpdateRequestDto,
 	type QuizScoreDto,
 } from "./libs/types/types.js";
+import { type ScoreModel } from "./score.model.js";
 
 class CategoryRepository implements Repository {
 	private categoryModel: typeof CategoryModel;
@@ -50,7 +50,7 @@ class CategoryRepository implements Repository {
 			.castTo<CategoryModel>();
 
 		await category
-			.$relatedQuery<CategoryScoreModel>(RelationName.SCORES)
+			.$relatedQuery<ScoreModel>(RelationName.SCORES)
 			.relate({ id: userId, score });
 
 		return await this.categoryModel
@@ -123,19 +123,27 @@ class CategoryRepository implements Repository {
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
 			.findOne({ userId })
-			.castTo<CategoryScoreModel | null>();
+			.castTo<ScoreModel | undefined>();
 
-		return scoreModel
-			? CategoryEntity.initialize({
-					createdAt: scoreModel.createdAt,
-					id: scoreModel.id,
-					name: scoreModel.name,
-					score: scoreModel.score,
-					scores: [],
-					updatedAt: scoreModel.updatedAt,
-					userId: scoreModel.userId,
-				})
-			: null;
+		if (!scoreModel) {
+			return null;
+		}
+
+		const { name } = await this.categoryModel
+			.query()
+			.findById(scoreModel.categoryId)
+			.select("name")
+			.castTo<CategoryModel>();
+
+		return CategoryEntity.initialize({
+			createdAt: scoreModel.createdAt,
+			id: scoreModel.id,
+			name,
+			score: scoreModel.score,
+			scores: [],
+			updatedAt: scoreModel.updatedAt,
+			userId: scoreModel.userId,
+		});
 	}
 
 	public async findUserScores(userId: number): Promise<CategoryEntity[]> {
@@ -147,11 +155,21 @@ class CategoryRepository implements Repository {
 					.query()
 					.from(DatabaseTableName.QUIZ_SCORES)
 					.where({ categoryId: category.id, userId })
+					.orderBy("updatedAt", SortOrder.DESC)
 					.returning("*")
-					.castTo<CategoryScoreModel[]>();
+					.castTo<ScoreModel[]>();
 
 				const scoreEntities = scoresModel.map((score) => {
-					return CategoryEntity.initialize(score);
+					return CategoryEntity.initialize({
+						categoryId: category.id,
+						createdAt: score.createdAt,
+						id: score.id,
+						name: category.name,
+						score: score.score,
+						scores: [],
+						updatedAt: score.updatedAt,
+						userId: score.userId,
+					});
 				});
 
 				return CategoryEntity.initialize({
@@ -198,7 +216,7 @@ class CategoryRepository implements Repository {
 			.castTo<CategoryModel>();
 
 		await categoryModel
-			.$relatedQuery<CategoryScoreModel>(RelationName.SCORES)
+			.$relatedQuery<ScoreModel>(RelationName.SCORES)
 			.where({ userId })
 			.patch({ score });
 
@@ -206,7 +224,7 @@ class CategoryRepository implements Repository {
 			.query()
 			.from(DatabaseTableName.QUIZ_SCORES)
 			.findOne({ categoryId, userId })
-			.castTo<CategoryScoreModel>();
+			.castTo<ScoreModel>();
 
 		return CategoryEntity.initialize({
 			categoryId: categoryModel.id,

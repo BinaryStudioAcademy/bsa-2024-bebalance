@@ -6,6 +6,7 @@ export {
 	type TaskNoteDto,
 	type TaskNoteParametersDto,
 	type TaskNoteRequestDto,
+	type TaskPayload,
 	type TaskUpdateParametersDto,
 	type TaskUpdateRequestDto,
 } from "./libs/types/types.js";
