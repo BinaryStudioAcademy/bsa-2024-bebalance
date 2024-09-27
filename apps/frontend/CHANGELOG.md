@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.49.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.48.1...frontend-v1.49.0) (2024-09-27)
+
+
+### Features
+
+* **frontend:** popup on profile when user leaves bb-473 ([#574](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/574)) ([6848758](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/684875827d05940aa93ac70f1db2a8f69265143d))
+* **frontend:** responsiveness for wheel of balance (root) screen bb-586 ([#604](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/604)) ([a0142e8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/a0142e86db7841e7953ddbf54933795c272a6bf7))
+* **frontend:** task explanations bb-340 ([#589](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/589)) ([58e0557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/58e0557e50b32aaf29b7b1214c8c3ff9b53178d0))
+
+
+### Bug Fixes
+
+* **frontend:** Add notes to tasks bb-419 ([#592](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/592)) ([1f34a05](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/1f34a0501c9bd7e2a19ea3ff1b77804b453d314e))
+* **frontend:** popup about unsaved changes appears after saving changes bb-465 ([#600](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/600)) ([e15ee1b](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/e15ee1b273651fd26f52da7542eb287f234d5eb3))
+
 ## [1.48.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.48.0...frontend-v1.48.1) (2024-09-26)
 
 
