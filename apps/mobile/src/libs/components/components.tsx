@@ -43,6 +43,7 @@ export {
 	ActivityIndicator,
 	FlatList,
 	Image,
+	ImageBackground,
 	KeyboardAvoidingView,
 	Pressable,
 	ScrollView,
