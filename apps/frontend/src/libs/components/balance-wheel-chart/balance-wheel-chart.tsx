@@ -29,11 +29,13 @@ ChartJS.register(PolarAreaController, ArcElement, Tooltip, RadialLinearScale);
 type Properties = {
 	data: ChartDataType[];
 	isAnimating?: boolean;
+	variant?: "animation" | "chat" | "root";
 };
 
 const BalanceWheelChart: React.FC<Properties> = ({
 	data,
 	isAnimating = false,
+	variant = "root",
 }: Properties) => {
 	const chartReference = useRef<ChartJS<PolarAreaType> | null>(null);
 
@@ -121,13 +123,7 @@ const BalanceWheelChart: React.FC<Properties> = ({
 	}, [data, handleUpdateChartData]);
 
 	return (
-		<div
-			className={
-				isAnimating
-					? styles["animation-container"]
-					: styles["root-wheel-container"]
-			}
-		>
+		<div className={styles[`${variant}-wheel-container`]}>
 			<canvas ref={handleRenderChart} />
 		</div>
 	);
