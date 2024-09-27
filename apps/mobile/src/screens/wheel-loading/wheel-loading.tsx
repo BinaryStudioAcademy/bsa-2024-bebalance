@@ -45,7 +45,7 @@ const WheelLoading: React.FC = () => {
 		if (percentLoading === LoadingSetting.MAX_PERCENT) {
 			navigation.navigate(QuestionsStackName.BOTTOM_TABS);
 		}
-	}, [percentLoading]);
+	}, [percentLoading, navigation]);
 
 	return (
 		<BackgroundWrapper planetLayout="wheelLoading">
