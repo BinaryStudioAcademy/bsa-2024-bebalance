@@ -3,6 +3,7 @@ import { type ComponentProps } from "react";
 import {
 	Button,
 	MultipleCheckboxInput,
+	OnLeaveModal,
 	RadioGroup,
 	ScreenWrapper,
 	ScrollView,
@@ -34,7 +35,6 @@ import {
 import { actions as authActions } from "~/slices/auth/auth";
 import { actions as userActions } from "~/slices/users/users";
 
-import { SignOutModal } from "./libs/components/components";
 import { styles } from "./styles";
 
 const Settings: React.FC = () => {
@@ -70,7 +70,7 @@ const Settings: React.FC = () => {
 	);
 
 	const modalButtonsConfiguration: ComponentProps<
-		typeof SignOutModal
+		typeof OnLeaveModal
 	>["buttonsConfiguration"] = [
 		{
 			appearance: "outlined",
@@ -166,8 +166,10 @@ const Settings: React.FC = () => {
 						/>
 					</View>
 				</View>
-				<SignOutModal
+				<OnLeaveModal
 					buttonsConfiguration={modalButtonsConfiguration}
+					description="Oh no! You're one step away from life balance. Are you sure you
+						want to leave?"
 					isVisible={isConfirmationModalVisible}
 					onBackdropPress={handleModalDismiss}
 				/>

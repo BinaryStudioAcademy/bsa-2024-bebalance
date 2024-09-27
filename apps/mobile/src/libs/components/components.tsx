@@ -21,6 +21,7 @@ export { Logo } from "./logo/logo";
 export { Modal } from "./modal/modal";
 export { MultipleCheckboxInput } from "./multiple-checkbox-input/multiple-checkbox-input";
 export { MultipleSliderInput } from "./multiple-slider-input/multiple-slider-input";
+export { OnLeaveModal } from "./on-leave-modal/on-leave-modal";
 export { PageSwitcher } from "./page-switcher/page-switcher";
 export { Planet } from "./planet/planet";
 export { ProgressBar } from "./progress-bar/progress-bar";

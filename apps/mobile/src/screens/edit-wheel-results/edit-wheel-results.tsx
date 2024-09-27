@@ -1,9 +1,10 @@
 import { StackActions } from "@react-navigation/native";
-import React from "react";
+import React, { type ComponentProps } from "react";
 
 import {
 	CheckboxCategoriesForm,
 	LoaderWrapper,
+	OnLeaveModal,
 	PageSwitcher,
 	ScreenWrapper,
 	ScrollView,
@@ -42,7 +43,30 @@ const EditWheelResults: React.FC = () => {
 		>();
 
 	const { dataStatus, scores } = useAppSelector((state) => state.quiz);
+
 	const dispatch = useAppDispatch();
+
+	const [isConfirmationModalVisible, setIsConfirmationModalVisible] =
+		useState<boolean>(false);
+
+	const handleModalDismiss = useCallback((): void => {
+		setIsConfirmationModalVisible(false);
+	}, []);
+
+	const modalButtonsConfiguration: ComponentProps<
+		typeof OnLeaveModal
+	>["buttonsConfiguration"] = [
+		{
+			appearance: "filled",
+			label: "Yes",
+			onPress: handleModalDismiss,
+		},
+		{
+			appearance: "outlined",
+			label: "Cancel",
+			onPress: handleModalDismiss,
+		},
+	];
 
 	const handleEditScores = useCallback(
 		(payload: QuizScoresUpdateRequestDto) => {
@@ -136,6 +160,12 @@ const EditWheelResults: React.FC = () => {
 					)}
 				</View>
 			</LoaderWrapper>
+			<OnLeaveModal
+				buttonsConfiguration={modalButtonsConfiguration}
+				description="Unsaved changes will be lost. Continue?"
+				isVisible={isConfirmationModalVisible}
+				onBackdropPress={handleModalDismiss}
+			/>
 		</ScreenWrapper>
 	);
 };
