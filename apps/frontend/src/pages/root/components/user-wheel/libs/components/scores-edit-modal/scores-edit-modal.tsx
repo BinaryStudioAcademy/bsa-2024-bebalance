@@ -1,10 +1,12 @@
-import { Button, Slider } from "~/libs/components/components.js";
+import runImg from "~/assets/img/run.svg";
+import { Button, Popup, Slider } from "~/libs/components/components.js";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
 	useEffect,
 	useState,
+	useUnsavedChangesBlocker,
 } from "~/libs/hooks/hooks.js";
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
@@ -85,32 +87,50 @@ const ScoresEditModal: React.FC<Properties> = ({
 		}
 	}, [areChangesDiscarded, setScores, originalScores]);
 
+	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
+		useUnsavedChangesBlocker({
+			hasUnsavedChanges: !isDiscardButtonDisabled,
+			reset: handleDiscardChanges,
+		});
+
 	return (
-		<div className={styles["container"]}>
-			<p className={styles["text"]}>
-				Do you feel any changes in anything? Estimate the fields from 1 to 10
-			</p>
-			<div className={styles["scores-container"]}>
-				{scores.map((item, index) => (
-					<Slider
-						id={item.categoryId}
-						key={index}
-						label={item.categoryName}
-						onValueChange={handleSliderChange}
-						value={item.score}
+		<>
+			<Popup
+				closeButtonLabel="CANCEL"
+				confirmButtonLabel="YES"
+				hasCloseIcon
+				icon={runImg}
+				isOpen={!isDiscardButtonDisabled && isBlocked}
+				onClose={handlePopupCancel}
+				onConfirm={handlePopupConfirm}
+				title="Unsaved changes will be lost. Continue?"
+			/>
+			<div className={styles["container"]}>
+				<p className={styles["text"]}>
+					Do you feel any changes in anything? Estimate the fields from 1 to 10
+				</p>
+				<div className={styles["scores-container"]}>
+					{scores.map((item, index) => (
+						<Slider
+							id={item.categoryId}
+							key={index}
+							label={item.categoryName}
+							onValueChange={handleSliderChange}
+							value={item.score}
+						/>
+					))}
+				</div>
+				<div className={styles["buttons-container"]}>
+					<Button label="Save changes" onClick={handleSaveChanges} />
+					<Button
+						isDisabled={isDiscardButtonDisabled}
+						label="Discard Changes"
+						onClick={handleDiscardChanges}
+						variant="secondary"
 					/>
-				))}
+				</div>
 			</div>
-			<div className={styles["buttons-container"]}>
-				<Button label="Save changes" onClick={handleSaveChanges} />
-				<Button
-					isDisabled={isDiscardButtonDisabled}
-					label="Discard Changes"
-					onClick={handleDiscardChanges}
-					variant="secondary"
-				/>
-			</div>
-		</div>
+		</>
 	);
 };
 
