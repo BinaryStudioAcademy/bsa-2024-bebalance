@@ -76,14 +76,12 @@ const ScoresEditModal: React.FC<Properties> = ({
 	const handleDiscardChanges = useCallback(() => {
 		void dispatch(quizActions.getScores());
 		setAreChangesDiscarded((previousValue) => !previousValue);
-		setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 	}, [setAreChangesDiscarded, dispatch]);
 
 	useEffect(() => {
 		setScores(originalScores);
 
 		if (areChangesDiscarded) {
-			setAreChangesDiscarded((previousValue) => !previousValue);
 			setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 		}
 	}, [areChangesDiscarded, setScores, originalScores]);
