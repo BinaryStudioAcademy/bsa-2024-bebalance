@@ -51,6 +51,22 @@ class TasksApi extends BaseHttpApi {
 
 		return await response.json<TaskDto>();
 	}
+
+	public async updateTaskDeadline(id: number): Promise<TaskDto> {
+		const response = await this.load(
+			this.getFullEndpoint(TasksApiPath.$ID_DEADLINE, {
+				id: id.toString(),
+			}),
+			{
+				contentType: ContentType.JSON,
+				hasAuth: true,
+				method: "PATCH",
+				payload: JSON.stringify({}),
+			},
+		);
+
+		return await response.json<TaskDto>();
+	}
 }
 
 export { TasksApi };
