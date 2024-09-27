@@ -12,6 +12,7 @@ import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 import {
 	AFTER_DISCARD_CHANGES_DELAY,
 	IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE,
+	IS_RESET_CHANGES_SCORES_INITIAL_VALUE,
 } from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
@@ -33,7 +34,9 @@ const ScoresEditModal: React.FC<Properties> = ({
 	const [scores, setScores] = useState<ModalData[]>(data);
 	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
 		useState<boolean>(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
-	const [isResetChanges, setIsResetChanges] = useState<boolean>(false);
+	const [isResetChanges, setIsResetChanges] = useState<boolean>(
+		IS_RESET_CHANGES_SCORES_INITIAL_VALUE,
+	);
 
 	const handleSaveChanges = useCallback(() => {
 		if (!isDiscardButtonDisabled) {
@@ -79,13 +82,13 @@ const ScoresEditModal: React.FC<Properties> = ({
 
 	const handleDiscardChanges = useCallback(() => {
 		void dispatch(quizActions.getScores());
-		setIsResetChanges(true);
+		setIsResetChanges(!IS_RESET_CHANGES_SCORES_INITIAL_VALUE);
 	}, [setIsResetChanges, dispatch]);
 
 	useEffect(() => {
 		if (areChangesScores()) {
 			setScores(originalScores);
-			setIsResetChanges(false);
+			setIsResetChanges(IS_RESET_CHANGES_SCORES_INITIAL_VALUE);
 			setTimeout(() => {
 				setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
 			}, AFTER_DISCARD_CHANGES_DELAY);
