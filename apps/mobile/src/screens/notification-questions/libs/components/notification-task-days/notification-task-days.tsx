@@ -5,15 +5,15 @@ import {
 	Text,
 	View,
 } from "~/libs/components/components";
+import { TASK_DAYS_OPTIONS } from "~/libs/constants/constants";
 import { globalStyles } from "~/libs/styles/styles";
 import {
 	type Control,
 	type FieldErrors,
 	type FieldValues,
+	type NotificationQuestionsFormValues,
 } from "~/libs/types/types";
 
-import { TASK_DAYS_OPTIONS } from "../../constants/constants";
-import { type NotificationQuestionsFormValues } from "../../types/types";
 import { styles } from "./styles";
 
 type Properties<T extends FieldValues> = {
