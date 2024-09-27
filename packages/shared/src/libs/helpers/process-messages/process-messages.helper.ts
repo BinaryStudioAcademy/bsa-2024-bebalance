@@ -33,11 +33,12 @@ const processMessages = (
 		}
 
 		if (checkIsTaskMessage(message)) {
-			const { task } = message.payload;
+			const { task, text } = message.payload;
+
 			taskSuggestions.push({
 				categoryId: task.categoryId,
 				categoryName: task.categoryName,
-				description: task.description,
+				description: text ?? task.description,
 				label: task.label,
 			});
 		}
