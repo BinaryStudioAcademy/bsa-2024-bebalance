@@ -31,6 +31,8 @@ const TaskActionButton: React.FC<Properties> = ({
 		};
 	}, [type]);
 
+	const contentColor = isDisabled ? BaseColor.GRAY : BaseColor.BLACK;
+
 	return (
 		<Pressable disabled={isDisabled} onPress={onPress}>
 			{({ pressed }) => {
@@ -50,8 +52,13 @@ const TaskActionButton: React.FC<Properties> = ({
 							activeStyles,
 						]}
 					>
-						<Icon color={BaseColor.BLACK} name={iconName} size={ICON_SIZE} />
-						<Text preset="regular" style={globalStyles.pl8} weight="semiBold">
+						<Icon color={contentColor} name={iconName} size={ICON_SIZE} />
+						<Text
+							color={contentColor}
+							preset="regular"
+							style={globalStyles.pl8}
+							weight="semiBold"
+						>
 							{label}
 						</Text>
 					</View>
