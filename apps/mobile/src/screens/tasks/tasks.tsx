@@ -2,11 +2,11 @@ import React from "react";
 
 import {
 	ExpiredTasksModal,
+	FlatList,
 	ImageBackground,
 	LoaderWrapper,
 	PageSwitcher,
 	ScreenWrapper,
-	ScrollView,
 	TaskCard,
 	Text,
 	View,
@@ -20,13 +20,14 @@ import {
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type ImageSourcePropType, type ValueOf } from "~/libs/types/types";
+import { type ImageSourcePropType } from "~/libs/types/types";
 import { type TaskDto } from "~/packages/tasks/tasks";
 import { type UserDto } from "~/packages/users/users";
 import { actions as taskActions } from "~/slices/task/task";
 import { actions as userActions } from "~/slices/users/users";
 
-import { TasksMode, TaskStatus, TaskTab } from "./libs/enums/enums";
+import { EmptyTasksHeader } from "./libs/components/components";
+import { TaskStatus, TaskTab } from "./libs/enums/enums";
 import { getMillisecondsLeft } from "./libs/helpers/helpers";
 import { styles } from "./styles";
 
@@ -40,12 +41,10 @@ const Tasks: React.FC = () => {
 		({ tasks }) => tasks,
 	);
 
-	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
-		TasksMode.CURRENT,
-	);
+	const [isCurrentMode, setIsCurrentMode] = useState<boolean>(true);
 
 	const hasExpiredTasks = expiredTasks.length > NumericalValue.ZERO;
-	const taskbarTasks = mode === TasksMode.CURRENT ? activeTasks : tasks;
+	const taskbarTasks = isCurrentMode ? activeTasks : tasks;
 
 	useEffect(() => {
 		void dispatch(
@@ -54,14 +53,12 @@ const Tasks: React.FC = () => {
 	}, [dispatch, authenticatedUser]);
 
 	useEffect(() => {
-		if (mode === TasksMode.CURRENT) {
+		if (isCurrentMode) {
 			void dispatch(taskActions.getCurrentTasks());
-		}
-
-		if (mode === TasksMode.PAST) {
+		} else {
 			void dispatch(taskActions.getPastTasks());
 		}
-	}, [dispatch, mode]);
+	}, [dispatch, isCurrentMode]);
 
 	useEffect(() => {
 		const currentTime = Date.now();
@@ -87,12 +84,8 @@ const Tasks: React.FC = () => {
 	}, [tasks, dispatch]);
 
 	const handleModeToggle = useCallback(() => {
-		setMode((previousState) => {
-			return previousState === TasksMode.CURRENT
-				? TasksMode.PAST
-				: TasksMode.CURRENT;
-		});
-	}, []);
+		setIsCurrentMode(!isCurrentMode);
+	}, [isCurrentMode]);
 
 	const handleSkip = useCallback(
 		(id: number): void => {
@@ -117,6 +110,34 @@ const Tasks: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleRenderTask = useCallback(
+		({ item }: { item: TaskDto }) => {
+			return (
+				<TaskCard
+					key={item.id}
+					onComplete={handleComplete}
+					onExpire={handleExpired}
+					onSkip={handleSkip}
+					task={item}
+				/>
+			);
+		},
+		[handleComplete, handleExpired, handleSkip],
+	);
+
+	const handleKeyExtractor = useCallback(
+		(item: TaskDto, index: number) => index.toString(),
+		[],
+	);
+
+	const emptyTasksComponent = useCallback(() => {
+		const content = isCurrentMode
+			? "You don't have any active tasks"
+			: "You don't have any past tasks";
+
+		return <EmptyTasksHeader content={content} />;
+	}, [isCurrentMode]);
+
 	return (
 		<ScreenWrapper edges={["top", "left", "right"]} style={styles.container}>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
@@ -137,9 +158,7 @@ const Tasks: React.FC = () => {
 								My Tasks
 							</Text>
 							<PageSwitcher
-								activeTab={
-									mode === TasksMode.CURRENT ? TaskTab.ACTIVE : TaskTab.PAST
-								}
+								activeTab={isCurrentMode ? TaskTab.ACTIVE : TaskTab.PAST}
 								onTabChange={handleModeToggle}
 								style={[globalStyles.flex1, styles.switch]}
 								tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
@@ -152,23 +171,17 @@ const Tasks: React.FC = () => {
 							}
 							style={[globalStyles.flex1, styles.backgroundContainer]}
 						>
-							<ScrollView
+							<FlatList
 								contentContainerStyle={[
 									globalStyles.gap8,
 									globalStyles.ph16,
 									globalStyles.pv24,
 								]}
-							>
-								{taskbarTasks.map((task) => (
-									<TaskCard
-										key={task.id}
-										onComplete={handleComplete}
-										onExpire={handleExpired}
-										onSkip={handleSkip}
-										task={task}
-									/>
-								))}
-							</ScrollView>
+								data={taskbarTasks}
+								keyExtractor={handleKeyExtractor}
+								ListEmptyComponent={emptyTasksComponent}
+								renderItem={handleRenderTask}
+							/>
 						</ImageBackground>
 					</>
 				)}
