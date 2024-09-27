@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.32.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.31.0...shared-v1.32.0) (2024-09-27)
+
+
+### Features
+
+* **frontend:** task explanations bb-340 ([#589](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/589)) ([58e0557](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/58e0557e50b32aaf29b7b1214c8c3ff9b53178d0))
+
 ## [1.31.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/shared-v1.30.0...shared-v1.31.0) (2024-09-26)
 
 
