@@ -17,6 +17,7 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useFocusEffect,
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
@@ -28,23 +29,20 @@ import { actions as userActions } from "~/slices/users/users";
 
 import { EmptyTasksHeader } from "./libs/components/components";
 import { TaskStatus, TaskTab } from "./libs/enums/enums";
-import { getMillisecondsLeft } from "./libs/helpers/helpers";
 import { styles } from "./styles";
-
-const MILLISECONDS_PER_MINUTE = 60_000;
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
-	const { activeTasks, dataStatus, expiredTasks, tasks } = useAppSelector(
+	const { activeTasks, dataStatus, expiredTasks, pastTasks } = useAppSelector(
 		({ tasks }) => tasks,
 	);
 
 	const [isCurrentMode, setIsCurrentMode] = useState<boolean>(true);
 
 	const hasExpiredTasks = expiredTasks.length > NumericalValue.ZERO;
-	const taskbarTasks = isCurrentMode ? activeTasks : tasks;
+	const taskbarTasks = isCurrentMode ? activeTasks : pastTasks;
 
 	useEffect(() => {
 		void dispatch(
@@ -52,36 +50,12 @@ const Tasks: React.FC = () => {
 		);
 	}, [dispatch, authenticatedUser]);
 
-	useEffect(() => {
-		if (isCurrentMode) {
+	useFocusEffect(
+		useCallback(() => {
 			void dispatch(taskActions.getCurrentTasks());
-		} else {
 			void dispatch(taskActions.getPastTasks());
-		}
-	}, [dispatch, isCurrentMode]);
-
-	useEffect(() => {
-		const currentTime = Date.now();
-		const expired: TaskDto[] = [];
-		const active: TaskDto[] = [];
-
-		for (const task of tasks) {
-			const { dueDate, status } = task;
-			const timeToDeadline = getMillisecondsLeft(currentTime, dueDate);
-
-			if (
-				timeToDeadline < MILLISECONDS_PER_MINUTE &&
-				status === TaskStatus.CURRENT
-			) {
-				expired.push(task);
-			} else {
-				active.push(task);
-			}
-		}
-
-		void dispatch(taskActions.setActiveTasks(active));
-		void dispatch(taskActions.setExpiredTasks(expired));
-	}, [tasks, dispatch]);
+		}, [dispatch]),
+	);
 
 	const handleModeToggle = useCallback(() => {
 		setIsCurrentMode(!isCurrentMode);

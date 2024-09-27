@@ -1,11 +1,10 @@
-import { useFocusEffect } from "@react-navigation/native";
-
 import { ChatMessage, View, Wheel } from "~/libs/components/components";
 import { transformScoresToWheelData } from "~/libs/helpers/helpers";
 import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
+	useFocusEffect,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { actions as quizActions } from "~/slices/quiz/quiz";
