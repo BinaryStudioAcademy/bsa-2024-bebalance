@@ -4,6 +4,7 @@ import {
 	Loader,
 	Switch,
 } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -50,6 +51,21 @@ const UserWheel: React.FC = () => {
 		? "Edit my wheel results"
 		: "My wheel results";
 
+	const estimationStyles = getValidClassNames(
+		styles["content"],
+		isEditingModalOpen && styles["hidden"],
+	);
+
+	const dateContainerStyles = getValidClassNames(
+		styles["date-container"],
+		isEditingModalOpen && styles["hidden"],
+	);
+
+	const modalStyles = getValidClassNames(
+		styles["content"],
+		!isEditingModalOpen && styles["hidden"],
+	);
+
 	const lastWheelUpdateDate = scoresLastUpdatedAt
 		? getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
 		: null;
@@ -95,7 +111,7 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<div className={styles["header-text-container"]}>
 					<h4 className={styles["header-text"]}>{headerText}</h4>
-					<div className={styles["date-container"]}>
+					<div className={dateContainerStyles}>
 						<p className={styles["date"]}>{lastWheelUpdateDate}</p>
 					</div>
 				</div>
@@ -115,14 +131,16 @@ const UserWheel: React.FC = () => {
 			</div>
 			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
-					<div>
+					<div className={estimationStyles}>
 						<BalanceWheelChart data={chartData} />
 						<CircularProgress
 							percentage={completionTasksPercentage ?? NO_TASKS_PERCENTAGE}
 						/>
 					</div>
 				)}
-				{isEditingModalOpen && handleGetModal(editMode)}
+				<div className={modalStyles}>
+					{isEditingModalOpen && handleGetModal(editMode)}
+				</div>
 			</div>
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
