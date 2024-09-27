@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 		backgroundColor: BaseColor.BG_WHITE,
 	},
 	container: {
-		backgroundColor: BaseColor.EXTRA_LIGHT_GRAY,
+		backgroundColor: BaseColor.BG_LIGHT,
 		borderRadius: 30,
 	},
 	inactive: {
