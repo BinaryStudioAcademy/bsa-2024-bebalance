@@ -2,6 +2,7 @@ import { type ComponentProps } from "react";
 
 import {
 	Button,
+	OnLeaveModal,
 	ScreenWrapper,
 	Text,
 	View,
@@ -9,8 +10,6 @@ import {
 import { useAppDispatch, useCallback, useState } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { actions as authActions } from "~/slices/auth/auth";
-
-import { SignOutModal } from "./libs/components/components";
 
 const Settings: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -31,7 +30,7 @@ const Settings: React.FC = () => {
 	);
 
 	const modalButtonsConfiguration: ComponentProps<
-		typeof SignOutModal
+		typeof OnLeaveModal
 	>["buttonsConfiguration"] = [
 		{
 			appearance: "outlined",
@@ -62,8 +61,10 @@ const Settings: React.FC = () => {
 					onPress={handleModalShow}
 				/>
 			</View>
-			<SignOutModal
+			<OnLeaveModal
 				buttonsConfiguration={modalButtonsConfiguration}
+				description="Oh no! You're one step away from life balance. Are you sure you
+						want to leave?"
 				isVisible={isConfirmationModalVisible}
 				onBackdropPress={handleModalDismiss}
 			/>

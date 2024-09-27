@@ -20,14 +20,16 @@ type ModalButtonConfiguration = {
 
 type Properties = {
 	buttonsConfiguration: ModalButtonConfiguration[];
+	description: string;
 	isVisible: boolean;
 	onBackdropPress: () => void;
 };
 
 const ICON_SIZE = 70;
 
-const SignOutModal: FC<Properties> = ({
+const OnLeaveModal: FC<Properties> = ({
 	buttonsConfiguration,
+	description,
 	isVisible,
 	onBackdropPress,
 }) => {
@@ -46,9 +48,8 @@ const SignOutModal: FC<Properties> = ({
 						name="directions-run"
 						size={ICON_SIZE}
 					/>
-					<Text preset="subheading" style={styles.text}>
-						Oh no! You&apos;re one step away from life balance. Are you sure you
-						want to leave?
+					<Text preset="subheading" style={styles.text} weight="bold">
+						{description}
 					</Text>
 				</View>
 				<View style={globalStyles.gap12}>
@@ -66,4 +67,4 @@ const SignOutModal: FC<Properties> = ({
 	);
 };
 
-export { SignOutModal };
+export { OnLeaveModal };
