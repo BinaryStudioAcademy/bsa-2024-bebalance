@@ -1,5 +1,10 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback, useState } from "~/libs/hooks/hooks.js";
+import {
+	useAppForm,
+	useCallback,
+	useEffect,
+	useState,
+} from "~/libs/hooks/hooks.js";
 import {
 	type UserUpdatePasswordFormDto,
 	type UserUpdatePasswordRequestDto,
@@ -12,9 +17,13 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserUpdatePasswordRequestDto) => void;
+	setIsDirty: (payload: boolean) => void;
 };
 
-const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const UpdatePasswordForm: React.FC<Properties> = ({
+	onSubmit,
+	setIsDirty,
+}: Properties) => {
 	const [isCurrentPasswordVisible, setIsCurrentPasswordVisible] =
 		useState<boolean>(false);
 	const [isNewPasswordVisible, setIsNewPasswordVisible] =
@@ -22,7 +31,7 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const [isConfirmNewPasswordVisible, setIsConfirmNewPasswordVisible] =
 		useState<boolean>(false);
 
-	const { control, errors, getValues, handleSubmit, setError } =
+	const { control, errors, getValues, handleSubmit, isDirty, setError } =
 		useAppForm<UserUpdatePasswordFormDto>({
 			defaultValues: DEFAULT_UPDATE_PASSWORD_PAYLOAD,
 			validationSchema: userUpdatePasswordValidationSchema,
@@ -58,6 +67,10 @@ const UpdatePasswordForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 	const handleToggleConfirmNewPasswordVisibility = useCallback(() => {
 		setIsConfirmNewPasswordVisible((previousState) => !previousState);
 	}, []);
+
+	useEffect(() => {
+		setIsDirty(isDirty);
+	}, [isDirty, setIsDirty]);
 
 	return (
 		<form className={styles["form"]} onSubmit={handleFormSubmit}>
