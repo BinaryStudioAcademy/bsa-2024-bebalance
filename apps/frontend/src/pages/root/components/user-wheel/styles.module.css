@@ -7,6 +7,7 @@
 
 .header {
 	display: flex;
+	gap: 25%;
 	align-items: center;
 	width: 100%;
 	height: 69px;
@@ -23,15 +24,21 @@
 
 .switch-container {
 	position: relative;
-	left: 25%;
 	width: 253px;
 }
 
 .content-wrapper {
 	display: flex;
-	gap: 45px;
 	justify-content: center;
 	height: fit-content;
+	margin: 0 20px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left: 16px;
 }
 
 .button-wrapper {
@@ -62,4 +69,35 @@
 	display: flex;
 	flex-direction: column;
 	gap: 7px;
+}
+
+@media (width <= 1024px) {
+	.container {
+		margin-bottom: 30px;
+	}
+
+	.content-hidden {
+		display: none;
+		height: 0;
+	}
+
+	.content-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		align-items: center;
+	}
+
+	.header {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+		align-items: flex-start;
+		height: auto;
+	}
+
+	.switch-container {
+		left: 0;
+		align-self: center;
+	}
 }

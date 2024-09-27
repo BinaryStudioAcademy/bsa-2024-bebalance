@@ -4,6 +4,7 @@ import {
 	Loader,
 	Switch,
 } from "~/libs/components/components.js";
+import { getValidClassNames } from "~/libs/helpers/helpers.js";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -49,6 +50,16 @@ const UserWheel: React.FC = () => {
 	const headerText = isEditingModalOpen
 		? "Edit my wheel results"
 		: "My wheel results";
+
+	const estimationStyles = getValidClassNames(
+		styles["content"],
+		isEditingModalOpen && styles["content-hidden"],
+	);
+
+	const modalStyles = getValidClassNames(
+		styles["content"],
+		!isEditingModalOpen && styles["content-hidden"],
+	);
 
 	const lastWheelUpdateDate = scoresLastUpdatedAt
 		? getFormattedDate(new Date(scoresLastUpdatedAt), "d MMM yyyy, EEEE")
@@ -115,14 +126,16 @@ const UserWheel: React.FC = () => {
 			</div>
 			<div className={styles["content-wrapper"]}>
 				{scores.length > NO_SCORES_COUNT && (
-					<div>
+					<div className={estimationStyles}>
 						<BalanceWheelChart data={chartData} />
 						<CircularProgress
 							percentage={completionTasksPercentage ?? NO_TASKS_PERCENTAGE}
 						/>
 					</div>
 				)}
-				{isEditingModalOpen && handleGetModal(editMode)}
+				<div className={modalStyles}>
+					{isEditingModalOpen && handleGetModal(editMode)}
+				</div>
 			</div>
 			{!isEditingModalOpen && (
 				<div className={styles["button-wrapper"]}>
