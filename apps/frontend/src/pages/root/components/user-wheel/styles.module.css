@@ -76,9 +76,8 @@
 		margin-bottom: 30px;
 	}
 
-	.content-hidden {
+	.hidden {
 		display: none;
-		height: 0;
 	}
 
 	.content-wrapper {

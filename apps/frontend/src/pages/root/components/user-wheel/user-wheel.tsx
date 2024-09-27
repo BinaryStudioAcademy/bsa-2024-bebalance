@@ -53,12 +53,17 @@ const UserWheel: React.FC = () => {
 
 	const estimationStyles = getValidClassNames(
 		styles["content"],
-		isEditingModalOpen && styles["content-hidden"],
+		isEditingModalOpen && styles["hidden"],
+	);
+
+	const dateContainerStyles = getValidClassNames(
+		styles["date-container"],
+		isEditingModalOpen && styles["hidden"],
 	);
 
 	const modalStyles = getValidClassNames(
 		styles["content"],
-		!isEditingModalOpen && styles["content-hidden"],
+		!isEditingModalOpen && styles["hidden"],
 	);
 
 	const lastWheelUpdateDate = scoresLastUpdatedAt
@@ -106,7 +111,7 @@ const UserWheel: React.FC = () => {
 			<div className={styles["header"]}>
 				<div className={styles["header-text-container"]}>
 					<h4 className={styles["header-text"]}>{headerText}</h4>
-					<div className={styles["date-container"]}>
+					<div className={dateContainerStyles}>
 						<p className={styles["date"]}>{lastWheelUpdateDate}</p>
 					</div>
 				</div>
