@@ -21,14 +21,13 @@ const AcceptRegenerateTaskButtons: React.FC = () => {
 	const navigation =
 		useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
 
-	const threadId = useAppSelector((state) => state.chat.threadId);
 	const taskSuggestions = useAppSelector((state) => state.chat.taskSuggestions);
 
 	const handleAccept = useCallback(() => {
 		void dispatch(
 			chatActions.createTasks({
-				payload: taskSuggestions,
-				threadId: threadId as string,
+				messages: [],
+				tasks: taskSuggestions,
 			}),
 		);
 
@@ -49,13 +48,13 @@ const AcceptRegenerateTaskButtons: React.FC = () => {
 		);
 
 		navigation.navigate(BottomTabScreenName.TASKS);
-	}, [dispatch, taskSuggestions, threadId, navigation]);
+	}, [dispatch, taskSuggestions, navigation]);
 
 	const handleGenerateNew = useCallback(() => {
 		void dispatch(
 			chatActions.getChangedTasksSuggestion({
-				payload: taskSuggestions,
-				threadId: threadId as string,
+				messages: [],
+				tasks: taskSuggestions,
 			}),
 		);
 
@@ -65,7 +64,7 @@ const AcceptRegenerateTaskButtons: React.FC = () => {
 				text: "I don't like the tasks.",
 			}),
 		);
-	}, [dispatch, taskSuggestions, threadId]);
+	}, [dispatch, taskSuggestions]);
 
 	return (
 		<ChatMessage text={EXPLAIN_TEXT}>

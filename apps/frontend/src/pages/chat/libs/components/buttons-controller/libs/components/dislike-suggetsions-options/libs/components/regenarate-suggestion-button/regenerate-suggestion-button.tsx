@@ -1,23 +1,28 @@
 import { Button } from "~/libs/components/components.js";
 import { useAppDispatch, useCallback } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
+import {
+	SuggestionsManipulationButtonLabel,
+	SuggestionsManipulationMessage,
+} from "../../../../suggestions-manipulation-options/libs/enums/enums.js";
 import { DislikeSuggestionMessage } from "../../enums/enums.js";
 
 type Properties = {
 	label: string;
 	oldSuggestions: TaskCreateDto[];
 	suggestion: TaskCreateDto;
-	threadId: string;
 };
 
 const RegenerateSuggestionButton: React.FC<Properties> = ({
 	label,
 	oldSuggestions,
 	suggestion,
-	threadId,
 }: Properties) => {
 	const dispatch = useAppDispatch();
 
@@ -32,11 +37,35 @@ const RegenerateSuggestionButton: React.FC<Properties> = ({
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		void dispatch(
 			chatActions.changeTasksSuggestion({
-				APIPayload: { payload: [suggestion], threadId },
+				APIPayload: {
+					messages: [
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: SuggestionsManipulationMessage.MAIN_MESSAGE,
+						},
+						{
+							author: ChatMessageAuthor.USER,
+							text: SuggestionsManipulationButtonLabel.DISLIKE_TASKS,
+						},
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: DislikeSuggestionMessage.MAIN,
+						},
+						{
+							author: ChatMessageAuthor.USER,
+							text: label,
+						},
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: DislikeSuggestionMessage.WAIT,
+						},
+					],
+					tasks: [suggestion],
+				},
 				oldSuggestions,
 			}),
 		);
-	}, [dispatch, threadId, label, suggestion, oldSuggestions]);
+	}, [dispatch, label, suggestion, oldSuggestions]);
 
 	return (
 		<Button

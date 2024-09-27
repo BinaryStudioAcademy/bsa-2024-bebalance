@@ -1,5 +1,6 @@
 const DatabaseTableName = {
 	CATEGORIES: "categories",
+	CHAT_MESSAGES: "chat_messages",
 	FILES: "files",
 	MIGRATIONS: "migrations",
 	ONBOARDING_ANSWERS: "onboarding_answers",

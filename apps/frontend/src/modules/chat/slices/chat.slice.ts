@@ -1,13 +1,13 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { DataStatus } from "~/libs/enums/enums.js";
+import { DataStatus, NumericalValue } from "~/libs/enums/enums.js";
 import { type ValueOf } from "~/libs/types/types.js";
 import { type SelectedCategory } from "~/modules/categories/categories.js";
 import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import { type ChatMessage } from "../libs/types/types.js";
+import { type ChatMessage, type TaskMessage } from "../libs/types/types.js";
 import {
 	changeTasksSuggestion,
 	createTasksFromSuggestions,
@@ -51,10 +51,40 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(initConversation.fulfilled, (state, action) => {
-				state.threadId = action.payload.threadId;
-
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_CREATION;
 				state.dataStatus = DataStatus.FULFILLED;
+				state.threadId = action.payload.threadId;
+				state.messages = [];
+
+				const { messages } = action.payload;
+				let taskBuffer: TaskMessage[] = [];
+
+				for (const message of messages) {
+					if (message.type === ChatMessageType.TASK) {
+						taskBuffer.push(message.payload as TaskMessage);
+					} else {
+						if (taskBuffer.length > NumericalValue.ZERO) {
+							state.messages.push({
+								author: ChatMessageAuthor.ASSISTANT,
+								isRead: true,
+								payload: taskBuffer,
+								type: ChatMessageType.TASK,
+							});
+						}
+
+						taskBuffer = [];
+						state.messages.push(message as ChatMessage);
+					}
+				}
+
+				if (taskBuffer.length > NumericalValue.ZERO) {
+					state.messages.push({
+						author: ChatMessageAuthor.ASSISTANT,
+						isRead: true,
+						payload: taskBuffer,
+						type: ChatMessageType.TASK,
+					});
+				}
 			})
 			.addCase(initConversation.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;

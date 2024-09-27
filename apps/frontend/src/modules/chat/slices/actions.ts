@@ -4,8 +4,8 @@ import { type AsyncThunkConfig } from "~/libs/types/types.js";
 
 import { processMessages } from "../libs/helpers/helpers.js";
 import {
+	type AIAssistantChatInitializeResponseDto,
 	type AIAssistantCreateMultipleTasksDto,
-	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ChangeTasksSuggestionPayload,
 	type ProcessedMessagesAndSuggestions,
@@ -13,7 +13,7 @@ import {
 import { name as sliceName } from "./chat.slice.js";
 
 const initConversation = createAsyncThunk<
-	AIAssistantResponseDto,
+	AIAssistantChatInitializeResponseDto,
 	undefined,
 	AsyncThunkConfig
 >(`${sliceName}/init-conversation`, async (_, { extra }) => {

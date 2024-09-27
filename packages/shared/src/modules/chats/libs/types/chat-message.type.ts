@@ -4,7 +4,7 @@ import { type TextMessage } from "./text.message.type.js";
 
 type ChatMessage = Omit<
 	ChatMessageDto<TaskMessage[] | TextMessage>,
-	"createdAt" | "id"
+	"createdAt" | "id" | "threadId" | "updatedAt"
 >;
 
 export { type ChatMessage };

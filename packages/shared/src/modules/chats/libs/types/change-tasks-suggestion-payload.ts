@@ -1,8 +1,8 @@
-import { type AIAssistantRequestDto } from "../../../ai-assistant/ai-assistant.js";
+import { type AIAssistantChangeTaskRequestDto } from "../../../ai-assistant/ai-assistant.js";
 import { type TaskCreateDto } from "../../../tasks/tasks.js";
 
 type ChangeTasksSuggestionPayload = {
-	APIPayload: AIAssistantRequestDto;
+	APIPayload: AIAssistantChangeTaskRequestDto;
 	oldSuggestions?: TaskCreateDto[];
 };
 

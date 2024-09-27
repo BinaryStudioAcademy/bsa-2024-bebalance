@@ -4,7 +4,10 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
@@ -14,10 +17,7 @@ import {
 import styles from "./styles.module.css";
 
 const SuggestionsManipulationOptions: React.FC = () => {
-	const { taskSuggestions, threadId } = useAppSelector((state) => ({
-		taskSuggestions: state.chat.taskSuggestions,
-		threadId: state.chat.threadId,
-	}));
+	const { taskSuggestions } = useAppSelector((state) => state.chat);
 	const dispatch = useAppDispatch();
 	const handleAcceptAllSuggestions = useCallback(() => {
 		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
@@ -40,11 +40,24 @@ const SuggestionsManipulationOptions: React.FC = () => {
 
 		void dispatch(
 			chatActions.createTasksFromSuggestions({
-				payload: taskSuggestions,
-				threadId: threadId as string,
+				messages: [
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: SuggestionsManipulationMessage.MAIN_MESSAGE,
+					},
+					{
+						author: ChatMessageAuthor.USER,
+						text: SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
+					},
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: SuggestionsManipulationMessage.ACCEPT_TASKS_RESPONSE,
+					},
+				],
+				tasks: taskSuggestions,
 			}),
 		);
-	}, [dispatch, taskSuggestions, threadId]);
+	}, [dispatch, taskSuggestions]);
 
 	const handleDislikeSuggestions = useCallback(() => {
 		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));

@@ -5,6 +5,7 @@ import {
 	AIAssistantMessageValidationSchema,
 	OpenAIErrorMessage,
 	type OpenAIResponseMessage,
+	OpenAIRoleKey,
 } from "~/libs/modules/open-ai/open-ai.js";
 
 import {
@@ -13,17 +14,14 @@ import {
 	HTTPCode,
 } from "../../enums/enums.js";
 import { OpenAIError } from "../../exceptions/exceptions.js";
-import {
-	type AIAssistantResponseDto,
-	type ChatMessageDto,
-} from "../../types/types.js";
+import { type ChatMessageCreateDto } from "../../types/types.js";
 import { type explainTasks } from "./explain-tasks.validation-schema.js";
 
 type TaskByCategoryData = z.infer<typeof explainTasks>;
 
 const generateExplainTasksSuggestionsResponse = (
 	aiResponse: OpenAIResponseMessage,
-): AIAssistantResponseDto | null => {
+): ChatMessageCreateDto[] | null => {
 	const message = aiResponse.getPaginatedItems().shift();
 
 	if (!message) {
@@ -39,40 +37,35 @@ const generateExplainTasksSuggestionsResponse = (
 			contentText,
 		) as TaskByCategoryData;
 
-		const textMessage: ChatMessageDto = {
-			author: ChatMessageAuthor.ASSISTANT,
-			createdAt: new Date().toISOString(),
-			id: FIRST_ITEM_INDEX,
-			isRead: false,
+		const textMessage: ChatMessageCreateDto = {
+			author: OpenAIRoleKey.ASSISTANT,
 			payload: {
 				text: resultData.message,
 			},
+			threadId: message.thread_id,
 			type: ChatMessageType.TEXT,
 		};
 
-		const tasksMessages: ChatMessageDto[] = resultData.tasks.map((task) => {
-			return {
-				author: ChatMessageAuthor.ASSISTANT,
-				createdAt: new Date().toISOString(),
-				id: FIRST_ITEM_INDEX,
-				isRead: false,
-				payload: {
-					task: {
-						categoryId: task.categoryId,
-						categoryName: task.categoryName,
-						description: task.description,
-						label: task.label,
+		const tasksMessages: ChatMessageCreateDto[] = resultData.tasks.map(
+			(task) => {
+				return {
+					author: ChatMessageAuthor.ASSISTANT,
+					payload: {
+						task: {
+							categoryId: task.categoryId,
+							categoryName: task.categoryName,
+							description: task.description,
+							label: task.label,
+						},
+						text: task.explanation,
 					},
-					text: task.explanation,
-				},
-				type: ChatMessageType.TASK,
-			};
-		});
+					threadId: message.thread_id,
+					type: ChatMessageType.TASK,
+				};
+			},
+		);
 
-		return {
-			messages: [textMessage, ...tasksMessages],
-			threadId: message.thread_id,
-		};
+		return [textMessage, ...tasksMessages];
 	} catch {
 		throw new OpenAIError({
 			message: OpenAIErrorMessage.WRONG_RESPONSE,

@@ -1,8 +1,12 @@
 export {
+	type AIAssistantAcceptTaskRequestDto,
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantChatInitializeResponseDto,
 	type AIAssistantCreateMultipleTasksDto,
-	type AIAssistantRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
+	type ChatMessageCreateDto,
 	type ChatMessageDto,
 	type SelectedCategory,
 	type TaskCreateDto,

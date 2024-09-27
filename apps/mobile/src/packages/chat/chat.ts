@@ -23,8 +23,10 @@ export {
 	processMessages,
 } from "./libs/helpers/helpers";
 export {
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantChatInitializeResponseDto,
 	type AIAssistantCreateMultipleTasksDto,
-	type AIAssistantRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 	type ChatMessage,

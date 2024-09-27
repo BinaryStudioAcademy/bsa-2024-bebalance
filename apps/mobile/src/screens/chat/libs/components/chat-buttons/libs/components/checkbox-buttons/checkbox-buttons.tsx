@@ -19,7 +19,6 @@ import { getSelectedCategoriesHelper } from "./libs/helpers/helpers";
 const CheckBoxButtons: React.FC = () => {
 	const dispatch = useAppDispatch();
 
-	const threadId = useAppSelector((state) => state.chat.threadId);
 	const quizCategories = useAppSelector((state) => state.quiz.scores);
 
 	const handleFormSubmit = useCallback(
@@ -37,7 +36,7 @@ const CheckBoxButtons: React.FC = () => {
 
 			const taskPayload = {
 				categories: newSelectedCategories,
-				threadId: threadId as string,
+				messages: [],
 			};
 
 			void dispatch(chatActions.getTasksForCategories(taskPayload));
@@ -48,7 +47,7 @@ const CheckBoxButtons: React.FC = () => {
 				}),
 			);
 		},
-		[dispatch, quizCategories, threadId],
+		[dispatch, quizCategories],
 	);
 
 	return (

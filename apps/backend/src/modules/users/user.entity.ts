@@ -27,6 +27,8 @@ class UserEntity implements Entity {
 
 	private passwordSalt: string;
 
+	private threadId: null | string;
+
 	private updatedAt: string;
 
 	private userTaskDays: null | number[];
@@ -44,6 +46,7 @@ class UserEntity implements Entity {
 		notificationFrequency,
 		passwordHash,
 		passwordSalt,
+		threadId,
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -59,6 +62,7 @@ class UserEntity implements Entity {
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
+		threadId: null | string;
 		updatedAt: string;
 		userTaskDays: null | number[];
 	}) {
@@ -76,6 +80,7 @@ class UserEntity implements Entity {
 		this.completionTasksPercentage = completionTasksPercentage;
 		this.updatedAt = updatedAt;
 		this.userTaskDays = userTaskDays;
+		this.threadId = threadId;
 	}
 
 	public static initialize({
@@ -91,6 +96,7 @@ class UserEntity implements Entity {
 		notificationFrequency,
 		passwordHash,
 		passwordSalt,
+		threadId,
 		updatedAt,
 		userTaskDays,
 	}: {
@@ -106,6 +112,7 @@ class UserEntity implements Entity {
 		notificationFrequency?: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
+		threadId: null | string;
 		updatedAt: string;
 		userTaskDays?: number[];
 	}): UserEntity {
@@ -124,6 +131,7 @@ class UserEntity implements Entity {
 				notificationFrequency ?? NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
+			threadId,
 			updatedAt,
 			userTaskDays: userTaskDays ?? null,
 		});
@@ -153,6 +161,7 @@ class UserEntity implements Entity {
 			notificationFrequency: NotificationFrequency.NONE,
 			passwordHash,
 			passwordSalt,
+			threadId: null,
 			updatedAt: "",
 			userTaskDays: null,
 		});
@@ -170,6 +179,7 @@ class UserEntity implements Entity {
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
 		passwordHash: string;
 		passwordSalt: string;
+		threadId: null | string;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
@@ -186,6 +196,7 @@ class UserEntity implements Entity {
 			notificationFrequency: this.notificationFrequency,
 			passwordHash: this.passwordHash,
 			passwordSalt: this.passwordSalt,
+			threadId: this.threadId,
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};
@@ -202,6 +213,7 @@ class UserEntity implements Entity {
 		id: number;
 		name: string;
 		notificationFrequency: ValueOf<typeof NotificationFrequency>;
+		threadId: null | string;
 		updatedAt: string;
 		userTaskDays: number[];
 	} {
@@ -217,6 +229,7 @@ class UserEntity implements Entity {
 			id: this.id as number,
 			name: this.name,
 			notificationFrequency: this.notificationFrequency,
+			threadId: this.threadId,
 			updatedAt: this.updatedAt,
 			userTaskDays: this.userTaskDays ?? [],
 		};

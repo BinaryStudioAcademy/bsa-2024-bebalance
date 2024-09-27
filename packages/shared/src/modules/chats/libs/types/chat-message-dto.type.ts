@@ -12,7 +12,9 @@ type ChatMessageDto<Payload = TaskMessage | TextMessage> = {
 	id: number;
 	isRead: boolean;
 	payload: Payload;
+	threadId: string;
 	type: ValueOf<typeof ChatMessageType>;
+	updatedAt: string;
 };
 
 export { type ChatMessageDto };

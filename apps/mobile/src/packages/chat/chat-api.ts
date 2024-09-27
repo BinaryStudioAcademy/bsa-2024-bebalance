@@ -3,11 +3,12 @@ import { type APIConfiguration, BaseHttpApi } from "~/libs/packages/api/api";
 
 import { AIAssistantApiPath } from "./libs/enums/enums";
 import {
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantChatInitializeResponseDto,
 	type AIAssistantCreateMultipleTasksDto,
-	type AIAssistantRequestDto,
+	type AIAssistantExplainTaskRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
-	type ThreadMessageCreateDto,
 } from "./libs/types/types";
 
 class ChatApi extends BaseHttpApi {
@@ -32,7 +33,7 @@ class ChatApi extends BaseHttpApi {
 	}
 
 	public async getChangedTasksSuggestion(
-		payload: AIAssistantRequestDto,
+		payload: AIAssistantChangeTaskRequestDto,
 	): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_CHANGE_TASKS, {}),
@@ -48,7 +49,7 @@ class ChatApi extends BaseHttpApi {
 	}
 
 	public async getExplainedTasksSuggestion(
-		payload: AIAssistantRequestDto,
+		payload: AIAssistantExplainTaskRequestDto,
 	): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_EXPLAIN_TASKS, {}),
@@ -79,7 +80,7 @@ class ChatApi extends BaseHttpApi {
 		return await response.json<AIAssistantResponseDto>();
 	}
 
-	public async initializeConversation(): Promise<ThreadMessageCreateDto> {
+	public async initializeConversation(): Promise<AIAssistantChatInitializeResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_INITIALIZE, {}),
 			{
@@ -90,7 +91,7 @@ class ChatApi extends BaseHttpApi {
 			},
 		);
 
-		return await response.json<ThreadMessageCreateDto>();
+		return await response.json<AIAssistantChatInitializeResponseDto>();
 	}
 }
 

@@ -4,8 +4,9 @@ import { type APIConfiguration } from "~/libs/types/types.js";
 
 import { AIAssistantApiPath } from "./libs/enums/enums.js";
 import {
+	type AIAssistantChangeTaskRequestDto,
+	type AIAssistantChatInitializeResponseDto,
 	type AIAssistantCreateMultipleTasksDto,
-	type AIAssistantRequestDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
 } from "./libs/types/types.js";
@@ -16,7 +17,7 @@ class ChatApi extends BaseHTTPApi {
 	}
 
 	public async changeTasksSuggestion(
-		payload: AIAssistantRequestDto,
+		payload: AIAssistantChangeTaskRequestDto,
 	): Promise<AIAssistantResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_CHANGE_TASKS, {}),
@@ -63,7 +64,7 @@ class ChatApi extends BaseHTTPApi {
 		return await response.json<AIAssistantResponseDto>();
 	}
 
-	public async initiateConversation(): Promise<AIAssistantResponseDto> {
+	public async initiateConversation(): Promise<AIAssistantChatInitializeResponseDto> {
 		const response = await this.load(
 			this.getFullEndpoint(AIAssistantApiPath.CHAT_INITIALIZE, {}),
 			{
@@ -74,7 +75,7 @@ class ChatApi extends BaseHTTPApi {
 			},
 		);
 
-		return await response.json<AIAssistantResponseDto>();
+		return await response.json<AIAssistantChatInitializeResponseDto>();
 	}
 }
 

@@ -17,6 +17,8 @@ class UserDetailsModel extends AbstractModel {
 
 	public notificationFrequency!: ValueOf<typeof NotificationFrequency>;
 
+	public threadId!: string;
+
 	public userId!: number;
 
 	static get relationMappings(): RelationMappings {

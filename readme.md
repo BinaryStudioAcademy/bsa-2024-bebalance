@@ -44,6 +44,7 @@ erDiagram
         int user_id FK
         string notification_frequency
         int avatar_file_id FK
+        varchar thread_id
     }
 
     files {
@@ -148,6 +149,19 @@ erDiagram
         varchar label
         text description
         text status
+    }
+
+    chat_messages }o--|| user_details : thread_id
+    chat_messages {
+        int id PK
+        dateTime created_at
+        dateTime updated_at
+        author text
+        is_read boolean
+        text text
+        text type
+        json task
+        varchar thread_id FK
     }
 
     task_notes }o--|| tasks: task_id

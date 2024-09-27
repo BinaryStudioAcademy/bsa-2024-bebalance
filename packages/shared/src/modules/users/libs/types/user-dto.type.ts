@@ -12,6 +12,7 @@ type UserDto = {
 	id: number;
 	name: string;
 	notificationFrequency?: ValueOf<typeof NotificationFrequency>;
+	threadId: null | string;
 	updatedAt: string;
 	userTaskDays?: number[];
 };

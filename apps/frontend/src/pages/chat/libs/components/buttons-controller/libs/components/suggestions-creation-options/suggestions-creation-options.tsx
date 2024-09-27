@@ -4,7 +4,10 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import { SUGGESTIONS_CREATION_TEXT } from "./libs/constants/constants.js";
@@ -13,9 +16,8 @@ import { getCategoriesWithThreeLowestScores } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
 const SuggestionsCreationOptions: React.FC = () => {
-	const { scores, threadId } = useAppSelector((state) => ({
+	const { scores } = useAppSelector((state) => ({
 		scores: state.quiz.scores,
-		threadId: state.chat.threadId,
 	}));
 	const dispatch = useAppDispatch();
 
@@ -43,10 +45,19 @@ const SuggestionsCreationOptions: React.FC = () => {
 		void dispatch(
 			chatActions.getTasksForCategories({
 				categories: selectedCategories,
-				threadId: threadId as string,
+				messages: [
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: SUGGESTIONS_CREATION_TEXT,
+					},
+					{
+						author: ChatMessageAuthor.USER,
+						text: SuggestionsCreationButtonLabel.YES,
+					},
+				],
 			}),
 		);
-	}, [dispatch, scores, threadId]);
+	}, [dispatch, scores]);
 
 	return (
 		<div className={styles["message-container"]}>

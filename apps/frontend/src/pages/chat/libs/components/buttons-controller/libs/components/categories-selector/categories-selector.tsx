@@ -4,7 +4,10 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
 import {
@@ -14,9 +17,8 @@ import {
 import styles from "./styles.module.css";
 
 const CategoriesSelector: React.FC = () => {
-	const { quizCategories, threadId } = useAppSelector((state) => ({
+	const { quizCategories } = useAppSelector((state) => ({
 		quizCategories: state.categories.items,
-		threadId: state.chat.threadId,
 	}));
 	const dispatch = useAppDispatch();
 
@@ -30,24 +32,33 @@ const CategoriesSelector: React.FC = () => {
 				}));
 
 			dispatch(chatActions.updateSelectedCategories(newSelectedCategories));
-
-			const taskPayload = {
-				categories: newSelectedCategories,
-				threadId: threadId ?? "",
-			};
-
-			let namesOfSelectedCategories = "";
-
-			for (const category of newSelectedCategories) {
-				namesOfSelectedCategories += `${category.name}\n`;
-			}
+			const text = `Suggest tasks for ${newSelectedCategories
+				.map((category) => {
+					return category.name;
+				})
+				.join(", ")} categories`;
 
 			dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 			dispatch(chatActions.addAssistantTextMessage(CATEGORIES_SELECTOR_TEXT));
-			dispatch(chatActions.addUserTextMessage(namesOfSelectedCategories));
+			dispatch(chatActions.addUserTextMessage(text));
+
+			const taskPayload = {
+				categories: newSelectedCategories,
+				messages: [
+					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: CATEGORIES_SELECTOR_TEXT,
+					},
+					{
+						author: ChatMessageAuthor.USER,
+						text,
+					},
+				],
+			};
+
 			await dispatch(chatActions.getTasksForCategories(taskPayload));
 		},
-		[dispatch, quizCategories, threadId],
+		[dispatch, quizCategories],
 	);
 
 	const handleFormSubmit = useCallback(

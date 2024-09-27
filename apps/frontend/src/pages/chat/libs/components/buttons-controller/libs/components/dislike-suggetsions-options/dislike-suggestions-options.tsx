@@ -4,18 +4,24 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
+import {
+	SuggestionsManipulationButtonLabel,
+	SuggestionsManipulationMessage,
+} from "../suggestions-manipulation-options/libs/enums/enums.js";
 import { RegenerateSuggestionButton } from "./libs/components/components.js";
 import { DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL } from "./libs/constants/constants.js";
 import { DislikeSuggestionMessage } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 const DislikeSuggestionsOptions: React.FC = () => {
-	const { taskSuggestions, threadId } = useAppSelector((state) => ({
+	const { taskSuggestions } = useAppSelector((state) => ({
 		taskSuggestions: state.chat.taskSuggestions,
-		threadId: state.chat.threadId,
 	}));
 	const dispatch = useAppDispatch();
 
@@ -32,10 +38,34 @@ const DislikeSuggestionsOptions: React.FC = () => {
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		void dispatch(
 			chatActions.changeTasksSuggestion({
-				APIPayload: { payload: taskSuggestions, threadId: threadId as string },
+				APIPayload: {
+					messages: [
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: SuggestionsManipulationMessage.MAIN_MESSAGE,
+						},
+						{
+							author: ChatMessageAuthor.USER,
+							text: SuggestionsManipulationButtonLabel.DISLIKE_TASKS,
+						},
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: DislikeSuggestionMessage.MAIN,
+						},
+						{
+							author: ChatMessageAuthor.USER,
+							text: DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL,
+						},
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: DislikeSuggestionMessage.WAIT,
+						},
+					],
+					tasks: taskSuggestions,
+				},
 			}),
 		);
-	}, [dispatch, threadId, taskSuggestions]);
+	}, [dispatch, taskSuggestions]);
 
 	return (
 		<div className={styles["message-container"]}>
@@ -56,7 +86,6 @@ const DislikeSuggestionsOptions: React.FC = () => {
 									label={`${suggestion.categoryName} sector task`}
 									oldSuggestions={taskSuggestions}
 									suggestion={suggestion}
-									threadId={threadId as string}
 								/>
 							);
 						})}
