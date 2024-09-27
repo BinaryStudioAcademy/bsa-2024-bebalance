@@ -17,7 +17,6 @@ const GenerateTaskButtons: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const scores = useAppSelector((state) => state.quiz.scores);
-	const threadId = useAppSelector((state) => state.chat.threadId);
 
 	const lowestCategories = getLowestCategories(scores);
 
@@ -35,13 +34,13 @@ const GenerateTaskButtons: React.FC = () => {
 		void dispatch(
 			chatActions.getTasksForCategories({
 				categories: lowestCategories,
-				threadId: threadId as string,
+				messages: [],
 			}),
 		);
 
 		void dispatch(chatActions.updateSelectedCategories(lowestCategories));
 
-		dispatch(chatActions.setButtonsMode(ButtonsMode.FEEDBACK));
+		dispatch(chatActions.setButtonsMode(ButtonsMode.EXPLAIN_ACCEPT));
 		dispatch(
 			chatActions.addTextMessage({
 				author: ChatMessageAuthor.ASSISTANT,
@@ -54,7 +53,7 @@ const GenerateTaskButtons: React.FC = () => {
 				text: "Yes, 3 lowest",
 			}),
 		);
-	}, [dispatch, threadId, lowestCategories]);
+	}, [dispatch, lowestCategories]);
 
 	return (
 		<ChatMessage text={CONFIRMATION_TEXT}>

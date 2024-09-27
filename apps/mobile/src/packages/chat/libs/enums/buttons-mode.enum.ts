@@ -1,6 +1,7 @@
 const ButtonsMode = {
+	ACCEPT_REGENERATE: "Accept or regenerate",
 	CHECKBOX: "Checkbox",
-	FEEDBACK: "Feedback",
+	EXPLAIN_ACCEPT: "Explain or accept",
 	GENERATE_TASK: "Generate task",
 	NONE: "none",
 } as const;

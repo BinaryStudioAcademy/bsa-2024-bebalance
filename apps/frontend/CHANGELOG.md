@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.48.1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.48.0...frontend-v1.48.1) (2024-09-26)
+
+
+### Bug Fixes
+
+* bug when saving answer ids second time bb-560 ([#597](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/597)) ([3784421](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/378442116164185c1cff351f68e6b5af085573a4))
+* **frontend/backend:** insights are not updated after user makes actions with tasks bb-561 ([#584](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/584)) ([f30f347](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/f30f347b6084e37d491e4297f2abecf7bb80dbbe))
+* **frontend:** updated styles for profile page bb-594 ([#596](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/596)) ([0cda480](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0cda48014fb4af1bc5c10dff45396634400c120a))
+
+## [1.48.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.47.0...frontend-v1.48.0) (2024-09-26)
+
+
+### Features
+
+* **frontend:** regenerate all task suggestions bb-340 ([#576](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/576)) ([8b244e8](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/8b244e8f9df797193cd695b5dbd62edd6b18b946))
+* **frontend:** scroll to top on next and back buttons click bb-290 ([#585](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/585)) ([3737bfc](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/3737bfc93dc8ba9b51ff7836880099a6bfe9754f))
+
+
+### Bug Fixes
+
+* **frontend:** default browser popup bb-580 ([#582](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/582)) ([1503180](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/15031802e654d347991e00d1279f0cca8e218649))
+
 ## [1.47.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/frontend-v1.46.1...frontend-v1.47.0) (2024-09-26)
 
 

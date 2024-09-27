@@ -1,9 +1,13 @@
 export {
+	type AIAssistantChangeTaskRequestDto,
 	type AIAssistantChatInitializeResponseDto,
 	type AIAssistantCreateMultipleTasksDto,
 	type AIAssistantResponseDto,
 	type AIAssistantSuggestTaskRequestDto,
+	type ChangeTasksSuggestionPayload,
+	type ChatMessage,
 	type ChatMessageDto,
+	type ProcessedMessagesAndSuggestions,
 	type TaskMessage,
 	type TaskPayload,
 	type TextMessage,

@@ -6,7 +6,7 @@ import {
 
 type ChatMessage = Omit<
 	ChatMessageDto<TaskMessage[] | TextMessage>,
-	"createdAt" | "id"
+	"createdAt" | "id" | "threadId" | "updatedAt"
 >;
 
 export { type ChatMessage };

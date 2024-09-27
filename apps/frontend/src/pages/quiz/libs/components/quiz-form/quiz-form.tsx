@@ -25,6 +25,7 @@ import {
 import { Step } from "../../enums/enums.js";
 import { getQuizDefaultValues } from "../../helpers/helpers.js";
 import { type QuizFormValues } from "../../types/types.js";
+import { TOP_SCROLL_VALUE } from "./libs/constants/constants.js";
 import { extractCategoryIdsFromQuestions } from "./libs/helpers/helpers.js";
 import styles from "./styles.module.css";
 
@@ -73,6 +74,13 @@ const QuizForm: React.FC<Properties> = ({ onNext }: Properties) => {
 				questionsByCategories.length - PREVIOUS_INDEX_OFFSET,
 		);
 	}, [currentCategoryIndex, questionsByCategories]);
+
+	useEffect(() => {
+		window.scrollTo({
+			behavior: "smooth",
+			top: TOP_SCROLL_VALUE,
+		});
+	}, [currentCategoryIndex]);
 
 	const handlePreviousStep = useCallback(() => {
 		void dispatch(quizActions.previousQuestion());

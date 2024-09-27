@@ -7,13 +7,9 @@ import { ChatMessageAuthor, ChatMessageType } from "~/modules/chat/chat.js";
 import { type TaskCreateDto } from "~/modules/tasks/tasks.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
-import { checkIsTaskMessage } from "../libs/guards/guards.js";
+import { type ChatMessage, type TaskMessage } from "../libs/types/types.js";
 import {
-	type ChatMessageDto,
-	type TaskMessage,
-	type TextMessage,
-} from "../libs/types/types.js";
-import {
+	changeTasksSuggestion,
 	createTasksFromSuggestions,
 	getTasksForCategories,
 	initConversation,
@@ -22,10 +18,7 @@ import {
 type State = {
 	buttonsMode: ValueOf<typeof ButtonsModeOption>;
 	dataStatus: ValueOf<typeof DataStatus>;
-	messages: Omit<
-		ChatMessageDto<TaskMessage | TaskMessage[] | TextMessage>,
-		"createdAt" | "id" | "threadId" | "updatedAt"
-	>[];
+	messages: ChatMessage[];
 	selectedCategories: SelectedCategory[];
 	taskSuggestions: TaskCreateDto[];
 	threadId: null | string;
@@ -80,7 +73,7 @@ const { actions, name, reducer } = createSlice({
 						}
 
 						taskBuffer = [];
-						state.messages.push(message);
+						state.messages.push(message as ChatMessage);
 					}
 				}
 
@@ -101,41 +94,31 @@ const { actions, name, reducer } = createSlice({
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(getTasksForCategories.fulfilled, (state, action) => {
+				const { messages, taskSuggestions } = action.payload;
 				state.dataStatus = DataStatus.FULFILLED;
-				const newMessages = action.payload.messages;
-				const taskSuggestionsMessagePayload: TaskMessage[] = [];
+				state.taskSuggestions = taskSuggestions;
 
-				for (const message of newMessages) {
-					if (message.type === "text") {
-						state.messages.push({
-							author: message.author,
-							isRead: message.isRead,
-							payload: message.payload as TextMessage,
-							type: message.type,
-						});
-					}
-
-					if (checkIsTaskMessage(message)) {
-						taskSuggestionsMessagePayload.push(message.payload);
-						state.taskSuggestions.push({
-							categoryId: message.payload.task.categoryId,
-							categoryName: message.payload.task.categoryName,
-							description: message.payload.task.description,
-							label: message.payload.task.label,
-						});
-					}
-				}
-
-				state.messages.push({
-					author: ChatMessageAuthor.ASSISTANT,
-					isRead: true,
-					payload: taskSuggestionsMessagePayload,
-					type: ChatMessageType.TASK,
-				});
+				state.messages.push(...messages);
 
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
 			.addCase(getTasksForCategories.rejected, (state) => {
+				state.dataStatus = DataStatus.REJECTED;
+			})
+
+			.addCase(changeTasksSuggestion.pending, (state) => {
+				state.dataStatus = DataStatus.PENDING;
+			})
+			.addCase(changeTasksSuggestion.fulfilled, (state, action) => {
+				const { messages, taskSuggestions } = action.payload;
+				state.dataStatus = DataStatus.FULFILLED;
+				state.taskSuggestions = taskSuggestions;
+
+				state.messages.push(...messages);
+
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
+			})
+			.addCase(changeTasksSuggestion.rejected, (state) => {
 				state.dataStatus = DataStatus.REJECTED;
 			});
 	},
@@ -161,6 +144,12 @@ const { actions, name, reducer } = createSlice({
 			};
 
 			state.messages.push(userMessage);
+		},
+		clearChat(state) {
+			state.messages = [];
+			state.taskSuggestions = [];
+			state.selectedCategories = [];
+			state.buttonsMode = ButtonsModeOption.NONE;
 		},
 		setButtonsMode(
 			state,

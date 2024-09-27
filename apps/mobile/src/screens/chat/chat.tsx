@@ -23,7 +23,7 @@ import { styles } from "./styles";
 
 type ChatMessageItem = Omit<
 	ChatMessageDto<TaskMessage[] | TextMessage>,
-	"createdAt" | "id"
+	"createdAt" | "id" | "threadId" | "updatedAt"
 >;
 
 const Chat: React.FC = () => {
