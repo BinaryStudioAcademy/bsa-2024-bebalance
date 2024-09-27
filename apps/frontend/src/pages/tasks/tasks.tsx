@@ -58,7 +58,10 @@ const Tasks: React.FC = () => {
 		for (const task of tasks) {
 			const timeToDeadline = getMillisecondsLeft(currentTime, task.dueDate);
 
-			if (timeToDeadline < MillisecondsPerUnit.MINUTE) {
+			if (
+				timeToDeadline < MillisecondsPerUnit.MINUTE &&
+				task.status === TaskStatus.CURRENT
+			) {
 				expired.push(task);
 			} else {
 				active.push(task);
