@@ -1,3 +1,5 @@
+import { type StyleProp, type ViewStyle } from "react-native";
+
 import { Checkbox, Text, View } from "~/libs/components/components";
 import { BaseColor, NumericalValue } from "~/libs/enums/enums";
 import { useCallback, useFormController } from "~/libs/hooks/hooks";
@@ -13,6 +15,8 @@ import { type InputOption } from "./libs/types/types";
 
 type Properties<T extends FieldValues> = {
 	checkAllLabel?: string;
+	checkboxStyle?: StyleProp<ViewStyle>;
+	containerStyle?: StyleProp<ViewStyle>;
 	control: Control<T, null>;
 	errors: FieldErrors<T>;
 	name: FieldPath<T>;
@@ -21,6 +25,8 @@ type Properties<T extends FieldValues> = {
 
 const MultipleCheckboxInput = <T extends FieldValues>({
 	checkAllLabel = "",
+	checkboxStyle,
+	containerStyle,
 	control,
 	errors,
 	name,
@@ -70,6 +76,8 @@ const MultipleCheckboxInput = <T extends FieldValues>({
 
 				return (
 					<Checkbox
+						checkboxStyle={checkboxStyle}
+						containerStyle={containerStyle}
 						isChecked={isChecked}
 						key={id}
 						label={label}
