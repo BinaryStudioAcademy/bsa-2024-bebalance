@@ -24,6 +24,7 @@ const QuestionsStack: React.FC = () => {
 	const hasNotificationDays = useAppSelector(
 		({ auth }) => Number(auth.user?.userTaskDays?.length) > NumericalValue.ZERO,
 	);
+	const isRetakingQuiz = useAppSelector(({ quiz }) => quiz.isRetakingQuiz);
 
 	return (
 		<NativeStack.Navigator screenOptions={{ headerShown: false }}>
@@ -43,10 +44,12 @@ const QuestionsStack: React.FC = () => {
 					/>
 				</>
 			)}
-			<NativeStack.Screen
-				component={QuizEntry}
-				name={QuestionsStackName.QUIZ_ENTRY}
-			/>
+			{!isRetakingQuiz && (
+				<NativeStack.Screen
+					component={QuizEntry}
+					name={QuestionsStackName.QUIZ_ENTRY}
+				/>
+			)}
 			<NativeStack.Screen component={Quiz} name={QuestionsStackName.QUIZ} />
 			{!hasNotificationDays && (
 				<>
