@@ -1,5 +1,5 @@
 import { Button, Input } from "~/libs/components/components.js";
-import { useAppForm, useCallback } from "~/libs/hooks/hooks.js";
+import { useAppForm, useCallback, useEffect } from "~/libs/hooks/hooks.js";
 import {
 	type UserDto,
 	type UserUpdateFormDto,
@@ -11,18 +11,21 @@ import styles from "./styles.module.css";
 
 type Properties = {
 	onSubmit: (payload: UserUpdateRequestDto) => void;
+	setIsDirty: (payload: boolean) => void;
 	user: UserDto;
 };
 
 const UpdateUserForm: React.FC<Properties> = ({
 	onSubmit,
+	setIsDirty,
 	user,
 }: Properties) => {
 	const { email, name } = user;
-	const { control, errors, handleSubmit } = useAppForm<UserUpdateFormDto>({
-		defaultValues: { email, name },
-		validationSchema: userUpdateValidationSchema,
-	});
+	const { control, errors, handleSubmit, isDirty } =
+		useAppForm<UserUpdateFormDto>({
+			defaultValues: { email, name },
+			validationSchema: userUpdateValidationSchema,
+		});
 
 	const handleFormSubmit = useCallback(
 		(event_: React.BaseSyntheticEvent): void => {
@@ -30,6 +33,10 @@ const UpdateUserForm: React.FC<Properties> = ({
 		},
 		[handleSubmit, onSubmit],
 	);
+
+	useEffect(() => {
+		setIsDirty(isDirty);
+	}, [isDirty, setIsDirty]);
 
 	return (
 		<form className={styles["form"]} onSubmit={handleFormSubmit}>

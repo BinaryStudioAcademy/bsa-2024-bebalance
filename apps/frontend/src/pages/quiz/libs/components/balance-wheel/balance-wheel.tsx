@@ -105,6 +105,7 @@ const BalanceWheel: React.FC = () => {
 			<BalanceWheelChart
 				data={BALANCE_WHEEL_ANIMATED_INITIAL_DATA}
 				isAnimating
+				variant="animation"
 			/>
 			<span className={styles["text"]}>Analyzing {roundedPercentage}%</span>
 		</div>
