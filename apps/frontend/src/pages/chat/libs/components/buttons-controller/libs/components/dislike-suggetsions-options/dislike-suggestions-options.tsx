@@ -4,9 +4,16 @@ import {
 	useAppSelector,
 	useCallback,
 } from "~/libs/hooks/hooks.js";
-import { actions as chatActions } from "~/modules/chat/chat.js";
+import {
+	actions as chatActions,
+	ChatMessageAuthor,
+} from "~/modules/chat/chat.js";
 import { ButtonsModeOption } from "~/pages/chat/libs/enums/enums.js";
 
+import {
+	SuggestionsManipulationButtonLabel,
+	SuggestionsManipulationMessage,
+} from "../suggestions-manipulation-options/libs/enums/enums.js";
 import { RegenerateSuggestionButton } from "./libs/components/components.js";
 import { DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL } from "./libs/constants/constants.js";
 import { DislikeSuggestionMessage } from "./libs/enums/enums.js";
@@ -31,7 +38,31 @@ const DislikeSuggestionsOptions: React.FC = () => {
 		dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 		void dispatch(
 			chatActions.changeTasksSuggestion({
-				APIPayload: { messages: [], tasks: taskSuggestions },
+				APIPayload: {
+					messages: [
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: SuggestionsManipulationMessage.MAIN_MESSAGE,
+						},
+						{
+							author: ChatMessageAuthor.USER,
+							text: SuggestionsManipulationButtonLabel.DISLIKE_TASKS,
+						},
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: DislikeSuggestionMessage.MAIN,
+						},
+						{
+							author: ChatMessageAuthor.USER,
+							text: DISLIKE_ALL_SUGGESTIONS_BUTTON_LABEL,
+						},
+						{
+							author: ChatMessageAuthor.ASSISTANT,
+							text: DislikeSuggestionMessage.WAIT,
+						},
+					],
+					tasks: taskSuggestions,
+				},
 			}),
 		);
 	}, [dispatch, taskSuggestions]);

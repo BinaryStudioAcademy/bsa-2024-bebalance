@@ -26,24 +26,28 @@ const changeTaskSuggestionRequest = z.object({
 				}),
 		}),
 	),
-	task: z.object({
-		categoryId: z.number({
-			invalid_type_error: AIAssistantValidationMessage.CATEGORY_ID_REQUIRED,
-		}),
-		categoryName: z
-			.string()
-			.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-				message: AIAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
+	tasks: z.array(
+		z.object({
+			categoryId: z.number({
+				invalid_type_error: AIAssistantValidationMessage.CATEGORY_ID_REQUIRED,
 			}),
-		description: z
-			.string()
-			.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-				message: AIAssistantValidationMessage.DESCRIPTION_REQUIRED,
-			}),
-		label: z.string().min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
-			message: AIAssistantValidationMessage.LABEL_REQUIRED,
+			categoryName: z
+				.string()
+				.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+					message: AIAssistantValidationMessage.CATEGORY_NAME_REQUIRED,
+				}),
+			description: z
+				.string()
+				.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+					message: AIAssistantValidationMessage.DESCRIPTION_REQUIRED,
+				}),
+			label: z
+				.string()
+				.min(AIAssistantValidationRule.NON_EMPTY_ITEM_MIN_LENGTH, {
+					message: AIAssistantValidationMessage.LABEL_REQUIRED,
+				}),
 		}),
-	}),
+	),
 });
 
 export { changeTaskSuggestionRequest };

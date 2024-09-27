@@ -42,6 +42,10 @@ const SuggestionsManipulationOptions: React.FC = () => {
 			chatActions.createTasksFromSuggestions({
 				messages: [
 					{
+						author: ChatMessageAuthor.ASSISTANT,
+						text: SuggestionsManipulationMessage.MAIN_MESSAGE,
+					},
+					{
 						author: ChatMessageAuthor.USER,
 						text: SuggestionsManipulationButtonLabel.ACCEPT_TASKS,
 					},

@@ -21,6 +21,7 @@ import {
 import {
 	acceptMultipleTasksValidationSchema,
 	addMessageToThreadValidationSchema,
+	changeTaskSuggestionRequestValidationSchema,
 	taskActionRequestSchemaValidationSchema,
 	taskSuggestionRequestValidationSchema,
 } from "./libs/validation-schemas/validation-schemas.js";
@@ -320,7 +321,7 @@ class AIAssistantController extends BaseController {
 			method: "POST",
 			path: AIAssistantApiPath.CHAT_CHANGE_TASKS,
 			validation: {
-				body: taskActionRequestSchemaValidationSchema,
+				body: changeTaskSuggestionRequestValidationSchema,
 			},
 		});
 
@@ -335,7 +336,7 @@ class AIAssistantController extends BaseController {
 			method: "POST",
 			path: AIAssistantApiPath.CHAT_EXPLAIN_TASKS,
 			validation: {
-				body: taskActionRequestSchemaValidationSchema,
+				body: changeTaskSuggestionRequestValidationSchema,
 			},
 		});
 
