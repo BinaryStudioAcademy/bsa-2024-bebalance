@@ -20,6 +20,10 @@ const ButtonsController: React.FC = () => {
 			return <SuggestionsManipulationOptions />;
 		}
 
+		case ButtonsModeOption.SUGGESTIONS_EXPLANATION: {
+			return <SuggestionsManipulationOptions isExplained />;
+		}
+
 		case ButtonsModeOption.CATEGORIES_CHECKBOX: {
 			return <CategoriesSelector />;
 		}

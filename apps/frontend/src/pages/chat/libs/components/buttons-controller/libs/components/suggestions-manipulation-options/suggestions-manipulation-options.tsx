@@ -13,8 +13,15 @@ import {
 } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
-const SuggestionsManipulationOptions: React.FC = () => {
+type Properties = {
+	isExplained?: boolean;
+};
+
+const SuggestionsManipulationOptions: React.FC<Properties> = ({
+	isExplained = false,
+}: Properties) => {
 	const { taskSuggestions, threadId } = useAppSelector((state) => ({
+		selectedCategories: state.chat.selectedCategories,
 		taskSuggestions: state.chat.taskSuggestions,
 		threadId: state.chat.threadId,
 	}));
@@ -46,6 +53,25 @@ const SuggestionsManipulationOptions: React.FC = () => {
 		);
 	}, [dispatch, taskSuggestions, threadId]);
 
+	const handleExplainTasksSuggestions = useCallback(() => {
+		void dispatch(
+			chatActions.addUserTextMessage(
+				SuggestionsManipulationButtonLabel.EXPLAIN_TASKS,
+			),
+		);
+
+		void dispatch(
+			chatActions.explainTasksSuggestions({
+				payload: taskSuggestions,
+				threadId: threadId as string,
+			}),
+		);
+
+		void dispatch(
+			chatActions.setButtonsMode(ButtonsModeOption.SUGGESTIONS_EXPLANATION),
+		);
+	}, [dispatch, taskSuggestions, threadId]);
+
 	const handleDislikeSuggestions = useCallback(() => {
 		void dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 
@@ -70,12 +96,21 @@ const SuggestionsManipulationOptions: React.FC = () => {
 			<div className={styles["content-container"]}>
 				<div className={styles["content"]}>
 					<p>{SuggestionsManipulationMessage.MAIN_MESSAGE}</p>
+					<br />
 					<div className={styles["button-container"]}>
 						<Button
 							label={SuggestionsManipulationButtonLabel.ACCEPT_TASKS}
 							onClick={handleAcceptAllSuggestions}
 							variant="secondary"
 						/>
+						{isExplained && (
+							<Button
+								label={SuggestionsManipulationButtonLabel.EXPLAIN_TASKS}
+								onClick={handleExplainTasksSuggestions}
+								variant="secondary"
+							/>
+						)}
+
 						<Button
 							label={SuggestionsManipulationButtonLabel.DISLIKE_TASKS}
 							onClick={handleDislikeSuggestions}
