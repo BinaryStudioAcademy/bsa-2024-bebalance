@@ -51,7 +51,16 @@ const ScoresEditModal: React.FC<Properties> = ({
 	}, [onSaveChanges, dispatch, scores, isDiscardButtonDisabled]);
 
 	const areChangesScores = useCallback(() => {
-		return JSON.stringify(originalScores) !== JSON.stringify(scores);
+		for (const [index, score] of scores.entries()) {
+			if (
+				originalScores[index] &&
+				originalScores[index].score !== score.score
+			) {
+				return true;
+			}
+		}
+
+		return false;
 	}, [originalScores, scores]);
 
 	const handleSliderChange = useCallback(
