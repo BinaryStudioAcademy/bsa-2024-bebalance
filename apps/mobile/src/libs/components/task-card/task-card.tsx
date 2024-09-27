@@ -19,14 +19,22 @@ import { styles } from "./styles";
 
 type Properties = {
 	onComplete?: (id: number) => void;
+	onExpire?: (task: TaskDto) => void;
 	onSkip?: (id: number) => void;
 	task: TaskDto;
+	variant?: "active" | "expired";
 };
 
 const EDIT_ICON_SIZE = 20;
 const NUMBER_OF_LINES = 3;
 
-const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
+const TaskCard: React.FC<Properties> = ({
+	onComplete,
+	onExpire,
+	onSkip,
+	task,
+	variant = "active",
+}) => {
 	const handleTaskSkip = useCallback(() => {
 		onSkip?.(task.id);
 	}, [task, onSkip]);
@@ -36,14 +44,24 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 	}, [task, onComplete]);
 
 	const isActiveTask = task.status === TaskStatus.CURRENT;
+	const isExpired = variant === "expired";
+	const taskStyle = isExpired ? styles.expired : styles.active;
+	const editIconColor = isExpired ? BaseColor.GRAY : BaseColor.BLACK;
+	const actionsBorderTopStyle = isExpired
+		? styles.actionsDisabled
+		: styles.actionsActive;
 
 	const statusProperties = useMemo(
 		() => getStatusProperties(task.status),
 		[task.status],
 	);
 
+	const handleExpiredTask = useCallback(() => {
+		onExpire?.(task);
+	}, [onExpire, task]);
+
 	return (
-		<View style={[globalStyles.mb16, globalStyles.mh16, styles.container]}>
+		<View style={[styles.container, taskStyle]}>
 			<View
 				style={[
 					globalStyles.alignItemsCenter,
@@ -54,7 +72,13 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 				]}
 			>
 				<Tag label={task.categoryName} />
-				{isActiveTask && <DeadlineCountdown deadline={task.dueDate} />}
+				{isActiveTask && (
+					<DeadlineCountdown
+						deadline={task.dueDate}
+						isExpired={isExpired}
+						onExpire={handleExpiredTask}
+					/>
+				)}
 			</View>
 			<View style={[globalStyles.mt32, globalStyles.pb24, globalStyles.ph16]}>
 				<Text preset="subheading" weight="bold">
@@ -80,6 +104,7 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 						globalStyles.ph16,
 						globalStyles.pt16,
 						styles.actions,
+						actionsBorderTopStyle,
 					]}
 				>
 					<View
@@ -90,17 +115,19 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 						]}
 					>
 						<Icon
-							color={BaseColor.BLACK}
+							color={editIconColor}
 							name="edit-note"
 							size={EDIT_ICON_SIZE}
 						/>
 					</View>
 					<TaskActionButton
+						isDisabled={isExpired}
 						label="Skip the task"
 						onPress={handleTaskSkip}
 						type="skip"
 					/>
 					<TaskActionButton
+						isDisabled={isExpired}
 						label="Mark complete"
 						onPress={handleTaskComplete}
 						type="complete"
@@ -108,7 +135,9 @@ const TaskCard: React.FC<Properties> = ({ onComplete, onSkip, task }) => {
 				</View>
 			) : (
 				statusProperties && (
-					<View style={[globalStyles.pt16, styles.actions]}>
+					<View
+						style={[globalStyles.pt16, styles.actions, actionsBorderTopStyle]}
+					>
 						<TaskStatusLabel
 							label={statusProperties.label}
 							type={statusProperties.type}
