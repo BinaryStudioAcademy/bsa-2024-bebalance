@@ -30,7 +30,7 @@ const InitialMessages: React.FC = () => {
 			<div className={styles["message-container"]}>
 				<Icon name="aiAssistantAvatar" />
 				<div className={styles["content-container"]}>
-					<p>here&apos;s how your wheel looks like right now:</p>
+					<p>Here&apos;s how your wheel looks like right now:</p>
 					<div className={styles["content"]}>
 						<BalanceWheelChart data={chartData} />
 					</div>

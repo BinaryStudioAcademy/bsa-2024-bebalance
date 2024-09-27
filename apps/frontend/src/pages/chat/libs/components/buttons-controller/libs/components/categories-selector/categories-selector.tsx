@@ -36,11 +36,9 @@ const CategoriesSelector: React.FC = () => {
 				threadId: threadId ?? "",
 			};
 
-			let namesOfSelectedCategories = "";
-
-			for (const category of newSelectedCategories) {
-				namesOfSelectedCategories += `${category.name}\n`;
-			}
+			let namesOfSelectedCategories = newSelectedCategories
+				.map((category) => category.name)
+				.join(", ");
 
 			dispatch(chatActions.setButtonsMode(ButtonsModeOption.NONE));
 			dispatch(chatActions.addAssistantTextMessage(CATEGORIES_SELECTOR_TEXT));
