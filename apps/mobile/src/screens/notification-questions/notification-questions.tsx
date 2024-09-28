@@ -121,7 +121,7 @@ const NotificationQuestions: React.FC = () => {
 						<View>
 							<Text
 								size="xl"
-								style={[globalStyles.mb48, globalStyles.mt12, styles.title]}
+								style={[globalStyles.mb24, globalStyles.mt12, styles.title]}
 								weight="bold"
 							>
 								And the last step

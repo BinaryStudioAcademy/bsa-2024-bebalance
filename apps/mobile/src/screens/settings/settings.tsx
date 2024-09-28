@@ -101,7 +101,7 @@ const Settings: React.FC = () => {
 		<ScreenWrapper edges={["top"]}>
 			<ScrollView contentContainerStyle={globalStyles.flex1}>
 				<View style={[globalStyles.flex1, globalStyles.p16, styles.container]}>
-					<Text preset="heading" style={globalStyles.mb24} weight="bold">
+					<Text preset="subheading" style={globalStyles.mb24} weight="bold">
 						Settings
 					</Text>
 					<Text preset="subheading" style={globalStyles.mb12} weight="bold">
