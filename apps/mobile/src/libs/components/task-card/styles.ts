@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 		backgroundColor: BaseColor.BG_WHITE,
 	},
 	container: {
+		backgroundColor: BaseColor.BG_WHITE,
 		borderColor: BaseColor.BG_LIGHT,
 		borderRadius: 16,
 		borderWidth: 1,

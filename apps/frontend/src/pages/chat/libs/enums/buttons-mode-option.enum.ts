@@ -3,6 +3,7 @@ const ButtonsModeOption = {
 	DISLIKE_SUGGESTIONS: "dislikeSuggestions",
 	NONE: "none",
 	SUGGESTIONS_CREATION: "suggestionsGeneration",
+	SUGGESTIONS_EXPLANATION: "suggestionExplanation",
 	SUGGESTIONS_MANIPULATION: "suggestionsManipulation",
 } as const;
 
