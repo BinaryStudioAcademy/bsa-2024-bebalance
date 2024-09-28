@@ -10,7 +10,7 @@ type Properties = {
 
 const CircularProgress: React.FC<Properties> = ({ percentage }: Properties) => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
-	const RADIUS = 90;
+	const RADIUS = 80;
 	const circumference = Math.PI * RADIUS;
 	const offset =
 		circumference - (percentage / TOTAL_PERCENTAGE) * circumference;
