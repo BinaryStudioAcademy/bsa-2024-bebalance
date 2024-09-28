@@ -16,7 +16,7 @@ import { ConfirmPasswordCustomValidation } from "./libs/enums/enums.js";
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: UserUpdatePasswordRequestDto) => void;
+	onSubmit: (payload: UserUpdatePasswordRequestDto) => Promise<void>;
 	setIsDirty: (payload: boolean) => void;
 };
 
@@ -44,7 +44,7 @@ const UpdatePasswordForm: React.FC<Properties> = ({
 				const { newPassword } = payload;
 
 				if (confirmNewPassword === newPassword) {
-					onSubmit(payload);
+					void onSubmit(payload);
 				} else {
 					setError(ConfirmPasswordCustomValidation.FIELD.CONFIRM_NEW_PASSWORD, {
 						message: ConfirmPasswordCustomValidation.ERROR_MESSAGE,

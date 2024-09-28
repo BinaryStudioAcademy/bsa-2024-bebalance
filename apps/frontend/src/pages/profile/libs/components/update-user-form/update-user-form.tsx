@@ -10,7 +10,7 @@ import {
 import styles from "./styles.module.css";
 
 type Properties = {
-	onSubmit: (payload: UserUpdateRequestDto) => void;
+	onSubmit: (payload: UserUpdateRequestDto) => Promise<void>;
 	setIsDirty: (payload: boolean) => void;
 	user: UserDto;
 };

@@ -33,6 +33,7 @@ const Profile: React.FC = () => {
 		dataStatus: users.dataStatus,
 		user: users.user,
 	}));
+	const [isDirty, setIsDirty] = useState<boolean>(false);
 
 	useEffect(() => {
 		void dispatch(
@@ -41,17 +42,19 @@ const Profile: React.FC = () => {
 	}, [dispatch, authenticatedUser]);
 
 	const handleUpdateSubmit = useCallback(
-		(payload: UserUpdateRequestDto): void => {
-			void dispatch(
+		async (payload: UserUpdateRequestDto): Promise<void> => {
+			await dispatch(
 				usersActions.update({ data: payload, id: (user as UserDto).id }),
 			);
+			setIsDirty((previousValue) => !previousValue);
 		},
 		[dispatch, user],
 	);
 
 	const handleUpdatePasswordSubmit = useCallback(
-		(payload: UserUpdatePasswordRequestDto): void => {
-			void dispatch(authActions.updatePassword(payload));
+		async (payload: UserUpdatePasswordRequestDto): Promise<void> => {
+			await dispatch(authActions.updatePassword(payload));
+			setIsDirty((previousValue) => !previousValue);
 		},
 		[dispatch],
 	);
@@ -75,9 +78,6 @@ const Profile: React.FC = () => {
 	}, [dispatch]);
 
 	const isLoading = dataStatus === DataStatus.PENDING;
-
-	const [isDirty, setIsDirty] = useState<boolean>(false);
-
 	const { handlePopupCancel, handlePopupConfirm, isBlocked } =
 		useUnsavedChangesBlocker({ hasUnsavedChanges: isDirty });
 
