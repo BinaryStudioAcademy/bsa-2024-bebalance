@@ -1,12 +1,6 @@
-import { useFocusEffect } from "@react-navigation/native";
-
 import { ChatMessage, View, Wheel } from "~/libs/components/components";
 import { transformScoresToWheelData } from "~/libs/helpers/helpers";
-import {
-	useAppDispatch,
-	useAppSelector,
-	useCallback,
-} from "~/libs/hooks/hooks";
+import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { actions as quizActions } from "~/slices/quiz/quiz";
 
@@ -21,11 +15,9 @@ const InitialChatMessage: React.FC = () => {
 
 	const userName = user?.name ?? "";
 
-	useFocusEffect(
-		useCallback(() => {
-			void dispatch(quizActions.getScores());
-		}, [dispatch]),
-	);
+	useEffect(() => {
+		void dispatch(quizActions.getScores());
+	}, [dispatch]);
 
 	return (
 		<>

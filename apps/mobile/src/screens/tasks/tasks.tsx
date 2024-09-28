@@ -2,10 +2,11 @@ import React from "react";
 
 import {
 	ExpiredTasksModal,
+	FlatList,
+	ImageBackground,
 	LoaderWrapper,
 	PageSwitcher,
 	ScreenWrapper,
-	ScrollView,
 	TaskCard,
 	Text,
 	View,
@@ -16,35 +17,32 @@ import {
 	useAppSelector,
 	useCallback,
 	useEffect,
+	useFocusEffect,
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
-import { type ValueOf } from "~/libs/types/types";
+import { type ImageSourcePropType } from "~/libs/types/types";
 import { type TaskDto } from "~/packages/tasks/tasks";
 import { type UserDto } from "~/packages/users/users";
 import { actions as taskActions } from "~/slices/task/task";
 import { actions as userActions } from "~/slices/users/users";
 
-import { TasksMode, TaskStatus, TaskTab } from "./libs/enums/enums";
-import { getMillisecondsLeft } from "./libs/helpers/helpers";
+import { EmptyTasksHeader } from "./libs/components/components";
+import { TaskStatus, TaskTab } from "./libs/enums/enums";
 import { styles } from "./styles";
-
-const MILLISECONDS_PER_MINUTE = 60_000;
 
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
-	const { activeTasks, dataStatus, expiredTasks, tasks } = useAppSelector(
+	const { activeTasks, dataStatus, expiredTasks, pastTasks } = useAppSelector(
 		({ tasks }) => tasks,
 	);
 
-	const [mode, setMode] = useState<ValueOf<typeof TasksMode>>(
-		TasksMode.CURRENT,
-	);
+	const [isCurrentMode, setIsCurrentMode] = useState<boolean>(true);
 
 	const hasExpiredTasks = expiredTasks.length > NumericalValue.ZERO;
-	const taskbarTasks = mode === TasksMode.CURRENT ? activeTasks : tasks;
+	const taskbarTasks = isCurrentMode ? activeTasks : pastTasks;
 
 	useEffect(() => {
 		void dispatch(
@@ -52,46 +50,16 @@ const Tasks: React.FC = () => {
 		);
 	}, [dispatch, authenticatedUser]);
 
-	useEffect(() => {
-		if (mode === TasksMode.CURRENT) {
+	useFocusEffect(
+		useCallback(() => {
 			void dispatch(taskActions.getCurrentTasks());
-		}
-
-		if (mode === TasksMode.PAST) {
 			void dispatch(taskActions.getPastTasks());
-		}
-	}, [dispatch, mode]);
-
-	useEffect(() => {
-		const currentTime = Date.now();
-		const expired: TaskDto[] = [];
-		const active: TaskDto[] = [];
-
-		for (const task of tasks) {
-			const { dueDate, status } = task;
-			const timeToDeadline = getMillisecondsLeft(currentTime, dueDate);
-
-			if (
-				timeToDeadline < MILLISECONDS_PER_MINUTE &&
-				status === TaskStatus.CURRENT
-			) {
-				expired.push(task);
-			} else {
-				active.push(task);
-			}
-		}
-
-		void dispatch(taskActions.setActiveTasks(active));
-		void dispatch(taskActions.setExpiredTasks(expired));
-	}, [tasks, dispatch]);
+		}, [dispatch]),
+	);
 
 	const handleModeToggle = useCallback(() => {
-		setMode((previousState) => {
-			return previousState === TasksMode.CURRENT
-				? TasksMode.PAST
-				: TasksMode.CURRENT;
-		});
-	}, []);
+		setIsCurrentMode(!isCurrentMode);
+	}, [isCurrentMode]);
 
 	const handleSkip = useCallback(
 		(id: number): void => {
@@ -116,6 +84,34 @@ const Tasks: React.FC = () => {
 		[dispatch],
 	);
 
+	const handleRenderTask = useCallback(
+		({ item }: { item: TaskDto }) => {
+			return (
+				<TaskCard
+					key={item.id}
+					onComplete={handleComplete}
+					onExpire={handleExpired}
+					onSkip={handleSkip}
+					task={item}
+				/>
+			);
+		},
+		[handleComplete, handleExpired, handleSkip],
+	);
+
+	const handleKeyExtractor = useCallback(
+		(item: TaskDto) => item.id.toString(),
+		[],
+	);
+
+	const emptyTasksComponent = useCallback(() => {
+		const content = isCurrentMode
+			? "You don't have any active tasks"
+			: "You don't have any past tasks";
+
+		return <EmptyTasksHeader content={content} />;
+	}, [isCurrentMode]);
+
 	return (
 		<ScreenWrapper edges={["top", "left", "right"]} style={styles.container}>
 			<LoaderWrapper isLoading={dataStatus === DataStatus.PENDING}>
@@ -136,27 +132,31 @@ const Tasks: React.FC = () => {
 								My Tasks
 							</Text>
 							<PageSwitcher
-								activeTab={
-									mode === TasksMode.CURRENT ? TaskTab.ACTIVE : TaskTab.PAST
-								}
+								activeTab={isCurrentMode ? TaskTab.ACTIVE : TaskTab.PAST}
 								onTabChange={handleModeToggle}
 								style={[globalStyles.flex1, styles.switch]}
 								tabs={[TaskTab.ACTIVE, TaskTab.PAST]}
 							/>
 						</View>
-						<ScrollView
-							contentContainerStyle={[globalStyles.gap8, globalStyles.p16]}
+						<ImageBackground
+							resizeMode="cover"
+							source={
+								require("~/assets/images/background.png") as ImageSourcePropType
+							}
+							style={[globalStyles.flex1, styles.backgroundContainer]}
 						>
-							{taskbarTasks.map((task) => (
-								<TaskCard
-									key={task.id}
-									onComplete={handleComplete}
-									onExpire={handleExpired}
-									onSkip={handleSkip}
-									task={task}
-								/>
-							))}
-						</ScrollView>
+							<FlatList
+								contentContainerStyle={[
+									globalStyles.gap8,
+									globalStyles.ph16,
+									globalStyles.pv24,
+								]}
+								data={taskbarTasks}
+								keyExtractor={handleKeyExtractor}
+								ListEmptyComponent={emptyTasksComponent}
+								renderItem={handleRenderTask}
+							/>
+						</ImageBackground>
 					</>
 				)}
 			</LoaderWrapper>

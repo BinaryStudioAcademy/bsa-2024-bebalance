@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { DataStatus } from "~/libs/enums/enums";
+import { getActiveAndExpiredTasks } from "~/libs/helpers/helpers";
 import { type ValueOf } from "~/libs/types/types";
 import { type TaskDto } from "~/packages/tasks/tasks";
 
@@ -16,14 +17,14 @@ type State = {
 	activeTasks: TaskDto[];
 	dataStatus: ValueOf<typeof DataStatus>;
 	expiredTasks: TaskDto[];
-	tasks: TaskDto[];
+	pastTasks: TaskDto[];
 };
 
 const initialState: State = {
 	activeTasks: [],
 	dataStatus: DataStatus.IDLE,
 	expiredTasks: [],
-	tasks: [],
+	pastTasks: [],
 };
 
 const { actions, name, reducer } = createSlice({
@@ -33,7 +34,11 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getCurrentTasks.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.tasks = action.payload;
+			const { activeTasks, expiredTasks } = getActiveAndExpiredTasks(
+				action.payload,
+			);
+			state.activeTasks = activeTasks;
+			state.expiredTasks = expiredTasks;
 		});
 		builder.addCase(getCurrentTasks.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -43,7 +48,7 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(getPastTasks.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.tasks = action.payload;
+			state.pastTasks = action.payload;
 		});
 		builder.addCase(getPastTasks.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -54,9 +59,13 @@ const { actions, name, reducer } = createSlice({
 		});
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.dataStatus = DataStatus.FULFILLED;
-			state.tasks = state.tasks.filter((task) => {
+			state.activeTasks = state.activeTasks.filter((task) => {
 				return task.id !== action.payload.id;
 			});
+			state.expiredTasks = state.expiredTasks.filter((task) => {
+				return task.id !== action.payload.id;
+			});
+			state.pastTasks = [...state.pastTasks, action.payload];
 		});
 		builder.addCase(updateTask.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
@@ -65,14 +74,10 @@ const { actions, name, reducer } = createSlice({
 			state.dataStatus = DataStatus.PENDING;
 		});
 		builder.addCase(updateTaskDeadline.fulfilled, (state, action) => {
-			state.tasks = state.tasks.map((task) => {
-				if (task.id === action.payload.id) {
-					return action.payload;
-				}
-
-				return task;
-			});
-
+			state.activeTasks = [...state.activeTasks, action.payload];
+			state.expiredTasks = state.expiredTasks.filter(
+				(task) => task.id !== action.payload.id,
+			);
 			state.dataStatus = DataStatus.FULFILLED;
 		});
 		builder.addCase(updateTaskDeadline.rejected, (state) => {
@@ -90,12 +95,6 @@ const { actions, name, reducer } = createSlice({
 			state.activeTasks = state.activeTasks.filter(
 				(task) => task.id !== action.payload.id,
 			);
-		},
-		setActiveTasks: (state, action: PayloadAction<TaskDto[]>) => {
-			state.activeTasks = action.payload;
-		},
-		setExpiredTasks: (state, action: PayloadAction<TaskDto[]>) => {
-			state.expiredTasks = action.payload;
 		},
 	},
 });

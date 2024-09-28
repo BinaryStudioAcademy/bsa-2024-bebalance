@@ -21,7 +21,7 @@ const useConditionalScreens = (): NavigationItem[] => {
 			{
 				component: BottomTabsNavigator,
 				name: RootScreenName.BOTTOM_TABS_NAVIGATOR,
-				shouldBeRendered: hasUser && hasAnsweredQuizQuestions,
+				shouldBeRendered: hasUser,
 			},
 			{
 				component: Auth,
