@@ -9,7 +9,11 @@ import {
 import { actions as quizActions } from "~/modules/quiz/quiz.js";
 import { type QuizScoresGetAllItemResponseDto } from "~/modules/quiz/quiz.js";
 
-import { IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE } from "./libs/constants/constants.js";
+import {
+	AFTER_DISCARD_CHANGES_DELAY,
+	IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE,
+	IS_RESET_CHANGES_SCORES_INITIAL_VALUE,
+} from "./libs/constants/constants.js";
 import { type ModalData } from "./libs/types/types.js";
 import styles from "./styles.module.css";
 
@@ -30,8 +34,9 @@ const ScoresEditModal: React.FC<Properties> = ({
 	const [scores, setScores] = useState<ModalData[]>(data);
 	const [isDiscardButtonDisabled, setIsDiscardButtonDisabled] =
 		useState<boolean>(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
-	const [areChangesDiscarded, setAreChangesDiscarded] =
-		useState<boolean>(false);
+	const [isResetChanges, setIsResetChanges] = useState<boolean>(
+		IS_RESET_CHANGES_SCORES_INITIAL_VALUE,
+	);
 
 	const handleSaveChanges = useCallback(() => {
 		if (!isDiscardButtonDisabled) {
@@ -44,6 +49,19 @@ const ScoresEditModal: React.FC<Properties> = ({
 
 		onSaveChanges();
 	}, [onSaveChanges, dispatch, scores, isDiscardButtonDisabled]);
+
+	const areChangesScores = useCallback(() => {
+		for (const [index, score] of scores.entries()) {
+			if (
+				originalScores[index] &&
+				originalScores[index].score !== score.score
+			) {
+				return true;
+			}
+		}
+
+		return false;
+	}, [originalScores, scores]);
 
 	const handleSliderChange = useCallback(
 		(categoryId: number, value: number) => {
@@ -73,17 +91,22 @@ const ScoresEditModal: React.FC<Properties> = ({
 
 	const handleDiscardChanges = useCallback(() => {
 		void dispatch(quizActions.getScores());
-		setAreChangesDiscarded((previousValue) => !previousValue);
-	}, [setAreChangesDiscarded, dispatch]);
+		setIsResetChanges(!IS_RESET_CHANGES_SCORES_INITIAL_VALUE);
+	}, [setIsResetChanges, dispatch]);
 
 	useEffect(() => {
-		setScores(originalScores);
-
-		if (areChangesDiscarded) {
-			setAreChangesDiscarded((previousValue) => !previousValue);
-			setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
+		if (areChangesScores()) {
+			setScores(originalScores);
+			setIsResetChanges(IS_RESET_CHANGES_SCORES_INITIAL_VALUE);
+			setTimeout(() => {
+				setIsDiscardButtonDisabled(IS_DISCARD_BUTTON_DISABLED_INITIAL_VALUE);
+			}, AFTER_DISCARD_CHANGES_DELAY);
 		}
-	}, [areChangesDiscarded, setScores, originalScores]);
+	}, [isResetChanges, setScores, originalScores, scores, areChangesScores]);
+
+	useEffect(() => {
+		return (): void => void dispatch(quizActions.getScores());
+	}, [dispatch]);
 
 	return (
 		<div className={styles["container"]}>
