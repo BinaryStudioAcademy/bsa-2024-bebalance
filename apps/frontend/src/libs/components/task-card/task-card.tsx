@@ -74,7 +74,7 @@ const TaskCard: React.FC<Properties> = ({
 			className={getValidClassNames(styles["card"], styles[`card-${variant}`])}
 		>
 			<div className={styles["card-header"]}>
-				<Category categoryName={task.categoryName} />
+				<Category categoryName={task.categoryName} variant={variant} />
 				{isActive && (
 					<Deadline
 						deadline={(task as TaskDto).dueDate}
@@ -99,6 +99,7 @@ const TaskCard: React.FC<Properties> = ({
 							<div className={styles["button-container"]}>
 								<Button
 									hasVisuallyHiddenLabel
+									iconColor={iconColor}
 									iconName="note"
 									iconPosition="left"
 									label="notes"
