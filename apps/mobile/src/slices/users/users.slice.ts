@@ -41,7 +41,7 @@ const { actions, name, reducer } = createSlice({
 		builder.addCase(saveNotificationAnswers.rejected, (state) => {
 			state.dataStatus = DataStatus.REJECTED;
 		});
-		builder.addCase(signOut.pending, () => {
+		builder.addCase(signOut.fulfilled, () => {
 			return initialState;
 		});
 	},
