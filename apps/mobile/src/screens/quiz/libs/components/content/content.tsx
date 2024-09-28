@@ -40,8 +40,7 @@ const Content: React.FC<Properties<QuizFormValues>> = ({
 		<>
 			<Text
 				preset="subheading"
-				style={[globalStyles.mb48, globalStyles.mt12, styles.title]}
-				weight="bold"
+				style={[globalStyles.mb24, globalStyles.mt12, styles.title]}
 			>
 				{question?.label}
 			</Text>

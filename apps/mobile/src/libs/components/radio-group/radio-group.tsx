@@ -63,6 +63,7 @@ const RadioGroup = <T extends FieldValues>({
 	return (
 		<View>
 			<RNRadioGroup
+				containerStyle={globalStyles.flexGrow1}
 				onPress={onFieldChange}
 				radioButtons={radioButtonsProperties}
 				selectedId={selectedId}

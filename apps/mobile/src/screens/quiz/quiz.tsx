@@ -181,15 +181,20 @@ const Quiz: React.FC = () => {
 							globalStyles.mh12,
 							globalStyles.mt32,
 							globalStyles.ph16,
-							globalStyles.pb16,
+							globalStyles.pv16,
 							styles.container,
 						]}
 					>
 						{currentQuestion && (
-							<>
+							<View
+								style={[
+									globalStyles.flex1,
+									globalStyles.justifyContentSpaceBetween,
+								]}
+							>
 								<Text
 									size="xl"
-									style={[globalStyles.mb24, styles.title]}
+									style={[globalStyles.mv24, styles.title]}
 									weight="bold"
 								>
 									Wheel Quiz questions
@@ -201,29 +206,29 @@ const Quiz: React.FC = () => {
 								<View
 									style={[
 										globalStyles.flex1,
-										globalStyles.justifyContentSpaceBetween,
+										globalStyles.justifyContentCenter,
 									]}
 								>
 									<InfinitePager
 										infinitePagerReference={infinitePagerReference}
 										onPageRender={handleRenderPageComponent}
 									/>
-									<View style={globalStyles.gap16}>
-										<Button
-											isDisabled={!isValid}
-											label={isLastQuestion ? "CONTINUE" : "NEXT"}
-											onPress={handleFormSubmit}
-										/>
-										{currentQuestionIndex !== NumericalValue.ZERO && (
-											<Button
-												appearance="outlined"
-												label="BACK"
-												onPress={handlePreviousClick}
-											/>
-										)}
-									</View>
 								</View>
-							</>
+								<View style={globalStyles.gap16}>
+									<Button
+										isDisabled={!isValid}
+										label={isLastQuestion ? "CONTINUE" : "NEXT"}
+										onPress={handleFormSubmit}
+									/>
+									{currentQuestionIndex !== NumericalValue.ZERO && (
+										<Button
+											appearance="outlined"
+											label="BACK"
+											onPress={handlePreviousClick}
+										/>
+									)}
+								</View>
+							</View>
 						)}
 					</View>
 				</ScreenWrapper>

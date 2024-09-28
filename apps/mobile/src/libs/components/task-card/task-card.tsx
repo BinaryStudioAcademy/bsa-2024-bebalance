@@ -2,7 +2,6 @@ import React from "react";
 
 import {
 	DeadlineCountdown,
-	Icon,
 	Tag,
 	TaskActionButton,
 	TaskStatusLabel,
@@ -25,7 +24,6 @@ type Properties = {
 	variant?: "active" | "expired";
 };
 
-const EDIT_ICON_SIZE = 20;
 const NUMBER_OF_LINES = 3;
 
 const TaskCard: React.FC<Properties> = ({
@@ -46,7 +44,6 @@ const TaskCard: React.FC<Properties> = ({
 	const isActiveTask = task.status === TaskStatus.CURRENT;
 	const isExpired = variant === "expired";
 	const taskStyle = isExpired ? styles.expired : styles.active;
-	const editIconColor = isExpired ? BaseColor.GRAY : BaseColor.BLACK;
 	const actionsBorderTopStyle = isExpired
 		? styles.actionsDisabled
 		: styles.actionsActive;
@@ -107,19 +104,6 @@ const TaskCard: React.FC<Properties> = ({
 						actionsBorderTopStyle,
 					]}
 				>
-					<View
-						style={[
-							globalStyles.justifyContentCenter,
-							globalStyles.p4,
-							styles.edit,
-						]}
-					>
-						<Icon
-							color={editIconColor}
-							name="edit-note"
-							size={EDIT_ICON_SIZE}
-						/>
-					</View>
 					<TaskActionButton
 						isDisabled={isExpired}
 						label="Skip the task"
