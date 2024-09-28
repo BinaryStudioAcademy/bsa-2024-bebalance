@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.62.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.61.0...v1.62.0) (2024-09-28)
+
+
+### Features
+
+* **frontend:** popup on edit wheel screen when user leaves bb-466 ([#617](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/617)) ([b0627e1](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/b0627e1a5296de5bfd7f55f29351484c4f5a7c4a))
+* **mobile:** task management bb-445 ([#577](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/577)) ([0a3e281](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/0a3e281ceb42152f50e1104fcb43c78d4f6d11a8))
+
+
+### Bug Fixes
+
+* **frontend:** add to expired only current tasks bb-593 ([#613](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/613)) ([fa5ea13](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/fa5ea13b7cc6077405cd8864d790ad15e26f473c))
+* **frontend:** fix radius of semicircle bb-605 ([#611](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/611)) ([411b470](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/411b470bc67c8c6c8f35a57dd04a3abed5f7169f))
+* **frontend:** task deadline actions modal bb-418 ([#614](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/614)) ([c9ff3c3](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/c9ff3c3e98181863216ffbf9eab92cd27b36be66))
+* **mobile:** App occasionally closes unexpectedly after quiz analysis for new user or retake quiz for existing user bb-606 ([#615](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/issues/615)) ([9669999](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/commit/9669999a911a4cbd4e7a52ddeaed2add8b10a2d0))
+
 ## [1.61.0](https://github.com/BinaryStudioAcademy/bsa-2024-bebalance/compare/v1.60.1...v1.61.0) (2024-09-27)
 
 
