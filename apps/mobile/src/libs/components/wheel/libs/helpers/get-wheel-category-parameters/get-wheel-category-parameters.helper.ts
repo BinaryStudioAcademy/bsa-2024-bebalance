@@ -16,14 +16,12 @@ type GetWheelCategoryParameters = (data: {
 	innerColor: string;
 	innerColorOffset: number;
 	outerColor: string;
-	outerColorOffset: number;
 	sectorKey: string;
 	startPercent: number;
 };
 
 const MAX_PERCENT = 100;
 const INNER_COLOR_OFFSET = 1;
-const OUTER_COLOR_OFFSET = 0;
 
 const getWheelCategoryParameters: GetWheelCategoryParameters = ({
 	categoriesLength,
@@ -50,7 +48,6 @@ const getWheelCategoryParameters: GetWheelCategoryParameters = ({
 		innerColor,
 		innerColorOffset: INNER_COLOR_OFFSET,
 		outerColor,
-		outerColorOffset: OUTER_COLOR_OFFSET,
 		sectorKey: uniqueIndex,
 		startPercent,
 	};

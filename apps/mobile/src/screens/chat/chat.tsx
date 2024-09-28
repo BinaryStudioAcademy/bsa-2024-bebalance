@@ -88,6 +88,7 @@ const Chat: React.FC = () => {
 						}
 						ListHeaderComponent={threadId ? <InitialChatMessage /> : null}
 						renderItem={handleRenderItem}
+						showsVerticalScrollIndicator={false}
 					/>
 				</View>
 			</View>

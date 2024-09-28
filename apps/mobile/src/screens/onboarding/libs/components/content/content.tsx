@@ -38,7 +38,7 @@ const Content: React.FC<Properties<OnboardingFormValues>> = ({
 
 	return (
 		<>
-			<Text size="xl" style={styles.title} weight="bold">
+			<Text size="lg" style={[globalStyles.mb24, styles.title]} weight="bold">
 				{question?.label}
 			</Text>
 			<RadioGroup

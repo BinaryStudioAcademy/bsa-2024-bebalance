@@ -68,7 +68,6 @@ const Wheel: React.FC<Properties> = ({
 				innerColor,
 				innerColorOffset,
 				outerColor,
-				outerColorOffset,
 				sectorKey,
 				startPercent,
 			} = getWheelCategoryParameters({
@@ -101,7 +100,7 @@ const Wheel: React.FC<Properties> = ({
 					<Defs>
 						<SvgGradient id={gradientId}>
 							<Stop offset={innerColorOffset} stopColor={innerColor} />
-							<Stop offset={outerColorOffset} stopColor={outerColor} />
+							<Stop stopColor={outerColor} />
 						</SvgGradient>
 					</Defs>
 					{isLabelShown && (
