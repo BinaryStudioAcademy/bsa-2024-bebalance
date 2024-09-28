@@ -42,8 +42,8 @@ const Settings: React.FC = () => {
 	const [isConfirmationModalVisible, setIsConfirmationModalVisible] =
 		useState<boolean>(false);
 
-	const user = useAppSelector((state) => state.auth.user) as UserDto;
-	const dataStatus = useAppSelector((state) => state.auth.dataStatus);
+	const user = useAppSelector((state) => state.users.user) as UserDto;
+	const dataStatus = useAppSelector((state) => state.users.dataStatus);
 
 	const { control, errors, handleSubmit, isDirty, isValid } =
 		useAppForm<NotificationQuestionsFormValues>({
