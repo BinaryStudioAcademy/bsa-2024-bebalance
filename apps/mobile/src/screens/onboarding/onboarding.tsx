@@ -150,17 +150,17 @@ const Onboarding: React.FC = () => {
 						]}
 					>
 						{currentQuestion && (
-							<>
+							<View
+								style={[
+									globalStyles.flex1,
+									globalStyles.justifyContentSpaceBetween,
+								]}
+							>
 								<ProgressBar
 									currentItemIndex={currentQuestionIndex}
 									totalItemsAmount={totalQuestionsAmount}
 								/>
-								<View
-									style={[
-										globalStyles.flex1,
-										globalStyles.justifyContentSpaceBetween,
-									]}
-								>
+								<>
 									<InfinitePager
 										infinitePagerReference={infinitePager}
 										onPageRender={handleRenderPageComponent}
@@ -179,8 +179,8 @@ const Onboarding: React.FC = () => {
 											/>
 										)}
 									</View>
-								</View>
-							</>
+								</>
+							</View>
 						)}
 					</View>
 				</ScreenWrapper>

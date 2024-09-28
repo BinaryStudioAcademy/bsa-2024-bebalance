@@ -99,11 +99,18 @@ const Settings: React.FC = () => {
 
 	return (
 		<ScreenWrapper edges={["top"]}>
-			<ScrollView contentContainerStyle={globalStyles.flex1}>
+			<Text
+				preset="subheading"
+				style={[globalStyles.pv12, globalStyles.ph16, styles.container]}
+				weight="bold"
+			>
+				Settings
+			</Text>
+			<ScrollView
+				contentContainerStyle={globalStyles.flexGrow1}
+				showsVerticalScrollIndicator={false}
+			>
 				<View style={[globalStyles.flex1, globalStyles.p16, styles.container]}>
-					<Text preset="subheading" style={globalStyles.mb24} weight="bold">
-						Settings
-					</Text>
 					<Text preset="subheading" style={globalStyles.mb12} weight="bold">
 						Days to receive tasks
 					</Text>
@@ -141,7 +148,13 @@ const Settings: React.FC = () => {
 							globalStyles.justifyContentSpaceBetween,
 						]}
 					>
-						<View style={[styles.radioContainer, globalStyles.pb32]}>
+						<View
+							style={[
+								styles.radioContainer,
+								globalStyles.pb24,
+								globalStyles.mb24,
+							]}
+						>
 							<RadioGroup
 								control={control}
 								errors={errors}
