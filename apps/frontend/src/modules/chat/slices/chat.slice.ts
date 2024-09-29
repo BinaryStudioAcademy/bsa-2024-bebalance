@@ -73,10 +73,7 @@ const { actions, name, reducer } = createSlice({
 
 				state.messages.push(...messages);
 
-				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_EXPLANATION;
-			})
-			.addCase(getTasksForCategories.rejected, (state) => {
-				state.dataStatus = DataStatus.REJECTED;
+				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
 			.addCase(explainTasksSuggestions.pending, (state) => {
 				state.dataStatus = DataStatus.PENDING;
@@ -92,12 +89,15 @@ const { actions, name, reducer } = createSlice({
 				state.messages.push(...messages);
 				state.buttonsMode = ButtonsModeOption.SUGGESTIONS_MANIPULATION;
 			})
+			.addCase(changeTasksSuggestion.rejected, (state) => {
+				state.dataStatus = DataStatus.REJECTED;
+			})
+
 			.addCase(changeTasksSuggestion.pending, (state) => {
 				state.dataStatus = DataStatus.PENDING;
 			})
 			.addCase(changeTasksSuggestion.fulfilled, (state, action) => {
 				const { messages, taskSuggestions } = action.payload;
-
 				state.dataStatus = DataStatus.FULFILLED;
 				state.taskSuggestions = taskSuggestions;
 
