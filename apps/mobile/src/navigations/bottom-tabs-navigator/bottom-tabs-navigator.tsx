@@ -13,10 +13,12 @@ import { BaseColor, BottomTabScreenName, DataStatus } from "~/libs/enums/enums";
 import { useAppDispatch, useAppSelector, useEffect } from "~/libs/hooks/hooks";
 import { type BottomTabNavigationParameterList } from "~/libs/types/types";
 import { WheelStackNavigator } from "~/navigations/bottom-tabs-navigator/wheel/wheel";
+import { type UserDto } from "~/packages/users/users";
 import { Chat } from "~/screens/chat/chat";
 import { Settings } from "~/screens/settings/settings";
 import { Tasks } from "~/screens/tasks/tasks";
 import { actions as appActions } from "~/slices/app/app";
+import { actions as userActions } from "~/slices/users/users";
 
 import { styles } from "./styles";
 
@@ -40,6 +42,7 @@ const screenOptions: BottomTabNavigationOptions = {
 const BottomTabsNavigator: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const dataStatus = useAppSelector(({ app }) => app.dataStatus);
+	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
 	const initialNotificationId = useAppSelector(
 		({ app }) => app.initialNotificationId,
 	);
@@ -51,6 +54,12 @@ const BottomTabsNavigator: React.FC = () => {
 	useEffect(() => {
 		void dispatch(appActions.updateInitialNotificationId());
 	}, [dispatch]);
+
+	useEffect(() => {
+		void dispatch(
+			userActions.getById({ id: (authenticatedUser as UserDto).id }),
+		);
+	}, [dispatch, authenticatedUser]);
 
 	if (isLoading) {
 		return null;

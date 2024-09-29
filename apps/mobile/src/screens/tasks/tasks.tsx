@@ -16,16 +16,13 @@ import {
 	useAppDispatch,
 	useAppSelector,
 	useCallback,
-	useEffect,
 	useFocusEffect,
 	useState,
 } from "~/libs/hooks/hooks";
 import { globalStyles } from "~/libs/styles/styles";
 import { type ImageSourcePropType } from "~/libs/types/types";
 import { type TaskDto } from "~/packages/tasks/tasks";
-import { type UserDto } from "~/packages/users/users";
 import { actions as taskActions } from "~/slices/task/task";
-import { actions as userActions } from "~/slices/users/users";
 
 import { EmptyTasksHeader } from "./libs/components/components";
 import { TaskStatus, TaskTab } from "./libs/enums/enums";
@@ -34,7 +31,6 @@ import { styles } from "./styles";
 const Tasks: React.FC = () => {
 	const dispatch = useAppDispatch();
 
-	const authenticatedUser = useAppSelector(({ auth }) => auth.user);
 	const { activeTasks, dataStatus, expiredTasks, pastTasks } = useAppSelector(
 		({ tasks }) => tasks,
 	);
@@ -43,12 +39,6 @@ const Tasks: React.FC = () => {
 
 	const hasExpiredTasks = expiredTasks.length > NumericalValue.ZERO;
 	const taskbarTasks = isCurrentMode ? activeTasks : pastTasks;
-
-	useEffect(() => {
-		void dispatch(
-			userActions.getById({ id: (authenticatedUser as UserDto).id }),
-		);
-	}, [dispatch, authenticatedUser]);
 
 	useFocusEffect(
 		useCallback(() => {
